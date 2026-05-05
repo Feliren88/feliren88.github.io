@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vicky Feliren - Applied Scientist, Multimodal AI, Vision-Language Models, Remote Sensing.">
+  <title>Vicky Feliren | VF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <canvas id="pointcloud-bg" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="brand" href="#home">VF</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="section hero reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">MULTIMODAL AI / VISION-LANGUAGE MODELS / REMOTE SENSING</p>
+        <h1>Vicky Feliren</h1>
+        <p class="lead">
+          Applied Scientist with 5+ years bridging state-of-the-art multimodal research
+          (Vision-Language Models, Embodied AI) with production-grade engineering.
+          Proven track record of architecting deep learning systems handling 1M+ daily
+          inferences and publishing in top-tier venues (IEEE Q1, ACL, ECCV).
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#publications">Publications</a>
+          <a class="btn btn-secondary" href="#experience">Experience</a>
+        </div>
+        <ul class="hero-meta">
+          <li>Melbourne, Australia</li>
+          <li>M.Sc. Data Science (Monash)</li>
+          <li>Thesis: Conformal Prediction for VLN</li>
+          <li>GPA: 4.0/4.0</li>
+        </ul>
+        <div class="bg-controls">
+          <p>Background Point Cloud</p>
+          <div class="shape-controls" role="group" aria-label="Point cloud shape">
+            <button class="shape-btn is-active" type="button" data-shape="knot">Knot</button>
+            <button class="shape-btn" type="button" data-shape="gyroid">Gyroid</button>
+            <button class="shape-btn" type="button" data-shape="helix">Helix</button>
+            <button class="shape-btn" type="button" data-shape="sphere">Sphere</button>
+          </div>
+          <div class="lab-foot">
+            <span id="shape-label">Shape: Knot</span>
+            <span id="point-count">Points: 2800</span>
+            <span>Drag anywhere to orbit &middot; Alt + Scroll to zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <section id="experience" class="section reveal">
+      <p class="eyebrow">CAREER TRAJECTORY</p>
+      <h2 class="section-title">Experience &amp; Education</h2>
+
+      <div class="split-grid">
+        <div>
+          <p class="column-title">WORK EXPERIENCE</p>
+          <ol class="timeline">
+            <li>
+              <p class="time">OCT 2024 &ndash; PRESENT</p>
+              <h3>SEACrowd &mdash; Researcher, Multimodal &amp; Vision-Language</h3>
+              <p class="loc">Open-science research collective &middot; <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">seacrowd.github.io</a></p>
+              <p>Led cross-functional workgroups across 50+ researchers and 5+ countries to curate SEA-VL, a multicultural vision-language benchmark. Co-developed VLM adaptation paradigms improving cultural relevance by 15%.</p>
+            </li>
+            <li>
+              <p class="time">FEB 2025 &ndash; NOV 2025</p>
+              <h3>Artefact &mdash; Senior Data Scientist</h3>
+              <p class="loc">French-based AI consulting &middot; Founding member, Jakarta office</p>
+              <p>Pioneered end-to-end predictive Share of Voice system on Vertex AI, scaling inference across 6 markets within 2 months. As inaugural Jakarta hire, codified engineering protocols for scalable applied AI operations.</p>
+            </li>
+            <li>
+              <p class="time">DEC 2022 &ndash; JAN 2025</p>
+              <h3>Monash University &mdash; Research Associate</h3>
+              <p class="loc">Top 50 global research university</p>
+              <p>Directed geospatial AI pipelines across global consortia (UQ, UCL, Nottingham). Designed progressive cross-attention network for flood segmentation informing policy for 25M+ residents. First-authored IEEE GRSL Q1.</p>
+            </li>
+            <li>
+              <p class="time">JUN 2021 &ndash; JUN 2023</p>
+              <h3>GDP Labs (GLAIR.ai) &mdash; Senior Data Scientist / ML Engineer</h3>
+              <p class="loc">AI firm backed by major Indonesian conglomerate</p>
+              <p>Achieved 99.99% reliability for biometric systems handling 1M+ daily financial inferences. Reduced delivery timelines by 30% through automated ML pipelines. Fast-tracked to Senior in 12 months.</p>
+            </li>
+            <li>
+              <p class="time">JAN 2021 &ndash; JUN 2021</p>
+              <h3>Jakarta Smart City &mdash; Data Scientist</h3>
+              <p class="loc">Indonesia's smart city ecosystem</p>
+              <p>Developed probabilistic forecasting models for waste logistics, improving efficiency by 15% for 10M+ residents. Presented at IEEE-sponsored conference to 500+ attendees.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <p class="column-title">EDUCATION</p>
+          <ol class="timeline short">
+            <li>
+              <p class="time">EXPECTED SEPT 2026</p>
+              <h3>Monash University</h3>
+              <p class="loc">Master of Data Science &middot; GPA: 4.0/4.0</p>
+              <p>Thesis: <em>Conformal prediction approach to vision-language navigation (VLN)</em></p>
+            </li>
+            <li>
+              <p class="time">APRIL 2020</p>
+              <h3>Monash University</h3>
+              <p class="loc">Bachelor of Computer Science</p>
+              <p>Student Exchange at NTU Singapore</p>
+            </li>
+          </ol>
+
+          <p class="column-title" style="margin-top:1.2rem">PATENT</p>
+          <ol class="timeline short">
+            <li>
+              <p class="time">ISSUED JUNE 2025</p>
+              <h3>Fish &amp; Shrimp Pond Detection via Satellite Imagery</h3>
+              <p class="loc">IDS000010594</p>
+              <p>Proprietary computer vision pipeline for high-resolution aquaculture monitoring using novel spectral indices.</p>
+            </li>
+          </ol>
+
+          <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
+          <ol class="timeline short">
+            <li>
+              <p class="time">JAN 2024 &ndash; JAN 2025</p>
+              <h3>Bangkit Academy (Google, Gojek, Traveloka)</h3>
+              <p class="loc">ML Instructor &amp; Capstone Advisor</p>
+              <p>Mentored 150+ students; supervised 5+ capstone projects deploying ML to Cloud Run.</p>
+            </li>
+            <li>
+              <p class="time">NOV 2023</p>
+              <h3>Bina Nusantara University</h3>
+              <p class="loc">Guest Lecturer, Computer Vision</p>
+              <p>Sessions on CNNs to Transformers and semantic segmentation for 100+ seniors.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section reveal">
+      <p class="eyebrow">SYSTEM CAPABILITIES</p>
+      <h2 class="section-title">Technical Skills</h2>
+
+      <div class="skill-grid">
+        <article class="skill-card">
+          <h3>DEEP LEARNING &amp; MULTIMODAL AI</h3>
+          <p>Building and deploying multimodal models from research to production.</p>
+          <ul>
+            <li>PyTorch</li><li>TensorFlow</li><li>Vision-Language Models</li><li>Conformal Prediction</li><li>Knowledge Distillation</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>GENERATIVE AI &amp; LLMOps</h3>
+          <p>End-to-end LLM application development with agentic workflows.</p>
+          <ul>
+            <li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Vector Database</li><li>Agentic Workflows</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>COMPUTER VISION &amp; GEOSPATIAL</h3>
+          <p>From satellite imagery to semantic segmentation and pose estimation.</p>
+          <ul>
+            <li>OpenCV</li><li>Semantic Segmentation</li><li>Multispectral Imaging</li><li>Pose Estimation</li><li>Google Earth Engine</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>PRODUCTION ML &amp; DATA ENGINEERING</h3>
+          <p>Cloud-scale ML pipelines with distributed inference and data processing.</p>
+          <ul>
+            <li>GCP (Vertex AI, BigQuery)</li><li>AWS (EC2, S3, SageMaker)</li><li>Kubernetes</li><li>Docker</li><li>Apache Spark</li><li>dbt</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>AI-ASSISTED TOOLS</h3>
+          <p>Leveraging AI-powered development tools for accelerated engineering.</p>
+          <ul>
+            <li>Claude Code</li><li>Spec-driven Dev</li><li>Kilo Code</li><li>Opencode</li><li>Cursor</li><li>CodeRabbit</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>LANGUAGES &amp; FOUNDATIONS</h3>
+          <p>Core programming and systems tooling for research and production.</p>
+          <ul>
+            <li>Python</li><li>Scala</li><li>SQL</li><li>R</li><li>Git</li><li>Linux/Unix</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="section reveal">
+      <p class="eyebrow">RESEARCH ARCHIVE</p>
+      <h2 class="section-title">Publications</h2>
+      <p class="section-note">Selected research in multimodal AI, remote sensing, and geospatial analysis.</p>
+
+      <div class="project-controls">
+        <div class="filters" role="group" aria-label="Publication filters">
+          <button class="filter is-active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="first-author">First Author</button>
+          <button class="filter" type="button" data-filter="collab">Collaborative</button>
+        </div>
+        <p class="project-count"><span id="project-count">7</span> publications</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card" data-kind="first-author">
+          <p class="tag">FIRST AUTHOR &middot; IEEE Q1</p>
+          <h3>Progressive Cross Attention Network for Flood Segmentation</h3>
+          <p>Using multispectral satellite imagery for flood segmentation.</p>
+          <span class="venue">IEEE Geoscience and Remote Sensing Letters, 2025 (IF: 4.4)</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Novel progressive cross-attention architecture translating SOTA research into operational flood segmentation informing policy for 25M+ residents.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="first-author">
+          <p class="tag">FIRST AUTHOR</p>
+          <h3>Plastic Bag Ban Policy &amp; Waste Complaints in Jakarta</h3>
+          <p>Analysis through JAKI and Qlue platforms.</p>
+          <span class="venue">ICISS 2021</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Spatial-temporal policy analysis translating waste complaint data into actionable urban governance insights.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="collab">
+          <p class="tag">MAJOR CONTRIBUTOR &middot; ECCV</p>
+          <h3>Anthropogenic Regional Adaptation in Multimodal VLM</h3>
+          <p>Vision-language model adaptation for cultural relevance.</p>
+          <span class="venue">Under review &mdash; ECCV 2026</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Co-developed adaptation paradigms improving cultural relevance metrics by 15% in frontier multimodal architectures.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="collab">
+          <p class="tag">ACL 2026</p>
+          <h3>CommonLID: Re-evaluating Language Identification on Web Data</h3>
+          <p>State-of-the-art language identification performance evaluation.</p>
+          <span class="venue">Accepted &mdash; ACL 2026</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Large-scale evaluation of language identification systems on web-crawled data across diverse linguistic landscapes.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="collab">
+          <p class="tag">MAJOR CONTRIBUTOR &middot; ACL 2025</p>
+          <h3>SEA-VL: Multicultural Vision-Language Dataset for SEA</h3>
+          <p>Crowdsource, crawl, or generate? A multicultural VL benchmark.</p>
+          <span class="venue">ACL 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Led cross-functional workgroups across 50+ researchers and 5+ countries to curate a benchmark reducing systematic cultural bias in VLMs.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="collab">
+          <p class="tag">Q1 &middot; IF: 11.4</p>
+          <h3>Multi-modal Deep Learning for Mining Footprint Segmentation</h3>
+          <p>Semantic segmentation with multispectral satellite imagery.</p>
+          <span class="venue">Remote Sensing of Environment, 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Managed 500GB+ geospatial datasets via Google Earth Engine with rigorous peer-reviewed labeling protocols.</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-kind="collab">
+          <p class="tag">Q2 &middot; IF: 2.3</p>
+          <h3>Integrated Flood Policy: Retention Ponds in South Bandung</h3>
+          <p>Mixed-methods evaluation for urban flood mitigation.</p>
+          <span class="venue">AQUA, 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <div class="card-expand">
+            <p>Enhancing urban resilience through integrated flood policy and planning evaluation.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="projects" class="section reveal">
+      <p class="eyebrow">MILESTONES</p>
+      <h2 class="section-title">Awards &amp; Honours</h2>
+
+      <div class="awards-grid">
+        <article class="award-card">
+          <p class="tag">SCHOLARSHIP</p>
+          <h3>Monash Indonesia Inaugural Welcome Scholarship</h3>
+          <p class="time-inline">2024</p>
+          <p>Awarded for exceptional potential in driving regional AI innovation and high academic standing.</p>
+        </article>
+        <article class="award-card">
+          <p class="tag">SCHOLARSHIP</p>
+          <h3>Deep Learning Nanodegree &mdash; Facebook &amp; Udacity</h3>
+          <p class="time-inline">2019</p>
+          <p>Selected as top global applicant to master advanced PyTorch and GAN architectures.</p>
+        </article>
+        <article class="award-card highlight">
+          <p class="tag">CHAMPION</p>
+          <h3>Microsoft Azure Virtual Hackathon APAC</h3>
+          <p class="time-inline">2020</p>
+          <p>Engineered HakkTaxi: ML-driven predictive routing with 6-second ETA margin of error using Azure spatial data.</p>
+        </article>
+        <article class="award-card">
+          <p class="tag">TOP 3</p>
+          <h3>CamvsCovid &mdash; University of Cambridge</h3>
+          <p class="time-inline">2020</p>
+          <p>TeleHealthMonitor: GDPR-compliant Edge AI for COVID-19 remote monitoring on resource-constrained devices.</p>
+        </article>
+        <article class="award-card">
+          <p class="tag">BEST COMMUNITY TRACK</p>
+          <h3>Cal Hacks &mdash; UC Berkeley</h3>
+          <p class="time-inline">2020</p>
+          <p>IVR solution integrated with real-time news APIs, bridging the digital divide via standard telephony.</p>
+        </article>
+      </div>
+
+      <div class="service-section">
+        <p class="column-title" style="margin-top:1.5rem">PROFESSIONAL SERVICE</p>
+        <div class="service-grid">
+          <div class="service-item">
+            <strong>Peer Reviewer</strong>
+            <p>IEEE IGARSS 2026 &mdash; Premier global remote sensing symposium</p>
+          </div>
+          <div class="service-item">
+            <strong>Technical Judge</strong>
+            <p>iNTUition, CruzHacks, Cal Hacks (2021&ndash;2022) &mdash; 50+ projects evaluated</p>
+          </div>
+          <div class="service-item">
+            <strong>Open Source Contributor</strong>
+            <p>SEACrowd collective &mdash; Southeast Asian AI alignment &amp; data democratization</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <p class="eyebrow">ESTABLISH LINK</p>
+      <h2 class="section-title">Contact</h2>
+      <p class="contact-intro">Open for research collaborations, applied scientist roles, and multimodal AI projects. Specializes in Vision-Language Models, remote sensing, and scalable ML pipelines.</p>
+
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:jokosusantojs88@gmail.com"><span>Email</span><strong>jokosusantojs88@gmail.com</strong></a>
+        <a class="contact-card" href="https://www.linkedin.com/in/vickyfeliren/" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>vickyfeliren</strong></a>
+        <a class="contact-card" href="https://github.com/vickyfeliren" target="_blank" rel="noreferrer"><span>GitHub</span><strong>vickyfeliren</strong></a>
+        <a class="contact-card" href="https://seacrowd.github.io/" target="_blank" rel="noreferrer"><span>SEACrowd</span><strong>seacrowd.github.io</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Vicky Feliren &middot; VF</p>
+  </footer>
+
+  <script src="script.js?v=1"></script>
+</body>
+</html>
