@@ -21,12 +21,12 @@
 ## Phase 1: Visual Enhancement (2-3 weeks)
 
 ### Photography & Brand Assets
-- [ ] Professional headshot (high-res, multiple angles)
+- [x] Professional headshot (high-res, multiple angles) - profile.png uploaded
 - [ ] Workplace/conference photos (7-10 images)
 - [ ] SEACrowd project screenshots
 - [ ] Research project visualizations (ProCANet architecture, flood maps)
 - [ ] Teaching/mentoring photos
-- [ ] Favicon variations (light/dark mode)
+- [ ] Favicon variations (light/dark mode) - favicon.png, favicon_black.JPG uploaded
 - [ ] Open Graph images for social sharing (1200x630px)
 - [ ] Twitter card images
 
@@ -178,10 +178,10 @@
 ## Priority Queue (Next 30 Days)
 
 ### Must Have (Week 1)
-1. ~Professional headshots uploaded~ (pending)
-2. ~Publication images/thumbnails~ (pending)
+1. [x] Professional headshots uploaded (profile.png exists)
+2. Publication images/thumbnails
 3. [x] Person schema markup
-4. ~Executive summary PDF~ (pending)
+4. Executive summary PDF
 
 ### Should Have (Weeks 2-3)
 1. Interactive D3 timeline
