@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Writings
-subtitle: AI Research, Multimodal Systems, Southeast Asia
 description: Articles on trustworthy AI, conformal prediction, multimodal systems, Southeast Asian AI, and personal reflections — published on Medium.
 permalink: /writings/
 ---
