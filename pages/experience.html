@@ -27,80 +27,25 @@
       <div class="split-grid">
         <div>
           <p class="column-title">WORK EXPERIENCE</p>
-          <ol class="timeline">
-            <li>
-              <p class="time">OCT 2024 – PRESENT</p>
-              <h3>SEACrowd — Researcher, Multimodal & Vision-Language</h3>
-              <p class="loc">Open-science research collective · seacrowd.github.io</p>
-              <p>Contributed cross-functional workgroups across 50+ researchers and 5+ countries to curate SEA-VL, a multicultural vision-language benchmark. Co-developed VLM adaptation paradigms improving cultural relevance.</p>
-            </li>
-            <li>
-              <p class="time">FEB 2025 – NOV 2025</p>
-              <h3>Artefact — Senior Data Scientist</h3>
-              <p class="loc">French-based AI consulting · Founding member, Jakarta office</p>
-              <p>Pioneered end-to-end predictive Share of Voice system on Vertex AI, scaling inference across 6 markets within 2 months. As inaugural Jakarta hire, codified engineering protocols for scalable applied AI operations.</p>
-            </li>
-            <li>
-              <p class="time">DEC 2022 – JAN 2025</p>
-              <h3>Monash University — Research Associate</h3>
-              <p class="loc">Top 50 global research university</p>
-              <p>Directed geospatial AI pipelines across global consortia (UQ, UCL, Nottingham). Designed progressive cross-attention network for flood segmentation informing policy. First-authored IEEE GRSL Q1.</p>
-            </li>
-            <li>
-              <p class="time">JUN 2021 – JUN 2023</p>
-              <h3>GDP Labs (GLAIR.ai) — Senior Data Scientist / ML Engineer</h3>
-              <p class="loc">AI firm backed by major Indonesian conglomerate</p>
-              <p>Achieved 99.99% reliability for biometric systems handling 1M+ daily financial inferences. Reduced delivery timelines by 30% through automated ML pipelines. Fast-tracked to Senior in 12 months.</p>
-            </li>
-            <li>
-              <p class="time">JAN 2021 – JUN 2021</p>
-              <h3>Jakarta Smart City — Data Scientist</h3>
-              <p class="loc">Indonesia's smart city ecosystem</p>
-              <p>Developed probabilistic forecasting models for waste logistics, improving efficiency by 15% for 10M+ residents. Presented at IEEE-sponsored conference to 500+ attendees.</p>
-            </li>
+          <ol id="work-experience-list" class="timeline">
+            <p class="loading">Loading...</p>
           </ol>
         </div>
 
         <div>
           <p class="column-title">EDUCATION</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">EXPECTED SEPT 2026</p>
-              <h3>Monash University</h3>
-              <p class="loc">Master of Data Science · GPA: 4.0/4.0</p>
-              <p>Thesis: Conformal prediction approach to vision-language navigation (VLN)</p>
-            </li>
-            <li>
-              <h3>Monash University</h3>
-              <p class="loc">Bachelor of Computer Science</p>
-              <p>Student Exchange at NTU Singapore</p>
-            </li>
+          <ol id="education-list" class="timeline short">
+            <p class="loading">Loading...</p>
           </ol>
 
           <p class="column-title" style="margin-top:1.2rem">PATENT</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">ISSUED JUNE 2025</p>
-              <h3>Fish & Shrimp Pond Detection via Satellite Imagery</h3>
-              <p class="loc">IDS000010594</p>
-              <p>Proprietary computer vision pipeline for high-resolution aquaculture monitoring using novel spectral indices.</p>
-            </li>
+          <ol id="patents-list" class="timeline short">
+            <p class="loading">Loading...</p>
           </ol>
 
           <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">JAN 2024 – JAN 2025</p>
-              <h3>Bangkit Academy (Google, Gojek, Traveloka)</h3>
-              <p class="loc">ML Instructor & Capstone Advisor</p>
-              <p>Mentored 150+ students; supervised 5+ capstone projects deploying ML to Cloud Run.</p>
-            </li>
-            <li>
-              <p class="time">NOV 2023</p>
-              <h3>Bina Nusantara University</h3>
-              <p class="loc">Guest Lecturer, Computer Vision</p>
-              <p>Sessions on CNNs to Transformers and semantic segmentation for 100+ seniors.</p>
-            </li>
+          <ol id="teaching-list" class="timeline short">
+            <p class="loading">Loading...</p>
           </ol>
         </div>
       </div>
@@ -111,6 +56,22 @@
     <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/experience.js"></script>
+  <script>
+(function() {
+  function renderTimeline(containerId, data) {
+    var container = document.getElementById(containerId);
+    if (!container || !data || data.length === 0) return;
+    container.innerHTML = data.map(function(item) {
+      return '<li><p class="time">' + item.dates + '</p><h3>' + item.title + '</h3><p class="loc">' + item.location + '</p><p>' + item.description + '</p></li>';
+    }).join('');
+  }
+  renderTimeline('work-experience-list', WORK_EXPERIENCE_DATA);
+  renderTimeline('education-list', EDUCATION_DATA);
+  renderTimeline('patents-list', PATENTS_DATA);
+  renderTimeline('teaching-list', TEACHING_DATA);
+})();
+  </script>
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
 </body>

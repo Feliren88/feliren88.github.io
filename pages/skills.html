@@ -24,49 +24,8 @@
       <p class="eyebrow">SYSTEM CAPABILITIES</p>
       <h2 class="section-title">Expertise</h2>
 
-      <div class="skill-grid">
-        <article class="skill-card reveal">
-          <h3>DEEP LEARNING & MULTIMODAL AI</h3>
-          <p>Building and deploying multimodal models from research to production.</p>
-          <ul>
-            <li>PyTorch</li><li>TensorFlow</li><li>Vision-Language Models</li><li>Conformal Prediction</li><li>Knowledge Distillation</li>
-          </ul>
-        </article>
-        <article class="skill-card reveal">
-          <h3>GENERATIVE AI & LLMOps</h3>
-          <p>End-to-end LLM application development with agentic workflows.</p>
-          <ul>
-            <li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Vector Database</li><li>Agentic Workflows</li>
-          </ul>
-        </article>
-        <article class="skill-card reveal">
-          <h3>COMPUTER VISION & GEOSPATIAL</h3>
-          <p>From satellite imagery to semantic segmentation and pose estimation.</p>
-          <ul>
-            <li>OpenCV</li><li>Semantic Segmentation</li><li>Multispectral Imaging</li><li>Pose Estimation</li><li>Google Earth Engine</li>
-          </ul>
-        </article>
-        <article class="skill-card reveal">
-          <h3>PRODUCTION ML & DATA ENGINEERING</h3>
-          <p>Cloud-scale ML pipelines with distributed inference and data processing.</p>
-          <ul>
-            <li>GCP (Vertex AI, BigQuery)</li><li>AWS (EC2, S3, SageMaker)</li><li>Kubernetes</li><li>Docker</li><li>Apache Spark</li><li>dbt</li>
-          </ul>
-        </article>
-        <article class="skill-card reveal">
-          <h3>AI-ASSISTED TOOLS</h3>
-          <p>Leveraging AI-powered development tools for accelerated engineering.</p>
-          <ul>
-            <li>Claude Code</li><li>Spec-driven Dev</li><li>Kilo Code</li><li>Opencode</li><li>Cursor</li><li>CodeRabbit</li>
-          </ul>
-        </article>
-        <article class="skill-card reveal">
-          <h3>LANGUAGES & FOUNDATIONS</h3>
-          <p>Core programming and systems tooling for research and production.</p>
-          <ul>
-            <li>Python</li><li>Scala</li><li>SQL</li><li>R</li><li>Git</li><li>Linux/Unix</li>
-          </ul>
-        </article>
+      <div id="skills-grid" class="skill-grid">
+        <p class="loading">Loading skills...</p>
       </div>
     </section>
   </main>
@@ -75,6 +34,20 @@
     <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/skills.js"></script>
+  <script>
+(function() {
+  var container = document.getElementById('skills-grid');
+  if (!container || !SKILLS_DATA || SKILLS_DATA.length === 0) return;
+  container.innerHTML = SKILLS_DATA.map(function(skill) {
+    return '<article class="skill-card reveal">' +
+      '<h3>' + skill.category + '</h3>' +
+      '<p>' + skill.description + '</p>' +
+      '<ul>' + skill.skills.map(function(s) { return '<li>' + s + '</li>'; }).join('') + '</ul>' +
+    '</article>';
+  }).join('');
+})();
+  </script>
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
 </body>

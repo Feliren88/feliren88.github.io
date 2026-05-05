@@ -24,54 +24,14 @@
       <p class="eyebrow">MILESTONES</p>
       <h2 class="section-title">Awards & Honours</h2>
 
-      <div class="awards-grid">
-        <article class="award-card">
-          <p class="tag">SCHOLARSHIP</p>
-          <h3>Monash Indonesia Inaugural Welcome Scholarship</h3>
-          <p class="time-inline">2024</p>
-          <p>Awarded for exceptional potential in driving regional AI innovation and high academic standing.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">SCHOLARSHIP</p>
-          <h3>Deep Learning Nanodegree — Facebook & Udacity</h3>
-          <p class="time-inline">2019</p>
-          <p>Selected as top global applicant to master advanced PyTorch and GAN architectures.</p>
-        </article>
-        <article class="award-card highlight">
-          <p class="tag">CHAMPION</p>
-          <h3><a href="https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/" target="_blank" rel="noreferrer">Microsoft Azure Virtual Hackathon APAC</a></h3>
-          <p class="time-inline">2020</p>
-          <p>Engineered HakkTaxi: ML-driven predictive routing with 6-second ETA margin of error using Azure spatial data.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">TOP 3</p>
-          <h3><a href="https://devpost.com/software/converse-xash34" target="_blank" rel="noreferrer">CamvsCovid — University of Cambridge</a></h3>
-          <p class="time-inline">2020</p>
-          <p>TeleHealthMonitor: GDPR-compliant Edge AI for COVID-19 remote monitoring on resource-constrained devices.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">BEST COMMUNITY TRACK</p>
-          <h3><a href="https://devpost.com/software/converse-xash34" target="_blank" rel="noreferrer">Cal Hacks 8.0</a> — UC Berkeley</h3>
-          <p class="time-inline">2020</p>
-          <p>IVR solution integrated with real-time news APIs, bridging the digital divide via standard telephony.</p>
-        </article>
+      <div id="awards-grid" class="awards-grid">
+        <p class="loading">Loading awards...</p>
       </div>
 
       <div class="service-section">
         <p class="column-title" style="margin-top:1.5rem">PROFESSIONAL SERVICE</p>
-        <div class="service-grid">
-          <div class="service-item">
-            <strong>Peer Reviewer</strong>
-            <p>IEEE IGARSS 2026 — Premier global remote sensing symposium</p>
-          </div>
-          <div class="service-item">
-            <strong>Technical Judge</strong>
-            <p>Cal Hacks 8.0, CruzHacks 2022, iNTUition v8.0 (2021–2022) — 50+ projects evaluated</p>
-          </div>
-          <div class="service-item">
-            <strong>Open Source Contributor</strong>
-            <p>SEACrowd collective — Southeast Asian AI alignment & data democratization</p>
-          </div>
+        <div id="service-grid" class="service-grid">
+          <p class="loading">Loading...</p>
         </div>
       </div>
     </section>
@@ -81,6 +41,31 @@
     <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/awards.js"></script>
+  <script>
+(function() {
+  var awardsGrid = document.getElementById('awards-grid');
+  var serviceGrid = document.getElementById('service-grid');
+  if (awardsGrid && AWARDS_DATA) {
+    var keys = Object.keys(AWARDS_DATA);
+    awardsGrid.innerHTML = keys.map(function(key) {
+      var a = AWARDS_DATA[key];
+      var html = '<article class="award-card' + (a.category === 'CHAMPION' ? ' highlight' : '') + '">' +
+        '<p class="tag">' + a.category + '</p>' +
+        '<h3>' + (a.url ? '<a href="' + a.url + '" target="_blank" rel="noreferrer">' + a.title + '</a>' : a.title) + '</h3>' +
+        '<p class="time-inline">' + a.year + '</p>' +
+        '<p>' + a.description + '</p>' +
+      '</article>';
+      return html;
+    }).join('');
+  }
+  if (serviceGrid && SERVICE_DATA) {
+    serviceGrid.innerHTML = SERVICE_DATA.map(function(s) {
+      return '<div class="service-item"><strong>' + s.role + '</strong><p>' + s.description + '</p></div>';
+    }).join('');
+  }
+})();
+  </script>
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
 </body>

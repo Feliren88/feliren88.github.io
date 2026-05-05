@@ -31,93 +31,11 @@
           <button class="filter" type="button" data-filter="first-author">First Author</button>
           <button class="filter" type="button" data-filter="collab">Collaborative</button>
         </div>
-        <p class="project-count"><span id="project-count">7</span> publications</p>
+        <p class="project-count"><span id="project-count">0</span> publications</p>
       </div>
 
-      <div class="project-grid">
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">Q1 · IF: 11.4</p>
-          <h3>Multi-modal deep learning approaches to semantic segmentation of mining footprints with multispectral satellite imagery</h3>
-          <p>Semantic segmentation of global mining footprints using multispectral satellite imagery across 37 locations worldwide.</p>
-          <span class="venue">Remote Sensing of Environment, Volume 318, 2025</span>
-          <a href="https://doi.org/10.1016/j.rse.2024.114584" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>Existing remote sensing applications in mining are often of limited scope, typically mapping multiple mining land covers for a single mine or only mapping mining extents or a single feature (e.g., tailings dam) for multiple mines across a region.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">MAJOR CONTRIBUTOR · ACL 2025</p>
-          <h3>Crowdsource, Crawl, or Generate? Creating SEA-VL, a Multicultural Vision-Language Dataset for Southeast Asia</h3>
-          <p>A multicultural VL benchmark for SEA.</p>
-          <span class="venue">ACL 2025</span>
-          <a href="https://aclanthology.org/2025.acl-long.916/" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>Despite Southeast Asia's (SEA) extraordinary linguistic and cultural diversity, the region remains significantly underrepresented in vision-language (VL) research.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="first-author">
-          <p class="tag">FIRST AUTHOR · IEEE Q1</p>
-          <h3>Progressive Cross-Attention Network for Flood Segmentation Using Multispectral Satellite Imagery</h3>
-          <p>Using multispectral satellite imagery for flood segmentation.</p>
-          <span class="venue">IEEE Geoscience and Remote Sensing Letters, 2024</span>
-          <a href="https://ieeexplore.ieee.org/document/10750225" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>In recent years, the integration of deep learning techniques with remote sensing technology has revolutionized the way natural hazards, such as floods, are monitored and managed.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">Q2 · IF: 2.3</p>
-          <h3>Enhancing urban resilience through integrated flood policy and planning: a mixed-methods evaluation of retention ponds for flood mitigation in South Bandung</h3>
-          <p>Mixed-methods evaluation of retention ponds for urban flood mitigation.</p>
-          <span class="venue">AQUA — Water Infrastructure, Ecosystems and Society, Volume 74(2), 2025</span>
-          <a href="https://iwaponline.com/aqua/article/74/2/267/106789/Enhancing-urban-resilience-through-integrated" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>This study focuses on South Bandung, an area where flooding is a recurring problem, causing significant damage to infrastructure and displacing local residents.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">ACL 2026</p>
-          <h3>CommonLID: Re-evaluating State-of-the-Art Language Identification Performance on Web Data</h3>
-          <p>State-of-the-art language identification performance evaluation.</p>
-          <span class="venue">ACL 2026 (Accepted)</span>
-          <a href="https://arxiv.org/abs/2601.18026" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>Language identification (LID) is a fundamental step in curating multilingual corpora. However, LID models still perform poorly for many languages, especially on the noisy and heterogeneous web data often used to train multilingual language models.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">UNDER REVIEW</p>
-          <h3>Anthropogenic Regional Adaptation in Multimodal Vision-Language Model</h3>
-          <p>Vision-language model adaptation for cultural relevance in SEA.</p>
-          <span class="venue">Under Review</span>
-          <a href="https://arxiv.org/abs/2604.11490" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>While the field of vision-language (VL) has achieved remarkable success in integrating visual and textual information across multiple languages and domains, there is still no dedicated framework for assessing human-centric alignment in vision-language systems.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="first-author">
-          <p class="tag">FIRST AUTHOR</p>
-          <h3>The Effect of Plastic Bag Ban Policy Towards Waste Complaints in Jakarta Through JAKI and Qlue</h3>
-          <p>Analysis through JAKI and Qlue platforms.</p>
-          <span class="venue">ICISS 2021</span>
-          <a href="https://ieeexplore.ieee.org/document/9533236/" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
-          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
-          <div class="card-expand">
-            <p>Plastic bag ban policy has been implemented in Jakarta since July 1st, 2020. However, it is still unclear the impact of this policy on Jakarta to reduce waste.</p>
-          </div>
-        </article>
+      <div id="publications-container" class="project-grid">
+        <p class="loading">Loading publications...</p>
       </div>
     </section>
   </main>
@@ -126,6 +44,44 @@
     <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/publications.js"></script>
+  <script>
+(function() {
+  function renderPublications(filter) {
+    var container = document.getElementById('publications-container');
+    var countEl = document.getElementById('project-count');
+    var items = Object.keys(PUBLICATIONS_DATA).map(function(key) {
+      var p = PUBLICATIONS_DATA[key];
+      p._kind = key.indexOf('first-author') !== -1 || key.indexOf('flood') !== -1 || key.indexOf('plastic') !== -1 ? 'first-author' : 'collab';
+      p._key = key;
+      return p;
+    });
+    if (filter !== 'all') {
+      items = items.filter(function(p) { return p._kind === filter; });
+    }
+    countEl.textContent = items.length;
+    container.innerHTML = items.map(function(p) {
+      var kind = p._kind === 'first-author' ? 'first-author' : 'collab';
+      return '<article class="project-card reveal" data-kind="' + kind + '">' +
+        '<p class="tag">' + p.tag + '</p>' +
+        '<h3>' + p.title + '</h3>' +
+        '<p>' + p.description + '</p>' +
+        '<span class="venue">' + p.venue + '</span>' +
+        (p.url ? '<a href="' + p.url + '" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>' : '') +
+        (p.abstract ? '<button class="card-toggle" type="button" aria-expanded="false">Abstract</button><div class="card-expand"><p>' + p.abstract + '</p></div>' : '') +
+      '</article>';
+    }).join('');
+  }
+  document.querySelectorAll('.filter').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter').forEach(function(b) { b.classList.remove('is-active'); });
+      this.classList.add('is-active');
+      renderPublications(this.dataset.filter);
+    });
+  });
+  renderPublications('all');
+})();
+  </script>
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
 </body>
