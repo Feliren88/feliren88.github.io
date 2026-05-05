@@ -17,8 +17,7 @@
   function getCurrentPage() {
     var path = window.location.pathname;
     var filename = path.split('/').pop() || 'index.html';
-    
-    var item = NAV_ITEMS.find(function(n) { return n.href === filename || n.href === path; });
+    var item = NAV_ITEMS.find(function(n) { return n.href.endsWith(filename) || n.href === path; });
     return item ? item.page : '/';
   }
 
