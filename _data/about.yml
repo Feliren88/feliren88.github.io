@@ -10,7 +10,7 @@ sections:
       - title: 'Trustworthy AI'
         description: 'Conformal prediction for vision-language models. Uncertainty quantification with statistical guarantees — not just calibration heuristics.'
       - title: 'Cultural AI'
-        description: 'Vision-language benchmarks and adaptation methods for Southeast Asia. Making AI systems actually reflect the world they\'re deployed in.'
+        description: "Vision-language benchmarks and adaptation methods for Southeast Asia. Making AI systems actually reflect the world they're deployed in."
       - title: 'Geospatial AI'
         description: 'Remote sensing and satellite imagery for flood segmentation, mining mapping, and environmental monitoring. Published in IEEE and Remote Sensing of Environment.'
       - title: 'Production ML'
@@ -20,10 +20,10 @@ sections:
       - type: 'Speaking'
         description: 'I speak on trustworthy AI, multimodal systems, and AI for underrepresented regions — for conferences, university events, and industry panels.'
       - type: 'Research Collaboration'
-        description: 'If your work touches conformal prediction, vision-language models, geospatial AI, or cultural inclusion in AI, I\'d like to know about it.'
+        description: "If your work touches conformal prediction, vision-language models, geospatial AI, or cultural inclusion in AI, I'd like to know about it."
       - type: 'Mentorship'
         description: 'I mentor early-career researchers and engineers in Southeast Asia — especially those navigating graduate school applications or careers in applied AI.'
       - type: 'Applied Roles'
-        description: 'I\'m open to research and applied scientist roles internationally, particularly where the work connects to trustworthy AI or underrepresented communities.'
+        description: "I'm open to research and applied scientist roles internationally, particularly where the work connects to trustworthy AI or underrepresented communities."
   - title: 'What Drives Me'
-    content: 'Reliability and relevance. Every system I\'ve built comes down to the same question: <strong>how do we know when to trust the model?</strong> And who is the model actually built for?'
+    content: 'Reliability and relevance. Every system I have built comes down to the same question: <strong>how do we know when to trust the model?</strong> And who is the model actually built for?'

@@ -35,13 +35,7 @@ sitemap:
 exclude:
   - node_modules
   - vendor
-  - Gemfile
-  - Gemfile.lock
-  - package.json
-  - yarn.lock
   - CLAUDE.md
-  - .gitignore
-  - pages
 
 # Permalink structure
 permalink: pretty
