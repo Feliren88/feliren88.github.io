@@ -27,7 +27,7 @@ var AWARDS_DATA = {
   },
   'deep-learning-nanodegree': {
     category: 'SCHOLARSHIP',
-    title: 'Deep Learning Nanodegree — Facebook & Udacity',
+    title: 'Deep Learning Nanodegree - Facebook & Udacity',
     year: '2019',
     description: 'Selected as top global applicant to master advanced PyTorch and GAN architectures.'
   },
@@ -40,14 +40,14 @@ var AWARDS_DATA = {
   },
   'camvscovid': {
     category: 'TOP 3',
-    title: 'CamvsCovid — University of Cambridge',
+    title: 'CamvsCovid - University of Cambridge',
     year: '2020',
     description: 'TeleHealthMonitor: GDPR-compliant Edge AI for COVID-19 remote monitoring on resource-constrained devices.',
     url: 'https://devpost.com/software/converse-xash34'
   },
   'cal-hacks': {
     category: 'BEST COMMUNITY TRACK',
-    title: 'Cal Hacks 8.0 — UC Berkeley',
+    title: 'Cal Hacks 8.0 - UC Berkeley',
     year: '2020',
     description: 'IVR solution integrated with real-time news APIs, bridging the digital divide via standard telephony.',
     url: 'https://devpost.com/software/converse-xash34'
@@ -57,15 +57,15 @@ var AWARDS_DATA = {
 var SERVICE_DATA = [
   {
     role: 'Peer Reviewer',
-    description: 'IEEE IGARSS 2026 — Premier global remote sensing symposium'
+    description: 'IEEE IGARSS 2026 - Premier global remote sensing symposium'
   },
   {
     role: 'Technical Judge',
-    description: 'Cal Hacks 8.0, CruzHacks 2022, iNTUition v8.0 (2021–2022) — 50+ projects evaluated',
+    description: 'Cal Hacks 8.0, CruzHacks 2022, iNTUition v8.0 (2021-2022) - 50+ projects evaluated',
     urls: ['https://cal-hacks-8.devpost.com/', 'https://cruzhacks-2022.devpost.com/', 'https://intuition-v8.devpost.com/']
   },
   {
     role: 'Open Source Contributor',
-    description: 'SEACrowd collective — Southeast Asian AI alignment & data democratization'
+    description: 'SEACrowd collective - Southeast Asian AI alignment and data democratization'
   }
 ];
