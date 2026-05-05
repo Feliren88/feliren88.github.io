@@ -6,7 +6,6 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
-<p class="eyebrow">WRITING</p>
 <h1 class="section-title">
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">Thoughts</a>
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">

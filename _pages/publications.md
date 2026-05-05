@@ -6,7 +6,12 @@ description: Peer-reviewed work on conformal prediction for vision-language mode
 permalink: /research/
 ---
 
-<p class="eyebrow">RESEARCH ARCHIVE</p>
+<p class="eyebrow">
+  <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">
+    <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" style="width:18px;height:18px;vertical-align:middle;margin-right:0.4rem">
+    RESEARCH ARCHIVE
+  </a>
+</p>
 <h1 class="section-title">
   <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">Research</a>
   <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
