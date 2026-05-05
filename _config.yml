@@ -13,14 +13,16 @@ author:
   name: Vicky Feliren
 email: vickyfeliren@gmail.com
 
-# Locale
+# Webmaster Tools Verification
+google_site_verification: "google41769159a82c477f"
+
+# Locale & Language
 locale: en-US
+lang: en-US
 
 # SEO Settings (for jekyll-seo-tag)
 logo: /assets/img/profile.jpg
 image: /assets/img/profile.jpg
-twitter:
-  card: summary_large
 
 # Search keywords for AI roles
 keywords:
@@ -35,6 +37,7 @@ keywords:
   - Multimodal AI
   - Trustworthy AI
   - Conformal Prediction
+
 social:
   name: Vicky Feliren
   links:
@@ -72,6 +75,7 @@ defaults:
       path: ""
     values:
       layout: default
+      robots: "index, follow" # Ensures all pages are indexable by default
   - scope:
       path: "_pages"
     values:
