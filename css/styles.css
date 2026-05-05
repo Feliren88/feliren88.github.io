@@ -614,6 +614,16 @@ h1 {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.award-card h3 a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.award-card h3 a:hover {
+  color: var(--accent);
+}
+
 .award-card:hover {
   border-color: rgba(119, 146, 175, 0.48);
   box-shadow: 0 0 0 1px rgba(119, 146, 175, 0.14), 0 14px 28px rgba(0, 0, 0, 0.2);
@@ -665,6 +675,15 @@ h1 {
 
 .service-item {
   padding: 0.78rem;
+}
+
+.service-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.service-item a:hover {
+  text-decoration: underline;
 }
 
 .service-item strong {
