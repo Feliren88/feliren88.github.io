@@ -48,6 +48,23 @@ feliren88.github.io/
 - **jekyll-seo-tag**: Automatic meta tags
 - **jekyll-sitemap**: Auto-generated sitemap
 
+## Structured Data (JSON-LD)
+
+Person schema in `_layouts/default.html` covers:
+
+| Property | Value |
+|----------|-------|
+| `@type` | Person |
+| `@id` | `https://feliren88.github.io/about/` |
+| `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
+| `knowsAbout` | 6 AI/ML domains |
+| `knowsLanguage` | English, Indonesian |
+| `award` | 5 awards (2019–2024) |
+| `memberOf` | SEACrowd, ACL, IEEE |
+| `colleague` | Risqi Saputra, Taufiq Asyhari |
+| `author` | 7 ScholarlyArticle entries with DOI/URLs |
+| `sameAs` | 10 academic/social profiles |
+
 ## Navigation (Single Source of Truth)
 
 All navigation is defined in `js/components/nav.js`. This is the **single source of truth** - modification here updates all pages automatically.

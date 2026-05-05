@@ -53,9 +53,9 @@
 ## Phase 2: SEO & Knowledge Panel (3-4 weeks)
 
 ### Structured Data Markup
-- [x] Person schema (JSON-LD) with affiliation, email, knowsAbout
-- [ ] Article schema for each publication
-- [ ] Organization schema for SEACrowd
+- [x] Person schema (JSON-LD) — comprehensive: name, alternateName, gender, jobTitle, alumniOf, worksFor, image, email, url, description, disambiguatingDescription, knowsAbout, knowsLanguage, award, memberOf, colleague, author (7 ScholarlyArticle entries), sameAs (10 profiles)
+- [x] Article schema for each publication — via ScholarlyArticle in Person.author array with publisher and datePublished
+- [ ] Organization schema for SEACrowd (standalone, not just memberOf)
 
 ### Content Optimization
 - [ ] Create author page on Wikipedia
@@ -180,7 +180,7 @@
 ### Must Have (Week 1)
 1. [x] Professional headshots uploaded (profile.png exists)
 2. Publication images/thumbnails
-3. [x] Person schema markup
+3. [x] Person schema markup — comprehensive JSON-LD with publications, awards, colleagues, languages
 4. Executive summary PDF
 
 ### Should Have (Weeks 2-3)
