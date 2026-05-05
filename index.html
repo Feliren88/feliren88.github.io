@@ -22,27 +22,12 @@
   <main>
     <section class="section hero reveal">
       <div class="hero-copy">
-        <p class="eyebrow">APPLIED SCIENTIST / MULTIMODAL AI / REMOTE SENSING</p>
-        <h1>Vicky Feliren</h1>
-        <p class="lead" style="font-size:1.32rem;line-height:1.5;max-width:42rem">
-          I build AI systems that see and understand the world —
-          from satellite imagery mapping flood zones in Indonesia
-          to vision-language models that resonate with Southeast Asian cultures.
-        </p>
-        <p class="lead" style="font-size:1.08rem;margin-top:1.2rem;color:var(--muted)">
-          I'm currently a Researcher at SEACrowd, building open-source datasets and models
-          for a region often overlooked by AI. Before this, I spent years
-          at the intersection of geospatial AI and practical engineering —
-          shipping systems that process millions of daily inferences.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="pages/about.html">More About Me</a>
-          <a class="btn btn-secondary" href="pages/thoughts.html">Read My Writings</a>
-        </div>
-        <ul class="hero-meta">
-          <li>Based in Jakarta, Indonesia</li>
-          <li>M.Sc. Data Science (Monash University)</li>
-        </ul>
+        <p class="eyebrow" id="index-eyebrow">APPLIED SCIENTIST / MULTIMODAL AI / REMOTE SENSING</p>
+        <h1 id="index-name">Vicky Feliren</h1>
+        <p class="lead" id="index-lead1" style="font-size:1.32rem;line-height:1.5;max-width:42rem"></p>
+        <p class="lead" id="index-lead2" style="font-size:1.08rem;margin-top:1.2rem;color:var(--muted)"></p>
+        <div class="hero-actions" id="index-buttons"></div>
+        <ul class="hero-meta" id="index-meta"></ul>
         <div class="bg-controls">
           <p>Background Point Cloud</p>
           <div class="shape-controls" role="group" aria-label="Point cloud shape">
@@ -65,7 +50,28 @@
     <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="js/data/index.js"></script>
   <script src="js/main.js?v=2"></script>
+  <script>
+(function() {
+  var d = INDEX_DATA;
+  if (!d) return;
+  document.getElementById('index-eyebrow').textContent = d.eyebrow || '';
+  document.getElementById('index-name').textContent = d.name || '';
+  document.getElementById('index-lead1').textContent = d.lead1 || '';
+  document.getElementById('index-lead2').textContent = d.lead2 || '';
+  if (d.buttons) {
+    document.getElementById('index-buttons').innerHTML = d.buttons.map(function(b) {
+      return '<a class="btn btn-primary" href="' + b.href + '">' + b.label + '</a>';
+    }).join('');
+  }
+  if (d.meta) {
+    document.getElementById('index-meta').innerHTML = d.meta.map(function(m) {
+      return '<li>' + m + '</li>';
+    }).join('');
+  }
+})();
+  </script>
   <script src="js/components/nav.js"></script>
 </body>
 </html>
