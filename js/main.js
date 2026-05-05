@@ -164,6 +164,7 @@ function initPointCloudLab() {
   let targetRotX = rotX;
   let targetRotY = rotY;
   let zoom = 560;
+  let activeShape = "knot";
 
   // Restore animation state from localStorage
   try {
@@ -185,7 +186,6 @@ function initPointCloudLab() {
   let pointerBiasX = 0;
   let pointerBiasY = 0;
 
-  let activeShape = "knot";
   let points = [];
   let targets = [];
   let motionVectors = [];
