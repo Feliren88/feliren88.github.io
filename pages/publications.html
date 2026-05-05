@@ -61,9 +61,10 @@
      * Renders publications from PUBLICATIONS_DATA to the DOM
      * Uses data-kind attribute to determine filter category
      */
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var grid = document.getElementById('publications-grid');
       if (!grid || typeof PUBLICATIONS_DATA === 'undefined') return;
+      if (grid.children.length > 0) return; // Already rendered
 
       var html = '';
       var keys = Object.keys(PUBLICATIONS_DATA);
@@ -88,7 +89,7 @@
 
       grid.innerHTML = html;
       document.getElementById('project-count').textContent = count;
-    })();
+    });
   </script>
 </body>
 </html>
