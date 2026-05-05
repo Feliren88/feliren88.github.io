@@ -20,103 +20,37 @@ permalink: /contact/
 
 <p class="column-title" style="margin-top:2.5rem;margin-bottom:1rem">REACH ME</p>
 <div id="contact-grid" class="contact-grid">
-  {% for link in site.data.contact.links %}
-  <a class="contact-card" href="{{ link.url }}" target="_blank" rel="noreferrer">
-    <span>{{ link.label }}</span>
-    <strong>{{ link.value }}</strong>
+  <a class="contact-card" href="mailto:vickyfeliren@gmail.com" target="_blank" rel="noreferrer">
+    <img src="/assets/img/gmail-svgrepo-com.svg" alt="Email" class="contact-icon">
+    <span>Email</span>
+    <strong>vickyfeliren@gmail.com</strong>
   </a>
-  {% endfor %}
+  <a class="contact-card" href="https://www.linkedin.com/in/feliren/" target="_blank" rel="noreferrer">
+    <img src="/assets/img/linkedin-svgrepo-com.svg" alt="LinkedIn" class="contact-icon">
+    <span>LinkedIn</span>
+    <strong>feliren</strong>
+  </a>
+  <a class="contact-card" href="https://github.com/feliren88" target="_blank" rel="noreferrer">
+    <img src="/assets/img/github-svgrepo-com.svg" alt="GitHub" class="contact-icon">
+    <span>GitHub</span>
+    <strong>feliren88</strong>
+  </a>
+  <a class="contact-card" href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
+    <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" class="contact-icon">
+    <span>Google Scholar</span>
+    <strong>Vicky Feliren</strong>
+  </a>
+  <a class="contact-card" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
+    <img src="/assets/img/medium-icon-svgrepo-com.svg" alt="Medium" class="contact-icon">
+    <span>Medium</span>
+    <strong>@feliren</strong>
+  </a>
 </div>
 
-<p class="column-title" style="margin-top:3rem;margin-bottom:1rem">SEND A MESSAGE</p>
-<form class="contact-form" id="contact-form">
-  <div class="form-group">
-    <label for="from_name">Full Name</label>
-    <input type="text" id="from_name" name="from_name" required placeholder="Your name">
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required placeholder="your@email.com">
-  </div>
-  <div class="form-group">
-    <label for="subject">Subject</label>
-    <input type="text" id="subject" name="subject" required placeholder="What's this about?">
-  </div>
-  <div class="form-group">
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Send Message</button>
-  <p id="form-status" style="margin-top:1rem;font-size:0.9rem"></p>
-</form>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  (function() {
-    emailjs.init("fOPWIK3AwtJkBQyat");
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var btn = this.querySelector('button');
-      var status = document.getElementById('form-status');
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-      emailjs.send("service_or7muew", "template_0oiicm9", {
-        from_name: document.getElementById('from_name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      }).then(function() {
-        btn.textContent = 'Message Sent!';
-        status.textContent = 'Thank you! Your message has been sent.';
-        status.style.color = 'green';
-        document.getElementById('contact-form').reset();
-        setTimeout(function() {
-          btn.disabled = false;
-          btn.textContent = 'Send Message';
-        }, 3000);
-      }).catch(function(error) {
-        btn.disabled = false;
-        btn.textContent = 'Send Message';
-        status.textContent = 'Failed to send. Please try again.';
-        status.style.color = 'red';
-      });
-    });
-  })();
-</script>
-
 <style>
-  .contact-form {
-    max-width: 32rem;
-    margin-top: 1rem;
-  }
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-  .form-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 0.4rem;
-  }
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.7rem;
-    font-size: 0.95rem;
-    font-family: inherit;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--surface);
-    color: var(--text);
-    transition: border-color 0.2s ease;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-  .form-group textarea {
-    resize: vertical;
+  .contact-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 0.5rem;
   }
 </style>
