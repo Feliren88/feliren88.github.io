@@ -23,13 +23,10 @@
     <section class="section reveal">
       <p class="eyebrow">ESTABLISH LINK</p>
       <h2 class="section-title">Contact</h2>
-      <p class="contact-intro">Open for research collaborations, meaningful projects, and good conversations about multimodal AI and its real-world impact.</p>
+      <p id="contact-intro" class="contact-intro">Loading...</p>
 
-      <div class="contact-grid">
-        <a class="contact-card" href="mailto:vickyfeliren@gmail.com"><span>Email</span><strong>vickyfeliren@gmail.com</strong></a>
-        <a class="contact-card" href="https://www.linkedin.com/in/feliren/" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>feliren</strong></a>
-        <a class="contact-card" href="https://github.com/feliren88" target="_blank" rel="noreferrer"><span>GitHub</span><strong>Feliren88</strong></a>
-        <a class="contact-card" href="https://medium.com/@feliren" target="_blank" rel="noreferrer"><span>Medium</span><strong>@feliren</strong></a>
+      <div id="contact-grid" class="contact-grid">
+        <p class="loading">Loading...</p>
       </div>
     </section>
   </main>
@@ -38,6 +35,20 @@
     <p>&copy; <span id="year"></span> Vicky Feliren &middot; VF</p>
   </footer>
 
+  <script src="../js/data/contact.js"></script>
+  <script>
+(function() {
+  var intro = document.getElementById('contact-intro');
+  var grid = document.getElementById('contact-grid');
+  if (!CONTACT_DATA) return;
+  if (intro && CONTACT_DATA.intro) intro.textContent = CONTACT_DATA.intro;
+  if (grid && CONTACT_DATA.links) {
+    grid.innerHTML = CONTACT_DATA.links.map(function(link) {
+      return '<a class="contact-card" href="' + link.url + '" target="_blank" rel="noreferrer"><span>' + link.label + '</span><strong>' + link.value + '</strong></a>';
+    }).join('');
+  }
+})();
+  </script>
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
 </body>
