@@ -40,7 +40,7 @@
     /**
      * Renders skills from SKILLS_DATA to the DOM
      */
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var grid = document.getElementById('skill-grid');
       if (!grid || typeof SKILLS_DATA === 'undefined') return;
       if (grid.innerHTML.trim() !== '') return;
@@ -61,7 +61,8 @@
       });
 
       grid.innerHTML = html;
-    })();
+    });
+  });
   </script>
 </body>
 </html>

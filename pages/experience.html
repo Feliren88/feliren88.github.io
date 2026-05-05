@@ -28,26 +28,18 @@
       <div class="split-grid">
         <div>
           <p class="column-title">WORK EXPERIENCE</p>
-          <ol class="timeline" id="work-experience-list">
-            <!-- Work experience rendered by JavaScript from js/data/experience.js -->
-          </ol>
+          <ol class="timeline" id="work-experience-list"></ol>
         </div>
 
         <div>
           <p class="column-title">EDUCATION</p>
-          <ol class="timeline short" id="education-list">
-            <!-- Education rendered by JavaScript from js/data/experience.js -->
-          </ol>
+          <ol class="timeline short" id="education-list"></ol>
 
           <p class="column-title" style="margin-top:1.2rem">PATENT</p>
-          <ol class="timeline short" id="patents-list">
-            <!-- Patents rendered by JavaScript from js/data/experience.js -->
-          </ol>
+          <ol class="timeline short" id="patents-list"></ol>
 
           <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
-          <ol class="timeline short" id="teaching-list">
-            <!-- Teaching rendered by JavaScript from js/data/experience.js -->
-          </ol>
+          <ol class="timeline short" id="teaching-list"></ol>
         </div>
       </div>
     </section>
@@ -61,83 +53,77 @@
   <script src="../js/components/nav.js"></script>
   <script src="../js/main.js?v=2"></script>
   <script>
-    /**
-     * Renders work experience from WORK_EXPERIENCE_DATA to the DOM
-     */
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      /**
+       * Renders work experience from WORK_EXPERIENCE_DATA to the DOM
+       */
       var list = document.getElementById('work-experience-list');
-      if (!list || typeof WORK_EXPERIENCE_DATA === 'undefined') return;
-
-      var html = '';
-      WORK_EXPERIENCE_DATA.forEach(function(item) {
-        html += '<li>';
-        html += '<p class="time">' + item.dates + '</p>';
-        html += '<h3>' + item.title + '</h3>';
-        html += '<p class="loc">' + item.location + '</p>';
-        html += '<p>' + item.description + '</p>';
-        html += '</li>';
-      });
-      list.innerHTML = html;
-    })();
-
-    /**
-     * Renders education from EDUCATION_DATA to the DOM
-     */
-    (function() {
-      var list = document.getElementById('education-list');
-      if (!list || typeof EDUCATION_DATA === 'undefined') return;
-
-      var html = '';
-      EDUCATION_DATA.forEach(function(item) {
-        html += '<li>';
-        if (item.dates) {
+      if (list && typeof WORK_EXPERIENCE_DATA !== 'undefined') {
+        var html = '';
+        WORK_EXPERIENCE_DATA.forEach(function(item) {
+          html += '<li>';
           html += '<p class="time">' + item.dates + '</p>';
-        }
-        html += '<h3>' + item.title + '</h3>';
-        html += '<p class="loc">' + item.location + '</p>';
-        html += '<p>' + item.description + '</p>';
-        html += '</li>';
-      });
-      list.innerHTML = html;
-    })();
+          html += '<h3>' + item.title + '</h3>';
+          html += '<p class="loc">' + item.location + '</p>';
+          html += '<p>' + item.description + '</p>';
+          html += '</li>';
+        });
+        list.innerHTML = html;
+      }
 
-    /**
-     * Renders patents from PATENTS_DATA to the DOM
-     */
-    (function() {
-      var list = document.getElementById('patents-list');
-      if (!list || typeof PATENTS_DATA === 'undefined') return;
+      /**
+       * Renders education from EDUCATION_DATA to the DOM
+       */
+      var eduList = document.getElementById('education-list');
+      if (eduList && typeof EDUCATION_DATA !== 'undefined') {
+        var html = '';
+        EDUCATION_DATA.forEach(function(item) {
+          html += '<li>';
+          if (item.dates) {
+            html += '<p class="time">' + item.dates + '</p>';
+          }
+          html += '<h3>' + item.title + '</h3>';
+          html += '<p class="loc">' + item.location + '</p>';
+          html += '<p>' + item.description + '</p>';
+          html += '</li>';
+        });
+        eduList.innerHTML = html;
+      }
 
-      var html = '';
-      PATENTS_DATA.forEach(function(item) {
-        html += '<li>';
-        html += '<p class="time">' + item.dates + '</p>';
-        html += '<h3>' + item.title + '</h3>';
-        html += '<p class="loc">' + item.location + '</p>';
-        html += '<p>' + item.description + '</p>';
-        html += '</li>';
-      });
-      list.innerHTML = html;
-    })();
+      /**
+       * Renders patents from PATENTS_DATA to the DOM
+       */
+      var patentList = document.getElementById('patents-list');
+      if (patentList && typeof PATENTS_DATA !== 'undefined') {
+        var html = '';
+        PATENTS_DATA.forEach(function(item) {
+          html += '<li>';
+          html += '<p class="time">' + item.dates + '</p>';
+          html += '<h3>' + item.title + '</h3>';
+          html += '<p class="loc">' + item.location + '</p>';
+          html += '<p>' + item.description + '</p>';
+          html += '</li>';
+        });
+        patentList.innerHTML = html;
+      }
 
-    /**
-     * Renders teaching from TEACHING_DATA to the DOM
-     */
-    (function() {
-      var list = document.getElementById('teaching-list');
-      if (!list || typeof TEACHING_DATA === 'undefined') return;
-
-      var html = '';
-      TEACHING_DATA.forEach(function(item) {
-        html += '<li>';
-        html += '<p class="time">' + item.dates + '</p>';
-        html += '<h3>' + item.title + '</h3>';
-        html += '<p class="loc">' + item.location + '</p>';
-        html += '<p>' + item.description + '</p>';
-        html += '</li>';
-      });
-      list.innerHTML = html;
-    })();
+      /**
+       * Renders teaching from TEACHING_DATA to the DOM
+       */
+      var teachList = document.getElementById('teaching-list');
+      if (teachList && typeof TEACHING_DATA !== 'undefined') {
+        var html = '';
+        TEACHING_DATA.forEach(function(item) {
+          html += '<li>';
+          html += '<p class="time">' + item.dates + '</p>';
+          html += '<h3>' + item.title + '</h3>';
+          html += '<p class="loc">' + item.location + '</p>';
+          html += '<p>' + item.description + '</p>';
+          html += '</li>';
+        });
+        teachList.innerHTML = html;
+      }
+    });
   </script>
 </body>
 </html>
