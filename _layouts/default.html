@@ -21,13 +21,21 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": [
+        "https://schema.org",
+        {
+          "sameAs": {"@type": "@id"},
+          "url": {"@type": "@id"}
+        }
+      ],
       "@type": "Person",
+      "@id": "https://feliren88.github.io/#vicky-feliren",
       "name": "Vicky Feliren",
       "jobTitle": "Applied Scientist",
       "worksFor": {
-        "@type": "Organization",
-        "name": "Monash University"
+        "@type": "EducationalOrganization",
+        "name": "Monash University",
+        "url": "https://www.monash.edu"
       },
       "affiliation": "Monash University",
       "url": "https://feliren88.github.io",
