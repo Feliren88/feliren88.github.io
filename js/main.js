@@ -88,7 +88,7 @@ function collapseAllCards(exceptCard = null) {
     const button = card.querySelector(".card-toggle");
     if (button) {
       button.setAttribute("aria-expanded", "false");
-      button.textContent = "Details";
+      button.textContent = "Abstract";
     }
   }
 }
@@ -103,7 +103,7 @@ toggleButtons.forEach((button) => {
     collapseAllCards(willExpand ? card : null);
     card.classList.toggle("expanded", willExpand);
     button.setAttribute("aria-expanded", String(willExpand));
-    button.textContent = willExpand ? "Collapse" : "Details";
+    button.textContent = willExpand ? "Collapse" : "Abstract";
   });
 });
 
