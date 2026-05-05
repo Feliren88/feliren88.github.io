@@ -175,6 +175,7 @@ function initPointCloudLab() {
       targetRotX = rotX;
       targetRotY = rotY;
       zoom = state.zoom ?? zoom;
+      activeShape = state.activeShape ?? activeShape;
     }
   } catch (e) {}
 
@@ -461,7 +462,7 @@ function initPointCloudLab() {
       if (shapeLabelEl) {
         shapeLabelEl.textContent = `Shape: ${shape.charAt(0).toUpperCase()}${shape.slice(1)}`;
       }
-      saveStateSession();
+      saveState();
     });
   });
 
@@ -470,6 +471,15 @@ function initPointCloudLab() {
   }
 
   resetPoints(activeShape);
+
+  // Sync button UI and label with restored shape
+  shapeButtons.forEach((b) => {
+    b.classList.toggle("is-active", b.getAttribute("data-shape") === activeShape);
+  });
+  if (shapeLabelEl) {
+    shapeLabelEl.textContent = `Shape: ${activeShape.charAt(0).toUpperCase()}${activeShape.slice(1)}`;
+  }
+
   resize();
   window.addEventListener("resize", resize);
   draw();
