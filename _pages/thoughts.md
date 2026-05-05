@@ -67,14 +67,14 @@ permalink: /writings/
     font-size: 0.76rem;
     font-weight: 700;
   }
-  .medium-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--accent);
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-decoration: none;
-    vertical-align: middle;
-  }
+.medium-badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 0.35rem;
+     color: var(--text);
+     font-size: 0.82rem;
+     font-weight: 600;
+     text-decoration: none;
+     vertical-align: middle;
+   }
 </style>
