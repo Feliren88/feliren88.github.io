@@ -160,7 +160,7 @@ main {
   max-width: 860px;
   display: flex;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .hero-profile {
