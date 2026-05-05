@@ -1,44 +1,35 @@
-your-model-just-killed:
-  title: 'Your Model Just Killed Someone\'s Grandmother'
-  description: 'Exploring why every production ML system needs conformal prediction for honest uncertainty quantification and safer deployments.'
-  url: 'https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4'
+- title: "Your model just killed someone's grandmother: Why every production ML needs conformal prediction"
+  description: "How conformal prediction gives you honest uncertainty quantification with mathematical guarantees that actually hold in production."
+  url: "https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4"
 
-art-of-letting-go:
-  title: 'The Art of Letting Go While Still Caring'
-  description: 'Reflections on control, surrender, and finding strength in vulnerability through personal experience.'
-  url: 'https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063'
+- title: "The art of letting go while still caring"
+  description: "What I learned from trying to control everything and ending up with nothing."
+  url: "https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063"
 
-meditation-7-days:
-  title: 'Meditation: 7 Days, No Phone, Noble Silence'
+- title: "Meditation. 7 days. No phone. Noble silence."
   description: "A data-driven researcher's journey into 7 days of silent meditation at Taman Brahma Bali Usada."
-  url: 'https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3'
+  url: "https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3"
 
-trustworthy-ai:
-  title: 'My Initial Exploration on Trustworthy AI'
-  description: 'First encounters with Trustworthy AI — bridging information theory and responsible machine learning.'
-  url: 'https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956'
+- title: "My initial exploration on Trustworthy AI"
+  description: "First encounters with Trustworthy AI — bridging information theory and responsible machine learning."
+  url: "https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956"
 
-phoenix-protocol:
-  title: 'Phoenix Protocol: Rising from the Ashes of Adversity'
-  description: 'On resilience, reinvention, and learning to rise again after failure and loss.'
-  url: 'https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638'
+- title: "Phoenix Protocol: Rising from the ashes of adversity"
+  description: "On resilience, reinvention, and learning to rise again after failure and loss."
+  url: "https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638"
 
-privacy-matters:
-  title: 'Privacy Matters: Navigating the Digital Age with Confidence'
-  description: 'Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship.'
-  url: 'https://medium.com/technology-hits/privacy-matters-navigating-the-digital-age-with-confidence-6a47dede68ed'
+- title: "Privacy Matters: Navigating the Digital Age with Confidence"
+  description: "Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship."
+  url: "https://medium.com/technology-hits/privacy-matters-navigating-the-digital-age-with-confidence-6a47dede68ed"
 
-mental-health-matters:
-  title: 'Mental Health Matters: Please Take Care'
-  description: 'A personal reflection on mental health awareness, self-care, and breaking the silence.'
-  url: 'https://feliren.medium.com/mental-health-matters-please-take-care-2469d7c62baa'
+- title: "Mental Health Matters: Please Take Care"
+  description: "A personal reflection on mental health awareness, self-care, and breaking the silence."
+  url: "https://feliren.medium.com/mental-health-matters-please-take-care-2469d7c62baa"
 
-iu-concert:
-  title: 'A Stranger\'s Guide to the IU Concert'
-  description: 'Reflections on fandom, culture, and music through the lens of an IU concert experience.'
-  url: 'https://medium.com/illumination/a-strangers-guide-to-the-iu-concert-reflections-on-fandom-culture-and-music-702ec9f03966'
+- title: "A Stranger's Guide to the IU Concert"
+  description: "Reflections on fandom, culture, and music through the lens of an IU concert experience."
+  url: "https://medium.com/illumination/a-strangers-guide-to-the-iu-concert-reflections-on-fandom-culture-and-music-702ec9f03966"
 
-gone-social-media:
-  title: 'Gone from Social Media for 4 Years — Now I Am Back'
-  description: 'Returning to social media after 4 years — reflections on digital presence and personal growth.'
-  url: 'https://feliren.medium.com/gone-from-social-media-for-4-years-now-i-am-back-b835759639d3'
+- title: "Gone from Social Media for 4 Years — Now I Am Back"
+  description: "Returning to social media after 4 years — reflections on digital presence and personal growth."
+  url: "https://feliren.medium.com/gone-from-social-media-for-4-years-now-i-am-back-b835759639d3"

@@ -16,9 +16,7 @@ permalink: /writings/
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
 <div id="thoughts-container" class="thoughts-grid">
-  <!-- Static fallback - RSS fetch still works via JS -->
-  {% for key in site.data.thoughts %}
-  {% assign thought = key[1] %}
+  {% for thought in site.data.thoughts %}
   <a class="thought-card" href="{{ thought.url }}" target="_blank" rel="noreferrer">
     <h3>{{ thought.title }}</h3>
     <p>{{ thought.description }}</p>
@@ -26,39 +24,6 @@ permalink: /writings/
   </a>
   {% endfor %}
 </div>
-
-<script>
-(function() {
-  var container = document.getElementById('thoughts-container');
-  var MEDIUM_USER = 'feliren';
-  var RSS2JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@' + MEDIUM_USER;
-
-  function formatDate(dateStr) {
-    var date = new Date(dateStr);
-    var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-  }
-
-  function renderArticle(item) {
-    var summary = item.description ? item.description.replace(/<[^>]+>/g, '').substring(0, 160) + '...' : '';
-    return '<a class="thought-card" href="' + item.link + '" target="_blank" rel="noreferrer">' +
-      '<span class="date">' + formatDate(item.pubDate) + '</span>' +
-      '<h3>' + item.title + '</h3>' +
-      '<p>' + summary + '</p>' +
-      '<span class="read-more">Read on Medium →</span>' +
-    '</a>';
-  }
-
-  fetch(RSS2JSON_API)
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.status === 'ok' && data.items && data.items.length > 0) {
-        container.innerHTML = data.items.slice(0, 10).map(renderArticle).join('');
-      }
-    })
-    .catch(function() {});
-})();
-</script>
 
 <style>
   .thoughts-grid {
@@ -81,14 +46,6 @@ permalink: /writings/
     border-color: rgba(119, 146, 175, 0.48);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-  }
-  .thought-card .date {
-    display: block;
-    color: var(--accent);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.32rem;
   }
   .thought-card h3 {
     margin: 0;
@@ -121,10 +78,5 @@ permalink: /writings/
     font-size: 0.72rem;
     font-weight: 600;
     text-decoration: none;
-  }
-  .loading {
-    text-align: center;
-    padding: 3rem;
-    color: var(--muted);
   }
 </style>
