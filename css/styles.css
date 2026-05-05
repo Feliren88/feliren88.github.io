@@ -19,6 +19,27 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(1500px 820px at 80% -12%, rgba(101, 124, 152, 0.18), transparent 62%),
+    radial-gradient(980px 680px at -8%28%, rgba(78, 97, 122, 0.13), transparent 66%),
+    linear-gradient(180deg, var(--bg), var(--bg-soft));
+  background-color: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
