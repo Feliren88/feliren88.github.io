@@ -165,6 +165,19 @@ function initPointCloudLab() {
   let targetRotY = rotY;
   let zoom = 560;
 
+  // Restore animation state from localStorage
+  try {
+    const saved = localStorage.getItem("pointCloudState");
+    if (saved) {
+      const state = JSON.parse(saved);
+      rotX = state.rotX ?? rotX;
+      rotY = state.rotY ?? rotY;
+      targetRotX = rotX;
+      targetRotY = rotY;
+      zoom = state.zoom ?? zoom;
+    }
+  } catch (e) {}
+
   let dragging = false;
   let lastX = 0;
   let lastY = 0;
@@ -176,6 +189,24 @@ function initPointCloudLab() {
   let targets = [];
   let motionVectors = [];
   let pointCount = 2800;
+
+  // Save animation state periodically and before unload
+  function saveState() {
+    try {
+      localStorage.setItem("pointCloudState", JSON.stringify({
+        rotX, rotY, zoom, activeShape
+      }));
+    } catch (e) {}
+  }
+
+  // Also use sessionStorage as backup for same-session persistence
+  function saveStateSession() {
+    try {
+      sessionStorage.setItem("pointCloudState", JSON.stringify({
+        rotX, rotY, zoom, activeShape
+      }));
+    } catch (e) {}
+  }
 
   function rand(min, max) {
     return Math.random() * (max - min) + min;
@@ -343,6 +374,9 @@ function initPointCloudLab() {
       targetRotY += 0.00155;
     }
 
+    // Save state periodically
+    saveStateSession();
+
     for (let i = 0; i < points.length; i += 1) {
       const p = points[i];
       const t = targets[i];
@@ -427,6 +461,7 @@ function initPointCloudLab() {
       if (shapeLabelEl) {
         shapeLabelEl.textContent = `Shape: ${shape.charAt(0).toUpperCase()}${shape.slice(1)}`;
       }
+      saveStateSession();
     });
   });
 
@@ -438,6 +473,9 @@ function initPointCloudLab() {
   resize();
   window.addEventListener("resize", resize);
   draw();
+
+  // Save state before page unload
+  window.addEventListener("beforeunload", saveState);
 }
 
 initPointCloudLab();
