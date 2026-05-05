@@ -47,12 +47,13 @@
   <script src="../js/data/publications.js"></script>
   <script>
 (function() {
+  var FIRST_AUTHOR_KEYS = ['flood-procanet', 'plastic-bag-ban'];
   function renderPublications(filter) {
     var container = document.getElementById('publications-container');
     var countEl = document.getElementById('project-count');
     var items = Object.keys(PUBLICATIONS_DATA).map(function(key) {
       var p = PUBLICATIONS_DATA[key];
-      p._kind = key.indexOf('first-author') !== -1 || key.indexOf('flood') !== -1 || key.indexOf('plastic') !== -1 ? 'first-author' : 'collab';
+      p._kind = FIRST_AUTHOR_KEYS.indexOf(key) !== -1 ? 'first-author' : 'collab';
       p._key = key;
       return p;
     });
