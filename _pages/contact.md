@@ -20,31 +20,13 @@ permalink: /contact/
 
 <p class="column-title" style="margin-top:2.5rem;margin-bottom:1rem">REACH ME</p>
 <div id="contact-grid" class="contact-grid">
-  <a class="contact-card" href="mailto:vickyfeliren@gmail.com" target="_blank" rel="noreferrer">
-    <img src="/assets/img/gmail-svgrepo-com (1).svg" alt="Email" class="contact-icon">
-    <span>Email</span>
-    <strong>vickyfeliren@gmail.com</strong>
+  {% for link in site.data.contact.links %}
+  <a class="contact-card" href="{{ link.url }}" target="_blank" rel="noreferrer">
+    <img src="/assets/img/{{ link.icon }}" alt="{{ link.label }}" class="contact-icon">
+    <span>{{ link.label }}</span>
+    <strong>{{ link.value }}</strong>
   </a>
-  <a class="contact-card" href="https://www.linkedin.com/in/feliren/" target="_blank" rel="noreferrer">
-    <img src="/assets/img/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="contact-icon">
-    <span>LinkedIn</span>
-    <strong>feliren</strong>
-  </a>
-  <a class="contact-card" href="https://github.com/feliren88" target="_blank" rel="noreferrer">
-    <img src="/assets/img/github-color-svgrepo-com.svg" alt="GitHub" class="contact-icon">
-    <span>GitHub</span>
-    <strong>feliren88</strong>
-  </a>
-  <a class="contact-card" href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
-    <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" class="contact-icon">
-    <span>Google Scholar</span>
-    <strong>Vicky Feliren</strong>
-  </a>
-  <a class="contact-card" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
-    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" class="contact-icon">
-    <span>Medium</span>
-    <strong>@feliren</strong>
-  </a>
+  {% endfor %}
 </div>
 
 <style>

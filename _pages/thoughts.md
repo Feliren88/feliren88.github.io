@@ -7,11 +7,10 @@ permalink: /writings/
 ---
 
 <p class="eyebrow">WRITING</p>
-<h1 class="section-title">Thoughts
-  <a class="medium-badge" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a2.46 2.46 0 0 1-2.46 2.46 2.46 2.46 0 0 1-2.46-2.46A2.46 2.46 0 0 1 13.54 12a2.46 2.46 0 0 1 .23 1.47l-3.82 1.54a1.54 1.54 0 0 1-1.08-1.08l1.54-3.82A2.46 2.46 0 0 1 13.54 12zm-6.7 3.7a25.46 25.46 0 0 1 8.54-7.7l1.92 1.92a19.7 19.7 0 0 0-7.7 4.08 19.7 19.7 0 0 0-2.76 1.7zm9.9-8.7a22.7 22.7 0 0 1 7.7 7.7l-1.92 1.92a25.46 25.46 0 0 1-5.78-9.62z"/></svg>
-    @feliren
-  </a>
+<h1 class="section-title">
+  <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:28px;height:28px;vertical-align:middle;margin-right:0.5rem">
+  Thoughts
+  <a class="medium-badge" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">@feliren</a>
 </h1>
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
