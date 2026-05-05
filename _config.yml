@@ -2,17 +2,40 @@
 title: Vicky Feliren
 tagline: Applied Scientist — Multimodal AI & Trustworthy Vision-Language Models
 description: >
-  Applied Scientist specializing in trustworthy multimodal AI and cultural inclusion 
-  in vision-language systems. M.Sc. candidate at Monash University. Published in IEEE, 
-  ACL, and Remote Sensing of Environment.
+  Vicky Feliren is an Applied Scientist and AI Researcher specializing in Computer Vision, 
+  Deep Learning, and Trustworthy AI. Published in IEEE, ACL, and Remote Sensing of Environment. 
+  Expertise in Vision-Language Models, Conformal Prediction, and Geospatial AI.
 baseurl: ""
 url: "https://feliren88.github.io"
 
+# Author info
+author:
+  name: Vicky Feliren
+  twitter: feliren88
+email: vickyfeliren@gmail.com
+
+# Locale
+locale: en-US
+
 # SEO Settings (for jekyll-seo-tag)
 logo: /assets/img/profile.jpg
+image: /assets/img/profile.jpg
 twitter:
-  username: feliren88
-  card: summary
+  card: summary_large
+
+# Search keywords for AI roles
+keywords:
+  - Vicky Feliren
+  - Applied Scientist
+  - AI Researcher
+  - Machine Learning Engineer
+  - Data Scientist
+  - Computer Vision
+  - Deep Learning
+  - Vision-Language Models
+  - Multimodal AI
+  - Trustworthy AI
+  - Conformal Prediction
 social:
   name: Vicky Feliren
   links:
