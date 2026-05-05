@@ -1,117 +1,85 @@
 # Vicky Feliren - Personal Website
 
-Personal portfolio website built with semantic HTML, vanilla CSS, and JavaScript. Deployed via GitHub Pages.
+Personal portfolio website for Vicky Feliren - Applied Scientist specializing in Multimodal AI, Vision-Language Models, and Remote Sensing. Built with Jekyll static site generator.
 
 ## Project Structure
 
 ```
 feliren88.github.io/
-├── README.md              # Project documentation
-├── CLAUDE.md             # Development guidelines
-├── index.html           # Homepage (landing)
+├── README.md       # Project documentation
+├── CLAUDE.md       # Development guidelines
+├── _config.yml     # Jekyll configuration
+├── Gemfile         # Ruby dependencies
+├── index.html      # Homepage (Jekyll template)
+├── _layouts/
+│   ├── default.html  # Base layout with SEO
+│   └── page.html     # Page template
+├── _pages/         # Jekyll pages (Markdown)
+│   ├── about.md
+│   ├── skills.md
+│   ├── experience.md
+│   ├── publications.md
+│   ├── awards.md
+│   ├── thoughts.md
+│   └── contact.md
+├── _data/          # YAML data files
+│   ├── index.yml
+│   ├── about.yml
+│   ├── skills.yml
+│   ├── experience.yml
+│   ├── publications.yml
+│   ├── awards.yml
+│   ├── thoughts.yml
+│   └── contact.yml
 ├── css/
-│   └── styles.css     # All styles
-├── js/
-│   ├── main.js       # Core JavaScript (3D point cloud, animations)
-│   ├── components/
-│   │   └── nav.js   # Shared navigation - SINGLE SOURCE OF TRUTH
-│   └── data/       # External data configurations
-│       ├── thoughts.js
-│       ├── publications.js
-│       ├── awards.js
-│       ├── experience.js
-│       └── skills.js
-└── pages/
-    ├── about.html      # About Vicky
-    ├── skills.html     # Expertise
-    ├── experience.html # Work experience
-    ├── publications.html # Research
-    ├── awards.html    # Recognition
-    ├── thoughts.html  # Writings (Medium)
-    └── contact.html # Contact
+│   └── styles.css
+└── js/
+    ├── main.js          # Core JavaScript
+    └── components/
+        └── nav.js       # Shared navigation
 ```
 
 ## Technology Stack
 
+- **Jekyll**: Static site generator with liquid templating
 - **HTML5**: Semantic markup with accessibility
-- **CSS3**: Custom properties, Grid/Flexbox, keyframe animations
+- **CSS3**: Custom properties, Grid/Flexbox, responsive design
 - **JavaScript (ES6+)**: Vanilla JS, no frameworks
+- **jekyll-seo-tag**: Automatic meta tags
+- **jekyll-sitemap**: Auto-generated sitemap
 
 ## Navigation (Single Source of Truth)
 
-All navigation is defined in `js/components/nav.js`. This ensures consistent naming across all pages.
+All navigation is defined in `js/components/nav.js`. This is the **single source of truth** - modification here updates all pages automatically.
 
-To change navigation labels or order, edit `js/components/nav.js`:
+## Content Management
 
-```javascript
-var NAV_ITEMS = [
-  { href: '/index.html', label: 'Home', page: '/' },
-  { href: '/pages/about.html', label: 'About', page: '/about' },
-  { href: '/pages/skills.html', label: 'Expertise', page: '/expertise' },
-  { href: '/pages/experience.html', label: 'Work', page: '/work' },
-  { href: '/pages/publications.html', label: 'Research', page: '/research' },
-  { href: '/pages/awards.html', label: 'Recognition', page: '/recognition' },
-  { href: '/pages/thoughts.html', label: 'Writings', page: '/writings' },
-  { href: '/pages/contact.html', label: 'Contact', page: '/contact' },
-];
-```
+Content is managed through YAML data files in `_data/`. Each page corresponds to a data file:
 
-## Data Configuration
+- `_data/about.yml` — About page content
+- `_data/skills.yml` — Expertise skills
+- `_data/experience.yml` — Work experience, education, patents, teaching
+- `_data/publications.yml` — Research publications
+- `_data/awards.yml` — Awards and service
+- `_data/thoughts.yml` — Medium writings
+- `_data/contact.yml` — Contact information
 
-Content is managed through external JavaScript data files in `js/data/`.
-
-### Adding New Content
-
-**Thoughts (Medium)** — `js/data/thoughts.js`:
-```javascript
-var THOUGHTS_DATA = {
-  'article-key': { description: '...', url: 'https://...' }
-};
-```
-
-**Publications** — `js/data/publications.js`:
-```javascript
-var PUBLICATIONS_DATA = {
-  'key': { tag: '...', title: '...', description: '...', venue: '...', url: '...', abstract: '...' }
-};
-```
-
-**Awards** — `js/data/awards.js`:
-```javascript
-var AWARDS_DATA = { 'key': { category: '...', title: '...', year: '...', description: '...', url: '...' } };
-var SERVICE_DATA = [{ role: '...', description: '...', urls: [...] }];
-```
-
-**Experience** — `js/data/experience.js`:
-```javascript
-var WORK_EXPERIENCE_DATA = [{ dates: '...', title: '...', location: '...', description: '...' }];
-var EDUCATION_DATA = [...];
-var PATENTS_DATA = [...];
-var TEACHING_DATA = [...];
-```
-
-**Skills** — `js/data/skills.js`:
-```javascript
-var SKILLS_DATA = [{ category: '...', description: '...', skills: ['...'] }];
-```
-
-## Development
+## Local Development
 
 ```bash
-python -m http.server 8000
-# or
-npx serve .
+bundle install
+bundle exec jekyll serve --livereload
 ```
 
-Access at `http://localhost:8000`
+Site available at `http://localhost:4000`
 
-## Features
+## Building
 
-- Interactive 3D point cloud background (draggable, multiple shapes)
-- Scroll reveal animations
-- Shared navigation - consistent across all pages
-- Responsive design
-- Data-driven content rendering
+```bash
+bundle exec jekyll build
+```
+
+Output goes to `_site/` directory.
 
 ## Deploying
 
@@ -120,6 +88,8 @@ git add -A
 git commit -m "description"
 git push origin main
 ```
+
+GitHub Actions handles Jekyll build automatically.
 
 ## Contact
 
