@@ -30,85 +30,30 @@
   <main>
     <section class="section reveal">
       <p class="eyebrow">CAREER TRAJECTORY</p>
-      <h2 class="section-title">Experience &amp; Education</h2>
+      <h2 class="section-title">Experience & Education</h2>
 
       <div class="split-grid">
         <div>
           <p class="column-title">WORK EXPERIENCE</p>
-          <ol class="timeline">
-            <li>
-              <p class="time">OCT 2024 &ndash; PRESENT</p>
-              <h3>SEACrowd &mdash; Researcher, Multimodal &amp; Vision-Language</h3>
-              <p class="loc">Open-science research collective &middot; <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">seacrowd.github.io</a></p>
-              <p>Contributed cross-functional workgroups across 50+ researchers and 5+ countries to curate SEA-VL, a multicultural vision-language benchmark. Co-developed VLM adaptation paradigms improving cultural relevance.</p>
-            </li>
-            <li>
-              <p class="time">FEB 2025 &ndash; NOV 2025</p>
-              <h3>Artefact &mdash; Senior Data Scientist</h3>
-              <p class="loc">French-based AI consulting &middot; Founding member, Jakarta office</p>
-              <p>Pioneered end-to-end predictive Share of Voice system on Vertex AI, scaling inference across 6 markets within 2 months. As inaugural Jakarta hire, codified engineering protocols for scalable applied AI operations.</p>
-            </li>
-            <li>
-              <p class="time">DEC 2022 &ndash; JAN 2025</p>
-              <h3>Monash University &mdash; Research Associate</h3>
-              <p class="loc">Top 50 global research university</p>
-              <p>Directed geospatial AI pipelines across global consortia (UQ, UCL, Nottingham). Designed progressive cross-attention network for flood segmentation informing policy. First-authored IEEE GRSL Q1.</p>
-            </li>
-            <li>
-              <p class="time">JUN 2021 &ndash; JUN 2023</p>
-              <h3>GDP Labs (GLAIR.ai) &mdash; Senior Data Scientist / ML Engineer</h3>
-              <p class="loc">AI firm backed by major Indonesian conglomerate</p>
-              <p>Achieved 99.99% reliability for biometric systems handling 1M+ daily financial inferences. Reduced delivery timelines by 30% through automated ML pipelines. Fast-tracked to Senior in 12 months.</p>
-            </li>
-            <li>
-              <p class="time">JAN 2021 &ndash; JUN 2021</p>
-              <h3>Jakarta Smart City &mdash; Data Scientist</h3>
-              <p class="loc">Indonesia's smart city ecosystem</p>
-              <p>Developed probabilistic forecasting models for waste logistics, improving efficiency by 15% for 10M+ residents. Presented at IEEE-sponsored conference to 500+ attendees.</p>
-            </li>
+          <ol class="timeline" id="work-experience-list">
+            <!-- Work experience rendered by JavaScript from js/data/experience.js -->
           </ol>
         </div>
 
         <div>
           <p class="column-title">EDUCATION</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">EXPECTED SEPT 2026</p>
-              <h3>Monash University</h3>
-              <p class="loc">Master of Data Science &middot; GPA: 4.0/4.0</p>
-              <p>Thesis: <em>Conformal prediction approach to vision-language navigation (VLN)</em></p>
-            </li>
-            <li>
-              <h3>Monash University</h3>
-              <p class="loc">Bachelor of Computer Science</p>
-              <p>Student Exchange at NTU Singapore</p>
-            </li>
+          <ol class="timeline short" id="education-list">
+            <!-- Education rendered by JavaScript from js/data/experience.js -->
           </ol>
 
           <p class="column-title" style="margin-top:1.2rem">PATENT</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">ISSUED JUNE 2025</p>
-              <h3>Fish &amp; Shrimp Pond Detection via Satellite Imagery</h3>
-              <p class="loc">IDS000010594</p>
-              <p>Proprietary computer vision pipeline for high-resolution aquaculture monitoring using novel spectral indices.</p>
-            </li>
+          <ol class="timeline short" id="patents-list">
+            <!-- Patents rendered by JavaScript from js/data/experience.js -->
           </ol>
 
           <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
-          <ol class="timeline short">
-            <li>
-              <p class="time">JAN 2024 &ndash; JAN 2025</p>
-              <h3>Bangkit Academy (Google, Gojek, Traveloka)</h3>
-              <p class="loc">ML Instructor &amp; Capstone Advisor</p>
-              <p>Mentored 150+ students; supervised 5+ capstone projects deploying ML to Cloud Run.</p>
-            </li>
-            <li>
-              <p class="time">NOV 2023</p>
-              <h3>Bina Nusantara University</h3>
-              <p class="loc">Guest Lecturer, Computer Vision</p>
-              <p>Sessions on CNNs to Transformers and semantic segmentation for 100+ seniors.</p>
-            </li>
+          <ol class="timeline short" id="teaching-list">
+            <!-- Teaching rendered by JavaScript from js/data/experience.js -->
           </ol>
         </div>
       </div>
@@ -116,9 +61,89 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year"></span> Vicky Feliren &middot; VF</p>
+    <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/experience.js"></script>
   <script src="../js/main.js?v=2"></script>
+  <script>
+    /**
+     * Renders work experience from WORK_EXPERIENCE_DATA to the DOM
+     */
+    (function() {
+      var list = document.getElementById('work-experience-list');
+      if (!list || typeof WORK_EXPERIENCE_DATA === 'undefined') return;
+
+      var html = '';
+      WORK_EXPERIENCE_DATA.forEach(function(item) {
+        html += '<li>';
+        html += '<p class="time">' + item.dates + '</p>';
+        html += '<h3>' + item.title + '</h3>';
+        html += '<p class="loc">' + item.location + '</p>';
+        html += '<p>' + item.description + '</p>';
+        html += '</li>';
+      });
+      list.innerHTML = html;
+    })();
+
+    /**
+     * Renders education from EDUCATION_DATA to the DOM
+     */
+    (function() {
+      var list = document.getElementById('education-list');
+      if (!list || typeof EDUCATION_DATA === 'undefined') return;
+
+      var html = '';
+      EDUCATION_DATA.forEach(function(item) {
+        html += '<li>';
+        if (item.dates) {
+          html += '<p class="time">' + item.dates + '</p>';
+        }
+        html += '<h3>' + item.title + '</h3>';
+        html += '<p class="loc">' + item.location + '</p>';
+        html += '<p>' + item.description + '</p>';
+        html += '</li>';
+      });
+      list.innerHTML = html;
+    })();
+
+    /**
+     * Renders patents from PATENTS_DATA to the DOM
+     */
+    (function() {
+      var list = document.getElementById('patents-list');
+      if (!list || typeof PATENTS_DATA === 'undefined') return;
+
+      var html = '';
+      PATENTS_DATA.forEach(function(item) {
+        html += '<li>';
+        html += '<p class="time">' + item.dates + '</p>';
+        html += '<h3>' + item.title + '</h3>';
+        html += '<p class="loc">' + item.location + '</p>';
+        html += '<p>' + item.description + '</p>';
+        html += '</li>';
+      });
+      list.innerHTML = html;
+    })();
+
+    /**
+     * Renders teaching from TEACHING_DATA to the DOM
+     */
+    (function() {
+      var list = document.getElementById('teaching-list');
+      if (!list || typeof TEACHING_DATA === 'undefined') return;
+
+      var html = '';
+      TEACHING_DATA.forEach(function(item) {
+        html += '<li>';
+        html += '<p class="time">' + item.dates + '</p>';
+        html += '<h3>' + item.title + '</h3>';
+        html += '<p class="loc">' + item.location + '</p>';
+        html += '<p>' + item.description + '</p>';
+        html += '</li>';
+      });
+      list.innerHTML = html;
+    })();
+  </script>
 </body>
 </html>

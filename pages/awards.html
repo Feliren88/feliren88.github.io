@@ -30,65 +30,86 @@
   <main>
     <section class="section reveal">
       <p class="eyebrow">MILESTONES</p>
-      <h2 class="section-title">Awards &amp; Honours</h2>
+      <h2 class="section-title">Awards & Honours</h2>
 
-      <div class="awards-grid">
-        <article class="award-card">
-          <p class="tag">SCHOLARSHIP</p>
-          <h3>Monash Indonesia Inaugural Welcome Scholarship</h3>
-          <p class="time-inline">2024</p>
-          <p>Awarded for exceptional potential in driving regional AI innovation and high academic standing.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">SCHOLARSHIP</p>
-          <h3>Deep Learning Nanodegree &mdash; Facebook &amp; Udacity</h3>
-          <p class="time-inline">2019</p>
-          <p>Selected as top global applicant to master advanced PyTorch and GAN architectures.</p>
-        </article>
-        <article class="award-card highlight">
-          <p class="tag">CHAMPION</p>
-          <h3><a href="https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/" target="_blank" rel="noreferrer">Microsoft Azure Virtual Hackathon APAC</a></h3>
-          <p class="time-inline">2020</p>
-          <p>Engineered HakkTaxi: ML-driven predictive routing with 6-second ETA margin of error using Azure spatial data.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">TOP 3</p>
-          <h3><a href="https://devpost.com/software/converse-xash34" target="_blank" rel="noreferrer">CamvsCovid &mdash; University of Cambridge</a></h3>
-          <p class="time-inline">2020</p>
-          <p>TeleHealthMonitor: GDPR-compliant Edge AI for COVID-19 remote monitoring on resource-constrained devices.</p>
-        </article>
-        <article class="award-card">
-          <p class="tag">BEST COMMUNITY TRACK</p>
-          <h3><a href="https://devpost.com/software/converse-xash34" target="_blank" rel="noreferrer">Cal Hacks 8.0</a> &mdash; UC Berkeley</h3>
-          <p class="time-inline">2020</p>
-          <p>IVR solution integrated with real-time news APIs, bridging the digital divide via standard telephony.</p>
-        </article>
+      <div class="awards-grid" id="awards-grid">
+        <!-- Awards rendered by JavaScript from js/data/awards.js -->
       </div>
 
       <div class="service-section">
         <p class="column-title" style="margin-top:1.5rem">PROFESSIONAL SERVICE</p>
-        <div class="service-grid">
-          <div class="service-item">
-            <strong>Peer Reviewer</strong>
-            <p>IEEE IGARSS 2026 &mdash; Premier global remote sensing symposium</p>
-          </div>
-          <div class="service-item">
-            <strong>Technical Judge</strong>
-            <p><a href="https://cal-hacks-8.devpost.com/" target="_blank" rel="noreferrer">Cal Hacks 8.0</a>, <a href="https://cruzhacks-2022.devpost.com/" target="_blank" rel="noreferrer">CruzHacks 2022</a>, <a href="https://intuition-v8.devpost.com/" target="_blank" rel="noreferrer">iNTUition v8.0</a> (2021&ndash;2022) &mdash; 50+ projects evaluated</p>
-          </div>
-          <div class="service-item">
-            <strong>Open Source Contributor</strong>
-            <p>SEACrowd collective &mdash; Southeast Asian AI alignment &amp; data democratization</p>
-          </div>
+        <div class="service-grid" id="service-grid">
+          <!-- Service entries rendered by JavaScript from js/data/awards.js -->
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year"></span> Vicky Feliren &middot; VF</p>
+    <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
+  <script src="../js/data/awards.js"></script>
   <script src="../js/main.js?v=2"></script>
+  <script>
+    /**
+     * Renders awards from AWARDS_DATA to the DOM
+     */
+    (function() {
+      var awardsGrid = document.getElementById('awards-grid');
+      if (!awardsGrid || typeof AWARDS_DATA === 'undefined') return;
+
+      var html = '';
+      var keys = Object.keys(AWARDS_DATA);
+
+      keys.forEach(function(key) {
+        var award = AWARDS_DATA[key];
+        var highlight = key === 'microsoft-azure-hackathon' ? ' highlight' : '';
+        html += '<article class="award-card' + highlight + '">';
+        html += '<p class="tag">' + award.category + '</p>';
+        
+        if (award.url) {
+          html += '<h3><a href="' + award.url + '" target="_blank" rel="noreferrer">' + award.title + '</a></h3>';
+        } else {
+          html += '<h3>' + award.title + '</h3>';
+        }
+        
+        html += '<p class="time-inline">' + award.year + '</p>';
+        html += '<p>' + award.description + '</p>';
+        html += '</article>';
+      });
+
+      awardsGrid.innerHTML = html;
+    })();
+
+    /**
+     * Renders service entries from SERVICE_DATA to the DOM
+     */
+    (function() {
+      var serviceGrid = document.getElementById('service-grid');
+      if (!serviceGrid || typeof SERVICE_DATA === 'undefined') return;
+
+      var html = '';
+
+      SERVICE_DATA.forEach(function(service) {
+        html += '<div class="service-item">';
+        html += '<strong>' + service.role + '</strong>';
+        
+        if (service.urls && service.urls.length > 0) {
+          var linkHtml = service.urls.map(function(url) {
+            var name = url.match(/:\/\/([^/]+)/)[1].replace('www.', '').split('.')[0];
+            return '<a href="' + url + '" target="_blank" rel="noreferrer">' + name + '</a>';
+          }).join(', ');
+          html += '<p>' + linkHtml + ' — ' + service.description.split(' — ')[1] + '</p>';
+        } else {
+          html += '<p>' + service.description + '</p>';
+        }
+        
+        html += '</div>';
+      });
+
+      serviceGrid.innerHTML = html;
+    })();
+  </script>
 </body>
 </html>
