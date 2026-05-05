@@ -550,9 +550,24 @@ h1 {
 }
 
 .project-card.expanded .card-expand {
-  max-height: 7.6rem;
+  max-height: 18rem;
+  overflow-y: auto;
   opacity: 1;
   margin-top: 0.45rem;
+}
+
+.card-expand::-webkit-scrollbar {
+  width: 5px;
+}
+
+.card-expand::-webkit-scrollbar-track {
+  background: rgba(11, 20, 31, 0.4);
+  border-radius: 3px;
+}
+
+.card-expand::-webkit-scrollbar-thumb {
+  background: var(--accent-2);
+  border-radius: 3px;
 }
 
 .project-card.expanded .card-toggle {
