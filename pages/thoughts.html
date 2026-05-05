@@ -130,9 +130,10 @@
     'meditation-7-days-no-phone-noble-silence': 'A data-driven researcher\'s journey into 7 days of silent meditation at Taman Brahma Bali Usada.',
     'my-initial-exploration-on-trustworthy-ai': 'First encounters with Trustworthy AI — bridging information theory and responsible machine learning.',
     'phoenix-protocol-rising-from-the-ashes-of-adversity': 'On resilience, reinvention, and learning to rise again after failure and loss.',
-    'privacy-matters-your-data-your-power-your-responsibility': 'Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship.',
+    'privacy-matters-navigating-the-digital-age-with-confidence': 'Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship.',
     'mental-health-matters-please-take-care': 'A personal reflection on mental health awareness, self-care, and breaking the silence.',
-    'a-strangers-guide-to-the-iu-concert': 'Reflections on fandom, culture, and music through the lens of an IU concert experience.'
+    'a-strangers-guide-to-the-iu-concert': 'Reflections on fandom, culture, and music through the lens of an IU concert experience.',
+    'gone-from-social-media-for-4-years-now-i-am-back': 'Returning to social media after 4 years — reflections on digital presence and personal growth.'
   };
 
   function getSlug(title) {
@@ -143,14 +144,19 @@
   }
 
   function getDescription(item) {
-    // Try to match by slug derived from title
-    var slug = getSlug(item.title);
+    var titleLower = item.title.toLowerCase();
     for (var key in DESCRIPTIONS) {
-      if (slug.indexOf(key) !== -1 || key.indexOf(slug.substring(0, 20)) !== -1) {
+      var keyParts = key.split('-');
+      var matchCount = 0;
+      for (var i = 0; i < keyParts.length; i++) {
+        if (keyParts[i].length > 3 && titleLower.indexOf(keyParts[i]) !== -1) {
+          matchCount++;
+        }
+      }
+      if (matchCount >= Math.min(3, keyParts.length)) {
         return DESCRIPTIONS[key];
       }
     }
-    // Fallback: clean the first sentence of the body
     return cleanFallback(item.description);
   }
 
