@@ -30,7 +30,9 @@
   <main>
     <section class="section reveal">
       <p class="eyebrow">RESEARCH ARCHIVE</p>
-      <h2 class="section-title">Publications</h2>
+      <h2 class="section-title">Publications
+        <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="margin-left:0.75rem;font-size:0.82rem;color:var(--accent);text-decoration:none;font-weight:500;font-family:'Manrope',sans-serif">Google Scholar →</a>
+      </h2>
       <p class="section-note">Selected research in multimodal AI, remote sensing, and geospatial analysis.</p>
 
       <div class="project-controls">
@@ -43,36 +45,51 @@
       </div>
 
       <div class="project-grid">
-        <article class="project-card reveal" data-kind="first-author">
-          <p class="tag">FIRST AUTHOR &middot; IEEE Q1</p>
-          <h3>Progressive Cross Attention Network for Flood Segmentation</h3>
-          <p>Using multispectral satellite imagery for flood segmentation.</p>
-          <span class="venue">IEEE Geoscience and Remote Sensing Letters, 2025 (IF: 4.4)</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+        <article class="project-card reveal" data-kind="collab">
+          <p class="tag">Q1 · IF: 11.4</p>
+          <h3>Multi-modal Deep Learning for Mining Footprint Segmentation</h3>
+          <p>Semantic segmentation of global mining footprints using multispectral satellite imagery across 37 locations worldwide.</p>
+          <span class="venue">Remote Sensing of Environment, Volume 318, 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
           <div class="card-expand">
-            <p>Novel progressive cross-attention architecture translating SOTA research into operational flood segmentation informing policy for 25M+ residents.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="first-author">
-          <p class="tag">FIRST AUTHOR</p>
-          <h3>Plastic Bag Ban Policy &amp; Waste Complaints in Jakarta</h3>
-          <p>Analysis through JAKI and Qlue platforms.</p>
-          <span class="venue">ICISS 2021</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
-          <div class="card-expand">
-            <p>Spatial-temporal policy analysis translating waste complaint data into actionable urban governance insights.</p>
+            <p>Existing remote sensing applications in mining are often of limited scope, typically mapping multiple mining land covers for a single mine. This study presents a pioneering effort in performing deep learning-based semantic segmentation of 37 mining locations worldwide, representing a range of commodities from gold to coal, using multispectral satellite imagery. We crafted a customized multispectral dataset and trained multimodal semantic segmentation models (U-Net, DeepLabV3+, FPN, SegFormer, Prithvi). Results indicated that FPN with DenseNet-121 backbone, pre-trained on ImageNet, and trained using both RGB and NIR bands, performs the best. This work lays a robust foundation for analyzing the complex relationship between mining projects, communities, and the environment.</p>
+            <a href="https://doi.org/10.1016/j.rse.2024.114584" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
           </div>
         </article>
 
         <article class="project-card reveal" data-kind="collab">
-          <p class="tag">MAJOR CONTRIBUTOR &middot; ECCV</p>
-          <h3>Anthropogenic Regional Adaptation in Multimodal VLM</h3>
-          <p>Vision-language model adaptation for cultural relevance.</p>
-          <span class="venue">Under review &mdash; ECCV 2026</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <p class="tag">MAJOR CONTRIBUTOR · ACL 2025</p>
+          <h3>SEA-VL: Multicultural Vision-Language Dataset for Southeast Asia</h3>
+          <p>Crowdsource, crawl, or generate? A multicultural VL benchmark for SEA.</p>
+          <span class="venue">ACL 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
           <div class="card-expand">
-            <p>Co-developed adaptation paradigms improving cultural relevance metrics by 15% in frontier multimodal architectures.</p>
+            <p>Southeast Asia is a region of extraordinary linguistic and cultural diversity, yet it remains significantly underrepresented in vision-language research. To fill this gap, we present SEA-VL, an open-source initiative dedicated to developing high-quality, culturally relevant data for SEA languages. By involving contributors from SEA countries, SEA-VL aims to ensure better cultural relevance and diversity. We explored three approaches: crowdsourcing, automated image crawling, and synthetic image generation. We found that image crawling achieves ~85% cultural relevance while being more cost-efficient than crowdsourcing, whereas synthetic images fail to accurately reflect SEA cultures. Collectively, we gathered 1.28M SEA culturally-relevant images, more than 50 times larger than other existing datasets.</p>
+            <a href="https://arxiv.org/abs/2503.07920" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-kind="first-author">
+          <p class="tag">FIRST AUTHOR · IEEE Q1</p>
+          <h3>Progressive Cross Attention Network for Flood Segmentation</h3>
+          <p>Using multispectral satellite imagery for flood segmentation in Indonesia.</p>
+          <span class="venue">IEEE Geoscience and Remote Sensing Letters, 2024</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
+          <div class="card-expand">
+            <p>We introduce Progressive Cross Attention Network (ProCANet), a deep learning model that progressively applies both self- and cross-attention mechanisms to multispectral features, generating optimal feature combinations for flood segmentation. The proposed model was compared with state-of-the-art approaches using Sen1Floods11 dataset and our bespoke flood data for the Citarum River basin, Indonesia. Our model demonstrated superior performance with the highest Intersection over Union (IoU) score of 0.815. This work opens a promising path for enhancing the accuracy of flood analysis using remote sensing technology.</p>
+            <a href="https://arxiv.org/abs/2501.11923" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-kind="collab">
+          <p class="tag">Q2 · IF: 2.3</p>
+          <h3>Integrated Flood Policy: Retention Ponds in South Bandung</h3>
+          <p>Mixed-methods evaluation of retention ponds for urban flood mitigation.</p>
+          <span class="venue">AQUA — Water Infrastructure, Ecosystems and Society, Volume 74(2), 2025</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
+          <div class="card-expand">
+            <p>This study focuses on South Bandung, an area where flooding is a recurring problem. We examine the role of retention ponds in Andir and Cieunteung as a strategic response to flood management challenges. The study employs a mixed-methods approach, integrating remote sensing and GIS analysis with deep learning-based semantic segmentation to evaluate hydraulic performance. NDWI and semantic segmentation using multispectral images from PlanetScope are utilized to assess water bodies and flooding patterns, while field observations and stakeholder interviews provide qualitative insights. The study highlights the importance of an integrated approach combining urban planning, community engagement, and multi-scale infrastructure development.</p>
+            <a href="https://doi.org/10.1002/aq2.471" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
           </div>
         </article>
 
@@ -80,43 +97,35 @@
           <p class="tag">ACL 2026</p>
           <h3>CommonLID: Re-evaluating Language Identification on Web Data</h3>
           <p>State-of-the-art language identification performance evaluation.</p>
-          <span class="venue">Accepted &mdash; ACL 2026</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <span class="venue">ACL 2026 (Accepted)</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
           <div class="card-expand">
-            <p>Large-scale evaluation of language identification systems on web-crawled data across diverse linguistic landscapes.</p>
+            <p>A large-scale evaluation of language identification systems on web-crawled data across diverse linguistic landscapes. The study re-evaluates current state-of-the-art language identification performance and provides new insights into web data characteristics.</p>
+            <a href="https://aclanthology.org/2026.acl-long.299/" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
           </div>
         </article>
 
         <article class="project-card reveal" data-kind="collab">
-          <p class="tag">MAJOR CONTRIBUTOR &middot; ACL 2025</p>
-          <h3>SEA-VL: Multicultural Vision-Language Dataset for SEA</h3>
-          <p>Crowdsource, crawl, or generate? A multicultural VL benchmark.</p>
-          <span class="venue">ACL 2025</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+          <p class="tag">UNDER REVIEW · ECCV 2026</p>
+          <h3>Anthropogenic Regional Adaptation in Multimodal Vision-Language Model</h3>
+          <p>Vision-language model adaptation for cultural relevance in SEA.</p>
+          <span class="venue">ECCV 2026 (Under Review)</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
           <div class="card-expand">
-            <p>Led cross-functional workgroups across 50+ researchers and 5+ countries to curate a benchmark reducing systematic cultural bias in VLMs.</p>
+            <p>Co-developed adaptation paradigms improving cultural relevance metrics by 15% in frontier multimodal architectures. This work addresses the lack of culturally-aware vision-language models for Southeast Asian contexts.</p>
+            <a href="https://arxiv.org/abs/2604.11490" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
           </div>
         </article>
 
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">Q1 &middot; IF: 11.4</p>
-          <h3>Multi-modal Deep Learning for Mining Footprint Segmentation</h3>
-          <p>Semantic segmentation with multispectral satellite imagery.</p>
-          <span class="venue">Remote Sensing of Environment, 2025</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
+        <article class="project-card reveal" data-kind="first-author">
+          <p class="tag">FIRST AUTHOR</p>
+          <h3>The Effect of Plastic Bag Ban Policy Towards Waste Complaints in Jakarta</h3>
+          <p>Analysis through JAKI and Qlue platforms.</p>
+          <span class="venue">ICISS 2021</span>
+          <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
           <div class="card-expand">
-            <p>Managed 500GB+ geospatial datasets via Google Earth Engine with rigorous peer-reviewed labeling protocols.</p>
-          </div>
-        </article>
-
-        <article class="project-card reveal" data-kind="collab">
-          <p class="tag">Q2 &middot; IF: 2.3</p>
-          <h3>Integrated Flood Policy: Retention Ponds in South Bandung</h3>
-          <p>Mixed-methods evaluation for urban flood mitigation.</p>
-          <span class="venue">AQUA, 2025</span>
-          <button class="card-toggle" type="button" aria-expanded="false">Details</button>
-          <div class="card-expand">
-            <p>Enhancing urban resilience through integrated flood policy and planning evaluation.</p>
+            <p>Spatial-temporal policy analysis of the plastic bag ban policy in Jakarta using citizen complaint data from JAKI and Qlue platforms. The study translates waste complaint data into actionable urban governance insights, analyzing the impact of policy interventions on citizen complaints.</p>
+            <a href="https://doi.org/10.1109/ICISS53134.2021.9612326" target="_blank" rel="noreferrer" class="paper-link">Paper →</a>
           </div>
         </article>
       </div>
@@ -124,7 +133,7 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year"></span> Vicky Feliren &middot; VF</p>
+    <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
   </footer>
 
   <script src="../js/main.js?v=2"></script>
