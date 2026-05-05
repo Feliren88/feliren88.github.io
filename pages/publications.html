@@ -25,15 +25,6 @@
       <h2 class="section-title">Research <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="margin-left:0.75rem;font-size:0.82rem;color:var(--accent);text-decoration:none;font-weight:500;font-family:'Manrope',sans-serif">Google Scholar →</a></h2>
       <p class="section-note">Selected research in multimodal AI, remote sensing, and geospatial analysis.</p>
 
-      <div class="project-controls">
-        <div class="filters" role="group" aria-label="Publication filters">
-          <button class="filter is-active" type="button" data-filter="all">All</button>
-          <button class="filter" type="button" data-filter="first-author">First Author</button>
-          <button class="filter" type="button" data-filter="collab">Collaborative</button>
-        </div>
-        <p class="project-count"><span id="project-count">0</span> publications</p>
-      </div>
-
       <div id="publications-container" class="project-grid">
         <p class="loading">Loading publications...</p>
       </div>
@@ -47,40 +38,20 @@
   <script src="../js/data/publications.js"></script>
   <script>
 (function() {
-  var FIRST_AUTHOR_KEYS = ['flood-procanet', 'plastic-bag-ban'];
-  function renderPublications(filter) {
-    var container = document.getElementById('publications-container');
-    var countEl = document.getElementById('project-count');
-    var items = Object.keys(PUBLICATIONS_DATA).map(function(key) {
-      var p = PUBLICATIONS_DATA[key];
-      p._kind = FIRST_AUTHOR_KEYS.indexOf(key) !== -1 ? 'first-author' : 'collab';
-      p._key = key;
-      return p;
-    });
-    if (filter !== 'all') {
-      items = items.filter(function(p) { return p._kind === filter; });
-    }
-    countEl.textContent = items.length;
-    container.innerHTML = items.map(function(p) {
-      var kind = p._kind === 'first-author' ? 'first-author' : 'collab';
-      return '<article class="project-card reveal" data-kind="' + kind + '">' +
-        '<p class="tag">' + p.tag + '</p>' +
-        '<h3>' + p.title + '</h3>' +
-        '<p>' + p.description + '</p>' +
-        '<span class="venue">' + p.venue + '</span>' +
-        (p.url ? '<a href="' + p.url + '" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>' : '') +
-        (p.abstract ? '<button class="card-toggle" type="button" aria-expanded="false">Abstract</button><div class="card-expand"><p>' + p.abstract + '</p></div>' : '') +
-      '</article>';
-    }).join('');
-  }
-  document.querySelectorAll('.filter').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter').forEach(function(b) { b.classList.remove('is-active'); });
-      this.classList.add('is-active');
-      renderPublications(this.dataset.filter);
-    });
-  });
-  renderPublications('all');
+  var container = document.getElementById('publications-container');
+  if (!container || !PUBLICATIONS_DATA) return;
+  var keys = Object.keys(PUBLICATIONS_DATA);
+  container.innerHTML = keys.map(function(key) {
+    var p = PUBLICATIONS_DATA[key];
+    return '<article class="project-card reveal">' +
+      '<p class="tag">' + p.tag + '</p>' +
+      '<h3>' + p.title + '</h3>' +
+      '<p>' + p.description + '</p>' +
+      '<span class="venue">' + p.venue + '</span>' +
+      (p.url ? '<a href="' + p.url + '" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>' : '') +
+      (p.abstract ? '<button class="card-toggle" type="button" aria-expanded="false">Abstract</button><div class="card-expand"><p>' + p.abstract + '</p></div>' : '') +
+    '</article>';
+  }).join('');
 })();
   </script>
   <script src="../js/components/nav.js"></script>
