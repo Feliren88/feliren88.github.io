@@ -172,8 +172,8 @@ main {
 }
 
 .profile-image {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--line);
