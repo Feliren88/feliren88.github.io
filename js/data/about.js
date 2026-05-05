@@ -13,8 +13,8 @@ var ABOUT_DATA = {
   hero: [
     "I'm an applied scientist working on <strong>multimodal AI</strong> and <strong>vision-language models</strong>, building AI that actually understands context, not just pixels.",
     "Right now, I'm doing my master's at Monash under <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a>. We're working on conformal prediction for vision-language navigation, making VLMs quantify their uncertainty reliably. When a model says it's confident, we want provable bounds, not just a number.",
-    "I came to this from the other side. In industry, I shipped production ML systems handling real traffic at scale. I know what it takes to take a model out of a notebook and deploy it reliably in the wild.",
-    "Currently I'm also with <strong>SEACrowd</strong>, building vision-language datasets for Southeast Asia. We're building the foundation for AI that reflects this region.",
+    "Five years in the trenches doing geospatial AI and production ML. I have shipped systems handling millions of daily inferences. I know what it takes to take a model out of a notebook and deploy it reliably in the wild.",
+    "I build open-source datasets and models for a region often overlooked by AI. We're building the foundation for multimodal AI that reflects this part of the world.",
     "I write about what I learn because I remember how hard some of this was to figure out. If something I stumbled through helps someone skip a detour, that's worth sharing."
   ],
   sections: [
