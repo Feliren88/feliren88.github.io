@@ -104,7 +104,7 @@
           @feliren
         </a>
       </h2>
-      <p class="section-note">Thoughts on AI, research, and engineering from my Medium articles.</p>
+      <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
       <div id="thoughts-container" class="thoughts-grid">
         <p class="loading">Loading articles...</p>
@@ -131,20 +131,19 @@
 
       function truncate(text, maxLen) {
         if (!text) return '';
-        const stripped = text.replace(/<[^>]+>/g, '');
+        const stripped = text.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
         if (stripped.length <= maxLen) return stripped;
         return stripped.substring(0, maxLen).trim() + '...';
       }
 
-      function getDescription(content, description) {
-        if (content && content.length > description.length) {
-          const clean = content.replace(/<[^>]+>/g, '').trim();
-          if (clean.length > 140) {
-            return clean.substring(0, 140).trim() + '...';
-          }
-          return clean;
+      function getSummary(item) {
+        const desc = item.description || '';
+        const cleanDesc = desc.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        
+        if (cleanDesc.length > 30) {
+          return truncate(cleanDesc, 150);
         }
-        return truncate(description, 140);
+        return truncate(item.content, 150);
       }
 
       function renderArticle(item) {
@@ -158,7 +157,7 @@
           categoryTag +
           '<span class="date">' + formatDate(item.pubDate) + '</span>' +
           '<h3>' + item.title + '</h3>' +
-          '<p>' + getDescription(item.content, item.description) + '</p>' +
+          '<p>' + getSummary(item) + '</p>' +
           '<span class="read-more">Read on Medium →</span>' +
         '</a>';
       }
