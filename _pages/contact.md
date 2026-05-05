@@ -60,7 +60,7 @@ permalink: /contact/
       var status = document.getElementById('form-status');
       btn.disabled = true;
       btn.textContent = 'Sending...';
-      emailjs.send("service_or7muew", "template_ah21icd", {
+      emailjs.send("service_or7muew", "template_0oiicm9", {
         from_name: document.getElementById('from_name').value,
         email: document.getElementById('email').value,
         subject: document.getElementById('subject').value,
