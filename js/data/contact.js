@@ -10,7 +10,25 @@
  */
 
 var CONTACT_DATA = {
-  intro: 'Open for research collaborations, meaningful projects, and good conversations about multimodal AI and its real-world impact.',
+  intro: 'I work at the intersection of trustworthy AI and cultural inclusion in multimodal systems. If any of the below fits where you are, I would be glad to hear from you.',
+  engagements: [
+    {
+      type: 'Speaking',
+      description: 'Conference talks, university lectures, and panel discussions — on multimodal AI, trustworthy AI, uncertainty quantification, or AI for underrepresented regions.'
+    },
+    {
+      type: 'Research Collaboration',
+      description: 'Working on conformal prediction, vision-language models, geospatial AI, or cultural AI for underrepresented communities? Let\'s find the overlap.'
+    },
+    {
+      type: 'Mentorship',
+      description: 'I mentor early-career researchers and engineers navigating AI work in Southeast Asia, including graduate school applications and careers in applied science.'
+    },
+    {
+      type: 'International Roles',
+      description: 'Open to applied scientist and research roles internationally, particularly where the work connects to trustworthy or culturally grounded AI.'
+    }
+  ],
   links: [
     { label: 'Email', url: 'mailto:vickyfeliren@gmail.com', value: 'vickyfeliren@gmail.com' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/feliren/', value: 'feliren' },

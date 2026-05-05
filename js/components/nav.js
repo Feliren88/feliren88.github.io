@@ -11,7 +11,7 @@
     { href: '/pages/publications.html', label: 'Research', page: '/research' },
     { href: '/pages/awards.html', label: 'Recognition', page: '/recognition' },
     { href: '/pages/thoughts.html', label: 'Writings', page: '/writings' },
-    { href: '/pages/contact.html', label: 'Contact', page: '/contact' },
+    { href: '/pages/contact.html', label: 'Work With Me', page: '/contact' },
   ];
 
   function getCurrentPage() {

@@ -11,25 +11,33 @@
 
 var ABOUT_DATA = {
   hero: [
-    "I'm an applied scientist working on <strong>multimodal AI</strong> and <strong>vision-language models</strong>, building AI that actually understands context, not just pixels.",
-    "Right now, I'm doing my master's at Monash under <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a>. We're working on conformal prediction for vision-language navigation, making VLMs quantify their uncertainty reliably. When a model says it's confident, we want provable bounds, not just a number.",
-    "Five years in the trenches doing geospatial AI and production ML. I have shipped systems handling millions of daily inferences. I know what it takes to take a model out of a notebook and deploy it reliably in the wild.",
-    "I build open-source datasets and models for a region often overlooked by AI. We're building the foundation for multimodal AI that reflects this part of the world.",
-    "I write about what I learn because I remember how hard some of this was to figure out. If something I stumbled through helps someone skip a detour, that's worth sharing."
+    "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong> — building systems that are reliable when it matters and culturally relevant to the places they operate in.",
+    "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on conformal prediction for vision-language navigation. The goal is simple to state and hard to achieve: when a model claims confidence, we want provable bounds — not just a number.",
+    "The other thread in my work is cultural inclusion. Southeast Asia is one of the world's most linguistically and visually diverse regions, and it's almost entirely absent from the training data and benchmarks that define what modern AI can and cannot do. I've been building the datasets, benchmarks, and adaptation methods to change that — with SEACrowd and through my own research.",
+    "I've also shipped production ML systems at scale: biometric inference at 1M+ daily transactions, geospatial pipelines across global research consortia, predictive systems live across six markets. The research and the engineering inform each other."
   ],
   sections: [
     {
-      title: 'What I Do',
+      title: 'Research Focus',
       cards: [
-        { title: 'Research', description: 'Conformal prediction for VLMs, cultural relevance in vision-language for Southeast Asia.' },
-        { title: 'Engineering', description: 'Production ML systems, cloud infrastructure, scaling to real-world deployment.' },
-        { title: 'Open Source', description: 'Building datasets and models that serve the research community.' },
-        { title: 'Mentoring', description: 'Industry programs and university guest lectures.' }
+        { title: 'Trustworthy AI', description: 'Conformal prediction for vision-language models. Uncertainty quantification with statistical guarantees — not just calibration heuristics.' },
+        { title: 'Cultural AI', description: 'Vision-language benchmarks and adaptation methods for Southeast Asia. Making AI systems actually reflect the world they\'re deployed in.' },
+        { title: 'Geospatial AI', description: 'Remote sensing and satellite imagery for flood segmentation, mining mapping, and environmental monitoring. Published in IEEE and Remote Sensing of Environment.' },
+        { title: 'Production ML', description: 'End-to-end ML systems from research to deployment — cloud infrastructure, inference at scale, reliability engineering.' }
+      ]
+    },
+    {
+      title: 'How We Can Work Together',
+      engage: [
+        { type: 'Speaking', description: 'I speak on trustworthy AI, multimodal systems, and AI for underrepresented regions — for conferences, university events, and industry panels.' },
+        { type: 'Research Collaboration', description: 'If your work touches conformal prediction, vision-language models, geospatial AI, or cultural inclusion in AI, I\'d like to know about it.' },
+        { type: 'Mentorship', description: 'I mentor early-career researchers and engineers in Southeast Asia — especially those navigating graduate school applications or careers in applied AI.' },
+        { type: 'Applied Roles', description: 'I\'m open to research and applied scientist roles internationally, particularly where the work connects to trustworthy AI or underrepresented communities.' }
       ]
     },
     {
       title: 'What Drives Me',
-      content: "Reliability matters. Every system I've built comes down to one question: <strong>how do we know when to trust the model?</strong>"
+      content: 'Reliability and relevance. Every system I\'ve built comes down to the same question: <strong>how do we know when to trust the model?</strong> And who is the model actually built for?'
     }
   ]
 };

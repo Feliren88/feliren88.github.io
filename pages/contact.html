@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Vicky Feliren - Applied Scientist, Multimodal AI, Vision-Language Models, Remote Sensing.">
-  <title>Contact | Vicky Feliren</title>
+  <meta name="description" content="Work with Vicky Feliren — speaking engagements, research collaboration, mentorship, and international roles in multimodal AI and trustworthy AI.">
+  <title>Work With Me | Vicky Feliren</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -21,10 +21,13 @@
 
   <main>
     <section class="section reveal">
-      <p class="eyebrow">ESTABLISH LINK</p>
-      <h2 class="section-title">Contact</h2>
+      <p class="eyebrow">LET'S WORK TOGETHER</p>
+      <h2 class="section-title">Work With Me</h2>
       <p id="contact-intro" class="contact-intro">Loading...</p>
 
+      <div id="contact-engagements" style="margin:2rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:56rem"></div>
+
+      <p class="column-title" style="margin-top:2.5rem;margin-bottom:1rem">REACH ME</p>
       <div id="contact-grid" class="contact-grid">
         <p class="loading">Loading...</p>
       </div>
@@ -39,9 +42,15 @@
   <script>
 (function() {
   var intro = document.getElementById('contact-intro');
+  var engagements = document.getElementById('contact-engagements');
   var grid = document.getElementById('contact-grid');
   if (!CONTACT_DATA) return;
   if (intro && CONTACT_DATA.intro) intro.textContent = CONTACT_DATA.intro;
+  if (engagements && CONTACT_DATA.engagements) {
+    engagements.innerHTML = CONTACT_DATA.engagements.map(function(item) {
+      return '<div style="padding:1.2rem;border:1px solid var(--line);border-radius:8px"><h4 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.5rem">' + item.type + '</h4><p style="font-size:0.95rem;line-height:1.55;color:var(--muted)">' + item.description + '</p></div>';
+    }).join('');
+  }
   if (grid && CONTACT_DATA.links) {
     grid.innerHTML = CONTACT_DATA.links.map(function(link) {
       return '<a class="contact-card" href="' + link.url + '" target="_blank" rel="noreferrer"><span>' + link.label + '</span><strong>' + link.value + '</strong></a>';

@@ -14,16 +14,16 @@
  */
 
 var INDEX_DATA = {
-  eyebrow: 'APPLIED SCIENTIST / MULTIMODAL AI / TRUSTWORTHY AI / REMOTE SENSING',
+  eyebrow: 'APPLIED SCIENTIST · MULTIMODAL AI · TRUSTWORTHY AI · REMOTE SENSING',
   name: 'Vicky Feliren',
-  lead1: 'I build AI systems that see and understand the world, from satellite imagery mapping flood zones in Indonesia to vision-language models that resonate with Southeast Asian cultures.',
-  lead2: 'Five years in the trenches doing geospatial AI and production ML. I have shipped systems handling millions of daily inferences.',
+  lead1: 'I work on two problems: making AI systems know when to trust themselves, and making them work for the cultures and geographies they were never designed for.',
+  lead2: 'Published in IEEE, ACL, and Remote Sensing of Environment. Building open AI infrastructure for Southeast Asia from Jakarta.',
   buttons: [
-    { label: 'More About Me', href: 'pages/about.html' },
+    { label: 'Research & Work', href: 'pages/about.html' },
     { label: 'Read My Writings', href: 'pages/thoughts.html' }
   ],
   meta: [
-    'Based in Jakarta, Indonesia',
-    'M.Sc. Data Science (Monash University)'
+    'Currently: M.Sc. thesis on uncertainty in vision-language models · Monash University',
+    'Contributing to SEACrowd — open AI infrastructure for Southeast Asia'
   ]
 };

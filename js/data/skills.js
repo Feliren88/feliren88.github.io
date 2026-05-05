@@ -16,33 +16,28 @@
 
 var SKILLS_DATA = [
   {
-    category: 'DEEP LEARNING & MULTIMODAL AI',
-    description: 'Building and deploying multimodal models from research to production.',
-    skills: ['PyTorch', 'TensorFlow', 'Vision-Language Models', 'Conformal Prediction', 'Knowledge Distillation']
+    category: 'RESEARCH: TRUSTWORTHY AI',
+    description: 'Uncertainty quantification and reliability for deployed AI systems — the gap between calibration and provable guarantees.',
+    skills: ['Conformal Prediction', 'Uncertainty Quantification', 'Vision-Language Models', 'Knowledge Distillation', 'Model Evaluation']
   },
   {
-    category: 'GENERATIVE AI & LLMOps',
-    description: 'End-to-end LLM application development with agentic workflows.',
-    skills: ['LangChain', 'LangGraph', 'RAG', 'Vector Database', 'Agentic Workflows']
+    category: 'RESEARCH: CULTURAL & GEOSPATIAL AI',
+    description: 'AI systems for underrepresented regions and environments — from satellite imagery to multilingual vision-language benchmarks.',
+    skills: ['Semantic Segmentation', 'Multispectral Imaging', 'Google Earth Engine', 'Cultural Benchmarking', 'Vision-Language Adaptation']
   },
   {
-    category: 'COMPUTER VISION & GEOSPATIAL',
-    description: 'From satellite imagery to semantic segmentation and pose estimation.',
-    skills: ['OpenCV', 'Semantic Segmentation', 'Multispectral Imaging', 'Pose Estimation', 'Google Earth Engine']
+    category: 'ENGINEERING: DEEP LEARNING',
+    description: 'Model development from architecture design to production — multimodal, generative, and geospatial systems.',
+    skills: ['PyTorch', 'TensorFlow', 'LangChain / LangGraph', 'RAG & Agentic Workflows', 'OpenCV']
   },
   {
-    category: 'PRODUCTION ML & DATA ENGINEERING',
-    description: 'Cloud-scale ML pipelines with distributed inference and data processing.',
+    category: 'ENGINEERING: PRODUCTION ML',
+    description: 'Cloud-scale ML pipelines with distributed inference — built and operated across GCP and AWS.',
     skills: ['GCP (Vertex AI, BigQuery)', 'AWS (EC2, S3, SageMaker)', 'Kubernetes', 'Docker', 'Apache Spark', 'dbt']
   },
   {
-    category: 'AI-ASSISTED TOOLS',
-    description: 'Leveraging AI-powered development tools for accelerated engineering.',
-    skills: ['Claude Code', 'Spec-driven Dev', 'Kilo Code', 'Opencode', 'Cursor', 'CodeRabbit']
-  },
-  {
     category: 'LANGUAGES & FOUNDATIONS',
-    description: 'Core programming and systems tooling for research and production.',
+    description: 'Core tooling for research and systems engineering.',
     skills: ['Python', 'Scala', 'SQL', 'R', 'Git', 'Linux/Unix']
   }
 ];
