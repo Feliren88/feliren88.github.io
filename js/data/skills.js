@@ -1,11 +1,11 @@
 /**
  * Skills data configuration
- * 
+ *
  * This file contains all skill categories and items for the skills page.
  * To add new skills:
  * 1. Add a new entry to the SKILLS_DATA array
  * 2. Include category title, description, and list of skills
- * 
+ *
  * Format:
  *   {
  *     category: "CATEGORY TITLE",
@@ -18,27 +18,32 @@ var SKILLS_DATA = [
   {
     category: 'RESEARCH: TRUSTWORTHY AI',
     description: 'Uncertainty quantification and reliability for deployed AI — the gap between calibration scores and provable coverage guarantees.',
-    skills: ['Conformal Prediction', 'Uncertainty Quantification', 'Vision-Language Models', 'Knowledge Distillation', 'Causal Inference']
+    skills: ['Conformal Prediction', 'Uncertainty Quantification', 'Vision-Language Models', 'Knowledge Distillation', 'Causal Inference', 'A/B Testing', 'Hypothesis Testing']
   },
   {
     category: 'RESEARCH: CULTURAL & GEOSPATIAL AI',
     description: 'AI systems for underrepresented regions and environments — satellite imagery, multilingual benchmarks, and adaptation methods.',
-    skills: ['Semantic Segmentation', 'Multispectral Imaging', 'Google Earth Engine', 'Cultural Benchmarking', 'Vision-Language Adaptation']
+    skills: ['Semantic Segmentation', 'Multispectral Imaging', 'Google Earth Engine', 'Cultural Benchmarking', 'Vision-Language Adaptation', 'Pose Estimation']
   },
   {
     category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI',
     description: 'Model development from architecture design to deployment — multimodal, generative, and geospatial systems.',
-    skills: ['PyTorch', 'TensorFlow', 'LangChain / LangGraph', 'RAG & Agentic Workflows', 'OpenCV', 'Diffusion Models']
+    skills: ['PyTorch', 'TensorFlow', 'scikit-learn', 'LangChain / LangGraph', 'RAG & Agentic Workflows', 'OpenCV', 'Diffusion Models', 'Intel OpenVINO']
   },
   {
     category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY',
     description: 'Evaluation design and production monitoring — because a model is only as trustworthy as your ability to measure it.',
-    skills: ['LLM-as-a-Judge', 'Human-in-the-Loop Evaluation', 'LangSmith', 'MLflow', 'Weights & Biases', 'Calibration Drift Monitoring']
+    skills: ['LLM-as-a-Judge', 'Human-in-the-Loop Evaluation', 'LangSmith', 'MLflow', 'Weights & Biases', 'Calibration Drift Monitoring', 'Latency Benchmarking']
   },
   {
     category: 'ENGINEERING: PRODUCTION ML & DATA',
     description: 'Cloud-scale ML pipelines with distributed inference — designed and operated across GCP and AWS.',
-    skills: ['GCP (Vertex AI, BigQuery)', 'AWS (EC2, S3, SageMaker)', 'Kubernetes', 'Docker', 'Apache Spark', 'dbt']
+    skills: ['GCP (Vertex AI, BigQuery)', 'AWS (EC2, S3, SageMaker)', 'Kubernetes', 'Docker', 'Apache Spark', 'dbt', 'Vector Database']
+  },
+  {
+    category: 'VISUALIZATION & ANALYTICS',
+    description: 'Translating model outputs and data findings into decisions — for technical and non-technical audiences alike.',
+    skills: ['Tableau', 'Streamlit', 'Plotly', 'Matplotlib', 'd3']
   },
   {
     category: 'LANGUAGES & FOUNDATIONS',
