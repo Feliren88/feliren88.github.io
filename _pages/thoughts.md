@@ -20,7 +20,7 @@ permalink: /writings/
   {% for key in site.data.thoughts %}
   {% assign thought = key[1] %}
   <a class="thought-card" href="{{ thought.url }}" target="_blank" rel="noreferrer">
-    <h3>{{ thought.description | split: '.' | first }}.</h3>
+    <h3>{{ thought.title }}</h3>
     <p>{{ thought.description }}</p>
     <span class="read-more">Read on Medium →</span>
   </a>
