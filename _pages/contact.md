@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Work With Vicky Feliren
+title: Work with Vicky Feliren
 subtitle: Speaking, Research Collaboration, Mentorship, Applied Scientist Roles
 description: Available for speaking engagements, research collaboration, mentorship, and applied scientist roles internationally. Specializing in trustworthy AI and cultural AI for Southeast Asia.
 permalink: /contact/
