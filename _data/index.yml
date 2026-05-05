@@ -1,0 +1,12 @@
+eyebrow: 'APPLIED SCIENTIST · MULTIMODAL AI · TRUSTWORTHY AI · REMOTE SENSING'
+name: 'Vicky Feliren'
+lead1: 'I work on two problems: making AI systems know when to trust themselves, and making them work for the cultures and geographies they were never designed for.'
+lead2: 'Published in IEEE, ACL, and Remote Sensing of Environment. Building open AI infrastructure for Southeast Asia from Jakarta.'
+buttons:
+  - label: 'Research & Work'
+    href: '/about/'
+  - label: 'Read My Writings'
+    href: '/writings/'
+meta:
+  - 'Currently: M.Sc. thesis on uncertainty in vision-language models · Monash University'
+  - 'Contributing to SEACrowd — open AI infrastructure for Southeast Asia'

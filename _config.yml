@@ -1,0 +1,62 @@
+# Site settings
+title: Vicky Feliren
+tagline: Applied Scientist — Multimodal AI & Trustworthy Vision-Language Models
+description: >
+  Applied Scientist specializing in trustworthy multimodal AI and cultural inclusion 
+  in vision-language systems. M.Sc. candidate at Monash University. Published in IEEE, 
+  ACL, and Remote Sensing of Environment.
+baseurl: ""
+url: "https://feliren88.github.io"
+
+# SEO Settings (for jekyll-seo-tag)
+logo: /assets/img/profile.jpg
+twitter:
+  username: feliren88
+  card: summary
+social:
+  name: Vicky Feliren
+  links:
+    - https://www.linkedin.com/in/feliren/
+    - https://github.com/feliren88
+    - https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en
+    - https://medium.com/@feliren
+
+# Build settings
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Sitemap settings
+sitemap:
+  changefreq: monthly
+  priority: 0.5
+
+# Exclude from processing
+exclude:
+  - node_modules
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - yarn.lock
+  - CLAUDE.md
+  - .gitignore
+  - pages
+
+# Permalink structure
+permalink: pretty
+
+# Include _pages directory
+include:
+  - _pages
+
+# Front Matter Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "_pages"
+    values:
+      layout: page

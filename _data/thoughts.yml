@@ -1,0 +1,35 @@
+your-model-just-killed:
+  description: 'Exploring why every production ML system needs conformal prediction for honest uncertainty quantification and safer deployments.'
+  url: 'https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4'
+
+art-of-letting-go:
+  description: 'Reflections on control, surrender, and finding strength in vulnerability through personal experience.'
+  url: 'https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063'
+
+meditation-7-days:
+  description: "A data-driven researcher's journey into 7 days of silent meditation at Taman Brahma Bali Usada."
+  url: 'https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3'
+
+trustworthy-ai:
+  description: 'First encounters with Trustworthy AI — bridging information theory and responsible machine learning.'
+  url: 'https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956'
+
+phoenix-protocol:
+  description: 'On resilience, reinvention, and learning to rise again after failure and loss.'
+  url: 'https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638'
+
+privacy-matters:
+  description: 'Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship.'
+  url: 'https://medium.com/technology-hits/privacy-matters-navigating-the-digital-age-with-confidence-6a47dede68ed'
+
+mental-health-matters:
+  description: 'A personal reflection on mental health awareness, self-care, and breaking the silence.'
+  url: 'https://feliren.medium.com/mental-health-matters-please-take-care-2469d7c62baa'
+
+iu-concert:
+  description: 'Reflections on fandom, culture, and music through the lens of an IU concert experience.'
+  url: 'https://medium.com/illumination/a-strangers-guide-to-the-iu-concert-reflections-on-fandom-culture-and-music-702ec9f03966'
+
+gone-social-media:
+  description: 'Returning to social media after 4 years — reflections on digital presence and personal growth.'
+  url: 'https://feliren.medium.com/gone-from-social-media-for-4-years-now-i-am-back-b835759639d3'

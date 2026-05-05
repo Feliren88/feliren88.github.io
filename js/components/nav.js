@@ -4,26 +4,25 @@
 
 (function() {
   var NAV_ITEMS = [
-    { href: '/index.html', label: 'Home', page: '/' },
-    { href: '/pages/about.html', label: 'About', page: '/about' },
-    { href: '/pages/skills.html', label: 'Expertise', page: '/expertise' },
-    { href: '/pages/experience.html', label: 'Work', page: '/work' },
-    { href: '/pages/publications.html', label: 'Research', page: '/research' },
-    { href: '/pages/awards.html', label: 'Recognition', page: '/recognition' },
-    { href: '/pages/thoughts.html', label: 'Writings', page: '/writings' },
-    { href: '/pages/contact.html', label: 'Work With Me', page: '/contact' },
+    { href: '/', label: 'Home', page: '/' },
+    { href: '/about/', label: 'About', page: '/about' },
+    { href: '/expertise/', label: 'Expertise', page: '/expertise' },
+    { href: '/work/', label: 'Work', page: '/work' },
+    { href: '/research/', label: 'Research', page: '/research' },
+    { href: '/recognition/', label: 'Recognition', page: '/recognition' },
+    { href: '/writings/', label: 'Writings', page: '/writings' },
+    { href: '/contact/', label: 'Work With Me', page: '/contact' },
   ];
 
   function getCurrentPage() {
     var path = window.location.pathname;
-    var filename = path.split('/').pop() || 'index.html';
-    var item = NAV_ITEMS.find(function(n) { return n.href.endsWith(filename) || n.href === path; });
+    var item = NAV_ITEMS.find(function(n) { return path === n.href || path.startsWith(n.href + '/'); });
     return item ? item.page : '/';
   }
 
   function getHrefForPage(page) {
     var item = NAV_ITEMS.find(function(n) { return n.page === page; });
-    return item ? item.href : 'index.html';
+    return item ? item.href : '/';
   }
 
   function renderNavigation() {

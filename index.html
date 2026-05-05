@@ -1,137 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Vicky Feliren — Applied Scientist working on trustworthy multimodal AI and cultural inclusion in vision-language systems. Published in IEEE, ACL, and Remote Sensing of Environment.">
-  <title>Vicky Feliren | Applied Scientist — Multimodal AI &amp; Trustworthy Vision-Language Models</title>
-  <link rel="canonical" href="https://feliren88.github.io/">
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Vicky Feliren">
-  <meta property="og:title" content="Vicky Feliren — Applied Scientist, Multimodal AI &amp; Trustworthy Vision-Language Models">
-  <meta property="og:description" content="Applied Scientist working on trustworthy AI and cultural inclusion in multimodal vision-language systems. Published in IEEE, ACL, and Remote Sensing of Environment.">
-  <meta property="og:url" content="https://feliren88.github.io/">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Vicky Feliren — Applied Scientist, Multimodal AI">
-  <meta name="twitter:description" content="Applied Scientist working on trustworthy AI and cultural inclusion in multimodal vision-language systems. Published in IEEE, ACL, and Remote Sensing of Environment.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "@id": "https://feliren88.github.io/#person",
-        "name": "Vicky Feliren",
-        "givenName": "Vicky",
-        "familyName": "Feliren",
-        "jobTitle": "Applied Scientist",
-        "description": "Applied Scientist specializing in trustworthy multimodal AI and cultural inclusion in vision-language systems. M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.",
-        "url": "https://feliren88.github.io",
-        "sameAs": [
-          "https://www.linkedin.com/in/feliren/",
-          "https://github.com/feliren88",
-          "https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en",
-          "https://medium.com/@feliren"
-        ],
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "Monash University",
-          "url": "https://www.monash.edu"
-        },
-        "knowsAbout": [
-          "Multimodal AI",
-          "Vision-Language Models",
-          "Conformal Prediction",
-          "Uncertainty Quantification",
-          "Geospatial AI",
-          "Remote Sensing",
-          "Trustworthy AI",
-          "Southeast Asian AI",
-          "Cultural AI"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://feliren88.github.io/#website",
-        "name": "Vicky Feliren",
-        "url": "https://feliren88.github.io",
-        "description": "Personal website of Vicky Feliren, Applied Scientist specializing in Multimodal AI and Trustworthy Vision-Language Systems.",
-        "author": { "@id": "https://feliren88.github.io/#person" }
-      }
-    ]
-  }
-  </script>
-</head>
-<body>
-  <div class="grid-bg" aria-hidden="true"></div>
-  <canvas id="pointcloud-bg" aria-hidden="true"></canvas>
+---
+layout: default
+title: Vicky Feliren | Applied Scientist — Multimodal AI & Trustworthy Vision-Language Models
+description: Applied Scientist working on trustworthy multimodal AI and cultural inclusion in vision-language systems. Published in IEEE, ACL, and Remote Sensing of Environment.
+---
 
-  <header class="topbar" id="site-header">
-    <a class="brand" href="index.html">VF</a>
-    <nav class="nav" aria-label="Primary" id="main-nav"></nav>
-  </header>
-
-  <main>
-    <section class="section hero reveal">
-      <div class="hero-copy">
-        <p class="eyebrow" id="index-eyebrow">APPLIED SCIENTIST · MULTIMODAL AI · TRUSTWORTHY AI · REMOTE SENSING</p>
-        <h1 id="index-name">Vicky Feliren</h1>
-        <p class="lead" id="index-lead1" style="font-size:1.32rem;line-height:1.5;max-width:42rem">I work on two problems: making AI systems know when to trust themselves, and making them work for the cultures and geographies they were never designed for.</p>
-        <p class="lead" id="index-lead2" style="font-size:1.08rem;margin-top:1.2rem;color:var(--muted)">Published in IEEE, ACL, and Remote Sensing of Environment. Building open AI infrastructure for Southeast Asia from Jakarta.</p>
-        <div class="hero-actions" id="index-buttons"></div>
-        <ul class="hero-meta" id="index-meta">
-          <li>Currently: M.Sc. thesis on uncertainty in vision-language models · Monash University</li>
-          <li>Contributing to SEACrowd — open AI infrastructure for Southeast Asia</li>
-        </ul>
-        <div class="bg-controls">
-          <p>Background Point Cloud</p>
-          <div class="shape-controls" role="group" aria-label="Point cloud shape">
-            <button class="shape-btn is-active" type="button" data-shape="knot">Knot</button>
-            <button class="shape-btn" type="button" data-shape="gyroid">Gyroid</button>
-            <button class="shape-btn" type="button" data-shape="helix">Helix</button>
-            <button class="shape-btn" type="button" data-shape="sphere">Sphere</button>
-          </div>
-          <div class="lab-foot">
-            <span id="shape-label">Shape: Knot</span>
-            <span id="point-count">Points: 2800</span>
-            <span>Drag anywhere to orbit · Alt + Scroll to zoom</span>
-          </div>
-        </div>
+<section class="section hero reveal">
+  <div class="hero-copy">
+    <p class="eyebrow">{{ site.data.index.eyebrow }}</p>
+    <h1>{{ site.data.index.name }}</h1>
+    <p class="lead" style="font-size:1.32rem;line-height:1.5;max-width:42rem">{{ site.data.index.lead1 }}</p>
+    <p class="lead" style="font-size:1.08rem;margin-top:1.2rem;color:var(--muted)">{{ site.data.index.lead2 }}</p>
+    
+    <div class="hero-actions">
+      {% for button in site.data.index.buttons %}
+      <a class="btn btn-primary" href="{{ button.href | relative_url }}">{{ button.label }}</a>
+      {% endfor %}
+    </div>
+    
+    <ul class="hero-meta">
+      {% for item in site.data.index.meta %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    
+    <div class="bg-controls">
+      <p>Background Point Cloud</p>
+      <div class="shape-controls" role="group" aria-label="Point cloud shape">
+        <button class="shape-btn is-active" type="button" data-shape="knot">Knot</button>
+        <button class="shape-btn" type="button" data-shape="gyroid">Gyroid</button>
+        <button class="shape-btn" type="button" data-shape="helix">Helix</button>
+        <button class="shape-btn" type="button" data-shape="sphere">Sphere</button>
       </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> Vicky Feliren · VF</p>
-  </footer>
-
-  <script src="js/data/index.js"></script>
-  <script src="js/main.js?v=2"></script>
-  <script>
-(function() {
-  var d = INDEX_DATA;
-  if (!d) return;
-  document.getElementById('index-eyebrow').textContent = d.eyebrow || '';
-  document.getElementById('index-name').textContent = d.name || '';
-  document.getElementById('index-lead1').textContent = d.lead1 || '';
-  document.getElementById('index-lead2').textContent = d.lead2 || '';
-  if (d.buttons) {
-    document.getElementById('index-buttons').innerHTML = d.buttons.map(function(b) {
-      return '<a class="btn btn-primary" href="' + b.href + '">' + b.label + '</a>';
-    }).join('');
-  }
-  if (d.meta) {
-    document.getElementById('index-meta').innerHTML = d.meta.map(function(m) {
-      return '<li>' + m + '</li>';
-    }).join('');
-  }
-})();
-  </script>
-  <script src="js/components/nav.js"></script>
-</body>
-</html>
+      <div class="lab-foot">
+        <span id="shape-label">Shape: Knot</span>
+        <span id="point-count">Points: 2800</span>
+        <span>Drag anywhere to orbit · Alt + Scroll to zoom</span>
+      </div>
+    </div>
+  </div>
+</section>
