@@ -9,9 +9,9 @@ permalink: /writings/
 <p class="eyebrow">WRITING</p>
 <h1 class="section-title">
   Thoughts 
-  <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
-    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle">
-    <span class="medium-badge">@feliren</span>
+  <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
+    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem">
+    <span class="medium-badge" style="margin-left:0">@feliren</span>
   </a>
 </h1>
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
@@ -74,10 +74,10 @@ permalink: /writings/
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin-left: 0.5rem;
     color: var(--accent);
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
+    vertical-align: middle;
   }
 </style>
