@@ -106,6 +106,17 @@
       </h2>
       <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
+      <div class="project-controls">
+        <div class="filters" role="group" aria-label="Category filters">
+          <button class="filter is-active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="ai">AI</button>
+          <button class="filter" type="button" data-filter="research">Research</button>
+          <button class="filter" type="button" data-filter="philosophy">Philosophy</button>
+          <button class="filter" type="button" data-filter="engineering">Engineering</button>
+        </div>
+        <p class="project-count"><span id="thought-count">0</span> articles</p>
+      </div>
+
       <div id="thoughts-container" class="thoughts-grid">
         <p class="loading">Loading articles...</p>
       </div>
@@ -148,12 +159,15 @@
 
       function renderArticle(item) {
         const categories = item.categories || [];
+        const catLower = categories.map(function(c) { return c.toLowerCase(); });
+        const primaryCat = catLower.length > 0 ? catLower[0] : 'general';
+        
         let categoryTag = '';
         if (categories.length > 0) {
           categoryTag = '<span class="tag" style="margin:0 0 0.32rem;display:inline-block;border:1px solid rgba(119,146,175,0.42);border-radius:0.3rem;padding:0.15rem 0.35rem;color:var(--accent);font-size:0.64rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">' + categories[0] + '</span>';
         }
 
-        return '<a class="thought-card" href="' + item.link + '" target="_blank" rel="noreferrer">' +
+        return '<a class="thought-card" href="' + item.link + '" target="_blank" rel="noreferrer" data-categories="' + catLower.join(' ') + '">' +
           categoryTag +
           '<span class="date">' + formatDate(item.pubDate) + '</span>' +
           '<h3>' + item.title + '</h3>' +
@@ -165,8 +179,11 @@
       fetch(RSS2JSON_API)
         .then(function(res) { return res.json(); })
         .then(function(data) {
+          var allCards = [];
           if (data.status === 'ok' && data.items && data.items.length > 0) {
-            container.innerHTML = data.items.slice(0, 10).map(renderArticle).join('');
+            allCards = data.items.slice(0, 10).map(renderArticle);
+            container.innerHTML = allCards.join('');
+            document.getElementById('thought-count').textContent = data.items.length;
           } else {
             container.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">No articles found. <a href="https://medium.com/@feliren" target="_blank" style="color:var(--accent)">View on Medium →</a></p>';
           }
@@ -174,6 +191,27 @@
         .catch(function() {
           container.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">Could not load articles. <a href="https://medium.com/@feliren" target="_blank" style="color:var(--accent)">View on Medium →</a></p>';
         });
+
+      var thoughtFilterButtons = document.querySelectorAll('.thoughts-grid + .project-controls .filter');
+      var thoughtCards = document.querySelectorAll('.thought-card');
+
+      for (var i = 0; i < thoughtFilterButtons.length; i++) {
+        thoughtFilterButtons[i].addEventListener('click', function() {
+          for (var j = 0; j < thoughtFilterButtons.length; j++) {
+            thoughtFilterButtons[j].classList.remove('is-active');
+          }
+          this.classList.add('is-active');
+          var filter = this.getAttribute('data-filter');
+          for (var k = 0; k < thoughtCards.length; k++) {
+            var cats = thoughtCards[k].getAttribute('data-categories') || '';
+            if (filter === 'all' || cats.indexOf(filter) !== -1) {
+              thoughtCards[k].style.display = 'block';
+            } else {
+              thoughtCards[k].style.display = 'none';
+            }
+          }
+        });
+      }
     })();
   </script>
 </body>
