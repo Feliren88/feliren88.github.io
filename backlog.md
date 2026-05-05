@@ -53,10 +53,7 @@
 ## Phase 2: SEO & Knowledge Panel (3-4 weeks)
 
 ### Structured Data Markup
-- [ ] Person schema (JSON-LD)
-  - JobTitle: "Applied Scientist"
-  - WorksFor: Monash University
-  - SameAs: LinkedIn, GitHub, Google Scholar, ORCID
+- [x] Person schema (JSON-LD) with affiliation, email, knowsAbout
 - [ ] Article schema for each publication
 - [ ] Organization schema for SEACrowd
 
@@ -104,7 +101,7 @@
   - Contact form
 
 ### Conversion Tracking
-- [ ] Google Analytics 4
+- [x] Google Tag Manager deployed (container GTM-W4R769D6)
 - [ ] Hotjar for heatmaps
 - [ ] UTM tracking for LinkedIn posts
 - [ ] Contact form submissions tracking
@@ -181,16 +178,16 @@
 ## Priority Queue (Next 30 Days)
 
 ### Must Have (Week 1)
-1. Professional headshots uploaded
-2. Publication images/thumbnails
-3. Person schema markup
-4. Executive summary PDF
+1. ~Professional headshots uploaded~ (pending)
+2. ~Publication images/thumbnails~ (pending)
+3. [x] Person schema markup
+4. ~Executive summary PDF~ (pending)
 
 ### Should Have (Weeks 2-3)
 1. Interactive D3 timeline
 2. Skills visualization
 3. Google Scholar SEO
-4. Analytics setup
+4. [x] Analytics setup (GTM)
 
 ### Could Have (Month 2)
 1. Physics-based timeline
@@ -243,10 +240,10 @@
 
 ## Timeline Summary
 
-| Month | Focus | Key Deliverable |
-|-------|-------|-----------------|
-| May 2026 | Visuals + SEO basics | Photo gallery, Person schema |
-| June 2026 | Interactive features | Timeline, Skills viz |
-| July 2026 | Network building | Wikipedia, Guest posts |
-| August 2026 | Optimization | Analytics, Polish |
-| September 2026 | Review | Role secured? Knowledge panel? |
+| Month | Focus | Key Deliverable | Status |
+|-------|-------|-----------------|--------|
+| May 2026 | Visuals + SEO basics | Photo gallery, Person schema | IN PROGRESS |
+| June 2026 | Interactive features | Timeline, Skills viz | PENDING |
+| July 2026 | Network building | Wikipedia, Guest posts | PENDING |
+| August 2026 | Optimization | Analytics, Polish | PENDING |
+| September 2026 | Review | Role secured? Knowledge panel? | TARGET |
