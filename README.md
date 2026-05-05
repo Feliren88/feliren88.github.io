@@ -10,85 +10,81 @@ feliren88.github.io/
 ├── CLAUDE.md             # Development guidelines
 ├── index.html           # Homepage (landing)
 ├── css/
-│   └── styles.css       # All styles
+│   └── styles.css     # All styles
 ├── js/
-│   ├── main.js         # Core JavaScript (animations, interactions)
-│   └── data/
-│       ├── thoughts.js     # Medium blog articles config
-│       ├── publications.js  # Publications config
-│       ├── awards.js     # Awards & service config
-│       ├── experience.js # Work, education, patents, teaching config
-│       └── skills.js     # Skills config
+│   ├── main.js       # Core JavaScript (3D point cloud, animations)
+│   ├── components/
+│   │   └── nav.js   # Shared navigation - SINGLE SOURCE OF TRUTH
+│   └── data/       # External data configurations
+│       ├── thoughts.js
+│       ├── publications.js
+│       ├── awards.js
+│       ├── experience.js
+│       └── skills.js
 └── pages/
-    ├── experience.html  # Work experience & education
-    ├── skills.html  # Technical skills
-    ├── publications.html # Research publications
-    ├── awards.html # Awards & honours
-    ├── thoughts.html # Medium blog articles
-    └── contact.html # Contact information
+    ├── about.html      # About Vicky
+    ├── skills.html     # Expertise
+    ├── experience.html # Work experience
+    ├── publications.html # Research
+    ├── awards.html    # Recognition
+    ├── thoughts.html  # Writings (Medium)
+    └── contact.html # Contact
 ```
 
 ## Technology Stack
 
-- **HTML5**: Semantic markup with accessibility considerations
-- **CSS3**: Custom properties (CSS variables), Grid/Flexbox layouts, keyframe animations
-- **JavaScript (ES6+)**: No frameworks, vanilla JS only
+- **HTML5**: Semantic markup with accessibility
+- **CSS3**: Custom properties, Grid/Flexbox, keyframe animations
+- **JavaScript (ES6+)**: Vanilla JS, no frameworks
+
+## Navigation (Single Source of Truth)
+
+All navigation is defined in `js/components/nav.js`. This ensures consistent naming across all pages.
+
+To change navigation labels or order, edit `js/components/nav.js`:
+
+```javascript
+var NAV_ITEMS = [
+  { href: 'index.html', label: 'Home', page: '/' },
+  { href: 'about.html', label: 'About', page: '/about' },
+  { href: 'skills.html', label: 'Expertise', page: '/expertise' },
+  { href: 'experience.html', label: 'Work', page: '/work' },
+  { href: 'publications.html', label: 'Research', page: '/research' },
+  { href: 'awards.html', label: 'Recognition', page: '/recognition' },
+  { href: 'thoughts.html', label: 'Writings', page: '/writings' },
+  { href: 'contact.html', label: 'Contact', page: '/contact' },
+];
+```
 
 ## Data Configuration
 
-All content is managed through external JavaScript data files in `js/data/`. This separates content from presentation, making updates easier.
+Content is managed through external JavaScript data files in `js/data/`.
 
 ### Adding New Content
 
-Each data file follows a specific format with JSDoc comments:
-
-**Thoughts (Medium articles)** — `js/data/thoughts.js`:
+**Thoughts (Medium)** — `js/data/thoughts.js`:
 ```javascript
 var THOUGHTS_DATA = {
-  'article-key': {
-    description: 'Custom description',
-    url: 'https://medium.com/@feliren/article-slug'
-  }
+  'article-key': { description: '...', url: 'https://...' }
 };
 ```
 
 **Publications** — `js/data/publications.js`:
 ```javascript
 var PUBLICATIONS_DATA = {
-  'key': {
-    tag: 'TAG',
-    title: 'Title',
-    description: 'Short description',
-    venue: 'Venue, Year',
-    url: 'https://...',
-    abstract: 'Full abstract'
-  }
+  'key': { tag: '...', title: '...', description: '...', venue: '...', url: '...', abstract: '...' }
 };
 ```
 
 **Awards** — `js/data/awards.js`:
 ```javascript
-var AWARDS_DATA = {
-  'key': {
-    category: 'CATEGORY',
-    title: 'Award Title',
-    year: 'YEAR',
-    description: 'Description',
-    url: 'https://...' // optional
-  }
-};
-
-var SERVICE_DATA = [
-  { role: 'Role', description: 'Description', urls: [...] }
-];
+var AWARDS_DATA = { 'key': { category: '...', title: '...', year: '...', description: '...', url: '...' } };
+var SERVICE_DATA = [{ role: '...', description: '...', urls: [...] }];
 ```
 
 **Experience** — `js/data/experience.js`:
 ```javascript
-var WORK_EXPERIENCE_DATA = [
-  { dates: 'DATE', title: 'Role — Company', location: 'Location', description: '...' }
-];
-
+var WORK_EXPERIENCE_DATA = [{ dates: '...', title: '...', location: '...', description: '...' }];
 var EDUCATION_DATA = [...];
 var PATENTS_DATA = [...];
 var TEACHING_DATA = [...];
@@ -96,20 +92,14 @@ var TEACHING_DATA = [...];
 
 **Skills** — `js/data/skills.js`:
 ```javascript
-var SKILLS_DATA = [
-  { category: 'Category', description: '...', skills: ['Skill 1', 'Skill 2', ...] }
-];
+var SKILLS_DATA = [{ category: '...', description: '...', skills: ['...'] }];
 ```
 
 ## Development
 
-### Local Development
-
 ```bash
-# Python
 python -m http.server 8000
-
-# or npx
+# or
 npx serve .
 ```
 
@@ -119,24 +109,9 @@ Access at `http://localhost:8000`
 
 - Interactive 3D point cloud background (draggable, multiple shapes)
 - Scroll reveal animations
-- 3D tilt effect on cards (mouse tracking)
-- Responsive design (mobile, tablet, desktop)
-- Filterable publications
-- External data config for easy content updates
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Accessibility
-
-- Semantic HTML structure
-- ARIA labels where appropriate
-- Keyboard navigable
-- Respects `prefers-reduced-motion`
+- Shared navigation - consistent across all pages
+- Responsive design
+- Data-driven content rendering
 
 ## Deploying
 
