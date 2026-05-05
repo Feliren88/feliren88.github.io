@@ -40,6 +40,12 @@ exclude:
 # Permalink structure
 permalink: pretty
 
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:slug/
+
 # Include _pages directory
 include:
   - _pages
