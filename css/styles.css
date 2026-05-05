@@ -542,6 +542,27 @@ h1 {
   color: #dbe5f3;
 }
 
+.paper-btn {
+  display: inline-block;
+  margin-top: 0.55rem;
+  margin-right: 0.45rem;
+  padding: 0.32rem 0.65rem;
+  background: rgba(119, 146, 175, 0.2);
+  border: 1px solid rgba(119, 146, 175, 0.4);
+  border-radius: 0.35rem;
+  color: var(--text);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.18s ease;
+}
+
+.paper-btn:hover {
+  border-color: rgba(119, 146, 175, 0.6);
+  background: rgba(119, 146, 175, 0.32);
+  transform: translateY(-1px);
+}
+
 .card-expand {
   max-height: 0;
   overflow: hidden;
