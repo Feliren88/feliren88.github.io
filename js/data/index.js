@@ -14,7 +14,7 @@
  */
 
 var INDEX_DATA = {
-  eyebrow: 'APPLIED SCIENTIST / MULTIMODAL AI / REMOTE SENSING',
+  eyebrow: 'APPLIED SCIENTIST / MULTIMODAL AI / TRUSTWORTHY AI / REMOTE SENSING',
   name: 'Vicky Feliren',
   lead1: 'I build AI systems that see and understand the world, from satellite imagery mapping flood zones in Indonesia to vision-language models that resonate with Southeast Asian cultures.',
   lead2: 'Five years in the trenches doing geospatial AI and production ML. I have shipped systems handling millions of daily inferences.',
