@@ -17,22 +17,27 @@
 var SKILLS_DATA = [
   {
     category: 'RESEARCH: TRUSTWORTHY AI',
-    description: 'Uncertainty quantification and reliability for deployed AI systems — the gap between calibration and provable guarantees.',
-    skills: ['Conformal Prediction', 'Uncertainty Quantification', 'Vision-Language Models', 'Knowledge Distillation', 'Model Evaluation']
+    description: 'Uncertainty quantification and reliability for deployed AI — the gap between calibration scores and provable coverage guarantees.',
+    skills: ['Conformal Prediction', 'Uncertainty Quantification', 'Vision-Language Models', 'Knowledge Distillation', 'Causal Inference']
   },
   {
     category: 'RESEARCH: CULTURAL & GEOSPATIAL AI',
-    description: 'AI systems for underrepresented regions and environments — from satellite imagery to multilingual vision-language benchmarks.',
+    description: 'AI systems for underrepresented regions and environments — satellite imagery, multilingual benchmarks, and adaptation methods.',
     skills: ['Semantic Segmentation', 'Multispectral Imaging', 'Google Earth Engine', 'Cultural Benchmarking', 'Vision-Language Adaptation']
   },
   {
-    category: 'ENGINEERING: DEEP LEARNING',
-    description: 'Model development from architecture design to production — multimodal, generative, and geospatial systems.',
-    skills: ['PyTorch', 'TensorFlow', 'LangChain / LangGraph', 'RAG & Agentic Workflows', 'OpenCV']
+    category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI',
+    description: 'Model development from architecture design to deployment — multimodal, generative, and geospatial systems.',
+    skills: ['PyTorch', 'TensorFlow', 'LangChain / LangGraph', 'RAG & Agentic Workflows', 'OpenCV', 'Diffusion Models']
   },
   {
-    category: 'ENGINEERING: PRODUCTION ML',
-    description: 'Cloud-scale ML pipelines with distributed inference — built and operated across GCP and AWS.',
+    category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY',
+    description: 'Evaluation design and production monitoring — because a model is only as trustworthy as your ability to measure it.',
+    skills: ['LLM-as-a-Judge', 'Human-in-the-Loop Evaluation', 'LangSmith', 'MLflow', 'Weights & Biases', 'Calibration Drift Monitoring']
+  },
+  {
+    category: 'ENGINEERING: PRODUCTION ML & DATA',
+    description: 'Cloud-scale ML pipelines with distributed inference — designed and operated across GCP and AWS.',
     skills: ['GCP (Vertex AI, BigQuery)', 'AWS (EC2, S3, SageMaker)', 'Kubernetes', 'Docker', 'Apache Spark', 'dbt']
   },
   {

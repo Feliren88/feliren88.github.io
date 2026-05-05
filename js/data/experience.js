@@ -20,31 +20,31 @@ var WORK_EXPERIENCE_DATA = [
     dates: 'OCT 2024 – PRESENT',
     title: 'SEACrowd - Researcher, Multimodal & Vision-Language',
     location: 'Open-science research collective · seacrowd.github.io',
-    description: 'Co-built SEA-VL with 50+ researchers across 5+ countries — a multicultural vision-language benchmark for Southeast Asia published at ACL 2025. Contributed to VLM adaptation methods improving cultural relevance across the region.'
+    description: 'Doing the work commercial labs won\'t: building the AI infrastructure Southeast Asia is missing — datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study I led the training and evaluation for.'
   },
   {
     dates: 'FEB 2025 – NOV 2025',
     title: 'Artefact - Senior Data Scientist',
-    location: 'French-based AI consulting · Founding member, Jakarta office',
-    description: 'Built an end-to-end predictive Share of Voice system on Vertex AI, live across 6 markets within two months. Joined as the first hire in Jakarta, establishing engineering practices for the team\'s applied AI operations.'
+    location: 'French AI consulting · Founding technical member, Jakarta office',
+    description: 'The challenge here was translation: taking research-grade methodology — conformal prediction, calibrated uncertainty, LLM evaluation pipelines — and turning it into something that Media Directors could act on when deciding where to move budget across APAC markets. Joined as the first technical hire in Jakarta and built the engineering baseline from scratch, including the forecasting system, RAG-based insights tooling, and the observability layer around it.'
   },
   {
     dates: 'DEC 2022 – JAN 2025',
     title: 'Monash University - Research Associate',
-    location: 'Top 50 global research university',
-    description: 'Led geospatial AI research across a global consortium (UQ, UCL, Nottingham). Designed ProCANet, a progressive cross-attention architecture for multispectral flood segmentation informing regional policy — published first-authored in IEEE GRSL (Q1).'
+    location: 'Global research consortium: Monash, UQ, UCL, Nottingham',
+    description: 'Designed ProCANet — a progressive cross-attention architecture that fuses multispectral satellite bands for flood segmentation — and built the geospatial data pipelines to train and validate it across imagery from multiple sensors and regions. The work starts at a satellite and ends at a map that informs how governments prepare for and respond to floods. Published first-authored in IEEE GRSL; contributed to a Remote Sensing of Environment paper on mining footprint segmentation using foundation model fine-tuning.'
   },
   {
     dates: 'JUN 2021 – JUN 2023',
     title: 'GDP Labs (GLAIR.ai) - Senior Data Scientist / ML Engineer',
-    location: 'AI firm backed by major Indonesian conglomerate',
-    description: 'Built and operated biometric inference systems at 99.99% reliability, handling 1M+ daily financial transactions. Automated ML delivery pipelines, cutting deployment cycles by 30%.'
+    location: 'AI consulting, backed by a major Indonesian conglomerate',
+    description: 'Built and maintained the ML systems that major Indonesian banks trusted for biometric authentication and credit decisions — the kind of infrastructure where reliability isn\'t a target, it\'s a baseline expectation. Worked across the full stack from model architecture to production operations, and later across fraud detection, credit scoring under regulatory audit constraints, and demand forecasting for financial clients.'
   },
   {
     dates: 'JAN 2021 – JUN 2021',
     title: 'Jakarta Smart City - Data Scientist',
-    location: "Indonesia's smart city ecosystem",
-    description: 'Developed probabilistic forecasting models for waste logistics across a city of 10M+ residents, improving operational efficiency by 15%. Presented findings at an IEEE-sponsored conference to 500+ attendees.'
+    location: "Indonesia's smart city government initiative",
+    description: 'Applied probabilistic time-series forecasting to municipal waste logistics — translating messy operational signals into resource deployment decisions at the scale of a major city. Conducted causal analysis on the impact of Jakarta\'s plastic bag ban policy using citizen complaint data; presented findings at an IEEE-sponsored conference.'
   }
 ];
 
@@ -56,6 +56,7 @@ var EDUCATION_DATA = [
     description: 'Thesis: Conformal prediction approach to vision-language navigation (VLN)'
   },
   {
+    dates: 'DECEMBER 2019',
     title: 'Monash University',
     location: 'Bachelor of Computer Science',
     description: 'Student Exchange at NTU Singapore'
@@ -76,12 +77,12 @@ var TEACHING_DATA = [
     dates: 'JAN 2024 – JAN 2025',
     title: 'Bangkit Academy (Google, Gojek, Traveloka)',
     location: 'ML Instructor & Capstone Advisor',
-    description: 'Mentored 150+ students; supervised 5+ capstone projects deploying ML to Cloud Run.'
+    description: 'Taught ML fundamentals and supervised capstone projects for Bangkit Academy — a program training Indonesia\'s next generation of applied AI engineers. Took projects from early-stage ideas to deployed Cloud Run endpoints; the kind of mentorship where you see someone go from confused to shipping.'
   },
   {
     dates: 'NOV 2023',
     title: 'Bina Nusantara University',
     location: 'Guest Lecturer, Computer Vision',
-    description: 'Sessions on CNNs to Transformers and semantic segmentation for 100+ seniors.'
+    description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation — designed for final-year students seeing these ideas applied to real problems for the first time.'
   }
 ];
