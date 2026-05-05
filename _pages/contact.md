@@ -21,17 +21,17 @@ permalink: /contact/
 <p class="column-title" style="margin-top:2.5rem;margin-bottom:1rem">REACH ME</p>
 <div id="contact-grid" class="contact-grid">
   <a class="contact-card" href="mailto:vickyfeliren@gmail.com" target="_blank" rel="noreferrer">
-    <img src="/assets/img/gmail-svgrepo-com.svg" alt="Email" class="contact-icon">
+    <img src="/assets/img/gmail-svgrepo-com (1).svg" alt="Email" class="contact-icon">
     <span>Email</span>
     <strong>vickyfeliren@gmail.com</strong>
   </a>
   <a class="contact-card" href="https://www.linkedin.com/in/feliren/" target="_blank" rel="noreferrer">
-    <img src="/assets/img/linkedin-svgrepo-com.svg" alt="LinkedIn" class="contact-icon">
+    <img src="/assets/img/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="contact-icon">
     <span>LinkedIn</span>
     <strong>feliren</strong>
   </a>
   <a class="contact-card" href="https://github.com/feliren88" target="_blank" rel="noreferrer">
-    <img src="/assets/img/github-svgrepo-com.svg" alt="GitHub" class="contact-icon">
+    <img src="/assets/img/github-color-svgrepo-com.svg" alt="GitHub" class="contact-icon">
     <span>GitHub</span>
     <strong>feliren88</strong>
   </a>
@@ -41,7 +41,7 @@ permalink: /contact/
     <strong>Vicky Feliren</strong>
   </a>
   <a class="contact-card" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
-    <img src="/assets/img/medium-icon-svgrepo-com.svg" alt="Medium" class="contact-icon">
+    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" class="contact-icon">
     <span>Medium</span>
     <strong>@feliren</strong>
   </a>
