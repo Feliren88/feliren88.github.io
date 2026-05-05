@@ -4,14 +4,14 @@
 
 (function() {
   var NAV_ITEMS = [
-    { href: 'index.html', label: 'Home', page: '/' },
-    { href: 'pages/about.html', label: 'About', page: '/about' },
-    { href: 'pages/skills.html', label: 'Expertise', page: '/expertise' },
-    { href: 'pages/experience.html', label: 'Work', page: '/work' },
-    { href: 'pages/publications.html', label: 'Research', page: '/research' },
-    { href: 'pages/awards.html', label: 'Recognition', page: '/recognition' },
-    { href: 'pages/thoughts.html', label: 'Writings', page: '/writings' },
-    { href: 'pages/contact.html', label: 'Contact', page: '/contact' },
+    { href: '/index.html', label: 'Home', page: '/' },
+    { href: '/pages/about.html', label: 'About', page: '/about' },
+    { href: '/pages/skills.html', label: 'Expertise', page: '/expertise' },
+    { href: '/pages/experience.html', label: 'Work', page: '/work' },
+    { href: '/pages/publications.html', label: 'Research', page: '/research' },
+    { href: '/pages/awards.html', label: 'Recognition', page: '/recognition' },
+    { href: '/pages/thoughts.html', label: 'Writings', page: '/writings' },
+    { href: '/pages/contact.html', label: 'Contact', page: '/contact' },
   ];
 
   function getCurrentPage() {
