@@ -8,11 +8,11 @@ permalink: /research/
 
 <p class="eyebrow">RESEARCH ARCHIVE</p>
 <h1 class="section-title">
+  Research 
   <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
-    <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" style="width:28px;height:28px;vertical-align:middle;margin-right:0.5rem">
+    <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" style="width:24px;height:24px;vertical-align:middle">
+    <span style="font-size:0.82rem;color:var(--accent);text-decoration:none;font-weight:500;font-family:'Manrope',sans-serif">Google Scholar</span>
   </a>
-  Research
-  <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="margin-left:0.75rem;font-size:0.82rem;color:var(--accent);text-decoration:none;font-weight:500;font-family:'Manrope',sans-serif">Google Scholar</a>
 </h1>
 <p class="section-note">Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.</p>
 

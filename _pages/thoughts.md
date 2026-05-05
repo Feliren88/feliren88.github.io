@@ -8,11 +8,11 @@ permalink: /writings/
 
 <p class="eyebrow">WRITING</p>
 <h1 class="section-title">
+  Thoughts 
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer">
-    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:28px;height:28px;vertical-align:middle;margin-right:0.5rem">
+    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle">
+    <span class="medium-badge">@feliren</span>
   </a>
-  Thoughts
-  <a class="medium-badge" href="https://medium.com/@feliren" target="_blank" rel="noreferrer">@feliren</a>
 </h1>
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
