@@ -1,45 +1,39 @@
 /**
  * Navigation component - Single source of truth for all pages
- * Include this script in every page to render consistent navigation
  */
 
 (function() {
   var NAV_ITEMS = [
     { href: 'index.html', label: 'Home', page: '/' },
-    { href: 'about.html', label: 'About', page: '/about' },
-    { href: 'skills.html', label: 'Expertise', page: '/expertise' },
-    { href: 'experience.html', label: 'Work', page: '/work' },
-    { href: 'publications.html', label: 'Research', page: '/research' },
-    { href: 'awards.html', label: 'Recognition', page: '/recognition' },
-    { href: 'thoughts.html', label: 'Writings', page: '/writings' },
-    { href: 'contact.html', label: 'Contact', page: '/contact' },
+    { href: 'pages/about.html', label: 'About', page: '/about' },
+    { href: 'pages/skills.html', label: 'Expertise', page: '/expertise' },
+    { href: 'pages/experience.html', label: 'Work', page: '/work' },
+    { href: 'pages/publications.html', label: 'Research', page: '/research' },
+    { href: 'pages/awards.html', label: 'Recognition', page: '/recognition' },
+    { href: 'pages/thoughts.html', label: 'Writings', page: '/writings' },
+    { href: 'pages/contact.html', label: 'Contact', page: '/contact' },
   ];
 
   function getCurrentPage() {
     var path = window.location.pathname;
     var filename = path.split('/').pop() || 'index.html';
     
-    var item = NAV_ITEMS.find(function(n) { return n.href === filename; });
+    var item = NAV_ITEMS.find(function(n) { return n.href === filename || n.href === path; });
     return item ? item.page : '/';
   }
 
-  function getBasePath() {
-    var path = window.location.pathname;
-    if (path.includes('/pages/')) {
-      return '../';
-    }
-    return '';
+  function getHrefForPage(page) {
+    var item = NAV_ITEMS.find(function(n) { return n.page === page; });
+    return item ? item.href : 'index.html';
   }
 
   function renderNavigation() {
     var currentPage = getCurrentPage();
-    var basePath = getBasePath();
     var nav = document.querySelector('nav.nav');
     if (!nav) return;
 
     nav.innerHTML = NAV_ITEMS.map(function(item) {
-      var isActive = currentPage === item.page ? ' is-active' : '';
-      return '<a href="' + basePath + item.href + '" class="' + (currentPage === item.page ? 'is-active' : '') + '">' + item.label + '</a>';
+      return '<a href="' + item.href + '" class="' + (currentPage === item.page ? 'is-active' : '') + '">' + item.label + '</a>';
     }).join('');
   }
 
