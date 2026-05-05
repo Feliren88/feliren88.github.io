@@ -49,10 +49,10 @@ permalink: /writings/
     margin: 0;
     font-size: 1.08rem;
     line-height: 1.3;
-    transition: color 0.2s ease;
+    color: var(--text);
   }
   .thought-card:hover h3 {
-    color: var(--accent);
+    color: var(--muted);
   }
   .thought-card p {
     margin: 0.42rem 0 0;
@@ -67,14 +67,14 @@ permalink: /writings/
     font-size: 0.76rem;
     font-weight: 700;
   }
-.medium-badge {
-     display: inline-flex;
-     align-items: center;
-     gap: 0.35rem;
-     color: var(--text);
-     font-size: 0.82rem;
-     font-weight: 600;
-     text-decoration: none;
-     vertical-align: middle;
-   }
+  .medium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    vertical-align: middle;
+  }
 </style>
