@@ -3,56 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="About Vicky Feliren - Applied Scientist, Multimodal AI, Vision-Language Models.">
+  <meta name="description" content="About Vicky Feliren - Applied Scientist">
   <title>About | Vicky Feliren</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css?v=2">
   <style>
-    .about-hero {
-      font-size: 1.25rem;
-      line-height: 1.7;
-      max-width: 44rem;
-    }
-    .about-hero p {
-      margin-bottom: 1.2rem;
-    }
-    .about-hero strong {
-      color: var(--accent);
-    }
-    .about-section {
-      margin-top: 2.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    .about-section h3 {
-      font-size: 1.1rem;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .about-card {
-      padding: 1.2rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-    .about-card h4 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .about-card p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
+    .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
+    .about-hero p { margin-bottom: 1.2rem; }
+    .about-hero strong { color: var(--accent); }
+    .about-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+    .about-section h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
+    .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
+    .about-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+    .about-card p { font-size: 0.95rem; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -61,8 +27,7 @@
 
   <header class="topbar">
     <a class="brand" href="../index.html">VF</a>
-    <nav class="nav" aria-label="Primary">
-    </nav>
+    <nav class="nav" aria-label="Primary" id="main-nav"></nav>
   </header>
 
   <main>
@@ -71,32 +36,11 @@
       <h2 class="section-title">About Vicky</h2>
 
       <div class="about-hero">
-        <p>
-          I'm an applied scientist working at the intersection of <strong>multimodal AI</strong>,
-          <strong>vision-language models</strong>, and <strong>remote sensing</strong> —
-          with a focus on building AI that actually understands the world outside the Western bubble.
-        </p>
-        <p>
-          My journey started in Jakarta, trying to make sense of the Citarum River — one of the world's most polluted rivers.
-          That project on flood segmentation in Indonesia's Bandung taught me something I've carried ever since:
-          <strong>the best AI doesn't just see pixels; it understands context, culture, and consequence.</strong>
-        </p>
-        <p>
-          Now at <strong>SEACrowd</strong>, I work with researchers across Southeast Asia to build datasets and models
-          that reflect our languages, our images, our stories. We're not just filling gaps —
-          we're creating the foundation for AI that belongs to this region.
-        </p>
-        <p>
-          Before this, I built production systems at Artefact, shipping ML pipelines across 6 markets.
-          Before that, Monash University — where I first-authored my IEEE paper on progressive cross-attention networks.
-          And before that, GDP Labs and Jakarta Smart City, where I learned that the hardest problems aren't the algorithms —
-          they're the data, the infrastructure, the humans.
-        </p>
-        <p>
-          I write about what I learn along the way — not to show off, but because I believe
-          <strong>knowledge shared is knowledge multiplied</strong>. If something I figured out
-          can help someone else skip a detour, it's worth writing down.
-        </p>
+        <p>I'm an applied scientist working at the intersection of <strong>multimodal AI</strong>, <strong>vision-language models</strong>, and <strong>remote sensing</strong> — with a focus on building AI that actually understands the world outside the Western bubble.</p>
+        <p>My journey started in Jakarta, trying to make sense of the Citarum River — one of the world's most polluted rivers. That project on flood segmentation in Indonesia's Bandung taught me something I've carried ever since: <strong>the best AI doesn't just see pixels; it understands context, culture, and consequence.</strong></p>
+        <p>Now at <strong>SEACrowd</strong>, I work with researchers across Southeast Asia to build datasets and models that reflect our languages, our images, our stories. We're not just filling gaps — we're creating the foundation for AI that belongs to this region.</p>
+        <p>Before this, I built production systems at Artefact, shipping ML pipelines across 6 markets. Before that, Monash University — where I first-authored my IEEE paper on progressive cross-attention networks. And before that, GDP Labs and Jakarta Smart City, where I learned that the hardest problems aren't the algorithms — they're the data, the infrastructure, the humans.</p>
+        <p>I write about what I learn along the way — not to show off, but because I believe <strong>knowledge shared is knowledge multiplied</strong>. If something I figured out can help someone else skip a detour, it's worth writing down.</p>
       </div>
 
       <div class="about-section">
@@ -123,16 +67,8 @@
 
       <div class="about-section">
         <h3>What Drives Me</h3>
-        <p style="line-height:1.7;max-width:44rem">
-          I believe AI should serve everyone, not just the places that built it.
-          Every mining footprint I mapped from space, every flood I predicted,
-          every vision-language model I've tuned for cultural relevance —
-          they all point toward the same question: <strong>how do we make AI that actually works for people who need it?</strong>
-        </p>
-        <p style="line-height:1.7;margin-top:1rem;color:var(--muted)">
-          If you're working on something similar — or just want to talk shop —
-          I'd love to hear from you.
-        </p>
+        <p style="line-height:1.7;max-width:44rem">I believe AI should serve everyone, not just the places that built it. Every mining footprint I mapped from space, every flood I predicted, every vision-language model I've tuned for cultural relevance — they all point toward the same question: <strong>how do we make AI that actually works for people who need it?</strong></p>
+        <p style="line-height:1.7;margin-top:1rem;color:var(--muted)">If you're working on something similar — or just want to talk shop — I'd love to hear from you.</p>
       </div>
     </section>
   </main>
