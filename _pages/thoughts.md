@@ -8,7 +8,7 @@ permalink: /writings/
 
 <p class="eyebrow">WRITING</p>
 <h1 class="section-title">
-  Thoughts 
+  <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">Thoughts</a>
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
     <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem">
     <span class="medium-badge" style="margin-left:0">@feliren</span>

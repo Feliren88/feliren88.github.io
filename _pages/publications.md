@@ -8,7 +8,7 @@ permalink: /research/
 
 <p class="eyebrow">RESEARCH ARCHIVE</p>
 <h1 class="section-title">
-  Research 
+  <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">Research</a>
   <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
     <img src="/assets/img/google-scholar-svgrepo-com.svg" alt="Google Scholar" style="width:24px;height:24px;vertical-align:middle">
     <span style="font-size:0.82rem;color:var(--accent);text-decoration:none;font-weight:500;font-family:'Manrope',sans-serif">Google Scholar</span>
