@@ -11,9 +11,7 @@ permalink: /research/
 <p class="section-note">Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.</p>
 
 <div id="publications-container" class="project-grid">
-  {% assign sorted_pubs = site.data.publications | sort: 'venue' %}
-  {% for key in site.data.publications %}
-  {% assign pub = key[1] %}
+  {% for pub in site.data.publications %}
   <article class="project-card reveal">
     <p class="tag">{{ pub.tag }}</p>
     <h3>{{ pub.title }}</h3>
