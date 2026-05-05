@@ -25,9 +25,7 @@
       <p class="eyebrow">SYSTEM CAPABILITIES</p>
       <h2 class="section-title">Expertise</h2>
 
-      <div class="skill-grid" id="skill-grid">
-        <!-- Skills rendered by JavaScript from js/data/skills.js -->
-      </div>
+      <div class="skill-grid" id="skill-grid"></div>
     </section>
   </main>
 
@@ -45,7 +43,7 @@
     (function() {
       var grid = document.getElementById('skill-grid');
       if (!grid || typeof SKILLS_DATA === 'undefined') return;
-      if (grid.children.length > 0) return; // Already rendered
+      if (grid.innerHTML.trim() !== '') return;
 
       var html = '';
       SKILLS_DATA.forEach(function(category) {
