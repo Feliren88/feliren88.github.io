@@ -424,7 +424,7 @@ function initPointCloudLab() {
   });
 
   window.addEventListener("pointermove", (event) => {
-    if (finePointer) {
+    if (finePointer && !isInteractiveTarget(event.target)) {
       pointerBiasX = event.clientX / Math.max(1, width) - 0.5;
       pointerBiasY = event.clientY / Math.max(1, height) - 0.5;
     }
