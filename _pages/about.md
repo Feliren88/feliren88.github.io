@@ -8,47 +8,58 @@ permalink: /about/
 
 <p class="eyebrow">WHO I AM</p>
 
-<div id="about-hero" class="about-hero">
-  {% for paragraph in site.data.about.hero %}
-  <p>{{ paragraph }}</p>
-  {% endfor %}
-</div>
+<div class="about-layout">
+  <div class="about-main">
+    <div id="about-hero" class="about-hero">
+      {% for paragraph in site.data.about.hero %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+    </div>
 
-<div id="about-sections">
-  {% for section in site.data.about.sections %}
-  <div class="about-section">
-    <h3>{{ section.title }}</h3>
-    
-    {% if section.content %}
-    <p style="line-height:1.7;max-width:44rem">{{ section.content }}</p>
-    {% endif %}
-    
-    {% if section.cards %}
-    <div class="about-grid">
-      {% for card in section.cards %}
-      <div class="about-card">
-        <h4>{{ card.title }}</h4>
-        <p>{{ card.description }}</p>
+    <div id="about-sections">
+      {% for section in site.data.about.sections %}
+      <div class="about-section">
+        <h3>{{ section.title }}</h3>
+        
+        {% if section.content %}
+        <p style="line-height:1.7;max-width:44rem">{{ section.content }}</p>
+        {% endif %}
+        
+        {% if section.cards %}
+        <div class="about-grid">
+          {% for card in section.cards %}
+          <div class="about-card">
+            <h4>{{ card.title }}</h4>
+            <p>{{ card.description }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% if section.engage %}
+        <div class="about-grid">
+          {% for item in section.engage %}
+          <div class="about-card">
+            <h4>{{ item.type }}</h4>
+            <p>{{ item.description }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
       {% endfor %}
     </div>
-    {% endif %}
-    
-    {% if section.engage %}
-    <div class="about-grid">
-      {% for item in section.engage %}
-      <div class="about-card">
-        <h4>{{ item.type }}</h4>
-        <p>{{ item.description }}</p>
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
   </div>
-  {% endfor %}
+
+  <div class="about-sidebar">
+    <img src="/assets/img/profile_2.svg" alt="Vicky Feliren" class="profile-image">
+  </div>
 </div>
 
 <style>
+  .about-layout { display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start; }
+  .profile-image { width: 100%; height: auto; border-radius: 12px; }
+  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } .profile-image { max-width: 300px; } }
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
   .about-hero p { margin-bottom: 1.2rem; }
   .about-hero strong { color: var(--accent); }
