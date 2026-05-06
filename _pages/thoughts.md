@@ -7,7 +7,7 @@ permalink: /writings/
 
 <h1 class="section-title">
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
-    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem">
+    <img src="/assets/img/medium-svgrepo-com.svg" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem" loading="lazy">
     <span class="medium-badge" style="margin-left:0">@feliren</span>
   </a>
 </h1>

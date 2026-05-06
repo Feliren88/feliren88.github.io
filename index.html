@@ -7,7 +7,10 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
 <section class="section hero reveal">
   <div class="hero-copy">
     <div class="hero-profile">
-      <img src="{{ '/assets/img/profile.png' | relative_url }}" alt="Vicky Feliren" class="profile-image">
+      <picture>
+        <source type="image/webp" srcset="{{ '/assets/img/profile-450.webp' | relative_url }} 450w, {{ '/assets/img/profile.webp' | relative_url }} 880w" sizes="225px">
+        <img src="{{ '/assets/img/profile.png' | relative_url }}" alt="Vicky Feliren" class="profile-image" fetchpriority="high" width="225" height="225">
+      </picture>
     </div>
     <div class="hero-content">
       <p class="eyebrow">{{ site.data.index.eyebrow }}</p>

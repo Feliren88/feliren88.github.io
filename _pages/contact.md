@@ -6,7 +6,7 @@ description: Available for speaking engagements, research collaboration, mentors
 permalink: /contact/
 ---
 
-<img src="/assets/img/profile_3.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false">
+<img src="/assets/img/profile_3.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false" loading="lazy">
 
 <p class="eyebrow">LET'S WORK TOGETHER</p>
 <p class="contact-intro">{{ site.data.contact.intro }}</p>
@@ -24,7 +24,7 @@ permalink: /contact/
 <div id="contact-grid" class="contact-grid">
   {% for link in site.data.contact.links %}
   <a class="contact-card" href="{{ link.url }}" target="_blank" rel="noreferrer">
-    <img src="/assets/img/{{ link.icon }}" alt="{{ link.label }}" class="contact-icon">
+    <img src="/assets/img/{{ link.icon }}" alt="{{ link.label }}" class="contact-icon" loading="lazy">
     <span>{{ link.label }}</span>
     <strong>{{ link.value }}</strong>
   </a>

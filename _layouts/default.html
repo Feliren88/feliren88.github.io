@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ '/assets/img/favicon_black.JPG' | relative_url }}" type="image/jpeg">
-    <link rel="stylesheet" href="{{ '/css/styles.css?v=8' | relative_url }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/manrope-latin.woff2' | relative_url }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/spacegrotesk-latin.woff2' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/styles.css?v=9' | relative_url }}">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -169,5 +171,6 @@
 
     <script src="{{ '/js/main.js?v=4' | relative_url }}"></script>
     <script src="{{ '/js/components/nav.js' | relative_url }}"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
   </body>
 </html>

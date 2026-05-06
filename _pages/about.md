@@ -8,7 +8,7 @@ permalink: /about/
 
 <p class="eyebrow">WHO I AM</p>
 
-<img src="/assets/img/profile_2.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false">
+<img src="/assets/img/profile_2.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false" loading="lazy">
 
 <div id="about-hero" class="about-hero">
   {% for paragraph in site.data.about.hero %}
