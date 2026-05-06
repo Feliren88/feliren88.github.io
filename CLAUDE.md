@@ -9,12 +9,13 @@ Personal portfolio website for Vicky Feliren - Applied Scientist specializing in
 ```
 feliren88.github.io/
 ├── README.md       # Project documentation
-├── CLAUDE.md      # This file
-├── _config.yml    # Jekyll configuration
-├── Gemfile        # Ruby dependencies
-├── index.html     # Homepage (Jekyll template)
+├── CLAUDE.md       # This file
+├── _config.yml     # Jekyll configuration
+├── Gemfile         # Ruby dependencies
+├── index.html      # Homepage (Jekyll template)
+├── sw.js           # Service worker (Jekyll-processed Liquid template)
 ├── _layouts/
-│   ├── default.html  # Base layout with SEO
+│   ├── default.html  # Base layout with SEO, skip link, font preloads
 │   └── page.html     # Page template
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
@@ -34,13 +35,20 @@ feliren88.github.io/
 │   ├── thoughts.yml
 │   └── contact.yml
 ├── assets/
-│   └── fonts/           # Self-hosted Manrope + Space Grotesk woff2 subsets
+│   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
+│   └── img/
+│       ├── profile.png           # Original (1.2MB) — OG image / fallback
+│       ├── profile.webp          # Full-size WebP (109KB)
+│       ├── profile-450.webp      # 450px WebP (34KB) — served to most devices
+│       ├── profile_2.svg         # About page background
+│       ├── profile_3.svg         # Contact page background
+│       └── favicon.png / favicon_black.JPG / *.svg
 ├── css/
-│   └── styles.css       # Includes @font-face declarations at top
+│   └── styles.css  # @font-face, custom properties, all component styles
 └── js/
-    ├── main.js          # Core JavaScript
+    ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal)
     └── components/
-        └── nav.js       # Shared navigation
+        └── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
 ```
 
 ## Jekyll Configuration
@@ -69,7 +77,7 @@ Clean URLs without `.html`:
 
 ## Shared Navigation
 
-All navigation is defined in `js/components/nav.js`. This is the **single source of truth** - modification here updates all pages automatically.
+All navigation is defined in `js/components/nav.js` via the `NAV_ITEMS` array. This is the **single source of truth** — modification here updates all pages automatically. The hardcoded `<nav>` in `default.html` is a no-JS fallback.
 
 ## Code Conventions
 
@@ -85,31 +93,64 @@ permalink: /slug/
 ```
 
 ### Data Files
-Content stored in `_data/*.yml` - accessed via `site.data.<filename>.<key>`
+Content stored in `_data/*.yml` — accessed via `site.data.<filename>.<key>`
 
 ### CSS
-- CSS custom properties (`:root`)
+- CSS custom properties in `:root`
 - Mobile-first responsive design
 - Grid for layouts, Flexbox for components
+- Key variables: `--text`, `--muted`, `--accent`, `--accent-2`, `--border-ui`, `--line`, `--surface`
+- `--border-ui: rgba(119, 146, 175, 0.7)` — minimum 3:1 contrast; use for all interactive element borders (buttons, links styled as cards)
 
 ### JavaScript
 - ES6+ syntax
-- IIFE wrapper for DOM rendering
+- IIFE wrapper in nav.js
+- Current versions: `main.js?v=5`, `nav.js` (no version pin)
+
+## Accessibility (WCAG 2.1 AA)
+
+The site targets WCAG 2.1 AA compliance. Key implementations:
+
+- **Skip link**: `.skip-link` in `default.html` — first focusable element, links to `#main-content` on `<main>`
+- **Focus indicator**: Global `:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }` in `styles.css`
+- **Button borders**: All interactive element borders use `--border-ui` (≥ 3:1 contrast ratio) not `--line`
+- **Text contrast**: `--text` = 13.6:1, `--muted` = 6.75:1, `--accent` = 5.81:1 against `--bg`
+- **Status messages**: `#project-count` uses `role="status" aria-live="polite"` in `publications.md`
+- **Decorative images**: `aria-hidden="true"` on SVG backgrounds and canvas
+- **Alt text**: All meaningful images have descriptive alt text
+
+## Performance
+
+- **WebP images**: Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset; PNG fallback for older browsers
+- **Hero image**: `fetchpriority="high"` + explicit `width`/`height` to prevent layout shift
+- **Lazy loading**: `loading="lazy"` on all off-screen images (background SVGs, contact icons, inline icons)
+- **Font preload**: `<link rel="preload">` for `manrope-latin.woff2` and `spacegrotesk-latin.woff2` in `<head>`
+- **Font subsets**: Only latin and latin-ext `@font-face` blocks declared (cyrillic/greek/vietnamese removed — not used in English content)
+- **Service worker** (`sw.js`): Cache-first for static assets, network-first for HTML. Cache name is versioned by build timestamp via `{{ site.time | date: "%s" }}`. Registered via inline script at bottom of `default.html`.
 
 ## Common Tasks
 
 ### Change Navigation
-Edit `js/components/nav.js` - change `NAV_ITEMS` array.
+Edit the `NAV_ITEMS` array in `js/components/nav.js`.
 
 ### Add New Content
 Edit the appropriate file in `_data/`.
 
 ### Add New Page
 1. Create `_pages/newpage.md` with front matter
-2. Add to navigation in `js/components/nav.js`
+2. Add to `NAV_ITEMS` in `js/components/nav.js`
 
 ### Update Styles
-Edit `css/styles.css` and bump version query string in `_layouts/default.html`.
+Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=10` → `?v=11`), and update the matching entry in `sw.js` PRECACHE array.
+
+### Add a New Button or Interactive Link
+Use `border: 1px solid var(--border-ui)` — not `--line` or `--line-strong` — to maintain 3:1 non-text contrast (WCAG 1.4.11).
+
+### Add New Images
+- Provide WebP version alongside PNG/JPG
+- Add `loading="lazy"` unless the image is above the fold
+- Add `width` and `height` attributes to prevent layout shift
+- Decorative images: `alt=""` + `aria-hidden="true"`
 
 ## Local Development
 

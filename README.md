@@ -11,8 +11,9 @@ feliren88.github.io/
 ├── _config.yml     # Jekyll configuration
 ├── Gemfile         # Ruby dependencies
 ├── index.html      # Homepage (Jekyll template)
+├── sw.js           # Service worker (Jekyll-processed Liquid template)
 ├── _layouts/
-│   ├── default.html  # Base layout with SEO
+│   ├── default.html  # Base layout with SEO, skip link, font preloads
 │   └── page.html     # Page template
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
@@ -31,22 +32,45 @@ feliren88.github.io/
 │   ├── awards.yml
 │   ├── thoughts.yml
 │   └── contact.yml
+├── assets/
+│   ├── fonts/      # Manrope + Space Grotesk — latin/latin-ext subsets only
+│   └── img/        # profile.webp, profile-450.webp, profile.png, SVGs
 ├── css/
 │   └── styles.css
 └── js/
     ├── main.js          # Core JavaScript
     └── components/
-        └── nav.js       # Shared navigation
+        └── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
 ```
 
 ## Technology Stack
 
-- **Jekyll**: Static site generator with liquid templating
+- **Jekyll**: Static site generator with Liquid templating
 - **HTML5**: Semantic markup with accessibility
 - **CSS3**: Custom properties, Grid/Flexbox, responsive design
 - **JavaScript (ES6+)**: Vanilla JS, no frameworks
 - **jekyll-seo-tag**: Automatic meta tags
 - **jekyll-sitemap**: Auto-generated sitemap
+
+## Performance
+
+- WebP images with `<picture>` srcset; PNG fallback for older browsers
+- `fetchpriority="high"` on above-fold hero image
+- `loading="lazy"` on all off-screen images
+- `<link rel="preload">` for critical font files
+- Font `@font-face` declarations limited to latin and latin-ext subsets
+- Service worker (`sw.js`) for offline access — cache-first for assets, network-first for HTML
+
+## Accessibility
+
+Targets **WCAG 2.1 AA** compliance:
+
+- Skip-to-content link as first focusable element
+- `:focus-visible` keyboard focus indicator on all interactive elements
+- Interactive element borders use `--border-ui` (≥ 3:1 contrast ratio)
+- `--text` / `--muted` / `--accent` all meet contrast requirements against dark background
+- `aria-live="polite"` on dynamic status regions
+- Decorative images marked `aria-hidden="true"`
 
 ## Structured Data (JSON-LD)
 
@@ -65,9 +89,9 @@ Person schema in `_layouts/default.html` covers:
 | `author` | 7 ScholarlyArticle entries with DOI/URLs |
 | `sameAs` | 10 academic/social profiles |
 
-## Navigation (Single Source of Truth)
+## Navigation
 
-All navigation is defined in `js/components/nav.js`. This is the **single source of truth** - modification here updates all pages automatically.
+All navigation is defined in `js/components/nav.js` via the `NAV_ITEMS` array — modification here updates all pages automatically.
 
 ## Content Management
 
