@@ -57,9 +57,9 @@ permalink: /about/
 </div>
 
 <style>
-  .about-layout { display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start; }
+  .about-layout { display: grid; grid-template-columns: 1fr 450px; gap: 3rem; align-items: start; }
   .profile-image { width: 100%; height: auto; border-radius: 12px; user-select: none; -webkit-user-drag: none; }
-  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } .profile-image { max-width: 300px; } }
+  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } .profile-image { max-width: 350px; } }
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
   .about-hero p { margin-bottom: 1.2rem; }
   .about-hero strong { color: var(--accent); }
