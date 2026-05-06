@@ -79,7 +79,7 @@ function applyFilter(kind) {
     if (isMatch) visible += 1;
   }
   if (projectCount) {
-    projectCount.textContent = String(visible);
+    projectCount.textContent = visible + (visible === 1 ? ' publication' : ' publications');
   }
 }
 

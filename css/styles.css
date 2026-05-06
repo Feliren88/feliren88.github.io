@@ -46,11 +46,37 @@
   --line-strong: rgba(114, 130, 152, 0.34);
   --accent: #7792af;
   --accent-2: #5d7691;
+  --border-ui: rgba(119, 146, 175, 0.7);
   --shadow: 0 22px 40px rgba(0, 0, 0, 0.3);
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 html {
@@ -270,7 +296,7 @@ h1 {
   padding: 0.58rem 0.88rem;
   font-size: 0.84rem;
   font-weight: 700;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--border-ui);
   transition: border-color 0.2s ease, background 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
 }
 
@@ -328,7 +354,7 @@ h1 {
 }
 
 .shape-btn {
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--border-ui);
   background: rgba(16, 26, 39, 0.74);
   color: #98abc2;
   border-radius: 999px;
@@ -521,7 +547,7 @@ h1 {
 }
 
 .filter {
-  border: 1px solid var(--line);
+  border: 1px solid var(--border-ui);
   border-radius: 999px;
   background: rgba(16, 27, 40, 0.74);
   color: #8b9fb8;
@@ -596,7 +622,7 @@ h1 {
 .project-card .venue {
   display: block;
   margin-top: 0.42rem;
-  color: var(--accent-2);
+  color: var(--accent);
   font-size: 0.78rem;
   font-style: italic;
 }
@@ -612,7 +638,7 @@ h1 {
 
 .card-toggle {
   margin-top: 0.62rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border-ui);
   border-radius: 0.34rem;
   background: rgba(18, 30, 46, 0.68);
   color: #93a8c0;
@@ -634,7 +660,7 @@ h1 {
   margin-right: 0.45rem;
   padding: 0.32rem 0.65rem;
   background: rgba(119, 146, 175, 0.2);
-  border: 1px solid rgba(119, 146, 175, 0.4);
+  border: 1px solid var(--border-ui);
   border-radius: 0.35rem;
   color: var(--text);
   font-size: 0.74rem;
@@ -804,6 +830,7 @@ h1 {
   display: block;
   text-decoration: none;
   padding: 0.8rem;
+  border-color: var(--border-ui);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
