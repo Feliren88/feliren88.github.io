@@ -4,6 +4,21 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
+/* --- Disable image drag and right-click --- */
+document.addEventListener("contextmenu", (event) => {
+  if (event.target.tagName === "IMG") {
+    event.preventDefault();
+    return false;
+  }
+});
+
+document.addEventListener("dragstart", (event) => {
+  if (event.target.tagName === "IMG") {
+    event.preventDefault();
+    return false;
+  }
+});
+
 /* --- Scroll-reveal --- */
 const revealNodes = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window && revealNodes.length > 0) {
