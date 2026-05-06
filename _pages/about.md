@@ -51,7 +51,7 @@ permalink: /about/
 </div>
 
 <style>
-  .profile-bg { position: absolute; right: 0; top: 80px; width: 600px; z-index: -1; opacity: 0.1; user-select: none; -webkit-user-drag: none; border-radius: 0; }
+  .profile-bg { position: absolute; right: 0; top: 80px; width: 600px; z-index: -1; opacity: 0.8; user-select: none; -webkit-user-drag: none; border-radius: 0; }
   @media (max-width: 1200px) { .profile-bg { position: static; width: 100%; max-width: 500px; margin: 2rem auto; opacity: 1; } }
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
   .about-hero p { margin-bottom: 1.2rem; }
