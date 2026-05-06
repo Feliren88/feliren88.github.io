@@ -2,7 +2,7 @@ work_experience:
   - dates: 'OCT 2024 – PRESENT'
     title: 'SEACrowd - Researcher, Multimodal & Vision-Language'
     location: 'Open-science research collective · seacrowd.github.io'
-    description: "Doing the work commercial labs won't: building the AI infrastructure Southeast Asia is missing — datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study I led the training and evaluation for."
+    description: "Doing the work commercial labs won't: building the AI infrastructure Southeast Asia is missing — datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study."
 
   - dates: 'FEB 2025 – NOV 2025'
     title: 'Artefact - Senior Data Scientist'

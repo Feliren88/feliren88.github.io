@@ -33,8 +33,10 @@ feliren88.github.io/
 │   ├── awards.yml
 │   ├── thoughts.yml
 │   └── contact.yml
+├── assets/
+│   └── fonts/           # Self-hosted Manrope + Space Grotesk woff2 subsets
 ├── css/
-│   └── styles.css
+│   └── styles.css       # Includes @font-face declarations at top
 └── js/
     ├── main.js          # Core JavaScript
     └── components/
