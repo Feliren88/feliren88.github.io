@@ -9,7 +9,7 @@ permalink: /about/
 <p class="eyebrow">WHO I AM</p>
 
 <div class="about-layout">
-  <div class="about-main">
+  <div class="about-main" style="max-width:100%">
     <div id="about-hero" class="about-hero">
       {% for paragraph in site.data.about.hero %}
       <p>{{ paragraph }}</p>
@@ -57,9 +57,9 @@ permalink: /about/
 </div>
 
 <style>
-  .about-layout { display: grid; grid-template-columns: 1fr 450px; gap: 3rem; align-items: start; }
+  .about-layout { display: grid; grid-template-columns: 1fr 900px; gap: 3rem; align-items: start; }
   .profile-image { width: 100%; height: auto; border-radius: 12px; user-select: none; -webkit-user-drag: none; }
-  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } .profile-image { max-width: 350px; } }
+  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } .profile-image { max-width: 100%; width: 400px; } }
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
   .about-hero p { margin-bottom: 1.2rem; }
   .about-hero strong { color: var(--accent); }
