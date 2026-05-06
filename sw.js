@@ -19,8 +19,7 @@ const PRECACHE = [
   '/assets/fonts/spacegrotesk-latin-ext.woff2',
   '/assets/img/profile-450.webp',
   '/assets/img/profile.webp',
-  '/assets/img/profile.png',
-  '/assets/img/favicon.png',
+  '/assets/img/favicon.webp',
 ];
 
 self.addEventListener('install', event => {

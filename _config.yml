@@ -18,8 +18,8 @@ locale: en-US
 lang: en-US
 
 # SEO Settings (for jekyll-seo-tag)
-logo: /assets/img/profile.png
-image: /assets/img/profile.png
+logo: /assets/img/profile.webp
+image: /assets/img/profile.webp
 
 # Search keywords for AI roles
 keywords:
