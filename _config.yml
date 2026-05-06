@@ -1,9 +1,7 @@
 # Site settings
 title: Vicky Feliren
 description: 
-  Vicky Feliren is an Applied Scientist and AI Researcher specializing in Computer Vision, 
-  Deep Learning, and Trustworthy AI. Published in IEEE, ACL, and Remote Sensing of Environment. 
-  Expertise in Vision-Language Models, Conformal Prediction, and Geospatial AI.
+  Applied Scientist building AI that rigorously knows its own limits grounded with rigorous engineering and philosophy.
 baseurl: ""
 url: "https://feliren88.github.io"
 
