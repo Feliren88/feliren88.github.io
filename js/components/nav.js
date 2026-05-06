@@ -30,6 +30,15 @@
     var nav = document.querySelector('nav.nav');
     if (!nav) return;
 
+    var existingLinks = nav.querySelectorAll('a');
+    if (existingLinks.length > 0) {
+      existingLinks.forEach(function(link) {
+        var item = NAV_ITEMS.find(function(n) { return n.href === link.getAttribute('href'); });
+        link.className = item && currentPage === item.page ? 'is-active' : '';
+      });
+      return;
+    }
+
     nav.innerHTML = NAV_ITEMS.map(function(item) {
       return '<a href="' + item.href + '" class="' + (currentPage === item.page ? 'is-active' : '') + '">' + item.label + '</a>';
     }).join('');

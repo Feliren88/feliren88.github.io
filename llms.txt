@@ -1,0 +1,38 @@
+# Vicky Feliren
+
+> Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models
+
+Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, Data Scientist working on two problems: making AI systems know when to trust themselves (conformal prediction for vision-language models), and making them culturally relevant to the regions they were never designed for (AI for Southeast Asia). M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.
+
+## Pages
+
+- [Home](https://feliren88.github.io/): Overview and research focus
+- [About](https://feliren88.github.io/about/): Background, research focus, and collaboration opportunities
+- [Expertise](https://feliren88.github.io/expertise/): Research and engineering skills — trustworthy AI, geospatial AI, LLM evaluation, production ML
+- [Work](https://feliren88.github.io/work/): Work history — Monash University Research Associate, Artefact Senior Data Scientist, GDP Labs ML Engineer, Jakarta Smart City; Education at Monash University
+- [Research](https://feliren88.github.io/research/): Publications in IEEE Q1 (IF 11.4), ACL 2025, Remote Sensing of Environment
+- [Recognition](https://feliren88.github.io/recognition/): Microsoft Azure APAC Champion (2020), Cambridge CamvsCovid Top 3 (2020), UC Berkeley Cal Hacks Best Community Track (2020), Monash Scholarship (2024), Facebook/Udacity Deep Learning Scholarship (2019)
+- [Writings](https://feliren88.github.io/writings/): Articles on life, philosophy, AI, and tech — published on Medium
+- [Contact](https://feliren88.github.io/contact/): Available for speaking, research collaboration, mentorship, and applied scientist roles internationally
+
+## Key Research
+
+- **SEA-VL** (ACL 2025, Major Contributor): Multicultural vision-language dataset for Southeast Asia — 1.28M culturally relevant images across 11 SEA languages. https://aclanthology.org/2025.acl-long.916/
+- **ProCANet** (IEEE GRSL 2024, First Author): Progressive cross-attention network for flood segmentation using multispectral satellite imagery — state-of-the-art IoU 0.815 on Sen1Floods11. https://ieeexplore.ieee.org/document/10750225
+- **Mining Segmentation** (Remote Sensing of Environment, IF 11.4, 2025): Multi-modal deep learning for global mining footprint segmentation across 37 locations. https://doi.org/10.1016/j.rse.2024.114584
+- **CommonLID** (ACL 2026, Accepted): Human-annotated language identification benchmark covering 109 languages for web data. https://arxiv.org/abs/2601.18026
+- **Anthropogenic Regional Adaptation** (Under Review 2026): GG-EZ achieves 5–15% gains in cultural relevance for Southeast Asia, retaining 98%+ global benchmark performance. https://arxiv.org/abs/2604.11490
+- **Retention Ponds Study** (AQUA, IF 2.3, 2025): Urban resilience through flood policy and planning in South Bandung. https://iwaponline.com/aqua/article/74/2/267/106789/
+
+## Profiles
+
+- Google Scholar: https://scholar.google.com/citations?user=R2LVQ7AAAAAJ
+- ORCID: https://orcid.org/0000-0003-3306-8426
+- ACL Anthology: https://aclanthology.org/people/vicky-feliren/
+- Semantic Scholar: https://www.semanticscholar.org/author/Vicky-Feliren/2330264544
+- DBLP: https://dblp.org/pid/392/6206.html
+- LinkedIn: https://www.linkedin.com/in/feliren/
+- GitHub: https://github.com/feliren88
+- HuggingFace: https://huggingface.co/feliren
+- Medium: https://medium.com/@feliren
+- Devpost: https://devpost.com/Feliren
