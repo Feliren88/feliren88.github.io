@@ -6,6 +6,8 @@ description: Available for speaking engagements, research collaboration, mentors
 permalink: /contact/
 ---
 
+<img src="/assets/img/profile_3.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false">
+
 <p class="eyebrow">LET'S WORK TOGETHER</p>
 <p class="contact-intro">{{ site.data.contact.intro }}</p>
 
@@ -30,6 +32,8 @@ permalink: /contact/
 </div>
 
 <style>
+  .profile-bg { position: absolute; right: 0; top: 80px; width: 600px; z-index: -1; opacity: 0.8; user-select: none; -webkit-user-drag: none; border-radius: 0; }
+  @media (max-width: 1200px) { .profile-bg { position: static; width: 100%; max-width: 500px; margin: 2rem auto; opacity: 1; } }
   .contact-icon {
     width: 24px;
     height: 24px;
