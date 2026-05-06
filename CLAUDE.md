@@ -37,12 +37,12 @@ feliren88.github.io/
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
 │   └── img/
-│       ├── profile.png           # Original (1.2MB) — OG image / fallback
-│       ├── profile.webp          # Full-size WebP (109KB)
+│       ├── profile.webp          # Full-size WebP (109KB) — hero + OG image
 │       ├── profile-450.webp      # 450px WebP (34KB) — served to most devices
-│       ├── profile_2.svg         # About page background
-│       ├── profile_3.svg         # Contact page background
-│       └── favicon.png / favicon_black.JPG / *.svg
+│       ├── profile_2_bg.webp     # About page background (82KB, white-on-transparent silhouette)
+│       ├── profile_3_bg.webp     # Contact page background (220KB, white-on-transparent silhouette)
+│       ├── favicon.webp / favicon_black.webp
+│       └── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
 ├── css/
 │   └── styles.css  # @font-face, custom properties, all component styles
 └── js/
@@ -121,11 +121,12 @@ The site targets WCAG 2.1 AA compliance. Key implementations:
 
 ## Performance
 
-- **WebP images**: Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset; PNG fallback for older browsers
-- **Hero image**: `fetchpriority="high"` + explicit `width`/`height` to prevent layout shift
-- **Lazy loading**: `loading="lazy"` on all off-screen images (background SVGs, contact icons, inline icons)
-- **Font preload**: `<link rel="preload">` for `manrope-latin.woff2` and `spacegrotesk-latin.woff2` in `<head>`
-- **Font subsets**: Only latin and latin-ext `@font-face` blocks declared (cyrillic/greek/vietnamese removed — not used in English content)
+- **All-WebP images**: No PNG/JPG/SVG originals remain. Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset.
+- **Hero image**: `fetchpriority="high"` + explicit `width`/`height` to prevent layout shift.
+- **Page-specific preload**: Pages declare `preload_image:` in front matter; `default.html` emits `<link rel="preload" as="image">` for that path. Used on `/about/` (`profile_2_bg.webp`) and `/contact/` (`profile_3_bg.webp`) to eliminate visible load delay.
+- **Lazy loading**: `loading="lazy"` on all off-screen images (contact icons, inline icons).
+- **Font preload**: `<link rel="preload">` for `manrope-latin.woff2` and `spacegrotesk-latin.woff2` in `<head>`.
+- **Font subsets**: Only latin and latin-ext `@font-face` blocks declared (cyrillic/greek/vietnamese removed — not used in English content).
 - **Service worker** (`sw.js`): Cache-first for static assets, network-first for HTML. Cache name is versioned by build timestamp via `{{ site.time | date: "%s" }}`. Registered via inline script at bottom of `default.html`.
 
 ## Common Tasks
@@ -147,8 +148,9 @@ Edit `css/styles.css`, bump the version query string in `_layouts/default.html` 
 Use `border: 1px solid var(--border-ui)` — not `--line` or `--line-strong` — to maintain 3:1 non-text contrast (WCAG 1.4.11).
 
 ### Add New Images
-- Provide WebP version alongside PNG/JPG
+- All images must be WebP — no PNG/JPG/SVG source files are retained in `assets/img/`
 - Add `loading="lazy"` unless the image is above the fold
+- For above-fold background images: set `preload_image: /assets/img/<file>.webp` in the page's front matter instead of `loading="lazy"`; add `fetchpriority="high"` to the `<img>` tag
 - Add `width` and `height` attributes to prevent layout shift
 - Decorative images: `alt=""` + `aria-hidden="true"`
 

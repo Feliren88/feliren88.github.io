@@ -34,7 +34,7 @@ feliren88.github.io/
 │   └── contact.yml
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin/latin-ext subsets only
-│   └── img/        # profile.webp, profile-450.webp, profile.png, SVGs
+│   └── img/        # All WebP — profile.webp, profile-450.webp, profile_2_bg.webp, profile_3_bg.webp, favicons, icons
 ├── css/
 │   └── styles.css
 └── js/
@@ -54,11 +54,11 @@ feliren88.github.io/
 
 ## Performance
 
-- WebP images with `<picture>` srcset; PNG fallback for older browsers
-- `fetchpriority="high"` on above-fold hero image
+- All-WebP image assets — no PNG/JPG/SVG originals retained
+- Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset
+- `fetchpriority="high"` on above-fold images; page-specific `<link rel="preload">` via `preload_image:` front matter
 - `loading="lazy"` on all off-screen images
-- `<link rel="preload">` for critical font files
-- Font `@font-face` declarations limited to latin and latin-ext subsets
+- `<link rel="preload">` for critical font files; `@font-face` limited to latin and latin-ext subsets
 - Service worker (`sw.js`) for offline access — cache-first for assets, network-first for HTML
 
 ## Accessibility
