@@ -32,7 +32,7 @@ permalink: /contact/
 </div>
 
 <style>
-  .profile-bg { position: absolute; right: -160px; top: 40px; width: 650px; z-index: -1; opacity: 0.8; user-select: none; -webkit-user-drag: none; border-radius: 0; }
+  .profile-bg { position: absolute; right: -160px; top: 40px; width: 650px; z-index: -1; opacity: 0.9; user-select: none; -webkit-user-drag: none; border-radius: 0; }
   @media (max-width: 1200px) { .profile-bg { position: static; width: 100%; max-width: 500px; margin: 2rem auto; opacity: 1; } }
   .contact-icon {
     width: 24px;
