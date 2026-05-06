@@ -4,11 +4,12 @@ title: About Vicky Feliren
 subtitle: Multimodal AI Researcher & Applied Scientist. Philosopher.
 description: Research on conformal prediction for vision-language models, AI for Southeast Asia, and production ML at scale. M.Sc. candidate at Monash University.
 permalink: /about/
+preload_image: /assets/img/profile_2_bg.webp
 ---
 
 <p class="eyebrow">WHO I AM</p>
 
-<img src="/assets/img/profile_2.svg" alt="" class="profile-bg" aria-hidden="true" draggable="false" loading="lazy">
+<img src="/assets/img/profile_2_bg.webp" alt="" class="profile-bg" aria-hidden="true" draggable="false" fetchpriority="high">
 
 <div id="about-hero" class="about-hero">
   {% for paragraph in site.data.about.hero %}
