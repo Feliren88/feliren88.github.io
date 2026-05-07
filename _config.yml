@@ -47,6 +47,7 @@ social:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # Sitemap settings
 sitemap:

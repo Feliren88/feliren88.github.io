@@ -11,6 +11,7 @@ preload_image: /assets/img/profile_3_bg.webp
 
 <p class="eyebrow">LET'S WORK TOGETHER</p>
 <p class="contact-intro">{{ site.data.contact.intro }}</p>
+<p class="contact-intro" style="font-size:1rem;margin-top:0.6rem;color:var(--muted)">{{ site.data.contact.intro_sub }}</p>
 
 <div id="contact-engagements" style="margin:2rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:56rem">
   {% for item in site.data.contact.engagements %}

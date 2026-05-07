@@ -471,6 +471,144 @@ After each P0 change, re-run Lighthouse and the DevTools trace to validate impro
 
 ---
 
+---
+
+## RFC-002: Site Restructuring — 8 Pages → 5 Pages
+
+**Status:** PROPOSED  
+**Author:** Vicky Feliren  
+**Date:** 2026-05-07  
+**Inspiration:** yoshuabengio.org/en, andrewng.org
+
+---
+
+### Problem Statement
+
+The current nav has 8 items: Home, About, Expertise, Work, Research, Recognition, Writings, Work With Me. This creates three compounding problems:
+
+1. **Cognitive overload for first-time visitors.** Eight options means no clear reading path. A recruiter or collaborator doesn't know whether to click About, Expertise, or Work to answer "who is this person?"
+
+2. **Fragmentation of a single question.** "Who are you?" is split across four pages — bio (About), skills (Expertise), job history (Work), and awards (Recognition). A visitor who wants a complete picture has to make four separate trips.
+
+3. **Homepage duplication.** The homepage currently has a "Research Focus" section AND a "How We Can Work Together" section that are near-identical to sections on the About and Contact pages. The homepage reads like a compressed second About page rather than an entry point.
+
+**Reference analysis:**
+- **Bengio (yoshuabengio.org)**: 2 nav items — Research and Blog. Homepage is the bio. Everything about the person lives in one place.
+- **Andrew Ng (andrewng.org)**: 4 core pages — About (bio + all ventures), Writing, Research, Contact. "Who are you" is answered in one scroll on the About page.
+
+Both sites feel tidy because they have a clear answer to "what is each page for?" The current site does not.
+
+---
+
+### Proposed New Structure (5 pages)
+
+| Nav Label | URL | Content |
+|-----------|-----|---------|
+| Home | / | Hero only. Remove "How We Can Work Together" and "What Drives Me" sections. |
+| About | /about/ | Bio + Research Focus cards + Expertise (skills) + Track Record (experience + education) + Recognition (awards). |
+| Research | /research/ | Publications list — unchanged. |
+| Writing | /writings/ | Blog posts — unchanged. |
+| Work With Me | /contact/ | Engagement types + contact links. Add "What Drives Me" as opening paragraph. |
+
+**Pages to delete:** `/expertise/`, `/work/`, `/recognition/`
+
+---
+
+### Content Migration Map
+
+| Content | Currently on | Move to |
+|---------|-------------|---------|
+| Skills grid (6 categories) | `/expertise/` | New "How I Work" section on `/about/` |
+| Work experience + education | `/work/` | New "Track Record" section on `/about/` |
+| Awards (5 entries) | `/recognition/` | New "Recognition" section on `/about/` |
+| "Research Focus" cards | Homepage + About (duplicate) | Keep on `/about/` only; remove from homepage |
+| "How We Can Work Together" | Homepage + About (duplicate) | Remove both; Contact already has engagement section |
+| "What Drives Me" paragraph | Homepage + About (duplicate) | One copy as intro paragraph on `/contact/`; remove from homepage |
+| Internal link `/work/` in `about.yml` hero | Links to deleted page | Change to `#track-record` anchor or remove |
+
+---
+
+### About Page Layout After Merge
+
+One long, scannable page with five anchored sections:
+
+1. **Bio** — existing hero paragraphs (no changes to copy)
+2. **Research Focus** — existing 4 cards (moved here from homepage; About is now the canonical home)
+3. **How I Work** — skill categories grid pulled from current Expertise page
+4. **Track Record** — experience entries + education from current Work page
+5. **Recognition** — awards from current Recognition page
+
+Each section gets an `id` anchor so the homepage and other pages can deep-link (e.g., `href="/about/#track-record"`).
+
+---
+
+### Homepage Layout After
+
+Cleaner, faster to scan — it's an entry point, not a second About:
+
+1. **Hero** — name, eyebrow, lead copy, two buttons (already point to `/about/` and `/writings/`)
+2. *(Remove)* "How We Can Work Together" section
+3. *(Remove)* "What Drives Me" section
+
+Optional: keep or remove the Research Focus cards on the homepage depending on how long the hero feels without them. If kept, they are a teaser pointing to `/about/` — not a full duplicate.
+
+---
+
+### What Does Not Change
+
+- All visual design — CSS, color palette, typography, animations, layout style
+- All copy/content — just reorganized across fewer pages, nothing rewritten
+- `/research/` and `/writings/` URLs — no broken external links to publications
+- `/contact/` URL
+
+---
+
+### Redirects Needed
+
+Add `jekyll-redirect-from` to `Gemfile` (if not present) and set in each deleted page's front matter before deleting the file, so search engines and any external links land gracefully:
+
+```yaml
+# _pages/expertise.md (before deletion)
+redirect_to: /about/
+```
+
+| Old URL | Redirects To |
+|---------|-------------|
+| /expertise/ | /about/ |
+| /work/ | /about/ |
+| /recognition/ | /about/ |
+
+---
+
+### Risks & Mitigations
+
+| Risk | Mitigation |
+|------|-----------|
+| About page becomes very long | Anchor links + sticky section subheadings make it scannable; both Bengio and Ng use long About pages successfully |
+| SEO loss on deleted URLs | 301 redirects via `jekyll-redirect-from` preserve link equity |
+| Internal links break | Audit `_data/*.yml` and `_pages/*.md` for `/work/`, `/expertise/`, `/recognition/` hrefs before deleting files |
+| Homepage feels sparse without two sections | Test both variants; hero + Research Focus cards alone may feel cleaner, not emptier |
+
+---
+
+### Implementation Steps
+
+1. Audit all internal links: `grep -r "/expertise/\|/work/\|/recognition/" _data/ _pages/ _layouts/`
+2. Add anchor `id` attributes to new sections in `about.md`
+3. Merge Expertise content into a new "How I Work" section in `_pages/about.md` + `_data/about.yml`
+4. Merge Work content into a new "Track Record" section in `_pages/about.md`
+5. Merge Recognition content into a new "Recognition" section in `_pages/about.md`
+6. Update `_data/about.yml`: remove "How We Can Work Together" and "What Drives Me" sections
+7. Update `_data/index.yml`: remove "How We Can Work Together" and "What Drives Me" sections
+8. Update `_data/contact.yml`: add `intro_extended` field with "What Drives Me" copy as contact page opener
+9. Fix internal link in `_data/about.yml` hero: change `/work/` → `#track-record`
+10. Update `js/components/nav.js` NAV_ITEMS: remove Expertise, Work, Recognition entries
+11. Add `redirect_to` front matter to each page being deleted
+12. Delete `_pages/expertise.md`, `_pages/experience.md` (Work), `_pages/awards.md` (Recognition)
+13. Bump `styles.css` version query string in `default.html` if any CSS changes are made
+
+---
+
 ## Timeline Summary
 
 | Month | Focus | Key Deliverable | Status |

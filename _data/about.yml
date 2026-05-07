@@ -2,7 +2,7 @@ hero:
   - "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong> — building systems that are reliable when it matters and culturally relevant to the places they operate in."
   - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve: when a model claims confidence, we want provable bounds, not just a number."
   - "The other thread in my work is cultural inclusion. Southeast Asia is one of the world's most linguistically and visually diverse regions, and it's almost entirely absent from the training data and benchmarks that define what modern AI can and cannot do. I've been building the datasets, benchmarks, and adaptation methods to change that, with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and through my <a href='/research/'>own research</a>."
-  - "I've also shipped production ML systems at scale: machine learning inference at millions daily transactions, geospatial pipelines across global research consortia, predictive systems live across six markets. <a href='/work/'>See my full track record →</a>"
+  - "I've also shipped production ML systems at scale: machine learning inference at millions daily transactions, geospatial pipelines across global research consortia, predictive systems live across six markets. <a href='#track-record'>See my full track record →</a>"
 
 sections:
   - title: 'Research Focus'
@@ -15,15 +15,3 @@ sections:
         description: 'Remote sensing and satellite imagery for flood segmentation, mining mapping, and environmental monitoring. Published in IEEE and Remote Sensing of Environment.'
       - title: 'Production ML'
         description: 'End-to-end ML systems from research to deployment — cloud infrastructure, inference at scale, reliability engineering.'
-  - title: 'How We Can Work Together'
-    engage:
-      - type: 'Speaking'
-        description: 'I speak on trustworthy AI, multimodal systems, and AI for underrepresented regions — for conferences, university events, and industry panels.'
-      - type: 'Research Collaboration'
-        description: "If your work touches conformal prediction, vision-language models, geospatial AI, or cultural inclusion in AI, I'd like to know about it."
-      - type: 'Mentorship'
-        description: 'I mentor early-career researchers and engineers in Southeast Asia — especially those navigating graduate school applications or careers in applied AI.'
-      - type: 'Applied Roles'
-        description: "I'm open to research and applied scientist roles internationally, particularly where the work connects to trustworthy AI or underrepresented communities."
-  - title: 'What Drives Me'
-    content: 'Reliability and relevance. Every system I have built comes down to the same question: <strong>how do we know when to trust the model?</strong> And who is the model actually built for?'

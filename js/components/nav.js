@@ -6,10 +6,7 @@
   var NAV_ITEMS = [
     { href: '/', label: 'Home', page: '/' },
     { href: '/about/', label: 'About', page: '/about' },
-    { href: '/expertise/', label: 'Expertise', page: '/expertise' },
-    { href: '/work/', label: 'Work', page: '/work' },
     { href: '/research/', label: 'Research', page: '/research' },
-    { href: '/recognition/', label: 'Recognition', page: '/recognition' },
     { href: '/writings/', label: 'Writings', page: '/writings' },
     { href: '/contact/', label: 'Work With Me', page: '/contact' },
   ];

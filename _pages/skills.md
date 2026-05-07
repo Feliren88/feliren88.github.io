@@ -4,6 +4,7 @@ title: How I Work
 subtitle: Research and Engineering Practice
 description: Conformal prediction, vision-language models, geospatial AI, LLM evaluation, production ML on GCP and AWS, and visualization.
 permalink: /expertise/
+redirect_to: /about/
 ---
 
 <p class="eyebrow">RESEARCH & ENGINEERING</p>
