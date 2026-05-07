@@ -111,7 +111,7 @@
 ## Phase 4: Advanced Interactive Features (3-4 weeks)
 
 ### Physics-Based Timeline (Advanced D3)
-- [ ] Interactive career timeline with physics
+- [ ] Interactive career timeline with physics — see RFC-004 below
   - Animated particles representing projects
   - Gravity wells at key achievements
   - Drag to explore different time periods
@@ -618,3 +618,526 @@ redirect_to: /about/
 | July 2026 | Network building | Wikipedia, Guest posts | PENDING |
 | August 2026 | Optimization | Analytics, Polish | PENDING |
 | September 2026 | Review | Role secured? Knowledge panel? | TARGET |
+
+---
+
+## RFC-003: About Page — From CV Dump to "Who I Am at a Glance"
+
+**Status:** BRAINSTORM — awaiting design decision  
+**Author:** Vicky Feliren  
+**Date:** 2026-05-07  
+**Feedback received:** "How I Work seems redundant unless you add visualizations. Overall good but first impression seems a bit wordy."  
+**Target audience:** Big tech HR (recruiter scan), professors actively seeking PhD students
+
+---
+
+### Diagnosis: Why the Current About Page Feels Crowded
+
+After RFC-002 the About page has seven sections in one scroll: bio (4 paragraphs), Research Focus (4 cards), How I Work (6 skill category cards with bullet lists), Track Record (5 work roles + 2 education + 1 patent + 2 teaching), and Recognition (5 awards + 3 service entries). That is effectively a full CV rendered as prose on one page.
+
+Three root causes:
+
+**1. The bio is 4 paragraphs before anything else loads.** Andrew Ng's entire About bio is ~255 words across 3 short paragraphs. The current bio opens with 4 paragraphs of similar length, then the page continues for another 5 sections. The reader is already fatigued before they reach the research work.
+
+**2. "How I Work" (skills grid) adds noise, not signal.** A big tech hiring manager and a PhD-seeking professor both already know what PyTorch is. A skills list says nothing about your *depth* with it — but a first-author IEEE paper does. The feedback is right: the section is only useful with visualizations (radar chart, proficiency graph, etc.). As a plain bullet list it reads like a LinkedIn skills section, which undermines the researcher framing.
+
+**3. Track Record is full-prose, not scannable.** The experience descriptions average 3–4 sentences each. Multiplied by 5 roles, that is ~600 words of career narrative embedded in a page that is already text-heavy. A recruiter doesn't read this — they scan. If they can't scan, they leave.
+
+**Compounding issue — audience mismatch in tone:** The target audience (big tech HR, PhD supervisors) responds to *demonstrated quality*, not exhaustive completeness. A professor deciding whether to invite you for a PhD interview wants to see two or three research outputs that show intellectual depth, then a short bio that places them in context. An HR director at a big tech company wants: "research ✓, good institutions ✓, shipped things ✓, contact ✓" — in 30 seconds. Both audiences are repelled by length; neither is convinced by it.
+
+The LSE guide states it plainly: *"Visitors will spend a very short time on your site. Content in engaging chunks, not just long lists."* The webflow examples show the pattern: best personal sites lean heavily visual, minimal copy, whitespace does the work.
+
+---
+
+### Design Principles for This Audience
+
+These come directly from the reference guides and the two target sites:
+
+| Principle | What it means here |
+|-----------|-------------------|
+| **One question per scroll position** | Each section answers exactly one thing a visitor might ask, then stops |
+| **Show, don't list** | Research cards should show a publication title + venue, not a skills bullet list |
+| **Quality signal over quantity signal** | 3 strong proof-points beat 10 mediocre ones |
+| **Confident restraint** | Bengio's homepage has 200 words of bio. Ng's About is 255. Brevity signals you don't need to oversell |
+| **Scannability at every level** | A recruiter should be able to reconstruct your career from the page in 15 seconds without reading a single full sentence |
+
+---
+
+### Three Options — Pick One Direction
+
+---
+
+#### Option A: Trim & Breathe (Lowest effort, highest immediate ROI)
+
+**What changes:**
+- Bio: cut from 4 paragraphs → 2. Keep the research thread (trustworthy AI + cultural inclusion) and remove or heavily compress the production ML paragraph (it's covered by Track Record).
+- Remove "How I Work" (skills grid) entirely. The research cards and experience already demonstrate capability to this audience. If skills need a home, add a single compact line under each experience entry, not a full grid.
+- Track Record: show only `dates · role · org name` per entry. Remove all prose descriptions from view by default. The descriptions still exist in the data; a "read more" or hover-expand reveals them for visitors who want depth.
+- Recognition: compress to a single horizontal strip of badge-style pills rather than a full card grid.
+
+**What it looks like scroll by scroll:**
+1. Hero (unchanged)
+2. Bio — 2 paragraphs (~150 words total)
+3. Research Focus — 4 cards (unchanged)
+4. Track Record — timeline, dates + org + title only
+5. Recognition — compact horizontal badges
+
+**Effort:** Small — data changes + CSS tweak for the timeline condensed view.  
+**Risk:** The condensed timeline may feel too thin if not designed carefully.
+
+---
+
+#### Option B: Progressive Disclosure (Medium effort — recommended)
+
+**Core idea:** Show a confident summary; let visitors who want depth opt in. This is how both Bengio and Ng handle it — the landing view is clean, depth is available but not forced.
+
+**What changes:**
+
+*Bio area (new):* 2 short paragraphs + a single "stat bar" row immediately below:
+```
+3 first/major-author papers  ·  4.0/4.0 GPA  ·  5 markets deployed  ·  ACL · IEEE · RSE
+```
+This is the Andrew Ng "8 million students" pattern — one row of hard facts does more work than a paragraph of prose.
+
+*Research Focus (refined):* 2 wider cards instead of 4 small ones. Fewer, with more breathing room. Each card shows: research area name, 1-sentence description, and the flagship paper title + venue as a link. This is the proof point — not a tag line, an actual paper.
+
+*"How I Work" (removed):* Eliminated. The research cards and experience already show the skills. If a visitor asks "what does she know?", the Research Focus cards and Track Record answer that better than a skills grid. Move any truly unique skills (e.g., conformal prediction, SEACrowd specific tools) to appear as small tags on the relevant experience entry.
+
+*Track Record (condensed + expandable):* Visual timeline — left column: year range. Right column: org name + role title + one-line descriptor (12 words max). No prose by default. A subtle "expand" chevron reveals the full description for visitors who want it. This is scannable in under 10 seconds.
+
+*Recognition (unchanged structure, condensed copy):* Keep the card grid for the featured award (Microsoft Azure APAC Champion), reduce others to title + year + single sentence.
+
+**What it looks like scroll by scroll:**
+1. Hero
+2. Bio (2 paragraphs + stat bar)
+3. Research (2 wider cards with paper links)
+4. Track Record (scannable timeline, expand-on-click)
+5. Recognition (condensed)
+
+**Effort:** Medium — requires data changes, some new CSS for stat bar and expand/collapse, and some JS for the expand interaction.  
+**Risk:** Expand/collapse adds interaction complexity; needs mobile testing.
+
+---
+
+#### Option C: Narrative + Proof Points (Most work, closest to Bengio/Ng)
+
+**Core idea:** Replace the grid-of-sections structure with a single flowing narrative + 3 visual "proof point" cards that each link to evidence. This is closer to how a senior academic site reads.
+
+**What changes:**
+
+*Entire page collapses to:*
+1. **Bio narrative** (~200 words, 3 paragraphs) — written as a personal statement, not a list of facts. Reads like a cover letter's first page, not a LinkedIn summary.
+2. **Three proof point cards** (large, visual):
+   - Card 1: Flagship research — SEA-VL / ProCANet, with journal badge and abstract excerpt
+   - Card 2: Production impact — "Deployed to 6 markets, millions of daily transactions" — industry track record in one line
+   - Card 3: Community — SEACrowd, "50+ researchers, 5 countries"
+3. **Compact career strip** — a single horizontal row: `2021 Jakarta Smart City · 2021–23 GDP Labs · 2022–25 Monash RA · 2025 Artefact → Present SEACrowd + MSc`. One line, scannable, no prose.
+4. **Awards** — 3 inline text pills (`APAC Champion 2020 · Cambridge Top 3 2020 · UC Berkeley Best Track 2020`), no cards.
+
+**Effort:** High — requires a narrative rewrite of the bio, new card component for proof points, and letting go of the completeness instinct.  
+**Risk:** Highest change from current state; needs the narrative to be very well written to carry the page.
+
+---
+
+### Recommendation
+
+**Start with Option A immediately** (it removes the single biggest problem — the skills grid — with minimal effort and makes the page 30% shorter). Then plan Option B as a follow-on iteration once you've seen how the trimmed page feels.
+
+Option C is the right long-term direction if the goal is to position primarily as a researcher (PhD application, academic audience). If big tech HR is equally important, Option B balances both audiences better.
+
+**The "How I Work" section should be removed in all three options.** It is the clearest signal that the page is over-indexed on completeness over quality. Every reference — LSE guide, webflow examples, Bengio, Ng — points to the same direction: let the research work speak, not the skills list.
+
+---
+
+### Open Questions (needs decision before implementing)
+
+1. **Option A vs B?** Option A is a quick win this week. Option B needs ~1 day of work. Which do you want to do first?
+2. **Stat bar (Option B):** Which 4 stats best represent you to *this specific audience*? Proposal: `3 first/major-author papers · 4.0 GPA · 5 markets deployed · ACL · IEEE · RSE` — but you may want to rephrase.
+3. **Track Record descriptions:** Keep them hidden behind expand-on-click, or remove them entirely and trust the homepage bio to cover the narrative?
+4. **"How I Work" skills — where does it go?** Three choices: (a) delete entirely, (b) move to a collapsed accordion at the bottom of About, (c) keep as a separate `/expertise/` page that's not in the nav but linked from About with "see full skill breakdown →".
+5. **Tone of the bio:** Currently writes like a portfolio pitch. Should it be rewritten to read more like an academic personal statement (for professor audience) or kept as-is?
+
+---
+
+## RFC-004: Career Timeline — A Cinematic, Physics-Driven Narrative (D3)
+
+**Status:** READY FOR DELIVERY  
+**Author:** Vicky Feliren  
+**Date:** 2026-05-07  
+**Target page:** `/about/` — replaces the Track Record section  
+**Audience:** Big-tech recruiters (30-second scan) and PhD supervisors (depth-seekers)  
+**Design language:** Apple-level restraint — quiet field, sparing highlights, editorial typography, motion that means something.
+
+---
+
+### Why This Exists
+
+A list of jobs and dates does not show a researcher with momentum. It shows a CV. This timeline replaces the list with a **single cinematic sequence** that auto-plays a 22-second story when the page loads, then becomes an explorable map. The physics are not decoration — heavier achievements pull harder, parallel tracks overlap, and the visitor *feels* the shape of the career before they read a word.
+
+Every visual choice serves one rule: **the field stays quiet so the highlights can speak.** Three professional moments earn the brightest light on the canvas. Everything else recedes.
+
+---
+
+### Objectives (measurable)
+
+| # | Objective | How we know it landed |
+|---|-----------|----------------------|
+| 1 | Tell the career story in ≤ 22s without the visitor reading | Auto-play sequence renders the 5 narrative beats, hits 60 FPS on a 2020 MacBook Air |
+| 2 | Make 3 hero achievements visually unmistakable | IISF 2024, APAC Champion 2020, SEA-VL ACL 2025 each render with **Highlight Mark** treatment that no other element receives |
+| 3 | Be equally crafted in dark and light mode | Both palettes verified ≥ 4.5:1 on text, ≥ 3:1 on UI; Highlight Mark reads as the brightest/darkest point in either canvas |
+| 4 | Stay accessible | Keyboard-navigable, screen-readable Track Record fallback, `prefers-reduced-motion` honoured, no-JS fallback intact |
+| 5 | Stay fast | Lazy-loaded D3 bundle ≤ 30 KB gzipped, no impact on `/` LCP, `/about/` LCP delta < 200ms |
+
+---
+
+### Narrative Spine — The Five Beats
+
+This is the canonical story. **Copy is final** — the delivery agent uses these strings verbatim. Each beat has an opening state, a held moment, and a transition out. Pacing is closer to a film cut than a webpage animation.
+
+```
+PROLOGUE  (0.0 – 1.5s)   |  Empty stage
+  Time axis fades in from 0 → 1 opacity over 1200ms (cubic-bezier(0.22, 1, 0.36, 1)).
+  No nodes yet. The canvas breathes. Years 2021 → 2026 appear as faint tick marks.
+
+BEAT 1 — Foundation        (1.5 – 5.0s)
+  Camera: dwell on left third of canvas
+  Enter: Jakarta Smart City node (industry track), then GDP Labs node, 600ms apart
+  Held title (top-left, Space Grotesk 18px):  "Production, at city scale."
+  Held caption (Manrope 14px, --muted):       "2021. Where it started."
+  Exit: 400ms ease-out, camera begins push right
+
+BEAT 2 — Inflection        (5.0 – 9.0s)
+  Camera: pushes right, picks up the GDP Labs gravity field
+  Enter: ProCANet satellite locks into orbit; particle trail draws between Jakarta and GDP Labs
+  Held title:    "The research thread ignites."
+  Held caption:  "First publication. ProCANet — IEEE."
+  Subtle: ProCANet satellite emits one Highlight Pulse on entry (200ms)
+
+BEAT 3 — Depth   ★ HIGHLIGHT BEAT   (9.0 – 14.5s)
+  Camera: dwell — slowest beat by design
+  Enter: Monash RA node enters with the highest mass on the canvas (3-year tenure)
+  HIGHLIGHT MARK appears on Monash node — IISF 2024 Most Visionary Research
+    – Concentric ring expands and holds at 1.4× node radius
+    – Mark color steps to the brightest luminance on the canvas
+  Held title:    "Three years. First-author IEEE. Most Visionary Research."
+  Held caption:  "Monash · ProCANet · IISF 2024"
+  This beat lasts 5.5s. Restraint signals importance. Do not shorten.
+
+BEAT 4 — Multiplication    (14.5 – 18.5s)
+  Camera: pulls back to show the full canvas
+  Enter: SEACrowd node expands on the community track
+  Particle burst: 50 particles emit from the SEACrowd node over 600ms, settling into orbit
+  Held title:    "SEACrowd. 50+ researchers. A benchmark for Southeast Asia."
+  Held caption:  "SEA-VL · ACL 2025"
+  HIGHLIGHT MARK on SEA-VL satellite (community-track variant of the highlight palette)
+
+CODA — Now                 (18.5 – 22.0s)
+  Camera: settles centred on the full timeline
+  Artefact node enters quietly on the right; equilibrium reached
+  Held title:    "Today: multimodal AI for the world's underrepresented languages."
+  Held caption:  (none — let the canvas hold)
+  Auto-play hands off to interactive mode at 22.0s
+  A small ✦ "Replay" affordance appears top-right
+```
+
+**Pacing rule:** every beat has a *hold* of at least 1.2s before the next transition begins. Apple-level pacing means the visitor's eye lands before the next thing arrives. Do not crossfade beats — cut on a held moment.
+
+---
+
+### The Highlight System — The Most Important Visual Mechanic
+
+The canvas has many particles. Only **three professional moments** ever receive the **Highlight Mark**. This is the central restraint of the design. Highlights are not decoration; they are the editorial voice.
+
+#### Three permitted Highlight Marks
+
+| # | Achievement | Beat | Visual treatment |
+|---|------------|------|-----------------|
+| 1 | **IISF 2024 — Most Visionary Research** | Beat 3 | Concentric ring, 3s pulse period, 1.4× radius, peak luminance |
+| 2 | **SEA-VL — ACL 2025** | Beat 4 | Particle burst (50 particles, 600ms), then steady ring at peak luminance |
+| 3 | **Microsoft Azure APAC Champion 2020** | Beat 1 (under-the-line) | Single 200ms ring flash on Jakarta-era industry track, then ambient glow |
+
+No other element earns a Highlight Mark. Other awards live in the Recognition section below the timeline as supporting context.
+
+#### Highlight color tokens — the only "loud" colors on the canvas
+
+The field colors are quiet (steel, navy, teal — all desaturated). The highlight color is one decisive luminance step away from the background. In dark mode it is near-white; in light mode it is near-ink. This is the Apple move: keep the field quiet, then make the peak unmistakable.
+
+```
+DARK MODE                   LIGHT MODE
+─────────────────           ─────────────────
+canvas bg     #070d14       canvas bg     #f0f3f7
+field steel   #5d7691       field steel   #3f6490
+field warm    #6e89a8       field warm    #2e5070
+field teal    #4f8579       field teal    #1e6e5a
+muted label   #8b9db5       muted label   #3d506b
+
+★ HIGHLIGHT MARK             ★ HIGHLIGHT MARK
+  fill        #eef3fb         fill        #0a1f3a
+  ring        #c9d8f0         ring        #1a3a5c
+  pulse glow  rgba(238,243,251,0.45)  pulse glow  rgba(10,31,58,0.35)
+```
+
+**Field saturation rule:** track colors must sit within 6 ΔE of each other so they read as a family, not as separate categories. The Highlight Mark must sit ≥ 35 ΔE away from every track color. Verify with Chrome DevTools' contrast picker before shipping.
+
+#### Theme switching
+
+Reading the theme: `document.documentElement.dataset.theme` (set by the existing theme button). When the user toggles theme, the timeline's `getColors()` helper re-reads the value and runs a 280ms color crossfade on every D3 selection — fill, stroke, and ring. Particles do not re-spawn. Verify by toggling theme during Beat 3 dwell — it should feel like a lighting change, not a reload.
+
+---
+
+### Visual Grammar — One-Line Reference
+
+| Element | Physics role | Visual encoding |
+|---------|-------------|----------------|
+| Career role | Node | Circle, radius = √(months tenure) × 6, max 32px |
+| Project / paper | Satellite | 4px particle, elliptical orbit around parent node |
+| Track lane | Y-axis swim lane | Research (top), Industry (middle), Community (bottom) |
+| Time | X-axis | Linear scale, Jan 2021 → present |
+| Highlight Mark | Gravity well | Concentric ring + peak-luminance fill — only 3 ever exist |
+| Particle trail | Damped force trace | 35% alpha line, fades over 1200ms |
+| Beat title / caption | Editorial overlay | DOM elements, not SVG — Space Grotesk + Manrope |
+
+---
+
+### Motion System
+
+All motion uses one of three named easings. The delivery agent must use these by name, not eyeball other curves.
+
+```
+emphasized   cubic-bezier(0.22, 1, 0.36, 1)    // beat entries, hero reveals
+standard     cubic-bezier(0.4, 0, 0.2, 1)      // hover, theme switch, color crossfade
+gentle       cubic-bezier(0.4, 0, 0.6, 1)      // particle drift, idle pulses
+```
+
+**Durations** (do not improvise):
+
+| Action | Duration | Easing |
+|--------|----------|--------|
+| Beat title fade in | 480ms | emphasized |
+| Beat title hold | ≥ 1200ms | — |
+| Beat title fade out | 320ms | standard |
+| Camera push between beats | 1100ms | emphasized |
+| Highlight Pulse (one-shot) | 200ms | standard |
+| Highlight Mark steady pulse | 3000ms loop | gentle |
+| Hover detail panel slide-in | 280ms | standard |
+| Theme color crossfade | 280ms | standard |
+| Replay button fade in (post-coda) | 600ms | standard |
+
+**Motion budget:** total moving pixels per frame must not exceed 8% of the canvas area during idle. Auto-play may briefly exceed this during particle bursts (Beat 4) for ≤ 600ms. If the budget is exceeded sustainedly, drop the particle count by 25% and re-test.
+
+---
+
+### Interaction Model
+
+After auto-play hands off:
+
+```
+IDLE
+  Particles drift on gentle easing, ~0.3 units/sec
+  Highlight Marks pulse at 3s period
+  Replay button visible top-right
+  Time scrubber visible bottom (Beat 1 → Coda)
+
+HOVER node
+  Other nodes ease to 35% opacity (220ms standard)
+  Detail panel slides in from right (desktop) or up from bottom (≤ 1023px)
+    Panel content: dates · org · role · one-line impact (≤ 90 chars)
+    Panel link: "Read more ↓" — anchors to prose Track Record below the canvas
+  Satellites of the hovered node freeze and grow 1.2×
+
+CLICK node (any)
+  Same as hover, but state is sticky — dismissed by Escape, click outside, or hovering another node
+
+CLICK Highlight Mark
+  Camera pushes to that mark (800ms emphasized)
+  Detail panel includes a publication link / external URL
+  Back affordance returns to equilibrium
+
+DRAG node
+  Overrides simulation for that node only
+  Release: rejoins simulation with inherited velocity
+  5px drag threshold prevents accidental click→drag transitions
+
+TIME SCRUBBER
+  Drag or click jumps to that beat's opening state
+  Particles animate from current position — no hard reset
+  Keyboard: ←/→ steps one beat
+
+KEYBOARD
+  Tab    cycles focus through nodes left → right (chronological)
+  Enter  triggers click on focused node
+  Esc    dismisses panel, returns to idle
+  P      pauses / resumes auto-play
+  R      replays from Prologue
+```
+
+---
+
+### Responsive Behaviour
+
+| Viewport | Behaviour |
+|----------|-----------|
+| ≥ 1024px | Full canvas, three swim lanes, full physics, full auto-play |
+| 768 – 1023px | Two swim lanes (community merges into research), 60% particle count, panel slides up from bottom |
+| < 768px | **Static SVG fallback** — horizontal-scroll timeline with milestone dots and Highlight Marks rendered as static rings. No physics, no auto-play. The narrative still reads. |
+
+The fallback is not a degraded experience — it is a different cinematic. Same copy, same Highlight Marks, just composed for thumb-scroll.
+
+---
+
+### Accessibility (non-negotiable)
+
+- `prefers-reduced-motion: reduce` → skip auto-play entirely; render the Coda equilibrium state with all Highlight Marks visible but not pulsing.
+- Every node is `<g role="button" tabindex="0" aria-label="...">` with full text equivalent of date / org / role.
+- Beat titles render as DOM `<h3>` (visually hidden when faded out, present in the accessibility tree continuously throughout that beat).
+- Time scrubber: `role="slider"`, `aria-valuemin`, `aria-valuemax`, `aria-valuenow` (1–5), `aria-valuetext` (beat name).
+- Below the canvas, render the existing prose Track Record as the canonical, screen-reader-friendly source of truth. The canvas is a *presentation layer* over that data.
+- No-JS fallback: the prose Track Record is the primary content; the canvas progressively enhances it.
+- Color contrast: every label ≥ 4.5:1; every UI ring ≥ 3:1. Verified in both modes.
+
+---
+
+### Technical Architecture
+
+```
+_data/timeline.yml                 ← single source of truth (data + copy)
+_pages/about.md                    ← mount point + prose Track Record fallback
+_layouts/default.html              ← conditional script load on /about/
+js/components/timeline.js          ← IIFE entry, ~400 LOC; handles theme, scrubber, replay, a11y
+js/lib/d3-timeline-bundle.js       ← rollup'd D3 modules (force, drag, zoom, transition, ease, interpolate-path, scale, selection)
+css/styles.css                     ← timeline component styles (append, do not split file)
+```
+
+**D3 modules** (rollup `--format iife`, target ≤ 30 KB gz):
+`d3-selection`, `d3-scale`, `d3-force`, `d3-drag`, `d3-zoom`, `d3-transition`, `d3-ease`, `d3-interpolate-path`.
+
+**Hybrid renderer:** `<canvas>` for particle trails (cheap fill-rect path); `<svg>` for nodes, Highlight Marks, and labels (DOM-accessible). Both live in the same mount container with `position: absolute` overlays.
+
+**Data binding:** all node data, copy, and beat configuration live in `_data/timeline.yml`. The JS reads from a JSON-serialized blob emitted by Jekyll into a `<script type="application/json" id="timeline-data">…</script>` tag. **No copy lives in JS.**
+
+---
+
+### Deliverables — The Agent's Checklist
+
+The agent picking this up ships these files in this order. Each step has an acceptance check.
+
+#### Step 1 — Data
+**Create** `_data/timeline.yml` with:
+- `meta:` containing canvas dimensions, beat count, motion easings (mirrors of the Motion System table above)
+- `tracks:` array of 3 entries (research, industry, community), each with `dark` and `light` color hex
+- `highlight:` object with `dark` and `light` mark color sets (fill, ring, glow)
+- `nodes:` array of 6 entries — Jakarta, GDP Labs, Monash RA, SEACrowd, Artefact, plus a placeholder for any role to be confirmed
+- `beats:` array of 6 entries (Prologue, Beat 1–4, Coda) with `start_ms`, `end_ms`, `title`, `caption`, `camera`, `enters[]`, `highlight_mark` (if any)
+- `acceptance:` data validates against a JSON schema embedded as a comment at top of file
+
+**Acceptance:** `bundle exec jekyll build` succeeds; `_site/about/` HTML contains a `<script type="application/json" id="timeline-data">` block with the full payload.
+
+#### Step 2 — Mount + fallback
+**Edit** `_pages/about.md` Track Record section:
+- Insert `<div id="career-timeline" role="region" aria-label="Career timeline visualization"></div>` *above* the existing prose list.
+- Wrap the existing prose list in `<div class="timeline-fallback" data-fallback="track-record">…</div>` so JS can hide it when the canvas is up. Without JS, the fallback is the page.
+
+**Acceptance:** Disable JS in the browser; the page still reads the full Track Record narrative.
+
+#### Step 3 — Conditional script load
+**Edit** `_layouts/default.html`:
+- Add a Liquid conditional `{% if page.permalink == '/about/' %}` block in the deferred script section that loads `/js/lib/d3-timeline-bundle.js?v=1` then `/js/components/timeline.js?v=1`, both `defer`.
+- Add a `<link rel="preload" as="script" href="/js/lib/d3-timeline-bundle.js?v=1">` only on `/about/`.
+- Update `sw.js` PRECACHE array to include both new files.
+
+**Acceptance:** `/` does not download the D3 bundle (verify in Network panel). `/about/` does, and parses ≤ 30 KB gz.
+
+#### Step 4 — Bundle D3
+**Create** `js/lib/d3-timeline-bundle.js`:
+- Use `rollup --format iife --name d3` with the modules listed above
+- Commit the bundled output (no build step in CI yet)
+- Document the rollup command in a comment at the top of the file
+
+**Acceptance:** `gzip -c js/lib/d3-timeline-bundle.js | wc -c` ≤ 30720 bytes.
+
+#### Step 5 — Build `timeline.js`
+**Create** `js/components/timeline.js` — single IIFE. Internal structure:
+
+```
+(function () {
+  const data = JSON.parse(document.getElementById('timeline-data').textContent);
+  const mount = document.getElementById('career-timeline');
+  if (!mount || !window.d3) { return; /* fallback stays visible */ }
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const colors = getColors();             // theme-aware
+  const layout = computeLayout();         // scales, lanes, mount sizing
+  const renderer = createRenderer();      // canvas + svg overlay
+  const sim = createSimulation();         // d3-force config
+  const beats = createBeatSequencer();    // chapter timing
+  const ui = createUI();                  // scrubber, replay, panel, keyboard
+
+  document.querySelector('.timeline-fallback')?.setAttribute('hidden', '');
+  if (reducedMotion) beats.skipToCoda(); else beats.play();
+
+  observeThemeChanges();                  // 280ms color crossfade on toggle
+  observeResize();                        // re-layout on viewport changes
+})();
+```
+
+**Acceptance:**
+- Auto-play runs end-to-end and lands on the Coda equilibrium
+- Hover, click, drag, scrubber, keyboard all behave as specified
+- Theme toggle during Beat 3 produces a 280ms color crossfade with no particle re-spawn
+- `prefers-reduced-motion: reduce` skips to Coda immediately
+- No console errors in either mode, on Chrome / Firefox / Safari
+
+#### Step 6 — Styles
+**Append to** `css/styles.css`:
+- `.timeline-mount` — sizing, `contain: strict`, `position: relative`, dark + light surface backgrounds
+- `.timeline-beat-title`, `.timeline-beat-caption` — Space Grotesk 18 / Manrope 14, color tokens, fade transitions
+- `.timeline-detail-panel` — slide-in panel, glassy `--surface` background, `--border-ui` 1px border
+- `.timeline-scrubber`, `.timeline-replay-btn` — interactive controls, full focus rings via `:focus-visible`
+- `.timeline-fallback[hidden]` — hidden when JS upgrades the page
+- `@media (max-width: 767px)` — collapse to static SVG fallback
+
+Bump CSS version: `styles.css?v=N` → `styles.css?v=N+1` in `_layouts/default.html` and `sw.js` PRECACHE.
+
+**Acceptance:** Lighthouse passes ≥ 90 Performance and ≥ 95 Accessibility on `/about/` in both themes.
+
+#### Step 7 — Verification pass
+Before declaring done, the agent runs through this manually:
+
+- [ ] Auto-play story reads cleanly on first load, dark mode
+- [ ] Auto-play story reads cleanly on first load, light mode
+- [ ] Theme toggle during Beat 3 produces a smooth color crossfade
+- [ ] Three Highlight Marks are visually unmistakable; no fourth element competes
+- [ ] Hover panel never overlaps a Highlight Mark when it appears
+- [ ] Time scrubber returns to any beat's opening state cleanly
+- [ ] `prefers-reduced-motion` honored on macOS, iOS, and Windows
+- [ ] Mobile fallback is a complete narrative, not a stub
+- [ ] No-JS page still reads the full Track Record
+- [ ] Lighthouse Performance ≥ 90, Accessibility ≥ 95
+- [ ] No console errors, warnings, or layout shift > 0.05
+
+---
+
+### Out of Scope (do not gold-plate)
+
+- 3D rendering, WebGL, Three.js — pure 2D D3 only
+- Audio cues / sound design
+- Server-side analytics on beat completion
+- Editing tool / CMS for the timeline data
+- Animation timeline editor — the beats are coded, not authored visually
+- Sharing a single beat as a deep-linked URL (`/about/#beat-3`) — defer to a future RFC
+- Adding more than 3 Highlight Marks. The restraint is the design.
+
+---
+
+### Editorial Voice Reference
+
+When in doubt, read these two pages for tone and pacing:
+- **yoshuabengio.org/en** — confident restraint, minimal copy
+- **andrewng.org** — long form, but every line earns its place
+
+When in doubt visually, model after:
+- The **AirPods Pro** product page transitions (Apple) — push-and-dwell camera motion, never crossfade
+- **Stripe Sessions** event pages — editorial typography over restrained motion
+- **Linear's changelog** — quiet field, occasional decisive accent
+
+Do not model after: dashboard demos, parallax-heavy portfolios, or any "data viz showcase" reel. Those are noisy. This is a story.

@@ -1,0 +1,114 @@
+nodes:
+  - id: jakarta
+    label: Jakarta Smart City
+    org: "Indonesia's smart city government initiative"
+    dates: "Jan – Jun 2021"
+    start_year: 2021.0
+    end_year: 2021.5
+    track: industry
+    duration_months: 6
+    impact: "Production ML at city scale — probabilistic forecasting for municipal waste logistics across a major metro."
+
+  - id: gdp_labs
+    label: GDP Labs
+    org: "AI consulting, backed by a major Indonesian conglomerate"
+    dates: "Jun 2021 – Jun 2023"
+    start_year: 2021.5
+    end_year: 2023.5
+    track: industry
+    duration_months: 24
+    impact: "ML systems for major Indonesian banks — biometric auth, credit scoring, fraud detection. Full-stack from model to prod."
+
+  - id: monash_ra
+    label: Monash RA
+    org: "Research Associate · Monash, UQ, UCL, Nottingham consortium"
+    dates: "Dec 2022 – Jan 2025"
+    start_year: 2022.92
+    end_year: 2025.08
+    track: research
+    duration_months: 26
+    impact: "Designed ProCANet — progressive cross-attention for flood segmentation. First-authored IEEE GRSL, contributed to Remote Sensing of Environment."
+
+  - id: seacrowd
+    label: SEACrowd
+    org: "Open-science research collective · seacrowd.github.io"
+    dates: "Oct 2024 – Present"
+    start_year: 2024.75
+    end_year: 2026.4
+    track: community
+    duration_months: 19
+    impact: "SEA-VL at ACL 2025. Building Southeast Asia's AI infrastructure — 50+ researchers, 5 countries, the region's first vision-language benchmark."
+
+  - id: artefact
+    label: Artefact
+    org: "French AI consulting · Senior Data Scientist, Jakarta"
+    dates: "Feb – Nov 2025"
+    start_year: 2025.08
+    end_year: 2025.92
+    track: industry
+    duration_months: 10
+    impact: "Founding technical hire, Jakarta office. Forecasting systems, RAG-based insights tooling, LLM evaluation pipelines for APAC media clients."
+
+highlights:
+  - id: iisf_2024
+    label: "IISF 2024 — Most Visionary Research"
+    node: monash_ra
+    url: "https://www.monash.edu/indonesia/news/mining-spatial-data-intelligence-research-hub-wins-most-visionary-research-at-iisf-2024"
+
+  - id: sea_vl
+    label: "SEA-VL · ACL 2025"
+    node: seacrowd
+    url: "https://aclanthology.org/2025.acl-long.916/"
+
+  - id: apac_champion
+    label: "Microsoft Azure APAC Champion 2020"
+    node: gdp_labs
+    url: "https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/"
+
+beats:
+  - id: prologue
+    start_ms: 0
+    end_ms: 1500
+    title: ""
+    caption: ""
+    enters: []
+
+  - id: beat1
+    start_ms: 1500
+    end_ms: 5000
+    title: "Production, at city scale."
+    caption: "2021. Where it started."
+    enters: [jakarta, gdp_labs]
+    highlight_mark: apac_champion
+
+  - id: beat2
+    start_ms: 5000
+    end_ms: 9000
+    title: "The research thread ignites."
+    caption: "First publication. ProCANet — IEEE GRSL."
+    enters: [monash_ra]
+    highlight_mark: ""
+
+  - id: beat3
+    start_ms: 9000
+    end_ms: 14500
+    title: "Three years. First-author IEEE. Most Visionary Research."
+    caption: "Monash · ProCANet · IISF 2024"
+    enters: []
+    highlight_mark: iisf_2024
+
+  - id: beat4
+    start_ms: 14500
+    end_ms: 18500
+    title: "SEACrowd. 50+ researchers. A benchmark for Southeast Asia."
+    caption: "SEA-VL · ACL 2025"
+    enters: [seacrowd]
+    highlight_mark: sea_vl
+
+  - id: coda
+    start_ms: 18500
+    end_ms: 22000
+    title: "Today: multimodal AI for the world's underrepresented languages."
+    caption: ""
+    enters: [artefact]
+    highlight_mark: ""

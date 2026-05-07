@@ -77,6 +77,8 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
 
     <div id="track-record" class="about-section">
       <h3>Track Record</h3>
+      <div id="career-timeline" class="timeline-mount" role="region" aria-label="Career timeline visualization"></div>
+      <div class="timeline-fallback">
       <div class="split-grid">
         <div>
           <p class="column-title">WORK EXPERIENCE</p>
@@ -123,6 +125,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
           </ol>
         </div>
       </div>
+      </div><!-- /.timeline-fallback -->
     </div>
 
     <div id="recognition" class="about-section">
@@ -152,6 +155,8 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
 
   </div>
 </section>
+
+<script type="application/json" id="timeline-data">{{ site.data.timeline | jsonify }}</script>
 
 <style>
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
