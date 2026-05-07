@@ -51,26 +51,8 @@ preload_image: /assets/img/profile_2_bg.webp
   {% endfor %}
 </div>
 
-<div id="how-i-work" class="about-section">
-  <h3>How I Work</h3>
-  <div id="skills-grid" class="skill-grid">
-    {% for skill in site.data.skills %}
-    <article class="skill-card reveal">
-      <h3>{{ skill.category }}</h3>
-      <p>{{ skill.description }}</p>
-      <ul>
-        {% for s in skill.skills %}
-        <li>{{ s }}</li>
-        {% endfor %}
-      </ul>
-    </article>
-    {% endfor %}
-  </div>
-</div>
-
 <div id="track-record" class="about-section">
   <h3>Track Record</h3>
-  <p class="section-note">Five years spanning academic research, AI consulting, and production ML engineering — published in IEEE, ACL, and Remote Sensing of Environment, with systems deployed at scale across Southeast Asia and APAC.</p>
   <div class="split-grid">
     <div>
       <p class="column-title">WORK EXPERIENCE</p>
@@ -80,7 +62,6 @@ preload_image: /assets/img/profile_2_bg.webp
           <p class="time">{{ item.dates }}</p>
           <h3>{{ item.title }}</h3>
           <p class="loc">{{ item.location }}</p>
-          <p>{{ item.description }}</p>
         </li>
         {% endfor %}
       </ol>
@@ -93,7 +74,6 @@ preload_image: /assets/img/profile_2_bg.webp
           <p class="time">{{ item.dates }}</p>
           <h3>{{ item.title }}</h3>
           <p class="loc">{{ item.location }}</p>
-          <p>{{ item.description }}</p>
         </li>
         {% endfor %}
       </ol>
@@ -104,7 +84,6 @@ preload_image: /assets/img/profile_2_bg.webp
           <p class="time">{{ item.dates }}</p>
           <h3>{{ item.title }}</h3>
           <p class="loc">{{ item.location }}</p>
-          <p>{{ item.description }}</p>
         </li>
         {% endfor %}
       </ol>
@@ -115,7 +94,6 @@ preload_image: /assets/img/profile_2_bg.webp
           <p class="time">{{ item.dates }}</p>
           <h3>{{ item.title }}</h3>
           <p class="loc">{{ item.location }}</p>
-          <p>{{ item.description }}</p>
         </li>
         {% endfor %}
       </ol>
@@ -125,36 +103,28 @@ preload_image: /assets/img/profile_2_bg.webp
 
 <div id="recognition" class="about-section">
   <h3>Recognition</h3>
-  <div id="awards-grid" class="awards-grid">
+  <ul class="award-pills">
     {% for key in site.data.awards %}
     {% assign award = key[1] %}
     {% if award.category %}
-    <article class="award-card{% if award.featured %} featured{% endif %}{% if award.category == 'CHAMPION' %} highlight{% endif %}">
-      <p class="tag">{{ award.category }}</p>
-      <h3>
-        {% if award.url %}
-        <a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>
-        {% else %}
-        {{ award.title }}
-        {% endif %}
-      </h3>
-      <p class="time-inline">{{ award.year }}</p>
-      <p class="desc">{{ award.description }}</p>
-    </article>
+    <li>
+      <span class="tag">{{ award.category }}</span>
+      {% if award.url %}
+      <a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>
+      {% else %}
+      {{ award.title }}
+      {% endif %}
+      <span class="time-inline">{{ award.year }}</span>
+    </li>
     {% endif %}
     {% endfor %}
-  </div>
-  <div class="service-section">
-    <p class="column-title" style="margin-top:2rem">PROFESSIONAL SERVICE</p>
-    <div id="service-grid" class="service-grid">
-      {% for item in site.data.awards.service %}
-      <div class="service-item">
-        <strong>{{ item.role }}</strong>
-        <p>{{ item.description }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
+  </ul>
+  <p class="column-title" style="margin-top:2rem">PROFESSIONAL SERVICE</p>
+  <ul class="award-pills">
+    {% for item in site.data.awards.service %}
+    <li><strong>{{ item.role }}</strong> — {{ item.description }}</li>
+    {% endfor %}
+  </ul>
 </div>
 
 <style>
@@ -171,10 +141,11 @@ preload_image: /assets/img/profile_2_bg.webp
   .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
   .about-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
   .about-card p { font-size: 0.95rem; line-height: 1.5; }
-  .awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .award-card.featured { grid-column: 1 / -1; padding: 1.4rem 1.8rem; border-color: rgba(119, 146, 175, 0.52); }
-  .award-card.featured h3 { font-size: 1.25rem; }
-  .award-card.featured > p.desc { font-size: 0.92rem; max-width: 56rem; }
-  .award-card.featured .tag { font-size: 0.72rem; }
-  @media (max-width: 600px) { .awards-grid { grid-template-columns: 1fr; } .award-card.featured { grid-column: 1; } }
+  .award-pills { list-style: none; padding: 0; margin: 0.8rem 0 0; }
+  .award-pills li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; flex-wrap: wrap; }
+  .award-pills li:last-child { border-bottom: none; }
+  .award-pills .tag { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); flex-shrink: 0; }
+  .award-pills a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .award-pills a:hover { color: var(--accent); }
+  .award-pills .time-inline { color: var(--muted); font-size: 0.85rem; margin-left: auto; flex-shrink: 0; }
 </style>
