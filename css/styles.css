@@ -50,6 +50,10 @@
   --shadow: 0 22px 40px rgba(0, 0, 0, 0.3);
 }
 
+html[data-theme="light"] .topbar {
+  background: rgba(240, 243, 247, 0.88);
+}
+
 html[data-theme="light"] {
   --bg: #f0f3f7;
   --bg-soft: #e8ecf3;
