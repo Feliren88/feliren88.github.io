@@ -68,46 +68,46 @@ highlights:
 beats:
   - id: prologue
     start_ms: 0
-    end_ms: 1500
+    end_ms: 600
     title: ""
     caption: ""
     enters: []
 
   - id: beat1
-    start_ms: 1500
-    end_ms: 5000
+    start_ms: 600
+    end_ms: 2800
     title: "Production, at city scale."
     caption: "2021. Where it started."
     enters: [jakarta, gdp_labs]
     highlight_mark: apac_champion
 
   - id: beat2
-    start_ms: 5000
-    end_ms: 9000
+    start_ms: 2800
+    end_ms: 5000
     title: "The research thread ignites."
     caption: "First publication. ProCANet — IEEE GRSL."
     enters: [monash_ra]
     highlight_mark: ""
 
   - id: beat3
-    start_ms: 9000
-    end_ms: 14500
+    start_ms: 5000
+    end_ms: 8000
     title: "Three years. First-author IEEE. Most Visionary Research."
     caption: "Monash · ProCANet · IISF 2024"
     enters: []
     highlight_mark: iisf_2024
 
   - id: beat4
-    start_ms: 14500
-    end_ms: 18500
+    start_ms: 8000
+    end_ms: 10200
     title: "SEACrowd. 50+ researchers. A benchmark for Southeast Asia."
     caption: "SEA-VL · ACL 2025"
     enters: [seacrowd]
     highlight_mark: sea_vl
 
   - id: coda
-    start_ms: 18500
-    end_ms: 22000
+    start_ms: 10200
+    end_ms: 12000
     title: "Today: multimodal AI for the world's underrepresented languages."
     caption: ""
     enters: [artefact]

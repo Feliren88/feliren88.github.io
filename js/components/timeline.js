@@ -29,16 +29,17 @@
 
   // ── Layout ────────────────────────────────────────────────────
   var YEAR_START = 2021, YEAR_END = 2026.5;
-  var TRACK_Y = { research: 0.22, industry: 0.55, community: 0.82 };
 
   function makeLayout() {
     var w = mount.clientWidth || 800;
-    var h = 320, pl = 18, pr = 14, pt = 52, pb = 52;
+    var h = 260, pl = 18, pr = 20, pt = 52, pb = 52;
     var iw = w - pl - pr, ih = h - pt - pb;
+    var midY = pt + ih * 0.5;
     return {
       w: w, h: h, pt: pt, pb: pb, pl: pl, pr: pr,
+      midY: midY,
       xFor: function (yr) { return pl + (yr - YEAR_START) / (YEAR_END - YEAR_START) * iw; },
-      yFor: function (t) { return pt + (TRACK_Y[t] || 0.5) * ih; },
+      yFor: function () { return midY; },
       rFor: function (mo) { return Math.min(30, Math.max(12, Math.sqrt(mo) * 4.8)); },
     };
   }
@@ -122,21 +123,26 @@
 
   function drawAxis() {
     axisG.innerHTML = '';
-    var ay = L.h - L.pb + 14;
     var iw = L.w - L.pl - L.pr;
+    var ay = L.h - L.pb + 14;
+
+    // Single horizontal guide through the midpoint (the timeline spine)
+    axisG.appendChild(mkEl('line', {
+      x1: L.pl, y1: L.midY, x2: L.pl + iw, y2: L.midY,
+      stroke: C.trail, 'stroke-width': '0.5',
+    }));
+
+    // Year axis at bottom
     axisG.appendChild(mkEl('line', { x1: L.pl, y1: ay, x2: L.pl + iw, y2: ay, stroke: C.axis, 'stroke-width': '1' }));
     for (var yr = 2021; yr <= 2026; yr++) {
       var x = L.xFor(yr);
       axisG.appendChild(mkEl('line', { x1: x, y1: ay, x2: x, y2: ay + 5, stroke: C.axis, 'stroke-width': '1' }));
+      // Vertical tick from year mark up to the spine
+      axisG.appendChild(mkEl('line', { x1: x, y1: L.midY, x2: x, y2: ay, stroke: C.trail, 'stroke-width': '0.3', 'stroke-dasharray': '2,6' }));
       var t = mkEl('text', { x: x, y: ay + 17, 'text-anchor': 'middle', 'font-size': '10', 'font-family': 'Manrope, sans-serif', fill: C.muted, opacity: '0.65' });
       t.textContent = yr;
       axisG.appendChild(t);
     }
-    ['research', 'industry', 'community'].forEach(function (track) {
-      var tl = mkEl('text', { x: L.pl + 4, y: L.yFor(track), 'dominant-baseline': 'middle', 'font-size': '9', 'font-family': 'Manrope, sans-serif', 'letter-spacing': '0.06em', fill: trackColor(track), opacity: '0.4' });
-      tl.textContent = track[0].toUpperCase();
-      axisG.appendChild(tl);
-    });
   }
 
   function buildNodeElems() {
@@ -313,7 +319,7 @@
       beatCaptEl.textContent = caption;
       beatTitleEl.style.opacity = title ? '1' : '0';
       beatCaptEl.style.opacity = caption ? '1' : '0';
-    }, 300);
+    }, 150);
   }
 
   // ── Enter node ────────────────────────────────────────────────
@@ -378,8 +384,19 @@
     setScrubber(idx);
     var beat = BEATS[idx];
     showBeatText(beat.title || '', beat.caption || '');
-    (beat.enters || []).forEach(function (nid, i) { setTimeout(function () { enterNode(nid); }, i * 280); });
-    if (beat.highlight_mark) activateHighlight(beat.highlight_mark, 750);
+    var enters = beat.enters || [];
+    enters.forEach(function (nid, i) { setTimeout(function () { enterNode(nid); }, i * 280); });
+    if (beat.highlight_mark) activateHighlight(beat.highlight_mark, 600);
+
+    // Auto-show panel for first entering node
+    if (enters.length > 0) {
+      beatTimeouts.push(setTimeout(function () {
+        panel.hidden = true; activeNodeId = null;
+        var n = getNode(enters[0]);
+        if (n && n.visible) togglePanel(n);
+      }, 520));
+    }
+
     var dur = (beat.end_ms || 3000) - (beat.start_ms || 0);
     beatTimeouts.push(setTimeout(function () { playBeat(idx + 1); }, dur));
   }
@@ -438,6 +455,12 @@
     showBeatText(last.title || '', last.caption || '');
     setScrubber(BEATS.length - 1);
     replayEl.classList.remove('tl-replay--hidden');
+    // Auto-show last entering node panel
+    var lastEnters = (last.enters || []);
+    if (lastEnters.length > 0) {
+      var n = getNode(lastEnters[0]);
+      if (n) togglePanel(n);
+    }
   }
 
   // ── Theme ─────────────────────────────────────────────────────

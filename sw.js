@@ -9,7 +9,7 @@ const PRECACHE = [
   '/css/styles.css?v=15',
   '/js/main.js?v=5',
   '/js/components/nav.js?v=2',
-  '/js/components/timeline.js?v=1',
+  '/js/components/timeline.js?v=2',
   '/assets/fonts/manrope-latin.woff2',
   '/assets/fonts/manrope-latin-ext.woff2',
   '/assets/fonts/spacegrotesk-latin.woff2',
