@@ -4,8 +4,6 @@
 
 (function() {
   var NAV_ITEMS = [
-    { href: '/', label: 'Home', page: '/' },
-    { href: '/about/', label: 'About', page: '/about' },
     { href: '/research/', label: 'Research', page: '/research' },
     { href: '/writings/', label: 'Writings', page: '/writings' },
     { href: '/contact/', label: 'Work With Me', page: '/contact' },

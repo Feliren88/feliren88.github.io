@@ -4,7 +4,7 @@ title: About Vicky Feliren
 subtitle: Multimodal AI Researcher & Applied Scientist
 description: Bio, research focus, expertise, track record, and recognition. Applied Scientist on trustworthy multimodal AI and cultural inclusion — published in IEEE, ACL, and Remote Sensing of Environment.
 permalink: /about/
-preload_image: /assets/img/profile_2_bg.webp
+redirect_to: /
 ---
 
 <p class="eyebrow">WHO I AM</p>
