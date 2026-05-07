@@ -42,6 +42,11 @@ patents:
     description: 'Proprietary computer vision pipeline for high-resolution aquaculture monitoring using novel spectral indices.'
 
 teaching:
+  - dates: 'MAY 2026 – JUN 2026'
+    title: 'Coding Camp powered by DBS Foundation'
+    location: 'Capstone Project Advisor'
+    description: "Supervised 2 capstone AI projects for Indonesia's university students. Impacting future generation technical leaders in a region."
+
   - dates: 'JAN 2024 – JAN 2025'
     title: 'Bangkit Academy (Google, Gojek, Traveloka)'
     location: 'ML Instructor & Capstone Advisor'

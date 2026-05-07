@@ -1,151 +1,1515 @@
-wip_notice: "This page is a living document — use cases are being documented progressively as part of an ongoing effort to make my applied work more accessible. Check back for updates."
+
+wip_notice: >
+  This is a living document. Use cases are documented progressively as part of
+  an ongoing effort to make applied work accessible and reproducible. Check
+  back for updates.
+
+# ============================================================
+# CATEGORY DEFINITIONS
+# ============================================================
 
 categories:
   - id: geospatial
     label: Geospatial AI & Remote Sensing
     color: accent
+    description: >
+      Deep learning systems operating on multispectral satellite imagery and
+      multi-modal geospatial data. Problems span pixel-level segmentation,
+      change detection, and multi-source sensor fusion at scales ranging from
+      city basins to continental mining regions.
 
   - id: cultural
     label: Cultural & Multilingual AI
     color: accent-2
+    description: >
+      Vision-language models and NLP systems designed for underrepresented
+      Southeast Asian geographies. Work addresses systematic blind spots in
+      SOTA models when confronted with culturally-situated reasoning, low-resource
+      script variation, and code-switched multilingual web text.
 
   - id: production
-    label: Production ML — Industry
+    label: Production ML -- Industry
     color: accent
+    description: >
+      End-to-end ML systems shipped under real commercial, regulatory, and
+      operational constraints. Problems include high-throughput inference
+      reliability, regulatory explainability mandates, MLOps observability,
+      and the research-to-production handoff at scale.
 
   - id: applied
     label: Applied & Hackathon Projects
     color: accent-2
+    description: >
+      Time-boxed applied engineering under competition constraints. Demonstrates
+      full-stack ML system design -- from data ingestion to deployment -- within
+      48-hour windows, validated by international juries across Cambridge,
+      Berkeley, and Microsoft APAC.
+
+# ============================================================
+# USE CASES
+# ============================================================
 
 usecases:
-  - title: Flood Segmentation from Multispectral Satellite Imagery
+
+  # ──────────────────────────────────────────────
+  # GEOSPATIAL AI & REMOTE SENSING
+  # ──────────────────────────────────────────────
+
+  - id: procaenet-flood-segmentation
+    title: Flood segmentation from multispectral satellite imagery (ProCANet)
     category: geospatial
-    tags: [Semantic Segmentation, Remote Sensing, IEEE]
-    venue: "IEEE IGARSS 2024 (Q1 Conference)"
-    outcome: "Published architecture — ProCANet — with progressive cross-attention mechanism outperforming baseline U-Net variants on the FloodNet benchmark."
-    description: >
-      Designed and implemented ProCANet, a progressive cross-attention network for pixel-level flood detection using Sentinel-2 multispectral imagery. The model learns to fuse spectral bands with spatial context at multiple scales, enabling reliable segmentation in heterogeneous terrain (urban, agricultural, forest) under partially cloudy conditions. Trained on FloodNet disaster-response data; evaluated against SOTA semantic segmentation architectures.
-    impact: "Directly applicable to disaster response pipelines — rapid, automated damage extent mapping from satellite passes within hours of an event."
+    tags:
+      - Semantic Segmentation
+      - Attention Mechanisms
+      - Multi-Modal Fusion
+      - Remote Sensing
+      - PyTorch Lightning
+    venue: "IEEE Geoscience and Remote Sensing Letters (GRSL), 2025 -- Q1 (IF 4.4)"
+    role: First Author
+    doi: "10.1109/LGRS.2024.3495974"
     link: "https://ieeexplore.ieee.org/document/10750225"
+    keywords:
+      - Flood segmentation
+      - Multimodal deep learning
+      - Progressive cross-attention
+      - Semantic segmentation
+      - Sentinel-2
+      - Sen1Floods11
 
-  - title: Mining Footprint Detection with Multi-Modal Satellite Data
+    situation: >
+      Flood extent mapping from satellite imagery is a critical upstream input for
+      disaster response logistics. Manual GIS analysis introduces latency of days
+      to weeks, which is operationally unacceptable within the 72-hour emergency
+      response window. The 270km Citarum River basin in West Java -- home to 25M+
+      residents -- lacked an automated, high-accuracy segmentation pipeline capable
+      of handling the spectral heterogeneity of urban, agricultural, and forested
+      flood zones under partial cloud cover.
+
+    complication: >
+      Standard U-Net architectures using only RGB bands systematically fail in
+      flood-affected terrain due to spectral confusion between water bodies,
+      dark soil, and shadowed regions. Incorporating Near-Infrared (NIR) bands
+      from Sentinel-2 introduces a multi-modal fusion problem: attention must be
+      learned across both spectral dimensions and spatial scales simultaneously.
+      Naively concatenating RGB and NIR at the encoder input does not resolve
+      cross-modal feature misalignment at skip connections -- the precise location
+      where spatial detail is propagated to the decoder.
+
+    resolution:
+      architecture: >
+        Designed ProCANet (Progressive Cross-Attention Network): a dual-encoder
+        U-Net where a dedicated NIR encoder runs in parallel to the RGB encoder.
+        Progressive cross-attention modules are inserted at every skip connection
+        -- not only at the bottleneck -- enabling the decoder to attend to
+        modality-specific features at each resolution scale (1/2, 1/4, 1/8, 1/16).
+        Self-attention within each encoder branch captures intra-modal long-range
+        spatial dependencies before the cross-modal fusion step, reducing
+        interference between locally coherent but spectrally distinct regions.
+      training: >
+        Trained on Sen1Floods11 benchmark (Sentinel-2 multispectral, 11 flood
+        events globally). All experiments tracked end-to-end with Weights & Biases
+        (W&B) including hyperparameter sweeps, loss curve monitoring, and
+        per-class IoU checkpointing.
+      generalization: >
+        Zero-shot generalization to PlanetScope imagery at 6x training resolution
+        (3m vs 10m GSD) across a 6,112 km2 holdout area without retraining,
+        validated against NDWI-derived pseudo ground truth (IoU 0.659). This
+        tests real deployment conditions where the inference sensor differs from
+        the training sensor.
+      baselines: >
+        Benchmarked against UNet, PSPNet, LinkNet, MANet, PAN, and ConvNeXt V2
+        on the same Sen1Floods11 protocol. ProCANet achieves F1 0.898 (UNet 0.884)
+        and IoU 0.815 (UNet 0.791) -- statistically meaningful gains given the
+        saturating benchmark landscape.
+
+    tech_stack:
+      frameworks: [PyTorch, PyTorch Lightning]
+      remote_sensing: [Google Earth Engine, Sentinel-2, PlanetScope]
+      experiment_tracking: [Weights & Biases (W&B)]
+      data_format: [GeoTIFF, multispectral raster, NDWI]
+
+    metrics:
+      f1_score: 0.898
+      iou: 0.815
+      zero_shot_iou: 0.659
+      baseline_f1: 0.884
+      baseline_iou: 0.791
+      coverage_area_km2: 6112
+      accuracy_pct: 95.0
+
+    impact: >
+      Directly applicable to disaster response pipelines serving 25M+ residents
+      in the Citarum basin. Automated segmentation from a satellite pass reduces
+      flood extent mapping latency from days (manual GIS) to hours, enabling
+      earlier evacuation routing and logistics staging for BNPB (Indonesia National
+      Disaster Management Authority).
+
+    collaborators:
+      - institution: "Monash University"
+        role: "Primary research host (A/Prof Risqi U. Saputra)"
+      - institution: "University of Indonesia"
+        role: "Domain validation"
+
+  # ──────────────────────────────────────────
+
+  - id: mining-footprint-segmentation
+    title: Mining footprint detection with multi-modal satellite data
     category: geospatial
-    tags: [Multi-Modal Fusion, Land Use, Elsevier RSE]
-    venue: "Remote Sensing of Environment (IF 11.4, Q1 Journal)"
-    outcome: "Multi-modal architecture fusing optical + SAR + DEM inputs, achieving state-of-the-art footprint delineation over large-scale Australian mining regions."
-    description: >
-      Built a multi-modal deep learning pipeline that fuses optical (Sentinel-2), synthetic aperture radar (Sentinel-1), and digital elevation model data to segment active and historical mining footprints. Addressed domain shift across geographies (different ore types, vegetation cover, seasonal variation) and temporal change detection. Work conducted at Monash University in collaboration with environmental monitoring stakeholders.
-    impact: "Enables automated, scalable land-use accountability for environmental compliance and rehabilitation planning — previously requiring months of manual GIS analysis."
+    tags:
+      - Multi-Modal Fusion
+      - Semantic Segmentation
+      - SAR
+      - DEM
+      - Foundation Models
+      - Land Use
+    venue: "Remote Sensing of Environment, vol. 318, 2025 -- Q1 (IF 11.4)"
+    role: Co-Author
+    doi: "10.1016/j.rse.2024.114584"
     link: "https://doi.org/10.1016/j.rse.2024.114584"
+    keywords:
+      - Global mining footprints
+      - Semantic segmentation
+      - Multispectral
+      - Deep learning
+      - SAR
+      - Geospatial foundation models
 
-  - title: Aquaculture Pond Detection & Change Analysis
+    situation: >
+      Mining footprint delineation is a prerequisite for environmental compliance
+      monitoring and land rehabilitation planning at national scale. Across
+      Australia -- one of the world's largest mining jurisdictions -- mapping
+      active and historical footprints previously required months of manual GIS
+      analyst time per region, making continuous monitoring economically infeasible
+      for regulatory bodies.
+
+    complication: >
+      Single-modality optical imagery (Sentinel-2) is insufficient for robust
+      footprint delineation: cloud cover interrupts temporal consistency,
+      spectral signatures of disturbed land overlap with natural bare soil and
+      dry vegetation, and underground or sub-canopy operations are invisible to
+      optical sensors. Integrating Synthetic Aperture Radar (Sentinel-1 SAR)
+      and Digital Elevation Model (DEM) data introduces a multi-modal fusion
+      problem with heterogeneous input dimensionality, temporal misalignment
+      across sensors, and domain shift across ore types (iron ore vs. coal vs.
+      bauxite) and vegetation biomes (arid vs. temperate).
+
+    resolution:
+      architecture: >
+        Built a multi-modal deep learning pipeline fusing three independent input
+        streams: optical (Sentinel-2, 13 bands), SAR (Sentinel-1 VV/VH
+        backscatter), and DEM (elevation + slope derivatives). Stream-specific
+        encoders extract modality-aligned features before a late-fusion aggregation
+        head. Fine-tuned Prithvi -- a NASA/IBM geospatial foundation model
+        pre-trained on Sentinel-2 and Landsat -- for mining-specific
+        segmentation, representing the first published application of a geospatial
+        FM to this task.
+      data_pipeline: >
+        Built ingestion and preprocessing pipelines for 500GB+ of labeled
+        multispectral imagery from Google Earth Engine. Coordinated peer-reviewed
+        annotation with geographers across University of Queensland, UCL, and
+        University of Nottingham -- spanning multiple ore-type and biome classes
+        -- implementing inter-annotator agreement checks to ensure label quality
+        at scale.
+      temporal_change: >
+        Addressed temporal change detection across multi-year image stacks,
+        distinguishing active operations from rehabilitated or historically
+        disturbed land -- a distinction with direct legal and financial implications
+        under Australian mining regulation.
+
+    tech_stack:
+      frameworks: [TensorFlow, PyTorch]
+      remote_sensing: [Google Earth Engine, Sentinel-1, Sentinel-2, DEM]
+      foundation_models: [Prithvi (NASA/IBM)]
+      data_volume_gb: 500
+
+    impact: >
+      Enables automated, scalable land-use accountability for environmental
+      compliance and rehabilitation planning across continental-scale mining
+      regions -- replacing months of manual GIS analysis with a satellite-speed
+      automated pipeline. Directly informs regulatory workflows for Australian
+      state environmental agencies and international mining company ESG reporting.
+
+    collaborators:
+      - institution: "Monash University"
+        role: "Primary host (A/Prof Risqi U. Saputra, Prof Alex Lechner)"
+      - institution: "University of Queensland"
+        role: "Remote sensing science and annotation"
+      - institution: "UCL"
+        role: "Annotation and domain expertise"
+      - institution: "University of Nottingham"
+        role: "Annotation and domain expertise"
+
+  # ──────────────────────────────────────────
+
+  - id: aquaculture-pond-detection
+    title: Aquaculture pond detection and change analysis
     category: geospatial
-    tags: [Object Detection, Coastal Monitoring, Patent]
-    venue: "Monash University — Filed Patent IDS000010594"
-    outcome: "Novel detection pipeline for identifying and tracking aquaculture pond expansion along Southeast Asian coastlines using time-series satellite imagery."
-    description: >
-      Developed a pipeline to automatically detect and monitor shrimp/fish farming ponds from multi-temporal Sentinel imagery across Indonesia and Vietnam. Tackled challenges including spectral similarity to natural water bodies, tidal variation, and cloud cover. Results fed into a coastal land-use change analysis relevant to mangrove deforestation policy.
-    impact: "Supports government and NGO monitoring of illegal land conversion and ecosystem impact in coastal regions — at satellite-scale speed versus manual survey."
+    tags:
+      - Object Detection
+      - Coastal Monitoring
+      - Change Detection
+      - Time-Series Satellite
+      - Patent
+    venue: "Monash University -- Filed Patent IDS000010594, Issued June 2025"
+    role: Lead Developer
+    keywords:
+      - Aquaculture detection
+      - Coastal land use
+      - Mangrove deforestation
+      - Sentinel-2 time series
+      - Indonesia
+      - Vietnam
 
-  - title: "SEA-VL: Vision-Language Benchmark for Southeast Asia"
+    situation: >
+      Illegal aquaculture expansion -- primarily shrimp and fish ponds -- along
+      Southeast Asian coastlines is a leading driver of mangrove deforestation.
+      Indonesia and Vietnam have lost significant coastal mangrove cover in the
+      past two decades. Regulatory monitoring relied on periodic manual surveys,
+      creating enforcement gaps measured in years between detection and
+      intervention.
+
+    complication: >
+      Pond detection from optical satellite imagery is non-trivial due to spectral
+      similarity between aquaculture ponds and natural water bodies (rivers,
+      tidal flats, estuaries). Tidal variation causes the same geographic location
+      to appear as water or land depending on acquisition timing. Cloud cover
+      over tropical coastlines further degrades single-date classification
+      reliability. The core challenge is temporal: distinguishing stable natural
+      water bodies from newly constructed ponds requires multi-temporal analysis
+      across image stacks, not single-image classification.
+
+    resolution:
+      approach: >
+        Developed a multi-temporal detection pipeline on Sentinel-2 imagery
+        combining: (1) spectral indices (NDWI, MNDWI, AWEI) for initial water
+        body candidate extraction, (2) geometric regularity filters to distinguish
+        rectangular anthropogenic pond structures from organic natural water body
+        shapes, and (3) temporal differencing across image stacks to identify
+        newly constructed ponds within user-defined monitoring windows.
+      geography: >
+        Pipeline validated across Indonesia (Sumatra, Kalimantan coastlines)
+        and Vietnam (Mekong Delta, Ca Mau province) -- geographies with distinct
+        spectral and tidal characteristics, testing cross-regional generalization.
+      output: >
+        Outputs feed a coastal land-use change analysis linking pond expansion
+        rates to mangrove coverage loss, providing spatial evidence for policy
+        reporting on illegal conversion.
+
+    tech_stack:
+      frameworks: [Python, Google Earth Engine]
+      indices: [NDWI, MNDWI, AWEI]
+      imagery: [Sentinel-2 (multi-temporal)]
+
+    patent:
+      title: "System for Detection and Analysis of Fish and Shrimp Ponds Using Satellite Imagery"
+      id: IDS000010594
+      issued: "June 2025"
+
+    impact: >
+      Supports government and NGO monitoring of illegal coastal land conversion
+      at satellite speed versus field survey cadence. Results can be delivered
+      within hours of a new satellite pass, enabling near-real-time enforcement
+      alerts for regulatory agencies managing coastal biodiversity and carbon
+      stock in Indonesia and Vietnam.
+
+  # ──────────────────────────────────────────
+
+  - id: flood-urban-resilience
+    title: Flood policy evaluation -- retention pond effectiveness in South Bandung
+    category: geospatial
+    tags:
+      - Flood Mitigation
+      - Policy Evaluation
+      - NDWI
+      - Mixed Methods
+      - Urban Resilience
+    venue: "AQUA -- Water Infrastructure, Ecosystems and Society, 2025 -- Q2"
+    role: Contributor
+    doi: "10.2166/aqua.2025.292"
+    keywords:
+      - Deep learning flood segmentation
+      - Flood mitigation
+      - Flood policy
+      - NDWI
+      - Sustainability
+      - Urban resilience
+
+    situation: >
+      Urban flood management policy in Indonesian cities relies heavily on
+      retention pond construction as a primary mitigation instrument, yet rigorous
+      quantitative evaluation of their effectiveness at the city scale is rarely
+      conducted prior to large-scale replication.
+
+    resolution:
+      approach: >
+        Mixed-methods evaluation combining deep learning-based flood segmentation
+        (applying the ProCANet framework) with NDWI-derived flood extent mapping
+        across South Bandung catchments, integrated with qualitative policy
+        document analysis. Provided quantitative evidence of retention pond
+        effectiveness before and after infrastructure intervention.
+      significance: >
+        Bridges the gap between ML-based earth observation and evidence-based
+        urban policy -- translating pixel-level segmentation outputs into
+        measurable policy KPIs that city planners can act on.
+
+    tech_stack:
+      frameworks: [Python, Google Earth Engine]
+      indices: [NDWI]
+      methods: [Deep learning segmentation, mixed-methods policy analysis]
+
+  # ──────────────────────────────────────────────
+  # CULTURAL & MULTILINGUAL AI
+  # ──────────────────────────────────────────────
+
+  - id: sea-vl-benchmark
+    title: "SEA-VL: multicultural vision-language benchmark for Southeast Asia"
     category: cultural
-    tags: [Vision-Language Models, Dataset, ACL 2025]
-    venue: "ACL 2025 (Main Conference)"
-    outcome: "Led crowdsourcing and data pipeline for a 10,000+ image-question benchmark spanning 11 SEA languages and diverse cultural contexts."
-    description: >
-      Co-led the data collection and quality assurance pipeline for SEA-VL, a multicultural vision-language dataset capturing everyday Southeast Asian cultural knowledge — food, festivals, architecture, signage, and traditional practices — across Indonesia, Vietnam, Philippines, Thailand, Myanmar, and more. Coordinated a community of 100+ annotators across the region, designed annotation guidelines, and implemented quality filtering. The benchmark exposes systematic blind spots in GPT-4V, Gemini, and Claude on culturally situated reasoning.
-    impact: "Establishes the first rigorous, community-built VLM benchmark for SEA, directly informing model localization efforts by AI labs targeting the region."
+    tags:
+      - Vision-Language Models
+      - Benchmark
+      - Dataset
+      - Crowdsourcing
+      - Cultural AI
+      - ACL 2025
+    venue: "ACL 2025 (Main Conference, Long Paper)"
+    role: "Core Contributor -- Data Pipeline Lead"
     link: "https://aclanthology.org/2025.acl-long.916/"
+    arxiv: "https://arxiv.org/abs/2503.07920"
+    keywords:
+      - Multicultural dataset
+      - Southeast Asia
+      - Vision-language
+      - Crowdsourcing
+      - Multilingual
+      - Benchmark
+      - Cultural representation
 
-  - title: "GG-EZ: Regional Adaptation in Vision-Language Models"
-    category: cultural
-    tags: [VLMs, Cultural AI, Regional Adaptation]
-    venue: "arXiv preprint (2026)"
-    outcome: "Proposed and evaluated an anthropogenic regional adaptation framework improving VLM accuracy on SEA-specific visual content by significant margins over zero-shot baselines."
-    description: >
-      Investigated how vision-language models (LLaVA, InternVL, Phi-Vision) fail at culturally situated tasks and designed an adaptation methodology — combining retrieval-augmented prompting, region-specific fine-tuning, and evaluation scaffolds — to close that gap. Introduced the concept of anthropogenic priors: that cultural context is learnable from structured regional knowledge rather than raw scale.
-    impact: "Provides a replicable playbook for adapting general-purpose VLMs to underrepresented geographies without requiring full retraining."
-    link: "https://arxiv.org/abs/2604.11490"
+    situation: >
+      State-of-the-art Vision-Language Models (GPT-4V, Gemini 1.5, Claude 3)
+      are trained predominantly on English-centric, Western-origin image-text
+      data. Southeast Asia -- 11 countries, 700M+ people, hundreds of languages,
+      and visually distinct cultural practices -- is systematically underrepresented
+      in both training corpora and evaluation benchmarks. There is no rigorous,
+      community-built benchmark that can measure VLM capability on culturally
+      situated reasoning tasks specific to the region.
 
-  - title: "CommonLID: Language Identification on Noisy Web Data"
+    complication: >
+      Creating a culturally valid benchmark requires more than web scraping:
+      image-question pairs must encode genuine cultural knowledge (traditional
+      food, festivals, architecture, script signage, social practices) that is
+      invisible to models trained on global web data. Standard crowdsourcing
+      platforms (MTurk) lack the regional annotator coverage and cultural
+      competence necessary. Automated generation using GPT-4 or Gemini introduces
+      circularity -- benchmarking models against data partially generated by
+      similar models. Language diversity (11 SEA languages including low-resource
+      scripts) further complicates quality control.
+
+    resolution:
+      data_collection: >
+        Co-led a distributed crowdsourcing operation across 100+ community
+        annotators spanning Indonesia, Vietnam, Philippines, Thailand, Myanmar,
+        Malaysia, Cambodia, Laos, Singapore, Timor-Leste, and Brunei. Annotators
+        submitted culturally grounded image-question-answer triplets from lived
+        experience, not from web retrieval.
+      pipeline: >
+        Designed and implemented the data quality pipeline: annotation guideline
+        authoring, multi-stage review protocol (automated + human-in-the-loop),
+        image deduplication at scale (1.28M-image corpus using pHash benchmarked
+        against CLIP-ViT, SigLIP, and Nomic Embed Vision with 50-pair human
+        evaluation), language validation, and cultural accuracy review. Contributed
+        to 10,000+ final image-question pairs across 11 languages and diverse
+        cultural domains.
+      findings: >
+        Benchmark exposes systematic blind spots in GPT-4V, Gemini, and Claude
+        on culturally situated visual reasoning -- quantifying the gap that
+        motivated the entire research program. Results directly inform model
+        localization priorities for AI labs targeting SEA markets.
+
+    tech_stack:
+      models_evaluated: [GPT-4V, Gemini 1.5, Claude 3, LLaVA, InternVL]
+      deduplication: [pHash, CLIP-ViT, SigLIP, Nomic Embed Vision]
+      annotation_scale: "100+ annotators, 11 countries"
+      dataset_size: "10,000+ image-question pairs"
+      languages: 11
+
+    impact: >
+      Establishes the first rigorous, community-built VLM benchmark for Southeast
+      Asia. Results are actively being used by AI labs to identify and prioritize
+      model localization gaps for the 700M+ person SEA market. Accepted at ACL
+      2025 (Main Conference) -- the top-tier NLP venue -- validating the
+      community-science methodology as publishable at the highest standards.
+
+    team_scale: "50+ researchers across 5+ countries"
+
+  # ──────────────────────────────────────────
+
+  - id: gg-ez-regional-adaptation
+    title: "GG-EZ: regional adaptation framework for vision-language models in SEA"
     category: cultural
-    tags: [NLP, Language ID, Low-Resource, ACL 2026]
+    tags:
+      - VLMs
+      - Cultural AI
+      - Regional Adaptation
+      - Diffusion Models
+      - Knowledge Distillation
+      - ECCV 2026
+    venue: "ECCV 2026 (Under Review) + arXiv preprint 2026"
+    role: "Lead -- Diffusion Model Arm"
+    arxiv: "https://arxiv.org/abs/2604.11490"
+    keywords:
+      - Vision-language models
+      - Cultural adaptation
+      - Southeast Asia
+      - Retrieval-augmented generation
+      - Fine-tuning
+      - Anthropogenic priors
+
+    situation: >
+      General-purpose VLMs (LLaVA, InternVL, Phi-Vision, SDXL) exhibit
+      systematic failure modes on culturally situated visual tasks specific to
+      Southeast Asia -- misidentifying local food, misreading regional scripts,
+      failing to recognize traditional practices. The commercial default response
+      is full retraining on regional data, which is computationally prohibitive
+      and requires proprietary data access most regional stakeholders do not have.
+
+    complication: >
+      The core scientific question: can cultural correctness be recovered through
+      targeted adaptation without full retraining -- and if so, what is the
+      minimal intervention? This requires a testable hypothesis about where
+      cultural knowledge is encoded in model weights and how it can be efficiently
+      modified. Evaluation is doubly hard: cultural correctness is subjective
+      and requires human raters with genuine regional expertise, not automated
+      metrics.
+
+    resolution:
+      framework: >
+        Proposed an anthropogenic regional adaptation framework: the hypothesis
+        that cultural context is learnable from structured regional knowledge
+        sources rather than raw scale. Three adaptation mechanisms investigated:
+        (1) retrieval-augmented prompting with curated regional knowledge bases,
+        (2) region-specific fine-tuning with targeted cultural datasets,
+        (3) evaluation scaffolds for measuring cultural correctness systematically.
+      diffusion_arm: >
+        Led the generative model arm for ECCV 2026 (SEA-SDXL). Fine-tuned
+        SDXL UNet (batch 32, LR 1e-5, 4 epochs, VAE encoder frozen to preserve
+        perceptual quality). Designed GG-EZ linear weight-merging variants at
+        25% and 50% interpolation ratios between base SDXL and the fine-tuned
+        regional checkpoint. Human evaluation (1.569 vs 1.491 baseline on
+        cultural correctness) confirmed improvement while retaining 98%+ global
+        DPG-Bench performance -- validating the key design bet that regional
+        specialization and global quality are not zero-sum.
+      evaluation: >
+        Human evaluation protocol with regional annotators for cultural
+        correctness scoring; automated DPG-Bench for global generation quality.
+        Both metrics tracked per adaptation variant to build a Pareto frontier
+        of regional gain vs. global degradation.
+
+    tech_stack:
+      models: [SDXL, LLaVA, InternVL, Phi-Vision]
+      training: [PyTorch, diffusers]
+      evaluation: [DPG-Bench, human evaluation, RAG scaffolds]
+      hyperparams:
+        batch_size: 32
+        learning_rate: 1.0e-5
+        epochs: 4
+        vae: frozen
+
+    metrics:
+      cultural_correctness_adapted: 1.569
+      cultural_correctness_baseline: 1.491
+      global_benchmark_retention_pct: 98.0
+
+    impact: >
+      Provides a replicable, computationally accessible playbook for adapting
+      general-purpose VLMs to underrepresented geographies. The 98%+ global
+      quality retention result is critical: it demolishes the common objection
+      that regional adaptation necessarily degrades global model utility, making
+      the business case for SEA localization significantly stronger for commercial
+      AI labs.
+
+  # ──────────────────────────────────────────
+
+  - id: commonlid-language-identification
+    title: "CommonLID: language identification on noisy web data"
+    category: cultural
+    tags:
+      - NLP
+      - Language Identification
+      - Low-Resource
+      - Benchmark
+      - ACL 2026
     venue: "ACL 2026"
-    outcome: "Re-evaluated leading LID systems on realistic web-crawled multilingual data; identified critical degradation patterns on code-switched and low-resource SEA text."
-    description: >
-      Re-benchmarked state-of-the-art language identification systems (fastText, GlotLID, OpenLID) on CommonCrawl-sourced data reflecting real-world noise: code-switching, romanized scripts, and orthographic variation common in SEA languages. Results challenged published accuracy claims and motivated a more rigorous evaluation protocol for low-resource NLP.
-    impact: "Directly affects NLP pipeline reliability for downstream tasks like content moderation, machine translation routing, and corpus construction in SEA."
-    link: "https://arxiv.org/abs/2601.18026"
+    role: Contributor
+    arxiv: "https://arxiv.org/abs/2601.18026"
+    keywords:
+      - Language identification
+      - Low-resource NLP
+      - Code-switching
+      - CommonCrawl
+      - Southeast Asia
+      - Benchmark
 
-  - title: Biometric Authentication & Credit Scoring at Scale
+    situation: >
+      Language Identification (LID) is an upstream dependency for virtually
+      every multilingual NLP pipeline: machine translation routing, content
+      moderation, corpus construction, and search indexing all assume that
+      LID is solved. Published accuracy figures for leading LID systems
+      (fastText LangID, GlotLID, OpenLID) frequently exceed 95% on clean
+      benchmark data, creating false confidence in the field.
+
+    complication: >
+      Real-world web data from Southeast Asia systematically violates the
+      assumptions of existing LID benchmarks: text is code-switched (mixing
+      Bahasa Indonesia with English and Javanese in a single sentence),
+      written in romanized orthographies that diverge from standardized script
+      forms, and contains phonetic spellings and social media abbreviations.
+      Published LID systems trained on curated parallel corpora degrade
+      significantly on this distribution -- a degradation that is not measurable
+      on existing benchmarks because they do not sample from realistic web data.
+
+    resolution:
+      approach: >
+        Re-benchmarked fastText LangID, GlotLID, and OpenLID on CommonCrawl-
+        sourced text reflecting realistic SEA web data distributions --
+        code-switched content, romanized scripts, and orthographic variation.
+        Identified critical accuracy degradation patterns (system-specific
+        failure modes across language families) and proposed a more rigorous
+        evaluation protocol for future LID systems claiming low-resource SEA
+        coverage.
+      significance: >
+        Challenges published accuracy claims on SEA languages and motivates
+        re-evaluation of data pipelines that rely on LID as a preprocessing
+        step -- including the CommonCrawl-based training corpora used by major
+        LLMs.
+
+    tech_stack:
+      systems_evaluated: [fastText LangID, GlotLID, OpenLID]
+      data_source: CommonCrawl
+      focus_languages: "Low-resource SEA languages (11+)"
+
+    impact: >
+      Directly affects NLP pipeline reliability for downstream tasks including
+      content moderation, machine translation routing, and LLM training corpus
+      construction in SEA. The rigorous evaluation protocol serves as a
+      methodological reference for future low-resource LID benchmarking work
+      across any underrepresented language family.
+
+  # ──────────────────────────────────────────────
+  # PRODUCTION ML -- INDUSTRY
+  # ──────────────────────────────────────────────
+
+  - id: share-of-voice-forecasting
+    title: Share of Voice forecasting system -- Fortune 500 APAC (Artefact)
     category: production
-    tags: [Fintech, Production ML, Regulatory Compliance]
-    venue: "GDP Labs — Lead ML Engineer (2021–2024)"
-    outcome: "Shipped biometric liveness detection and alternative credit scoring models into production serving millions of users across Indonesian fintech platforms."
-    description: >
-      Led ML engineering for biometric authentication (face anti-spoofing, document OCR verification) and credit scoring using alternative data signals (transaction history, behavioral patterns, device metadata). Navigated OJK (Indonesia Financial Services Authority) regulatory audits requiring full model explainability and fairness documentation. Built MLOps infrastructure for monitoring data drift, feature distribution shifts, and model degradation in a high-stakes lending context.
-    impact: "Expanded financial access to thin-file borrowers (previously unscoreable by traditional credit bureaus) while maintaining regulatory compliance."
+    tags:
+      - Forecasting
+      - Conformal Prediction
+      - XGBoost
+      - GCP Vertex AI
+      - dbt
+      - MLOps
+      - Uncertainty Quantification
+    venue: "Artefact -- Senior Data Scientist (Feb 2025 -- Nov 2025)"
+    role: "Lead ML Engineer (Founding Technical Member, Jakarta Office)"
+    keywords:
+      - Share of voice
+      - Market forecasting
+      - Conformal prediction
+      - Vertex AI
+      - Decision intelligence
 
-  - title: Fraud Detection Pipeline
+    situation: >
+      A Fortune 500 global beauty conglomerate needed a data-driven system for
+      measuring and forecasting Share of Voice (SoV) -- their relative brand
+      presence across competitor-inclusive media impressions -- across 6 APAC
+      markets, 5 product categories, 4 divisions, and 4 digital platforms
+      (Meta, Instagram, TikTok, YouTube). Media Directors and Chief Media Officers
+      were making over- vs. under-investment decisions by brand and market using
+      manual spreadsheet benchmarking updated monthly with 3-4 week lag.
+
+    complication: >
+      The forecasting problem is high-dimensional and sparse: the
+      (category x country x division x platform) grain produces hundreds of
+      independent time series with short histories, seasonal patterns driven
+      by campaign cycles, and competitive signal entangled with organic brand
+      momentum. The initial baseline -- a linear regression -- failed to capture
+      non-linear interaction effects between platform algorithm changes and
+      competitor spend surges. More critically, point forecasts were insufficient
+      for the use case: media planners needed calibrated uncertainty ranges to
+      justify budget reallocation decisions to CFOs, not single-number predictions
+      that communicated false precision.
+
+    resolution:
+      model: >
+        Migrated baseline linear regression to XGBoost after resolving regulatory
+        and stakeholder explainability constraints (SHAP feature importance
+        validated against domain knowledge with client media teams). Integrated
+        third-party competitive intelligence signals from SimilarWeb (web traffic)
+        and Traackr (influencer engagement) alongside platform-native social
+        engagement features via dbt transformation pipelines on BigQuery.
+      uncertainty_quantification: >
+        Designed split conformal prediction wrappers on XGBoost outputs to
+        deliver calibrated prediction intervals with coverage guarantees --
+        replacing point forecasts with plannable uncertainty ranges. Built
+        evaluation pipelines tracking calibration drift and empirical coverage
+        as observable KPIs (target: 90% PI empirical coverage on rolling holdout
+        windows), establishing UQ as a first-class production metric alongside
+        point forecast accuracy.
+      mlops: >
+        Full pipeline on GCP Vertex AI Workbench: automated data ingestion scripts,
+        dbt for feature transformation and versioning, MLflow-equivalent experiment
+        tracking, and Streamlit dashboards translating model outputs into stacked
+        market-share visualizations for non-technical commercial leads. Established
+        engineering baseline (code review, reproducibility standards, config
+        management) as sole technical IC -- setting the production ML delivery
+        standard for a newly opened office.
+      rag_poc: >
+        Developed RAG-based insights PoC for business stakeholders; validated
+        output quality through human-in-the-loop evaluation of factual accuracy
+        and relevance; instrumented prompt versioning and response monitoring
+        via LangSmith as part of a structured LLM evaluation pipeline.
+
+    tech_stack:
+      model: [XGBoost, Conformal Prediction (split)]
+      cloud: [GCP Vertex AI, BigQuery, GCS, Cloud Workstation]
+      data_engineering: [dbt, Python, SQL]
+      external_data: [SimilarWeb, Traackr]
+      serving: [Streamlit]
+      llmops: [LangChain, LangSmith, RAG]
+      uncertainty: [Split conformal prediction, calibration drift monitoring]
+
+    metrics:
+      markets: 6
+      platforms: 4
+      categories: 5
+      divisions: 4
+      latency_reduction_pct: 40
+      decision_cycle_acceleration_pct: 30
+      pi_coverage_target_pct: 90
+
+    impact: >
+      Shifted media investment decisions from reactive (monthly lagged reporting)
+      to predictive (calibrated forward-looking uncertainty ranges), directly
+      informing budget allocation decisions by Media Directors and CMOs across
+      6 APAC markets. Scaled from 1 to 3 countries within 2 months of initial
+      delivery. The conformal prediction framework converted a "model output"
+      into a "decision input" -- the distinction that makes ML commercially
+      durable in enterprise settings.
+
+  # ──────────────────────────────────────────
+
+  - id: biometric-authentication-credit-scoring
+    title: Biometric authentication and alternative credit scoring at scale (GDP Labs)
     category: production
-    tags: [Fintech, Anomaly Detection, Real-Time]
-    venue: "GDP Labs — Lead ML Engineer (2021–2024)"
-    outcome: "Built and maintained real-time fraud detection system reducing fraudulent transaction approval rates significantly on digital payment flows."
-    description: >
-      Designed a multi-stage fraud detection pipeline combining rule-based filters, gradient-boosted classifiers, and graph-based network anomaly detection to catch account takeover, synthetic identity fraud, and merchant collusion patterns. Implemented near-real-time feature serving using Kafka + Redis. Continuously re-trained on labeled feedback loops from the fraud operations team.
-    impact: "Protected both end users and the platform from financial loss; fraud catch rate improvements directly reduced operational chargeback costs."
+    tags:
+      - Biometrics
+      - Face Verification
+      - Anti-Spoofing
+      - Liveness Detection
+      - Credit Scoring
+      - Fintech
+      - MLOps
+      - Regulatory Compliance
+    venue: "GDP Labs (GLAIR.ai) -- Senior Data Scientist / ML Engineer (2021 -- 2023)"
+    role: "Lead ML Engineer -- Promoted to Senior within 12 months"
+    keywords:
+      - Face biometrics
+      - Anti-spoofing
+      - Liveness detection
+      - Credit scoring
+      - OJK compliance
+      - MLflow
+      - Financial inclusion
 
-  - title: Municipal Waste Logistics Forecasting
+    situation: >
+      A major Indonesian bank required a production-grade biometric authentication
+      stack capable of handling login surges at national scale, while simultaneously
+      needing to expand credit access to "thin-file" borrowers -- individuals with
+      insufficient traditional credit bureau history to receive a FICO-equivalent
+      score under conventional underwriting. Indonesia's fintech regulator OJK
+      requires full model explainability and fairness documentation for any
+      credit scoring model deployed in a regulated lending product.
+
+    complication: >
+      Biometric systems for financial services face an adversarial threat model:
+      presentation attacks (photo prints, video replay, 3D masks) are
+      economically motivated at this scale. Anti-spoofing and liveness detection
+      must operate at CPU-only inference (no GPU in production banking
+      infrastructure at the time) under a strict latency SLA at 1M+ daily
+      inferences. Credit scoring under OJK mandates that the model be
+      interpretable to a non-ML-specialist regulator -- which rules out standard
+      gradient boosting outputs without explicit explainability transformation
+      and requires documentation of fairness analysis across demographic groups.
+
+    resolution:
+      biometrics: >
+        Deployed MobileNet backbone (optimized for CPU inference) under Intel
+        OpenVINO runtime, achieving 90% verification accuracy at 99.99% uptime
+        through login surge peaks of 1M+ daily inferences. Designed synchronous
+        and asynchronous load testing harnesses in JMeter to establish production
+        latency benchmarks and identify bottlenecks before deployment.
+        Anti-spoofing and active liveness modules tested under both sync/async
+        load profiles.
+      credit_scoring: >
+        All credit scoring experiments tracked with MLflow (hyperparameter logs,
+        model registry, metric versioning). Shipped a regulatory-explainable
+        scorecard model: logistic regression converted to a points-based scorecard
+        format interpretable by OJK auditors, with SHAP-based feature importance
+        documented for the fairness review. Alternative data signals used:
+        transaction history patterns, behavioral metadata, and device signals
+        for thin-file borrowers previously excluded from formal credit markets.
+        Validated against a 6-month client-monitored window: 35% higher loan
+        approval efficiency, 25% lower default rate vs. prior baseline.
+      mlops: >
+        Established reproducibility standards (fixed seeds, version-pinned
+        configs, regression benchmarks) adopted across 5+ products. Built
+        scalable serverless clustering API on AWS (Kubernetes, scikit-learn,
+        MLflow) for an analytics platform -- 40% increase in business leads
+        reported by client. Set internal code-review bar and automated ML
+        pipeline standards that reduced research-to-production handoff friction
+        company-wide.
+      hr_analytics: >
+        Led HR analytics initiative using PrestoDB and Metabase, resulting in
+        50% productivity measurement improvement for internal operations team.
+
+    tech_stack:
+      frameworks: [PyTorch, scikit-learn, XGBoost]
+      inference: [Intel OpenVINO, MobileNet]
+      mlops: [MLflow, Docker, Kubernetes]
+      cloud: [AWS (S3, EC2, ECR, SageMaker, Lambda, API Gateway)]
+      load_testing: [JMeter (sync + async)]
+      database: [MySQL, PrestoDB]
+      explainability: [SHAP, Scorecard (logistic regression)]
+
+    metrics:
+      daily_inferences: "1M+"
+      uptime_pct: 99.99
+      verification_accuracy_pct: 90.0
+      loan_approval_efficiency_improvement_pct: 35
+      default_rate_reduction_pct: 25
+      business_leads_increase_pct: 40
+      productivity_boost_pct: 50
+      time_to_market_reduction_pct: 30
+      products_impacted: 5
+      promotion_months: 12
+
+    impact: >
+      Expanded financial access to thin-file borrowers previously unscoreable
+      by traditional credit bureaus, while maintaining full OJK regulatory
+      compliance. Biometric stack protected millions of users from presentation
+      attacks at 99.99% availability -- a reliability standard equivalent to
+      Tier 4 data center SLAs applied to an ML inference service.
+
+  # ──────────────────────────────────────────
+
+  - id: fraud-detection-pipeline
+    title: Real-time fraud detection pipeline (GDP Labs)
     category: production
-    tags: [Time Series, Smart City, Forecasting]
-    venue: "Jakarta Smart City — Data Scientist (2020–2021)"
-    outcome: "Deployed demand-side forecasting models informing waste truck routing and collection scheduling for Jakarta's solid waste management agency."
-    description: >
-      Developed time-series forecasting models (Prophet, LSTM) for predicting daily waste volume by district and collection point, integrating public holiday calendars, weather data, and event schedules as exogenous variables. Findings fed directly into route optimization algorithms, reducing truck idle time and improving collection coverage for a city of 10M+ residents.
-    impact: "Operational efficiency gains in waste collection — one of Jakarta's highest-volume urban services — with direct cost and emissions reduction impact."
+    tags:
+      - Fraud Detection
+      - Anomaly Detection
+      - Graph Networks
+      - Real-Time Inference
+      - Kafka
+      - Redis
+      - Fintech
+    venue: "GDP Labs (GLAIR.ai) -- Lead ML Engineer (2021 -- 2023)"
+    role: Lead ML Engineer
 
-  - title: Demand Forecasting for Financial & Media Clients
+    situation: >
+      A digital payments platform processing high daily transaction volumes
+      faced escalating fraud losses across three distinct attack vectors:
+      account takeover (credential stuffing + session hijacking), synthetic
+      identity fraud (fabricated KYC documents), and merchant collusion
+      (fake transaction inflation for revenue sharing manipulation). Each
+      attack type has a different feature signature and temporal dynamics,
+      requiring a multi-stage detection architecture rather than a single
+      classifier.
+
+    complication: >
+      Fraud detection in payments requires near-real-time inference: a decision
+      must be issued within the transaction authorization window (typically
+      sub-second). This constraints model complexity -- full graph neural network
+      inference on the entire transaction network is not feasible at authorization
+      time. Additionally, the class imbalance problem is extreme (fraud rate
+      typically < 0.1%), and the adversarial nature of the problem means that
+      fraudsters adapt to model outputs, creating continuous concept drift
+      that invalidates static models within weeks.
+
+    resolution:
+      architecture: >
+        Designed a multi-stage pipeline combining three detection layers:
+        (1) rule-based pre-filters for known attack signatures (velocity checks,
+        geolocation anomalies, device fingerprint blacklists) as low-latency
+        first-pass rejection, (2) gradient-boosted classifiers (XGBoost) on
+        engineered transaction features for the statistical anomaly detection
+        layer, (3) graph-based network anomaly detection to identify merchant
+        collusion rings and synthetic identity clusters using structural patterns
+        in the transaction graph.
+      real_time_serving: >
+        Near-real-time feature serving implemented via Kafka (event streaming
+        for transaction ingestion) and Redis (low-latency feature store for
+        pre-computed aggregate features: rolling velocity counts, behavioral
+        baselines per account). This decouples feature computation from
+        inference, enabling complex features without violating latency SLAs.
+      continuous_learning: >
+        Continuous retraining pipeline on labeled feedback from the fraud
+        operations team (human-in-the-loop label generation from case resolution
+        outcomes). Deployed with monitoring on feature distribution shifts and
+        score distribution drift as early warning signals for concept drift
+        between retraining cycles.
+
+    tech_stack:
+      models: [XGBoost, gradient boosting, graph anomaly detection]
+      streaming: [Apache Kafka]
+      feature_store: [Redis]
+      frameworks: [Python, scikit-learn]
+      infrastructure: [Docker, Kubernetes, AWS]
+
+    impact: >
+      Measurably reduced fraudulent transaction approval rates on digital payment
+      flows, with fraud catch rate improvements directly reducing operational
+      chargeback costs and protecting both end users and platform economics.
+      The multi-stage architecture pattern -- rule-based pre-filter, statistical
+      classifier, graph anomaly detector -- became the internal template for
+      subsequent fraud system designs across the client portfolio.
+
+  # ──────────────────────────────────────────
+
+  - id: municipal-waste-forecasting
+    title: Municipal waste logistics forecasting -- Jakarta Smart City
     category: production
-    tags: [Forecasting, Client Delivery, Consulting]
-    venue: "Artefact — Data Scientist (2024)"
-    outcome: "Delivered demand and audience forecasting models for enterprise clients in financial services and media verticals."
-    description: >
-      Built and shipped forecasting solutions as a consulting data scientist: audience reach forecasting for a media group's advertising inventory planning, and transaction volume forecasting for a financial services client's treasury operations. Projects required rapid iteration on data quality issues, client-specific business constraints, and hand-off to internal client teams with full documentation.
-    impact: "Enabled clients to shift from reactive to predictive planning — directly informing budget allocation and operational staffing decisions."
+    tags:
+      - Time Series Forecasting
+      - Smart City
+      - Prophet
+      - LSTM
+      - Causal Inference
+      - Policy Analysis
+    venue: "Jakarta Smart City -- Data Scientist (Jan 2021 -- June 2021)"
+    role: Lead Data Scientist
 
-  - title: "HakkTaxi: Ride-Share Demand Prediction"
-    category: applied
-    tags: [Gradient Boosting, Geospatial, Azure, Hackathon]
-    venue: "Microsoft Azure APAC Hackathon — Regional Champion (2020)"
-    outcome: "Built and won with a real-time ride-share demand prediction system leveraging Azure ML, geospatial clustering, and live traffic data."
-    description: >
-      In 48 hours, designed a demand heatmap and surge prediction system for ride-hailing in Jakarta using gradient boosting on historical trip logs, weather data, and Points of Interest density. Integrated with Azure Maps for live visualization. Competed against teams across Southeast Asia and Australia.
-    impact: "Recognized as Regional Champion across APAC — demonstrated practical ML system design under competition constraints."
+    situation: >
+      Jakarta's solid waste management agency (DINAS LINGKUNGAN HIDUP) operates
+      waste collection logistics for a city of 10M+ residents across hundreds
+      of collection points and sub-districts. Route scheduling was reactive --
+      trucks were dispatched on fixed schedules irrespective of actual waste
+      accumulation, resulting in both under-collection (overflow complaints) and
+      over-collection (idle truck capacity wasted on empty routes), with cascading
+      effects on fuel cost and emissions.
 
-  - title: "TeleHealthMonitor: Edge AI for Remote Patient Monitoring"
-    category: applied
-    tags: [Edge AI, Healthcare, Computer Vision, Hackathon]
-    venue: "CamvsCovid, University of Cambridge — Top 3 Globally (2020)"
-    outcome: "Designed a low-bandwidth remote patient monitoring system using on-device CV inference to reduce hospital load during COVID-19."
-    description: >
-      Built a system enabling remote vitals monitoring (respiratory rate estimation via camera, symptom self-reporting) designed for low-connectivity environments — running inference on-device (mobile/edge) to minimize data transmission. Targeted under-resourced clinics across Indonesia where broadband is unreliable. Finished in the global top 3 out of hundreds of international submissions.
-    impact: "Validated the feasibility of edge-first AI healthcare tools for emerging markets — a design pattern increasingly adopted in global health AI."
+    complication: >
+      Waste volume forecasting at the collection-point grain is a noisy time
+      series problem with strong but irregular seasonality: public holidays,
+      cultural events (Lebaran, Christmas), local market days, and weather
+      events (heavy rain flooding) all create non-stationary spikes that
+      additive decomposition models struggle to capture. A single city-level
+      forecast is insufficient -- route optimization requires district-level
+      and collection-point-level granularity, multiplying the forecasting
+      problem by hundreds of independent series with varying data quality.
 
-  - title: "Community IVR: Voice AI for Offline Communities"
-    category: applied
-    tags: [NLP, Speech, Accessibility, Hackathon]
-    venue: "Cal Hacks 8.0, UC Berkeley — Best Community Track (2020)"
-    outcome: "Built an IVR (interactive voice response) system delivering essential information to communities without smartphones or internet access."
-    description: >
-      Designed a phone-based AI assistant using speech recognition and a structured knowledge graph to answer community health, government services, and COVID-19 guidance queries — operable via basic feature phones on 2G networks. Optimized for Indonesian language and local dialect variation. Won Best Community Track at UC Berkeley's flagship hackathon.
-    impact: "Addressed digital exclusion directly — the 40% of Indonesians without smartphones remain invisible to most AI applications."
+    resolution:
+      models: >
+        Developed ensemble time-series forecasting pipeline: Facebook Prophet
+        (primary, for interpretable seasonal component estimation and holiday
+        handling) benchmarked against ARIMA, SARIMA, and exponential smoothing
+        baselines. LSTM explored for capturing non-linear temporal dependencies
+        in high-density districts. Exogenous variables integrated: public
+        holiday calendars, weather data (rainfall, temperature), and local
+        event schedules.
+      policy_evaluation: >
+        Conducted pre-post causal analysis to measure the impact of Jakarta's
+        2020 plastic bag ban on waste complaint volume using citizen report data
+        from JAKI and Qlue platforms (100,000+ complaint records). Applied
+        difference-in-differences methodology controlling for seasonal and
+        macroeconomic confounders (COVID-19 mobility restrictions required
+        explicit control). Results provided statistically significant evidence
+        of complaint reduction post-intervention.
+      visualization: >
+        Built Tableau dashboards for spatial-temporal analysis of waste volume
+        patterns by district, translated into operational route recommendations
+        for logistics planners. Results and policy findings presented to 500+
+        attendees at ICISS 2021 (IEEE-sponsored international conference).
 
-  - title: "Plastic Bag Ban: Causal Policy Analysis"
+    tech_stack:
+      frameworks: [Python, R]
+      forecasting: [Facebook Prophet, ARIMA, SARIMA, LSTM, statsmodels]
+      visualization: [Tableau, Matplotlib]
+      libraries: [scikit-learn, pandas, numpy]
+      causal_methods: [Difference-in-differences, hypothesis testing]
+
+    metrics:
+      waste_efficiency_improvement_pct: 15
+      residents_impacted: "10M+"
+      complaint_records_analyzed: "100,000+"
+      conference_attendees: 500
+
+    publications:
+      - citation: >
+          V. Feliren et al., "The Effect of Plastic Bag Ban Policy Towards Waste
+          Complaints in Jakarta Through JAKI and Qlue," ICISS 2021, IEEE.
+        doi: "10.1109/ICISS53185.2021.9533236"
+        link: "https://ieeexplore.ieee.org/document/9533236/"
+
+    impact: >
+      15% operational efficiency improvement in waste collection logistics across
+      a 10M+ resident urban grid -- translating to direct fuel cost reduction and
+      emissions savings. Policy causal analysis provided empirical evidence for
+      the plastic bag ban's effectiveness, establishing a methodology applicable
+      to evaluating future environmental regulations at city scale. First-authored
+      IEEE conference paper presented internationally.
+
+  # ──────────────────────────────────────────
+
+  - id: demand-forecasting-consulting
+    title: Demand and audience forecasting for financial and media clients (Artefact)
+    category: production
+    tags:
+      - Demand Forecasting
+      - Client Delivery
+      - Consulting
+      - Financial Services
+      - Media
+    venue: "Artefact -- Senior Data Scientist (2025)"
+    role: Lead Data Scientist
+
+    situation: >
+      Two enterprise consulting engagements in parallel: a media group requiring
+      audience reach forecasting for advertising inventory planning (forward-looking
+      impressions and CPM estimation by placement type), and a financial services
+      client requiring transaction volume forecasting for treasury operations
+      (liquidity management and capital allocation planning).
+
+    resolution:
+      approach: >
+        Rapid iteration cycle (consulting cadence: 2-week sprint to client demo)
+        requiring simultaneous data quality triage, model selection, business
+        constraint integration (client-specific revenue targets, regulatory
+        reporting periods), and documentation for handoff to internal client
+        teams. Model outputs translated into planning-ready business language --
+        not statistical summaries -- for senior stakeholder consumption.
+      handoff: >
+        Full documentation delivered: model card, feature dictionary, retraining
+        protocol, and dashboard user guide. Client teams validated outputs
+        against business intuition before sign-off -- a critical acceptance
+        criterion in consulting delivery that requires the data scientist to
+        function as both technical lead and domain translator.
+
+    tech_stack:
+      cloud: [GCP (Vertex AI, BigQuery)]
+      frameworks: [Python, XGBoost, Prophet]
+      data_engineering: [dbt, SQL]
+
+    impact: >
+      Enabled both clients to shift from reactive to predictive planning --
+      media client could commit advertising inventory with forward-looking
+      reach estimates, financial client could optimize liquidity buffers against
+      probabilistic transaction volume bands. Both engagements delivered on
+      consulting timelines with internal client team handoff.
+
+  # ──────────────────────────────────────────────
+  # APPLIED & HACKATHON PROJECTS
+  # ──────────────────────────────────────────────
+
+  - id: hakktaxi-ride-share
+    title: "HakkTaxi: ride-share demand prediction (Microsoft Azure APAC Hackathon)"
     category: applied
-    tags: [NLP, Causal Inference, Policy, IEEE]
-    venue: "ICISS 2021 — IEEE"
-    outcome: "Quantified the effect of Jakarta's 2020 plastic bag ban on public waste complaints using NLP-based time-series analysis of citizen reports."
-    description: >
-      Applied difference-in-differences causal inference and NLP-based classification of 100,000+ citizen waste complaints from the Jakarta Smart City platform to measure the policy impact of the plastic bag ban. Identified statistically significant reduction in plastic-specific complaints post-intervention, controlling for seasonal and economic confounders.
-    impact: "Provided empirical evidence for the ban's effectiveness — methodology applicable to evaluating other environmental regulations at city scale."
+    tags:
+      - Gradient Boosting
+      - Geospatial Clustering
+      - Demand Prediction
+      - Azure ML
+      - Real-Time
+      - Hackathon
+    venue: "Microsoft Azure Virtual Hackathon APAC -- Regional Champion (2020)"
+    role: Lead ML Engineer
+    duration_hours: 48
+    keywords:
+      - Ride-hailing demand prediction
+      - Jakarta
+      - Geospatial clustering
+      - Azure Maps
+      - Gradient boosting
+
+    situation: >
+      Jakarta's ride-hailing market suffers from supply-demand mismatch that
+      manifests as surge pricing during predictable high-demand windows (morning
+      commute, Friday evening, rain events). Driver repositioning is reactive --
+      drivers respond to surge pricing signals that are already 5-10 minutes late.
+      A demand heatmap that forecasts surge zones 15-30 minutes ahead would allow
+      proactive repositioning, reducing surge duration and improving driver
+      earnings predictability.
+
+    resolution:
+      architecture: >
+        Within 48 hours: designed a demand heatmap and surge prediction system
+        using gradient boosting (XGBoost) on historical trip logs, weather data,
+        and Points of Interest (POI) density features per geospatial hex cell
+        (H3 grid). Temporal features: hour-of-day, day-of-week, public holiday
+        flag, historical demand rolling averages. Geospatial features: POI
+        category counts (office density, transit hub proximity, entertainment
+        zones). Integrated with Azure Maps API for live visualization as a
+        real-time demand heatmap overlay.
+      competition_result: >
+        Competed against teams across Southeast Asia and Australia. Won Regional
+        Champion across APAC -- validated against international jury with Microsoft
+        engineering and product leadership as judges.
+
+    tech_stack:
+      cloud: [Microsoft Azure (Azure ML, Azure Maps)]
+      model: [XGBoost, gradient boosting]
+      geospatial: [H3 grid, POI density features]
+      data: [Historical trip logs, weather API, POI data]
+
+    metrics:
+      eta_margin_of_error_seconds: 6
+      competition_scope: "Asia Pacific Region"
+      placement: "1st Place (Regional Champion)"
+
+    impact: >
+      Demonstrated full-stack demand forecasting system design -- data ingestion
+      to real-time visualization -- within 48 hours. The 6-second ETA margin
+      of error on validation data validated the geospatial feature engineering
+      approach. Regional Champion result across APAC establishes competitive
+      benchmarking against the region's top applied ML teams.
+
+  # ──────────────────────────────────────────
+
+  - id: telehealthmonitor-edge-ai
+    title: "TeleHealthMonitor: Edge AI for remote patient monitoring (CamvsCovid)"
+    category: applied
+    tags:
+      - Edge AI
+      - Healthcare
+      - Computer Vision
+      - GDPR Compliance
+      - Low Bandwidth
+      - Hackathon
+    venue: "CamvsCovid, Cambridge Judge Business School -- Top 3 Globally (2020)"
+    role: Lead ML Engineer
+    duration_hours: 72
+    keywords:
+      - Remote patient monitoring
+      - Edge inference
+      - Respiratory rate estimation
+      - COVID-19
+      - Indonesia
+      - GDPR
+
+    situation: >
+      During the COVID-19 pandemic surge (early 2020), Indonesian public hospitals
+      faced patient overflow that required monitoring high-risk home-isolated
+      patients remotely. Standard telemonitoring systems assumed broadband
+      connectivity and expensive hardware (pulse oximeters, ECG patches) --
+      neither assumption held for the majority of Indonesia's population, where
+      rural broadband penetration was below 30% and healthcare hardware supply
+      chains were disrupted.
+
+    complication: >
+      Camera-based vitals estimation (respiratory rate via chest motion analysis)
+      is computationally expensive if inference runs server-side -- the video
+      stream alone would overwhelm rural 2G/3G connections. On-device inference
+      on consumer smartphones (low-end Android, 2017-2019 chipsets) requires
+      aggressive model compression and runtime optimization. GDPR-equivalent
+      patient privacy requirements prohibit raw video transmission to cloud
+      servers -- on-device inference is not just a bandwidth solution, it is
+      a compliance requirement.
+
+    resolution:
+      architecture: >
+        Designed an edge-first architecture: respiratory rate estimation via
+        optical flow analysis on chest region (bounding box from lightweight
+        pose estimation) running entirely on-device. Only the derived vital
+        sign estimate (a single float, not video frames) is transmitted to the
+        monitoring dashboard. Symptom self-reporting via structured mobile form
+        provides complementary clinical signal.
+      optimization: >
+        Model quantized and optimized for ARM CPU inference on target chipset
+        range. Evaluated inference latency and accuracy tradeoff across
+        quantization levels (FP32, FP16, INT8) on physical device testing.
+      privacy: >
+        GDPR-compliant by design: zero raw biometric data leaves the device.
+        Data transmission limited to aggregated vital sign estimates and
+        structured symptom reports.
+
+    tech_stack:
+      inference: [On-device (ARM CPU), optical flow, pose estimation]
+      optimization: [Model quantization (INT8/FP16), OpenCV]
+      connectivity: [2G/3G compatible (minimal data transmission)]
+      frameworks: [Python, OpenCV, TensorFlow Lite]
+
+    metrics:
+      global_placement: "Top 3 (out of hundreds of international submissions)"
+      competition: "University of Cambridge (15 finalist teams)"
+
+    impact: >
+      Top 3 globally at Cambridge's international COVID-19 innovation challenge.
+      Validated the edge-first AI healthcare architecture for emerging markets --
+      a design pattern that has since been adopted across multiple global health
+      AI deployment contexts where bandwidth and hardware constraints are binding.
+      Demonstrated that GDPR-compliant vitals monitoring is achievable on
+      commodity 2019-era smartphones at 2G data rates.
+
+  # ──────────────────────────────────────────
+
+  - id: community-ivr-voice-ai
+    title: "Community IVR: Voice AI for offline communities (Cal Hacks 8.0)"
+    category: applied
+    tags:
+      - NLP
+      - Speech Recognition
+      - IVR
+      - Accessibility
+      - Low-Resource
+      - Hackathon
+    venue: "Cal Hacks 8.0, UC Berkeley -- Best Community Track (2020)"
+    role: Lead ML Engineer
+    duration_hours: 36
+    keywords:
+      - Interactive voice response
+      - Feature phone
+      - Indonesian NLP
+      - Digital inclusion
+      - 2G network
+      - COVID-19
+
+    situation: >
+      During the COVID-19 pandemic, Indonesian government health guidance,
+      social program eligibility, and emergency services information was
+      primarily distributed through smartphone apps and social media platforms.
+      This created a critical information exclusion for the estimated 40% of
+      Indonesians without smartphones -- predominantly rural, elderly, and
+      low-income populations who were simultaneously the most vulnerable to
+      COVID-19 health and economic shocks.
+
+    resolution:
+      architecture: >
+        Designed a phone-based AI assistant operable via basic feature phones
+        on 2G networks -- no smartphone, no internet, no app required. Core
+        components: ASR (Automatic Speech Recognition) optimized for Indonesian
+        language and local dialect variation (Javanese-accented Indonesian,
+        Sundanese-accented Indonesian), a structured knowledge graph for COVID-19
+        health guidance, government service eligibility, and emergency contact
+        routing, and a Text-to-Speech response layer.
+      accessibility_design: >
+        Designed for zero digital literacy barrier: interaction model mirrors
+        existing DTMF IVR systems that Indonesian users were already familiar
+        with from banking and telecom services. Free-form voice queries supported
+        for users unfamiliar with menu navigation.
+      localization: >
+        Knowledge graph manually curated for Indonesian context: local health
+        authority contact numbers, regional quarantine regulations, bantuan
+        sosial (social assistance) eligibility criteria, and local dialect
+        variation in query phrasing.
+
+    tech_stack:
+      speech: [ASR, TTS, DTMF IVR]
+      nlp: [Knowledge graph, intent classification]
+      infrastructure: [PSTN (standard telephone network), 2G compatible]
+      language: "Indonesian + Javanese/Sundanese dialect variants"
+
+    metrics:
+      placement: "Best Community Track"
+      competition: "Cal Hacks 8.0, UC Berkeley"
+      target_demographic: "40% of Indonesians without smartphones"
+
+    impact: >
+      Directly addressed digital exclusion at a population scale -- the 40%
+      of Indonesians without smartphones are invisible to virtually all AI
+      applications. Won Best Community Track at UC Berkeley's flagship hackathon,
+      validating the design approach with an international jury. The architecture
+      pattern (feature phone + ASR + knowledge graph, no smartphone required)
+      remains relevant for digital inclusion challenges across Sub-Saharan Africa,
+      rural South Asia, and other underserved markets.
+
+  # ──────────────────────────────────────────
+
+  - id: plastic-bag-ban-causal-analysis
+    title: Plastic bag ban -- causal policy analysis using NLP and citizen data
+    category: applied
+    tags:
+      - NLP
+      - Causal Inference
+      - Difference-in-Differences
+      - Policy Analysis
+      - IEEE
+      - Smart City
+    venue: "ICISS 2021 -- IEEE"
+    role: First Author
+    doi: "10.1109/ICISS53185.2021.9533236"
     link: "https://ieeexplore.ieee.org/document/9533236/"
+    keywords:
+      - Plastic bag ban
+      - Waste complaints
+      - Hypothesis testing
+      - Causal inference
+      - e-government
+      - Jakarta
+
+    situation: >
+      Jakarta implemented a plastic bag ban in 2020 -- prohibiting single-use
+      plastic bag distribution by retailers. Policy makers needed empirical
+      evidence of the ban's effectiveness to justify regulatory enforcement
+      costs and inform decisions about extending similar restrictions to other
+      waste categories. No quantitative impact evaluation had been conducted
+      using the city's own citizen complaint data platforms.
+
+    complication: >
+      Causal identification is non-trivial in this setting. The plastic bag ban
+      coincided with COVID-19 lockdown measures that dramatically reduced retail
+      footfall and waste generation -- a massive confounding event that would
+      inflate any naive pre-post comparison. Controlling for pandemic-period
+      mobility restrictions, economic activity reduction, and seasonal waste
+      patterns simultaneously requires explicit causal inference methodology,
+      not simple before-after descriptive statistics.
+
+    resolution:
+      method: >
+        Applied difference-in-differences (DiD) causal inference framework using
+        NLP-classified citizen waste complaints from JAKI (Jakarta's official
+        smart city complaint platform) and Qlue (a civic reporting platform).
+        100,000+ complaint records classified by waste type using text
+        classification -- distinguishing plastic-specific complaints from
+        general waste, sanitation, and other urban service complaints.
+        Plastic-specific complaints serve as the treatment group; non-plastic
+        waste complaints serve as the control group within the same platform
+        and time period.
+      confounders: >
+        Controlled for: COVID-19 mobility reduction (using Google Community
+        Mobility Reports as a proxy), seasonal waste volume patterns, and
+        platform reporting activity levels (to distinguish real-world waste
+        changes from changes in complaint behavior).
+      result: >
+        Identified statistically significant reduction in plastic-specific
+        complaints post-ban-implementation, controlling for pandemic confounders.
+        Pre-registered hypotheses and transparent methodology presented at
+        ICISS 2021.
+
+    tech_stack:
+      nlp: [Text classification, complaint taxonomy]
+      causal: [Difference-in-differences, hypothesis testing]
+      data: [JAKI, Qlue citizen complaint platforms]
+      statistics: [Python statsmodels, R]
+      records_analyzed: "100,000+"
+
+    metrics:
+      complaint_records: "100,000+"
+      conference_attendees: 500
+      venue: "ICISS 2021, IEEE, Bandung, Indonesia"
+
+    impact: >
+      Provided empirical causal evidence for the plastic bag ban's effectiveness --
+      the first quantitative impact evaluation using Jakarta's own citizen
+      complaint infrastructure. Methodology is directly replicable for evaluating
+      future environmental regulations (food container bans, extended producer
+      responsibility policies) at city scale. Presented to 500+ international
+      attendees at IEEE-sponsored ICISS 2021, establishing this as a template
+      for evidence-based urban environmental policy evaluation in emerging market
+      smart cities.
+
+# ============================================================
+# CROSS-CUTTING TECHNICAL CAPABILITIES
+# ============================================================
+
+technical_capabilities:
+  deep_learning_and_multimodal:
+    - PyTorch
+    - TensorFlow
+    - PyTorch Lightning
+    - Vision-Language Models (VLM)
+    - Conformal Prediction
+    - Knowledge Distillation
+    - Diffusion Models (SDXL fine-tuning)
+
+  generative_ai_and_llmops:
+    - LangChain
+    - LangGraph
+    - Retrieval-Augmented Generation (RAG)
+    - LLM Evaluation (LLM-as-a-judge, human-in-the-loop)
+    - LangSmith
+    - Vector Databases
+    - Agentic Workflows
+
+  computer_vision_and_geospatial:
+    - OpenCV
+    - Semantic Segmentation
+    - Multispectral Imaging
+    - Pose Estimation
+    - Google Earth Engine
+    - Optical Flow
+
+  production_ml_and_data_engineering:
+    - GCP (Vertex AI, BigQuery, GCS)
+    - AWS (EC2, S3, SageMaker, Lambda, API Gateway, ECR)
+    - Kubernetes
+    - Docker
+    - Apache Spark
+    - dbt
+    - Intel OpenVINO
+
+  experimentation_and_observability:
+    - MLflow
+    - Weights & Biases (W&B)
+    - A/B Testing
+    - Latency Benchmarking
+    - Calibration Drift Monitoring
+    - Causal Inference (pre-post policy analysis, DiD)
+    - JMeter (sync + async load testing)
+
+  uncertainty_quantification:
+    - Split Conformal Prediction
+    - Calibrated Prediction Intervals
+    - Coverage Guarantee Monitoring
+    - Empirical Coverage KPIs
+
+  visualization_and_analytics:
+    - Tableau
+    - Streamlit
+    - Plotly
+    - Matplotlib
+
+  languages_and_foundations:
+    - Python
+    - Scala
+    - SQL
+    - R
+    - Git
+    - Linux/Unix
+
+# ============================================================
+# PUBLICATIONS
+# ============================================================
+
+publications:
+  q1_journals:
+    - id: ieee-grsl-2025
+      citation: >
+        V. Feliren, F. Khikmah, I. D. Bhaswara, B. I. Nasution, A. M. Lechner,
+        and M. R. U. Saputra, "Progressive Cross-Attention Network for Flood
+        Segmentation Using Multispectral Satellite Imagery," IEEE Geoscience and
+        Remote Sensing Letters, vol. 22, pp. 1-5, 2025, Art no. 1500105.
+      doi: "10.1109/LGRS.2024.3495974"
+      link: "https://ieeexplore.ieee.org/document/10750225"
+      role: First Author
+      if: 4.4
+      quartile: Q1
+
+    - id: rse-2025
+      citation: >
+        M. R. U. Saputra, I. D. Bhaswara, B. I. Nasution, M. A. L. Ern,
+        N. L. R. Husna, T. Witra, V. Feliren, J. R. Owen, D. Kemp, and
+        A. M. Lechner, "Multi-modal deep learning approaches to semantic
+        segmentation of mining footprints with multispectral satellite imagery,"
+        Remote Sensing of Environment, vol. 318, 2025, Art. no. 114584.
+      doi: "10.1016/j.rse.2024.114584"
+      link: "https://doi.org/10.1016/j.rse.2024.114584"
+      role: Co-Author
+      if: 11.4
+      quartile: Q1
+
+  q2_journals:
+    - id: aqua-2025
+      citation: >
+        E. Permanasari, M. Wijaya, V. Feliren, F. Khikmah, A. Lechner,
+        A. Virani, and R. Saputra, "Enhancing urban resilience through
+        integrated flood policy and planning: a mixed-methods evaluation
+        of retention ponds for flood mitigation in South Bandung,"
+        AQUA - Water Infrastructure, Ecosystems and Society, 2025.
+      doi: "10.2166/aqua.2025.292"
+      role: Co-Author
+      quartile: Q2
+
+  top_conferences:
+    - id: acl-2025-seavl
+      citation: >
+        S. Cahyawijaya, H. Lovenia, J. R. A. Moniz, [...], V. Feliren, et al.,
+        "Crowdsource, Crawl, or Generate? Creating SEA-VL, a Multicultural
+        Vision-Language Dataset for Southeast Asia," ACL 2025 (Main Conference).
+      arxiv: "https://arxiv.org/abs/2503.07920"
+      link: "https://aclanthology.org/2025.acl-long.916/"
+      role: Core Contributor -- Data Pipeline Lead
+      venue_tier: "ACL (top-tier NLP venue)"
+
+    - id: acl-2026-commonlid
+      citation: >
+        "CommonLID: Language Identification on Noisy Web Data," ACL 2026.
+      arxiv: "https://arxiv.org/abs/2601.18026"
+      role: Contributor
+      venue_tier: "ACL (top-tier NLP venue)"
+
+    - id: iciss-2021
+      citation: >
+        V. Feliren, Y. Nugraha, B. I. Nasution, C. Febria Finola,
+        J. I. Kanggrawan, and A. L. Suherman, "The Effect of Plastic Bag
+        Ban Policy Towards Waste Complaints in Jakarta Through JAKI and Qlue,"
+        ICISS 2021, IEEE.
+      doi: "10.1109/ICISS53185.2021.9533236"
+      link: "https://ieeexplore.ieee.org/document/9533236/"
+      role: First Author
+
+  preprints:
+    - id: gg-ez-2026
+      citation: >
+        V. Feliren et al., "GG-EZ: Regional Adaptation in Vision-Language
+        Models," arXiv preprint, 2026.
+      arxiv: "https://arxiv.org/abs/2604.11490"
+      role: Lead Author -- Diffusion Arm
+
+# ============================================================
+# PATENTS
+# ============================================================
+
+patents:
+  - title: "System for Detection and Analysis of Fish and Shrimp Ponds Using Satellite Imagery"
+    id: IDS000010594
+    issued: "June 2025"
+    institution: Monash University
+
+# ============================================================
+# AWARDS & RECOGNITION
+# ============================================================
+
+awards:
+  hackathons:
+    - title: "Microsoft Azure Virtual Hackathon APAC"
+      placement: "1st Place -- Regional Champion"
+      year: 2020
+      project: HakkTaxi
+      scope: "Asia Pacific Region"
+
+    - title: "CamvsCovid, Cambridge Judge Business School"
+      placement: "Top 3 Globally (15 finalist teams)"
+      year: 2020
+      project: TeleHealthMonitor
+
+    - title: "Cal Hacks 8.0, UC Berkeley"
+      placement: "Best Community Track"
+      year: 2020
+      project: Community IVR
+
+    - title: "Reboot the Earth, UN Technology Innovation Labs"
+      placement: "Top 10"
+      year: 2019
+
+  scholarships:
+    - title: "Monash Indonesia Inaugural Welcome Scholarship"
+      year: 2024
+    - title: "Deep Learning Nanodegree Scholarship (Facebook & Udacity)"
+      year: 2019
+    - title: "Monash Travel Grant Scholarship (Student Exchange, NTU Singapore)"
+      year: 2018
+
+  service:
+    hackathon_judge:
+      - "iNTUition v8.0, Nanyang Technological University (2022)"
+      - "CruzHacks 2022, UC Santa Cruz (2022)"
+      - "Cal Hacks 8.0, UC Berkeley (2021)"
+    teaching:
+      - role: "Machine Learning Instructor & Project Advisor"
+        institution: "Bangkit Academy (Google, Tokopedia, Gojek, Traveloka)"
+        period: "Jan 2024 -- Jan 2025"
+        note: "Taught ML curriculum and supervised capstone projects for university students across Indonesia"
+      - role: "Guest Lecturer, Computer Vision"
+        institution: "Bina Nusantara University"
+        period: "Nov 2023"
+        note: "Delivered applied CV lectures to 100+ undergraduate engineering students"
