@@ -6,6 +6,13 @@ microsoft-azure-hackathon:
   description: 'Regional champion across APAC with HakkTaxi — a ride-sharing demand predictor built on Azure Spatial data, delivered in 48 hours. Microsoft featured the project in their official APAC innovation announcement.'
   url: 'https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/'
 
+iisf-most-visionary:
+  category: 'MOST VISIONARY RESEARCH'
+  title: 'Mining Spatial Data Intelligence Research Hub — IISF 2024'
+  year: '2024'
+  description: 'Most Visionary Research at the Indonesia International Sustainability Forum (IISF) 2024 Virtual Academic Dialogue — for applying AI and remote sensing to evaluate biodiversity impacts from energy transition mining in Indonesia.'
+  url: 'https://www.monash.edu/indonesia/news/mining-spatial-data-intelligence-research-hub-wins-most-visionary-research-at-iisf-2024'
+
 monash-scholarship:
   category: 'SCHOLARSHIP'
   title: 'Monash Indonesia Inaugural Welcome Scholarship'
