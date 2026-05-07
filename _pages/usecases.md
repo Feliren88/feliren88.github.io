@@ -6,10 +6,6 @@ description: A practitioner's view of ML use cases across geospatial AI, cultura
 permalink: /usecases/
 ---
 
-<p class="eyebrow">APPLIED WORK</p>
-<h1 class="page-title">Use Cases</h1>
-<p class="page-subtitle">{{ page.subtitle }}</p>
-
 <div class="wip-notice" role="note">
   <span class="wip-badge">Work in Progress</span>
   <p>{{ site.data.usecases.wip_notice }}</p>
