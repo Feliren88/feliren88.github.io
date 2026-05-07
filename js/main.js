@@ -21,6 +21,11 @@ document.addEventListener("dragstart", (event) => {
 
 /* --- Scroll-reveal --- */
 const revealNodes = document.querySelectorAll(".reveal");
+function revealInView(node) {
+  if (node.classList.contains("in-view")) return;
+  const r = node.getBoundingClientRect();
+  if (r.top < window.innerHeight && r.bottom > 0) node.classList.add("in-view");
+}
 if ("IntersectionObserver" in window && revealNodes.length > 0) {
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -31,9 +36,12 @@ if ("IntersectionObserver" in window && revealNodes.length > 0) {
         }
       }
     },
-    { threshold: 0.14 }
+    { threshold: 0 }
   );
   revealNodes.forEach((node) => revealObserver.observe(node));
+  // iOS Safari doesn't fire the observer for elements already in view at
+  // load time — flush them manually after layout settles (double-rAF).
+  requestAnimationFrame(() => requestAnimationFrame(() => revealNodes.forEach(revealInView)));
 } else {
   revealNodes.forEach((node) => node.classList.add("in-view"));
 }
