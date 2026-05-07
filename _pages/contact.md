@@ -4,10 +4,10 @@ title: Work with Vicky Feliren
 subtitle: Speaking, Research Collaboration, Mentorship, Applied Scientist Roles
 description: Available for speaking engagements, research collaboration, mentorship, and applied scientist roles internationally. Specializing in trustworthy AI and cultural AI for Southeast Asia.
 permalink: /contact/
-preload_image: /assets/img/profile_3_bg.webp
+preload_image: /assets/img/profile_2_color.webp
 ---
 
-<img src="/assets/img/profile_3_bg.webp" alt="" class="profile-bg" aria-hidden="true" draggable="false" fetchpriority="high">
+<img src="/assets/img/profile_2_color.webp" alt="" class="profile-bg" aria-hidden="true" draggable="false" fetchpriority="high">
 
 <p class="eyebrow">LET'S WORK TOGETHER</p>
 <p class="contact-intro">{{ site.data.contact.intro }}</p>
