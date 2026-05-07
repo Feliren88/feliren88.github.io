@@ -3,14 +3,10 @@
 const CACHE = 'feliren88-{{ site.time | date: "%s" }}';
 const PRECACHE = [
   '/',
-  '/about/',
-  '/expertise/',
-  '/work/',
   '/research/',
-  '/recognition/',
   '/writings/',
   '/contact/',
-  '/css/styles.css?v=10',
+  '/css/styles.css?v=12',
   '/js/main.js?v=5',
   '/js/components/nav.js',
   '/assets/fonts/manrope-latin.woff2',
