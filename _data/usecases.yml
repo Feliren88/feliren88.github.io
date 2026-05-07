@@ -340,6 +340,17 @@ usecases:
       quantitative evaluation of their effectiveness at the city scale is rarely
       conducted prior to large-scale replication.
 
+    complication: >
+      Urban flood interventions are seldom evaluated with causal rigour — construction
+      volume is treated as a proxy for effectiveness. The confounding problem is
+      severe: retention pond implementation coincides with seasonal rainfall variation,
+      upstream catchment changes, and ongoing expansion of impervious surface cover
+      across the city — all of which independently alter flood frequency. A naive
+      before-after comparison would misattribute any observed reduction to the
+      intervention when the causal signal is fundamentally ambiguous. Policy
+      replication at city scale required defensible quantitative evidence, not
+      directional narratives from anecdotal post-project reports.
+
     resolution:
       approach: >
         Mixed-methods evaluation combining deep learning-based flood segmentation
@@ -980,6 +991,18 @@ usecases:
       client requiring transaction volume forecasting for treasury operations
       (liquidity management and capital allocation planning).
 
+    complication: >
+      Consulting sprint cadence -- 2-week cycles from kickoff to senior-stakeholder
+      demo -- is structurally incompatible with the iterative data quality
+      investigation that forecasting accuracy requires. Both engagements surfaced
+      data gaps mid-sprint: sparse historical coverage for specific media placement
+      types, thin transaction records for niche instrument categories. More
+      critically, both clients arrived with pre-formed intuitions about expected
+      forecast ranges; any model output that violated those intuitions demanded
+      immediate explainability -- not a follow-up memo -- requiring the data
+      scientist to function simultaneously as technical lead, domain translator,
+      and stakeholder manager under a hard clock.
+
     resolution:
       approach: >
         Rapid iteration cycle (consulting cadence: 2-week sprint to client demo)
@@ -1039,6 +1062,18 @@ usecases:
       A demand heatmap that forecasts surge zones 15-30 minutes ahead would allow
       proactive repositioning, reducing surge duration and improving driver
       earnings predictability.
+
+    complication: >
+      A 48-hour competition window eliminates access to the proprietary trip
+      telemetry that production demand forecasting requires. The core feature
+      engineering challenge: constructing a credible demand signal from proxy
+      variables -- historical aggregates, weather data, and static POI density --
+      that generalises across Jakarta's heterogeneous urban geography. CBD office
+      clusters, university campuses, market districts, and transit hubs each
+      exhibit fundamentally different demand dynamics that a single model must
+      capture without overfitting. The additional constraint: a system demonstrable
+      in 5 minutes to non-technical judges while withstanding commercial scrutiny
+      from Microsoft product leadership on the jury panel.
 
     resolution:
       architecture: >
@@ -1181,6 +1216,17 @@ usecases:
       Indonesians without smartphones -- predominantly rural, elderly, and
       low-income populations who were simultaneously the most vulnerable to
       COVID-19 health and economic shocks.
+
+    complication: >
+      IVR systems fail in emerging markets through predictable usability breakdowns:
+      menu trees designed for literate, patient users collapse under dialect
+      variation, background noise, and low digital confidence. Indonesian ASR
+      trained on formal broadcast speech systematically underperforms on
+      Javanese-accented, Sundanese-accented, and code-switched Indonesian -- the
+      dominant registers of the target population. The knowledge base itself was
+      a moving target: quarantine regulations, bantuan sosial eligibility criteria,
+      and emergency contact routing changed weekly during the 2020 pandemic surge.
+      A static knowledge graph would be obsolete before deployment.
 
     resolution:
       architecture: >
