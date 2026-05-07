@@ -50,6 +50,41 @@
   --shadow: 0 22px 40px rgba(0, 0, 0, 0.3);
 }
 
+html[data-theme="light"] {
+  --bg: #f0f3f7;
+  --bg-soft: #e8ecf3;
+  --bg-grid: rgba(95, 113, 136, 0.07);
+  --surface: rgba(255, 255, 255, 0.65);
+  --surface-soft: rgba(240, 243, 247, 0.9);
+  --text: #141c28;
+  --muted: #3d506b;
+  --line: rgba(114, 130, 152, 0.2);
+  --line-strong: rgba(114, 130, 152, 0.3);
+  --accent: #3f6490;
+  --accent-2: #2e5070;
+  --border-ui: rgba(63, 100, 144, 0.65);
+  --shadow: 0 22px 40px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0.3rem 0.4rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { color: var(--accent); }
+.theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.theme-btn .icon-moon { display: none; }
+.theme-btn .icon-sun  { display: block; }
+html[data-theme="light"] .theme-btn .icon-moon { display: block; }
+html[data-theme="light"] .theme-btn .icon-sun  { display: none; }
+
 * {
   box-sizing: border-box;
 }

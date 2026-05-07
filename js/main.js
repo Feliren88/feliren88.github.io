@@ -418,7 +418,8 @@ function initPointCloudLab() {
       const depthNorm = Math.max(0, Math.min(1, (p.depth + 240) / 480));
       const alpha = 0.12 + depthNorm * 0.33;
       const size = 0.85 + depthNorm * 2.3;
-      const tone = 112 + depthNorm * 46;
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const tone = isLight ? 58 + depthNorm * 40 : 112 + depthNorm * 46;
       ctx.fillStyle = `rgba(${tone.toFixed(0)}, ${(tone + 22).toFixed(0)}, ${(tone + 36).toFixed(0)}, ${alpha.toFixed(3)})`;
       ctx.fillRect(p.x, p.y, size, size);
     }
