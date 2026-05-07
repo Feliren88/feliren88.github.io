@@ -1,0 +1,151 @@
+wip_notice: "This page is a living document — use cases are being documented progressively as part of an ongoing effort to make my applied work more accessible. Check back for updates."
+
+categories:
+  - id: geospatial
+    label: Geospatial AI & Remote Sensing
+    color: accent
+
+  - id: cultural
+    label: Cultural & Multilingual AI
+    color: accent-2
+
+  - id: production
+    label: Production ML — Industry
+    color: accent
+
+  - id: applied
+    label: Applied & Hackathon Projects
+    color: accent-2
+
+usecases:
+  - title: Flood Segmentation from Multispectral Satellite Imagery
+    category: geospatial
+    tags: [Semantic Segmentation, Remote Sensing, IEEE]
+    venue: "IEEE IGARSS 2024 (Q1 Conference)"
+    outcome: "Published architecture — ProCANet — with progressive cross-attention mechanism outperforming baseline U-Net variants on the FloodNet benchmark."
+    description: >
+      Designed and implemented ProCANet, a progressive cross-attention network for pixel-level flood detection using Sentinel-2 multispectral imagery. The model learns to fuse spectral bands with spatial context at multiple scales, enabling reliable segmentation in heterogeneous terrain (urban, agricultural, forest) under partially cloudy conditions. Trained on FloodNet disaster-response data; evaluated against SOTA semantic segmentation architectures.
+    impact: "Directly applicable to disaster response pipelines — rapid, automated damage extent mapping from satellite passes within hours of an event."
+    link: "https://ieeexplore.ieee.org/document/10750225"
+
+  - title: Mining Footprint Detection with Multi-Modal Satellite Data
+    category: geospatial
+    tags: [Multi-Modal Fusion, Land Use, Elsevier RSE]
+    venue: "Remote Sensing of Environment (IF 11.4, Q1 Journal)"
+    outcome: "Multi-modal architecture fusing optical + SAR + DEM inputs, achieving state-of-the-art footprint delineation over large-scale Australian mining regions."
+    description: >
+      Built a multi-modal deep learning pipeline that fuses optical (Sentinel-2), synthetic aperture radar (Sentinel-1), and digital elevation model data to segment active and historical mining footprints. Addressed domain shift across geographies (different ore types, vegetation cover, seasonal variation) and temporal change detection. Work conducted at Monash University in collaboration with environmental monitoring stakeholders.
+    impact: "Enables automated, scalable land-use accountability for environmental compliance and rehabilitation planning — previously requiring months of manual GIS analysis."
+    link: "https://doi.org/10.1016/j.rse.2024.114584"
+
+  - title: Aquaculture Pond Detection & Change Analysis
+    category: geospatial
+    tags: [Object Detection, Coastal Monitoring, Patent]
+    venue: "Monash University — Filed Patent IDS000010594"
+    outcome: "Novel detection pipeline for identifying and tracking aquaculture pond expansion along Southeast Asian coastlines using time-series satellite imagery."
+    description: >
+      Developed a pipeline to automatically detect and monitor shrimp/fish farming ponds from multi-temporal Sentinel imagery across Indonesia and Vietnam. Tackled challenges including spectral similarity to natural water bodies, tidal variation, and cloud cover. Results fed into a coastal land-use change analysis relevant to mangrove deforestation policy.
+    impact: "Supports government and NGO monitoring of illegal land conversion and ecosystem impact in coastal regions — at satellite-scale speed versus manual survey."
+
+  - title: "SEA-VL: Vision-Language Benchmark for Southeast Asia"
+    category: cultural
+    tags: [Vision-Language Models, Dataset, ACL 2025]
+    venue: "ACL 2025 (Main Conference)"
+    outcome: "Led crowdsourcing and data pipeline for a 10,000+ image-question benchmark spanning 11 SEA languages and diverse cultural contexts."
+    description: >
+      Co-led the data collection and quality assurance pipeline for SEA-VL, a multicultural vision-language dataset capturing everyday Southeast Asian cultural knowledge — food, festivals, architecture, signage, and traditional practices — across Indonesia, Vietnam, Philippines, Thailand, Myanmar, and more. Coordinated a community of 100+ annotators across the region, designed annotation guidelines, and implemented quality filtering. The benchmark exposes systematic blind spots in GPT-4V, Gemini, and Claude on culturally situated reasoning.
+    impact: "Establishes the first rigorous, community-built VLM benchmark for SEA, directly informing model localization efforts by AI labs targeting the region."
+    link: "https://aclanthology.org/2025.acl-long.916/"
+
+  - title: "GG-EZ: Regional Adaptation in Vision-Language Models"
+    category: cultural
+    tags: [VLMs, Cultural AI, Regional Adaptation]
+    venue: "arXiv preprint (2026)"
+    outcome: "Proposed and evaluated an anthropogenic regional adaptation framework improving VLM accuracy on SEA-specific visual content by significant margins over zero-shot baselines."
+    description: >
+      Investigated how vision-language models (LLaVA, InternVL, Phi-Vision) fail at culturally situated tasks and designed an adaptation methodology — combining retrieval-augmented prompting, region-specific fine-tuning, and evaluation scaffolds — to close that gap. Introduced the concept of anthropogenic priors: that cultural context is learnable from structured regional knowledge rather than raw scale.
+    impact: "Provides a replicable playbook for adapting general-purpose VLMs to underrepresented geographies without requiring full retraining."
+    link: "https://arxiv.org/abs/2604.11490"
+
+  - title: "CommonLID: Language Identification on Noisy Web Data"
+    category: cultural
+    tags: [NLP, Language ID, Low-Resource, ACL 2026]
+    venue: "ACL 2026"
+    outcome: "Re-evaluated leading LID systems on realistic web-crawled multilingual data; identified critical degradation patterns on code-switched and low-resource SEA text."
+    description: >
+      Re-benchmarked state-of-the-art language identification systems (fastText, GlotLID, OpenLID) on CommonCrawl-sourced data reflecting real-world noise: code-switching, romanized scripts, and orthographic variation common in SEA languages. Results challenged published accuracy claims and motivated a more rigorous evaluation protocol for low-resource NLP.
+    impact: "Directly affects NLP pipeline reliability for downstream tasks like content moderation, machine translation routing, and corpus construction in SEA."
+    link: "https://arxiv.org/abs/2601.18026"
+
+  - title: Biometric Authentication & Credit Scoring at Scale
+    category: production
+    tags: [Fintech, Production ML, Regulatory Compliance]
+    venue: "GDP Labs — Lead ML Engineer (2021–2024)"
+    outcome: "Shipped biometric liveness detection and alternative credit scoring models into production serving millions of users across Indonesian fintech platforms."
+    description: >
+      Led ML engineering for biometric authentication (face anti-spoofing, document OCR verification) and credit scoring using alternative data signals (transaction history, behavioral patterns, device metadata). Navigated OJK (Indonesia Financial Services Authority) regulatory audits requiring full model explainability and fairness documentation. Built MLOps infrastructure for monitoring data drift, feature distribution shifts, and model degradation in a high-stakes lending context.
+    impact: "Expanded financial access to thin-file borrowers (previously unscoreable by traditional credit bureaus) while maintaining regulatory compliance."
+
+  - title: Fraud Detection Pipeline
+    category: production
+    tags: [Fintech, Anomaly Detection, Real-Time]
+    venue: "GDP Labs — Lead ML Engineer (2021–2024)"
+    outcome: "Built and maintained real-time fraud detection system reducing fraudulent transaction approval rates significantly on digital payment flows."
+    description: >
+      Designed a multi-stage fraud detection pipeline combining rule-based filters, gradient-boosted classifiers, and graph-based network anomaly detection to catch account takeover, synthetic identity fraud, and merchant collusion patterns. Implemented near-real-time feature serving using Kafka + Redis. Continuously re-trained on labeled feedback loops from the fraud operations team.
+    impact: "Protected both end users and the platform from financial loss; fraud catch rate improvements directly reduced operational chargeback costs."
+
+  - title: Municipal Waste Logistics Forecasting
+    category: production
+    tags: [Time Series, Smart City, Forecasting]
+    venue: "Jakarta Smart City — Data Scientist (2020–2021)"
+    outcome: "Deployed demand-side forecasting models informing waste truck routing and collection scheduling for Jakarta's solid waste management agency."
+    description: >
+      Developed time-series forecasting models (Prophet, LSTM) for predicting daily waste volume by district and collection point, integrating public holiday calendars, weather data, and event schedules as exogenous variables. Findings fed directly into route optimization algorithms, reducing truck idle time and improving collection coverage for a city of 10M+ residents.
+    impact: "Operational efficiency gains in waste collection — one of Jakarta's highest-volume urban services — with direct cost and emissions reduction impact."
+
+  - title: Demand Forecasting for Financial & Media Clients
+    category: production
+    tags: [Forecasting, Client Delivery, Consulting]
+    venue: "Artefact — Data Scientist (2024)"
+    outcome: "Delivered demand and audience forecasting models for enterprise clients in financial services and media verticals."
+    description: >
+      Built and shipped forecasting solutions as a consulting data scientist: audience reach forecasting for a media group's advertising inventory planning, and transaction volume forecasting for a financial services client's treasury operations. Projects required rapid iteration on data quality issues, client-specific business constraints, and hand-off to internal client teams with full documentation.
+    impact: "Enabled clients to shift from reactive to predictive planning — directly informing budget allocation and operational staffing decisions."
+
+  - title: "HakkTaxi: Ride-Share Demand Prediction"
+    category: applied
+    tags: [Gradient Boosting, Geospatial, Azure, Hackathon]
+    venue: "Microsoft Azure APAC Hackathon — Regional Champion (2020)"
+    outcome: "Built and won with a real-time ride-share demand prediction system leveraging Azure ML, geospatial clustering, and live traffic data."
+    description: >
+      In 48 hours, designed a demand heatmap and surge prediction system for ride-hailing in Jakarta using gradient boosting on historical trip logs, weather data, and Points of Interest density. Integrated with Azure Maps for live visualization. Competed against teams across Southeast Asia and Australia.
+    impact: "Recognized as Regional Champion across APAC — demonstrated practical ML system design under competition constraints."
+
+  - title: "TeleHealthMonitor: Edge AI for Remote Patient Monitoring"
+    category: applied
+    tags: [Edge AI, Healthcare, Computer Vision, Hackathon]
+    venue: "CamvsCovid, University of Cambridge — Top 3 Globally (2020)"
+    outcome: "Designed a low-bandwidth remote patient monitoring system using on-device CV inference to reduce hospital load during COVID-19."
+    description: >
+      Built a system enabling remote vitals monitoring (respiratory rate estimation via camera, symptom self-reporting) designed for low-connectivity environments — running inference on-device (mobile/edge) to minimize data transmission. Targeted under-resourced clinics across Indonesia where broadband is unreliable. Finished in the global top 3 out of hundreds of international submissions.
+    impact: "Validated the feasibility of edge-first AI healthcare tools for emerging markets — a design pattern increasingly adopted in global health AI."
+
+  - title: "Community IVR: Voice AI for Offline Communities"
+    category: applied
+    tags: [NLP, Speech, Accessibility, Hackathon]
+    venue: "Cal Hacks 8.0, UC Berkeley — Best Community Track (2020)"
+    outcome: "Built an IVR (interactive voice response) system delivering essential information to communities without smartphones or internet access."
+    description: >
+      Designed a phone-based AI assistant using speech recognition and a structured knowledge graph to answer community health, government services, and COVID-19 guidance queries — operable via basic feature phones on 2G networks. Optimized for Indonesian language and local dialect variation. Won Best Community Track at UC Berkeley's flagship hackathon.
+    impact: "Addressed digital exclusion directly — the 40% of Indonesians without smartphones remain invisible to most AI applications."
+
+  - title: "Plastic Bag Ban: Causal Policy Analysis"
+    category: applied
+    tags: [NLP, Causal Inference, Policy, IEEE]
+    venue: "ICISS 2021 — IEEE"
+    outcome: "Quantified the effect of Jakarta's 2020 plastic bag ban on public waste complaints using NLP-based time-series analysis of citizen reports."
+    description: >
+      Applied difference-in-differences causal inference and NLP-based classification of 100,000+ citizen waste complaints from the Jakarta Smart City platform to measure the policy impact of the plastic bag ban. Identified statistically significant reduction in plastic-specific complaints post-intervention, controlling for seasonal and economic confounders.
+    impact: "Provided empirical evidence for the ban's effectiveness — methodology applicable to evaluating other environmental regulations at city scale."
+    link: "https://ieeexplore.ieee.org/document/9533236/"
