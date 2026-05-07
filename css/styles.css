@@ -395,8 +395,8 @@ h1 {
   background: rgba(16, 26, 39, 0.74);
   color: #98abc2;
   border-radius: 999px;
-  padding: 0.24rem 0.46rem;
-  font-size: 0.72rem;
+  padding: 0.34rem 0.72rem;
+  font-size: 0.82rem;
   font-family: "Space Grotesk", sans-serif;
   cursor: pointer;
   transition: color 0.2s ease, background 0.2s ease, transform 0.18s ease, border-color 0.2s ease;
