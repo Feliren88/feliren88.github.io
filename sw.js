@@ -6,7 +6,7 @@ const PRECACHE = [
   '/research/',
   '/writings/',
   '/contact/',
-  '/css/styles.css?v=12',
+  '/css/styles.css?v=13',
   '/js/main.js?v=5',
   '/js/components/nav.js',
   '/assets/fonts/manrope-latin.woff2',

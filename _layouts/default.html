@@ -8,7 +8,7 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/spacegrotesk-latin.woff2' | relative_url }}">
     {% if page.preload_image %}<link rel="preload" as="image" href="{{ page.preload_image | relative_url }}" type="image/webp">{% endif %}
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
-    <link rel="stylesheet" href="{{ '/css/styles.css?v=12' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/styles.css?v=13' | relative_url }}">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -149,10 +149,8 @@
     <canvas id="pointcloud-bg" aria-hidden="true"></canvas>
 
     <header class="topbar" id="site-header">
-      <a class="brand" href="{{ '/' | relative_url }}">
-        <img src="{{ '/assets/img/favicon.webp' | relative_url }}" alt="Home" style="height:1.6rem;width:auto;">
-      </a>
       <nav class="nav" aria-label="Primary" id="main-nav">
+        <a href="/">About</a>
         <a href="/research/">Research</a>
         <a href="/writings/">Writings</a>
         <a href="/contact/">Work With Me</a>

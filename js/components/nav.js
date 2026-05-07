@@ -4,6 +4,7 @@
 
 (function() {
   var NAV_ITEMS = [
+    { href: '/', label: 'About', page: '/' },
     { href: '/research/', label: 'Research', page: '/research' },
     { href: '/writings/', label: 'Writings', page: '/writings' },
     { href: '/contact/', label: 'Work With Me', page: '/contact' },
