@@ -24,6 +24,10 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, Data Scientist 
 - **Anthropogenic Regional Adaptation** (Under Review 2026): GG-EZ achieves 5–15% gains in cultural relevance for Southeast Asia, retaining 98%+ global benchmark performance. https://arxiv.org/abs/2604.11490
 - **Retention Ponds Study** (AQUA, IF 2.3, 2025): Urban resilience through flood policy and planning in South Bandung. https://iwaponline.com/aqua/article/74/2/267/106789/
 
+## Ongoing Projects
+
+- **ECCV Workshop - Qwen VL Fine-tuning** (2026): Fine-tuning Qwen2.5-VL-3B-Instruct using LLaMA-Factory for AI City Challenge 2026 Track 2 captioning task. Implemented LoRA fine-tuning with rank 16, progressive cross-attention network adaptation, and DeepSpeed ZeRO-2 optimization on V100 GPU.
+
 ## Profiles
 
 - Google Scholar: https://scholar.google.com/citations?user=R2LVQ7AAAAAJ
