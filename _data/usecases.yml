@@ -45,6 +45,14 @@ categories:
       48-hour windows, validated by international juries across Cambridge,
       Berkeley, and Microsoft APAC.
 
+  - id: ongoing
+    label: Ongoing Projects
+    color: accent
+    description: >
+      Active research and open-source contributions currently in progress.
+      These projects represent current work areas spanning thesis research,
+      competition participation, and open-source contributions.
+
 # ============================================================
 # USE CASES
 # ============================================================
@@ -1357,7 +1365,7 @@ usecases:
 
   - id: eccv-workshop-qwen-vl
     title: "Qwen VL Fine-tuning for AI City Challenge 2026 Track 2"
-    category: applied
+    category: ongoing
     tags:
       - Vision-Language Models
       - LoRA Fine-tuning
@@ -1448,14 +1456,14 @@ usecases:
       conflicts, CUDA configuration, dataset sequence length optimization,
       memory fragmentation handling) form a practical playbook applicable to
       any VLM fine-tuning task on resource-limited GPU clusters. Outputs include
-      ready-to-use LoRA adapters and training scripts for downstream captioning
+ready-to-use LoRA adapters and training scripts for downstream captioning
       applications.
 
   # ──────────────────────────────────────────
 
   - id: vln-conformal-prediction
     title: "Conformal Prediction for Vision-and-Language Navigation (DUET + HAMT)"
-    category: applied
+    category: ongoing
     tags:
       - Conformal Prediction
       - Vision-Language Navigation
@@ -1554,6 +1562,93 @@ usecases:
       result for ICRA 2027. The codebase enables reproducible benchmarking for
       future VLN uncertainty research.
 
+  # ──────────────────────────────────────────
+
+  - id: llm-d-inference-scheduler
+    title: "Contributing to llm-d/inference-scheduler -- Kubernetes LLM Inference Scheduling"
+    category: ongoing
+    tags:
+      - Open Source Contribution
+      - Kubernetes
+      - Go
+      - Inference Scheduling
+      - Gateway API
+      - Envoy
+      - P/D Disaggregation
+      - KV Cache
+    venue: "Open Source -- llm-d/inference-scheduler (Planned 2026)"
+    role: Contributor
+    keywords:
+      - Kubernetes
+      - Gateway API
+      - LLM inference
+      - Endpoint picker plugin
+      - Envoy ext-proc
+      - vLLM
+      - Disaggregated inference
+      - KV cache-aware scheduling
+
+    situation: >
+      Production LLM inference at scale requires intelligent request routing across
+      multiple model serving backends. The llm-d/inference-scheduler project
+      provides the Endpoint Picker Plugin (EPP) -- a Kubernetes-native scheduling
+      component that routes inference requests to vLLM backends based on KV cache
+      state, prefill locality, and load. As LLM inference grows in commercial
+      importance, contributing to this infrastructure-level project enables
+      impact at scale across the open-source AI infrastructure ecosystem.
+
+    complication: >
+      Contributing to infrastructure-level Go projects requires understanding
+      multiple interacting subsystems: Gateway API CRDs and inference extensions,
+      Envoy's ext-proc callback mechanism for request interception, vLLM's serving
+      architecture with P/D (prefill/decode) disaggregation, KV cache-aware
+      scheduling policies, and Kubernetes deployment patterns (Kustomize,
+      Helm, RBAC). The codebase uses Go 1.24+ with distributed tracing,
+      Prometheus metrics, and a modular plugin architecture (filters and scorers)
+      that requires careful API design to maintain extensibility.
+
+    resolution:
+      planned_contributions: >
+        Planning to contribute to the inference scheduling framework by:
+        (1) Understanding the Gateway API Inference Extension (GIE) integration
+        layer and how EPP intercepts and routes requests via Envoy ext-proc,
+        (2) Exploring the disaggregation modes (EPD, P/D, E/PD, E/P/D) to
+        identify optimization opportunities in KV cache-aware scheduling
+        decisions, (3) Contributing to scheduler plugin development (filters
+        and scorers) for improved load balancing and cache utilization,
+        (4) Investigating the tokenization architecture (UDS-based) for
+        latency optimization opportunities.
+      learning_goals: >
+        Deepen expertise in: Kubernetes operator patterns, Envoy proxy
+        extensibility, distributed systems for ML inference, Go concurrency
+        patterns, and production ML infrastructure design. The project
+        provides exposure to real-world inference serving challenges at the
+        intersection of cloud infrastructure and applied ML.
+      setup_progress: >
+        Cloning the repository and setting up KIND development environment
+        locally. Reviewing codebase structure (cmd/, internal/, pkg/, apix/)
+        and existing test patterns (unit, integration, e2e). Familiarizing
+        with the disaggregation mode deployment patterns and simulator
+        configuration for local development.
+
+    tech_stack:
+      language: [Go 1.24+]
+      k8s: [Gateway API, Envoy ext-proc, Kustomize, Helm]
+      ml_serving: [vLLM, P/D Disaggregation, KV Cache]
+      observability: [Prometheus, Grafana, Distributed tracing]
+      testing: [Unit tests, Integration tests, E2E (Kind clusters)]
+      models: [TinyLlama-1.1B, Qwen3-VL-2B]
+
+    impact: >
+      Contributing to llm-d/inference-scheduler provides the opportunity to work
+      on foundational AI infrastructure used by teams deploying LLM inference at
+      scale. The project's architecture (Gateway API extension, Envoy integration,
+      KV cache awareness) represents the current state-of-the-art in production
+      LLM serving. Contributions benefit the broader open-source AI ecosystem
+      and strengthen expertise in distributed ML systems.
+
+# ============================================================
+# CROSS-CUTTING TECHNICAL CAPABILITIES
 # ============================================================
 # CROSS-CUTTING TECHNICAL CAPABILITIES
 # ============================================================
