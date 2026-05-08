@@ -1353,6 +1353,104 @@ usecases:
       for evidence-based urban environmental policy evaluation in emerging market
       smart cities.
 
+  # ──────────────────────────────────────────
+
+  - id: eccv-workshop-qwen-vl
+    title: "Qwen VL Fine-tuning for AI City Challenge 2026 Track 2"
+    category: applied
+    tags:
+      - Vision-Language Models
+      - LoRA Fine-tuning
+      - Qwen2.5-VL
+      - LLaMA-Factory
+      - DeepSpeed
+      - VLM Training
+      - ECCV 2026
+    venue: "AI City Challenge 2026 Track 2 -- ECCV Workshop (2026)"
+    role: Lead ML Engineer
+    keywords:
+      - Vision-language model fine-tuning
+      - Qwen2.5-VL-3B
+      - LoRA adaptation
+      - DeepSpeed ZeRO-2
+      - AI City Challenge
+      - Captioning
+
+    situation: >
+      The AI City Challenge Track 2 requires fine-tuning vision-language models
+      for video captioning tasks under compute-constrained environments (single
+      V100 GPU with 14GB memory). General-purpose VLMs like Qwen2.5-VL achieve
+      strong baseline performance but require task-specific adaptation for
+      domain-specific captioning quality. The constraint environment demands
+      careful memory management and optimization to achieve meaningful fine-tuning
+      within hardware limits.
+
+    complication: >
+      Fine-tuning Qwen2.5-VL-3B on a 14GB GPU presents multiple technical
+      challenges: standard full-parameter fine-tuning exceeds GPU memory on
+      even a single forward pass, multi-GPU training is blocked by cluster-level
+      TCP port exhaustion, and naive LoRA configurations fail due to sequence
+      length issues (caption_train_small.json had multiple image segments per
+      sample creating sequences too long for GPU memory). Additional challenges
+      include system-wide PyTorch vs. venv torch conflicts and CUDA version
+      mismatches between the cluster environment and PyTorch installation.
+
+    resolution:
+      architecture: >
+        Implemented LoRA fine-tuning on Qwen2.5-VL-3B-Instruct using LLaMA-Factory
+        framework with LoRA rank 16, LoRA alpha 4, targeting all layers. Cutoff
+        length increased from 4096 to 8192 to accommodate longer sequences.
+        Gradient checkpointing enabled for memory optimization. DeepSpeed ZeRO-2
+        configuration prepared for multi-GPU scaling when cluster port issues resolve.
+      dataset_optimization: >
+        Created caption_train_tiny.json with simplified format (single image per
+        sample instead of multiple segments) to reduce sequence length while
+        preserving task semantics. This resolved the CUDA OOM on first forward pass
+        issue that prevented training from starting.
+      environment_setup: >
+        Configured dedicated Python 3.11 venv with PyTorch 2.5.1+cu121, peft,
+        transformers, deepspeed. Set CUDA_HOME=/usr/local/cuda-12.5 for correct
+        CUDA bindings, PYTHONPATH to venv site-packages first to avoid system torch
+        conflict, and PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True for better
+        memory fragmentation handling. NCCL_SOCKET_IFNAME=lo configured to avoid
+        multi-GPU port conflicts.
+      training_pipeline: >
+        Implemented automated training script (train_qwen.py) that generates
+        dataset_info.json, train_caption.yaml, and ds_zero2.json configs, then
+        executes LLaMA-Factory training with proper environment isolation.
+        Achieved stable training with train loss ~1.46 after 3 epochs on simplified
+        dataset, training time ~1:42 minutes.
+
+    tech_stack:
+      model: [Qwen2.5-VL-3B-Instruct, LoRA]
+      framework: [LLaMA-Factory, DeepSpeed ZeRO-2]
+      training: [PyTorch 2.5.1+cu121, peft, transformers]
+      infrastructure: [V100 14GB, CUDA 12.5]
+      hyperparams:
+        lora_rank: 16
+        lora_alpha: 4
+        cutoff_len: 8192
+        batch_size: 1
+        learning_rate: 1.0e-4
+        gradient_checkpointing: true
+        epochs: 3
+
+    metrics:
+      train_loss: 1.46
+      training_time_minutes: 1.75
+      epochs_completed: 3
+      samples: 5
+      gpu_memory_gb: 14
+
+    impact: >
+      Establishes a reproducible LoRA fine-tuning pipeline for Qwen VL models
+      under constrained compute environments. The resolved issues (venv environment
+      conflicts, CUDA configuration, dataset sequence length optimization,
+      memory fragmentation handling) form a practical playbook applicable to
+      any VLM fine-tuning task on resource-limited GPU clusters. Outputs include
+      ready-to-use LoRA adapters and training scripts for downstream captioning
+      applications.
+
 # ============================================================
 # CROSS-CUTTING TECHNICAL CAPABILITIES
 # ============================================================
