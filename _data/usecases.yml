@@ -1451,6 +1451,109 @@ usecases:
       ready-to-use LoRA adapters and training scripts for downstream captioning
       applications.
 
+  # ──────────────────────────────────────────
+
+  - id: vln-conformal-prediction
+    title: "Conformal Prediction for Vision-and-Language Navigation (DUET + HAMT)"
+    category: applied
+    tags:
+      - Conformal Prediction
+      - Vision-Language Navigation
+      - Uncertainty Quantification
+      - VLN-DUET
+      - VLN-HAMT
+      - Score Functions
+      - ICRA 2027
+    venue: "Thesis Research -- VLN-DUET Uncertainty Propagation (2026)"
+    role: Lead Researcher
+    keywords:
+      - Conformal prediction
+      - Vision-and-language navigation
+      - Uncertainty quantification
+      - VLN-DUET
+      - VLN-HAMT
+      - R2R dataset
+      - Prediction sets
+
+    situation: >
+      Vision-and-Language Navigation (VLN) agents operating in unseen environments
+      require calibrated uncertainty estimates to know when to defer to human
+      oversight. A navigation agent that is 70% confident may be catastrophically
+      wrong -- high confidence does not guarantee correctness. Conformal Prediction
+      (CP) offers distribution-free coverage guarantees but requires systematic
+      evaluation across multiple VLN architectures and uncertainty propagation
+      formulations to determine which methods actually improve set efficiency
+      without sacrificing coverage.
+
+    complication: >
+      Evaluating CP for VLN requires navigating three compounding challenges:
+      (1) Multiple VLN architectures with fundamentally different action spaces
+      (DUET's topological graph vs. HAMT's local candidate space) make fair
+      comparison non-trivial, (2) VLN's short trajectories (mean 6-8 steps) are
+      structurally incompatible with temporal uncertainty propagation methods
+      designed for long-horizon tasks, and (3) 21 propagation formulations must
+      be systematically benchmarked to distinguish genuine improvements from
+      hyperparameter artifacts. Additionally, the codebase must support two
+      navigation backends (VLN-DUET, VLN-HAMT) with a unified CLI, handling
+      environment conflicts between DUET's and HAMT's Python dependencies.
+
+    resolution:
+      methodology: >
+        Implemented end-to-end conformal prediction runner (conformal_vln.py)
+        supporting DUET and HAMT backends with matched action spaces via
+        `--action_space full/local` switch on DUET. Score functions (THR/APS/RAPS)
+        run automatically; intervention modes (observe, set_restrict) enable
+        coverage vs. intervention trade-off analysis.
+      propagation_benchmark: >
+        Designed and executed systematic benchmark of 21 uncertainty propagation
+        formulations across 3 VLN architectures and 4 alpha levels. Key finding:
+        16 of 21 temporal propagation formulations catastrophically inflate
+        prediction set sizes (mean 17-38 actions, saturating the full action
+        space) on finite-horizon VLN trajectories. Root cause: VLN's short
+        trajectories prevent running-average methods (EMA, ACI) from converging
+        and cause control-based methods (PID) to overshoot.
+      score_augmentation: >
+        Discovered that augmenting the base THR nonconformity score with a
+        log-prob penalty term `s(a) = (1 - p_a) + w * (-log p_a)` improves
+        set efficiency by 18-47% across all tested models while maintaining
+        valid coverage guarantees. The improvement is architecture-invariant
+        because the penalty is a monotonic transformation of the softmax output.
+      codebase: >
+        Built unified codebase (`output_v6/`) supporting both DUET and HAMT
+        with DeepSpeed integration for efficient calibration, multi-backend
+        experiment orchestration, and a propagation pipeline running ~24h per
+        full configuration. Resolved environment conflicts via modular import
+        isolation (`_hamt_module_context`) to prevent DUET's `r2r` package
+        from shadowing HAMT's dependencies.
+
+    tech_stack:
+      frameworks: [PyTorch, DeepSpeed ZeRO-2]
+      vln_models: [VLN-DUET, VLN-HAMT]
+      conformal_methods: [THR, APS, RAPS, Conformal Prediction]
+      propagation_formulations: "21 formulations (EMA, CumulMax, ACI, PID, entropy-family, etc.)"
+      datasets: [R2R, R4R, REVERIE, SOON]
+      evaluation: [Coverage guarantees, Set size, Intervention rate]
+      hardware: [A40, V100]
+
+    metrics:
+      architectures_tested: 3
+      propagation_formulations: 21
+      alpha_levels: 4
+      efficiency_improvement_pct: "18-47"
+      mean_set_size_baseline: 1.9
+      mean_set_size_logprob_penalty: 1.38
+      trajectory_length_mean: 7
+      calibration_runtime_hours: 24
+
+    impact: >
+      Provides the first systematic CP evaluation across multiple VLN architectures,
+      establishing which uncertainty quantification methods work and why most
+      temporal propagation approaches fail on VLN's short-horizon trajectories.
+      The log-prob penalty finding -- that simple score augmentation outperforms
+      complex temporal propagation -- is a counterintuitive and publication-worthy
+      result for ICRA 2027. The codebase enables reproducible benchmarking for
+      future VLN uncertainty research.
+
 # ============================================================
 # CROSS-CUTTING TECHNICAL CAPABILITIES
 # ============================================================
