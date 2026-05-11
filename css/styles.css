@@ -1201,29 +1201,33 @@ h1 {
   .nav-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── Left drawer — starts below the topbar so the bar stays fully clickable ── */
+  /* ── Full-width dropdown — auto height, no scrolling needed ── */
   .nav {
     position: fixed;
     top: 56px;
     left: 0;
-    height: calc(100% - 56px);
-    width: min(240px, 75vw);
+    right: 0;
     flex-direction: column;
     flex-wrap: nowrap;
-    padding: 0.5rem 0.75rem 1rem;
+    padding: 0.4rem 1rem 0.6rem;
     background: var(--bg);
-    border-right: 1px solid var(--line);
-    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     z-index: 40;
-    transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 0.1rem;
-    overflow-y: auto;
+    gap: 0.15rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.22s ease;
   }
-  .nav.is-open { transform: translateX(0); }
+  .nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
   .nav a {
     font-size: 0.9rem;
-    padding: 0.55rem 0.75rem;
+    padding: 0.6rem 0.75rem;
     border-radius: 8px;
     width: 100%;
     line-height: 1.3;
