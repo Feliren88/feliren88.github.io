@@ -1456,7 +1456,7 @@ usecases:
       conflicts, CUDA configuration, dataset sequence length optimization,
       memory fragmentation handling) form a practical playbook applicable to
       any VLM fine-tuning task on resource-limited GPU clusters. Outputs include
-ready-to-use LoRA adapters and training scripts for downstream captioning
+      ready-to-use LoRA adapters and training scripts for downstream captioning
       applications.
 
   # ──────────────────────────────────────────

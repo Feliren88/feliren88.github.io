@@ -1,14 +1,14 @@
 User-agent: *
 Allow: /
 
-# Google Search & AI Overviews
+# Google
 User-agent: Googlebot
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-# ChatGPT / OpenAI
+# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 
@@ -18,7 +18,7 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Claude / Anthropic
+# Anthropic / Claude
 User-agent: ClaudeBot
 Allow: /
 
@@ -32,7 +32,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Other AI search crawlers
+# Other AI crawlers
 User-agent: Amazonbot
 Allow: /
 
@@ -46,6 +46,12 @@ User-agent: YouBot
 Allow: /
 
 User-agent: DiffBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://feliren88.github.io/sitemap.xml
