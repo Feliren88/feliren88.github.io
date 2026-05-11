@@ -54,4 +54,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://feliren88.github.io/sitemap.xml
+Sitemap: https://vickyfeliren.com/sitemap.xml

@@ -6,43 +6,43 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 
 ## Pages
 
-- [Home](https://feliren88.github.io/): Hero — research identity and entry point
-- [About](https://feliren88.github.io/about/): Bio, research focus, expertise, work history, and awards
-- [Research](https://feliren88.github.io/research/): Publications — IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
-- [Use Cases](https://feliren88.github.io/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across geospatial AI, cultural NLP, production fintech, and hackathon projects
-- [Writings](https://feliren88.github.io/writings/): Articles on AI, philosophy, and life — published on Medium
-- [Work With Me](https://feliren88.github.io/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
+- [Home](https://vickyfeliren.com/): Hero — research identity and entry point
+- [About](https://vickyfeliren.com/about/): Bio, research focus, expertise, work history, and awards
+- [Research](https://vickyfeliren.com/research/): Publications — IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
+- [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across geospatial AI, cultural NLP, production fintech, and hackathon projects
+- [Writings](https://vickyfeliren.com/writings/): Articles on AI, philosophy, and life — published on Medium
+- [Work With Me](https://vickyfeliren.com/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
 
 ## Use Cases (individual pages)
 
 ### Geospatial AI & Remote Sensing
-- [Flood Segmentation — ProCANet](https://feliren88.github.io/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
-- [Mining Footprint Detection](https://feliren88.github.io/usecases/mining-footprint-segmentation/): Remote Sensing of Environment Q1 (IF 11.4) 2025. Multi-modal deep learning fusing Sentinel-2, SAR, and DEM for continental-scale mining footprint delineation. First application of a geospatial foundation model (Prithvi) to this task.
-- [Aquaculture Pond Detection](https://feliren88.github.io/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (Monash University, June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
-- [Flood Policy Evaluation](https://feliren88.github.io/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung — bridging ProCANet satellite segmentation with evidence-based urban policy.
+- [Flood Segmentation — ProCANet](https://vickyfeliren.com/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
+- [Mining Footprint Detection](https://vickyfeliren.com/usecases/mining-footprint-segmentation/): Remote Sensing of Environment Q1 (IF 11.4) 2025. Multi-modal deep learning fusing Sentinel-2, SAR, and DEM for continental-scale mining footprint delineation. First application of a geospatial foundation model (Prithvi) to this task.
+- [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (Monash University, June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
+- [Flood Policy Evaluation](https://vickyfeliren.com/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung — bridging ProCANet satellite segmentation with evidence-based urban policy.
 
 ### Cultural & Multilingual AI
-- [SEA-VL Benchmark](https://feliren88.github.io/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
-- [GG-EZ Regional Adaptation](https://feliren88.github.io/usecases/gg-ez-regional-adaptation/): ECCV 2026 (under review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
-- [CommonLID Language Identification](https://feliren88.github.io/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data — exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
+- [SEA-VL Benchmark](https://vickyfeliren.com/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
+- [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/): ECCV 2026 (under review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
+- [CommonLID Language Identification](https://vickyfeliren.com/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data — exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
 
 ### Production ML — Industry
-- [Share of Voice Forecasting](https://feliren88.github.io/usecases/share-of-voice-forecasting/): Artefact (2025). XGBoost + split conformal prediction for Fortune 500 brand SoV forecasting across 6 APAC markets. Calibrated prediction intervals with 90% empirical coverage target.
-- [Biometric Auth & Credit Scoring](https://feliren88.github.io/usecases/biometric-authentication-credit-scoring/): GDP Labs (2021–2023). MobileNet/OpenVINO biometric stack at 1M+ daily inferences, 99.99% uptime. OJK-compliant alternative credit scoring; 35% loan approval efficiency improvement.
-- [Fraud Detection Pipeline](https://feliren88.github.io/usecases/fraud-detection-pipeline/): GDP Labs (2021–2023). Multi-stage pipeline: rule-based pre-filters + XGBoost + graph anomaly detection with Kafka streaming and Redis feature store.
-- [Municipal Waste Forecasting](https://feliren88.github.io/usecases/municipal-waste-forecasting/): Jakarta Smart City (2021). Facebook Prophet ensemble for 10M-resident waste logistics; causal DiD analysis of plastic bag ban. 15% operational efficiency improvement. IEEE ICISS 2021.
-- [Demand Forecasting — Consulting](https://feliren88.github.io/usecases/demand-forecasting-consulting/): Artefact (2025). Audience reach and transaction volume forecasting for Fortune 500 media and financial clients under 2-week consulting cadence.
+- [Share of Voice Forecasting](https://vickyfeliren.com/usecases/share-of-voice-forecasting/): Artefact (2025). XGBoost + split conformal prediction for Fortune 500 brand SoV forecasting across 6 APAC markets. Calibrated prediction intervals with 90% empirical coverage target.
+- [Biometric Auth & Credit Scoring](https://vickyfeliren.com/usecases/biometric-authentication-credit-scoring/): GDP Labs (2021–2023). MobileNet/OpenVINO biometric stack at 1M+ daily inferences, 99.99% uptime. OJK-compliant alternative credit scoring; 35% loan approval efficiency improvement.
+- [Fraud Detection Pipeline](https://vickyfeliren.com/usecases/fraud-detection-pipeline/): GDP Labs (2021–2023). Multi-stage pipeline: rule-based pre-filters + XGBoost + graph anomaly detection with Kafka streaming and Redis feature store.
+- [Municipal Waste Forecasting](https://vickyfeliren.com/usecases/municipal-waste-forecasting/): Jakarta Smart City (2021). Facebook Prophet ensemble for 10M-resident waste logistics; causal DiD analysis of plastic bag ban. 15% operational efficiency improvement. IEEE ICISS 2021.
+- [Demand Forecasting — Consulting](https://vickyfeliren.com/usecases/demand-forecasting-consulting/): Artefact (2025). Audience reach and transaction volume forecasting for Fortune 500 media and financial clients under 2-week consulting cadence.
 
 ### Applied & Hackathon Projects
-- [HakkTaxi — Ride-Share Demand](https://feliren88.github.io/usecases/hakktaxi-ride-share/): Microsoft Azure APAC Regional Champion (2020). XGBoost + H3 geospatial grid demand heatmap for Jakarta; 6-second ETA margin of error. Built in 48 hours.
-- [TeleHealthMonitor — Edge AI](https://feliren88.github.io/usecases/telehealthmonitor-edge-ai/): Cambridge CamvsCovid Top 3 globally (2020). On-device respiratory rate estimation for COVID-19 home monitoring on 2G-compatible, GDPR-compliant Android.
-- [Community IVR — Voice AI](https://feliren88.github.io/usecases/community-ivr-voice-ai/): UC Berkeley Cal Hacks Best Community Track (2020). Feature phone AI assistant (ASR + knowledge graph + TTS) for offline Indonesian communities, no smartphone required.
-- [Plastic Bag Ban Causal Analysis](https://feliren88.github.io/usecases/plastic-bag-ban-causal-analysis/): IEEE ICISS 2021 (First Author). Difference-in-differences analysis of Jakarta's 2020 plastic bag ban using 100,000+ NLP-classified citizen complaints.
+- [HakkTaxi — Ride-Share Demand](https://vickyfeliren.com/usecases/hakktaxi-ride-share/): Microsoft Azure APAC Regional Champion (2020). XGBoost + H3 geospatial grid demand heatmap for Jakarta; 6-second ETA margin of error. Built in 48 hours.
+- [TeleHealthMonitor — Edge AI](https://vickyfeliren.com/usecases/telehealthmonitor-edge-ai/): Cambridge CamvsCovid Top 3 globally (2020). On-device respiratory rate estimation for COVID-19 home monitoring on 2G-compatible, GDPR-compliant Android.
+- [Community IVR — Voice AI](https://vickyfeliren.com/usecases/community-ivr-voice-ai/): UC Berkeley Cal Hacks Best Community Track (2020). Feature phone AI assistant (ASR + knowledge graph + TTS) for offline Indonesian communities, no smartphone required.
+- [Plastic Bag Ban Causal Analysis](https://vickyfeliren.com/usecases/plastic-bag-ban-causal-analysis/): IEEE ICISS 2021 (First Author). Difference-in-differences analysis of Jakarta's 2020 plastic bag ban using 100,000+ NLP-classified citizen complaints.
 
 ### Ongoing Projects
-- [Qwen VL Fine-tuning — ECCV 2026](https://feliren88.github.io/usecases/eccv-workshop-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
-- [Conformal Prediction for VLN](https://feliren88.github.io/usecases/vln-conformal-prediction/): Thesis research. First systematic CP evaluation across VLN-DUET and VLN-HAMT. 21 propagation formulations benchmarked; log-prob penalty achieves 18–47% set efficiency improvement.
-- [llm-d/inference-scheduler](https://feliren88.github.io/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
+- [Qwen VL Fine-tuning — ECCV 2026](https://vickyfeliren.com/usecases/eccv-workshop-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
+- [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. First systematic CP evaluation across VLN-DUET and VLN-HAMT. 21 propagation formulations benchmarked; log-prob penalty achieves 18–47% set efficiency improvement.
+- [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
 ## Key Research
 
