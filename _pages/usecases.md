@@ -164,7 +164,7 @@ permalink: /usecases/
     color: var(--muted);
     line-height: 1.68;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
