@@ -11,6 +11,13 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         <source type="image/webp" srcset="{{ '/assets/img/profile-450.webp' | relative_url }} 450w, {{ '/assets/img/profile.webp' | relative_url }} 880w" sizes="225px">
         <img src="{{ '/assets/img/profile.webp' | relative_url }}" alt="Vicky Feliren" class="profile-image" fetchpriority="high" width="225" height="225">
       </picture>
+      <div class="hero-social-links">
+        {% for link in site.data.contact.links %}
+        <a href="{{ link.url }}" class="hero-social-link" aria-label="{{ link.label }}"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>
+          <img src="{{ '/assets/img/' | append: link.icon | relative_url }}" alt="{{ link.label }}" width="20" height="20" loading="lazy">
+        </a>
+        {% endfor %}
+      </div>
     </div>
     <div class="hero-content">
       <p class="eyebrow">{{ site.data.index.eyebrow }}</p>
@@ -154,6 +161,16 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
 </section>
 
 <style>
+  .hero-social-links { display: flex; justify-content: center; gap: 0.65rem; margin-top: 0.85rem; }
+  .hero-social-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--surface);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .hero-social-link:hover { border-color: var(--border-ui); transform: translateY(-2px); }
+  .hero-social-link img { width: 20px; height: 20px; }
+
   .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
   .about-hero p { margin-bottom: 1.2rem; }
   .about-hero strong { color: var(--accent); }
