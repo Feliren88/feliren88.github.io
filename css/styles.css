@@ -290,9 +290,11 @@ main {
     text-align: center;
   }
   .hero-actions,
-  .hero-meta,
-  .shape-controls {
+  .hero-meta {
     justify-content: center;
+  }
+  .shape-controls {
+    display: none;
   }
 }
 
@@ -1271,8 +1273,8 @@ h1 {
 
   /* ── Hero centering ── */
   .hero-actions,
-  .hero-meta,
-  .shape-controls { justify-content: center; }
+  .hero-meta { justify-content: center; }
+  .shape-controls { display: none; }
 
   /* ── Typography ── */
   .eyebrow { letter-spacing: 0.13em; font-size: 0.7rem; }

@@ -72,7 +72,8 @@
     ?fields=title,year,authors,venue,externalIds,citationCount,abstract,publicationVenue
   ```
   Implement as GitHub Actions weekly cron: diff against `_data/publications.yml`, auto-commit citation count updates and new papers. Citation counts are the main win — stale without automation.
-- [ ] **IndexNow GitHub Actions step** — Add a deploy step that pings `api.indexnow.org` with the sitemap URL after every push to `main`. Notifies Bing, Yandex, and Perplexity simultaneously for instant indexing instead of waiting for crawl cycles. Requires generating a one-time API key and hosting a verification file (e.g., `/{key}.txt`) in the repo root.
+- [x] **IndexNow GitHub Actions step** — Key `8b56dcaacaec497390f14ba4f2706f59`, verification file at `/8b56dcaacaec497390f14ba4f2706f59.txt`, workflow at `.github/workflows/indexnow.yml`. Pings Bing + Yandex + Perplexity 90s after every push to `main`.
+  - **BLOCKED: push failed** — OAuth token missing `workflow` scope. Commit `768e204` is ready locally. To push: run `gh auth refresh -s workflow` then `git push origin main`. Alternatively, generate a new PAT with `workflow` scope at GitHub → Settings → Developer Settings → Personal Access Tokens.
 - [ ] **Google Rich Results Test** — Run `search.google.com/test/rich-results` on `https://vickyfeliren.com/research/` to confirm `ScholarlyArticle` JSON-LD is parsed correctly. Free, 30 seconds. Fix any errors flagged.
 - [ ] **PageSpeed Insights / Core Web Vitals** — Run `pagespeed.web.dev` on homepage. Core Web Vitals (LCP, CLS, INP) directly affect Google ranking. Target: LCP < 2.5s, CLS < 0.1. See RFC-001 in this backlog for the full performance plan.
 
