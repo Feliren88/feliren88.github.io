@@ -18,12 +18,12 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 ### Geospatial AI & Remote Sensing
 - [Flood Segmentation — ProCANet](https://vickyfeliren.com/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
 - [Mining Footprint Detection](https://vickyfeliren.com/usecases/mining-footprint-segmentation/): Remote Sensing of Environment Q1 (IF 11.4) 2025. Multi-modal deep learning fusing Sentinel-2, SAR, and DEM for continental-scale mining footprint delineation. First application of a geospatial foundation model (Prithvi) to this task.
-- [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (Monash University, June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
+- [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
 - [Flood Policy Evaluation](https://vickyfeliren.com/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung — bridging ProCANet satellite segmentation with evidence-based urban policy.
 
 ### Cultural & Multilingual AI
 - [SEA-VL Benchmark](https://vickyfeliren.com/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
-- [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/): ECCV 2026 (under review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
+- [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/): (Under Review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
 - [CommonLID Language Identification](https://vickyfeliren.com/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data — exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
 
 ### Production ML — Industry
@@ -40,7 +40,7 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - [Plastic Bag Ban Causal Analysis](https://vickyfeliren.com/usecases/plastic-bag-ban-causal-analysis/): IEEE ICISS 2021 (First Author). Difference-in-differences analysis of Jakarta's 2020 plastic bag ban using 100,000+ NLP-classified citizen complaints.
 
 ### Ongoing Projects
-- [Qwen VL Fine-tuning — ECCV 2026](https://vickyfeliren.com/usecases/eccv-workshop-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
+- [Qwen VL Fine-tuning — ECCV Workshop 2026](https://vickyfeliren.com/usecases/eccv-workshop-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 - [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. First systematic CP evaluation across VLN-DUET and VLN-HAMT. 21 propagation formulations benchmarked; log-prob penalty achieves 18–47% set efficiency improvement.
 - [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
@@ -50,7 +50,7 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - **ProCANet** (IEEE GRSL 2025, First Author): Progressive cross-attention network for flood segmentation using multispectral satellite imagery — IoU 0.815, F1 0.898 on Sen1Floods11. https://ieeexplore.ieee.org/document/10750225
 - **Mining Segmentation** (Remote Sensing of Environment, IF 11.4, 2025, Co-Author): Multi-modal deep learning for global mining footprint delineation — first use of a geospatial foundation model on this task. https://doi.org/10.1016/j.rse.2024.114584
 - **CommonLID** (ACL 2026, Contributor): Language identification benchmark for noisy web data across 109 languages. https://arxiv.org/abs/2601.18026
-- **GG-EZ** (ECCV 2026 under review, Lead — Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
+- **GG-EZ** (Under review, Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
 - **Plastic Bag Ban** (IEEE ICISS 2021, First Author): Causal policy analysis of Jakarta's plastic bag ban using citizen complaint data. https://ieeexplore.ieee.org/document/9533236/
 
@@ -79,3 +79,79 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - HuggingFace: https://huggingface.co/feliren
 - Medium: https://medium.com/@feliren
 - Devpost: https://devpost.com/Feliren
+
+## Skills
+
+- category: 'RESEARCH: TRUSTWORTHY AI'
+  description: 'Uncertainty quantification and reliability for deployed AI — the gap between calibration scores and provable coverage guarantees.'
+  skills:
+    - 'Conformal Prediction'
+    - 'Uncertainty Quantification'
+    - 'Vision-Language Models'
+    - 'Knowledge Distillation'
+    - 'Causal Inference'
+    - 'A/B Testing'
+    - 'Hypothesis Testing'
+
+- category: 'RESEARCH: CULTURAL & GEOSPATIAL AI'
+  description: 'AI systems for underrepresented regions and environments — satellite imagery, multilingual benchmarks, and adaptation methods.'
+  skills:
+    - 'Semantic Segmentation'
+    - 'Multispectral Imaging'
+    - 'Google Earth Engine'
+    - 'Cultural Benchmarking'
+    - 'Vision-Language Adaptation'
+    - 'Pose Estimation'
+
+- category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
+  description: 'Model development from architecture design to deployment — multimodal, generative, and geospatial systems.'
+  skills:
+    - 'PyTorch'
+    - 'TensorFlow'
+    - 'scikit-learn'
+    - 'LangChain / LangGraph'
+    - 'RAG & Agentic Workflows'
+    - 'OpenCV'
+    - 'Diffusion Models'
+    - 'Intel OpenVINO'
+
+- category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY'
+  description: 'Evaluation design and production monitoring — because a model is only as trustworthy as your ability to measure it.'
+  skills:
+    - 'LLM-as-a-Judge'
+    - 'Human-in-the-Loop Evaluation'
+    - 'LangSmith'
+    - 'MLflow'
+    - 'Weights & Biases'
+    - 'Calibration Drift Monitoring'
+    - 'Latency Benchmarking'
+
+- category: 'ENGINEERING: PRODUCTION ML & DATA'
+  description: 'Cloud-scale ML pipelines with distributed inference — designed and operated across GCP and AWS.'
+  skills:
+    - 'GCP (Vertex AI, BigQuery)'
+    - 'AWS (EC2, S3, SageMaker)'
+    - 'Kubernetes'
+    - 'Docker'
+    - 'Apache Spark'
+    - 'dbt'
+    - 'Vector Database'
+
+- category: 'VISUALIZATION & ANALYTICS'
+  description: 'Translating model outputs and data findings into decisions — for technical and non-technical audiences alike.'
+  skills:
+    - 'Tableau'
+    - 'Streamlit'
+    - 'Plotly'
+    - 'Matplotlib'
+    - 'd3'
+
+- category: 'LANGUAGES & FOUNDATIONS'
+  description: 'Core tooling for research and systems engineering.'
+  skills:
+    - 'Python'
+    - 'Scala'
+    - 'SQL'
+    - 'R'
+    - 'Git'
+    - 'Linux/Unix'

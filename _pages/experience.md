@@ -2,7 +2,6 @@
 layout: page
 title: Experience & Education
 subtitle: Work History and Background
-description: Research Associate at Monash University, Senior Data Scientist at Artefact, ML Engineer at GDP Labs. IEEE Q1 first author, ACL 2025 contributor.
 permalink: /work/
 redirect_to: /about/
 ---

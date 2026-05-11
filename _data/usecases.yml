@@ -262,7 +262,7 @@ usecases:
       - Change Detection
       - Time-Series Satellite
       - Patent
-    venue: "Monash University -- Filed Patent IDS000010594, Issued June 2025"
+    venue: "Filed Patent IDS000010594, Issued June 2025"
     role: Lead Developer
     keywords:
       - Aquaculture detection
