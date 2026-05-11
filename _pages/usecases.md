@@ -22,7 +22,7 @@ permalink: /usecases/
   {% for uc in site.data.usecases.usecases %}
   {% assign ext_link = uc.link | default: uc.arxiv %}
   {% unless ext_link %}{% if uc.doi %}{% assign ext_link = "https://doi.org/" | append: uc.doi %}{% endif %}{% endunless %}
-  <article class="uc-card" data-category="{{ uc.category }}">
+  <article class="uc-card" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">
 
     <div class="uc-card-header">
       <div class="uc-tags">
@@ -203,17 +203,35 @@ permalink: /usecases/
 
 <script>
 (function() {
+  var PRIORITY = { ongoing: 1, cultural: 2, geospatial: 3, production: 4, applied: 5 };
   var btns = document.querySelectorAll('.uc-filter-btn');
+  var grid = document.getElementById('uc-grid');
   var cards = document.querySelectorAll('.uc-card');
+
+  function applyFilter(filter) {
+    var arr = Array.from(cards);
+    arr.sort(function(a, b) {
+      if (filter === 'all') {
+        var pa = PRIORITY[a.getAttribute('data-category')] || 99;
+        var pb = PRIORITY[b.getAttribute('data-category')] || 99;
+        if (pa !== pb) return pa - pb;
+      }
+      return parseInt(a.getAttribute('data-index')) - parseInt(b.getAttribute('data-index'));
+    });
+    arr.forEach(function(card) { grid.appendChild(card); });
+    cards.forEach(function(card) {
+      card.hidden = filter !== 'all' && card.getAttribute('data-category') !== filter;
+    });
+  }
+
   btns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var filter = btn.getAttribute('data-filter');
       btns.forEach(function(b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
-      cards.forEach(function(card) {
-        card.hidden = filter !== 'all' && card.getAttribute('data-category') !== filter;
-      });
+      applyFilter(btn.getAttribute('data-filter'));
     });
   });
+
+  applyFilter('all');
 })();
 </script>

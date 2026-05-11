@@ -9,6 +9,14 @@ wip_notice: >
 # ============================================================
 
 categories:
+  - id: ongoing
+    label: Ongoing Projects
+    color: accent
+    description: >
+      Active research and open-source contributions currently in progress.
+      These projects represent current work areas spanning thesis research,
+      competition participation, and open-source contributions.
+
   - id: geospatial
     label: Geospatial AI & Remote Sensing
     color: accent
@@ -44,14 +52,6 @@ categories:
       full-stack ML system design -- from data ingestion to deployment -- within
       48-hour windows, validated by international juries across Cambridge,
       Berkeley, and Microsoft APAC.
-
-  - id: ongoing
-    label: Ongoing Projects
-    color: accent
-    description: >
-      Active research and open-source contributions currently in progress.
-      These projects represent current work areas spanning thesis research,
-      competition participation, and open-source contributions.
 
 # ============================================================
 # USE CASES
