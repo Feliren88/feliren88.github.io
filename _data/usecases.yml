@@ -442,12 +442,12 @@ usecases:
         experience, not from web retrieval.
       pipeline: >
         Designed and implemented the data quality pipeline: annotation guideline
-        authoring, multi-stage review protocol (automated + human-in-the-loop),
-        image deduplication at scale (1.28M-image corpus using pHash benchmarked
-        against CLIP-ViT, SigLIP, and Nomic Embed Vision with 50-pair human
-        evaluation), language validation, and cultural accuracy review. Contributed
-        to 10,000+ final image-question pairs across 11 languages and diverse
-        cultural domains.
+        authoring, multi-stage review protocol combining automated filtering with
+        human-in-the-loop validation, large-scale image deduplication across the
+        full candidate corpus (comparing multiple similarity methods against a
+        human-validated reference set to select the most reliable approach),
+        language validation, and cultural accuracy review. Contributed to 10,000+
+        final image-question pairs across 11 languages and diverse cultural domains.
       findings: >
         Benchmark exposes systematic blind spots in GPT-4V, Gemini, and Claude
         on culturally situated visual reasoning -- quantifying the gap that
@@ -521,14 +521,16 @@ usecases:
         (2) region-specific fine-tuning with targeted cultural datasets,
         (3) evaluation scaffolds for measuring cultural correctness systematically.
       diffusion_arm: >
-        Led the generative model arm for ECCV 2026 (SEA-SDXL). Fine-tuned
-        SDXL UNet (batch 32, LR 1e-5, 4 epochs, VAE encoder frozen to preserve
-        perceptual quality). Designed GG-EZ linear weight-merging variants at
-        25% and 50% interpolation ratios between base SDXL and the fine-tuned
-        regional checkpoint. Human evaluation (1.569 vs 1.491 baseline on
-        cultural correctness) confirmed improvement while retaining 98%+ global
-        DPG-Bench performance -- validating the key design bet that regional
-        specialization and global quality are not zero-sum.
+        Led the image generation arm of the project. Fine-tuned the image
+        generation model on curated Southeast Asian visual data, then designed
+        a linear model merging strategy — blending the original general-purpose
+        model weights with the regionally adapted version at different mixing
+        ratios — to control the tradeoff between cultural specificity and global
+        image quality. Human evaluation by regional annotators confirmed cultural
+        correctness improvement (1.569 vs. 1.491 baseline) while automated
+        benchmarking confirmed 98%+ retention of global generation quality,
+        validating the core hypothesis that regional specialization and global
+        capability are not zero-sum.
       evaluation: >
         Human evaluation protocol with regional annotators for cultural
         correctness scoring; automated DPG-Bench for global generation quality.
@@ -1428,40 +1430,49 @@ usecases:
       within hardware limits.
 
     complication: >
-      Fine-tuning Qwen2.5-VL-3B on a 14GB GPU presents multiple technical
-      challenges: standard full-parameter fine-tuning exceeds GPU memory on
-      even a single forward pass, multi-GPU training is blocked by cluster-level
-      TCP port exhaustion, and naive LoRA configurations fail due to sequence
-      length issues (caption_train_small.json had multiple image segments per
-      sample creating sequences too long for GPU memory). Additional challenges
-      include system-wide PyTorch vs. venv torch conflicts and CUDA version
-      mismatches between the cluster environment and PyTorch installation.
+      Fine-tuning a 3-billion parameter vision-language model on a single 14GB
+      GPU pushes against the physical limits of what the hardware can hold.
+      Standard fine-tuning loads the entire model and training state into GPU
+      memory simultaneously — an approach that fails at this scale. Multi-GPU
+      parallelism, the conventional fallback, was unavailable due to cluster
+      networking constraints. The additional challenge: the video captioning task
+      required processing multiple visual frames per training example, generating
+      sequences that exceeded memory capacity even with memory-efficient training
+      enabled. Software environment conflicts between the cluster's system-wide
+      libraries and the project's required versions added further setup overhead
+      before any training could begin.
 
     resolution:
       architecture: >
-        Implemented LoRA fine-tuning on Qwen2.5-VL-3B-Instruct using LLaMA-Factory
-        framework with LoRA rank 16, LoRA alpha 4, targeting all layers. Cutoff
-        length increased from 4096 to 8192 to accommodate longer sequences.
-        Gradient checkpointing enabled for memory optimization. DeepSpeed ZeRO-2
-        configuration prepared for multi-GPU scaling when cluster port issues resolve.
+        Applied Parameter-Efficient Fine-Tuning (PEFT) using Low-Rank Adaptation
+        (LoRA) — a technique that updates only a small fraction of model parameters
+        rather than all 3 billion, dramatically reducing training memory requirements.
+        Extended the model's context window to handle longer visual sequences and
+        enabled gradient checkpointing — a technique that trades additional
+        computation for reduced memory by recomputing intermediate values during
+        training rather than storing them. This combination made fine-tuning feasible
+        on a single constrained GPU. Multi-GPU scaling is configured and ready for
+        deployment when cluster infrastructure allows.
       dataset_optimization: >
-        Created caption_train_tiny.json with simplified format (single image per
-        sample instead of multiple segments) to reduce sequence length while
-        preserving task semantics. This resolved the CUDA OOM on first forward pass
-        issue that prevented training from starting.
+        Redesigned the training data format to reduce memory consumption per
+        training step. The original dataset structure packed multiple video frames
+        per example, producing sequences that saturated GPU memory before training
+        could begin. Reformatting to a single-frame-per-example structure preserved
+        the task semantics while making each training step memory-safe — a data
+        engineering decision that unblocked the entire fine-tuning run.
       environment_setup: >
-        Configured dedicated Python 3.11 venv with PyTorch 2.5.1+cu121, peft,
-        transformers, deepspeed. Set CUDA_HOME=/usr/local/cuda-12.5 for correct
-        CUDA bindings, PYTHONPATH to venv site-packages first to avoid system torch
-        conflict, and PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True for better
-        memory fragmentation handling. NCCL_SOCKET_IFNAME=lo configured to avoid
-        multi-GPU port conflicts.
+        Resolved software environment conflicts between the cluster's system-wide
+        deep learning installation and the project's required library versions —
+        a common constraint in shared GPU environments that required careful
+        dependency isolation and GPU runtime configuration to ensure reproducible,
+        conflict-free training execution.
       training_pipeline: >
-        Implemented automated training script (train_qwen.py) that generates
-        dataset_info.json, train_caption.yaml, and ds_zero2.json configs, then
-        executes LLaMA-Factory training with proper environment isolation.
-        Achieved stable training with train loss ~1.46 after 3 epochs on simplified
-        dataset, training time ~1:42 minutes.
+        Built an automated end-to-end training pipeline handling dataset
+        preprocessing, configuration generation, and training execution as a single
+        reproducible workflow — reducing manual setup time for each experimental
+        run and making the pipeline transferable to other GPU-constrained fine-tuning
+        tasks. Achieved stable, converging training across the dataset within the
+        14GB memory budget.
 
     tech_stack:
       model: [Qwen2.5-VL-3B-Instruct, LoRA]
@@ -1485,12 +1496,13 @@ usecases:
       gpu_memory_gb: 14
 
     impact: >
-      Establishes a reproducible LoRA fine-tuning pipeline for Qwen VL models
-      under constrained compute environments. The resolved issues (venv environment
-      conflicts, CUDA configuration, dataset sequence length optimization,
-      memory fragmentation handling) form a practical playbook applicable to
-      any VLM fine-tuning task on resource-limited GPU clusters. Outputs include
-      ready-to-use LoRA adapters and training scripts for downstream captioning
+      Establishes a replicable methodology for fine-tuning large vision-language
+      models under GPU memory constraints common in academic and resource-limited
+      research environments. The design decisions — parameter-efficient adaptation,
+      memory-safe data formatting, environment isolation, and automated pipeline
+      orchestration — form a practical guide applicable to any VLM fine-tuning task
+      on shared or consumer-grade hardware. Outputs include ready-to-use adapted
+      model weights and a reproducible training pipeline for downstream captioning
       applications.
 
   # ──────────────────────────────────────────
@@ -1530,24 +1542,31 @@ usecases:
       without sacrificing coverage.
 
     complication: >
-      Evaluating CP for VLN requires navigating three compounding challenges:
-      (1) Multiple VLN architectures with fundamentally different action spaces
-      (DUET's topological graph vs. HAMT's local candidate space) make fair
-      comparison non-trivial, (2) VLN's short trajectories (mean 6-8 steps) are
-      structurally incompatible with temporal uncertainty propagation methods
-      designed for long-horizon tasks, and (3) 21 propagation formulations must
-      be systematically benchmarked to distinguish genuine improvements from
-      hyperparameter artifacts. Additionally, the codebase must support two
-      navigation backends (VLN-DUET, VLN-HAMT) with a unified CLI, handling
-      environment conflicts between DUET's and HAMT's Python dependencies.
+      Evaluating conformal prediction for navigation requires navigating three
+      compounding challenges: (1) Multiple navigation architectures with
+      fundamentally different action representations — one operating on a
+      topological map of the environment, the other on local candidate steps —
+      make fair cross-system comparison non-trivial; (2) Navigation trajectories
+      are short (mean 6-8 steps), making them structurally incompatible with
+      temporal uncertainty propagation methods designed for long-horizon tasks
+      where running-average methods need many steps to converge; and (3) Twenty-one
+      propagation formulations must be benchmarked systematically to distinguish
+      genuine improvements from configuration artifacts. Building a unified
+      experimental framework bridging two architectures with incompatible software
+      ecosystems added significant engineering overhead before scientific evaluation
+      could begin.
 
     resolution:
       methodology: >
-        Implemented end-to-end conformal prediction runner (conformal_vln.py)
-        supporting DUET and HAMT backends with matched action spaces via
-        `--action_space full/local` switch on DUET. Score functions (THR/APS/RAPS)
-        run automatically; intervention modes (observe, set_restrict) enable
-        coverage vs. intervention trade-off analysis.
+        Built a unified experimental framework supporting both VLN-DUET and
+        VLN-HAMT navigation architectures under a consistent evaluation protocol,
+        enabling direct comparison across systems that would otherwise be
+        benchmarked in isolation. Evaluated three classes of uncertainty scoring
+        methods — threshold-based, adaptive prediction sets, and regularized
+        adaptive sets — across both architectures. Both passive observation mode
+        (does uncertainty improve over time?) and active intervention mode (does
+        restricting the agent to high-confidence actions improve success rates?)
+        evaluated across all configurations.
       propagation_benchmark: >
         Designed and executed systematic benchmark of 21 uncertainty propagation
         formulations across 3 VLN architectures and 4 alpha levels. Key finding:
@@ -1557,18 +1576,25 @@ usecases:
         trajectories prevent running-average methods (EMA, ACI) from converging
         and cause control-based methods (PID) to overshoot.
       score_augmentation: >
-        Discovered that augmenting the base THR nonconformity score with a
-        log-prob penalty term `s(a) = (1 - p_a) + w * (-log p_a)` improves
-        set efficiency by 18-47% across all tested models while maintaining
-        valid coverage guarantees. The improvement is architecture-invariant
-        because the penalty is a monotonic transformation of the softmax output.
+        Discovered that augmenting the base uncertainty score with a logarithmic
+        confidence penalty — additionally down-weighting actions where the model is
+        both uncertain and assigns low probability — improves prediction set
+        efficiency by 18-47% across all tested architectures while maintaining
+        valid coverage guarantees. The improvement holds across architectures
+        because the augmentation operates on the model's raw output probabilities,
+        which all tested systems produce in the same form. This is a counterintuitive
+        finding: a simple one-term modification outperforms complex temporal
+        propagation methods that attempt to accumulate uncertainty across navigation
+        steps.
       codebase: >
-        Built unified codebase (`output_v6/`) supporting both DUET and HAMT
-        with DeepSpeed integration for efficient calibration, multi-backend
-        experiment orchestration, and a propagation pipeline running ~24h per
-        full configuration. Resolved environment conflicts via modular import
-        isolation (`_hamt_module_context`) to prevent DUET's `r2r` package
-        from shadowing HAMT's dependencies.
+        Built a unified research codebase supporting both navigation architectures
+        with consistent interfaces, enabling controlled comparison between systems
+        previously evaluated only in isolation. Includes automated pipeline
+        orchestration, the full suite of 21 uncertainty propagation formulations,
+        and reproducible experiment configuration — a research infrastructure
+        contribution that enables future VLN uncertainty research without
+        rebuilding from scratch. Full calibration benchmarks run approximately
+        24 hours per configuration on available hardware.
 
     tech_stack:
       frameworks: [PyTorch, DeepSpeed ZeRO-2]
@@ -1590,13 +1616,14 @@ usecases:
       calibration_runtime_hours: 24
 
     impact: >
-      Provides the first systematic CP evaluation across multiple VLN architectures,
-      establishing which uncertainty quantification methods work and why most
-      temporal propagation approaches fail on VLN's short-horizon trajectories.
-      The log-prob penalty finding -- that simple score augmentation outperforms
-      complex temporal propagation -- is a counterintuitive and publication-worthy
-      result for ICRA 2027. The codebase enables reproducible benchmarking for
-      future VLN uncertainty research.
+      Provides the first systematic conformal prediction evaluation across multiple
+      VLN architectures, establishing which uncertainty quantification methods work
+      and why most temporal propagation approaches fail on short-horizon navigation
+      trajectories. The logarithmic penalty finding — that a simple score
+      augmentation outperforms complex temporal propagation — is a counterintuitive
+      and publication-worthy result targeting ICRA 2027. The unified experimental
+      framework enables reproducible benchmarking for future VLN uncertainty
+      research without the setup overhead of the initial investigation.
 
   # ──────────────────────────────────────────
 
@@ -1648,14 +1675,13 @@ usecases:
     resolution:
       planned_contributions: >
         Planning to contribute to the inference scheduling framework by:
-        (1) Understanding the Gateway API Inference Extension (GIE) integration
-        layer and how EPP intercepts and routes requests via Envoy ext-proc,
-        (2) Exploring the disaggregation modes (EPD, P/D, E/PD, E/P/D) to
-        identify optimization opportunities in KV cache-aware scheduling
-        decisions, (3) Contributing to scheduler plugin development (filters
-        and scorers) for improved load balancing and cache utilization,
-        (4) Investigating the tokenization architecture (UDS-based) for
-        latency optimization opportunities.
+        (1) Understanding how the scheduling layer intercepts and routes inference
+        requests to the appropriate GPU backend, (2) Exploring disaggregation
+        modes — strategies for splitting the prefill and decode phases of LLM
+        inference across nodes — to identify scheduling optimization opportunities,
+        (3) Contributing to scheduler plugin development for improved load
+        balancing and KV cache reuse, (4) Identifying latency optimization
+        opportunities in the request processing pipeline.
       learning_goals: >
         Deepen expertise in: Kubernetes operator patterns, Envoy proxy
         extensibility, distributed systems for ML inference, Go concurrency
@@ -1663,11 +1689,11 @@ usecases:
         provides exposure to real-world inference serving challenges at the
         intersection of cloud infrastructure and applied ML.
       setup_progress: >
-        Cloning the repository and setting up KIND development environment
-        locally. Reviewing codebase structure (cmd/, internal/, pkg/, apix/)
-        and existing test patterns (unit, integration, e2e). Familiarizing
-        with the disaggregation mode deployment patterns and simulator
-        configuration for local development.
+        Setting up a local development environment matching the project's cluster
+        configuration. Reviewing the codebase architecture and existing test
+        patterns (unit, integration, and end-to-end). Familiarising with the
+        disaggregation deployment modes and the local simulation environment
+        for iterative development before contributing upstream.
 
     tech_stack:
       language: [Go 1.24+]
