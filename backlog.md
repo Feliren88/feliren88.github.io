@@ -23,8 +23,7 @@
 ### Photography & Brand Assets
 - [x] Professional headshot (high-res, multiple angles) - profile.png, profile_2.svg, profile_3.svg uploaded
 - [ ] Workplace/conference photos (7-10 images)
-- [ ] Image thumbnails for Writing cards (OpenGraph/cover images per Medium article, 16:9 or 4:3, displayed on card, click goes to Medium)
-- [ ] Image thumbnails for Use Cases cards (project-specific visuals — architecture diagrams, satellite imagery, result screenshots, displayed on card, click goes to individual use case page `/usecases/<id>/`)
+- [ ] **Card cover images — Research, Writings, Use Cases** — see RFC-005 below for full implementation plan
 - [ ] SEACrowd project screenshots
 - [ ] Research project visualizations (ProCANet architecture, flood maps)
 - [ ] Teaching/mentoring photos
@@ -1158,3 +1157,178 @@ When in doubt visually, model after:
 - **Linear's changelog** — quiet field, occasional decisive accent
 
 Do not model after: dashboard demos, parallax-heavy portfolios, or any "data viz showcase" reel. Those are noisy. This is a story.
+
+---
+
+## RFC-005: Card Cover Images — Research, Writings, Use Cases
+
+**Status:** READY FOR DELIVERY
+**Author:** Vicky Feliren
+**Date:** 2026-05-12
+**Target pages:** `/research/`, `/writings/`, `/usecases/`
+**Scope:** Add a cover image slot to every card across all three pages. Images are optional — cards without an image fall back gracefully to the existing layout.
+
+---
+
+### Why
+
+Cards without images are text-only. A cover image gives each card:
+- A visual anchor that communicates the work at a glance (satellite map, paper figure, article cover art)
+- Higher click-through when shared on social (Open Graph uses the same image)
+- Stronger visual hierarchy on the page — the eye lands on the image before the title
+
+All three pages share the same `.project-card` component, so a single CSS addition covers all three.
+
+---
+
+### Image Specs (all three pages)
+
+| Property | Value |
+|----------|-------|
+| Aspect ratio | 16:9 |
+| Display size | 100% card width × auto height (CSS-controlled) |
+| Format | WebP only (site convention) |
+| Fallback | No image field = card renders without image (no broken layout) |
+| Alt text | Required — set in data YAML per card |
+| Loading | `lazy` on all card images (below fold) |
+| Width/height attrs | Required to prevent layout shift |
+
+---
+
+### Step 1 — Prepare images
+
+Create one 16:9 WebP cover image per card and place in `assets/img/cards/`:
+
+```
+assets/img/cards/
+├── research-mining.webp          ← Multi-modal mining segmentation
+├── research-sea-vl.webp          ← SEA-VL multicultural VLM benchmark
+├── research-flood-procanet.webp  ← ProCANet flood segmentation
+├── research-conformal.webp       ← Conformal prediction for VLMs
+├── research-iwa.webp             ← IWA flood paper
+├── research-mangrove.webp        ← Mangrove detection
+├── research-gdp.webp             ← GDP Labs production ML
+├── writings-map-territory.webp   ← "We all think our map is the territory"
+├── writings-conformal-prod.webp  ← "Your model just killed someone's grandmother"
+├── writings-letting-go.webp      ← "The art of letting go"
+├── writings-meditation.webp      ← "Meditation. 7 days. No phone."
+├── writings-trustworthy-ai.webp  ← "My initial exploration on Trustworthy AI"
+├── writings-phoenix.webp         ← "Phoenix Protocol"
+├── writings-privacy.webp         ← "Privacy Matters"
+├── writings-mental-health.webp   ← "Mental Health Matters"
+└── usecase-<key>.webp            ← one per use case entry in usecases.yml
+```
+
+**Good image sources per type:**
+- **Research**: paper figures, architecture diagrams, satellite imagery screenshots, result visualisation from the paper PDF
+- **Writings**: Medium article cover art (visible at the top of each Medium post) — screenshot and export as WebP
+- **Use Cases**: architecture diagrams, output maps, result screenshots from the project
+
+**Conversion command** (if you have PNG/JPG source):
+```bash
+cwebp -q 82 source.png -o output.webp
+# or with ImageMagick:
+magick source.png -quality 82 output.webp
+```
+
+Target file size: **≤ 80 KB per image** (compress aggressively — these are card thumbnails, not hero images).
+
+---
+
+### Step 2 — Add `image` field to data YAML files
+
+**`_data/publications.yml`** — add `image` and `image_alt` to each entry:
+```yaml
+- key: mining-multispectral
+  image: /assets/img/cards/research-mining.webp
+  image_alt: "Satellite imagery segmentation output showing mining footprints in colour-coded classes"
+  # ... rest of fields unchanged
+```
+
+**`_data/thoughts.yml`** — add `image` and `image_alt` to each entry:
+```yaml
+- title: "We all think our map is the territory"
+  image: /assets/img/cards/writings-map-territory.webp
+  image_alt: "Abstract illustration of overlapping maps representing different cultural worldviews"
+  # ... rest unchanged
+```
+
+**`_data/usecases.yml`** — add `image` and `image_alt` to each use case entry under `items:`:
+```yaml
+- key: flood-procanet
+  image: /assets/img/cards/usecase-flood-procanet.webp
+  image_alt: "ProCANet flood segmentation output on Sentinel-1 SAR imagery showing flood extent in blue"
+  # ... rest unchanged
+```
+
+Both fields are optional. Cards without `image` render exactly as they do today.
+
+---
+
+### Step 3 — Update page templates
+
+**`_pages/publications.md`** — add the image block inside `<article class="project-card reveal">`, before the tag:
+```liquid
+{% if pub.image %}
+<img src="{{ pub.image }}" alt="{{ pub.image_alt }}" class="card-cover" width="640" height="360" loading="lazy">
+{% endif %}
+<p class="tag">{{ pub.tag }}</p>
+```
+
+**`_pages/thoughts.md`** — same pattern:
+```liquid
+{% if post.image %}
+<img src="{{ post.image }}" alt="{{ post.image_alt }}" class="card-cover" width="640" height="360" loading="lazy">
+{% endif %}
+```
+
+**`_pages/usecases.md`** — same pattern on each use case card:
+```liquid
+{% if item.image %}
+<img src="{{ item.image }}" alt="{{ item.image_alt }}" class="card-cover" width="640" height="360" loading="lazy">
+{% endif %}
+```
+
+---
+
+### Step 4 — Add CSS
+
+Append to `css/styles.css` (bump version `?v=N` → `?v=N+1` in `default.html` and `sw.js`):
+
+```css
+.card-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
+  margin: -1.2rem -1.2rem 1rem -1.2rem;  /* bleed to card edges, space below */
+  width: calc(100% + 2.4rem);            /* compensate for card padding */
+}
+```
+
+Adjust the negative margin values to match `.project-card` padding (currently `1.2rem` — verify in `styles.css` at the `.project-card` rule before shipping).
+
+---
+
+### Step 5 — Verify
+
+- [ ] Cards with images display correctly in dark and light mode
+- [ ] Cards without `image` field render identically to today (no broken layout)
+- [ ] Images are lazy-loaded (verify in Network panel — they should not appear in initial load waterfall)
+- [ ] No layout shift — `width`/`height` attrs are present on every `<img>`
+- [ ] Mobile: images still fill card width correctly at ≤760px
+- [ ] Lighthouse Performance still ≥ 90 on `/research/` — card images are lazy so they should not affect LCP
+
+---
+
+### Implementation order
+
+1. Prepare all images (biggest time investment — can be done in batches, one page at a time)
+2. Add YAML fields for whichever page you have images for
+3. Update the template for that page
+4. Add CSS (one change covers all three pages)
+5. Repeat for next page
+
+Start with **Writings** — Medium article cover images are easy to screenshot and the page has the most cards, so the visual improvement is most immediately obvious.
