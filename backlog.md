@@ -85,7 +85,7 @@
 - [x] Semantic Scholar — author profile claimed (ID: 2330264544)
 - [x] LinkedIn — `vickyfeliren.com` attached to profile
 - [x] Perplexity Publisher Program — submitted
-- [ ] **Crunchbase** — Create profile. Tech recruiters and AI tools use Crunchbase as an authoritative professional source for "who is this person." Include link to `vickyfeliren.com`, current role (Applied Scientist / MSc candidate at Monash), and key projects.
+- [x] **Crunchbase** — Profile live at `crunchbase.com/person/vicky-feliren`
 - [ ] **ResearchGate** — High domain authority, ranks well for researcher name searches. Add profile with link to `vickyfeliren.com` and import publications.
 - [ ] **OpenAlex** — Author entity cleanup needed first (see Content Optimization above).
 - [ ] **GitHub profile README** — `github.com/feliren88` README should prominently link to `vickyfeliren.com`. GitHub pages are crawled by every major LLM training pipeline.
