@@ -1,0 +1,176 @@
+---
+layout: default
+---
+
+{% assign uc = site.data.usecases.usecases | where: "id", page.uc_id | first %}
+{% if uc == nil %}
+<section class="section page reveal">
+  <p style="color:var(--muted)">Use case not found.</p>
+</section>
+{% else %}
+<section class="section page reveal uc-page">
+
+  <nav class="uc-breadcrumb" aria-label="Breadcrumb">
+    <a href="/usecases/" class="uc-back-link">← Use Cases</a>
+  </nav>
+
+  <header class="uc-page-header">
+    <div class="uc-tags">{% for tag in uc.tags %}<span class="uc-tag">{{ tag }}</span>{% endfor %}</div>
+    <h1 class="uc-page-title">{{ uc.title }}</h1>
+    <p class="uc-meta">
+      <span class="uc-venue-name">{{ uc.venue }}</span>{% if uc.role %}<span class="uc-role"> · {{ uc.role }}</span>{% endif %}
+    </p>
+  </header>
+
+  {% if uc.situation %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">Situation</span>
+    <p class="uc-section-body">{{ uc.situation }}</p>
+  </div>
+  {% endif %}
+
+  {% if uc.complication %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">The Challenge</span>
+    <p class="uc-section-body">{{ uc.complication }}</p>
+  </div>
+  {% endif %}
+
+  {% if uc.resolution %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">The Approach</span>
+    {% for pair in uc.resolution %}
+    <p class="uc-section-body">{{ pair[1] }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if uc.impact %}
+  <div class="uc-impact-block">
+    <span class="uc-section-label">Impact</span>
+    <p class="uc-impact-body">{{ uc.impact }}</p>
+  </div>
+  {% endif %}
+
+  {% if uc.metrics %}
+  <div class="uc-metrics" aria-label="Key metrics">
+    {% for pair in uc.metrics %}
+    <span class="uc-metric-pill">
+      <strong>{{ pair[1] }}</strong>
+      <span>{{ pair[0] | replace: '_', ' ' }}</span>
+    </span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if uc.tech_stack %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">Tech Stack</span>
+    <div class="uc-tech-strip">
+      {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% for item in pair[1] %}<span class="uc-tech-tag">{{ item }}</span>{% endfor %}{% endunless %}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if uc.collaborators %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">Collaborators</span>
+    <ul class="uc-collaborators">
+      {% for collab in uc.collaborators %}
+      <li><strong>{{ collab.institution }}</strong>{% if collab.role %} — {{ collab.role }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="uc-detail-links">
+    <a href="/usecases/" class="uc-detail-link">← All Use Cases</a>
+    {% if uc.link %}<a href="{{ uc.link }}" target="_blank" rel="noreferrer" class="uc-detail-link">View Publication ↗</a>{% endif %}
+    {% if uc.arxiv %}<a href="{{ uc.arxiv }}" target="_blank" rel="noreferrer" class="uc-detail-link">arXiv ↗</a>{% endif %}
+    {% unless uc.link %}{% if uc.doi %}<a href="https://doi.org/{{ uc.doi }}" target="_blank" rel="noreferrer" class="uc-detail-link">DOI ↗</a>{% endif %}{% endunless %}
+    {% if uc.patent %}<span class="uc-detail-link" style="cursor:default;border-color:var(--line)">Patent {{ uc.patent.id }}</span>{% endif %}
+    {% if uc.publications %}{% for pub in uc.publications %}{% if pub.link %}<a href="{{ pub.link }}" target="_blank" rel="noreferrer" class="uc-detail-link">Publication ↗</a>{% endif %}{% endfor %}{% endif %}
+  </div>
+
+</section>
+
+<style>
+  .uc-breadcrumb { margin-bottom: 1.5rem; }
+  .uc-back-link { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .uc-back-link:hover { color: var(--accent); }
+
+  .uc-page-header { margin-bottom: 2rem; }
+  .uc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.85rem; }
+  .uc-tag {
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.15rem 0.45rem; border-radius: 3px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+  .uc-page-title { font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 700; margin: 0 0 0.5rem; line-height: 1.2; }
+  .uc-meta { margin: 0; font-size: 0.82rem; }
+  .uc-venue-name { color: var(--accent); font-weight: 500; }
+  .uc-role { color: var(--muted); }
+
+  .uc-page-section { margin: 0 0 1.75rem; }
+  .uc-section-label {
+    display: block; font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.55rem;
+  }
+  .uc-section-body {
+    margin: 0 0 0.65rem; font-size: 0.9rem;
+    color: var(--muted); line-height: 1.72;
+  }
+  .uc-section-body:last-child { margin-bottom: 0; }
+
+  .uc-impact-block {
+    margin: 0 0 1.75rem; padding: 1rem 1.1rem;
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+  }
+  .uc-impact-body { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+  .uc-metrics { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.75rem; }
+  .uc-metric-pill {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0.4rem 0.7rem;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px; gap: 0.08rem;
+  }
+  .uc-metric-pill strong { font-size: 0.9rem; color: var(--text); font-weight: 600; white-space: nowrap; }
+  .uc-metric-pill span { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
+
+  .uc-tech-strip { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
+  .uc-tech-tag {
+    font-size: 0.7rem; padding: 0.12rem 0.42rem; border-radius: 3px;
+    background: color-mix(in srgb, var(--muted) 10%, transparent);
+    color: var(--muted);
+    border: 1px solid color-mix(in srgb, var(--muted) 15%, transparent);
+  }
+
+  .uc-collaborators { margin: 0.1rem 0 0; padding-left: 1.1rem; font-size: 0.88rem; color: var(--muted); line-height: 1.85; }
+  .uc-collaborators li { margin-bottom: 0.2rem; }
+
+  .uc-detail-links {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    margin-top: 0.5rem;
+  }
+  a.uc-detail-link {
+    font-size: 0.76rem; color: var(--muted); text-decoration: none;
+    padding: 0.25rem 0.55rem;
+    border: 1px solid var(--border-ui); border-radius: 4px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  a.uc-detail-link:hover { color: var(--accent); border-color: var(--accent); }
+  span.uc-detail-link {
+    font-size: 0.76rem; color: var(--muted);
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
+  }
+</style>
+{% endif %}
