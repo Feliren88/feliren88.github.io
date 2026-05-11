@@ -60,26 +60,37 @@
 - [ ] Organization schema for SEACrowd (standalone, not just memberOf)
 
 ### Content Optimization
-- [ ] Create author page on Wikipedia
-- [ ] Add to WikiData (QID creation)
-- [ ] ORCID profile alignment
+- [ ] Create author page on Wikipedia — account requested via Wikipedia:Request_an_account *(in progress)*
+- [ ] **WikiData QID creation** — Wikimedia account now active. Create entity at `wikidata.org` with: name, aliases, occupation (researcher/data scientist), employer (Monash University), educated at (Monash), official website (`vickyfeliren.com`), ORCID, Google Scholar ID, GitHub, LinkedIn, Semantic Scholar ID, sameAs links. This is the single biggest unlock for Google Knowledge Panel and LLM identity resolution — Gemini, ChatGPT, and Perplexity all use WikiData as ground-truth entity reference.
+- [ ] **ORCID bidirectional link** — ORCID (`0000-0003-3306-8426`) is in the site's `sameAs` JSON-LD but the ORCID profile must also link back to `vickyfeliren.com` in the "websites" field for the entity graph to close. Verify and add if missing.
+- [ ] **OpenAlex duplicate author merge** — Two "Vicky Feliren" entities exist at `openalex.org/works?filter=authorships.author.id:a5051263368`. One has incorrect past institutions. Use the OpenAlex author disambiguation feedback form at `openalex.org/authors` to: (1) merge the duplicate entities, (2) correct the wrong institution data. OpenAlex feeds many LLM training pipelines — incorrect institution data propagates to AI answers about your background.
+- [ ] **Google Search Console — submit sitemap** — Domain is verified (key `google41769159a82c477f` in `_config.yml`) but confirm `https://vickyfeliren.com/sitemap.xml` is submitted inside Search Console under Sitemaps. Verification and sitemap submission are two separate steps.
 - [ ] Google Scholar profile optimization
   - Profile photo
   - Verified email at institution
   - Bio with consistent keywords
-- [ ] **Semantic Scholar API auto-sync for publications** — Semantic Scholar has a public API (no auth required) that returns full metadata for all papers by author ID `2330264544`. Endpoint proven to work:
+- [ ] **Semantic Scholar API auto-sync for publications** — Semantic Scholar profile claimed *(done)*. API auto-sync still pending. Public API, no auth required, author ID `2330264544`. Endpoint proven to work:
   ```
   https://api.semanticscholar.org/graph/v1/author/2330264544/papers
     ?fields=title,year,authors,venue,externalIds,citationCount,abstract,publicationVenue
   ```
-  Possible implementation: GitHub Actions workflow (e.g., weekly cron) that hits this endpoint, diffs against `_data/publications.yml`, and auto-commits updates for citation counts, new papers, and author lists. Citation counts are the main win — they change frequently and today were skipped because manual maintenance would make them stale immediately. A scheduled Action solves that. Secondary benefit: any new paper added to Semantic Scholar appears automatically on the site.
+  Implement as GitHub Actions weekly cron: diff against `_data/publications.yml`, auto-commit citation count updates and new papers. Citation counts are the main win — stale without automation.
+- [ ] **IndexNow GitHub Actions step** — Add a deploy step that pings `api.indexnow.org` with the sitemap URL after every push to `main`. Notifies Bing, Yandex, and Perplexity simultaneously for instant indexing instead of waiting for crawl cycles. Requires generating a one-time API key and hosting a verification file (e.g., `/{key}.txt`) in the repo root.
+- [ ] **Google Rich Results Test** — Run `search.google.com/test/rich-results` on `https://vickyfeliren.com/research/` to confirm `ScholarlyArticle` JSON-LD is parsed correctly. Free, 30 seconds. Fix any errors flagged.
+- [ ] **PageSpeed Insights / Core Web Vitals** — Run `pagespeed.web.dev` on homepage. Core Web Vitals (LCP, CLS, INP) directly affect Google ranking. Target: LCP < 2.5s, CLS < 0.1. See RFC-001 in this backlog for the full performance plan.
 
 ### Link Building
-- [ ] Submit to:
-  - Crunchbase (profile creation)
-  - ResearchGate
-  - Academia.edu
-  - Semantic Scholar author profile
+- [x] Bing Webmaster Tools — site added, sitemap submitted
+- [x] Yandex Webmaster — verification file live, site added
+- [x] Semantic Scholar — author profile claimed (ID: 2330264544)
+- [x] LinkedIn — `vickyfeliren.com` attached to profile
+- [x] Perplexity Publisher Program — submitted
+- [ ] **Crunchbase** — Create profile. Tech recruiters and AI tools use Crunchbase as an authoritative professional source for "who is this person." Include link to `vickyfeliren.com`, current role (Applied Scientist / MSc candidate at Monash), and key projects.
+- [ ] **ResearchGate** — High domain authority, ranks well for researcher name searches. Add profile with link to `vickyfeliren.com` and import publications.
+- [ ] **OpenAlex** — Author entity cleanup needed first (see Content Optimization above).
+- [ ] **GitHub profile README** — `github.com/feliren88` README should prominently link to `vickyfeliren.com`. GitHub pages are crawled by every major LLM training pipeline.
+- [ ] **Medium canonical links** — If cross-posting writing to Medium, set canonical URL to `vickyfeliren.com/writings/` so Google attributes authority to your site rather than Medium.
+- [ ] Academia.edu — Academic profile
 - [ ] Guest post on:
   - Towards Data Science
   - Medium AI publications
