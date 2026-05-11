@@ -56,6 +56,15 @@ permalink: /research/
     <h3>{{ pub.title }}</h3>
     <p>{{ pub.description }}</p>
     <span class="venue">{{ pub.venue }}</span>
+    {% if pub.authors %}
+    {% assign _preview = pub.authors | slice: 0, 4 | join: ", " %}
+    {% assign _total = pub.authors | size %}
+    {% assign _remaining = _total | minus: 4 %}
+    <details class="card-authors">
+      <summary>{{ _preview }}{% if _remaining > 0 %} and {{ _remaining }} more{% endif %}</summary>
+      <p class="authors-full">{{ pub.authors | join: ", " }}</p>
+    </details>
+    {% endif %}
     {% if pub.url %}
     <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn" aria-label="Read paper: {{ pub.title }}">Read Paper</a>
     {% endif %}

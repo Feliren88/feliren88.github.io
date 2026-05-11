@@ -758,6 +758,26 @@ h1 {
   display: none;
 }
 
+.card-authors {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
+.card-authors summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.card-authors summary::-webkit-details-marker { display: none; }
+.card-authors summary::before { content: "▸ "; font-size: 0.65rem; color: var(--accent); }
+.card-authors[open] summary::before { content: "▾ "; }
+.card-authors .authors-full {
+  margin: 0.35rem 0 0 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+  font-size: 0.73rem;
+}
+
 /* Awards */
 .awards-grid {
   margin-top: 0.95rem;
