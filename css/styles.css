@@ -293,7 +293,8 @@ main {
   .hero-meta {
     justify-content: center;
   }
-  .shape-controls {
+  .shape-controls,
+  .bg-controls > p {
     display: none;
   }
 }
@@ -1274,7 +1275,8 @@ h1 {
   /* ── Hero centering ── */
   .hero-actions,
   .hero-meta { justify-content: center; }
-  .shape-controls { display: none; }
+  .shape-controls,
+  .bg-controls > p { display: none; }
 
   /* ── Typography ── */
   .eyebrow { letter-spacing: 0.13em; font-size: 0.7rem; }
