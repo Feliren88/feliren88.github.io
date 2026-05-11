@@ -286,6 +286,11 @@ main {
     align-items: center;
     text-align: center;
   }
+  .hero-actions,
+  .hero-meta,
+  .shape-controls {
+    justify-content: center;
+  }
 }
 
 .eyebrow {

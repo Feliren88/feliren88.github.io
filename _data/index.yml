@@ -5,6 +5,8 @@ lead2: 'Published in academic conferences and journals. Building open AI infrast
 buttons:
   - label: 'Research'
     href: '/research/'
+  - label: 'Use Cases'
+    href: '/usecases/'
   - label: 'Writings'
     href: '/writings/'
 meta:
