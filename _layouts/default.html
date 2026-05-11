@@ -29,8 +29,8 @@
       "name": "Vicky Feliren",
       "alternateName": "Vicky Feliren",
       "gender": "Male",
-      "description": "Applied Scientist",
-      "disambiguatingDescription": "Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models",
+      "description": "Applied Scientist (he/him)",
+      "disambiguatingDescription": "Vicky Feliren (he/him) — Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models",
       "jobTitle": "Applied Scientist",
       "alumniOf": {
         "@type": "CollegeOrUniversity",
@@ -76,53 +76,17 @@
         }
       ],
       "author": [
+        {% for pub in site.data.publications %}
         {
           "@type": "ScholarlyArticle",
-          "name": "Progressive Cross-Attention Network for Flood Segmentation using Multispectral Satellite Imagery",
-          "url": "https://ieeexplore.ieee.org/document/10750225",
-          "datePublished": "2024",
-          "publisher": { "@type": "Organization", "name": "Institute of Electrical and Electronics Engineers" }
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "Multi-modal deep learning approaches to semantic segmentation of mining footprints with multispectral satellite imagery",
-          "url": "https://doi.org/10.1016/j.rse.2024.114584",
-          "datePublished": "2025",
-          "publisher": { "@type": "Organization", "name": "Elsevier" }
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "Crowdsource, Crawl, or Generate? Creating SEA-VL, a Multicultural Vision-Language Dataset for Southeast Asia",
-          "url": "https://aclanthology.org/2025.acl-long.916/",
-          "datePublished": "2025",
-          "publisher": { "@type": "Organization", "name": "Association for Computational Linguistics" }
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "Enhancing urban resilience through integrated flood policy and planning: a mixed-methods evaluation of retention ponds for flood mitigation in South Bandung",
-          "url": "https://iwaponline.com/aqua/article/74/2/267/106789/Enhancing-urban-resilience-through-integrated",
-          "datePublished": "2025",
-          "publisher": { "@type": "Organization", "name": "IWA Publishing" }
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "CommonLID: Re-evaluating State-of-the-Art Language Identification Performance on Web Data",
-          "url": "https://arxiv.org/abs/2601.18026",
-          "datePublished": "2026"
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "Anthropogenic Regional Adaptation in Multimodal Vision-Language Model",
-          "url": "https://arxiv.org/abs/2604.11490",
-          "datePublished": "2026"
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "name": "The Effect of Plastic Bag Ban Policy Towards Waste Complaints in Jakarta",
-          "url": "https://ieeexplore.ieee.org/document/9533236/",
-          "datePublished": "2021",
-          "publisher": { "@type": "Organization", "name": "Institute of Electrical and Electronics Engineers" }
-        }
+          "name": {{ pub.title | jsonify }},
+          "url": {{ pub.url | jsonify }},
+          "description": {{ pub.abstract | jsonify }},
+          "datePublished": {{ pub.year | jsonify }}{% if pub.publisher %},
+          "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
+          "keywords": {{ pub.keywords | jsonify }}{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
       ],
       "sameAs": [
         "https://feliren88.github.io",

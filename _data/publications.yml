@@ -2,8 +2,23 @@
   tag: 'Q1 · IF: 11.4'
   title: "Multi-modal deep learning approaches to semantic segmentation of mining footprints with multispectral satellite imagery"
   description: 'Semantic segmentation of global mining footprints using multispectral satellite imagery across 37 locations worldwide.'
-  venue: 'Remote Sensing of Environment, Volume 318, 2025'
+  venue: 'Remote Sensing of Environment, Volume 318, Article 114584, 2025'
+  year: "2025"
+  publisher: 'Elsevier'
   url: 'https://doi.org/10.1016/j.rse.2024.114584'
+  doi: '10.1016/j.rse.2024.114584'
+  keywords: ['semantic segmentation', 'mining detection', 'multispectral satellite imagery', 'remote sensing', 'deep learning', 'geospatial AI', 'U-Net', 'SegFormer', 'land cover mapping', 'satellite imagery']
+  authors:
+    - "Muhamad Risqi U. Saputra"
+    - "Irfan Dwiki Bhaswara"
+    - "Bahrul Ilmi Nasution"
+    - "Michelle Ang Li Ern"
+    - "Nur Laily Romadhotul Husna"
+    - "Tahjudil Witra"
+    - "Vicky Feliren"
+    - "John R. Owen"
+    - "Deanna Kemp"
+    - "Alex M. Lechner"
   abstract: 'Existing remote sensing applications in mining are often of limited scope, typically mapping multiple mining land covers for a single mine or only mapping mining extents or a single feature (e.g., tailings dam) for multiple mines across a region. Many of these works have a narrow focus on specific mine land covers rather than encompassing the variety of mining and non-mining land use in a mine site. This study presents a pioneering effort in performing deep learning-based semantic segmentation of 37 mining locations worldwide, representing a range of commodities from gold to coal, using multispectral satellite imagery, to automate mapping of mining and non-mining land covers. Due to the absence of a dedicated training dataset, we crafted a customized multispectral dataset for training and testing deep learning models, leveraging and refining existing datasets in terms of boundaries, shapes, and class labels. We trained and tested multimodal semantic segmentation models, particularly based on U-Net, DeepLabV3+, Feature Pyramid Network (FPN), SegFormer, and IBM-NASA foundational geospatial model (Prithvi) architecture, with a focus on evaluating different model configurations, input band combinations, and the effectiveness of transfer learning. In terms of multimodality, we utilized various image bands, including Red, Green, Blue, and Near Infra-Red (NIR) and Normalized Difference Vegetation Index (NDVI), to determine which combination of inputs yields the most accurate segmentation. Results indicated that among different configurations, FPN with DenseNet-121 backbone, pre-trained on ImageNet, and trained using both RGB and NIR bands, performs the best. We concluded the study with a comprehensive assessment of the model performance based on climate classification categories and diverse mining commodities.'
 
 - key: sea-vl
@@ -11,23 +26,140 @@
   title: 'Crowdsource, Crawl, or Generate? Creating SEA-VL, a Multicultural Vision-Language Dataset for Southeast Asia'
   description: 'A multicultural vision-language benchmark for Southeast Asia, covering 1.28M culturally relevant images across 11 SEA languages.'
   venue: 'ACL 2025'
+  year: "2025"
+  publisher: 'Association for Computational Linguistics'
   url: 'https://aclanthology.org/2025.acl-long.916/'
+  keywords: ['vision-language models', 'Southeast Asia', 'multicultural AI', 'multilingual benchmark', 'cultural diversity', 'VQA', 'image-text dataset', 'SEA languages', 'culturally relevant AI']
+  authors:
+    - "Samuel Cahyawijaya"
+    - "Holy Lovenia"
+    - "Joel Ruben Antony Moniz"
+    - "Tack Hwa Wong"
+    - "Mohammad Rifqi Farhansyah"
+    - "Thant Thiri Maung"
+    - "Frederikus Hudi"
+    - "David Anugraha"
+    - "Muhammad Ravi Shulthan Habibi"
+    - "Muhammad Reza Qorib"
+    - "Amit Agarwal"
+    - "Joseph Marvin Imperial"
+    - "Hitesh Laxmichand Patel"
+    - "Vicky Feliren"
+    - "Bahrul Ilmi Nasution"
+    - "Manuel Antonio Rufino"
+    - "Genta Indra Winata"
+    - "Rian Adam Rajagede"
+    - "Carlos Rafael Catalan"
+    - "Mohamed Fazli Mohamed Imam"
+    - "Priyaranjan Pattnayak"
+    - "Salsabila Zahirah Pranida"
+    - "Kevin Pratama"
+    - "Yeshil Bangera"
+    - "Adisai Na-Thalang"
+    - "Patricia Nicole Monderin"
+    - "Yueqi Song"
+    - "Christian Simon"
+    - "Lynnette Hui Xian Ng"
+    - "Richardy Lobo Sapan"
+    - "Taki Hasan Rafi"
+    - "Bin Wang"
+    - "Supryadi"
+    - "Kanyakorn Veerakanjana"
+    - "Piyalitt Ittichaiwong"
+    - "Matthew Theodore Roque"
+    - "Karissa Vincentio"
+    - "Takdanai Kreangphet"
+    - "Phakphum Artkaew"
+    - "Kadek Hendrawan Palgunadi"
+    - "Yanzhi Yu"
+    - "Rochana Prih Hastuti"
+    - "William Nixon"
+    - "Mithil Bangera"
+    - "Adrian Xuan Wei Lim"
+    - "Aye Hninn Khine"
+    - "Hanif Muhammad Zhafran"
+    - "Teddy Ferdinan"
+    - "Audra Aurora Izzani"
+    - "Ayushman Singh"
+    - "Evan Evan"
+    - "Jauza Akbar Krito"
+    - "Michael Anugraha"
+    - "Fenal Ashokbhai Ilasariya"
+    - "Haochen Li"
+    - "John Amadeo Daniswara"
+    - "Filbert Aurelian Tjiaranata"
+    - "Eryawan Presma Yulianrifat"
+    - "Can Udomcharoenchaikit"
+    - "Fadil Risdian Ansori"
+    - "Mahardika Krisna Ihsani"
+    - "Giang Nguyen"
+    - "Anab Maulana Barik"
+    - "Dan John Velasco"
+    - "Rifo Ahmad Genadi"
+    - "Saptarshi Saha"
+    - "Chengwei Wei"
+    - "Isaiah Edri W. Flores"
+    - "Kenneth Chen Ko Han"
+    - "Anjela Gail D. Santos"
+    - "Wan Shen Lim"
+    - "Kaung Si Phyo"
+    - "Tim Santos"
+    - "Meisyarah Dwiastuti"
+    - "Jiayun Luo"
+    - "Jan Christian Blaise Cruz"
+    - "Ming Shan Hee"
+    - "Ikhlasul Akmal Hanif"
+    - "M. Alif Al Hakim"
+    - "Muhammad Rizky Sya'ban"
+    - "Kun Kerdthaisong"
+    - "Lester James Validad Miranda"
+    - "Fajri Koto"
+    - "Tirana Noor Fatyanosa"
+    - "Alham Fikri Aji"
+    - "Jostin Jerico Rosal"
+    - "Jun Kevin"
+    - "Robert Wijaya"
+    - "Onno P. Kampman"
+    - "Ruochen Zhang"
+    - "Börje F. Karlsson"
+    - "Peerat Limkonchotiwat"
   abstract: "Despite Southeast Asia's extraordinary linguistic and cultural diversity, the region remains significantly underrepresented in vision-language research. To fill this gap, we present SEA-VL, an open-source initiative dedicated to developing culturally relevant high-quality datasets for SEA languages."
 
 - key: flood-procanet
   tag: 'FIRST AUTHOR · IEEE Q1'
   title: 'Progressive Cross-Attention Network for Flood Segmentation Using Multispectral Satellite Imagery'
   description: 'ProCANet achieving state-of-the-art IoU of 0.815 on the Sen1Floods11 benchmark.'
-  venue: 'IEEE Geoscience and Remote Sensing Letters, 2024'
+  venue: 'IEEE Geoscience and Remote Sensing Letters, Vol. 22, pp. 1–5, 2024'
+  year: "2024"
+  publisher: 'Institute of Electrical and Electronics Engineers'
   url: 'https://ieeexplore.ieee.org/document/10750225'
+  keywords: ['flood segmentation', 'flood mapping', 'progressive cross-attention', 'multispectral satellite imagery', 'remote sensing', 'deep learning', 'Sen1Floods11', 'geospatial AI', 'ProCANet']
+  authors:
+    - "Vicky Feliren"
+    - "Fithrothul Khikmah"
+    - "Irfan Dwiki Bhaswara"
+    - "Bahrul Ilmi Nasution"
+    - "Alex M. Lechner"
+    - "Muhamad Risqi U. Saputra"
   abstract: 'We introduce a progressive cross-attention network (ProCANet) that progressively applies both self- and cross-attention mechanisms to multispectral features, generating optimal feature combinations for flood segmentation.'
 
 - key: retention-ponds
   tag: 'Q2 · IF: 2.3'
   title: 'Enhancing urban resilience through integrated flood policy and planning'
   description: 'Mixed-methods evaluation of retention ponds for urban flood mitigation.'
-  venue: 'AQUA - Water Infrastructure, Ecosystems and Society, Volume 74(2), 2025'
+  venue: 'AQUA — Water Infrastructure, Ecosystems and Society, Vol. 74(2), pp. 267–282, 2025'
+  year: "2025"
+  publisher: 'IWA Publishing'
   url: 'https://iwaponline.com/aqua/article/74/2/267/106789/Enhancing-urban-resilience-through-integrated'
+  keywords: ['urban flooding', 'retention ponds', 'flood mitigation', 'urban resilience', 'water management', 'Bandung', 'flood policy', 'stormwater management']
+  authors:
+    - "Eka Permanasari"
+    - "Marco Wijaya"
+    - "Vicky Feliren"
+    - "Fithrotul Khikmah"
+    - "Alex M. Lechner"
+    - "Altaf Virani"
+    - "Muhamad Risqi U. Saputra"
   abstract: 'This study examines the role of retention ponds in South Bandung as a strategic response to flood management challenges.'
 
 - key: commonlid
@@ -35,7 +167,108 @@
   title: 'CommonLID: Re-evaluating State-of-the-Art Language Identification Performance on Web Data'
   description: 'A community-driven human-annotated benchmark covering 109 languages.'
   venue: 'ACL 2026 (Accepted)'
+  year: "2026"
+  publisher: 'Association for Computational Linguistics'
   url: 'https://arxiv.org/abs/2601.18026'
+  keywords: ['language identification', 'multilingual NLP', 'web data benchmark', 'low-resource languages', '109 languages', 'human annotation', 'CommonLID']
+  authors:
+    - "Pedro Ortiz Suarez"
+    - "Laurie Burchell"
+    - "Catherine Arnett"
+    - "Rafael Mosquera-Gómez"
+    - "Sara Hincapie-Monsalve"
+    - "Thom Vaughan"
+    - "Damian Stewart"
+    - "Malte Ostendorff"
+    - "Idris Abdulmumin"
+    - "Vukosi Marivate"
+    - "Shamsuddeen Hassan Muhammad"
+    - "Atnafu Lambebo Tonja"
+    - "Hend Al-Khalifa"
+    - "Nadia Ghezaiel Hammouda"
+    - "Verrah Otiende"
+    - "Tack Hwa Wong"
+    - "Jakhongir Saydaliev"
+    - "Melika Nobakhtian"
+    - "Muhammad Ravi Shulthan Habibi"
+    - "Chalamalasetti Kranti"
+    - "Carol Muchemi"
+    - "Khang Nguyen"
+    - "Faisal Muhammad Adam"
+    - "Luis Frentzen Salim"
+    - "Reem Alqifari"
+    - "Cynthia Amol"
+    - "Joseph Marvin Imperial"
+    - "Ilker Kesen"
+    - "Ahmad Mustafid"
+    - "Pavel Stepachev"
+    - "Leshem Choshen"
+    - "David Anugraha"
+    - "Hamada Nayel"
+    - "Seid Muhie Yimam"
+    - "Vallerie Alexandra Putra"
+    - "My Chiffon Nguyen"
+    - "Azmine Toushik Wasi"
+    - "Gouthami Vadithya"
+    - "Rob van der Goot"
+    - "Lanwenn ar C'horr"
+    - "Karan Dua"
+    - "Andrew Yates"
+    - "Mithil Bangera"
+    - "Yeshil Bangera"
+    - "Hitesh Laxmichand Patel"
+    - "Shu Okabe"
+    - "Fenal Ashokbhai Ilasariya"
+    - "Dmitry Gaynullin"
+    - "Genta Indra Winata"
+    - "Yiyuan Li"
+    - "Juan Pablo Martínez"
+    - "Amit Agarwal"
+    - "Ikhlasul Akmal Hanif"
+    - "Raia Abu Ahmad"
+    - "Esther Adenuga"
+    - "Filbert Aurelian Tjiaranata"
+    - "Weerayut Buaphet"
+    - "Michael Anugraha"
+    - "Sowmya Vajjala"
+    - "Benjamin Rice"
+    - "Azril Hafizi Amirudin"
+    - "Jesujoba O. Alabi"
+    - "Srikant Panda"
+    - "Yassine Toughrai"
+    - "Bruhan Kyomuhendo"
+    - "Daniel Ruffinelli"
+    - "Akshata A"
+    - "Manuel Goulão"
+    - "Ej Zhou"
+    - "Ingrid Gabriela Franco Ramirez"
+    - "Cristina Aggazzotti"
+    - "Konstantin Dobler"
+    - "Jun Kevin"
+    - "Quentin Pagès"
+    - "Nicholas Andrews"
+    - "Nuhu Ibrahim"
+    - "Mattes Ruckdeschel"
+    - "Amr Keleg"
+    - "Mike Zhang"
+    - "Casper Muziri"
+    - "Saron Samuel"
+    - "Sotaro Takeshita"
+    - "Kun Kerdthaisong"
+    - "Luca Foppiano"
+    - "Rasul Dent"
+    - "Tommaso Green"
+    - "Ahmad Mustapha Wali"
+    - "Kamohelo Makaaka"
+    - "Vicky Feliren"
+    - "Inshirah Idris"
+    - "Hande Celikkanat"
+    - "Abdulhamid Abubakar"
+    - "Jean Maillard"
+    - "Benoît Sagot"
+    - "Thibault Clérice"
+    - "Kenton Murray"
+    - "Sarah Luger"
   abstract: 'We introduce CommonLID, a community-driven, human-annotated LID benchmark for the web domain, covering 109 languages.'
 
 - key: anthropogenic
@@ -43,13 +276,74 @@
   title: 'Anthropogenic Regional Adaptation in Multimodal Vision-Language Model'
   description: 'GG-EZ achieves 5-15% gains in cultural relevance for Southeast Asia while retaining over 98% of global benchmark performance.'
   venue: 'Under Review'
+  year: "2026"
   url: 'https://arxiv.org/abs/2604.11490'
+  keywords: ['vision-language models', 'cultural adaptation', 'Southeast Asia', 'regional AI', 'multimodal AI', 'GG-EZ', 'anthropogenic adaptation', 'cultural relevance']
+  authors:
+    - "Samuel Cahyawijaya"
+    - "Peerat Limkonchotiwat"
+    - "Tack Hwa Wong"
+    - "Hitesh Laxmichand Patel"
+    - "Amit Agarwal"
+    - "Manuel Antonio Rufino"
+    - "Carlos Rafael Catalan"
+    - "Muhammad Reza Qorib"
+    - "Vicky Feliren"
+    - "Holy Lovenia"
+    - "Aye Hninn Khine"
+    - "Frederikus Hudi"
+    - "David Anugraha"
+    - "Alham Fikri Aji"
+    - "Romrawin Chumpu"
+    - "Viet-Thanh Pham"
+    - "Minghan Wang"
+    - "Mohamed Fazli Mohamed Imam"
+    - "Ruochen Zhang"
+    - "Joseph Marvin Imperial"
+    - "Khumaisa Nur'aini"
+    - "Do Xuan Long"
+    - "Musa Izzanardi Wijanarko"
+    - "Joel Ruben Antony Moniz"
+    - "Patrick Amadeus Irawan"
+    - "Hanif Muhammad Zhafran"
+    - "Isaiah Flores"
+    - "Salsabila Zahirah Pranida"
+    - "Jun Kevin"
+    - "Jostin Jerico Rosal"
+    - "Patricia Nicole Monderin"
+    - "Kun Kerdthaisong"
+    - "Ahmad Mustafid"
+    - "My Chiffon Nguyen"
+    - "Natchapon Jongwiriyanurak"
+    - "Siva Worajitwannakul"
+    - "Haochen Li"
+    - "Adrian Xuan Wei Lim"
+    - "Bin Wang"
+    - "Muhammad Ravi Shulthan Habibi"
+    - "Lynnette Hui Xian Ng"
+    - "Mithil Bangera"
+    - "Yeshil Bangera"
+    - "Priyaranjan Pattnayak"
+    - "Dun Li Chan"
+    - "Sherissa Caren Djuniwar"
+    - "Cho Chan Myei Oo"
+    - "Hee Ming Shan"
   abstract: 'We introduce Anthropogenic Regional Adaptation: a novel paradigm that aims to optimize model relevance to specific regional contexts while ensuring the retention of global generalization capabilities.'
 
 - key: plastic-bag-ban
   tag: 'FIRST AUTHOR'
   title: 'The Effect of Plastic Bag Ban Policy Towards Waste Complaints in Jakarta'
   description: 'Analysis through JAKI and Qlue platforms.'
-  venue: 'ICISS 2021'
+  venue: 'International Conference on ICT for Smart Society (ICISS 2021), pp. 1–5'
+  year: "2021"
+  publisher: 'Institute of Electrical and Electronics Engineers'
   url: 'https://ieeexplore.ieee.org/document/9533236/'
+  keywords: ['plastic bag ban', 'waste policy', 'Jakarta', 'urban sustainability', 'citizen complaints', 'environmental policy', 'smart city', 'JAKI', 'Qlue']
+  authors:
+    - "Vicky Feliren"
+    - "Yudhistira Nugraha"
+    - "Bahrul Ilmi Nasution"
+    - "Clarissa Febria Finola"
+    - "Juan Kanggrawan"
+    - "Alex Suherman"
   abstract: 'Plastic bag ban policy has been implemented in Jakarta since July 1st, 2020. This research aims to look at the policy impact on waste complaints.'

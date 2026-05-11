@@ -6,6 +6,39 @@ description: Peer-reviewed work on conformal prediction for vision-language mode
 permalink: /research/
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://vickyfeliren.com/research/",
+  "name": "Research & Publications — Vicky Feliren",
+  "description": "Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.",
+  "url": "https://vickyfeliren.com/research/",
+  "author": {
+    "@type": "Person",
+    "@id": "https://vickyfeliren.com/",
+    "name": "Vicky Feliren",
+    "url": "https://vickyfeliren.com"
+  },
+  "hasPart": [
+    {% for pub in site.data.publications %}
+    {
+      "@type": "ScholarlyArticle",
+      "name": {{ pub.title | jsonify }},
+      "headline": {{ pub.title | jsonify }},
+      "url": {{ pub.url | jsonify }},
+      "description": {{ pub.abstract | jsonify }},
+      "datePublished": {{ pub.year | jsonify }},
+      {% if pub.keywords %}"keywords": {{ pub.keywords | jsonify }},{% endif %}
+      "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }} }{% if pub.publisher %},
+      "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %},
+      "author": [{% for a in pub.authors %}{ "@type": "Person"{% if a == "Vicky Feliren" %}, "@id": "https://vickyfeliren.com/"{% endif %}, "name": {{ a | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
 <p class="eyebrow">
   <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">
     <img src="/assets/img/google-scholar-svgrepo-com.webp" alt="Google Scholar" style="width:18px;height:18px;vertical-align:middle;margin-right:0.4rem" loading="lazy">
@@ -24,7 +57,7 @@ permalink: /research/
     <p>{{ pub.description }}</p>
     <span class="venue">{{ pub.venue }}</span>
     {% if pub.url %}
-    <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read Paper</a>
+    <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn" aria-label="Read paper: {{ pub.title }}">Read Paper</a>
     {% endif %}
     {% if pub.abstract %}
     <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>

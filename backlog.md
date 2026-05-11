@@ -23,6 +23,8 @@
 ### Photography & Brand Assets
 - [x] Professional headshot (high-res, multiple angles) - profile.png, profile_2.svg, profile_3.svg uploaded
 - [ ] Workplace/conference photos (7-10 images)
+- [ ] Image thumbnails for Writing cards (OpenGraph/cover images per Medium article, 16:9 or 4:3, displayed on card, click goes to Medium)
+- [ ] Image thumbnails for Use Cases cards (project-specific visuals — architecture diagrams, satellite imagery, result screenshots, displayed on card, click goes to individual use case page `/usecases/<id>/`)
 - [ ] SEACrowd project screenshots
 - [ ] Research project visualizations (ProCANet architecture, flood maps)
 - [ ] Teaching/mentoring photos
@@ -65,6 +67,12 @@
   - Profile photo
   - Verified email at institution
   - Bio with consistent keywords
+- [ ] **Semantic Scholar API auto-sync for publications** — Semantic Scholar has a public API (no auth required) that returns full metadata for all papers by author ID `2330264544`. Endpoint proven to work:
+  ```
+  https://api.semanticscholar.org/graph/v1/author/2330264544/papers
+    ?fields=title,year,authors,venue,externalIds,citationCount,abstract,publicationVenue
+  ```
+  Possible implementation: GitHub Actions workflow (e.g., weekly cron) that hits this endpoint, diffs against `_data/publications.yml`, and auto-commits updates for citation counts, new papers, and author lists. Citation counts are the main win — they change frequently and today were skipped because manual maintenance would make them stale immediately. A scheduled Action solves that. Secondary benefit: any new paper added to Semantic Scholar appears automatically on the site.
 
 ### Link Building
 - [ ] Submit to:
