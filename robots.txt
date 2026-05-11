@@ -28,6 +28,13 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
+# Meta / Llama
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
 # Perplexity
 User-agent: PerplexityBot
 Allow: /
