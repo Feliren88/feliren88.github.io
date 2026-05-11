@@ -41,9 +41,51 @@
     }).join('');
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderNavigation);
-  } else {
+  function initMobileNav() {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.getElementById('main-nav');
+    var backdrop = document.getElementById('nav-backdrop');
+    if (!toggle || !nav || !backdrop) return;
+
+    function openNav() {
+      nav.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      toggle.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+
+    function closeNav() {
+      nav.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      toggle.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+
+    toggle.addEventListener('click', function() {
+      nav.classList.contains('is-open') ? closeNav() : openNav();
+    });
+
+    backdrop.addEventListener('click', closeNav);
+
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeNav);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeNav();
+    });
+  }
+
+  function init() {
     renderNavigation();
+    initMobileNav();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
