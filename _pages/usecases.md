@@ -34,7 +34,7 @@ permalink: /usecases/
     <h3 class="uc-title"><a href="/usecases/{{ uc.id }}/" class="uc-title-link">{{ uc.title }}</a></h3>
     <p class="uc-meta"><span class="uc-venue-name">{{ uc.venue }}</span>{% if uc.role %}<span class="uc-role"> · {{ uc.role }}</span>{% endif %}</p>
 
-    {% if uc.situation %}<p class="uc-situation">{{ uc.situation }}</p>{% endif %}
+    {% if uc.hook %}<p class="uc-situation">{{ uc.hook }}</p>{% endif %}
 
     {% if uc.tech_stack %}
     <div class="uc-tech-strip">
@@ -157,16 +157,12 @@ permalink: /usecases/
   .uc-venue-name { color: var(--accent); font-weight: 500; }
   .uc-role { color: var(--muted); }
 
-  /* ── Situation — 3-line teaser ──────────────────────── */
+  /* ── Hook — short card teaser ───────────────────────── */
   .uc-situation {
     margin: 0 0 1rem;
     font-size: 0.88rem;
     color: var(--muted);
     line-height: 1.68;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
     flex: 1;
   }
 

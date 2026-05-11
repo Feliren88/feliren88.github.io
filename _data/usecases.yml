@@ -84,6 +84,8 @@ usecases:
       - Sentinel-2
       - Sen1Floods11
 
+    hook: "Satellite flood maps for 25M people — hours instead of days, state-of-the-art IoU."
+
     situation: >
       Flood extent mapping from satellite imagery is a critical upstream input for
       disaster response logistics. Manual GIS analysis introduces latency of days
@@ -182,6 +184,8 @@ usecases:
       - SAR
       - Geospatial foundation models
 
+    hook: "The first geospatial foundation model applied to continental-scale mining footprint detection."
+
     situation: >
       Mining footprint delineation is a prerequisite for environmental compliance
       monitoring and land rehabilitation planning at national scale. Across
@@ -268,6 +272,8 @@ usecases:
       - Indonesia
       - Vietnam
 
+    hook: "Catching illegal shrimp farms from orbit before regulators arrive — hours, not field-survey years."
+
     situation: >
       Illegal aquaculture expansion -- primarily shrimp and fish ponds -- along
       Southeast Asian coastlines is a leading driver of mangrove deforestation.
@@ -342,6 +348,8 @@ usecases:
       - Sustainability
       - Urban resilience
 
+    hook: "Do retention ponds actually reduce flooding? We answered it with satellites and causal stats."
+
     situation: >
       Urban flood management policy in Indonesian cities relies heavily on
       retention pond construction as a primary mitigation instrument, yet rigorous
@@ -402,6 +410,8 @@ usecases:
       - Multilingual
       - Benchmark
       - Cultural representation
+
+    hook: "GPT-4V fails on Southeast Asian culture. We built the benchmark that proves it — ACL 2025."
 
     situation: >
       State-of-the-art Vision-Language Models (GPT-4V, Gemini 1.5, Claude 3)
@@ -482,6 +492,8 @@ usecases:
       - Retrieval-augmented generation
       - Fine-tuning
       - Anthropogenic priors
+
+    hook: "Cultural AI for Southeast Asia without retraining from scratch — 98%+ global quality retained."
 
     situation: >
       General-purpose VLMs (LLaVA, InternVL, Phi-Vision, SDXL) exhibit
@@ -568,6 +580,8 @@ usecases:
       - Southeast Asia
       - Benchmark
 
+    hook: "That 99% LID accuracy on SEA languages? It collapses on real noisy web data."
+
     situation: >
       Language Identification (LID) is an upstream dependency for virtually
       every multilingual NLP pipeline: machine translation routing, content
@@ -636,6 +650,8 @@ usecases:
       - Conformal prediction
       - Vertex AI
       - Decision intelligence
+
+    hook: "Turned media gut-feel into calibrated prediction intervals across 6 APAC markets for a Fortune 500."
 
     situation: >
       A Fortune 500 global beauty conglomerate needed a data-driven system for
@@ -740,6 +756,8 @@ usecases:
       - MLflow
       - Financial inclusion
 
+    hook: "1M+ daily inferences at 99.99% uptime. Credit for the borrowers banks wouldn't score."
+
     situation: >
       A major Indonesian bank required a production-grade biometric authentication
       stack capable of handling login surges at national scale, while simultaneously
@@ -835,6 +853,8 @@ usecases:
     venue: "GDP Labs (GLAIR.ai) -- Lead ML Engineer (2021 -- 2023)"
     role: Lead ML Engineer
 
+    hook: "Three fraud attack types, one pipeline — rule filters, XGBoost, and graph anomaly detection."
+
     situation: >
       A digital payments platform processing high daily transaction volumes
       faced escalating fraud losses across three distinct attack vectors:
@@ -907,6 +927,8 @@ usecases:
       - Policy Analysis
     venue: "Jakarta Smart City -- Data Scientist (Jan 2021 -- June 2021)"
     role: Lead Data Scientist
+
+    hook: "Forecasted Jakarta's trash so trucks go where waste actually is, not where the schedule says."
 
     situation: >
       Jakarta's solid waste management agency (DINAS LINGKUNGAN HIDUP) operates
@@ -992,6 +1014,8 @@ usecases:
     venue: "Artefact -- Senior Data Scientist (2025)"
     role: Lead Data Scientist
 
+    hook: "Two Fortune 500 clients, two forecasting problems, two weeks each — shipped and handed off."
+
     situation: >
       Two enterprise consulting engagements in parallel: a media group requiring
       audience reach forecasting for advertising inventory planning (forward-looking
@@ -1061,6 +1085,8 @@ usecases:
       - Geospatial clustering
       - Azure Maps
       - Gradient boosting
+
+    hook: "A Jakarta ride-demand heatmap built in 48 hours. Microsoft Azure APAC Regional Champion."
 
     situation: >
       Jakarta's ride-hailing market suffers from supply-demand mismatch that
@@ -1139,6 +1165,8 @@ usecases:
       - Indonesia
       - GDPR
 
+    hook: "COVID-19 vitals monitoring on a 2G connection — no cloud, no smartphone. Top 3, Cambridge."
+
     situation: >
       During the COVID-19 pandemic surge (early 2020), Indonesian public hospitals
       faced patient overflow that required monitoring high-risk home-isolated
@@ -1215,6 +1243,8 @@ usecases:
       - Digital inclusion
       - 2G network
       - COVID-19
+
+    hook: "Health info for 40% of Indonesians without smartphones — via a plain old phone call."
 
     situation: >
       During the COVID-19 pandemic, Indonesian government health guidance,
@@ -1300,6 +1330,8 @@ usecases:
       - e-government
       - Jakarta
 
+    hook: "Jakarta banned plastic bags in 2020. Did it work? Proved it causally with 100K+ complaints."
+
     situation: >
       Jakarta implemented a plastic bag ban in 2020 -- prohibiting single-use
       plastic bag distribution by retailers. Policy makers needed empirical
@@ -1383,6 +1415,8 @@ usecases:
       - DeepSpeed ZeRO-2
       - AI City Challenge
       - Captioning
+
+    hook: "Fine-tuning a 3B VLM on a 14GB GPU — every memory constraint hit, diagnosed, and solved."
 
     situation: >
       The AI City Challenge Track 2 requires fine-tuning vision-language models
@@ -1482,6 +1516,8 @@ usecases:
       - VLN-HAMT
       - R2R dataset
       - Prediction sets
+
+    hook: "21 uncertainty methods for robot navigation tested. Most fail. One works — and we know why."
 
     situation: >
       Vision-and-Language Navigation (VLN) agents operating in unseen environments
@@ -1587,6 +1623,8 @@ usecases:
       - vLLM
       - Disaggregated inference
       - KV cache-aware scheduling
+
+    hook: "Contributing to the Kubernetes layer routing LLM requests across GPU backends at production scale."
 
     situation: >
       Production LLM inference at scale requires intelligent request routing across
