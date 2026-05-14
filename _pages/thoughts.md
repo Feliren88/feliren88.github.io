@@ -5,12 +5,12 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
-<h1 class="section-title">
+<h2 class="section-title">
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
     <img src="/assets/img/medium-svgrepo-com.webp" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem" loading="lazy">
     <span class="medium-badge" style="margin-left:0">@feliren</span>
   </a>
-</h1>
+</h2>
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
 <div id="thoughts-container" class="thoughts-grid">

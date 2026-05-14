@@ -7,7 +7,7 @@ permalink: /contact/
 preload_image: /assets/img/profile_2_color.webp
 ---
 
-<img src="/assets/img/profile_2_color.webp" alt="" class="profile-bg" aria-hidden="true" draggable="false" fetchpriority="high">
+<img src="/assets/img/profile_2_color.webp" alt="Vicky Feliren – AI researcher and applied scientist" class="profile-bg" draggable="false" fetchpriority="high">
 
 <p class="eyebrow">LET'S WORK TOGETHER</p>
 <p class="contact-intro">{{ site.data.contact.intro }}</p>
