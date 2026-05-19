@@ -142,6 +142,14 @@
         <div class="footer-brand">
           <span class="footer-name">Vicky Feliren</span>
           <span class="footer-role">Applied Scientist · Multimodal AI · Trustworthy AI</span>
+          <p class="footer-desc">Building trustworthy AI for the cultures and geographies it was never designed for.</p>
+          <div class="footer-social">
+            {% for link in site.data.contact.links %}
+            <a href="{{ link.url }}" aria-label="{{ link.label }}" class="footer-social-link"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>
+              <img src="{{ '/assets/img/' | append: link.icon | relative_url }}" alt="" width="16" height="16" loading="lazy">
+            </a>
+            {% endfor %}
+          </div>
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
           <a href="/">About</a>
@@ -150,16 +158,9 @@
           <a href="/writings/">Writings</a>
           <a href="/contact/">Work With Me</a>
         </nav>
-        <div class="footer-social">
-          {% for link in site.data.contact.links %}
-          <a href="{{ link.url }}" aria-label="{{ link.label }}" class="footer-social-link"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>
-            <img src="{{ '/assets/img/' | append: link.icon | relative_url }}" alt="" width="16" height="16" loading="lazy">
-          </a>
-          {% endfor %}
-        </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> Vicky Feliren &middot; Monash University, Melbourne</p>
+        <p>&copy; <span id="year"></span> Vicky Feliren</p>
       </div>
     </footer>
 
