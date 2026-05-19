@@ -2,6 +2,33 @@
 
 Personal portfolio website for Vicky Feliren - Applied Scientist specializing in Multimodal AI, Vision-Language Models, and Remote Sensing. Built with Jekyll static site generator.
 
+## Lighthouse Scores (May 2026)
+
+Tested on homepage (vickyfeliren.com) · Emulated Moto G Power · Slow 4G · Lighthouse 13.0.2
+
+| Category | Score |
+|---|---|
+| Performance | 85 |
+| Accessibility | 98 → **100** (h3 heading fix) |
+| Best Practices | 96 |
+| SEO | 100 |
+
+### Performance notes
+
+- **FCP 2.5 s / LCP 2.7 s / TBT 350 ms** — measured on slow 4G emulation with Chrome extensions active; Lighthouse flagged extension interference (Zotero, AdBlock, etc.) as a significant contributor to TBT and JS execution time
+- **main.js CPU time 2.6 s** — dominated by the point cloud animation loop; already deferred via `requestIdleCallback` with 1.5 s timeout
+- **Render-blocking CSS 180 ms** — styles.css (5.8 KiB) is render-blocking; inlining critical CSS is the path to improvement but not yet applied
+- **Cache TTL 10 min** — GitHub Pages sets this; not configurable from Jekyll; versioned query strings (`?v=N`) ensure fresh assets on each deploy
+
+### Accessibility notes
+
+- h3 elements were used as section headings directly under h1 (no h2 in between); fixed by promoting section headings to h2 and card titles to h3
+
+### Best Practices notes
+
+- `ServiceWorker script evaluation failed` console error — likely caused by browser extensions intercepting the sw.js fetch; fixed defensively by guarding `Accept` header null check in the fetch handler
+- CSP, HSTS, COOP, X-Frame-Options headers are unscored audit items; GitHub Pages does not support custom HTTP response headers — these require a CDN (Cloudflare) or proxy layer to apply
+
 ## Project Structure
 
 ```
@@ -38,9 +65,10 @@ feliren88.github.io/
 ├── css/
 │   └── styles.css
 └── js/
-    ├── main.js          # Core JavaScript
+    ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal)
     └── components/
-        └── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
+        ├── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
+        └── timeline.js  # Project timeline (loaded only on /project/ page)
 ```
 
 ## Technology Stack
@@ -60,6 +88,7 @@ feliren88.github.io/
 - `loading="lazy"` on all off-screen images
 - `<link rel="preload">` for critical font files; `@font-face` limited to latin and latin-ext subsets
 - Service worker (`sw.js`) for offline access — cache-first for assets, network-first for HTML
+- Point cloud animation deferred via `requestIdleCallback` (1.5 s timeout)
 
 ## Accessibility
 
@@ -71,6 +100,7 @@ Targets **WCAG 2.1 AA** compliance:
 - `--text` / `--muted` / `--accent` all meet contrast requirements against dark background
 - `aria-live="polite"` on dynamic status regions
 - Decorative images marked `aria-hidden="true"`
+- Heading hierarchy: h1 (name) → h2 (section) → h3 (subsection/card/timeline item)
 
 ## Structured Data (JSON-LD)
 
@@ -79,15 +109,15 @@ Person schema in `_layouts/default.html` covers:
 | Property | Value |
 |----------|-------|
 | `@type` | Person |
-| `@id` | `https://feliren88.github.io/about/` |
+| `@id` | `https://vickyfeliren.com/` |
 | `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
 | `knowsAbout` | 6 AI/ML domains |
 | `knowsLanguage` | English, Indonesian |
 | `award` | 5 awards (2019–2024) |
 | `memberOf` | SEACrowd, ACL, IEEE |
 | `colleague` | Risqi Saputra, Taufiq Asyhari |
-| `author` | 7 ScholarlyArticle entries with DOI/URLs |
-| `sameAs` | 10 academic/social profiles |
+| `author` | ScholarlyArticle entries auto-generated from `_data/publications.yml` |
+| `sameAs` | 12 academic/social profiles |
 
 ## Navigation
 

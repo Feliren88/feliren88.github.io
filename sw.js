@@ -42,7 +42,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== location.origin) return;
 
-  if (request.headers.get('Accept').includes('text/html')) {
+  if ((request.headers.get('Accept') || '').includes('text/html')) {
     event.respondWith(
       fetch(request)
         .then(response => {

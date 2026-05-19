@@ -60,7 +60,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     </div>
 
     <div id="tech-stack" class="about-section">
-      <h3>Tech Stack</h3>
+      <h2>Tech Stack</h2>
       <div class="tech-tag-cloud">
         {% for tag in site.data.about.tech_stack %}
         <span class="tech-tag">{{ tag }}</span>
@@ -71,7 +71,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     <div id="about-sections">
       {% for section in site.data.about.sections %}
       <div class="about-section">
-        <h3>{{ section.title }}</h3>
+        <h2>{{ section.title }}</h2>
 
         {% if section.content %}
         <p style="line-height:1.7;max-width:44rem">{{ section.content }}</p>
@@ -81,7 +81,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         <div class="about-grid">
           {% for card in section.cards %}
           <div class="about-card">
-            <h4>{{ card.title }}</h4>
+            <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
           </div>
           {% endfor %}
@@ -92,7 +92,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     </div>
 
     <div id="track-record" class="about-section">
-      <h3>Track Record</h3>
+      <h2>Track Record</h2>
       <div class="split-grid">
         <div>
           <p class="column-title">WORK EXPERIENCE</p>
@@ -142,7 +142,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     </div>
 
     <div id="recognition" class="about-section">
-      <h3>Recognition</h3>
+      <h2>Recognition</h2>
       <ul class="award-pills">
         {% for key in site.data.awards %}
         {% assign award = key[1] %}
@@ -186,10 +186,10 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   .about-hero a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
   .about-hero a:hover { color: var(--accent); }
   .about-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-  .about-section h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
+  .about-section h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
   .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
-  .about-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+  .about-card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
   .about-card p { font-size: 0.95rem; line-height: 1.5; }
   .award-pills { list-style: none; padding: 0; margin: 0.8rem 0 0; }
   .award-pills li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; flex-wrap: wrap; }
