@@ -2,6 +2,19 @@
 
 Personal portfolio website for Vicky Feliren - Applied Scientist specializing in Multimodal AI, Vision-Language Models, and Remote Sensing. Built with Jekyll static site generator.
 
+## Changelog
+
+### May 2026
+- Added "Quality and Reliability for AI Engineers" article to `_data/thoughts.yml`
+- Fixed heading hierarchy: section headings `h3 → h2`, card titles `h4 → h3` (Accessibility 98 → 100)
+- Fixed `ServiceWorker` null `Accept` header crash in `sw.js` fetch handler
+- Added **Insights** section to homepage: 3-card grid of latest Medium writings with "View all →" link
+- Added **Let's Collaborate** section to homepage: eyebrow, heading, engagement type tags, CTA driven by `contact.yml`
+- Added **footer banner**: two-column layout (brand + description + social icons left / nav links right) with copyright bottom bar; replaces the former one-liner footer
+- Refactored Insights and Let's Collaborate sections to use `border-top` divider pattern consistent with about-sections (removed glass card wrappers)
+- Redesigned footer to brand-left / nav-right two-column layout; added brand description line
+- `styles.css` bumped to `v=26`
+
 ## Lighthouse Scores (May 2026)
 
 Tested on homepage (vickyfeliren.com) · Emulated Moto G Power · Slow 4G · Lighthouse 13.0.2
@@ -37,7 +50,7 @@ feliren88.github.io/
 ├── CLAUDE.md       # Development guidelines
 ├── _config.yml     # Jekyll configuration
 ├── Gemfile         # Ruby dependencies
-├── index.html      # Homepage (Jekyll template)
+├── index.html      # Homepage — hero, about, Insights, Let's Collaborate sections
 ├── sw.js           # Service worker (Jekyll-processed Liquid template)
 ├── _layouts/
 │   ├── default.html  # Base layout with SEO, skip link, font preloads

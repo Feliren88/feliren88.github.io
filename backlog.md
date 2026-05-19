@@ -1332,3 +1332,76 @@ Adjust the negative margin values to match `.project-card` padding (currently `1
 5. Repeat for next page
 
 Start with **Writings** — Medium article cover images are easy to screenshot and the page has the most cards, so the visual improvement is most immediately obvious.
+
+---
+
+## RFC-006 — Landing Page Research: Insights & Backlog (May 2026)
+
+**Sources reviewed:** Unbounce Anatomy, Stellar Content Guide, Figma Resource Library, OptimizePress Elements, Zapier Examples, Unbounce High-Converting Examples, Unicorn Platform 2026 Architecture, Mailchimp Resources. (CXL and Neil Patel returned 403.)
+
+**Scope:** Map conversion-focused landing page best practices to vickyfeliren.com. The homepage acts as a personal brand landing page whose primary conversion goal is: (1) get researchers/collaborators to contact, (2) drive to Research/Writings pages.
+
+---
+
+### What the research says (principles that apply here)
+
+1. **Single primary CTA above the fold** — every high-converting page has exactly one CTA in the hero. Multiple competing actions (Research, Contact, Writings, Skills) dilute click-through.
+2. **Availability signal** — visitors want to know immediately if you're open to opportunities. Most personal sites omit this and lose relevant inbound.
+3. **Problem → Solution framing** — the hero copy should state the audience's problem before introducing the solution (you). "Multimodal AI is unreliable and culturally narrow" → "I build trustworthy systems that work for everyone."
+4. **Proof adjacent to claims** — testimonials, stats, and venue logos belong *immediately after* the claim they support, not in a separate "awards" section buried below the fold.
+5. **CTA after every major section** — conversion research shows repeating the CTA after each content block significantly increases total clicks without feeling spammy.
+6. **Scannable credibility stats** — 3–4 bold numbers (publications, years, venues, hackathon wins) give visitors a fast trust signal without reading paragraphs.
+7. **Venue trust badges** — logos or bold venue names (IEEE, ACL, Remote Sensing of Environment) near the hero perform better than plain text lists.
+8. **Objection block** — a short FAQ on the contact page that pre-answers "what's your availability?", "what do you charge?", "what kind of projects?" removes friction before a cold message.
+9. **Message consistency** — the hero headline, SEO description, OG image text, and JSON-LD description should all reinforce the same core USP. Currently these say subtly different things.
+10. **Mobile hero CTA sizing** — tap targets on mobile should be ≥ 44px height. The current `.btn` may fall short at small viewports.
+
+---
+
+### P1 — Quick wins (< 1 day each)
+
+- [ ] **Single primary CTA in hero** — keep "View Research →" as the *only* primary button; demote "Work With Me →" to a secondary link (outline style or text link). The contact page is already in the nav; the hero shouldn't compete with itself.
+- [ ] **Availability badge** — add a small `●  Open to collaborations` pill near the hero eyebrow or below the profile image. Driven by a new `available: true` field in `_data/index.yml`. Renders as a green dot + text, hidden when `false`.
+- [ ] **Scannable stats row** — add a `<ul class="hero-stats">` below the hero meta with 3–4 numbers: `N publications`, `N+ years research`, `N hackathon wins`, `N venues`. Driven by `_data/index.yml stats:` list. Single-line on desktop, wraps on mobile.
+- [ ] **Message consistency audit** — align hero `lead1`, `description` in front matter, JSON-LD `description`/`disambiguatingDescription`, and OG description. All should say: *trustworthy multimodal AI for underrepresented cultures and geographies.*
+- [ ] **Mobile CTA tap target** — audit `.btn` height at 375px viewport. Ensure `min-height: 44px` and `padding` produce a target ≥ 44px tall.
+- [ ] **CTA after Insights section** — the existing "View all writings →" link is small. Promote it to a full `btn btn-secondary` button below the insights grid.
+
+---
+
+### P2 — Moderate effort (1–3 days each)
+
+- [ ] **Problem → Solution hero reframe** — rewrite `lead1` in `_data/index.yml` to open with the problem: *"Most AI systems fail at the margins — wrong culture, wrong geography, wrong language."* Then introduce the solution in `lead2`. Requires copy iteration; test with a few trusted reviewers before shipping.
+- [ ] **Proof-adjacent venue badges** — in the hero or immediately below the stats row, add a compact strip of logos/text: `Published in IEEE · ACL · Remote Sensing of Environment`. Drives immediate credibility without scrolling to Recognition.
+- [ ] **FAQ / objection block on Contact page** — add a `_data/contact.yml` `faq:` list. Render as an accordion or simple `<dl>` before the contact form. Cover: availability, collaboration types, response time, what you're *not* open to.
+- [ ] **Featured publication highlight** — surface one flagship paper near the top of the Research page (or homepage Research preview) with abstract snippet, venue badge, and "Read paper →" CTA. Moves the strongest proof point above the fold.
+- [ ] **Section CTAs** — after Track Record and after Recognition on the homepage, add a secondary CTA: "See full research →" and "Work with me →". Repeat the conversion invitation at natural scroll-stop points.
+- [ ] **"As seen in" media strip** — a minimal `Venue:` strip (IEEE / ACL / RSE logos or text-badges) placed between the hero and the about text acts as a fast trust anchor. Common pattern on high-converting personal/consultant pages.
+- [ ] **Use Cases page restructure** — frame each use case in Problem → Approach → Result format. Add a CTA at the end of each case. This converts the page from a portfolio into a consulting pitch.
+
+---
+
+### P3 — Longer projects (1–2 weeks each)
+
+- [ ] **Contact form (Formspree or similar)** — currently the "Work With Me" page is email-only. A form with subject-line presets ("Research collaboration", "Speaking", "Consulting") reduces friction and increases conversion. Formspree free tier supports static sites.
+- [ ] **Video introduction (60–90 s)** — a short "who I am and what I work on" video embedded in the hero or About section increases time-on-page and personal connection. High lift but highest conversion impact on personal brand pages.
+- [ ] **Testimonials / endorsements** — even 2–3 short quotes from collaborators or supervisors (Risqi Saputra, Taufiq Asyhari) would significantly boost trust. Add as `_data/testimonials.yml`, render on homepage below Let's Collaborate.
+- [ ] **Writings pagination** — the Writings page currently renders all articles. Add client-side pagination (show 6, "Load more" button) to keep the page fast as the list grows.
+- [ ] **OG image optimization** — the current OG image is the profile photo. A designed OG card (name + role + tagline on a branded background) performs better in link previews on LinkedIn/Twitter. Generate with a script or Figma export.
+- [ ] **Structured data for writings** — add `BlogPosting` JSON-LD blocks to the Writings page, auto-generated from `_data/thoughts.yml`. Enables Google rich results for articles.
+- [ ] **Inline critical CSS** — styles.css (5.8 KiB) is render-blocking. Inlining ~1 KiB of critical CSS (above-fold variables + hero layout) and loading the rest async would push FCP under 2 s on slow 4G. Significant but complex; requires a build step or manual extraction.
+- [ ] **Cloudflare proxy** — adding Cloudflare in front of GitHub Pages enables: custom HTTP security headers (CSP, HSTS, COOP, X-Frame-Options), edge caching with longer TTLs, image optimization, and potentially real User Analytics. Zero-cost at free tier for this traffic level.
+- [ ] **hreflang for Indonesian audience** — if content is ever published in Indonesian (Medium supports this), add `<link rel="alternate" hreflang="id">` tags. Low effort if the structure is in place early.
+
+---
+
+### Already done (May 2026)
+
+- [x] Heading hierarchy fix (h3 → h2 sections, h4 → h3 cards) — Accessibility 100
+- [x] SW null Accept header guard — Best Practices console error fixed
+- [x] **Insights section** on homepage — latest 3 writings with "View all →"
+- [x] **Let's Collaborate section** on homepage — engagement tags + CTA
+- [x] **Footer banner** — brand + description + social left / nav right two-column layout
+- [x] Footer copyright simplified (removed "Monash University, Melbourne")
+- [x] "Quality and Reliability for AI Engineers" article added to `_data/thoughts.yml`
+- [x] README.md updated with Lighthouse scores and May 2026 changelog
