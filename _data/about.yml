@@ -1,3 +1,38 @@
+tech_stack:
+  - PyTorch
+  - TensorFlow
+  - PyTorch Lightning
+  - Vision-Language Models
+  - Diffusion Models
+  - LoRA Fine-tuning
+  - DeepSpeed
+  - LangChain
+  - Retrieval-Augmented Generation
+  - LLM Evaluation
+  - LangSmith
+  - Google Earth Engine
+  - Semantic Segmentation
+  - Multispectral Imaging
+  - OpenCV
+  - GCP Vertex AI
+  - AWS SageMaker
+  - Kubernetes
+  - Docker
+  - MLflow
+  - Weights & Biases
+  - dbt
+  - BigQuery
+  - XGBoost
+  - scikit-learn
+  - Conformal Prediction
+  - Uncertainty Quantification
+  - Streamlit
+  - Apache Kafka
+  - SHAP
+  - Python
+  - SQL
+  - Go
+
 hero:
   - "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong> — building systems that are reliable when it matters and culturally relevant to the places they operate in."
   - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve: when a model claims confidence, we want provable bounds, not just a number."

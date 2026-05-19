@@ -512,4 +512,8 @@ function initPointCloudLab() {
   window.addEventListener("beforeunload", saveState);
 }
 
-initPointCloudLab();
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initPointCloudLab, { timeout: 1500 });
+} else {
+  window.addEventListener('load', initPointCloudLab, { once: true });
+}

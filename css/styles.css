@@ -216,7 +216,7 @@ main,
   font-size: 0.84rem;
   padding: 0.4rem 0.62rem;
   border-radius: 999px;
-  transition: color 0.2s ease, background 0.2s ease, transform 0.18s ease;
+  transition: background 0.2s ease, transform 0.18s ease;
 }
 
 .nav a:hover,
@@ -1127,6 +1127,28 @@ h1 {
 @media (max-width: 767px) {
   .timeline-mount { display: none; }
   .timeline-fallback[hidden] { display: block !important; }
+}
+
+/* Tech stack tag cloud */
+.tech-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+}
+.tech-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.26rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(119, 146, 175, 0.09);
+  color: var(--accent);
+  border: 1px solid var(--line-strong);
+}
+html[data-theme="light"] .tech-tag {
+  background: rgba(63, 100, 144, 0.07);
 }
 
 /* Reveal animation */
