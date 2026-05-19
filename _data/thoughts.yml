@@ -1,3 +1,7 @@
+- title: "Quality and Reliability for AI Engineers"
+  description: "A practical guide to building quality and reliability into AI systems — covering evaluation frameworks, failure modes, and engineering practices that keep production AI trustworthy at scale."
+  url: "https://feliren.medium.com/quality-and-reliability-for-ai-engineers-b2f92f6406f8"
+
 - title: "We all think our map is the territory"
   description: "On ethnocentrism as an invisible cultural default — why our own cultural frameworks feel like objective reality, and what it takes to build global teams that can genuinely hold multiple maps at once."
   url: "https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db"
