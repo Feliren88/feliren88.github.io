@@ -9,7 +9,7 @@
     {% if page.preload_image %}<link rel="preload" as="image" href="{{ page.preload_image | relative_url }}" type="image/webp">{% endif %}
     {% if page.url == '/project/' %}<link rel="preload" as="script" href="{{ '/js/components/timeline.js?v=2' | relative_url }}">{% endif %}
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
-    <link rel="stylesheet" href="{{ '/css/styles.css?v=25' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/styles.css?v=26' | relative_url }}">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -138,7 +138,29 @@
     </main>
 
     <footer class="footer">
-      <p>&copy; <span id="year"></span> Vicky Feliren</p>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-name">Vicky Feliren</span>
+          <span class="footer-role">Applied Scientist · Multimodal AI · Trustworthy AI</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/">About</a>
+          <a href="/research/">Research</a>
+          <a href="/usecases/">Use Cases</a>
+          <a href="/writings/">Writings</a>
+          <a href="/contact/">Work With Me</a>
+        </nav>
+        <div class="footer-social">
+          {% for link in site.data.contact.links %}
+          <a href="{{ link.url }}" aria-label="{{ link.label }}" class="footer-social-link"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>
+            <img src="{{ '/assets/img/' | append: link.icon | relative_url }}" alt="" width="16" height="16" loading="lazy">
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Vicky Feliren &middot; Monash University, Melbourne</p>
+      </div>
     </footer>
 
     <script src="{{ '/js/main.js?v=6' | relative_url }}"></script>

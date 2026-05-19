@@ -169,6 +169,39 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   </div>
 </section>
 
+<section class="section insights-section reveal">
+  <div class="insights-inner">
+    <div class="insights-header">
+      <h2 class="section-title">Insights</h2>
+      <a href="/writings/" class="insights-view-all">View all writings →</a>
+    </div>
+    <p class="section-note">Thoughts on AI, research, and beyond — published on Medium.</p>
+    <div class="insights-grid">
+      {% for thought in site.data.thoughts limit:3 %}
+      <a class="insight-card" href="{{ thought.url }}" target="_blank" rel="noreferrer">
+        <h3>{{ thought.title }}</h3>
+        <p>{{ thought.description }}</p>
+        <span class="insight-read">Read on Medium →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section collab-section reveal">
+  <div class="collab-inner">
+    <p class="eyebrow">Open to</p>
+    <h2 class="collab-heading">Let's Collaborate</h2>
+    <p class="collab-sub">{{ site.data.contact.intro_sub }}</p>
+    <div class="collab-tags">
+      {% for eng in site.data.contact.engagements %}
+      <span class="collab-tag">{{ eng.type }}</span>
+      {% endfor %}
+    </div>
+    <a href="/contact/" class="btn btn-primary collab-cta">Work With Me →</a>
+  </div>
+</section>
+
 <style>
   .hero-social-links { display: flex; justify-content: center; gap: 0.65rem; margin-top: 0.85rem; }
   .hero-social-link {
@@ -197,4 +230,97 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   .award-pills .tag { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); flex-shrink: 0; }
   .award-pills a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
   .award-pills a:hover { color: var(--accent); }
+
+  /* ── Insights ─────────────────────────────────────── */
+  .insights-inner {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    padding: 1.8rem clamp(1rem, 2.4vw, 1.9rem);
+  }
+  .insights-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .insights-header .section-title { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+  .insights-view-all {
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .insights-view-all:hover { text-decoration: underline; }
+  .insights-grid {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+  .insight-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    padding: 1rem 1.1rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: rgba(16, 28, 42, 0.5);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .insight-card:hover {
+    border-color: rgba(119, 146, 175, 0.48);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  }
+  .insight-card h3 { margin: 0; font-size: 1rem; line-height: 1.35; color: var(--text); }
+  .insight-card p { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.84rem; line-height: 1.5; flex: 1; }
+  .insight-read { display: inline-block; margin-top: 0.75rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
+
+  /* ── Let's Collaborate ────────────────────────────── */
+  .collab-inner {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 2.4vw, 1.9rem);
+    text-align: center;
+  }
+  .collab-heading { margin: 0.4rem 0 0; font-size: clamp(1.8rem, 4vw, 3rem); color: var(--text); }
+  .collab-sub {
+    margin: 0.85rem auto 0;
+    max-width: 38rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .collab-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  .collab-tag {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border-ui);
+    border-radius: 999px;
+    font-size: 0.79rem;
+    color: var(--muted);
+  }
+  .collab-cta { display: inline-block; margin-top: 1.6rem; }
+
+  /* ── Responsive ───────────────────────────────────── */
+  @media (max-width: 1020px) {
+    .insights-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .insights-grid { grid-template-columns: 1fr; }
+    .collab-sub { font-size: 0.88rem; }
+  }
 </style>

@@ -926,6 +926,89 @@ h1 {
   margin: 0 auto 1.5rem;
   color: var(--muted);
   font-size: 0.75rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.8rem;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.footer-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.footer-role {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover { color: var(--text); }
+
+.footer-social {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  opacity: 0.75;
+  transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+}
+
+.footer-social-link:hover {
+  border-color: var(--border-ui);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.footer-bottom {
+  margin-top: 1.2rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 
 /* ── Career Timeline ──────────────────────────────────────────── */
@@ -1198,6 +1281,9 @@ html[data-theme="light"] .tech-tag {
   #pointcloud-bg {
     opacity: 0.48;
   }
+
+  .footer-top { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .footer-nav { gap: 0.75rem; }
 }
 
 @media (pointer: coarse) {
