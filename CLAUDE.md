@@ -10,13 +10,16 @@ Personal portfolio website for Vicky Feliren - Applied Scientist specializing in
 feliren88.github.io/
 ├── README.md       # Project documentation
 ├── CLAUDE.md       # This file
+├── llms.txt        # LLM-readable site summary (pages, use cases, research, writings)
+├── robots.txt      # Crawler directives + sitemap pointer (Sitemap: https://vickyfeliren.com/sitemap.xml)
 ├── _config.yml     # Jekyll configuration
 ├── Gemfile         # Ruby dependencies
 ├── index.html      # Homepage (Jekyll template)
 ├── sw.js           # Service worker (Jekyll-processed Liquid template)
 ├── _layouts/
-│   ├── default.html  # Base layout with SEO, skip link, font preloads
-│   └── page.html     # Page template
+│   ├── default.html   # Base layout with SEO, skip link, font preloads
+│   ├── page.html      # Generic page template (extends default)
+│   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -24,7 +27,9 @@ feliren88.github.io/
 │   ├── publications.md
 │   ├── awards.md
 │   ├── thoughts.md
-│   └── contact.md
+│   ├── contact.md
+│   ├── usecases.md    # Use cases listing page
+│   └── usecases/      # Individual use case detail pages (19 files) — each sets layout: usecase and uc_id
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml
@@ -33,7 +38,9 @@ feliren88.github.io/
 │   ├── publications.yml
 │   ├── awards.yml
 │   ├── thoughts.yml
-│   └── contact.yml
+│   ├── contact.yml
+│   ├── usecases.yml   # All use case content (88 KB) — keyed by id, consumed by usecase.html
+│   └── timeline.yml   # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
 │   └── img/
@@ -48,7 +55,8 @@ feliren88.github.io/
 └── js/
     ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal)
     └── components/
-        └── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
+        ├── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
+        └── timeline.js  # Project timeline (loaded only on /project/ page)
 ```
 
 ## Jekyll Configuration

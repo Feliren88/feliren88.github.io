@@ -4,6 +4,11 @@ Personal portfolio website for Vicky Feliren - Applied Scientist specializing in
 
 ## Changelog
 
+### May 2026 (latest)
+- Confirmed canonical SEO setup: `url: "https://vickyfeliren.com"` in `_config.yml` + `jekyll-seo-tag` generates correct `<link rel="canonical">` on every page; `robots.txt` sitemap points to `vickyfeliren.com`
+- Updated `llms.txt`: added "Quality and Reliability for AI Engineers" article (was missing from Writings section)
+- Updated `README.md` and `CLAUDE.md` project structure: added `usecase.html` layout, `_pages/usecases/` directory, `_data/usecases.yml`, `_data/timeline.yml`, `js/components/timeline.js`, `llms.txt`, `robots.txt`
+
 ### May 2026
 - Added "Quality and Reliability for AI Engineers" article to `_data/thoughts.yml`
 - Fixed heading hierarchy: section headings `h3 → h2`, card titles `h4 → h3` (Accessibility 98 → 100)
@@ -48,13 +53,16 @@ Tested on homepage (vickyfeliren.com) · Emulated Moto G Power · Slow 4G · Lig
 feliren88.github.io/
 ├── README.md       # Project documentation
 ├── CLAUDE.md       # Development guidelines
+├── llms.txt        # LLM-readable site summary (pages, use cases, research, writings)
+├── robots.txt      # Crawler directives + sitemap pointer
 ├── _config.yml     # Jekyll configuration
 ├── Gemfile         # Ruby dependencies
 ├── index.html      # Homepage — hero, about, Insights, Let's Collaborate sections
 ├── sw.js           # Service worker (Jekyll-processed Liquid template)
 ├── _layouts/
-│   ├── default.html  # Base layout with SEO, skip link, font preloads
-│   └── page.html     # Page template
+│   ├── default.html   # Base layout with SEO, skip link, font preloads
+│   ├── page.html      # Generic page template (extends default)
+│   └── usecase.html   # Use case detail template (extends default)
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -62,7 +70,9 @@ feliren88.github.io/
 │   ├── publications.md
 │   ├── awards.md
 │   ├── thoughts.md
-│   └── contact.md
+│   ├── contact.md
+│   ├── usecases.md    # Use cases listing page
+│   └── usecases/      # Individual use case detail pages (19 files)
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml
@@ -71,7 +81,9 @@ feliren88.github.io/
 │   ├── publications.yml
 │   ├── awards.yml
 │   ├── thoughts.yml
-│   └── contact.yml
+│   ├── contact.yml
+│   ├── usecases.yml   # All use case content (88 KB)
+│   └── timeline.yml   # Project timeline entries
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin/latin-ext subsets only
 │   └── img/        # All WebP — profile.webp, profile-450.webp, profile_2_bg.webp, profile_3_bg.webp, favicons, icons
@@ -147,6 +159,8 @@ Content is managed through YAML data files in `_data/`. Each page corresponds to
 - `_data/awards.yml` — Awards and service
 - `_data/thoughts.yml` — Medium writings
 - `_data/contact.yml` — Contact information
+- `_data/usecases.yml` — All use case content, keyed by `id`; consumed by `usecase.html` layout
+- `_data/timeline.yml` — Project timeline entries; loaded by `timeline.js` on `/project/`
 
 ## Local Development
 

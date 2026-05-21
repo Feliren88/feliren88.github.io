@@ -56,6 +56,7 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 
 ## Writings
 
+- [Quality and Reliability for AI Engineers](https://feliren.medium.com/quality-and-reliability-for-ai-engineers-b2f92f6406f8): A practical guide to evaluation frameworks, failure modes, and engineering practices that keep production AI trustworthy at scale.
 - [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db): On ethnocentrism as invisible cultural default and building global teams.
 - [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4): Why production ML needs conformal prediction.
 - [The art of letting go while still caring](https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063): Personal reflection on control and release.
