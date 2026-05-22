@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Work with Vicky Feliren
+hide_title: true
 description: Available for speaking engagements, research collaboration, mentorship, and applied scientist roles internationally. Specializing in trustworthy AI and cultural AI for Southeast Asia.
 permalink: /contact/
 preload_image: /assets/img/profile_2_color.webp
