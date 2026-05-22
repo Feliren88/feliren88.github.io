@@ -1337,7 +1337,7 @@ Start with **Writings** — Medium article cover images are easy to screenshot a
 
 ## RFC-007: Writings Page — Dates, Reorder, Tags
 
-**Status:** READY FOR DELIVERY
+**Status:** DELIVERED — 2026-05-23
 **Author:** Vicky Feliren
 **Reviewed by:** Claude Opus
 **Date:** 2026-05-23

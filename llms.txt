@@ -56,17 +56,17 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 
 ## Writings
 
-- [Quality and Reliability for AI Engineers](https://medium.com/data-science-collective/quality-and-reliability-for-ai-engineers-b2f92f6406f8): A practical guide to evaluation frameworks, failure modes, and engineering practices that keep production AI trustworthy at scale.
-- [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db): On ethnocentrism as invisible cultural default and building global teams.
-- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4): Why production ML needs conformal prediction.
-- [The art of letting go while still caring](https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063): Personal reflection on control and release.
-- [Meditation. 7 days. No phone. Noble silence.](https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3): A data scientist's experience at Taman Brahma Bali Usada.
-- [My initial exploration on Trustworthy AI](https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956): Bridging information theory and responsible ML.
-- [Phoenix Protocol: Rising from the ashes of adversity](https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638): On resilience and reinvention.
-- [Privacy Matters: Navigating the Digital Age with Confidence](https://medium.com/technology-hits/privacy-matters-navigating-the-digital-age-with-confidence-6a47dede68ed): Data synthesis and responsible data stewardship.
-- [Mental Health Matters: Please Take Care](https://feliren.medium.com/mental-health-matters-please-take-care-2469d7c62baa): Personal reflection on mental health.
-- [A Stranger's Guide to the IU Concert](https://medium.com/illumination/a-strangers-guide-to-the-iu-concert-reflections-on-fandom-culture-and-music-702ec9f03966): Reflections on fandom and culture.
-- [Gone from social media for 4 years. Now I am back](https://feliren.medium.com/gone-from-social-media-for-4-years-now-i-am-back-b835759639d3): Reflections on digital presence.
+- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4) (Jan 2026, Engineering): Why production ML needs conformal prediction — honest uncertainty quantification with mathematical coverage guarantees.
+- [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db) (May 2026, Research): On ethnocentrism as invisible cultural default and building global teams that hold multiple maps at once.
+- [Quality and Reliability for AI Engineers](https://medium.com/data-science-collective/quality-and-reliability-for-ai-engineers-b2f92f6406f8) (May 2026, Engineering): Practical guide to evaluation frameworks, failure modes, and engineering practices for trustworthy production AI.
+- [The art of letting go while still caring](https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063) (Jan 2026, Personal): Personal reflection on control and release.
+- [Meditation. 7 days. No phone. Noble silence.](https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3) (Dec 2025, Personal): A data scientist's experience at Taman Brahma Bali Usada.
+- [My initial exploration on Trustworthy AI](https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956) (Nov 2025, Research): Bridging information theory and responsible ML.
+- [Phoenix Protocol: Rising from the ashes of adversity](https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638) (May 2025, Personal): On resilience and reinvention.
+- [Privacy Matters: Navigating the Digital Age with Confidence](https://medium.com/technology-hits/privacy-matters-navigating-the-digital-age-with-confidence-6a47dede68ed) (Oct 2024, Engineering): Data synthesis and responsible data stewardship.
+- [Mental Health Matters: Please Take Care](https://feliren.medium.com/mental-health-matters-please-take-care-2469d7c62baa) (Jul 2024, Personal): Personal reflection on mental health.
+- [A Stranger's Guide to the IU Concert](https://medium.com/illumination/a-strangers-guide-to-the-iu-concert-reflections-on-fandom-culture-and-music-702ec9f03966) (May 2024, Personal): Reflections on fandom and culture.
+- [Gone from social media for 4 years. Now I am back](https://feliren.medium.com/gone-from-social-media-for-4-years-now-i-am-back-b835759639d3) (Mar 2024, Personal): Reflections on digital presence.
 
 ## Profiles
 
