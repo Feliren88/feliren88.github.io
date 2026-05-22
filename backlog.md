@@ -1335,6 +1335,684 @@ Start with **Writings** — Medium article cover images are easy to screenshot a
 
 ---
 
+## RFC-007: Writings Page — Dates, Reorder, Tags
+
+**Status:** READY FOR DELIVERY
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target page:** `/writings/`
+**Estimated effort:** ~1.5 hours total
+
+---
+
+### Problem Statement
+
+The Writings archive currently has no publication dates, no ordered hierarchy, and no way for a visitor to filter by interest. Every article carries equal visual weight regardless of when it was written or who it's written for. A 2022 personal reflection and a 2025 conformal prediction deep-dive look identical. This is wrong — and fixable in an afternoon.
+
+Three compounding effects:
+1. **No dates = no return reason.** Returning visitors cannot tell if anything changed. The conformal prediction essay is fresher and more relevant than the social media reflection; nothing signals that.
+2. **Weak opening = high bounce.** The current first card ("We all think our map is the territory") is a good essay but not the strongest hook. The list is currently ordered by data entry, not by pull.
+3. **Flat list = no hunt reward.** A recruiter who wants only engineering pieces has to scroll past personal essays. Variable reward via filtering (Eyal's Hook Model, information-foraging) is left on the table.
+
+---
+
+### Change 1: Date stamp every article
+
+Add a `date` field to each entry in `_data/thoughts.yml`:
+
+```yaml
+- title: "Your model just killed someone's grandmother"
+  date: "2025-03"
+  url: "..."
+```
+
+Render in the template as `Mar 2025` next to the card header. Format: `Mon YYYY` (3-letter month, 4-digit year). Update `_pages/thoughts.md` to output:
+
+```liquid
+{% if post.date %}
+<span class="card-date">{{ post.date | date: "%b %Y" }}</span>
+{% endif %}
+```
+
+Add `.card-date` to `css/styles.css`: `color: var(--muted); font-size: 0.78rem; font-family: var(--font-mono, monospace);`
+
+**Acceptance:** Every card shows a date. No card shows a broken or missing date.
+
+---
+
+### Change 2: Reorder — front-load the three highest-pull titles
+
+The opening three articles should cover three distinct visitor motivations: moral stake, idea-promise, professional self-interest. Proposed top-3 order in `_data/thoughts.yml`:
+
+1. **"Your model just killed someone's grandmother"** — moral stake + consequentialist framing (Loewenstein information gap)
+2. **"We all think our map is the territory"** — idea-promise with global relevance
+3. **"Quality and Reliability for AI Engineers"** — professional self-interest for the primary audience
+
+Reorder the YAML array. No template changes needed.
+
+**Acceptance:** The Writings page leads with the three entries above, in this order.
+
+---
+
+### Change 3: Tag every article — Engineering / Research / Personal
+
+Add a `tag` field to each `_data/thoughts.yml` entry:
+
+```yaml
+- title: "Your model just killed someone's grandmother"
+  tag: Engineering
+```
+
+Three permitted values: `Engineering`, `Research`, `Personal`.
+
+**Template:** Add a filter bar above the article list in `_pages/thoughts.md` (same pattern as the existing filter on `/research/`):
+
+```html
+<div class="filter-bar" role="group" aria-label="Filter writings">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Engineering">Engineering</button>
+  <button class="filter-btn" data-filter="Research">Research</button>
+  <button class="filter-btn" data-filter="Personal">Personal</button>
+</div>
+```
+
+Wire to the existing JS filter pattern used on the research page — `data-tag` on each card, `data-filter` on each button, toggle `.hidden` via the same event listener approach.
+
+**CSS:** Reuse `.filter-btn` styles already in `styles.css`. Add `.card-tag-pill` if you want a visible tag badge on each card itself.
+
+**Acceptance:** Clicking "Engineering" hides Personal and Research cards. Filter persists on scroll. "All" restores full list.
+
+---
+
+### Implementation order
+
+1. Add `date` and `tag` fields to all 11 entries in `_data/thoughts.yml` (30 min)
+2. Reorder the YAML to put the three top-pull essays first (5 min)
+3. Update `_pages/thoughts.md` to render date + filter bar (30 min)
+4. Add `.card-date` CSS and wire filter JS (20 min)
+5. Bump `styles.css` version string in `default.html` and `sw.js`
+
+---
+
+## RFC-008: About Page — CTA Hierarchy, "This Month" Block, Tech Stack Trim, Talks Section
+
+**Status:** PROPOSED — needs option decision before implementing
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target page:** `/about/`
+**Estimated effort:** ~2.5 hours (modules 1–4 only; email opt-in is RFC-012)
+
+---
+
+### Problem Statement
+
+The About page currently does five jobs simultaneously and has no dated signal. Four independent modules address distinct problems; none depends on the others and each can be shipped separately.
+
+---
+
+### Module 1 — Hero CTA hierarchy
+
+**Problem:** Three equal-weight buttons (Research, Use Cases, Writings) create the paradox of choice. No single action dominates.
+
+**Fix:** Promote Use Cases to primary visual weight; demote Research and Writings to secondary text-style links.
+
+- Change the Use Cases button: keep `.btn btn-primary` (filled, full padding)
+- Change Research and Writings: add `.btn-ghost` class — text-weight with subtle underline, no background fill
+
+**Why Use Cases as primary:** It carries the future conformal prediction demo (RFC-009). Making it primary now seeds the expectation and creates a return trigger once the demo lands.
+
+**CSS:** Add `.btn-ghost { background: transparent; border: none; text-decoration: underline; padding: 0.4rem 0.6rem; color: var(--accent); }` to `styles.css`. Adjust to match existing type scale.
+
+**Effort:** 20 min. **Risk:** Low — visual-only change, no content or data changes.
+
+---
+
+### Module 2 — "This Month" block (replaces or augments "Currently:")
+
+**Problem:** The current `Currently:` section has no date. Returning visitors cannot tell if it changed. Without a timestamp, the return reason evaporates.
+
+**Fix:** Add `_data/now.yml` as the data source. Render a dated block with a visible `last_updated` label.
+
+```yaml
+# _data/now.yml
+last_updated: 2026-05-23
+items:
+  - "Wrapping the uncertainty chapter of my M.Sc. thesis"
+  - "Reviewing for IGARSS 2026"
+  - "Drafting a CommonLID follow-up for SEA scripts"
+  - "Reading: Vovk and Shafer on conformal prediction"
+```
+
+**Template** (in `_pages/about.md` or `_data/about.yml` section):
+
+```liquid
+{% assign now = site.data.now %}
+<section class="section-block now-block">
+  <h2>This month <span class="now-date">— updated {{ now.last_updated | date: "%b %-d, %Y" }}</span></h2>
+  <ul>
+    {% for item in now.items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+</section>
+```
+
+**CSS:** `.now-date { font-size: 0.78rem; color: var(--muted); font-weight: 400; }`
+
+**Update cadence:** Every 4–8 weeks. Change `last_updated` date + refresh `items` list. The visible date is what creates the return reason.
+
+**Effort:** 45 min including first content entry. **Risk:** Low — isolated data file, does not touch existing sections.
+
+---
+
+### Module 3 — Tech stack trim: 41 items → 25 items in 5 clusters
+
+**Problem:** A 41-item flat skills list reads as junior. It signals "I know the names of tools" rather than depth. Recruiters and professors respond to quality signals, not quantity.
+
+**Fix:** Cut to ~25 items across 5 clusters of 5. Cluster headings carry the chunking weight (Miller's law).
+
+**Proposed 5 clusters and contents** (adjust to match actual `_data/skills.yml` structure):
+
+| Cluster | Keep |
+|---------|------|
+| Modeling | PyTorch, TensorFlow, scikit-learn, Diffusion Models, Knowledge Distillation |
+| Vision-Language & Uncertainty | Conformal Prediction, Vision-Language Models, Semantic Segmentation, Cultural Benchmarking, Causal Inference |
+| Serving & Infrastructure | Kubernetes, Docker, GCP (Vertex AI, BigQuery), AWS (EC2, SageMaker), vLLM / SGLang |
+| Data & Pipelines | Apache Spark, dbt, Vector Database, Google Earth Engine, Kafka |
+| Reliability & Evaluation | LLM-as-a-Judge, MLflow, Weights & Biases, LangSmith, A/B Testing |
+
+**Remove:** Tableau, Streamlit, d3, Plotly, Matplotlib, Scala, R, Intel OpenVINO, OpenCV, LangChain/LangGraph, RAG & Agentic Workflows, Pose Estimation, Multispectral Imaging, Human-in-the-Loop Evaluation, Calibration Drift Monitoring, Latency Benchmarking (16 items cut).
+
+Removed items are demonstrably true but do not add differentiation for the target audience. If a specific role requires one of them, they belong in a cover letter, not a portfolio homepage.
+
+**Effort:** 45 min (edit `_data/skills.yml` + adjust cluster labels in the page template). **Risk:** Low — data-only change; removed items are not deleted, just unlisted.
+
+---
+
+### Module 4 — Talks section
+
+**Problem:** Teaching and Professional Service exist, but speaking engagements and podcast appearances have no home. The absence of a Talks section is also a missed commitment device.
+
+**Fix:** Add a `Talks` block as a sibling section to Teaching in `_data/experience.yml` (or a standalone `_data/talks.yml`).
+
+**If no confirmed talks exist yet**, ship the heading with a placeholder entry:
+
+```yaml
+talks:
+  - title: "First confirmed talk slot"
+    venue: "Open"
+    date: "Q3 2026"
+    note: "Available for conference talks, podcasts, and panel invitations."
+```
+
+The empty-but-dated section serves two purposes: it is a commitment device for you (now there's a slot to fill), and it is a scarcity signal for visitors who are considering inviting you.
+
+**Template:** Render identically to the existing Teaching section structure.
+
+**Effort:** 20 min. **Risk:** None — additive only.
+
+---
+
+### Open questions before implementing
+
+1. Which module to ship first? Recommended order: 2 (now.yml) → 3 (tech stack trim) → 1 (CTA) → 4 (Talks).
+2. Does `Currently:` section get replaced entirely, or does `This Month` sit alongside it?
+3. Tech stack trim: review the proposed cluster contents against `_data/skills.yml` and flag any items that should stay.
+
+---
+
+## RFC-009: Use Cases Page — Conformal Prediction Interactive Demo
+
+**Status:** PROPOSED — Week 2 target
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target page:** `/usecases/`
+**Estimated effort:** ~8 hours (6h Hugging Face Space build + 30min embed + 1.5h polish)
+
+---
+
+### Why This Page, Why This Demo
+
+The Use Cases URL already promises applied artifacts. A conformal prediction demo lands in the right semantic context — it is the methodology claim made interactive. The IKEA effect compounds here: every slider drag is an act of investment. Visitors who configure their own prediction set will remember the site for months, not minutes (Eyal's Hook Model: investment → stored value → return trigger).
+
+If the full interactive demo is too heavy this quarter, ship a **static walkthrough first** (three images, three pre-computed prediction sets at three α values, rendered as a comparison grid). Static today, interactive next quarter.
+
+---
+
+### Minimum Viable Demo — Specification
+
+**Backend (Hugging Face Space, Gradio)**
+
+- **Input:** Image upload with 3 sample images preloaded (satellite flood map, cultural scene, natural image). Visitors can play without uploading.
+- **Slider:** Coverage target α ∈ [0.80, 0.99], step 0.01
+- **Output:**
+  - Prediction set C(x): the smallest set of class labels such that P(y ∈ C(x)) ≥ 1 − α on the calibration distribution
+  - Empirical coverage on a held-out calibration set (so the guarantee is shown, not hand-waved)
+  - Set size (number of labels included) to make the efficiency tradeoff visible
+
+**Core function:**
+
+```python
+from typing import Tuple, List
+import numpy as np
+
+def conformal_prediction_set(
+    softmax_scores: np.ndarray,
+    calibration_scores: np.ndarray,
+    alpha: float,
+) -> Tuple[List[int], float]:
+    """Return the prediction set and the empirical threshold.
+
+    Args:
+        softmax_scores: Shape (num_classes,). Predicted class probs for one test input.
+        calibration_scores: Shape (n_cal,). Nonconformity scores on held-out cal set,
+            computed as 1 - p_true.
+        alpha: Target miscoverage rate in (0, 1).
+
+    Returns:
+        prediction_set: Sorted list of class indices included in C(x).
+        q_hat: The (1 - alpha) quantile threshold used.
+    """
+    n = calibration_scores.shape[0]
+    q_level = np.ceil((n + 1) * (1 - alpha)) / n
+    q_hat = float(np.quantile(calibration_scores, q_level, method="higher"))
+    nonconformity = 1.0 - softmax_scores
+    prediction_set = sorted(np.where(nonconformity <= q_hat)[0].tolist())
+    return prediction_set, q_hat
+```
+
+**Model:** Use a pretrained EfficientNet-B0 or ViT-B/16 from `timm` — small enough to run on CPU on a free HF Space. Calibration set: a 500-image held-out split of ImageNet-1k (or a custom cultural image set if available). This keeps the demo honest — the empirical coverage shown is real.
+
+**Gradio UI layout:**
+
+```
+[ Sample Images: Flood Map | Cultural Scene | Natural ]   [ Upload your own ]
+[ Coverage target α: ——●—— 0.90 ]
+─────────────────────────────────────────────────────
+[ Prediction Set ]        [ Coverage Stats ]
+  Labels: {cat, lynx}      Empirical coverage: 91.2%
+  Set size: 2              Calibration n: 500
+  q̂ threshold: 0.23        Target α: 0.90
+```
+
+---
+
+### Embedding in Use Cases
+
+Once the Space is live at `https://huggingface.co/spaces/feliren/<space-name>`:
+
+```html
+<!-- In _pages/usecases.md, at top of page or in a featured section -->
+<section class="section demo-embed reveal">
+  <h2>Try it: Conformal Prediction</h2>
+  <p class="subtitle">Drag the slider. Watch the guarantee hold.</p>
+  <iframe
+    src="https://feliren-<space-name>.hf.space"
+    frameborder="0"
+    width="100%"
+    height="520"
+    loading="lazy"
+    title="Conformal prediction interactive demo"
+  ></iframe>
+</section>
+```
+
+**CSS:** `.demo-embed iframe { border-radius: 8px; border: 1px solid var(--line); min-height: 480px; }`
+
+---
+
+### Static fallback (Week 1 option)
+
+Before the Space is built, ship a static comparison grid showing the coverage vs. set-size tradeoff across three α values on three pre-selected images. Three 16:9 result cards side-by-side (or stacked mobile). This gives the Use Cases page a technical artifact immediately without the HF Space build time.
+
+Data can be pre-computed locally and hardcoded as a `_data/demo_results.yml`.
+
+---
+
+### Acceptance criteria
+
+- [ ] Three sample images preloaded; visitor can start without uploading
+- [ ] Slider at α=0.95 produces a larger set than α=0.80 for the same image (coverage/efficiency tradeoff is visible)
+- [ ] Empirical coverage on calibration set is shown and updates with slider
+- [ ] Space runs on CPU-only (free HF tier); first inference < 4 seconds
+- [ ] Iframe renders at all viewport widths without horizontal scroll
+- [ ] `loading="lazy"` — iframe does not delay page LCP
+
+---
+
+## RFC-010: Research Page — Author List Collapse + Citation Badges
+
+**Status:** PROPOSED
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target page:** `/research/`
+**Estimated effort:** ~2 hours
+
+---
+
+### Problem Statement
+
+Two independent issues on the Research page reduce scannability and leave third-party social proof uncaptured.
+
+---
+
+### Change 1 — Collapse long author lists by default
+
+**Problem:** The ACL 2025 co-author list is 90+ names. On mobile it occupies multiple screen heights before the visitor reaches the abstract or venue. This is visual noise at the worst possible position — the top of the card.
+
+**Fix:** Default to showing first 3 authors + "et al." with a `Show all authors` toggle.
+
+In `_pages/publications.md`, replace the flat author render with:
+
+```liquid
+{% assign author_count = pub.authors | size %}
+{% if author_count > 4 %}
+  <span class="authors-short">{{ pub.authors | slice: 0, 3 | join: ", " }}, et al.</span>
+  <button class="authors-toggle" aria-expanded="false" data-target="authors-{{ pub.key }}">Show all {{ author_count }} authors</button>
+  <span class="authors-full hidden" id="authors-{{ pub.key }}">{{ pub.authors | join: ", " }}</span>
+{% else %}
+  <span class="authors-short">{{ pub.authors | join: ", " }}</span>
+{% endif %}
+```
+
+Wire a small inline `<script>` (or add to `main.js`) to toggle `.hidden` and flip `aria-expanded` on click.
+
+**CSS:** `.authors-toggle { background: none; border: none; color: var(--accent); font-size: 0.78rem; cursor: pointer; padding: 0; margin-left: 0.3rem; } .authors-full.hidden { display: none; }`
+
+**Acceptance:** ACL 2025 card shows "Vicky Feliren, [Author 2], [Author 3], et al." by default. "Show all 90 authors" toggle expands inline. Toggle is keyboard accessible (`Enter`, `Space`).
+
+---
+
+### Change 2 — Citation count badge (hand-updated v1, automated v2)
+
+**Problem:** Citation counts are third-party social proof currently left on the table. A `Cited by N` badge per paper costs nothing to display and adds immediate credibility signal.
+
+**v1 — Hand-updated (ship this quarter):**
+
+Add a `citations` field to `_data/publications.yml`:
+
+```yaml
+- key: procanet-flood
+  citations: 4
+  # ... rest of fields
+```
+
+Render as a badge in the card:
+
+```liquid
+{% if pub.citations %}
+<span class="citation-badge" title="Google Scholar citation count">Cited by {{ pub.citations }}</span>
+{% endif %}
+```
+
+**CSS:** `.citation-badge { display: inline-block; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; color: var(--muted); margin-left: 0.4rem; }`
+
+Update quarterly. Check `scholar.google.com/citations?user=R2LVQ7AAAAAJ`.
+
+**v2 — Automated (Phase 2, see also Phase 2 SEO backlog):**
+
+The existing Semantic Scholar API backlog item (`/graph/v1/author/2330264544/papers?fields=citationCount`) covers this. Once the GitHub Actions cron is wired, the `citations` field updates automatically on each weekly run.
+
+**Acceptance (v1):** At least 3 papers show citation count badges. No badge appears on papers with 0 citations (omit the field for unpublished/preprint papers).
+
+---
+
+### Optional — Collapse abstracts by default
+
+Currently abstracts expand the page significantly. The one-sentence description above each abstract already summarises the key finding.
+
+**Option:** Wrap abstract in a `<details>` / `<summary>` HTML element — no JS required, accessible by default:
+
+```liquid
+{% if pub.abstract %}
+<details class="abstract-toggle">
+  <summary>Read abstract</summary>
+  <p>{{ pub.abstract }}</p>
+</details>
+{% endif %}
+```
+
+**CSS:** `details.abstract-toggle summary { cursor: pointer; color: var(--accent); font-size: 0.85rem; } details.abstract-toggle[open] summary { color: var(--muted); }`
+
+This is a quality-of-life improvement, not a conversion change. Ship only if the page feels too long after the author collapse is in place.
+
+---
+
+## RFC-011: Contact Page — Three-Tier Friction Model
+
+**Status:** PROPOSED
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target page:** `/contact/`
+**Estimated effort:** ~1 hour (content changes, no new components)
+
+---
+
+### Problem Statement
+
+The current "Work With Me" page is email-only with no availability signal, no pre-filtering of serious inquiries, and no way for casual visitors to engage without cold-emailing. Every visitor faces the same friction regardless of their intent. This misses the self-sorting behavior that converts casual interest into concrete asks.
+
+Three contact tiers — low, medium, high friction — let visitors self-select. Cialdini's scarcity principle and Norman's feedback principle both apply: clear availability + constrained slots signal value, reduce cold-email hesitation, and filter for serious asks.
+
+---
+
+### Tier 1 — Low friction: Email with scope signal
+
+Add a short paragraph before the email link that tells visitors:
+- What you respond to: research collaboration, speaking invitations, mentorship inquiries, AI consulting
+- What you don't respond to: recruitment for full-time roles before Q4 2026, unsolicited LinkedIn connections without prior email
+
+```yaml
+# _data/contact.yml — add field
+email_scope: "I respond to: research collaboration, conference talks, AI consulting, and PhD supervision inquiries. I don't respond to: cold recruitment outreach before Q4 2026."
+```
+
+Render above the email link. One paragraph. No bullet list needed.
+
+---
+
+### Tier 2 — Medium friction: Calendly with scarcity signal
+
+Add a 15-minute Calendly link for lightweight sync conversations. The scarcity signal is the key:
+
+```
+📅 15-min intro call — Two slots per month. Currently open: June 2026.
+```
+
+Drive from `_data/contact.yml`:
+```yaml
+calendly_url: "https://calendly.com/feliren/15min"
+calendly_slots_label: "Two slots per month. Currently open: June 2026."
+calendly_open: true
+```
+
+Render as a secondary CTA button below the email link. Hide the button when `calendly_open: false`.
+
+Update `calendly_slots_label` each month when updating the "This Month" block (RFC-008 Module 2).
+
+---
+
+### Tier 3 — High friction / low cost: Async intake form
+
+For consulting and research collaboration inquiries that need pre-qualification before a call. Use Tally.so (free tier, works with static sites, zero iframe footprint):
+
+Three pre-qualifying questions:
+1. What are you working on and where does AI fit?
+2. What's your timeline and budget range (if applicable)?
+3. How did you find this page?
+
+```yaml
+# _data/contact.yml
+intake_form_url: "https://tally.so/r/<form-id>"
+intake_form_label: "Consulting & collaboration inquiry"
+```
+
+Render as a tertiary text-style link below the Calendly button. Not a primary CTA — it is for self-selected serious asks.
+
+---
+
+### Availability headline
+
+Add one line at the top of the Contact page, below the page heading, before any other content:
+
+```
+Currently open for: one consulting engagement (Q3 2026), two mentorship slots, conference talks through end of year.
+```
+
+Drive from `_data/contact.yml`:
+```yaml
+availability_headline: "Currently open for: one consulting engagement (Q3 2026), two mentorship slots, conference talks through year-end."
+```
+
+Update when availability changes. This is the first thing a visitor reads — it answers the implicit question "is this person even reachable?" before they scroll.
+
+**Effort:** 1 hour — all content changes in `_data/contact.yml` + template updates in `_pages/contact.md`. No new components.
+
+---
+
+### Acceptance
+
+- [ ] Availability headline is the first text after the page heading
+- [ ] Email tier includes the scope signal paragraph
+- [ ] Calendly CTA is visible when `calendly_open: true`, hidden when `false`
+- [ ] Tally form link present as a tertiary option
+- [ ] All external links open in `target="_blank" rel="noreferrer"`
+- [ ] Mobile: all three tiers are readable and tappable without horizontal scroll
+
+---
+
+## RFC-012: Email Opt-In — Newsletter via Buttondown
+
+**Status:** PROPOSED
+**Author:** Vicky Feliren
+**Reviewed by:** Claude Opus
+**Date:** 2026-05-23
+**Target placement:** Below Insights section on homepage (`/`)
+**Estimated effort:** ~1.5 hours
+
+---
+
+### Why
+
+The Hook Model (Eyal) currently has no investment loop on the site. Visitors arrive, read, leave. No trigger brings them back unless they manually return. An email opt-in closes the loop: the next essay becomes a fresh external trigger for every subscriber. A 2% opt-in rate on 100 weekly visitors = 2 new subscribers/week. At 52 weeks, that is 100 subscribers after one year of consistent essays — a warm audience for every job application, collaboration ask, or paper announcement.
+
+Buttondown is the right choice: free under 100 subscribers, single `<form>` embed, no tracking pixels, consistent with the site's minimalist aesthetic. ConvertKit is also viable.
+
+---
+
+### Copy
+
+```
+One essay a month on trustworthy AI, conformal prediction, and Southeast Asian ML.
+No spam. Unsubscribe in one click.
+
+[ Your email ]  [ Subscribe → ]
+```
+
+Value promise is specific (topic + frequency). Objection pre-handled (no spam + easy exit). No incentive bribe needed — the content is the value.
+
+---
+
+### Implementation
+
+**Step 1 — Create Buttondown account** at buttondown.email. Set publication name, reply-to email.
+
+**Step 2 — Embed form** in `index.html` (or `_data/index.yml` if the homepage sections are data-driven):
+
+```html
+<section class="section opt-in reveal">
+  <h2>Monthly dispatch</h2>
+  <p class="subtitle">One essay on trustworthy AI, conformal prediction, and Southeast Asian ML. No spam.</p>
+  <form
+    action="https://buttondown.email/api/emails/embed-subscribe/feliren"
+    method="post"
+    target="_blank"
+    class="opt-in-form"
+  >
+    <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+    <button type="submit" class="btn btn-primary">Subscribe →</button>
+  </form>
+</section>
+```
+
+Replace `feliren` with the actual Buttondown username.
+
+**Step 3 — CSS:**
+
+```css
+.opt-in-form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.opt-in-form input[type="email"] {
+  flex: 1 1 220px;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.opt-in-form input[type="email"]::placeholder { color: var(--muted); }
+@media (max-width: 480px) {
+  .opt-in-form { flex-direction: column; }
+  .opt-in-form .btn { width: 100%; }
+}
+```
+
+**Placement:** Immediately below the Insights section, above the Let's Collaborate section. The Insights section shows recent essays; the opt-in is the natural next action for a visitor who just read three article summaries.
+
+---
+
+### Acceptance
+
+- [ ] Form submits to Buttondown without page reload (opens confirmation tab via `target="_blank"`)
+- [ ] Input field is keyboard-navigable and screen-reader labelled (`aria-label`)
+- [ ] Mobile: form stacks to single column, button full-width at ≤ 480px
+- [ ] Dark and light mode: input background and text are readable
+- [ ] Empty submit shows browser `required` validation (no custom JS needed)
+
+---
+
+## Weekend Sequencing — Two-Weekend Execution Plan
+
+*From the Claude Opus review, 2026-05-23. Sequenced by effort-to-impact within each session.*
+
+### Weekend 1 (~6 hours) — No new features, only sharpening existing pages
+
+| # | Task | RFC | Est. |
+|---|------|-----|------|
+| 1 | Date stamp every Writings entry | RFC-007 | 20 min |
+| 2 | Tag Writings entries Engineering / Research / Personal | RFC-007 | 20 min |
+| 3 | Reorder Writings — lead with top-3 pull titles | RFC-007 | 5 min |
+| 4 | Wire Writings filter bar (reuse research page JS pattern) | RFC-007 | 30 min |
+| 5 | Trim tech stack: 41 → 25 items in 5 clusters | RFC-008 M3 | 45 min |
+| 6 | Build `_data/now.yml`, render "This Month" dated block | RFC-008 M2 | 45 min |
+| 7 | Add Talks section (even if first entry is placeholder) | RFC-008 M4 | 20 min |
+| 8 | Promote Use Cases CTA to primary weight | RFC-008 M1 | 20 min |
+| 9 | Collapse author lists behind toggle on Research | RFC-010 | 45 min |
+| 10 | Add citation count badges (hand-updated v1) | RFC-010 | 30 min |
+| 11 | Availability headline + three-tier contact structure | RFC-011 | 60 min |
+
+### Weekend 2 (~10 hours) — The demo, the newsletter, the badges
+
+| # | Task | RFC | Est. |
+|---|------|-----|------|
+| 1 | Build Hugging Face Space with CP demo | RFC-009 | 6 hr |
+| 2 | Embed iframe on Use Cases | RFC-009 | 30 min |
+| 3 | Create Buttondown account + embed form below Insights | RFC-012 | 90 min |
+| 4 | Write first newsletter essay, queue for month-end | — | 60 min |
+| 5 | Hand-update citation counts from Google Scholar | RFC-010 | 30 min |
+
+---
+
 ## RFC-006 — Landing Page Research: Insights & Backlog (May 2026)
 
 **Sources reviewed:** Unbounce Anatomy, Stellar Content Guide, Figma Resource Library, OptimizePress Elements, Zapier Examples, Unbounce High-Converting Examples, Unicorn Platform 2026 Architecture, Mailchimp Resources. (CXL and Neil Patel returned 403.)
