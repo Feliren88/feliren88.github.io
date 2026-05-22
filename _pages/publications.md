@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Research & Publications
-hide_title: true
 description: Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection.
 permalink: /research/
 ---
