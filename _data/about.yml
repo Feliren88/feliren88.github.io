@@ -1,46 +1,28 @@
 tech_stack:
-  - Python
-  - CUDA
-  - Go
-  - SQL
   - PyTorch
   - TensorFlow
-  - PyTorch Lightning
   - DeepSpeed
-  - FlashAttention
+  - scikit-learn
+  - XGBoost
+  - Conformal Prediction
   - Vision-Language Models
   - Diffusion Models
-  - LoRA Fine-tuning
   - PEFT
-  - Unsloth
-  - LLaMA-Factory
-  - vLLM
-  - SGLang
-  - Hugging Face
-  - LangChain
-  - Retrieval-Augmented Generation
-  - LLM Evaluation
-  - LangSmith
-  - Conformal Prediction
-  - Uncertainty Quantification
-  - Google Earth Engine
   - Semantic Segmentation
-  - Multispectral Imaging
-  - OpenCV
-  - GCP Vertex AI
-  - AWS SageMaker
   - Kubernetes
   - Docker
+  - vLLM
   - FastAPI
-  - Gradio
-  - Streamlit
-  - MLflow
-  - Weights & Biases
+  - GCP Vertex AI
+  - Python
+  - SQL
   - dbt
   - BigQuery
-  - XGBoost
-  - scikit-learn
-  - Apache Kafka
+  - Google Earth Engine
+  - LLM Evaluation
+  - LangSmith
+  - MLflow
+  - Weights & Biases
   - SHAP
 
 hero:

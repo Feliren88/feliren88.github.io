@@ -59,6 +59,17 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
       {% endfor %}
     </div>
 
+    {% if site.data.now %}
+    <div id="now-block" class="about-section now-block">
+      <h2>This Month <span class="now-updated">— updated {{ site.data.now.last_updated }}</span></h2>
+      <ul class="now-list">
+        {% for item in site.data.now.items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
     <div id="tech-stack" class="about-section">
       <h2>Tech Stack</h2>
       <div class="tech-tag-cloud">
@@ -137,6 +148,18 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
             </li>
             {% endfor %}
           </ol>
+          {% if site.data.experience.talks %}
+          <p class="column-title" style="margin-top:1.2rem">TALKS</p>
+          <ol id="talks-list" class="timeline short">
+            {% for item in site.data.experience.talks %}
+            <li>
+              <p class="time">{{ item.dates }}</p>
+              <h3>{{ item.title }}</h3>
+              <p class="loc">{{ item.location }}</p>
+            </li>
+            {% endfor %}
+          </ol>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -216,6 +239,9 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   .about-hero a:hover { color: var(--accent); }
   .about-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
   .about-section h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
+  .now-updated { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+  .now-list { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.95rem; line-height: 1.75; }
+  .now-list li { margin-bottom: 0.2rem; }
   .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
   .about-card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }

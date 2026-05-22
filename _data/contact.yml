@@ -11,6 +11,12 @@ engagements:
   - type: 'International Roles'
     description: 'Open to applied scientist and research roles internationally, particularly where the work connects to trustworthy or culturally grounded AI.'
 
+availability_headline: "Currently open for: research collaboration, conference talks, and mentorship."
+email_scope: "I respond to research collaboration, conference talks, AI consulting, and PhD/career mentorship. I don't respond to cold recruitment outreach before Q4 2026."
+calendly_url: ""
+calendly_slots_label: "Two slots per month · Currently open: June 2026"
+calendly_open: false
+
 links:
   - label: 'Email'
     url: 'mailto:vickyfeliren@gmail.com'

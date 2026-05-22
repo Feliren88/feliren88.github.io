@@ -1437,7 +1437,7 @@ Wire to the existing JS filter pattern used on the research page — `data-tag` 
 
 ## RFC-008: About Page — CTA Hierarchy, "This Month" Block, Tech Stack Trim, Talks Section
 
-**Status:** PROPOSED — needs option decision before implementing
+**Status:** PARTIAL DELIVERY — 2026-05-23 (modules 2, 3, 4 delivered; module 1 CTA pending decision)
 **Author:** Vicky Feliren
 **Reviewed by:** Claude Opus
 **Date:** 2026-05-23
@@ -1784,7 +1784,7 @@ This is a quality-of-life improvement, not a conversion change. Ship only if the
 
 ## RFC-011: Contact Page — Three-Tier Friction Model
 
-**Status:** PROPOSED
+**Status:** DELIVERED — 2026-05-23 (Calendly CTA hidden until calendly_open: true + calendly_url set in contact.yml)
 **Author:** Vicky Feliren
 **Reviewed by:** Claude Opus
 **Date:** 2026-05-23
