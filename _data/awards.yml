@@ -19,11 +19,41 @@ monash-scholarship:
   year: '2024'
   description: 'One of the inaugural recipients — awarded for research potential in regional AI and academic standing at Monash University.'
 
+monash-travel-grant:
+  category: 'SCHOLARSHIP'
+  title: 'Monash Travel Grant'
+  year: '2018'
+  description: 'Awarded by Monash University to support international student exchange at Nanyang Technological University, Singapore.'
+
+jeffrey-cheah:
+  category: 'SCHOLARSHIP'
+  title: 'Jeffrey Cheah Entrance Scholarship'
+  year: '2015'
+  description: 'Merit-based entrance scholarship awarded by Sunway Education Group.'
+
 deep-learning-nanodegree:
   category: 'SCHOLARSHIP'
   title: 'Deep Learning Nanodegree — Facebook & Udacity'
   year: '2019'
   description: 'Competitively selected from a global applicant pool by Facebook and Udacity to study advanced deep learning and GAN architectures.'
+
+monash-hackathon:
+  category: 'TOP 3'
+  title: 'Monash Hackathon'
+  year: '2019'
+  description: 'Top 3 at Monash University Hackathon — Nov 2019.'
+
+reboot-the-earth:
+  category: 'TOP 10'
+  title: 'Reboot the Earth — United Nations Technology Innovation Labs'
+  year: '2019'
+  description: 'Top 10 globally in a UN Technology Innovation Labs challenge focused on climate and sustainability solutions.'
+
+monash-coding-competition:
+  category: 'HONORABLE MENTION'
+  title: 'Monash University Coding Competition'
+  year: '2018'
+  description: 'Honorable Mention at the Monash University Coding Competition — Aug 2018.'
 
 camvscovid:
   category: 'TOP 3'
