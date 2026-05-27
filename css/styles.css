@@ -1483,6 +1483,9 @@ html[data-theme="light"] .tech-tag--tool {
 .hero-now {
   margin-top: 1rem;
 }
+.hero-now > .hero-meta {
+  margin-top: 0;
+}
 .hero-now-label {
   display: block;
   font-size: 0.66rem;

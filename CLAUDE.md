@@ -51,7 +51,7 @@ feliren88.github.io/
 │       ├── favicon.webp / favicon_black.webp
 │       └── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
 ├── css/
-│   └── styles.css  # @font-face, custom properties, all component styles (current: v27)
+│   └── styles.css  # @font-face, custom properties, all component styles (current: v28)
 └── js/
     ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal, reveal-group stagger)
     └── components/
@@ -204,7 +204,7 @@ Content stored in `_data/*.yml` — accessed via `site.data.<filename>.<key>`
 ### JavaScript
 - ES6+ syntax
 - IIFE wrapper in nav.js
-- Current versions: `main.js?v=6`, `nav.js?v=3`
+- Current versions: `main.js?v=7`, `nav.js?v=3`
 
 ## Accessibility (WCAG 2.1 AA)
 
@@ -253,7 +253,7 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 3. `main.js` handles clicks on `.filter-pill, .filter` automatically for `.project-card` items; for other card types, add inline JS that reads `.filter-pill` clicks and toggles visibility
 
 ### Update Styles
-Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=27` → `?v=28`), and update the matching entry in `sw.js` PRECACHE array.
+Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.
 
 ### Add a New Button or Interactive Link
 Use `border: 1px solid var(--border-ui)` — not `--line` or `--line-strong` — to maintain 3:1 non-text contrast (WCAG 1.4.11).
