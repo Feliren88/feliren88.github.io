@@ -40,6 +40,8 @@ cal-hacks:
   url: 'https://devpost.com/software/converse-xash34'
 
 service:
+  - role: 'Industry Judge'
+    description: 'Monash FIT PGIE 2026 — evaluated 6 cross-disciplinary teams (36 students) from Master of AI, Data Science, and IT presenting real-world industry projects.'
   - role: 'Peer Reviewer'
     description: 'IEEE IGARSS 2026 — Premier global remote sensing and geoscience symposium.'
   - role: 'Technical Judge'

@@ -42,6 +42,10 @@ patents:
     description: 'Proprietary computer vision pipeline for high-resolution aquaculture monitoring using novel spectral indices.'
 
 teaching:
+  - dates: 'MAY 2026'
+    title: 'Monash University PGIE — Industry Judge'
+    location: 'Faculty of IT Postgraduate Industry Experience'
+
   - dates: 'MAY 2026 – JUN 2026'
     title: 'IBM SkillsBuild'
     location: 'Capstone Project Advisor'
