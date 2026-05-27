@@ -37,6 +37,10 @@ education:
   - dates: 'DECEMBER 2019'
     title: 'Monash University'
     location: 'Bachelor of Computer Science'
+
+  - dates: '2018'
+    title: 'Udacity — Deep Learning Nanodegree'
+    location: 'Neural networks, CNNs, RNNs, GANs · Facebook AI scholarship recipient'
     description: 'Student Exchange at NTU Singapore'
 
 patents:
