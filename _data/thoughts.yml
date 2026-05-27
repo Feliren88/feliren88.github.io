@@ -1,44 +1,72 @@
-- title: "Your model just killed someone's grandmother: Why every production ML needs conformal prediction"
-  description: "How conformal prediction gives you honest uncertainty quantification with mathematical guarantees that actually hold in production."
-  url: "https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4"
-  date: "Jan 2026"
-  tag: Engineering
-
-- title: "We all think our map is the territory"
-  description: "On ethnocentrism as an invisible cultural default — why our own cultural frameworks feel like objective reality, and what it takes to build global teams that can genuinely hold multiple maps at once."
-  url: "https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db"
+- title: "The cost of becoming"
+  description: "A poem for the people who are tired of waiting for themselves."
+  url: "https://medium.com/illumination/the-cost-of-becoming-78f7cd818fda"
   date: "May 2026"
-  tag: Research
+  tag: Personal
+  image: "https://cdn-images-1.medium.com/max/2600/0*lKdkYzGMklwxnoaM"
+
+- title: "Four hours, one vendor, one airline"
+  description: "What a four-hour American Airlines booking outage reveals about the compounding costs of vendor dependency in modern infrastructure."
+  url: "https://medium.com/illumination/four-hours-one-vendor-one-airline-1c0044b938c4"
+  date: "May 2026"
+  tag: Engineering
+  image: "https://cdn-images-1.medium.com/max/2600/1*_sc4dlO8J0ePaIucBrFAqA.jpeg"
+
+- title: "If everyone forgets, why be good"
+  description: "On why moral action still matters even when no one remembers — exploring Mother Teresa, Aristotle, and what we owe to the universe."
+  url: "https://medium.com/write-a-catalyst/if-everyone-forgets-why-be-good-0858bdac1bc2"
+  date: "May 2026"
+  tag: Personal
+  image: "https://cdn-images-1.medium.com/max/1024/0*rbvardQGLtdkjZ8c"
 
 - title: "Quality and Reliability for AI Engineers"
   description: "A practical guide to building quality and reliability into AI systems — covering evaluation frameworks, failure modes, and engineering practices that keep production AI trustworthy at scale."
   url: "https://medium.com/data-science-collective/quality-and-reliability-for-ai-engineers-b2f92f6406f8"
   date: "May 2026"
   tag: Engineering
+  image: "https://cdn-images-1.medium.com/max/2600/0*9YbhvWgXHVC8abfc.png"
+
+- title: "We all think our map is the territory"
+  description: "On ethnocentrism as an invisible cultural default — why our own cultural frameworks feel like objective reality, and what it takes to build global teams that can genuinely hold multiple maps at once."
+  url: "https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db"
+  date: "May 2026"
+  tag: Research
+  image: "https://cdn-images-1.medium.com/max/1024/1*TTdzEd1V3hdvmMIoVGis1w.jpeg"
+
+- title: "Your model just killed someone's grandmother: Why every production ML needs conformal prediction"
+  description: "How conformal prediction gives you honest uncertainty quantification with mathematical guarantees that actually hold in production."
+  url: "https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4"
+  date: "Jan 2026"
+  tag: Engineering
+  image: "https://cdn-images-1.medium.com/max/953/1*pFClFcsz3bQr08HxHCSkcQ.jpeg"
 
 - title: "The art of letting go while still caring"
   description: "What I learned from trying to control everything and ending up with nothing."
   url: "https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063"
   date: "Jan 2026"
   tag: Personal
+  image: "https://cdn-images-1.medium.com/max/937/1*rGYkE4JncGAmWL1hjOY9ZA.jpeg"
 
 - title: "Meditation. 7 days. No phone. Noble silence."
   description: "A data-driven researcher's journey into 7 days of silent meditation at Taman Brahma Bali Usada."
   url: "https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3"
   date: "Dec 2025"
   tag: Personal
+  image: "https://cdn-images-1.medium.com/max/1024/1*QZyRtUhozXRHEN887s7DAQ.jpeg"
 
 - title: "My initial exploration on Trustworthy AI"
   description: "First encounters with Trustworthy AI — bridging information theory and responsible machine learning."
   url: "https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956"
   date: "Nov 2025"
   tag: Research
+  image: "https://cdn-images-1.medium.com/max/946/1*QR0YLiUpwThQmPIsdcDpLA.jpeg"
 
 - title: "Phoenix Protocol: Rising from the ashes of adversity"
   description: "On resilience, reinvention, and learning to rise again after failure and loss."
   url: "https://medium.com/illumination/phoenix-protocol-rising-from-the-ashes-of-adversity-a5968e079638"
   date: "May 2025"
   tag: Personal
+  image: "https://cdn-images-1.medium.com/max/1024/1*uisgRqMZWn5YN7EPH2bmqA.png"
 
 - title: "Privacy Matters: Navigating the Digital Age with Confidence"
   description: "Discussing data synthesis, privacy-preserving analytics, and responsible data stewardship."

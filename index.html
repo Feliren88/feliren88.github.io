@@ -209,10 +209,13 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   <p class="section-note">Thoughts on AI, research, and beyond — published on Medium.</p>
   <div class="insights-grid reveal-group">
     {% for thought in site.data.thoughts limit:3 %}
-    <a class="insight-card reveal" href="{{ thought.url }}" target="_blank" rel="noreferrer">
-      <h3>{{ thought.title }}</h3>
-      <p>{{ thought.description }}</p>
-      <span class="insight-read">Read on Medium →</span>
+    <a class="insight-card reveal{% if thought.image %} insight-card--has-img{% endif %}" href="{{ thought.url }}" target="_blank" rel="noreferrer">
+      {% if thought.image %}<img class="insight-card-img" src="{{ thought.image }}" alt="" loading="lazy">{% endif %}
+      <div class="insight-card-body">
+        <h3>{{ thought.title }}</h3>
+        <p>{{ thought.description }}</p>
+        <span class="insight-read">Read on Medium →</span>
+      </div>
     </a>
     {% endfor %}
   </div>
@@ -298,7 +301,17 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     box-shadow: var(--shadow);
     backdrop-filter: blur(5px);
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
   }
+  .insight-card--has-img { padding-top: 0; }
+  .insight-card-img {
+    display: block;
+    width: calc(100% + 2.4rem);
+    margin: 0 -1.2rem 0.85rem;
+    height: 150px;
+    object-fit: cover;
+  }
+  .insight-card-body { display: flex; flex-direction: column; flex: 1; }
   .insight-card:hover {
     border-color: rgba(119, 146, 175, 0.48);
     transform: translateY(-3px);

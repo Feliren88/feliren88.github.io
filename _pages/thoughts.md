@@ -23,14 +23,17 @@ permalink: /writings/
 
 <div id="thoughts-container" class="thoughts-grid">
   {% for thought in site.data.thoughts %}
-  <a class="thought-card" href="{{ thought.url }}" target="_blank" rel="noreferrer" data-tag="{{ thought.tag }}">
-    <div class="thought-meta">
-      {% if thought.tag %}<span class="thought-tag-pill thought-tag-{{ thought.tag | downcase }}">{{ thought.tag }}</span>{% endif %}
-      {% if thought.date %}<span class="thought-date">{{ thought.date }}</span>{% endif %}
+  <a class="thought-card{% if thought.image %} thought-card--has-img{% endif %}" href="{{ thought.url }}" target="_blank" rel="noreferrer" data-tag="{{ thought.tag }}">
+    {% if thought.image %}<img class="thought-card-img" src="{{ thought.image }}" alt="" loading="lazy">{% endif %}
+    <div class="thought-body">
+      <div class="thought-meta">
+        {% if thought.tag %}<span class="thought-tag-pill thought-tag-{{ thought.tag | downcase }}">{{ thought.tag }}</span>{% endif %}
+        {% if thought.date %}<span class="thought-date">{{ thought.date }}</span>{% endif %}
+      </div>
+      <h3>{{ thought.title }}</h3>
+      <p>{{ thought.description }}</p>
+      <span class="read-more">Read on Medium →</span>
     </div>
-    <h3>{{ thought.title }}</h3>
-    <p>{{ thought.description }}</p>
-    <span class="read-more">Read on Medium →</span>
   </a>
   {% endfor %}
 </div>
@@ -84,7 +87,17 @@ permalink: /writings/
     background: var(--surface);
     box-shadow: var(--shadow);
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
   }
+  .thought-card--has-img { padding-top: 0; }
+  .thought-card-img {
+    display: block;
+    width: calc(100% + 2rem);
+    margin: 0 -1rem 0.85rem;
+    height: 160px;
+    object-fit: cover;
+  }
+  .thought-body { padding: 0; }
   .thought-card:hover {
     border-color: rgba(119, 146, 175, 0.48);
     transform: translateY(-3px);
