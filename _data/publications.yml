@@ -1,4 +1,5 @@
 - key: mining-multispectral
+  kind: geospatial
   tag: 'Q1 · IF: 11.4'
   title: "Multi-modal deep learning approaches to semantic segmentation of mining footprints with multispectral satellite imagery"
   description: 'Semantic segmentation of global mining footprints using multispectral satellite imagery across 37 locations worldwide.'
@@ -12,6 +13,7 @@
   abstract: 'Existing remote sensing applications in mining are often of limited scope, typically mapping multiple mining land covers for a single mine or only mapping mining extents or a single feature (e.g., tailings dam) for multiple mines across a region. Many of these works have a narrow focus on specific mine land covers rather than encompassing the variety of mining and non-mining land use in a mine site. This study presents a pioneering effort in performing deep learning-based semantic segmentation of 37 mining locations worldwide, representing a range of commodities from gold to coal, using multispectral satellite imagery, to automate mapping of mining and non-mining land covers. Due to the absence of a dedicated training dataset, we crafted a customized multispectral dataset for training and testing deep learning models, leveraging and refining existing datasets in terms of boundaries, shapes, and class labels. We trained and tested multimodal semantic segmentation models, particularly based on U-Net, DeepLabV3+, Feature Pyramid Network (FPN), SegFormer, and IBM-NASA foundational geospatial model (Prithvi) architecture, with a focus on evaluating different model configurations, input band combinations, and the effectiveness of transfer learning. In terms of multimodality, we utilized various image bands, including Red, Green, Blue, and Near Infra-Red (NIR) and Normalized Difference Vegetation Index (NDVI), to determine which combination of inputs yields the most accurate segmentation. Results indicated that among different configurations, FPN with DenseNet-121 backbone, pre-trained on ImageNet, and trained using both RGB and NIR bands, performs the best. We concluded the study with a comprehensive assessment of the model performance based on climate classification categories and diverse mining commodities.'
 
 - key: sea-vl
+  kind: cultural
   tag: 'MAJOR CONTRIBUTOR · ACL 2025'
   title: 'Crowdsource, Crawl, or Generate? Creating SEA-VL, a Multicultural Vision-Language Dataset for Southeast Asia'
   description: 'A multicultural vision-language benchmark for Southeast Asia, covering 1.28M culturally relevant images across 11 SEA languages.'
@@ -24,6 +26,7 @@
   abstract: "Despite Southeast Asia's extraordinary linguistic and cultural diversity, the region remains significantly underrepresented in vision-language research. To fill this gap, we present SEA-VL, an open-source initiative dedicated to developing culturally relevant high-quality datasets for SEA languages."
 
 - key: flood-procanet
+  kind: geospatial
   tag: 'FIRST AUTHOR · IEEE Q1'
   title: 'Progressive Cross-Attention Network for Flood Segmentation Using Multispectral Satellite Imagery'
   description: 'ProCANet achieving state-of-the-art IoU of 0.815 on the Sen1Floods11 benchmark.'
@@ -36,6 +39,7 @@
   abstract: 'We introduce a progressive cross-attention network (ProCANet) that progressively applies both self- and cross-attention mechanisms to multispectral features, generating optimal feature combinations for flood segmentation.'
 
 - key: retention-ponds
+  kind: geospatial
   tag: 'Q2 · IF: 2.3'
   title: 'Enhancing urban resilience through integrated flood policy and planning'
   description: 'Mixed-methods evaluation of retention ponds for urban flood mitigation.'
@@ -48,6 +52,7 @@
   abstract: 'This study examines the role of retention ponds in South Bandung as a strategic response to flood management challenges.'
 
 - key: commonlid
+  kind: nlp
   tag: 'ACL 2026'
   title: 'CommonLID: Re-evaluating State-of-the-Art Language Identification Performance on Web Data'
   description: 'A community-driven human-annotated benchmark covering 109 languages.'
@@ -60,6 +65,7 @@
   abstract: 'We introduce CommonLID, a community-driven, human-annotated LID benchmark for the web domain, covering 109 languages.'
 
 - key: anthropogenic
+  kind: cultural
   tag: 'UNDER REVIEW'
   title: 'Anthropogenic Regional Adaptation in Multimodal Vision-Language Model'
   description: 'GG-EZ achieves 5-15% gains in cultural relevance for Southeast Asia while retaining over 98% of global benchmark performance.'
@@ -71,6 +77,7 @@
   abstract: 'We introduce Anthropogenic Regional Adaptation: a novel paradigm that aims to optimize model relevance to specific regional contexts while ensuring the retention of global generalization capabilities.'
 
 - key: plastic-bag-ban
+  kind: applied
   tag: 'FIRST AUTHOR'
   title: 'The Effect of Plastic Bag Ban Policy Towards Waste Complaints in Jakarta'
   description: 'Analysis through JAKI and Qlue platforms.'

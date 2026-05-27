@@ -1,29 +1,32 @@
 tech_stack:
-  - PyTorch
-  - TensorFlow
-  - DeepSpeed
-  - scikit-learn
-  - XGBoost
-  - Conformal Prediction
-  - Vision-Language Models
-  - Diffusion Models
-  - PEFT
-  - Semantic Segmentation
-  - Kubernetes
-  - Docker
-  - vLLM
-  - FastAPI
-  - GCP Vertex AI
-  - Python
-  - SQL
-  - dbt
-  - BigQuery
-  - Google Earth Engine
-  - LLM Evaluation
-  - LangSmith
-  - MLflow
-  - Weights & Biases
-  - SHAP
+  primary:
+    - Conformal Prediction
+    - Vision-Language Models
+    - Semantic Segmentation
+    - Diffusion Models
+    - PyTorch
+    - TensorFlow
+  framework:
+    - PEFT
+    - DeepSpeed
+    - vLLM
+    - FastAPI
+    - scikit-learn
+    - XGBoost
+    - Google Earth Engine
+    - Python
+  tool:
+    - GCP Vertex AI
+    - Kubernetes
+    - Docker
+    - BigQuery
+    - SQL
+    - dbt
+    - MLflow
+    - Weights & Biases
+    - LangSmith
+    - LLM Evaluation
+    - SHAP
 
 hero:
   - "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong> — building systems that are reliable when it matters and culturally relevant to the places they operate in."

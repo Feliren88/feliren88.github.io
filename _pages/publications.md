@@ -50,11 +50,18 @@ permalink: /research/
 </p>
 <p class="section-note">Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.</p>
 
+<div class="filter-bar" role="group" aria-label="Filter publications by research area">
+  <button class="filter-pill is-active" data-filter="all">All</button>
+  <button class="filter-pill" data-filter="geospatial">Geospatial</button>
+  <button class="filter-pill" data-filter="cultural">Cultural AI</button>
+  <button class="filter-pill" data-filter="nlp">Language</button>
+  <button class="filter-pill" data-filter="applied">Applied</button>
+</div>
 <p class="project-count" id="project-count" role="status" aria-live="polite" aria-atomic="true"></p>
 
 <div id="publications-container" class="project-grid">
   {% for pub in site.data.publications %}
-  <article class="project-card reveal">
+  <article class="project-card reveal" data-kind="{{ pub.kind | default: 'applied' }}">
     <p class="tag">{{ pub.tag }}</p>
     <h3>{{ pub.title }}</h3>
     <p>{{ pub.description }}</p>
@@ -72,7 +79,7 @@ permalink: /research/
     <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn" aria-label="Read paper: {{ pub.title }}">Read Paper</a>
     {% endif %}
     {% if pub.abstract %}
-    <button class="card-toggle" type="button" aria-expanded="false">Abstract</button>
+    <button class="card-toggle card-toggle--text" type="button" aria-expanded="false">Abstract ↓</button>
     <div class="card-expand"><p>{{ pub.abstract }}</p></div>
     {% endif %}
   </article>

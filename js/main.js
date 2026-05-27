@@ -19,14 +19,15 @@ document.addEventListener("dragstart", (event) => {
   }
 });
 
-/* --- Scroll-reveal --- */
+/* --- Scroll-reveal with group stagger (Gestalt: Common Fate) --- */
 const revealNodes = document.querySelectorAll(".reveal");
+const revealGroups = document.querySelectorAll(".reveal-group");
 function revealInView(node) {
   if (node.classList.contains("in-view")) return;
   const r = node.getBoundingClientRect();
   if (r.top < window.innerHeight && r.bottom > 0) node.classList.add("in-view");
 }
-if ("IntersectionObserver" in window && revealNodes.length > 0) {
+if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
@@ -38,12 +39,41 @@ if ("IntersectionObserver" in window && revealNodes.length > 0) {
     },
     { threshold: 0 }
   );
-  revealNodes.forEach((node) => revealObserver.observe(node));
-  // iOS Safari doesn't fire the observer for elements already in view at
-  // load time — flush them manually after layout settles (double-rAF).
-  requestAnimationFrame(() => requestAnimationFrame(() => revealNodes.forEach(revealInView)));
+  // Observe individual reveal nodes not inside a group
+  revealNodes.forEach((node) => {
+    if (!node.closest(".reveal-group")) revealObserver.observe(node);
+  });
+  // Observe groups — marking group in-view triggers CSS nth-child delay on children
+  const groupObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          // Also mark children so opacity/transform apply
+          entry.target.querySelectorAll(".reveal").forEach((child) => child.classList.add("in-view"));
+          groupObserver.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.05 }
+  );
+  revealGroups.forEach((g) => groupObserver.observe(g));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    revealNodes.forEach((n) => { if (!n.closest(".reveal-group")) revealInView(n); });
+    revealGroups.forEach((g) => {
+      const r = g.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        g.classList.add("in-view");
+        g.querySelectorAll(".reveal").forEach((c) => c.classList.add("in-view"));
+      }
+    });
+  }));
 } else {
   revealNodes.forEach((node) => node.classList.add("in-view"));
+  revealGroups.forEach((g) => {
+    g.classList.add("in-view");
+    g.querySelectorAll(".reveal").forEach((c) => c.classList.add("in-view"));
+  });
 }
 
 /* --- Active nav on scroll --- */
@@ -74,7 +104,7 @@ setActiveNav();
 window.addEventListener("scroll", setActiveNav, { passive: true });
 
 /* --- Publication filters --- */
-const filterButtons = Array.from(document.querySelectorAll(".filter"));
+const filterButtons = Array.from(document.querySelectorAll(".filter-pill, .filter"));
 const projectCards = Array.from(document.querySelectorAll(".project-card"));
 const projectCount = document.getElementById("project-count");
 
@@ -424,7 +454,7 @@ function initPointCloudLab() {
 
     for (const p of projected) {
       const depthNorm = Math.max(0, Math.min(1, (p.depth + 240) / 480));
-      const alpha = 0.12 + depthNorm * 0.33;
+      const alpha = 0.07 + depthNorm * 0.18;
       const size = 0.85 + depthNorm * 2.3;
       const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       const tone = isLight ? 58 + depthNorm * 40 : 112 + depthNorm * 46;
@@ -480,8 +510,22 @@ function initPointCloudLab() {
       const shape = button.getAttribute("data-shape");
       if (!shape || shape === activeShape) return;
       activeShape = shape;
-      shapeButtons.forEach((b) => b.classList.remove("is-active"));
-      button.classList.add("is-active");
+      // Coordinated animation — common fate (Gestalt)
+      shapeButtons.forEach((b) => {
+        b.classList.remove("is-active");
+        b.style.transition = "transform 0.15s ease, opacity 0.15s ease";
+        b.style.transform = "scale(0.92)";
+        b.style.opacity = "0.55";
+      });
+      button.style.transform = "scale(1.06)";
+      button.style.opacity = "1";
+      setTimeout(() => {
+        shapeButtons.forEach((b) => {
+          b.style.transform = "";
+          b.style.opacity = "";
+        });
+        button.classList.add("is-active");
+      }, 150);
       resetPoints(shape);
       if (shapeLabelEl) {
         shapeLabelEl.textContent = `Shape: ${shape.charAt(0).toUpperCase()}${shape.slice(1)}`;

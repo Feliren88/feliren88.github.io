@@ -6,15 +6,15 @@ description: A practitioner's view of ML use cases across geospatial AI, cultura
 permalink: /usecases/
 ---
 
-<div class="wip-notice" role="note">
-  <span class="wip-badge">Work in Progress</span>
+<div class="note-block" role="note">
+  <span class="note-badge">Work in Progress</span>
   <p>{{ site.data.usecases.wip_notice }}</p>
 </div>
 
-<div class="uc-filter-bar" role="group" aria-label="Filter use cases by category">
-  <button class="uc-filter-btn is-active" data-filter="all">All</button>
+<div class="filter-bar" role="group" aria-label="Filter use cases by category">
+  <button class="filter-pill is-active" data-filter="all">All</button>
   {% for cat in site.data.usecases.categories %}
-  <button class="uc-filter-btn" data-filter="{{ cat.id }}">{{ cat.label }}</button>
+  <button class="filter-pill" data-filter="{{ cat.id }}">{{ cat.label }}</button>
   {% endfor %}
 </div>
 
@@ -51,53 +51,6 @@ permalink: /usecases/
 <style>
   .page-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; margin: 0.2rem 0 0.5rem; line-height: 1.1; }
   .page-subtitle { font-size: 1.05rem; color: var(--muted); margin-bottom: 2rem; }
-
-  /* ── WIP notice ─────────────────────────────────────── */
-  .wip-notice {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--border-ui);
-    border-radius: 8px;
-    margin-bottom: 2.5rem;
-    background: var(--surface);
-  }
-  .wip-notice p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
-  .wip-badge {
-    flex-shrink: 0;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--accent) 15%, transparent);
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    margin-top: 0.1rem;
-  }
-
-  /* ── Filter bar ─────────────────────────────────────── */
-  .uc-filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
-  .uc-filter-btn {
-    padding: 0.35rem 0.85rem;
-    font-size: 0.82rem;
-    font-family: inherit;
-    border: 1px solid var(--border-ui);
-    border-radius: 20px;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
-  }
-  .uc-filter-btn:hover { color: var(--text); border-color: var(--accent); }
-  .uc-filter-btn.is-active { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
   /* ── Grid ───────────────────────────────────────────── */
   .uc-grid {
@@ -200,7 +153,7 @@ permalink: /usecases/
 <script>
 (function() {
   var PRIORITY = { ongoing: 1, cultural: 2, geospatial: 3, production: 4, applied: 5 };
-  var btns = document.querySelectorAll('.uc-filter-btn');
+  var btns = document.querySelectorAll('.filter-pill');
   var grid = document.getElementById('uc-grid');
   var cards = document.querySelectorAll('.uc-card');
 

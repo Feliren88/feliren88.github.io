@@ -13,11 +13,11 @@ permalink: /writings/
 </h2>
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
-<div class="th-filter-bar" role="group" aria-label="Filter writings by category">
-  <button class="th-filter is-active" data-filter="all">All</button>
-  <button class="th-filter" data-filter="Engineering">Engineering</button>
-  <button class="th-filter" data-filter="Research">Research</button>
-  <button class="th-filter" data-filter="Personal">Personal</button>
+<div class="filter-bar" role="group" aria-label="Filter writings by category">
+  <button class="filter-pill is-active" data-filter="all">All</button>
+  <button class="filter-pill" data-filter="Engineering">Engineering</button>
+  <button class="filter-pill" data-filter="Research">Research</button>
+  <button class="filter-pill" data-filter="Personal">Personal</button>
 </div>
 <p class="th-count" id="thought-count" role="status" aria-live="polite" aria-atomic="true"></p>
 
@@ -37,7 +37,7 @@ permalink: /writings/
 
 <script>
 (function () {
-  var filters = document.querySelectorAll('.th-filter');
+  var filters = document.querySelectorAll('.filter-pill');
   var cards = document.querySelectorAll('.thought-card');
   var countEl = document.getElementById('thought-count');
 
@@ -64,37 +64,6 @@ permalink: /writings/
 </script>
 
 <style>
-  .th-filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-bottom: 0.6rem;
-  }
-  .th-filter {
-    border: 1px solid var(--border-ui);
-    border-radius: 999px;
-    background: rgba(16, 27, 40, 0.74);
-    color: #8b9fb8;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.3rem 0.65rem;
-    cursor: pointer;
-    transition: color 0.2s ease, background 0.2s ease, transform 0.18s ease, border-color 0.2s ease;
-  }
-  .th-filter:hover { transform: translateY(-1px); }
-  .th-filter.is-active {
-    color: #d9e3ef;
-    background: rgba(111, 136, 163, 0.34);
-    border-color: rgba(123, 146, 174, 0.6);
-  }
-  [data-theme="light"] .th-filter {
-    background: rgba(240, 243, 247, 0.9);
-    color: #3d506b;
-  }
-  [data-theme="light"] .th-filter.is-active {
-    color: #0a1f3a;
-    background: rgba(111, 136, 163, 0.2);
-  }
   .th-count {
     margin: 0 0 0.7rem;
     color: var(--muted);
@@ -104,12 +73,12 @@ permalink: /writings/
     margin-top: 0.1rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.8rem;
+    gap: 1.25rem;
   }
   .thought-card {
     display: block;
     text-decoration: none;
-    padding: 0.88rem;
+    padding: var(--card-pad-sm);
     border: 1px solid var(--line);
     border-radius: 1rem;
     background: var(--surface);

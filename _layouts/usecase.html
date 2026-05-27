@@ -9,6 +9,8 @@ layout: default
 </section>
 {% else %}
 <section class="section page reveal uc-page">
+  <div class="uc-page-layout" id="uc-layout">
+  <div class="uc-main-content">
 
   <nav class="uc-breadcrumb" aria-label="Breadcrumb">
     <a href="/usecases/" class="uc-back-link">← Use Cases</a>
@@ -92,6 +94,8 @@ layout: default
     {% if uc.publications %}{% for pub in uc.publications %}{% if pub.link %}<a href="{{ pub.link }}" target="_blank" rel="noreferrer" class="uc-detail-link">Publication ↗</a>{% endif %}{% endfor %}{% endif %}
   </div>
 
+  </div><!-- /.uc-main-content -->
+  </div><!-- /.uc-page-layout -->
 </section>
 
 <style>
@@ -173,4 +177,43 @@ layout: default
     border-radius: 4px;
   }
 </style>
+
+<script>
+(function() {
+  var layout = document.getElementById('uc-layout');
+  if (!layout) return;
+  var labels = layout.querySelectorAll('.uc-section-label');
+  if (labels.length < 3) return;
+  var toc = document.createElement('nav');
+  toc.className = 'uc-toc-wrap';
+  toc.setAttribute('aria-label', 'Page sections');
+  var title = document.createElement('p');
+  title.className = 'toc-title';
+  title.textContent = 'On this page';
+  toc.appendChild(title);
+  var ul = document.createElement('ul');
+  labels.forEach(function(el, i) {
+    var id = 'uc-sec-' + i;
+    el.setAttribute('id', id);
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = el.textContent.trim();
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  toc.appendChild(ul);
+  layout.appendChild(toc);
+  var tocLinks = Array.from(ul.querySelectorAll('a'));
+  var targets = tocLinks.map(function(a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  function onScroll() {
+    var scrollY = window.scrollY + 100;
+    var active = 0;
+    targets.forEach(function(t, i) { if (t && t.offsetTop <= scrollY) active = i; });
+    tocLinks.forEach(function(a, i) { a.classList.toggle('is-active', i === active); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 {% endif %}

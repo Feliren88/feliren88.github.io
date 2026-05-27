@@ -12,14 +12,16 @@ preload_image: /assets/img/profile_2_color.webp
 {% if site.data.contact.availability_headline %}
 <p class="availability-hl">{{ site.data.contact.availability_headline }}</p>
 {% endif %}
-<p class="contact-intro">{{ site.data.contact.intro }}</p>
-<p class="contact-intro" style="font-size:1rem;margin-top:0.6rem;color:var(--muted)">{{ site.data.contact.intro_sub }}</p>
+<div class="contact-intro-block">
+  <p class="contact-intro">{{ site.data.contact.intro }}</p>
+  <p class="contact-intro" style="font-size:0.97rem;margin-top:0.5rem;color:var(--muted)">{{ site.data.contact.intro_sub }}</p>
+</div>
 
-<div id="contact-engagements" style="margin:2rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:56rem">
+<div id="contact-engagements" class="contact-engagements-grid">
   {% for item in site.data.contact.engagements %}
-  <div style="padding:1.2rem;border:1px solid var(--line);border-radius:8px">
-    <h4 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.5rem">{{ item.type }}</h4>
-    <p style="font-size:0.95rem;line-height:1.55;color:var(--muted)">{{ item.description }}</p>
+  <div class="card--mini">
+    <h2 class="t-section-title">{{ item.type }}</h2>
+    <p style="font-size:0.95rem;line-height:1.55;color:var(--muted);margin:0">{{ item.description }}</p>
   </div>
   {% endfor %}
 </div>
@@ -47,6 +49,13 @@ preload_image: /assets/img/profile_2_color.webp
 <style>
   .profile-bg { position: absolute; right: -160px; top: 40px; width: 650px; z-index: -1; user-select: none; -webkit-user-drag: none; border-radius: 0; }
   @media (max-width: 1200px) { .profile-bg { position: static; width: 100%; max-width: 500px; margin: 2rem auto; opacity: 1; } }
+  .contact-engagements-grid {
+    margin: 0 0 var(--gap-4);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--gap-2);
+    max-width: 56rem;
+  }
   .contact-icon { width: 24px; height: 24px; margin-bottom: 0.5rem; }
   .availability-hl {
     font-size: 0.95rem;

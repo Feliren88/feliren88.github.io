@@ -49,6 +49,15 @@
   --border-ui: rgba(119, 146, 175, 0.7);
   --shadow: 0 22px 40px rgba(0, 0, 0, 0.3);
   --topbar-bg: rgba(8, 13, 21, 0.72);
+  /* spacing scale */
+  --gap-1: 0.5rem;
+  --gap-2: 1rem;
+  --gap-3: 1.5rem;
+  --gap-4: 2.5rem;
+  /* card padding tokens */
+  --card-pad-lg: 1.5rem;
+  --card-pad-sm: 1rem;
+  --card-pad-xs: 0.82rem;
 }
 
 html[data-theme="light"] {
@@ -170,7 +179,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  opacity: 0.58;
+  opacity: 0.22;
 }
 
 .topbar,
@@ -594,32 +603,85 @@ h1 {
   flex-wrap: wrap;
 }
 
+/* ── Unified filter bar (Gestalt: Similarity) ─────────── */
+.filter-bar,
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: var(--gap-1);
+  margin-bottom: var(--gap-2);
 }
 
+.filter-pill,
 .filter {
   border: 1px solid var(--border-ui);
   border-radius: 999px;
   background: rgba(16, 27, 40, 0.74);
   color: #8b9fb8;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.3rem 0.55rem;
+  font-family: inherit;
+  padding: 0.32rem 0.72rem;
   cursor: pointer;
   transition: color 0.2s ease, background 0.2s ease, transform 0.18s ease, border-color 0.2s ease;
 }
 
+.filter-pill:hover,
 .filter:hover {
+  color: var(--text);
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
 
+.filter-pill.is-active,
 .filter.is-active {
-  color: #d9e3ef;
-  background: rgba(111, 136, 163, 0.34);
-  border-color: rgba(123, 146, 174, 0.6);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: var(--accent);
+}
+
+html[data-theme="light"] .filter-pill,
+html[data-theme="light"] .filter {
+  background: rgba(240, 243, 247, 0.9);
+  color: #3d506b;
+}
+
+html[data-theme="light"] .filter-pill.is-active,
+html[data-theme="light"] .filter.is-active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ── Note block utility (Gestalt: Figure-Ground) ──────── */
+.note-block {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-2);
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: var(--gap-4);
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.note-block p { margin: 0; }
+
+.note-badge {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  margin-top: 0.1rem;
+  white-space: nowrap;
 }
 
 .project-count {
@@ -636,7 +698,7 @@ h1 {
 }
 
 .project-card {
-  padding: 0.88rem;
+  padding: var(--card-pad-sm);
   --rx: 0deg;
   --ry: 0deg;
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
@@ -1227,7 +1289,87 @@ h1 {
   .timeline-fallback[hidden] { display: block !important; }
 }
 
-/* Tech stack tag cloud */
+/* ── Typography tokens (Gestalt: Similarity + Prägnanz) ── */
+.t-eyebrow {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.t-section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  margin: 0 0 0.75rem;
+}
+
+.t-display {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.t-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── Card role system (Gestalt: Common Region + Proximity) */
+.card--feature {
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(5px);
+  transition: border-color 0.2s;
+}
+
+.card--feature:hover { border-color: var(--border-ui); }
+
+.card--list {
+  padding: var(--card-pad-sm);
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(5px);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.card--list:hover {
+  border-color: rgba(119, 146, 175, 0.48);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+
+.card--mini {
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+/* ── Contact intro block ──────────────────────────────── */
+.contact-intro-block {
+  margin: 0.75rem 0 var(--gap-3);
+}
+
+.contact-intro-block .contact-intro + .contact-intro {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+}
+
+/* ── Tech stack tag cloud with tiers (Gestalt: Prägnanz) */
 .tech-tag-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -1245,8 +1387,33 @@ h1 {
   color: var(--accent);
   border: 1px solid var(--line-strong);
 }
+.tech-tag--primary {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.78rem;
+  background: rgba(119, 146, 175, 0.14);
+  border-color: rgba(119, 146, 175, 0.32);
+}
+.tech-tag--framework {
+  font-size: 0.76rem;
+  opacity: 0.92;
+}
+.tech-tag--tool {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.52rem;
+  opacity: 0.78;
+  background: rgba(119, 146, 175, 0.06);
+}
 html[data-theme="light"] .tech-tag {
   background: rgba(63, 100, 144, 0.07);
+}
+html[data-theme="light"] .tech-tag--primary {
+  background: rgba(63, 100, 144, 0.12);
+  border-color: rgba(63, 100, 144, 0.28);
+}
+html[data-theme="light"] .tech-tag--tool {
+  background: rgba(63, 100, 144, 0.04);
 }
 
 /* Reveal animation */
@@ -1282,6 +1449,106 @@ html[data-theme="light"] .tech-tag {
   }
 }
 
+/* ── Reveal group stagger (Gestalt: Common Fate) ──────── */
+.reveal-group > .reveal {
+  transition-delay: 0ms;
+}
+.reveal-group.in-view > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-group.in-view > .reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal-group.in-view > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-group.in-view > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-group.in-view > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-group.in-view > .reveal:nth-child(6) { transition-delay: 400ms; }
+.reveal-group.in-view > .reveal:nth-child(n+7) { transition-delay: 480ms; }
+
+/* ── Abstract toggle — text-only style for research cards ─ */
+.card-toggle--text {
+  margin-top: 0.55rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.card-toggle--text:hover { color: var(--accent); }
+.project-card.expanded .card-toggle--text { color: var(--accent); }
+
+/* ── Hero meta context block ──────────────────────────── */
+.hero-now {
+  margin-top: 1rem;
+}
+.hero-now-label {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  opacity: 0.65;
+}
+
+/* ── Sticky TOC for use-case pages ───────────────────── */
+.uc-toc-wrap {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  backdrop-filter: blur(5px);
+  font-size: 0.75rem;
+}
+
+.uc-toc-wrap ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.uc-toc-wrap li a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.4;
+  display: block;
+}
+
+.uc-toc-wrap li a:hover,
+.uc-toc-wrap li a.is-active { color: var(--accent); }
+
+.uc-toc-wrap .toc-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+  opacity: 0.7;
+}
+
+.uc-page-layout {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: var(--gap-3);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .uc-page-layout { grid-template-columns: 1fr; }
+  .uc-toc-wrap { display: none; }
+}
+
 /* Responsive */
 @media (max-width: 1020px) {
   .split-grid,
@@ -1294,7 +1561,7 @@ html[data-theme="light"] .tech-tag {
   }
 
   #pointcloud-bg {
-    opacity: 0.48;
+    opacity: 0.18;
   }
 
   .footer-top { flex-direction: column; gap: 1.5rem; }

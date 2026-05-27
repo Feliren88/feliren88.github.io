@@ -31,11 +31,14 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         {% endfor %}
       </div>
 
-      <ul class="hero-meta">
-        {% for item in site.data.index.meta %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
+      <div class="hero-now">
+        <span class="hero-now-label">Right now</span>
+        <ul class="hero-meta">
+          {% for item in site.data.index.meta %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
 
       <div class="bg-controls">
         <p>Background Point Cloud</p>
@@ -73,8 +76,14 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     <div id="tech-stack" class="about-section">
       <h2>Tech Stack</h2>
       <div class="tech-tag-cloud">
-        {% for tag in site.data.about.tech_stack %}
-        <span class="tech-tag">{{ tag }}</span>
+        {% for tag in site.data.about.tech_stack.primary %}
+        <span class="tech-tag tech-tag--primary">{{ tag }}</span>
+        {% endfor %}
+        {% for tag in site.data.about.tech_stack.framework %}
+        <span class="tech-tag tech-tag--framework">{{ tag }}</span>
+        {% endfor %}
+        {% for tag in site.data.about.tech_stack.tool %}
+        <span class="tech-tag tech-tag--tool">{{ tag }}</span>
         {% endfor %}
       </div>
     </div>
@@ -89,9 +98,9 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         {% endif %}
 
         {% if section.cards %}
-        <div class="about-grid">
+        <div class="about-grid reveal-group">
           {% for card in section.cards %}
-          <div class="about-card">
+          <div class="about-card reveal">
             <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
           </div>
@@ -198,9 +207,9 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     <a href="/writings/" class="insights-view-all">View all writings →</a>
   </div>
   <p class="section-note">Thoughts on AI, research, and beyond — published on Medium.</p>
-  <div class="insights-grid">
+  <div class="insights-grid reveal-group">
     {% for thought in site.data.thoughts limit:3 %}
-    <a class="insight-card" href="{{ thought.url }}" target="_blank" rel="noreferrer">
+    <a class="insight-card reveal" href="{{ thought.url }}" target="_blank" rel="noreferrer">
       <h3>{{ thought.title }}</h3>
       <p>{{ thought.description }}</p>
       <span class="insight-read">Read on Medium →</span>
