@@ -42,8 +42,9 @@ monash-scholarship:
 deep-learning-nanodegree:
   category: 'SCHOLARSHIP'
   title: 'Deep Learning Nanodegree — Facebook & Udacity'
-  year: '2019'
+  year: '2018'
   description: 'Competitively selected from a global applicant pool by Facebook and Udacity to study advanced deep learning and GAN architectures.'
+  url: 'https://www.udacity.com/certificate/e/9eb94c5c-1b4e-11e9-96ec-53761dc381f8'
 
 jeffrey-cheah:
   category: 'SCHOLARSHIP'
