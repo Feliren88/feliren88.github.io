@@ -5,6 +5,27 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
+{% if site.data.features %}
+<div class="features-section">
+  <p class="t-eyebrow" style="margin-bottom:0.75rem">Featured In</p>
+  <div class="features-grid">
+    {% for feature in site.data.features %}
+    <a class="feature-card" href="{{ feature.url }}" target="_blank" rel="noreferrer">
+      <div class="feature-card-top">
+        <span class="feature-publication">{{ feature.publication }}</span>
+        <span class="feature-date">{{ feature.date }}</span>
+      </div>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+      <span class="feature-read">Read on {{ feature.publication }} →</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="writings-divider"></div>
+
 <h2 class="section-title">
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
     <img src="/assets/img/medium-svgrepo-com.webp" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem" loading="lazy">
@@ -67,6 +88,67 @@ permalink: /writings/
 </script>
 
 <style>
+  /* ── Featured In ─────────────────────────────────────── */
+  .features-section { margin-bottom: 0.5rem; }
+  .features-grid { display: grid; gap: 1rem; }
+  .feature-card {
+    display: block;
+    text-decoration: none;
+    padding: var(--card-pad-lg);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--accent) 4%, var(--surface));
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  }
+  .feature-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.55rem;
+  }
+  .feature-publication {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .feature-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+  }
+  .feature-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.12rem;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .feature-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.52;
+  }
+  .feature-read {
+    display: inline-block;
+    margin-top: 0.65rem;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+  .writings-divider {
+    margin: 1.75rem 0 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
   .th-count {
     margin: 0 0 0.7rem;
     color: var(--muted);
