@@ -10,14 +10,17 @@ permalink: /writings/
   <p class="t-eyebrow" style="margin-bottom:0.75rem">Featured In</p>
   <div class="features-grid">
     {% for feature in site.data.features %}
-    <a class="feature-card" href="{{ feature.url }}" target="_blank" rel="noreferrer">
-      <div class="feature-card-top">
-        <span class="feature-publication">{{ feature.publication }}</span>
-        <span class="feature-date">{{ feature.date }}</span>
+    <a class="feature-card{% if feature.image %} feature-card--has-img{% endif %}" href="{{ feature.url }}" target="_blank" rel="noreferrer">
+      {% if feature.image %}<img class="feature-card-img" src="{{ feature.image }}" alt="{{ feature.title }}" loading="lazy">{% endif %}
+      <div class="feature-card-body">
+        <div class="feature-card-top">
+          <span class="feature-publication">{{ feature.publication }}</span>
+          <span class="feature-date">{{ feature.date }}</span>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+        <span class="feature-read">Read on {{ feature.publication }} →</span>
       </div>
-      <h3>{{ feature.title }}</h3>
-      <p>{{ feature.description }}</p>
-      <span class="feature-read">Read on {{ feature.publication }} →</span>
     </a>
     {% endfor %}
   </div>
@@ -100,7 +103,17 @@ permalink: /writings/
     background: color-mix(in srgb, var(--accent) 4%, var(--surface));
     box-shadow: var(--shadow);
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
   }
+  .feature-card--has-img { padding-top: 0; }
+  .feature-card-img {
+    display: block;
+    width: calc(100% + 2 * var(--card-pad-lg));
+    margin: 0 calc(-1 * var(--card-pad-lg)) var(--card-pad-lg);
+    height: 220px;
+    object-fit: cover;
+  }
+  .feature-card-body { display: flex; flex-direction: column; }
   .feature-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
