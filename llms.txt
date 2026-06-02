@@ -10,7 +10,7 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - [About](https://vickyfeliren.com/about/): Bio, research focus, expertise, work history, and awards
 - [Research](https://vickyfeliren.com/research/): Publications — IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
 - [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across geospatial AI, cultural NLP, production fintech, and hackathon projects
-- [Writings](https://vickyfeliren.com/writings/): Articles on AI, philosophy, and life — published on Medium
+- [Writings](https://vickyfeliren.com/writings/): Press features and personal articles — Tech in Asia coverage and Medium essays on AI, philosophy, and life
 - [Work With Me](https://vickyfeliren.com/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
 
 ## Use Cases (individual pages)
@@ -53,6 +53,11 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - **GG-EZ** (Under review, Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
 - **Plastic Bag Ban** (IEEE ICISS 2021, First Author): Causal policy analysis of Jakarta's plastic bag ban using citizen complaint data. https://ieeexplore.ieee.org/document/9533236/
+
+## Press Features
+
+- [SEA's AI law trap: who really pays?](https://www.techinasia.com/seas-ai-law-trap-pays) (Tech in Asia, Jun 2026): Featured contributor on who bears the real cost as Southeast Asian governments race to regulate AI.
+- [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026): Featured coverage on AI regulation across Southeast Asia — emerging rules, enforcement risks, and compliance requirements.
 
 ## Writings
 

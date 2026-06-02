@@ -37,6 +37,7 @@ feliren88.github.io/
 │   ├── experience.yml
 │   ├── publications.yml  # Each entry requires a `kind` field for filter routing
 │   ├── awards.yml
+│   ├── features.yml      # Press features / media coverage — rendered at top of /writings/ above Medium articles
 │   ├── thoughts.yml
 │   ├── contact.yml
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
