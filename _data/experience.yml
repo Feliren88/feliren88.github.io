@@ -86,6 +86,10 @@ talks:
     title: 'PyPalu — Python for Localized Context'
     location: 'Python community meetup · Sulawesi Tengah, Indonesia'
 
+  - dates: 'OCT 2024'
+    title: 'Bank of Indonesia — Data Synthesis, Privacy & Responsible Data Management'
+    location: 'Invited talk · Bank of Indonesia'
+
   - dates: 'Q3 2026 OPEN'
     title: 'Available for conference talks, podcasts, and panel invitations'
     location: 'Topics: trustworthy AI, conformal prediction, AI for Southeast Asia'
