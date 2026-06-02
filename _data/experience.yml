@@ -76,7 +76,7 @@ teaching:
     location: 'ML Instructor & Capstone Advisor'
     description: "Taught ML fundamentals and supervised capstone projects for Bangkit Academy — a program training Indonesia's next generation of applied AI engineers. Took projects from early-stage ideas to deployed Cloud Run endpoints; the kind of mentorship where you see someone go from confused to shipping."
 
-  - dates: 'NOV 2023'
+  - dates: 'NOV 2024'
     title: 'Bina Nusantara University'
     location: 'Guest Lecturer, Computer Vision'
     description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation — designed for final-year students seeing these ideas applied to real problems for the first time.'
