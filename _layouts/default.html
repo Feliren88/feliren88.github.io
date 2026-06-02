@@ -42,6 +42,44 @@
         "name": "Monash University",
         "sameAs": "https://www.monash.edu"
       },
+      "affiliation": [
+        { "@type": "CollegeOrUniversity", "name": "Monash University", "sameAs": "https://www.monash.edu" },
+        { "@type": "Organization", "name": "SEACrowd", "url": "https://seacrowd.github.io/" },
+        { "@type": "Organization", "name": "Association for Computational Linguistics", "sameAs": "https://www.aclweb.org/" },
+        { "@type": "Organization", "name": "IEEE", "sameAs": "https://www.ieee.org/" }
+      ],
+      "nationality": { "@type": "Country", "name": "Indonesia" },
+      "homeLocation": {
+        "@type": "Place",
+        "address": { "@type": "PostalAddress", "addressCountry": "AU", "addressLocality": "Melbourne" }
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Master of Data Science",
+          "educationalLevel": "Master's degree",
+          "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Monash University", "sameAs": "https://www.monash.edu" }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Bachelor of Computer Science",
+          "educationalLevel": "Bachelor's degree",
+          "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Monash University", "sameAs": "https://www.monash.edu" }
+        }
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Applied Scientist",
+        "description": "Applied research on trustworthy multimodal AI and vision-language models",
+        "skills": "Conformal Prediction, Vision-Language Models, Multimodal AI, Geospatial AI, Uncertainty Quantification",
+        "occupationLocation": { "@type": "Country", "name": "Australia" }
+      },
+      "seeks": {
+        "@type": "Demand",
+        "name": "Applied Scientist and Research Scientist roles, AI research collaboration, speaking engagements, and consulting on trustworthy AI"
+      },
       "url": "https://vickyfeliren.com",
       "image": "https://vickyfeliren.com/assets/img/profile.webp",
       "email": "vickyfeliren@gmail.com",
@@ -74,11 +112,9 @@
         "Cal Hacks 8.0, UC Berkeley — Best Community Track (2020)"
       ],
       "memberOf": [
-        {
-          "@type": "Organization",
-          "name": "SEACrowd",
-          "url": "https://seacrowd.github.io/"
-        }
+        { "@type": "Organization", "name": "SEACrowd", "url": "https://seacrowd.github.io/" },
+        { "@type": "Organization", "name": "Association for Computational Linguistics", "sameAs": "https://www.aclweb.org/" },
+        { "@type": "Organization", "name": "IEEE", "sameAs": "https://www.ieee.org/" }
       ],
       "author": [
         {% for pub in site.data.publications %}
@@ -123,6 +159,31 @@
           "datePublished": "2026-06-01"
         }
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://vickyfeliren.com/#website",
+      "url": "https://vickyfeliren.com",
+      "name": "Vicky Feliren",
+      "description": "Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models — published in IEEE, ACL, and Remote Sensing of Environment.",
+      "inLanguage": "en",
+      "author": { "@id": "https://vickyfeliren.com/" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "@id": "https://vickyfeliren.com/#profilepage",
+      "url": "https://vickyfeliren.com",
+      "name": "Vicky Feliren — Applied Scientist",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://vickyfeliren.com/#website" },
+      "about": { "@id": "https://vickyfeliren.com/" },
+      "mainEntity": { "@id": "https://vickyfeliren.com/" }
     }
     </script>
   </head>

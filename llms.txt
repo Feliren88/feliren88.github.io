@@ -59,11 +59,43 @@ Vicky Feliren is an Applied Scientist, AI Engineer / Researcher, and Data Scient
 - [SEA's AI law trap: who really pays?](https://www.techinasia.com/seas-ai-law-trap-pays) (Tech in Asia, Jun 2026): Featured contributor on who bears the real cost as Southeast Asian governments race to regulate AI.
 - [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026): Featured coverage on AI regulation across Southeast Asia — emerging rules, enforcement risks, and compliance requirements.
 
+## Talks & Public Speaking
+
+- PyPalu, Sulawesi Tengah, Indonesia (May 2026): Python for localized context — Python community meetup.
+- Bank of Indonesia (Oct 2024): Invited talk on data synthesis, data privacy, and responsible data management.
+- Bina Nusantara University (Nov 2023): Guest lecture on computer vision — from CNNs to Transformers through semantic segmentation.
+- Available Q3 2026 for conference talks, podcasts, and panels on trustworthy AI, conformal prediction, and AI for Southeast Asia.
+
+## Awards & Recognition
+
+- Microsoft Azure Virtual Hackathon APAC — Regional Champion (2020): APAC-wide, Microsoft-featured.
+- CamvsCovid, University of Cambridge — Top 3 Globally (2020): Built TeleHealthMonitor for COVID-19 remote patient monitoring.
+- Cal Hacks 8.0, UC Berkeley — Best Community Track (2020): Built community IVR voice AI for offline Indonesian communities.
+- Reboot the Earth, UN Technology Innovation Labs — Top 10 (2019): Global climate and sustainability solutions challenge.
+- IISF 2024 — Most Visionary Research: AI and remote sensing for biodiversity impact from energy transition mining.
+- Monash Indonesia Inaugural Welcome Scholarship (2024): Awarded for research potential in regional AI.
+- Deep Learning Nanodegree, Facebook & Udacity — Scholarship (2018).
+- Jeffrey Cheah Entrance Scholarship, Sunway Education Group (2015).
+- Monash Hackathon — Top 3 (2019).
+- Monash University Coding Competition — Honorable Mention (2018).
+
+## Education
+
+- Monash University — Master of Data Science (Expected Sept 2026, GPA 4.0/4.0). Thesis: conformal prediction for vision-language navigation.
+- BlueDot Impact — Technical AI Safety (Jun 2026): Cohort intensive covering alignment, interpretability, red-teaming, AI control.
+- Monash University — Bachelor of Computer Science (Dec 2019).
+- Nanyang Technological University — Computer Science Exchange Programme, Singapore (Jun–Dec 2018).
+- Udacity — Deep Learning Nanodegree (2019, Facebook AI scholarship recipient).
+- Monash CURIE Compass — Mentee, Centre for Undergraduate Research Initiatives and Excellence (Mar–Dec 2019).
+
 ## Writings
 
-- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4) (Jan 2026, Engineering): Why production ML needs conformal prediction — honest uncertainty quantification with mathematical coverage guarantees.
-- [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db) (May 2026, Research): On ethnocentrism as invisible cultural default and building global teams that hold multiple maps at once.
+- [The cost of becoming](https://medium.com/illumination/the-cost-of-becoming-78f7cd818fda) (May 2026, Personal): A poem for people tired of waiting for themselves.
+- [Four hours, one vendor, one airline](https://medium.com/illumination/four-hours-one-vendor-one-airline-1c0044b938c4) (May 2026, Engineering): What a four-hour American Airlines outage reveals about vendor dependency in modern infrastructure.
+- [If everyone forgets, why be good](https://medium.com/write-a-catalyst/if-everyone-forgets-why-be-good-0858bdac1bc2) (May 2026, Personal): On moral action when no one remembers — Mother Teresa, Aristotle, and what we owe the universe.
 - [Quality and Reliability for AI Engineers](https://medium.com/data-science-collective/quality-and-reliability-for-ai-engineers-b2f92f6406f8) (May 2026, Engineering): Practical guide to evaluation frameworks, failure modes, and engineering practices for trustworthy production AI.
+- [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db) (May 2026, Research): On ethnocentrism as invisible cultural default and building global teams that hold multiple maps at once.
+- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4) (Jan 2026, Engineering): Why production ML needs conformal prediction — honest uncertainty quantification with mathematical coverage guarantees.
 - [The art of letting go while still caring](https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063) (Jan 2026, Personal): Personal reflection on control and release.
 - [Meditation. 7 days. No phone. Noble silence.](https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3) (Dec 2025, Personal): A data scientist's experience at Taman Brahma Bali Usada.
 - [My initial exploration on Trustworthy AI](https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956) (Nov 2025, Research): Bridging information theory and responsible ML.
