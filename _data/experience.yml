@@ -82,6 +82,10 @@ teaching:
     description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation — designed for final-year students seeing these ideas applied to real problems for the first time.'
 
 talks:
+  - dates: 'MAY 2026'
+    title: 'PyPalu — Python for Localized Context'
+    location: 'Python community meetup · Sulawesi Tengah, Indonesia'
+
   - dates: 'Q3 2026 OPEN'
     title: 'Available for conference talks, podcasts, and panel invitations'
     location: 'Topics: trustworthy AI, conformal prediction, AI for Southeast Asia'
