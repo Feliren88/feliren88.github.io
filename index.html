@@ -197,7 +197,20 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
     <h2>Insights</h2>
     <a href="/writings/" class="insights-view-all">View all writings →</a>
   </div>
-  <p class="section-note">Thoughts on AI, research, and beyond — published on Medium.</p>
+  <p class="section-note">Thoughts on AI, research, and beyond.</p>
+  {% assign feature = site.data.features | first %}
+  {% if feature %}
+  {% assign feat_src = feature.sources | where: "publication", "The Business Times" | first | default: feature.sources.first %}
+  <a class="insight-feature reveal" href="{{ feat_src.url }}" target="_blank" rel="noreferrer">
+    {% if feature.image %}<img class="insight-feature-img" src="{{ feature.image }}" alt="" loading="lazy" width="640" height="360">{% endif %}
+    <div class="insight-feature-body">
+      <span class="insight-feature-badge">Featured in {{ feat_src.publication }}</span>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+      <span class="insight-read">Read in {{ feat_src.publication }} →</span>
+    </div>
+  </a>
+  {% endif %}
   <div class="insights-grid reveal-group">
     {% for thought in site.data.thoughts limit:3 %}
     <a class="insight-card reveal{% if thought.image %} insight-card--has-img{% endif %}" href="{{ thought.url }}" target="_blank" rel="noreferrer">
