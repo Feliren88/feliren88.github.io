@@ -57,7 +57,8 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Press Features
 
 - [SEA's AI law trap: who really pays?](https://www.techinasia.com/seas-ai-law-trap-pays) (Tech in Asia, Jun 2026): Featured contributor on who bears the real cost as Southeast Asian governments race to regulate AI.
-- [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026): Featured coverage on AI regulation across Southeast Asia — emerging rules, enforcement risks, and compliance requirements.
+- [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026, paywalled): Featured coverage on AI regulation across Southeast Asia — emerging rules, enforcement risks, and compliance requirements.
+- [AI rules in South-East Asia: Risks, fines, and everything else you need to know](https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know) (Business Times, Jun 2026): Same story, open access — AI regulation landscape across Southeast Asia, enforcement risks, and compliance requirements.
 
 ## Talks & Public Speaking
 

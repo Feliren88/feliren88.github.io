@@ -10,18 +10,32 @@ permalink: /writings/
   <p class="t-eyebrow" style="margin-bottom:0.75rem">Featured In</p>
   <div class="features-grid">
     {% for feature in site.data.features %}
-    <a class="feature-card{% if feature.image %} feature-card--has-img{% endif %}" href="{{ feature.url }}" target="_blank" rel="noreferrer">
+    <div class="feature-card{% if feature.image %} feature-card--has-img{% endif %}">
       {% if feature.image %}<img class="feature-card-img" src="{{ feature.image }}" alt="{{ feature.title }}" loading="lazy">{% endif %}
       <div class="feature-card-body">
         <div class="feature-card-top">
+          {% if feature.sources %}
+          <span class="feature-publication">{% for source in feature.sources %}{{ source.publication }}{% unless forloop.last %} · {% endunless %}{% endfor %}</span>
+          {% else %}
           <span class="feature-publication">{{ feature.publication }}</span>
+          {% endif %}
           <span class="feature-date">{{ feature.date }}</span>
         </div>
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.description }}</p>
-        <span class="feature-read">Read on {{ feature.publication }} →</span>
+        {% if feature.sources %}
+        <div class="feature-source-buttons">
+          {% for source in feature.sources %}
+          <a class="feature-source-btn{% if source.paywalled %} feature-source-btn--paywalled{% endif %}" href="{{ source.url }}" target="_blank" rel="noreferrer">
+            Read on {{ source.publication }}{% if source.paywalled %}&thinsp;<span class="paywall-badge">Paywalled</span>{% endif %} →
+          </a>
+          {% endfor %}
+        </div>
+        {% else %}
+        <a class="feature-read" href="{{ feature.url }}" target="_blank" rel="noreferrer">Read on {{ feature.publication }} →</a>
+        {% endif %}
       </div>
-    </a>
+    </div>
     {% endfor %}
   </div>
 </div>
@@ -156,6 +170,42 @@ permalink: /writings/
     color: var(--accent);
     font-size: 0.76rem;
     font-weight: 700;
+  }
+  .feature-source-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+  }
+  .feature-source-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border-ui);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .feature-source-btn:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+  .feature-source-btn--paywalled {
+    opacity: 0.75;
+  }
+  .paywall-badge {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--muted) 18%, transparent);
+    color: var(--muted);
   }
   .writings-divider {
     margin: 1.75rem 0 1.5rem;
