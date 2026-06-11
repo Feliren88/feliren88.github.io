@@ -39,13 +39,13 @@ permalink: /research/
 </script>
 
 <p class="eyebrow">
-  <a href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer" style="text-decoration:none;color:inherit">
-    <img src="/assets/img/google-scholar-svgrepo-com.webp" alt="Google Scholar" style="width:18px;height:18px;vertical-align:middle;margin-right:0.4rem" loading="lazy">
+  <a class="eyebrow-link" href="https://scholar.google.com/citations?user=R2LVQ7AAAAAJ&hl=en" target="_blank" rel="noreferrer">
+    <img src="/assets/img/google-scholar-svgrepo-com.webp" alt="Google Scholar" width="18" height="18" loading="lazy">
     RESEARCH ARCHIVE
   </a>
-  <span style="margin:0 0.5rem;opacity:0.4">·</span>
-  <a id="cy-effective-orcid-url" href="https://orcid.org/0000-0003-3306-8426" target="orcid.widget" rel="me noopener noreferrer" style="text-decoration:none;color:inherit;vertical-align:top">
-    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;vertical-align:middle;margin-right:0.3rem" alt="ORCID iD icon" loading="lazy">ORCID
+  <span class="eyebrow-sep">·</span>
+  <a id="cy-effective-orcid-url" class="eyebrow-link eyebrow-link--orcid" href="https://orcid.org/0000-0003-3306-8426" target="orcid.widget" rel="me noopener noreferrer">
+    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon" width="16" height="16" loading="lazy">ORCID
   </a>
 </p>
 <p class="section-note">Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.</p>

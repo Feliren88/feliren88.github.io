@@ -2082,4 +2082,75 @@ Replace `feliren` with the actual Buttondown username.
 - [x] **Footer banner** — brand + description + social left / nav right two-column layout
 - [x] Footer copyright simplified (removed "Monash University, Melbourne")
 - [x] "Quality and Reliability for AI Engineers" article added to `_data/thoughts.yml`
+
+---
+
+## RFC-013: Site-Wide Visual Refinement Audit
+
+**Status:** DELIVERED — 2026-06-11 (code complete; browser visual QA in both themes still pending — no Ruby/browser on the implementation host)
+**Author:** Claude (visual review of all pages + `css/styles.css` v28)
+**Date:** 2026-06-11
+**Scope:** Whole-site visual quality — hierarchy, color, consistency, and polish. Complements RFC-001 (performance), RFC-003 (About content), RFC-005 (card images). Items here are visual/CSS only; no content rewrites.
+
+---
+
+### Diagnosis — the three big patterns
+
+1. **No focal point: everything is a card.** Hero, timeline items, skill cards, project cards, contact cards, award cards, and service items all share the identical treatment — `1px var(--line)` border, ~1rem radius, `var(--surface)` glass background, the same `--shadow` (`styles.css:255–267`). When every element is elevated, nothing is. The eye has nowhere to land first.
+
+2. **Flat typographic hierarchy.** Section `h2` headings render at 1.1rem in the accent color — *smaller than the card `h3` titles inside them* (1.12rem). Meanwhile ~20 distinct font sizes exist between 0.65rem and 1.35rem, many ad hoc (0.66, 0.67, 0.68, 0.72, 0.73, 0.74, 0.75, 0.76, 0.78…). The site reads as one continuous texture of small text rather than scannable sections.
+
+3. **Monochrome flatness.** The entire palette is one desaturated steel-blue hue. `--accent` (#7792af) is barely distinguishable from `--muted` (#8b9db5), so links, headings, tags, and CTAs all carry the same visual weight. The primary CTA button is a translucent tint of the same hue — it does not pop. (This is the same "quiet field needs a decisive peak" insight RFC-004 already applies to the timeline — the rest of the site never got the peak.)
+
+---
+
+### P0 — Quick wins (≤ 1 hour each)
+
+- [x] **Add a brand wordmark to the topbar.** The `.brand` style exists in `styles.css:206` but no element uses it — `default.html`'s topbar is `justify-content: flex-end`, leaving the top-left corner empty on every page. Add `<a class="brand" href="/">Vicky Feliren</a>` (or a "VF" monogram) and switch the topbar to `space-between`. Free brand recognition on every page view, zero new CSS.
+- [x] **Make section headings anchor the page.** Bump `.about-section h2`, `.t-section-title`, `.insights-hd h2` from 1.1rem to ~1.5–1.75rem and switch from accent color to `var(--text)` (keep the eyebrow pattern for the accent pop). A recruiter scanning the homepage should be able to find Track Record / Recognition / Insights from headline size alone.
+- [x] **Give the primary CTA a real accent.** Pick one slightly warmer/brighter accent (even just a higher-chroma step of the existing blue, e.g. #8fb4e3 dark / #2563a8 light) used *only* for `.btn-primary` and the availability dot. Everything else stays in the quiet steel family. One decisive color, used once per viewport.
+- [x] **Remove hover-lift from non-interactive elements.** `.timeline li:hover` lifts and glows (`styles.css:492–496`) but timeline items aren't links — false affordance. Reserve `translateY` hovers for clickable cards only.
+- [x] **Delete the duplicated/broken CSS block.** `styles.css:145–162` repeats `*`, `html`, and `body` rules already defined at 99–143; the *first* `body` background also has a typo (`at -8%28%`, line 140) that invalidates its whole `background` declaration — it only works because the duplicate re-declares it. Keep one clean copy.
+- [x] **Fix CLS on homepage insight cards.** `.insight-card-img` in `index.html` has no `width`/`height` attributes (RFC-005 specifies them for `.card-cover` but the insights grid uses its own class). Add `width="640" height="360"` + keep `loading="lazy"`.
+
+### P1 — Consistency pass (half a day total)
+
+- [x] **Tokenize the radius and type scales.** Border radii currently include 1rem, 0.85rem, 10px, 8px, 0.65rem, 0.5rem, 0.45rem, 0.35rem, 0.3rem. Define 3 tokens (`--radius-lg: 12px`, `--radius-md: 8px`, `--radius-sm: 4px`) and a 6-step type scale (e.g. 0.75 / 0.85 / 1 / 1.2 / 1.5 / clamp-display), then sweep. Mechanical change, large coherence payoff.
+- [x] **Light-mode QA sweep for hardcoded dark colors.** Several rules bypass the theme variables and assume dark mode: `.loc` (#7e95b1), `.skill-card li` (`rgba(17,31,46,0.7)` bg + #9bb0c8), `.lab-foot span`, `.btn-secondary` (`rgba(18,31,47,0.62)`), `.shape-btn` (`rgba(16,26,39,0.74)`), `.card-toggle` (`rgba(18,30,46,0.68)`), and the heavy `rgba(0,0,0,0.28)` hover shadows. In light mode these render as muddy dark chips. Replace with vars or add `html[data-theme="light"]` overrides; verify every interactive state in both themes.
+- [x] **Demote one layer of card chrome.** Pick a hierarchy: (a) hero = the only glass-surface box, (b) project/use-case/insight cards = border + surface, no shadow until hover, (c) timeline/award/service entries = borderless list rows with a hairline divider (the award-pills on the homepage already do this well — extend that pattern). This single change fixes the "everything is a card" monotony.
+- [x] **Consolidate page-level `<style>` blocks into `styles.css`.** `index.html` (~130 lines), `contact.md`, and `usecases.md` each carry their own style block, plus scattered inline `style=""` attributes (hero leads, contact intro, column titles). Move them into the stylesheet under page-scoped comments. Improves caching, kills drift (the insight-card and card-cover image styles have already diverged), and makes the token sweep above possible.
+- [x] **Vary the section rhythm on the homepage.** Every section uses the identical `margin-top: 2.5rem; border-top: 1px var(--line)` divider, producing a uniform "ruled notebook" cadence. Give the two conversion sections distinct treatment: Insights keeps the rule; Let's Collaborate gets more breathing room (e.g. `padding: 4rem 0`) and a soft radial wash behind it so the final CTA feels like a destination, not another row.
+- [x] **Calm the hero box.** The hero card currently stacks: photo + social row + eyebrow + h1 + pronouns + two leads + buttons + "Right now" pills + the point-cloud shape picker. Two cuts: (1) move the shape picker out of the hero — a small ✦ icon button beside the theme toggle that pops the four options keeps the easter egg without spending hero real estate; (2) replace the inline `style="font-size:1.32rem…"` lead with a `.lead--xl` class using `clamp(1.05rem, 2vw, 1.3rem)` so it scales on mobile. Also consider `clamp(150px, 22vw, 225px)` for the profile photo so it doesn't dominate small screens.
+
+### P2 — Larger polish (1–2 days)
+
+- [x] **Background layer audit.** Four ambient layers compete on every page: grid texture + animated point cloud + two radial gradients + per-card `backdrop-filter` blur. Test removing the grid (`opacity 0.17` over a point cloud at `0.22` is mostly noise) and keeping point cloud + one gradient. Fewer layers = calmer field = the new accent reads stronger. (Pairs with the RFC-001 WebGL work — fewer layers is also cheaper.)
+- [x] **Compress oversized assets.** `assets/img/tech-in-asia-ai-rules.webp` is 733 KB and `profile_3_bg.webp` is 220 KB — both far above the ≤80 KB card-image budget set in RFC-005. Resize/re-encode; verify `profile_3_bg.webp` and `profile_2_bg.webp` are even referenced anywhere before keeping them.
+- [x] **Unify the three card-image implementations.** `.card-cover` (RFC-005), `.insight-card-img` (homepage), and the use-case cards (no image slot yet) should share one cover-image component: same aspect ratio (16:9), same edge-bleed margin trick, same dimensions/lazy attributes. One class, three pages.
+- [x] **Differentiate the Research page venue line.** `.venue` is italic accent at 0.78rem — visually identical weight to the tag and the author line, so the most credibility-bearing fact on the card (IEEE / ACL / RSE) disappears. Render venue as a small bordered badge (the `.note-badge` style already exists) so it reads at a glance; pairs with the RFC-010 citation badges.
+- [x] **Empty-state and density check on Use Cases.** 19 cards in a 320px-min grid with up to ~10 tech tags each is the densest page on the site. Cap visible tech tags at ~5 with a "+N" overflow chip, and consider featuring the top 3 cases (wider cards, RFC-005 cover images) above the uniform grid.
+
+---
+
+### Delivery notes (2026-06-11)
+
+- **Tokens added** to `:root`: `--cta`/`--cta-text` (dark `#8fb4e3`, light `#2563a8`), `--shadow-hover`, `--radius-lg/md/sm` (12/8/4px), and a 7-step type scale (`--fs-2xs` 0.7rem → `--fs-heading` clamp). All sub-1rem font sizes and all non-pill border radii in `styles.css` now use tokens.
+- **Hero CTAs:** first button (Research) renders `btn-primary`, the rest `btn-secondary` — consistent with RFC-006 P1 ("View Research as the only primary"). If RFC-008 M1 later decides Use Cases should be primary, reorder `_data/index.yml buttons:`.
+- **Shape picker** moved to a ✦ popover in the topbar (next to the theme toggle); `main.js` binds `.shape-btn` by class so no JS changes were needed beyond a small open/close script in `default.html`. Hidden on coarse pointers and ≤760px, matching the point-cloud visibility rules.
+- **Timeline/award/service rows:** timeline entries are now borderless rows with hairline dividers; remaining cards keep border+surface and earn shadow on hover; the hero is the only resting-shadow surface.
+- **Grid background layer removed** (`.grid-bg` div + CSS). Revert = restore the div in `default.html` and the 10-line rule (see git history) if the field feels too flat.
+- **Assets:** `tech-in-asia-ai-rules.webp` 732 KB → 45 KB (was losslessly encoded; re-encoded lossy q80, same 1024×576). `profile_3_bg.webp` stays 220 KB — RGBA transparency is already at its compression floor; it is also unreferenced by any template (only docs), so consider deleting instead.
+- **Use Cases density:** tech tags capped at 5 with a "+N" dashed chip. The "feature top 3 cases" idea is deferred — it needs the RFC-005 cover images first.
+- **`about.md` not touched:** it has `redirect_to: /` so its duplicate style block is dead code; clean up when deleting the page.
+- **CSS version bumped** v28 → v29 in `default.html` and `sw.js` PRECACHE.
+- Remaining unchecked items below need a real browser (screenshots, Lighthouse, CLS) — run after the next deploy.
+
+---
+
+### Verification (after each batch)
+
+- [ ] Screenshot homepage, Research, Use Cases, Writings, Contact in **both themes** at 1440px / 768px / 375px and compare against current
+- [ ] Lighthouse Accessibility stays 100 (heading sizes/colors must keep ≥ 4.5:1 contrast)
+- [ ] No CLS regression from image/typography changes (target < 0.1)
+- [x] `grep -n "style=" _pages/*.md index.html` returns no presentational inline styles after the consolidation pass
 - [x] README.md updated with Lighthouse scores and May 2026 changelog

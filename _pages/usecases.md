@@ -37,8 +37,12 @@ permalink: /usecases/
     {% if uc.hook %}<p class="uc-situation">{{ uc.hook }}</p>{% endif %}
 
     {% if uc.tech_stack %}
+    {% assign tech_total = 0 %}
+    {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% assign pair_size = pair[1] | size %}{% assign tech_total = tech_total | plus: pair_size %}{% endunless %}{% endfor %}
+    {% assign tech_shown = 0 %}
     <div class="uc-tech-strip">
-      {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% for item in pair[1] %}<span class="uc-tech-tag">{{ item }}</span>{% endfor %}{% endunless %}{% endfor %}
+      {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% for item in pair[1] %}{% if tech_shown < 5 %}<span class="uc-tech-tag">{{ item }}</span>{% assign tech_shown = tech_shown | plus: 1 %}{% endif %}{% endfor %}{% endunless %}{% endfor %}
+      {% if tech_total > 5 %}<span class="uc-tech-tag uc-tech-tag--more" title="{{ tech_total }} technologies total">+{{ tech_total | minus: 5 }}</span>{% endif %}
     </div>
     {% endif %}
 
@@ -48,107 +52,6 @@ permalink: /usecases/
   {% endfor %}
 </div>
 
-<style>
-  .page-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; margin: 0.2rem 0 0.5rem; line-height: 1.1; }
-  .page-subtitle { font-size: 1.05rem; color: var(--muted); margin-bottom: 2rem; }
-
-  /* ── Grid ───────────────────────────────────────────── */
-  .uc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.25rem;
-    align-items: start;
-  }
-
-  /* ── Card ───────────────────────────────────────────── */
-  .uc-card {
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.2s;
-  }
-  .uc-card:hover { border-color: var(--border-ui); }
-  .uc-card[hidden] { display: none; }
-
-  /* ── Card header: tags + external link ──────────────── */
-  .uc-card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
-  }
-  .uc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .uc-tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.15rem 0.45rem;
-    border-radius: 3px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent);
-  }
-  .uc-ext-link {
-    flex-shrink: 0;
-    font-size: 1rem;
-    color: var(--muted);
-    text-decoration: none;
-    line-height: 1;
-    padding: 0.2rem 0.3rem;
-    border-radius: 4px;
-    transition: color 0.15s;
-  }
-  .uc-ext-link:hover { color: var(--accent); }
-
-  /* ── Title + meta ───────────────────────────────────── */
-  .uc-title { font-size: 1rem; font-weight: 600; margin: 0 0 0.3rem; line-height: 1.35; }
-  .uc-title-link { color: var(--text); text-decoration: none; transition: color 0.15s; }
-  .uc-title-link:hover { color: var(--accent); }
-  .uc-meta { margin: 0 0 1rem; font-size: 0.78rem; line-height: 1.4; }
-  .uc-venue-name { color: var(--accent); font-weight: 500; }
-  .uc-role { color: var(--muted); }
-
-  /* ── Hook — short card teaser ───────────────────────── */
-  .uc-situation {
-    margin: 0 0 1rem;
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.68;
-    flex: 1;
-  }
-
-  /* ── Tech strip ─────────────────────────────────────── */
-  .uc-tech-strip { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.65rem 0 0; }
-  .uc-tech-tag {
-    font-size: 0.67rem;
-    padding: 0.1rem 0.38rem;
-    border-radius: 3px;
-    background: color-mix(in srgb, var(--muted) 10%, transparent);
-    color: var(--muted);
-    border: 1px solid color-mix(in srgb, var(--muted) 15%, transparent);
-  }
-
-  /* ── CTA ─────────────────────────────────────────────── */
-  .uc-card-cta {
-    display: inline-block;
-    margin-top: auto;
-    padding-top: 0.85rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-    border-top: 1px solid var(--line);
-    transition: opacity 0.15s;
-  }
-  .uc-card-cta:hover { opacity: 0.75; }
-
-  @media (max-width: 600px) {
-    .uc-grid { grid-template-columns: 1fr; }
-    .uc-filter-bar { gap: 0.4rem; }
-  }
-</style>
 
 <script>
 (function() {

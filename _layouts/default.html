@@ -9,7 +9,7 @@
     {% if page.preload_image %}<link rel="preload" as="image" href="{{ page.preload_image | relative_url }}" type="image/webp">{% endif %}
     {% if page.url == '/project/' %}<link rel="preload" as="script" href="{{ '/js/components/timeline.js?v=2' | relative_url }}">{% endif %}
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
-    <link rel="stylesheet" href="{{ '/css/styles.css?v=28' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/styles.css?v=29' | relative_url }}">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -202,13 +202,13 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <div class="grid-bg" aria-hidden="true"></div>
     <canvas id="pointcloud-bg" aria-hidden="true"></canvas>
 
     <header class="topbar" id="site-header">
       <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
       </button>
+      <a class="brand" href="/">Vicky Feliren</a>
       <nav class="nav" aria-label="Primary" id="main-nav">
         <a href="/">About</a>
         <a href="/research/">Research</a>
@@ -216,6 +216,18 @@
         <a href="/writings/">Writings</a>
         <a href="/contact/">Work With Me</a>
       </nav>
+      <div class="shape-menu">
+        <button id="shape-toggle" class="theme-btn shape-toggle-btn" type="button" aria-label="Change background shape" aria-expanded="false" aria-haspopup="true" aria-controls="shape-popover">✦</button>
+        <div class="shape-popover" id="shape-popover" hidden>
+          <p>Background point cloud</p>
+          <div class="shape-controls" role="group" aria-label="Point cloud shape">
+            <button class="shape-btn is-active" type="button" data-shape="knot">Knot</button>
+            <button class="shape-btn" type="button" data-shape="gyroid">Gyroid</button>
+            <button class="shape-btn" type="button" data-shape="helix">Helix</button>
+            <button class="shape-btn" type="button" data-shape="sphere">Sphere</button>
+          </div>
+        </div>
+      </div>
       <button id="theme-toggle" class="theme-btn" aria-label="Switch to light mode" type="button">
         <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -272,6 +284,24 @@
       setTheme(saved || 'dark');
       btn.addEventListener('click', function() {
         setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      });
+    })();
+    </script>
+    <script>
+    (function(){
+      var toggle = document.getElementById('shape-toggle');
+      var popover = document.getElementById('shape-popover');
+      if (!toggle || !popover) return;
+      function setOpen(open) {
+        popover.hidden = !open;
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      toggle.addEventListener('click', function() { setOpen(popover.hidden); });
+      document.addEventListener('click', function(e) {
+        if (!popover.hidden && !popover.contains(e.target) && e.target !== toggle) setOpen(false);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !popover.hidden) { setOpen(false); toggle.focus(); }
       });
     })();
     </script>

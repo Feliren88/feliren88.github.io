@@ -23,12 +23,12 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
       <p class="eyebrow">{{ site.data.index.eyebrow }}</p>
       <h1>{{ site.data.index.name }}</h1>
       <p class="hero-pronouns">he/him</p>
-      <p class="lead" style="font-size:1.32rem;line-height:1.5;max-width:42rem">{{ site.data.index.lead1 }}</p>
-      <p class="lead" style="font-size:1.08rem;margin-top:1.2rem;color:var(--muted)">{{ site.data.index.lead2 }}</p>
+      <p class="lead lead--xl">{{ site.data.index.lead1 }}</p>
+      <p class="lead lead--sub">{{ site.data.index.lead2 }}</p>
 
       <div class="hero-actions">
         {% for button in site.data.index.buttons %}
-        <a class="btn btn-primary" href="{{ button.href | relative_url }}">{{ button.label }}</a>
+        <a class="btn {% if forloop.first %}btn-primary{% else %}btn-secondary{% endif %}" href="{{ button.href | relative_url }}">{{ button.label }}</a>
         {% endfor %}
       </div>
 
@@ -39,16 +39,6 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
-      </div>
-
-      <div class="bg-controls">
-        <p>Background Point Cloud</p>
-        <div class="shape-controls" role="group" aria-label="Point cloud shape">
-          <button class="shape-btn is-active" type="button" data-shape="knot">Knot</button>
-          <button class="shape-btn" type="button" data-shape="gyroid">Gyroid</button>
-          <button class="shape-btn" type="button" data-shape="helix">Helix</button>
-          <button class="shape-btn" type="button" data-shape="sphere">Sphere</button>
-        </div>
       </div>
     </div>
   </div>
@@ -95,7 +85,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         <h2>{{ section.title }}</h2>
 
         {% if section.content %}
-        <p style="line-height:1.7;max-width:44rem">{{ section.content }}</p>
+        <p class="section-prose">{{ section.content }}</p>
         {% endif %}
 
         {% if section.cards %}
@@ -126,7 +116,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
             </li>
             {% endfor %}
           </ol>
-          <p class="column-title" style="margin-top:1.2rem">PATENT</p>
+          <p class="column-title mt-md">PATENT</p>
           <ol id="patents-list" class="timeline short">
             {% for item in site.data.experience.patents %}
             <li>
@@ -137,7 +127,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
             {% endfor %}
           </ol>
           {% if site.data.experience.talks %}
-          <p class="column-title" style="margin-top:1.2rem">TALKS</p>
+          <p class="column-title mt-md">TALKS</p>
           <ol id="talks-list" class="timeline short">
             {% for item in site.data.experience.talks %}
             <li>
@@ -160,7 +150,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
             </li>
             {% endfor %}
           </ol>
-          <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
+          <p class="column-title mt-md">TEACHING</p>
           <ol id="teaching-list" class="timeline short">
             {% for item in site.data.experience.teaching %}
             <li>
@@ -191,7 +181,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
         {% endif %}
         {% endfor %}
       </ul>
-      <p class="column-title" style="margin-top:2rem">PROFESSIONAL SERVICE</p>
+      <p class="column-title mt-lg">PROFESSIONAL SERVICE</p>
       <ul class="award-pills">
         {% for item in site.data.awards.service %}
         <li><strong>{{ item.role }}</strong> — {{ item.description }}</li>
@@ -211,7 +201,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   <div class="insights-grid reveal-group">
     {% for thought in site.data.thoughts limit:3 %}
     <a class="insight-card reveal{% if thought.image %} insight-card--has-img{% endif %}" href="{{ thought.url }}" target="_blank" rel="noreferrer">
-      {% if thought.image %}<img class="insight-card-img" src="{{ thought.image }}" alt="" loading="lazy">{% endif %}
+      {% if thought.image %}<img class="card-cover" src="{{ thought.image }}" alt="" loading="lazy" width="640" height="360">{% endif %}
       <div class="insight-card-body">
         <h3>{{ thought.title }}</h3>
         <p>{{ thought.description }}</p>
@@ -234,134 +224,3 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
   <a href="/contact/" class="btn btn-primary collab-cta">Work With Me →</a>
 </section>
 
-<style>
-  .hero-social-links { display: flex; justify-content: center; gap: 0.65rem; margin-top: 0.85rem; }
-  .hero-social-link {
-    display: flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid var(--line); background: var(--surface);
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .hero-social-link:hover { border-color: var(--border-ui); transform: translateY(-2px); }
-  .hero-social-link img { width: 20px; height: 20px; }
-
-  .hero-pronouns { font-size: 0.8rem; color: var(--muted); margin: 0.1rem 0 0.85rem; letter-spacing: 0.04em; }
-
-  .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
-  .about-hero p { margin-bottom: 1.2rem; }
-  .about-hero strong { color: var(--accent); }
-  .about-hero a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-  .about-hero a:hover { color: var(--accent); }
-  .about-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-  .about-section h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
-  .now-updated { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
-  .now-list { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.95rem; line-height: 1.75; }
-  .now-list li { margin-bottom: 0.2rem; }
-  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-  .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
-  .about-card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
-  .about-card p { font-size: 0.95rem; line-height: 1.5; }
-  .award-pills { list-style: none; padding: 0; margin: 0.8rem 0 0; }
-  .award-pills li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; flex-wrap: wrap; }
-  .award-pills li:last-child { border-bottom: none; }
-  .award-pills .tag { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); flex-shrink: 0; }
-  .award-pills a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-  .award-pills a:hover { color: var(--accent); }
-
-  /* ── Insights ─────────────────────────────────────── */
-  .insights-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-  .insights-hd {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .insights-hd h2 { font-size: 1.1rem; color: var(--accent); margin: 0 0 0.25rem; }
-  .insights-view-all {
-    color: var(--accent);
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .insights-view-all:hover { text-decoration: underline; }
-  .insights-grid {
-    margin-top: 0.9rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-  }
-  .insight-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    padding: 1.1rem 1.2rem;
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(5px);
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    overflow: hidden;
-  }
-  .insight-card--has-img { padding-top: 0; }
-  .insight-card-img {
-    display: block;
-    width: calc(100% + 2.4rem);
-    margin: 0 -1.2rem 0.85rem;
-    height: 150px;
-    object-fit: cover;
-  }
-  .insight-card-body { display: flex; flex-direction: column; flex: 1; }
-  .insight-card:hover {
-    border-color: rgba(119, 146, 175, 0.48);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
-  }
-  .insight-card h3 { margin: 0; font-size: 1rem; line-height: 1.35; color: var(--text); }
-  .insight-card p { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.84rem; line-height: 1.5; flex: 1; }
-  .insight-read { display: inline-block; margin-top: 0.75rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
-
-  /* ── Let's Collaborate ────────────────────────────── */
-  .collab-section {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
-    border-top: 1px solid var(--line);
-    text-align: center;
-  }
-  .collab-heading { margin: 0.4rem 0 0; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--text); }
-  .collab-sub {
-    margin: 0.85rem auto 0;
-    max-width: 38rem;
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.65;
-  }
-  .collab-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.25rem;
-  }
-  .collab-tag {
-    padding: 0.28rem 0.72rem;
-    border: 1px solid var(--border-ui);
-    border-radius: 999px;
-    font-size: 0.79rem;
-    color: var(--muted);
-  }
-  .collab-cta { display: inline-block; margin-top: 1.5rem; }
-
-  /* ── Responsive ───────────────────────────────────── */
-  @media (max-width: 1020px) {
-    .insights-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 760px) {
-    .insights-grid { grid-template-columns: 1fr; }
-    .collab-sub { font-size: 0.88rem; }
-  }
-</style>
