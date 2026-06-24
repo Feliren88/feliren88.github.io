@@ -79,7 +79,7 @@ layout: default
     <span class="uc-section-label">Collaborators</span>
     <ul class="uc-collaborators">
       {% for collab in uc.collaborators %}
-      <li><strong>{{ collab.institution }}</strong>{% if collab.role %} — {{ collab.role }}{% endif %}</li>
+      <li><strong>{{ collab.institution }}</strong>{% if collab.role %}, {{ collab.role }}{% endif %}</li>
       {% endfor %}
     </ul>
   </div>

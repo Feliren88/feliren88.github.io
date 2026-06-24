@@ -29,18 +29,18 @@ tech_stack:
     - SHAP
 
 hero:
-  - "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong> — building systems that are reliable when it matters and culturally relevant to the places they operate in."
-  - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve: when a model claims confidence, we want provable bounds, not just a number."
+  - "I'm an applied scientist working on <strong>trustworthy multimodal AI</strong>, building systems that are reliable when it matters and culturally relevant to the places they operate in."
+  - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve. When a model claims confidence, we want that confidence backed by provable bounds."
   - "The other thread in my work is cultural inclusion. Southeast Asia is one of the world's most linguistically and visually diverse regions, and it's almost entirely absent from the training data and benchmarks that define what modern AI can and cannot do. I've been building the datasets, benchmarks, and adaptation methods to change that, with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and through my <a href='/research/'>own research</a>."
 
 sections:
   - title: 'Research Focus'
     cards:
       - title: 'Trustworthy AI'
-        description: 'Conformal prediction for vision-language models. Uncertainty quantification with statistical guarantees — not just calibration heuristics.'
+        description: 'Conformal prediction for vision-language models. Uncertainty quantification backed by statistical guarantees that hold up where calibration heuristics fall short.'
       - title: 'Cultural AI'
         description: "Vision-language benchmarks and adaptation methods for Southeast Asia. Making AI systems actually reflect the world they're deployed in."
       - title: 'Geospatial AI'
         description: 'Remote sensing and satellite imagery for flood segmentation, mining mapping, and environmental monitoring. Published in IEEE and Remote Sensing of Environment.'
       - title: 'Production ML'
-        description: 'End-to-end ML systems from research to deployment — cloud infrastructure, inference at scale, reliability engineering.'
+        description: 'End-to-end ML systems spanning the full path from research to deployment, with cloud infrastructure, inference at scale, and reliability engineering.'

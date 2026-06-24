@@ -150,7 +150,7 @@
       var g = mkEl('g', {
         'class': 'tl-node', 'id': 'tln-' + n.id,
         'role': 'button', 'tabindex': '0',
-        'aria-label': n.data.dates + ' · ' + n.data.label + ' — click for detail',
+        'aria-label': n.data.dates + ' · ' + n.data.label + ', click for detail',
       });
       g.style.cursor = 'pointer';
       // CSS sets initial opacity: 0 on .tl-node

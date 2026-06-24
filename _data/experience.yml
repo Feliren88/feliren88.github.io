@@ -2,27 +2,27 @@ work_experience:
   - dates: 'OCT 2024 – PRESENT'
     title: 'SEACrowd - Researcher, Multimodal & Vision-Language'
     location: 'Open-science research collective · seacrowd.github.io'
-    description: "Doing the work commercial labs won't: building the AI infrastructure Southeast Asia is missing — datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study."
+    description: "I do the work commercial labs won't, building the AI infrastructure Southeast Asia is missing. Datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study."
 
   - dates: 'FEB 2025 – NOV 2025'
     title: 'Artefact - Senior Data Scientist'
     location: 'French AI consulting · Founding technical member, Jakarta office'
-    description: "The challenge here was translation: taking research-grade methodology — conformal prediction, calibrated uncertainty, LLM evaluation pipelines — and turning it into something that Media Directors could act on when deciding where to move budget across APAC markets. Joined as the first technical hire in Jakarta and built the engineering baseline from scratch, including the forecasting system, RAG-based insights tooling, and the observability layer around it."
+    description: "The challenge here was translation, taking research-grade methodology (conformal prediction, calibrated uncertainty, LLM evaluation pipelines) and turning it into something that Media Directors could act on when deciding where to move budget across APAC markets. Joined as the first technical hire in Jakarta and built the engineering baseline from scratch, including the forecasting system, RAG-based insights tooling, and the observability layer around it."
 
   - dates: 'DEC 2022 – JAN 2025'
     title: 'Monash University - Research Associate'
     location: 'Global research consortium: Monash, UQ, UCL, Nottingham'
-    description: "Designed ProCANet — a progressive cross-attention architecture that fuses multispectral satellite bands for flood segmentation — and built the geospatial data pipelines to train and validate it across imagery from multiple sensors and regions. The work starts at a satellite and ends at a map that informs how governments prepare for and respond to floods. Published first-authored in IEEE GRSL; contributed to a Remote Sensing of Environment paper on mining footprint segmentation using foundation model fine-tuning."
+    description: "Designed ProCANet, a progressive cross-attention architecture that fuses multispectral satellite bands for flood segmentation, and built the geospatial data pipelines to train and validate it across imagery from multiple sensors and regions. The work starts at a satellite and ends at a map that informs how governments prepare for and respond to floods. Published first-authored in IEEE GRSL; contributed to a Remote Sensing of Environment paper on mining footprint segmentation using foundation model fine-tuning."
 
   - dates: 'JUN 2021 – JUN 2023'
     title: 'GDP Labs (GLAIR.ai) - Senior Data Scientist / ML Engineer'
     location: 'AI consulting, backed by a major Indonesian conglomerate'
-    description: "Built and maintained the ML systems that major Indonesian banks trusted for biometric authentication and credit decisions — the kind of infrastructure where reliability isn't a target, it's a baseline expectation. Worked across the full stack from model architecture to production operations, and later across fraud detection, credit scoring under regulatory audit constraints, and demand forecasting for financial clients."
+    description: "Built and maintained the ML systems that major Indonesian banks trusted for biometric authentication and credit decisions, the kind of infrastructure where reliability is the baseline expectation. Worked across the full stack from model architecture to production operations, and later across fraud detection, credit scoring under regulatory audit constraints, and demand forecasting for financial clients."
 
   - dates: 'JAN 2021 – JUN 2021'
     title: 'Jakarta Smart City - Data Scientist'
     location: "Indonesia's smart city government initiative"
-    description: "Applied probabilistic time-series forecasting to municipal waste logistics — translating messy operational signals into resource deployment decisions at the scale of a major city. Conducted causal analysis on the impact of Jakarta's plastic bag ban policy using citizen complaint data; presented findings at an IEEE-sponsored conference."
+    description: "Applied probabilistic time-series forecasting to municipal waste logistics, translating messy operational signals into resource deployment decisions at the scale of a major city. Conducted causal analysis on the impact of Jakarta's plastic bag ban policy using citizen complaint data; presented findings at an IEEE-sponsored conference."
 
 education:
   - dates: 'EXPECTED SEPT 2026'
@@ -30,7 +30,7 @@ education:
     location: 'Master of Data Science · GPA: 4.0/4.0'
 
   - dates: 'JUN 2026'
-    title: 'BlueDot Impact — Technical AI Safety'
+    title: 'BlueDot Impact, Technical AI Safety'
     location: 'Cohort intensive · alignment, interpretability, red-teaming, AI control'
     description: 'Thesis: Conformal prediction approach to vision-language navigation (VLN)'
 
@@ -47,7 +47,7 @@ education:
     location: 'Computer Science Exchange Programme · Singapore'
 
   - dates: '2019'
-    title: 'Udacity — Deep Learning Nanodegree'
+    title: 'Udacity, Deep Learning Nanodegree'
     location: 'Neural networks, CNNs, RNNs, GANs · Facebook AI scholarship recipient'
     description: 'Student Exchange at NTU Singapore'
 
@@ -59,7 +59,7 @@ patents:
 
 teaching:
   - dates: 'MAY 2026'
-    title: 'Monash University PGIE — Industry Judge'
+    title: 'Monash University PGIE, Industry Judge'
     location: 'Faculty of IT Postgraduate Industry Experience'
 
   - dates: 'MAY 2026 – JUN 2026'
@@ -74,20 +74,20 @@ teaching:
   - dates: 'JAN 2024 – JAN 2025'
     title: 'Bangkit Academy (Google, Gojek, Traveloka)'
     location: 'ML Instructor & Capstone Advisor'
-    description: "Taught ML fundamentals and supervised capstone projects for Bangkit Academy — a program training Indonesia's next generation of applied AI engineers. Took projects from early-stage ideas to deployed Cloud Run endpoints; the kind of mentorship where you see someone go from confused to shipping."
+    description: "Taught ML fundamentals and supervised capstone projects for Bangkit Academy, a program training Indonesia's next generation of applied AI engineers. Took projects from early-stage ideas to deployed Cloud Run endpoints; the kind of mentorship where you see someone go from confused to shipping."
 
   - dates: 'NOV 2024'
     title: 'Bina Nusantara University'
     location: 'Guest Lecturer, Computer Vision'
-    description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation — designed for final-year students seeing these ideas applied to real problems for the first time.'
+    description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation, designed for final-year students seeing these ideas applied to real problems for the first time.'
 
 talks:
   - dates: 'MAY 2026'
-    title: 'PyPalu — Python for Localized Context'
+    title: 'PyPalu, Python for Localized Context'
     location: 'Python community meetup · Sulawesi Tengah, Indonesia'
 
   - dates: 'OCT 2024'
-    title: 'Bank of Indonesia — Data Synthesis, Privacy & Responsible Data Management'
+    title: 'Bank of Indonesia, Data Synthesis, Privacy & Responsible Data Management'
     location: 'Invited talk · Bank of Indonesia'
 
   - dates: 'Q3 2026 OPEN'

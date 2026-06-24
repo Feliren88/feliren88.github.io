@@ -7,7 +7,7 @@ redirect_to: /about/
 ---
 
 <p class="eyebrow">TRACK RECORD</p>
-<p class="section-note">Five years spanning academic research, AI consulting, and production ML engineering — published in IEEE, ACL, and Remote Sensing of Environment, with systems deployed at scale across Southeast Asia and APAC.</p>
+<p class="section-note">Five years spanning academic research, AI consulting, and production ML engineering, published in IEEE, ACL, and Remote Sensing of Environment, with systems deployed at scale across Southeast Asia and APAC.</p>
 
 <div class="split-grid">
   <div>

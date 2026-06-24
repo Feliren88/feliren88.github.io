@@ -55,7 +55,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
 
     {% if site.data.now %}
     <div id="now-block" class="about-section now-block">
-      <h2>This Month <span class="now-updated">— updated {{ site.data.now.last_updated }}</span></h2>
+      <h2>This Month <span class="now-updated">· updated {{ site.data.now.last_updated }}</span></h2>
       <ul class="now-list">
         {% for item in site.data.now.items %}
         <li>{{ item }}</li>
@@ -184,7 +184,7 @@ description: Applied Scientist working on trustworthy multimodal AI and cultural
       <p class="column-title mt-lg">PROFESSIONAL SERVICE</p>
       <ul class="award-pills">
         {% for item in site.data.awards.service %}
-        <li><strong>{{ item.role }}</strong> — {{ item.description }}</li>
+        <li><strong>{{ item.role }}</strong>, {{ item.description }}</li>
         {% endfor %}
       </ul>
     </div>

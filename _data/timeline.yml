@@ -7,7 +7,7 @@ nodes:
     end_year: 2021.5
     track: industry
     duration_months: 6
-    impact: "Production ML at city scale — probabilistic forecasting for municipal waste logistics across a major metro."
+    impact: "Production ML at city scale, probabilistic forecasting for municipal waste logistics across a major metro."
 
   - id: gdp_labs
     label: GDP Labs
@@ -17,7 +17,7 @@ nodes:
     end_year: 2023.5
     track: industry
     duration_months: 24
-    impact: "ML systems for major Indonesian banks — biometric auth, credit scoring, fraud detection. Full-stack from model to prod."
+    impact: "ML systems for major Indonesian banks, biometric auth, credit scoring, fraud detection. Full-stack from model to prod."
 
   - id: monash_ra
     label: Monash RA
@@ -27,7 +27,7 @@ nodes:
     end_year: 2025.08
     track: research
     duration_months: 26
-    impact: "Designed ProCANet — progressive cross-attention for flood segmentation. First-authored IEEE GRSL, contributed to Remote Sensing of Environment."
+    impact: "Designed ProCANet, progressive cross-attention for flood segmentation. First-authored IEEE GRSL, contributed to Remote Sensing of Environment."
 
   - id: seacrowd
     label: SEACrowd
@@ -37,7 +37,7 @@ nodes:
     end_year: 2026.4
     track: community
     duration_months: 19
-    impact: "SEA-VL at ACL 2025. Building Southeast Asia's AI infrastructure — 50+ researchers, 5 countries, the region's first vision-language benchmark."
+    impact: "SEA-VL at ACL 2025. Building Southeast Asia's AI infrastructure, 50+ researchers, 5 countries, the region's first vision-language benchmark."
 
   - id: artefact
     label: Artefact
@@ -51,7 +51,7 @@ nodes:
 
 highlights:
   - id: iisf_2024
-    label: "IISF 2024 — Most Visionary Research"
+    label: "IISF 2024, Most Visionary Research"
     node: monash_ra
     url: "https://www.monash.edu/indonesia/news/mining-spatial-data-intelligence-research-hub-wins-most-visionary-research-at-iisf-2024"
 
@@ -85,7 +85,7 @@ beats:
     start_ms: 2800
     end_ms: 5000
     title: "The research thread ignites."
-    caption: "First publication. ProCANet — IEEE GRSL."
+    caption: "First publication. ProCANet, IEEE GRSL."
     enters: [monash_ra]
     highlight_mark: ""
 

@@ -36,7 +36,7 @@ categories:
       script variation, and code-switched multilingual web text.
 
   - id: production
-    label: Production ML -- Industry
+    label: Production ML, Industry
     color: accent
     description: >
       End-to-end ML systems shipped under real commercial, regulatory, and
@@ -49,7 +49,7 @@ categories:
     color: accent-2
     description: >
       Time-boxed applied engineering under competition constraints. Demonstrates
-      full-stack ML system design -- from data ingestion to deployment -- within
+      full-stack ML system design, from data ingestion to deployment, within
       48-hour windows, validated by international juries across Cambridge,
       Berkeley, and Microsoft APAC.
 
@@ -72,7 +72,7 @@ usecases:
       - Multi-Modal Fusion
       - Remote Sensing
       - PyTorch Lightning
-    venue: "IEEE Geoscience and Remote Sensing Letters (GRSL), 2025 -- Q1 (IF 4.4)"
+    venue: "IEEE Geoscience and Remote Sensing Letters (GRSL), 2025, Q1 (IF 4.4)"
     role: First Author
     doi: "10.1109/LGRS.2024.3495974"
     link: "https://ieeexplore.ieee.org/document/10750225"
@@ -84,14 +84,14 @@ usecases:
       - Sentinel-2
       - Sen1Floods11
 
-    hook: "Satellite flood maps for 25M people — hours instead of days, state-of-the-art IoU."
+    hook: "Satellite flood maps for 25M people, hours instead of days, state-of-the-art IoU."
 
     situation: >
       Flood extent mapping from satellite imagery is a critical upstream input for
       disaster response logistics. Manual GIS analysis introduces latency of days
       to weeks, which is operationally unacceptable within the 72-hour emergency
-      response window. The 270km Citarum River basin in West Java -- home to 25M+
-      residents -- lacked an automated, high-accuracy segmentation pipeline capable
+      response window. The 270km Citarum River basin in West Java, home to 25M+
+      residents, lacked an automated, high-accuracy segmentation pipeline capable
       of handling the spectral heterogeneity of urban, agricultural, and forested
       flood zones under partial cloud cover.
 
@@ -102,15 +102,15 @@ usecases:
       from Sentinel-2 introduces a multi-modal fusion problem: attention must be
       learned across both spectral dimensions and spatial scales simultaneously.
       Naively concatenating RGB and NIR at the encoder input does not resolve
-      cross-modal feature misalignment at skip connections -- the precise location
+      cross-modal feature misalignment at skip connections, the precise location
       where spatial detail is propagated to the decoder.
 
     resolution:
       architecture: >
         Designed ProCANet (Progressive Cross-Attention Network): a dual-encoder
         U-Net where a dedicated NIR encoder runs in parallel to the RGB encoder.
-        Progressive cross-attention modules are inserted at every skip connection
-        -- not only at the bottleneck -- enabling the decoder to attend to
+        Progressive cross-attention modules are inserted at every skip connection,
+        so fusion happens across all scales and the decoder can attend to
         modality-specific features at each resolution scale (1/2, 1/4, 1/8, 1/16).
         Self-attention within each encoder branch captures intra-modal long-range
         spatial dependencies before the cross-modal fusion step, reducing
@@ -129,7 +129,7 @@ usecases:
       baselines: >
         Benchmarked against UNet, PSPNet, LinkNet, MANet, PAN, and ConvNeXt V2
         on the same Sen1Floods11 protocol. ProCANet achieves F1 0.898 (UNet 0.884)
-        and IoU 0.815 (UNet 0.791) -- statistically meaningful gains given the
+        and IoU 0.815 (UNet 0.791), statistically meaningful gains given the
         saturating benchmark landscape.
 
     tech_stack:
@@ -172,7 +172,7 @@ usecases:
       - DEM
       - Foundation Models
       - Land Use
-    venue: "Remote Sensing of Environment, vol. 318, 2025 -- Q1 (IF 11.4)"
+    venue: "Remote Sensing of Environment, vol. 318, 2025, Q1 (IF 11.4)"
     role: Co-Author
     doi: "10.1016/j.rse.2024.114584"
     link: "https://doi.org/10.1016/j.rse.2024.114584"
@@ -189,7 +189,7 @@ usecases:
     situation: >
       Mining footprint delineation is a prerequisite for environmental compliance
       monitoring and land rehabilitation planning at national scale. Across
-      Australia -- one of the world's largest mining jurisdictions -- mapping
+      Australia, one of the world's largest mining jurisdictions, mapping
       active and historical footprints previously required months of manual GIS
       analyst time per region, making continuous monitoring economically infeasible
       for regulatory bodies.
@@ -211,21 +211,21 @@ usecases:
         streams: optical (Sentinel-2, 13 bands), SAR (Sentinel-1 VV/VH
         backscatter), and DEM (elevation + slope derivatives). Stream-specific
         encoders extract modality-aligned features before a late-fusion aggregation
-        head. Fine-tuned Prithvi -- a NASA/IBM geospatial foundation model
-        pre-trained on Sentinel-2 and Landsat -- for mining-specific
+        head. Fine-tuned Prithvi, a NASA/IBM geospatial foundation model
+        pre-trained on Sentinel-2 and Landsat, for mining-specific
         segmentation, representing the first published application of a geospatial
         FM to this task.
       data_pipeline: >
         Built ingestion and preprocessing pipelines for 500GB+ of labeled
         multispectral imagery from Google Earth Engine. Coordinated peer-reviewed
         annotation with geographers across University of Queensland, UCL, and
-        University of Nottingham -- spanning multiple ore-type and biome classes
-        -- implementing inter-annotator agreement checks to ensure label quality
+        University of Nottingham, spanning multiple ore-type and biome classes,
+        implementing inter-annotator agreement checks to ensure label quality
         at scale.
       temporal_change: >
         Addressed temporal change detection across multi-year image stacks,
         distinguishing active operations from rehabilitated or historically
-        disturbed land -- a distinction with direct legal and financial implications
+        disturbed land, a distinction with direct legal and financial implications
         under Australian mining regulation.
 
     tech_stack:
@@ -237,7 +237,7 @@ usecases:
     impact: >
       Enables automated, scalable land-use accountability for environmental
       compliance and rehabilitation planning across continental-scale mining
-      regions -- replacing months of manual GIS analysis with a satellite-speed
+      regions, replacing months of manual GIS analysis with a satellite-speed
       automated pipeline. Directly informs regulatory workflows for Australian
       state environmental agencies and international mining company ESG reporting.
 
@@ -272,10 +272,10 @@ usecases:
       - Indonesia
       - Vietnam
 
-    hook: "Catching illegal shrimp farms from orbit before regulators arrive — hours, not field-survey years."
+    hook: "Catching illegal shrimp farms from orbit before regulators arrive, hours, not field-survey years."
 
     situation: >
-      Illegal aquaculture expansion -- primarily shrimp and fish ponds -- along
+      Illegal aquaculture expansion, primarily shrimp and fish ponds, along
       Southeast Asian coastlines is a leading driver of mangrove deforestation.
       Indonesia and Vietnam have lost significant coastal mangrove cover in the
       past two decades. Regulatory monitoring relied on periodic manual surveys,
@@ -302,7 +302,7 @@ usecases:
         newly constructed ponds within user-defined monitoring windows.
       geography: >
         Pipeline validated across Indonesia (Sumatra, Kalimantan coastlines)
-        and Vietnam (Mekong Delta, Ca Mau province) -- geographies with distinct
+        and Vietnam (Mekong Delta, Ca Mau province), geographies with distinct
         spectral and tidal characteristics, testing cross-regional generalization.
       output: >
         Outputs feed a coastal land-use change analysis linking pond expansion
@@ -329,7 +329,7 @@ usecases:
   # ──────────────────────────────────────────
 
   - id: flood-urban-resilience
-    title: Flood policy evaluation -- retention pond effectiveness in South Bandung
+    title: Flood policy evaluation, retention pond effectiveness in South Bandung
     category: geospatial
     tags:
       - Flood Mitigation
@@ -337,7 +337,7 @@ usecases:
       - NDWI
       - Mixed Methods
       - Urban Resilience
-    venue: "AQUA -- Water Infrastructure, Ecosystems and Society, 2025 -- Q2"
+    venue: "AQUA, Water Infrastructure, Ecosystems and Society, 2025, Q2"
     role: Contributor
     doi: "10.2166/aqua.2025.292"
     keywords:
@@ -357,11 +357,11 @@ usecases:
       conducted prior to large-scale replication.
 
     complication: >
-      Urban flood interventions are seldom evaluated with causal rigour — construction
+      Urban flood interventions are seldom evaluated with causal rigour, construction
       volume is treated as a proxy for effectiveness. The confounding problem is
       severe: retention pond implementation coincides with seasonal rainfall variation,
       upstream catchment changes, and ongoing expansion of impervious surface cover
-      across the city — all of which independently alter flood frequency. A naive
+      across the city, all of which independently alter flood frequency. A naive
       before-after comparison would misattribute any observed reduction to the
       intervention when the causal signal is fundamentally ambiguous. Policy
       replication at city scale required defensible quantitative evidence, not
@@ -376,7 +376,7 @@ usecases:
         effectiveness before and after infrastructure intervention.
       significance: >
         Bridges the gap between ML-based earth observation and evidence-based
-        urban policy -- translating pixel-level segmentation outputs into
+        urban policy, translating pixel-level segmentation outputs into
         measurable policy KPIs that city planners can act on.
 
     tech_stack:
@@ -387,6 +387,123 @@ usecases:
   # ──────────────────────────────────────────────
   # CULTURAL & MULTILINGUAL AI
   # ──────────────────────────────────────────────
+
+  - id: multilingual-vlm-crossmodal-conflict
+    title: "Do Multilingual VLMs Abstain Under Cross-Modal Conflict in Low-Resource Languages?"
+    category: cultural
+    tags:
+      - Vision-Language Models
+      - Multilingual AI
+      - AI Safety
+      - Activation Steering
+      - Cross-Modal Conflict
+      - Apart Research
+      - Hackathon
+    venue: "Apart Research Global South AI Safety Hackathon (2026)"
+    role: "Co-First Author, Benchmark & Steering Lead"
+    link: "https://apartresearch.com/project/do-multilingual-visionlanguage-models-abstain-under-crossmodal-conflict-in-lowresource-languages-hcsp"
+    keywords:
+      - Multilingual vision-language models
+      - Cross-modal conflict
+      - Abstention safety
+      - Low-resource languages
+      - Hindi
+      - Telugu
+      - Contrastive activation steering
+      - Override gap
+
+    hook: "A model that trusts its eyes in English becomes a caption-follower in Telugu. We measured it, localized it, and steered it back."
+
+    situation: >
+      Vision-Language Models (VLMs) must arbitrate between visual evidence and a
+      textual claim, a safety-critical decision when the two contradict. A model
+      may safely abstain under cross-modal conflict in English, but hundreds of
+      millions of people interact with multilingual VLMs in low-resource languages
+      such as Hindi and Telugu, where both training data and red-teaming are
+      scarce. The harm in high-stakes settings is concrete: an X-ray that depicts
+      a fracture, paired with a report asserting no abnormality, can lead a model to
+      silently adopt the false caption over its own correct perception. Whether
+      cross-modal arbitration survives the shift to a low-resource language was
+      largely unmeasured.
+
+    complication: >
+      Raw text-bias conflates two distinct failures: a model can follow a false
+      caption, or it can never have perceived the correct answer in the first
+      place. A single aggregate accuracy number hides exactly the cells that
+      matter most: the model that trusts its eyes in English yet capitulates to
+      false text in Telugu. Worse, abstention itself can collapse into a failure
+      mode: a model that defaults to "unable to answer" looks cautious while
+      sacrificing all visual utility. Existing mitigations rely on expensive
+      fine-tuning or contrastive decoding, and almost all prior conflict
+      evaluation is English-only.
+
+    resolution:
+      benchmark: >
+        Built and open-sourced four multilingual cross-modal conflict datasets
+        (English, Hindi, Telugu) spanning natural scenes, physics renders, remote
+        sensing, and rendered 3D objects, with high-quality translations generated
+        via NLLB-200-600M and Claude and verified by humans. Designed a paired
+        perception-control benchmark: every item is scored both with and without
+        the counterfactual caption, yielding an "override gap" and a normalized
+        "override share" that isolate genuine caption-driven override from baseline
+        perceptual inability, a perception-corrected metric that re-ranks model
+        safety.
+      evaluation: >
+        Evaluated nine open multilingual VLMs across three languages and four
+        datasets (10,260 conflict evaluations), identifying two distinct,
+        language-dependent failure modes: text capture (the caption wins) and
+        abstention collapse (the model refuses everything). The override-share
+        metric exposed "quietly unsafe" abstainers: Qwen2.5-VL-7B posts the
+        lowest raw text-bias yet by far the highest override share (0.81),
+        flipping the naive safety ranking.
+      mechanistic_probing: >
+        Cached last-prompt-token residual-stream activations per layer and fit
+        L2-regularized logistic probes (5-fold CV) to decode image-faithful vs.
+        text-following outcomes. The conflict signal stays strongly linearly
+        decodable even where behaviour collapses (peak accuracy 0.97 in English
+        and still 0.92 in Telugu), establishing a dissociation: behaviour
+        collapses along the resource axis while the representation does not.
+      cross_lingual_steering: >
+        Exploited that dissociation with cross-lingual contrastive activation
+        steering: fit an abstain-vs-assert direction in English, inject it
+        mid-depth through forward hooks, sweep its strength under an off-target
+        perception guard, and transfer it to Hindi and Telugu. For
+        abstention-amenable models a single English-fit vector drives steered
+        text-override to zero in every target language with a transfer gap of 0.00.
+        The mitigation runs entirely at inference time, with no labels in the target
+        language. Code (MIT) and all four datasets are released on GitHub and the
+        Hugging Face Hub.
+
+    tech_stack:
+      models: [InternVL3-2B/8B, Qwen2.5-VL-3B/7B, Qwen3-VL-8B, LLaVA-OneVision-7B, GLM-4.1V-9B-Thinking, Granite-Vision-3.3-2B, SEA-LION-v4-8B-VL]
+      methods: [Contrastive activation steering, Linear probes, Logistic regression, Forward hooks]
+      translation: [NLLB-200-600M, Claude, Gemini]
+      datasets: [COCO-Counterfactuals, Pendulum, Remote-Sensing-VQA, 3D-Objects]
+      languages: [English, Hindi, Telugu]
+
+    metrics:
+      models_evaluated: 9
+      languages: 3
+      datasets: 4
+      conflict_evaluations: "10,260"
+      probe_accuracy_telugu: 0.92
+      max_override_share: 0.81
+      transfer_gap_abstention: 0.00
+
+    impact: >
+      Delivers the first multilingual, perception-controlled audit of cross-modal
+      conflict in VLMs, showing that genuine visual grounding evaporates precisely
+      in the low-resource languages that English-only evaluation never sees. The
+      override-gap design gives deployers and regulators a concrete auditing
+      instrument that names the most caption-suggestible model-by-language cells,
+      and the cross-lingual steering result demonstrates a cheap, inference-time
+      fix: an honesty direction estimated in a high-resource language transfers
+      down the resource axis. Open-sourced benchmark, steering pipeline, and four
+      datasets enable reproducible follow-up work on multilingual VLM safety.
+
+    team_scale: "3 co-first authors"
+
+  # ──────────────────────────────────────────
 
   - id: sea-vl-benchmark
     title: "SEA-VL: multicultural vision-language benchmark for Southeast Asia"
@@ -399,7 +516,7 @@ usecases:
       - Cultural AI
       - ACL 2025
     venue: "ACL 2025 (Main Conference, Long Paper)"
-    role: "Core Contributor -- Data Pipeline Lead"
+    role: "Core Contributor, Data Pipeline Lead"
     link: "https://aclanthology.org/2025.acl-long.916/"
     arxiv: "https://arxiv.org/abs/2503.07920"
     keywords:
@@ -411,13 +528,13 @@ usecases:
       - Benchmark
       - Cultural representation
 
-    hook: "GPT-4V fails on Southeast Asian culture. We built the benchmark that proves it — ACL 2025."
+    hook: "GPT-4V fails on Southeast Asian culture. We built the benchmark that proves it, ACL 2025."
 
     situation: >
       State-of-the-art Vision-Language Models (GPT-4V, Gemini 1.5, Claude 3)
       are trained predominantly on English-centric, Western-origin image-text
-      data. Southeast Asia -- 11 countries, 700M+ people, hundreds of languages,
-      and visually distinct cultural practices -- is systematically underrepresented
+      data. Southeast Asia, 11 countries, 700M+ people, hundreds of languages,
+      and visually distinct cultural practices, is systematically underrepresented
       in both training corpora and evaluation benchmarks. There is no rigorous,
       community-built benchmark that can measure VLM capability on culturally
       situated reasoning tasks specific to the region.
@@ -429,7 +546,7 @@ usecases:
       invisible to models trained on global web data. Standard crowdsourcing
       platforms (MTurk) lack the regional annotator coverage and cultural
       competence necessary. Automated generation using GPT-4 or Gemini introduces
-      circularity -- benchmarking models against data partially generated by
+      circularity, benchmarking models against data partially generated by
       similar models. Language diversity (11 SEA languages including low-resource
       scripts) further complicates quality control.
 
@@ -450,7 +567,7 @@ usecases:
         final image-question pairs across 11 languages and diverse cultural domains.
       findings: >
         Benchmark exposes systematic blind spots in GPT-4V, Gemini, and Claude
-        on culturally situated visual reasoning -- quantifying the gap that
+        on culturally situated visual reasoning, quantifying the gap that
         motivated the entire research program. Results directly inform model
         localization priorities for AI labs targeting SEA markets.
 
@@ -465,7 +582,7 @@ usecases:
       Establishes the first rigorous, community-built VLM benchmark for Southeast
       Asia. Results are actively being used by AI labs to identify and prioritize
       model localization gaps for the 700M+ person SEA market. Accepted at ACL
-      2025 (Main Conference) -- the top-tier NLP venue -- validating the
+      2025 (Main Conference), the top-tier NLP venue, validating the
       community-science methodology as publishable at the highest standards.
 
     team_scale: "50+ researchers across 5+ countries"
@@ -481,9 +598,9 @@ usecases:
       - Regional Adaptation
       - Diffusion Models
       - Knowledge Distillation
-      - ECCV 2026
-    venue: "ECCV 2026 (Under Review) + arXiv preprint 2026"
-    role: "Lead -- Diffusion Model Arm"
+      - Under Review
+    venue: "Under Review + arXiv preprint 2026"
+    role: "Lead, Diffusion Model Arm"
     arxiv: "https://arxiv.org/abs/2604.11490"
     keywords:
       - Vision-language models
@@ -493,19 +610,19 @@ usecases:
       - Fine-tuning
       - Anthropogenic priors
 
-    hook: "Cultural AI for Southeast Asia without retraining from scratch — 98%+ global quality retained."
+    hook: "Cultural AI for Southeast Asia without retraining from scratch, 98%+ global quality retained."
 
     situation: >
       General-purpose VLMs (LLaVA, InternVL, Phi-Vision, SDXL) exhibit
       systematic failure modes on culturally situated visual tasks specific to
-      Southeast Asia -- misidentifying local food, misreading regional scripts,
+      Southeast Asia, misidentifying local food, misreading regional scripts,
       failing to recognize traditional practices. The commercial default response
       is full retraining on regional data, which is computationally prohibitive
       and requires proprietary data access most regional stakeholders do not have.
 
     complication: >
       The core scientific question: can cultural correctness be recovered through
-      targeted adaptation without full retraining -- and if so, what is the
+      targeted adaptation without full retraining, and if so, what is the
       minimal intervention? This requires a testable hypothesis about where
       cultural knowledge is encoded in model weights and how it can be efficiently
       modified. Evaluation is doubly hard: cultural correctness is subjective
@@ -523,9 +640,9 @@ usecases:
       diffusion_arm: >
         Led the image generation arm of the project. Fine-tuned the image
         generation model on curated Southeast Asian visual data, then designed
-        a linear model merging strategy — blending the original general-purpose
+        a linear model merging strategy, blending the original general-purpose
         model weights with the regionally adapted version at different mixing
-        ratios — to control the tradeoff between cultural specificity and global
+        ratios, to control the tradeoff between cultural specificity and global
         image quality. Human evaluation by regional annotators confirmed cultural
         correctness improvement (1.569 vs. 1.491 baseline) while automated
         benchmarking confirmed 98%+ retention of global generation quality,
@@ -599,13 +716,13 @@ usecases:
       written in romanized orthographies that diverge from standardized script
       forms, and contains phonetic spellings and social media abbreviations.
       Published LID systems trained on curated parallel corpora degrade
-      significantly on this distribution -- a degradation that is not measurable
+      significantly on this distribution, a degradation that is not measurable
       on existing benchmarks because they do not sample from realistic web data.
 
     resolution:
       approach: >
         Re-benchmarked fastText LangID, GlotLID, and OpenLID on CommonCrawl-
-        sourced text reflecting realistic SEA web data distributions --
+        sourced text reflecting realistic SEA web data distributions,
         code-switched content, romanized scripts, and orthographic variation.
         Identified critical accuracy degradation patterns (system-specific
         failure modes across language families) and proposed a more rigorous
@@ -614,7 +731,7 @@ usecases:
       significance: >
         Challenges published accuracy claims on SEA languages and motivates
         re-evaluation of data pipelines that rely on LID as a preprocessing
-        step -- including the CommonCrawl-based training corpora used by major
+        step, including the CommonCrawl-based training corpora used by major
         LLMs.
 
     tech_stack:
@@ -630,11 +747,11 @@ usecases:
       across any underrepresented language family.
 
   # ──────────────────────────────────────────────
-  # PRODUCTION ML -- INDUSTRY
+  # PRODUCTION ML, INDUSTRY
   # ──────────────────────────────────────────────
 
   - id: share-of-voice-forecasting
-    title: Share of Voice forecasting system -- Fortune 500 APAC (Artefact)
+    title: Share of Voice forecasting system, Fortune 500 APAC (Artefact)
     category: production
     tags:
       - Forecasting
@@ -644,7 +761,7 @@ usecases:
       - dbt
       - MLOps
       - Uncertainty Quantification
-    venue: "Artefact -- Senior Data Scientist (Feb 2025 -- Nov 2025)"
+    venue: "Artefact, Senior Data Scientist (Feb 2025, Nov 2025)"
     role: "Lead ML Engineer (Founding Technical Member, Jakarta Office)"
     keywords:
       - Share of voice
@@ -657,8 +774,8 @@ usecases:
 
     situation: >
       A Fortune 500 global beauty conglomerate needed a data-driven system for
-      measuring and forecasting Share of Voice (SoV) -- their relative brand
-      presence across competitor-inclusive media impressions -- across 6 APAC
+      measuring and forecasting Share of Voice (SoV), their relative brand
+      presence across competitor-inclusive media impressions, across 6 APAC
       markets, 5 product categories, 4 divisions, and 4 digital platforms
       (Meta, Instagram, TikTok, YouTube). Media Directors and Chief Media Officers
       were making over- vs. under-investment decisions by brand and market using
@@ -669,7 +786,7 @@ usecases:
       (category x country x division x platform) grain produces hundreds of
       independent time series with short histories, seasonal patterns driven
       by campaign cycles, and competitive signal entangled with organic brand
-      momentum. The initial baseline -- a linear regression -- failed to capture
+      momentum. The initial baseline, a linear regression, failed to capture
       non-linear interaction effects between platform algorithm changes and
       competitor spend surges. More critically, point forecasts were insufficient
       for the use case: media planners needed calibrated uncertainty ranges to
@@ -686,7 +803,7 @@ usecases:
         engagement features via dbt transformation pipelines on BigQuery.
       uncertainty_quantification: >
         Designed split conformal prediction wrappers on XGBoost outputs to
-        deliver calibrated prediction intervals with coverage guarantees --
+        deliver calibrated prediction intervals with coverage guarantees,
         replacing point forecasts with plannable uncertainty ranges. Built
         evaluation pipelines tracking calibration drift and empirical coverage
         as observable KPIs (target: 90% PI empirical coverage on rolling holdout
@@ -698,7 +815,7 @@ usecases:
         tracking, and Streamlit dashboards translating model outputs into stacked
         market-share visualizations for non-technical commercial leads. Established
         engineering baseline (code review, reproducibility standards, config
-        management) as sole technical IC -- setting the production ML delivery
+        management) as sole technical IC, setting the production ML delivery
         standard for a newly opened office.
       rag_poc: >
         Developed RAG-based insights PoC for business stakeholders; validated
@@ -730,7 +847,7 @@ usecases:
       informing budget allocation decisions by Media Directors and CMOs across
       6 APAC markets. Scaled from 1 to 3 countries within 2 months of initial
       delivery. The conformal prediction framework converted a "model output"
-      into a "decision input" -- the distinction that makes ML commercially
+      into a "decision input", the distinction that makes ML commercially
       durable in enterprise settings.
 
   # ──────────────────────────────────────────
@@ -747,8 +864,8 @@ usecases:
       - Fintech
       - MLOps
       - Regulatory Compliance
-    venue: "GDP Labs (GLAIR.ai) -- Senior Data Scientist / ML Engineer (2021 -- 2023)"
-    role: "Lead ML Engineer -- Promoted to Senior within 12 months"
+    venue: "GDP Labs (GLAIR.ai), Senior Data Scientist / ML Engineer (2021, 2023)"
+    role: "Lead ML Engineer, Promoted to Senior within 12 months"
     keywords:
       - Face biometrics
       - Anti-spoofing
@@ -763,7 +880,7 @@ usecases:
     situation: >
       A major Indonesian bank required a production-grade biometric authentication
       stack capable of handling login surges at national scale, while simultaneously
-      needing to expand credit access to "thin-file" borrowers -- individuals with
+      needing to expand credit access to "thin-file" borrowers, individuals with
       insufficient traditional credit bureau history to receive a FICO-equivalent
       score under conventional underwriting. Indonesia's fintech regulator OJK
       requires full model explainability and fairness documentation for any
@@ -776,7 +893,7 @@ usecases:
       must operate at CPU-only inference (no GPU in production banking
       infrastructure at the time) under a strict latency SLA at 1M+ daily
       inferences. Credit scoring under OJK mandates that the model be
-      interpretable to a non-ML-specialist regulator -- which rules out standard
+      interpretable to a non-ML-specialist regulator, which rules out standard
       gradient boosting outputs without explicit explainability transformation
       and requires documentation of fairness analysis across demographic groups.
 
@@ -803,7 +920,7 @@ usecases:
         Established reproducibility standards (fixed seeds, version-pinned
         configs, regression benchmarks) adopted across 5+ products. Built
         scalable serverless clustering API on AWS (Kubernetes, scikit-learn,
-        MLflow) for an analytics platform -- 40% increase in business leads
+        MLflow) for an analytics platform, 40% increase in business leads
         reported by client. Set internal code-review bar and automated ML
         pipeline standards that reduced research-to-production handoff friction
         company-wide.
@@ -836,7 +953,7 @@ usecases:
       Expanded financial access to thin-file borrowers previously unscoreable
       by traditional credit bureaus, while maintaining full OJK regulatory
       compliance. Biometric stack protected millions of users from presentation
-      attacks at 99.99% availability -- a reliability standard equivalent to
+      attacks at 99.99% availability, a reliability standard equivalent to
       Tier 4 data center SLAs applied to an ML inference service.
 
   # ──────────────────────────────────────────
@@ -852,10 +969,10 @@ usecases:
       - Kafka
       - Redis
       - Fintech
-    venue: "GDP Labs (GLAIR.ai) -- Lead ML Engineer (2021 -- 2023)"
+    venue: "GDP Labs (GLAIR.ai), Lead ML Engineer (2021, 2023)"
     role: Lead ML Engineer
 
-    hook: "Three fraud attack types, one pipeline — rule filters, XGBoost, and graph anomaly detection."
+    hook: "Three fraud attack types, one pipeline, rule filters, XGBoost, and graph anomaly detection."
 
     situation: >
       A digital payments platform processing high daily transaction volumes
@@ -870,7 +987,7 @@ usecases:
     complication: >
       Fraud detection in payments requires near-real-time inference: a decision
       must be issued within the transaction authorization window (typically
-      sub-second). This constraints model complexity -- full graph neural network
+      sub-second). This constraints model complexity, full graph neural network
       inference on the entire transaction network is not feasible at authorization
       time. Additionally, the class imbalance problem is extreme (fraud rate
       typically < 0.1%), and the adversarial nature of the problem means that
@@ -911,14 +1028,14 @@ usecases:
       Measurably reduced fraudulent transaction approval rates on digital payment
       flows, with fraud catch rate improvements directly reducing operational
       chargeback costs and protecting both end users and platform economics.
-      The multi-stage architecture pattern -- rule-based pre-filter, statistical
-      classifier, graph anomaly detector -- became the internal template for
+      The multi-stage architecture pattern, rule-based pre-filter, statistical
+      classifier, graph anomaly detector, became the internal template for
       subsequent fraud system designs across the client portfolio.
 
   # ──────────────────────────────────────────
 
   - id: municipal-waste-forecasting
-    title: Municipal waste logistics forecasting -- Jakarta Smart City
+    title: Municipal waste logistics forecasting, Jakarta Smart City
     category: production
     tags:
       - Time Series Forecasting
@@ -927,15 +1044,15 @@ usecases:
       - LSTM
       - Causal Inference
       - Policy Analysis
-    venue: "Jakarta Smart City -- Data Scientist (Jan 2021 -- June 2021)"
+    venue: "Jakarta Smart City, Data Scientist (Jan 2021, June 2021)"
     role: Lead Data Scientist
 
-    hook: "Forecasted Jakarta's trash so trucks go where waste actually is, not where the schedule says."
+    hook: "Forecasted Jakarta's trash so trucks follow where waste actually piles up instead of a fixed weekly schedule."
 
     situation: >
       Jakarta's solid waste management agency (DINAS LINGKUNGAN HIDUP) operates
       waste collection logistics for a city of 10M+ residents across hundreds
-      of collection points and sub-districts. Route scheduling was reactive --
+      of collection points and sub-districts. Route scheduling was reactive,
       trucks were dispatched on fixed schedules irrespective of actual waste
       accumulation, resulting in both under-collection (overflow complaints) and
       over-collection (idle truck capacity wasted on empty routes), with cascading
@@ -947,7 +1064,7 @@ usecases:
       cultural events (Lebaran, Christmas), local market days, and weather
       events (heavy rain flooding) all create non-stationary spikes that
       additive decomposition models struggle to capture. A single city-level
-      forecast is insufficient -- route optimization requires district-level
+      forecast is insufficient, route optimization requires district-level
       and collection-point-level granularity, multiplying the forecasting
       problem by hundreds of independent series with varying data quality.
 
@@ -996,7 +1113,7 @@ usecases:
 
     impact: >
       15% operational efficiency improvement in waste collection logistics across
-      a 10M+ resident urban grid -- translating to direct fuel cost reduction and
+      a 10M+ resident urban grid, translating to direct fuel cost reduction and
       emissions savings. Policy causal analysis provided empirical evidence for
       the plastic bag ban's effectiveness, establishing a methodology applicable
       to evaluating future environmental regulations at city scale. First-authored
@@ -1013,10 +1130,10 @@ usecases:
       - Consulting
       - Financial Services
       - Media
-    venue: "Artefact -- Senior Data Scientist (2025)"
+    venue: "Artefact, Senior Data Scientist (2025)"
     role: Lead Data Scientist
 
-    hook: "Two Fortune 500 clients, two forecasting problems, two weeks each — shipped and handed off."
+    hook: "Two Fortune 500 clients, two forecasting problems, two weeks each, shipped and handed off."
 
     situation: >
       Two enterprise consulting engagements in parallel: a media group requiring
@@ -1026,14 +1143,14 @@ usecases:
       (liquidity management and capital allocation planning).
 
     complication: >
-      Consulting sprint cadence -- 2-week cycles from kickoff to senior-stakeholder
-      demo -- is structurally incompatible with the iterative data quality
+      Consulting sprint cadence, 2-week cycles from kickoff to senior-stakeholder
+      demo, is structurally incompatible with the iterative data quality
       investigation that forecasting accuracy requires. Both engagements surfaced
       data gaps mid-sprint: sparse historical coverage for specific media placement
       types, thin transaction records for niche instrument categories. More
       critically, both clients arrived with pre-formed intuitions about expected
       forecast ranges; any model output that violated those intuitions demanded
-      immediate explainability -- not a follow-up memo -- requiring the data
+      immediate explainability, not a follow-up memo, requiring the data
       scientist to function simultaneously as technical lead, domain translator,
       and stakeholder manager under a hard clock.
 
@@ -1043,12 +1160,12 @@ usecases:
         requiring simultaneous data quality triage, model selection, business
         constraint integration (client-specific revenue targets, regulatory
         reporting periods), and documentation for handoff to internal client
-        teams. Model outputs translated into planning-ready business language --
-        not statistical summaries -- for senior stakeholder consumption.
+        teams. Model outputs translated into planning-ready business language,
+        not statistical summaries, for senior stakeholder consumption.
       handoff: >
         Full documentation delivered: model card, feature dictionary, retraining
         protocol, and dashboard user guide. Client teams validated outputs
-        against business intuition before sign-off -- a critical acceptance
+        against business intuition before sign-off, a critical acceptance
         criterion in consulting delivery that requires the data scientist to
         function as both technical lead and domain translator.
 
@@ -1058,7 +1175,7 @@ usecases:
       data_engineering: [dbt, SQL]
 
     impact: >
-      Enabled both clients to shift from reactive to predictive planning --
+      Enabled both clients to shift from reactive to predictive planning,
       media client could commit advertising inventory with forward-looking
       reach estimates, financial client could optimize liquidity buffers against
       probabilistic transaction volume bands. Both engagements delivered on
@@ -1078,7 +1195,7 @@ usecases:
       - Azure ML
       - Real-Time
       - Hackathon
-    venue: "Microsoft Azure Virtual Hackathon APAC -- Regional Champion (2020)"
+    venue: "Microsoft Azure Virtual Hackathon APAC, Regional Champion (2020)"
     role: Lead ML Engineer
     duration_hours: 48
     keywords:
@@ -1093,7 +1210,7 @@ usecases:
     situation: >
       Jakarta's ride-hailing market suffers from supply-demand mismatch that
       manifests as surge pricing during predictable high-demand windows (morning
-      commute, Friday evening, rain events). Driver repositioning is reactive --
+      commute, Friday evening, rain events). Driver repositioning is reactive,
       drivers respond to surge pricing signals that are already 5-10 minutes late.
       A demand heatmap that forecasts surge zones 15-30 minutes ahead would allow
       proactive repositioning, reducing surge duration and improving driver
@@ -1103,7 +1220,7 @@ usecases:
       A 48-hour competition window eliminates access to the proprietary trip
       telemetry that production demand forecasting requires. The core feature
       engineering challenge: constructing a credible demand signal from proxy
-      variables -- historical aggregates, weather data, and static POI density --
+      variables, historical aggregates, weather data, and static POI density,
       that generalises across Jakarta's heterogeneous urban geography. CBD office
       clusters, university campuses, market districts, and transit hubs each
       exhibit fundamentally different demand dynamics that a single model must
@@ -1123,7 +1240,7 @@ usecases:
         real-time demand heatmap overlay.
       competition_result: >
         Competed against teams across Southeast Asia and Australia. Won Regional
-        Champion across APAC -- validated against international jury with Microsoft
+        Champion across APAC, validated against international jury with Microsoft
         engineering and product leadership as judges.
 
     tech_stack:
@@ -1138,8 +1255,8 @@ usecases:
       placement: "1st Place (Regional Champion)"
 
     impact: >
-      Demonstrated full-stack demand forecasting system design -- data ingestion
-      to real-time visualization -- within 48 hours. The 6-second ETA margin
+      Demonstrated full-stack demand forecasting system design, data ingestion
+      to real-time visualization, within 48 hours. The 6-second ETA margin
       of error on validation data validated the geospatial feature engineering
       approach. Regional Champion result across APAC establishes competitive
       benchmarking against the region's top applied ML teams.
@@ -1156,7 +1273,7 @@ usecases:
       - GDPR Compliance
       - Low Bandwidth
       - Hackathon
-    venue: "CamvsCovid, Cambridge Judge Business School -- Top 3 Globally (2020)"
+    venue: "CamvsCovid, Cambridge Judge Business School, Top 3 Globally (2020)"
     role: Lead ML Engineer
     duration_hours: 72
     keywords:
@@ -1167,26 +1284,26 @@ usecases:
       - Indonesia
       - GDPR
 
-    hook: "COVID-19 vitals monitoring on a 2G connection — no cloud, no smartphone. Top 3, Cambridge."
+    hook: "COVID-19 vitals monitoring on a 2G connection, no cloud, no smartphone. Top 3, Cambridge."
 
     situation: >
       During the COVID-19 pandemic surge (early 2020), Indonesian public hospitals
       faced patient overflow that required monitoring high-risk home-isolated
       patients remotely. Standard telemonitoring systems assumed broadband
-      connectivity and expensive hardware (pulse oximeters, ECG patches) --
+      connectivity and expensive hardware (pulse oximeters, ECG patches),
       neither assumption held for the majority of Indonesia's population, where
       rural broadband penetration was below 30% and healthcare hardware supply
       chains were disrupted.
 
     complication: >
       Camera-based vitals estimation (respiratory rate via chest motion analysis)
-      is computationally expensive if inference runs server-side -- the video
+      is computationally expensive if inference runs server-side, the video
       stream alone would overwhelm rural 2G/3G connections. On-device inference
       on consumer smartphones (low-end Android, 2017-2019 chipsets) requires
       aggressive model compression and runtime optimization. GDPR-equivalent
       patient privacy requirements prohibit raw video transmission to cloud
-      servers -- on-device inference is not just a bandwidth solution, it is
-      a compliance requirement.
+      servers, which turns on-device inference into a hard compliance
+      requirement on top of its bandwidth savings.
 
     resolution:
       architecture: >
@@ -1217,7 +1334,7 @@ usecases:
 
     impact: >
       Top 3 globally at Cambridge's international COVID-19 innovation challenge.
-      Validated the edge-first AI healthcare architecture for emerging markets --
+      Validated the edge-first AI healthcare architecture for emerging markets,
       a design pattern that has since been adopted across multiple global health
       AI deployment contexts where bandwidth and hardware constraints are binding.
       Demonstrated that GDPR-compliant vitals monitoring is achievable on
@@ -1235,7 +1352,7 @@ usecases:
       - Accessibility
       - Low-Resource
       - Hackathon
-    venue: "Cal Hacks 8.0, UC Berkeley -- Best Community Track (2020)"
+    venue: "Cal Hacks 8.0, UC Berkeley, Best Community Track (2020)"
     role: Lead ML Engineer
     duration_hours: 36
     keywords:
@@ -1246,14 +1363,14 @@ usecases:
       - 2G network
       - COVID-19
 
-    hook: "Health info for 40% of Indonesians without smartphones — via a plain old phone call."
+    hook: "Health info for 40% of Indonesians without smartphones, via a plain old phone call."
 
     situation: >
       During the COVID-19 pandemic, Indonesian government health guidance,
       social program eligibility, and emergency services information was
       primarily distributed through smartphone apps and social media platforms.
       This created a critical information exclusion for the estimated 40% of
-      Indonesians without smartphones -- predominantly rural, elderly, and
+      Indonesians without smartphones, predominantly rural, elderly, and
       low-income populations who were simultaneously the most vulnerable to
       COVID-19 health and economic shocks.
 
@@ -1262,7 +1379,7 @@ usecases:
       menu trees designed for literate, patient users collapse under dialect
       variation, background noise, and low digital confidence. Indonesian ASR
       trained on formal broadcast speech systematically underperforms on
-      Javanese-accented, Sundanese-accented, and code-switched Indonesian -- the
+      Javanese-accented, Sundanese-accented, and code-switched Indonesian, the
       dominant registers of the target population. The knowledge base itself was
       a moving target: quarantine regulations, bantuan sosial eligibility criteria,
       and emergency contact routing changed weekly during the 2020 pandemic surge.
@@ -1271,7 +1388,7 @@ usecases:
     resolution:
       architecture: >
         Designed a phone-based AI assistant operable via basic feature phones
-        on 2G networks -- no smartphone, no internet, no app required. Core
+        on 2G networks, no smartphone, no internet, no app required. Core
         components: ASR (Automatic Speech Recognition) optimized for Indonesian
         language and local dialect variation (Javanese-accented Indonesian,
         Sundanese-accented Indonesian), a structured knowledge graph for COVID-19
@@ -1300,7 +1417,7 @@ usecases:
       target_demographic: "40% of Indonesians without smartphones"
 
     impact: >
-      Directly addressed digital exclusion at a population scale -- the 40%
+      Directly addressed digital exclusion at a population scale, the 40%
       of Indonesians without smartphones are invisible to virtually all AI
       applications. Won Best Community Track at UC Berkeley's flagship hackathon,
       validating the design approach with an international jury. The architecture
@@ -1311,7 +1428,7 @@ usecases:
   # ──────────────────────────────────────────
 
   - id: plastic-bag-ban-causal-analysis
-    title: Plastic bag ban -- causal policy analysis using NLP and citizen data
+    title: Plastic bag ban, causal policy analysis using NLP and citizen data
     category: applied
     tags:
       - NLP
@@ -1320,7 +1437,7 @@ usecases:
       - Policy Analysis
       - IEEE
       - Smart City
-    venue: "ICISS 2021 -- IEEE"
+    venue: "ICISS 2021, IEEE"
     role: First Author
     doi: "10.1109/ICISS53185.2021.9533236"
     link: "https://ieeexplore.ieee.org/document/9533236/"
@@ -1335,7 +1452,7 @@ usecases:
     hook: "Jakarta banned plastic bags in 2020. Did it work? Proved it causally with 100K+ complaints."
 
     situation: >
-      Jakarta implemented a plastic bag ban in 2020 -- prohibiting single-use
+      Jakarta implemented a plastic bag ban in 2020, prohibiting single-use
       plastic bag distribution by retailers. Policy makers needed empirical
       evidence of the ban's effectiveness to justify regulatory enforcement
       costs and inform decisions about extending similar restrictions to other
@@ -1345,7 +1462,7 @@ usecases:
     complication: >
       Causal identification is non-trivial in this setting. The plastic bag ban
       coincided with COVID-19 lockdown measures that dramatically reduced retail
-      footfall and waste generation -- a massive confounding event that would
+      footfall and waste generation, a massive confounding event that would
       inflate any naive pre-post comparison. Controlling for pandemic-period
       mobility restrictions, economic activity reduction, and seasonal waste
       patterns simultaneously requires explicit causal inference methodology,
@@ -1357,7 +1474,7 @@ usecases:
         NLP-classified citizen waste complaints from JAKI (Jakarta's official
         smart city complaint platform) and Qlue (a civic reporting platform).
         100,000+ complaint records classified by waste type using text
-        classification -- distinguishing plastic-specific complaints from
+        classification, distinguishing plastic-specific complaints from
         general waste, sanitation, and other urban service complaints.
         Plastic-specific complaints serve as the treatment group; non-plastic
         waste complaints serve as the control group within the same platform
@@ -1386,7 +1503,7 @@ usecases:
       venue: "ICISS 2021, IEEE, Bandung, Indonesia"
 
     impact: >
-      Provided empirical causal evidence for the plastic bag ban's effectiveness --
+      Provided empirical causal evidence for the plastic bag ban's effectiveness,
       the first quantitative impact evaluation using Jakarta's own citizen
       complaint infrastructure. Methodology is directly replicable for evaluating
       future environmental regulations (food container bans, extended producer
@@ -1397,9 +1514,9 @@ usecases:
 
   # ──────────────────────────────────────────
 
-  - id: eccv-workshop-qwen-vl
+  - id: aicity-qwen-vl
     title: "Qwen VL Fine-tuning for AI City Challenge 2026 Track 2"
-    category: ongoing
+    category: applied
     tags:
       - Vision-Language Models
       - LoRA Fine-tuning
@@ -1407,8 +1524,7 @@ usecases:
       - LLaMA-Factory
       - DeepSpeed
       - VLM Training
-      - ECCV 2026
-    venue: "AI City Challenge 2026 Track 2 -- ECCV Workshop (2026)"
+    venue: "AI City Challenge 2026, Track 2 (2026)"
     role: Lead ML Engineer
     keywords:
       - Vision-language model fine-tuning
@@ -1418,7 +1534,7 @@ usecases:
       - AI City Challenge
       - Captioning
 
-    hook: "Fine-tuning a 3B VLM on a 14GB GPU — every memory constraint hit, diagnosed, and solved."
+    hook: "Fine-tuning a 3B VLM on a 14GB GPU, every memory constraint hit, diagnosed, and solved."
 
     situation: >
       The AI City Challenge Track 2 requires fine-tuning vision-language models
@@ -1433,7 +1549,7 @@ usecases:
       Fine-tuning a 3-billion parameter vision-language model on a single 14GB
       GPU pushes against the physical limits of what the hardware can hold.
       Standard fine-tuning loads the entire model and training state into GPU
-      memory simultaneously — an approach that fails at this scale. Multi-GPU
+      memory simultaneously, an approach that fails at this scale. Multi-GPU
       parallelism, the conventional fallback, was unavailable due to cluster
       networking constraints. The additional challenge: the video captioning task
       required processing multiple visual frames per training example, generating
@@ -1445,10 +1561,10 @@ usecases:
     resolution:
       architecture: >
         Applied Parameter-Efficient Fine-Tuning (PEFT) using Low-Rank Adaptation
-        (LoRA) — a technique that updates only a small fraction of model parameters
+        (LoRA), a technique that updates only a small fraction of model parameters
         rather than all 3 billion, dramatically reducing training memory requirements.
         Extended the model's context window to handle longer visual sequences and
-        enabled gradient checkpointing — a technique that trades additional
+        enabled gradient checkpointing, a technique that trades additional
         computation for reduced memory by recomputing intermediate values during
         training rather than storing them. This combination made fine-tuning feasible
         on a single constrained GPU. Multi-GPU scaling is configured and ready for
@@ -1458,18 +1574,18 @@ usecases:
         training step. The original dataset structure packed multiple video frames
         per example, producing sequences that saturated GPU memory before training
         could begin. Reformatting to a single-frame-per-example structure preserved
-        the task semantics while making each training step memory-safe — a data
+        the task semantics while making each training step memory-safe, a data
         engineering decision that unblocked the entire fine-tuning run.
       environment_setup: >
         Resolved software environment conflicts between the cluster's system-wide
-        deep learning installation and the project's required library versions —
+        deep learning installation and the project's required library versions,
         a common constraint in shared GPU environments that required careful
         dependency isolation and GPU runtime configuration to ensure reproducible,
         conflict-free training execution.
       training_pipeline: >
         Built an automated end-to-end training pipeline handling dataset
         preprocessing, configuration generation, and training execution as a single
-        reproducible workflow — reducing manual setup time for each experimental
+        reproducible workflow, reducing manual setup time for each experimental
         run and making the pipeline transferable to other GPU-constrained fine-tuning
         tasks. Achieved stable, converging training across the dataset within the
         14GB memory budget.
@@ -1498,9 +1614,9 @@ usecases:
     impact: >
       Establishes a replicable methodology for fine-tuning large vision-language
       models under GPU memory constraints common in academic and resource-limited
-      research environments. The design decisions — parameter-efficient adaptation,
+      research environments. The design decisions, parameter-efficient adaptation,
       memory-safe data formatting, environment isolation, and automated pipeline
-      orchestration — form a practical guide applicable to any VLM fine-tuning task
+      orchestration, form a practical guide applicable to any VLM fine-tuning task
       on shared or consumer-grade hardware. Outputs include ready-to-use adapted
       model weights and a reproducible training pipeline for downstream captioning
       applications.
@@ -1518,7 +1634,7 @@ usecases:
       - VLN-HAMT
       - Score Functions
       - ICRA 2027
-    venue: "Thesis Research -- VLN-DUET Uncertainty Propagation (2026)"
+    venue: "Thesis Research, VLN-DUET Uncertainty Propagation (2026)"
     role: Lead Researcher
     keywords:
       - Conformal prediction
@@ -1529,13 +1645,13 @@ usecases:
       - R2R dataset
       - Prediction sets
 
-    hook: "21 uncertainty methods for robot navigation tested. Most fail. One works — and we know why."
+    hook: "21 uncertainty methods for robot navigation tested. Most fail. One works, and we know why."
 
     situation: >
       Vision-and-Language Navigation (VLN) agents operating in unseen environments
       require calibrated uncertainty estimates to know when to defer to human
       oversight. A navigation agent that is 70% confident may be catastrophically
-      wrong -- high confidence does not guarantee correctness. Conformal Prediction
+      wrong, high confidence does not guarantee correctness. Conformal Prediction
       (CP) offers distribution-free coverage guarantees but requires systematic
       evaluation across multiple VLN architectures and uncertainty propagation
       formulations to determine which methods actually improve set efficiency
@@ -1544,8 +1660,8 @@ usecases:
     complication: >
       Evaluating conformal prediction for navigation requires navigating three
       compounding challenges: (1) Multiple navigation architectures with
-      fundamentally different action representations — one operating on a
-      topological map of the environment, the other on local candidate steps —
+      fundamentally different action representations (one operating on a
+      topological map of the environment, the other on local candidate steps)
       make fair cross-system comparison non-trivial; (2) Navigation trajectories
       are short (mean 6-8 steps), making them structurally incompatible with
       temporal uncertainty propagation methods designed for long-horizon tasks
@@ -1562,8 +1678,8 @@ usecases:
         VLN-HAMT navigation architectures under a consistent evaluation protocol,
         enabling direct comparison across systems that would otherwise be
         benchmarked in isolation. Evaluated three classes of uncertainty scoring
-        methods — threshold-based, adaptive prediction sets, and regularized
-        adaptive sets — across both architectures. Both passive observation mode
+        methods, threshold-based, adaptive prediction sets, and regularized
+        adaptive sets, across both architectures. Both passive observation mode
         (does uncertainty improve over time?) and active intervention mode (does
         restricting the agent to high-confidence actions improve success rates?)
         evaluated across all configurations.
@@ -1577,8 +1693,8 @@ usecases:
         and cause control-based methods (PID) to overshoot.
       score_augmentation: >
         Discovered that augmenting the base uncertainty score with a logarithmic
-        confidence penalty — additionally down-weighting actions where the model is
-        both uncertain and assigns low probability — improves prediction set
+        confidence penalty, additionally down-weighting actions where the model is
+        both uncertain and assigns low probability, improves prediction set
         efficiency by 18-47% across all tested architectures while maintaining
         valid coverage guarantees. The improvement holds across architectures
         because the augmentation operates on the model's raw output probabilities,
@@ -1591,7 +1707,7 @@ usecases:
         with consistent interfaces, enabling controlled comparison between systems
         previously evaluated only in isolation. Includes automated pipeline
         orchestration, the full suite of 21 uncertainty propagation formulations,
-        and reproducible experiment configuration — a research infrastructure
+        and reproducible experiment configuration, a research infrastructure
         contribution that enables future VLN uncertainty research without
         rebuilding from scratch. Full calibration benchmarks run approximately
         24 hours per configuration on available hardware.
@@ -1619,8 +1735,8 @@ usecases:
       Provides the first systematic conformal prediction evaluation across multiple
       VLN architectures, establishing which uncertainty quantification methods work
       and why most temporal propagation approaches fail on short-horizon navigation
-      trajectories. The logarithmic penalty finding — that a simple score
-      augmentation outperforms complex temporal propagation — is a counterintuitive
+      trajectories. The logarithmic penalty finding, that a simple score
+      augmentation outperforms complex temporal propagation, is a counterintuitive
       and publication-worthy result targeting ICRA 2027. The unified experimental
       framework enables reproducible benchmarking for future VLN uncertainty
       research without the setup overhead of the initial investigation.
@@ -1628,7 +1744,7 @@ usecases:
   # ──────────────────────────────────────────
 
   - id: llm-d-inference-scheduler
-    title: "Contributing to llm-d/inference-scheduler -- Kubernetes LLM Inference Scheduling"
+    title: "Contributing to llm-d/inference-scheduler, Kubernetes LLM Inference Scheduling"
     category: ongoing
     tags:
       - Open Source Contribution
@@ -1639,7 +1755,7 @@ usecases:
       - Envoy
       - P/D Disaggregation
       - KV Cache
-    venue: "Open Source -- llm-d/inference-scheduler (Planned 2026)"
+    venue: "Open Source, llm-d/inference-scheduler (Planned 2026)"
     role: Contributor
     keywords:
       - Kubernetes
@@ -1656,7 +1772,7 @@ usecases:
     situation: >
       Production LLM inference at scale requires intelligent request routing across
       multiple model serving backends. The llm-d/inference-scheduler project
-      provides the Endpoint Picker Plugin (EPP) -- a Kubernetes-native scheduling
+      provides the Endpoint Picker Plugin (EPP), a Kubernetes-native scheduling
       component that routes inference requests to vLLM backends based on KV cache
       state, prefill locality, and load. As LLM inference grows in commercial
       importance, contributing to this infrastructure-level project enables
@@ -1677,8 +1793,8 @@ usecases:
         Planning to contribute to the inference scheduling framework by:
         (1) Understanding how the scheduling layer intercepts and routes inference
         requests to the appropriate GPU backend, (2) Exploring disaggregation
-        modes — strategies for splitting the prefill and decode phases of LLM
-        inference across nodes — to identify scheduling optimization opportunities,
+        modes, strategies for splitting the prefill and decode phases of LLM
+        inference across nodes, to identify scheduling optimization opportunities,
         (3) Contributing to scheduler plugin development for improved load
         balancing and KV cache reuse, (4) Identifying latency optimization
         opportunities in the request processing pipeline.
@@ -1833,7 +1949,7 @@ publications:
         Vision-Language Dataset for Southeast Asia," ACL 2025 (Main Conference).
       arxiv: "https://arxiv.org/abs/2503.07920"
       link: "https://aclanthology.org/2025.acl-long.916/"
-      role: Core Contributor -- Data Pipeline Lead
+      role: Core Contributor, Data Pipeline Lead
       venue_tier: "ACL (top-tier NLP venue)"
 
     - id: acl-2026-commonlid
@@ -1859,7 +1975,7 @@ publications:
         V. Feliren et al., "GG-EZ: Regional Adaptation in Vision-Language
         Models," arXiv preprint, 2026.
       arxiv: "https://arxiv.org/abs/2604.11490"
-      role: Lead Author -- Diffusion Arm
+      role: Lead Author, Diffusion Arm
 
 # ============================================================
 # PATENTS
@@ -1878,7 +1994,7 @@ patents:
 awards:
   hackathons:
     - title: "Microsoft Azure Virtual Hackathon APAC"
-      placement: "1st Place -- Regional Champion"
+      placement: "1st Place, Regional Champion"
       year: 2020
       project: HakkTaxi
       scope: "Asia Pacific Region"
@@ -1913,7 +2029,7 @@ awards:
     teaching:
       - role: "Machine Learning Instructor & Project Advisor"
         institution: "Bangkit Academy (Google, Tokopedia, Gojek, Traveloka)"
-        period: "Jan 2024 -- Jan 2025"
+        period: "Jan 2024, Jan 2025"
         note: "Taught ML curriculum and supervised capstone projects for university students across Indonesia"
       - role: "Guest Lecturer, Computer Vision"
         institution: "Bina Nusantara University"

@@ -2,7 +2,7 @@
 layout: page
 title: Use Cases
 subtitle: Applied Machine Learning Across Research, Industry, and the Field
-description: A practitioner's view of ML use cases across geospatial AI, cultural NLP, production fintech, and applied projects — from satellite imagery to hackathon prototypes.
+description: A practitioner's view of ML use cases across geospatial AI, cultural NLP, production fintech, and applied projects, from satellite imagery to hackathon prototypes.
 permalink: /usecases/
 ---
 

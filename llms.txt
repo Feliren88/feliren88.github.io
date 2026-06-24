@@ -6,49 +6,50 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 
 ## Pages
 
-- [Home](https://vickyfeliren.com/): Hero — research identity and entry point
+- [Home](https://vickyfeliren.com/): Hero, research identity and entry point
 - [About](https://vickyfeliren.com/about/): Bio, research focus, expertise, work history, and awards
-- [Research](https://vickyfeliren.com/research/): Publications — IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
+- [Research](https://vickyfeliren.com/research/): Publications, IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
 - [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across geospatial AI, cultural NLP, production fintech, and hackathon projects
-- [Writings](https://vickyfeliren.com/writings/): Press features and personal articles — Tech in Asia coverage and Medium essays on AI, philosophy, and life
+- [Writings](https://vickyfeliren.com/writings/): Press features and personal articles, Tech in Asia coverage and Medium essays on AI, philosophy, and life
 - [Work With Me](https://vickyfeliren.com/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
 
 ## Use Cases (individual pages)
 
 ### Geospatial AI & Remote Sensing
-- [Flood Segmentation — ProCANet](https://vickyfeliren.com/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
+- [Flood Segmentation, ProCANet](https://vickyfeliren.com/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
 - [Mining Footprint Detection](https://vickyfeliren.com/usecases/mining-footprint-segmentation/): Remote Sensing of Environment Q1 (IF 11.4) 2025. Multi-modal deep learning fusing Sentinel-2, SAR, and DEM for continental-scale mining footprint delineation. First application of a geospatial foundation model (Prithvi) to this task.
 - [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
-- [Flood Policy Evaluation](https://vickyfeliren.com/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung — bridging ProCANet satellite segmentation with evidence-based urban policy.
+- [Flood Policy Evaluation](https://vickyfeliren.com/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung, bridging ProCANet satellite segmentation with evidence-based urban policy.
 
 ### Cultural & Multilingual AI
+- [Multilingual VLMs Under Cross-Modal Conflict](https://vickyfeliren.com/usecases/multilingual-vlm-crossmodal-conflict/): Apart Research Global South AI Safety Hackathon 2026 (Co-First Author). Multilingual (English, Hindi, Telugu) cross-modal conflict benchmark for 9 open VLMs with a paired perception-control override-gap design. The conflict signal stays linearly decodable at 0.92 in Telugu; cross-lingual contrastive steering transfers an English-fit direction that drives text-override to zero for abstention-amenable models.
 - [SEA-VL Benchmark](https://vickyfeliren.com/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
 - [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/): (Under Review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
-- [CommonLID Language Identification](https://vickyfeliren.com/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data — exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
+- [CommonLID Language Identification](https://vickyfeliren.com/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data, exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
 
-### Production ML — Industry
+### Production ML, Industry
 - [Share of Voice Forecasting](https://vickyfeliren.com/usecases/share-of-voice-forecasting/): Artefact (2025). XGBoost + split conformal prediction for Fortune 500 brand SoV forecasting across 6 APAC markets. Calibrated prediction intervals with 90% empirical coverage target.
 - [Biometric Auth & Credit Scoring](https://vickyfeliren.com/usecases/biometric-authentication-credit-scoring/): GDP Labs (2021–2023). MobileNet/OpenVINO biometric stack at 1M+ daily inferences, 99.99% uptime. OJK-compliant alternative credit scoring; 35% loan approval efficiency improvement.
 - [Fraud Detection Pipeline](https://vickyfeliren.com/usecases/fraud-detection-pipeline/): GDP Labs (2021–2023). Multi-stage pipeline: rule-based pre-filters + XGBoost + graph anomaly detection with Kafka streaming and Redis feature store.
 - [Municipal Waste Forecasting](https://vickyfeliren.com/usecases/municipal-waste-forecasting/): Jakarta Smart City (2021). Facebook Prophet ensemble for 10M-resident waste logistics; causal DiD analysis of plastic bag ban. 15% operational efficiency improvement. IEEE ICISS 2021.
-- [Demand Forecasting — Consulting](https://vickyfeliren.com/usecases/demand-forecasting-consulting/): Artefact (2025). Audience reach and transaction volume forecasting for Fortune 500 media and financial clients under 2-week consulting cadence.
+- [Demand Forecasting, Consulting](https://vickyfeliren.com/usecases/demand-forecasting-consulting/): Artefact (2025). Audience reach and transaction volume forecasting for Fortune 500 media and financial clients under 2-week consulting cadence.
 
 ### Applied & Hackathon Projects
-- [HakkTaxi — Ride-Share Demand](https://vickyfeliren.com/usecases/hakktaxi-ride-share/): Microsoft Azure APAC Regional Champion (2020). XGBoost + H3 geospatial grid demand heatmap for Jakarta; 6-second ETA margin of error. Built in 48 hours.
-- [TeleHealthMonitor — Edge AI](https://vickyfeliren.com/usecases/telehealthmonitor-edge-ai/): Cambridge CamvsCovid Top 3 globally (2020). On-device respiratory rate estimation for COVID-19 home monitoring on 2G-compatible, GDPR-compliant Android.
-- [Community IVR — Voice AI](https://vickyfeliren.com/usecases/community-ivr-voice-ai/): UC Berkeley Cal Hacks Best Community Track (2020). Feature phone AI assistant (ASR + knowledge graph + TTS) for offline Indonesian communities, no smartphone required.
+- [HakkTaxi, Ride-Share Demand](https://vickyfeliren.com/usecases/hakktaxi-ride-share/): Microsoft Azure APAC Regional Champion (2020). XGBoost + H3 geospatial grid demand heatmap for Jakarta; 6-second ETA margin of error. Built in 48 hours.
+- [TeleHealthMonitor, Edge AI](https://vickyfeliren.com/usecases/telehealthmonitor-edge-ai/): Cambridge CamvsCovid Top 3 globally (2020). On-device respiratory rate estimation for COVID-19 home monitoring on 2G-compatible, GDPR-compliant Android.
+- [Community IVR, Voice AI](https://vickyfeliren.com/usecases/community-ivr-voice-ai/): UC Berkeley Cal Hacks Best Community Track (2020). Feature phone AI assistant (ASR + knowledge graph + TTS) for offline Indonesian communities, no smartphone required.
 - [Plastic Bag Ban Causal Analysis](https://vickyfeliren.com/usecases/plastic-bag-ban-causal-analysis/): IEEE ICISS 2021 (First Author). Difference-in-differences analysis of Jakarta's 2020 plastic bag ban using 100,000+ NLP-classified citizen complaints.
+- [Qwen VL Fine-tuning for AI City Challenge 2026](https://vickyfeliren.com/usecases/aicity-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 
 ### Ongoing Projects
-- [Qwen VL Fine-tuning — ECCV Workshop 2026](https://vickyfeliren.com/usecases/eccv-workshop-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 - [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. First systematic CP evaluation across VLN-DUET and VLN-HAMT. 21 propagation formulations benchmarked; log-prob penalty achieves 18–47% set efficiency improvement.
 - [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
 ## Key Research
 
-- **SEA-VL** (ACL 2025, Core Contributor — Data Pipeline Lead): Multicultural vision-language dataset for Southeast Asia — 10,000+ image-question pairs across 11 SEA languages, 100+ annotators. https://aclanthology.org/2025.acl-long.916/
-- **ProCANet** (IEEE GRSL 2025, First Author): Progressive cross-attention network for flood segmentation using multispectral satellite imagery — IoU 0.815, F1 0.898 on Sen1Floods11. https://ieeexplore.ieee.org/document/10750225
-- **Mining Segmentation** (Remote Sensing of Environment, IF 11.4, 2025, Co-Author): Multi-modal deep learning for global mining footprint delineation — first use of a geospatial foundation model on this task. https://doi.org/10.1016/j.rse.2024.114584
+- **SEA-VL** (ACL 2025, Core Contributor, Data Pipeline Lead): Multicultural vision-language dataset for Southeast Asia, 10,000+ image-question pairs across 11 SEA languages, 100+ annotators. https://aclanthology.org/2025.acl-long.916/
+- **ProCANet** (IEEE GRSL 2025, First Author): Progressive cross-attention network for flood segmentation using multispectral satellite imagery, IoU 0.815, F1 0.898 on Sen1Floods11. https://ieeexplore.ieee.org/document/10750225
+- **Mining Segmentation** (Remote Sensing of Environment, IF 11.4, 2025, Co-Author): Multi-modal deep learning for global mining footprint delineation, first use of a geospatial foundation model on this task. https://doi.org/10.1016/j.rse.2024.114584
 - **CommonLID** (ACL 2026, Contributor): Language identification benchmark for noisy web data across 109 languages. https://arxiv.org/abs/2601.18026
 - **GG-EZ** (Under review, Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
@@ -57,46 +58,46 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Press Features
 
 - [SEA's AI law trap: who really pays?](https://www.techinasia.com/seas-ai-law-trap-pays) (Tech in Asia, Jun 2026): Featured contributor on who bears the real cost as Southeast Asian governments race to regulate AI.
-- [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026, paywalled): Featured coverage on AI regulation across Southeast Asia — emerging rules, enforcement risks, and compliance requirements.
-- [AI rules in South-East Asia: Risks, fines, and everything else you need to know](https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know) (Business Times, Jun 2026): Same story, open access — AI regulation landscape across Southeast Asia, enforcement risks, and compliance requirements.
+- [AI rules in SEA: the risks, the fines, what you need to know](https://www.techinasia.com/ai-rules-sea-risks-fines) (Tech in Asia, Jun 2026, paywalled): Featured coverage on AI regulation across Southeast Asia, emerging rules, enforcement risks, and compliance requirements.
+- [AI rules in South-East Asia: Risks, fines, and everything else you need to know](https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know) (Business Times, Jun 2026): Same story, open access, AI regulation landscape across Southeast Asia, enforcement risks, and compliance requirements.
 
 ## Talks & Public Speaking
 
-- PyPalu, Sulawesi Tengah, Indonesia (May 2026): Python for localized context — Python community meetup.
+- PyPalu, Sulawesi Tengah, Indonesia (May 2026): Python for localized context, Python community meetup.
 - Bank of Indonesia (Oct 2024): Invited talk on data synthesis, data privacy, and responsible data management.
-- Bina Nusantara University (Nov 2024): Guest lecture on computer vision — from CNNs to Transformers through semantic segmentation.
+- Bina Nusantara University (Nov 2024): Guest lecture on computer vision, from CNNs to Transformers through semantic segmentation.
 - Available Q3 2026 for conference talks, podcasts, and panels on trustworthy AI, conformal prediction, and AI for Southeast Asia.
 
 ## Awards & Recognition
 
-- Microsoft Azure Virtual Hackathon APAC — Regional Champion (2020): APAC-wide, Microsoft-featured.
-- CamvsCovid, University of Cambridge — Top 3 Globally (2020): Built TeleHealthMonitor for COVID-19 remote patient monitoring.
-- Cal Hacks 8.0, UC Berkeley — Best Community Track (2020): Built community IVR voice AI for offline Indonesian communities.
-- Reboot the Earth, UN Technology Innovation Labs — Top 10 (2019): Global climate and sustainability solutions challenge.
-- IISF 2024 — Most Visionary Research: AI and remote sensing for biodiversity impact from energy transition mining.
+- Microsoft Azure Virtual Hackathon APAC, Regional Champion (2020): APAC-wide, Microsoft-featured.
+- CamvsCovid, University of Cambridge, Top 3 Globally (2020): Built TeleHealthMonitor for COVID-19 remote patient monitoring.
+- Cal Hacks 8.0, UC Berkeley, Best Community Track (2020): Built community IVR voice AI for offline Indonesian communities.
+- Reboot the Earth, UN Technology Innovation Labs, Top 10 (2019): Global climate and sustainability solutions challenge.
+- IISF 2024, Most Visionary Research: AI and remote sensing for biodiversity impact from energy transition mining.
 - Monash Indonesia Inaugural Welcome Scholarship (2024): Awarded for research potential in regional AI.
-- Deep Learning Nanodegree, Facebook & Udacity — Scholarship (2018).
+- Deep Learning Nanodegree, Facebook & Udacity, Scholarship (2018).
 - Jeffrey Cheah Entrance Scholarship, Sunway Education Group (2015).
-- Monash Hackathon — Top 3 (2019).
-- Monash University Coding Competition — Honorable Mention (2018).
+- Monash Hackathon, Top 3 (2019).
+- Monash University Coding Competition, Honorable Mention (2018).
 
 ## Education
 
-- Monash University — Master of Data Science (Expected Sept 2026, GPA 4.0/4.0). Thesis: conformal prediction for vision-language navigation.
-- BlueDot Impact — Technical AI Safety (Jun 2026): Cohort intensive covering alignment, interpretability, red-teaming, AI control.
-- Monash University — Bachelor of Computer Science (Dec 2019).
-- Nanyang Technological University — Computer Science Exchange Programme, Singapore (Jun–Dec 2018).
-- Udacity — Deep Learning Nanodegree (2019, Facebook AI scholarship recipient).
-- Monash CURIE Compass — Mentee, Centre for Undergraduate Research Initiatives and Excellence (Mar–Dec 2019).
+- Monash University, Master of Data Science (Expected Sept 2026, GPA 4.0/4.0). Thesis: conformal prediction for vision-language navigation.
+- BlueDot Impact, Technical AI Safety (Jun 2026): Cohort intensive covering alignment, interpretability, red-teaming, AI control.
+- Monash University, Bachelor of Computer Science (Dec 2019).
+- Nanyang Technological University, Computer Science Exchange Programme, Singapore (Jun–Dec 2018).
+- Udacity, Deep Learning Nanodegree (2019, Facebook AI scholarship recipient).
+- Monash CURIE Compass, Mentee, Centre for Undergraduate Research Initiatives and Excellence (Mar–Dec 2019).
 
 ## Writings
 
 - [The cost of becoming](https://medium.com/illumination/the-cost-of-becoming-78f7cd818fda) (May 2026, Personal): A poem for people tired of waiting for themselves.
 - [Four hours, one vendor, one airline](https://medium.com/illumination/four-hours-one-vendor-one-airline-1c0044b938c4) (May 2026, Engineering): What a four-hour American Airlines outage reveals about vendor dependency in modern infrastructure.
-- [If everyone forgets, why be good](https://medium.com/write-a-catalyst/if-everyone-forgets-why-be-good-0858bdac1bc2) (May 2026, Personal): On moral action when no one remembers — Mother Teresa, Aristotle, and what we owe the universe.
+- [If everyone forgets, why be good](https://medium.com/write-a-catalyst/if-everyone-forgets-why-be-good-0858bdac1bc2) (May 2026, Personal): On moral action when no one remembers, Mother Teresa, Aristotle, and what we owe the universe.
 - [Quality and Reliability for AI Engineers](https://medium.com/data-science-collective/quality-and-reliability-for-ai-engineers-b2f92f6406f8) (May 2026, Engineering): Practical guide to evaluation frameworks, failure modes, and engineering practices for trustworthy production AI.
 - [We all think our map is the territory](https://medium.com/illumination/we-all-think-our-map-is-the-territory-32b2e50848db) (May 2026, Research): On ethnocentrism as invisible cultural default and building global teams that hold multiple maps at once.
-- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4) (Jan 2026, Engineering): Why production ML needs conformal prediction — honest uncertainty quantification with mathematical coverage guarantees.
+- [Your model just killed someone's grandmother](https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4) (Jan 2026, Engineering): Why production ML needs conformal prediction, honest uncertainty quantification with mathematical coverage guarantees.
 - [The art of letting go while still caring](https://medium.com/illumination/the-art-of-letting-go-while-still-caring-d8e95ca5b063) (Jan 2026, Personal): Personal reflection on control and release.
 - [Meditation. 7 days. No phone. Noble silence.](https://medium.com/illumination/meditation-7-days-no-phone-noble-silence-ba3c8da021b3) (Dec 2025, Personal): A data scientist's experience at Taman Brahma Bali Usada.
 - [My initial exploration on Trustworthy AI](https://medium.com/technology-hits/my-initial-exploration-on-trustworthy-ai-76f6139f8956) (Nov 2025, Research): Bridging information theory and responsible ML.
@@ -122,7 +123,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Skills
 
 - category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'Uncertainty quantification and reliability for deployed AI — the gap between calibration scores and provable coverage guarantees.'
+  description: 'Uncertainty quantification and reliability for deployed AI, the gap between calibration scores and provable coverage guarantees.'
   skills:
     - 'Conformal Prediction'
     - 'Uncertainty Quantification'
@@ -133,7 +134,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
     - 'Hypothesis Testing'
 
 - category: 'RESEARCH: CULTURAL & GEOSPATIAL AI'
-  description: 'AI systems for underrepresented regions and environments — satellite imagery, multilingual benchmarks, and adaptation methods.'
+  description: 'AI systems for underrepresented regions and environments, satellite imagery, multilingual benchmarks, and adaptation methods.'
   skills:
     - 'Semantic Segmentation'
     - 'Multispectral Imaging'
@@ -143,7 +144,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
     - 'Pose Estimation'
 
 - category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
-  description: 'Model development from architecture design to deployment — multimodal, generative, and geospatial systems.'
+  description: 'Model development from architecture design to deployment, multimodal, generative, and geospatial systems.'
   skills:
     - 'PyTorch'
     - 'TensorFlow'
@@ -155,7 +156,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
     - 'Intel OpenVINO'
 
 - category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY'
-  description: 'Evaluation design and production monitoring — because a model is only as trustworthy as your ability to measure it.'
+  description: 'Evaluation design and production monitoring, because a model is only as trustworthy as your ability to measure it.'
   skills:
     - 'LLM-as-a-Judge'
     - 'Human-in-the-Loop Evaluation'
@@ -166,7 +167,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
     - 'Latency Benchmarking'
 
 - category: 'ENGINEERING: PRODUCTION ML & DATA'
-  description: 'Cloud-scale ML pipelines with distributed inference — designed and operated across GCP and AWS.'
+  description: 'Cloud-scale ML pipelines with distributed inference, designed and operated across GCP and AWS.'
   skills:
     - 'GCP (Vertex AI, BigQuery)'
     - 'AWS (EC2, S3, SageMaker)'
@@ -177,7 +178,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
     - 'Vector Database'
 
 - category: 'VISUALIZATION & ANALYTICS'
-  description: 'Translating model outputs and data findings into decisions — for technical and non-technical audiences alike.'
+  description: 'Translating model outputs and data findings into decisions, for technical and non-technical audiences alike.'
   skills:
     - 'Tableau'
     - 'Streamlit'

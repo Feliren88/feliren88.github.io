@@ -1,5 +1,5 @@
 - category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'Uncertainty quantification and reliability for deployed AI — the gap between calibration scores and provable coverage guarantees.'
+  description: 'Uncertainty quantification and reliability for deployed AI, the gap between calibration scores and provable coverage guarantees.'
   skills:
     - 'Conformal Prediction'
     - 'Uncertainty Quantification'
@@ -10,7 +10,7 @@
     - 'Hypothesis Testing'
 
 - category: 'RESEARCH: CULTURAL & GEOSPATIAL AI'
-  description: 'AI systems for underrepresented regions and environments — satellite imagery, multilingual benchmarks, and adaptation methods.'
+  description: 'AI systems for underrepresented regions and environments, satellite imagery, multilingual benchmarks, and adaptation methods.'
   skills:
     - 'Semantic Segmentation'
     - 'Multispectral Imaging'
@@ -20,7 +20,7 @@
     - 'Pose Estimation'
 
 - category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
-  description: 'Model development from architecture design to deployment — multimodal, generative, and geospatial systems.'
+  description: 'Model development from architecture design to deployment, multimodal, generative, and geospatial systems.'
   skills:
     - 'PyTorch'
     - 'TensorFlow'
@@ -32,7 +32,7 @@
     - 'Intel OpenVINO'
 
 - category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY'
-  description: 'Evaluation design and production monitoring — because a model is only as trustworthy as your ability to measure it.'
+  description: 'Evaluation design and production monitoring, because a model is only as trustworthy as your ability to measure it.'
   skills:
     - 'LLM-as-a-Judge'
     - 'Human-in-the-Loop Evaluation'
@@ -43,7 +43,7 @@
     - 'Latency Benchmarking'
 
 - category: 'ENGINEERING: PRODUCTION ML & DATA'
-  description: 'Cloud-scale ML pipelines with distributed inference — designed and operated across GCP and AWS.'
+  description: 'Cloud-scale ML pipelines with distributed inference, designed and operated across GCP and AWS.'
   skills:
     - 'GCP (Vertex AI, BigQuery)'
     - 'AWS (EC2, S3, SageMaker)'
@@ -54,7 +54,7 @@
     - 'Vector Database'
 
 - category: 'VISUALIZATION & ANALYTICS'
-  description: 'Translating model outputs and data findings into decisions — for technical and non-technical audiences alike.'
+  description: 'Translating model outputs and data findings into decisions, for technical and non-technical audiences alike.'
   skills:
     - 'Tableau'
     - 'Streamlit'

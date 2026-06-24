@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Writings
-description: Articles on trustworthy AI, conformal prediction, multimodal systems, Southeast Asian AI, and personal reflections — published on Medium.
+description: Articles on trustworthy AI, conformal prediction, multimodal systems, Southeast Asian AI, and personal reflections, published on Medium.
 permalink: /writings/
 ---
 

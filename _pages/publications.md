@@ -10,7 +10,7 @@ permalink: /research/
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "@id": "https://vickyfeliren.com/research/",
-  "name": "Research & Publications — Vicky Feliren",
+  "name": "Research & Publications, Vicky Feliren",
   "description": "Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.",
   "url": "https://vickyfeliren.com/research/",
   "author": {
