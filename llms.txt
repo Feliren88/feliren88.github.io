@@ -2,7 +2,7 @@
 
 > Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models
 
-Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Data Scientist working on two problems: making AI systems know when to trust themselves (conformal prediction for vision-language models), and making them culturally relevant to the regions they were never designed for (AI for Southeast Asia). M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.
+Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Data Scientist working on two problems. The first is making AI systems know when to trust themselves (conformal prediction for vision-language models). The second is making them culturally relevant to the regions they were never designed for (AI for Southeast Asia). M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.
 
 ## Pages
 
@@ -30,7 +30,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ### Production ML, Industry
 - [Share of Voice Forecasting](https://vickyfeliren.com/usecases/share-of-voice-forecasting/): Artefact (2025). XGBoost + split conformal prediction for Fortune 500 brand SoV forecasting across 6 APAC markets. Calibrated prediction intervals with 90% empirical coverage target.
 - [Biometric Auth & Credit Scoring](https://vickyfeliren.com/usecases/biometric-authentication-credit-scoring/): GDP Labs (2021–2023). MobileNet/OpenVINO biometric stack at 1M+ daily inferences, 99.99% uptime. OJK-compliant alternative credit scoring; 35% loan approval efficiency improvement.
-- [Fraud Detection Pipeline](https://vickyfeliren.com/usecases/fraud-detection-pipeline/): GDP Labs (2021–2023). Multi-stage pipeline: rule-based pre-filters + XGBoost + graph anomaly detection with Kafka streaming and Redis feature store.
+- [Fraud Detection Pipeline](https://vickyfeliren.com/usecases/fraud-detection-pipeline/): GDP Labs (2021–2023). Multi-stage pipeline combining rule-based pre-filters, XGBoost, and graph anomaly detection with Kafka streaming and a Redis feature store.
 - [Municipal Waste Forecasting](https://vickyfeliren.com/usecases/municipal-waste-forecasting/): Jakarta Smart City (2021). Facebook Prophet ensemble for 10M-resident waste logistics; causal DiD analysis of plastic bag ban. 15% operational efficiency improvement. IEEE ICISS 2021.
 - [Demand Forecasting, Consulting](https://vickyfeliren.com/usecases/demand-forecasting-consulting/): Artefact (2025). Audience reach and transaction volume forecasting for Fortune 500 media and financial clients under 2-week consulting cadence.
 
