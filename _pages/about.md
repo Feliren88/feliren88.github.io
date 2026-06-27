@@ -132,7 +132,7 @@ redirect_to: /
   <p class="column-title" style="margin-top:2rem">PROFESSIONAL SERVICE</p>
   <ul class="award-pills">
     {% for item in site.data.awards.service %}
-    <li><strong>{{ item.role }}</strong>, {{ item.description }}</li>
+    <li><strong>{{ item.role }}:</strong> {{ item.description }}</li>
     {% endfor %}
   </ul>
 </div>
