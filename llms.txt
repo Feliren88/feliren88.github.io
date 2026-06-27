@@ -64,6 +64,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Talks & Public Speaking
 
 - PyPalu, Sulawesi Tengah, Indonesia (May 2026): Python for localized context, Python community meetup.
+- [MUSE, How Data Science Differs in Each Sector](https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector) (Monash University Indonesia, 2025): Panel speaker on how data science practice differs across industry sectors.
 - Bank of Indonesia (Oct 2024): Invited talk on data synthesis, data privacy, and responsible data management.
 - Bina Nusantara University (Nov 2024): Guest lecture on computer vision, from CNNs to Transformers through semantic segmentation.
 - Available Q3 2026 for conference talks, podcasts, and panels on trustworthy AI, conformal prediction, and AI for Southeast Asia.

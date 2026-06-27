@@ -60,5 +60,17 @@ redirect_to: /about/
       </li>
       {% endfor %}
     </ol>
+
+    <p class="column-title" style="margin-top:1.2rem">SPEAKING</p>
+    <ol id="talks-list" class="timeline short">
+      {% for item in site.data.experience.talks %}
+      <li>
+        <p class="time">{{ item.dates }}</p>
+        <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+        <p class="loc">{{ item.location }}</p>
+        {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
   </div>
 </div>
