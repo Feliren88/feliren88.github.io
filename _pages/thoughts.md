@@ -5,6 +5,27 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
+{% if site.data.notes %}
+<div class="notes-section">
+  <p class="t-eyebrow" style="margin-bottom:0.5rem">Research Notes</p>
+  <p class="section-note" style="margin-top:0">Short distillations of papers I have an opinion about — what the work shows, and what I think it misses.</p>
+  <div class="notes-list">
+    {% for note in site.data.notes %}
+    <div class="note-item">
+      <div class="note-item-top">
+        <span class="note-item-paper">{{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}{% if note.venue %} · {{ note.venue }} {{ note.year }}{% endif %}</span>
+        {% if note.date %}<span class="note-item-date">{{ note.date }}</span>{% endif %}
+      </div>
+      <h3 class="note-item-title">{{ note.title }}</h3>
+      <p class="note-item-take">{{ note.take }}</p>
+      {% if note.link %}<a class="note-item-link" href="{{ note.link }}" target="_blank" rel="noreferrer">Read the paper →</a>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="writings-divider"></div>
+{% endif %}
+
 {% if site.data.features %}
 <div class="features-section">
   <p class="t-eyebrow" style="margin-bottom:0.75rem">Featured In</p>
@@ -52,9 +73,9 @@ permalink: /writings/
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
 <div class="filter-bar" role="group" aria-label="Filter writings by category">
-  <button class="filter-pill is-active" data-filter="all">All</button>
+  <button class="filter-pill" data-filter="all">All</button>
+  <button class="filter-pill is-active" data-filter="Research">Research</button>
   <button class="filter-pill" data-filter="Engineering">Engineering</button>
-  <button class="filter-pill" data-filter="Research">Research</button>
   <button class="filter-pill" data-filter="Personal">Personal</button>
 </div>
 <p class="th-count" id="thought-count" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -100,7 +121,7 @@ permalink: /writings/
     });
   });
 
-  applyFilter('all');
+  applyFilter('Research');
 })();
 </script>
 
@@ -211,6 +232,58 @@ permalink: /writings/
     margin: 1.75rem 0 1.5rem;
     border-top: 1px solid var(--line);
   }
+
+  /* ── Research Notes ──────────────────────────────────── */
+  .notes-section { margin-bottom: 0.5rem; }
+  .notes-list { display: grid; gap: 1rem; margin-top: 1rem; }
+  .note-item {
+    padding: var(--card-pad-sm);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    background: var(--surface);
+  }
+  .note-item-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .note-item-paper {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+  }
+  .note-item-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .note-item-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .note-item-take {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .note-item-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .note-item-link:hover { text-decoration: underline; }
 
   .th-count {
     margin: 0 0 0.7rem;

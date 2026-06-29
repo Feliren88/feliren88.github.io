@@ -19,7 +19,7 @@ feliren88.github.io/
 ├── _layouts/
 │   ├── default.html   # Base layout with SEO, skip link, font preloads
 │   ├── page.html      # Generic page template (extends default)
-│   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections)
+│   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -38,7 +38,8 @@ feliren88.github.io/
 │   ├── publications.yml  # Each entry requires a `kind` field for filter routing
 │   ├── awards.yml
 │   ├── features.yml      # Press features / media coverage — rendered at top of /writings/ above Medium articles
-│   ├── thoughts.yml
+│   ├── notes.yml         # Research notes — short paper distillations with own take; rendered at top of /writings/ (newest first)
+│   ├── thoughts.yml      # Medium articles — ORDERED for homepage "Insights" strip (first 3 surface there); /writings/ defaults to the Research filter
 │   ├── contact.yml
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)

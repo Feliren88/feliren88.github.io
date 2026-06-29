@@ -52,7 +52,7 @@ permalink: /research/
 
 <div class="filter-bar" role="group" aria-label="Filter publications by research area">
   <button class="filter-pill is-active" data-filter="all">All</button>
-  <button class="filter-pill" data-filter="geospatial">Geospatial</button>
+  <button class="filter-pill" data-filter="geospatial">Earth Observation</button>
   <button class="filter-pill" data-filter="cultural">Cultural AI</button>
   <button class="filter-pill" data-filter="nlp">Language</button>
   <button class="filter-pill" data-filter="applied">Applied</button>

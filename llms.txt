@@ -2,7 +2,7 @@
 
 > Applied Scientist specializing in Trustworthy Multimodal AI and Vision-Language Models
 
-Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Data Scientist working on two problems. The first is making AI systems know when to trust themselves (conformal prediction for vision-language models). The second is making them culturally relevant to the regions they were never designed for (AI for Southeast Asia). M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.
+Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Data Scientist working on one question from two sides. The first is getting AI systems to surface what they actually know and to hold back when they should (trustworthy multimodal AI, conformal prediction, eliciting latent knowledge, interpretability and activation steering for safety). The second is making that reliability hold for the languages and contexts the systems were never trained on (multilingual AI safety, AI for Southeast Asia). Multimodal AI applied to earth observation is one place this agenda is pressure-tested against messy real-world data. M.Sc. candidate at Monash University. Published in IEEE, ACL, and Remote Sensing of Environment.
 
 ## Pages
 
@@ -15,7 +15,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 
 ## Use Cases (individual pages)
 
-### Geospatial AI & Remote Sensing
+### Multimodal AI · Earth Observation
 - [Flood Segmentation, ProCANet](https://vickyfeliren.com/usecases/procaenet-flood-segmentation/): First-author IEEE GRSL 2025. Progressive cross-attention network for multispectral satellite flood segmentation. IoU 0.815 on Sen1Floods11; zero-shot transfer to PlanetScope across 6,112 km².
 - [Mining Footprint Detection](https://vickyfeliren.com/usecases/mining-footprint-segmentation/): Remote Sensing of Environment Q1 (IF 11.4) 2025. Multi-modal deep learning fusing Sentinel-2, SAR, and DEM for continental-scale mining footprint delineation. First application of a geospatial foundation model (Prithvi) to this task.
 - [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.

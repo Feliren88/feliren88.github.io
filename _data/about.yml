@@ -34,13 +34,14 @@ hero:
   - "The other thread in my work is cultural inclusion. Southeast Asia is one of the world's most linguistically and visually diverse regions, and it's almost entirely absent from the training data and benchmarks that define what modern AI can and cannot do. I've been building the datasets, benchmarks, and adaptation methods to change that, with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and through my <a href='/research/'>own research</a>."
 
 sections:
-  - title: 'Research Focus'
+  - title: 'Research Agenda'
+    content: "I work on one question from two sides. Getting a model to surface what it actually knows, and to hold back when it should, reliably, for the languages and contexts it was never trained on. Three open problems I would bet on, and the place I pressure-test them. Each sits in the gap between two communities that rarely talk to each other, which is usually where the tractable and neglected work hides."
     cards:
-      - title: 'Trustworthy AI'
-        description: 'Conformal prediction for vision-language models. Uncertainty quantification backed by statistical guarantees that hold up where calibration heuristics fall short.'
-      - title: 'Cultural AI'
-        description: "Vision-language benchmarks and adaptation methods for Southeast Asia. Making AI systems actually reflect the world they're deployed in."
-      - title: 'Geospatial AI'
-        description: 'Remote sensing and satellite imagery for flood segmentation, mining mapping, and environmental monitoring. Published in IEEE and Remote Sensing of Environment.'
-      - title: 'Production ML'
-        description: 'End-to-end ML systems spanning the full path from research to deployment, with cloud infrastructure, inference at scale, and reliability engineering.'
+      - title: 'Saying what you know, in any language'
+        description: "Models often state a confident falsehood while their own representations encode the correct answer, and the gap widens when the modalities disagree or the query is in a low-resource language. I want systems that defer to their own better-supported internal belief, and I want us to actually measure how this failure shifts across languages, because almost no one does. A model that confidently states a falsehood it could have flagged is a deployment hazard, not a rounding error."
+      - title: 'Whether our safety tools even work outside English'
+        description: "Probing and activation steering are becoming the core tools for reading a model's internal state for deception, refusal, or harmful intent. Almost all of that work is validated in English, and we do not know whether a probe or a steering vector transfers to another language or fails silently outside it. If internal monitoring holds for English and breaks for the languages most of the world actually uses, the safety stack carries a language-shaped hole and a false sense of security with it."
+      - title: 'Making "I do not know" trustworthy, with guarantees'
+        description: "Deployed and agentic multimodal systems need to know when not to act, but their confidence signals are poorly calibrated and carry no guarantees. Conformal prediction gives distribution-free coverage guarantees, and extending it to multimodal, sequential, and free-form generation is largely open. An agent that acts confidently when it should defer is a direct path to loss of control. Calibrated, guaranteed abstention is one of the few safety levers I can make rigorous."
+      - title: 'Where it gets tested'
+        description: "These ideas have to survive contact with messy data. I pressure-test them in vision-language navigation, the subject of my thesis, in multimodal models for earth observation published in IEEE and Remote Sensing of Environment, and in open multilingual AI for Southeast Asia with SEACrowd and SEA-VL. The regions and sensors that English-first, benchmark-first AI never really sees."

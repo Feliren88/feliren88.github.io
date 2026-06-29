@@ -1,0 +1,38 @@
+# Research notes — short distillations of papers I have an opinion about.
+# Each note: my framing as `title`, the paper, and `take` (what it shows + what I think it misses).
+# Newest first.
+
+- title: "Conformal guarantees are only as honest as the exchangeability they assume"
+  paper: "Language Models with Conformal Factuality Guarantees"
+  authors: "Christopher Mohri, Tatsunori Hashimoto"
+  venue: "ICML"
+  year: "2024"
+  link: "https://arxiv.org/abs/2402.10978"
+  date: "Jun 2026"
+  take: >
+    This is the cleanest demonstration I know that you can wrap a language model's
+    output in a distribution-free correctness guarantee instead of a vibe. What I
+    keep flagging is the fine print. The guarantee rides on exchangeability, and the
+    settings I actually care about, agents acting over time, multimodal inputs,
+    free-form generation, low-resource languages, are exactly the ones where
+    exchangeability quietly fails. I read this less as a solved problem and more as
+    the strongest available foundation to build the non-exchangeable, multimodal
+    version on. That gap is most of why I think guaranteed abstention is still wide open.
+
+- title: "We can steer a model toward honesty. We have only checked that in English"
+  paper: "Representation Engineering: A Top-Down Approach to AI Transparency"
+  authors: "Andy Zou et al."
+  venue: "arXiv"
+  year: "2023"
+  link: "https://arxiv.org/abs/2310.01405"
+  date: "Jun 2026"
+  take: >
+    Representation engineering made the case that high-level properties like honesty
+    and harmlessness live in directions you can read off and push on, and it is fast
+    becoming part of the default safety toolkit. My worry is methodological. Almost
+    every result is validated in English, and we keep treating the probes and steering
+    vectors as if they were language-agnostic without checking. If an honesty direction
+    transfers cleanly to a low-resource language, that is a strong and useful claim. If
+    it fails silently, we have shipped a monitor that is blind exactly where human
+    oversight is already thinnest. Either way someone has to test it, and that is
+    squarely the work I want to do.

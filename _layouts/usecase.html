@@ -54,6 +54,27 @@ layout: default
   </div>
   {% endif %}
 
+  {% if uc.why_this %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">Why I chose this problem</span>
+    <p class="uc-section-body">{{ uc.why_this }}</p>
+  </div>
+  {% endif %}
+
+  {% if uc.surprise %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">What surprised me</span>
+    <p class="uc-section-body">{{ uc.surprise }}</p>
+  </div>
+  {% endif %}
+
+  {% if uc.next %}
+  <div class="uc-page-section">
+    <span class="uc-section-label">What I would do next</span>
+    <p class="uc-section-body">{{ uc.next }}</p>
+  </div>
+  {% endif %}
+
   {% if uc.metrics %}
   <div class="uc-metrics" aria-label="Key metrics">
     {% for pair in uc.metrics %}

@@ -489,6 +489,33 @@ usecases:
 
     team_scale: "3 co-first authors"
 
+    why_this: >
+      Cross-modal conflict is usually studied as an English-only curiosity. What
+      pulled me in was the safety framing. The moment a model stops trusting its
+      eyes and starts obeying a false caption is exactly the moment it becomes
+      dangerous, and the people most exposed to that failure speak the languages
+      our evaluations ignore. The problem sits in the gap between interpretability
+      and low-resource NLP, two communities that rarely test each other's claims,
+      and that gap is where I think the tractable, neglected work hides.
+
+    surprise: >
+      The behaviour and the representation came apart. As we moved down the
+      resource axis the models capitulated to false text far more often, yet the
+      internal signal that separates trusting the image from following the caption
+      stayed almost as decodable in a low-resource language as in English. The model
+      still knew. It just stopped acting on what it knew. That dissociation, not the
+      headline accuracy drop, is the result I keep thinking about, because it reframes
+      the failure as one of elicitation rather than of knowledge.
+
+    next: >
+      Two directions. First, push the cross-lingual steering result from a hackathon
+      proof into a real method, stress-testing how far an honesty direction fit in
+      one language transfers across many and finding where it breaks. Second, treat
+      this as the measurement gap it exposes, a standard, perception-controlled way
+      to audit when a multimodal model should abstain and does not, across languages,
+      so safety claims stop being English-shaped, and then put coverage guarantees on
+      top so abstention is something you can bound rather than hope for.
+
   # ──────────────────────────────────────────
 
   - id: sea-vl-benchmark
