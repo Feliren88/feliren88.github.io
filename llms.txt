@@ -7,10 +7,10 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Pages
 
 - [Home](https://vickyfeliren.com/): Hero, research identity and entry point
-- [About](https://vickyfeliren.com/about/): Bio, research focus, expertise, work history, and awards
+- [About](https://vickyfeliren.com/about/): Bio, research agenda, expertise, work history, and awards
 - [Research](https://vickyfeliren.com/research/): Publications, IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
-- [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across geospatial AI, cultural NLP, production fintech, and hackathon projects
-- [Writings](https://vickyfeliren.com/writings/): Press features and personal articles, Tech in Asia coverage and Medium essays on AI, philosophy, and life
+- [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across multimodal AI, multilingual and cultural NLP, earth observation, production fintech, and hackathon projects
+- [Writings](https://vickyfeliren.com/writings/): Research notes (short paper distillations with own take), press features, and Medium essays on AI, philosophy, and life. Defaults to the Research filter.
 - [Work With Me](https://vickyfeliren.com/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
 
 ## Use Cases (individual pages)
@@ -54,6 +54,13 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 - **GG-EZ** (Under review, Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
 - **Plastic Bag Ban** (IEEE ICISS 2021, First Author): Causal policy analysis of Jakarta's plastic bag ban using citizen complaint data. https://ieeexplore.ieee.org/document/9533236/
+
+## Research Notes
+
+Short distillations of papers, with own take (what the work shows and what it misses). Published at the top of the Writings page.
+
+- **Conformal guarantees are only as honest as the exchangeability they assume** (Jun 2026), on "Language Models with Conformal Factuality Guarantees" (Mohri & Hashimoto, ICML 2024): The cleanest demonstration that you can wrap an LM output in a distribution-free correctness guarantee, but the guarantee rides on exchangeability, which fails in the agentic, multimodal, free-form, low-resource settings that matter. https://arxiv.org/abs/2402.10978
+- **We can steer a model toward honesty. We have only checked that in English** (Jun 2026), on "Representation Engineering: A Top-Down Approach to AI Transparency" (Zou et al., 2023): Honesty and harmlessness live in readable, steerable directions and this is becoming default safety tooling, but it is validated almost entirely in English and we do not know whether the probes and steering vectors transfer to other languages or fail silently. https://arxiv.org/abs/2310.01405
 
 ## Press Features
 
@@ -124,28 +131,30 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 ## Skills
 
 - category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'Uncertainty quantification and reliability for deployed AI, the gap between calibration scores and provable coverage guarantees.'
+  description: 'Knowing when a model should defer, and proving it. Distribution-free guarantees and reliability for deployed AI, beyond calibration scores.'
   skills:
     - 'Conformal Prediction'
     - 'Uncertainty Quantification'
     - 'Vision-Language Models'
+    - 'Interpretability'
     - 'Knowledge Distillation'
     - 'Causal Inference'
     - 'A/B Testing'
     - 'Hypothesis Testing'
 
-- category: 'RESEARCH: CULTURAL & GEOSPATIAL AI'
-  description: 'AI systems for underrepresented regions and environments, satellite imagery, multilingual benchmarks, and adaptation methods.'
+- category: 'RESEARCH: MULTILINGUAL & MULTIMODAL AI'
+  description: 'Making reliability and safety hold for the languages and contexts AI was never built for. Probing and steering internal states, multilingual benchmarks, adaptation methods, and earth-observation models that pressure-test the work against messy data.'
   skills:
+    - 'Activation Steering'
+    - 'Linear Probing'
+    - 'Cultural Benchmarking'
+    - 'Vision-Language Adaptation'
     - 'Semantic Segmentation'
     - 'Multispectral Imaging'
     - 'Google Earth Engine'
-    - 'Cultural Benchmarking'
-    - 'Vision-Language Adaptation'
-    - 'Pose Estimation'
 
 - category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
-  description: 'Model development from architecture design to deployment, multimodal, generative, and geospatial systems.'
+  description: 'Model development from architecture design to deployment, multimodal, generative, and earth-observation systems.'
   skills:
     - 'PyTorch'
     - 'TensorFlow'

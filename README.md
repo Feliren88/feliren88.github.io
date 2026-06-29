@@ -1,10 +1,17 @@
 # Vicky Feliren - Personal Website
 
-Personal portfolio website for Vicky Feliren - Applied Scientist specializing in Multimodal AI, Vision-Language Models, and Remote Sensing. Built with Jekyll static site generator.
+Personal portfolio website for Vicky Feliren - Applied Scientist working on trustworthy, multimodal, and multilingual AI: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Built with Jekyll static site generator.
 
 ## Changelog
 
-### May 2026 (latest)
+### June 2026 (latest)
+- **Research-agenda repositioning.** Shifted the site narrative from "what I did" to "what I think matters and why." Remote sensing / earth observation reframed from an identity label to a proof point.
+- Homepage "Research Focus" → **"Research Agenda"** (`_data/about.yml`): three open problems with the *why*, stated without metrics
+- Added a **Research Notes** stream (`_data/notes.yml`) of short paper distillations at the top of `/writings/`; `/writings/` now defaults to the **Research** filter; `_data/thoughts.yml` reordered so the homepage Insights strip leads with research/judgment pieces
+- Added a reusable **Research Note** block to `usecase.html` (`why_this` / `surprise` / `next` fields), authored for the multilingual VLM cross-modal-conflict study
+- Reframed identity surfaces: hero eyebrow (`index.yml`), Person schema `knowsAbout`/`skills` (`default.html`), `_config.yml` keywords, `_data/skills.yml` categories, `llms.txt`, and the research filter label (Geospatial → Earth Observation). Journal credentials (IEEE, ACL, Remote Sensing of Environment) retained as evidence.
+
+### May 2026
 - Confirmed canonical SEO setup: `url: "https://vickyfeliren.com"` in `_config.yml` + `jekyll-seo-tag` generates correct `<link rel="canonical">` on every page; `robots.txt` sitemap points to `vickyfeliren.com`
 - Updated `llms.txt`: added "Quality and Reliability for AI Engineers" article (was missing from Writings section)
 - Updated `README.md` and `CLAUDE.md` project structure: added `usecase.html` layout, `_pages/usecases/` directory, `_data/usecases.yml`, `_data/timeline.yml`, `js/components/timeline.js`, `llms.txt`, `robots.txt`
@@ -62,7 +69,7 @@ feliren88.github.io/
 ├── _layouts/
 │   ├── default.html   # Base layout with SEO, skip link, font preloads
 │   ├── page.html      # Generic page template (extends default)
-│   └── usecase.html   # Use case detail template (extends default)
+│   └── usecase.html   # Use case detail template (extends default); optional why_this/surprise/next fields render a "Research Note" block
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -72,7 +79,7 @@ feliren88.github.io/
 │   ├── thoughts.md
 │   ├── contact.md
 │   ├── usecases.md    # Use cases listing page
-│   └── usecases/      # Individual use case detail pages (19 files)
+│   └── usecases/      # Individual use case detail pages (20 files)
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml
@@ -80,9 +87,11 @@ feliren88.github.io/
 │   ├── experience.yml
 │   ├── publications.yml
 │   ├── awards.yml
-│   ├── thoughts.yml
+│   ├── thoughts.yml   # Medium articles — ordered to drive the homepage Insights strip
+│   ├── notes.yml      # Research notes — short paper distillations with own take
+│   ├── features.yml   # Press features / media coverage
 │   ├── contact.yml
-│   ├── usecases.yml   # All use case content (88 KB)
+│   ├── usecases.yml   # All use case content
 │   └── timeline.yml   # Project timeline entries
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin/latin-ext subsets only
@@ -136,9 +145,9 @@ Person schema in `_layouts/default.html` covers:
 | `@type` | Person |
 | `@id` | `https://vickyfeliren.com/` |
 | `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
-| `knowsAbout` | 6 AI/ML domains |
+| `knowsAbout` | 8 AI/ML domains (Trustworthy AI, Multimodal AI, AI Safety, Interpretability, Multilingual AI … Earth Observation last) |
 | `knowsLanguage` | English, Indonesian |
-| `award` | 5 awards (2019–2024) |
+| `award` | 10 awards (2015–2024) |
 | `memberOf` | SEACrowd, ACL, IEEE |
 | `colleague` | Risqi Saputra, Taufiq Asyhari |
 | `author` | ScholarlyArticle entries auto-generated from `_data/publications.yml` |
@@ -157,7 +166,9 @@ Content is managed through YAML data files in `_data/`. Each page corresponds to
 - `_data/experience.yml` — Work experience, education, patents, teaching
 - `_data/publications.yml` — Research publications
 - `_data/awards.yml` — Awards and service
-- `_data/thoughts.yml` — Medium writings
+- `_data/thoughts.yml` — Medium writings; ordered so the first three drive the homepage Insights strip
+- `_data/notes.yml` — Research notes (short paper distillations with own take); rendered atop `/writings/`
+- `_data/features.yml` — Press features / media coverage
 - `_data/contact.yml` — Contact information
 - `_data/usecases.yml` — All use case content, keyed by `id`; consumed by `usecase.html` layout
 - `_data/timeline.yml` — Project timeline entries; loaded by `timeline.js` on `/project/`

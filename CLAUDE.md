@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-Personal portfolio website for Vicky Feliren - Applied Scientist specializing in Multimodal AI, Vision-Language Models, and Remote Sensing. Built with Jekyll static site generator.
+Personal portfolio website for Vicky Feliren - Applied Scientist working on trustworthy, multimodal, and multilingual AI: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Earth observation (remote sensing) is framed as a proof point, not an identity. Built with Jekyll static site generator.
+
+**Narrative spine (apply to all copy):** identity = trustworthy · multimodal · multilingual AI safety. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages.
 
 ## Architecture
 
@@ -24,12 +26,12 @@ feliren88.github.io/
 │   ├── about.md
 │   ├── skills.md
 │   ├── experience.md
-│   ├── publications.md   # Research page — includes filter bar (Geospatial/Cultural AI/Language/Applied)
+│   ├── publications.md   # Research page — includes filter bar (Earth Observation/Cultural AI/Language/Applied)
 │   ├── awards.md
 │   ├── thoughts.md       # Writings page — uses unified .filter-pill filter bar
 │   ├── contact.md
 │   ├── usecases.md       # Use cases listing page — uses unified .filter-pill filter bar
-│   └── usecases/         # Individual use case detail pages (19 files) — each sets layout: usecase and uc_id
+│   └── usecases/         # Individual use case detail pages (20 files) — each sets layout: usecase and uc_id
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml         # tech_stack is now tiered: primary / framework / tool
@@ -72,9 +74,9 @@ Two JSON-LD blocks exist:
 **1. Person schema** — in `_layouts/default.html` (appears on every page). Properties:
 - Identity: `name`, `alternateName`, `gender`, `description` (includes he/him), `disambiguatingDescription`, `image`
 - Role: `jobTitle`, `alumniOf`, `worksFor` (both Monash University)
-- Knowledge: `knowsAbout` (6 domains), `knowsLanguage` (English, Indonesian)
-- Recognition: `award` (5 entries), `memberOf` (SEACrowd, ACL, IEEE)
-- Network: `colleague` (Risqi Saputra, Taufiq Asyhari), `sameAs` (10 profiles)
+- Knowledge: `knowsAbout` (8 domains, led by Trustworthy AI / Multimodal AI / AI Safety / Interpretability / Multilingual AI; Earth Observation last), `knowsLanguage` (English, Indonesian)
+- Recognition: `award` (10 entries), `memberOf` (SEACrowd, ACL, IEEE)
+- Network: `colleague` (Risqi Saputra, Taufiq Asyhari), `sameAs` (12 profiles)
 - Works: `author` array — **auto-generated from `_data/publications.yml`** via Liquid
 
 **2. CollectionPage + ScholarlyArticle schema** — in `_pages/publications.md` (research page only). Also auto-generated from `_data/publications.yml`.
