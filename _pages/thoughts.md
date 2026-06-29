@@ -5,12 +5,14 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
+<div class="essay-feature-block">
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
-  <span class="essay-feature-label">Essay</span>
-  <h2>Knowing when you don't know is the core safety property</h2>
-  <p>Why calibrated abstention, not raw capability, is what makes a model safe to deploy — and how first-principles philosophy and a technical agenda meet.</p>
-  <span class="read-more">Read the essay →</span>
+<span class="essay-feature-label">Essay</span>
+<span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
+<span class="essay-feature-desc">Why calibrated abstention, more than raw capability, is what makes a model safe to deploy.</span>
+<span class="read-more">Read the essay →</span>
 </a>
+</div>
 
 <div class="writings-divider"></div>
 
@@ -246,22 +248,22 @@ permalink: /writings/
   .essay-feature {
     display: block;
     text-decoration: none;
-    padding: var(--card-pad-lg);
-    border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
-    border-radius: 1rem;
-    background: color-mix(in srgb, var(--accent) 5%, var(--surface));
-    box-shadow: var(--shadow);
+    padding: var(--card-pad-sm) var(--card-pad-lg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    background: var(--surface);
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
-  .essay-feature:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+  .essay-feature:hover { border-left-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
   .essay-feature-label {
-    display: inline-block;
+    display: block;
     font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
   }
-  .essay-feature h2 { margin: 0 0 0.45rem; font-size: 1.25rem; line-height: 1.3; color: var(--text); border: none; padding: 0; }
-  .essay-feature p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
-  .essay-feature .read-more { display: inline-block; margin-top: 0.6rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
+  .essay-feature-title { display: block; font-family: var(--font-display, inherit); font-size: 1.15rem; font-weight: 700; line-height: 1.3; color: var(--text); margin-bottom: 0.35rem; }
+  .essay-feature-desc { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+  .essay-feature .read-more { display: inline-block; margin-top: 0.55rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
 
   /* ── Research Notes ──────────────────────────────────── */
   .notes-section { margin-bottom: 0.5rem; }
