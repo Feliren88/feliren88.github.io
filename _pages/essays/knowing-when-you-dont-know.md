@@ -2,9 +2,17 @@
 layout: page
 title: Knowing when you don't know is the core safety property
 subtitle: Why calibrated abstention, more than raw capability, is what makes a model safe to deploy
-description: An essay arguing that the central safety property of an AI system is not how much it knows but whether it knows the boundary of its own competence — and why that is a measurable, guaranteeable target.
+description: An essay arguing that the central safety property of an AI system is not how much it knows but whether it knows the boundary of its own competence, and why that is a measurable, guaranteeable target.
 permalink: /essays/knowing-when-you-dont-know/
 ---
+
+<style>
+  /* Essay page — keep the subtitle on one line and constrain reading width */
+  .page-header .subtitle { max-width: none; }
+  .page-content { max-width: 44rem; }
+  .page-content p { line-height: 1.8; }
+  @media (max-width: 760px) { .page-content { max-width: 100%; } }
+</style>
 
 We keep measuring intelligence by what a system can do. I think the more important question is whether it knows when it cannot. A model that answers everything does not impress me. A model that knows where its competence ends, and stops there, does.
 
