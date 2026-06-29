@@ -1,7 +1,7 @@
-eyebrow: 'APPLIED SCIENTIST · TRUSTWORTHY AI · MULTIMODAL & MULTILINGUAL AI'
+eyebrow: 'APPLIED SCIENTIST · AI SAFETY · TRUSTWORTHY MULTIMODAL & MULTILINGUAL AI'
 name: 'Vicky Feliren'
-lead1: 'I work on two problems. One is making AI systems know when to trust themselves. The other is making them work for the cultures and geographies they were never designed for.'
-lead2: 'Published in academic conferences and journals. Building open AI infrastructure for Southeast Asia.'
+lead1: 'I work on AI safety. One half is getting a model to surface what it actually knows and to hold back when it should. The other is making that reliability hold for the languages and contexts it was never built for.'
+lead2: 'Conformal prediction, interpretability, and abstention you can trust. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
 buttons:
   - label: 'Research'
     href: '/research/'

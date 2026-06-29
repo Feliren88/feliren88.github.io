@@ -2,7 +2,7 @@
 layout: page
 title: How I Work
 subtitle: Research and Engineering Practice
-description: Conformal prediction, vision-language models, geospatial AI, LLM evaluation, production ML on GCP and AWS, and visualization.
+description: AI safety, conformal prediction, interpretability and activation steering, vision-language models, multilingual AI, earth observation, LLM evaluation, and production ML on GCP and AWS.
 permalink: /expertise/
 redirect_to: /about/
 ---

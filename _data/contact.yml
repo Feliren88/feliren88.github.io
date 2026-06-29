@@ -1,18 +1,18 @@
-intro: 'Reliability and relevance. Every system I have built comes down to the same question. How do we know when to trust the model? And who is the model actually built for?'
-intro_sub: 'I work at the intersection of trustworthy AI and cultural inclusion in multimodal systems. If any of the below fits where you are, I would be glad to hear from you.'
+intro: 'Reliability and relevance. Every system I have built comes down to the same question. How do we know when to trust the model, when should it hold back, and who is it actually built for?'
+intro_sub: 'I work on AI safety for trustworthy, multimodal, and multilingual systems. If any of the below fits where you are, I would be glad to hear from you.'
 
 engagements:
-  - type: 'Speaking'
-    description: 'Conference talks, university lectures, and panel discussions, on multimodal AI, trustworthy AI, uncertainty quantification, or AI for underrepresented regions.'
   - type: 'Research Collaboration'
-    description: "Working on conformal prediction, vision-language models, geospatial AI, or cultural AI for underrepresented communities? Let's find the overlap."
+    description: "Working on AI safety, interpretability and steering, conformal prediction and abstention, eliciting latent knowledge, or whether internal monitoring holds up outside English? Let's find the overlap."
+  - type: 'Speaking'
+    description: 'Conference talks, university lectures, and panels on AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
   - type: 'Mentorship'
-    description: "I mentor early-career researchers and engineers navigating AI work in Southeast Asia, including graduate school applications and careers in applied science."
-  - type: 'International Roles'
-    description: 'Open to applied scientist and research roles internationally, particularly where the work connects to trustworthy or culturally grounded AI.'
+    description: "I mentor early-career researchers and engineers moving into AI safety and trustworthy AI, including graduate school applications and careers in applied science, especially across Southeast Asia."
+  - type: 'Research & Applied Roles'
+    description: 'Open to research and applied scientist roles internationally, particularly in AI safety, trustworthy AI, and reliability for multimodal and multilingual systems.'
 
-availability_headline: "Currently open for: research collaboration, conference talks, and mentorship."
-email_scope: "I respond to research collaboration, conference talks, AI consulting, and career mentorship."
+availability_headline: "Currently open for: AI safety research collaboration, conference talks, and mentorship."
+email_scope: "I respond to research collaboration (AI safety, trustworthy and multilingual AI), conference talks, and career mentorship."
 calendly_url: ""
 calendly_slots_label: "Two slots per month · Currently open: June 2026"
 calendly_open: false

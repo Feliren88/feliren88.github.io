@@ -5,6 +5,15 @@ description: Articles on trustworthy AI, conformal prediction, multimodal system
 permalink: /writings/
 ---
 
+<a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
+  <span class="essay-feature-label">Essay</span>
+  <h2>Knowing when you don't know is the core safety property</h2>
+  <p>Why calibrated abstention, not raw capability, is what makes a model safe to deploy — and how first-principles philosophy and a technical agenda meet.</p>
+  <span class="read-more">Read the essay →</span>
+</a>
+
+<div class="writings-divider"></div>
+
 {% if site.data.notes %}
 <div class="notes-section">
   <p class="t-eyebrow" style="margin-bottom:0.5rem">Research Notes</p>
@@ -232,6 +241,27 @@ permalink: /writings/
     margin: 1.75rem 0 1.5rem;
     border-top: 1px solid var(--line);
   }
+
+  /* ── Featured Essay ──────────────────────────────────── */
+  .essay-feature {
+    display: block;
+    text-decoration: none;
+    padding: var(--card-pad-lg);
+    border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .essay-feature:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+  .essay-feature-label {
+    display: inline-block;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .essay-feature h2 { margin: 0 0 0.45rem; font-size: 1.25rem; line-height: 1.3; color: var(--text); border: none; padding: 0; }
+  .essay-feature p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+  .essay-feature .read-more { display: inline-block; margin-top: 0.6rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
 
   /* ── Research Notes ──────────────────────────────────── */
   .notes-section { margin-bottom: 0.5rem; }

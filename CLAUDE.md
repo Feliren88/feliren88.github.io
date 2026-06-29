@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Personal portfolio website for Vicky Feliren - Applied Scientist working on trustworthy, multimodal, and multilingual AI: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Earth observation (remote sensing) is framed as a proof point, not an identity. Built with Jekyll static site generator.
+Personal portfolio website for Vicky Feliren - Applied Scientist working on **AI safety** for trustworthy, multimodal, and multilingual systems: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Earth observation (remote sensing) is framed as a proof point, not an identity. Built with Jekyll static site generator.
 
-**Narrative spine (apply to all copy):** identity = trustworthy · multimodal · multilingual AI safety. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages.
+**Narrative spine (apply to all copy):** identity = **AI safety** for trustworthy · multimodal · multilingual systems. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages. The hero, Person schema, contact engagements, and the Use Cases hierarchy (an `AI Safety & Reliability` category sorts first) all lead with safety. Long-form essays live in `_pages/essays/` (e.g. the bridge essay `knowing-when-you-dont-know`), featured atop `/writings/` and on the homepage.
 
 ## Architecture
 
@@ -31,7 +31,8 @@ feliren88.github.io/
 │   ├── thoughts.md       # Writings page — uses unified .filter-pill filter bar
 │   ├── contact.md
 │   ├── usecases.md       # Use cases listing page — uses unified .filter-pill filter bar
-│   └── usecases/         # Individual use case detail pages (20 files) — each sets layout: usecase and uc_id
+│   ├── usecases/         # Individual use case detail pages (20 files) — each sets layout: usecase and uc_id
+│   └── essays/           # Long-form essays (layout: page) — e.g. knowing-when-you-dont-know.md; featured atop /writings/ and homepage
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml         # tech_stack is now tiered: primary / framework / tool

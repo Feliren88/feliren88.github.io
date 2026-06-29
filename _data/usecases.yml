@@ -9,6 +9,15 @@ wip_notice: >
 # ============================================================
 
 categories:
+  - id: safety
+    label: AI Safety & Reliability
+    color: accent
+    description: >
+      Work on getting models to surface what they know and abstain when they
+      should. Multilingual cross-modal conflict and abstention, interpretability
+      and activation steering, and conformal prediction with coverage guarantees
+      for multimodal and sequential systems.
+
   - id: ongoing
     label: Ongoing Projects
     color: accent
@@ -18,7 +27,7 @@ categories:
       competition participation, and open-source contributions.
 
   - id: geospatial
-    label: Geospatial AI & Remote Sensing
+    label: Multimodal AI · Earth Observation
     color: accent
     description: >
       Deep learning systems operating on multispectral satellite imagery and
@@ -384,7 +393,7 @@ usecases:
 
   - id: multilingual-vlm-crossmodal-conflict
     title: "Do Multilingual VLMs Abstain Under Cross-Modal Conflict in Low-Resource Languages?"
-    category: cultural
+    category: safety
     tags:
       - Vision-Language Models
       - Multilingual AI
@@ -1605,7 +1614,7 @@ usecases:
 
   - id: vln-conformal-prediction
     title: "Conformal Prediction for Vision-and-Language Navigation (DUET + HAMT)"
-    category: ongoing
+    category: safety
     tags:
       - Conformal Prediction
       - Vision-Language Navigation

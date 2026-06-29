@@ -1,10 +1,16 @@
 # Vicky Feliren - Personal Website
 
-Personal portfolio website for Vicky Feliren - Applied Scientist working on trustworthy, multimodal, and multilingual AI: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Built with Jekyll static site generator.
+Personal portfolio website for Vicky Feliren - Applied Scientist working on **AI safety** for trustworthy, multimodal, and multilingual systems: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Built with Jekyll static site generator.
 
 ## Changelog
 
-### June 2026 (latest)
+### June 2026 — AI-safety-forward profile (latest)
+- **Identity → AI safety.** Hero eyebrow + `lead1`, About hero, Person schema (`description` / `disambiguatingDescription` / occupation), `_config.yml` description, and `llms.txt` now lead with AI safety (trustworthy, multimodal, multilingual).
+- **Use Cases hierarchy.** Added a leading `AI Safety & Reliability` category (sorts first via the `PRIORITY` map in `usecases.md`); re-tagged the multilingual VLM conflict study and the VLN conformal-prediction thesis into it. Geospatial label → "Multimodal AI · Earth Observation".
+- **Bridge essay** (`_pages/essays/knowing-when-you-dont-know.md`): "Knowing when you don't know is the core safety property" — featured atop `/writings/` and leading the homepage Insights.
+- **Homepage Insights** now leads with the essay and the safety research notes; **contact engagements** retuned toward AI-safety research collaboration (Research Collaboration first).
+
+### June 2026 — research-agenda repositioning
 - **Research-agenda repositioning.** Shifted the site narrative from "what I did" to "what I think matters and why." Remote sensing / earth observation reframed from an identity label to a proof point.
 - Homepage "Research Focus" → **"Research Agenda"** (`_data/about.yml`): three open problems with the *why*, stated without metrics
 - Added a **Research Notes** stream (`_data/notes.yml`) of short paper distillations at the top of `/writings/`; `/writings/` now defaults to the **Research** filter; `_data/thoughts.yml` reordered so the homepage Insights strip leads with research/judgment pieces
@@ -79,7 +85,8 @@ feliren88.github.io/
 │   ├── thoughts.md
 │   ├── contact.md
 │   ├── usecases.md    # Use cases listing page
-│   └── usecases/      # Individual use case detail pages (20 files)
+│   ├── usecases/      # Individual use case detail pages (20 files)
+│   └── essays/        # Long-form essays (e.g. knowing-when-you-dont-know.md)
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml
