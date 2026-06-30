@@ -42,7 +42,7 @@ feliren88.github.io/
 │   ├── awards.yml
 │   ├── features.yml      # Press features / media coverage — rendered at top of /writings/ above Medium articles
 │   ├── notes.yml         # Research notes — short paper distillations with own take; rendered at top of /writings/ (newest first)
-│   ├── thoughts.yml      # Medium articles — ORDERED for homepage "Insights" strip (first 3 surface there); /writings/ defaults to the Research filter
+│   ├── thoughts.yml      # Medium articles — ORDERED for homepage "Insights" strip (first 3 surface there); /writings/ defaults to the All filter
 │   ├── contact.yml
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)

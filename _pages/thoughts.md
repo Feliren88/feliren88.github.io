@@ -84,8 +84,8 @@ permalink: /writings/
 <p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
 
 <div class="filter-bar" role="group" aria-label="Filter writings by category">
-  <button class="filter-pill" data-filter="all">All</button>
-  <button class="filter-pill is-active" data-filter="Research">Research</button>
+  <button class="filter-pill is-active" data-filter="all">All</button>
+  <button class="filter-pill" data-filter="Research">Research</button>
   <button class="filter-pill" data-filter="Engineering">Engineering</button>
   <button class="filter-pill" data-filter="Personal">Personal</button>
 </div>
@@ -132,7 +132,7 @@ permalink: /writings/
     });
   });
 
-  applyFilter('Research');
+  applyFilter('all');
 })();
 </script>
 
@@ -250,12 +250,11 @@ permalink: /writings/
     text-decoration: none;
     padding: var(--card-pad-sm) var(--card-pad-lg);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 10px 10px 0;
+    border-radius: 10px;
     background: var(--surface);
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
-  .essay-feature:hover { border-left-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
+  .essay-feature:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
   .essay-feature-label {
     display: block;
     font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
@@ -271,8 +270,7 @@ permalink: /writings/
   .note-item {
     padding: var(--card-pad-sm);
     border: 1px solid var(--line);
-    border-left: 2px solid var(--accent);
-    border-radius: 0 8px 8px 0;
+    border-radius: 8px;
     background: var(--surface);
   }
   .note-item-top {
