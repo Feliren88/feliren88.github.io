@@ -2116,8 +2116,6 @@ html[data-theme="light"] .tech-tag--tool {
 .availability-hl {
   font-size: var(--fs-base);
   color: var(--muted);
-  border-left: 2px solid var(--accent);
-  padding-left: 0.75rem;
   margin: 0.4rem 0 1.5rem;
   line-height: 1.5;
 }
