@@ -13,7 +13,8 @@
 
   function getCurrentPage() {
     var path = window.location.pathname;
-    var item = NAV_ITEMS.find(function(n) { return path === n.href || path.startsWith(n.href + '/'); });
+    if (path.indexOf('/essays/') === 0) return '/writings';
+    var item = NAV_ITEMS.find(function(n) { return path === n.href || (n.href !== '/' && path.indexOf(n.href) === 0); });
     return item ? item.page : '/';
   }
 

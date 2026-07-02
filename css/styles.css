@@ -151,6 +151,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   color: var(--text);
   font-family: "Manrope", sans-serif;
   background:
@@ -580,6 +581,7 @@ h1 {
   margin: 0.5rem 0 0;
   color: var(--muted);
   font-size: var(--fs-sm);
+  max-width: 75ch;
 }
 
 .project-controls {
@@ -2089,6 +2091,12 @@ html[data-theme="light"] .tech-tag--tool {
     max-width: 500px;
     margin: 2rem auto;
     opacity: 1;
+  }
+}
+@media (max-width: 600px) {
+  .profile-bg--contact {
+    max-width: 300px;
+    margin: 1.25rem auto;
   }
 }
 .contact-reach-title {
