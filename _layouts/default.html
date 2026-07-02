@@ -123,7 +123,7 @@
         {% for pub in site.data.publications %}
         {
           "@type": "ScholarlyArticle",
-          "name": {{ pub.title | jsonify }},
+          "headline": {{ pub.title | jsonify }},
           "url": {{ pub.url | jsonify }},
           "description": {{ pub.abstract | jsonify }},
           "datePublished": {{ pub.year | jsonify }}{% if pub.publisher %},
