@@ -8,7 +8,7 @@
   publisher: 'Elsevier'
   url: 'https://doi.org/10.1016/j.rse.2024.114584'
   doi: '10.1016/j.rse.2024.114584'
-  date: "2025-03"
+  date: "2025-03-01T00:00:00Z"
   volume: "318"
   issn: '0034-4257'
   keywords: ['semantic segmentation', 'mining detection', 'multispectral satellite imagery', 'remote sensing', 'deep learning', 'geospatial AI', 'U-Net', 'SegFormer', 'land cover mapping', 'satellite imagery']
@@ -25,7 +25,7 @@
   publisher: 'Association for Computational Linguistics'
   url: 'https://aclanthology.org/2025.acl-long.916/'
   doi: '10.18653/v1/2025.acl-long.916'
-  date: "2025-07"
+  date: "2025-07-01T00:00:00Z"
   pages: "18685-18717"
   isbn: '979-8-89176-251-0'
   keywords: ['vision-language models', 'Southeast Asia', 'multicultural AI', 'multilingual benchmark', 'cultural diversity', 'VQA', 'image-text dataset', 'SEA languages', 'culturally relevant AI']
@@ -42,7 +42,7 @@
   publisher: 'Institute of Electrical and Electronics Engineers'
   url: 'https://ieeexplore.ieee.org/document/10750225'
   doi: '10.1109/LGRS.2024.3495974'
-  date: "2024-11-11"
+  date: "2024-11-11T00:00:00Z"
   volume: "22"
   pages: "1-5"
   issn: '1545-598X'
@@ -60,7 +60,7 @@
   publisher: 'IWA Publishing'
   url: 'https://iwaponline.com/aqua/article/74/2/267/106789/Enhancing-urban-resilience-through-integrated'
   doi: '10.2166/aqua.2025.292'
-  date: "2025-02-01"
+  date: "2025-02-01T00:00:00Z"
   volume: "74"
   issue: "2"
   pages: "267-282"
@@ -79,7 +79,7 @@
   publisher: 'Association for Computational Linguistics'
   url: 'https://aclanthology.org/2026.acl-long.1527/'
   doi: '10.18653/v1/2026.acl-long.1527'
-  date: "2026-07"
+  date: "2026-07-01T00:00:00Z"
   pages: "33063-33080"
   isbn: '979-8-89176-390-6'
   keywords: ['language identification', 'multilingual NLP', 'web data benchmark', 'low-resource languages', '109 languages', 'human annotation', 'CommonLID']
@@ -95,7 +95,7 @@
   year: "2026"
   url: 'https://arxiv.org/abs/2604.11490'
   doi: '10.48550/arXiv.2604.11490'
-  date: "2026-04"
+  date: "2026-04-13T13:56:00Z"
   keywords: ['vision-language models', 'cultural adaptation', 'Southeast Asia', 'regional AI', 'multimodal AI', 'GG-EZ', 'anthropogenic adaptation', 'cultural relevance']
   authors: ["Samuel Cahyawijaya", "Peerat Limkonchotiwat", "Tack Hwa Wong", "Hitesh Laxmichand Patel", "Amit Agarwal", "Manuel Antonio Rufino", "Carlos Rafael Catalan", "Muhammad Reza Qorib", "Vicky Feliren", "Holy Lovenia", "Aye Hninn Khine", "Frederikus Hudi", "David Anugraha", "Alham Fikri Aji", "Romrawin Chumpu", "Viet-Thanh Pham", "Minghan Wang", "Mohamed Fazli Mohamed Imam", "Ruochen Zhang", "Joseph Marvin Imperial", "Khumaisa Nur'aini", "Do Xuan Long", "Musa Izzanardi Wijanarko", "Joel Ruben Antony Moniz", "Patrick Amadeus Irawan", "Hanif Muhammad Zhafran", "Isaiah Flores", "Salsabila Zahirah Pranida", "Jun Kevin", "Jostin Jerico Rosal", "Patricia Nicole Monderin", "Kun Kerdthaisong", "Ahmad Mustafid", "My Chiffon Nguyen", "Natchapon Jongwiriyanurak", "Siva Worajitwannakul", "Haochen Li", "Adrian Xuan Wei Lim", "Bin Wang", "Muhammad Ravi Shulthan Habibi", "Lynnette Hui Xian Ng", "Mithil Bangera", "Yeshil Bangera", "Priyaranjan Pattnayak", "Dun Li Chan", "Sherissa Caren Djuniwar", "Cho Chan Myei Oo", "Hee Ming Shan"]
   abstract: 'We introduce Anthropogenic Regional Adaptation: a novel paradigm that aims to optimize model relevance to specific regional contexts while ensuring the retention of global generalization capabilities.'
@@ -110,7 +110,7 @@
   publisher: 'Institute of Electrical and Electronics Engineers'
   url: 'https://ieeexplore.ieee.org/document/9533236/'
   doi: '10.1109/ICISS53185.2021.9533236'
-  date: "2021-08-02"
+  date: "2021-08-02T00:00:00Z"
   pages: "1-5"
   keywords: ['plastic bag ban', 'waste policy', 'Jakarta', 'urban sustainability', 'citizen complaints', 'environmental policy', 'smart city', 'JAKI', 'Qlue']
   authors: ["Vicky Feliren", "Yudhistira Nugraha", "Bahrul Ilmi Nasution", "Clarissa Febria Finola", "J.I. Kanggrawan", "A. L. Suherman"]

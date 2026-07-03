@@ -23,6 +23,7 @@ permalink: /research/
     {% for pub in site.data.publications %}
     {
       "@type": "ScholarlyArticle",
+      {% if pub.doi %}"@id": "https://doi.org/{{ pub.doi }}",{% endif %}
       "name": {{ pub.title | jsonify }},
       "headline": {{ pub.title | jsonify }},
       "url": {{ pub.url | jsonify }},
@@ -33,7 +34,7 @@ permalink: /research/
       {% if pub.keywords %}"keywords": {{ pub.keywords | jsonify }},{% endif %}
       "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }}{% if pub.issn %}, "issn": {{ pub.issn | jsonify }}{% endif %} }{% if pub.publisher %},
       "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %},
-      "author": [{% for a in pub.authors %}{ "@type": "Person"{% if a == "Vicky Feliren" %}, "@id": "https://vickyfeliren.com/"{% endif %}, "name": {{ a | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      "author": [{% for a in pub.authors %}{ "@type": "Person", "name": {{ a | jsonify }}{% if a == "Vicky Feliren" %}, "url": "https://vickyfeliren.com"{% endif %} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ]
