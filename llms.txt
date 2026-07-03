@@ -128,7 +128,6 @@ Short distillations of papers, with own take (what the work shows and what it mi
 - HuggingFace: https://huggingface.co/feliren
 - Medium: https://medium.com/@feliren
 - Devpost: https://devpost.com/Feliren
-- Wikidata Profile: https://www.wikidata.org/wiki/Q140401371
 
 ## Skills
 

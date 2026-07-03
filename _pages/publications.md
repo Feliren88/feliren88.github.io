@@ -27,7 +27,7 @@ permalink: /research/
       "headline": {{ pub.title | jsonify }},
       "url": {{ pub.url | jsonify }},
       "description": {{ pub.abstract | jsonify }},
-      "datePublished": {{ pub.year | jsonify }},
+      "datePublished": "{{ pub.year }}-01-01",
       {% if pub.keywords %}"keywords": {{ pub.keywords | jsonify }},{% endif %}
       "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }} }{% if pub.publisher %},
       "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %},

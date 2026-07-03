@@ -126,6 +126,7 @@
           "headline": {{ pub.title | jsonify }},
           "url": {{ pub.url | jsonify }},
           "description": {{ pub.abstract | jsonify }},
+          "author": [{% for a in pub.authors %}{ "@type": "Person"{% if a == "Vicky Feliren" %}, "@id": "https://vickyfeliren.com/"{% endif %}, "name": {{ a | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
           "datePublished": {{ pub.year | jsonify }}{% if pub.publisher %},
           "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
           "keywords": {{ pub.keywords | jsonify }}{% endif %}
@@ -144,8 +145,7 @@
         "https://aclanthology.org/people/vicky-feliren/",
         "https://huggingface.co/feliren",
         "https://dblp.org/pid/392/6206.html",
-        "https://www.semanticscholar.org/author/Vicky-Feliren/2330264544",
-        "https://www.wikidata.org/wiki/Q140401371"
+        "https://www.semanticscholar.org/author/Vicky-Feliren/2330264544"
       ],
       "performerIn": [
         {
@@ -179,21 +179,21 @@
           "headline": "SEA's AI law trap: who really pays?",
           "url": "https://www.techinasia.com/seas-ai-law-trap-pays",
           "publisher": { "@type": "Organization", "name": "Tech in Asia" },
-          "datePublished": "2026-06-02"
+          "datePublished": "2026-06-02T00:00:00+08:00"
         },
         {
           "@type": "Article",
           "headline": "AI rules in SEA: the risks, the fines, what you need to know",
           "url": "https://www.techinasia.com/ai-rules-sea-risks-fines",
           "publisher": { "@type": "Organization", "name": "Tech in Asia" },
-          "datePublished": "2026-06-01"
+          "datePublished": "2026-06-01T00:00:00+08:00"
         },
         {
           "@type": "Article",
           "headline": "AI rules in South-East Asia: Risks, fines, and everything else you need to know",
           "url": "https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know",
           "publisher": { "@type": "Organization", "name": "The Business Times" },
-          "datePublished": "2026-06-01"
+          "datePublished": "2026-06-01T00:00:00+08:00"
         }
       ]
     }
