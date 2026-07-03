@@ -27,9 +27,11 @@ permalink: /research/
       "headline": {{ pub.title | jsonify }},
       "url": {{ pub.url | jsonify }},
       "description": {{ pub.abstract | jsonify }},
-      "datePublished": "{{ pub.year }}-01-01",
+      "datePublished": "{{ pub.date | default: pub.year }}",
+      {% if pub.doi %}"sameAs": "https://doi.org/{{ pub.doi }}",{% endif %}
+      {% if pub.pages %}"pagination": {{ pub.pages | jsonify }},{% endif %}
       {% if pub.keywords %}"keywords": {{ pub.keywords | jsonify }},{% endif %}
-      "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }} }{% if pub.publisher %},
+      "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }}{% if pub.issn %}, "issn": {{ pub.issn | jsonify }}{% endif %} }{% if pub.publisher %},
       "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %},
       "author": [{% for a in pub.authors %}{ "@type": "Person"{% if a == "Vicky Feliren" %}, "@id": "https://vickyfeliren.com/"{% endif %}, "name": {{ a | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
     }{% unless forloop.last %},{% endunless %}

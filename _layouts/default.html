@@ -127,7 +127,8 @@
           "url": {{ pub.url | jsonify }},
           "description": {{ pub.abstract | jsonify }},
           "author": [{% for a in pub.authors %}{ "@type": "Person"{% if a == "Vicky Feliren" %}, "@id": "https://vickyfeliren.com/"{% endif %}, "name": {{ a | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
-          "datePublished": {{ pub.year | jsonify }}{% if pub.publisher %},
+          "datePublished": "{{ pub.date | default: pub.year }}"{% if pub.doi %},
+          "sameAs": "https://doi.org/{{ pub.doi }}"{% endif %}{% if pub.publisher %},
           "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
           "keywords": {{ pub.keywords | jsonify }}{% endif %}
         }{% unless forloop.last %},{% endunless %}

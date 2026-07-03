@@ -82,7 +82,7 @@ Two JSON-LD blocks exist:
 
 **2. CollectionPage + ScholarlyArticle schema** — in `_pages/publications.md` (research page only). Also auto-generated from `_data/publications.yml`.
 
-When adding new publications, **only update `_data/publications.yml`** — both JSON-LD blocks update automatically. Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year` (string), `url`, `abstract`, `keywords` (array). Optional: `publisher`, `doi`.
+When adding new publications, **only update `_data/publications.yml`** — both JSON-LD blocks update automatically. Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year` (string), `url`, `abstract`, `keywords` (array), `authors` (array). Optional: `publisher`, `doi`, `date` (ISO, from the bibtex/Crossref record — used as `datePublished`, falls back to `year`), `pages`, `volume`, `issue`, `issn`, `isbn`.
 
 Valid `kind` values: `geospatial`, `cultural`, `nlp`, `applied`.
 
