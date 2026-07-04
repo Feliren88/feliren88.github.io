@@ -111,6 +111,7 @@ html[data-theme="light"] {
 .theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
 .theme-btn .icon-moon { display: none; }
 .theme-btn .icon-sun  { display: block; }
+.theme-btn .icon-shapes { display: block; }
 html[data-theme="light"] .theme-btn .icon-moon { display: block; }
 html[data-theme="light"] .theme-btn .icon-sun  { display: none; }
 
@@ -1702,7 +1703,6 @@ html[data-theme="light"] .tech-tag--tool {
   display: flex;
   align-items: center;
 }
-.shape-toggle-btn { font-size: var(--fs-base); }
 .shape-popover {
   position: absolute;
   top: calc(100% + 0.8rem);
