@@ -1703,6 +1703,9 @@ html[data-theme="light"] .tech-tag--tool {
   display: flex;
   align-items: center;
 }
+.shape-menu .theme-btn {
+  padding: 0.5rem 0.6rem;
+}
 .shape-popover {
   position: absolute;
   top: calc(100% + 0.8rem);
