@@ -1702,10 +1702,15 @@ html[data-theme="light"] .tech-tag--tool {
   position: relative;
   display: flex;
   align-items: center;
+  z-index: 31;
 }
 .shape-menu .theme-btn {
   padding: 0.5rem 0.7rem;
   cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .shape-menu .icon-shapes {
   display: block;
