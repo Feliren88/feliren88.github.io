@@ -1704,7 +1704,13 @@ html[data-theme="light"] .tech-tag--tool {
   align-items: center;
 }
 .shape-menu .theme-btn {
-  padding: 0.5rem 0.6rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}
+.shape-menu .icon-shapes {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 .shape-popover {
   position: absolute;
