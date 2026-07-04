@@ -169,7 +169,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  opacity: 0.38;
+  opacity: 0.45;
 }
 
 .topbar,
@@ -1546,7 +1546,7 @@ html[data-theme="light"] .tech-tag--tool {
   }
 
   #pointcloud-bg {
-    opacity: 0.3;
+    opacity: 0.38;
   }
 
   .footer-top { flex-direction: column; gap: 1.5rem; }
