@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """Generate consulting-grade pipeline diagrams (PNG) for /usecases/ card banners.
 
-Each use case gets a 440x200 (logical) architecture flowchart rendered on the
-site's dark canvas with the site's own fonts (Manrope + Space Grotesk), then
-rasterised at 3x via Playwright/Chromium to assets/img/usecases/<id>.png
-(1320x600).
+Each use case gets a 440x200 (logical) architecture flowchart rendered with the
+site's own fonts (Manrope + Space Grotesk) in BOTH site themes, rasterised at
+3x via Playwright/Chromium:
 
-Faithfulness rule: every node, metric, and edge below is sourced from the
-corresponding entry in _data/usecases.yml — no invented numbers.
+    assets/img/usecases/<id>.png         dark  (default; also the og:image)
+    assets/img/usecases/<id>-light.png   light (swapped in client-side)
+
+It also regenerates _data/uc_banners.yml (image alt text) from the same specs,
+so the diagrams, their alt text, and the light/dark variants can never drift.
+
+Faithfulness rules: every node and chip is sourced from the corresponding
+entry in _data/usecases.yml, and NO numeric wording is allowed anywhere in a
+diagram (no metrics, counts, percentages, sizes, or years) — qualitative
+outcome chips only. Product nomenclature containing digits (Sentinel-2, INT8,
+V100, ZeRO-2, ...) is permitted.
 
 Usage:
     python3 scripts/generate_uc_banners.py [--only id1,id2] [--keep-svg]
@@ -19,7 +27,6 @@ default /opt/pw-browsers/chromium), Pillow optional for PNG optimisation.
 import argparse
 import html
 import os
-import sys
 import tempfile
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,21 +39,55 @@ SCALE = 3
 MARGIN = 14.0
 COL_GAP = 18.0
 BODY_TOP, BODY_BOT = 46.0, 178.0
-CHIP_ROW_Y = 182.0           # KPI chips band (bottom-left)
+CHIP_ROW_Y = 182.0           # outcome chips band (bottom-left)
 
-INK = "#dbe4f2"              # node titles
-MUTED = "#8b9db5"            # subs / secondary
-FAINT = "#5d7691"            # eyebrow
-LANE = "#54687f"             # lane labels
-ACCENT = "#7792af"
-ARROW = "#5a7190"
-ARROW_HEAD = "#6c86a6"
-BG = "#0b121c"
-NODE_FILL = "#111c2c"
-INPUT_FILL = "#0d1725"
-NODE_STROKE = "rgba(119,146,175,0.30)"
-INPUT_STROKE = "rgba(139,157,181,0.32)"
-RULE = "rgba(114,130,152,0.18)"
+# Palettes mirror css/styles.css :root (dark) and [data-theme="light"].
+THEMES = {
+    "dark": dict(
+        suffix="",
+        BG="#0b121c",
+        DOTS="rgba(95,113,136,0.10)",
+        INK="#dbe4f2",
+        MUTED="#8b9db5",
+        FAINT="#5d7691",
+        LANE="#54687f",
+        ACCENT="#7792af",
+        ACCENT_RGB="119,146,175",
+        ARROW="#5a7190",
+        ARROW_HEAD="#6c86a6",
+        NODE_FILL="#111c2c",
+        INPUT_FILL="#0d1725",
+        NODE_STROKE="rgba(119,146,175,0.30)",
+        INPUT_STROKE="rgba(139,157,181,0.32)",
+        RULE="rgba(114,130,152,0.18)",
+        LOOP="rgba(119,146,175,0.55)",
+        LOOP_HEAD="rgba(119,146,175,0.75)",
+        LOOP_TEXT="rgba(139,157,181,0.9)",
+        WATERMARK="rgba(93,118,145,0.55)",
+    ),
+    "light": dict(
+        suffix="-light",
+        BG="#f0f3f7",
+        DOTS="rgba(63,100,144,0.14)",
+        INK="#1a2635",
+        MUTED="#3d506b",
+        FAINT="#2e5070",
+        LANE="#4a5f78",
+        ACCENT="#3f6490",
+        ACCENT_RGB="63,100,144",
+        ARROW="#5f7793",
+        ARROW_HEAD="#476690",
+        NODE_FILL="#ffffff",
+        INPUT_FILL="#f7f9fc",
+        NODE_STROKE="rgba(63,100,144,0.32)",
+        INPUT_STROKE="rgba(63,100,144,0.34)",
+        RULE="rgba(63,100,144,0.20)",
+        LOOP="rgba(63,100,144,0.55)",
+        LOOP_HEAD="rgba(63,100,144,0.75)",
+        LOOP_TEXT="rgba(61,80,107,0.95)",
+        WATERMARK="rgba(46,80,112,0.45)",
+    ),
+}
 
 TITLE_FS, TITLE_LH = 9.3, 11.2   # Space Grotesk 600
 SUB_FS, SUB_LH = 7.8, 9.4        # Manrope 500
@@ -84,7 +125,7 @@ def text_w(s, fs, title=False):
 # ----------------------------------------------------------------- specs ----
 # node: (title, sub_or_None, kind)   kind: in | proc | out
 # edges: ((col,row), (col,row)[, bow_px_down])
-# metrics: [(value, label)] -> KPI chips bottom-left
+# metrics: [(value, label)] -> qualitative outcome chips bottom-left
 # loop: dict(frm=(c,r), to=(c,r), label=...) dashed feedback arc
 SPECS = [
   dict(
@@ -377,19 +418,9 @@ def tokens(text):
     a hyphen.
     """
     out = []
-    for word in text.split():
-        while "-" in word[1:-1] and len(word) > 13:
-            i = word.index("-", 1) + 1
-            out.append(word[:i])
-            word = word[i:]
-        if word == "·" and out is not None:
-            continue  # handled by prefixing below
-        out.append(word)
-    # re-scan original to prefix separators
-    out = []
     pending = ""
     for word in text.split():
-        if word in {"·", "→", "+", "×"} :
+        if word in {"·", "→", "+", "×"}:
             pending = word
             continue
         if pending:
@@ -408,7 +439,7 @@ def tokens(text):
 def wrap(text, fs, title, max_w, what):
     """Greedy wrap; raises if the text cannot fit two lines (no silent loss).
 
-    An explicit \n in the text forces a break.
+    An explicit newline in the text forces a break.
     """
     if "\n" in text:
         lines = []
@@ -448,10 +479,11 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-def render_svg(spec):
+def render_svg(spec, T):
     n = len(spec["cols"])
     col_w = (W - 2 * MARGIN - (n - 1) * COL_GAP) / n
     col_x = [MARGIN + i * (col_w + COL_GAP) for i in range(n)]
+    acc = T["ACCENT_RGB"]
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
@@ -459,44 +491,44 @@ def render_svg(spec):
     ]
     parts.append(f"""<defs>
 <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
-  <circle cx="1" cy="1" r="0.55" fill="rgba(95,113,136,0.10)"/>
+  <circle cx="1" cy="1" r="0.55" fill="{T['DOTS']}"/>
 </pattern>
 <linearGradient id="gout" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="rgba(119,146,175,0.20)"/>
-  <stop offset="1" stop-color="rgba(119,146,175,0.05)"/>
+  <stop offset="0" stop-color="rgba({acc},0.20)"/>
+  <stop offset="1" stop-color="rgba({acc},0.05)"/>
 </linearGradient>
 <marker id="ah" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
-  <path d="M0 0L6 3L0 6z" fill="{ARROW_HEAD}"/>
+  <path d="M0 0L6 3L0 6z" fill="{T['ARROW_HEAD']}"/>
 </marker>
 <marker id="ahd" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-  <path d="M0 0L6 3L0 6z" fill="rgba(119,146,175,0.75)"/>
+  <path d="M0 0L6 3L0 6z" fill="{T['LOOP_HEAD']}"/>
 </marker>
 </defs>""")
-    parts.append(f'<rect width="{W}" height="{H}" fill="{BG}"/>')
+    parts.append(f'<rect width="{W}" height="{H}" fill="{T["BG"]}"/>')
     parts.append(f'<rect width="{W}" height="{H}" fill="url(#dots)"/>')
 
     # header
     parts.append(
         f'<text x="{MARGIN}" y="19" font-size="7" font-weight="700" '
-        f'letter-spacing="0.9" fill="{FAINT}">{esc(spec["eyebrow"])}</text>'
+        f'letter-spacing="0.9" fill="{T["FAINT"]}">{esc(spec["eyebrow"])}</text>'
     )
     chip = spec["chip"]
     chip_w = text_w(chip, 6.3) + 0.5 * len(chip) + 14  # + letter-spacing
     parts.append(
         f'<rect x="{W - MARGIN - chip_w:.1f}" y="9.5" width="{chip_w:.1f}" height="13" rx="6.5" '
-        f'fill="rgba(119,146,175,0.08)" stroke="rgba(119,146,175,0.35)" stroke-width="0.8"/>'
+        f'fill="rgba({acc},0.08)" stroke="rgba({acc},0.35)" stroke-width="0.8"/>'
     )
     parts.append(
         f'<text x="{W - MARGIN - chip_w / 2:.1f}" y="18.4" text-anchor="middle" font-size="6.3" '
-        f'font-weight="700" letter-spacing="0.5" fill="{MUTED}">{esc(chip)}</text>'
+        f'font-weight="700" letter-spacing="0.5" fill="{T["MUTED"]}">{esc(chip)}</text>'
     )
-    parts.append(f'<line x1="{MARGIN}" y1="27" x2="{W - MARGIN}" y2="27" stroke="{RULE}"/>')
+    parts.append(f'<line x1="{MARGIN}" y1="27" x2="{W - MARGIN}" y2="27" stroke="{T["RULE"]}"/>')
 
     # lane labels
     for i, lane in enumerate(spec["lanes"]):
         parts.append(
             f'<text x="{col_x[i] + col_w / 2:.1f}" y="39.5" text-anchor="middle" font-size="6.3" '
-            f'font-weight="700" letter-spacing="1.1" fill="{LANE}">{esc(lane)}</text>'
+            f'font-weight="700" letter-spacing="1.1" fill="{T["LANE"]}">{esc(lane)}</text>'
         )
 
     # layout + draw nodes
@@ -512,12 +544,12 @@ def render_svg(spec):
             x = col_x[ci]
             geo[(ci, ri)] = (x, y, col_w, h)
             if kind == "in":
-                style = (f'fill="{INPUT_FILL}" stroke="{INPUT_STROKE}" '
+                style = (f'fill="{T["INPUT_FILL"]}" stroke="{T["INPUT_STROKE"]}" '
                          f'stroke-width="1" stroke-dasharray="3.2 2.6"')
             elif kind == "out":
-                style = f'fill="url(#gout)" stroke="{ACCENT}" stroke-width="1.3"'
+                style = f'fill="url(#gout)" stroke="{T["ACCENT"]}" stroke-width="1.3"'
             else:
-                style = f'fill="{NODE_FILL}" stroke="{NODE_STROKE}" stroke-width="1"'
+                style = f'fill="{T["NODE_FILL"]}" stroke="{T["NODE_STROKE"]}" stroke-width="1"'
             parts.append(
                 f'<rect x="{x:.1f}" y="{y:.1f}" width="{col_w:.1f}" height="{h:.1f}" rx="6" {style}/>'
             )
@@ -525,14 +557,14 @@ def render_svg(spec):
             for ln in t_lines:
                 parts.append(
                     f'<text x="{x + PAD_X}" y="{ty:.1f}" font-family="Space Grotesk" '
-                    f'font-size="{TITLE_FS}" font-weight="600" fill="{INK}">{esc(ln)}</text>'
+                    f'font-size="{TITLE_FS}" font-weight="600" fill="{T["INK"]}">{esc(ln)}</text>'
                 )
                 ty += TITLE_LH
             ty += 1.0
             for ln in s_lines:
                 parts.append(
                     f'<text x="{x + PAD_X}" y="{ty:.1f}" font-size="{SUB_FS}" '
-                    f'font-weight="500" fill="{MUTED}">{esc(ln)}</text>'
+                    f'font-weight="500" fill="{T["MUTED"]}">{esc(ln)}</text>'
                 )
                 ty += SUB_LH
             y += h + gap
@@ -552,7 +584,7 @@ def render_svg(spec):
             d = (f"M{sx:.1f} {sy:.1f}C{sx + dx:.1f} {sy + bow:.1f} "
                  f"{ex - dx:.1f} {ey + bow:.1f} {ex:.1f} {ey:.1f}")
         parts.append(
-            f'<path d="{d}" fill="none" stroke="{ARROW}" stroke-width="1.15" marker-end="url(#ah)"/>'
+            f'<path d="{d}" fill="none" stroke="{T["ARROW"]}" stroke-width="1.15" marker-end="url(#ah)"/>'
         )
 
     # dashed feedback loop
@@ -570,15 +602,15 @@ def render_svg(spec):
              f"Q{ex:.1f} {yy:.1f} {ex:.1f} {yy - r:.1f}"
              f"L{ex:.1f} {ey + 1.5:.1f}")
         parts.append(
-            f'<path d="{d}" fill="none" stroke="rgba(119,146,175,0.55)" '
+            f'<path d="{d}" fill="none" stroke="{T["LOOP"]}" '
             f'stroke-dasharray="3 3" marker-end="url(#ahd)"/>'
         )
         parts.append(
             f'<text x="{(sx + ex) / 2:.1f}" y="{yy + 8.4:.1f}" text-anchor="middle" font-size="6.4" '
-            f'font-weight="600" fill="rgba(139,157,181,0.9)">{esc(lp["label"])}</text>'
+            f'font-weight="600" fill="{T["LOOP_TEXT"]}">{esc(lp["label"])}</text>'
         )
 
-    # KPI chips (bottom-left)
+    # outcome chips (bottom-left)
     cx = MARGIN
     for value, label in spec.get("metrics", []):
         vw = text_w(value, 9, title=True)
@@ -586,21 +618,21 @@ def render_svg(spec):
         cw_ = 10 + vw + 6 + lw + 10
         parts.append(
             f'<rect x="{cx:.1f}" y="{CHIP_ROW_Y}" width="{cw_:.1f}" height="14" rx="7" '
-            f'fill="rgba(119,146,175,0.10)" stroke="rgba(119,146,175,0.45)" stroke-width="0.9"/>'
+            f'fill="rgba({acc},0.10)" stroke="rgba({acc},0.45)" stroke-width="0.9"/>'
         )
         parts.append(
             f'<text x="{cx + 10:.1f}" y="{CHIP_ROW_Y + 10}" font-family="Space Grotesk" '
-            f'font-size="9" font-weight="700" fill="{INK}">{esc(value)}</text>'
+            f'font-size="9" font-weight="700" fill="{T["INK"]}">{esc(value)}</text>'
         )
         parts.append(
             f'<text x="{cx + 10 + vw + 6:.1f}" y="{CHIP_ROW_Y + 9.6}" font-size="6.4" '
-            f'font-weight="600" fill="{MUTED}">{esc(label)}</text>'
+            f'font-weight="600" fill="{T["MUTED"]}">{esc(label)}</text>'
         )
         cx += cw_ + 8
 
     parts.append(
         f'<text x="{W - MARGIN}" y="{CHIP_ROW_Y + 9.8}" text-anchor="end" font-size="5.8" '
-        f'font-weight="600" letter-spacing="0.4" fill="rgba(93,118,145,0.55)">vickyfeliren.com</text>'
+        f'font-weight="600" letter-spacing="0.4" fill="{T["WATERMARK"]}">vickyfeliren.com</text>'
     )
     parts.append("</svg>")
     return "".join(parts)
@@ -624,7 +656,7 @@ def build_alt(spec):
         for title, sub, _k in col:
             names.append(f"{title} ({sub})" if sub else title)
         stages.append(" + ".join(names))
-    return "End-to-end pipeline diagram: " + " \u2192 ".join(stages)
+    return "End-to-end pipeline diagram: " + " → ".join(stages)
 
 
 def write_alt_data(specs):
@@ -660,24 +692,26 @@ def main():
             viewport={"width": W, "height": H}, device_scale_factor=SCALE
         )
         for spec in todo:
-            svg = render_svg(spec)
-            hpath = os.path.join(tmp, spec["id"] + ".html")
-            with open(hpath, "w", encoding="utf-8") as f:
-                f.write(HTML_TMPL.format(fonts=fonts, bg=BG, svg=svg))
-            page.goto("file://" + hpath)
-            page.evaluate("() => document.fonts.ready")
-            png = os.path.join(OUT_DIR, spec["id"] + ".png")
-            page.screenshot(path=png, clip={"x": 0, "y": 0, "width": W, "height": H})
-            if args.keep_svg:
-                with open(os.path.join(OUT_DIR, spec["id"] + ".svg"), "w", encoding="utf-8") as f:
-                    f.write(svg)
-            try:  # optional size optimisation
-                from PIL import Image
-                im = Image.open(png).convert("RGB")
-                im.save(png, optimize=True)
-            except ImportError:
-                pass
-            print("rendered", os.path.relpath(png, REPO), f"{os.path.getsize(png) // 1024} KB")
+            for T in THEMES.values():
+                svg = render_svg(spec, T)
+                name = spec["id"] + T["suffix"]
+                hpath = os.path.join(tmp, name + ".html")
+                with open(hpath, "w", encoding="utf-8") as f:
+                    f.write(HTML_TMPL.format(fonts=fonts, bg=T["BG"], svg=svg))
+                page.goto("file://" + hpath)
+                page.evaluate("() => document.fonts.ready")
+                png = os.path.join(OUT_DIR, name + ".png")
+                page.screenshot(path=png, clip={"x": 0, "y": 0, "width": W, "height": H})
+                if args.keep_svg:
+                    with open(os.path.join(OUT_DIR, name + ".svg"), "w", encoding="utf-8") as f:
+                        f.write(svg)
+                try:  # optional size optimisation
+                    from PIL import Image
+                    im = Image.open(png).convert("RGB")
+                    im.save(png, optimize=True)
+                except ImportError:
+                    pass
+                print("rendered", os.path.relpath(png, REPO), f"{os.path.getsize(png) // 1024} KB")
         browser.close()
     write_alt_data(SPECS)
 

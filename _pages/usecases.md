@@ -26,7 +26,7 @@ permalink: /usecases/
 
     {% assign banner = site.data.uc_banners[uc.id] %}
     {% if banner %}
-    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
+    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" data-src-dark="/assets/img/usecases/{{ uc.id }}.png" data-src-light="/assets/img/usecases/{{ uc.id }}-light.png" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
     {% endif %}
 
     <div class="uc-card-header">
@@ -59,6 +59,17 @@ permalink: /usecases/
 
 
 <script>
+(function() {
+  function syncBanners() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    document.querySelectorAll('.uc-flow-img').forEach(function(img) {
+      var want = light ? img.getAttribute('data-src-light') : img.getAttribute('data-src-dark');
+      if (want && img.getAttribute('src') !== want) img.setAttribute('src', want);
+    });
+  }
+  syncBanners();
+  new MutationObserver(syncBanners).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
 (function() {
   var PRIORITY = { safety: 1, ongoing: 2, cultural: 3, geospatial: 4, production: 5, applied: 6 };
   var btns = document.querySelectorAll('.filter-pill');
