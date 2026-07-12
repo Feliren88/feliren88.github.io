@@ -90,22 +90,22 @@ SPECS = [
   dict(
     id="procaenet-flood-segmentation",
     eyebrow="FLOOD SEGMENTATION — MULTISPECTRAL EO PIPELINE",
-    chip="IEEE GRSL · Q1 · 2025",
+    chip="IEEE GRSL",
     lanes=["SATELLITE INPUT", "DUAL ENCODERS", "FUSION", "OUTPUT"],
     cols=[
       [("Sentinel-2 RGB", "visible bands", "in"),
        ("Sentinel-2 NIR", "water-sensitive", "in")],
       [("Dual encoders", "self-attention per branch", "proc")],
       [("Cross-attention", "fused at every skip scale", "proc")],
-      [("Flood extent masks", "zero-shot PlanetScope 3 m", "out")],
+      [("Flood extent masks", "zero-shot sensor transfer", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("0.815", "IoU · Sen1Floods11"), ("0.898", "F1 vs 0.884 U-Net")],
+    metrics=[("State of the art", "benchmark flood segmentation")],
   ),
   dict(
     id="mining-footprint-segmentation",
     eyebrow="MINING FOOTPRINTS — MULTI-MODAL EO FUSION",
-    chip="RSE · Q1 · IF 11.4",
+    chip="REMOTE SENSING OF ENV",
     lanes=["INPUT STREAMS", "ENCODERS", "FUSION", "OUTPUT"],
     cols=[
       [("Sentinel-2 optical", None, "in"),
@@ -117,12 +117,12 @@ SPECS = [
     ],
     edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((0, 2), (1, 0)),
            ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("500 GB", "labelled imagery · GEE")],
+    metrics=[("Continental scale", "Earth Engine corpus")],
   ),
   dict(
     id="aquaculture-pond-detection",
     eyebrow="AQUACULTURE EXPANSION — CHANGE DETECTION",
-    chip="PATENT IDS000010594",
+    chip="PATENT FILED",
     lanes=["INPUT", "SPECTRAL SCREEN", "SHAPE FILTER", "OUTPUT"],
     cols=[
       [("Sentinel-2 stack", "multi-temporal revisits", "in")],
@@ -131,12 +131,12 @@ SPECS = [
       [("Expansion alerts", "Indonesia + Vietnam coasts", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("2", "geographies validated")],
+    metrics=[("Cross-regional", "coastline validation")],
   ),
   dict(
     id="flood-urban-resilience",
     eyebrow="FLOOD POLICY EVALUATION — EO × MIXED METHODS",
-    chip="AQUA · Q2 · 2025",
+    chip="AQUA JOURNAL",
     lanes=["EVIDENCE STREAMS", "TRIANGULATION", "OUTPUT"],
     cols=[
       [("ProCANet flood masks", None, "in"),
@@ -151,93 +151,93 @@ SPECS = [
   dict(
     id="multilingual-vlm-crossmodal-conflict",
     eyebrow="VLM SAFETY — CONFLICT, PROBING & STEERING",
-    chip="APART RESEARCH · 2026",
+    chip="APART RESEARCH",
     lanes=["BENCHMARK", "EVALUATION", "MECHANISTIC", "INTERVENTION"],
     cols=[
-      [("Conflict benchmark", "EN · HI · TE · 4 domains", "in")],
-      [("9 open VLMs", "10,260 evaluations", "proc")],
-      [("Linear probes", "residual stream · 5-fold CV", "proc")],
-      [("Cross-lingual steering", "text-override driven to 0", "out")],
+      [("Conflict benchmark", "EN · HI · TE · multi-domain", "in")],
+      [("Open VLM cohort", "multilingual evaluation", "proc")],
+      [("Linear probes", "residual-stream readout", "proc")],
+      [("Cross-lingual steering", "text-override eliminated", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("0.92", "probe accuracy · Telugu")],
+    metrics=[("Transferable", "EN-fit steering direction")],
   ),
   dict(
     id="sea-vl-benchmark",
     eyebrow="SEA-VL — MULTICULTURAL BENCHMARK PIPELINE",
-    chip="ACL 2025 · MAIN CONF",
+    chip="ACL · MAIN CONFERENCE",
     lanes=["CROWDSOURCING", "QUALITY PIPELINE", "DATASET", "AUDIT"],
     cols=[
-      [("100+ annotators", "11 SEA countries", "in")],
+      [("Community annotators", "across SEA countries", "in")],
       [("Dedup + HITL review", "pHash · CLIP · SigLIP", "proc")],
       [("SEA-VL dataset", "culturally grounded VQA", "proc")],
       [("Frontier audit", "GPT-4V · Gemini · Claude", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("10K+", "image-question pairs")],
+    metrics=[("Community-built", "culturally grounded corpus")],
   ),
   dict(
     id="gg-ez-regional-adaptation",
     eyebrow="REGIONAL ADAPTATION — MERGE WITHOUT FORGETTING",
-    chip="UNDER REVIEW · 2026",
+    chip="UNDER REVIEW · ARXIV",
     lanes=["INPUTS", "ADAPTATION", "MERGE", "OUTPUT"],
     cols=[
       [("SEA visual corpus", "curated regional", "in"),
        ("SDXL base weights", "general-purpose", "in")],
       [("Diffusion fine-tune", "cultural adaptation arm", "proc")],
       [("Linear weight merge", "regional ↔ global blend", "proc")],
-      [("Adapted model", "cultural score\n1.569 vs 1.491", "out")],
+      [("Adapted model", "cultural fidelity improved", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((0, 1), (2, 0), 28), ((2, 0), (3, 0))],
-    metrics=[("98%+", "global quality retained")],
+    metrics=[("Quality retained", "global benchmarks intact")],
   ),
   dict(
     id="commonlid-language-identification",
     eyebrow="LANGUAGE ID — STRESS TEST ON REAL WEB DATA",
-    chip="ACL 2026",
+    chip="ACL CONFERENCE",
     lanes=["INPUT", "SYSTEMS", "RE-BENCHMARK", "OUTPUT"],
     cols=[
       [("CommonCrawl text", "code-switched · romanized", "in")],
-      [("3 LID systems", "fastText · GlotLID · OpenLID", "proc")],
+      [("Production LID stack", "fastText · GlotLID · OpenLID", "proc")],
       [("Stratified eval", "noise regimes isolated", "proc")],
       [("Failure map", "guidance for LLM corpora", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("11+", "low-resource SEA languages")],
+    metrics=[("Low-resource focus", "SEA web text")],
   ),
   dict(
     id="share-of-voice-forecasting",
     eyebrow="SOV FORECASTING — CALIBRATED UNCERTAINTY",
-    chip="ARTEFACT · 2025",
+    chip="ARTEFACT",
     lanes=["DATA", "MODEL", "UNCERTAINTY", "DELIVERY"],
     cols=[
       [("SimilarWeb + Traackr", "competitive intel", "in"),
        ("Client media data", "BigQuery · dbt", "in")],
       [("XGBoost", "SHAP-validated forecasts", "proc")],
-      [("Split conformal", "calibrated 90% intervals", "proc")],
-      [("Planning dashboards", "Streamlit · 6 APAC markets", "out")],
+      [("Split conformal", "distribution-free intervals", "proc")],
+      [("Planning dashboards", "Streamlit · APAC markets", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("90%", "PI coverage target"), ("-40%", "reporting latency")],
+    metrics=[("Calibrated", "coverage-guaranteed intervals"), ("Faster", "stakeholder reporting")],
   ),
   dict(
     id="biometric-authentication-credit-scoring",
     eyebrow="BIOMETRIC AUTH & ALT-CREDIT — PRODUCTION ML",
-    chip="GDP LABS · 2021–23",
+    chip="GDP LABS",
     lanes=["TRAFFIC", "INFERENCE", "SERVICE", "CREDIT"],
     cols=[
-      [("1M+ daily logins", "surge traffic", "in")],
+      [("Login surge traffic", "major bank clients", "in")],
       [("MobileNet · OpenVINO", "CPU-optimised runtime", "proc")],
       [("Verification API", "sync + async load-tested", "proc")],
       [("Credit scorecard", "points-based · explainable", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("99.99%", "uptime"), ("+35%", "approval efficiency")],
+    metrics=[("Bank-grade", "uptime under surge"), ("Explainable", "regulator-ready scoring")],
   ),
   dict(
     id="fraud-detection-pipeline",
     eyebrow="FRAUD DETECTION — STREAMING MULTI-STAGE",
-    chip="GDP LABS · 2021–23",
+    chip="GDP LABS",
     lanes=["INGESTION", "PRE-FILTER", "DETECTION", "DECISIONS"],
     cols=[
       [("Kafka stream", "Redis online features", "in")],
@@ -247,7 +247,7 @@ SPECS = [
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
     loop=dict(frm=(3, 0), to=(2, 0), label="HITL labels · continuous retraining"),
-    metrics=[("3", "attack types covered")],
+    metrics=[("Multi-vector", "attack-type coverage")],
   ),
   dict(
     id="municipal-waste-forecasting",
@@ -255,18 +255,18 @@ SPECS = [
     chip="JAKARTA SMART CITY",
     lanes=["CITIZEN DATA", "FORECASTING", "CAUSAL CHECK", "OPERATIONS"],
     cols=[
-      [("JAKI · Qlue reports", "100K+ · 10M residents", "in")],
+      [("JAKI · Qlue reports", "citywide citizen data", "in")],
       [("Prophet ensemble", "vs ARIMA · SARIMA", "proc")],
-      [("DiD analysis", "2020 plastic-bag ban", "proc")],
+      [("DiD analysis", "plastic-bag ban rollout", "proc")],
       [("Route planning", "Tableau · per district", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("+15%", "operational efficiency")],
+    metrics=[("Leaner routing", "operational efficiency gains")],
   ),
   dict(
     id="demand-forecasting-consulting",
     eyebrow="DEMAND FORECASTING — CONSULTING CADENCE",
-    chip="ARTEFACT · 2025",
+    chip="ARTEFACT",
     lanes=["TRIAGE", "MODELLING", "VALIDATION", "HANDOFF"],
     cols=[
       [("Data triage", "quality audit · BigQuery", "in")],
@@ -275,11 +275,11 @@ SPECS = [
       [("Documented handoff", "model card · retraining", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("2 wks", "sprint to demo"), ("2", "Fortune 500 clients")],
+    metrics=[("Sprint cadence", "triage to client demo")],
   ),
   dict(
     id="hakktaxi-ride-share",
-    eyebrow="RIDE-SHARE DEMAND — 48-HOUR BUILD",
+    eyebrow="RIDE-SHARE DEMAND — HACKATHON SPRINT",
     chip="AZURE APAC CHAMPION",
     lanes=["INPUT SIGNALS", "FEATURES", "MODEL", "OUTPUT"],
     cols=[
@@ -292,21 +292,21 @@ SPECS = [
     ],
     edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((0, 2), (1, 0)),
            ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("6 s", "ETA margin of error")],
+    metrics=[("Seconds-level", "ETA margin of error")],
   ),
   dict(
     id="telehealthmonitor-edge-ai",
     eyebrow="EDGE VITALS MONITORING — PRIVACY BY DESIGN",
-    chip="CAMBRIDGE · TOP 3 GLOBAL",
+    chip="CAMBRIDGE · CAMVSCOVID",
     lanes=["SENSOR", "ON-DEVICE CV", "OPTIMISATION", "UPLINK"],
     cols=[
       [("Camera feed", "chest-region video", "in")],
       [("Pose + optical flow", "respiratory-rate estimate", "proc")],
       [("On-device INT8", "ARM CPU · FP32→INT8", "proc")],
-      [("2G vitals uplink", "one float · no raw video", "out")],
+      [("2G vitals uplink", "vital signs only · no video", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("0 bytes", "raw biometrics transmitted")],
+    metrics=[("Privacy-preserving", "no raw video leaves device")],
   ),
   dict(
     id="community-ivr-voice-ai",
@@ -320,35 +320,35 @@ SPECS = [
       [("TTS response", "DTMF-familiar UX", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("40%", "of Indonesians lack smartphones")],
+    metrics=[("Smartphone-free", "offline community reach")],
   ),
   dict(
     id="plastic-bag-ban-causal-analysis",
     eyebrow="PLASTIC-BAG BAN — CAUSAL POLICY ANALYSIS",
-    chip="IEEE ICISS · 2021",
+    chip="IEEE ICISS",
     lanes=["CITIZEN DATA", "NLP", "CAUSAL INFERENCE", "FINDING"],
     cols=[
-      [("100K+ complaints", "JAKI · Qlue platforms", "in")],
+      [("Citizen complaints", "JAKI · Qlue platforms", "in")],
       [("Text classification", "waste-type taxonomy", "proc")],
       [("DiD estimation", "mobility + season controls", "proc")],
       [("Causal verdict", "fewer plastic complaints", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("Significant", "post-ban reduction")],
+    metrics=[("Significant", "post-ban complaint decline")],
   ),
   dict(
     id="aicity-qwen-vl",
-    eyebrow="VLM FINE-TUNING — 14 GB MEMORY BUDGET",
-    chip="AI CITY CHALLENGE 2026",
+    eyebrow="VLM FINE-TUNING — CONSTRAINED GPU MEMORY",
+    chip="AI CITY CHALLENGE",
     lanes=["DATASET", "MEMORY FIT", "PEFT", "TRAINING"],
     cols=[
-      [("Traffic video QA", "Track 2 corpus", "in")],
+      [("Traffic video QA", "challenge corpus", "in")],
       [("Dataset re-pack", "per-step memory cut", "proc")],
-      [("LoRA r=16", "Qwen2.5-VL-3B", "proc")],
-      [("ZeRO-2 training", "3 epochs · 14 GB V100", "out")],
+      [("LoRA adapters", "Qwen2.5-VL-3B", "proc")],
+      [("ZeRO-2 training", "on a commodity V100", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("1.46", "final train loss")],
+    metrics=[("Memory-bounded", "commodity-GPU training")],
   ),
   dict(
     id="llm-d-inference-scheduler",
@@ -362,7 +362,7 @@ SPECS = [
       [("vLLM backends", "Kubernetes-native", "out")],
     ],
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
-    metrics=[("Go 1.24+", "contribution surface")],
+    metrics=[("Production-scale", "LLM request routing")],
   ),
 ]
 
@@ -616,6 +616,29 @@ svg {{ display:block; }}
 </style></head><body>{svg}</body></html>"""
 
 
+def build_alt(spec):
+    """Digit-consistent alt text derived from the diagram spec itself."""
+    stages = []
+    for col in spec["cols"]:
+        names = []
+        for title, sub, _k in col:
+            names.append(f"{title} ({sub})" if sub else title)
+        stages.append(" + ".join(names))
+    return "End-to-end pipeline diagram: " + " \u2192 ".join(stages)
+
+
+def write_alt_data(specs):
+    """Regenerate _data/uc_banners.yml (consumed by _pages/usecases.md)."""
+    import json
+    path = os.path.join(REPO, "_data", "uc_banners.yml")
+    lines = ["# AUTO-GENERATED by scripts/generate_uc_banners.py — do not edit by hand.\n"]
+    for spec in specs:
+        lines.append(f"{spec['id']}:\n  alt: {json.dumps(build_alt(spec), ensure_ascii=False)}\n")
+    with open(path, "w", encoding="utf-8") as f:
+        f.writelines(lines)
+    print("wrote", os.path.relpath(path, REPO))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="comma-separated subset of ids")
@@ -656,6 +679,7 @@ def main():
                 pass
             print("rendered", os.path.relpath(png, REPO), f"{os.path.getsize(png) // 1024} KB")
         browser.close()
+    write_alt_data(SPECS)
 
 
 if __name__ == "__main__":

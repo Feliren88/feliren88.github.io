@@ -261,10 +261,10 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 3. `main.js` handles clicks on `.filter-pill, .filter` automatically for `.project-card` items; for other card types, add inline JS that reads `.filter-pill` clicks and toggles visibility
 
 ### Add or Edit a Use Case Pipeline Banner
-Cards on `/usecases/` show a pre-rendered pipeline diagram (`assets/img/usecases/<id>.png`, 1320x600 PNG) whenever the entry in `_data/usecases.yml` has a `flow:` key. The `flow:` steps are used only for the image `alt` text; the diagram itself is defined in the `SPECS` list inside `scripts/generate_uc_banners.py` (nodes, lanes, edges, KPI chips — keep every value faithful to the entry's `resolution:` content, no invented metrics). To add or change a banner:
-1. Edit the spec in `scripts/generate_uc_banners.py` (and the entry's `flow:` for alt text)
-2. Run `python3 scripts/generate_uc_banners.py --only <id>` (needs `pip install playwright pillow` + a Chromium binary)
-3. Commit the regenerated PNG. Entries without `flow:` (e.g. `vln-conformal-prediction`) render no banner.
+Cards on `/usecases/` show a pre-rendered pipeline diagram (`assets/img/usecases/<id>.png`, 1320x600 PNG) whenever `_data/uc_banners.yml` has an entry for the use case id. Both the PNGs and that data file (which holds the image `alt` text) are AUTO-GENERATED from the `SPECS` list inside `scripts/generate_uc_banners.py` — the single source of truth for nodes, lanes, edges, and outcome chips. Style rules: every claim faithful to the entry's `resolution:` content; NO numeric wording anywhere in the diagram (no metrics, counts, percentages, sizes, or years) — qualitative outcome chips only; product nomenclature containing digits (Sentinel-2, INT8, V100, ZeRO-2…) is allowed. To add or change a banner:
+1. Edit the spec in `scripts/generate_uc_banners.py`
+2. Run `python3 scripts/generate_uc_banners.py [--only <id>]` (needs `pip install playwright pillow` + a Chromium binary) — regenerates the PNG(s) and `_data/uc_banners.yml`
+3. Commit both. Use cases without a spec (e.g. `vln-conformal-prediction`) render no banner.
 
 ### Update Styles
 Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.

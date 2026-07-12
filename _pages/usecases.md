@@ -24,9 +24,9 @@ permalink: /usecases/
   {% unless ext_link %}{% if uc.doi %}{% assign ext_link = "https://doi.org/" | append: uc.doi %}{% endif %}{% endunless %}
   <article class="uc-card" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">
 
-    {% if uc.flow %}
-    {% capture flow_alt %}{% for step in uc.flow %}{{ step.label }}{% if step.sub %} ({{ step.sub }}){% endif %}{% unless forloop.last %} → {% endunless %}{% endfor %}{% endcapture %}
-    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" alt="End-to-end pipeline diagram: {{ flow_alt | strip }}" width="1320" height="600" loading="lazy" decoding="async">
+    {% assign banner = site.data.uc_banners[uc.id] %}
+    {% if banner %}
+    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
     {% endif %}
 
     <div class="uc-card-header">
