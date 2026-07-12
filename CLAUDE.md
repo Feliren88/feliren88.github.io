@@ -22,6 +22,8 @@ feliren88.github.io/
 │   ├── default.html   # Base layout with SEO, skip link, font preloads
 │   ├── page.html      # Generic page template (extends default)
 │   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
+├── _includes/
+│   └── uc-flow-icon.html  # Pipeline-step icon library (33 stroke glyphs) for use case flow banners; {% include uc-flow-icon.html name="satellite" %}
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -256,6 +258,14 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 1. Add `.filter-bar` / `.filter-pill` markup (see Design System above)
 2. Add `data-kind="<value>"` to each card/item element
 3. `main.js` handles clicks on `.filter-pill, .filter` automatically for `.project-card` items; for other card types, add inline JS that reads `.filter-pill` clicks and toggles visibility
+
+### Add or Edit a Use Case Pipeline Banner
+Each entry in `_data/usecases.yml` may declare a `flow:` list of 4 steps rendered as the card's teaser banner on `/usecases/` (input → method → validation → output):
+```yaml
+flow:
+  - { icon: satellite, label: "Sentinel-2 MSI", sub: "RGB + NIR bands" }
+```
+Icons come from `_includes/uc-flow-icon.html`; add new glyphs there as `{% when 'name' %}` cases. Styles live under `.uc-flow` in `styles.css`. Entries without `flow:` (e.g. `vln-conformal-prediction`) simply render no banner. Keep labels faithful to the entry's `resolution:` content — no invented metrics.
 
 ### Update Styles
 Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.

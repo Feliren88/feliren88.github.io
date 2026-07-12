@@ -95,6 +95,12 @@ usecases:
 
     hook: "Satellite flood maps for 25M people, hours instead of days, state-of-the-art IoU."
 
+    flow:
+      - { icon: satellite, label: "Sentinel-2 MSI", sub: "RGB + NIR bands" }
+      - { icon: layers, label: "Dual encoders", sub: "parallel RGB ∥ NIR U-Net" }
+      - { icon: merge, label: "Cross-attention", sub: "fused at every skip scale" }
+      - { icon: map, label: "Flood masks", sub: "IoU 0.815 · zero-shot 3 m" }
+
     situation: >
       Flood extent mapping from satellite imagery is a critical upstream input for
       disaster response logistics. Manual GIS analysis introduces latency of days
@@ -193,6 +199,12 @@ usecases:
 
     hook: "The first geospatial foundation model applied to continental-scale mining footprint detection."
 
+    flow:
+      - { icon: satellite, label: "S2 + SAR + DEM", sub: "500 GB via Earth Engine" }
+      - { icon: layers, label: "Stream encoders", sub: "Prithvi geospatial FM" }
+      - { icon: merge, label: "Multi-modal fusion", sub: "optical + radar + terrain" }
+      - { icon: map, label: "Mining footprints", sub: "continental · multi-year" }
+
     situation: >
       Mining footprint delineation is a prerequisite for environmental compliance
       monitoring and land rehabilitation planning at national scale. Across
@@ -279,6 +291,12 @@ usecases:
 
     hook: "Catching illegal shrimp farms from orbit before regulators arrive, hours, not field-survey years."
 
+    flow:
+      - { icon: satellite, label: "Sentinel-2 stack", sub: "multi-temporal revisits" }
+      - { icon: droplet, label: "Spectral indices", sub: "NDWI · MNDWI · AWEI" }
+      - { icon: filter, label: "Geometry filters", sub: "man-made pond shapes" }
+      - { icon: map, label: "Expansion alerts", sub: "Indonesia + Vietnam coasts" }
+
     situation: >
       Illegal aquaculture expansion, primarily shrimp and fish ponds, along
       Southeast Asian coastlines is a leading driver of mangrove deforestation.
@@ -354,6 +372,12 @@ usecases:
 
     hook: "Do retention ponds actually reduce flooding? We answered it with satellites and causal stats."
 
+    flow:
+      - { icon: satellite, label: "Sentinel-2 imagery", sub: "South Bandung catchments" }
+      - { icon: layers, label: "ProCANet + NDWI", sub: "flood extent mapping" }
+      - { icon: doc, label: "Policy analysis", sub: "mixed-methods evaluation" }
+      - { icon: check, label: "Policy KPIs", sub: "retention pond evidence" }
+
     situation: >
       Urban flood management policy in Indonesian cities relies heavily on
       retention pond construction as a primary mitigation instrument, yet rigorous
@@ -416,6 +440,12 @@ usecases:
       - Override gap
 
     hook: "A model that trusts its eyes in English becomes a caption-follower in Telugu. We measured it, localized it, and steered it back."
+
+    flow:
+      - { icon: image, label: "Conflict pairs", sub: "EN · HI · TE captions" }
+      - { icon: chip, label: "9 open VLMs", sub: "10,260 evaluations" }
+      - { icon: target, label: "Linear probes", sub: "residual stream · 0.92 TE" }
+      - { icon: compass, label: "Activation steering", sub: "cross-lingual · override → 0" }
 
     situation: >
       Vision-Language Models (VLMs) must arbitrate between visual evidence and a
@@ -552,6 +582,12 @@ usecases:
 
     hook: "GPT-4V fails on Southeast Asian culture. We built the benchmark that proves it, ACL 2025."
 
+    flow:
+      - { icon: users, label: "100+ annotators", sub: "11 SEA countries" }
+      - { icon: filter, label: "Quality pipeline", sub: "pHash · CLIP dedup + HITL" }
+      - { icon: image, label: "10K+ VQA pairs", sub: "culturally grounded" }
+      - { icon: chart, label: "VLM blind spots", sub: "GPT-4V · Gemini · Claude" }
+
     situation: >
       State-of-the-art Vision-Language Models (GPT-4V, Gemini 1.5, Claude 3)
       are trained predominantly on English-centric, Western-origin image-text
@@ -631,6 +667,12 @@ usecases:
       - Anthropogenic priors
 
     hook: "Cultural AI for Southeast Asia without retraining from scratch, 98%+ global quality retained."
+
+    flow:
+      - { icon: image, label: "Curated SEA corpus", sub: "regional visual data" }
+      - { icon: chip, label: "SDXL fine-tune", sub: "diffusion adaptation arm" }
+      - { icon: merge, label: "Weight merging", sub: "linear blend with base" }
+      - { icon: chart, label: "Cultural gain", sub: "1.569 vs 1.491 · 98% kept" }
 
     situation: >
       General-purpose VLMs (LLaVA, InternVL, Phi-Vision, SDXL) exhibit
@@ -715,6 +757,12 @@ usecases:
 
     hook: "That 99% LID accuracy on SEA languages? It collapses on real noisy web data."
 
+    flow:
+      - { icon: globe, label: "CommonCrawl text", sub: "code-switched · romanized" }
+      - { icon: tag, label: "LID re-benchmark", sub: "fastText · GlotLID · OpenLID" }
+      - { icon: chart, label: "Failure localization", sub: "where 99% claims collapse" }
+      - { icon: doc, label: "Corpus guidance", sub: "for LLM data pipelines" }
+
     situation: >
       Language Identification (LID) is an upstream dependency for virtually
       every multilingual NLP pipeline. Machine translation routing, content
@@ -785,6 +833,12 @@ usecases:
       - Decision intelligence
 
     hook: "Turned media gut-feel into calibrated prediction intervals across 6 APAC markets for a Fortune 500."
+
+    flow:
+      - { icon: stream, label: "Market signals", sub: "SimilarWeb · Traackr · dbt" }
+      - { icon: chip, label: "XGBoost + SHAP", sub: "stakeholder-explainable" }
+      - { icon: range, label: "Conformal intervals", sub: "90% coverage target" }
+      - { icon: chart, label: "SoV dashboards", sub: "6 APAC markets · Streamlit" }
 
     situation: >
       A Fortune 500 global beauty conglomerate needed a data-driven system for
@@ -887,6 +941,12 @@ usecases:
 
     hook: "1M+ daily inferences at 99.99% uptime. Credit for the borrowers banks wouldn't score."
 
+    flow:
+      - { icon: scan, label: "1M+ daily auths", sub: "biometric verification" }
+      - { icon: chip, label: "MobileNet · OpenVINO", sub: "CPU-optimized serving" }
+      - { icon: gauge, label: "99.99% uptime", sub: "surge-tested · JMeter" }
+      - { icon: check, label: "Credit scorecard", sub: "+35% approval efficiency" }
+
     situation: >
       A major Indonesian bank required a production-grade biometric authentication
       stack capable of handling login surges at national scale, while simultaneously
@@ -981,6 +1041,12 @@ usecases:
 
     hook: "Three fraud attack types, one pipeline, rule filters, XGBoost, and graph anomaly detection."
 
+    flow:
+      - { icon: stream, label: "Kafka txn stream", sub: "Redis feature store" }
+      - { icon: filter, label: "Rule pre-filters", sub: "velocity · geo · device" }
+      - { icon: nodes, label: "XGBoost + graph", sub: "anomaly detection layers" }
+      - { icon: loop, label: "Ops feedback loop", sub: "HITL labels · drift watch" }
+
     situation: >
       A digital payments platform processing high daily transaction volumes
       faced escalating fraud losses across three distinct attack vectors, account takeover (credential stuffing + session hijacking), synthetic
@@ -1051,6 +1117,12 @@ usecases:
     role: Lead Data Scientist
 
     hook: "Forecasted Jakarta's trash so trucks follow where waste actually piles up instead of a fixed weekly schedule."
+
+    flow:
+      - { icon: doc, label: "JAKI · Qlue reports", sub: "100K+ citizen records" }
+      - { icon: chart, label: "Prophet ensemble", sub: "vs ARIMA · SARIMA" }
+      - { icon: target, label: "DiD causal analysis", sub: "plastic-ban impact" }
+      - { icon: truck, label: "Route planning", sub: "+15% efficiency · Tableau" }
 
     situation: >
       Jakarta's solid waste management agency (DINAS LINGKUNGAN HIDUP) operates
@@ -1136,6 +1208,12 @@ usecases:
 
     hook: "Two Fortune 500 clients, two forecasting problems, two weeks each, shipped and handed off."
 
+    flow:
+      - { icon: stream, label: "Client data triage", sub: "BigQuery · dbt" }
+      - { icon: chip, label: "XGBoost · Prophet", sub: "fit per problem" }
+      - { icon: check, label: "Business validation", sub: "client sign-off gate" }
+      - { icon: box, label: "Documented handoff", sub: "model card · retrain guide" }
+
     situation: >
       Two enterprise consulting engagements ran in parallel. A media group required audience reach forecasting for advertising inventory planning (forward-looking impressions and CPM estimation by placement type), and a financial services client required transaction volume forecasting for treasury operations
       (liquidity management and capital allocation planning).
@@ -1202,6 +1280,12 @@ usecases:
       - Gradient boosting
 
     hook: "A Jakarta ride-demand heatmap built in 48 hours. Microsoft Azure APAC Regional Champion."
+
+    flow:
+      - { icon: map, label: "Trips · weather · POI", sub: "Jakarta trip logs" }
+      - { icon: hex, label: "H3 hex features", sub: "temporal + spatial" }
+      - { icon: chip, label: "XGBoost demand", sub: "surge prediction" }
+      - { icon: gauge, label: "Demand heatmap", sub: "6 s ETA error · 48 h build" }
 
     situation: >
       Jakarta's ride-hailing market suffers from supply-demand mismatch that
@@ -1280,6 +1364,12 @@ usecases:
 
     hook: "COVID-19 vitals monitoring on a 2G connection, no cloud, no smartphone. Top 3, Cambridge."
 
+    flow:
+      - { icon: camera, label: "Phone camera", sub: "chest-region video" }
+      - { icon: pulse, label: "Optical-flow RR", sub: "pose-guided · on-device" }
+      - { icon: chip, label: "INT8 quantized", sub: "ARM CPU inference" }
+      - { icon: lock, label: "Vitals over 2G", sub: "no raw video leaves device" }
+
     situation: >
       During the COVID-19 pandemic surge (early 2020), Indonesian public hospitals
       faced patient overflow that required monitoring high-risk home-isolated
@@ -1357,6 +1447,12 @@ usecases:
       - COVID-19
 
     hook: "Health info for 40% of Indonesians without smartphones, via a plain old phone call."
+
+    flow:
+      - { icon: phone, label: "Feature-phone call", sub: "PSTN · 2G · no internet" }
+      - { icon: mic, label: "Indonesian ASR", sub: "+ dialect variants" }
+      - { icon: nodes, label: "Knowledge graph", sub: "curated health + aid info" }
+      - { icon: chat, label: "Spoken answers", sub: "TTS · zero-literacy UX" }
 
     situation: >
       During the COVID-19 pandemic, Indonesian government health guidance,
@@ -1440,6 +1536,12 @@ usecases:
       - Jakarta
 
     hook: "Jakarta banned plastic bags in 2020. Did it work? Proved it causally with 100K+ complaints."
+
+    flow:
+      - { icon: doc, label: "100K+ complaints", sub: "JAKI · Qlue platforms" }
+      - { icon: tag, label: "NLP classification", sub: "waste-type taxonomy" }
+      - { icon: target, label: "DiD estimation", sub: "mobility + season controls" }
+      - { icon: check, label: "Causal verdict", sub: "significant drop · ICISS 2021" }
 
     situation: >
       Jakarta implemented a plastic bag ban in 2020, prohibiting single-use
@@ -1525,6 +1627,12 @@ usecases:
       - Captioning
 
     hook: "Fine-tuning a 3B VLM on a 14GB GPU, every memory constraint hit, diagnosed, and solved."
+
+    flow:
+      - { icon: camera, label: "Traffic video QA", sub: "AI City 2026 · Track 2" }
+      - { icon: box, label: "Dataset re-pack", sub: "fits 14 GB GPU memory" }
+      - { icon: chip, label: "LoRA r=16 fine-tune", sub: "Qwen2.5-VL-3B" }
+      - { icon: bolt, label: "ZeRO-2 training", sub: "3 epochs on V100 14 GB" }
 
     situation: >
       The AI City Challenge Track 2 requires fine-tuning vision-language models
@@ -1753,6 +1861,12 @@ usecases:
       - KV cache-aware scheduling
 
     hook: "Contributing to the Kubernetes layer routing LLM requests across GPU backends at production scale."
+
+    flow:
+      - { icon: stream, label: "Inference requests", sub: "Gateway API ingress" }
+      - { icon: route, label: "Envoy ext-proc", sub: "scheduling filter" }
+      - { icon: nodes, label: "KV-cache-aware", sub: "P/D disaggregation" }
+      - { icon: chip, label: "vLLM GPU backends", sub: "Kubernetes-native" }
 
     situation: >
       Production LLM inference at scale requires intelligent request routing across

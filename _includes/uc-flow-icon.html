@@ -1,0 +1,42 @@
+{%- comment -%}
+Pipeline-step icon library for use case flow banners.
+Usage: {% include uc-flow-icon.html name="satellite" %}
+Stroke glyphs inherit currentColor; sized via .uc-flow-icon svg in styles.css.
+{%- endcomment -%}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{%- case include.name -%}
+{%- when 'satellite' -%}<circle cx="12" cy="12" r="3.4"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-24 12 12)"/>
+{%- when 'layers' -%}<path d="M12 3l8 4.5-8 4.5-8-4.5L12 3z"/><path d="M4 12l8 4.5 8-4.5"/><path d="M4 16.5L12 21l8-4.5"/>
+{%- when 'merge' -%}<path d="M4 5c6 0 6 7 13 7M4 19c6 0 6-7 13-7"/><path d="M14 8.5l3.5 3.5-3.5 3.5"/>
+{%- when 'map' -%}<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>
+{%- when 'droplet' -%}<path d="M12 3c3.5 4.2 6 7.4 6 10.2a6 6 0 1 1-12 0C6 10.4 8.5 7.2 12 3z"/>
+{%- when 'filter' -%}<path d="M4 5h16l-6 7v6l-4 2v-8L4 5z"/>
+{%- when 'doc' -%}<path d="M7 3h7l4 4v14H7V3z"/><path d="M14 3v4h4M10 12h6M10 16h6"/>
+{%- when 'check' -%}<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>
+{%- when 'image' -%}<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M5 17l4.5-4.5 3 3L16 12l3 3"/>
+{%- when 'chip' -%}<rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>
+{%- when 'target' -%}<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2"/>
+{%- when 'compass' -%}<circle cx="12" cy="12" r="9"/><path d="M15.2 8.8l-1.9 5.5-5.5 1.9 1.9-5.5 5.5-1.9z"/>
+{%- when 'users' -%}<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14.6c2.3.4 3.8 2.1 3.8 4.4"/>
+{%- when 'chart' -%}<path d="M4 4v16h16"/><path d="M7.5 14l3.5-4 3 3 4.5-5.5"/>
+{%- when 'globe' -%}<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c-3 2.5-4.5 5.5-4.5 9s1.5 6.5 4.5 9c3-2.5 4.5-5.5 4.5-9S15 5.5 12 3z"/>
+{%- when 'tag' -%}<path d="M20 4h-7L4 13l7 7 9-9V4z"/><circle cx="16" cy="8" r="1.2"/>
+{%- when 'stream' -%}<path d="M3 7h14M3 12h10M3 17h14"/><path d="M18 9l3 3-3 3"/>
+{%- when 'range' -%}<path d="M12 6v12M8 6h8M8 18h8"/><circle cx="12" cy="12" r="1.6"/>
+{%- when 'scan' -%}<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M9 10h.01M15 10h.01M9.5 14.5c.8.7 1.6 1 2.5 1s1.7-.3 2.5-1"/>
+{%- when 'gauge' -%}<path d="M5 17a8 8 0 1 1 14 0"/><path d="M12 13.5L15.5 10"/><circle cx="12" cy="14" r="1.2"/>
+{%- when 'nodes' -%}<circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.3 7.9l4.6 8M17.7 7.9l-4.6 8M7.2 6h9.6"/>
+{%- when 'loop' -%}<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M17.5 2.5v4h-4"/>
+{%- when 'truck' -%}<path d="M2 7h11v9H2V7z"/><path d="M13 10h4l3 3v3h-7v-6z"/><circle cx="6.5" cy="18.5" r="1.7"/><circle cx="16.5" cy="18.5" r="1.7"/>
+{%- when 'box' -%}<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>
+{%- when 'camera' -%}<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8 7l1.5-3h5L16 7"/>
+{%- when 'pulse' -%}<path d="M3 12h4l2.5-6 4 12 2.5-6h5"/>
+{%- when 'lock' -%}<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3"/>
+{%- when 'phone' -%}<path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+{%- when 'mic' -%}<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"/>
+{%- when 'chat' -%}<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-6 4V6z"/>
+{%- when 'route' -%}<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/>
+{%- when 'bolt' -%}<path d="M13 2L5 13.5h6L9.5 22 19 10.5h-6L13 2z"/>
+{%- when 'hex' -%}<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9L12 3z"/>
+{%- endcase -%}
+</svg>
