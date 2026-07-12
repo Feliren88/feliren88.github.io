@@ -25,14 +25,8 @@ permalink: /usecases/
   <article class="uc-card" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">
 
     {% if uc.flow %}
-    <ol class="uc-flow" aria-label="{{ uc.title }} pipeline, input to output">
-      {% for step in uc.flow %}
-      <li>
-        <span class="uc-flow-icon" aria-hidden="true">{% include uc-flow-icon.html name=step.icon %}</span>
-        <span class="uc-flow-text"><strong>{{ step.label }}</strong><span>{{ step.sub }}</span></span>
-      </li>
-      {% endfor %}
-    </ol>
+    {% capture flow_alt %}{% for step in uc.flow %}{{ step.label }}{% if step.sub %} ({{ step.sub }}){% endif %}{% unless forloop.last %} → {% endunless %}{% endfor %}{% endcapture %}
+    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" alt="End-to-end pipeline diagram: {{ flow_alt | strip }}" width="1320" height="600" loading="lazy" decoding="async">
     {% endif %}
 
     <div class="uc-card-header">

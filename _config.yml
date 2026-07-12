@@ -64,6 +64,7 @@ exclude:
   - vendor
   - CLAUDE.md
   - backlog.md
+  - scripts
 
 # Permalink structure
 permalink: pretty

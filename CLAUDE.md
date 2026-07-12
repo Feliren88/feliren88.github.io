@@ -22,8 +22,8 @@ feliren88.github.io/
 │   ├── default.html   # Base layout with SEO, skip link, font preloads
 │   ├── page.html      # Generic page template (extends default)
 │   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
-├── _includes/
-│   └── uc-flow-icon.html  # Pipeline-step icon library (33 stroke glyphs) for use case flow banners; {% include uc-flow-icon.html name="satellite" %}
+├── scripts/
+│   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (PNG, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -56,7 +56,8 @@ feliren88.github.io/
 │       ├── profile_2_bg.webp     # About page background (82KB, white-on-transparent silhouette)
 │       ├── profile_3_bg.webp     # Contact page background (220KB, white-on-transparent silhouette)
 │       ├── favicon.webp / favicon_black.webp
-│       └── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
+│       ├── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
+│       └── usecases/            # Generated pipeline diagrams (19 PNG, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
 ├── css/
 │   └── styles.css  # @font-face, custom properties, all component styles (current: v28)
 └── js/
@@ -260,12 +261,10 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 3. `main.js` handles clicks on `.filter-pill, .filter` automatically for `.project-card` items; for other card types, add inline JS that reads `.filter-pill` clicks and toggles visibility
 
 ### Add or Edit a Use Case Pipeline Banner
-Each entry in `_data/usecases.yml` may declare a `flow:` list of 4 steps rendered as the card's teaser banner on `/usecases/` (input → method → validation → output):
-```yaml
-flow:
-  - { icon: satellite, label: "Sentinel-2 MSI", sub: "RGB + NIR bands" }
-```
-Icons come from `_includes/uc-flow-icon.html`; add new glyphs there as `{% when 'name' %}` cases. Styles live under `.uc-flow` in `styles.css`. Entries without `flow:` (e.g. `vln-conformal-prediction`) simply render no banner. Keep labels faithful to the entry's `resolution:` content — no invented metrics.
+Cards on `/usecases/` show a pre-rendered pipeline diagram (`assets/img/usecases/<id>.png`, 1320x600 PNG) whenever the entry in `_data/usecases.yml` has a `flow:` key. The `flow:` steps are used only for the image `alt` text; the diagram itself is defined in the `SPECS` list inside `scripts/generate_uc_banners.py` (nodes, lanes, edges, KPI chips — keep every value faithful to the entry's `resolution:` content, no invented metrics). To add or change a banner:
+1. Edit the spec in `scripts/generate_uc_banners.py` (and the entry's `flow:` for alt text)
+2. Run `python3 scripts/generate_uc_banners.py --only <id>` (needs `pip install playwright pillow` + a Chromium binary)
+3. Commit the regenerated PNG. Entries without `flow:` (e.g. `vln-conformal-prediction`) render no banner.
 
 ### Update Styles
 Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.

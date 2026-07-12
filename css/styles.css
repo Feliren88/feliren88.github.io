@@ -2269,64 +2269,15 @@ html[data-theme="light"] .tech-tag--tool {
 }
 .uc-card-cta:hover { opacity: 0.75; }
 
-/* Use case pipeline banner — end-to-end flow strip at top of each card */
-.uc-flow {
-  list-style: none;
+/* Use case pipeline banner — pre-rendered diagram at top of each card */
+.uc-flow-img {
+  display: block;
+  width: calc(100% + 3rem);
+  max-width: none;
+  height: auto;
   margin: -1.5rem -1.5rem 1.1rem;
-  padding: 0.72rem 0.9rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  row-gap: 0.5rem;
   border-bottom: 1px solid var(--line);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: color-mix(in srgb, var(--accent) 4%, transparent);
-}
-.uc-flow li {
-  display: flex;
-  align-items: center;
-  gap: 0.42rem;
-  min-width: 0;
-}
-.uc-flow li:not(:last-child)::after {
-  content: "\2192";
-  content: "\2192" / "";
-  color: var(--muted);
-  opacity: 0.6;
-  margin: 0 0.55rem;
-  font-size: 0.75rem;
-}
-.uc-flow-icon {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 25px;
-  height: 25px;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  color: var(--accent);
-}
-.uc-flow-icon svg { width: 14px; height: 14px; }
-.uc-flow li:last-child .uc-flow-icon {
-  background: color-mix(in srgb, var(--accent) 20%, transparent);
-}
-.uc-flow-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.uc-flow-text strong {
-  font-size: var(--fs-2xs);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.25;
-  white-space: nowrap;
-}
-.uc-flow-text span {
-  font-size: 0.64rem;
-  color: var(--muted);
-  line-height: 1.3;
-  white-space: nowrap;
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
 }
 
 @media (max-width: 600px) {
