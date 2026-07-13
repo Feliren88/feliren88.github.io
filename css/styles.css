@@ -169,7 +169,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  opacity: 0.45;
+  opacity: 0.57;
 }
 
 .topbar,
@@ -1545,9 +1545,9 @@ html[data-theme="light"] .tech-tag--tool {
     grid-template-columns: 1fr;
   }
 
-  #pointcloud-bg {
-    opacity: 0.38;
-  }
+#pointcloud-bg {
+     opacity: 0.45;
+   }
 
   .footer-top { flex-direction: column; gap: 1.5rem; }
   .footer-nav { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 0.4rem 1.1rem; }
