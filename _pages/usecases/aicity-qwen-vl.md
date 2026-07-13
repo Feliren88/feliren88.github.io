@@ -1,7 +1,7 @@
 ---
 layout: usecase
 uc_id: aicity-qwen-vl
-image: /assets/img/usecases/aicity-qwen-vl.png
+image: /assets/img/usecases/aicity-qwen-vl.webp
 permalink: /usecases/aicity-qwen-vl/
 redirect_from:
   - /usecases/eccv-workshop-qwen-vl/

@@ -23,7 +23,7 @@ feliren88.github.io/
 │   ├── page.html      # Generic page template (extends default)
 │   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
 ├── scripts/
-│   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (PNG, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
+│   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (WebP, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
 ├── _pages/         # Jekyll pages (Markdown)
 │   ├── about.md
 │   ├── skills.md
@@ -57,7 +57,7 @@ feliren88.github.io/
 │       ├── profile_3_bg.webp     # Contact page background (220KB, white-on-transparent silhouette)
 │       ├── favicon.webp / favicon_black.webp
 │       ├── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
-│       └── usecases/            # Generated pipeline diagrams (19 PNG, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
+│       └── usecases/            # Generated pipeline diagrams (20 WebP, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
 ├── css/
 │   └── styles.css  # @font-face, custom properties, all component styles (current: v28)
 └── js/
@@ -261,10 +261,10 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 3. `main.js` handles clicks on `.filter-pill, .filter` automatically for `.project-card` items; for other card types, add inline JS that reads `.filter-pill` clicks and toggles visibility
 
 ### Add or Edit a Use Case Pipeline Banner
-Cards on `/usecases/` show a pre-rendered pipeline diagram whenever `_data/uc_banners.yml` has an entry for the use case id. Each diagram exists in both themes — `assets/img/usecases/<id>.png` (dark, the default and also each detail page's `image:` front matter for og:image social cards) and `<id>-light.png` (swapped in by inline JS on `/usecases/` when `data-theme="light"`), 1320x600 PNG. Both the PNGs and that data file (which holds the image `alt` text) are AUTO-GENERATED from the `SPECS` list inside `scripts/generate_uc_banners.py` — the single source of truth for nodes, lanes, edges, and outcome chips. Style rules: every claim faithful to the entry's `resolution:` content; NO numeric wording anywhere in the diagram (no metrics, counts, percentages, sizes, or years) — qualitative outcome chips only; product nomenclature containing digits (Sentinel-2, INT8, V100, ZeRO-2…) is allowed. To add or change a banner:
+Cards on `/usecases/` and the top of each use case detail page show a pre-rendered pipeline diagram whenever `_data/uc_banners.yml` has an entry for the use case id. Each diagram exists in both themes — `assets/img/usecases/<id>.webp` (dark, the default and also each detail page's `image:` front matter for og:image social cards) and `<id>-light.webp` (swapped in by `syncFlowBanners()` in `js/main.js` whenever `data-theme` changes, on both the listing and detail pages), 1320x600 lossy WebP (quality 90). Both the WebPs and that data file (which holds the image `alt` text) are AUTO-GENERATED from the `SPECS` list inside `scripts/generate_uc_banners.py` — the single source of truth for nodes, lanes, edges, and outcome chips. Style rules: every claim faithful to the entry's `resolution:` content; NO numeric wording anywhere in the diagram (no metrics, counts, percentages, sizes, or years) — qualitative outcome chips only; product nomenclature containing digits (Sentinel-2, INT8, V100, ZeRO-2…) is allowed. To add or change a banner:
 1. Edit the spec in `scripts/generate_uc_banners.py`
-2. Run `python3 scripts/generate_uc_banners.py [--only <id>]` (needs `pip install playwright pillow` + a Chromium binary) — regenerates the PNG(s) and `_data/uc_banners.yml`
-3. Commit both. Use cases without a spec (e.g. `vln-conformal-prediction`) render no banner. New use cases also need `image: /assets/img/usecases/<id>.png` in their detail page front matter for the og:image.
+2. Run `python3 scripts/generate_uc_banners.py [--only <id>]` (needs `pip install playwright pillow` + a Chromium binary) — regenerates the WebP(s) and `_data/uc_banners.yml`
+3. Commit both. Use cases without a spec (e.g. `vln-conformal-prediction`) render no banner. New use cases also need `image: /assets/img/usecases/<id>.webp` in their detail page front matter for the og:image.
 
 ### Update Styles
 Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.

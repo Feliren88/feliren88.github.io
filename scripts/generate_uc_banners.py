@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Generate consulting-grade pipeline diagrams (PNG) for /usecases/ card banners.
+"""Generate consulting-grade pipeline diagrams (WebP) for /usecases/ card banners.
 
 Each use case gets a 440x200 (logical) architecture flowchart rendered with the
 site's own fonts (Manrope + Space Grotesk) in BOTH site themes, rasterised at
-3x via Playwright/Chromium:
+3x via Playwright/Chromium and encoded to lossless WebP:
 
-    assets/img/usecases/<id>.png         dark  (default; also the og:image)
-    assets/img/usecases/<id>-light.png   light (swapped in client-side)
+    assets/img/usecases/<id>.webp         dark  (default; also the og:image)
+    assets/img/usecases/<id>-light.webp   light (swapped in client-side)
 
 It also regenerates _data/uc_banners.yml (image alt text) from the same specs,
 so the diagrams, their alt text, and the light/dark variants can never drift.
@@ -21,7 +21,7 @@ Usage:
     python3 scripts/generate_uc_banners.py [--only id1,id2] [--keep-svg]
 
 Requires: playwright (pip) + a Chromium build (path via $UC_BANNER_CHROMIUM,
-default /opt/pw-browsers/chromium), Pillow optional for PNG optimisation.
+default /opt/pw-browsers/chromium), and Pillow to encode the WebP output.
 """
 
 import argparse
@@ -691,7 +691,7 @@ def write_alt_data(specs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="comma-separated subset of ids")
-    ap.add_argument("--keep-svg", action="store_true", help="also copy SVGs next to PNGs")
+    ap.add_argument("--keep-svg", action="store_true", help="also copy SVGs next to WebPs")
     args = ap.parse_args()
     only = set(args.only.split(",")) if args.only else None
     todo = [s for s in SPECS if not only or s["id"] in only]
@@ -699,6 +699,7 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     fonts = os.path.join(REPO, "assets", "fonts")
 
+    from PIL import Image
     from playwright.sync_api import sync_playwright
 
     with tempfile.TemporaryDirectory(prefix="ucb-") as tmp, sync_playwright() as p:
@@ -717,18 +718,14 @@ def main():
                     f.write(HTML_TMPL.format(fonts=fonts, bg=T["BG"], svg=svg))
                 page.goto("file://" + hpath)
                 page.evaluate("() => document.fonts.ready")
-                png = os.path.join(OUT_DIR, name + ".png")
-                page.screenshot(path=png, clip={"x": 0, "y": 0, "width": W, "height": H})
+                tmp_png = os.path.join(tmp, name + ".png")
+                page.screenshot(path=tmp_png, clip={"x": 0, "y": 0, "width": W, "height": H})
                 if args.keep_svg:
                     with open(os.path.join(OUT_DIR, name + ".svg"), "w", encoding="utf-8") as f:
                         f.write(svg)
-                try:  # optional size optimisation
-                    from PIL import Image
-                    im = Image.open(png).convert("RGB")
-                    im.save(png, optimize=True)
-                except ImportError:
-                    pass
-                print("rendered", os.path.relpath(png, REPO), f"{os.path.getsize(png) // 1024} KB")
+                webp = os.path.join(OUT_DIR, name + ".webp")
+                Image.open(tmp_png).convert("RGB").save(webp, "WEBP", quality=90, method=6)
+                print("rendered", os.path.relpath(webp, REPO), f"{os.path.getsize(webp) // 1024} KB")
         browser.close()
     write_alt_data(SPECS)
 

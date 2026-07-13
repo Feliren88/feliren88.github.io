@@ -27,7 +27,7 @@ permalink: /usecases/
     {% assign banner = site.data.uc_banners[uc.id] %}
     {% if banner %}
     <a class="uc-flow-link" href="/usecases/{{ uc.id }}/" aria-label="Read writeup: {{ uc.title }}">
-      <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" data-src-dark="/assets/img/usecases/{{ uc.id }}.png" data-src-light="/assets/img/usecases/{{ uc.id }}-light.png" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
+      <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.webp" data-src-dark="/assets/img/usecases/{{ uc.id }}.webp" data-src-light="/assets/img/usecases/{{ uc.id }}-light.webp" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
     </a>
     {% endif %}
 
