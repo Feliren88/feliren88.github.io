@@ -19,6 +19,20 @@ document.addEventListener("dragstart", (event) => {
   }
 });
 
+/* --- Use case pipeline banners: swap dark/light PNG with theme --- */
+function syncFlowBanners() {
+  const light = document.documentElement.getAttribute("data-theme") === "light";
+  document.querySelectorAll(".uc-flow-img").forEach((img) => {
+    const want = light ? img.getAttribute("data-src-light") : img.getAttribute("data-src-dark");
+    if (want && img.getAttribute("src") !== want) img.setAttribute("src", want);
+  });
+}
+syncFlowBanners();
+new MutationObserver(syncFlowBanners).observe(document.documentElement, {
+  attributes: true,
+  attributeFilter: ["data-theme"]
+});
+
 /* --- Scroll-reveal with group stagger (Gestalt: Common Fate) --- */
 const revealNodes = document.querySelectorAll(".reveal");
 const revealGroups = document.querySelectorAll(".reveal-group");

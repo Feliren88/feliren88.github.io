@@ -392,6 +392,23 @@ SPECS = [
     metrics=[("Memory-bounded", "commodity-GPU training")],
   ),
   dict(
+    id="vln-conformal-prediction",
+    eyebrow="VLN UNCERTAINTY — CALIBRATED HELP-SEEKING",
+    chip="THESIS RESEARCH",
+    lanes=["NAVIGATION BACKBONES", "CONFIDENCE RESCALING", "TRAJECTORY CALIBRATION", "HELP-SEEKING"],
+    cols=[
+      [("VLN-DUET", None, "in"),
+       ("VLN-HAMT", None, "in"),
+       ("Recurrent VLN-BERT", None, "in")],
+      [("Confidence rescaling", "divide by residual confidence", "proc")],
+      [("Episode-max calibration", "whole-trajectory coverage proof", "proc")],
+      [("Help-seeking policy", "operator queried on flagged steps", "out")],
+    ],
+    edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((0, 2), (1, 0)),
+           ((1, 0), (2, 0)), ((2, 0), (3, 0))],
+    metrics=[("Coverage restored", "across backbones and benchmarks"), ("Transfers", "cross-backbone")],
+  ),
+  dict(
     id="llm-d-inference-scheduler",
     eyebrow="LLM INFERENCE — KUBERNETES SCHEDULING",
     chip="OPEN SOURCE · llm-d",

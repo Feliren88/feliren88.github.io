@@ -42,7 +42,7 @@ Vicky Feliren (he/him) is an Applied Scientist, AI Engineer / Researcher, and Da
 - [Qwen VL Fine-tuning for AI City Challenge 2026](https://vickyfeliren.com/usecases/aicity-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 
 ### Ongoing Projects
-- [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. First systematic CP evaluation across VLN-DUET and VLN-HAMT. 21 propagation formulations benchmarked; log-prob penalty achieves 18–47% set efficiency improvement.
+- [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. Parameter-free confidence-rescaled conformal score restores calibrated coverage across VLN-DUET, VLN-HAMT, and Recurrent VLN-BERT on R2R and REVERIE; closed-loop help-seeking lifts success from 71% to 91%.
 - [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
 ## Key Research

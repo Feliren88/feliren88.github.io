@@ -1613,7 +1613,7 @@ usecases:
   # ──────────────────────────────────────────
 
   - id: vln-conformal-prediction
-    title: "Conformal Prediction for Vision-and-Language Navigation (DUET + HAMT)"
+    title: "Conformal Prediction for Vision-and-Language Navigation in Discrete Graphs"
     category: safety
     tags:
       - Conformal Prediction
@@ -1621,8 +1621,8 @@ usecases:
       - Uncertainty Quantification
       - VLN-DUET
       - VLN-HAMT
-      - Score Functions
-      - ICRA 2027
+      - Human-in-the-Loop
+
     venue: "Thesis Research, VLN-DUET Uncertainty Propagation (2026)"
     role: Lead Researcher
     keywords:
@@ -1631,100 +1631,98 @@ usecases:
       - Uncertainty quantification
       - VLN-DUET
       - VLN-HAMT
-      - R2R dataset
+      - Recurrent VLN-BERT
+      - R2R and REVERIE datasets
       - Prediction sets
+      - Human-in-the-loop help-seeking
 
-    hook: "21 uncertainty methods for robot navigation tested. Most fail. One works, and we know why."
+    hook: "Navigation agents are confidently wrong. A parameter-free rescaling of the model's own softmax turns that overconfidence into a calibrated stop sign."
 
     situation: >
-      Vision-and-Language Navigation (VLN) agents operating in unseen environments
-      require calibrated uncertainty estimates to know when to defer to human
-      oversight. A navigation agent that is 70% confident may be catastrophically
-      wrong, high confidence does not guarantee correctness. Conformal Prediction
-      (CP) offers distribution-free coverage guarantees but requires systematic
-      evaluation across multiple VLN architectures and uncertainty propagation
-      formulations to determine which methods actually improve set efficiency
-      without sacrificing coverage.
+      Vision-and-Language Navigation (VLN) agents operating in unseen buildings
+      commit to incorrect moves with high confidence and no internal signal of
+      error, so early deviations compound into terminal navigation failures.
+      A deployed agent needs a calibrated estimate of when to query a human
+      operator before that happens. Conformal Prediction (CP) offers a
+      distribution-free, finite-sample guarantee that the correct action lies
+      in a prediction set at an operator-chosen risk level, but it was never
+      validated on the concentrated, sequential softmax distributions that
+      modern VLN transformers produce.
 
     complication: >
-      Evaluating conformal prediction for navigation requires navigating three compounding challenges. (1) Multiple navigation architectures with
-      fundamentally different action representations (one operating on a
-      topological map of the environment, the other on local candidate steps)
-      make fair cross-system comparison non-trivial; (2) Navigation trajectories
-      are short (mean 6-8 steps), making them structurally incompatible with
-      temporal uncertainty propagation methods designed for long-horizon tasks
-      where running-average methods need many steps to converge; and (3) Twenty-one
-      propagation formulations must be benchmarked systematically to distinguish
-      genuine improvements from configuration artifacts. Building a unified
-      experimental framework bridging two architectures with incompatible software
-      ecosystems added significant engineering overhead before scientific evaluation
-      could begin.
+      Standard CP scoring breaks on navigation for two structural reasons, not
+      one. First, well-trained VLN policies are sharply concentrated (mean
+      top-action probability 0.80-0.84 on R2R val-unseen), which pushes
+      standard classification scores toward zero until the calibrated
+      threshold stops responding to the risk level at all and collapses into
+      uninformative singleton sets. Second, a navigation episode is a
+      sequence: its steps are strongly dependent, so calibrating step-by-step
+      violates the exchangeability assumption split CP requires, and the
+      seen-to-unseen shift a deployed agent faces erodes coverage further
+      still. Any fix has to hold across architecturally distinct backbones,
+      generalise past the single benchmark it was tuned on, and translate into
+      an operating rule that a human supervisor can actually act on.
 
     resolution:
-      methodology: >
-        Built a unified experimental framework supporting both VLN-DUET and
-        VLN-HAMT navigation architectures under a consistent evaluation protocol,
-        enabling direct comparison across systems that would otherwise be
-        benchmarked in isolation. Evaluated three classes of uncertainty scoring
-        methods, threshold-based, adaptive prediction sets, and regularized
-        adaptive sets, across both architectures. Both passive observation mode
-        (does uncertainty improve over time?) and active intervention mode (does
-        restricting the agent to high-confidence actions improve success rates?)
-        evaluated across all configurations.
-      propagation_benchmark: >
-        Designed and executed systematic benchmark of 21 uncertainty propagation
-        formulations across 3 VLN architectures and 4 alpha levels. The key finding is that 16 of 21 temporal propagation formulations catastrophically inflate
-        prediction set sizes (mean 17-38 actions, saturating the full action
-        space) on finite-horizon VLN trajectories. The root cause is that VLN's short trajectories prevent running-average methods (EMA, ACI) from converging
-        and cause control-based methods (PID) to overshoot.
-      score_augmentation: >
-        Discovered that augmenting the base uncertainty score with a logarithmic
-        confidence penalty, additionally down-weighting actions where the model is
-        both uncertain and assigns low probability, improves prediction set
-        efficiency by 18-47% across all tested architectures while maintaining
-        valid coverage guarantees. The improvement holds across architectures
-        because the augmentation operates on the model's raw output probabilities,
-        which all tested systems produce in the same form. This is a counterintuitive finding. A simple one-term modification outperforms complex temporal
-        propagation methods that attempt to accumulate uncertainty across navigation
-        steps.
-      codebase: >
-        Built a unified research codebase supporting both navigation architectures
-        with consistent interfaces, enabling controlled comparison between systems
-        previously evaluated only in isolation. Includes automated pipeline
-        orchestration, the full suite of 21 uncertainty propagation formulations,
-        and reproducible experiment configuration, a research infrastructure
-        contribution that enables future VLN uncertainty research without
-        rebuilding from scratch. Full calibration benchmarks run approximately
-        24 hours per configuration on available hardware.
+      score: >
+        Normalise any base nonconformity score by the policy's residual
+        confidence, dividing by one plus that residual, and calibrate over the
+        maximum score across an entire episode rather than per step. The
+        rescaling is parameter-free, adds no trainable weights or inference
+        latency, and restores the threshold's sensitivity to the
+        operator-chosen risk level exactly where the raw score had saturated.
+      guarantee: >
+        Proved the normalised score is an instantiation of sequence-level
+        conformal calibration for variable-length discrete-graph navigation:
+        under episode-level exchangeability alone, the prediction set covers
+        the correct action over the whole trajectory at every risk level,
+        holding regardless of how dependent the steps within an episode are.
+        A learned weight variant satisfies the same guarantee at the cost of
+        an extra calibration split, but contributes little once the
+        confidence floor is in place.
+      cross_architecture_validation: >
+        Benchmarked across four transformer backbones spanning a wide
+        success-rate spread and three base scores, maintaining valid coverage
+        in every configuration tested. A threshold calibrated on one backbone
+        transfers directly to every other backbone's test split, because the
+        rescaling maps distinct policies onto a shared confidence scale, so a
+        transferred threshold is a usable warm start for a new platform ahead
+        of local recalibration.
+      generalisation_and_deployment: >
+        Extended the evaluation to a remote object-grounding benchmark beyond
+        the original navigation task, confirming the navigation-level
+        guarantee holds under a genuinely different objective, while showing
+        the object-grounding head needs a small in-distribution recalibration
+        split under the same covariate shift. Closed the loop by wiring the
+        prediction set into a help-seeking policy that queries a human
+        operator only on the steps it flags, lifting navigation success
+        substantially at a modest query rate and beating an uncalibrated
+        confidence cutoff on the same operating budget.
 
     tech_stack:
       frameworks: [PyTorch, DeepSpeed ZeRO-2]
-      vln_models: [VLN-DUET, VLN-HAMT]
-      conformal_methods: [THR, APS, RAPS, Conformal Prediction]
-      propagation_formulations: "21 formulations (EMA, CumulMax, ACI, PID, entropy-family, etc.)"
-      datasets: [R2R, R4R, REVERIE, SOON]
-      evaluation: [Coverage guarantees, Set size, Intervention rate]
+      vln_models: [VLN-DUET, VLN-HAMT, Recurrent VLN-BERT]
+      conformal_methods: [THR, APS, RAPS, Split Conformal Prediction]
+      datasets: [R2R, REVERIE]
+      evaluation: [Whole-trajectory coverage, Threshold transfer, Closed-loop help-seeking]
       hardware: [A40, V100]
 
     metrics:
-      architectures_tested: 3
-      propagation_formulations: 21
-      alpha_levels: 4
-      efficiency_improvement_pct: "18-47"
-      mean_set_size_baseline: 1.9
-      mean_set_size_logprob_penalty: 1.38
-      trajectory_length_mean: 7
-      calibration_runtime_hours: 24
+      backbones_evaluated: 4
+      base_scores_evaluated: 3
+      configurations_covering_target: "36/36"
+      cross_backbone_pairs_covering_target: "12/12"
+      benchmarks_validated: 2
+      help_seeking_success_lift: "71% to 91%"
 
     impact: >
-      Provides the first systematic conformal prediction evaluation across multiple
-      VLN architectures, establishing which uncertainty quantification methods work
-      and why most temporal propagation approaches fail on short-horizon navigation
-      trajectories. The logarithmic penalty finding, that a simple score
-      augmentation outperforms complex temporal propagation, is a counterintuitive
-      and publication-worthy result targeting ICRA 2027. The unified experimental
-      framework enables reproducible benchmarking for future VLN uncertainty
-      research without the setup overhead of the initial investigation.
+      Establishes that a single parameter-free rescaling, not a more complex
+      temporal or learned correction, restores valid and risk-responsive
+      uncertainty on overconfident navigation policies, with a proof that
+      holds across architectures and generalises to a second benchmark. The
+      closed-loop result turns a coverage guarantee into an operating rule: an
+      operator answering only the flagged steps recovers most of the success
+      gap to a fully supervised agent at a fraction of the query volume.
 
   # ──────────────────────────────────────────
 

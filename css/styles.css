@@ -2270,15 +2270,22 @@ html[data-theme="light"] .tech-tag--tool {
 .uc-card-cta:hover { opacity: 0.75; }
 
 /* Use case pipeline banner — pre-rendered diagram at top of each card */
-.uc-flow-img {
+.uc-flow-link {
   display: block;
   width: calc(100% + 3rem);
-  max-width: none;
-  height: auto;
   margin: -1.5rem -1.5rem 1.1rem;
   border-bottom: 1px solid var(--line);
   border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  overflow: hidden;
 }
+.uc-flow-img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  transition: opacity 0.15s;
+}
+.uc-flow-link:hover .uc-flow-img { opacity: 0.85; }
 
 @media (max-width: 600px) {
   .uc-grid { grid-template-columns: 1fr; }

@@ -1,7 +1,8 @@
 ---
 layout: usecase
 uc_id: vln-conformal-prediction
+image: /assets/img/usecases/vln-conformal-prediction.png
 permalink: /usecases/vln-conformal-prediction/
-title: "Conformal Prediction for Vision-and-Language Navigation (DUET + HAMT)"
-description: "First systematic CP evaluation across VLN-DUET and VLN-HAMT architectures, 21 propagation formulations benchmarked, with a log-prob penalty achieving 18–47% set efficiency improvement while maintaining valid coverage."
+title: "Conformal Prediction for Vision-and-Language Navigation in Discrete Graphs"
+description: "A parameter-free confidence rescaling restores calibrated, risk-responsive prediction sets on overconfident VLN policies across four backbones and two benchmarks, and a closed-loop help-seeking policy built on it lifts navigation success from 71% to 91%."
 ---

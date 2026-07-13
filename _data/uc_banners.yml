@@ -35,5 +35,7 @@ plastic-bag-ban-causal-analysis:
   alt: "End-to-end pipeline diagram: Citizen complaints (JAKI · Qlue platforms) → Text classification (waste-type taxonomy) → DiD estimation (mobility + season controls) → Causal verdict (fewer plastic complaints)"
 aicity-qwen-vl:
   alt: "End-to-end pipeline diagram: Traffic video QA (challenge corpus) → Dataset re-pack (per-step memory cut) → LoRA adapters (Qwen2.5-VL-3B) → ZeRO-2 training (on a commodity V100)"
+vln-conformal-prediction:
+  alt: "End-to-end pipeline diagram: VLN-DUET + VLN-HAMT + Recurrent VLN-BERT → Confidence rescaling (divide by residual confidence) → Episode-max calibration (whole-trajectory coverage proof) → Help-seeking policy (operator queried on flagged steps)"
 llm-d-inference-scheduler:
   alt: "End-to-end pipeline diagram: Inference requests (Gateway API ingress) → Envoy ext-proc (request interception) → KV-cache routing (P/D disaggregation) → vLLM backends (Kubernetes-native)"

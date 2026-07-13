@@ -24,6 +24,14 @@ layout: default
     </p>
   </header>
 
+  {% assign banner = site.data.uc_banners[uc.id] %}
+  {% if banner %}
+  <figure class="uc-page-figure">
+    <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.png" data-src-dark="/assets/img/usecases/{{ uc.id }}.png" data-src-light="/assets/img/usecases/{{ uc.id }}-light.png" alt="{{ banner.alt }}" width="1320" height="600" fetchpriority="high" decoding="async">
+    <figcaption class="uc-page-figure-caption">Pipeline overview</figcaption>
+  </figure>
+  {% endif %}
+
   {% if uc.situation %}
   <div class="uc-page-section">
     <span class="uc-section-label">Situation</span>
@@ -136,6 +144,15 @@ layout: default
   .uc-meta { margin: 0; font-size: 0.82rem; }
   .uc-venue-name { color: var(--accent); font-weight: 500; }
   .uc-role { color: var(--muted); }
+
+  .uc-page-figure { margin: 0 0 2rem; }
+  .uc-page-figure .uc-flow-img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); border-radius: var(--radius-lg, 10px);
+  }
+  .uc-page-figure-caption {
+    margin-top: 0.5rem; font-size: 0.76rem; color: var(--muted); text-align: center;
+  }
 
   .uc-page-section { margin: 0 0 1.75rem; }
   .uc-section-label {
