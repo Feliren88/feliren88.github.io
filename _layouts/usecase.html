@@ -116,7 +116,7 @@ layout: default
 
   <div class="uc-detail-links">
     <a href="/usecases/" class="uc-detail-link">← All Use Cases</a>
-    {% if uc.link %}<a href="{{ uc.link }}" target="_blank" rel="noreferrer" class="uc-detail-link">View Publication ↗</a>{% endif %}
+    {% if uc.link %}{% if uc.link contains "://" %}<a href="{{ uc.link }}" target="_blank" rel="noreferrer" class="uc-detail-link">View Publication ↗</a>{% else %}<a href="{{ uc.link }}" class="uc-detail-link">Read Full Report →</a>{% endif %}{% endif %}
     {% if uc.arxiv %}<a href="{{ uc.arxiv }}" target="_blank" rel="noreferrer" class="uc-detail-link">arXiv ↗</a>{% endif %}
     {% unless uc.link %}{% if uc.doi %}<a href="https://doi.org/{{ uc.doi }}" target="_blank" rel="noreferrer" class="uc-detail-link">DOI ↗</a>{% endif %}{% endunless %}
     {% if uc.patent %}<span class="uc-detail-link" style="cursor:default;border-color:var(--line)">Patent {{ uc.patent.id }}</span>{% endif %}

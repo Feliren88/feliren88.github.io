@@ -20,7 +20,9 @@ permalink: /usecases/
 
 <div class="uc-grid" id="uc-grid">
   {% for uc in site.data.usecases.usecases %}
-  {% assign ext_link = uc.link | default: uc.arxiv %}
+  {% assign ext_link = nil %}
+  {% if uc.link contains "://" %}{% assign ext_link = uc.link %}{% endif %}
+  {% assign ext_link = ext_link | default: uc.arxiv %}
   {% unless ext_link %}{% if uc.doi %}{% assign ext_link = "https://doi.org/" | append: uc.doi %}{% endif %}{% endunless %}
   <article class="uc-card" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">
 

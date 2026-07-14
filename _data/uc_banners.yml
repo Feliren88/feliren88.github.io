@@ -9,6 +9,8 @@ flood-urban-resilience:
   alt: "End-to-end pipeline diagram: ProCANet flood masks + NDWI flood extent + Policy documents → Mixed-methods analysis (satellite + policy evidence) → Retention-pond KPIs (evidence for city planners)"
 multilingual-vlm-crossmodal-conflict:
   alt: "End-to-end pipeline diagram: Conflict benchmark (EN · HI · TE · multi-domain) → Open VLM cohort (multilingual evaluation) → Linear probes (residual-stream readout) → Cross-lingual steering (text-override eliminated)"
+heron-hijack-self-probe:
+  alt: "End-to-end pipeline diagram: Clean + attacked + Benign-prefix control + Held-out family → Hidden-state capture (read-only, single forward pass) → Control-aware probe (logistic regression, one layer) → Conformal FPR gate (flag above calibrated threshold)"
 sea-vl-benchmark:
   alt: "End-to-end pipeline diagram: Community annotators (across SEA countries) → Dedup + HITL review (pHash · CLIP · SigLIP) → SEA-VL dataset (culturally grounded VQA) → Frontier audit (GPT-4V · Gemini · Claude)"
 gg-ez-regional-adaptation:

@@ -204,6 +204,23 @@ SPECS = [
     metrics=[("Transferable", "EN-fit steering direction")],
   ),
   dict(
+    id="heron-hijack-self-probe",
+    eyebrow="IN-CONTEXT HIJACK DETECTION — READ-ONLY SELF-PROBE",
+    chip="HERON FELLOWSHIP",
+    lanes=["DATASET", "HIDDEN-STATE CAPTURE", "CONTROL-AWARE PROBE", "CONFORMAL GATE"],
+    cols=[
+      [("Clean + attacked", None, "in"),
+       ("Benign-prefix control", None, "in"),
+       ("Held-out family", None, "in")],
+      [("Hidden-state capture", "read-only, single forward pass", "proc")],
+      [("Control-aware probe", "logistic regression, one layer", "proc")],
+      [("Conformal FPR gate", "flag above calibrated threshold", "out")],
+    ],
+    edges=[((0, 0), (1, 0)), ((0, 1), (1, 0)), ((0, 2), (1, 0)),
+           ((1, 0), (2, 0)), ((2, 0), (3, 0))],
+    metrics=[("Deconfounded", "benign-prefix confound controlled"), ("Guarantee holds", "finite-sample bound")],
+  ),
+  dict(
     id="sea-vl-benchmark",
     eyebrow="SEA-VL — MULTICULTURAL BENCHMARK PIPELINE",
     chip="ACL · MAIN CONFERENCE",
