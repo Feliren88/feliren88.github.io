@@ -6,6 +6,13 @@ microsoft-azure-hackathon:
   description: 'Regional champion across APAC with HakkTaxi, a ride-sharing demand predictor built on Azure Spatial data, delivered in 48 hours. Microsoft featured the project in their official APAC innovation announcement.'
   url: 'https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/'
 
+apart-global-south-ai-safety-hackathon:
+  category: 'REGIONAL WINNER'
+  title: 'Asia Pacific Regional Winner, Global South AI Safety Hackathon (Apart Research)'
+  year: '2026'
+  description: 'Regional winner for "Do Multilingual Vision-Language Models Abstain Under Cross-Modal Conflict in Low-Resource Languages?", testing whether VLMs recognize and hold back on image-caption conflicts across low-resource languages rather than answering confidently and wrong.'
+  url: 'https://apartresearch.com/project/do-multilingual-visionlanguage-models-abstain-under-crossmodal-conflict-in-lowresource-languages-hcsp'
+
 camvscovid:
   category: 'TOP 3'
   title: 'CamvsCovid, University of Cambridge'

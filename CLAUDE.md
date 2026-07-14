@@ -79,7 +79,7 @@ Two JSON-LD blocks exist:
 - Identity: `name`, `alternateName`, `gender`, `description` (includes he/him), `disambiguatingDescription`, `image`
 - Role: `jobTitle`, `alumniOf`, `worksFor` (both Monash University)
 - Knowledge: `knowsAbout` (8 domains, led by Trustworthy AI / Multimodal AI / AI Safety / Interpretability / Multilingual AI; Earth Observation last), `knowsLanguage` (English, Indonesian)
-- Recognition: `award` (10 entries), `memberOf` (SEACrowd, ACL, IEEE)
+- Recognition: `award` (11 entries), `memberOf` (SEACrowd, ACL, IEEE)
 - Network: `colleague` (Risqi Saputra, Taufiq Asyhari), `sameAs` (12 profiles)
 - Works: `author` array — **auto-generated from `_data/publications.yml`** via Liquid
 
