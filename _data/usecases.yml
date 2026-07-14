@@ -579,8 +579,9 @@ usecases:
     resolution:
       pipeline: >
         Built a read-only pipeline on Qwen2.5-0.5B-Instruct, one forward pass
-        per prompt over 384 prompts across four conditions (clean, attacked,
-        a benign-prefix control, and a held-out attack family excluded from
+        per prompt over 640 prompts across four conditions (clean, attacked,
+        a benign-prefix control whose hard negatives reuse the attacks' command
+        vocabulary in benign senses, and a held-out attack family excluded from
         training), with residual-stream hidden states cached at every layer so
         the full ablation suite reuses a single model pass. A logistic-regression
         probe on one layer's last-token state scores each prompt, and a
@@ -588,14 +589,14 @@ usecases:
         decision rule at a chosen false-positive budget, alpha = 0.05.
       confound_control: >
         Designed the benign-prefix control specifically to catch the shortcut
-        described above, and it did. The first, naive probe (clean vs. attacked
-        only) flagged 100% of harmless prefixed prompts as attacks once tested
-        against the control condition, despite reaching a perfect AUC on the
-        headline metric. Retraining the decision boundary to separate
+        described above, and it did. The naive probe (clean vs. attacked only)
+        flagged 100% of harmless prefixed prompts as attacks under clean-only
+        calibration, across all ten seeds, despite reaching a perfect AUC on
+        the headline metric. Retraining the decision boundary to separate
         goal-override prefixes from harmless ones (control-aware training)
-        removed the false alarms, raised the deconfounded AUC from 0.983 to
-        1.000, and restored true-positive rate on the held-out attack family
-        from 0.711 to 1.000.
+        removed the false alarms, raised the deconfounded AUC from 0.937 to
+        0.998, and restored true-positive rate on the held-out attack family
+        from 0.710 to 0.988.
       generalization: >
         Stress-tested the control-aware detector, at its original threshold and
         with no retraining, against attacks it had never seen in any form,
@@ -605,13 +606,15 @@ usecases:
         position-specific memorisation as explanations for the signal.
       calibration_validity: >
         Verified the conformal guarantee empirically over 200 random
-        calibration/test splits (mean false-positive rate 0.017 against a 0.05
+        calibration/test splits (mean false-positive rate 0.037 against a 0.05
         target) and surfaced a second calibration finding: a threshold
-        calibrated only on prefix-form benign traffic misclassified 52.6% of
+        calibrated only on prefix-form benign traffic misclassified 25.8% of
         harmless suffix-form prompts, even though the detector's score ranking
-        stayed perfect. Extending the calibration set with representative
-        benign traffic, with detector weights unchanged, restored the bound
-        (0.030 combined false-positive rate). Ten ablations in total (A1 to A10)
+        stayed near-perfect (AUC 0.999). Extending the calibration set with
+        representative benign traffic, with detector weights unchanged, restored
+        the bound for the mixture (0.045 combined false-positive rate; the
+        remaining suffix-subgroup gap, 0.087, motivates group-conditional
+        calibration). Ten ablations in total (A1 to A10)
         plus a behavioral check and five unit tests rule out layer-choice
         artifacts, pipeline leakage, and label noise.
 
@@ -622,10 +625,10 @@ usecases:
       hardware: [A100]
 
     metrics:
-      deconfounded_auc: "1.000 ± 0.000"
-      fpr_at_alpha_0.05: "0.031 ± 0.033"
-      held_out_family_tpr: "1.000 ± 0.000"
-      output_hijack_success_rate_pct: "24-58"
+      deconfounded_auc: "0.998 ± 0.003"
+      fpr_at_alpha_0.05: "0.029 ± 0.016"
+      held_out_family_tpr: "0.988 ± 0.013"
+      output_hijack_success_rate_pct: "36-49"
       ablations_and_controls: 10
 
     impact: >
@@ -633,11 +636,11 @@ usecases:
       only clean and attacked conditions can certify a detector at perfect AUC
       that misclassifies every harmless prefixed prompt, and that a calibration
       set restricted to one benign format can certify a 5% false-alarm budget
-      that measures ten times higher on another benign format. Both findings
+      that measures five times higher on another benign format. Both findings
       argue for building confound controls and calibration-coverage audits into
       security benchmarks by default rather than treating a single accuracy
       number as sufficient. The behavioral check grounds the case for internal
-      monitoring directly: injections flip the model's output only 24 to 58% of
+      monitoring directly: injections flip the model's output only 36 to 49% of
       the time, while the internal probe flags almost every attempt, exactly the
       regime where output monitoring under-fires.
 
@@ -661,11 +664,12 @@ usecases:
       past this one detector.
 
     next: >
-      The layer sweep saturates at AUC 1.0 from layer one onward, which mostly
-      says these template injections are lexically easy, not that the signal
-      lives at layer one specifically. The next step is a harder, semantically
-      diverse attack suite in the style of in-context representation hijacking,
-      where layer localisation becomes a real question, alongside larger models,
+      With hard negatives in the benchmark the layer sweep finally shows
+      structure — chance at the embeddings, a peak in early-middle layers,
+      decay toward the head — but the injections are still template-generated.
+      The next step is a harder, semantically diverse attack suite in the style
+      of in-context representation hijacking, where layer localisation becomes
+      a sharper question, alongside larger models,
       group-conditional calibration for the subgroup coverage gap the
       suffix-position ablation exposed, and moving from an external probe
       toward a detector the model can use on itself.
