@@ -72,6 +72,7 @@ permalink: pretty
 # Include for additional directories
 include:
   - _pages
+  - scripts/heron
 
 # Front Matter Defaults
 defaults:

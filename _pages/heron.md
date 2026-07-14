@@ -126,6 +126,12 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 <p class="heron-meta"><b>Vicky Feliren</b> · July 2026 · Model: Qwen2.5-0.5B-Instruct</p>
 <p class="heron-meta heron-meta-code">Code: <code>self_probe_hijack_detection.py</code> <code>ablations.py</code> <code>ablations_extended.py</code> <code>behavioral_check.py</code></p>
 
+<p style="margin: 0 0 1.75rem;">
+  <a class="btn btn-primary" href="/scripts/heron/presentation.html" target="_blank" rel="noopener">
+    View the 3-Minute Thesis slide &rarr;
+  </a>
+</p>
+
 <div class="heron-tiles reveal-group">
   <div class="heron-tile reveal"><div class="num">0.998 &plusmn; 0.003</div><div class="lbl">Deconfounded AUC (benign-prefix vs. attacked, incl. hard negatives), 10 seeds, layer 12</div></div>
   <div class="heron-tile reveal"><div class="num accent">0.029 &plusmn; 0.016</div><div class="lbl">Empirical false-positive rate at the conformal threshold, target &alpha; = 0.05</div></div>
