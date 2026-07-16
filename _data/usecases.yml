@@ -559,7 +559,7 @@ usecases:
       resists the injection at the output level, which happens often, input and
       output monitoring records nothing, and the attempt goes unlogged. This
       work-test prototype for the Heron AI Security Research Fellowship asks a
-      narrower, testable question: do a small instruction-tuned model's own
+      narrower, testable question: do an instruction-tuned model's own
       hidden states carry a linearly readable signature of a hijack attempt,
       and can the resulting detector's false-positive rate be bounded before
       deployment rather than guessed at.
@@ -603,7 +603,11 @@ usecases:
         paraphrases built to avoid every command word in the training templates,
         and attacks moved from the prefix to the suffix position. True-positive
         rate held at 1.000 in both cases, which rules out keyword matching and
-        position-specific memorisation as explanations for the signal.
+        position-specific memorisation as explanations for the signal. The full
+        benchmark was then rerun on the same model family at 1.5B, 3B and 7B.
+        Detection improved with size and false alarms stayed near budget, while
+        the larger models obeyed the injected command far more often (roughly
+        27 to 49% of attempts at 0.5B and 1.5B, 73 to 85% at 3B and 7B).
       calibration_validity: >
         Verified the conformal guarantee empirically over 200 random
         calibration/test splits (mean false-positive rate 0.037 against a 0.05
@@ -619,7 +623,7 @@ usecases:
         artifacts, pipeline leakage, and label noise.
 
     tech_stack:
-      model: [Qwen2.5-0.5B-Instruct]
+      model: [Qwen2.5-Instruct 0.5B-7B]
       methods: [Logistic regression probe, Split conformal prediction, Residual-stream activation caching]
       evaluation: [Deconfounded AUC, False-positive rate at alpha, Held-out family TPR, Paraphrase and position transfer]
       hardware: [A100]
@@ -629,20 +633,22 @@ usecases:
       fpr_at_alpha_0.05: "0.029 ± 0.016"
       held_out_family_tpr: "0.988 ± 0.013"
       output_hijack_success_rate_pct: "36-49"
-      ablations_and_controls: 10
+      scale_sweep: "0.5B to 7B, AUC reaches 1.000"
+      ablations_and_controls: 11
 
     impact: >
-      Shows, on one small model and one attack family, that a benchmark with
+      Shows, on one model family and one attack style, that a benchmark with
       only clean and attacked conditions can certify a detector at perfect AUC
       that misclassifies every harmless prefixed prompt, and that a calibration
       set restricted to one benign format can certify a 5% false-alarm budget
       that measures five times higher on another benign format. Both findings
       argue for building confound controls and calibration-coverage audits into
       security benchmarks by default rather than treating a single accuracy
-      number as sufficient. The behavioral check grounds the case for internal
-      monitoring directly: injections flip the model's output only 36 to 49% of
-      the time, while the internal probe flags almost every attempt, exactly the
-      regime where output monitoring under-fires.
+      number as sufficient. The behavioral results ground the case for internal
+      monitoring directly. The 0.5B model obeys the injection in 36 to 49% of
+      attempts, the 7B model in roughly 80%, and the probe flags almost every
+      attempt at every size. Capability helps the attacker, and output
+      monitoring under-fires exactly where it matters.
 
     why_this: >
       Most LLM security tooling watches the boundary, inputs and outputs, and
@@ -664,15 +670,16 @@ usecases:
       past this one detector.
 
     next: >
-      With hard negatives in the benchmark the layer sweep finally shows
-      structure — chance at the embeddings, a peak in early-middle layers,
-      decay toward the head — but the injections are still template-generated.
-      The next step is a harder, semantically diverse attack suite in the style
-      of in-context representation hijacking, where layer localisation becomes
-      a sharper question, alongside larger models,
-      group-conditional calibration for the subgroup coverage gap the
-      suffix-position ablation exposed, and moving from an external probe
-      toward a detector the model can use on itself.
+      With hard negatives in the benchmark the 0.5B layer sweep finally shows
+      structure, rising from chance at the embeddings to a peak in early-middle
+      layers and fading toward the head. That structure washes out at 3B and
+      7B, and the injections are still template-generated. The next step is a
+      harder, semantically diverse attack suite in the style of in-context
+      representation hijacking, where layer localisation becomes a sharper
+      question, alongside a second architecture family, group-conditional
+      calibration for the subgroup coverage gap the suffix-position ablation
+      exposed, and moving from an external probe toward a detector the model
+      can use on itself.
 
   # ──────────────────────────────────────────
 

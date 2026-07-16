@@ -206,7 +206,7 @@ SPECS = [
   dict(
     id="heron-hijack-self-probe",
     eyebrow="IN-CONTEXT HIJACK DETECTION — READ-ONLY SELF-PROBE",
-    chip="HERON FELLOWSHIP",
+    chip="AI SECURITY",
     lanes=["DATASET", "HIDDEN-STATE CAPTURE", "CONTROL-AWARE PROBE", "CONFORMAL GATE"],
     cols=[
       [("Clean + attacked", None, "in"),

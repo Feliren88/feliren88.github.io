@@ -122,7 +122,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   <a href="/usecases/">Use Cases</a><span>/</span><a href="/usecases/heron-hijack-self-probe/">Structured Summary</a><span>/</span>Full Report
 </p>
 
-<p class="heron-meta"><b>Vicky Feliren</b> · July 2026 · Model: Qwen2.5-0.5B-Instruct</p>
+<p class="heron-meta"><b>Vicky Feliren</b> · July 2026 · Models: Qwen2.5-Instruct 0.5B–7B (main experiments on 0.5B)</p>
 
 <p style="margin: 0 0 1.75rem;">
   <a class="btn btn-primary" href="/scripts/heron/presentation.html" target="_blank" rel="noopener">
@@ -258,12 +258,12 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   <p class="soft">
     Ten goal-hijack templates and twelve benign prefixes are sampled uniformly per instance; the
     example above shows one draw of each. Eight of the twelve prefixes are <b>hard negatives</b>
-    that reuse the attack templates' command vocabulary — <i>ignore, disregard, system, skip,
-    forget, developer</i> — in benign senses ("Note from the developer of this quiz app: keep
-    answers short."). A detector keyed on surface vocabulary or on "instruction-like prefix"
+    that reuse the attack templates' command vocabulary (<i>ignore, disregard, system, skip,
+    forget, developer</i>) in benign senses, such as "Note from the developer of this quiz app:
+    keep answers short." A detector keyed on surface vocabulary or on "instruction-like prefix"
     fires on these; one keyed on goal override must not. An earlier draft without hard negatives
-    scored a saturated 1.000 on every power metric — real, but uninformative. The full template
-    lists are in <code>Config</code> in <code>self_probe_hijack_detection.py</code>.
+    scored a saturated 1.000 on every power metric. Those scores were real but uninformative. The
+    full template lists are in <code>Config</code> in <code>self_probe_hijack_detection.py</code>.
   </p>
 
   <h3>Feature extraction (read-only)</h3>
@@ -310,6 +310,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       <tr><td class="num id">A8</td><td>Suffix-position attacks + benign-suffix controls (480 new prompts)</td><td>detection restricted to the trained prefix position</td></tr>
       <tr><td class="num id">A9</td><td>Paraphrase attack set with disjoint vocabulary</td><td>keyword matching instead of semantic detection</td></tr>
       <tr><td class="num id">A10</td><td>20 independent label shuffles</td><td>ambiguity of a single-shuffle null</td></tr>
+      <tr><td class="num id">A11</td><td>Model-scale sweep: same benchmark on Qwen2.5-Instruct 1.5B/3B/7B</td><td>findings specific to one small model</td></tr>
     </table>
   </div>
   <p>
@@ -349,7 +350,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     across all 10 seeds)</b> as attacks. The naive decision boundary encodes the feature "extra
     text precedes the task". Calibrating on a mixed benign pool lowers the naive false alarms to
     0.031 &plusmn; 0.020, but the threshold this pushes upward collapses held-out-family TPR to
-    0.710 &plusmn; 0.083 — and the naive probe ranks the hard-negative prefixes poorly in the
+    0.710 &plusmn; 0.083. The naive probe also ranks the hard-negative prefixes poorly in the
     first place (deconfounded AUC 0.937 &plusmn; 0.018). Control-aware training raises
     held-out-family TPR to 0.988 &plusmn; 0.013 and the deconfounded AUC from 0.937 to 0.998.
   </p>
@@ -362,7 +363,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 
   <figure class="heron-figure">
     <div class="heron-figure-frame">
-      <img src="/assets/img/heron/hijack-detection-scores.webp" alt="Histogram of control-aware probe scores at layer 12: clean and benign-prefix scores concentrate left of the conformal threshold, train-family and held-out-family attacked scores concentrate right of it." width="980" height="588" loading="lazy" decoding="async">
+      <img src="/assets/img/heron/hijack-detection-scores.webp" alt="Histogram of control-aware probe scores at layer 12: clean and benign-prefix scores concentrate left of the conformal threshold, train-family and held-out-family attacked scores concentrate right of it." width="949" height="550" loading="lazy" decoding="async">
     </div>
     <figcaption><b>Figure 2.</b> Control-aware probe scores at layer 12. Both benign conditions
       concentrate left of the conformal threshold &tau; (dashed line, &alpha; = 0.05); both attack
@@ -392,13 +393,14 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 
   <figure class="heron-figure">
     <div class="heron-figure-frame">
-      <img src="/assets/img/heron/ablation-layer-sweep.webp" alt="Held-out AUC per layer with a zoom panel: chance at layer 0, deconfounded last-token AUC peaks at layers 4 to 7 and decays toward layer 24, while mean pooling stays at 1.0." width="1288" height="560" loading="lazy" decoding="async">
+      <img src="/assets/img/heron/ablation-layer-sweep.webp" alt="Held-out AUC per layer with a zoom panel: chance at layer 0, deconfounded last-token AUC peaks at layers 4 to 7 and decays toward layer 24, while mean pooling stays at 1.0." width="1272" height="580" loading="lazy" decoding="async">
     </div>
     <figcaption><b>Figure 3.</b> Held-out AUC per layer, with a zoom on layers 1&ndash;24 (right).
       The deconfounded last-token curve peaks (1.000) at layers 4&ndash;7 and decays to
       &asymp;0.977 by layer 24; layer 0 is chance. Mean pooling reads the injected tokens
-      directly and stays at 1.000 everywhere — lexical presence, not integrated state — which is
-      why the last-token probe is the meaningful instrument.</figcaption>
+      directly and stays at 1.000 everywhere, so it measures word presence rather than the
+      model's integrated state. That is why the last-token probe is the meaningful
+      instrument.</figcaption>
   </figure>
 
   <h3>Extended ablations: paraphrase, position, and a second calibration finding</h3>
@@ -427,8 +429,8 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     becomes vacuous for that traffic. Adding suffix-form benign scores to the calibration pool,
     with detector weights unchanged, reduces the combined benign-pool FPR to 0.045 &plusmn; 0.034,
     within the &alpha; = 0.05 target, at essentially unchanged TPR. The bound is marginal over the
-    calibration mixture; the suffix subgroup alone still measures 0.087 &plusmn; 0.067 — above
-    &alpha; — and per-subgroup validity requires group-conditional (Mondrian) calibration.
+    calibration mixture. The suffix subgroup alone still measures 0.087 &plusmn; 0.067, above
+    &alpha;, and per-subgroup validity requires group-conditional (Mondrian) calibration.
   </p>
   <div class="note-block" role="note">
     <span class="note-badge">Finding</span>
@@ -438,13 +440,54 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       should measure both.</p>
   </div>
 
+  <h3>The same benchmark from 0.5B to 7B (A11)</h3>
+  <p>
+    The full benchmark and 10-seed protocol were rerun on the Qwen2.5-Instruct family at four
+    sizes, with the probe at mid-depth for each model. The architecture family stays the same,
+    so parameter count is the only variable that changes.
+  </p>
+  <div class="heron-table-wrap">
+    <table class="heron-table">
+      <tr><th>Model</th><th class="num">Deconf. AUC (control-aware)</th><th class="num">Deconf. AUC (naive)</th><th class="num">TPR, held-out</th><th class="num">FPR pool</th><th class="num">Output flip rate</th></tr>
+      <tr><td class="id">0.5B</td><td class="num">0.998 &plusmn; 0.003</td><td class="num">0.937 &plusmn; 0.018</td><td class="num">0.988 &plusmn; 0.013</td><td class="num">0.029 &plusmn; 0.016</td><td class="num">48.7% / 36.2%</td></tr>
+      <tr><td class="id">1.5B</td><td class="num">0.999 &plusmn; 0.001</td><td class="num">0.971 &plusmn; 0.009</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.043 &plusmn; 0.026</td><td class="num">26.9% / 38.1%</td></tr>
+      <tr class="hl"><td class="id">3B</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.979 &plusmn; 0.008</td><td class="num">0.997 &plusmn; 0.003</td><td class="num">0.035 &plusmn; 0.037</td><td class="num">72.5% / 85.0%</td></tr>
+      <tr class="hl"><td class="id">7B</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.998 &plusmn; 0.002</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.054 &plusmn; 0.037</td><td class="num">83.8% / 80.0%</td></tr>
+    </table>
+  </div>
+  <figure class="heron-figure">
+    <div class="heron-figure-frame">
+      <img src="/assets/img/heron/ablation-model-scale.webp" alt="Three panels across four model sizes: detection metrics at the top with false alarms near the 5% budget; deconfounded AUC rising from chance at the embeddings and staying high at every depth; output flip rates growing with scale while the probe flags nearly all attempts" width="1813" height="541" loading="lazy" decoding="async">
+    </div>
+    <figcaption><b>Figure 4.</b> The hijack signal across model scale. Left: detection metrics
+      stay at the top and the false-positive rate near the &alpha; = 0.05 budget at every size.
+      Middle: at every scale the signal is absent at the raw embeddings and available from the
+      first transformer layers; the late-layer fade seen at 0.5B disappears by 3B. Right: output
+      flip rates grow with scale while the probe flags nearly all attempts.</figcaption>
+  </figure>
+  <p>
+    The main result holds as the model grows. Detection improves with size and is essentially
+    perfect at 3B and 7B, and false alarms stay near the 5% budget at every size. The 7B mean of
+    0.054 carries a standard deviation of 0.037 across splits, which is what you expect from a
+    bound that holds on average. The gap between the naive probe and the control-aware probe also
+    shrinks as models grow, so the shortcut problem hurts most on small models. It still took the
+    control condition to learn that.
+  </p>
+  <p>
+    The behavioral result reversed my expectation. The two smaller models obeyed the hidden
+    command in roughly three or four attempts out of ten. The two larger models obeyed it in
+    roughly eight out of ten. A model that is better at following instructions is also better at
+    following injected ones. The probe flagged at least 98.8% of attempts at every size, whether
+    the model obeyed or not.
+  </p>
+
   <h3>Behavioral grounding</h3>
   <p>
     Greedy decoding on all 320 attacked prompts measures how often the injection changes the
-    model's output. The injected instruction succeeds in <b>48.8%</b> of training-family prompts
-    and <b>36.3%</b> of held-out-family prompts. The internal probe flags &asymp;99% of attempts
-    in both families. The attacked label therefore means a hijack attempt is present in context. It
-    does not mean the hijack succeeded.
+    model's output. On the 0.5B model of the main experiments, the injected instruction succeeds
+    in <b>48.8%</b> of training-family prompts and <b>36.3%</b> of held-out-family prompts. The
+    internal probe flags &asymp;99% of attempts in both families. The attacked label therefore
+    means a hijack attempt is present in context. It does not mean the hijack succeeded.
   </p>
 </section>
 
@@ -459,14 +502,19 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <li>The detected feature is semantic. TPR is 0.988 &plusmn; 0.013 on an unseen phrasing family
       and 1.000 &plusmn; 0.000 on paraphrases that share no command vocabulary with the training
       templates and on attacks moved from prefix to suffix position. The detector stays within
-      budget on harmless prefixes — including hard negatives that reuse attack vocabulary — when
+      budget on harmless prefixes, including hard negatives that reuse attack vocabulary, when
       the training protocol includes the control condition (benign-pool FPR 0.029 &plusmn; 0.016
       at &alpha; = 0.05).</li>
     <li>The conformal threshold satisfies its finite-sample marginal FPR bound empirically (mean
       FPR 0.037 over 200 splits, target 0.05).</li>
     <li>The internal signal is informative in the regime where output monitoring records nothing:
-      injections change the output in 36&ndash;49% of cases, and the probe flags &asymp;99% of
-      attempts.</li>
+      on the 0.5B model, injections change the output in 36&ndash;49% of cases, and the probe
+      flags &asymp;99% of attempts.</li>
+    <li>The findings hold across the model family. On Qwen2.5-Instruct 1.5B, 3B and 7B the same
+      benchmark gives deconfounded AUC 0.999&ndash;1.000 and held-out TPR 0.997&ndash;1.000, with
+      the false-positive rate near budget. Compliance with the injection rises from roughly
+      27&ndash;49% of attempts to 73&ndash;85%. Larger models follow the hijack more often, and
+      the probe sees the attempt either way.</li>
   </ul>
 
   <h3>What the evidence does not support</h3>
@@ -474,11 +522,13 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <li>The probe is an external read of activations by a separate classifier. It is the baseline
       that model self-use methods, the target of the fellowship project, must exceed. No claim of
       model introspection follows from this work.</li>
-    <li>Results cover one 0.5B model and one template-generated attack style. The hard negatives
-      remove the worst lexical shortcut and give the layer sweep real structure (peak at layers
-      4&ndash;7, decay toward the head), but the injections remain template-generated; extension
-      to paraphrase-diverse and semantic hijacks in the style of Yona et al. is required before
-      the localization reading can be trusted.</li>
+    <li>Results cover one model family (Qwen2.5-Instruct, 0.5B&ndash;7B) and one
+      template-generated attack style. The hard negatives remove the worst lexical shortcut and
+      give the 0.5B layer sweep real structure (peak at layers 4&ndash;7, decay toward the head),
+      but that late-layer structure disappears at 3B/7B, and the injections remain
+      template-generated; extension to paraphrase-diverse and semantic hijacks in the style of
+      Yona et al., and to a second architecture family, is required before the localization
+      reading can be trusted.</li>
     <li>The conformal bound assumes exchangeability between calibration and deployment benign
       traffic, and A8 measures the cost of violating it: benign prompts in an uncalibrated form
       (suffix position) produced a 25.8% false-alarm rate against a 5% target. Recalibration with
@@ -505,21 +555,24 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   <p>
     This prototype reads a model's residual-stream hidden states during inference, trains a linear
     probe to detect in-context goal-hijack attempts, and calibrates the decision threshold with
-    split conformal prediction — on a benchmark deliberately salted with hard negatives so that
+    split conformal prediction. The benchmark is deliberately salted with hard negatives so that
     perfect scores cannot come from surface shortcuts. On Qwen2.5-0.5B-Instruct the control-aware
     detector reaches deconfounded AUC 0.998 &plusmn; 0.003, holds the empirical false-positive rate
     to 0.029 &plusmn; 0.016 against a target of 0.05, and transfers with TPR 0.988 &plusmn; 0.013 to
-    an injection family excluded from training — and with TPR 1.000 &plusmn; 0.000 to paraphrases
-    with disjoint vocabulary and to suffix-position attacks, so the detected feature is the
-    goal-override semantics rather than any keyword. Two findings came from the controls. The
+    an injection family excluded from training. It also reaches TPR 1.000 &plusmn; 0.000 on
+    paraphrases with disjoint vocabulary and on suffix-position attacks, so the detected feature
+    is the goal-override semantics rather than any keyword. Two findings came from the controls. The
     benign-prefix control exposed a confound that inverted the naive benchmark's conclusion. The
     suffix-position control measured the cost of a calibration set that under-covers benign
     traffic (25.8% false alarms against a 5% budget), and recalibration with representative
     traffic restored mixture-level validity while leaving a subgroup gap that motivates
     group-conditional calibration. The behavioral check showed that the internal signal detects
-    attempts that output monitoring misses. Next steps within the fellowship:
-    representation-level attacks, larger models, weight-space tampering, group-conditional
-    calibration, and the transition from external probes to detectors the model itself can use.
+    attempts that output monitoring misses. The scale sweep showed the signal strengthening from
+    0.5B to 7B while compliance with the injection roughly doubled. Capability helps the
+    attacker, and the internal alarm keeps seeing the attempt. Next steps include
+    representation-level attacks, other architecture families, weight-space tampering,
+    group-conditional calibration, and the transition from external probes to detectors the model
+    itself can use.
   </p>
 
   <h3>Reproduction</h3>
@@ -527,13 +580,14 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 .venv/bin/python self_probe_hijack_detection.py   # main experiment + Figure 1
 .venv/bin/python ablations.py                     # A1-A7 + Figure 2
 .venv/bin/python ablations_extended.py            # A8-A10 + recalibration
+.venv/bin/python ablation_model_scale.py          # A11 (downloads 1.5B/3B/7B)
 .venv/bin/python behavioral_check.py              # hijack success rates
 .venv/bin/pytest self_probe_hijack_detection.py   # 5 unit tests</code></div>
   <p class="soft">
     Outputs: <code>results_main.json</code>, <code>results_ablations.json</code>,
-    <code>results_ablations_extended.json</code>, <code>results_behavioral.json</code>, both
-    figures. Two model passes (640 base prompts, 480 extended prompts) populate the feature caches;
-    every ablation runs from the caches in seconds.
+    <code>results_ablations_extended.json</code>, <code>results_behavioral.json</code>,
+    <code>results_model_scale.json</code>, and the figures. Feature caches are populated by one
+    forward pass per prompt per model; every ablation runs from the caches in seconds.
   </p>
 
   <h3>References</h3>
