@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "Hidden-State Detection of In-Context Goal Hijacking with a Conformal False-Positive Guarantee"
-subtitle: "Heron AI Security Research Fellowship · Work-Test Prototype · Computation-Aware Security"
 description: "A read-only self-probe on Qwen2.5-0.5B-Instruct's residual stream detects in-context goal-hijack attempts with deconfounded AUC 0.998 on a hard-negative benchmark and a split-conformal false-positive guarantee, with confound controls that caught a shortcut a naive detector would have shipped with."
 permalink: /heron/
 image: /assets/img/usecases/heron-hijack-self-probe.webp
@@ -124,20 +123,12 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 </p>
 
 <p class="heron-meta"><b>Vicky Feliren</b> · July 2026 · Model: Qwen2.5-0.5B-Instruct</p>
-<p class="heron-meta heron-meta-code">Code: <code>self_probe_hijack_detection.py</code> <code>ablations.py</code> <code>ablations_extended.py</code> <code>behavioral_check.py</code></p>
 
 <p style="margin: 0 0 1.75rem;">
   <a class="btn btn-primary" href="/scripts/heron/presentation.html" target="_blank" rel="noopener">
     View the 3-Minute Thesis slide &rarr;
   </a>
 </p>
-
-<div class="heron-tiles reveal-group">
-  <div class="heron-tile reveal"><div class="num">0.998 &plusmn; 0.003</div><div class="lbl">Deconfounded AUC (benign-prefix vs. attacked, incl. hard negatives), 10 seeds, layer 12</div></div>
-  <div class="heron-tile reveal"><div class="num accent">0.029 &plusmn; 0.016</div><div class="lbl">Empirical false-positive rate at the conformal threshold, target &alpha; = 0.05</div></div>
-  <div class="heron-tile reveal"><div class="num">0.988 &plusmn; 0.013</div><div class="lbl">True-positive rate on the held-out injection family; 1.000 on disjoint-vocabulary paraphrases and suffix-position attacks at fixed &tau;</div></div>
-  <div class="heron-tile reveal"><div class="num">36&ndash;49%</div><div class="lbl">Output-level hijack success rate; the probe flags &asymp;99% of attempts</div></div>
-</div>
 
 <nav class="heron-crumbs" aria-label="Report sections">
   <a href="#problem">Problem</a><span>·</span>
@@ -558,8 +549,5 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 </section>
 
 <p class="heron-footer">
-  Work-test prototype for the Heron AI Security Research Fellowship, computation-aware security
-  project (project lead: Yossi Gandelsman). All experiments are read-only with respect to the model
-  and generate no harmful content. <a href="/usecases/heron-hijack-self-probe/">View the structured
-  use case summary →</a>
+  <a href="/usecases/heron-hijack-self-probe/">View the structured use case summary →</a>
 </p>

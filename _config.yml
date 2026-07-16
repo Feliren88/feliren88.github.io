@@ -64,7 +64,7 @@ exclude:
   - vendor
   - CLAUDE.md
   - backlog.md
-  - scripts
+  - scripts/generate_uc_banners.py
 
 # Permalink structure
 permalink: pretty
