@@ -618,9 +618,21 @@ usecases:
         representative benign traffic, with detector weights unchanged, restored
         the bound for the mixture (0.045 combined false-positive rate; the
         remaining suffix-subgroup gap, 0.087, motivates group-conditional
-        calibration). Ten ablations in total (A1 to A10)
+        calibration). Twelve ablations in total (A1 to A12)
         plus a behavioral check and five unit tests rule out layer-choice
         artifacts, pipeline leakage, and label noise.
+      input_text_baseline: >
+        Closed the loop with the baseline any reviewer would ask for. These
+        injections are visible in the prompt, so a bag-of-words classifier on
+        the raw input text, trained and calibrated under the identical
+        protocol, is the honest comparison. It nearly matches the probe
+        (deconfounded AUC 1.000) and trails it only on threshold transfer to
+        the unseen phrasing family (0.880 vs 0.988 of attacks caught at the
+        fixed alarm line). The benchmark therefore cannot claim internal
+        signals are required for this attack class; what it shows is that
+        hidden-state scores transfer to unseen phrasings without threshold
+        degradation, and that separating internal-state monitoring from input
+        filtering needs attacks that are not legible in the input text.
 
     tech_stack:
       model: [Qwen2.5-Instruct 0.5B-7B]
@@ -634,7 +646,8 @@ usecases:
       held_out_family_tpr: "0.988 ± 0.013"
       output_hijack_success_rate_pct: "36-49"
       scale_sweep: "0.5B to 7B, AUC reaches 1.000"
-      ablations_and_controls: 11
+      text_baseline_heldout_tpr: "0.880 (input-only) vs 0.988 (probe)"
+      ablations_and_controls: 12
 
     impact: >
       Shows, on one model family and one attack style, that a benchmark with
@@ -642,9 +655,10 @@ usecases:
       that misclassifies every harmless prefixed prompt, and that a calibration
       set restricted to one benign format can certify a 5% false-alarm budget
       that measures five times higher on another benign format. Both findings
-      argue for building confound controls and calibration-coverage audits into
-      security benchmarks by default rather than treating a single accuracy
-      number as sufficient. The behavioral results ground the case for internal
+      argue for building confound controls, calibration-coverage audits, and
+      trivial input-only baselines into security benchmarks by default rather
+      than treating a single accuracy number as sufficient. The behavioral
+      results ground the case for internal monitoring against output
       monitoring directly. The 0.5B model obeys the injection in 36 to 49% of
       attempts, the 7B model in roughly 80%, and the probe flags almost every
       attempt at every size. Capability helps the attacker, and output

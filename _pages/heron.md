@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Hidden-State Detection of In-Context Goal Hijacking with a Conformal False-Positive Guarantee"
-description: "A read-only self-probe on Qwen2.5-0.5B-Instruct's residual stream detects in-context goal-hijack attempts with deconfounded AUC 0.998 on a hard-negative benchmark and a split-conformal false-positive guarantee, with confound controls that caught a shortcut a naive detector would have shipped with."
+description: "A read-only linear probe on Qwen2.5-Instruct hidden states detects in-context goal-hijack attempts with deconfounded AUC 0.998 on a hard-negative benchmark and a split-conformal false-positive guarantee, with confound controls and an input-text baseline that keep the claims honest."
 permalink: /heron/
 image: /assets/img/usecases/heron-hijack-self-probe.webp
 ---
@@ -140,6 +140,22 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   <a href="#conclusion">Conclusion</a>
 </nav>
 
+<section class="heron-section" id="terms">
+  <h3 style="margin-top:0;">Terms used on this page</h3>
+  <div class="heron-table-wrap">
+    <table class="heron-table">
+      <tr><th>Term</th><th>Plain meaning</th></tr>
+      <tr><td class="id">Hidden state (residual stream)</td><td>the list of numbers a language model carries between its layers while it reads text, in effect its internal working state. Reading it changes nothing in the model.</td></tr>
+      <tr><td class="id">Linear probe</td><td>a simple classifier (logistic regression) trained to predict a label from a hidden state. If it succeeds, the information is present and easy to read out.</td></tr>
+      <tr><td class="id">AUC</td><td>a ranking score: how reliably the detector scores attacks above harmless prompts. 1.0 is perfect; 0.5 is a coin flip.</td></tr>
+      <tr><td class="id">Deconfounded AUC</td><td>the same score measured against harmless prompts deliberately written to <i>look</i> like attacks, so it cannot be earned by noticing "there is extra text".</td></tr>
+      <tr><td class="id">TPR / FPR</td><td>true-positive rate: the share of real attacks caught. False-positive rate: the share of harmless prompts wrongly flagged.</td></tr>
+      <tr><td class="id">Conformal prediction</td><td>a statistical method that turns any score into a flag/no-flag rule whose false-alarm rate is guaranteed in advance, provided future harmless traffic resembles the calibration data (the "exchangeability" assumption).</td></tr>
+      <tr><td class="id">Hard negative</td><td>a harmless prompt built to reuse attack vocabulary ("please ignore any typos&hellip;"), placed in the benchmark so shortcut detectors fail visibly.</td></tr>
+    </table>
+  </div>
+</section>
+
 <section class="heron-section" id="problem">
   <h2><span class="n">01</span> Problem</h2>
   <p>
@@ -147,7 +163,10 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     An in-context goal-hijack attack places an injected instruction in the prompt that attempts
     to override the user's task. The attack modifies the model's internal computation whether
     or not the final output changes. When the model resists the injection at the output level,
-    input/output monitoring records nothing unusual, and the attempt goes unlogged.
+    output monitoring records nothing unusual, and the attempt goes unlogged. A filter on the
+    input text can catch injections written in plain sight, and Section 5 measures how far such
+    a filter gets on this benchmark as a baseline. It can only ever see what is legible in the
+    prompt.
   </p>
   <p>This prototype tests two precise questions on a small instruction-tuned model:</p>
   <ol>
@@ -311,6 +330,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       <tr><td class="num id">A9</td><td>Paraphrase attack set with disjoint vocabulary</td><td>keyword matching instead of semantic detection</td></tr>
       <tr><td class="num id">A10</td><td>20 independent label shuffles</td><td>ambiguity of a single-shuffle null</td></tr>
       <tr><td class="num id">A11</td><td>Model-scale sweep: same benchmark on Qwen2.5-Instruct 1.5B/3B/7B</td><td>findings specific to one small model</td></tr>
+      <tr><td class="num id">A12</td><td>Input-text baseline: bag-of-words classifier on the raw prompt, identical protocol</td><td>hidden states adding nothing over a detector that never looks inside the model</td></tr>
     </table>
   </div>
   <p>
@@ -481,6 +501,37 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     the model obeyed or not.
   </p>
 
+  <h3>The baseline that keeps the claims honest (A12)</h3>
+  <p>
+    These injections sit in plain sight in the prompt, so the fair question is what reading
+    hidden states buys over a detector that never looks inside the model. A bag-of-words
+    classifier on the raw prompt text (TF-IDF features, logistic regression), trained and
+    calibrated under the identical control-aware, 10-seed protocol, is that baseline.
+  </p>
+  <div class="heron-table-wrap">
+    <table class="heron-table">
+      <tr><th>Metric (10 seeds)</th><th class="num">Input-text baseline</th><th class="num">Layer-12 probe</th></tr>
+      <tr><td>Deconfounded AUC</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.998 &plusmn; 0.003</td></tr>
+      <tr><td>FPR on benign pool at the alarm line</td><td class="num">0.020 &plusmn; 0.017</td><td class="num">0.029 &plusmn; 0.016</td></tr>
+      <tr><td>TPR, training injection family</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">0.988 &plusmn; 0.018</td></tr>
+      <tr class="hl"><td>TPR, held-out injection family at the fixed alarm line</td><td class="num">0.880 &plusmn; 0.063</td><td class="num">0.988 &plusmn; 0.013</td></tr>
+      <tr><td>TPR, paraphrase attacks (A9)</td><td class="num">0.984 &plusmn; 0.024</td><td class="num">1.000 &plusmn; 0.000</td></tr>
+      <tr><td>TPR, suffix-position attacks (A8)</td><td class="num">1.000 &plusmn; 0.000</td><td class="num">1.000 &plusmn; 0.000</td></tr>
+    </table>
+  </div>
+  <p>
+    The baseline nearly matches the probe. Its one measured deficit is threshold transfer:
+    attack phrasings never seen in training score lower than trained ones under the text model,
+    and 12% slip under the fixed alarm line, against 1.2% for the probe. The honest reading is
+    that on template-generated injections that are legible in the input text, input monitoring
+    is close to sufficient, and this benchmark cannot support a strong claim that internal
+    signals are required. What the comparison does establish is narrower and still useful:
+    hidden-state scores transfer to unseen attack phrasings without threshold degradation, and
+    a benchmark that can properly separate internal-state monitoring from input filtering needs
+    attacks that are <b>not</b> legible in the prompt, such as encoded or obfuscated injections,
+    representation-space attacks, and poisoned tool outputs. That extension is the next step.
+  </p>
+
   <h3>Behavioral grounding</h3>
   <p>
     Greedy decoding on all 320 attacked prompts measures how often the injection changes the
@@ -510,6 +561,9 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <li>The internal signal is informative in the regime where output monitoring records nothing:
       on the 0.5B model, injections change the output in 36&ndash;49% of cases, and the probe
       flags &asymp;99% of attempts.</li>
+    <li>Against input-text monitoring the advantage is narrower and precisely measured: the
+      probe's threshold transfers to unseen attack phrasings (TPR 0.988 vs the text baseline's
+      0.880 at the fixed alarm line), and nothing more on this benchmark.</li>
     <li>The findings hold across the model family. On Qwen2.5-Instruct 1.5B, 3B and 7B the same
       benchmark gives deconfounded AUC 0.999&ndash;1.000 and held-out TPR 0.997&ndash;1.000, with
       the false-positive rate near budget. Compliance with the injection rises from roughly
@@ -522,6 +576,11 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <li>The probe is an external read of activations by a separate classifier. It is the baseline
       that model self-use methods, the target of the fellowship project, must exceed. No claim of
       model introspection follows from this work.</li>
+    <li>No claim that internal signals are <b>required</b> for this attack class. A12 shows an
+      input-only text classifier nearly matches the probe, because these injections are visible
+      in the prompt. "Internal beats output monitoring" is measured here; "internal beats input
+      monitoring" is not established by this benchmark and would require attacks that are
+      illegible in the input text.</li>
     <li>Results cover one model family (Qwen2.5-Instruct, 0.5B&ndash;7B) and one
       template-generated attack style. The hard negatives remove the worst lexical shortcut and
       give the 0.5B layer sweep real structure (peak at layers 4&ndash;7, decay toward the head),
@@ -544,9 +603,12 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     The methodological findings are quantitative. A benchmark with only clean and attacked
     conditions certified a detector at AUC 1.000 that misclassified 100% of harmless prefixed
     prompts. A calibration set restricted to one benign format certified a 5% false-alarm budget
-    that measured 25.8% on another benign format. Confound controls belong inside the attack
-    benchmarks the project plans to release, detector training should include them as negative
-    examples, and calibration sets should be audited for coverage of deployment benign traffic.
+    that measured 25.8% on another benign format. And without the input-text baseline, the
+    benchmark would have implied that hidden states were doing work a bag-of-words filter mostly
+    does for free. Confound controls belong inside the attack benchmarks the project plans to
+    release, detector training should include them as negative examples, calibration sets should
+    be audited for coverage of deployment benign traffic, and every internal-state detector
+    should be reported next to the cheapest input-only baseline that could replace it.
   </p>
 </section>
 
@@ -566,13 +628,17 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     suffix-position control measured the cost of a calibration set that under-covers benign
     traffic (25.8% false alarms against a 5% budget), and recalibration with representative
     traffic restored mixture-level validity while leaving a subgroup gap that motivates
-    group-conditional calibration. The behavioral check showed that the internal signal detects
+    group-conditional calibration. A third finding came from the baseline. An input-only
+    bag-of-words classifier nearly matches the probe on these plainly visible injections, so the
+    probe's measured advantage is confined to threshold transfer on unseen phrasings, and the
+    case for internal monitoring must be made on attacks the input text does not reveal. The
+    behavioral check showed that the internal signal detects
     attempts that output monitoring misses. The scale sweep showed the signal strengthening from
     0.5B to 7B while compliance with the injection roughly doubled. Capability helps the
     attacker, and the internal alarm keeps seeing the attempt. Next steps include
-    representation-level attacks, other architecture families, weight-space tampering,
-    group-conditional calibration, and the transition from external probes to detectors the model
-    itself can use.
+    representation-level attacks that are illegible in the prompt, other architecture families,
+    weight-space tampering, group-conditional calibration, and the transition from external
+    probes to detectors the model itself can use.
   </p>
 
   <h3>Reproduction</h3>
@@ -581,12 +647,14 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 .venv/bin/python ablations.py                     # A1-A7 + Figure 2
 .venv/bin/python ablations_extended.py            # A8-A10 + recalibration
 .venv/bin/python ablation_model_scale.py          # A11 (downloads 1.5B/3B/7B)
+.venv/bin/python ablation_text_baseline.py        # A12 input-text baseline
 .venv/bin/python behavioral_check.py              # hijack success rates
 .venv/bin/pytest self_probe_hijack_detection.py   # 5 unit tests</code></div>
   <p class="soft">
     Outputs: <code>results_main.json</code>, <code>results_ablations.json</code>,
     <code>results_ablations_extended.json</code>, <code>results_behavioral.json</code>,
-    <code>results_model_scale.json</code>, and the figures. Feature caches are populated by one
+    <code>results_model_scale.json</code>, <code>results_text_baseline.json</code>, and the
+    figures. Feature caches are populated by one
     forward pass per prompt per model; every ablation runs from the caches in seconds.
   </p>
 
