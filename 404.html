@@ -5,6 +5,26 @@ description: This page doesn't exist, but everything else does.
 permalink: /404.html
 ---
 
+<script>
+  /* Salvage URLs mangled by markdown-style pasting, e.g.
+     /heron/%5D(https://vickyfeliren.com/heron/) -> /heron/.
+     Runs only on 404s; if nothing cleans up, the normal page shows. */
+  (function () {
+    var raw = window.location.pathname;
+    var path;
+    try { path = decodeURIComponent(raw); } catch (e) { path = raw; }
+    var cleaned = path;
+    var md = cleaned.indexOf('](');
+    if (md !== -1) cleaned = cleaned.slice(0, md);
+    cleaned = cleaned.replace(/[\])>,.'";:!]+$/, '');
+    if (cleaned === '') cleaned = '/';
+    if (cleaned.indexOf('.') === -1 && cleaned.slice(-1) !== '/') cleaned += '/';
+    if (cleaned !== path && cleaned !== raw) {
+      window.location.replace(cleaned + window.location.search + window.location.hash);
+    }
+  })();
+</script>
+
 <section class="section hero reveal">
   <div class="nf-wrap">
     <p class="nf-code">404</p>
