@@ -22,7 +22,7 @@ camvscovid:
 
 cal-hacks:
   category: 'BEST COMMUNITY TRACK'
-  title: 'Cal Hacks 8.0, UC Berkeley'
+  title: 'hack:now, Cal Hacks UC Berkeley'
   year: '2020'
   description: "Best Community Track at UC Berkeley's Cal Hacks. Built an IVR system making real-time information accessible over standard phone calls, designed for communities without reliable internet access."
   url: 'https://devpost.com/software/converse-xash34'
