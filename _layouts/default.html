@@ -33,19 +33,15 @@
         "name": "pronouns",
         "value": "he/him"
       },
-      "description": "Vicky Feliren is an applied scientist specializing in AI safety and the development of trustworthy multimodal and multilingual systems. He conducts applied research that bridges vision–language models, uncertainty quantification, and interpretability, and has published in venues including IEEE, ACL, and Remote Sensing of Environment. Vicky holds a Master of Data Science and a Bachelor of Computer Science from Monash University, and contributes to initiatives around responsible AI and regionally relevant multimodal research. He has been recognized with awards such as the Global South AI Safety Hackathon (Asia Pacific Regional Winner, 2026) and the Microsoft Azure Virtual Hackathon APAC (Regional Champion, 2020). Vicky is available for research collaborations, speaking engagements, and consulting on trustworthy AI.",
-      "disambiguatingDescription": "Applied Scientist working on AI safety, trustworthy multimodal and multilingual systems, with publications in IEEE, ACL, and Remote Sensing of Environment."}
+      "description": "Applied Scientist focusing on AI safety and trustworthy multimodal and multilingual systems; published in IEEE, ACL, and Remote Sensing of Environment.",
+      "disambiguatingDescription": "Vicky Feliren is an applied scientist specializing in AI safety and the development of trustworthy multimodal and multilingual systems. He conducts applied research that bridges vision–language models, uncertainty quantification, and interpretability, and has published in venues including IEEE, ACL, and Remote Sensing of Environment. Vicky holds a Master of Data Science and a Bachelor of Computer Science from Monash University, and contributes to initiatives around responsible AI and regionally relevant multimodal research. He has been recognized with awards such as the Global South AI Safety Hackathon (Asia Pacific Regional Winner, 2026) and the Microsoft Azure Virtual Hackathon APAC (Regional Champion, 2020). Vicky is available for research collaborations, speaking engagements, and consulting on trustworthy AI."}
       "jobTitle": "Applied Scientist",
       "alumniOf": {
         "@type": "CollegeOrUniversity",
         "name": "Monash University",
         "sameAs": "https://en.wikipedia.org/wiki/Monash_University"
       },
-      "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Monash University",
-        "sameAs": "https://www.monash.edu"
-      },
+      "worksFor": { "@id": "https://vickyfeliren.com/#monash" },
       "affiliation": [
         { "@type": "CollegeOrUniversity", "name": "Monash University", "sameAs": "https://www.monash.edu" },
         { "@type": "Organization", "name": "SEACrowd", "url": "https://seacrowd.github.io/" },
@@ -82,7 +78,12 @@
       },
       "url": "https://vickyfeliren.com",
       "contactPoint": { "@id": "https://vickyfeliren.com/#contact" },
-      "image": "https://vickyfeliren.com/assets/img/profile.webp",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://vickyfeliren.com/assets/img/profile.webp",
+        "caption": "Vicky Feliren",
+        "author": { "@id": "https://vickyfeliren.com/#person" }
+      },
       "email": "vickyfeliren@gmail.com",
       "colleague": [
         "https://research.monash.edu/en/persons/risqi-saputra/",
@@ -133,6 +134,11 @@
         "https://huggingface.co/feliren",
         "https://dblp.org/pid/392/6206.html",
         "https://www.semanticscholar.org/author/Vicky-Feliren/2330264544"
+  ],
+  "subjectOf": [
+    {% for pub in site.data.publications %}
+      {% if pub.doi %}{ "@id": "https://doi.org/{{ pub.doi }}" }{% elsif pub.url %}{ "@id": {{ pub.url | jsonify }} }{% endif %}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
   ],
   "identifier": [
     {
@@ -189,6 +195,16 @@
       "isPartOf": { "@id": "https://vickyfeliren.com/#website" },
       "about": { "@id": "https://vickyfeliren.com/#person" },
       "mainEntity": { "@id": "https://vickyfeliren.com/#person" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollegeOrUniversity",
+      "@id": "https://vickyfeliren.com/#monash",
+      "name": "Monash University",
+      "sameAs": "https://www.monash.edu"
     }
     </script>
 
