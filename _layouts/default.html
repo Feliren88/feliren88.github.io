@@ -25,7 +25,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": "https://vickyfeliren.com/",
+      "@id": "https://vickyfeliren.com/#person",
       "name": "Vicky Feliren",
       "gender": "Male",
       "additionalProperty": {
@@ -187,8 +187,8 @@
       "name": "Vicky Feliren, Applied Scientist",
       "inLanguage": "en",
       "isPartOf": { "@id": "https://vickyfeliren.com/#website" },
-      "about": { "@id": "https://vickyfeliren.com/" },
-      "mainEntity": { "@id": "https://vickyfeliren.com/" }
+      "about": { "@id": "https://vickyfeliren.com/#person" },
+      "mainEntity": { "@id": "https://vickyfeliren.com/#person" }
     }
     </script>
 
@@ -203,7 +203,7 @@
       {% if pub.url %}"url": {{ pub.url | jsonify }},{% endif %}
       {% if pub.abstract %}"description": {{ pub.abstract | jsonify }},{% endif %}
       "datePublished": "{{ pub.date | default: pub.year }}",
-      "author": { "@id": "https://vickyfeliren.com/" }{% if pub.publisher %},
+      "author": { "@id": "https://vickyfeliren.com/#person" }{% if pub.publisher %},
       "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
       "keywords": {{ pub.keywords | jsonify }}{% endif %}
     }
@@ -219,7 +219,7 @@
       "url": "https://www.techinasia.com/seas-ai-law-trap-pays",
       "publisher": { "@type": "Organization", "name": "Tech in Asia" },
       "datePublished": "2026-06-02T00:00:00+08:00",
-      "author": { "@id": "https://vickyfeliren.com/" }
+      "author": { "@id": "https://vickyfeliren.com/#person" }
     }
     </script>
 
@@ -231,7 +231,7 @@
       "url": "https://www.techinasia.com/ai-rules-sea-risks-fines",
       "publisher": { "@type": "Organization", "name": "Tech in Asia" },
       "datePublished": "2026-06-01T00:00:00+08:00",
-      "author": { "@id": "https://vickyfeliren.com/" }
+      "author": { "@id": "https://vickyfeliren.com/#person" }
     }
     </script>
 
@@ -243,7 +243,7 @@
       "url": "https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know",
       "publisher": { "@type": "Organization", "name": "The Business Times" },
       "datePublished": "2026-06-01T00:00:00+08:00",
-      "author": { "@id": "https://vickyfeliren.com/" }
+      "author": { "@id": "https://vickyfeliren.com/#person" }
     }
     </script>
 
