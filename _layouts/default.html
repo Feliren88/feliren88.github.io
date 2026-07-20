@@ -27,7 +27,6 @@
       "@type": "Person",
       "@id": "https://vickyfeliren.com/",
       "name": "Vicky Feliren",
-      "alternateName": "Vicky Feliren",
       "gender": "Male",
       "additionalProperty": {
         "@type": "PropertyValue",
@@ -82,6 +81,7 @@
         "name": "Applied Scientist and Research Scientist roles, AI research collaboration, speaking engagements, and consulting on trustworthy AI"
       },
       "url": "https://vickyfeliren.com",
+      "contactPoint": { "@id": "https://vickyfeliren.com/#contact" },
       "image": "https://vickyfeliren.com/assets/img/profile.webp",
       "email": "vickyfeliren@gmail.com",
       "colleague": [
@@ -90,13 +90,13 @@
       ],
       "knowsAbout": [
         "Trustworthy AI",
+        "AI Safety",
         "Multimodal AI",
         "Vision-Language Models",
         "Conformal Prediction",
-        "AI Safety",
         "Interpretability",
         "Multilingual AI",
-        "Earth Observation"
+        "Remote Sensing"
       ],
       "knowsLanguage": [
         { "@type": "Language", "name": "English" },
@@ -113,7 +113,7 @@
         "Reboot the Earth, UN Technology Innovation Labs, Top 10 (2019)",
         "Monash University Coding Competition, Honorable Mention (2018)",
         "CamvsCovid, University of Cambridge, Top 3 Globally (2020)",
-        "Cal Hacks 8.0, UC Berkeley, Best Community Track (2020)"
+        "hack:now, Cal Hacks, UC Berkeley, Best Community Track (2020)"
       ],
       "memberOf": [
         { "@type": "Organization", "name": "SEACrowd", "url": "https://seacrowd.github.io/" },
@@ -145,7 +145,23 @@
       "name": "Vicky Feliren",
       "description": "Applied Scientist working on AI safety for trustworthy, multimodal, and multilingual systems, published in IEEE, ACL, and Remote Sensing of Environment.",
       "inLanguage": "en",
-      "author": { "@id": "https://vickyfeliren.com/" }
+      "author": { "@id": "https://vickyfeliren.com/#person" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://vickyfeliren.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPoint",
+      "@id": "https://vickyfeliren.com/#contact",
+      "contactType": "General",
+      "email": "mailto:vickyfeliren@gmail.com",
+      "availableLanguage": ["English", "Indonesian"]
     }
     </script>
     <script type="application/ld+json">
