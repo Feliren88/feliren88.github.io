@@ -133,31 +133,8 @@
         "https://huggingface.co/feliren",
         "https://dblp.org/pid/392/6206.html",
         "https://www.semanticscholar.org/author/Vicky-Feliren/2330264544"
-      ],
-      "subjectOf": [
-        {
-          "@type": "Article",
-          "headline": "SEA's AI law trap: who really pays?",
-          "url": "https://www.techinasia.com/seas-ai-law-trap-pays",
-          "publisher": { "@type": "Organization", "name": "Tech in Asia" },
-          "datePublished": "2026-06-02T00:00:00+08:00"
-        },
-        {
-          "@type": "Article",
-          "headline": "AI rules in SEA: the risks, the fines, what you need to know",
-          "url": "https://www.techinasia.com/ai-rules-sea-risks-fines",
-          "publisher": { "@type": "Organization", "name": "Tech in Asia" },
-          "datePublished": "2026-06-01T00:00:00+08:00"
-        },
-        {
-          "@type": "Article",
-          "headline": "AI rules in South-East Asia: Risks, fines, and everything else you need to know",
-          "url": "https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know",
-          "publisher": { "@type": "Organization", "name": "The Business Times" },
-          "datePublished": "2026-06-01T00:00:00+08:00"
-        }
       ]
-    }
+}
     </script>
     <script type="application/ld+json">
     {
@@ -202,6 +179,43 @@
     }
     </script>
     {% endfor %}
+
+    <!-- Media coverage emitted as separate Article JSON-LD blocks so they appear as independent Article entities -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SEA's AI law trap: who really pays?",
+      "url": "https://www.techinasia.com/seas-ai-law-trap-pays",
+      "publisher": { "@type": "Organization", "name": "Tech in Asia" },
+      "datePublished": "2026-06-02T00:00:00+08:00",
+      "author": { "@id": "https://vickyfeliren.com/" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI rules in SEA: the risks, the fines, what you need to know",
+      "url": "https://www.techinasia.com/ai-rules-sea-risks-fines",
+      "publisher": { "@type": "Organization", "name": "Tech in Asia" },
+      "datePublished": "2026-06-01T00:00:00+08:00",
+      "author": { "@id": "https://vickyfeliren.com/" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI rules in South-East Asia: Risks, fines, and everything else you need to know",
+      "url": "https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know",
+      "publisher": { "@type": "Organization", "name": "The Business Times" },
+      "datePublished": "2026-06-01T00:00:00+08:00",
+      "author": { "@id": "https://vickyfeliren.com/" }
+    }
+    </script>
 
     <!-- Events emitted as separate Event JSON-LD blocks to appear as independent entities in rich results -->
     <script type="application/ld+json">
