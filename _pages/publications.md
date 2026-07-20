@@ -8,34 +8,35 @@ permalink: /research/
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": "https://vickyfeliren.com/research/",
-  "name": "Research & Publications, Vicky Feliren",
-  "description": "Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.",
-  "url": "https://vickyfeliren.com/research/",
-  "author": {
-    "@type": "Person",
-    "@id": "https://vickyfeliren.com/",
-    "name": "Vicky Feliren",
-    "url": "https://vickyfeliren.com"
-  },
-  "hasPart": [
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://vickyfeliren.com/research/",
+      "name": "Research & Publications, Vicky Feliren",
+      "description": "Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.",
+      "url": "https://vickyfeliren.com/research/",
+      "author": { "@id": "https://vickyfeliren.com/#person" },
+      "hasPart": [
+        {% for pub in site.data.publications %}
+        {% if pub.doi %}
+        "https://doi.org/{{ pub.doi }}"{% else %}"{{ pub.url }}"{% endif %}{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      ]
+    },
+
+    {% comment %} ScholarlyArticle nodes: each is a distinct node with its own @id (DOI preferred) and references the Person by @id for the author relationship. {% endcomment %}
     {% for pub in site.data.publications %}
     {
-      "@type": "ScholarlyArticle",
-      {% if pub.doi %}"@id": "https://doi.org/{{ pub.doi }}",{% endif %}
-      "name": {{ pub.title | jsonify }},
-      "headline": {{ pub.title | jsonify }},
-      "url": {{ pub.url | jsonify }},
-      "description": {{ pub.abstract | jsonify }},
-      "datePublished": "{{ pub.date | default: pub.year }}",
-      {% if pub.doi %}"sameAs": "https://doi.org/{{ pub.doi }}",{% endif %}
-      {% if pub.pages %}"pagination": {{ pub.pages | jsonify }},{% endif %}
+      "@type": "ScholarlyArticle"{% if pub.doi %},
+      "@id": "https://doi.org/{{ pub.doi }}"{% endif %},
+      "headline": {{ pub.title | jsonify }},{% if pub.url %}
+      "url": {{ pub.url | jsonify }},{% endif %}
+      {% if pub.abstract %}"description": {{ pub.abstract | jsonify }},{% endif %}
+      "datePublished": "{{ pub.date | default: pub.year }}", 
+      {% if pub.publisher %}"publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} },{% endif %}
       {% if pub.keywords %}"keywords": {{ pub.keywords | jsonify }},{% endif %}
-      "isPartOf": { "@type": "Periodical", "name": {{ pub.venue | jsonify }}{% if pub.issn %}, "issn": {{ pub.issn | jsonify }}{% endif %} }{% if pub.publisher %},
-      "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %},
-      "author": [{% for a in pub.authors %}{ "@type": "Person", "name": {{ a | jsonify }}{% if a == "Vicky Feliren" %}, "url": "https://vickyfeliren.com"{% endif %} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
-    }{% unless forloop.last %},{% endunless %}
+      "author": { "@id": "https://vickyfeliren.com/#person" }{% unless forloop.last %}, {% endunless %}
+    }
     {% endfor %}
   ]
 }
