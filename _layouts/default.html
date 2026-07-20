@@ -120,22 +120,6 @@
         { "@type": "Organization", "name": "Association for Computational Linguistics", "sameAs": "https://www.aclweb.org/" },
         { "@type": "Organization", "name": "IEEE", "sameAs": "https://www.ieee.org/" }
       ],
-      "author": [
-        {% for pub in site.data.publications %}
-        {
-          "@type": "ScholarlyArticle",{% if pub.doi %}
-          "@id": "https://doi.org/{{ pub.doi }}",{% endif %}
-          "headline": {{ pub.title | jsonify }},
-          "url": {{ pub.url | jsonify }},
-          "description": {{ pub.abstract | jsonify }},
-          "author": [{% for a in pub.authors %}{ "@type": "Person", "name": {{ a | jsonify }}{% if a == "Vicky Feliren" %}, "url": "https://vickyfeliren.com"{% endif %} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
-          "datePublished": "{{ pub.date | default: pub.year }}"{% if pub.doi %},
-          "sameAs": "https://doi.org/{{ pub.doi }}"{% endif %}{% if pub.publisher %},
-          "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
-          "keywords": {{ pub.keywords | jsonify }}{% endif %}
-        }{% unless forloop.last %},{% endunless %}
-        {% endfor %}
-      ],
       "sameAs": [
         "https://feliren88.github.io",
         "https://www.linkedin.com/in/feliren/",
@@ -149,32 +133,6 @@
         "https://huggingface.co/feliren",
         "https://dblp.org/pid/392/6206.html",
         "https://www.semanticscholar.org/author/Vicky-Feliren/2330264544"
-      ],
-      "performerIn": [
-        {
-          "@type": "Event",
-          "name": "MUSE: How Data Science Differs in Each Sector",
-          "url": "https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector",
-          "startDate": "2025",
-          "location": { "@type": "Place", "name": "Tangerang Selatan, Indonesia" },
-          "organizer": { "@type": "Organization", "name": "Monash University Indonesia", "sameAs": "https://www.monash.edu/indonesia" },
-          "description": "Panel speaker on how data science practice differs across industry sectors."
-        },
-        {
-          "@type": "Event",
-          "name": "PyPalu, Python for Localized Context",
-          "startDate": "2026-05",
-          "location": { "@type": "Place", "name": "Sulawesi Tengah, Indonesia" },
-          "description": "Python community meetup talk on Python for localized context."
-        },
-        {
-          "@type": "Event",
-          "name": "Bank of Indonesia, Data Synthesis, Privacy & Responsible Data Management",
-          "startDate": "2024-10",
-          "location": { "@type": "Place", "name": "Bandung, Indonesia" },
-          "organizer": { "@type": "Organization", "name": "Bank of Indonesia", "sameAs": "https://www.bi.go.id" },
-          "description": "Invited talk on data synthesis, data privacy, and responsible data management."
-        }
       ],
       "subjectOf": [
         {
@@ -224,6 +182,61 @@
       "isPartOf": { "@id": "https://vickyfeliren.com/#website" },
       "about": { "@id": "https://vickyfeliren.com/" },
       "mainEntity": { "@id": "https://vickyfeliren.com/" }
+    }
+    </script>
+
+    {% comment %} Output publications as separate ScholarlyArticle JSON-LD blocks and reference the person by @id to avoid embedding large nested author arrays inside the Person object. This makes Search Console parse results cleaner. {% endcomment %}
+    {% for pub in site.data.publications %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      {% if pub.doi %}"@id": "https://doi.org/{{ pub.doi }}",{% endif %}
+      "headline": {{ pub.title | jsonify }},
+      {% if pub.url %}"url": {{ pub.url | jsonify }},{% endif %}
+      {% if pub.abstract %}"description": {{ pub.abstract | jsonify }},{% endif %}
+      "datePublished": "{{ pub.date | default: pub.year }}",
+      "author": { "@id": "https://vickyfeliren.com/" }{% if pub.publisher %},
+      "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
+      "keywords": {{ pub.keywords | jsonify }}{% endif %}
+    }
+    </script>
+    {% endfor %}
+
+    <!-- Events emitted as separate Event JSON-LD blocks to appear as independent entities in rich results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "MUSE: How Data Science Differs in Each Sector",
+      "url": "https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector",
+      "startDate": "2025",
+      "location": { "@type": "Place", "name": "Tangerang Selatan, Indonesia" },
+      "organizer": { "@type": "Organization", "name": "Monash University Indonesia", "sameAs": "https://www.monash.edu/indonesia" },
+      "description": "Panel speaker on how data science practice differs across industry sectors."
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "PyPalu, Python for Localized Context",
+      "startDate": "2026-05",
+      "location": { "@type": "Place", "name": "Sulawesi Tengah, Indonesia" },
+      "description": "Python community meetup talk on Python for localized context."
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Bank of Indonesia, Data Synthesis, Privacy & Responsible Data Management",
+      "startDate": "2024-10",
+      "location": { "@type": "Place", "name": "Bandung, Indonesia" },
+      "organizer": { "@type": "Organization", "name": "Bank of Indonesia", "sameAs": "https://www.bi.go.id" },
+      "description": "Invited talk on data synthesis, data privacy, and responsible data management."
     }
     </script>
   </head>
