@@ -450,7 +450,7 @@ SPECS = [
       [("Structured Streaming", "reuses batch feature logic", "proc")],
       [("Windowed forecasts", "building + site topics", "out")],
     ],
-    edges=[((0, 0), (2, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
+    edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
     metrics=[("Batch model, live scoring", "no retraining on the stream")],
   ),
 ]
