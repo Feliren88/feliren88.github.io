@@ -1979,6 +1979,155 @@ usecases:
       LLM serving. Contributions benefit the broader open-source AI ecosystem
       and strengthen expertise in distributed ML systems.
 
+  # ──────────────────────────────────────────
+
+  - id: spark-kafka-energy-forecasting
+    title: "Batch-to-Streaming Energy Forecasting with Spark ML and Kafka"
+    category: production
+    tags:
+      - Apache Spark
+      - Spark Structured Streaming
+      - Apache Kafka
+      - Spark ML
+      - Event-Time Processing
+      - PySpark
+    venue: "Personal Project, 2026"
+    role: Solo Builder
+    link: "https://github.com/Feliren88/big_data"
+    keywords:
+      - Spark ML pipelines
+      - Structured Streaming
+      - Kafka producer/consumer
+      - Watermarking
+      - Tumbling windows
+      - RMSLE
+      - Feature engineering
+      - Random Forest regression
+
+    hook: "A building-energy forecaster that trains once in batch with Spark ML, then scores a live Kafka weather feed in real time."
+
+    situation: >
+      Most personal ML projects stop at a notebook that trains a model and
+      reports a metric. I wanted to build the other half too: what happens once
+      a model is trained, when new data keeps arriving and predictions have to
+      be produced continuously rather than once. The project uses hourly smart-meter
+      readings, static building metadata, and hourly weather records across
+      multiple sites to predict 6-hour building energy consumption, then wires
+      that trained model into a live streaming pipeline so it scores weather
+      events as they arrive instead of sitting idle after training.
+
+    complication: >
+      The two halves of the pipeline fight different problems. Batch training
+      has to handle a label that spans roughly eight orders of magnitude (a
+      near-vacant building next to a campus-scale consumer), a mix of numeric,
+      circular (wind direction), and high-cardinality categorical features, and
+      a real choice between optimizing for absolute error versus relative error.
+      Streaming has a different set of constraints entirely: events can arrive
+      slightly out of order, aggregation windows need a bounded memory footprint
+      instead of growing forever, and a model trained offline has to be loaded
+      into a running stream and produce output fast enough to be useful, not
+      just eventually correct.
+
+    resolution:
+      batch_training: >
+        Built explicit Spark schemas for all three source tables to avoid slow
+        schema-inference passes, then engineered features grounded in what the
+        EDA actually showed: log1p-transformed floor area (the label's
+        order-of-magnitude spread demanded it), building age instead of raw
+        year built, sine/cosine encoding for wind direction so 359° and 1°
+        stay close instead of looking maximally far apart, and a peak/off-peak
+        seasonal flag derived per site from each site's three hottest and three
+        coldest months. Raw building and site IDs were deliberately excluded
+        from the feature vector, since passing them would let a tree memorise
+        individual buildings rather than learn a pattern that generalises to
+        buildings the model has never seen in the streaming half.
+      model_selection: >
+        Trained Random Forest and GBT regressors on identical feature pipelines
+        so the comparison isolates the algorithm, not the inputs. Selection is
+        driven by RMSLE rather than RMSE, because RMSLE penalises relative
+        error, so a small building off by 10% and a huge building off by 10%
+        count the same, which matters when raw-scale error would otherwise be
+        dominated entirely by the largest consumers. Random Forest won the
+        baseline comparison (RMSLE 1.97 vs. GBT's 2.29), hyperparameter tuning
+        over tree depth and forest size brought that down to 1.95, and a second
+        pass training directly on log1p(label) — letting the tree ensemble
+        split on additive, comparable steps instead of a heavily skewed raw
+        scale — produced the best result at RMSLE 1.30. That final pipeline is
+        what gets saved and loaded into the streaming half.
+      streaming_pipeline: >
+        A Kafka producer replays historical weather data in chronological order
+        as a simulated live feed. A Spark Structured Streaming job subscribes to
+        that feed, applies a 5-second watermark sized to match the producer's
+        own batch cadence (long enough to absorb expected jitter, short enough
+        to keep aggregation state bounded), reapplies the exact feature
+        transformations from batch training, and scores each event with the
+        saved pipeline model. Two separate tumbling windows — 7 seconds for
+        building-level 6-hour totals, 1 second for site-level daily totals —
+        write results back out to their own Kafka topics, chosen so each
+        aggregation's output cadence matches how quickly its grouping key
+        actually accumulates enough events to be meaningful.
+      consumption_and_analysis: >
+        A consumer notebook drains the output topics, joins predictions against
+        actual metered consumption, and builds the plots an operator would
+        actually look at: a building x interval heatmap for demand-response
+        candidates, per-site daily trend lines, a shortfall/excess chart
+        flagging which sites the model under- versus over-predicts (the
+        under-predicted ones are the operationally urgent failure mode), and a
+        predicted-vs-actual trace with the single largest error annotated and
+        traced back to a concrete cause: the feature set has no way to see
+        one-off building-level events like an equipment fault or an
+        unscheduled occupancy change, so it necessarily smooths over them.
+
+    tech_stack:
+      processing: [Apache Spark, PySpark, Spark ML, Spark Structured Streaming]
+      streaming: [Apache Kafka, Kafka Producer/Consumer API]
+      ml: [Random Forest, GBT, TrainValidationSplit, custom RMSLE evaluator]
+      tooling: [Jupyter, pandas, pyarrow, Parquet]
+
+    metrics:
+      rmsle_rf_baseline: 1.97
+      rmsle_gbt_baseline: 2.29
+      rmsle_rf_tuned: 1.95
+      rmsle_rf_log1p_final: 1.30
+      building_window_s: 7
+      site_window_s: 1
+      watermark_s: 5
+
+    impact: >
+      A working, end-to-end demonstration that batch-trained models don't have
+      to stay batch-only: the same pipeline that trains offline on historical
+      data reuses its exact feature logic to score a live event stream, with
+      memory-bounded aggregation windows and a model-selection process that
+      picked the metric to match what the data actually needed, not the
+      default choice.
+
+    why_this: >
+      I wanted hands-on proof that I could take a model past the notebook and
+      into something that behaves like a real deployment: training decisions
+      that anticipate a downstream streaming consumer, and a streaming job
+      that has to respect constraints (bounded state, event-time correctness,
+      reusing a batch-trained artifact) that a one-off script never has to
+      think about.
+
+    surprise: >
+      How much of the streaming design was determined by decisions made back
+      in batch training. The choice to exclude raw building/site IDs from the
+      feature vector wasn't just about avoiding leakage in the train/test
+      split, it was what made the saved model usable on buildings the
+      streaming job had never seen. Watermarking and windowing also turned out
+      to be less about correctness in the abstract and more about matching two
+      independent systems' clocks: the producer's pacing and the consumer's
+      window sizes had to be reasoned about together, not tuned separately.
+
+    next: >
+      Add access control on the Kafka topics before treating this as anything
+      beyond a local demo, since building-level predicted consumption at short
+      time intervals is itself a re-identification and occupancy-inference
+      risk. On the modelling side, the largest single prediction errors trace
+      back to building-specific events the current feature set can't see, so
+      the next iteration would be a fault/occupancy-change signal, not another
+      pass of hyperparameter tuning on the same features.
+
 # ============================================================
 # CROSS-CUTTING TECHNICAL CAPABILITIES
 # ============================================================

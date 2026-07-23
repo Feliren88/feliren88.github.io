@@ -439,6 +439,20 @@ SPECS = [
     edges=[((0, 0), (1, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
     metrics=[("Production-scale", "LLM request routing")],
   ),
+  dict(
+    id="spark-kafka-energy-forecasting",
+    eyebrow="ENERGY FORECASTING — BATCH-TO-STREAMING SPARK/KAFKA",
+    chip="PERSONAL PROJECT",
+    lanes=["BATCH TRAINING", "LIVE FEED", "STREAM SCORING", "OUTPUTS"],
+    cols=[
+      [("Spark ML pipeline", "RMSLE-selected model", "in")],
+      [("Kafka weather feed", "watermarked event time", "proc")],
+      [("Structured Streaming", "reuses batch feature logic", "proc")],
+      [("Windowed forecasts", "building + site topics", "out")],
+    ],
+    edges=[((0, 0), (2, 0)), ((1, 0), (2, 0)), ((2, 0), (3, 0))],
+    metrics=[("Batch model, live scoring", "no retraining on the stream")],
+  ),
 ]
 
 # ------------------------------------------------------------- rendering ----
