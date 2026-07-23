@@ -2008,13 +2008,12 @@ usecases:
 
     situation: >
       Most personal ML projects stop at a notebook that trains a model and
-      reports a metric. I wanted to build the other half too: what happens once
-      a model is trained, when new data keeps arriving and predictions have to
-      be produced continuously rather than once. The project uses hourly smart-meter
-      readings, static building metadata, and hourly weather records across
-      multiple sites to predict 6-hour building energy consumption, then wires
-      that trained model into a live streaming pipeline so it scores weather
-      events as they arrive instead of sitting idle after training.
+      reports a metric, then sits there. I wanted to build past that point.
+      This project uses hourly smart-meter readings, static building metadata,
+      and hourly weather records across multiple sites to predict 6-hour
+      building energy consumption, then wires that trained model into a live
+      streaming pipeline so it scores weather events continuously as they
+      arrive.
 
     complication: >
       The two halves of the pipeline fight different problems. Batch training
@@ -2022,38 +2021,40 @@ usecases:
       near-vacant building next to a campus-scale consumer), a mix of numeric,
       circular (wind direction), and high-cardinality categorical features, and
       a real choice between optimizing for absolute error versus relative error.
-      Streaming has a different set of constraints entirely: events can arrive
-      slightly out of order, aggregation windows need a bounded memory footprint
-      instead of growing forever, and a model trained offline has to be loaded
-      into a running stream and produce output fast enough to be useful, not
-      just eventually correct.
+      Streaming has a different set of constraints entirely. Events can arrive
+      slightly out of order, aggregation windows need a bounded memory
+      footprint instead of growing forever, and a model trained offline has
+      to be loaded into a running stream and produce output fast enough to be
+      useful in real time.
 
     resolution:
       batch_training: >
         Built explicit Spark schemas for all three source tables to avoid slow
         schema-inference passes, then engineered features grounded in what the
-        EDA actually showed: log1p-transformed floor area (the label's
-        order-of-magnitude spread demanded it), building age instead of raw
-        year built, sine/cosine encoding for wind direction so 359° and 1°
-        stay close instead of looking maximally far apart, and a peak/off-peak
-        seasonal flag derived per site from each site's three hottest and three
-        coldest months. Raw building and site IDs were deliberately excluded
-        from the feature vector, since passing them would let a tree memorise
-        individual buildings rather than learn a pattern that generalises to
-        buildings the model has never seen in the streaming half.
+        EDA actually showed. Floor area got a log1p transform because the
+        label's order-of-magnitude spread demanded it. Building age replaced
+        raw year built. Wind direction got a sine/cosine encoding so 359° and
+        1° stay close instead of looking maximally far apart, and a
+        peak/off-peak seasonal flag was derived per site from each site's
+        three hottest and three coldest months. Raw building and site IDs were
+        deliberately excluded from the feature vector, since passing them
+        would let a tree memorise individual buildings rather than learn a
+        pattern that generalises to buildings the model has never seen in the
+        streaming half.
       model_selection: >
-        Trained Random Forest and GBT regressors on identical feature pipelines
-        so the comparison isolates the algorithm, not the inputs. Selection is
-        driven by RMSLE rather than RMSE, because RMSLE penalises relative
-        error, so a small building off by 10% and a huge building off by 10%
-        count the same, which matters when raw-scale error would otherwise be
-        dominated entirely by the largest consumers. Random Forest won the
+        Trained Random Forest and GBT regressors on identical feature
+        pipelines so the comparison isolates the algorithm rather than the
+        inputs. Selection is driven by RMSLE rather than RMSE, because RMSLE
+        penalises relative error, so a small building off by 10% and a huge
+        building off by 10% count the same, which matters when raw-scale
+        error would otherwise be dominated entirely by the largest consumers.
+        Random Forest won the
         baseline comparison (RMSLE 1.97 vs. GBT's 2.29), hyperparameter tuning
         over tree depth and forest size brought that down to 1.95, and a second
-        pass training directly on log1p(label) — letting the tree ensemble
-        split on additive, comparable steps instead of a heavily skewed raw
-        scale — produced the best result at RMSLE 1.30. That final pipeline is
-        what gets saved and loaded into the streaming half.
+        pass training directly on log1p(label) produced the best result at
+        RMSLE 1.30, since it let the tree ensemble split on additive,
+        comparable steps instead of a heavily skewed raw scale. That final
+        pipeline is what gets saved and loaded into the streaming half.
       streaming_pipeline: >
         A Kafka producer replays historical weather data in chronological order
         as a simulated live feed. A Spark Structured Streaming job subscribes to
@@ -2061,22 +2062,23 @@ usecases:
         own batch cadence (long enough to absorb expected jitter, short enough
         to keep aggregation state bounded), reapplies the exact feature
         transformations from batch training, and scores each event with the
-        saved pipeline model. Two separate tumbling windows — 7 seconds for
-        building-level 6-hour totals, 1 second for site-level daily totals —
-        write results back out to their own Kafka topics, chosen so each
-        aggregation's output cadence matches how quickly its grouping key
-        actually accumulates enough events to be meaningful.
+        saved pipeline model. Two separate tumbling windows write results back
+        out to their own Kafka topics. Building-level 6-hour totals use a
+        7-second window, and site-level daily totals use a 1-second window,
+        chosen so each aggregation's output cadence matches how quickly its
+        grouping key actually accumulates enough events to be meaningful.
       consumption_and_analysis: >
-        A consumer notebook drains the output topics, joins predictions against
-        actual metered consumption, and builds the plots an operator would
-        actually look at: a building x interval heatmap for demand-response
-        candidates, per-site daily trend lines, a shortfall/excess chart
-        flagging which sites the model under- versus over-predicts (the
-        under-predicted ones are the operationally urgent failure mode), and a
-        predicted-vs-actual trace with the single largest error annotated and
-        traced back to a concrete cause: the feature set has no way to see
-        one-off building-level events like an equipment fault or an
-        unscheduled occupancy change, so it necessarily smooths over them.
+        A consumer notebook drains the output topics, joins predictions
+        against actual metered consumption, and builds the plots an operator
+        would actually look at. A building x interval heatmap flags
+        demand-response candidates. Per-site daily trend lines show where
+        consumption is heading. A shortfall/excess chart flags which sites the
+        model under- versus over-predicts, and the under-predicted ones are
+        the operationally urgent failure mode. A predicted-vs-actual trace
+        annotates the single largest error and traces it back to a concrete
+        cause. The feature set has no way to see one-off building-level events
+        like an equipment fault or an unscheduled occupancy change, so it
+        necessarily smooths over them.
 
     tech_stack:
       processing: [Apache Spark, PySpark, Spark ML, Spark Structured Streaming]
@@ -2094,30 +2096,30 @@ usecases:
       watermark_s: 5
 
     impact: >
-      A working, end-to-end demonstration that batch-trained models don't have
-      to stay batch-only: the same pipeline that trains offline on historical
-      data reuses its exact feature logic to score a live event stream, with
-      memory-bounded aggregation windows and a model-selection process that
-      picked the metric to match what the data actually needed, not the
-      default choice.
+      The same pipeline that trains offline on historical data reuses its
+      exact feature logic to score a live event stream, with memory-bounded
+      aggregation windows and a model-selection process that picked the
+      metric to match what the data actually needed rather than the default
+      choice. It's proof that a batch-trained model doesn't have to stay
+      batch-only.
 
     why_this: >
       I wanted hands-on proof that I could take a model past the notebook and
-      into something that behaves like a real deployment: training decisions
-      that anticipate a downstream streaming consumer, and a streaming job
-      that has to respect constraints (bounded state, event-time correctness,
-      reusing a batch-trained artifact) that a one-off script never has to
-      think about.
+      into something that behaves like a real deployment. That means training
+      decisions that anticipate a downstream streaming consumer, and a
+      streaming job that has to respect constraints, like bounded state,
+      event-time correctness, and reusing a batch-trained artifact, that a
+      one-off script never has to think about.
 
     surprise: >
       How much of the streaming design was determined by decisions made back
-      in batch training. The choice to exclude raw building/site IDs from the
-      feature vector wasn't just about avoiding leakage in the train/test
-      split, it was what made the saved model usable on buildings the
-      streaming job had never seen. Watermarking and windowing also turned out
-      to be less about correctness in the abstract and more about matching two
-      independent systems' clocks: the producer's pacing and the consumer's
-      window sizes had to be reasoned about together, not tuned separately.
+      in batch training. Excluding raw building/site IDs from the feature
+      vector wasn't just about avoiding leakage in the train/test split, it
+      was what made the saved model usable on buildings the streaming job had
+      never seen. Watermarking and windowing turned out to be about matching
+      two independent systems' clocks. The producer's pacing and the
+      consumer's window sizes had to be reasoned about together, not tuned
+      separately.
 
     next: >
       Add access control on the Kafka topics before treating this as anything
