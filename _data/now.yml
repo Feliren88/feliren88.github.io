@@ -1,5 +1,6 @@
-last_updated: "June 2026"
+last_updated: "July 2026"
 items:
+  - "Presented the multilingual VLM abstention study at AI Safety India's Hackathon Winners event"
   - "Writing up my M.Sc. thesis on conformal prediction for vision-language navigation, sharpening the abstention and set-efficiency results"
   - "Following up the multilingual VLM study: turning cross-lingual activation steering for abstention from a hackathon proof into a real method"
   - "Testing whether abstention signals and honesty directions transfer across languages, or fail silently outside English"

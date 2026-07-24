@@ -82,6 +82,11 @@ teaching:
     description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation, designed for final-year students seeing these ideas applied to real problems for the first time.'
 
 talks:
+  - dates: 'JUL 2026'
+    title: 'Do Multilingual Vision-Language Models Abstain under Cross-Modal Conflict in Low-Resource Languages?'
+    location: 'Hackathon Winners Present · AI Safety India Community Events'
+    url: 'https://luma.com/oh51jw9e'
+
   - dates: 'MAY 2026'
     title: 'PyPalu, Python for Localized Context'
     location: 'Python community meetup · Sulawesi Tengah, Indonesia'

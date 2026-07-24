@@ -73,6 +73,7 @@ Short distillations of papers, with own take (what the work shows and what it mi
 
 ## Talks & Public Speaking
 
+- [Do Multilingual Vision-Language Models Abstain under Cross-Modal Conflict in Low-Resource Languages?](https://luma.com/oh51jw9e) (AI Safety India Community Events, Hackathon Winners Present, Jul 2026): Presented the Asia-Pacific winning submission from Apart Research's Global South AI Safety Hackathon.
 - PyPalu, Sulawesi Tengah, Indonesia (May 2026): Python for localized context, Python community meetup.
 - [MUSE, How Data Science Differs in Each Sector](https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector) (Monash University Indonesia, 2025): Panel speaker on how data science practice differs across industry sectors.
 - Bank of Indonesia (Oct 2024): Invited talk on data synthesis, data privacy, and responsible data management.
@@ -86,6 +87,7 @@ Short distillations of papers, with own take (what the work shows and what it mi
 - Cal Hacks 8.0, UC Berkeley, Best Community Track (2020): Built community IVR voice AI for offline Indonesian communities.
 - Reboot the Earth, UN Technology Innovation Labs, Top 10 (2019): Global climate and sustainability solutions challenge.
 - IISF 2024, Most Visionary Research: AI and remote sensing for biodiversity impact from energy transition mining.
+- Asia Pacific Regional Winner, Global South AI Safety Hackathon (Apart Research, 2026): Multilingual VLM abstention study; presented at AI Safety India's Hackathon Winners event, Jul 2026.
 - Monash Indonesia Inaugural Welcome Scholarship (2024): Awarded for research potential in regional AI.
 - Deep Learning Nanodegree, Facebook & Udacity, Scholarship (2018).
 - Jeffrey Cheah Entrance Scholarship, Sunway Education Group (2015).
