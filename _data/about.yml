@@ -32,7 +32,7 @@ stats:
   - value: '7'
     label: 'Peer-reviewed papers'
     detail: 'Across language and vision venues. I write for reviewers who check the math.'
-  - value: '5+ yrs'
+  - value: '5+ years'
     label: 'Industry ML in production'
     detail: 'Models people depend on for money, safety, and city services. Failure had a cost.'
   - value: '1'
