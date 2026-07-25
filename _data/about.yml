@@ -31,22 +31,22 @@ tech_stack:
 stats:
   - value: '7'
     label: 'Peer-reviewed papers'
-    detail: 'IEEE GRSL · ACL 2025 & 2026 · Remote Sensing of Environment · AQUA'
+    detail: 'Across language and vision venues. I write for reviewers who check the math.'
   - value: '5 yrs'
     label: 'Industry ML in production'
-    detail: 'Banking biometrics and credit, APAC media forecasting, city-scale logistics'
+    detail: 'Models people depend on for money, safety, and city services. Failure had a cost.'
   - value: '1'
     label: 'Issued patent'
-    detail: 'Satellite aquaculture detection · IDS000010594'
+    detail: 'A method novel enough to survive examination, not just a demo that worked once.'
   - value: '12'
     label: 'Awards & scholarships'
-    detail: 'Apart Research APAC winner · Microsoft APAC champion · Cambridge top 3'
+    detail: 'Won under time pressure, against strangers, judged on the work alone.'
   - value: '50+'
     label: 'Researchers co-led with'
-    detail: 'SEACrowd collective across five countries · SEA-VL at ACL 2025'
+    detail: 'Coordinating people across five countries and shipping what we promised.'
   - value: '90+'
     label: 'Students taught & judged'
-    detail: 'Bangkit, IBM SkillsBuild, DBS · Monash PGIE and three hackathon panels'
+    detail: 'I can explain hard ideas to someone who has never seen them before.'
 
 hero:
   - "I'm an applied scientist working on <strong>AI safety</strong>. I want models to surface what they actually know, to hold back when they should, and to do both reliably for the languages and contexts they were never trained on. Concretely, that means trustworthy multimodal systems that are reliable when it matters and relevant to the places they operate in."
