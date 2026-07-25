@@ -28,6 +28,26 @@ tech_stack:
     - LLM Evaluation
     - SHAP
 
+stats:
+  - value: '7'
+    label: 'Peer-reviewed papers'
+    detail: 'IEEE GRSL · ACL 2025 & 2026 · Remote Sensing of Environment · AQUA'
+  - value: '5 yrs'
+    label: 'Industry ML in production'
+    detail: 'Banking biometrics and credit, APAC media forecasting, city-scale logistics'
+  - value: '1'
+    label: 'Issued patent'
+    detail: 'Satellite aquaculture detection · IDS000010594'
+  - value: '12'
+    label: 'Awards & scholarships'
+    detail: 'Apart Research APAC winner · Microsoft APAC champion · Cambridge top 3'
+  - value: '50+'
+    label: 'Researchers co-led with'
+    detail: 'SEACrowd collective across five countries · SEA-VL at ACL 2025'
+  - value: '90+'
+    label: 'Students taught & judged'
+    detail: 'Bangkit, IBM SkillsBuild, DBS · Monash PGIE and three hackathon panels'
+
 hero:
   - "I'm an applied scientist working on <strong>AI safety</strong>. I want models to surface what they actually know, to hold back when they should, and to do both reliably for the languages and contexts they were never trained on. Concretely, that means trustworthy multimodal systems that are reliable when it matters and relevant to the places they operate in."
   - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve. When a model claims confidence, we want that confidence backed by provable bounds."

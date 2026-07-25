@@ -47,6 +47,18 @@ description: Applied Scientist working on AI safety — trustworthy, multimodal,
 <section class="section page reveal">
   <div class="page-content">
 
+    {% if site.data.about.stats %}
+    <div id="stat-strip" class="stat-strip reveal-group" role="list" aria-label="Track record at a glance">
+      {% for stat in site.data.about.stats %}
+      <div class="stat-item reveal" role="listitem">
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+        <span class="stat-detail">{{ stat.detail }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div id="about-hero" class="about-hero">
       {% for paragraph in site.data.about.hero %}
       <p>{{ paragraph }}</p>
