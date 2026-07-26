@@ -2,9 +2,92 @@
 
 ## Project Overview
 
-Personal portfolio website for Vicky Feliren - Applied Scientist working on **AI safety** for trustworthy, multimodal, and multilingual systems: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Earth observation (remote sensing) is framed as a proof point, not an identity. Built with Jekyll static site generator.
+Personal portfolio website for Vicky Feliren - Applied Scientist working on **calibration under safety alignment**: safety training costs a model some of its sense of what it knows, that cost has an unmeasured shape, and measuring it is the work. The framing is constructive (make safe models more useful) rather than adversarial (audit other people's systems). Earth observation (remote sensing) is framed as a proof point, not an identity. Built with Jekyll static site generator.
 
-**Narrative spine (apply to all copy):** identity = **AI safety** for trustworthy · multimodal · multilingual systems. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages. The hero, Person schema, contact engagements, and the Use Cases hierarchy (an `AI Safety & Reliability` category sorts first) all lead with safety. Long-form essays live in `_pages/essays/` (e.g. the bridge essay `knowing-when-you-dont-know`), featured atop `/writings/` and on the homepage.
+**Narrative spine (apply to all copy):** identity = **AI safety · calibration & alignment**. The claim: the alignment tax is reported as one averaged number but is better understood as a distribution over inputs whose shape nobody has measured, largest where the safety training data was thinnest (non-English, non-text). Multilingual and multimodal are the *method*, not the mission — they are where the cost is measurable, never an inclusion argument. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Conformal prediction is the recovery *tool*, not a topic to lead with. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages. Long-form essays live in `_pages/essays/`, featured atop `/writings/` and on the homepage.
+
+## Writing Rules (apply to ALL site copy)
+
+The voice is set by `_pages/essays/knowing-when-you-dont-know.md` and `_data/notes.yml`.
+Read one of those before writing copy. Match them; do not invent a new register.
+
+### Measurable targets
+
+| Rule | Target | How to check |
+|---|---|---|
+| Sentence length | **~14 words average**, nothing over ~17 | count before shipping |
+| Em dashes | **zero** in body prose | `grep -c '—' _data/*.yml` |
+| Hero length | 5 sentences / ~65 words max | it is a hook, not a summary |
+| Long words | avoid 11+ characters where a short word works | plain English wins |
+
+Vary sentence length deliberately: short sentences (≤8 words) are ~22% of the essay,
+often in consecutive pairs for emphasis. Uniform 20-word sentences read as AI-generated.
+
+### Never write these
+
+- **Negative contrast.** "More useful, not less", "not X but Y", "isn't about X, it's about Y".
+  State the positive and stop. The reader should process one idea, not two.
+- **Structure announcements.** "One claim, three ways in", "Two halves", "Here's the thing".
+  Lead with the claim itself. Never name the shape of the section before saying it.
+- **Invented numbers.** No statistic that cannot be traced to a source or to the CV.
+  ("ten thousand agent trajectories", "94% catch rate" — both were fabricated and removed.)
+- **Unverifiable capability boasts.** "I can run experiments without the infrastructure
+  being the bottleneck" is false — there is no standing GPU access. State facts
+  (employers, shipped systems), let the reader infer capability.
+- **Phrasing that points at other organisations.** "When a lab reports…", "nobody has
+  asked…", "as if they were stable numbers". Frame gaps as open questions the field
+  shares, not as somebody's error. He wants these labs to hire him.
+- **Glossary asides.** Do not stop mid-pitch to define a term. Pick phrasing that carries
+  its own meaning ("its sense of what it knows" beats defining "calibration").
+
+### Always do these
+
+- **State limits as the work, not as caveats.** "I do not treat that as a flaw in the
+  approach. I treat it as the work." Concede honestly, then keep going.
+- **Design claims so either result is publishable.** "Finding out is useful either way"
+  signals research taste and defuses the adversarial reading.
+- **British spelling** (characterise, behaviour, modelling).
+- **First person, direct.** "I think", "My worry is", "My starting position is".
+- Hedge to match the actual credence in `notes/research-agenda.md`. If the private note
+  says 0.65, the site should not read as certainty.
+
+### Citations
+
+Cite a **published venue** when one exists, and verify it — do not trust a citation
+chain. Check the arXiv comments field, the ACL Anthology, PMLR, or the conference
+proceedings directly.
+
+- Label the venue inline: `Lin et al. (EMNLP 2024)`, `Mohri and Hashimoto (ICML 2024)`.
+- Link to the proceedings (aclanthology.org, proceedings.mlr.press) over the arXiv
+  preprint when the paper is published.
+- If no acceptance is found, cite it **without** a venue label rather than guessing.
+- Never cite a claim sourced from a news aggregator or secondhand summary.
+- Verify every URL returns 200 before committing.
+
+Cautionary example: Askell et al. (2021) is often cited as establishing the alignment
+tax. It reports the opposite — no significant tax from those prompting interventions.
+
+### Inline link styling
+
+Prose links use text colour with an accent underline, never browser-default blue:
+
+```css
+.about-hero a, .section-prose a, .about-card a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+```
+
+Any new prose container needs adding to that selector list, or its links fall through to
+default blue and ignore the light/dark theme.
+
+### Private notes
+
+`notes/` is gitignored **and** in the `_config.yml` exclude list. Both are required:
+Jekyll copies unrecognised files into `_site/` and would publish them. `notes/research-agenda.md`
+holds credences, kill criteria, and career motives — never link it, never commit it.
 
 ## Architecture
 
