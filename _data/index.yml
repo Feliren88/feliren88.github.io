@@ -1,7 +1,7 @@
-eyebrow: 'APPLIED SCIENTIST · CALIBRATION & SAFETY ALIGNMENT · MULTIMODAL AGENTS'
+eyebrow: 'APPLIED SCIENTIST · AI SAFETY · CALIBRATION & ALIGNMENT'
 name: 'Vicky Feliren'
-lead1: 'I work on making safe models more useful, not less. Training a model to be safe costs it some calibration, and calibration is how a model knows what it knows. Lose it and the model defers badly, so you keep it on small problems.'
-lead2: 'I measure where that cost falls and work on getting it back. Mostly outside English, mostly outside text, where it looks worst and has been measured least.'
+lead1: 'I work on making safe models more useful. Safety training costs a model some of its sense of what it knows. A model that has lost that defers badly, so you keep it on small problems.'
+lead2: 'I measure where that cost lands and how to get it back. Mostly outside English, mostly outside text, where it looks worst and has been measured least.'
 buttons:
   - label: 'Research'
     href: '/research/'
@@ -10,6 +10,6 @@ buttons:
   - label: 'Writings'
     href: '/writings/'
 meta:
-  - 'Measuring the calibration cost of safety alignment across languages, reported per language rather than averaged'
-  - 'Finishing my M.Sc. thesis on uncertainty in vision-language navigation · Monash University, September 2026'
-  - 'Contributing to <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">SEACrowd</a>, open AI infrastructure for Southeast Asia'
+  - 'Measuring what safety training costs, one language at a time'
+  - 'M.Sc. thesis on uncertainty in vision-language navigation · Monash University, September 2026'
+  - 'Building open AI infrastructure for Southeast Asia with <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">SEACrowd</a>'
