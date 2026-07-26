@@ -6,15 +6,18 @@ permalink: /contact/
 preload_image: /assets/img/profile_2_color.webp
 ---
 
-<img src="/assets/img/profile_2_color.webp" alt="Vicky Feliren – AI researcher and applied scientist" class="profile-bg profile-bg--contact" draggable="false" fetchpriority="high">
-
-<p class="eyebrow">LET'S WORK TOGETHER</p>
-{% if site.data.contact.availability_headline %}
-<p class="availability-hl">{{ site.data.contact.availability_headline }}</p>
-{% endif %}
-<div class="contact-intro-block">
-  <p class="contact-intro">{{ site.data.contact.intro }}</p>
-  <p class="contact-intro">{{ site.data.contact.intro_sub }}</p>
+<div class="contact-lede">
+  <div class="contact-lede-copy">
+    <p class="eyebrow">LET'S WORK TOGETHER</p>
+    {% if site.data.contact.availability_headline %}
+    <p class="availability-hl">{{ site.data.contact.availability_headline }}</p>
+    {% endif %}
+    <div class="contact-intro-block">
+      <p class="contact-intro">{{ site.data.contact.intro }}</p>
+      <p class="contact-intro">{{ site.data.contact.intro_sub }}</p>
+    </div>
+  </div>
+  <img src="/assets/img/profile_2_color.webp" alt="Vicky Feliren – AI researcher and applied scientist" class="contact-lede-photo" draggable="false" fetchpriority="high" width="650" height="650">
 </div>
 
 <div id="contact-engagements" class="contact-engagements-grid">

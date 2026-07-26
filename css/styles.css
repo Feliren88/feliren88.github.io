@@ -2136,11 +2136,6 @@ html[data-theme="light"] .tech-tag--tool {
   -webkit-user-drag: none;
   border-radius: 0;
 }
-.profile-bg--contact {
-  right: -160px;
-  top: 40px;
-  width: 650px;
-}
 @media (max-width: 1200px) {
   .profile-bg {
     position: static;
@@ -2150,10 +2145,35 @@ html[data-theme="light"] .tech-tag--tool {
     opacity: 1;
   }
 }
-@media (max-width: 600px) {
-  .profile-bg--contact {
-    max-width: 300px;
-    margin: 1.25rem auto;
+
+/* Contact lede — copy left, photo right */
+.contact-lede {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: var(--gap-4);
+  align-items: center;
+  margin-bottom: var(--gap-4);
+}
+.contact-lede-copy { min-width: 0; }
+.contact-lede-copy .eyebrow { margin-top: 0; }
+/* the 68ch cap is for full-width text; inside this column it leaves a gap */
+.contact-lede-copy .contact-intro { max-width: none; }
+.contact-lede-photo {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  justify-self: end;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (max-width: 860px) {
+  .contact-lede {
+    grid-template-columns: 1fr;
+    gap: var(--gap-2);
+  }
+  .contact-lede-photo {
+    max-width: 320px;
+    justify-self: center;
   }
 }
 .contact-reach-title {
