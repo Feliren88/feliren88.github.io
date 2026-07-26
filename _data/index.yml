@@ -1,7 +1,7 @@
 eyebrow: 'APPLIED SCIENTIST · CALIBRATION & SAFETY ALIGNMENT · MULTIMODAL AGENTS'
 name: 'Vicky Feliren'
-lead1: 'I work on making safe models more useful, not less. Training a model to be safe has a cost. Part of that cost is calibration, which is how well a model knows what it knows. A model that loses it defers badly. You cannot hand that model work it would be expensive to get wrong, so the training meant to make an agent deployable is part of what limits how far it can go.'
-lead2: 'I measure where that cost falls and work on getting it back. Mostly outside English, mostly outside text, where the tradeoff looks worst and the measurement is thinnest. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
+lead1: 'I work on making safe models more useful, not less. Training a model to be safe costs it some calibration, and calibration is how a model knows what it knows. Lose it and the model defers badly, so you keep it on small problems.'
+lead2: 'I measure where that cost falls and work on getting it back. Mostly outside English, mostly outside text, where it looks worst and has been measured least.'
 buttons:
   - label: 'Research'
     href: '/research/'

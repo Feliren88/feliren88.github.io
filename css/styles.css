@@ -2174,6 +2174,7 @@ html[data-theme="light"] .tech-tag--tool {
   .contact-lede-photo {
     max-width: 320px;
     justify-self: center;
+    order: -1; /* photo above the copy on narrow screens */
   }
 }
 .contact-reach-title {
