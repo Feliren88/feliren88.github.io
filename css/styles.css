@@ -1805,13 +1805,17 @@ html[data-theme="light"] .tech-tag--tool {
 }
 .about-hero p { margin-bottom: 1.2rem; }
 .about-hero strong { color: var(--accent); }
-.about-hero a {
+.about-hero a,
+.section-prose a,
+.about-card a {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
-.about-hero a:hover { color: var(--accent); }
+.about-hero a:hover,
+.section-prose a:hover,
+.about-card a:hover { color: var(--accent); }
 
 .stat-strip {
   display: grid;
