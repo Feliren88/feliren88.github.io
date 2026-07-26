@@ -8,3 +8,6 @@ _site/
 
 # OS / editor cruft
 .DS_Store
+
+# Private research notes — never published, never committed
+notes/
