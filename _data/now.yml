@@ -1,6 +1,6 @@
 last_updated: "July 2026"
 items:
-  - "Presented the multilingual VLM abstention study at AI Safety India's Hackathon Winners event"
   - "Writing up my M.Sc. thesis on conformal prediction for vision-language navigation, sharpening the abstention and set-efficiency results"
-  - "Following up the multilingual VLM study: turning cross-lingual activation steering for abstention from a hackathon proof into a real method"
-  - "Testing whether abstention signals and honesty directions transfer across languages, or fail silently outside English"
+  - "Designing the first monitor-shift experiment in <a href='https://control-arena.aisi.org.uk/' target='_blank' rel='noreferrer'>ControlArena</a>: hold the attack policy fixed, vary the input language, measure what the monitor stops catching"
+  - "Reading the control literature properly, starting with <a href='https://arxiv.org/abs/2312.06942' target='_blank' rel='noreferrer'>Greenblatt et al.</a> and the safety cases that quote monitor catch rates as if they were stable numbers"
+  - "Presented the multilingual VLM abstention study at AI Safety India's Hackathon Winners event"

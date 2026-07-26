@@ -1,7 +1,7 @@
-eyebrow: 'APPLIED SCIENTIST · AI SAFETY · TRUSTWORTHY MULTIMODAL & MULTILINGUAL AI'
+eyebrow: 'APPLIED SCIENTIST · AI CONTROL · MONITORING FOR MULTIMODAL AGENTS'
 name: 'Vicky Feliren'
-lead1: 'I work on AI safety. One half is getting a model to surface what it actually knows and to hold back when it should. The other is making that reliability hold for the languages and contexts it was never built for.'
-lead2: 'Conformal prediction, interpretability, and abstention you can trust. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
+lead1: 'I work on whether AI monitoring actually holds. Labs are deploying agents behind monitors, a second model watching each action and scoring it for anything dangerous. Those monitors get built and red-teamed on English text. I test what happens when the input is not that, and I measure what gets missed.'
+lead2: 'Multimodal agents, non-English input, long trajectories. The parts of the input distribution nobody sampled. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
 buttons:
   - label: 'Research'
     href: '/research/'
@@ -10,5 +10,6 @@ buttons:
   - label: 'Writings'
     href: '/writings/'
 meta:
-  - 'Currently: M.Sc. thesis on uncertainty in vision-language models · Monash University'
-  - 'Contributing to SEACrowd, open AI infrastructure for Southeast Asia'
+  - 'Building a monitor-shift evaluation on <a href="https://control-arena.aisi.org.uk/" target="_blank" rel="noreferrer">ControlArena</a>: same attack policy, different input distribution, measured catch rate'
+  - 'Finishing my M.Sc. thesis on uncertainty in vision-language navigation · Monash University, September 2026'
+  - 'Contributing to <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">SEACrowd</a>, open AI infrastructure for Southeast Asia'

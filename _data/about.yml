@@ -1,32 +1,19 @@
 tech_stack:
   primary:
-    - Conformal Prediction
+    - Agent Evaluation
+    - Linear Probes & Activation Steering
     - Vision-Language Models
-    - Semantic Segmentation
-    - Diffusion Models
+    - Conformal Prediction
     - PyTorch
-    - TensorFlow
   framework:
+    - vLLM
     - PEFT
     - DeepSpeed
-    - vLLM
-    - FastAPI
-    - scikit-learn
-    - XGBoost
-    - Google Earth Engine
     - Python
   tool:
-    - GCP Vertex AI
-    - Kubernetes
-    - Docker
-    - BigQuery
-    - SQL
-    - dbt
-    - MLflow
     - Weights & Biases
-    - LangSmith
+    - Docker
     - LLM Evaluation
-    - SHAP
 
 stats:
   - value: '7'
@@ -34,34 +21,34 @@ stats:
     detail: 'Across language and vision venues. I write for reviewers who check the math.'
   - value: '5+ years'
     label: 'Industry ML in production'
-    detail: 'Models people depend on for money, safety, and city services. Failure had a cost.'
+    detail: 'I can run ten thousand agent trajectories without the infrastructure becoming the bottleneck.'
   - value: '1'
     label: 'Issued patent'
     detail: 'A method novel enough to survive examination, not just a demo that worked once.'
   - value: '12'
     label: 'Awards & scholarships'
-    detail: 'Won under time pressure, against strangers, judged on the work alone.'
+    detail: 'Including Asia Pacific regional winner, Global South AI Safety Hackathon. Judged on the work alone.'
   - value: '100+'
     label: 'Researchers co-led with'
-    detail: 'Coordinating people across continents and shipping what we promised.'
+    detail: 'Research at scale is a coordination problem before it is a technical one.'
   - value: '1000+'
     label: 'Students taught & judged'
     detail: 'I can explain hard ideas to someone who has never seen them before.'
 
 hero:
-  - "I'm an applied scientist working on <strong>AI safety</strong>. I want models to surface what they actually know, to hold back when they should, and to do both reliably for the languages and contexts they were never trained on. Concretely, that means trustworthy multimodal systems that are reliable when it matters and relevant to the places they operate in."
-  - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. The goal is simple to state and hard to achieve. When a model claims confidence, we want that confidence backed by provable bounds."
-  - "The other thread in my work is cultural inclusion. Southeast Asia is one of the world's most linguistically and visually diverse regions, and it's almost entirely absent from the training data and benchmarks that define what modern AI can and cannot do. I've been building the datasets, benchmarks, and adaptation methods to change that, with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and through my <a href='/research/'>own research</a>."
+  - "I'm an applied scientist working on <a href='https://arxiv.org/abs/2312.06942' target='_blank' rel='noreferrer'><strong>AI control</strong></a>. Labs are starting to deploy agents behind monitors, a second model that watches each action and flags anything dangerous. The catch rate of that monitor is the number a lot of safety cases now rest on. I test whether it survives inputs the red team never sampled, and I measure what gets missed when it does not."
+  - "At Monash University, I'm working with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a> on <a href='/research/'>conformal prediction for vision-language navigation</a>. That work taught me the habit I care most about now, which is asking what a guarantee is actually conditional on and which assumption fails first under pressure. Monitoring guarantees mostly have not been asked that question."
+  - "The other input I bring is access. Southeast Asia is one of the most linguistically and visually diverse regions in the world and it is almost absent from the data and benchmarks that define what modern AI can do. I've spent years building datasets and adaptation methods there with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and through my <a href='/research/'>own research</a>. For this agenda that is not an inclusion argument. It is an attack surface, and a source of the exact input distributions monitors have never been tested against."
 
 sections:
   - title: 'Research Agenda'
-    content: "I work on one question from two sides. Getting a model to surface what it actually knows, and to hold back when it should, reliably, for the languages and contexts it was never trained on. Three open problems I would bet on, and the place I pressure-test them. Each sits in the gap between two communities that rarely talk to each other, which is usually where the tractable and neglected work hides."
+    content: "One claim, three ways of attacking it. A monitor's miss rate is only characterised on the distribution its red team sampled, and nobody has measured how it degrades along the axes they did not vary. If it degrades sharply, control safety cases are quoting a number that does not survive deployment. Each of these sits in the gap between two communities that rarely talk to each other, which is usually where the tractable and neglected work hides."
     cards:
-      - title: 'Saying what you know, in any language'
-        description: "Models often state a confident falsehood while their own representations encode the correct answer, and the gap widens when the modalities disagree or the query is in a low-resource language. I want systems that defer to their own better-supported internal belief, and I want us to actually measure how this failure shifts across languages, because almost no one does. A model that confidently states a falsehood it could have flagged is a deployment hazard, not a rounding error."
-      - title: 'Whether our safety tools even work outside English'
-        description: "Probing and activation steering are becoming the core tools for reading a model's internal state for deception, refusal, or harmful intent. Almost all of that work is validated in English, and we do not know whether a probe or a steering vector transfers to another language or fails silently outside it. If internal monitoring holds for English and breaks for the languages most of the world actually uses, the safety stack carries a language-shaped hole and a false sense of security with it."
-      - title: 'Making "I do not know" trustworthy, with guarantees'
-        description: "Deployed and agentic multimodal systems need to know when not to act, but their confidence signals are poorly calibrated and carry no guarantees. Conformal prediction gives distribution-free coverage guarantees, and extending it to multimodal, sequential, and free-form generation is largely open. An agent that acts confidently when it should defer is a direct path to loss of control. Calibrated, guaranteed abstention is one of the few safety levers I can make rigorous."
+      - title: 'Monitors are only characterised where they were tested'
+        description: "Deployed agents sit behind a second model that reads each action and scores it for suspicion. That monitor's miss rate gets measured against attacks a red team wrote, on inputs a red team chose. Shift the input language, shift the modality, stretch the trajectory past the monitor's window, and nobody knows what the miss rate becomes. In <a href='https://www.aisi.gov.uk/blog/stress-testing-asynchronous-monitoring-of-ai-coding-agents' target='_blank' rel='noreferrer'>UK AISI's stress test of asynchronous monitoring</a>, a first-round monitor missed up to 67% of attacks and fell to 6% only after three rounds of iterating against the attacks it had already seen. That is a number earned on one distribution. I hold the attack fixed and vary the input instead, which is the cheaper axis and the one nobody has swept."
+      - title: 'Probes and steering have an unmeasured transfer rate'
+        description: "Linear probes and activation steering, following <a href='https://arxiv.org/abs/2310.01405' target='_blank' rel='noreferrer'>representation engineering</a>, are becoming the core instruments for reading a model's internal state for deception, refusal, or harmful intent. Almost all of that validation is English text. A probe that reads honesty in English and returns noise in Indonesian does not announce itself. It fails silently, and the safety case never notices it has stopped working. This is the internals version of the same question, and unlike most things in interpretability it is directly measurable."
+      - title: 'What a safety guarantee is actually conditional on'
+        description: "Control protocols report empirical safety and usefulness curves with no statement about coverage. <a href='https://arxiv.org/abs/2402.10978' target='_blank' rel='noreferrer'>Distribution-free methods</a> can supply that statement, but their assumptions break under exactly the adversarial shift that safety cares about. I work on naming which assumption fails first and what the bound degrades to when it does. This is where my uncertainty quantification background earns its place, as a tool I reach for rather than a topic I identify with."
       - title: 'Where it gets tested'
-        description: "These ideas have to survive contact with messy data. I pressure-test them in vision-language navigation, the subject of my thesis, in multimodal models for earth observation published in IEEE and Remote Sensing of Environment, and in open multilingual AI for Southeast Asia with SEACrowd and SEA-VL. The regions and sensors that English-first, benchmark-first AI never really sees."
+        description: "These have to survive contact with systems that were not built for the test. I run them on <a href='https://control-arena.aisi.org.uk/' target='_blank' rel='noreferrer'>ControlArena</a>, UK AISI's open library for control experiments, rather than a harness of my own, so anyone can rerun what I claim. The inputs come from work I already know: agent trajectories in vision-language navigation, the subject of my thesis; multimodal models for earth observation, published in IEEE and Remote Sensing of Environment; open multilingual models for Southeast Asia with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and SEA-VL. The distributions that English-first, benchmark-first evaluation never sees."

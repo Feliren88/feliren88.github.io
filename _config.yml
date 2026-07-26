@@ -1,7 +1,7 @@
 # Site settings
 title: Vicky Feliren
-description: 
-  Applied Scientist building AI that rigorously knows its own limits grounded with first-principle engineering and philosophy.
+description:
+  Applied Scientist working on AI control. I test whether monitoring holds for multimodal agents and non-English input, and measure what gets missed.
 baseurl: ""
 url: "https://vickyfeliren.com"
 
