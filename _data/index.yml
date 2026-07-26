@@ -1,7 +1,7 @@
-eyebrow: 'APPLIED SCIENTIST · AI CONTROL · MONITORING FOR MULTIMODAL AGENTS'
+eyebrow: 'APPLIED SCIENTIST · CALIBRATION & SAFETY ALIGNMENT · MULTIMODAL AGENTS'
 name: 'Vicky Feliren'
-lead1: 'I work on whether AI monitoring actually holds. Labs are deploying agents behind monitors, a second model watching each action and scoring it for anything dangerous. Those monitors get built and red-teamed on English text. I test what happens when the input is not that, and I measure what gets missed.'
-lead2: 'Multimodal agents, non-English input, long trajectories. The parts of the input distribution nobody sampled. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
+lead1: 'I work on making safe models more useful, not less. Training a model to be safe has a cost. Part of that cost is calibration, which is how well a model knows what it knows. A model that loses it defers badly. You cannot hand that model work it would be expensive to get wrong, so the training meant to make an agent deployable is part of what limits how far it can go.'
+lead2: 'I measure where that cost falls and work on getting it back. Mostly outside English, mostly outside text, where the tradeoff looks worst and the measurement is thinnest. Published in academic conferences and journals, and building open AI infrastructure for Southeast Asia.'
 buttons:
   - label: 'Research'
     href: '/research/'
@@ -10,6 +10,6 @@ buttons:
   - label: 'Writings'
     href: '/writings/'
 meta:
-  - 'Building a monitor-shift evaluation on <a href="https://control-arena.aisi.org.uk/" target="_blank" rel="noreferrer">ControlArena</a>: same attack policy, different input distribution, measured catch rate'
+  - 'Measuring the calibration cost of safety alignment across languages, reported per language rather than averaged'
   - 'Finishing my M.Sc. thesis on uncertainty in vision-language navigation · Monash University, September 2026'
   - 'Contributing to <a href="https://seacrowd.github.io/" target="_blank" rel="noreferrer">SEACrowd</a>, open AI infrastructure for Southeast Asia'

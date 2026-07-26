@@ -1,18 +1,18 @@
 intro: 'Reliability and relevance. Every system I have built comes down to the same question. How do we know when to trust the model, when should it hold back, and who is it actually built for?'
-intro_sub: 'I work on AI control, specifically whether monitoring holds up for multimodal agents and non-English input. If any of the below fits where you are, I would be glad to hear from you.'
+intro_sub: 'I work on calibration under safety alignment, and on making safe models more useful rather than less. If any of the below fits where you are, I would be glad to hear from you.'
 
 engagements:
   - type: 'Research Collaboration'
-    description: "Working on AI control, monitor robustness, agent evaluation, probes and steering, or guaranteed abstention? Particularly interested in anyone testing whether monitoring survives inputs it was never red-teamed on. Let's find the overlap."
+    description: "Working on the alignment tax, calibration, honesty and abstention, or evaluation beyond English? Particularly interested in anyone measuring what safety training costs and where that cost lands. Let's find the overlap."
   - type: 'Research & Applied Roles'
-    description: 'Open to research and applied scientist roles internationally, particularly in AI control, monitoring and evaluation, and reliability for multimodal and multilingual systems.'
+    description: 'Open to research and applied scientist roles internationally, particularly in alignment finetuning, calibration and evaluation, and reliability for multimodal and multilingual systems.'
   - type: 'Speaking'
     description: 'Conference talks, university lectures, and panels on AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
   - type: 'Mentorship'
     description: "I mentor early-career researchers and engineers moving into AI safety and trustworthy AI, including graduate school applications and careers in applied science, especially across Southeast Asia."
 
-availability_headline: "Currently open for: AI control research collaboration, conference talks, and mentorship."
-email_scope: "I respond to research collaboration (AI control, monitoring and evaluation, multimodal and multilingual AI), conference talks, and career mentorship."
+availability_headline: "Currently open for: research collaboration on calibration and safety alignment, conference talks, and mentorship."
+email_scope: "I respond to research collaboration (calibration and safety alignment, evaluation, multimodal and multilingual AI), conference talks, and career mentorship."
 calendly_url: ""
 calendly_slots_label: "Two slots per month · Currently open: June 2026"
 calendly_open: false

@@ -1,7 +1,7 @@
 # Site settings
 title: Vicky Feliren
 description:
-  Applied Scientist working on AI control. I test whether monitoring holds for multimodal agents and non-English input, and measure what gets missed.
+  Applied Scientist working on calibration under safety alignment. I measure where the safety-capability tradeoff falls hardest, outside English and outside text, and work on recovering it.
 baseurl: ""
 url: "https://vickyfeliren.com"
 

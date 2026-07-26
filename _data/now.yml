@@ -1,6 +1,6 @@
 last_updated: "July 2026"
 items:
   - "Writing up my M.Sc. thesis on conformal prediction for vision-language navigation, sharpening the abstention and set-efficiency results"
-  - "Designing the first monitor-shift experiment in <a href='https://control-arena.aisi.org.uk/' target='_blank' rel='noreferrer'>ControlArena</a>: hold the attack policy fixed, vary the input language, measure what the monitor stops catching"
-  - "Reading the control literature properly, starting with <a href='https://arxiv.org/abs/2312.06942' target='_blank' rel='noreferrer'>Greenblatt et al.</a> and working through how safety cases use monitor catch rates"
+  - "Replicating the published calibration cost of safety alignment in a setup I can run end to end, before building anything on top of it"
+  - "Designing the experiment that follows: measure that cost per language rather than averaged, starting with one I speak natively so I can audit the eval data myself"
   - "Presented the multilingual VLM abstention study at AI Safety India's Hackathon Winners event"
