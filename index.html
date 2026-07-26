@@ -93,7 +93,8 @@ description: Applied Scientist working on calibration under safety alignment. I 
 
     <div id="about-sections">
       {% for section in site.data.about.sections %}
-      <div class="about-section">
+      {% assign section_id = section.title | downcase | replace: ' ', '-' | replace: '"', '' %}
+      <div class="about-section" id="{{ section_id }}">
         <h2>{{ section.title }}</h2>
 
         {% if section.content %}

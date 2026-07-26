@@ -1854,6 +1854,9 @@ html[data-theme="light"] .tech-tag--tool {
   .stat-item { padding: 1rem; }
 }
 
+/* clear the sticky topbar when linked to by anchor */
+.about-section[id] { scroll-margin-top: 5.5rem; }
+
 .about-section {
   margin-top: 2.5rem;
   padding-top: 2rem;
