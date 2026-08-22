@@ -316,12 +316,12 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       <tr><td class="num id">A2</td><td>Last-token vs. mean pooling</td><td>dependence on the aggregation point</td></tr>
       <tr><td class="num id">A3</td><td>Shuffled-label control</td><td>pipeline leakage; AUC must return to &asymp;0.5</td></tr>
       <tr><td class="num id">A4</td><td>Leave-one-injection-out</td><td>memorization of surface strings</td></tr>
-      <tr><td class="num id">A5</td><td>Benign-prefix control + held-out family</td><td>detection of prefix presence instead of goal override</td></tr>
+      <tr><td class="num id">A5</td><td>Benign-prefix control + held-out family</td><td>whether the detector responds to prefix presence without a goal override</td></tr>
       <tr><td class="num id">A6</td><td>10-seed repetition of the full protocol</td><td>results specific to one lucky split</td></tr>
       <tr><td class="num id">A7</td><td>200 random calibration/test splits</td><td>violation of the conformal FPR bound</td></tr>
       <tr><td class="num id">B</td><td>Behavioral check (greedy decoding, 320 attacked prompts)</td><td>labels with no behavioral grounding</td></tr>
       <tr><td class="num id">A8</td><td>Suffix-position attacks + benign-suffix controls (480 new prompts)</td><td>detection restricted to the trained prefix position</td></tr>
-      <tr><td class="num id">A9</td><td>Paraphrase attack set with disjoint vocabulary</td><td>keyword matching instead of semantic detection</td></tr>
+      <tr><td class="num id">A9</td><td>Paraphrase attack set with disjoint vocabulary</td><td>whether the detector relies on keyword matching</td></tr>
       <tr><td class="num id">A10</td><td>20 independent label shuffles</td><td>ambiguity of a single-shuffle null</td></tr>
       <tr><td class="num id">A11</td><td>Model-scale sweep: same benchmark on Qwen2.5-Instruct 1.5B/3B/7B</td><td>findings specific to one small model</td></tr>
       <tr><td class="num id">A12</td><td>Input-text baseline: bag-of-words classifier on the raw prompt, identical protocol</td><td>hidden states adding nothing over a detector that never looks inside the model</td></tr>
@@ -332,7 +332,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     word of the training templates: none of them use <i>ignore, disregard, override, forget, skip,
     cancel, system, admin, directive, instruction, developer, task,</i> or <i>request</i>. The A8
     conditions reuse the ten training templates and the twelve harmless prefixes, appended after
-    the task instead of before it. A8/A9 evaluate the prefix-trained detector at its original
+    the task after it has learned prefixes that appear before the task. A8/A9 evaluate the prefix-trained detector at its original
     conformal threshold, with no retraining.
   </p>
   <p class="soft">
@@ -394,7 +394,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       available in early-middle layers; the pre-registered layer 12 reads 0.992 on the sweep split
       and 0.998 &plusmn; 0.003 across seeds. Mean pooling stays at 1.000 at every layer, as it
       must: the mean includes the injected tokens themselves, so it measures lexical presence
-      rather than the model's integrated state.</li>
+      and may fail to represent the model's integrated state.</li>
     <li><b>A3/A10 shuffled labels.</b> A single shuffle gives AUC 0.514. Twenty independent
       shuffles give 0.518 &plusmn; 0.039 (range 0.455&ndash;0.598), so the single-shuffle value is
       an unremarkable draw from a null centered on chance. No pipeline leakage.</li>
@@ -412,8 +412,8 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <figcaption><b>Figure 3.</b> Held-out AUC per layer, with a zoom on layers 1&ndash;24 (right).
       The deconfounded last-token curve peaks (1.000) at layers 4&ndash;7 and decays to
       &asymp;0.977 by layer 24; layer 0 is chance. Mean pooling reads the injected tokens
-      directly and stays at 1.000 everywhere, so it measures word presence rather than the
-      model's integrated state. That is why the last-token probe is the meaningful
+      directly and stays at 1.000 everywhere, so it measures word presence alone. It does not
+      capture the model's integrated state. That is why the last-token probe is the meaningful
       instrument.</figcaption>
   </figure>
 
@@ -573,7 +573,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     <li>No claim that internal signals are <b>required</b> for this attack class. A12 shows an
       input-only text classifier nearly matches the probe, because these injections are visible
       in the prompt. "Internal beats output monitoring" is measured here; "internal beats input
-      monitoring" is not established by this benchmark and would require attacks that are
+      monitoring" remains unproven in this benchmark and would require attacks that are
       illegible in the input text.</li>
     <li>Results cover one model family (Qwen2.5-Instruct, 0.5B&ndash;7B) and one
       template-generated attack style. The hard negatives remove the worst lexical shortcut and
@@ -617,7 +617,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     to 0.029 &plusmn; 0.016 against a target of 0.05, and transfers with TPR 0.988 &plusmn; 0.013 to
     an injection family excluded from training. It also reaches TPR 1.000 &plusmn; 0.000 on
     paraphrases with disjoint vocabulary and on suffix-position attacks, so the detected feature
-    is the goal-override semantics rather than any keyword. Two findings came from the controls. The
+    is the goal-override semantics. No individual keyword defines it. Two findings came from the controls. The
     benign-prefix control exposed a confound that inverted the naive benchmark's conclusion. The
     suffix-position control measured the cost of a calibration set that under-covers benign
     traffic (25.8% false alarms against a 5% budget), and recalibration with representative

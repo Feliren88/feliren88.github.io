@@ -377,7 +377,7 @@
     var ringNote = $('#pr-sixring-note');
 
     var RING_NOTE = [
-      'Nothing answered yet. That is not a failure, it is the reading. <b>Slow down.</b>',
+      'Nothing answered yet. The result is clear: <b>slow down.</b>',
       'One down. Five of these are still guesses.',
       'Two down. Still more unknown than known.',
       'Halfway. The remaining three are usually the uncomfortable ones.',
@@ -416,7 +416,7 @@
       } else {
         out.className = 'pr-verdict warn';
         out.innerHTML = '<b>' + unclear + ' of ' + rows.length + '</b> still unanswered. ' +
-          'The instruction here is not to try harder. It is to slow down.';
+          'Slow down and give the unanswered questions proper attention.';
       }
       save('six', state);
     }
@@ -440,7 +440,7 @@
     {
       max: 20,
       title: 'Freely reversible',
-      body: 'Undoing this costs an afternoon and some mild awkwardness. Deliberation is the expensive part here, not the mistake.',
+      body: 'Undoing this costs an afternoon and some mild awkwardness. Excessive deliberation costs more than a mistake here.',
       advice: 'Move now. Pick the version you can start today and let the result tell you what you could not work out in advance.'
     },
     {
@@ -459,7 +459,7 @@
       max: 90,
       title: 'Nearly permanent',
       body: 'There is a path back and you would not enjoy it. Assume the version of you who regrets this will have fewer options than the version deciding now.',
-      advice: 'Raise the evidence bar. If urgency is coming from someone else rather than from the facts, that is worth naming out loud.'
+      advice: 'Raise the evidence bar. Name any urgency created by another person when the facts do not support it.'
     },
     {
       max: 100,

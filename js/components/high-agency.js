@@ -95,7 +95,7 @@
     var state = load('signals', {});
 
     var READ = [
-      'Nothing ticked. That is a starting point, not a verdict. Agency is a setting you can change.',
+      'Nothing ticked. Treat this result as a starting point. You can change how you act.',
       'One signal. The seed is there.',
       'Two signals. You break the pattern sometimes.',
       'Three signals. You have a habit of going your own way.',
@@ -172,10 +172,10 @@
       } else if (down.length === 2) {
         out.innerHTML = '<p class="t">Two wheels down.</p><p>' +
           down.map(function (d) { return TRIKE[d].label.toLowerCase(); }).join(' and ') +
-          ' are both gone. This is not a slower version of agency. It is a different vehicle, and it does not move.</p>';
+          ' are both gone. The remaining vehicle cannot move, however hard you push it.</p>';
       } else {
-        out.innerHTML = '<p class="t">No wheels.</p><p>This is the default setting. It is not a character flaw. ' +
-          'It is what you get from a brain built for a small tribe and a school system built for a factory. ' +
+        out.innerHTML = '<p class="t">No wheels.</p><p>This is the default setting. ' +
+          'A brain built for a small tribe and a school system built for a factory can produce it. ' +
           'Put the wheels back on and read the rest.</p>';
       }
     }
@@ -199,7 +199,7 @@
   /* ══ The diagnostic quiz ═══════════════════════════════ */
   var QUESTIONS = [
     { axis: 'think', q: 'When I am stuck, I write the problem down before I try to solve it.' },
-    { axis: 'act', q: 'I would rather run a rough test this week than plan carefully for a month.' },
+    { axis: 'act', q: 'I run a rough test this week when a month of planning would add little value.' },
     { axis: 'disagree', q: 'I hold at least one view that most people around me think is wrong.' },
     { axis: 'think', q: 'I can say my biggest current problem in one plain sentence.' },
     { axis: 'act', q: 'When I decide something, the first step happens the same day.' },
@@ -225,7 +225,7 @@
     },
     commentator: {
       name: 'The commentator',
-      text: 'You see the problem more clearly than anyone in the room, and you watch from the stands. Accurate diagnosis is not the same as treatment.'
+      text: 'You see the problem clearly and watch from the stands. Diagnosis alone leaves the problem unchanged.'
     },
     blur: {
       name: 'The blur',
@@ -395,7 +395,7 @@
         TRIKE[lowest].text + '</p>');
       lines.push('<p class="ha-verdict-cta">' + FIX_HINT[lowest] + '</p>');
     }
-    lines.push('<p style="font-size:var(--fs-2xs);opacity:0.75">Twelve self-rated questions are a mirror, not a measurement. ' +
+    lines.push('<p style="font-size:var(--fs-2xs);opacity:0.75">These twelve self-rated questions offer a prompt for reflection. They do not provide an objective measurement. ' +
       'Treat the number as a prompt to argue with.</p>');
     box.innerHTML = lines.join('');
   }
@@ -703,7 +703,7 @@
 
     var TEMPLATE = [
       'Write down every single thing you could possibly do to start on <b>%G</b>. Do not filter. Fifteen minutes.',
-      'Read that list and use it to write out levels three, four and five. You are building the game, not playing it yet.',
+      'Read that list and use it to write out levels three, four and five. This step builds the plan; action comes next.',
       'Find the three most recommended starting resources for <b>%G</b> and get hold of one of them today.',
       'Spend twenty minutes with it. Note every point where you got lost. The notes matter more than the progress.',
       'Take one thing you did not understand and get it explained until you do. Then go back to level four.'
@@ -781,7 +781,7 @@
         { t: 'Give it time and see whether it resolves on its own.', k: 'rumination',
           why: 'Waiting is a decision with the accountability removed.' },
         { t: 'Read about other people who describe the same feeling.', k: 'midwit',
-          why: 'Vocabulary for a problem is not traction on it. You now have a more articulate version of the same stuck.' }
+          why: 'Better vocabulary has made the problem easier to describe. It has not moved you closer to a solution.' }
       ]
     },
     {
@@ -806,7 +806,7 @@
           why: 'Three years of theoretical data. You could have had practical data on four cities by now.' },
         { t: 'Build a spreadsheet weighting fourteen factors across five cities.', k: 'midwit',
           why: 'The weights are guesses wearing a suit. You will trust the output because it has decimal places.' },
-        { t: 'Book two weeks there next month and live an ordinary week, not a holiday.', k: 'high',
+        { t: 'Book two weeks there next month and follow an ordinary weekday routine throughout the visit.', k: 'high',
           why: 'You reframed a decision as an experiment. Success is that you ran it, whatever the answer turns out to be.' },
         { t: 'Accept that people from where you are from do not really do that.', k: 'attachment',
           why: 'A belief inherited from people who also never tested it.' }
@@ -920,7 +920,7 @@
       if (!keys.length) {
         html += '<p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7">No trap dominated. Either you already act with agency, ' +
           'or you spotted which answer the page wanted. Both are worth knowing about yourself. ' +
-          'The real test is not the one where the high agency option is written out for you.</p>';
+          'The real test comes when nobody writes the high-agency option out for you.</p>';
       } else {
         html += '<div class="ha-trap-tally">';
         keys.forEach(function (k) {
@@ -995,7 +995,7 @@
     },
     n7: { say: 'You have agency on this problem. Nothing left to diagnose. Run the chart again tomorrow.', term: true },
     o1: { say: 'The vague trap. Get it onto a surface outside your head. Paper, whiteboard, a walk with one question, a person who will interrupt you.', term: true, trap: '#trap-vague' },
-    o2: { say: 'Then it is a genuine limit and not a trap. This is the rarest outcome on the chart. Spend your agency somewhere else.', term: true },
+    o2: { say: 'Then you have found a genuine limit. This is the rarest outcome on the chart. Spend your agency somewhere else.', term: true },
     o3: { say: 'The attachment trap. Ask what you would do with ten times the agency, and take the first three answers seriously.', term: true, trap: '#trap-attachment' },
     o4: { say: 'The midwit trap. Invert it. Ask how you would guarantee failure, then flip each answer.', term: true, trap: '#trap-midwit' },
     o5: { say: 'The overwhelm trap. Write down everything you could possibly do. That list is level one, and you can do it now.', term: true, trap: '#trap-overwhelm' },
@@ -1122,7 +1122,7 @@
           inp.type = 'text';
           inp.className = 'ha-input';
           inp.value = state.dump[i] || '';
-          inp.placeholder = i === 0 ? 'A specific action, not a description of a feeling' : '';
+          inp.placeholder = i === 0 ? 'A specific action another person could observe' : '';
           inp.setAttribute('aria-label', 'Action ' + (i + 1));
           inp.addEventListener('input', function () { state.dump[i] = inp.value; persist(); });
 

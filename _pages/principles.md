@@ -30,7 +30,7 @@ extra_js: /js/components/principles.js
         <q>What do I want right now?</q>
       </button>
       <button class="pr-swap-card strong" type="button" data-q="protect" aria-pressed="true">
-        <span class="k"><svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-horizon"/></svg> The question to ask instead</span>
+        <span class="k"><svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-horizon"/></svg> The better question</span>
         <q>Which decision leaves me stronger, clearer, freer, and with more good options six months from now?</q>
       </button>
     </div>
@@ -50,12 +50,12 @@ extra_js: /js/components/principles.js
       <p class="pr-doors-hint">Six months from now. Tap either question above.</p>
     </div>
     <p>Immediate comfort does not tell me whether a decision is sound. I judge a choice by its
-    consequences, not by the relief or excitement it creates today.</p>
+    consequences. The relief or excitement it creates today is not enough.</p>
     <p>My rule is direct: <b>never sacrifice long-term freedom for short-term relief, ego,
     money, approval, anger, excitement or fear.</b></p>
   </div>
 
-  <p class="pr-deck">This is an operating manual, not a universal theory. I wrote it for moments
+  <p class="pr-deck">This personal operating manual is designed for moments
   when pressure weakens my judgment. Search for the situation you face and start there.</p>
 </section>
 
@@ -83,8 +83,8 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="six">
   <h2><span class="n">01</span> The six questions</h2>
-  <p class="pr-deck">Before any important decision, answer these. The test is not whether you
-  have an opinion. It is whether you can answer clearly.</p>
+  <p class="pr-deck">Before any important decision, answer these. A clear answer matters more
+  than a strong opinion.</p>
 
   <div class="pr-console">
     <div class="pr-console-head">
@@ -157,8 +157,8 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="reversibility">
   <h2><span class="n">02</span> Reversibility sets the speed</h2>
-  <p class="pr-deck">Most bad decisions are not wrong choices. They are right-speed choices
-  applied to the wrong kind of decision.</p>
+  <p class="pr-deck">Many bad decisions begin with the wrong pace. The right choice made too
+  quickly or too slowly can still produce a poor result.</p>
 
   <p>Reversible decisions deserve speed, because the information you want is on the other side of
   doing it. Irreversible decisions deserve patience, because the evidence bar should rise with the
@@ -212,7 +212,7 @@ extra_js: /js/components/principles.js
     <div class="pr-dial-examples" id="pr-dial-chips"></div>
   </div>
 
-  <p>The dial is a rule of thumb rather than a measurement. Its only job is to make you name the
+  <p>The dial is a rule of thumb. Its only job is to make you name the
   cost of being wrong before you decide how fast to move.</p>
 </section>
 
@@ -221,8 +221,8 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="situations">
   <h2><span class="n">03</span> The situations</h2>
-  <p class="pr-deck">Every state worth having a prepared answer for. Filter, or use the
-  search box above if you would rather describe it in your own words.</p>
+  <p class="pr-deck">Every state worth having a prepared answer for. Use the filters or describe
+  the situation in your own words with the search box above.</p>
 
   <div class="pr-filters filter-bar" role="group" aria-label="Filter situations by kind">
     <button class="filter-pill is-active" data-filter="all">All</button>
@@ -273,7 +273,7 @@ extra_js: /js/components/principles.js
         {% endif %}
         {% if s.steps %}
         <div class="pr-block">
-          <span class="k">{% if s.donts %}Instead{% else %}In order{% endif %}</span>
+          <span class="k">{% if s.donts %}Do this{% else %}In order{% endif %}</span>
           <ol>{% for t in s.steps %}<li>{{ t }}</li>{% endfor %}</ol>
         </div>
         {% endif %}
@@ -396,7 +396,7 @@ extra_js: /js/components/principles.js
     {% endfor %}
   </div>
 
-  <h3 id="trades">The five trades not to make permanently</h3>
+  <h3 id="trades">Five trades that should remain temporary</h3>
   <p>A temporary trade may be necessary. I require strong evidence before making any of these
   trades permanent.</p>
 
@@ -453,7 +453,7 @@ extra_js: /js/components/principles.js
   </div>
 
   <div class="pr-note">
-    <p><b>On this page.</b> This is a personal operating manual rather than advice for anyone else.
+    <p><b>On this page.</b> This personal operating manual records the standards I set for myself.
     I keep it because the states it covers are exactly the states in which I reason worst, and a
     written answer beats an improvised one when I am angry or tired.</p>
     <p>This manual also reflects my research on calibration. In both models and people, sound

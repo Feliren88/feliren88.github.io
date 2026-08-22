@@ -45,7 +45,7 @@ extra_js: /js/components/high-agency.js
   <p class="ha-deck">High agency is easier to recognise in a person than to define. The essay
   starts with examples, so this note does too.</p>
 
-  <p>In 1964, a judge said he could not define obscenity but knew it when he saw it.
+  <p>In 1964, a judge said he could not define obscenity and knew it when he saw it.
   High agency can feel the same. You have probably met someone who has it, even if you
   never named the trait.</p>
 
@@ -99,7 +99,7 @@ extra_js: /js/components/high-agency.js
       <button class="ha-signal" type="button" data-sig="treadmill" aria-pressed="false">
         <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Treadmill energy</span></span>
         <p class="why">You meet them tired and flat. You leave wanting to run up a hill. They add
-        energy to a room instead of drawing it out.</p>
+        energy to a room and leave it stronger.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="unguessable" aria-pressed="false">
         <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Unguessable opinions</span></span>
@@ -162,8 +162,8 @@ extra_js: /js/components/high-agency.js
 
   <p>Optimism says the glass is half full. Pessimism says it is half empty. High agency says
   you can turn on the tap. The people you would call from that jail cell may differ in age,
-  education, politics, and temperament. They share a habit of shaping events instead of
-  waiting for events to shape them.</p>
+  education, politics, and temperament. They share a habit of shaping events. They refuse to
+  wait for events to shape them.</p>
 
   <p>The essay breaks it into clear thinking, a bias to action, and disagreeability, and calls
   the combination a tricycle. Take a wheel off and see what you get.</p>
@@ -265,7 +265,7 @@ extra_js: /js/components/high-agency.js
     </div>
     <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin:0 0 var(--gap-2)">
       Rate each statement from 1 (never true of me) to 5 (always true). Answer for the last
-      three months, not for who you plan to be. Your answers stay in this browser.</p>
+      three months. Answer from your record of action; future plans do not count. Your answers stay in this browser.</p>
     <div id="ha-quiz"></div>
     <div class="ha-btn-row">
       <button class="ha-btn is-primary" id="ha-quiz-score" type="button" disabled>Show my three wheels</button>
@@ -392,14 +392,14 @@ extra_js: /js/components/high-agency.js
       <div class="ha-gate-step">
         <p class="q">Has any human ever done something in this class?</p>
         <p class="a">In 1961 Claude Shannon and Ed Thorp decided that beating roulette was a
-        physics problem rather than a luck problem. They built the first wearable computer,
+        physics problem they could measure. They built the first wearable computer,
         hid it in a shoe, timed the wheel with a toe switch, and took an edge off the house.
         <a href="https://escholarship.org/content/qt8342j4k0/qt8342j4k0_noSplash_0f0b570acb850337795f8d10911160e8.pdf" target="_blank" rel="noreferrer">Thorp later documented the system</a>.</p>
       </div>
       <div class="ha-gate-step">
         <p class="q">Who told you <span class="ha-gate-echo ha-echo">this</span> was impossible?</p>
         <p class="a">Name the source. Ask what they tested. Many claims of impossibility describe
-        one person's failed attempt, not a physical limit.</p>
+        one person's failed attempt. That does not establish a physical limit.</p>
       </div>
       <div class="ha-gate-step">
         <p class="q">If it is possible, what is the first hour of work?</p>
@@ -418,7 +418,7 @@ extra_js: /js/components/high-agency.js
         <p class="t-eyebrow">Model</p>
         <h5>An asteroid, one year out</h5>
       </div>
-      <span class="ha-lab-hint">Illustrative, not a forecast</span>
+      <span class="ha-lab-hint">Illustrative figures only</span>
     </div>
     <label class="ha-label" for="ha-asteroid">How much human agency gets pointed at it</label>
     <input class="ha-range" id="ha-asteroid" type="range" min="0" max="100" value="0" step="1">
@@ -616,7 +616,7 @@ extra_js: /js/components/high-agency.js
     <div class="ha-age-row">
       <label for="ha-age">Your age</label>
       <input id="ha-age" type="number" min="0" max="90" step="1" value="30">
-      <span style="font-size:var(--fs-2xs);color:var(--muted)">Grid assumes ninety years, which is an assumption and not a promise.</span>
+      <span style="font-size:var(--fs-2xs);color:var(--muted)">The grid uses ninety years as a simple planning assumption.</span>
     </div>
     <div class="ha-nows" id="ha-nows" aria-hidden="true"></div>
     <div class="ha-nows-legend">
@@ -654,7 +654,7 @@ extra_js: /js/components/high-agency.js
 
   <p>During his recovery, Wilbur studied birds as evidence that controlled flight was possible.
   Earlier attempts had failed, sometimes fatally. Public confidence in powered flight remained
-  low, but that opinion did not change the engineering question.</p>
+  low. The engineering question remained unchanged.</p>
 
   <p>There was no search engine and no aeronautics degree to enrol in. Wilbur wrote to
   libraries and to the Smithsonian and asked them to send him everything. Then he reasoned in
@@ -722,7 +722,7 @@ extra_js: /js/components/high-agency.js
     </div>
   </div>
 
-  <p class="mt-md">It was not a clean four years. Gliders broke. Calculations turned out to be
+  <p class="mt-md">The four years were difficult. Gliders broke. Calculations turned out to be
   wrong, including ones taken from the recognised authorities. One bad day in 1901 Wilbur told
   Orville that man would not fly in a thousand years. The next morning he was drawing again.</p>
 
@@ -910,7 +910,7 @@ extra_js: /js/components/high-agency.js
       <span class="k">Escape route</span>
       <p class="ask">How can I take action on this now?</p>
       <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin:0">Treat
-      rumination as a warning, not a method. If an action can produce useful evidence, take it.</p>
+      rumination as a warning. Respond with an action that can produce useful evidence.</p>
       <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin:0.6rem 0 0">
       Turn the decision into an experiment. If you are 60% confident that another city would
       suit you better, visit it and collect evidence. Running the test is progress. Five years
@@ -925,7 +925,7 @@ extra_js: /js/components/high-agency.js
     Learning quantum mechanics, earning a black belt, or building an aeroplane then feels
     like one impossible action.</p>
     <p class="sounds">I would not even know where to begin.</p>
-    <p>Games begin at level one, not level one hundred. The first task is small enough to begin
+    <p>Games begin at level one. The first task is small enough to begin
     and useful enough to lead into the second.</p>
 
     <div class="ha-lab">
@@ -1055,7 +1055,7 @@ extra_js: /js/components/high-agency.js
   Shut the door, put the phones away, test ideas against one another, and act on the strongest
   option before the group leaves.</p>
   <div class="ha-grid cols-4">
-    <div class="ha-card"><span class="tag">Step 1</span><h5>Gather</h5><p>Sharp people, not agreeable ones.</p></div>
+    <div class="ha-card"><span class="tag">Step 1</span><h5>Gather</h5><p>Invite people who will challenge your thinking.</p></div>
     <div class="ha-card"><span class="tag">Step 2</span><h5>Confess</h5><p>The real problem, stated plainly.</p></div>
     <div class="ha-card"><span class="tag">Step 3</span><h5>Seal</h5><p>Door shut. Phones down.</p></div>
     <div class="ha-card"><span class="tag">Step 4</span><h5>Rally</h5><p>Ideas back and forth. Act before you leave.</p></div>
@@ -1064,7 +1064,7 @@ extra_js: /js/components/high-agency.js
   <h3>Tool 3. The story razor</h3>
   <p>When two options are otherwise equal, ask which one makes the better story. This is
   <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">Amjad Masad's rule as presented in the essay</a>.
-  It is a tie-breaker, not permission to ignore risk. If both choices are sound, choose the one
+  Use it only as a tie-breaker after evaluating risk. If both choices are sound, choose the one
   that makes you an active author of your life.</p>
 
   <div class="ha-lab">
@@ -1198,7 +1198,7 @@ extra_js: /js/components/high-agency.js
       <span class="cat">Case 03</span>
       <h5>Burn the boats</h5>
       <p>Good intentions do not guarantee action. A public commitment can add a real social cost
-      to quitting, but it is a tool rather than a guarantee.</p>
+      to quitting. The added cost can help, although it does not guarantee follow-through.</p>
       <p class="lesson"><b>The line:</b> design the consequence before you need the motivation.</p>
     </div>
     <div class="ha-lib-card">
@@ -1207,14 +1207,14 @@ extra_js: /js/components/high-agency.js
       <p>The essay's example is an offer structured so the payment falls every month it goes
       undelivered. You do not need to feel motivated when the cost of a slow week is written on
       the wall in front of you.</p>
-      <p class="lesson"><b>The line:</b> urgency is a design choice, not a personality trait.</p>
+      <p class="lesson"><b>The line:</b> you can create urgency through the structure of a commitment.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat">Case 05</span>
       <h5>The trillion dollar test</h5>
       <p>If solving this paid a trillion dollars, and failing carried a death sentence, would you
       find a way? If the answer is yes, the problem was never capability. It was price.</p>
-      <p class="lesson"><b>The line:</b> most impossible means not worth this much to me yet.</p>
+      <p class="lesson"><b>The line:</b> “impossible” often means the current cost exceeds your commitment.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat">Case 06</span>
@@ -1243,7 +1243,7 @@ extra_js: /js/components/high-agency.js
   the one most easily faked. Refusing to update looks identical to independent thinking from
   the inside, and it feels better. The version I want is the one Wilbur had. He distrusted the
   published lift tables enough to build a wind tunnel. The brothers tested their assumptions and
-  produced more accurate data, as the <a href="https://airandspace.si.edu/explore/stories/researching-wright-way" target="_blank" rel="noreferrer">Smithsonian record explains</a>. That is not contrarianism. It is verification with the
+  produced more accurate data, as the <a href="https://airandspace.si.edu/explore/stories/researching-wright-way" target="_blank" rel="noreferrer">Smithsonian record explains</a>. They verified the claim themselves and had the
   nerve to act on the result.</p>
 
   <p>The other line I keep is that limits are the work. If the honest answer is that you cannot
@@ -1258,7 +1258,7 @@ extra_js: /js/components/high-agency.js
     <p>Historical details on the Wright brothers are checked against the
     <a href="https://airandspace.si.edu/stories/editorial/wright-brothers-made-history-kitty-hawk" target="_blank" rel="noreferrer">Smithsonian record</a> rather
     than taken from the essay, and one date and distance differ slightly as a result.
-    Where a figure is illustrative rather than measured, the page says so on the spot.</p>
+    The page labels every illustrative figure so readers can distinguish it from measured data.</p>
     <p>Nothing you type here is transmitted anywhere. The quiz, the checklist and the worksheet
     are held in your browser's local storage and clearing your browser data removes them.</p>
   </div>

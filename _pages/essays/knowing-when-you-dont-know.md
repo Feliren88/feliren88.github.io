@@ -18,11 +18,11 @@ We often measure intelligence by what a system can do. I care more about whether
 
 The idea is old. Socrates claimed one advantage: he knew that he knew nothing. People have long treated an honest view of one's limits as a virtue. We now build systems that make important decisions at a scale no person can fully supervise. That old virtue has become an engineering requirement. Current models do not meet it reliably.
 
-## Capability is not safety
+## Capability alone cannot provide safety
 
 Safety training is often described as a tax on capability. Refusals and guardrails constrain a model that would otherwise answer. That view misses the central risk: a model can be confidently wrong when it had enough evidence to hold back.
 
-Consider a model shown an image and a caption that contradict each other. Its internal representation contains the correct visual answer. Yet the model repeats the false caption without hesitation. The knowledge exists, but the system does not use it. I care about this gap between what a model represents and what it says. The failure is one of honesty, and honesty is a safety property.
+Consider a model shown an image and a caption that contradict each other. Its internal representation contains the correct visual answer. Yet the model repeats the false caption without hesitation. The system retains the knowledge and fails to use it. I care about this gap between what a model represents and what it says. The failure is one of honesty, and honesty is a safety property.
 
 Knowing when you do not know has a precise meaning here. The model should use its best-supported internal belief and abstain when that support is weak. It must do so reliably enough for people to build decisions around it.
 
@@ -36,7 +36,7 @@ This safety property can also be made rigorous. Many behaviours are hard to spec
 
 ## The hard part
 
-The available confidence signals are weak. Softmax probabilities and a model's own confidence statements are often poorly calibrated. A value near one may say little about whether the answer is correct. The engineering task is to give abstention a guarantee instead of a guess.
+The available confidence signals are weak. Softmax probabilities and a model's own confidence statements are often poorly calibrated. A value near one may say little about whether the answer is correct. The engineering task is to give abstention a statistical guarantee.
 
 Conformal prediction offers distribution-free coverage guarantees. It can bound errors without requiring full knowledge of the data distribution. The method replaces “the model seems sure” with a chosen level of coverage for the true answer. That shift from a heuristic to a contract is the technical core of my work.
 

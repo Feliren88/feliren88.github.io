@@ -86,7 +86,7 @@ usecases:
       - Sentinel-2
       - Sen1Floods11
 
-    hook: "State-of-the-art flood maps for a basin of 25 million people, produced in hours instead of days."
+    hook: "State-of-the-art flood maps for a basin of 25 million people, produced within hours."
 
     situation: >
       Disaster teams need flood maps before they can plan routes and supplies.
@@ -293,7 +293,7 @@ usecases:
 
     impact: >
       Governments and NGOs can monitor illegal coastal conversion within hours
-      of a new satellite pass instead of waiting for field surveys. The alerts
+      of a new satellite pass without waiting for field surveys. The alerts
       support agencies responsible for biodiversity and carbon stocks in Indonesia
       and Vietnam.
 
@@ -463,15 +463,14 @@ usecases:
       Behaviour and representation separated. Models followed false text more
       often in lower-resource languages, yet their internal signal remained almost
       as clear as in English. The model still represented the visual answer but
-      stopped using it. That makes this an elicitation failure rather than a simple
-      loss of knowledge.
+      stopped using it. The model retained the knowledge and failed to elicit it.
 
     next: >
       I will first test how far an honesty direction learned in one language
       transfers across many others and identify where it breaks. I will also develop
       a standard, perception-controlled audit of missed abstention across languages.
       The next goal is to add coverage guarantees, turning abstention into a bounded
-      decision rather than an expectation.
+      decision with a stated guarantee.
 
   # ──────────────────────────────────────────
 
@@ -510,8 +509,8 @@ usecases:
 
     complication: >
       Accuracy and AUC alone hide two important failures. First, a detector may
-      learn that extra text appears before the task instead of learning goal
-      hijacking. It can then score perfectly while flagging harmless prefixes.
+      learn only that extra text appears before the task. It can then score
+      perfectly while flagging harmless prefixes and missing the goal hijacking itself.
       The benchmark needs controls that expose this shortcut. Second, a raw probe
       score does not let an operator set an acceptable false-alarm rate in advance.
       The benchmark and calibration method must address both problems directly.
@@ -657,7 +656,7 @@ usecases:
       data_collection: >
         I co-led more than 100 community annotators across all 11 Southeast Asian
         countries. They wrote image, question, and answer sets from lived cultural
-        knowledge rather than web search.
+        knowledge without using web search as a substitute.
       pipeline: >
         I designed and built the quality pipeline. It covered annotation rules,
         automated filters, human review, language checks, and cultural validation.
@@ -793,7 +792,7 @@ usecases:
 
     complication: >
       Southeast Asian web text mixes languages within a sentence, uses Roman
-      spellings instead of standard scripts, and includes phonetic spelling and
+      spellings alongside standard scripts, and includes phonetic spelling and
       social-media shorthand. Systems trained on curated text perform much worse
       on this data. Existing benchmarks miss the decline because they do not
       represent the web conditions where the systems operate.
@@ -1075,7 +1074,7 @@ usecases:
     venue: "Jakarta Smart City, Data Scientist (Jan 2021, June 2021)"
     role: Lead Data Scientist
 
-    hook: "Forecasted Jakarta's waste so collection routes followed demand instead of a fixed weekly schedule."
+    hook: "Forecasted Jakarta's waste so collection routes could follow demand throughout the week."
 
     situation: >
       Jakarta's waste agency serves more than 10 million residents across hundreds
@@ -1296,8 +1295,8 @@ usecases:
       architecture: >
         Designed an edge-first architecture, with respiratory rate estimation via optical flow analysis on chest region (bounding box from lightweight
         pose estimation) running entirely on-device. Only the derived vital
-        sign estimate (a single float, not video frames) is transmitted to the
-        monitoring dashboard. Symptom self-reporting via structured mobile form
+        sign estimate is transmitted to the monitoring dashboard as a single float.
+        Video frames remain on the device. Symptom self-reporting via structured mobile form
         provides complementary clinical signal.
       optimization: >
         Model quantized and optimized for ARM CPU inference on target chipset
@@ -1510,8 +1509,8 @@ usecases:
 
     resolution:
       architecture: >
-        I used LoRA to update a small part of the model instead of all three billion
-        parameters. This cut training memory. I extended the context window for
+        I used LoRA to update a small part of the model while leaving most of its
+        three billion parameters frozen. This cut training memory. I extended the context window for
         longer visual sequences and enabled gradient checkpointing, which recomputes
         intermediate values to save memory. Together, these changes made training
         fit on one GPU. The pipeline also supports multi-GPU scaling when available.
@@ -1775,7 +1774,7 @@ usecases:
         age replaced construction year, and sine and cosine encoded wind direction
         so 359° stayed close to 1°. Each site's three hottest and coldest months
         defined peak seasons. I removed building and site IDs so the trees learned
-        patterns that transfer to unseen buildings instead of memorising identities.
+        patterns that transfer to unseen buildings and prevent identity memorisation.
       model_selection: >
         I trained Random Forest and GBT on the same features to isolate the model
         choice. RMSLE drove selection because it treats a 10% error equally across
@@ -1822,7 +1821,7 @@ usecases:
     impact: >
       The live stream reuses the exact feature logic from offline training and
       keeps aggregation memory bounded. Model selection used the metric that fit
-      the data rather than a default. The result shows that one Spark pipeline can
+      the data. The result shows that one Spark pipeline can
       move cleanly from batch training to live scoring.
 
     why_this: >
@@ -1840,7 +1839,7 @@ usecases:
       Before deployment, I would add access control to Kafka because short-interval
       building forecasts can reveal identity or occupancy. The largest errors come
       from faults and occupancy changes missing from the features. The next model
-      needs those signals rather than another tuning pass on the same inputs.
+      needs those signals. Another tuning pass on the same inputs cannot supply them.
 
 # ============================================================
 # CROSS-CUTTING TECHNICAL CAPABILITIES

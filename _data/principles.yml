@@ -31,7 +31,7 @@ situations:
       - Decide what outcome you actually want.
       - Communicate the boundary once you are calm.
       - Escalate only if the behaviour continues.
-    rule: Anger is information, not instruction.
+    rule: Anger provides information. Decide your response separately.
     reversible: false
 
   - id: afraid
@@ -132,7 +132,7 @@ situations:
     group: work
     ask: How does this person behave under pressure?
     body:
-      - Brilliance is not the qualifying trait. Evaluate ethics, emotional stability, incentives, financial discipline, communication, reliability and reputation.
+      - Brilliance alone is insufficient. Evaluate ethics, emotional stability, incentives, financial discipline, communication, reliability and reputation.
       - Before you begin, agree ownership, responsibilities, decision rights, compensation, how disagreements get settled, and exit terms.
     rule: Trust people emotionally. Structure agreements professionally.
 
@@ -157,7 +157,7 @@ situations:
     body:
       - Do not raise your lifestyle to match the new number straight away. Put the increase into safety, freedom, assets, knowledge and bargaining power first.
       - Avoid building a life that forces you to keep doing work you will eventually hate.
-    rule: Money is not only for consumption. It is freedom from bad choices.
+    rule: Use money to build freedom from bad choices.
 
   - id: money-down
     trigger: When money decreases
@@ -175,7 +175,7 @@ situations:
     body:
       - Wait when excitement is unusually high. Then ask what freedom you are exchanging for it.
       - The real price includes maintenance, debt, attention, storage, insurance, and sometimes an inability to leave a job.
-    rule: Count the price in freedom, not only in money.
+    rule: Count the full price, including the freedom you give up.
 
   - id: negotiate
     trigger: When negotiating
@@ -189,11 +189,11 @@ situations:
   - id: relationship-start
     trigger: When entering a relationship
     group: people
-    ask: What are the patterns, not the promises?
+    ask: What patterns does this person's behaviour reveal?
     body:
-      - Chemistry is not the assessment. Observe reliability, honesty, conflict behaviour, accountability, financial behaviour, how they treat people with less power, respect for boundaries, the ability to apologise, and consistency between words and actions.
+      - Chemistry begins the connection. Judge its long-term potential through reliability, honesty, conflict behaviour, accountability, financial behaviour, treatment of people with less power, respect for boundaries, apologies, and consistency between words and actions.
       - Attraction tells you to approach. Character tells you whether to stay.
-    rule: Choose long-term partners by patterns, not promises.
+    rule: Choose long-term partners by their repeated behaviour.
 
   - id: infatuated
     trigger: When deeply attracted to someone
@@ -201,7 +201,7 @@ situations:
     ask: Am I building a future faster than I am accumulating evidence?
     body:
       - Stay curious about who they actually are. Do not explain away repeated bad behaviour because the connection feels exceptional.
-    rule: Intensity is not evidence of compatibility.
+    rule: Compatibility requires evidence beyond emotional intensity.
 
   - id: conflict
     trigger: When relationship conflict begins
@@ -224,7 +224,7 @@ situations:
       - Ignore one unusually good day. Ignore one unusually bad day. Look at the pattern.
       - Then ask whether the problem is painful but repairable, or structural and repeatedly denied.
       - Do not stay on sunk cost alone. Do not leave merely because intimacy takes effort.
-    rule: Judge the pattern, not the last conversation.
+    rule: Judge the full pattern across many conversations.
     reversible: false
 
   - id: family
@@ -260,7 +260,7 @@ situations:
     ask: Is any part of this true?
     body:
       - Take the useful information and discard the hostility. If it is accurate, improve. If it is inaccurate but consequential, clarify. If it is inaccurate and irrelevant, move on.
-    rule: Your job is not to win every interpretation of you.
+    rule: Accept that you cannot control every interpretation of you.
 
   - id: embarrassed
     trigger: When publicly embarrassed
@@ -268,7 +268,7 @@ situations:
     ask: Am I about to make the recovery worse than the event?
     body:
       - Correct important factual errors. Take responsibility where it belongs. Do not overexplain. Then keep behaving consistently.
-      - Most reputational repair comes from accumulated future behaviour, not from one perfect statement.
+      - Most reputational repair comes from consistent future behaviour. One perfect statement cannot do that work alone.
     rule: Behave your way out. Do not talk your way out.
 
   - id: lie
@@ -318,7 +318,7 @@ situations:
       - Correct
       - Repeat
     body:
-      - Consuming information is not the same as becoming capable.
+      - Capability grows when you apply information in practice.
     rule: If you cannot use it, you do not own it yet.
 
   - id: procrastinating
@@ -343,8 +343,8 @@ situations:
     group: self
     ask: What can be paused, delegated, simplified or stopped?
     body:
-      - Do not sacrifice the physical system that makes every other ambition possible. Get proper care rather than self-diagnosing, and reduce the load.
-    rule: Health is infrastructure, not a reward you earn after success.
+      - Protect the physical system that makes every other ambition possible. Get proper care, avoid self-diagnosis, and reduce the load.
+    rule: Health is the foundation that makes success possible.
 
   - id: lonely
     trigger: When lonely
@@ -360,7 +360,7 @@ situations:
     ask: Do I need challenge, learning, creativity, people, movement, or rest?
     body:
       - Do not destroy something stable simply to feel alive. Add novelty deliberately before creating chaos by accident.
-    rule: Add novelty on purpose, not by demolition.
+    rule: Add novelty deliberately while preserving what still works.
 
   - id: jealous
     trigger: When jealous
@@ -369,15 +369,15 @@ situations:
     body:
       - Separate what you genuinely desire from what you want others to see you possessing.
       - Use envy as information. Never as a decision-maker.
-    rule: Envy is a compass reading, not a destination.
+    rule: Use envy to identify a desire, then decide whether that desire deserves pursuit.
 
   - id: comparing
     trigger: When comparing yourself to others
     group: self
     ask: Am I moving towards a life I respect?
     body:
-      - Compare trajectories, not snapshots. You rarely know their starting point, debt, support, private suffering, luck, sacrifices or hidden advantages.
-    rule: Compare trajectories, not snapshots.
+      - Compare trajectories over time. You rarely know another person's starting point, debt, support, private suffering, luck, sacrifices or hidden advantages.
+    rule: Compare trajectories over time.
 
   - id: praised
     trigger: When praised
@@ -393,7 +393,7 @@ situations:
     ask: What exactly is succeeding?
     body:
       - This is one of the most dangerous moments. Income can rise while health deteriorates, relationships weaken, curiosity disappears, freedom shrinks and responsibility becomes unbearable.
-    rule: Measure the whole life, not the loudest metric.
+    rule: Measure the whole life across every important dimension.
 
   - id: failing
     trigger: When failing
@@ -409,7 +409,7 @@ situations:
     ask: What role do I keep playing in this?
     body:
       - After the third serious repetition, stop calling it bad luck. Ask what warning you ignored, what assumption keeps returning, what kind of person or environment keeps producing this, and what boundary should have existed earlier.
-    rule: Repeated pain is usually a system problem, not an isolated event.
+    rule: Repeated pain usually points to a problem in the system.
 
   - id: opportunities
     trigger: When opportunities suddenly multiply
@@ -425,7 +425,7 @@ situations:
     ask: Which one is harder to recreate later?
     body:
       - Ask which teaches more, puts better people around you, increases ownership, preserves flexibility, and exposes you to valuable problems.
-    rule: Choose on long-term option value, not immediate comfort.
+    rule: Choose according to the long-term options each path preserves.
 
   - id: irreversible
     trigger: When the decision is hard to reverse
@@ -453,14 +453,14 @@ situations:
     ask: If I were starting today with what I now know, would I choose the same strategy?
     body:
       - Do not defend the old plan out of habit. Plans exist to serve reality, and reality owes your plan nothing.
-    rule: Update the plan, not the facts.
+    rule: Accept the facts and update the plan.
 
   - id: wrong
     trigger: When you were wrong
     group: decide
     ask: Was it information, reasoning, ego, incentives, wishful thinking, or fear?
     body:
-      - Say it plainly. I was wrong. Then find the cause and change the process, not merely the conclusion.
+      - Say it plainly. I was wrong. Then find the cause and change the process that produced the conclusion.
     rule: Being wrong is temporary. Refusing to update makes it permanent.
 
   - id: everyone-agrees
@@ -469,7 +469,7 @@ situations:
     ask: What would have to be true for my entire view to be wrong?
     body:
       - Become slightly suspicious. Go and find someone intelligent who disagrees, especially before a major financial, professional or strategic commitment.
-    rule: Unanimous agreement is a warning, not a confirmation.
+    rule: Treat unanimous agreement as a reason to check for missing dissent.
 
   - id: everyone-disagrees
     trigger: When everyone disagrees with you
@@ -477,7 +477,7 @@ situations:
     ask: What cheap test would let reality settle this?
     body:
       - Do not assume you are visionary. You may simply be wrong. Search for evidence and let reality arbitrate.
-    rule: Independence is thinking for yourself, not automatically opposing everyone.
+    rule: Independence requires your own reasoning and a willingness to agree when the evidence supports agreement.
 
   - id: going-well
     trigger: When life is going exceptionally well
@@ -523,7 +523,7 @@ sequence:
     detail: Choose the least costly action that will give you useful information.
   - key: SELECT
     line: Choose using what the test showed.
-    detail: Base the decision on observed results, not your mood at the time.
+    detail: Base the decision on observed results. Your mood at the time is weak evidence.
   - key: SCALE
     line: Increase your commitment when the evidence supports it.
     detail: Commit more time, money or attention only after the smaller test succeeds.

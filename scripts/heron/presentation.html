@@ -371,8 +371,8 @@ footer, header, hgroup, main, menu, nav, section {
   </div>
   <div class="slide-foot"><b>Detection quality and calibration coverage fail separately.</b> A benchmark that measures only one of them can certify the wrong detector.</div>
   <aside class="notes">The methodological core. The naive probe reached perfect AUC yet
-  flagged one hundred percent of harmless prefixed prompts: it had learned the confound,
-  prefix presence, not goal override. Adding the controls to its training class cut false
+  flagged one hundred percent of harmless prefixed prompts: it had learned to detect
+  prefix presence while missing the goal override. Adding the controls to its training class cut false
   positives to under three percent. Separately, a threshold calibrated on one benign
   distribution misfired twenty-six percent under distribution shift; recalibration
   restored validity.
@@ -419,7 +419,7 @@ footer, header, hgroup, main, menu, nav, section {
     </ul>
   </div>
   <div class="slide-foot">12 ablations &middot; 10 seeds &middot; 5 unit tests, all passing</div>
-  <aside class="notes">Four limits. An external probe, not model introspection. One
+  <aside class="notes">Four limits. The method uses an external probe and makes no claim of model introspection. One
   model family, one attack distribution. The conformal guarantee is marginal and assumes
   exchangeability with calibration traffic. And these injections are legible in the
   prompt: a TF-IDF baseline on raw text nearly matches the probe, except on unseen
@@ -444,8 +444,8 @@ ablation_text_baseline.py               behavioral_check.py      pytest ...  # 5
   <div class="slide-foot">Read-only with respect to the model; no harmful content anywhere in the pipeline. Full report: vickyfeliren.com/heron</div>
   <aside class="notes">As models become agents reading untrusted text, most hijack attempts
   will fail silently, until one does not. Activation monitoring sees the attempt when behavior
-  shows nothing. And the biggest lesson: a perfect-looking detector was a warning sign, not a
-  result. Thank you.</aside>
+  shows nothing. And the biggest lesson: a perfect-looking detector should trigger closer
+  inspection. Thank you.</aside>
 </section>
 
 </div>
