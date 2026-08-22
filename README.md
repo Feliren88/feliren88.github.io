@@ -1,201 +1,204 @@
-# Vicky Feliren - Personal Website
+# Vicky Feliren — Personal Website
 
-Personal portfolio website for Vicky Feliren - Applied Scientist working on **AI safety** for trustworthy, multimodal, and multilingual systems: getting models to surface what they know and hold back when they should, reliably, for the languages and contexts they were never trained on. Built with Jekyll static site generator.
+The personal site of Vicky Feliren, an Applied Scientist working on **calibration under safety alignment**.
 
-## Changelog
+The short version of the research: safety training costs a model some of its sense of what it knows. That cost is usually reported as one averaged number. It is probably not one number at all, and measuring its real shape is the work.
 
-### June 2026 — AI-safety-forward profile (latest)
-- **Identity → AI safety.** Hero eyebrow + `lead1`, About hero, Person schema (`description` / `disambiguatingDescription` / occupation), `_config.yml` description, and `llms.txt` now lead with AI safety (trustworthy, multimodal, multilingual).
-- **Use Cases hierarchy.** Added a leading `AI Safety & Reliability` category (sorts first via the `PRIORITY` map in `usecases.md`); re-tagged the multilingual VLM conflict study and the VLN conformal-prediction thesis into it. Geospatial label → "Multimodal AI · Earth Observation".
-- **Bridge essay** (`_pages/essays/knowing-when-you-dont-know.md`): "Knowing when you don't know is the core safety property" — featured atop `/writings/` and leading the homepage Insights.
-- **Homepage Insights** now leads with the essay and the safety research notes; **contact engagements** retuned toward AI-safety research collaboration (Research Collaboration first).
+The site is a static Jekyll build. It deploys to GitHub Pages at [vickyfeliren.com](https://vickyfeliren.com).
 
-### June 2026 — research-agenda repositioning
-- **Research-agenda repositioning.** Shifted the site narrative from "what I did" to "what I think matters and why." Remote sensing / earth observation reframed from an identity label to a proof point.
-- Homepage "Research Focus" → **"Research Agenda"** (`_data/about.yml`): three open problems with the *why*, stated without metrics
-- Added a **Research Notes** stream (`_data/notes.yml`) of short paper distillations at the top of `/writings/`; `/writings/` now defaults to the **Research** filter; `_data/thoughts.yml` reordered so the homepage Insights strip leads with research/judgment pieces
-- Added a reusable **Research Note** block to `usecase.html` (`why_this` / `surprise` / `next` fields), authored for the multilingual VLM cross-modal-conflict study
-- Reframed identity surfaces: hero eyebrow (`index.yml`), Person schema `knowsAbout`/`skills` (`default.html`), `_config.yml` keywords, `_data/skills.yml` categories, `llms.txt`, and the research filter label (Geospatial → Earth Observation). Journal credentials (IEEE, ACL, Remote Sensing of Environment) retained as evidence.
+## How the site is built
 
-### May 2026
-- Confirmed canonical SEO setup: `url: "https://vickyfeliren.com"` in `_config.yml` + `jekyll-seo-tag` generates correct `<link rel="canonical">` on every page; `robots.txt` sitemap points to `vickyfeliren.com`
-- Updated `llms.txt`: added "Quality and Reliability for AI Engineers" article (was missing from Writings section)
-- Updated `README.md` and `CLAUDE.md` project structure: added `usecase.html` layout, `_pages/usecases/` directory, `_data/usecases.yml`, `_data/timeline.yml`, `js/components/timeline.js`, `llms.txt`, `robots.txt`
+Content lives in YAML files. Templates read those files and render pages. There is no database and no framework.
 
-### May 2026
-- Added "Quality and Reliability for AI Engineers" article to `_data/thoughts.yml`
-- Fixed heading hierarchy: section headings `h3 → h2`, card titles `h4 → h3` (Accessibility 98 → 100)
-- Fixed `ServiceWorker` null `Accept` header crash in `sw.js` fetch handler
-- Added **Insights** section to homepage: 3-card grid of latest Medium writings with "View all →" link
-- Added **Let's Collaborate** section to homepage: eyebrow, heading, engagement type tags, CTA driven by `contact.yml`
-- Added **footer banner**: two-column layout (brand + description + social icons left / nav links right) with copyright bottom bar; replaces the former one-liner footer
-- Refactored Insights and Let's Collaborate sections to use `border-top` divider pattern consistent with about-sections (removed glass card wrappers)
-- Redesigned footer to brand-left / nav-right two-column layout; added brand description line
-- `styles.css` bumped to `v=26`
+```mermaid
+flowchart LR
+    A["_data/*.yml<br/>content"] --> C
+    B["_pages/*.md<br/>page shells"] --> C
+    C["Jekyll build"] --> D["_site/<br/>plain HTML"]
+    D --> E["GitHub Actions"]
+    E --> F["GitHub Pages<br/>vickyfeliren.com"]
+```
 
-## Lighthouse Scores (May 2026)
+To change what a page says, edit the YAML file. To change how it looks, edit the layout or the CSS.
 
-Tested on homepage (vickyfeliren.com) · Emulated Moto G Power · Slow 4G · Lighthouse 13.0.2
+## Page structure
 
-| Category | Score |
+Every page uses the same base layout. Two templates extend it.
+
+```mermaid
+flowchart TD
+    D["_layouts/default.html<br/>head, SEO, nav, footer"]
+    D --> P["page.html<br/>most pages"]
+    D --> U["usecase.html<br/>use case detail pages"]
+    D --> I["index.html<br/>homepage"]
+
+    P --> P1["/about/ /research/<br/>/writings/ /contact/<br/>essays"]
+    U --> U1["22 use case pages<br/>read from _data/usecases.yml"]
+```
+
+`usecase.html` is the only template that does real work. It looks up a use case by the `uc_id` in the page front matter, pulls the content from `_data/usecases.yml`, and builds the page. It also generates a sticky table of contents when a page has three or more sections.
+
+## Where content comes from
+
+Each page is driven by one data file.
+
+| Page | Data file |
 |---|---|
-| Performance | 85 |
-| Accessibility | 98 → **100** (h3 heading fix) |
-| Best Practices | 96 |
-| SEO | 100 |
+| Homepage | `_data/index.yml`, `_data/about.yml`, `_data/now.yml` |
+| About | `_data/about.yml` |
+| Research | `_data/publications.yml` |
+| Use Cases | `_data/usecases.yml` |
+| Writings | `_data/notes.yml`, `_data/features.yml`, `_data/thoughts.yml` |
+| Work With Me | `_data/contact.yml` |
+| Awards | `_data/awards.yml` |
+| Skills | `_data/skills.yml` |
+| Experience | `_data/experience.yml` |
+| Project timeline | `_data/timeline.yml` |
 
-### Performance notes
+Two files are generated, not written by hand:
 
-- **FCP 2.5 s / LCP 2.7 s / TBT 350 ms** — measured on slow 4G emulation with Chrome extensions active; Lighthouse flagged extension interference (Zotero, AdBlock, etc.) as a significant contributor to TBT and JS execution time
-- **main.js CPU time 2.6 s** — dominated by the point cloud animation loop; already deferred via `requestIdleCallback` with 1.5 s timeout
-- **Render-blocking CSS 180 ms** — styles.css (5.8 KiB) is render-blocking; inlining critical CSS is the path to improvement but not yet applied
-- **Cache TTL 10 min** — GitHub Pages sets this; not configurable from Jekyll; versioned query strings (`?v=N`) ensure fresh assets on each deploy
+- `_data/uc_banners.yml` — alt text for the use case diagrams
+- `assets/img/usecases/*.webp` — the diagrams themselves
 
-### Accessibility notes
+Both come from `scripts/generate_uc_banners.py`. Edit the `SPECS` list in that script, run it, and commit what it produces.
 
-- h3 elements were used as section headings directly under h1 (no h2 in between); fixed by promoting section headings to h2 and card titles to h3
+## Publications update three things at once
 
-### Best Practices notes
+Adding a paper to `_data/publications.yml` updates the research page, the research page's JSON-LD, and the site-wide Person schema. You only edit the one file.
 
-- `ServiceWorker script evaluation failed` console error — likely caused by browser extensions intercepting the sw.js fetch; fixed defensively by guarding `Accept` header null check in the fetch handler
-- CSP, HSTS, COOP, X-Frame-Options headers are unscored audit items; GitHub Pages does not support custom HTTP response headers — these require a CDN (Cloudflare) or proxy layer to apply
+```mermaid
+flowchart LR
+    P["_data/publications.yml"] --> A["/research/ page<br/>cards and filters"]
+    P --> B["ScholarlyArticle JSON-LD<br/>on /research/"]
+    P --> C["Person schema author list<br/>on every page"]
+```
 
-## Project Structure
+Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year`, `url`, `abstract`, `keywords`, `authors`.
+
+The `kind` field decides which filter button shows the entry. Valid values are `geospatial`, `cultural`, `nlp`, and `applied`.
+
+## Project structure
 
 ```
 feliren88.github.io/
-├── README.md       # Project documentation
-├── CLAUDE.md       # Development guidelines
-├── llms.txt        # LLM-readable site summary (pages, use cases, research, writings)
-├── robots.txt      # Crawler directives + sitemap pointer
-├── _config.yml     # Jekyll configuration
-├── Gemfile         # Ruby dependencies
-├── index.html      # Homepage — hero, about, Insights, Let's Collaborate sections
-├── sw.js           # Service worker (Jekyll-processed Liquid template)
+├── README.md          # This file
+├── CLAUDE.md          # Development guidelines and writing rules
+├── llms.txt           # Site summary for language models
+├── robots.txt         # Crawler rules, points to the sitemap
+├── _config.yml        # Jekyll configuration
+├── Gemfile            # Ruby dependencies
+├── index.html         # Homepage
+├── sw.js              # Service worker
+├── 404.html
+├── CNAME              # Custom domain
 ├── _layouts/
-│   ├── default.html   # Base layout with SEO, skip link, font preloads
-│   ├── page.html      # Generic page template (extends default)
-│   └── usecase.html   # Use case detail template (extends default); optional why_this/surprise/next fields render a "Research Note" block
-├── _pages/         # Jekyll pages (Markdown)
-│   ├── about.md
-│   ├── skills.md
-│   ├── experience.md
-│   ├── publications.md
-│   ├── awards.md
-│   ├── thoughts.md
-│   ├── contact.md
-│   ├── usecases.md    # Use cases listing page
-│   ├── usecases/      # Individual use case detail pages (20 files)
-│   └── essays/        # Long-form essays (e.g. knowing-when-you-dont-know.md)
-├── _data/          # YAML data files
-│   ├── index.yml
-│   ├── about.yml
-│   ├── skills.yml
-│   ├── experience.yml
-│   ├── publications.yml
-│   ├── awards.yml
-│   ├── thoughts.yml   # Medium articles — ordered to drive the homepage Insights strip
-│   ├── notes.yml      # Research notes — short paper distillations with own take
-│   ├── features.yml   # Press features / media coverage
-│   ├── contact.yml
-│   ├── usecases.yml   # All use case content
-│   └── timeline.yml   # Project timeline entries
+│   ├── default.html   # Base layout
+│   ├── page.html      # Standard page
+│   └── usecase.html   # Use case detail page
+├── _pages/
+│   ├── about.md  skills.md  experience.md  publications.md
+│   ├── awards.md  thoughts.md  contact.md  project.md  heron.md
+│   ├── usecases.md    # Listing page
+│   ├── usecases/      # 22 detail pages
+│   └── essays/        # Long-form essays
+├── _data/             # All page content, as YAML
+├── scripts/
+│   └── generate_uc_banners.py   # Renders the use case diagrams
 ├── assets/
-│   ├── fonts/      # Manrope + Space Grotesk — latin/latin-ext subsets only
-│   └── img/        # All WebP — profile.webp, profile-450.webp, profile_2_bg.webp, profile_3_bg.webp, favicons, icons
+│   ├── fonts/         # Manrope + Space Grotesk, latin subsets only
+│   └── img/           # All WebP, including generated use case diagrams
 ├── css/
-│   └── styles.css
-└── js/
-    ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal)
-    └── components/
-        ├── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
-        └── timeline.js  # Project timeline (loaded only on /project/ page)
+│   └── styles.css     # Everything, currently served as ?v=40
+├── js/
+│   ├── main.js        # Point cloud, filters, tilt, reveal animations
+│   └── components/
+│       ├── nav.js     # Navigation, single source of truth
+│       └── timeline.js
+└── notes/             # Private. Gitignored and excluded from the build.
 ```
-
-## Technology Stack
-
-- **Jekyll**: Static site generator with Liquid templating
-- **HTML5**: Semantic markup with accessibility
-- **CSS3**: Custom properties, Grid/Flexbox, responsive design
-- **JavaScript (ES6+)**: Vanilla JS, no frameworks
-- **jekyll-seo-tag**: Automatic meta tags
-- **jekyll-sitemap**: Auto-generated sitemap
-
-## Performance
-
-- All-WebP image assets — no PNG/JPG/SVG originals retained
-- Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset
-- `fetchpriority="high"` on above-fold images; page-specific `<link rel="preload">` via `preload_image:` front matter
-- `loading="lazy"` on all off-screen images
-- `<link rel="preload">` for critical font files; `@font-face` limited to latin and latin-ext subsets
-- Service worker (`sw.js`) for offline access — cache-first for assets, network-first for HTML
-- Point cloud animation deferred via `requestIdleCallback` (1.5 s timeout)
-
-## Accessibility
-
-Targets **WCAG 2.1 AA** compliance:
-
-- Skip-to-content link as first focusable element
-- `:focus-visible` keyboard focus indicator on all interactive elements
-- Interactive element borders use `--border-ui` (≥ 3:1 contrast ratio)
-- `--text` / `--muted` / `--accent` all meet contrast requirements against dark background
-- `aria-live="polite"` on dynamic status regions
-- Decorative images marked `aria-hidden="true"`
-- Heading hierarchy: h1 (name) → h2 (section) → h3 (subsection/card/timeline item)
-
-## Structured Data (JSON-LD)
-
-Person schema in `_layouts/default.html` covers:
-
-| Property | Value |
-|----------|-------|
-| `@type` | Person |
-| `@id` | `https://vickyfeliren.com/` |
-| `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
-| `knowsAbout` | 8 AI/ML domains (Trustworthy AI, Multimodal AI, AI Safety, Interpretability, Multilingual AI … Earth Observation last) |
-| `knowsLanguage` | English, Indonesian |
-| `award` | 10 awards (2015–2024) |
-| `memberOf` | SEACrowd, ACL, IEEE |
-| `colleague` | Risqi Saputra, Taufiq Asyhari |
-| `author` | ScholarlyArticle entries auto-generated from `_data/publications.yml` |
-| `sameAs` | 12 academic/social profiles |
 
 ## Navigation
 
-All navigation is defined in `js/components/nav.js` via the `NAV_ITEMS` array — modification here updates all pages automatically.
+All nav links live in the `NAV_ITEMS` array in `js/components/nav.js`. Change that array and every page updates.
 
-## Content Management
+```js
+var NAV_ITEMS = [
+  { href: '/',          label: 'About',        page: '/' },
+  { href: '/research/', label: 'Research',     page: '/research' },
+  { href: '/usecases/', label: 'Use Cases',    page: '/usecases' },
+  { href: '/writings/', label: 'Writings',     page: '/writings' },
+  { href: '/contact/',  label: 'Work With Me', page: '/contact' },
+];
+```
 
-Content is managed through YAML data files in `_data/`. Each page corresponds to a data file:
+The `<nav>` block hardcoded in `default.html` is the fallback for visitors with JavaScript off.
 
-- `_data/about.yml` — About page content
-- `_data/skills.yml` — Expertise skills
-- `_data/experience.yml` — Work experience, education, patents, teaching
-- `_data/publications.yml` — Research publications
-- `_data/awards.yml` — Awards and service
-- `_data/thoughts.yml` — Medium writings; ordered so the first three drive the homepage Insights strip
-- `_data/notes.yml` — Research notes (short paper distillations with own take); rendered atop `/writings/`
-- `_data/features.yml` — Press features / media coverage
-- `_data/contact.yml` — Contact information
-- `_data/usecases.yml` — All use case content, keyed by `id`; consumed by `usecase.html` layout
-- `_data/timeline.yml` — Project timeline entries; loaded by `timeline.js` on `/project/`
+## Technology
 
-## Local Development
+- **Jekyll** — static site generator, Liquid templates
+- **HTML5** — semantic markup
+- **CSS3** — custom properties, Grid and Flexbox, mobile first
+- **JavaScript** — vanilla ES6, no frameworks
+- **jekyll-seo-tag** — meta tags
+- **jekyll-sitemap** — sitemap
+
+## Performance
+
+- Every image is WebP. No PNG, JPG, or SVG sources are kept.
+- The hero image uses `<picture>` with a 450px and an 880px source.
+- Above-the-fold images get `fetchpriority="high"`. Pages can preload a background image by setting `preload_image:` in their front matter.
+- Everything below the fold gets `loading="lazy"`.
+- Fonts are preloaded and limited to the latin and latin-ext subsets.
+- The service worker serves assets cache-first and HTML network-first.
+- The point cloud animation waits for `requestIdleCallback`, with a 1.5 second timeout.
+
+## Accessibility
+
+The site targets **WCAG 2.1 AA**.
+
+- A skip-to-content link is the first thing you can tab to.
+- Every interactive element shows a `:focus-visible` outline.
+- Interactive borders use `--border-ui`, which clears 3:1 contrast.
+- `--text`, `--muted`, and `--accent` all pass contrast against the background.
+- Regions that change get `aria-live="polite"`.
+- Decorative images are marked `aria-hidden="true"`.
+- Headings run h1 for the name, h2 for sections, h3 for cards.
+
+## Structured data
+
+`_layouts/default.html` carries a Person schema on every page.
+
+| Property | Value |
+|---|---|
+| `@type` | Person |
+| `@id` | `https://vickyfeliren.com/` |
+| `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
+| `knowsAbout` | 8 domains, led by Trustworthy AI, Multimodal AI, and AI Safety |
+| `knowsLanguage` | English, Indonesian |
+| `award` | 12 entries |
+| `memberOf` | SEACrowd, ACL, IEEE |
+| `colleague` | Risqi Saputra, Taufiq Asyhari |
+| `author` | Generated from `_data/publications.yml` |
+| `sameAs` | 12 profiles |
+
+The research page carries a second block: CollectionPage plus ScholarlyArticle, also generated from `publications.yml`.
+
+## Running it locally
 
 ```bash
 bundle install
 bundle exec jekyll serve --livereload
 ```
 
-Site available at `http://localhost:4000`
+The site runs at `http://localhost:4000`.
 
-## Building
+To build without serving:
 
 ```bash
 bundle exec jekyll build
 ```
 
-Output goes to `_site/` directory.
+Output lands in `_site/`.
 
 ## Deploying
 
@@ -205,11 +208,18 @@ git commit -m "description"
 git push origin main
 ```
 
-GitHub Actions handles Jekyll build automatically.
+GitHub Actions builds and publishes from there.
+
+## Things worth knowing before you edit
+
+- **Bump the CSS version.** After editing `css/styles.css`, change the `?v=` number in `_layouts/default.html` and update the matching entry in the `sw.js` precache list. Skip this and visitors keep the old stylesheet.
+- **Read `CLAUDE.md` before writing any copy.** It sets the voice: short sentences, no em dashes, British spelling, no invented numbers.
+- **Do not hand-edit the use case diagrams.** They are generated. Edit `scripts/generate_uc_banners.py` instead.
+- **`notes/` stays private.** It is in `.gitignore` and in the `_config.yml` exclude list. Both are needed, because Jekyll copies unrecognised files into `_site/` and would otherwise publish them.
 
 ## Contact
 
 - Email: vickyfeliren@gmail.com
-- LinkedIn: @feliren
-- GitHub: @feliren88
-- Medium: @feliren
+- LinkedIn: [@feliren](https://linkedin.com/in/feliren)
+- GitHub: [@feliren88](https://github.com/feliren88)
+- Medium: [@feliren](https://medium.com/@feliren)

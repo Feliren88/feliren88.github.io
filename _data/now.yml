@@ -1,6 +1,6 @@
 last_updated: "July 2026"
 items:
-  - "Writing up my M.Sc. thesis on conformal prediction for vision-language navigation, sharpening the abstention and set-efficiency results"
-  - "Replicating the published calibration cost of safety alignment in a setup I can run end to end, before building anything on top of it"
-  - "Designing the experiment that follows: measure that cost per language rather than averaged, starting with one I speak natively so I can audit the eval data myself"
-  - "Presented the multilingual VLM abstention study at AI Safety India's Hackathon Winners event"
+  - "Writing my M.Sc. thesis on conformal prediction for vision-language navigation, with a focus on abstention and set efficiency"
+  - "Reproducing a published result on the calibration cost of safety alignment in a setup I can run from start to finish"
+  - "Designing the next experiment to measure that cost by language, starting with one I speak natively so I can review the evaluation data myself"
+  - "Presented my multilingual VLM abstention study at AI Safety India's Hackathon Winners event"

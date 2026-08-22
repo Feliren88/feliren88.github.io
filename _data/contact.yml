@@ -1,15 +1,15 @@
-intro: 'Reliability and relevance. Every system I have built comes down to the same question. How do we know when to trust the model, when should it hold back, and who is it actually built for?'
-intro_sub: 'I work on calibration under safety alignment, and on making safe models more useful. If any of the below fits where you are, I would be glad to hear from you.'
+intro: 'Every system I have built raises the same questions. When can we trust the model? When should it hold back? Who was it built to serve?'
+intro_sub: 'I study calibration under safety alignment and ways to keep safe models useful. If your work overlaps with the areas below, I would be glad to hear from you.'
 
 engagements:
   - type: 'Research Collaboration'
-    description: "Working on the alignment tax, calibration, honesty and abstention, or evaluation beyond English? Particularly interested in anyone measuring what safety training costs and where that cost lands. Let's find the overlap."
+    description: "I welcome work on the alignment tax, calibration, honesty, abstention, and evaluation beyond English. I am especially interested in measuring the costs of safety training and where they fall."
   - type: 'Research & Applied Roles'
-    description: 'Open to research and applied scientist roles internationally, particularly in alignment finetuning, calibration and evaluation, and reliability for multimodal and multilingual systems.'
+    description: 'I am open to research and applied scientist roles worldwide, especially in alignment finetuning, calibration, evaluation, and reliable multimodal or multilingual systems.'
   - type: 'Speaking'
-    description: 'Conference talks, university lectures, and panels on AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
+    description: 'I speak at conferences, universities, and panels about AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
   - type: 'Mentorship'
-    description: "I mentor early-career researchers and engineers moving into AI safety and trustworthy AI, including graduate school applications and careers in applied science, especially across Southeast Asia."
+    description: "I mentor early-career researchers and engineers entering AI safety and trustworthy AI. This includes graduate applications and applied science careers, especially across Southeast Asia."
 
 availability_headline: "Currently open for: research collaboration on calibration and safety alignment, conference talks, and mentorship."
 email_scope: "I respond to research collaboration (calibration and safety alignment, evaluation, multimodal and multilingual AI), conference talks, and career mentorship."

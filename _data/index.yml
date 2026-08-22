@@ -1,7 +1,7 @@
 eyebrow: 'APPLIED SCIENTIST · AI SAFETY · CALIBRATION & ALIGNMENT'
 name: 'Vicky Feliren'
-lead1: 'I work on making safe models more useful. Safety training costs a model some of its sense of what it knows. A model that has lost that defers badly, so you keep it on small problems.'
-lead2: 'I measure where that cost lands and how to get it back. Mostly outside English, mostly outside text, where it looks worst and has been measured least.'
+lead1: 'I work to make safe models more useful. Safety training can weaken a model’s sense of what it knows. When that happens, the model defers poorly, which limits the work we can trust it to do.'
+lead2: 'I measure where that cost falls and how to recover it. I focus on languages beyond English and inputs beyond text, where the cost may be greatest and remains poorly measured.'
 buttons:
   - label: 'Research'
     href: '/research/'

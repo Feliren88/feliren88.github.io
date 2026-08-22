@@ -4,5 +4,5 @@ uc_id: procaenet-flood-segmentation
 image: /assets/img/usecases/procaenet-flood-segmentation.webp
 permalink: /usecases/procaenet-flood-segmentation/
 title: "Flood Segmentation from Multispectral Imagery, ProCANet"
-description: "How ProCANet's progressive cross-attention architecture achieved state-of-the-art flood segmentation on Sen1Floods11 with zero-shot transfer to PlanetScope imagery across 6,112 km²."
+description: "How ProCANet reached 0.815 IoU on Sen1Floods11 and transferred to 6,112 km² of PlanetScope images without retraining."
 ---

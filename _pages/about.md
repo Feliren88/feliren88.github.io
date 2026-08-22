@@ -2,7 +2,7 @@
 layout: page
 title: About Vicky Feliren
 subtitle: AI Safety & Applied Scientist
-description: Bio, research agenda, expertise, track record, and recognition. Applied Scientist on AI safety for trustworthy, multimodal, and multilingual systems, published in IEEE, ACL, and Remote Sensing of Environment.
+description: Vicky Feliren is an Applied Scientist studying AI safety, calibration, and reliable multimodal and multilingual systems.
 permalink: /about/
 redirect_to: /
 ---

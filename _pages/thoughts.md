@@ -9,8 +9,20 @@ permalink: /writings/
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
 <span class="essay-feature-label">Essay</span>
 <span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
-<span class="essay-feature-desc">Why calibrated abstention, more than raw capability, is what makes a model safe to deploy.</span>
+<span class="essay-feature-desc">Why safe deployment depends on models knowing when to abstain.</span>
 <span class="read-more">Read the essay →</span>
+</a>
+<a class="essay-feature" href="/high-agency/">
+<span class="essay-feature-label">Interactive note</span>
+<span class="essay-feature-title">High Agency</span>
+<span class="essay-feature-desc">My notes on George Mack's essay, rebuilt as diagrams you can poke at. Diagnose your own three wheels, walk the flow chart, play the trap game.</span>
+<span class="read-more">Open the note →</span>
+</a>
+<a class="essay-feature" href="/principles/">
+<span class="essay-feature-label">Interactive note</span>
+<span class="essay-feature-title">The Life Operating Principle</span>
+<span class="essay-feature-desc">A personal operating manual for decisions under pressure. Search by how you feel, set the reversibility dial, run the six questions.</span>
+<span class="read-more">Open the note →</span>
 </a>
 </div>
 
@@ -19,7 +31,7 @@ permalink: /writings/
 {% if site.data.notes %}
 <div class="notes-section">
   <p class="t-eyebrow" style="margin-bottom:0.5rem">Research Notes</p>
-  <p class="section-note" style="margin-top:0">Short distillations of papers I have an opinion about — what the work shows, and what I think it misses.</p>
+  <p class="section-note" style="margin-top:0">Short notes on what research papers show, where their limits lie, and why those limits matter.</p>
   <div class="notes-list">
     {% for note in site.data.notes %}
     <div class="note-item">
@@ -245,6 +257,11 @@ permalink: /writings/
   }
 
   /* ── Featured Essay ──────────────────────────────────── */
+  .essay-feature-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--gap-2);
+  }
   .essay-feature {
     display: block;
     text-decoration: none;

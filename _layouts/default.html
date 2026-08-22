@@ -10,7 +10,8 @@
     {% if page.url == '/project/' %}<link rel="preload" as="script" href="{{ '/js/components/timeline.js?v=3' | relative_url }}">{% endif %}
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
     <link rel="stylesheet" href="{{ '/css/styles.css?v=40' | relative_url }}">
-    
+    {% if page.extra_css %}<link rel="stylesheet" href="{{ page.extra_css | relative_url }}?v=1">{% endif %}
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -399,8 +400,9 @@
     </footer>
 
     <script src="{{ '/js/main.js?v=8' | relative_url }}"></script>
-    <script src="{{ '/js/components/nav.js?v=4' | relative_url }}"></script>
+    <script src="{{ '/js/components/nav.js?v=5' | relative_url }}"></script>
     {% if page.url == '/project/' %}<script src="{{ '/js/components/timeline.js?v=3' | relative_url }}" defer></script>{% endif %}
+    {% if page.extra_js %}<script src="{{ page.extra_js | relative_url }}?v=1" defer></script>{% endif %}
     <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
     <script>
     (function(){

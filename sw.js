@@ -1,4 +1,8 @@
 ---
+# layout: null is required. The `path: ""` default in _config.yml applies
+# `layout: default` to every file with front matter, which wraps this script
+# in the HTML page layout and stops the service worker from parsing at all.
+layout: null
 ---
 const CACHE = 'feliren88-{{ site.time | date: "%s" }}';
 const PRECACHE = [
@@ -8,7 +12,7 @@ const PRECACHE = [
   '/contact/',
   '/css/styles.css?v=40',
   '/js/main.js?v=8',
-  '/js/components/nav.js?v=4',
+  '/js/components/nav.js?v=5',
   '/js/components/timeline.js?v=3',
   '/assets/fonts/manrope-latin.woff2',
   '/assets/fonts/manrope-latin-ext.woff2',

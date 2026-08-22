@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Hidden-State Detection of In-Context Goal Hijacking with a Conformal False-Positive Guarantee"
-description: "A read-only linear probe on Qwen2.5-Instruct hidden states detects in-context goal-hijack attempts with deconfounded AUC 0.998 on a hard-negative benchmark and a split-conformal false-positive guarantee, with confound controls and an input-text baseline that keep the claims honest."
+description: "A read-only probe detects goal-hijack attempts in Qwen2.5-Instruct hidden states with 0.998 deconfounded AUC and a split-conformal bound on false positives."
 permalink: /heron/
 image: /assets/img/usecases/heron-hijack-self-probe.webp
 ---
@@ -159,14 +159,11 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 <section class="heron-section" id="problem">
   <h2><span class="n">01</span> Problem</h2>
   <p>
-    Most deployed security monitoring for large language models analyzes inputs and outputs.
-    An in-context goal-hijack attack places an injected instruction in the prompt that attempts
-    to override the user's task. The attack modifies the model's internal computation whether
-    or not the final output changes. When the model resists the injection at the output level,
-    output monitoring records nothing unusual, and the attempt goes unlogged. A filter on the
-    input text can catch injections written in plain sight, and Section 5 measures how far such
-    a filter gets on this benchmark as a baseline. It can only ever see what is legible in the
-    prompt.
+    Most deployed security tools for language models inspect inputs and outputs. A goal-hijack
+    attack adds an instruction that tries to replace the user's task. It changes the model's
+    internal computation even when the final answer remains safe. Output monitoring can therefore
+    miss a resisted attack. An input filter can catch visible injections, and Section 5 measures
+    that baseline. It cannot detect anything beyond the prompt text.
   </p>
   <p>This prototype tests two precise questions on a small instruction-tuned model:</p>
   <ol>
@@ -177,17 +174,16 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       validity, using split conformal prediction?</li>
   </ol>
   <p class="soft">
-    The threat model is deliberately benign. Injections request harmless outputs such as a fixed
-    word or number. The detected condition is the presence of a goal-override attempt in context.
-    No harmful content is generated at any point.
+    The threat model is benign. Each injection requests a harmless word or number. The detector
+    identifies an attempt to override the goal; the experiment generates no harmful content.
   </p>
 </section>
 
 <section class="heron-section" id="literature">
   <h2><span class="n">02</span> Existing literature</h2>
   <p>
-    Four results motivate reading internal states for security, and one line of statistical work
-    supplies the guarantee mechanism.
+    Four results support reading internal states for security. Conformal prediction supplies the
+    statistical guarantee.
   </p>
   <ul>
     <li><b>Arditi et al. (NeurIPS 2024)</b> showed that refusal behavior is mediated by a small
@@ -209,21 +205,19 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
 <section class="heron-section" id="gap">
   <h2><span class="n">03</span> Gap</h2>
   <p>
-    Activation-based attack detectors typically report accuracy or AUC. Two elements are usually
-    absent, and this prototype supplies both.
+    Activation-based attack detectors usually report accuracy or AUC. This prototype adds two
+    missing controls.
   </p>
   <p>
-    <b>A false-positive budget with a guarantee.</b> A security operator needs to set an acceptable
-    false-alarm rate before deployment. A raw probe score does not support this. A split-conformal
-    threshold does: under exchangeability of calibration and deployment benign traffic, the flag
-    rule satisfies P(flag | benign) &le; &alpha; with finite-sample validity.
+    <b>A guaranteed false-positive budget.</b> An operator must set an acceptable alarm rate before
+    deployment. A raw probe score cannot do this. Under exchangeable calibration and deployment
+    traffic, a split-conformal threshold gives the finite-sample guarantee
+    P(flag | benign) &le; &alpha;.
   </p>
   <p>
-    <b>Confound controls in the benchmark itself.</b> A detector trained on clean prompts versus
-    prompts with an injected prefix can reach perfect AUC by encoding the feature "extra text
-    precedes the task". That feature also matches harmless prefixed prompts, so the perfect AUC
-    misstates deployment performance. The benchmark here includes a benign-prefix control condition
-    designed to expose exactly this failure. Section 5 shows that it did.
+    <b>Confound controls inside the benchmark.</b> A detector can reach perfect AUC by learning that
+    extra text appears before the task. It will then flag harmless prefixes too. This benchmark
+    includes a benign-prefix condition designed to expose that shortcut. Section 5 shows the result.
   </p>
 </section>
 
@@ -454,7 +448,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   </p>
   <div class="note-block" role="note">
     <span class="note-badge">Finding</span>
-    <p>Both calibration findings follow the same pattern: the probe's ranking is robust, and the
+    <p>Both calibration findings follow the same pattern: the probe's ranking stays stable, and the
       decision threshold is only as valid as the coverage of the benign calibration set. Detection
       quality and calibration coverage are separate failure surfaces, and a security benchmark
       should measure both.</p>

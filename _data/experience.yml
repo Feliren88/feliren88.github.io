@@ -2,27 +2,27 @@ work_experience:
   - dates: 'OCT 2024 – PRESENT'
     title: 'SEACrowd - Researcher, Multimodal & Vision-Language'
     location: 'Open-science research collective · seacrowd.github.io'
-    description: "I do the work commercial labs won't, building the AI infrastructure Southeast Asia is missing. Datasets, benchmarks, and adaptation methods for a region largely absent from mainstream training data. Two peer-reviewed outputs alongside 50+ researchers from five countries, including SEA-VL at ACL 2025 and a diffusion model adaptation study."
+    description: "I build open AI resources for Southeast Asia, a region still underrepresented in mainstream training data. My work covers datasets, benchmarks, and adaptation methods. It has produced two peer-reviewed studies with more than 50 researchers across five countries, including SEA-VL at ACL 2025 and a study of diffusion model adaptation."
 
   - dates: 'FEB 2025 – NOV 2025'
     title: 'Artefact - Senior Data Scientist'
     location: 'French AI consulting · Founding technical member, Jakarta office'
-    description: "The challenge here was translation, taking research-grade methodology (conformal prediction, calibrated uncertainty, LLM evaluation pipelines) and turning it into something that Media Directors could act on when deciding where to move budget across APAC markets. Joined as the first technical hire in Jakarta and built the engineering baseline from scratch, including the forecasting system, RAG-based insights tooling, and the observability layer around it."
+    description: "As the first technical hire in Jakarta, I turned research methods into tools that Media Directors could use for APAC budget decisions. The methods included conformal prediction, calibrated uncertainty, and LLM evaluation. I built the office's engineering base from scratch, including forecasting, RAG-based insight tools, and observability."
 
   - dates: 'DEC 2022 – JAN 2025'
     title: 'Monash University - Research Associate'
     location: 'Global research consortium: Monash, UQ, UCL, Nottingham'
-    description: "Designed ProCANet, a progressive cross-attention architecture that fuses multispectral satellite bands for flood segmentation, and built the geospatial data pipelines to train and validate it across imagery from multiple sensors and regions. The work starts at a satellite and ends at a map that informs how governments prepare for and respond to floods. Published first-authored in IEEE GRSL; contributed to a Remote Sensing of Environment paper on mining footprint segmentation using foundation model fine-tuning."
+    description: "I designed ProCANet, a progressive cross-attention model that combines multispectral satellite bands for flood segmentation. I also built geospatial pipelines to train and test it across sensors and regions. The result is a map that can inform government flood planning and response. I published the work as first author in IEEE GRSL and contributed to a Remote Sensing of Environment paper on mining-footprint segmentation with a fine-tuned foundation model."
 
   - dates: 'JUN 2021 – JUN 2023'
     title: 'GDP Labs (GLAIR.ai) - Senior Data Scientist / ML Engineer'
     location: 'AI consulting, backed by a major Indonesian conglomerate'
-    description: "Built and maintained the ML systems that major Indonesian banks trusted for biometric authentication and credit decisions, the kind of infrastructure where reliability is the baseline expectation. Worked across the full stack from model architecture to production operations, and later across fraud detection, credit scoring under regulatory audit constraints, and demand forecasting for financial clients."
+    description: "I built and maintained ML systems used by major Indonesian banks for biometric authentication and credit decisions. I worked across model design and production operations, then expanded into fraud detection, audited credit scoring, and demand forecasting for financial clients. Reliability was a core requirement throughout."
 
   - dates: 'JAN 2021 – JUN 2021'
     title: 'Jakarta Smart City - Data Scientist'
     location: "Indonesia's smart city government initiative"
-    description: "Applied probabilistic time-series forecasting to municipal waste logistics, translating messy operational signals into resource deployment decisions at the scale of a major city. Conducted causal analysis on the impact of Jakarta's plastic bag ban policy using citizen complaint data; presented findings at an IEEE-sponsored conference."
+    description: "I used probabilistic time-series models to forecast municipal waste and guide city-wide resource planning. I also used citizen complaint data to study the effect of Jakarta's plastic bag ban. I presented the findings at an IEEE-sponsored conference."
 
 education:
   - dates: 'EXPECTED SEPT 2026'
@@ -65,21 +65,21 @@ teaching:
   - dates: 'MAY 2026 – JUN 2026'
     title: 'IBM SkillsBuild'
     location: 'Capstone Project Advisor'
-    description: "Supervised 3 capstone AI projects for Indonesia's university students. Impacting future generation technical leaders in a region."
+    description: "I supervised three AI capstone projects for university students in Indonesia."
   - dates: 'MAY 2026 – JUN 2026'
     title: 'Coding Camp powered by DBS Foundation'
     location: 'Capstone Project Advisor'
-    description: "Supervised 2 capstone AI projects for Indonesia's university students. Impacting future generation technical leaders in a region."
+    description: "I supervised two AI capstone projects for university students in Indonesia."
 
   - dates: 'JAN 2024 – JAN 2025'
     title: 'Bangkit Academy (Google, Gojek, Traveloka)'
     location: 'ML Instructor & Capstone Advisor'
-    description: "Taught ML fundamentals and supervised capstone projects for Bangkit Academy, a program training Indonesia's next generation of applied AI engineers. Took projects from early-stage ideas to deployed Cloud Run endpoints; the kind of mentorship where you see someone go from confused to shipping."
+    description: "I taught ML fundamentals and supervised capstone projects for Bangkit Academy, which trains applied AI engineers in Indonesia. I guided projects from early ideas to deployed Cloud Run endpoints."
 
   - dates: 'NOV 2024'
     title: 'Bina Nusantara University'
     location: 'Guest Lecturer, Computer Vision'
-    description: 'Guest lecture tracing the arc from CNNs to Transformers through the lens of semantic segmentation, designed for final-year students seeing these ideas applied to real problems for the first time.'
+    description: 'I gave a guest lecture on the development from CNNs to Transformers, using semantic segmentation to show final-year students how the methods solve real problems.'
 
 talks:
   - dates: 'JUL 2026'

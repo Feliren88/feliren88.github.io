@@ -4,5 +4,5 @@ uc_id: commonlid-language-identification
 image: /assets/img/usecases/commonlid-language-identification.webp
 permalink: /usecases/commonlid-language-identification/
 title: "CommonLID: Language Identification on Noisy Web Data"
-description: "Re-benchmarking leading LID systems on realistic SEA web data, exposing critical accuracy gaps on code-switched, romanized, and dialect-heavy text that existing benchmarks miss. ACL 2026."
+description: "An ACL 2026 benchmark showing how language identification systems fail on real Southeast Asian web text."
 ---

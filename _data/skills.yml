@@ -1,5 +1,5 @@
 - category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'Knowing when a model should defer, and proving it. Distribution-free guarantees and reliability for deployed AI, beyond calibration scores.'
+  description: 'I study when models should defer and how to prove it, using distribution-free guarantees for deployed AI.'
   skills:
     - 'Conformal Prediction'
     - 'Uncertainty Quantification'
@@ -11,7 +11,7 @@
     - 'Hypothesis Testing'
 
 - category: 'RESEARCH: MULTILINGUAL & MULTIMODAL AI'
-  description: 'Making reliability and safety hold for the languages and contexts AI was never built for. Probing and steering internal states, multilingual benchmarks, adaptation methods, and earth-observation models that pressure-test the work against messy data.'
+  description: 'I test reliability and safety across overlooked languages and settings. My work covers internal-state probes, steering, multilingual benchmarks, adaptation, and earth observation.'
   skills:
     - 'Activation Steering'
     - 'Linear Probing'
@@ -22,7 +22,7 @@
     - 'Google Earth Engine'
 
 - category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
-  description: 'Model development from architecture design to deployment, multimodal, generative, and earth-observation systems.'
+  description: 'I build multimodal, generative, and earth-observation models from architecture design through deployment.'
   skills:
     - 'PyTorch'
     - 'TensorFlow'
@@ -34,7 +34,7 @@
     - 'Intel OpenVINO'
 
 - category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY'
-  description: 'Evaluation design and production monitoring, because a model is only as trustworthy as your ability to measure it.'
+  description: 'I design evaluations and production monitoring that make model reliability measurable.'
   skills:
     - 'LLM-as-a-Judge'
     - 'Human-in-the-Loop Evaluation'
@@ -45,7 +45,7 @@
     - 'Latency Benchmarking'
 
 - category: 'ENGINEERING: PRODUCTION ML & DATA'
-  description: 'Cloud-scale ML pipelines with distributed inference, designed and operated across GCP and AWS.'
+  description: 'I design and operate cloud-scale ML pipelines with distributed inference on GCP and AWS.'
   skills:
     - 'GCP (Vertex AI, BigQuery)'
     - 'AWS (EC2, S3, SageMaker)'
@@ -56,7 +56,7 @@
     - 'Vector Database'
 
 - category: 'VISUALIZATION & ANALYTICS'
-  description: 'Translating model outputs and data findings into decisions, for technical and non-technical audiences alike.'
+  description: 'I turn model outputs and data findings into clear decisions for technical and non-technical audiences.'
   skills:
     - 'Tableau'
     - 'Streamlit'

@@ -108,6 +108,8 @@ feliren88.github.io/
 ├── scripts/
 │   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (WebP, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
 ├── _pages/         # Jekyll pages (Markdown)
+│   ├── high-agency.md    # Interactive personal note on George Mack's High Agency essay (/high-agency/) — loads css/high-agency.css + js/components/high-agency.js via the `extra_css` / `extra_js` front matter hooks; ~20 self-contained widgets (quiz, trap game, flow chart, worksheet) that persist to localStorage under the `ha:` prefix
+│   ├── principles.md     # Interactive personal note, The Life Operating Principle (/principles/) — content lives in `_data/principles.yml`, rendered by Liquid AND emitted as a JSON island (`#pr-data`) that js/components/principles.js searches; localStorage prefix `pr:`
 │   ├── about.md
 │   ├── skills.md
 │   ├── experience.md
@@ -129,6 +131,7 @@ feliren88.github.io/
 │   ├── notes.yml         # Research notes — short paper distillations with own take; rendered at top of /writings/ (newest first)
 │   ├── thoughts.yml      # Medium articles — ORDERED for homepage "Insights" strip (first 3 surface there); /writings/ defaults to the All filter
 │   ├── contact.yml
+│   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
@@ -142,13 +145,35 @@ feliren88.github.io/
 │       ├── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
 │       └── usecases/            # Generated pipeline diagrams (20 WebP, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
 ├── css/
-│   └── styles.css  # @font-face, custom properties, all component styles (current: v28)
+│   ├── styles.css       # @font-face, custom properties, all component styles (current: v28)
+│   ├── high-agency.css  # Page-scoped styles for /high-agency/ only
+│   └── principles.css   # Page-scoped styles for /principles/ only
 └── js/
     ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal, reveal-group stagger)
     └── components/
-        ├── nav.js       # Navigation — single source of truth (NAV_ITEMS array)
-        └── timeline.js  # Project timeline (loaded only on /project/ page)
+        ├── nav.js          # Navigation — single source of truth (NAV_ITEMS array)
+        ├── timeline.js     # Project timeline (loaded only on /project/ page)
+        ├── high-agency.js  # Widgets for /high-agency/ (loaded only on that page)
+        └── principles.js   # Widgets for /principles/ (loaded only on that page)
 ```
+
+### Page-scoped CSS and JS
+
+A page can pull in its own stylesheet or script without touching every other page:
+
+```yaml
+extra_css: /css/high-agency.css
+extra_js: /js/components/high-agency.js
+```
+
+`default.html` emits a `<link>` after `styles.css` and a deferred `<script>` after `nav.js`
+when those keys are present. Use this for one-off pages heavy enough that their CSS would
+bloat the global stylesheet. Both are cache-busted with `?v=1`; bump that when you edit them.
+
+Page-scoped CSS should shadow the global type-scale tokens rather than hard-code sizes.
+`/high-agency/` is a long-form reading page, so it re-declares `--fs-base` and friends on
+`.high-agency` (set via `layout-class` front matter). Every token-driven size on that page
+grows together and no other page moves.
 
 ## Jekyll Configuration
 

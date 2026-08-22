@@ -1,0 +1,555 @@
+# The Life Operating Principle — /principles/
+# Consumed by _pages/principles.md. Each situation becomes a searchable, filterable
+# card and feeds the "what do I do now" console at the top of the page.
+#
+# id       : stable slug, used as the anchor and in the console
+# trigger  : the state you are in when you need this
+# group    : one of  pressure | work | money | people | self | decide
+# ask      : the question to ask instead of the obvious one
+# donts    : things not to do (optional)
+# steps    : ordered actions (optional)
+# body     : supporting prose (optional, array of paragraphs)
+# rule     : the compressed rule worth memorising
+# reversible: true | false | null  — whether decisions in this state are usually reversible
+
+situations:
+  - id: angry
+    trigger: When angry
+    group: pressure
+    ask: What boundary was actually crossed, and what outcome do I want?
+    donts:
+      - Send the message now
+      - Resign now
+      - Threaten or retaliate
+      - Embarrass someone publicly
+      - Make a permanent decision to solve a temporary feeling
+    steps:
+      - Stop communicating for now.
+      - Write down exactly what happened.
+      - Separate the actual offence from your interpretation of it.
+      - Name the boundary that was crossed.
+      - Decide what outcome you actually want.
+      - Communicate the boundary once you are calm.
+      - Escalate only if the behaviour continues.
+    rule: Anger is information, not instruction.
+    reversible: false
+
+  - id: afraid
+    trigger: When afraid
+    group: pressure
+    ask: What exactly am I afraid will happen?
+    body:
+      - Fear produces two bad reflexes. Avoid everything, or control everything. Do neither automatically.
+      - Classify the fear as probable, possible, unlikely, imagined, or preventable. Protect against the realistic downside and stop there.
+    rule: Manage risk. Do not worship safety.
+
+  - id: confused
+    trigger: When confused
+    group: pressure
+    ask: What is the actual decision in front of me?
+    body:
+      - Do not solve ten problems at once. Write down what you know, what you do not know, what information would genuinely change the decision, and what information is merely comforting to collect.
+      - Set a deadline. When enough evidence exists, decide.
+    rule: More thinking helps only while it can still change the decision.
+
+  - id: overwhelmed
+    trigger: When overwhelmed
+    group: pressure
+    ask: What must be protected today?
+    body:
+      - Reduce the time horizon. You are not solving your whole life this week.
+    steps:
+      - Physical safety
+      - Health
+      - Sleep
+      - Essential money
+      - Legal obligations
+      - Important relationships
+      - The next necessary action
+    rule: Under overload, protect the foundation before optimising the future.
+
+  - id: exhausted
+    trigger: When exhausted
+    group: self
+    ask: Is this a conclusion, or is this fatigue?
+    body:
+      - I do not trust major conclusions reached while exhausted. I restore sleep, food, movement, quiet and basic routine first, then reconsider.
+    rule: Do not redesign your life while depleted.
+
+  - id: emergency
+    trigger: When something has just gone wrong
+    group: pressure
+    ask: What is the order of operations here?
+    steps:
+      - Stabilise.
+      - Understand.
+      - Decide.
+      - Act.
+    body:
+      - Never reverse that order. Do not make a major decision merely to stop an uncomfortable feeling.
+    rule: Stabilise first. Understand second. Decide third. Act fourth.
+
+  - id: career
+    trigger: When making a career decision
+    group: work
+    ask: Three years from now, what will I own or know because I took this?
+    body:
+      - Never evaluate a role on salary and title alone. Ask whether it increases at least two of capability, judgement, network, ownership, reputation, autonomy, or future earning power.
+      - Be careful with more money plus more responsibility plus no new leverage. That combination is a golden cage.
+    rule: Do not confuse being needed with progressing.
+
+  - id: unbearable-work
+    trigger: When work becomes unbearable
+    group: work
+    ask: What exactly is broken?
+    body:
+      - Before asking whether to quit, name the component. Manager, role, company, industry, pay, workload, autonomy, values, geography, or your own expectations.
+      - Do not demolish the whole structure if one part can be repaired. Do not keep repairing something whose basic architecture is wrong.
+    rule: Fix the component when possible. Leave the system when necessary.
+
+  - id: promotion
+    trigger: When offered a promotion
+    group: work
+    ask: Am I being given greater authority, or only greater responsibility?
+    body:
+      - Responsibility without authority is dangerous. Responsibility without compensation is exploitation. Authority without competence is dangerous.
+      - Authority with competence, resources and accountability is the version worth having.
+    rule: Never accept importance merely because it flatters your identity.
+
+  - id: business
+    trigger: When starting a business
+    group: work
+    ask: What assumption can I test cheaply this month?
+    donts:
+      - Start because you hate your boss
+      - Start merely because you want freedom
+    body:
+      - Work through the real questions. Is there a real customer? A real problem? Will someone pay? Can the economics work? What is your unfair advantage? How long can you survive if growth is slow?
+    rule: Experiment cheaply before believing expensively.
+
+  - id: partners
+    trigger: When choosing business partners
+    group: work
+    ask: How does this person behave under pressure?
+    body:
+      - Brilliance is not the qualifying trait. Evaluate ethics, emotional stability, incentives, financial discipline, communication, reliability and reputation.
+      - Before you begin, agree ownership, responsibilities, decision rights, compensation, how disagreements get settled, and exit terms.
+    rule: Trust people emotionally. Structure agreements professionally.
+
+  - id: invest
+    trigger: When considering an investment
+    group: money
+    ask: Would losing this amount alter my life?
+    donts:
+      - Invest because everyone else is making money
+      - Invest because you fear missing out
+      - Invest because someone sounds confident
+      - Invest because you need a large return
+      - Invest to recover a previous loss
+    body:
+      - Understand how money is made here, how it can be lost, the liquidity, the concentration, the leverage, and the worst case.
+    rule: Never risk something essential to obtain something nonessential.
+
+  - id: money-up
+    trigger: When money increases
+    group: money
+    ask: Am I buying freedom or buying obligations?
+    body:
+      - Do not raise your lifestyle to match the new number straight away. Put the increase into safety, freedom, assets, knowledge and bargaining power first.
+      - Avoid building a life that forces you to keep doing work you will eventually hate.
+    rule: Money is not only for consumption. It is freedom from bad choices.
+
+  - id: money-down
+    trigger: When money decreases
+    group: money
+    ask: What is the machine that can rebuild, and am I protecting it?
+    body:
+      - Cut unnecessary fixed costs, status spending, ego spending, and commitments that return little.
+      - Preserve housing, health, food, essential insurance, productive tools, critical relationships, and your capacity to earn again.
+    rule: During contraction, protect the machine that can rebuild.
+
+  - id: purchase
+    trigger: When making a major purchase
+    group: money
+    ask: Would I still want this if nobody knew I owned it?
+    body:
+      - Wait when excitement is unusually high. Then ask what freedom you are exchanging for it.
+      - The real price includes maintenance, debt, attention, storage, insurance, and sometimes an inability to leave a job.
+    rule: Count the price in freedom, not only in money.
+
+  - id: negotiate
+    trigger: When negotiating
+    group: money
+    ask: What is my credible alternative?
+    body:
+      - Know your preferred outcome, your minimum acceptable outcome, your alternatives, and what you are willing to walk away from.
+      - The strongest person in the room is rarely the loudest. It is the one who can leave.
+    rule: Options create bargaining power.
+
+  - id: relationship-start
+    trigger: When entering a relationship
+    group: people
+    ask: What are the patterns, not the promises?
+    body:
+      - Chemistry is not the assessment. Observe reliability, honesty, conflict behaviour, accountability, financial behaviour, how they treat people with less power, respect for boundaries, the ability to apologise, and consistency between words and actions.
+      - Attraction tells you to approach. Character tells you whether to stay.
+    rule: Choose long-term partners by patterns, not promises.
+
+  - id: infatuated
+    trigger: When deeply attracted to someone
+    group: people
+    ask: Am I building a future faster than I am accumulating evidence?
+    body:
+      - Stay curious about who they actually are. Do not explain away repeated bad behaviour because the connection feels exceptional.
+    rule: Intensity is not evidence of compatibility.
+
+  - id: conflict
+    trigger: When relationship conflict begins
+    group: people
+    ask: Can I say this while it is still small?
+    steps:
+      - Say what happened.
+      - Say how it affected you.
+      - Say what you need.
+      - Ask what they need.
+    body:
+      - Do not silently accumulate evidence against someone.
+    rule: Early honesty is cheaper than late resentment.
+
+  - id: stay-or-leave
+    trigger: When deciding whether to stay or leave
+    group: people
+    ask: If nothing changed for three years, would I willingly choose this?
+    body:
+      - Ignore one unusually good day. Ignore one unusually bad day. Look at the pattern.
+      - Then ask whether the problem is painful but repairable, or structural and repeatedly denied.
+      - Do not stay on sunk cost alone. Do not leave merely because intimacy takes effort.
+    rule: Judge the pattern, not the last conversation.
+    reversible: false
+
+  - id: family
+    trigger: When dealing with family
+    group: people
+    ask: Am I supporting them, or repeatedly rescuing them from something they refuse to address?
+    body:
+      - Respect does not require unlimited access. Love does not require permanent obedience.
+      - Help people without becoming responsible for every consequence of their decisions.
+    rule: Compassion without boundaries eventually becomes resentment.
+
+  - id: friends
+    trigger: When dealing with friends
+    group: people
+    ask: Is there reciprocity over time?
+    body:
+      - It does not need to be equal every week. Over a year there should be mutual concern, effort, honesty, respect and goodwill.
+      - Do not stay loyal to people who punish your growth. Do not drop good people because your circumstances improved.
+    rule: Protect relationships that want both your wellbeing and your growth.
+
+  - id: power
+    trigger: When dealing with powerful people
+    group: people
+    ask: What do they want, control, and fear?
+    body:
+      - Do not become submissive because they have status. Do not become rebellious because they have authority.
+      - Study their incentives and find where your interests genuinely overlap. Stay respectful without surrendering judgement.
+    rule: Understand power without becoming psychologically owned by it.
+
+  - id: criticised
+    trigger: When someone criticises you
+    group: self
+    ask: Is any part of this true?
+    body:
+      - Take the useful information and discard the hostility. If it is accurate, improve. If it is inaccurate but consequential, clarify. If it is inaccurate and irrelevant, move on.
+    rule: Your job is not to win every interpretation of you.
+
+  - id: embarrassed
+    trigger: When publicly embarrassed
+    group: self
+    ask: Am I about to make the recovery worse than the event?
+    body:
+      - Correct important factual errors. Take responsibility where it belongs. Do not overexplain. Then keep behaving consistently.
+      - Most reputational repair comes from accumulated future behaviour, not from one perfect statement.
+    rule: Behave your way out. Do not talk your way out.
+
+  - id: lie
+    trigger: When tempted to lie
+    group: self
+    ask: What future problem am I creating to avoid today's discomfort?
+    body:
+      - Small lies carry ongoing maintenance costs. Tell the truth tactfully and early where you can.
+    rule: Do not borrow comfort from the future at compound interest.
+
+  - id: betrayed
+    trigger: When someone betrays your trust
+    group: people
+    ask: What needs protecting before I react?
+    steps:
+      - Protect money, accounts, legal position, information, reputation and physical safety.
+      - Document the facts.
+      - Then decide whether the relationship can be repaired.
+    rule: Protection first. Judgement second. Revenge never as strategy.
+
+  - id: relocate
+    trigger: When relocating
+    group: decide
+    ask: What version of me does this environment encourage?
+    body:
+      - Liking a city is the small question. Consider people, professional opportunity, cost, culture, safety, lifestyle, relationships, learning and future mobility.
+      - Places change behaviour by changing what counts as normal.
+    rule: Environments edit you slowly and without asking.
+
+  - id: mentors
+    trigger: When choosing people to learn from
+    group: self
+    ask: Do I actually want their life, or only their results?
+    body:
+      - Someone can be brilliant at making money and terrible at living. Someone can be famous and privately miserable. Someone can be accomplished and destructive to everyone near them.
+    rule: Never copy a strategy without examining the life it produces.
+
+  - id: learning
+    trigger: When learning something difficult
+    group: self
+    ask: Can I use this yet, or have I only read about it?
+    steps:
+      - Learn
+      - Practise
+      - Produce
+      - Get feedback
+      - Correct
+      - Repeat
+    body:
+      - Consuming information is not the same as becoming capable.
+    rule: If you cannot use it, you do not own it yet.
+
+  - id: procrastinating
+    trigger: When procrastinating
+    group: self
+    ask: What discomfort am I avoiding?
+    body:
+      - It is usually uncertainty, possible failure, boredom, embarrassment, complexity, or commitment.
+      - Shrink the first step until avoiding it takes more effort than doing it. Then begin.
+    rule: Name the discomfort and the task gets smaller.
+
+  - id: perfectionism
+    trigger: When perfectionism appears
+    group: self
+    ask: Does this need precision, or only completion?
+    body:
+      - Some mistakes are expensive. Most are harmless. Spend perfection only where errors genuinely matter.
+    rule: Precision is a resource. Allocate it intelligently.
+
+  - id: health
+    trigger: When health starts deteriorating
+    group: self
+    ask: What can be paused, delegated, simplified or stopped?
+    body:
+      - Do not sacrifice the physical system that makes every other ambition possible. Get proper care rather than self-diagnosing, and reduce the load.
+    rule: Health is infrastructure, not a reward you earn after success.
+
+  - id: lonely
+    trigger: When lonely
+    group: self
+    ask: Am I about to lower my standards because this is familiar?
+    body:
+      - Loneliness lowers standards. Build connection deliberately through friends, family, communities, hobbies, professional groups, volunteering and shared learning.
+    rule: Temporary loneliness is sometimes the cost of leaving the wrong environment first.
+
+  - id: bored
+    trigger: When bored
+    group: self
+    ask: Do I need challenge, learning, creativity, people, movement, or rest?
+    body:
+      - Do not destroy something stable simply to feel alive. Add novelty deliberately before creating chaos by accident.
+    rule: Add novelty on purpose, not by demolition.
+
+  - id: jealous
+    trigger: When jealous
+    group: self
+    ask: What does this reveal that I want?
+    body:
+      - Separate what you genuinely desire from what you want others to see you possessing.
+      - Use envy as information. Never as a decision-maker.
+    rule: Envy is a compass reading, not a destination.
+
+  - id: comparing
+    trigger: When comparing yourself to others
+    group: self
+    ask: Am I moving towards a life I respect?
+    body:
+      - Compare trajectories, not snapshots. You rarely know their starting point, debt, support, private suffering, luck, sacrifices or hidden advantages.
+    rule: Compare trajectories, not snapshots.
+
+  - id: praised
+    trigger: When praised
+    group: self
+    ask: Is this steering me, or just pleasing me?
+    body:
+      - Enjoy it. But if praise sets your direction, criticism will also control you.
+    rule: Receive validation without becoming dependent on it.
+
+  - id: succeeding
+    trigger: When succeeding
+    group: self
+    ask: What exactly is succeeding?
+    body:
+      - This is one of the most dangerous moments. Income can rise while health deteriorates, relationships weaken, curiosity disappears, freedom shrinks and responsibility becomes unbearable.
+    rule: Measure the whole life, not the loudest metric.
+
+  - id: failing
+    trigger: When failing
+    group: self
+    ask: What did reality just teach me?
+    body:
+      - Separate bad strategy, bad timing, bad execution, insufficient skill, insufficient resources, random bad luck, and a fundamentally bad idea. They have different fixes.
+    rule: A mistake becomes expensive only when you refuse to learn from it.
+
+  - id: repeating
+    trigger: When something repeatedly fails
+    group: self
+    ask: What role do I keep playing in this?
+    body:
+      - After the third serious repetition, stop calling it bad luck. Ask what warning you ignored, what assumption keeps returning, what kind of person or environment keeps producing this, and what boundary should have existed earlier.
+    rule: Repeated pain is usually a system problem, not an isolated event.
+
+  - id: opportunities
+    trigger: When opportunities suddenly multiply
+    group: decide
+    ask: Do these reinforce each other, or fragment me?
+    body:
+      - Opportunity has a hidden cost, and the cost is fragmentation. Prefer one direction that compounds over five unrelated ones that consume attention.
+    rule: A good opportunity can still be the wrong opportunity.
+
+  - id: two-goods
+    trigger: When choosing between two good options
+    group: decide
+    ask: Which one is harder to recreate later?
+    body:
+      - Ask which teaches more, puts better people around you, increases ownership, preserves flexibility, and exposes you to valuable problems.
+    rule: Choose on long-term option value, not immediate comfort.
+
+  - id: irreversible
+    trigger: When the decision is hard to reverse
+    group: decide
+    ask: What evidence would I need to be confident, and do I have it?
+    body:
+      - Marriage. Major debt. Children. Selling a company. Personal guarantees. Major legal commitments. Permanent relocation. Ending an important relationship.
+      - Slow down. Get independent perspectives. Consider the downside honestly. Do not let urgency created by another person replace your own judgement.
+    rule: The harder a decision is to reverse, the higher the evidence threshold.
+    reversible: false
+
+  - id: reversible
+    trigger: When the decision is easy to reverse
+    group: decide
+    ask: What is the smallest test that produces real information?
+    body:
+      - A pilot project, a short contract, a small investment of time, a temporary relocation, a prototype, a trial collaboration.
+      - Months of speculation lose to one cheap experiment.
+    rule: Reversible decisions deserve speed. Irreversible ones deserve patience.
+    reversible: true
+
+  - id: changed
+    trigger: When circumstances suddenly change
+    group: decide
+    ask: If I were starting today with what I now know, would I choose the same strategy?
+    body:
+      - Do not defend the old plan out of habit. Plans exist to serve reality, and reality owes your plan nothing.
+    rule: Update the plan, not the facts.
+
+  - id: wrong
+    trigger: When you were wrong
+    group: decide
+    ask: Was it information, reasoning, ego, incentives, wishful thinking, or fear?
+    body:
+      - Say it plainly. I was wrong. Then find the cause and change the process, not merely the conclusion.
+    rule: Being wrong is temporary. Refusing to update makes it permanent.
+
+  - id: everyone-agrees
+    trigger: When everyone agrees with you
+    group: decide
+    ask: What would have to be true for my entire view to be wrong?
+    body:
+      - Become slightly suspicious. Go and find someone intelligent who disagrees, especially before a major financial, professional or strategic commitment.
+    rule: Unanimous agreement is a warning, not a confirmation.
+
+  - id: everyone-disagrees
+    trigger: When everyone disagrees with you
+    group: decide
+    ask: What cheap test would let reality settle this?
+    body:
+      - Do not assume you are visionary. You may simply be wrong. Search for evidence and let reality arbitrate.
+    rule: Independence is thinking for yourself, not automatically opposing everyone.
+
+  - id: going-well
+    trigger: When life is going exceptionally well
+    group: pressure
+    ask: What am I building for the period when this stops?
+    body:
+      - Prepare quietly. Maintain savings, health, relationships, skills, humility and alternatives.
+      - Good periods create the resources that difficult periods spend.
+    rule: Do not consume everything prosperity gives you.
+
+  - id: going-badly
+    trigger: When life is going badly
+    group: pressure
+    ask: What is the smallest mission I can succeed at this week?
+    steps:
+      - Stop unnecessary damage.
+      - Regain stability.
+      - Recover information.
+      - Rebuild options.
+    body:
+      - Do not demand that one decision repair everything at once.
+    rule: Survival first. Positioning second. Expansion third.
+
+# The eight-step sequence for when nothing above fits
+sequence:
+  - key: STOP
+    line: Do not react immediately.
+    detail: Pause unless delay creates immediate danger. Use that time to regain enough clarity to judge the situation.
+  - key: SEE
+    line: What is actually happening?
+    detail: Describe the situation as a camera would. No motive, no forecast, no blame. Just the events.
+  - key: SEPARATE
+    line: Facts from fears, ego, assumptions and other people's opinions.
+    detail: Put each item in one of those five buckets. Most of what feels like a fact will land in another column.
+  - key: SECURE
+    line: Protect health, money, legal position, reputation and important relationships.
+    detail: Stop the bleeding before you diagnose. This step is boring and it is the one people skip.
+  - key: SPEAK
+    line: Have the conversation you are avoiding.
+    detail: Name the necessary conversation. Delay often makes the practical and emotional cost larger.
+  - key: SAMPLE
+    line: Take the smallest reversible action that produces new information.
+    detail: Not the decision. The test. You are buying evidence at the lowest available price.
+  - key: SELECT
+    line: Choose after reality gives feedback.
+    detail: Now you are deciding with data instead of with mood.
+  - key: SCALE
+    line: Commit heavily only after the direction proves itself.
+    detail: Conviction is earned by evidence, and it is the last step rather than the first.
+
+# The five things to protect
+protect:
+  - key: Health
+    line: Without it, every other advantage becomes harder to use.
+  - key: Integrity
+    line: Protect the trust that lets people rely on your word and work.
+  - key: Financial runway
+    line: Savings give you time to reject bad terms and make a considered decision.
+  - key: Your best relationships
+    line: Protect the people who provide honest help and accept it from you in return.
+  - key: The ability to walk away
+    line: Never build a life where one employer, customer, person, debt, status symbol or institution controls your future.
+
+# The five trades not to make permanently
+trades:
+  - give: Health
+    get: Money
+  - give: Integrity
+    get: Opportunity
+  - give: Freedom
+    get: Status
+  - give: Good relationships
+    get: Ambition
+  - give: Curiosity
+    get: Security

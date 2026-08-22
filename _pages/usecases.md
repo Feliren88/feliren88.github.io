@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Use Cases
-subtitle: Applied Machine Learning Across Research, Industry, and the Field
-description: A practitioner's view of ML use cases, led by AI safety and reliability work (multilingual VLM abstention, conformal prediction), then multilingual and multimodal AI, earth observation, and production systems.
+subtitle: Applied machine learning in research and production
+description: Case studies in AI safety, conformal prediction, multilingual and multimodal AI, earth observation, and production ML.
 permalink: /usecases/
 ---
 
