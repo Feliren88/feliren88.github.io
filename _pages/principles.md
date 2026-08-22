@@ -13,6 +13,8 @@ extra_js: /js/components/principles.js
 
 <script type="application/json" id="pr-data">{{ site.data.principles | jsonify }}</script>
 
+{% include principles-icons.html %}
+
 <!-- ═══════════════════════════════════════════════════════
      THE CENTRAL RULE
      ═══════════════════════════════════════════════════════ -->
@@ -23,14 +25,29 @@ extra_js: /js/components/principles.js
     <p>Pressure narrows attention to immediate relief. When I am angry, afraid, excited, or
     uncertain, I replace the first question in my head with a better one.</p>
     <div class="pr-swap">
-      <div class="pr-swap-card weak">
-        <span class="k">The question that arrives</span>
+      <button class="pr-swap-card weak" type="button" data-q="relief" aria-pressed="false">
+        <span class="k"><svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-now"/></svg> The question that arrives</span>
         <q>What do I want right now?</q>
-      </div>
-      <div class="pr-swap-card strong">
-        <span class="k">The question to ask instead</span>
+      </button>
+      <button class="pr-swap-card strong" type="button" data-q="protect" aria-pressed="true">
+        <span class="k"><svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-horizon"/></svg> The question to ask instead</span>
         <q>Which decision leaves me stronger, clearer, freer, and with more good options six months from now?</q>
+      </button>
+    </div>
+
+    <!-- Options as doors. Answering the first question shuts most of them,
+         which is the whole rule stated without a sentence. -->
+    <div class="pr-doors-wrap">
+      <p class="pr-doors-cap" id="pr-doors-cap" role="status"></p>
+      <div class="pr-doors" id="pr-doors" aria-hidden="true">
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
+        <span class="door is-open"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-door-open"/></svg></span>
       </div>
+      <p class="pr-doors-hint">Six months from now. Tap either question above.</p>
     </div>
     <p>Immediate comfort does not tell me whether a decision is sound. I judge a choice by its
     consequences, not by the relief or excitement it creates today.</p>
@@ -77,33 +94,51 @@ extra_js: /js/components/principles.js
       </div>
       <span class="pr-hint">Mark each one honestly</span>
     </div>
+
+    <!-- Six segments, one per question. Fills as you mark them clear. -->
+    <div class="pr-sixring-wrap">
+      <svg class="pr-sixring" id="pr-sixring" viewBox="0 0 120 120" role="img"
+           aria-label="Progress ring showing how many of the six questions you can answer.">
+        <g id="pr-sixring-segs"></g>
+        <text class="rnum" id="pr-sixring-num" x="60" y="63">0</text>
+        <text class="rcap" x="60" y="79">of six</text>
+      </svg>
+      <p class="pr-sixring-note" id="pr-sixring-note"></p>
+    </div>
+
     <div class="pr-six" id="pr-six">
       <div class="pr-q" data-q="1">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-q-facts"/></svg></span>
         <span class="qn">01</span>
         <span class="qt">What are the facts?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
       </div>
       <div class="pr-q" data-q="2">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-q-assume"/></svg></span>
         <span class="qn">02</span>
         <span class="qt">What am I assuming?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
       </div>
       <div class="pr-q" data-q="3">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-q-risk"/></svg></span>
         <span class="qn">03</span>
         <span class="qt">What could go seriously wrong?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
       </div>
       <div class="pr-q" data-q="4">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-reversible"/></svg></span>
         <span class="qn">04</span>
         <span class="qt">Is this decision reversible?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
       </div>
       <div class="pr-q" data-q="5">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-q-avoiding"/></svg></span>
         <span class="qn">05</span>
         <span class="qt">What am I avoiding saying or doing?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
       </div>
       <div class="pr-q" data-q="6">
+        <span class="qico" aria-hidden="true"><svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-q-options"/></svg></span>
         <span class="qn">06</span>
         <span class="qt">Will this increase or reduce my future options?</span>
         <button class="qtoggle" type="button" aria-pressed="false">Not yet</button>
@@ -147,11 +182,33 @@ extra_js: /js/components/principles.js
         <text class="dlab" x="30" y="176">Reversible</text>
         <text class="dlab" x="228" y="176">Permanent</text>
       </svg>
-      <div class="pr-dial-read" id="pr-dial-read" role="status"></div>
+      <div class="pr-dial-read" id="pr-dial-read" role="status">
+        <span class="pr-speed" id="pr-speed">
+          <svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use id="pr-speed-icon" href="#pi-speed-fast"/></svg>
+          <b id="pr-speed-word">Move</b>
+        </span>
+      </div>
     </div>
     <label class="pr-sr" for="pr-dial-range">How hard is this decision to undo</label>
     <input class="ha-range pr-range" id="pr-dial-range" type="range" min="0" max="100" value="0" step="1"
            style="width:100%;accent-color:var(--accent);height:1.6rem;cursor:pointer;margin-top:var(--gap-2)">
+
+    <!-- Ordinary decisions plotted on the same axis, so the dial has a scale. -->
+    <div class="pr-line-wrap">
+      <svg class="pr-line" id="pr-line" viewBox="0 0 560 118" role="img"
+           aria-label="Common decisions plotted from freely reversible to permanent.">
+        <path class="axis" d="M24 62h512"/>
+        <path class="axis-cap" d="M24 56v12M536 56v12"/>
+        <text class="lend" x="24" y="114">reversible</text>
+        <text class="lend" x="536" y="114" text-anchor="end">permanent</text>
+        <g id="pr-line-marks"></g>
+        <g class="you" id="pr-line-you">
+          <path d="M0 -16 L6 -6 L-6 -6 Z"/>
+          <text y="-22">you</text>
+        </g>
+      </svg>
+    </div>
+
     <div class="pr-dial-examples" id="pr-dial-chips"></div>
   </div>
 
@@ -177,6 +234,19 @@ extra_js: /js/components/principles.js
     <button class="filter-pill" data-filter="self">Yourself</button>
   </div>
   <p class="pr-count" id="pr-count" role="status" aria-live="polite"></p>
+
+  <!-- Every situation as one glyph. Faster to scan than 51 headings, and it
+       doubles as the jump index into the list below. -->
+  <div class="pr-map" id="pr-map" role="group" aria-label="Jump to a situation">
+    {% for s in site.data.principles.situations %}
+    <button class="pr-map-cell" type="button" data-go="{{ s.id }}" data-group="{{ s.group }}"
+            title="{{ s.trigger }}" aria-label="{{ s.trigger }}">
+      <svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-{{ s.id }}"/></svg>
+    </button>
+    {% endfor %}
+  </div>
+  <p class="pr-map-read" id="pr-map-read" role="status">Hover a glyph to name it. Tap to open it.</p>
+
   <div class="pr-btn-row" style="margin-top:0;margin-bottom:var(--gap-2)">
     <button class="pr-btn" id="pr-expand" type="button" data-open="false">Expand all</button>
   </div>
@@ -185,6 +255,9 @@ extra_js: /js/components/principles.js
     {% for s in site.data.principles.situations %}
     <article class="pr-card" id="sit-{{ s.id }}" data-group="{{ s.group }}">
       <button type="button" aria-expanded="false" aria-controls="body-{{ s.id }}">
+        <span class="pr-card-icon" aria-hidden="true">
+          <svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-{{ s.id }}"/></svg>
+        </span>
         <span>
           <span class="trg">{{ s.trigger }}</span>
           <span class="ask">{{ s.ask }}</span>
@@ -226,8 +299,8 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="sequence">
   <h2><span class="n">04</span> When nothing above fits</h2>
-  <p class="pr-deck">When no specific rule fits, I use this sequence. The order prevents me from
-  making a large decision before I have stabilized the situation and gathered evidence.</p>
+  <p class="pr-deck">When no specific rule fits, I follow these steps. They stop me from making a
+  major decision before I understand the problem, protect the essentials and test an option.</p>
 
   <div class="pr-console">
     <div class="pr-console-head">
@@ -237,9 +310,29 @@ extra_js: /js/components/principles.js
       </div>
       <span class="pr-hint">Tap any step</span>
     </div>
+
+    <!-- The track carries the one thing that matters here: the order. -->
+    <div class="pr-track-wrap">
+      <div class="pr-track" id="pr-track" role="group" aria-label="The eight steps in order">
+        {% for step in site.data.principles.sequence %}
+        <button class="pr-track-node" type="button" data-step="{{ forloop.index0 }}"
+                aria-label="Step {{ forloop.index }}, {{ step.key }}">
+          <span class="dot">
+            <svg class="pr-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#pi-{{ step.key | downcase }}"/></svg>
+          </span>
+          <span class="cap">{{ step.key }}</span>
+        </button>
+        {% endfor %}
+        <span class="pr-track-rail" aria-hidden="true"><i id="pr-track-fill"></i></span>
+      </div>
+    </div>
+
     <div class="pr-seq" id="pr-seq">
       {% for step in site.data.principles.sequence %}
       <div class="pr-step" tabindex="0" role="button" aria-label="{{ step.key }}: {{ step.line }}">
+        <span class="sicon" aria-hidden="true">
+          <svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-{{ step.key | downcase }}"/></svg>
+        </span>
         <span class="sk">{{ step.key }}</span>
         <span>
           <span class="sl">{{ step.line }}</span>
@@ -255,8 +348,8 @@ extra_js: /js/components/principles.js
     </div>
   </div>
 
-  <p>The critical mistake is selecting a direction before securing the basics. Stabilize health,
-  money, legal position, reputation, and key relationships before making a major choice.</p>
+  <p>Do not choose a direction while the basics remain at risk. Protect your health, money, legal
+  position, reputation and key relationships first.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -266,9 +359,36 @@ extra_js: /js/components/principles.js
   <h2><span class="n">05</span> The five things to protect</h2>
   <p class="pr-deck">When several problems arrive at once, I protect these five first.</p>
 
+  <!-- Five nodes orbiting the thing they exist to protect. Hovering one dims
+       the rest, which is the whole argument: lose any spoke and the centre goes. -->
+  <div class="pr-orbit-wrap">
+    <svg class="pr-orbit" id="pr-orbit" viewBox="0 0 380 310" role="img"
+         aria-label="Five protected things arranged around your ability to choose.">
+      <circle class="ring" cx="190" cy="150" r="96"/>
+      <g class="hub">
+        <circle cx="190" cy="150" r="46"/>
+        <text x="190" y="144">Your ability</text>
+        <text x="190" y="159">to choose</text>
+      </g>
+      {%- comment -%} JS places each node on the ring and drops its label. {%- endcomment -%}
+      {% for p in site.data.principles.protect %}
+      <g class="node" data-i="{{ forloop.index0 }}" tabindex="0" role="button" aria-label="{{ p.key }}">
+        <circle class="spoke-hit" r="30"/>
+        <circle class="bub" r="26"/>
+        <svg class="pi" viewBox="0 0 24 24" width="24" height="24" x="-12" y="-12"><use href="#pi-{{ p.icon }}"/></svg>
+      </g>
+      {% endfor %}
+      <g id="pr-orbit-labels"></g>
+    </svg>
+    <div class="pr-orbit-read" id="pr-orbit-read" role="status"></div>
+  </div>
+
   <div class="pr-protect">
     {% for p in site.data.principles.protect %}
-    <div class="pr-protect-card">
+    <div class="pr-protect-card" data-i="{{ forloop.index0 }}">
+      <span class="pico" aria-hidden="true">
+        <svg class="pr-i" viewBox="0 0 24 24"><use href="#pi-{{ p.icon }}"/></svg>
+      </span>
       <span class="n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
       <h5>{{ p.key }}</h5>
       <p>{{ p.line }}</p>
@@ -276,7 +396,7 @@ extra_js: /js/components/principles.js
     {% endfor %}
   </div>
 
-  <h3>The five trades not to make permanently</h3>
+  <h3 id="trades">The five trades not to make permanently</h3>
   <p>A temporary trade may be necessary. I require strong evidence before making any of these
   trades permanent.</p>
 
@@ -296,6 +416,33 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="closing">
   <h2><span class="n">06</span> One principle for every obstacle</h2>
+
+  <!-- Same obstacle, two questions. The width of each path is the number of
+       options you still have afterwards, which is the argument in one picture. -->
+  <div class="pr-fork-wrap">
+    <svg class="pr-fork" id="pr-fork" viewBox="0 0 560 320" role="img"
+         aria-label="One obstacle, two questions. Relief narrows your options, protection widens them.">
+      <g class="obstacle">
+        <path class="rock" d="M80 160 44 126l18-44 48-10 36 32-8 48-32 30-26-22Z"/>
+        <text x="82" y="238">The obstacle</text>
+      </g>
+
+      <g class="branch relief" data-branch="relief" tabindex="0" role="button"
+         aria-label="Asking how to make the discomfort disappear">
+        <path class="flow" d="M138 140C272 112 392 76 516 58L516 72C392 100 272 148 138 176Z"/>
+        <text class="q" x="322" y="30">“How do I make this discomfort disappear?”</text>
+        <text class="out" x="516" y="92" text-anchor="end">fewer options</text>
+      </g>
+
+      <g class="branch protect is-good" data-branch="protect" tabindex="0" role="button"
+         aria-label="Asking what protects the future">
+        <path class="flow" d="M138 142C272 168 392 186 516 196L516 288C392 268 272 212 138 180Z"/>
+        <text class="q" x="322" y="312">“What protects the future while dealing honestly with the present?”</text>
+        <text class="out" x="516" y="184" text-anchor="end">more options</text>
+      </g>
+    </svg>
+    <p class="pr-fork-read" id="pr-fork-read" role="status"></p>
+  </div>
 
   <div class="pr-final">
     <p>When something difficult happens, do not ask <b>how do I make this discomfort disappear.</b>

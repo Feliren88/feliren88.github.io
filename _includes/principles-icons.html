@@ -1,0 +1,415 @@
+{%- comment -%}
+Icon sprite for /principles/.
+
+One <symbol> per situation id in _data/principles.yml, plus the five things to
+protect and the eight sequence steps. Referenced as <use href="#pi-<id>">.
+
+House style: 24x24 box, content inset to roughly 3..21, stroke-only geometry
+inheriting currentColor. Stroke width, caps and joins are set once on the
+parent .pr-i in principles.css, so nothing here carries presentation.
+{%- endcomment -%}
+<svg class="pr-sprite" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+
+    <!-- ── Under pressure ─────────────────────────────── -->
+    <symbol id="pi-angry" viewBox="0 0 24 24">
+      <path d="M13 2.5 5.5 13.5H11l-1 8 8.5-11.5H13l1-7.5Z"/>
+    </symbol>
+    <symbol id="pi-afraid" viewBox="0 0 24 24">
+      <path d="M2.5 12s3.8-6.5 9.5-6.5S21.5 12 21.5 12 17.7 18.5 12 18.5 2.5 12 2.5 12Z"/>
+      <circle cx="12" cy="12" r="2.8"/>
+    </symbol>
+    <symbol id="pi-confused" viewBox="0 0 24 24">
+      <path d="M8.3 8.6a3.8 3.8 0 1 1 5 3.6c-1 .35-1.7 1.25-1.7 2.3v.8"/>
+      <circle cx="11.6" cy="19.2" r="1.2" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-overwhelmed" viewBox="0 0 24 24">
+      <rect x="3" y="16.5" width="18" height="4" rx="1.2"/>
+      <rect x="5" y="11" width="14" height="4" rx="1.2"/>
+      <rect x="8.5" y="4.5" width="10" height="4" rx="1.2" transform="rotate(-13 13.5 6.5)"/>
+    </symbol>
+    <symbol id="pi-exhausted" viewBox="0 0 24 24">
+      <rect x="2" y="7.5" width="17" height="9" rx="2.5"/>
+      <path d="M21.5 10.5v3"/>
+      <rect x="4.5" y="10" width="3.2" height="4" rx="0.8" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-emergency" viewBox="0 0 24 24">
+      <path d="M12 3 22 20.5H2L12 3Z"/>
+      <path d="M12 10v4.2"/>
+      <circle cx="12" cy="17.4" r="1.1" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-going-well" viewBox="0 0 24 24">
+      <path d="M2.5 20.5h19"/>
+      <path d="M5 15.5l4.5-4.5 3.2 3.2L20 7"/>
+      <path d="M15.5 7H20v4.5"/>
+    </symbol>
+    <symbol id="pi-going-badly" viewBox="0 0 24 24">
+      <path d="M7 14.5a4 4 0 0 1 .7-7.96 5.6 5.6 0 0 1 10.6 1.6A3.6 3.6 0 0 1 17.6 14.5H7Z"/>
+      <path d="M8 18v2.5M12 18v3M16 18v2.5"/>
+    </symbol>
+
+    <!-- ── Work ───────────────────────────────────────── -->
+    <symbol id="pi-career" viewBox="0 0 24 24">
+      <path d="M12 21V3.5"/>
+      <path d="M12 6h7.5l-2.2 2.6L19.5 11H12"/>
+      <path d="M12 14H4.5l2.2-2.6L4.5 8.8H12"/>
+    </symbol>
+    <symbol id="pi-unbearable-work" viewBox="0 0 24 24">
+      <path d="M13.5 3.5H5v17h8.5"/>
+      <path d="M10.5 12H21"/>
+      <path d="M18 8.8 21.2 12 18 15.2"/>
+    </symbol>
+    <symbol id="pi-promotion" viewBox="0 0 24 24">
+      <path d="M2.5 20.5H7V16h4.5v-4.5H16V7h5"/>
+      <path d="M17.5 3.5H21V7"/>
+    </symbol>
+    <symbol id="pi-business" viewBox="0 0 24 24">
+      <path d="M12 21v-8.5"/>
+      <path d="M12 12.5c0-3.2-2.6-5.8-5.8-5.8 0 3.2 2.6 5.8 5.8 5.8Z"/>
+      <path d="M12 12.5c0-3.6 3-6.6 6.6-6.6 0 3.6-3 6.6-6.6 6.6Z"/>
+    </symbol>
+    <symbol id="pi-partners" viewBox="0 0 24 24">
+      <circle cx="8.8" cy="12" r="5.6"/>
+      <circle cx="15.2" cy="12" r="5.6"/>
+    </symbol>
+
+    <!-- ── Money ──────────────────────────────────────── -->
+    <symbol id="pi-invest" viewBox="0 0 24 24">
+      <path d="M2.5 20.5h19"/>
+      <path d="M5.5 16.5 10 11l3 3 6.5-8"/>
+      <path d="M15 6h4.5v4.5"/>
+    </symbol>
+    <symbol id="pi-money-up" viewBox="0 0 24 24">
+      <circle cx="9" cy="14.5" r="6"/>
+      <path d="M9 11.5v6M7 13.2h4"/>
+      <path d="M18.5 20V5M15.2 8.3 18.5 5l3.3 3.3"/>
+    </symbol>
+    <symbol id="pi-money-down" viewBox="0 0 24 24">
+      <circle cx="9" cy="14.5" r="6"/>
+      <path d="M9 11.5v6M7 15.8h4"/>
+      <path d="M18.5 5v15M15.2 16.7 18.5 20l3.3-3.3"/>
+    </symbol>
+    <symbol id="pi-purchase" viewBox="0 0 24 24">
+      <path d="M20.8 12.6 12.6 20.8 3 11.2V3h8.2l9.6 9.6Z"/>
+      <circle cx="7.4" cy="7.4" r="1.7"/>
+    </symbol>
+    <symbol id="pi-negotiate" viewBox="0 0 24 24">
+      <path d="M3 8.5h14M13.5 5 17 8.5 13.5 12"/>
+      <path d="M21 15.5H7M10.5 12 7 15.5 10.5 19"/>
+    </symbol>
+
+    <!-- ── People ─────────────────────────────────────── -->
+    <symbol id="pi-relationship-start" viewBox="0 0 24 24">
+      <path d="M12 20.5S3.2 14.8 3.2 9.3A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8.8 2.7c0 5.5-8.8 11.2-8.8 11.2Z"/>
+    </symbol>
+    <symbol id="pi-infatuated" viewBox="0 0 24 24">
+      <path d="M11 20.5S3 15.2 3 10.1A4.3 4.3 0 0 1 11 7.5a4.3 4.3 0 0 1 8 2.6c0 5.1-8 10.4-8 10.4Z"/>
+      <path d="M18.5 2.5v3M21.5 5.5h-3M20.8 2.9 19 4.7"/>
+    </symbol>
+    <symbol id="pi-conflict" viewBox="0 0 24 24">
+      <path d="M2.5 12h6.5M6 9l3 3-3 3"/>
+      <path d="M21.5 12H15M18 9l-3 3 3 3"/>
+      <path d="M12 4.5v3M12 16.5v3"/>
+    </symbol>
+    <symbol id="pi-stay-or-leave" viewBox="0 0 24 24">
+      <path d="M12 3v6.5"/>
+      <path d="M12 9.5 6 15.2V21"/>
+      <path d="M12 9.5 18 15.2V21"/>
+    </symbol>
+    <symbol id="pi-family" viewBox="0 0 24 24">
+      <path d="M3.5 10.5 12 3.5l8.5 7v10h-17v-10Z"/>
+      <path d="M9.3 20.5v-5.6h5.4v5.6"/>
+    </symbol>
+    <symbol id="pi-friends" viewBox="0 0 24 24">
+      <circle cx="8" cy="8.5" r="3"/>
+      <circle cx="16.5" cy="8.5" r="2.6"/>
+      <path d="M2.8 19c0-2.9 2.3-5.2 5.2-5.2s5.2 2.3 5.2 5.2"/>
+      <path d="M15 14.2A5 5 0 0 1 21.2 19"/>
+    </symbol>
+    <symbol id="pi-power" viewBox="0 0 24 24">
+      <path d="M2.5 7.5 7 12.5 12 4.5l5 8 4.5-5v12h-19v-12Z"/>
+    </symbol>
+    <symbol id="pi-betrayed" viewBox="0 0 24 24">
+      <path d="M9.6 14.4 7.2 16.8a4 4 0 0 1-5.6-5.6L4 8.8"/>
+      <path d="M14.4 9.6l2.4-2.4a4 4 0 0 1 5.6 5.6L20 15.2"/>
+      <path d="M12.6 4.6 11 7M17 11l2.4-.8M4.6 13.2 7 12.4"/>
+    </symbol>
+
+    <!-- ── Yourself ───────────────────────────────────── -->
+    <symbol id="pi-criticised" viewBox="0 0 24 24">
+      <path d="M21 14.5a2.6 2.6 0 0 1-2.6 2.6H8.2L3.5 21V5.6A2.6 2.6 0 0 1 6.1 3h12.3A2.6 2.6 0 0 1 21 5.6v8.9Z"/>
+      <path d="M8 9.5h8.5M8 13h5"/>
+    </symbol>
+    <symbol id="pi-embarrassed" viewBox="0 0 24 24">
+      <circle cx="12" cy="4.6" r="2.1"/>
+      <path d="M8.6 8.4 4 20.5h16L15.4 8.4"/>
+      <path d="M9.5 14.5h5"/>
+    </symbol>
+    <symbol id="pi-lie" viewBox="0 0 24 24">
+      <path d="M2.5 8.5c4-2 6.6-2 9.5 0 2.9-2 5.5-2 9.5 0-.5 5.4-3.2 8.6-5.9 8.6-1.8 0-2.9-1.3-4.3-1.3s-2.5 1.3-4.3 1.3c-2.7 0-5.4-3.2-5.9-8.6Z"/>
+      <path d="M7 11.5h1.6M15.4 11.5H17"/>
+    </symbol>
+    <symbol id="pi-mentors" viewBox="0 0 24 24">
+      <circle cx="12" cy="5.4" r="2.6"/>
+      <path d="M8.2 14c0-2.1 1.7-3.8 3.8-3.8s3.8 1.7 3.8 3.8"/>
+      <rect x="4.5" y="16.5" width="15" height="4" rx="1.2"/>
+    </symbol>
+    <symbol id="pi-learning" viewBox="0 0 24 24">
+      <path d="M3.5 4.5h5.6a3 3 0 0 1 2.9 3v12a2.6 2.6 0 0 0-2.3-1.6H3.5v-13.4Z"/>
+      <path d="M20.5 4.5h-5.6a3 3 0 0 0-2.9 3v12a2.6 2.6 0 0 1 2.3-1.6h6.2V4.5Z"/>
+    </symbol>
+    <symbol id="pi-procrastinating" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M12 6.6V12l3.8 2.2"/>
+    </symbol>
+    <symbol id="pi-perfectionism" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.6"/>
+      <circle cx="12" cy="12" r="4.9"/>
+      <circle cx="12" cy="12" r="1.5" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-health" viewBox="0 0 24 24">
+      <path d="M2.5 12.5h4l2.2-5.5 3.3 11 2.6-7.2 1.6 1.7h5.3"/>
+    </symbol>
+    <symbol id="pi-lonely" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke-dasharray="3 3.4"/>
+      <circle cx="12" cy="12" r="2.6" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-bored" viewBox="0 0 24 24">
+      <path d="M2.5 15.5h11"/>
+      <path d="M15 4h5l-5 5.6h5"/>
+    </symbol>
+    <symbol id="pi-jealous" viewBox="0 0 24 24">
+      <path d="M17 2.8l1.5 3.1 3.4.5-2.5 2.4.6 3.4-3-1.6-3 1.6.6-3.4L12 6.4l3.4-.5L17 2.8Z"/>
+      <circle cx="8" cy="15.5" r="5.2"/>
+    </symbol>
+    <symbol id="pi-comparing" viewBox="0 0 24 24">
+      <path d="M2.5 20.5h19"/>
+      <rect x="4.5" y="11" width="5.5" height="9.5" rx="1"/>
+      <rect x="14" y="4.5" width="5.5" height="16" rx="1"/>
+    </symbol>
+    <symbol id="pi-praised" viewBox="0 0 24 24">
+      <path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1L3.2 9.4l6.1-.8L12 3Z"/>
+    </symbol>
+    <symbol id="pi-succeeding" viewBox="0 0 24 24">
+      <path d="M1.8 20.5 8.8 7.5l3.7 5.6 2.2-3.2 7.5 10.6H1.8Z"/>
+      <circle cx="18.4" cy="4.6" r="2.1"/>
+    </symbol>
+    <symbol id="pi-failing" viewBox="0 0 24 24">
+      <path d="M3.5 6.5 10 13.4l3-3 6.5 7.1"/>
+      <path d="M15 17.5h4.5V13"/>
+    </symbol>
+    <symbol id="pi-repeating" viewBox="0 0 24 24">
+      <path d="M20.2 12a8.2 8.2 0 1 1-2.4-5.8"/>
+      <path d="M20.5 3.5v5h-5"/>
+    </symbol>
+
+    <!-- ── Deciding ───────────────────────────────────── -->
+    <symbol id="pi-relocate" viewBox="0 0 24 24">
+      <path d="M12 21.2s7.3-6.7 7.3-11.4a7.3 7.3 0 1 0-14.6 0C4.7 14.5 12 21.2 12 21.2Z"/>
+      <circle cx="12" cy="9.6" r="2.7"/>
+    </symbol>
+    <symbol id="pi-opportunities" viewBox="0 0 24 24">
+      <circle cx="12" cy="19.5" r="1.9" class="pr-i-fill"/>
+      <path d="M12 17.4 4.5 6.5M12 17.4V4.5M12 17.4 19.5 6.5"/>
+      <path d="M3.2 10 4.5 6.5 8 7.7M9.6 7.5 12 4.5l2.4 3M16 7.7l3.5-1.2 1.3 3.5"/>
+    </symbol>
+    <symbol id="pi-two-goods" viewBox="0 0 24 24">
+      <path d="M12 21v-6"/>
+      <path d="M12 15 5.5 8.4V6M12 15l6.5-6.6V6"/>
+      <circle cx="5.5" cy="4" r="1.8"/>
+      <circle cx="18.5" cy="4" r="1.8"/>
+    </symbol>
+    <symbol id="pi-irreversible" viewBox="0 0 24 24">
+      <rect x="3.8" y="10.5" width="16.4" height="10" rx="2.4"/>
+      <path d="M7.8 10.5V7a4.2 4.2 0 0 1 8.4 0v3.5"/>
+    </symbol>
+    <symbol id="pi-reversible" viewBox="0 0 24 24">
+      <path d="M3.8 12a8.2 8.2 0 1 0 2.4-5.8"/>
+      <path d="M3.5 3.5v5h5"/>
+    </symbol>
+    <symbol id="pi-changed" viewBox="0 0 24 24">
+      <path d="M2.5 6.5h4l11 11h4"/>
+      <path d="M2.5 17.5h4l11-11h4"/>
+      <path d="M18.5 3.5 21.5 6.5 18.5 9.5M18.5 14.5l3 3-3 3"/>
+    </symbol>
+    <symbol id="pi-wrong" viewBox="0 0 24 24">
+      <path d="M7 21V9.5a4.6 4.6 0 0 1 9.2 0V21"/>
+      <path d="M3.2 12.8 7 9l3.8 3.8"/>
+    </symbol>
+    <symbol id="pi-everyone-agrees" viewBox="0 0 24 24">
+      <path d="M3 5.5h11M11 2.5l3 3-3 3"/>
+      <path d="M3 12h11M11 9l3 3-3 3"/>
+      <path d="M3 18.5h11M11 15.5l3 3-3 3"/>
+      <path d="M19 3.5v17"/>
+    </symbol>
+    <symbol id="pi-everyone-disagrees" viewBox="0 0 24 24">
+      <path d="M3 5.5h11M11 2.5l3 3-3 3"/>
+      <path d="M3 18.5h11M11 15.5l3 3-3 3"/>
+      <path d="M21 12H8M11 9l-3 3 3 3"/>
+    </symbol>
+
+    <!-- ── The five things to protect ─────────────────── -->
+    <symbol id="pi-protect-health" viewBox="0 0 24 24">
+      <path d="M12 20.5S3.4 15 3.4 9.4A4.6 4.6 0 0 1 12 6.7a4.6 4.6 0 0 1 8.6 2.7c0 5.6-8.6 11.1-8.6 11.1Z"/>
+      <path d="M6.5 12h3l1.5-3 2 5.5 1.5-2.5h3"/>
+    </symbol>
+    <symbol id="pi-protect-integrity" viewBox="0 0 24 24">
+      <path d="M12 21.2S3.8 17.8 3.8 11V5.4L12 2.8l8.2 2.6V11c0 6.8-8.2 10.2-8.2 10.2Z"/>
+      <path d="M8.6 11.6 11 14l4.4-4.6"/>
+    </symbol>
+    <symbol id="pi-protect-runway" viewBox="0 0 24 24">
+      <path d="M6 2.8h12M6 21.2h12"/>
+      <path d="M7 2.8c0 4.6 5 6.6 5 9.2s-5 4.6-5 9.2"/>
+      <path d="M17 2.8c0 4.6-5 6.6-5 9.2s5 4.6 5 9.2"/>
+    </symbol>
+    <symbol id="pi-protect-relationships" viewBox="0 0 24 24">
+      <circle cx="7.4" cy="7.8" r="2.8"/>
+      <circle cx="16.6" cy="7.8" r="2.8"/>
+      <path d="M2.6 19c0-2.7 2.1-4.8 4.8-4.8S12.2 16.3 12.2 19"/>
+      <path d="M11.8 19c0-2.7 2.1-4.8 4.8-4.8s4.8 2.1 4.8 4.8"/>
+    </symbol>
+    <symbol id="pi-protect-exit" viewBox="0 0 24 24">
+      <path d="M13.5 3.2H4.8v17.6h8.7"/>
+      <path d="M10 12h11.2"/>
+      <path d="M17.8 8.6 21.2 12l-3.4 3.4"/>
+    </symbol>
+
+    <!-- ── The eight-step sequence ────────────────────── -->
+    <symbol id="pi-stop" viewBox="0 0 24 24">
+      <path d="M8.2 2.8h7.6l5.4 5.4v7.6l-5.4 5.4H8.2l-5.4-5.4V8.2l5.4-5.4Z"/>
+      <path d="M8.6 12h6.8"/>
+    </symbol>
+    <symbol id="pi-see" viewBox="0 0 24 24">
+      <path d="M2.5 12s3.8-6.5 9.5-6.5S21.5 12 21.5 12 17.7 18.5 12 18.5 2.5 12 2.5 12Z"/>
+      <circle cx="12" cy="12" r="2.8" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-separate" viewBox="0 0 24 24">
+      <path d="M12 3v18" stroke-dasharray="3 3"/>
+      <path d="M8.5 8.5 4 13l4.5 4.5"/>
+      <path d="M15.5 8.5 20 13l-4.5 4.5"/>
+    </symbol>
+    <symbol id="pi-secure" viewBox="0 0 24 24">
+      <path d="M12 21.2S3.8 17.8 3.8 11V5.4L12 2.8l8.2 2.6V11c0 6.8-8.2 10.2-8.2 10.2Z"/>
+    </symbol>
+    <symbol id="pi-speak" viewBox="0 0 24 24">
+      <path d="M21 13.8a2.6 2.6 0 0 1-2.6 2.6H9L4.5 20.5V5.6A2.6 2.6 0 0 1 7.1 3h11.3A2.6 2.6 0 0 1 21 5.6v8.2Z"/>
+      <path d="M8.6 9.6h8.4"/>
+    </symbol>
+    <symbol id="pi-sample" viewBox="0 0 24 24">
+      <path d="M9.5 2.8v6.4L4.2 18.4a2 2 0 0 0 1.7 3h12.2a2 2 0 0 0 1.7-3L14.5 9.2V2.8"/>
+      <path d="M8.2 2.8h7.6"/>
+      <path d="M6.6 14.6h10.8"/>
+    </symbol>
+    <symbol id="pi-select" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M7.8 12.2 10.8 15.2 16.4 9"/>
+    </symbol>
+    <symbol id="pi-scale" viewBox="0 0 24 24">
+      <path d="M2.5 20.5h19"/>
+      <rect x="3.5" y="14" width="4.5" height="6.5" rx="1"/>
+      <rect x="9.8" y="9" width="4.5" height="11.5" rx="1"/>
+      <rect x="16" y="3.5" width="4.5" height="17" rx="1"/>
+    </symbol>
+
+    <!-- ── The central rule ──────────────────────────── -->
+    <symbol id="pi-now" viewBox="0 0 24 24">
+      <path d="M6.5 2.5h11M6.5 21.5h11"/>
+      <path d="M7.5 2.5c0 4.5 4.5 6.4 4.5 9.5s-4.5 5-4.5 9.5"/>
+      <path d="M16.5 2.5c0 4.5-4.5 6.4-4.5 9.5s4.5 5 4.5 9.5"/>
+      <path d="M9 19.5h6" class="pr-i-fill" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="pi-horizon" viewBox="0 0 24 24">
+      <path d="M2.5 15.5h19"/>
+      <circle cx="12" cy="15.5" r="5.5"/>
+      <path d="M12 2.5v3M4.6 5.6l2.1 2.1M19.4 5.6l-2.1 2.1"/>
+    </symbol>
+    <symbol id="pi-door-open" viewBox="0 0 24 24">
+      <path d="M3 21h18"/>
+      <path d="M6 21V5.5L15 3v18"/>
+      <path d="M18.5 21V7l-3.5-1"/>
+      <circle cx="12.6" cy="12.4" r="1" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-door-shut" viewBox="0 0 24 24">
+      <path d="M3 21h18"/>
+      <rect x="6" y="3" width="12" height="18" rx="1.5"/>
+      <circle cx="14.6" cy="12.4" r="1" class="pr-i-fill"/>
+    </symbol>
+
+    <!-- ── The six questions ─────────────────────────── -->
+    <symbol id="pi-q-facts" viewBox="0 0 24 24">
+      <rect x="4" y="3" width="16" height="18" rx="2.2"/>
+      <path d="M8 8h8M8 12h8M8 16h4.5"/>
+    </symbol>
+    <symbol id="pi-q-assume" viewBox="0 0 24 24">
+      <path d="M20.5 13.4a2.5 2.5 0 0 1-2.5 2.5H8.6L4.5 19.6V5.4A2.5 2.5 0 0 1 7 2.9h11a2.5 2.5 0 0 1 2.5 2.5v8Z"/>
+      <path d="M10.4 8.2a2.1 2.1 0 1 1 2.8 2c-.5.2-.9.6-.9 1.2v.3"/>
+      <circle cx="12.3" cy="14" r="0.9" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-q-risk" viewBox="0 0 24 24">
+      <path d="M12 3 22 20.5H2L12 3Z"/>
+      <path d="M12 9.5 10.5 14h3L12 18"/>
+    </symbol>
+    <symbol id="pi-q-avoiding" viewBox="0 0 24 24">
+      <path d="M20.5 13.4a2.5 2.5 0 0 1-2.5 2.5H8.6L4.5 19.6V5.4A2.5 2.5 0 0 1 7 2.9h11a2.5 2.5 0 0 1 2.5 2.5v8Z"/>
+      <path d="M3.5 3.5 20.5 20.5"/>
+    </symbol>
+    <symbol id="pi-q-options" viewBox="0 0 24 24">
+      <circle cx="5" cy="19" r="2"/>
+      <path d="M5 17c0-6 3-9 8-9h6"/>
+      <path d="M5 17c0-3 1.6-4.5 4-4.5h10"/>
+      <path d="M5 17c0-9 4.5-13 10-13h4"/>
+      <path d="M16.5 1.5 19.5 4l-3 2.5M16.5 10 19.5 12.5l-3 2.5M16.5 5.5 19.5 8l-3 2.5" opacity="0"/>
+    </symbol>
+
+    <!-- ── Speed ─────────────────────────────────────── -->
+    <symbol id="pi-speed-fast" viewBox="0 0 24 24">
+      <path d="M3 7h8M2 12h6M3 17h8"/>
+      <path d="M12.5 4.5 21 12l-8.5 7.5"/>
+    </symbol>
+    <symbol id="pi-speed-slow" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.6 8.6v6.8M14.4 8.6v6.8"/>
+    </symbol>
+
+    <!-- ── The five trades ───────────────────────────── -->
+    <symbol id="pi-freedom" viewBox="0 0 24 24">
+      <rect x="4" y="10.5" width="16" height="10" rx="2.4"/>
+      <path d="M8 10.5V7a4.2 4.2 0 0 1 8.2-1.4"/>
+    </symbol>
+    <symbol id="pi-curiosity" viewBox="0 0 24 24">
+      <circle cx="10.5" cy="10.5" r="7"/>
+      <path d="M15.6 15.6 21 21"/>
+      <path d="M8.6 8.6a2 2 0 1 1 2.6 1.9c-.5.2-.9.6-.9 1.2v.4"/>
+    </symbol>
+    <symbol id="pi-money" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="6.2" rx="8" ry="3.2"/>
+      <path d="M4 6.2v5.4c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2V6.2"/>
+      <path d="M4 11.6v5.4c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2v-5.4"/>
+    </symbol>
+    <symbol id="pi-opportunity" viewBox="0 0 24 24">
+      <path d="M3.5 20.5h17"/>
+      <path d="M6.5 20.5V4.5L15.5 2.5v18"/>
+      <circle cx="13" cy="12" r="1" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-status" viewBox="0 0 24 24">
+      <circle cx="12" cy="9" r="6"/>
+      <path d="M8.4 14.2 7 21.5l5-2.6 5 2.6-1.4-7.3"/>
+    </symbol>
+    <symbol id="pi-ambition" viewBox="0 0 24 24">
+      <path d="M6 21V3"/>
+      <path d="M6 4h11.5l-2.4 4 2.4 4H6"/>
+    </symbol>
+    <symbol id="pi-security" viewBox="0 0 24 24">
+      <rect x="4" y="10.5" width="16" height="10" rx="2.4"/>
+      <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+      <circle cx="12" cy="15.5" r="1.4" class="pr-i-fill"/>
+    </symbol>
+    <symbol id="pi-relationships" viewBox="0 0 24 24">
+      <circle cx="7.4" cy="7.8" r="2.8"/>
+      <circle cx="16.6" cy="7.8" r="2.8"/>
+      <path d="M2.6 19c0-2.7 2.1-4.8 4.8-4.8S12.2 16.3 12.2 19"/>
+      <path d="M11.8 19c0-2.7 2.1-4.8 4.8-4.8s4.8 2.1 4.8 4.8"/>
+    </symbol>
+
+  </defs>
+</svg>

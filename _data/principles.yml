@@ -504,52 +504,72 @@ situations:
 # The eight-step sequence for when nothing above fits
 sequence:
   - key: STOP
-    line: Do not react immediately.
-    detail: Pause unless delay creates immediate danger. Use that time to regain enough clarity to judge the situation.
+    line: Wait before you respond.
+    detail: Unless delay creates immediate danger, pause until you can assess the situation clearly.
   - key: SEE
-    line: What is actually happening?
-    detail: Describe the situation as a camera would. No motive, no forecast, no blame. Just the events.
+    line: Write down what happened.
+    detail: Record only what you observed. Leave out blame, predictions and guesses about motives.
   - key: SEPARATE
-    line: Facts from fears, ego, assumptions and other people's opinions.
-    detail: Put each item in one of those five buckets. Most of what feels like a fact will land in another column.
+    line: Separate facts from interpretation.
+    detail: Label each statement as fact, fear, assumption, pride or someone else's opinion.
   - key: SECURE
-    line: Protect health, money, legal position, reputation and important relationships.
-    detail: Stop the bleeding before you diagnose. This step is boring and it is the one people skip.
+    line: Protect the essentials first.
+    detail: Secure your health, money, legal position, reputation and important relationships before making a larger decision.
   - key: SPEAK
-    line: Have the conversation you are avoiding.
-    detail: Name the necessary conversation. Delay often makes the practical and emotional cost larger.
+    line: Address the conversation you have delayed.
+    detail: State the issue clearly to the person involved. Waiting can make the problem harder to resolve.
   - key: SAMPLE
-    line: Take the smallest reversible action that produces new information.
-    detail: Not the decision. The test. You are buying evidence at the lowest available price.
+    line: Run a small, reversible test.
+    detail: Choose the least costly action that will give you useful information.
   - key: SELECT
-    line: Choose after reality gives feedback.
-    detail: Now you are deciding with data instead of with mood.
+    line: Choose using what the test showed.
+    detail: Base the decision on observed results, not your mood at the time.
   - key: SCALE
-    line: Commit heavily only after the direction proves itself.
-    detail: Conviction is earned by evidence, and it is the last step rather than the first.
+    line: Increase your commitment when the evidence supports it.
+    detail: Commit more time, money or attention only after the smaller test succeeds.
 
 # The five things to protect
 protect:
   - key: Health
+    icon: protect-health
+    short: Health
     line: Without it, every other advantage becomes harder to use.
   - key: Integrity
+    icon: protect-integrity
+    short: Integrity
     line: Protect the trust that lets people rely on your word and work.
   - key: Financial runway
+    icon: protect-runway
+    short: Runway
     line: Savings give you time to reject bad terms and make a considered decision.
   - key: Your best relationships
+    icon: protect-relationships
+    short: People
     line: Protect the people who provide honest help and accept it from you in return.
   - key: The ability to walk away
+    icon: protect-exit
+    short: Exit
     line: Never build a life where one employer, customer, person, debt, status symbol or institution controls your future.
 
 # The five trades not to make permanently
 trades:
   - give: Health
+    give_icon: protect-health
     get: Money
+    get_icon: money
   - give: Integrity
+    give_icon: protect-integrity
     get: Opportunity
+    get_icon: opportunity
   - give: Freedom
+    give_icon: freedom
     get: Status
+    get_icon: status
   - give: Good relationships
+    give_icon: relationships
     get: Ambition
+    get_icon: ambition
   - give: Curiosity
+    give_icon: curiosity
     get: Security
+    get_icon: security
