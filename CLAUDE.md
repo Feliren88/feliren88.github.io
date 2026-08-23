@@ -181,7 +181,7 @@ extra_js: /js/components/high-agency.js
 
 `default.html` emits a `<link>` after `styles.css` and a deferred `<script>` after `nav.js`
 when those keys are present. Use this for one-off pages heavy enough that their CSS would
-bloat the global stylesheet. Both are cache-busted with `?v=2` in `default.html`; **bump that whenever you edit
+bloat the global stylesheet. Both are cache-busted with `?v=3` in `default.html`; **bump that whenever you edit
 `high-agency.css`, `principles.css` or their scripts**, or returning visitors get stale assets.
 
 Page-scoped CSS should shadow the global type-scale tokens rather than hard-code sizes.
