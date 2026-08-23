@@ -4,95 +4,23 @@ title: Use Cases
 subtitle: Applied machine learning in research and production
 description: Case studies in AI safety, conformal prediction, multilingual and multimodal AI, earth observation, and production ML.
 permalink: /usecases/
+hide_title: true
+extra_css: /css/portfolio-modern.css
 ---
+<article class="modern-portfolio usecases-modern">
+  <header class="mp-hero uc-modern-hero"><div><p class="eyebrow">USE CASES · FROM METHOD TO CONSEQUENCE</p><h1>Applied AI, shown through the decisions it changed.</h1><p class="mp-lead">Selected systems from research and production—each documented through the problem, intervention, evidence, and remaining limitation.</p><div class="mp-actions"><a class="btn btn-primary" href="#featured-cases">Explore featured cases</a><a class="mp-text-link" href="#case-index">Browse the complete index →</a></div></div><aside class="uc-hero-proof"><span>What every case includes</span><ul><li>Problem worth solving</li><li>Intervention and architecture</li><li>Evidence, not only claims</li><li>Limitation or current status</li></ul></aside></header>
 
-<div class="note-block" role="note">
-  <span class="note-badge">Work in Progress</span>
-  <p>{{ site.data.usecases.wip_notice }}</p>
-</div>
+  <section class="mp-section" id="featured-cases"><header class="mp-section-head"><div><p class="eyebrow">FEATURED CASES</p><h2>Three systems. Three kinds of reliability.</h2></div><p>Safety, multimodal perception, and cultural evaluation—shown at full resolution.</p></header><div class="uc-feature-list">
+    {% assign featured_ids = 'multilingual-vlm-crossmodal-conflict,heron-hijack-self-probe,procaenet-flood-segmentation' | split:',' %}{% for featured_id in featured_ids %}{% assign uc = site.data.usecases.usecases | where:'id',featured_id | first %}{% assign banner = site.data.uc_banners[uc.id] %}
+    <article class="uc-feature uc-entry" data-category="{{ uc.category }}" data-index="{{ forloop.index }}"><div class="uc-feature-visual">{% if banner %}<a href="/usecases/{{ uc.id }}/"><img src="/assets/img/usecases/{{ uc.id }}.webp" data-src-dark="/assets/img/usecases/{{ uc.id }}.webp" data-src-light="/assets/img/usecases/{{ uc.id }}-light.webp" alt="{{ banner.alt }}" width="1320" height="600" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async"></a>{% else %}<div class="uc-feature-signal"><span>0{{ forloop.index }}</span><i></i><b>{{ uc.category }}</b></div>{% endif %}</div><div class="uc-feature-copy"><div class="uc-feature-meta"><span>{{ uc.category }}</span><span>{{ uc.role }}</span></div><h3><a href="/usecases/{{ uc.id }}/">{{ uc.title }}</a></h3><p class="uc-feature-hook">{{ uc.hook }}</p><dl><div><dt>Problem</dt><dd>{{ uc.situation | strip_html | truncatewords:34 }}</dd></div><div><dt>Intervention</dt><dd>{% for part in uc.resolution limit:1 %}{{ part[1] | strip_html | truncatewords:34 }}{% endfor %}</dd></div><div><dt>Evidence</dt><dd>{% if uc.impact %}{{ uc.impact | strip_html | truncatewords:30 }}{% else %}{{ uc.hook }}{% endif %}</dd></div><div><dt>Limit / status</dt><dd>{% if uc.next %}{{ uc.next | strip_html | truncatewords:28 }}{% else %}Documented results and constraints are available in the full case.{% endif %}</dd></div></dl><div class="uc-feature-footer"><div class="uc-tags">{% for tag in uc.tags limit:3 %}<span class="uc-tag">{{ tag }}</span>{% endfor %}</div><a href="/usecases/{{ uc.id }}/">Read full case →</a></div></div></article>{% endfor %}
+  </div></section>
 
-<div class="filter-bar" role="group" aria-label="Filter use cases by category">
-  <button class="filter-pill is-active" data-filter="all">All</button>
-  {% for cat in site.data.usecases.categories %}
-  <button class="filter-pill" data-filter="{{ cat.id }}">{{ cat.label }}</button>
-  {% endfor %}
-</div>
-
-<div class="uc-grid" id="uc-grid">
-  {% for uc in site.data.usecases.usecases %}
-  {% assign ext_link = nil %}
-  {% if uc.link contains "://" %}{% assign ext_link = uc.link %}{% endif %}
-  {% assign ext_link = ext_link | default: uc.arxiv %}
-  {% unless ext_link %}{% if uc.doi %}{% assign ext_link = "https://doi.org/" | append: uc.doi %}{% endif %}{% endunless %}
-  <article class="uc-card" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">
-
-    {% assign banner = site.data.uc_banners[uc.id] %}
-    {% if banner %}
-    <a class="uc-flow-link" href="/usecases/{{ uc.id }}/" aria-label="Read writeup: {{ uc.title }}">
-      <img class="uc-flow-img" src="/assets/img/usecases/{{ uc.id }}.webp" data-src-dark="/assets/img/usecases/{{ uc.id }}.webp" data-src-light="/assets/img/usecases/{{ uc.id }}-light.webp" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async">
-    </a>
-    {% endif %}
-
-    <div class="uc-card-header">
-      <div class="uc-tags">
-        {% for tag in uc.tags %}<span class="uc-tag">{{ tag }}</span>{% endfor %}
-      </div>
-      {% if ext_link %}<a class="uc-ext-link" href="{{ ext_link }}" target="_blank" rel="noreferrer" aria-label="View source for {{ uc.title }}">↗</a>{% endif %}
+  <section class="mp-section uc-index" id="case-index"><header class="mp-section-head"><div><p class="eyebrow">COMPLETE INDEX</p><h2>Every case, one clear entry point</h2></div><p>{{ site.data.usecases.wip_notice }}</p></header>
+    {% assign all_count=site.data.usecases.usecases|size %}<div class="mp-filter-rail"><div class="filter-bar" role="group" aria-label="Filter use cases by category"><button class="filter-pill is-active" data-filter="all">All <span>{{ all_count }}</span></button>{% for cat in site.data.usecases.categories %}{% assign cat_count=site.data.usecases.usecases|where:'category',cat.id|size %}<button class="filter-pill" data-filter="{{ cat.id }}">{{ cat.label | replace:'AI Safety & Reliability','Safety' | replace:'Multimodal AI · Earth Observation','Earth' | replace:'Cultural & Multilingual AI','Cultural' | replace:'Production ML, Industry','Production' | replace:'Applied & Hackathon Projects','Applied' | replace:'Ongoing Projects','Ongoing' }} <span>{{ cat_count }}</span></button>{% endfor %}</div><p class="uc-result-count" id="uc-result-count" role="status" aria-live="polite"></p></div>
+    <div class="uc-index-list" id="uc-grid">{% for uc in site.data.usecases.usecases %}{% assign ext_link=nil %}{% if uc.link contains '://' %}{% assign ext_link=uc.link %}{% endif %}{% assign ext_link=ext_link|default:uc.arxiv %}{% unless ext_link %}{% if uc.doi %}{% assign ext_link='https://doi.org/'|append:uc.doi %}{% endif %}{% endunless %}{% assign banner=site.data.uc_banners[uc.id] %}
+      <article class="uc-index-row uc-entry" data-category="{{ uc.category }}" data-index="{{ forloop.index }}">{% if banner %}<a class="uc-index-image" href="/usecases/{{ uc.id }}/"><img src="/assets/img/usecases/{{ uc.id }}.webp" data-src-dark="/assets/img/usecases/{{ uc.id }}.webp" data-src-light="/assets/img/usecases/{{ uc.id }}-light.webp" alt="{{ banner.alt }}" width="1320" height="600" loading="lazy" decoding="async"></a>{% else %}<div class="uc-index-mark"><span>{{ forloop.index }}</span></div>{% endif %}<div class="uc-index-copy"><div><span class="uc-category">{{ uc.category }}</span><span class="uc-venue-name">{{ uc.venue }}</span></div><h3><a href="/usecases/{{ uc.id }}/">{{ uc.title }}</a></h3><p>{{ uc.hook | default:uc.situation | strip_html | truncatewords:27 }}</p><div class="uc-tags">{% for tag in uc.tags limit:3 %}<span class="uc-tag">{{ tag }}</span>{% endfor %}{% if uc.tags.size > 3 %}<span class="uc-tag uc-tag--more">+{{ uc.tags.size | minus:3 }}</span>{% endif %}</div></div><div class="uc-index-actions">{% if ext_link %}<a href="{{ ext_link }}" target="_blank" rel="noreferrer" aria-label="View source for {{ uc.title }}">Source ↗</a>{% endif %}<a class="uc-case-link" href="/usecases/{{ uc.id }}/">Read case →</a></div></article>{% endfor %}
     </div>
+  </section>
+</article>
 
-    <h3 class="uc-title"><a href="/usecases/{{ uc.id }}/" class="uc-title-link">{{ uc.title }}</a></h3>
-    <p class="uc-meta"><span class="uc-venue-name">{{ uc.venue }}</span>{% if uc.role %}<span class="uc-role"> · {{ uc.role }}</span>{% endif %}</p>
-
-    {% if uc.hook %}<p class="uc-situation">{{ uc.hook }}</p>{% endif %}
-
-    {% if uc.tech_stack %}
-    {% assign tech_total = 0 %}
-    {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% assign pair_size = pair[1] | size %}{% assign tech_total = tech_total | plus: pair_size %}{% endunless %}{% endfor %}
-    {% assign tech_shown = 0 %}
-    <div class="uc-tech-strip">
-      {% for pair in uc.tech_stack %}{% unless pair[0] == 'hyperparams' %}{% for item in pair[1] %}{% if tech_shown < 5 %}<span class="uc-tech-tag">{{ item }}</span>{% assign tech_shown = tech_shown | plus: 1 %}{% endif %}{% endfor %}{% endunless %}{% endfor %}
-      {% if tech_total > 5 %}<span class="uc-tech-tag uc-tech-tag--more" title="{{ tech_total }} technologies total">+{{ tech_total | minus: 5 }}</span>{% endif %}
-    </div>
-    {% endif %}
-
-    <a href="/usecases/{{ uc.id }}/" class="uc-card-cta">Read writeup →</a>
-
-  </article>
-  {% endfor %}
-</div>
-
-
-<script>
-(function() {
-  var PRIORITY = { safety: 1, ongoing: 2, cultural: 3, geospatial: 4, production: 5, applied: 6 };
-  var btns = document.querySelectorAll('.filter-pill');
-  var grid = document.getElementById('uc-grid');
-  var cards = document.querySelectorAll('.uc-card');
-
-  function applyFilter(filter) {
-    var arr = Array.from(cards);
-    arr.sort(function(a, b) {
-      if (filter === 'all') {
-        var pa = PRIORITY[a.getAttribute('data-category')] || 99;
-        var pb = PRIORITY[b.getAttribute('data-category')] || 99;
-        if (pa !== pb) return pa - pb;
-      }
-      return parseInt(a.getAttribute('data-index')) - parseInt(b.getAttribute('data-index'));
-    });
-    arr.forEach(function(card) { grid.appendChild(card); });
-    cards.forEach(function(card) {
-      card.hidden = filter !== 'all' && card.getAttribute('data-category') !== filter;
-    });
-  }
-
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      btns.forEach(function(b) { b.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-      applyFilter(btn.getAttribute('data-filter'));
-    });
-  });
-
-  applyFilter('all');
-})();
-</script>
+<script>(function(){var btns=document.querySelectorAll('.usecases-modern .filter-pill'),entries=document.querySelectorAll('#uc-grid .uc-entry'),count=document.getElementById('uc-result-count');function apply(filter){var visible=0;entries.forEach(function(entry){var show=filter==='all'||entry.dataset.category===filter;entry.hidden=!show;if(show)visible++});if(count)count.textContent=visible+(visible===1?' case':' cases')}btns.forEach(function(btn){btn.addEventListener('click',function(){btns.forEach(function(b){b.classList.remove('is-active')});btn.classList.add('is-active');apply(btn.dataset.filter)})});apply('all')})();</script>

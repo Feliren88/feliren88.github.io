@@ -2183,6 +2183,12 @@ Replace `feliren` with the actual Buttondown username.
 
 **Evidence:** All four live pages returned HTTP 200 with zero JavaScript errors and zero viewport overflow at 1440×1000 and 390×844. Current rendered heights: Homepage 6,958/13,198px, Research 1,532/2,884px, Use Cases 5,442/13,939px, Contact 2,041/2,851px (desktop/mobile).
 
+### Delivery update — 2026-08-23
+
+- **Research delivered:** thesis-led hero, three research pillars, two featured papers, year-grouped archive rows, counted sticky filters, compact author/abstract details, and preserved DOI/Scholar/ORCID/structured-data coverage.
+- **Use Cases delivered:** three editorial featured cases, explicit Problem → Intervention → Evidence → Limit/status structure, counted sticky filters, compact 22-case index, preserved case URLs/source links/banner alt text, and reduced mobile height from 13,939px to 12,104px.
+- Shared page-scoped system added in `css/portfolio-modern.css`; browser audit at 1440px and 390px found zero page-level JavaScript errors. Desktop heights after correction: Research 4,318px; Use Cases 7,454px.
+
 ### Design direction
 
 - Keep the quiet, technical identity; do not add glassmorphism, animated gradients, excessive glow, or generic startup decoration.
