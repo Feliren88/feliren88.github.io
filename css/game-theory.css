@@ -741,3 +741,109 @@ body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{d
   .gt-layer .depth { display: none; }
   .gt-domain > button { grid-template-columns: auto 1fr auto; }
 }
+
+/* ════════════════════════════════════════════════════════
+   Added icons, the shape map and the laws tracker
+   ════════════════════════════════════════════════════════ */
+
+/* Icons added around existing copy */
+.gt-cq { grid-template-columns: auto auto 1fr auto; }
+.gt-cq-i { color: var(--accent); font-size: 1.25rem; opacity: 0.75; }
+.gt-cq.is-done .gt-cq-i { opacity: 1; }
+.gt-drow-i { color: var(--accent); font-size: 1.15rem; opacity: 0.8; }
+.gt-game-tab { display: inline-flex; align-items: center; gap: 0.4rem; }
+.gt-game-tab .gt-i { font-size: 1.05rem; }
+
+/* 01 · every game as a shape */
+.gt-shapes-block { margin-top: var(--gap-3); border-top: 1px solid var(--line); padding-top: var(--gap-2); }
+.gt-shapes-k {
+  display: flex; align-items: center; gap: 0.4rem; margin: 0 0 0.7rem !important;
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent) !important;
+}
+.gt-shapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.45rem; }
+.gt-shape {
+  display: grid; gap: 0.4rem; justify-items: start;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: 0.7rem 0.75rem;
+  font-family: inherit; text-align: left; cursor: pointer;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+.gt-shape:hover { border-color: var(--accent); transform: translateY(-2px); }
+.gt-shape-head { display: flex; align-items: center; gap: 0.4rem; }
+.gt-shape-head .gt-i { color: var(--accent); font-size: 1.1rem; }
+.gt-shape-head b {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs);
+  color: var(--text); line-height: 1.2;
+}
+.gt-shape-grid {
+  display: grid; grid-template-columns: repeat(2, 1.15rem); grid-auto-rows: 1.15rem;
+  gap: 3px; padding: 3px; border: 1px solid var(--line-strong); border-radius: 3px;
+}
+.gt-shape-cell { border-radius: 2px; background: color-mix(in srgb, var(--muted) 16%, transparent); }
+.gt-shape-cell.is-par { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent-2) 70%, transparent); }
+.gt-shape-cell.is-ne { background: var(--accent); }
+.gt-shape-ne {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs);
+  color: var(--muted); letter-spacing: 0.02em;
+}
+.gt-shape-marks { display: flex; flex-wrap: wrap; gap: 0.2rem; }
+.gt-shape-marks .m {
+  font-size: 0.6rem; line-height: 1.5; padding: 0 0.35rem; border-radius: 999px;
+  border: 1px solid currentColor; letter-spacing: 0.03em;
+}
+.gt-shape-marks .dom { color: var(--accent-2); }
+.gt-shape-marks .mix { color: var(--muted); }
+.gt-shape-marks .zero { color: var(--text); }
+.gt-shape-marks .trap { color: var(--cta); }
+
+/* 10 · the laws tracker */
+.gt-lawbar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.9rem;
+  margin: 0 0 var(--gap-2); padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border-ui); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+.gt-lawbar .k {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs); font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+}
+.gt-lawbar .num { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-sm); color: var(--muted); }
+.gt-lawbar .num b { color: var(--text); font-size: 1.3em; }
+.gt-lawbar-track {
+  flex: 1 1 7rem; height: 5px; border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, var(--muted) 22%, transparent);
+}
+.gt-lawbar-track i {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transition: width 0.4s ease;
+}
+.gt-law { grid-template-columns: auto auto 1fr auto; }
+.gt-law-i { color: var(--accent); font-size: 1.3rem; opacity: 0.7; margin-top: 0.1rem; }
+.gt-law.is-kept { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.gt-law.is-kept .gt-law-i { opacity: 1; }
+.gt-law-tick {
+  align-self: start; display: grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; padding: 0; cursor: pointer;
+  border: 1px solid var(--border-ui); border-radius: 50%;
+  background: var(--surface); color: var(--muted);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.gt-law-tick .gt-i { font-size: 0.95rem; }
+.gt-law-tick:hover { border-color: var(--accent); color: var(--text); }
+.gt-law.is-kept .gt-law-tick {
+  background: var(--accent); border-color: var(--accent); color: var(--cta-text);
+}
+
+@media (max-width: 620px) {
+  .gt-shapes { grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); }
+  .gt-cq { grid-template-columns: auto auto 1fr; }
+  .gt-cq .qtog { grid-column: 1 / -1; justify-self: start; }
+}
+/* The dashboard row gained a leading glyph, so its track needs one more column. */
+.gt-drow { grid-template-columns: auto 8.5rem 1fr auto; }
+@media (max-width: 560px) {
+  .gt-drow { grid-template-columns: auto 1fr auto; }
+}

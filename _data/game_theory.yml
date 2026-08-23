@@ -11,6 +11,7 @@ games:
   - id: prisoners-dilemma
     name: "Prisoner's Dilemma"
     life: "Trust with someone you may not deal with again"
+    icon: gt-g-prisoners
     rows: ["Cooperate", "Defect"]
     cols: ["Cooperate", "Defect"]
     payoffs: [[[3, 3], [0, 5]], [[5, 0], [1, 1]]]
@@ -27,6 +28,7 @@ games:
   - id: stag-hunt
     name: "Stag Hunt"
     life: "Cofounders, marriage, any ambitious joint bet"
+    icon: gt-g-stag
     rows: ["Stag", "Hare"]
     cols: ["Stag", "Hare"]
     payoffs: [[[4, 4], [0, 3]], [[3, 0], [2, 2]]]
@@ -43,6 +45,7 @@ games:
   - id: chicken
     name: "Chicken"
     life: "Ego standoffs, brinkmanship, who blinks first"
+    icon: gt-g-chicken
     rows: ["Swerve", "Straight"]
     cols: ["Swerve", "Straight"]
     payoffs: [[[3, 3], [2, 4]], [[4, 2], [0, 0]]]
@@ -59,6 +62,7 @@ games:
   - id: trust-game
     name: "Trust Game"
     life: "Delegation, lending, early intimacy"
+    icon: gt-g-trust
     rows: ["Send", "Hold"]
     cols: ["Return", "Keep"]
     payoffs: [[[3, 3], [0, 5]], [[1, 1], [1, 1]]]
@@ -75,6 +79,7 @@ games:
   - id: public-goods
     name: "Public Goods"
     life: "Housework, team effort, anything everyone benefits from"
+    icon: gt-g-public
     rows: ["Contribute", "Free-ride"]
     cols: ["Contribute", "Free-ride"]
     payoffs: [[[3, 3], [1, 4]], [[4, 1], [2, 2]]]
@@ -91,6 +96,7 @@ games:
   - id: battle-of-sexes
     name: "Coordination"
     life: "Two good options, and being together beats being right"
+    icon: gt-g-coordination
     rows: ["Option A", "Option B"]
     cols: ["Option A", "Option B"]
     payoffs: [[[3, 2], [0, 0]], [[0, 0], [2, 3]]]
@@ -107,6 +113,7 @@ games:
   - id: matching-pennies
     name: "Matching Pennies"
     life: "Genuinely adversarial: bluffing, bidding, tactical surprise"
+    icon: gt-g-pennies
     rows: ["Heads", "Tails"]
     cols: ["Heads", "Tails"]
     payoffs: [[[1, -1], [-1, 1]], [[-1, 1], [1, -1]]]
@@ -123,6 +130,7 @@ games:
   - id: principal-agent
     name: "Principal-Agent"
     life: "Managing, delegating, hiring anyone whose effort you cannot see"
+    icon: gt-g-agent
     rows: ["Monitor", "Trust"]
     cols: ["Work", "Shirk"]
     payoffs: [[[2, 2], [1, 0]], [[4, 3], [0, 4]]]
@@ -174,144 +182,181 @@ levers:
 
 laws:
   - n: 1
+    icon: gt-l-survival
     law: "Survival precedes optimisation"
     why: "Nothing compounds after ruin. Expected value stops being the right measure once a loss ends your ability to keep playing."
 
   - n: 2
+    icon: gt-repeat
     law: "Most human games repeat"
     why: "The same people come back. That is what makes reputation an asset and betrayal expensive."
 
   - n: 3
+    icon: gt-l-positive
     law: "Most valuable games are positive-sum"
     why: "Treating a joint problem as a contest destroys the surplus you were both there to create."
 
   - n: 4
+    icon: gt-l-zero
     law: "Some games really are zero-sum"
     why: "One promotion, one contract, one auction. Misreading these as cooperative is its own kind of loss."
 
   - n: 5
+    icon: gt-l-response
     law: "Include the response"
     why: "Evaluate a decision after everyone else has replied to it."
 
   - n: 6
+    icon: gt-rules
     law: "Change the game before playing harder"
     why: "Effort inside a badly structured game is the most expensive way to lose."
 
   - n: 7
+    icon: gt-information
     law: "Information has option value"
     why: "Under uncertainty, a cheap experiment is usually worth more than a confident decision."
 
   - n: 8
+    icon: gt-l-escalate
     law: "Escalate commitment with evidence"
     why: "Small bet, then evidence, then large bet. Reversing that order is how people lose big."
 
   - n: 9
+    icon: gt-sunk
     law: "Sunk cost has no vote"
     why: "What you already spent is a fact about the past. Only future costs and benefits are decidable."
 
   - n: 10
+    icon: gt-exit
     law: "Improve your outside option first"
     why: "Bargaining power is built before the conversation, by making no-deal survivable."
 
   - n: 11
+    icon: gt-l-reputation
     law: "Reputation compounds and decays asymmetrically"
     why: "It takes years to build and one transaction to spend. Price it accordingly."
 
   - n: 12
+    icon: gt-l-incentives
     law: "Incentives beat intentions"
     why: "When the stated goal and the reward structure disagree, the reward structure wins."
 
   - n: 13
+    icon: gt-l-agency
     law: "Avoid success that costs you agency"
     why: "A well-paid role you cannot leave is a trap that looks like an achievement."
 
   - n: 14
+    icon: gt-l-trajectory
     law: "Optimise the trajectory"
     why: "Ask whether today's choice improves the sequence of states that follows."
 
   - n: 15
+    icon: gt-l-choose
     law: "Choose games carefully"
     why: "Strong players spend less of their life in games where winning means nothing."
 
 dashboard:
   - key: "Career"
+    icon: gt-career
     ask: "Is my capability growing along with my responsibility?"
     floor: false
 
   - key: "Money"
+    icon: gt-payoffs
     ask: "Is economic resilience improving?"
     floor: true
 
   - key: "Ownership"
+    icon: gt-leverage
     ask: "Do I capture upside from the value I create?"
     floor: false
 
   - key: "Relationships"
+    icon: gt-trust
     ask: "Is trust increasing?"
     floor: true
 
   - key: "Home"
+    icon: gt-home
     ask: "Does home restore energy or consume it?"
     floor: true
 
   - key: "Emotional"
+    icon: gt-emotion
     ask: "Am I deciding from equilibrium or from strain?"
     floor: true
 
   - key: "Learning"
+    icon: gt-tree
     ask: "Am I gaining useful future options?"
     floor: false
 
   - key: "Network"
+    icon: gt-network
     ask: "Are more of these relationships built on trust?"
     floor: false
 
   - key: "Reputation"
+    icon: gt-equilibrium
     ask: "Are my claims backed by evidence?"
     floor: false
 
   - key: "Authority"
+    icon: gt-rules
     ask: "Does my authority match my responsibility?"
     floor: false
 
   - key: "Meaning"
+    icon: gt-meaning
     ask: "Would I value this life with no spectators?"
     floor: true
 
   - key: "Recovery"
+    icon: gt-recovery
     ask: "Is energy genuinely being replenished?"
     floor: true
 
   - key: "Optionality"
+    icon: gt-optionality
     ask: "Do I have more credible moves than a year ago?"
     floor: false
 
 classifier:
   - q: "Who are the players, including future you?"
+    icon: gt-players
     why: "Present you and future you have different incentives and rarely negotiate."
 
   - q: "What does each player want?"
+    icon: gt-want
     why: "Compare what they say with the choices they repeatedly make."
 
   - q: "Who moves first?"
+    icon: gt-sequence
     why: "Order determines who commits and who responds, and often decides the outcome."
 
   - q: "Does this game repeat?"
+    icon: gt-repeat
     why: "One-shot and repeated versions of the same game have opposite correct strategies."
 
   - q: "Is the available value fixed?"
+    icon: gt-pie
     why: "Zero-sum tactics can destroy value when both sides could have gained."
 
   - q: "What does each side know?"
+    icon: gt-information
     why: "Hidden information is where most bad deals are made."
 
   - q: "What happens if I refuse to play?"
+    icon: gt-exit
     why: "Your no-deal outcome sets your bargaining power before you say anything."
 
   - q: "Which consequences are irreversible?"
+    icon: gt-irreversible
     why: "Reversible decisions reward speed. Irreversible ones reward patience."
 
   - q: "What response am I ignoring?"
+    icon: gt-blindspot
     why: "The move that fails is usually the one that assumed nobody would react."
 
 five:
@@ -365,7 +410,7 @@ domains:
     math: "Income ∝ Hours &rarr; Income ∝ Judgement, Scarcity, Ownership"
 
   - key: "Wealth"
-    icon: gt-optionality
+    icon: gt-wealth
     group: money
     games: ["Repeated stochastic game", "Ruin problem"]
     winning: "Staying in the game long enough for returns to compound."
@@ -392,7 +437,7 @@ domains:
     math: "δ ≥ (T − R) / (T − P)"
 
   - key: "Family"
-    icon: gt-players
+    icon: gt-home
     group: people
     games: ["Public goods", "Common-pool resource", "Coordination"]
     winning: "Contributions and authority made explicit, so the load does not silently fall on one person."
@@ -401,7 +446,7 @@ domains:
     math: ""
 
   - key: "Network"
-    icon: gt-players
+    icon: gt-network
     group: people
     games: ["Coalition formation", "Repeated trust", "Public goods"]
     winning: "A smaller set of trusted relationships can be worth more than a large contact list. These people would still take your call without the job titles."
@@ -437,7 +482,7 @@ domains:
     math: "UCB<sub>i</sub> = μ̂<sub>i</sub> + c√(ln t / n<sub>i</sub>)"
 
   - key: "Creativity"
-    icon: gt-arena
+    icon: gt-creativity
     group: self
     games: ["Differentiation", "Attention competition"]
     winning: "Work at the intersection of genuine curiosity and non-generic knowledge."
@@ -446,7 +491,7 @@ domains:
     math: "Value = Novelty × Relevance × Execution × Distribution"
 
   - key: "Identity"
-    icon: gt-information
+    icon: gt-identity
     group: self
     games: ["Self-signalling", "Social comparison"]
     winning: "Confidence built through evidence, repetition and recovery."
@@ -455,7 +500,7 @@ domains:
     math: "Confidence = f(Evidence, Repetition, Recovery)"
 
   - key: "Emotion"
-    icon: gt-sequence
+    icon: gt-emotion
     group: self
     games: ["Present self versus future self"]
     winning: "Deciding from equilibrium. Recognising which internal player currently holds the pen."
@@ -464,7 +509,7 @@ domains:
     math: ""
 
   - key: "Meaning"
-    icon: gt-optionality
+    icon: gt-meaning
     group: self
     games: ["Finite life, unbounded appetite"]
     winning: "Sources of meaning that do not depend on outranking anyone."
@@ -473,7 +518,7 @@ domains:
     math: "Satisfaction = f(rank) ⇒ no terminal state"
 
   - key: "Geography"
-    icon: gt-arena
+    icon: gt-geography
     group: self
     games: ["Matching", "Network effects", "Option value"]
     winning: "An environment that amplifies you. No location is good in the abstract."
@@ -482,7 +527,7 @@ domains:
     math: ""
 
   - key: "Recovery"
-    icon: gt-repeat
+    icon: gt-recovery
     group: self
     games: ["Common-pool resource"]
     winning: "Recovery scheduled as part of the work, including when the work remains unfinished."
@@ -491,7 +536,7 @@ domains:
     math: "Demand &gt; Regeneration ⇒ fragility"
 
   - key: "Vitality"
-    icon: gt-slow
+    icon: gt-vitality
     group: self
     games: ["Long-horizon resource preservation"]
     winning: "Output that remains sustainable for years."
@@ -538,21 +583,25 @@ regimes:
 
 readiness:
   - q: lr
+    icon: gt-recovery
     t: "Recovery"
     body: "You have little capacity and few good openings. Rebuild the base before forcing a move."
     rule: "Protect resources. Stop the bleeding first."
 
   - q: hr
+    icon: gt-position
     t: "Positioning"
     body: "You are ready, but the environment offers little. Use the quiet period to prepare."
     rule: "Build skill, network and runway now. The opening arrives on its own schedule."
 
   - q: lo
+    icon: gt-controlled
     t: "Controlled participation"
     body: "A real opening you are not yet built for. Take part without betting the system."
     rule: "Capture upside at small size. Learn fast."
 
   - q: ho
+    icon: gt-fast
     t: "Expansion"
     body: "Readiness and opportunity have arrived together. This combination is rare and may not last."
     rule: "Concentrate enough effort to use the opening while it exists."

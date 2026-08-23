@@ -156,8 +156,9 @@
       DATA.games.forEach(function (g, k) {
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'gt-btn';
-        b.textContent = g.name;
+        b.className = 'gt-btn gt-game-tab';
+        b.innerHTML = '<svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#' +
+          esc(g.icon || 'gt-equilibrium') + '"/></svg><span>' + esc(g.name) + '</span>';
         b.addEventListener('click', function () { gi = k; render(); });
         tabs.appendChild(b);
       });
@@ -783,9 +784,119 @@
     sections.forEach(function (section) { observer.observe(section); });
   }
 
+  /* ══ Every game as a shape ═════════════════════════════
+     A 2x2 for each game with the solver's pure equilibria marked, so all
+     eight structures are comparable at a glance. Everything drawn here comes
+     from the `solved` block, which scripts/solve_games.py computes from the
+     payoffs shown beside it, so the picture cannot disagree with the matrix. */
+  function shapes() {
+    var host = $('#gt-shapes');
+    if (!host || !DATA.games || !DATA.games.length) return;
+    var cap = $('#gt-shapes-cap');
+
+    function cellIn(list, i, j) {
+      return (list || []).some(function (c) { return c[0] === i && c[1] === j; });
+    }
+
+    DATA.games.forEach(function (g, k) {
+      var s = g.solved || {};
+      var pure = (s.pure || []).length;
+
+      var cells = '';
+      for (var i = 0; i < 2; i++) {
+        for (var j = 0; j < 2; j++) {
+          var isNE = cellIn(s.pure, i, j);
+          var isPar = cellIn(s.pareto, i, j);
+          cells += '<span class="gt-shape-cell' + (isNE ? ' is-ne' : '') +
+            (isPar ? ' is-par' : '') + '"></span>';
+        }
+      }
+
+      var marks = [];
+      if (s.dominant_row || s.dominant_col) marks.push('<span class="m dom">dominant</span>');
+      if (s.mixed) marks.push('<span class="m mix">mixed</span>');
+      if (s.zero_sum) marks.push('<span class="m zero">zero-sum</span>');
+      var trap = (s.pure || []).some(function (c) { return !cellIn(s.pareto, c[0], c[1]); });
+      if (trap) marks.push('<span class="m trap">trap</span>');
+
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'gt-shape';
+      b.dataset.i = k;
+      b.innerHTML =
+        '<span class="gt-shape-head">' +
+          '<svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#' +
+            esc(g.icon || 'gt-equilibrium') + '"/></svg>' +
+          '<b>' + esc(g.name) + '</b></span>' +
+        '<span class="gt-shape-grid">' + cells + '</span>' +
+        '<span class="gt-shape-ne">' + (pure === 0 ? 'no pure NE' :
+          pure === 1 ? '1 pure NE' : pure + ' pure NE') + '</span>' +
+        '<span class="gt-shape-marks">' + marks.join('') + '</span>';
+      host.appendChild(b);
+    });
+
+    if (cap) {
+      cap.innerHTML = 'A filled square is a pure Nash equilibrium; a ringed square is Pareto ' +
+        'efficient. A square that is filled but not ringed is the trap: stable, and worse for ' +
+        'both than a cell they could have reached.';
+    }
+
+    host.addEventListener('click', function (e) {
+      var b = e.target.closest('.gt-shape');
+      if (!b) return;
+      var tab = $$('#gt-game-tabs .gt-btn')[+b.dataset.i];
+      if (tab) {
+        tab.click();
+        var host2 = $('#gt-matrix-host');
+        if (host2 && host2.scrollIntoView) host2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  /* ══ Laws you keep ═════════════════════════════════════
+     Fifteen laws is a list until you have to say which ones you actually
+     follow. Ticks are local storage only. */
+  function lawTicks() {
+    var laws = $$('.gt-law[data-law]');
+    if (!laws.length) return;
+    var num = $('#gt-law-n');
+    var fill = $('#gt-law-fill');
+    var reset = $('#gt-law-reset');
+    var kept = load('laws', {}) || {};
+
+    function paint() {
+      var n = 0;
+      laws.forEach(function (row) {
+        var on = !!kept[row.dataset.law];
+        row.classList.toggle('is-kept', on);
+        var btn = $('.gt-law-tick', row);
+        if (btn) btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (on) n++;
+      });
+      if (num) num.textContent = n;
+      if (fill) fill.style.width = (n / laws.length * 100) + '%';
+      save('laws', kept);
+    }
+
+    laws.forEach(function (row) {
+      var btn = $('.gt-law-tick', row);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var k = row.dataset.law;
+        if (kept[k]) delete kept[k]; else kept[k] = true;
+        paint();
+      });
+    });
+
+    if (reset) {
+      reset.addEventListener('click', function () { kept = {}; paint(); });
+    }
+    paint();
+  }
+
   function init() {
-    [progress, narrativeRail, matrix, shadow, levers, quadrants, ruin, classifier, dashboard,
-      five, domains, ucb, trustCapital, regimes, readiness]
+    [progress, narrativeRail, matrix, shapes, lawTicks, shadow, levers, quadrants, ruin,
+      classifier, dashboard, five, domains, ucb, trustCapital, regimes, readiness]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

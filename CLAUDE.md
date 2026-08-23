@@ -209,6 +209,22 @@ backwards, and a wrong equilibrium is a wrong claim about how a real situation
 resolves. Deriving it from the numbers on screen makes the two impossible to
 disagree.
 
+Everything in the data file comes from `games.json`, not only the games:
+`levers`, `laws`, `dashboard`, `classifier`, `five`, `domains`, `regimes` and
+`readiness` are all emitted by the same script. **A hand edit to
+`_data/game_theory.yml` is lost on the next run.** To add a field, add it to
+`games.json` *and* to the matching `L.append(...)` in `solve_games.py`, then
+re-run. Every section now carries a distinct `icon:` per row on that route.
+
+`/game-theory/` also draws each game as a 2x2 shape map (`shapes()` in
+`js/components/game-theory.js`). It reads only the computed `solved` block, so
+the picture cannot disagree with the matrix beside it. Check it against the
+solver's own summary table after changing a payoff:
+
+```bash
+python3 scripts/solve_games.py --check
+```
+
 Note the **underscore** in the filename. Liquid parses `site.data.game-theory`
 as a subtraction, so a hyphenated data file is read unpredictably. Data files
 consumed by Liquid need underscores.

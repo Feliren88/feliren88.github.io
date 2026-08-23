@@ -102,6 +102,12 @@ extra_js: /js/components/game-theory.js
       </div>
       <div class="gt-game-read" id="gt-game-read" role="status"></div>
     </div>
+
+    <div class="gt-shapes-block">
+      <p class="gt-shapes-k"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-equilibrium"/></svg>All eight, by shape</p>
+      <div class="gt-shapes" id="gt-shapes" role="group" aria-label="Every game as an equilibrium shape"></div>
+      <p class="gt-hint" id="gt-shapes-cap"></p>
+    </div>
   </div>
 
   <p>Two things worth noticing as you click through. The Prisoner's Dilemma and Public Goods are the
@@ -458,6 +464,7 @@ extra_js: /js/components/game-theory.js
       {% for c in site.data.game_theory.classifier %}
       <div class="gt-cq" data-q="{{ forloop.index }}">
         <span class="qn">{{ forloop.index }}</span>
+        <svg class="gt-i gt-cq-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ c.icon }}"/></svg>
         <span class="qt">{{ c.q }}<span class="qw">{{ c.why }}</span></span>
         <button class="qtog" type="button" aria-pressed="false">Not yet</button>
       </div>
@@ -665,6 +672,7 @@ extra_js: /js/components/game-theory.js
     <div class="gt-dash" id="gt-dash">
       {% for d in site.data.game_theory.dashboard %}
       <div class="gt-drow" data-k="{{ d.key }}" data-floor="{{ d.floor }}">
+        <svg class="gt-i gt-drow-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ d.icon }}"/></svg>
         <span class="dk">{{ d.key }}{% if d.floor %}<span class="fl">floor</span>{% endif %}</span>
         <span class="dq">{{ d.ask }}</span>
         <span class="gt-scale" role="group" aria-label="{{ d.key }} score"></span>
@@ -762,17 +770,27 @@ extra_js: /js/components/game-theory.js
      07 · THE LAWS
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="laws">
-  <h2><span class="n">10</span> Fifteen laws</h2>
+  <h2><span class="n">10</span> Fifteen laws <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-l-choose"/></svg></h2>
   <p class="gt-deck">These are the rules I take from the models above.</p>
+
+  <div class="gt-lawbar">
+    <span class="k"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-medal"/></svg>Laws I actually keep</span>
+    <span class="num"><b id="gt-law-n">0</b> of 15</span>
+    <div class="gt-lawbar-track" aria-hidden="true"><i id="gt-law-fill"></i></div>
+    <button class="gt-btn" id="gt-law-reset" type="button">Clear</button>
+  </div>
 
   <div class="gt-laws">
     {% for l in site.data.game_theory.laws %}
-    <div class="gt-law">
+    <div class="gt-law" data-law="{{ l.n }}">
       <span class="n">{{ l.n }}</span>
+      <svg class="gt-i gt-law-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ l.icon }}"/></svg>
       <span>
         <h5>{{ l.law }}</h5>
         <p>{{ l.why }}</p>
       </span>
+      <button class="gt-law-tick" type="button" aria-pressed="false"
+              aria-label="Mark law {{ l.n }} as one I keep"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-check"/></svg></button>
     </div>
     {% endfor %}
   </div>
@@ -844,7 +862,7 @@ extra_js: /js/components/game-theory.js
      09 · WHY I KEEP THIS
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="why">
-  <h2><span class="n">12</span> Why I keep this</h2>
+  <h2><span class="n">12</span> Why I keep this <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-medal"/></svg></h2>
 
   <p>I work on calibration: the gap between what a system believes and what is true. Game theory
   adds an environment that watches the system and responds.</p>

@@ -130,6 +130,7 @@ def emit(src):
         L.append(f"  - id: {g['id']}")
         L.append(f"    name: {esc(g['name'])}")
         L.append(f"    life: {esc(g['life'])}")
+        L.append(f"    icon: {g['icon']}")
         L.append(f"    rows: [{esc(g['rows'][0])}, {esc(g['rows'][1])}]")
         L.append(f"    cols: [{esc(g['cols'][0])}, {esc(g['cols'][1])}]")
         L.append(f"    payoffs: {json.dumps(g['payoffs'])}")
@@ -155,6 +156,7 @@ def emit(src):
     L.append('laws:')
     for i, x in enumerate(laws, 1):
         L.append(f"  - n: {i}")
+        L.append(f"    icon: {x['icon']}")
         L.append(f"    law: {esc(x['law'])}")
         L.append(f"    why: {esc(x['why'])}")
         L.append('')
@@ -162,6 +164,7 @@ def emit(src):
     L.append('dashboard:')
     for x in dashboard:
         L.append(f"  - key: {esc(x['key'])}")
+        L.append(f"    icon: {x['icon']}")
         L.append(f"    ask: {esc(x['ask'])}")
         L.append(f"    floor: {json.dumps(x['floor'])}")
         L.append('')
@@ -169,6 +172,7 @@ def emit(src):
     L.append('classifier:')
     for x in classifier:
         L.append(f"  - q: {esc(x['q'])}")
+        L.append(f"    icon: {x['icon']}")
         L.append(f"    why: {esc(x['why'])}")
         L.append('')
 
@@ -205,6 +209,7 @@ def emit(src):
     L.append('readiness:')
     for x in src['readiness']:
         L.append(f"  - q: {x['q']}")
+        L.append(f"    icon: {x['icon']}")
         L.append(f"    t: {esc(x['t'])}")
         L.append(f"    body: {esc(x['body'])}")
         L.append(f"    rule: {esc(x['rule'])}")

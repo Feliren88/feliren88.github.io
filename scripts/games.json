@@ -36,7 +36,8 @@
         ]
       ],
       "reading": "Defecting pays more whatever the other player does. Both defect and receive 1, though mutual cooperation would give each player 3.",
-      "move": "Make the relationship repeat. When the future matters enough, conditional cooperation becomes rational."
+      "move": "Make the relationship repeat. When the future matters enough, conditional cooperation becomes rational.",
+      "icon": "gt-g-prisoners"
     },
     {
       "id": "stag-hunt",
@@ -73,7 +74,8 @@
         ]
       ],
       "reading": "Hunting stag pays more when both commit. Hare pays less but remains safe when the other person wavers. Doubt drives this game.",
-      "move": "Buy assurance before you commit. Evidence that they will show up is worth more than a better offer."
+      "move": "Buy assurance before you commit. Evidence that they will show up is worth more than a better offer.",
+      "icon": "gt-g-stag"
     },
     {
       "id": "chicken",
@@ -110,7 +112,8 @@
         ]
       ],
       "reading": "Two equilibria, and in each one somebody swerves. The crash is worst for both, which is exactly why the threat works.",
-      "move": "Build a face-saving exit for them. Cornering someone in Chicken raises your odds of the crash."
+      "move": "Build a face-saving exit for them. Cornering someone in Chicken raises your odds of the crash.",
+      "icon": "gt-g-chicken"
     },
     {
       "id": "trust-game",
@@ -147,7 +150,8 @@
         ]
       ],
       "reading": "Sending creates value only if it comes back. Backward induction says they keep, so you never send, and the surplus is never made.",
-      "move": "Send a small amount first. Escalate on evidence, not on how trustworthy they sound."
+      "move": "Send a small amount first. Escalate on evidence, not on how trustworthy they sound.",
+      "icon": "gt-g-trust"
     },
     {
       "id": "public-goods",
@@ -184,7 +188,8 @@
         ]
       ],
       "reading": "Everyone wants the shared good and would prefer someone else to fund it. Free-riding dominates, so the good stays underfunded.",
-      "move": "Make each contribution visible. People often free-ride on work they cannot see."
+      "move": "Make each contribution visible. People often free-ride on work they cannot see.",
+      "icon": "gt-g-public"
     },
     {
       "id": "battle-of-sexes",
@@ -221,7 +226,8 @@
         ]
       ],
       "reading": "You each prefer a different option, but a mismatch pays nobody. Both matching outcomes are stable.",
-      "move": "Agree a focal point in advance, or alternate. Arguing over which is better wastes the surplus you are arguing about."
+      "move": "Agree a focal point in advance, or alternate. Arguing over which is better wastes the surplus you are arguing about.",
+      "icon": "gt-g-coordination"
     },
     {
       "id": "matching-pennies",
@@ -258,7 +264,8 @@
         ]
       ],
       "reading": "No pure equilibrium exists. Any pattern you settle into can be exploited, so stable play requires unpredictability.",
-      "move": "Reserve zero-sum tactics for genuinely adversarial games. Applied elsewhere, they burn value both sides could have kept."
+      "move": "Reserve zero-sum tactics for genuinely adversarial games. Applied elsewhere, they burn value both sides could have kept.",
+      "icon": "gt-g-pennies"
     },
     {
       "id": "principal-agent",
@@ -295,7 +302,8 @@
         ]
       ],
       "reading": "Monitoring is costly and can damage trust. Without it, hidden effort invites shirking. The problem begins with poor visibility.",
-      "move": "Make the outcome observable and reward it directly. Better evidence reduces the need to police behaviour."
+      "move": "Make the outcome observable and reward it directly. Better evidence reduces the need to police behaviour.",
+      "icon": "gt-g-agent"
     }
   ],
   "levers": [
@@ -345,168 +353,205 @@
   "laws": [
     {
       "law": "Survival precedes optimisation",
-      "why": "Nothing compounds after ruin. Expected value stops being the right measure once a loss ends your ability to keep playing."
+      "why": "Nothing compounds after ruin. Expected value stops being the right measure once a loss ends your ability to keep playing.",
+      "icon": "gt-l-survival"
     },
     {
       "law": "Most human games repeat",
-      "why": "The same people come back. That is what makes reputation an asset and betrayal expensive."
+      "why": "The same people come back. That is what makes reputation an asset and betrayal expensive.",
+      "icon": "gt-repeat"
     },
     {
       "law": "Most valuable games are positive-sum",
-      "why": "Treating a joint problem as a contest destroys the surplus you were both there to create."
+      "why": "Treating a joint problem as a contest destroys the surplus you were both there to create.",
+      "icon": "gt-l-positive"
     },
     {
       "law": "Some games really are zero-sum",
-      "why": "One promotion, one contract, one auction. Misreading these as cooperative is its own kind of loss."
+      "why": "One promotion, one contract, one auction. Misreading these as cooperative is its own kind of loss.",
+      "icon": "gt-l-zero"
     },
     {
       "law": "Include the response",
-      "why": "Evaluate a decision after everyone else has replied to it."
+      "why": "Evaluate a decision after everyone else has replied to it.",
+      "icon": "gt-l-response"
     },
     {
       "law": "Change the game before playing harder",
-      "why": "Effort inside a badly structured game is the most expensive way to lose."
+      "why": "Effort inside a badly structured game is the most expensive way to lose.",
+      "icon": "gt-rules"
     },
     {
       "law": "Information has option value",
-      "why": "Under uncertainty, a cheap experiment is usually worth more than a confident decision."
+      "why": "Under uncertainty, a cheap experiment is usually worth more than a confident decision.",
+      "icon": "gt-information"
     },
     {
       "law": "Escalate commitment with evidence",
-      "why": "Small bet, then evidence, then large bet. Reversing that order is how people lose big."
+      "why": "Small bet, then evidence, then large bet. Reversing that order is how people lose big.",
+      "icon": "gt-l-escalate"
     },
     {
       "law": "Sunk cost has no vote",
-      "why": "What you already spent is a fact about the past. Only future costs and benefits are decidable."
+      "why": "What you already spent is a fact about the past. Only future costs and benefits are decidable.",
+      "icon": "gt-sunk"
     },
     {
       "law": "Improve your outside option first",
-      "why": "Bargaining power is built before the conversation, by making no-deal survivable."
+      "why": "Bargaining power is built before the conversation, by making no-deal survivable.",
+      "icon": "gt-exit"
     },
     {
       "law": "Reputation compounds and decays asymmetrically",
-      "why": "It takes years to build and one transaction to spend. Price it accordingly."
+      "why": "It takes years to build and one transaction to spend. Price it accordingly.",
+      "icon": "gt-l-reputation"
     },
     {
       "law": "Incentives beat intentions",
-      "why": "When the stated goal and the reward structure disagree, the reward structure wins."
+      "why": "When the stated goal and the reward structure disagree, the reward structure wins.",
+      "icon": "gt-l-incentives"
     },
     {
       "law": "Avoid success that costs you agency",
-      "why": "A well-paid role you cannot leave is a trap that looks like an achievement."
+      "why": "A well-paid role you cannot leave is a trap that looks like an achievement.",
+      "icon": "gt-l-agency"
     },
     {
       "law": "Optimise the trajectory",
-      "why": "Ask whether today's choice improves the sequence of states that follows."
+      "why": "Ask whether today's choice improves the sequence of states that follows.",
+      "icon": "gt-l-trajectory"
     },
     {
       "law": "Choose games carefully",
-      "why": "Strong players spend less of their life in games where winning means nothing."
+      "why": "Strong players spend less of their life in games where winning means nothing.",
+      "icon": "gt-l-choose"
     }
   ],
   "dashboard": [
     {
       "key": "Career",
       "ask": "Is my capability growing along with my responsibility?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-career"
     },
     {
       "key": "Money",
       "ask": "Is economic resilience improving?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-payoffs"
     },
     {
       "key": "Ownership",
       "ask": "Do I capture upside from the value I create?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-leverage"
     },
     {
       "key": "Relationships",
       "ask": "Is trust increasing?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-trust"
     },
     {
       "key": "Home",
       "ask": "Does home restore energy or consume it?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-home"
     },
     {
       "key": "Emotional",
       "ask": "Am I deciding from equilibrium or from strain?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-emotion"
     },
     {
       "key": "Learning",
       "ask": "Am I gaining useful future options?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-tree"
     },
     {
       "key": "Network",
       "ask": "Are more of these relationships built on trust?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-network"
     },
     {
       "key": "Reputation",
       "ask": "Are my claims backed by evidence?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-equilibrium"
     },
     {
       "key": "Authority",
       "ask": "Does my authority match my responsibility?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-rules"
     },
     {
       "key": "Meaning",
       "ask": "Would I value this life with no spectators?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-meaning"
     },
     {
       "key": "Recovery",
       "ask": "Is energy genuinely being replenished?",
-      "floor": true
+      "floor": true,
+      "icon": "gt-recovery"
     },
     {
       "key": "Optionality",
       "ask": "Do I have more credible moves than a year ago?",
-      "floor": false
+      "floor": false,
+      "icon": "gt-optionality"
     }
   ],
   "classifier": [
     {
       "q": "Who are the players, including future you?",
-      "why": "Present you and future you have different incentives and rarely negotiate."
+      "why": "Present you and future you have different incentives and rarely negotiate.",
+      "icon": "gt-players"
     },
     {
       "q": "What does each player want?",
-      "why": "Compare what they say with the choices they repeatedly make."
+      "why": "Compare what they say with the choices they repeatedly make.",
+      "icon": "gt-want"
     },
     {
       "q": "Who moves first?",
-      "why": "Order determines who commits and who responds, and often decides the outcome."
+      "why": "Order determines who commits and who responds, and often decides the outcome.",
+      "icon": "gt-sequence"
     },
     {
       "q": "Does this game repeat?",
-      "why": "One-shot and repeated versions of the same game have opposite correct strategies."
+      "why": "One-shot and repeated versions of the same game have opposite correct strategies.",
+      "icon": "gt-repeat"
     },
     {
       "q": "Is the available value fixed?",
-      "why": "Zero-sum tactics can destroy value when both sides could have gained."
+      "why": "Zero-sum tactics can destroy value when both sides could have gained.",
+      "icon": "gt-pie"
     },
     {
       "q": "What does each side know?",
-      "why": "Hidden information is where most bad deals are made."
+      "why": "Hidden information is where most bad deals are made.",
+      "icon": "gt-information"
     },
     {
       "q": "What happens if I refuse to play?",
-      "why": "Your no-deal outcome sets your bargaining power before you say anything."
+      "why": "Your no-deal outcome sets your bargaining power before you say anything.",
+      "icon": "gt-exit"
     },
     {
       "q": "Which consequences are irreversible?",
-      "why": "Reversible decisions reward speed. Irreversible ones reward patience."
+      "why": "Reversible decisions reward speed. Irreversible ones reward patience.",
+      "icon": "gt-irreversible"
     },
     {
       "q": "What response am I ignoring?",
-      "why": "The move that fails is usually the one that assumed nobody would react."
+      "why": "The move that fails is usually the one that assumed nobody would react.",
+      "icon": "gt-blindspot"
     }
   ],
   "five": [
@@ -577,7 +622,7 @@
     },
     {
       "key": "Wealth",
-      "icon": "gt-optionality",
+      "icon": "gt-wealth",
       "group": "money",
       "games": [
         "Repeated stochastic game",
@@ -618,7 +663,7 @@
     },
     {
       "key": "Family",
-      "icon": "gt-players",
+      "icon": "gt-home",
       "group": "people",
       "games": [
         "Public goods",
@@ -632,7 +677,7 @@
     },
     {
       "key": "Network",
-      "icon": "gt-players",
+      "icon": "gt-network",
       "group": "people",
       "games": [
         "Coalition formation",
@@ -683,7 +728,7 @@
     },
     {
       "key": "Creativity",
-      "icon": "gt-arena",
+      "icon": "gt-creativity",
       "group": "self",
       "games": [
         "Differentiation",
@@ -696,7 +741,7 @@
     },
     {
       "key": "Identity",
-      "icon": "gt-information",
+      "icon": "gt-identity",
       "group": "self",
       "games": [
         "Self-signalling",
@@ -709,7 +754,7 @@
     },
     {
       "key": "Emotion",
-      "icon": "gt-sequence",
+      "icon": "gt-emotion",
       "group": "self",
       "games": [
         "Present self versus future self"
@@ -721,7 +766,7 @@
     },
     {
       "key": "Meaning",
-      "icon": "gt-optionality",
+      "icon": "gt-meaning",
       "group": "self",
       "games": [
         "Finite life, unbounded appetite"
@@ -733,7 +778,7 @@
     },
     {
       "key": "Geography",
-      "icon": "gt-arena",
+      "icon": "gt-geography",
       "group": "self",
       "games": [
         "Matching",
@@ -747,7 +792,7 @@
     },
     {
       "key": "Recovery",
-      "icon": "gt-repeat",
+      "icon": "gt-recovery",
       "group": "self",
       "games": [
         "Common-pool resource"
@@ -759,7 +804,7 @@
     },
     {
       "key": "Vitality",
-      "icon": "gt-slow",
+      "icon": "gt-vitality",
       "group": "self",
       "games": [
         "Long-horizon resource preservation"
@@ -821,7 +866,8 @@
       "y": 1,
       "t": "Recovery",
       "body": "You have little capacity and few good openings. Rebuild the base before forcing a move.",
-      "rule": "Protect resources. Stop the bleeding first."
+      "rule": "Protect resources. Stop the bleeding first.",
+      "icon": "gt-recovery"
     },
     {
       "q": "hr",
@@ -829,7 +875,8 @@
       "y": 0,
       "t": "Positioning",
       "body": "You are ready, but the environment offers little. Use the quiet period to prepare.",
-      "rule": "Build skill, network and runway now. The opening arrives on its own schedule."
+      "rule": "Build skill, network and runway now. The opening arrives on its own schedule.",
+      "icon": "gt-position"
     },
     {
       "q": "lo",
@@ -837,7 +884,8 @@
       "y": 1,
       "t": "Controlled participation",
       "body": "A real opening you are not yet built for. Take part without betting the system.",
-      "rule": "Capture upside at small size. Learn fast."
+      "rule": "Capture upside at small size. Learn fast.",
+      "icon": "gt-controlled"
     },
     {
       "q": "ho",
@@ -845,7 +893,8 @@
       "y": 0,
       "t": "Expansion",
       "body": "Readiness and opportunity have arrived together. This combination is rare and may not last.",
-      "rule": "Concentrate enough effort to use the opening while it exists."
+      "rule": "Concentrate enough effort to use the opening while it exists.",
+      "icon": "gt-fast"
     }
   ]
 }
