@@ -28,15 +28,16 @@ education:
   - dates: 'EXPECTED SEPT 2026'
     title: 'Monash University'
     location: 'Master of Data Science · GPA: 4.0/4.0'
+    description: 'Thesis: Conformal prediction approach to vision-language navigation (VLN)'
 
   - dates: 'JUN 2026'
     title: 'BlueDot Impact, Technical AI Safety'
     location: 'Cohort intensive · alignment, interpretability, red-teaming, AI control'
-    description: 'Thesis: Conformal prediction approach to vision-language navigation (VLN)'
 
   - dates: 'DECEMBER 2019'
     title: 'Monash University'
     location: 'Bachelor of Computer Science'
+    description: 'Thesis: Encoder-Decoder Learning for Video Captioning'
 
   - dates: 'MAR – DEC 2019'
     title: 'Monash CURIE Compass'
