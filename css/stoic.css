@@ -40,7 +40,12 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
 
 /* Diagrams are scenes; bordered cards remain tools and archives. */
 #judgement .st-lab,#disciplines .st-lab,#above .st-lab,#death .st-lab { width: min(64rem,calc(100vw - 2rem)); margin-inline: 50%; transform: translateX(-50%); border: 0; border-radius: 1.5rem; padding: clamp(1.2rem,4vw,2.4rem); background: linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface-soft)),color-mix(in srgb,var(--cta) 4%,var(--surface))); }
-#judgement .st-machine { position: relative; grid-template-columns: repeat(4,minmax(0,1fr)); align-items: stretch; }
+#judgement .st-lab { width: min(76rem,calc(100vw - 2rem)); }
+#judgement .st-machine { position: relative; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(18rem,1.45fr) auto minmax(0,1fr); align-items: stretch; gap: .7rem; }
+#judgement .st-stage { grid-template-columns: 2.2rem minmax(0,1fr); min-width: 0; height: 100%; padding: 1rem; }
+#judgement .st-stage > span:last-child { min-width: 0; }
+#judgement .st-stage.is-lever { box-shadow: 0 0 0 1px color-mix(in srgb,var(--cta) 35%,transparent),0 14px 30px color-mix(in srgb,var(--cta) 9%,transparent); }
+#judgement .st-judges { grid-template-columns: 1fr; }
 #judgement .st-arrow { transform: rotate(-90deg); }
 #above .st-zoom-svg,#death .st-fame-svg { filter: drop-shadow(0 18px 32px color-mix(in srgb,var(--accent) 12%,transparent)); }
 .st-practice-grid { position: relative; }
@@ -51,6 +56,11 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .st-story-map{grid-template-columns:1fr;justify-items:center}.st-story-arrow{transform:rotate(90deg)}
   .st-story-rail{position:relative;top:auto;grid-template-columns:1fr 1fr}.st-story-rail a:last-child{grid-column:1/-1}
   #judgement .st-machine{grid-template-columns:1fr}#judgement .st-arrow{transform:none}.st-practice-grid::before{display:none}
+}
+@media(max-width:1050px){
+  #judgement .st-machine{grid-template-columns:1fr;gap:.5rem}
+  #judgement .st-arrow{transform:none;min-height:1.1rem}
+  #judgement .st-stage{height:auto}
 }
 
 /* ── Reading progress ─────────────────────────────────── */
