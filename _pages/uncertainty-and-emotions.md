@@ -10,6 +10,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 ---
 
 <div class="ue-progress" aria-hidden="true"><span id="ue-progress-fill"></span></div>
+<script type="application/json" id="ue-wheel-data">{{ site.data.emotion_wheel | jsonify }}</script>
 {% include uncertainty-icons.html %}
 
 <header class="ue-hero" aria-labelledby="ue-hero-title">
@@ -118,6 +119,36 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <h2><span>04</span><svg class="ue-i ue-h2-i"><use href="#ue-dumbbell"/></svg> Practise the gap</h2>
   <p class="ue-deck">Create a gap between the urge for relief and your response. That gap gives judgment time to return.</p>
   <div class="ue-formula"><div><svg class="ue-i"><use href="#ue-alarm"/></svg><b>Uncertainty</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-open"/></svg><b>Non-resolution</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-move"/></svg><b>Chosen action</b></div><i>=</i><strong>Freedom training</strong></div>
+
+  <div class="ue-curveviz">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-curveline"/></svg> What the feeling does when you do not act on it</p>
+    <div class="ue-curve-modes" id="ue-curve-modes" role="group" aria-label="Choose a response">
+      <button data-mode="relieve" class="is-on"><svg class="ue-i"><use href="#ue-cycle"/></svg><b>Do the relief move</b><small>each time the urge arrives</small></button>
+      <button data-mode="stay"><svg class="ue-i"><use href="#ue-surf"/></svg><b>Stay with it</b><small>and keep doing what you were doing</small></button>
+    </div>
+    <svg class="ue-curve-svg" id="ue-curve" viewBox="0 0 520 230" role="img"
+         aria-label="Distress over time, with and without the relief move.">
+      <line class="ax" x1="46" y1="188" x2="502" y2="188"/>
+      <line class="ax" x1="46" y1="14" x2="46" y2="188"/>
+      <text class="tick" x="40" y="24" text-anchor="end">high</text>
+      <text class="tick" x="40" y="188" text-anchor="end">low</text>
+      <text class="tick" x="46" y="208">the urge arrives</text>
+      <text class="tick" x="502" y="208" text-anchor="end">time passes</text>
+      <path class="band" id="ue-curve-band"/>
+      <path class="ln" id="ue-curve-line"/>
+      <g id="ue-curve-marks"></g>
+      <line class="scrub" id="ue-curve-scrub" x1="46" y1="14" x2="46" y2="188"/>
+      <circle class="dot" id="ue-curve-dot" r="5"/>
+    </svg>
+    <label class="ue-sr" for="ue-curve-range">Time since the urge arrived</label>
+    <input class="ue-range" id="ue-curve-range" type="range" min="0" max="100" step="1" value="0">
+    <div class="ue-curve-read">
+      <div><span class="k"><svg class="ue-i"><use href="#ue-timer"/></svg>Elapsed</span><b id="ue-curve-t">0 min</b></div>
+      <div><span class="k">Level</span><b id="ue-curve-v">rising</b></div>
+      <p id="ue-curve-say" role="status"></p>
+    </div>
+  </div>
+
   <div class="ue-gapviz" aria-label="The gap between the urge for relief and the response">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-dumbbell"/></svg> Where the training happens</p>
     <div class="ue-gaptrack">
@@ -151,12 +182,82 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div><svg class="ue-i"><use href="#ue-reduce"/></svg><b>Reduce</b><span>Do one review instead of five, or gather only decision-relevant facts.</span></div>
     <div><svg class="ue-i"><use href="#ue-target"/></svg><b>Choose</b><span>Return attention to the task, person, or commitment that matters now.</span></div>
   </div>
+
+  <div class="ue-wave-block">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-surf"/></svg> One wave, start to finish</p>
+    <div class="ue-wavesteps">
+      <span class="w1"><svg class="ue-i"><use href="#ue-urgency"/></svg><b>It rises</b><small>faster than you expected</small></span>
+      <span class="w2"><svg class="ue-i"><use href="#ue-distress"/></svg><b>It peaks</b><small>this is the part that feels unbearable and is not</small></span>
+      <span class="w3"><svg class="ue-i"><use href="#ue-allow"/></svg><b>It falls</b><small>on its own, without being solved</small></span>
+      <span class="w4"><svg class="ue-i"><use href="#ue-steady"/></svg><b>You are still here</b><small>and the next one arrives smaller</small></span>
+    </div>
+    <p class="ue-wave-note">Nothing on this line requires you to make the feeling stop. It requires you to still be doing something you chose while it happens.</p>
+  </div>
+
   <div class="ue-success"><svg class="ue-i"><use href="#ue-gauge"/></svg><span>Success is measured here</span><b>chosen action despite uncertainty</b><small>Anxiety may fall, stay, or rise. Its level does not grade the exercise.</small></div>
 </section>
 
 <section class="ue-part ue-prose" id="state">
   <h2><span>05</span><svg class="ue-i ue-h2-i"><use href="#ue-brain"/></svg> Read the emotion before acting</h2>
   <p class="ue-deck">An emotion carries information, an action urge, and physical energy. Separate those parts before choosing what to do.</p>
+
+  <div class="ue-primer">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-brain"/></svg> Start here if you have never taken one apart</p>
+
+    <div class="ue-primer-what">
+      <p><b>An emotion is a signal with a body attached.</b> Something happens, your mind reads it in a
+      particular way, the body changes to match, and you get an urge to do something. That whole bundle
+      arrives at once and feels like a single thing. It is four things, and they can be separated.</p>
+    </div>
+
+    <div class="ue-primer-parts">
+      <div class="s1"><svg class="ue-i"><use href="#ue-notice"/></svg><b>1. Something happens</b><span>An event, a thought, a memory, a sensation. It can come from outside or from nowhere obvious.</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="s2"><svg class="ue-i"><use href="#ue-label"/></svg><b>2. You read it</b><span>Your mind decides what it means. This step is fast, invisible, and often wrong.</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="s3"><svg class="ue-i"><use href="#ue-battery"/></svg><b>3. The body answers</b><span>Heart, breath, gut, jaw, temperature. This is the part that makes it feel like a fact.</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="s4"><svg class="ue-i"><use href="#ue-magnet"/></svg><b>4. An urge appears</b><span>Do something, or stop doing something. The urge is a suggestion, not an instruction.</span></div>
+    </div>
+
+    <div class="ue-primer-note">
+      <p><b>The reading is the part you can question.</b> The event already happened and the body is already
+      moving. The story your mind attached is the piece with room in it, and the urge is the piece you get
+      to answer rather than obey.</p>
+    </div>
+
+    <div class="ue-primer-facts">
+      <div><svg class="ue-i"><use href="#ue-curveline"/></svg><b>Every emotion ends</b><span>None of them are permanent, including the ones that feel permanent while they are happening.</span></div>
+      <div><svg class="ue-i"><use href="#ue-allow"/></svg><b>Feeling it is not agreeing with it</b><span>You can notice fear without treating the danger as real, and notice guilt without being guilty.</span></div>
+      <div><svg class="ue-i"><use href="#ue-label"/></svg><b>Naming it turns the volume down</b><span>A vague bad feeling is bigger than a named one. The wheel below is for finding the name.</span></div>
+      <div><svg class="ue-i"><use href="#ue-openq"/></svg><b>None of them are forbidden</b><span>There is no emotion you are not allowed to have. There are only actions worth choosing carefully.</span></div>
+    </div>
+
+    <div class="ue-primer-vs">
+      <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-venn"/></svg> Two things people mix up</p>
+      <div class="ue-vsgrid">
+        <div><span class="a">A feeling</span><span class="b">arrives on its own, cannot be ordered, and passes</span></div>
+        <div><span class="a">A mood</span><span class="b">lasts longer, has no single trigger, and colours everything you read</span></div>
+        <div><span class="a">A thought</span><span class="b">is a sentence in your head, and can be true, false, or simply loud</span></div>
+        <div><span class="a">An action</span><span class="b">is the only one of the four you choose, and the only one anyone else can see</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ue-wheel-block" id="ue-wheel-block">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-wheelmark"/></svg> Find the word before you decide what to do</p>
+    <div class="ue-wheel-wrap">
+      <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 452 452" role="img"
+           aria-label="A wheel of emotion words in three rings. Select any segment to read what it points at, what it urges, and one action that does not require the feeling to stop.">
+      </svg>
+      <div class="ue-wheel-read" id="ue-wheel-read" role="status">
+        <p class="ue-wheel-hint"><svg class="ue-i"><use href="#ue-eye"/></svg> Select any word. The centre keeps whatever you chose last.</p>
+      </div>
+    </div>
+    <div class="ue-btn-row"><button class="ue-btn" id="ue-wheel-clear" type="button">Clear selection</button></div>
+  </div>
+
   <div class="ue-anatomy" aria-label="One emotion separated into information, an action urge, and physical energy">
     <div class="ue-anatomy-src"><svg class="ue-i"><use href="#ue-heart"/></svg><b>One emotion</b></div>
     <div class="ue-anatomy-fan" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -173,8 +274,62 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <button data-copy="Slow the body enough to choose. Unclench, lengthen the exhale, feel the floor, and widen your view."><svg class="ue-i"><use href="#ue-wave"/></svg><b>Settle</b><span>Lower the speed.</span></button>
     <button data-copy="Follow the urge when it fits the facts. When it does not, take one small action in the more useful direction."><svg class="ue-i"><use href="#ue-move"/></svg><b>Choose</b><span>Act deliberately.</span></button>
   </div>
+
+  <div class="ue-overlap">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-venn"/></svg> Two readings, and the place you can act from</p>
+    <svg class="ue-overlap-svg" viewBox="0 0 460 240" role="img"
+         aria-label="Two overlapping circles: what the facts support, and what the feeling says. The overlap is where a choice is available.">
+      <circle class="c-fact" cx="175" cy="118" r="94"/>
+      <circle class="c-feel" cx="285" cy="118" r="94"/>
+      <text class="lab fact" x="104" y="112" text-anchor="middle">What the facts</text>
+      <text class="lab fact" x="104" y="130" text-anchor="middle">support</text>
+      <text class="lab feel" x="356" y="112" text-anchor="middle">What the feeling</text>
+      <text class="lab feel" x="356" y="130" text-anchor="middle">says</text>
+      <text class="lab mid" x="230" y="112" text-anchor="middle">Where you</text>
+      <text class="lab mid" x="230" y="130" text-anchor="middle">can choose</text>
+      <text class="cap" x="230" y="232" text-anchor="middle">Neither circle alone tells you what to do next.</text>
+    </svg>
+  </div>
+
   <p class="ue-oern-read" id="ue-oern-read" role="status">Choose a state skill to see its operating instruction.</p>
+
+  <div class="ue-band-block">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-window"/></svg> Which band are you in right now?</p>
+    <div class="ue-bands" id="ue-bands" role="group" aria-label="Choose your current band">
+      <button data-band="over"><svg class="ue-i"><use href="#ue-urgency"/></svg><b>Too switched on</b><small>racing, urgent, unable to sit still</small></button>
+      <button data-band="mid" class="is-on"><svg class="ue-i"><use href="#ue-target"/></svg><b>Able to choose</b><small>feeling something, still steering</small></button>
+      <button data-band="under"><svg class="ue-i"><use href="#ue-battery"/></svg><b>Switched off</b><small>flat, foggy, far away</small></button>
+    </div>
+    <div class="ue-band-strip" id="ue-band-strip" aria-hidden="true"><i class="over"></i><i class="mid"></i><i class="under"></i><span id="ue-band-mark"></span></div>
+    <div class="ue-band-read" id="ue-band-read" role="status"></div>
+  </div>
+
   <div class="ue-three"><p><svg class="ue-i"><use href="#ue-distress"/></svg><b>Distress</b> is not proof of danger.</p><p><svg class="ue-i"><use href="#ue-urgency"/></svg><b>Urgency</b> is not proof of importance.</p><p><svg class="ue-i"><use href="#ue-signal"/></svg><b>Emotion</b> is a signal, not a command.</p></div>
+
+  <div class="ue-levers">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-release"/></svg> Four ways to lower the speed in under two minutes</p>
+    <div class="ue-lever-grid">
+      <div><svg class="ue-i"><use href="#ue-cold"/></svg><b>Cold</b><span>Cold water on the face or wrists. The body slows before the mind agrees to.</span></div>
+      <div><svg class="ue-i"><use href="#ue-run"/></svg><b>Move</b><span>Two minutes of hard movement burns off what the alarm just released.</span></div>
+      <div><svg class="ue-i"><use href="#ue-breathe"/></svg><b>Longer out-breath</b><span>Make the exhale longer than the inhale for one minute.</span></div>
+      <div><svg class="ue-i"><use href="#ue-release"/></svg><b>Release</b><span>Tense a muscle group hard, hold, then let go. Repeat once.</span></div>
+    </div>
+    <p class="ue-lever-note">These buy you a few minutes of steadier judgment. They are not a way to make the feeling go away, and they do not need to work before you continue.</p>
+  </div>
+
+
+  <div class="ue-opp">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-opposite"/></svg> When the urge does not fit the facts</p>
+    <div class="ue-opp-rows">
+      <div><span class="f">Fear</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> avoid it entirely</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">approach it at a size you can repeat</span></div>
+      <div><span class="f">Anger</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> strike back now</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">step out, then state the boundary once</span></div>
+      <div><span class="f">Sadness</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> withdraw and stop</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">keep one small commitment to someone</span></div>
+      <div><span class="f">Shame</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> hide or over-explain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">say it once, repair it, carry on</span></div>
+      <div><span class="f">Doubt</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> check until it feels settled</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">leave it open and return to the task</span></div>
+    </div>
+    <p class="ue-opp-note">Follow the urge when the facts support it. When they do not, the useful direction is usually the one the feeling is arguing against.</p>
+  </div>
+
   <div class="ue-warning"><svg class="ue-i"><use href="#ue-pause"/></svg><b>Calming down is optional. Slowing down is enough.</b><p>Use breathing, movement, or sensory grounding to regain choice. Do not make a calm feeling the entry fee for continuing.</p></div>
 </section>
 
@@ -236,6 +391,29 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <button class="ue-btn" id="ue-rung-reset" type="button">Clear</button>
   </div>
 
+
+  <div class="ue-planner" id="ue-planner">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-plan"/></svg> Plan one rung, then run it</p>
+    <div class="ue-plan-grid">
+      <label class="p1"><span>The uncertainty I am practising</span>
+        <input class="ue-input" id="ue-plan-what" type="text" placeholder="Name it in one line" autocomplete="off"></label>
+      <label class="p2"><span><svg class="ue-i"><use href="#ue-nocheck"/></svg>The relief move I am not doing</span>
+        <input class="ue-input" id="ue-plan-skip" type="text" placeholder="What I would normally do to feel sure" autocomplete="off"></label>
+      <div class="p3"><span>Difficulty before</span>
+        <input class="ue-range" id="ue-plan-before" type="range" min="0" max="10" step="1" value="5">
+        <b id="ue-plan-before-v">5</b></div>
+      <div class="p4"><span>Difficulty after</span>
+        <input class="ue-range" id="ue-plan-after" type="range" min="0" max="10" step="1" value="5">
+        <b id="ue-plan-after-v">5</b></div>
+    </div>
+    <div class="ue-plan-out" id="ue-plan-out" role="status"></div>
+    <div class="ue-btn-row">
+      <button class="ue-btn is-primary" id="ue-plan-add" type="button">Log this round</button>
+      <button class="ue-btn" id="ue-plan-clear" type="button">Clear the log</button>
+    </div>
+    <div class="ue-plan-log" id="ue-plan-log"></div>
+  </div>
+
   <div class="ue-courage"><div><svg class="ue-i"><use href="#ue-shield"/></svg><span>Courage</span><b>chosen action despite fear</b></div><div><svg class="ue-i"><use href="#ue-steady"/></svg><span>Confidence</span><b>trust in your ability to respond</b></div></div>
   <p>You do not need proof that nothing bad will happen. You need a reasonable reading of the situation, a proportionate response, and enough trust that you can handle what follows.</p>
   <div class="ue-practice-log" aria-label="Practice review">
@@ -258,12 +436,33 @@ extra_js: /js/components/uncertainty-and-emotions.js
 <section class="ue-part ue-prose" id="reset">
   <h2><span>10</span><svg class="ue-i ue-h2-i"><use href="#ue-restart"/></svg> Recover without a trial</h2>
   <p class="ue-deck">A difficult round does not require self-punishment or a complete postmortem. Use curiosity to find the next workable adjustment.</p>
+
+  <div class="ue-stopseq">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-stop"/></svg> Before any of that, four beats</p>
+    <div class="ue-stopgrid">
+      <span><svg class="ue-i"><use href="#ue-stop"/></svg><b>Stop</b><small>no message, no decision, no review</small></span>
+      <span><svg class="ue-i"><use href="#ue-pause"/></svg><b>Step back</b><small>put one metre and one minute between you and it</small></span>
+      <span><svg class="ue-i"><use href="#ue-notice"/></svg><b>Look</b><small>what actually happened, in plain words</small></span>
+      <span><svg class="ue-i"><use href="#ue-smallstep"/></svg><b>Go on</b><small>the next useful action, at a size you can repeat</small></span>
+    </div>
+  </div>
+
   <div class="ue-reset">
     <div><b>1</b><svg class="ue-i"><use href="#ue-notice"/></svg><span><strong>Notice</strong>You went back to checking, avoidance, or repeated review.</span></div>
     <div><b>2</b><svg class="ue-i"><use href="#ue-nojudge"/></svg><span><strong>Drop the verdict</strong>Describe what happened without turning it into a character judgment.</span></div>
     <div><b>3</b><svg class="ue-i"><use href="#ue-pressure"/></svg><span><strong>Find the pressure point</strong>Was the step too large, the stakes unclear, or your capacity already low?</span></div>
     <div><b>4</b><svg class="ue-i"><use href="#ue-smallstep"/></svg><span><strong>Resume smaller</strong>Take the next useful action at a size you can repeat.</span></div>
   </div>
+
+  <div class="ue-accept">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-accept"/></svg> The part that stays open</p>
+    <div class="ue-accept-two">
+      <div class="closed"><svg class="ue-i"><use href="#ue-fact"/></svg><b>What can be settled</b><span>Facts you can check once. Actions you can take. Repairs you can make.</span></div>
+      <div class="open"><svg class="ue-i"><use href="#ue-infinity"/></svg><b>What stays open</b><span>Whether you will feel this again. Whether you were understood. Whether it was the best possible choice.</span></div>
+    </div>
+    <p class="ue-accept-note">The second column does not shrink by being argued with. It shrinks in importance when you keep acting while it is still open.</p>
+  </div>
+
   <p class="ue-compassion">Speak to yourself as you would to someone you respect: accurately, without humiliation, and without inventing a guarantee. Kindness helps you return to the work. It does not require pretending the work is easy.</p>
   <div class="ue-coda" aria-label="The complete uncertainty operating sequence">
     <p>When uncertainty appears</p>

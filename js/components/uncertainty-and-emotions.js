@@ -1,5 +1,6 @@
 (function(){'use strict';
   function all(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   var bar=document.getElementById('ue-progress-fill');
   if(bar){var busy=false,paint=function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';busy=false;};addEventListener('scroll',function(){if(!busy){busy=true;requestAnimationFrame(paint);}},{passive:true});paint();}
   var loopCopy=['An unknown appears. The mind may treat not knowing as a problem by itself.','Possibility becomes danger before the evidence has changed.','The body and mind demand an answer on the alarm system\'s timetable.','Checking, reviewing, asking again, analysing, or avoiding buys relief.','Relief rewards the move. The next alarm arrives with more authority.'];
@@ -144,6 +145,344 @@
   }
 
   [rounds,voi,protocolTicks,rungTicks].forEach(function(fn){
+    try{ fn(); }catch(e){ /* one widget must not take the page down */ }
+  });
+
+
+  /* ── What the feeling does when it is not acted on ───────
+     Two shapes over the same axis. Acting on the urge cuts the curve short
+     and the next arrival starts higher. Staying with it lets one wave finish.
+     The curves show a direction, not measured values. */
+  function curveViz(){
+    var svg=document.getElementById('ue-curve'); if(!svg) return;
+    var range=document.getElementById('ue-curve-range');
+    var modes=document.getElementById('ue-curve-modes');
+    var X0=46,X1=502,YT=22,YB=188;
+    var mode='relieve';
+    function px(t){ return X0+t*(X1-X0); }
+    function py(v){ return YB-v*(YB-YT); }
+
+    /* three arrivals, each cut off by the relief move and starting higher */
+    function relieve(t){
+      var seg=[[0,0.30,0.72],[0.34,0.64,0.86],[0.68,1.0,0.97]];
+      for(var k=0;k<seg.length;k++){
+        var a=seg[k][0], b=seg[k][1], peak=seg[k][2];
+        if(t>=a&&t<=b){
+          var u=(t-a)/(b-a);
+          return u<0.72 ? peak*Math.pow(u/0.72,0.75) : peak*(1-(u-0.72)/0.28)*0.9;
+        }
+      }
+      return 0.05;
+    }
+    /* one arrival: rises, peaks, and comes down without being solved */
+    function stay(t){
+      return 0.95*Math.exp(-Math.pow((t-0.26)/0.20,2))
+           + 0.30*Math.exp(-Math.pow((t-0.62)/0.26,2))
+           + 0.04;
+    }
+    function fn(t){ return Math.min(1,(mode==='relieve'?relieve(t):stay(t))); }
+
+    function d(){
+      var out='';
+      for(var i=0;i<=180;i++){ var t=i/180; out+=(i?'L':'M')+px(t).toFixed(1)+' '+py(fn(t)).toFixed(1); }
+      return out;
+    }
+    var line=document.getElementById('ue-curve-line');
+    var band=document.getElementById('ue-curve-band');
+    var marks=document.getElementById('ue-curve-marks');
+
+    function redraw(){
+      if(line) line.setAttribute('d',d());
+      if(band) band.setAttribute('d',d()+'L'+px(1).toFixed(1)+' '+YB+'L'+X0+' '+YB+'Z');
+      if(marks){
+        marks.innerHTML='';
+        if(mode==='relieve'){
+          [0.30,0.64].forEach(function(t){
+            marks.innerHTML+='<line class="cut" x1="'+px(t).toFixed(1)+'" y1="'+YT+'" x2="'+px(t).toFixed(1)+'" y2="'+YB+'"/>'
+              +'<text class="cutlab" x="'+(px(t)+5).toFixed(1)+'" y="'+(YT+12)+'">relief move</text>';
+          });
+        }
+      }
+      paint();
+    }
+
+    function paint(){
+      var t=+range.value/100, v=fn(t), x=px(t);
+      var scrub=document.getElementById('ue-curve-scrub');
+      if(scrub){ scrub.setAttribute('x1',x); scrub.setAttribute('x2',x); }
+      var dot=document.getElementById('ue-curve-dot');
+      if(dot){ dot.setAttribute('cx',x); dot.setAttribute('cy',py(v)); }
+      var el=document.getElementById('ue-curve-t');
+      if(el) el.textContent=Math.round(t*40)+' min';
+      var lv=document.getElementById('ue-curve-v');
+      if(lv) lv.textContent = v>0.75?'near the peak':v>0.45?'high':v>0.2?'settling':'low';
+      var say=document.getElementById('ue-curve-say');
+      if(say){
+        say.textContent = mode==='relieve'
+          ? 'Each relief move ends that wave early. The next one starts higher, and the gap between them gets shorter.'
+          : 'One wave, allowed to finish. Nothing was solved and it came down anyway. That is the part the relief move never lets you find out.';
+      }
+    }
+
+    if(modes){
+      modes.addEventListener('click',function(e){
+        var b=e.target.closest('button[data-mode]'); if(!b) return;
+        mode=b.dataset.mode;
+        all('#ue-curve-modes button').forEach(function(x){ x.classList.toggle('is-on',x===b); });
+        svg.dataset.mode=mode;
+        redraw();
+      });
+    }
+    if(range) range.addEventListener('input',paint);
+    svg.dataset.mode=mode;
+    redraw();
+  }
+
+  /* ── The wheel ───────────────────────────────────────────
+     Three rings drawn from _data/emotion_wheel.yml. Selecting any segment
+     shows that family's three parts: what it points at, what it urges, and
+     one action that does not wait for the feeling to stop. */
+  function wheel(){
+    var host=document.getElementById('ue-wheel'); if(!host) return;
+    var el=document.getElementById('ue-wheel-data'); if(!el) return;
+    var DATA; try{ DATA=JSON.parse(el.textContent); }catch(e){ return; }
+    var fams=(DATA&&DATA.families)||[]; if(!fams.length) return;
+
+    var read=document.getElementById('ue-wheel-read');
+    var NS='http://www.w3.org/2000/svg';
+    var CX=226,CY=226,R0=44,R1=88,R2=158,R3=214;
+    var TAU=Math.PI*2;
+
+    function pt(r,a){ return [CX+r*Math.cos(a), CY+r*Math.sin(a)]; }
+    function arc(r0,r1,a0,a1){
+      var p0=pt(r1,a0),p1=pt(r1,a1),p2=pt(r0,a1),p3=pt(r0,a0);
+      var big=(a1-a0)>Math.PI?1:0;
+      return 'M'+p0[0].toFixed(2)+' '+p0[1].toFixed(2)+
+             'A'+r1+' '+r1+' 0 '+big+' 1 '+p1[0].toFixed(2)+' '+p1[1].toFixed(2)+
+             'L'+p2[0].toFixed(2)+' '+p2[1].toFixed(2)+
+             'A'+r0+' '+r0+' 0 '+big+' 0 '+p3[0].toFixed(2)+' '+p3[1].toFixed(2)+'Z';
+    }
+    function mk(name,attrs,text){
+      var e=document.createElementNS(NS,name);
+      Object.keys(attrs).forEach(function(k){ e.setAttribute(k,attrs[k]); });
+      if(text!=null) e.textContent=text;
+      return e;
+    }
+    /* A wedge is wide across the arc near the middle and narrow further out.
+       The family ring is laid along its arc; the two outer rings run along the
+       radius instead, where the space is, and flip on the left half so no word
+       is upside down. */
+    function label(txt,r,a,cls,size,radial){
+      var p=pt(r,a), deg=a*180/Math.PI, flip=(deg>90&&deg<270);
+      var rot, anchor;
+      if(radial){
+        rot=flip?deg+180:deg;
+        anchor=flip?'end':'start';
+      }else{
+        rot=flip?deg+180:deg;
+        anchor='middle';
+      }
+      return mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),class:cls,
+        'text-anchor':anchor,'dominant-baseline':'middle','font-size':size,
+        transform:'rotate('+rot.toFixed(1)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')'}, txt);
+    }
+    /* Radial labels start just inside the band's inner edge, or just inside its
+       outer edge when they read right-to-left. */
+    function radialR(r0,r1,a){
+      var deg=a*180/Math.PI;
+      return (deg>90&&deg<270) ? r1-4 : r0+4;
+    }
+
+    var seg=TAU/fams.length;
+    var start=-Math.PI/2-seg/2;
+
+    fams.forEach(function(f,fi){
+      var a0=start+fi*seg, a1=a0+seg, hue=f.hue;
+      var g=mk('g',{class:'ue-fam','data-fam':fi});
+
+      /* inner ring: the family */
+      var p=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-1',
+        style:'--h:'+hue,tabindex:'0',role:'button','aria-label':f.name});
+      p.dataset.fam=fi; p.dataset.level='1';
+      g.appendChild(p);
+      g.appendChild(label(f.name,(R0+R1)/2,(a0+a1)/2,'ue-wt ue-wt-1',11.5,false));
+
+      /* middle ring: three broader words */
+      var inner=f.inner||[];
+      var iseg=seg/Math.max(1,inner.length);
+      inner.forEach(function(it,ii){
+        var b0=a0+ii*iseg, b1=b0+iseg;
+        var q=mk('path',{d:arc(R1,R2,b0,b1),class:'ue-seg ue-seg-2',
+          style:'--h:'+hue,tabindex:'0',role:'button','aria-label':it.name+', '+f.name});
+        q.dataset.fam=fi; q.dataset.level='2'; q.dataset.word=it.name;
+        g.appendChild(q);
+        g.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-2',9,true));
+
+        /* outer ring: the finer words */
+        var outs=it.outer||[];
+        var oseg=iseg/Math.max(1,outs.length);
+        outs.forEach(function(w,oi){
+          var c0=b0+oi*oseg, c1=c0+oseg;
+          var r=mk('path',{d:arc(R2,R3,c0,c1),class:'ue-seg ue-seg-3',
+            style:'--h:'+hue,tabindex:'0',role:'button','aria-label':w+', '+f.name});
+          r.dataset.fam=fi; r.dataset.level='3'; r.dataset.word=w;
+          g.appendChild(r);
+          g.appendChild(label(w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-3',7.8,true));
+        });
+      });
+      host.appendChild(g);
+    });
+
+    /* the hub keeps whatever was chosen last */
+    var hub=mk('g',{class:'ue-hub'});
+    hub.appendChild(mk('circle',{cx:CX,cy:CY,r:R0-4,class:'ue-hub-c'}));
+    var hubT=mk('text',{x:CX,y:CY-4,class:'ue-hub-t','text-anchor':'middle','font-size':15});
+    hubT.textContent='Which one?';
+    var hubS=mk('text',{x:CX,y:CY+14,class:'ue-hub-s','text-anchor':'middle','font-size':9.5});
+    hubS.textContent='pick a word';
+    hub.appendChild(hubT); hub.appendChild(hubS);
+    host.appendChild(hub);
+
+    function show(p){
+      var f=fams[+p.dataset.fam];
+      var word=p.dataset.word||f.name;
+      all('.ue-seg',host).forEach(function(x){ x.classList.remove('is-on'); });
+      all('.ue-fam',host).forEach(function(x){ x.classList.toggle('is-dim', x.dataset.fam!==p.dataset.fam); });
+      p.classList.add('is-on');
+      hubT.textContent=word;
+      hubS.textContent=word===f.name?'family':'in '+f.name.toLowerCase();
+      host.style.setProperty('--sel-h',f.hue);
+      if(read){
+        read.innerHTML=
+          '<p class="ue-wheel-word" style="--h:'+f.hue+'">'+esc(word)+
+            '<span>'+esc(f.name)+'</span></p>'+
+          '<dl class="ue-wheel-parts">'+
+            '<div><dt>What it points at</dt><dd>'+esc(f.points_at)+'</dd></div>'+
+            '<div><dt>What it urges</dt><dd>'+esc(f.urge)+'</dd></div>'+
+            '<div class="do"><dt>One action that does not wait for it to stop</dt><dd>'+esc(f.counter)+'</dd></div>'+
+          '</dl>';
+      }
+    }
+    function clear(){
+      all('.ue-seg',host).forEach(function(x){ x.classList.remove('is-on'); });
+      all('.ue-fam',host).forEach(function(x){ x.classList.remove('is-dim'); });
+      hubT.textContent='Which one?'; hubS.textContent='pick a word';
+      host.style.removeProperty('--sel-h');
+      if(read) read.innerHTML='<p class="ue-wheel-hint"><svg class="ue-i"><use href="#ue-eye"/></svg> Select any word. The centre keeps whatever you chose last.</p>';
+    }
+
+    host.addEventListener('click',function(e){
+      var p=e.target.closest('.ue-seg'); if(p) show(p);
+    });
+    host.addEventListener('keydown',function(e){
+      if(e.key!=='Enter'&&e.key!==' ') return;
+      var p=e.target.closest('.ue-seg'); if(!p) return;
+      e.preventDefault(); show(p);
+    });
+    var cl=document.getElementById('ue-wheel-clear');
+    if(cl) cl.addEventListener('click',clear);
+  }
+
+  /* ── Which band, and what fits it ────────────────────────
+     Named plainly. The middle band is the only one where a considered
+     decision belongs; the other two get a physical move first. */
+  function bands(){
+    var wrap=document.getElementById('ue-bands'); if(!wrap) return;
+    var read=document.getElementById('ue-band-read');
+    var mark=document.getElementById('ue-band-mark');
+    var COPY={
+      over:{t:'Too switched on',
+        p:'Speed is up, the body is loud, and everything feels like it must be settled now. A decision made here is really the alarm choosing.',
+        a:'Lower the speed first. Cold, movement, a longer out-breath. Then come back to the question.'},
+      mid:{t:'Able to choose',
+        p:'You can feel something and still steer. This is the only band where a considered decision belongs.',
+        a:'Do the thing you chose. This is where practice counts, and the feeling does not have to be absent.'},
+      under:{t:'Switched off',
+        p:'Flat, foggy, far away. Nothing feels urgent because nothing feels like much at all.',
+        a:'Raise the signal gently. Stand, cold water, light, one small physical task. Do not decide anything large from here.'}
+    };
+    var POS={over:'16%',mid:'50%',under:'84%'};
+    function show(k){
+      all('#ue-bands button').forEach(function(b){ b.classList.toggle('is-on',b.dataset.band===k); });
+      if(mark) mark.style.left=POS[k];
+      var c=COPY[k];
+      if(read&&c) read.innerHTML='<p class="t">'+esc(c.t)+'</p><p>'+esc(c.p)+'</p><p class="do">'+esc(c.a)+'</p>';
+    }
+    wrap.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-band]'); if(b) show(b.dataset.band);
+    });
+    show('mid');
+  }
+
+  /* ── Plan one rung, then log what happened ───────────────
+     Records what was practised and the two difficulty readings, so the record
+     is of behaviour rather than of whether it felt better. Local only. */
+  function planner(){
+    var root=document.getElementById('ue-planner'); if(!root) return;
+    var what=document.getElementById('ue-plan-what');
+    var skip=document.getElementById('ue-plan-skip');
+    var before=document.getElementById('ue-plan-before');
+    var after=document.getElementById('ue-plan-after');
+    var out=document.getElementById('ue-plan-out');
+    var logEl=document.getElementById('ue-plan-log');
+    var KEY='ue:log';
+    var rows=[];
+    try{ rows=JSON.parse(localStorage.getItem(KEY)||'[]')||[]; }catch(e){ rows=[]; }
+
+    function nums(){
+      var b=document.getElementById('ue-plan-before-v');
+      var a=document.getElementById('ue-plan-after-v');
+      if(b) b.textContent=before.value;
+      if(a) a.textContent=after.value;
+      if(out){
+        var d=+before.value-+after.value;
+        out.innerHTML = !what.value.trim()
+          ? 'Name the uncertainty above, then log the round.'
+          : d>0 ? 'It came down <b>'+d+'</b> without the relief move. That is the evidence this page keeps asking for.'
+          : d===0 ? 'It stayed level. The round still counts: you did it with the feeling present.'
+          : 'It rose. That happens, and the round still counts. The measure is what you did, not where the number landed.';
+      }
+    }
+    function paint(){
+      if(!logEl) return;
+      logEl.innerHTML = !rows.length ? '' :
+        '<p class="k">Rounds logged</p>'+rows.map(function(r,ix){
+          return '<div class="ue-plan-row"><span class="w">'+esc(r.what)+'</span>'+
+            (r.skip?'<span class="s">not doing: '+esc(r.skip)+'</span>':'')+
+            '<span class="n">'+r.before+' &rarr; '+r.after+'</span>'+
+            '<button type="button" data-del="'+ix+'" aria-label="Remove this round">&times;</button></div>';
+        }).join('');
+    }
+    function save(){ try{ localStorage.setItem(KEY,JSON.stringify(rows)); }catch(e){} }
+
+    [before,after].forEach(function(r){ if(r) r.addEventListener('input',nums); });
+    if(what) what.addEventListener('input',nums);
+
+    var addButton=document.getElementById('ue-plan-add');
+    if(addButton){
+      addButton.addEventListener('click',function(){
+        if(!what.value.trim()){ what.focus(); return; }
+        rows.unshift({what:what.value.trim(),skip:skip.value.trim(),
+          before:+before.value,after:+after.value});
+        rows=rows.slice(0,12);
+        save(); paint();
+        what.value=''; skip.value='';
+        nums();
+      });
+    }
+    if(logEl){
+      logEl.addEventListener('click',function(e){
+        var d=e.target.closest('button[data-del]'); if(!d) return;
+        rows.splice(+d.dataset.del,1); save(); paint();
+      });
+    }
+    var clear=document.getElementById('ue-plan-clear');
+    if(clear) clear.addEventListener('click',function(){ rows=[]; save(); paint(); });
+
+    nums(); paint();
+  }
+
+  [curveViz,wheel,bands,planner].forEach(function(fn){
     try{ fn(); }catch(e){ /* one widget must not take the page down */ }
   });
 
