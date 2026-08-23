@@ -242,16 +242,33 @@
      Three rings drawn from _data/emotion_wheel.yml. Selecting any segment
      shows that family's three parts: what it points at, what it urges, and
      one action that does not wait for the feeling to stop. */
+  /* ── The wheel, in two views ─────────────────────────────
+     Both come from published work and neither is a summary of the other.
+
+     Categories: the 27 emotion categories Cowen and Keltner recovered from
+     self-report, drawn as one ring. Their finding is that the categories are
+     bridged by continuous gradients, so the ring is coloured as a sweep rather
+     than as blocks, and neighbours are seated to follow the gradients the paper
+     names wherever a circle allows it.
+
+     Axes: the Geneva Emotion Wheel, twenty families placed by valence across
+     and control up, cutting four quadrants.
+
+     `def` lines describe each term. `urge` and `counter` are this page's own
+     frame, and the panel labels them so. */
   function wheel(){
     var host=document.getElementById('ue-wheel'); if(!host) return;
     var el=document.getElementById('ue-wheel-data'); if(!el) return;
     var DATA; try{ DATA=JSON.parse(el.textContent); }catch(e){ return; }
-    var fams=(DATA&&DATA.families)||[]; if(!fams.length) return;
+    var cats=(DATA&&DATA.categories)||[];
+    var gew=(DATA&&DATA.gew)||null;
+    if(!cats.length) return;
 
     var read=document.getElementById('ue-wheel-read');
     var NS='http://www.w3.org/2000/svg';
-    var CX=319,CY=319,R0=60,R1=132,R2=226,R3=307;
-    var TAU=Math.PI*2;
+    var CX=319,CY=319,TAU=Math.PI*2;
+    var fitQueue=[];
+    var view='cats';
 
     function pt(r,a){ return [CX+r*Math.cos(a), CY+r*Math.sin(a)]; }
     function arc(r0,r1,a0,a1){
@@ -268,168 +285,195 @@
       if(text!=null) e.textContent=text;
       return e;
     }
-    /* A wedge is wide across the arc near the middle and narrow further out.
-       The family ring is laid along its arc; the two outer rings run along the
-       radius instead, where the space is, and flip on the left half so no word
-       is upside down. */
-    function label(txt,r,a,cls,size,radial,room){
-      var p=pt(r,a), deg=(a*180/Math.PI%360+360)%360, flip=(deg>90&&deg<270);
-      /* The rotation already decides which way the glyphs run: unflipped, local
-         +x points outward and the anchor sits at the band's inner edge; flipped,
-         local +x points inward and the anchor sits at the outer edge. Either way
-         the text starts at its anchor and runs into the band, so both are
-         "start". Using "end" on the flipped half ran those words back out
-         through the outer ring, which is what broke joy, love and surprise. */
-      var anchor = radial ? 'start' : 'middle';
-      var rot = flip?deg+180:deg;
+
+    /* A wedge is widest across its arc and deepest along its radius. Radial
+       labels take the depth; the rotation decides which way the glyphs run, so
+       both halves anchor at "start" and read into the band. */
+    function label(txt,r,a,cls,size,room){
+      var p=pt(r,a), deg=((a*180/Math.PI)%360+360)%360, flip=(deg>90&&deg<270);
       var t=mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),class:cls,
-        'text-anchor':anchor,'dominant-baseline':'middle','font-size':size,
-        transform:'rotate('+rot.toFixed(1)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')'}, txt);
-      t.dataset.room=room.toFixed(1);
-      t.dataset.size=size;
+        'text-anchor':'start','dominant-baseline':'middle','font-size':size,
+        transform:'rotate('+(flip?deg+180:deg).toFixed(1)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')'}, txt);
+      t.dataset.room=room.toFixed(1); t.dataset.size=size;
       fitQueue.push(t);
       return t;
     }
-
-    /* Guessing at font metrics is what put words outside their bands. Ask the
-       browser instead: measure each label once it is in the document, shrink it
-       until it fits the space it was given, and if a long word is still over,
-       let the renderer condense it to exactly that width. */
-    var fitQueue=[];
+    function radialR(r0,r1,a){
+      var deg=((a*180/Math.PI)%360+360)%360;
+      return (deg>90&&deg<270) ? r1-6 : r0+6;
+    }
+    /* Guessed font metrics are what put words outside their bands before. Ask
+       the browser: measure, shrink to fit, and condense only as a last resort. */
     function fitLabels(){
       fitQueue.forEach(function(t){
-        var room=+t.dataset.room, size=+t.dataset.size;
-        var w;
+        var room=+t.dataset.room, size=+t.dataset.size, w;
         try{ w=t.getComputedTextLength(); }catch(e){ return; }
         if(!w||w<=room) return;
-        var shrunk=Math.max(size*0.72, size*room/w);
-        t.setAttribute('font-size',shrunk.toFixed(2));
+        t.setAttribute('font-size',Math.max(size*0.7,size*room/w).toFixed(2));
         try{ w=t.getComputedTextLength(); }catch(e){ return; }
-        if(w>room){
-          t.setAttribute('textLength',room.toFixed(1));
-          t.setAttribute('lengthAdjust','spacingAndGlyphs');
-        }
+        if(w>room){ t.setAttribute('textLength',room.toFixed(1)); t.setAttribute('lengthAdjust','spacingAndGlyphs'); }
       });
       fitQueue.length=0;
     }
-    /* Radial labels start just inside the band's inner edge, or just inside its
-       outer edge when they read right-to-left. */
-    function radialR(r0,r1,a){
-      var deg=(a*180/Math.PI%360+360)%360;
-      return (deg>90&&deg<270) ? r1-5 : r0+5;
+
+    var hubT,hubS;
+    function hub(r,title,sub){
+      var g=mk('g',{class:'ue-hub'});
+      g.appendChild(mk('circle',{cx:CX,cy:CY,r:r,class:'ue-hub-c'}));
+      hubT=mk('text',{x:CX,y:CY-6,class:'ue-hub-t','text-anchor':'middle','font-size':20});
+      hubT.textContent=title;
+      hubS=mk('text',{x:CX,y:CY+16,class:'ue-hub-s','text-anchor':'middle','font-size':12});
+      hubS.textContent=sub;
+      g.appendChild(hubT); g.appendChild(hubS);
+      host.appendChild(g);
     }
 
-    var seg=TAU/fams.length;
-    var start=-Math.PI/2-seg/2;
-
-    fams.forEach(function(f,fi){
-      var a0=start+fi*seg, a1=a0+seg, hue=f.hue;
-      var g=mk('g',{class:'ue-fam','data-fam':fi});
-
-      /* inner ring: the family */
-      var p=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-1',
-        style:'--h:'+hue,tabindex:'0',role:'button','aria-label':f.name+'. '+(f.def||'')});
-      p.dataset.fam=fi; p.dataset.level='1';
-      p.dataset.def=f.def||'';
-      g.appendChild(p);
-      g.appendChild(label(f.name,(R0+R1)/2,(a0+a1)/2,'ue-wt ue-wt-1',13,false,(a1-a0)*((R0+R1)/2)*0.86));
-
-      /* middle ring: three broader words */
-      var inner=f.inner||[];
-      var iseg=seg/Math.max(1,inner.length);
-      inner.forEach(function(it,ii){
-        var b0=a0+ii*iseg, b1=b0+iseg;
-        var q=mk('path',{d:arc(R1,R2,b0,b1),class:'ue-seg ue-seg-2',
-          style:'--h:'+hue,tabindex:'0',role:'button','aria-label':it.name+', '+f.name+'. '+(it.def||'')});
-        q.dataset.fam=fi; q.dataset.level='2'; q.dataset.word=it.name;
-        q.dataset.def=it.def||''; q.dataset.parent=f.name;
-        g.appendChild(q);
-        g.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-2',11,true,R2-R1-12));
-
-        /* outer ring: the finer words */
-        var outs=it.outer||[];
-        var oseg=iseg/Math.max(1,outs.length);
-        outs.forEach(function(o,oi){
-          var w=o.w, c0=b0+oi*oseg, c1=c0+oseg;
-          var r=mk('path',{d:arc(R2,R3,c0,c1),class:'ue-seg ue-seg-3',
-            style:'--h:'+hue,tabindex:'0',role:'button','aria-label':w+', '+f.name+'. '+(o.def||'')});
-          r.dataset.fam=fi; r.dataset.level='3'; r.dataset.word=w;
-          r.dataset.def=o.def||''; r.dataset.parent=it.name;
-          g.appendChild(r);
-          g.appendChild(label(w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-3',10,true,R3-R2-12));
-        });
-      });
-      host.appendChild(g);
-    });
-
-    /* the hub keeps whatever was chosen last */
-    var hub=mk('g',{class:'ue-hub'});
-    hub.appendChild(mk('circle',{cx:CX,cy:CY,r:R0-5,class:'ue-hub-c'}));
-    var hubT=mk('text',{x:CX,y:CY-6,class:'ue-hub-t','text-anchor':'middle','font-size':20});
-    hubT.textContent='Which one?';
-    var hubS=mk('text',{x:CX,y:CY+16,class:'ue-hub-s','text-anchor':'middle','font-size':12});
-    hubS.textContent='pick a word';
-    hub.appendChild(hubT); hub.appendChild(hubS);
-    host.appendChild(hub);
-
-    function show(p){
-      var f=fams[+p.dataset.fam];
-      var word=p.dataset.word||f.name;
-      all('.ue-seg',host).forEach(function(x){ x.classList.remove('is-on'); });
-      all('.ue-fam',host).forEach(function(x){ x.classList.toggle('is-dim', x.dataset.fam!==p.dataset.fam); });
-      p.classList.add('is-on');
-      hubT.textContent=word;
-      hubS.textContent=word===f.name?'family':'in '+f.name.toLowerCase();
-      host.style.setProperty('--sel-h',f.hue);
-      if(read){
-        var lvl=p.dataset.level;
-        var trail = lvl==='3' ? esc(f.name)+' &rsaquo; '+esc(p.dataset.parent||'')
-                  : lvl==='2' ? esc(f.name)
-                  : 'family';
-        read.innerHTML=
-          '<p class="ue-wheel-word" style="--h:'+f.hue+'">'+esc(word)+
-            '<span>'+trail+'</span></p>'+
-          '<p class="ue-wheel-def">'+esc(p.dataset.def||'')+'</p>'+
+    function panel(d){
+      if(!read) return;
+      read.innerHTML=
+        '<p class="ue-wheel-word" style="--h:'+(d.hue||200)+'">'+esc(d.name)+
+          '<span>'+esc(d.trail)+'</span></p>'+
+        '<p class="ue-wheel-def">'+esc(d.def||'')+'</p>'+
+        (d.urge||d.counter ?
           '<dl class="ue-wheel-parts">'+
-            '<div><dt>What it points at</dt><dd>'+esc(f.points_at)+'</dd></div>'+
-            '<div><dt>What it urges</dt><dd>'+esc(f.urge)+'</dd></div>'+
-            '<div class="do"><dt>One action that does not wait for it to stop</dt><dd>'+esc(f.counter)+'</dd></div>'+
+            (d.urge?'<div><dt>What it urges</dt><dd>'+esc(d.urge)+'</dd></div>':'')+
+            (d.counter?'<div class="do"><dt>One action that does not wait for it to stop</dt><dd>'+esc(d.counter)+'</dd></div>':'')+
           '</dl>'+
-          (lvl==='1' ? '' :
-            '<p class="ue-wheel-scope">These three describe the whole '+esc(f.name)+' family.</p>');
+          '<p class="ue-wheel-scope">The definition is the researchers’ category. These two lines are this page’s own reading, not a finding.</p>'
+          : '')+
+        (d.near&&d.near.length ?
+          '<p class="ue-wheel-near">The study reports a smooth gradient between this and '+
+            esc(d.near.join(', '))+'.</p>' : '');
+    }
+    function clearPanel(hint){
+      if(read) read.innerHTML='<p class="ue-wheel-hint"><svg class="ue-i"><use href="#ue-eye"/></svg> '+hint+'</p>';
+      if(hubT){ hubT.textContent='Which one?'; hubS.textContent='pick a word'; }
+      Array.prototype.slice.call(host.querySelectorAll('.ue-seg')).forEach(function(x){ x.classList.remove('is-on'); });
+    }
+
+    function select(p,d){
+      Array.prototype.slice.call(host.querySelectorAll('.ue-seg')).forEach(function(x){ x.classList.remove('is-on'); });
+      p.classList.add('is-on');
+      if(hubT){ hubT.textContent=d.name; hubS.textContent=d.trail; }
+      panel(d);
+    }
+
+    /* ── View one: the 27 categories ── */
+    function buildCats(){
+      /* Band depth is set by the longest name, "Aesthetic appreciation". */
+      var R0=132,R1=312, n=cats.length, seg=TAU/n, start=-Math.PI/2-seg/2;
+      cats.forEach(function(c,i){
+        var a0=start+i*seg, a1=a0+seg;
+        var hue=Math.round((200+i*(330/n))%360);
+        var p=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-cat',style:'--h:'+hue,
+          tabindex:'0',role:'button','aria-label':c.name+'. '+(c.def||'')});
+        var d={name:c.name,trail:'category '+(i+1)+' of '+n,def:c.def,urge:c.urge,
+               counter:c.counter,near:c.near||[],hue:hue};
+        p.addEventListener('click',function(){ select(p,d); });
+        p.addEventListener('keydown',function(e){
+          if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(p,d); }
+        });
+        host.appendChild(p);
+        host.appendChild(label(c.name,radialR(R0,R1,(a0+a1)/2),(a0+a1)/2,'ue-wt ue-wt-cat',12,R1-R0-14));
+      });
+      hub(R0-8,'Which one?','pick a word');
+    }
+
+    /* ── View two: valence across, control up ── */
+    function buildAxes(){
+      if(!gew) return;
+      var R0=120,R1=300, fams=gew.families||[], n=fams.length, seg=TAU/n;
+      var QH={ph:44,pl:150,nl:214,nh:8};
+      /* The instrument's own spoke order: down the right from just past the top,
+         then on round and up the left. */
+      var start=-Math.PI/2+seg/2;
+
+      /* quadrant backing, drawn first so the spokes sit over it */
+      [['ph',-Math.PI/2,0],['pl',0,Math.PI/2],['nl',Math.PI/2,Math.PI],['nh',Math.PI,Math.PI*1.5]]
+        .forEach(function(q){
+          host.appendChild(mk('path',{d:arc(0,R1+16,q[1],q[2]),class:'ue-quad ue-quad-'+q[0],
+            style:'--h:'+QH[q[0]]}));
+        });
+
+      fams.forEach(function(f,i){
+        var a0=start+i*seg, a1=a0+seg, hue=QH[f.q]||200;
+        var p=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-gew',style:'--h:'+hue,
+          tabindex:'0',role:'button','aria-label':f.name+'. '+(f.def||'')});
+        var q=(gew.quadrants||[]).filter(function(x){ return x.key===f.q; })[0]||{};
+        var d={name:f.name,trail:q.axes||'',def:f.def,hue:hue,
+               urge:null,counter:null,near:null};
+        p.addEventListener('click',function(){
+          select(p,d);
+          if(read) read.insertAdjacentHTML('beforeend',
+            '<p class="ue-wheel-quad"><b>'+esc(q.short||'')+'</b> '+esc(q.body||'')+'</p>');
+        });
+        p.addEventListener('keydown',function(e){
+          if(e.key==='Enter'||e.key===' '){ e.preventDefault(); p.dispatchEvent(new MouseEvent('click')); }
+        });
+        host.appendChild(p);
+        host.appendChild(label(f.name,radialR(R0,R1,(a0+a1)/2),(a0+a1)/2,'ue-wt ue-wt-cat',12,R1-R0-14));
+      });
+
+      /* the two axes and their ends */
+      host.appendChild(mk('line',{x1:CX-R1-14,y1:CY,x2:CX+R1+14,y2:CY,class:'ue-axis'}));
+      host.appendChild(mk('line',{x1:CX,y1:CY-R1-14,x2:CX,y2:CY+R1+14,class:'ue-axis'}));
+      [[CX-R1-6,CY-8,'start','Unpleasant'],[CX+R1+6,CY-8,'end','Pleasant'],
+       [CX+6,CY-R1-6,'start','High control'],[CX+6,CY+R1+16,'start','Low control']]
+        .forEach(function(t){
+          host.appendChild(mk('text',{x:t[0],y:t[1],'text-anchor':t[2],class:'ue-axlab','font-size':13},t[3]));
+        });
+      /* quadrant names, this page's shorthand */
+      (gew.quadrants||[]).forEach(function(q){
+        var pos={ph:[CX+R1*0.62,CY-R1*0.62],pl:[CX+R1*0.62,CY+R1*0.62],
+                 nl:[CX-R1*0.62,CY+R1*0.62],nh:[CX-R1*0.62,CY-R1*0.62]}[q.key];
+        if(!pos) return;
+        host.appendChild(mk('text',{x:pos[0],y:pos[1],'text-anchor':'middle',
+          class:'ue-qlab','font-size':13,style:'--h:'+QH[q.key]},q.short));
+      });
+      hub(R0-8,'Which one?','pick a word');
+    }
+
+    function render(){
+      host.innerHTML='';
+      fitQueue.length=0;
+      if(view==='cats'){ buildCats(); clearPanel('Select any category. Twenty-seven, from self-report.'); }
+      else { buildAxes(); clearPanel('Select any family. Placed by valence across and control up.'); }
+      host.dataset.view=view;
+      fitLabels();
+      if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
+        document.fonts.ready.then(function(){
+          Array.prototype.slice.call(host.querySelectorAll('.ue-wt')).forEach(function(t){
+            t.removeAttribute('textLength'); t.removeAttribute('lengthAdjust');
+            t.setAttribute('font-size',t.dataset.size);
+            fitQueue.push(t);
+          });
+          fitLabels();
+        });
       }
     }
-    function clear(){
-      all('.ue-seg',host).forEach(function(x){ x.classList.remove('is-on'); });
-      all('.ue-fam',host).forEach(function(x){ x.classList.remove('is-dim'); });
-      hubT.textContent='Which one?'; hubS.textContent='pick a word';
-      host.style.removeProperty('--sel-h');
-      if(read) read.innerHTML='<p class="ue-wheel-hint"><svg class="ue-i"><use href="#ue-eye"/></svg> Select any word. The centre keeps whatever you chose last.</p>';
-    }
 
-    host.addEventListener('click',function(e){
-      var p=e.target.closest('.ue-seg'); if(p) show(p);
-    });
-    host.addEventListener('keydown',function(e){
-      if(e.key!=='Enter'&&e.key!==' ') return;
-      var p=e.target.closest('.ue-seg'); if(!p) return;
-      e.preventDefault(); show(p);
-    });
-    var cl=document.getElementById('ue-wheel-clear');
-    if(cl) cl.addEventListener('click',clear);
-
-    fitLabels();
-    /* Web fonts can land after the first measurement and change every width. */
-    if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
-      document.fonts.ready.then(function(){
-        all('.ue-wt',host).forEach(function(t){
-          t.removeAttribute('textLength'); t.removeAttribute('lengthAdjust');
-          t.setAttribute('font-size',t.dataset.size);
-          fitQueue.push(t);
+    var tabs=document.getElementById('ue-wheel-views');
+    if(tabs){
+      tabs.addEventListener('click',function(e){
+        var b=e.target.closest('button[data-view]'); if(!b) return;
+        view=b.dataset.view;
+        all('#ue-wheel-views button').forEach(function(x){
+          var on=x===b;
+          x.classList.toggle('is-on',on);
+          x.setAttribute('aria-pressed',on?'true':'false');
         });
-        fitLabels();
+        var src=document.getElementById('ue-wheel-cite');
+        if(src) src.dataset.view=view;
+        render();
       });
     }
+    var cl=document.getElementById('ue-wheel-clear');
+    if(cl) cl.addEventListener('click',function(){
+      clearPanel(view==='cats'?'Select any category. Twenty-seven, from self-report.'
+                              :'Select any family. Placed by valence across and control up.');
+    });
+
+    render();
   }
 
   /* ── Which band, and what fits it ────────────────────────

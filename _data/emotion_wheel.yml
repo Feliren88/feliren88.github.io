@@ -1,315 +1,300 @@
 # Emotion wheel for /uncertainty-and-emotions/
 #
-# Eight families, each with three broader words and their finer ones. Rendered
-# as a sunburst by js/components/uncertainty-and-emotions.js through the JSON
-# island the page emits.
+# ── Where the categories come from ───────────────────────────────────────
+# The 27 categories below are the ones reported by Alan Cowen and Dacher
+# Keltner, "Self-report captures 27 distinct categories of emotion bridged by
+# continuous gradients", PNAS 114(38), E7900-E7909, 2017. They analysed reports
+# of emotional states elicited by 2,185 short videos rated by 853 participants.
 #
-# Every word carries its own `def`: one line saying what that word means and,
-# where it helps, how it differs from its neighbours. No two words share a
-# definition, and no word appears twice on the wheel.
+# CAUTION for anyone editing this file. That paper has two lists and they are
+# easy to confuse. Participants rated videos against a 34-word scale that
+# includes contempt, disappointment, envy, guilt, pride, sympathy and triumph.
+# The 27 below are what the dimensionality analysis returned, and they are the
+# study's finding. Several popular write-ups print the 34-word scale under the
+# headline "the 27 emotions". Do not add a category from the scale without
+# checking which list it belongs to.
 #
-# `points_at`, `urge` and `counter` sit at family level because they describe
-# what the whole family does. Fear urges escape whether it arrives as worry or
-# as panic. The page labels them as belonging to the family, so the difference
-# between a definition and a response stays visible.
+# ── What the study concluded, and the argument against it ────────────────
+# The paper's own finding is that these categories are "bridged by continuous
+# gradients" and that the boundaries between many of them are fuzzy rather than
+# discrete. A wheel of separate wedges is therefore a simplification. It is a
+# one-dimensional ring standing in for a high-dimensional space, which is why
+# two of the gradients the paper names cannot both be drawn as adjacent here.
+# The `near` field records the links the paper states; `ring_gap` marks the two
+# it could not seat next to each other.
 #
-# Outer words are kept to eleven characters so they fit their band. Bare Off,
-# On, Yes and No parse as booleans in YAML, so every word is quoted.
+# Cowen and Keltner develop this into semantic space theory: "Semantic Space
+# Theory: A Computational Approach to Emotion", Trends in Cognitive Sciences
+# 25(2), 124-136, 2021.
 #
-# Provenance. The three-ring layout follows the format Gloria Willcox introduced
-# in The Feeling Wheel, Transactional Analysis Journal 12(4), 274-276, 1982.
-# Grouping into eight families follows Robert Plutchik's 1980 wheel, though the
-# eight families here are not his set: his are joy, trust, fear, surprise,
-# sadness, anticipation, anger and disgust. The words below and every definition
-# were written for this page and are not taken from either source.
+# The main opposing account is Lisa Feldman Barrett's theory of constructed
+# emotion, which holds that emotions are constructed in the moment rather than
+# read off fixed categories: "The theory of constructed emotion: an active
+# inference account of interoception and categorization", Social Cognitive and
+# Affective Neuroscience 12(1), 1-23, 2017. The page states this openly rather
+# than presenting the 27 as settled.
+#
+# ── What is mine and what is not ─────────────────────────────────────────
+# `name` and `near` come from the research. `def` describes what each category
+# covers in plain English. `urge` and `counter` are this page's own practical
+# frame and are not findings from either paper; the page labels them as such.
+#
+# Ordering runs clockwise from calmness and follows the gradients the paper
+# names wherever a circle allows it. Hue sweeps continuously so neighbouring
+# categories blend, which is the paper's point about gradients.
 
-families:
-  - key: fear
-    name: Fear
-    hue: 262
-    def: The response to a threat you expect but have not met yet.
-    points_at: A possible threat, often one that has not happened yet.
-    urge: Escape it, avoid it, or make it certain before you move.
-    counter: Name the specific outcome you are protecting against, then take the smallest step towards it.
-    inner:
-      - name: "Anxious"
-        def: Fear stretched over time, with no single moment to point at.
-        outer:
-          - w: "Worried"
-            def: Turning a possible bad outcome over in your head, again and again.
-          - w: "Uneasy"
-            def: A low background sense that something is off, with no named cause.
-          - w: "Jumpy"
-            def: The body already braced, so ordinary noises land as alarms.
-          - w: "Dreading"
-            def: Treating something unpleasant as certain, and counting down to it.
-      - name: "Scared"
-        def: Fear with a clear object, arriving fast.
-        outer:
-          - w: "Startled"
-            def: The half-second jolt that comes before you know what caused it.
-          - w: "Alarmed"
-            def: Sudden fear that something needs your attention right now.
-          - w: "Panicked"
-            def: Fear loud enough that the body moves before you decide anything.
-      - name: "Insecure"
-        def: Fear pointed at your own standing rather than at an event.
-        outer:
-          - w: "Exposed"
-            def: Seen in a way you did not choose.
-          - w: "Inadequate"
-            def: Measuring yourself against a demand and coming up short.
-          - w: "Doubtful"
-            def: Unsure of your own judgement on something you already decided.
+source:
+  primary: "Cowen, A. S., & Keltner, D. (2017). Self-report captures 27 distinct categories of emotion bridged by continuous gradients. PNAS, 114(38), E7900-E7909."
+  primary_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5617253/"
+  theory: "Cowen, A. S., & Keltner, D. (2021). Semantic Space Theory: A Computational Approach to Emotion. Trends in Cognitive Sciences, 25(2), 124-136."
+  theory_url: "https://pubmed.ncbi.nlm.nih.gov/33349547/"
+  counterpoint: "Barrett, L. F. (2017). The theory of constructed emotion: an active inference account of interoception and categorization. Social Cognitive and Affective Neuroscience, 12(1), 1-23."
+  counterpoint_url: "https://academic.oup.com/scan/article/12/1/1/2823712"
+  ring_gap: "The paper links horror to sadness, and adoration to amusement. Neither pair sits adjacent on this ring, because a circle gives each category only two neighbours and other documented gradients had to take those places."
 
-  - key: anger
-    name: Anger
-    hue: 8
-    def: The response to something crossing a line you hold.
-    points_at: A boundary crossed, a rule broken, or something blocked.
-    urge: Push back, argue, retaliate, or make someone understand.
-    counter: Write down what was crossed. Decide the outcome you want before you speak.
-    inner:
-      - name: "Frustrated"
-        def: Anger at being blocked, rather than at a person.
-        outer:
-          - w: "Blocked"
-            def: Wanting to move and finding the way shut.
-          - w: "Impatient"
-            def: Anger at how long something is taking.
-          - w: "Exasperated"
-            def: Worn down by the same obstacle returning.
-      - name: "Resentful"
-        def: Anger kept rather than spoken, building across time.
-        outer:
-          - w: "Bitter"
-            def: Old anger that has settled and stopped looking for a resolution.
-          - w: "Overlooked"
-            def: Anger at being passed over or not counted.
-          - w: "Unthanked"
-            def: Anger at effort that was taken and never acknowledged.
-      - name: "Furious"
-        def: Anger at full volume, arriving fast.
-        outer:
-          - w: "Outraged"
-            def: Anger on behalf of a rule you believe everyone shares.
-          - w: "Seething"
-            def: Full anger held inside and not shown.
-          - w: "Scornful"
-            def: Anger mixed with looking down on the person.
+categories:
+  - name: "Calmness"
+    def: A settled state with nothing pressing for attention.
+    urge: Keep everything as it is, and avoid whatever might disturb it.
+    counter: Let it be temporary. It does not have to be defended to be real.
+    near: ["Aesthetic appreciation"]
 
-  - key: sadness
-    name: Sadness
-    hue: 214
-    def: The response to losing something that mattered.
-    points_at: A loss, a distance, or something that mattered and is gone.
-    urge: Withdraw, go quiet, stop trying.
-    counter: Let it be present and keep one small commitment to another person today.
-    inner:
-      - name: "Lonely"
-        def: Sadness about distance from other people.
-        outer:
-          - w: "Isolated"
-            def: Cut off by circumstance, with nobody within reach.
-          - w: "Excluded"
-            def: Others are together and you were not included.
-          - w: "Adrift"
-            def: Among people and still unable to reach them.
-      - name: "Disappointed"
-        def: Sadness at the gap between what you expected and what came.
-        outer:
-          - w: "Let down"
-            def: Someone did not do the thing you were counting on.
-          - w: "Deflated"
-            def: Effort that came to less than it should have.
-          - w: "Discouraged"
-            def: Enough disappointment that you doubt trying again.
-      - name: "Grieving"
-        def: Sadness at a loss that will not be reversed.
-        outer:
-          - w: "Heavy"
-            def: Sadness with weight, slowing everything down.
-          - w: "Aching"
-            def: Sadness that keeps returning to the same absence.
-          - w: "Numb"
-            def: Sadness so large that the feeling has gone quiet.
+  - name: "Aesthetic appreciation"
+    def: Being struck by something as beautiful or well made.
+    urge: Stay with it, and often to capture or keep it.
+    counter: Look for a minute longer before reaching for the phone.
 
-  - key: shame
-    name: Shame
-    hue: 286
-    def: The response to falling short of who you meant to be.
-    points_at: A gap between what you did and who you want to be.
-    urge: Hide, over-explain, confess repeatedly, or seek reassurance.
-    counter: Say the accurate sentence once, repair what you can, then continue.
-    inner:
-      - name: "Embarrassed"
-        def: Shame about how one moment looked to other people.
-        outer:
-          - w: "Watched"
-            def: Aware of being observed and wanting to be less visible.
-          - w: "Awkward"
-            def: Caught not knowing how to behave.
-          - w: "Cringing"
-            def: Replaying the moment later and flinching at it.
-      - name: "Guilty"
-        def: Shame about a specific act, rather than about yourself.
-        outer:
-          - w: "Regretful"
-            def: Wishing you had chosen differently.
-          - w: "Remorseful"
-            def: Regret plus the wish to put it right.
-          - w: "Blameworthy"
-            def: Holding yourself as the cause of a harm.
-      - name: "Worthless"
-        def: Shame that has spread from one act to your whole self.
-        outer:
-          - w: "Defective"
-            def: Believing something in you is wrong at the root.
-          - w: "Small"
-            def: Reduced, as though you take up less space than others.
-          - w: "Unlovable"
-            def: Believing that being known fully would end the closeness.
+  - name: "Awe"
+    def: The response to something vast enough to require adjusting your frame.
+    urge: Stop, stare, and make sense of it.
+    counter: Let the scale stand without resolving it into an explanation.
+    near: ["Aesthetic appreciation", "Admiration", "Calmness"]
 
-  - key: disgust
-    name: Disgust
-    hue: 96
-    def: The response to something that violates what you hold clean or right.
-    points_at: Something that violates what you value, or feels contaminating.
-    urge: Reject it, clean it, distance yourself, get rid of the thought.
-    counter: Let the thought stay in the room without arguing with it or removing it.
-    inner:
-      - name: "Repelled"
-        def: Disgust in the body, pulling you back from something.
-        outer:
-          - w: "Revolted"
-            def: A strong pull away, close to nausea.
-          - w: "Queasy"
-            def: Mild physical disgust, unsettled rather than violent.
-          - w: "Repulsed"
-            def: Wanting no contact with it at all.
-      - name: "Disapproving"
-        def: Disgust aimed at conduct rather than at a substance.
-        outer:
-          - w: "Judgemental"
-            def: Measuring someone against your standard and finding them short.
-          - w: "Appalled"
-            def: Shocked that a person would act this way.
-          - w: "Dismayed"
-            def: A drop in your estimate of someone.
-      - name: "Self-disgust"
-        def: Disgust turned back on yourself.
-        outer:
-          - w: "Sickened"
-            def: Disgust at something you did or thought.
-          - w: "Tainted"
-            def: Marked by contact with something you consider wrong.
-          - w: "Unclean"
-            def: Wanting to wash off something that is not physical.
+  - name: "Admiration"
+    def: Regard for someone's skill, character, or achievement.
+    urge: Emulate them, or measure yourself against them.
+    counter: Name the specific thing they do well, rather than ranking yourself.
 
-  - key: joy
-    name: Joy
-    hue: 44
-    def: The response to something good being present.
-    points_at: Something is going well, or something you care about is here.
+  - name: "Adoration"
+    def: Warm absorbed attention on someone you hold dear.
+    urge: Move closer and stay there.
+    counter: Let it be expressed plainly rather than tested for proof.
+
+  - name: "Romance"
+    def: Attraction to someone bound up with wanting a shared future.
+    urge: Move closer, and check whether it is returned.
+    counter: Let the evidence accumulate at its own pace.
+    near: ["Sexual desire"]
+
+  - name: "Sexual desire"
+    def: Physical wanting directed at another person.
+    urge: Act on it, or suppress it entirely.
+    counter: Notice it without treating either the wanting or the not-acting as a verdict on you.
+    near: ["Romance", "Craving"]
+
+  - name: "Craving"
+    def: Strong wanting for something specific, usually with a route to getting it.
+    urge: Get it now.
+    counter: Wait out the peak. Wanting is not the same as deciding.
+
+  - name: "Excitement"
+    def: Energised anticipation of something about to happen.
+    urge: Move, talk, start immediately.
+    counter: Let the energy run while you keep the plan you already made.
+
+  - name: "Joy"
+    def: A bright response to something good that is present now.
     urge: Hold on to it, or check whether you are allowed to have it.
     counter: Stay in it for a full minute without auditing whether it will last.
-    inner:
-      - name: "Content"
-        def: Joy at rest, with nothing further needed.
-        outer:
-          - w: "Settled"
-            def: Nothing pulling at you, and no next thing required.
-          - w: "Easy"
-            def: Effort has dropped away for a while.
-          - w: "Grateful"
-            def: Aware that something good came partly from outside you.
-      - name: "Excited"
-        def: Joy with energy in it, pointed forward.
-        outer:
-          - w: "Eager"
-            def: Ready to start, and impatient for it.
-          - w: "Buzzing"
-            def: More energy than the moment actually needs.
-          - w: "Playful"
-            def: Enjoying something with no purpose beyond the enjoying.
-      - name: "Proud"
-        def: Joy at something you did, or something you belong to.
-        outer:
-          - w: "Capable"
-            def: The quiet version. You know you can do the thing.
-          - w: "Seen"
-            def: Someone noticed the part you wanted noticed.
-          - w: "Satisfied"
-            def: The work is finished and it meets your own standard.
 
-  - key: love
-    name: Love
-    hue: 336
-    def: The response to someone whose wellbeing matters to you as your own.
-    points_at: Closeness, care, or someone whose wellbeing is bound up with yours.
-    urge: Move closer, or test whether the feeling is real enough.
-    counter: Act warmly without asking the feeling to prove itself first.
-    inner:
-      - name: "Affectionate"
-        def: Love showing up as warmth in ordinary contact.
-        outer:
-          - w: "Warm"
-            def: Simple gladness at someone being there.
-          - w: "Tender"
-            def: Care for someone at a moment when they are fragile.
-          - w: "Fond"
-            def: Steady mild affection built up over time.
-      - name: "Trusting"
-        def: Love showing up as a lowered guard.
-        outer:
-          - w: "Safe"
-            def: Not needing to manage how you come across.
-          - w: "Open"
-            def: Willing to be known without editing yourself.
-          - w: "Relieved"
-            def: The guard coming down after being up too long.
-      - name: "Longing"
-        def: Love pointed at someone who is not here.
-        outer:
-          - w: "Missing"
-            def: Aware of one specific absence.
-          - w: "Yearning"
-            def: Wanting closeness that is currently out of reach.
-          - w: "Wistful"
-            def: Missing something you know will not come back.
+  - name: "Amusement"
+    def: The response to something that strikes you as funny.
+    urge: Share it.
+    counter: Nothing needs managing here.
+    near: ["Awkwardness"]
 
-  - key: surprise
-    name: Surprise
-    hue: 178
+  - name: "Awkwardness"
+    def: Discomfort at a social moment that has gone slightly wrong.
+    urge: Fix it, explain it, or leave.
+    counter: Let the moment be awkward and carry on with the conversation.
+    near: ["Amusement"]
+
+  - name: "Confusion"
+    def: Not being able to make the pieces fit into one account.
+    urge: Resolve it before doing anything else.
+    counter: Write down what you know and what would actually change the decision.
+
+  - name: "Surprise"
     def: The response to reality not matching what you predicted.
-    points_at: Something did not match what you expected.
-    urge: Resolve the mismatch immediately.
+    urge: Explain the mismatch immediately.
     counter: Note what changed. Decide whether it changes the decision or only the feeling.
-    inner:
-      - name: "Confused"
-        def: Surprise that has not yet resolved into an explanation.
-        outer:
-          - w: "Disoriented"
-            def: The frame you were using no longer fits.
-          - w: "Unsure"
-            def: Two readings of the same thing both look possible.
-          - w: "Torn"
-            def: Pulled between options that each cost something.
-      - name: "Shocked"
-        def: Surprise arriving faster than you can absorb it.
-        outer:
-          - w: "Jolted"
-            def: The body reacted before you understood why.
-          - w: "Shaken"
-            def: Surprise that left the ground feeling less steady.
-          - w: "Amazed"
-            def: Surprise at something larger or better than expected.
-      - name: "Curious"
-        def: Surprise that opened into interest rather than alarm.
-        outer:
-          - w: "Interested"
-            def: Wanting to know more, without urgency.
-          - w: "Intrigued"
-            def: Pulled towards a puzzle.
-          - w: "Drawn"
-            def: Wanting to move closer to it.
+
+  - name: "Interest"
+    def: Attention pulled towards something you want to understand.
+    urge: Follow it.
+    counter: Follow it, and notice when following has become avoiding something else.
+
+  - name: "Entrancement"
+    def: Attention held so completely that time and self recede.
+    urge: Stay in it.
+    counter: Set an end before you begin, then let yourself go in.
+
+  - name: "Nostalgia"
+    def: Fondness for a past that is gone, usually mixed with loss.
+    urge: Return to it, or compare the present against it unfavourably.
+    counter: Take the specific thing you miss and ask what today's version would be.
+
+  - name: "Satisfaction"
+    def: The response to something finished and meeting your standard.
+    urge: Move straight on to the next thing.
+    counter: Stop and register it before the next task starts.
+
+  - name: "Relief"
+    def: The drop that follows a threat that did not arrive.
+    urge: Repeat whatever you believe prevented it.
+    counter: Check whether the action actually prevented anything before making it a rule.
+
+  - name: "Boredom"
+    def: Attention with nothing it wants to settle on.
+    urge: Find stimulation immediately.
+    counter: Let the empty stretch stand. It is where the next idea usually arrives.
+
+  - name: "Sadness"
+    def: The response to losing something that mattered.
+    urge: Withdraw, go quiet, stop trying.
+    counter: Let it be present and keep one small commitment to another person today.
+
+  - name: "Empathic pain"
+    def: Distress at another person's suffering.
+    urge: Fix it, or look away.
+    counter: Stay present and offer the specific help you can actually give.
+
+  - name: "Anxiety"
+    def: Apprehension about a threat that has not arrived and may not.
+    urge: Resolve the uncertainty before proceeding.
+    counter: Proceed with the question still open, at a size you can repeat.
+    near: ["Fear"]
+
+  - name: "Fear"
+    def: The response to a threat you can identify.
+    urge: Escape it, avoid it, or make it certain before you move.
+    counter: Name the specific outcome you are protecting against, then take the smallest step towards it.
+    near: ["Anxiety", "Horror"]
+
+  - name: "Horror"
+    def: Fear mixed with revulsion at something you cannot look away from.
+    urge: Get away from it and get it out of your mind.
+    counter: Let the image be there without arguing with it or replacing it.
+    near: ["Fear", "Disgust"]
+
+  - name: "Disgust"
+    def: Rejection of something that violates what you hold clean or right.
+    urge: Reject it, clean it, distance yourself, get rid of the thought.
+    counter: Let the thought stay in the room without arguing with it or removing it.
+    near: ["Horror"]
+
+  - name: "Anger"
+    def: The response to something crossing a line you hold.
+    urge: Push back, argue, retaliate, or make someone understand.
+    counter: Write down what was crossed. Decide the outcome you want before you speak.
+
+# ── The second view: the Geneva Emotion Wheel ────────────────────────────
+# Twenty emotion families placed on two axes: valence across, control or power
+# up. Klaus Scherer, "What are emotions? And how can they be measured?", Social
+# Science Information 44(4), 693-727, 2005; instrument version 3.0 in Scherer,
+# Shuman, Fontaine & Soriano, "The GRID meets the Wheel", in Components of
+# Emotional Meaning, Oxford University Press, 2013, pp. 281-298.
+#
+# The twenty terms and their spoke order are taken from the official version 3.0
+# response sheet. Reading down the left of that sheet gives anger, hate,
+# contempt, disgust, fear, disappointment, shame, regret, guilt, sadness, and
+# down the right gives interest, amusement, pride, joy, pleasure, contentment,
+# love, admiration, relief, compassion. Fear sits just above the midline on the
+# instrument, so it falls on the high-control side. That is the sheet's own
+# arrangement, kept rather than corrected.
+#
+# The axes and the four quadrants they cut are Scherer's. The short quadrant
+# names below are this page's shorthand, not his, and the page says so.
+
+gew:
+  axis_x: "Unpleasant to pleasant"
+  axis_y: "Low control to high control"
+  note: "Each spoke is a family. The Anger family covers rage, annoyance and exasperation; the Fear family covers anxiety, worry and panic."
+  quadrants:
+    - key: nh
+      short: "Antagonistic"
+      axes: "Unpleasant, high control"
+      body: "Something crossed a line and you have power to push back. These pull outward, at a target."
+    - key: ph
+      short: "Engaging"
+      axes: "Pleasant, high control"
+      body: "Something is going well and you are the one moving. These pull you forward into it."
+    - key: pl
+      short: "Receptive"
+      axes: "Pleasant, low control"
+      body: "Something good is here and you are not steering it. These ask you to receive rather than act."
+    - key: nl
+      short: "Resigned"
+      axes: "Unpleasant, low control"
+      body: "Something went wrong and you could not prevent it. These pull inward and downward."
+  families:
+    - name: "Interest"
+      q: ph
+      def: Attention pulled towards something you want to understand.
+    - name: "Amusement"
+      q: ph
+      def: The response to something that strikes you as funny.
+    - name: "Pride"
+      q: ph
+      def: Satisfaction in something you did that meets your own standard.
+    - name: "Joy"
+      q: ph
+      def: A bright response to something good that is present now.
+    - name: "Pleasure"
+      q: ph
+      def: Immediate enjoyment through the senses.
+    - name: "Contentment"
+      q: pl
+      def: Settled satisfaction with things as they are.
+    - name: "Love"
+      q: pl
+      def: Attachment to someone whose wellbeing matters to you as your own.
+    - name: "Admiration"
+      q: pl
+      def: Regard for someone's skill, character, or achievement.
+    - name: "Relief"
+      q: pl
+      def: The drop that follows a threat that did not arrive.
+    - name: "Compassion"
+      q: pl
+      def: Care moved by another person's suffering.
+    - name: "Sadness"
+      q: nl
+      def: The response to losing something that mattered.
+    - name: "Guilt"
+      q: nl
+      def: Holding yourself as the cause of a harm.
+    - name: "Regret"
+      q: nl
+      def: Wishing you had chosen differently.
+    - name: "Shame"
+      q: nl
+      def: Falling short of who you meant to be, with others as witness.
+    - name: "Disappointment"
+      q: nl
+      def: The gap between what you expected and what came.
+    - name: "Fear"
+      q: nh
+      def: The response to a threat you can identify.
+    - name: "Disgust"
+      q: nh
+      def: Rejection of something that violates what you hold clean or right.
+    - name: "Contempt"
+      q: nh
+      def: Looking down on someone as beneath your regard.
+    - name: "Hate"
+      q: nh
+      def: Sustained hostility towards a person or group.
+    - name: "Anger"
+      q: nh
+      def: The response to something crossing a line you hold.

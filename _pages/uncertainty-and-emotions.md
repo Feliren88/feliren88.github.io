@@ -246,6 +246,10 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
   <div class="ue-wheel-block" id="ue-wheel-block">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-wheelmark"/></svg> Find the word before you decide what to do</p>
+    <div class="ue-wheel-views" id="ue-wheel-views" role="group" aria-label="Choose a wheel">
+      <button type="button" data-view="cats" class="is-on" aria-pressed="true">27 categories<small>Cowen &amp; Keltner, 2017</small></button>
+      <button type="button" data-view="axes" aria-pressed="false">Valence and control<small>Geneva Emotion Wheel</small></button>
+    </div>
     <div class="ue-wheel-wrap">
       <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 638 638" role="img"
            aria-label="A wheel of emotion words in three rings. Select any segment to read what it points at, what it urges, and one action that does not require the feeling to stop.">
@@ -255,10 +259,28 @@ extra_js: /js/components/uncertainty-and-emotions.js
       </div>
     </div>
     <div class="ue-btn-row"><button class="ue-btn" id="ue-wheel-clear" type="button">Clear selection</button></div>
-    <p class="ue-wheel-source">The three-ring layout follows the format Gloria Willcox introduced in
-    The Feeling Wheel, Transactional Analysis Journal 12(4), 1982. Grouping emotions into eight
-    families follows Robert Plutchik's 1980 wheel, though the eight here are not his set. The words
-    on this wheel and every definition are my own, written for this page.</p>
+    <div class="ue-wheel-cite" id="ue-wheel-cite" data-view="cats">
+      <p class="for-cats"><b>27 categories.</b> Cowen, A. S., &amp; Keltner, D. (2017). Self-report
+      captures 27 distinct categories of emotion bridged by continuous gradients.
+      <i>PNAS</i>, 114(38), E7900&ndash;E7909, from 2,185 videos rated by 853 participants.
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5617253/" target="_blank" rel="noreferrer">Read it</a>.
+      The paper's finding is that these categories are bridged by continuous gradients and that
+      the boundaries between many of them are fuzzy, so a ring of separate wedges is a
+      simplification of a high-dimensional space.</p>
+      <p class="for-axes"><b>Valence and control.</b> The Geneva Emotion Wheel. Scherer, K. R. (2005).
+      What are emotions? And how can they be measured? <i>Social Science Information</i>, 44(4),
+      693&ndash;727; instrument version 3.0 in Scherer, Shuman, Fontaine &amp; Soriano (2013),
+      <i>Components of Emotional Meaning</i>, Oxford University Press, 281&ndash;298.
+      <a href="https://www.unige.ch/cisa/gew" target="_blank" rel="noreferrer">Instrument</a>.
+      The twenty families and their order are the instrument's. The two axes and the four quadrants
+      are Scherer's; the short quadrant names are my own shorthand.</p>
+      <p class="always">Definitions describe each published category in plain English. The lines
+      about urges and about what to do are my reading and are not findings from either paper.
+      The main opposing account holds that emotions are constructed in the moment rather than read
+      off fixed categories: Barrett, L. F. (2017),
+      <a href="https://academic.oup.com/scan/article/12/1/1/2823712" target="_blank" rel="noreferrer">The theory of constructed emotion</a>,
+      <i>Social Cognitive and Affective Neuroscience</i>, 12(1), 1&ndash;23.</p>
+    </div>
   </div>
 
   <div class="ue-anatomy" aria-label="One emotion separated into information, an action urge, and physical energy">
