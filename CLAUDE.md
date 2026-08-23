@@ -113,9 +113,10 @@ feliren88.github.io/
 ├── _includes/
 │   ├── principles-icons.html  # SVG <symbol> sprite for /principles/ (83 icons) — see "Icon sprite" below
 │   ├── stoic-icons.html       # SVG <symbol> sprite for /stoic/ (23 icons)
-│   └── game-theory-icons.html # SVG <symbol> sprite for /game-theory/ (18 icons)
+│   ├── game-theory-icons.html # SVG <symbol> sprite for /game-theory/ (18 icons)
+│   └── high-agency-icons.html # SVG <symbol> sprite for /high-agency/ (63 icons, `hai-` prefixed ids) — see "Icon sprite" below
 ├── _pages/         # Jekyll pages (Markdown)
-│   ├── high-agency.md    # Interactive personal note on George Mack's High Agency essay (/high-agency/) — loads css/high-agency.css + js/components/high-agency.js via the `extra_css` / `extra_js` front matter hooks; ~20 self-contained widgets (quiz, trap game, flow chart, worksheet) that persist to localStorage under the `ha:` prefix
+│   ├── high-agency.md    # Interactive personal note on George Mack's High Agency essay (/high-agency/) — loads css/high-agency.css + js/components/high-agency.js via the `extra_css` / `extra_js` front matter hooks; ~20 self-contained widgets (quiz, trap game, flow chart, worksheet) that persist to localStorage under the `ha:` prefix; icons come from `_includes/high-agency-icons.html`, and a twelve-badge progress board (`#badges`, floating `.ha-hud` pill) unlocks as the reader uses each widget, stored under `ha:badges`
 │   ├── game-theory.md    # Interactive personal note on strategic decision-making (/game-theory/) — content in `_data/game_theory.yml`, icons in `_includes/game-theory-icons.html`, localStorage prefix `gt:`
 │   ├── stoic.md          # Interactive personal note on Stoicism (/stoic/) — Marcus Aurelius and Epictetus; content in `_data/stoic.yml`, icons in `_includes/stoic-icons.html`, localStorage prefix `st:`
 │   ├── principles.md     # Interactive personal note, The Life Operating Principle (/principles/) — content lives in `_data/principles.yml`, rendered by Liquid AND emitted as a JSON island (`#pr-data`) that js/components/principles.js searches; localStorage prefix `pr:`
@@ -285,6 +286,47 @@ need|={k.lower() for k in re.findall(r'^  - key: ([A-Z]+)$',y,re.M)}
 print('missing symbols:', sorted(need-syms) or 'none')
 EOF
 ```
+
+### Icon sprite (`/high-agency/`)
+
+Same rules as `/principles/` above: `_includes/high-agency-icons.html` holds one
+`<symbol id="hai-..." viewBox="0 0 24 24">` per icon, presentation lives once on `.ha-i` in
+`high-agency.css`, and symbols carry geometry only.
+
+Ids are prefixed **`hai-`**, not `ha-`. The page already owns element ids in the `ha-`
+namespace, and two of them (`#ha-flow`, `#ha-loop`) collide with the obvious symbol names.
+A sprite `<symbol>` sits above the page in document order, so a collision makes
+`document.querySelector('#ha-flow')` return the symbol and silently kills the widget.
+
+Every referencing `<svg>` carries its own `viewBox="0 0 24 24"`.
+
+Check every reference resolves, and that nothing collides, before committing:
+
+```bash
+python3 - <<'PYEOF'
+import re
+sprite = open('_includes/high-agency-icons.html').read()
+page   = open('_pages/high-agency.md').read()
+js     = open('js/components/high-agency.js').read()
+syms = set(re.findall(r'<symbol id="([\w-]+)"', sprite))
+refs = set(re.findall(r'href="#(hai-[\w-]+)"', page + js))
+refs |= set(re.findall(r"icon: '([\w-]+)'", js)) | {'hai-lock'}
+ids  = re.findall(r'\sid="([^"]+)"', page) + list(syms)
+print('unresolved:', sorted(refs - syms) or 'none')
+print('unused    :', sorted(syms - refs) or 'none')
+print('id clashes:', sorted(i for i in set(ids) if ids.count(i) > 1) or 'none')
+PYEOF
+```
+
+### Progress badges (`/high-agency/`)
+
+`badges()` in `js/components/high-agency.js` runs **first** in `init()`, before any widget can
+call `award()`. It loads `ha:badges` from local storage, and a widget that awarded into an
+empty object first would overwrite the reader's record.
+
+It also wires itself to the existing widgets from the outside, using delegated listeners and
+two `MutationObserver`s, rather than editing each widget to report in. Adding a badge means
+adding one entry to `BADGES` and one listener, and leaves the twenty existing widgets alone.
 
 ## Jekyll Configuration
 

@@ -11,6 +11,15 @@ extra_js: /js/components/high-agency.js
 
 <div class="ha-progress" aria-hidden="true"><span id="ha-progress-fill"></span></div>
 
+{% include high-agency-icons.html %}
+
+<a class="ha-hud" id="ha-hud" href="#badges" hidden>
+  <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-medal"></use></svg>
+  <span class="ha-hud-num"><b id="ha-hud-n">0</b>/12</span>
+  <span class="ha-hud-track" aria-hidden="true"><i id="ha-hud-fill"></i></span>
+</a>
+<div class="ha-toast" id="ha-toast" role="status" aria-live="polite"></div>
+
 <div class="ha-story-hero" aria-labelledby="ha-story-title">
   <div class="ha-story-copy">
     <p class="ha-story-kicker">A field guide for unclear situations</p>
@@ -46,17 +55,18 @@ extra_js: /js/components/high-agency.js
 <div class="ha-toc">
   <p class="t-eyebrow" style="margin:0">On this page</p>
   <div class="ha-toc-grid">
-    <a href="#see-it"><span class="k">00</span><span>See it first</span></a>
-    <a href="#spectrum"><span class="k">01</span><span>The spectrum</span></a>
-    <a href="#diagnose"><span class="k">02</span><span>Do you have agency?</span></a>
-    <a href="#software"><span class="k">03</span><span>Five lines of software</span></a>
-    <a href="#wilbur"><span class="k">04</span><span>The Wilbur case</span></a>
-    <a href="#traps"><span class="k">05</span><span>The five traps</span></a>
-    <a href="#game"><span class="k">06</span><span>Trap diagnostic</span></a>
-    <a href="#tools"><span class="k">07</span><span>Five tools</span></a>
-    <a href="#exercise"><span class="k">08</span><span>The exercise</span></a>
-    <a href="#library"><span class="k">09</span><span>The library</span></a>
-    <a href="#why"><span class="k">10</span><span>Why I keep this</span></a>
+    <a href="#see-it"><span class="k">00</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><span>See it first</span></a>
+    <a href="#spectrum"><span class="k">01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-wheel"></use></svg><span>The spectrum</span></a>
+    <a href="#diagnose"><span class="k">02</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-gauge"></use></svg><span>Do you have agency?</span></a>
+    <a href="#software"><span class="k">03</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-chip"></use></svg><span>Five lines of software</span></a>
+    <a href="#wilbur"><span class="k">04</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-plane"></use></svg><span>The Wilbur case</span></a>
+    <a href="#traps"><span class="k">05</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-trap"></use></svg><span>The five traps</span></a>
+    <a href="#game"><span class="k">06</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-gamepad"></use></svg><span>Trap diagnostic</span></a>
+    <a href="#tools"><span class="k">07</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-toolbox"></use></svg><span>Five tools</span></a>
+    <a href="#exercise"><span class="k">08</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-clipboard"></use></svg><span>The exercise</span></a>
+    <a href="#library"><span class="k">09</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-books"></use></svg><span>The library</span></a>
+    <a href="#why"><span class="k">10</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-compass"></use></svg><span>Why I keep this</span></a>
+    <a href="#badges"><span class="k">★</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-medal"></use></svg><span>Your progress</span></a>
   </div>
 </div>
 
@@ -64,7 +74,7 @@ extra_js: /js/components/high-agency.js
      00 · SEE IT FIRST
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="see-it">
-  <h2><span class="n">00</span> See it first</h2>
+  <h2><span class="n">00</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg> See it first</h2>
   <p class="ha-deck">High agency is easier to recognise in a person than to define. The essay
   starts with examples, so this note does too.</p>
 
@@ -101,7 +111,7 @@ extra_js: /js/components/high-agency.js
     <cite>Eric Weinstein, quoted in the essay</cite>
   </div>
 
-  <h3 id="spotting">How to spot them</h3>
+  <h3 id="spotting"><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-verify"></use></svg>How to spot them</h3>
   <p>The essay lists ten common signs. Select the ones that describe you honestly.
   There is no external score, and your answers stay in your browser.</p>
 
@@ -115,52 +125,52 @@ extra_js: /js/components/high-agency.js
     </div>
     <div class="ha-signals" id="ha-signals">
       <button class="ha-signal" type="button" data-sig="hobby" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Weird teenage hobbies</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-puzzle"></use></svg><span class="name">Weird teenage hobbies</span></span>
         <p class="why">Teenagers face strong pressure to fit in. Someone who keeps an unusual
         interest then may be more willing to think independently later.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="treadmill" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Treadmill energy</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bolt"></use></svg><span class="name">Treadmill energy</span></span>
         <p class="why">You meet them tired and flat. You leave wanting to run up a hill. They add
         energy to a room and leave it stronger.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="unguessable" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Unguessable opinions</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-dice"></use></svg><span class="name">Unguessable opinions</span></span>
         <p class="why">Their interests and views do not match an easy stereotype. They formed
         their own opinions.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="immigrant" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Immigrant mentality</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg><span class="name">Immigrant mentality</span></span>
         <p class="why">Leaving your town takes judgement. Leaving your country takes judgement,
         logistics and a willingness to be nobody again for a while.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="niche" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Sends you niche things</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-send"></use></svg><span class="name">Sends you niche things</span></span>
         <p class="why">They judge an idea before checking whether it is popular. That is how
         people find useful things early.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="inverted" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Blunt to you, loyal behind you</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-shield"></use></svg><span class="name">Blunt to you, loyal behind you</span></span>
         <p class="why">They give you honest feedback in private and defend you in public.
         Both choices carry a social cost.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="quit" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Quit something prestigious</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-door"></use></svg><span class="name">Quit something prestigious</span></span>
         <p class="why">Walking away means beating momentum, sunk cost and the opinion of everyone
         who was impressed by the old title.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="verify" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">They verify</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-verify"></use></svg><span class="name">They verify</span></span>
         <p class="why">They ask who “they” are and request the paper behind “research shows.”
         They check a claim before adopting it.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="selftaught" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">Self-taught anything</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-book-open"></use></svg><span class="name">Self-taught anything</span></span>
         <p class="why">A song on the saxophone, a 3D printer, tax law. They start at zero and climb
         without waiting for an institution to say go.</p>
       </button>
       <button class="ha-signal" type="button" data-sig="question" aria-pressed="false">
-        <span class="top"><span class="box" aria-hidden="true"></span><span class="name">They question the question</span></span>
+        <span class="top"><span class="box" aria-hidden="true"></span><svg class="ha-i ha-sig-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-question"></use></svg><span class="name">They question the question</span></span>
         <p class="why">A right answer to the wrong question is worse than silence, because it feels
         like progress and takes you further away.</p>
       </button>
@@ -168,18 +178,43 @@ extra_js: /js/components/high-agency.js
     <p class="ha-tally" id="ha-signal-tally" role="status"></p>
   </div>
 
-  <h3>Low agency in one image</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>Low agency in one image</h3>
   <p>People reached the moon in 1969. Bernard Sadow filed his
   <a href="https://patents.google.com/patent/US3653474A/en" target="_blank" rel="noreferrer">rolling-luggage patent in 1970</a>.
   The comparison shows how an ordinary inconvenience can remain visible for years without
   being treated as a problem worth solving.</p>
+
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Diagram</p>
+        <h5>Two dates</h5>
+      </div>
+      <span class="ha-lab-hint">One year apart</span>
+    </div>
+    <div class="ha-dates">
+      <div class="ha-date is-hard">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-rocket"></use></svg>
+        <span class="yr">1969</span>
+        <p>People land on the moon and come home.</p>
+      </div>
+      <div class="ha-date-link" aria-hidden="true"><span>one year</span></div>
+      <div class="ha-date is-easy">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>
+        <span class="yr">1970</span>
+        <p>Somebody puts wheels on a suitcase.</p>
+      </div>
+    </div>
+    <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin:var(--gap-2) 0 0">
+      The hard problem went first. The easy one had been in everybody's hands the whole time.</p>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
      01 · THE SPECTRUM
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="spectrum">
-  <h2><span class="n">01</span> Three wheels</h2>
+  <h2><span class="n">01</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-wheel"></use></svg> Three wheels</h2>
   <p class="ha-deck">The essay defines agency as three traits: clear thinking, action, and
   willingness to reject a weak answer.</p>
 
@@ -187,6 +222,53 @@ extra_js: /js/components/high-agency.js
   you can turn on the tap. The people you would call from that jail cell may differ in age,
   education, politics, and temperament. They share a habit of shaping events. They refuse to
   wait for events to shape them.</p>
+
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Diagram</p>
+        <h5>Three readings of one glass</h5>
+      </div>
+      <span class="ha-lab-hint">Turn the tap</span>
+    </div>
+    <svg class="ha-tapfig" id="ha-tapfig" viewBox="0 0 560 250" role="img" aria-label="Three glasses filled to the same level. The first is read as half full, the second as half empty, and the third is filled from a tap.">
+      <defs>
+        <clipPath id="ha-clip-a"><path d="M64 96h56l-7 88H71Z"/></clipPath>
+        <clipPath id="ha-clip-b"><path d="M252 96h56l-7 88h-42Z"/></clipPath>
+        <clipPath id="ha-clip-c"><path d="M440 96h56l-7 88h-42Z"/></clipPath>
+      </defs>
+
+      <g class="pane">
+        <rect class="water" x="56" y="96" width="72" height="88" clip-path="url(#ha-clip-a)" transform="translate(0,44)"/>
+        <path class="glass" d="M64 96h56l-7 88H71Z"/>
+        <line class="mark" x1="52" y1="140" x2="132" y2="140"/>
+        <text class="cap" x="92" y="212">Half full</text>
+        <text class="sub" x="92" y="231">optimism</text>
+      </g>
+
+      <g class="pane">
+        <rect class="water" x="244" y="96" width="72" height="88" clip-path="url(#ha-clip-b)" transform="translate(0,44)"/>
+        <rect class="void" x="244" y="96" width="72" height="44" clip-path="url(#ha-clip-b)"/>
+        <path class="glass" d="M252 96h56l-7 88h-42Z"/>
+        <line class="mark" x1="240" y1="140" x2="320" y2="140"/>
+        <text class="cap" x="280" y="212">Half empty</text>
+        <text class="sub" x="280" y="231">pessimism</text>
+      </g>
+
+      <g class="pane" id="ha-tap-pane">
+        <path class="pipe" d="M404 44h64"/>
+        <path class="pipe" d="M468 44v22"/>
+        <path class="handle" d="M420 44v-15h18v15"/>
+        <g class="drops"><circle cx="468" cy="76" r="3.5"/><circle cx="468" cy="88" r="3"/></g>
+        <g class="fill"><rect class="water" x="432" y="96" width="72" height="88" clip-path="url(#ha-clip-c)"/></g>
+        <path class="glass" d="M440 96h56l-7 88h-42Z"/>
+        <text class="cap" x="468" y="212">Turn the tap</text>
+        <text class="sub" x="468" y="231">agency</text>
+      </g>
+    </svg>
+    <div class="ha-btn-row"><button class="ha-btn is-primary" id="ha-tap-btn" type="button">Turn the tap</button></div>
+    <p class="ha-tally" id="ha-tap-say" role="status">Two of these are opinions about the water. The third one changes how much there is.</p>
+  </div>
 
   <p>The essay breaks it into clear thinking, a bias to action, and disagreeability, and calls
   the combination a tricycle. Take a wheel off and see what you get.</p>
@@ -268,7 +350,7 @@ extra_js: /js/components/high-agency.js
      02 · DIAGNOSE
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="diagnose">
-  <h2><span class="n">02</span> Do you have agency?</h2>
+  <h2><span class="n">02</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-gauge"></use></svg> Do you have agency?</h2>
   <p class="ha-deck">Most people do not begin with high agency. The useful point is that the
   habit can change.</p>
 
@@ -329,7 +411,7 @@ extra_js: /js/components/high-agency.js
     </div>
   </div>
 
-  <h3>Where that puts you</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-grid"></use></svg>Where that puts you</h3>
   <p>Two axes are enough to place someone. Clarity is whether you can name the problem.
   Will is whether you move on it and keep moving when told no. Hover any quadrant to read it.
   If you scored the questions above, your marker is already on the field.</p>
@@ -383,8 +465,51 @@ extra_js: /js/components/high-agency.js
      ═══════════════════════════════════════════════════════ -->
 <div class="ha-turn" data-turn="II"><span>Act II</span><b>The first answer describes the current arrangement. It does not define the edge of the possible.</b></div>
 <section class="ha-part ha-prose" id="software">
-  <h2><span class="n">03</span> Five lines of software</h2>
+  <h2><span class="n">03</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-chip"></use></svg> Five lines of software</h2>
   <p class="ha-deck">The essay identifies five beliefs that support independent action.</p>
+
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Panel</p>
+        <h5>Five lines, one install</h5>
+      </div>
+      <span class="ha-lab-hint" id="ha-os-hint">0 of 5 installed</span>
+    </div>
+    <div class="ha-os" id="ha-os">
+      <div class="ha-os-row" data-line="1">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-unlock"></use></svg>
+        <a class="nm" href="#soft-1">There is no unsolvable problem</a>
+        <span class="say">Does the fix break a law of physics?</span>
+        <button class="ha-os-btn" type="button" aria-pressed="false">Install</button>
+      </div>
+      <div class="ha-os-row" data-line="2">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-fork"></use></svg>
+        <a class="nm" href="#soft-2">There is no way</a>
+        <span class="say">A routine works when it fits the person.</span>
+        <button class="ha-os-btn" type="button" aria-pressed="false">Install</button>
+      </div>
+      <div class="ha-os-row" data-line="3">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-no-adults"></use></svg>
+        <a class="nm" href="#soft-3">There are no adults</a>
+        <span class="say">Nobody holds the full picture.</span>
+        <button class="ha-os-btn" type="button" aria-pressed="false">Install</button>
+      </div>
+      <div class="ha-os-row" data-line="4">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-asterisk"></use></svg>
+        <a class="nm" href="#soft-4">There is no normal</a>
+        <span class="say">People remember the odd choice.</span>
+        <button class="ha-os-btn" type="button" aria-pressed="false">Install</button>
+      </div>
+      <div class="ha-os-row" data-line="5">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-clock"></use></svg>
+        <a class="nm" href="#soft-5">There is only now</a>
+        <span class="say">Your time to act is always now.</span>
+        <button class="ha-os-btn" type="button" aria-pressed="false">Install</button>
+      </div>
+    </div>
+    <div class="ha-os-track" aria-hidden="true"><i id="ha-os-fill"></i></div>
+  </div>
 
   <h3 id="soft-1">1. There is no unsolvable problem</h3>
   <p>Your mind follows the question you give it. Ask what is wrong and it produces problems.
@@ -517,7 +642,7 @@ extra_js: /js/components/high-agency.js
     </div>
     <div class="ha-pedestal" id="ha-pedestal">
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Founder</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-rocket"></use></svg>Founder</p>
         <p class="nm">Steve Jobs</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Delayed conventional treatment for pancreatic cancer for around nine
@@ -525,35 +650,35 @@ extra_js: /js/components/high-agency.js
         regretted it.</p>
       </button>
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Composer</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-music"></use></svg>Composer</p>
         <p class="nm">Mozart</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Earned well and spent worse. He wrote a run of increasingly desperate
         begging letters to a fellow freemason while deep in debt.</p>
       </button>
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Physicist</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-atom"></use></svg>Physicist</p>
         <p class="nm">Isaac Newton</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Left behind roughly a million words on alchemy. His heirs kept the
         papers out of print for generations because they were embarrassing.</p>
       </button>
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Philosopher</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-spiral"></use></svg>Philosopher</p>
         <p class="nm">Friedrich Nietzsche</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Proposed to Lou Salome, was refused, and never really recovered. His
         books sold in tiny numbers while he was alive to see it.</p>
       </button>
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Industrialist</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-factory"></use></svg>Industrialist</p>
         <p class="nm">Henry Ford</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Used the Dearborn Independent to promote an antisemitic campaign. The
         <a href="https://www.loc.gov/item/2013218776/" target="_blank" rel="noreferrer">Library of Congress documents the paper and its record</a>.</p>
       </button>
       <button class="ha-hero-card" type="button" aria-pressed="false">
-        <p class="role">Novelist</p>
+        <p class="role"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-feather"></use></svg>Novelist</p>
         <p class="nm">Fyodor Dostoevsky</p>
         <p class="flip-hint">Tap</p>
         <p class="human">Gambled away what he had, signed contracts on terrible terms to cover
@@ -656,7 +781,7 @@ extra_js: /js/components/high-agency.js
      04 · WILBUR
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="wilbur">
-  <h2><span class="n">04</span> The Wilbur case</h2>
+  <h2><span class="n">04</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-plane"></use></svg> The Wilbur case</h2>
   <p class="ha-deck">Wilbur Wright shows all five beliefs in practice. The account below follows
   the <a href="https://airandspace.si.edu/explore/stories/researching-wright-way" target="_blank" rel="noreferrer">Smithsonian's history of the Wrights' research</a>
   and its <a href="https://airandspace.si.edu/stories/editorial/wright-brothers-made-history-kitty-hawk" target="_blank" rel="noreferrer">record of the 1903 flights</a>.</p>
@@ -668,12 +793,12 @@ extra_js: /js/components/high-agency.js
   house. He nursed her until she died in 1889.</p>
 
   <div class="ha-timeline">
-    <div class="ha-tl-item is-low"><span class="yr">1885</span><p>Injured in a skating accident at eighteen. Yale is cancelled. <b>Life happening to Wilbur.</b></p></div>
-    <div class="ha-tl-item is-low"><span class="yr">1886 to 1889</span><p>Largely housebound. Nursing his mother through her final illness.</p></div>
-    <div class="ha-tl-item"><span class="yr">1890s</span><p>Reads everything. Writes to the Smithsonian in 1899 for every publication they hold on flight. <b>The first act of agency.</b></p></div>
-    <div class="ha-tl-item"><span class="yr">1900</span><p>Picks Kitty Hawk from weather data and travels seven hundred miles to a sand bar with a glider.</p></div>
-    <div class="ha-tl-item"><span class="yr">1901 to 1902</span><p>Builds a wind tunnel. Tests around two hundred wing shapes. Rewrites the published aerodynamic tables that were wrong.</p></div>
-    <div class="ha-tl-item"><span class="yr">17 December 1903</span><p><b>Powered flight.</b> Wilbur's fourth flight of the day lasts 59 seconds and covers 852 feet.</p></div>
+    <div class="ha-tl-item is-low"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-anchor"></use></svg><span class="yr">1885</span><p>Injured in a skating accident at eighteen. Yale is cancelled. <b>Life happening to Wilbur.</b></p></div>
+    <div class="ha-tl-item is-low"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-anchor"></use></svg><span class="yr">1886 to 1889</span><p>Largely housebound. Nursing his mother through her final illness.</p></div>
+    <div class="ha-tl-item"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-book-open"></use></svg><span class="yr">1890s</span><p>Reads everything. Writes to the Smithsonian in 1899 for every publication they hold on flight. <b>The first act of agency.</b></p></div>
+    <div class="ha-tl-item"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-map"></use></svg><span class="yr">1900</span><p>Picks Kitty Hawk from weather data and travels seven hundred miles to a sand bar with a glider.</p></div>
+    <div class="ha-tl-item"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-wind"></use></svg><span class="yr">1901 to 1902</span><p>Builds a wind tunnel. Tests around two hundred wing shapes. Rewrites the published aerodynamic tables that were wrong.</p></div>
+    <div class="ha-tl-item"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-plane"></use></svg><span class="yr">17 December 1903</span><p><b>Powered flight.</b> Wilbur's fourth flight of the day lasts 59 seconds and covers 852 feet.</p></div>
   </div>
 
   <p>During his recovery, Wilbur studied birds as evidence that controlled flight was possible.
@@ -698,7 +823,7 @@ extra_js: /js/components/high-agency.js
   <div class="ha-problems">
     <div class="ha-problem">
       <button type="button" aria-expanded="false">
-        <span class="pn">P1</span>
+        <span class="pn">P1</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-wind"></use></svg>
         <span class="pt">Dayton, Ohio has the wrong weather for flying</span>
         <span class="chev">&rsaquo;</span>
       </button>
@@ -710,7 +835,7 @@ extra_js: /js/components/high-agency.js
     </div>
     <div class="ha-problem">
       <button type="button" aria-expanded="false">
-        <span class="pn">P2</span>
+        <span class="pn">P2</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-map"></use></svg>
         <span class="pt">Kitty Hawk is seven hundred miles from home</span>
         <span class="chev">&rsaquo;</span>
       </button>
@@ -722,7 +847,7 @@ extra_js: /js/components/high-agency.js
     </div>
     <div class="ha-problem">
       <button type="button" aria-expanded="false">
-        <span class="pn">P3</span>
+        <span class="pn">P3</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-axes"></use></svg>
         <span class="pt">Nobody knows how to control an aircraft in the air</span>
         <span class="chev">&rsaquo;</span>
       </button>
@@ -734,7 +859,7 @@ extra_js: /js/components/high-agency.js
     </div>
     <div class="ha-problem">
       <button type="button" aria-expanded="false">
-        <span class="pn">P4</span>
+        <span class="pn">P4</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-cog"></use></svg>
         <span class="pt">Every engine that exists is too heavy to leave the ground</span>
         <span class="chev">&rsaquo;</span>
       </button>
@@ -767,7 +892,7 @@ extra_js: /js/components/high-agency.js
      05 · THE TRAPS
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="traps">
-  <h2><span class="n">05</span> Five low agency traps</h2>
+  <h2><span class="n">05</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-trap"></use></svg> Five low agency traps</h2>
   <p class="ha-deck">The same framework identifies five habits that weaken agency.</p>
 
   <p>Low agency can mean staying stuck on a searchable problem, delaying an important call,
@@ -776,9 +901,51 @@ extra_js: /js/components/high-agency.js
   <p>Each trap below has the same shape. A description, what it sounds like from the inside,
   and the one question that gets you out.</p>
 
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Map</p>
+        <h5>Five traps, five questions</h5>
+      </div>
+      <span class="ha-lab-hint">Every card jumps to its escape route</span>
+    </div>
+    <div class="ha-trapmap">
+      <a class="ha-trapcard" href="#trap-vague">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-fog"></use></svg>
+        <span class="tn">Trap 01</span>
+        <b>Vague</b>
+        <span class="ask">Get it out of your head.</span>
+      </a>
+      <a class="ha-trapcard" href="#trap-midwit">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bellcurve"></use></svg>
+        <span class="tn">Trap 02</span>
+        <b>Midwit</b>
+        <span class="ask">Invert it.</span>
+      </a>
+      <a class="ha-trapcard" href="#trap-attachment">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-anchor"></use></svg>
+        <span class="tn">Trap 03</span>
+        <b>Attachment</b>
+        <span class="ask">Ten times the agency.</span>
+      </a>
+      <a class="ha-trapcard" href="#trap-rumination">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-loop"></use></svg>
+        <span class="tn">Trap 04</span>
+        <b>Rumination</b>
+        <span class="ask">Act on it now.</span>
+      </a>
+      <a class="ha-trapcard" href="#trap-overwhelm">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-mountain"></use></svg>
+        <span class="tn">Trap 05</span>
+        <b>Overwhelm</b>
+        <span class="ask">Find level one.</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Vague -->
   <div class="ha-trap" id="trap-vague">
-    <h4><span class="tn">TRAP 01</span> The vague trap</h4>
+    <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-fog"></use></svg><span class="tn">TRAP 01</span> The vague trap</h4>
     <p>The vague trap avoids a clear problem statement. A person can think for years without
     defining what needs to change. Images and moods feel important but give action no target.</p>
     <p class="sounds">Things have not really been right for a while and I am not sure what to do about it.</p>
@@ -800,7 +967,7 @@ extra_js: /js/components/high-agency.js
 
   <!-- Midwit -->
   <div class="ha-trap" id="trap-midwit">
-    <h4><span class="tn">TRAP 02</span> The midwit trap</h4>
+    <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bellcurve"></use></svg><span class="tn">TRAP 02</span> The midwit trap</h4>
     <p>The midwit trap makes a simple task needlessly complex. One person takes the obvious
     action. Another studies the problem and returns to that same action. The person in the
     middle mistakes complexity for intelligence.</p>
@@ -877,7 +1044,7 @@ extra_js: /js/components/high-agency.js
 
   <!-- Attachment -->
   <div class="ha-trap" id="trap-attachment">
-    <h4><span class="tn">TRAP 03</span> The attachment trap</h4>
+    <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-anchor"></use></svg><span class="tn">TRAP 03</span> The attachment trap</h4>
     <p>The attachment trap treats old assumptions as facts. Once the frame feels fixed, every
     new fact gets forced into it. The essay calls this “last principles” thinking: reasoning
     from an assumption that was never tested.</p>
@@ -900,7 +1067,7 @@ extra_js: /js/components/high-agency.js
 
   <!-- Rumination -->
   <div class="ha-trap" id="trap-rumination">
-    <h4><span class="tn">TRAP 04</span> The rumination trap</h4>
+    <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-loop"></use></svg><span class="tn">TRAP 04</span> The rumination trap</h4>
     <p>The rumination trap repeats “what if it goes wrong?” until time runs out. No option is
     perfect, so the person delays every option.</p>
     <p class="sounds">I have spent five years thinking about moving. Every version I imagine has something wrong with it.</p>
@@ -944,7 +1111,7 @@ extra_js: /js/components/high-agency.js
 
   <!-- Overwhelm -->
   <div class="ha-trap" id="trap-overwhelm">
-    <h4><span class="tn">TRAP 05</span> The overwhelm trap</h4>
+    <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-mountain"></use></svg><span class="tn">TRAP 05</span> The overwhelm trap</h4>
     <p>The overwhelm trap compares the starting point with the final goal in one step.
     Learning quantum mechanics, earning a black belt, or building an aeroplane then feels
     like one impossible action.</p>
@@ -979,7 +1146,7 @@ extra_js: /js/components/high-agency.js
      06 · THE GAME
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="game">
-  <h2><span class="n">06</span> Which trap is yours?</h2>
+  <h2><span class="n">06</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-gamepad"></use></svg> Which trap is yours?</h2>
   <p class="ha-deck">Six ordinary situations. Four plausible responses each. One of them is the
   high agency move and the other three are traps wearing sensible clothes.</p>
 
@@ -1008,11 +1175,11 @@ extra_js: /js/components/high-agency.js
      ═══════════════════════════════════════════════════════ -->
 <div class="ha-turn" data-turn="III"><span>Act III</span><b>Agency becomes visible when analysis ends and contact with reality begins.</b></div>
 <section class="ha-part ha-prose" id="tools">
-  <h2><span class="n">07</span> Five tools</h2>
+  <h2><span class="n">07</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-toolbox"></use></svg> Five tools</h2>
   <p class="ha-deck">The essay closes with practical instruments. I have made the first one
   clickable, because a flow chart you can walk is worth more than a flow chart you can look at.</p>
 
-  <h3>Tool 1. The high agency flow chart</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-flow"></use></svg>Tool 1. The high agency flow chart</h3>
   <p>Bring one stuck problem. Answer honestly. Every terminal node is either a named trap with
   an escape route, or the news that you already have agency here and can stop diagnosing.</p>
 
@@ -1074,19 +1241,19 @@ extra_js: /js/components/high-agency.js
     <div class="ha-flow-say" id="ha-flow-say" role="status"></div>
   </div>
 
-  <h3>Tool 2. The Swedish House Mafia technique</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-users"></use></svg>Tool 2. The Swedish House Mafia technique</h3>
   <p>This technique comes from <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">the original essay</a>.
   Gather the sharpest people you know. State the real problem without protecting your pride.
   Shut the door, put the phones away, test ideas against one another, and act on the strongest
   option before the group leaves.</p>
   <div class="ha-grid cols-4">
-    <div class="ha-card"><span class="tag">Step 1</span><h5>Gather</h5><p>Invite people who will challenge your thinking.</p></div>
-    <div class="ha-card"><span class="tag">Step 2</span><h5>Confess</h5><p>The real problem, stated plainly.</p></div>
-    <div class="ha-card"><span class="tag">Step 3</span><h5>Seal</h5><p>Door shut. Phones down.</p></div>
-    <div class="ha-card"><span class="tag">Step 4</span><h5>Rally</h5><p>Ideas back and forth. Act before you leave.</p></div>
+    <div class="ha-card"><span class="tag">Step 1</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-users"></use></svg>Gather</h5><p>Invite people who will challenge your thinking.</p></div>
+    <div class="ha-card"><span class="tag">Step 2</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-message"></use></svg>Confess</h5><p>The real problem, stated plainly.</p></div>
+    <div class="ha-card"><span class="tag">Step 3</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-door"></use></svg>Seal</h5><p>Door shut. Phones down.</p></div>
+    <div class="ha-card"><span class="tag">Step 4</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bolt"></use></svg>Rally</h5><p>Ideas back and forth. Act before you leave.</p></div>
   </div>
 
-  <h3>Tool 3. The story razor</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-razor"></use></svg>Tool 3. The story razor</h3>
   <p>When two options are otherwise equal, ask which one makes the better story. This is
   <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">Amjad Masad's rule as presented in the essay</a>.
   Use it only as a tie-breaker after evaluating risk. If both choices are sound, choose the one
@@ -1097,6 +1264,25 @@ extra_js: /js/components/high-agency.js
       <div><p class="t-eyebrow">Tool</p><h5>Apply the razor</h5></div>
       <span class="ha-lab-hint">Two live options</span>
     </div>
+    <svg class="ha-scale" id="ha-scale" viewBox="0 0 520 176" role="img" aria-label="A balance scale with a pan for option A and a pan for option B. Choosing an option tips the beam towards it.">
+      <path class="stand" d="M212 162h96M260 162V90"/>
+      <path class="pivot" d="m260 62 15 28h-30Z"/>
+      <g class="beam" id="ha-scale-beam">
+        <line class="arm" x1="110" y1="64" x2="410" y2="64"/>
+        <g class="pan pan-a">
+          <line class="cord" x1="110" y1="64" x2="110" y2="96"/>
+          <path class="dish" d="M74 96h72l-13 22H87Z"/>
+          <text class="plab" x="110" y="113">A</text>
+        </g>
+        <g class="pan pan-b">
+          <line class="cord" x1="410" y1="64" x2="410" y2="96"/>
+          <path class="dish" d="M374 96h72l-13 22h-46Z"/>
+          <text class="plab" x="410" y="113">B</text>
+        </g>
+      </g>
+      <text class="slab" x="110" y="146">the sensible one</text>
+      <text class="slab" x="410" y="146">the one that scares you</text>
+    </svg>
     <div class="ha-razor">
       <div class="ha-razor-opt">
         <label class="ha-label" for="ha-razor-a">Option A</label>
@@ -1112,7 +1298,7 @@ extra_js: /js/components/high-agency.js
     <p class="ha-razor-verdict" id="ha-razor-out" role="status"></p>
   </div>
 
-  <h3>Tool 4. Ask for help, properly</h3>
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-message"></use></svg>Tool 4. Ask for help, properly</h3>
   <p><a href="https://sive.rs/ment" target="_blank" rel="noreferrer">Derek Sivers describes having three mentors</a>. When he gets stuck he writes the problem out
   for them: the context, the options, and what he thinks about each one, compressed so as not
   to waste their time. Then he predicts their reply and edits the note to address it. Then he
@@ -1123,7 +1309,48 @@ extra_js: /js/components/high-agency.js
     <cite>My reading of Sivers, in one line</cite>
   </div>
 
-  <h3>Tool 5. A change of perspective is worth fifty IQ points</h3>
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Diagram</p>
+        <h5>The draft that answers itself</h5>
+      </div>
+      <span class="ha-lab-hint">Four passes, nothing sent</span>
+    </div>
+    <div class="ha-drafts">
+      <div class="ha-draft">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-pen"></use></svg>
+        <span class="s">Pass 1</span><b>Write it out</b>
+        <small>Context, options, your read on each.</small>
+      </div>
+      <i aria-hidden="true">→</i>
+      <div class="ha-draft">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-message"></use></svg>
+        <span class="s">Pass 2</span><b>Predict the reply</b>
+        <small>You know these three people well enough.</small>
+      </div>
+      <i aria-hidden="true">→</i>
+      <div class="ha-draft">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-checklist"></use></svg>
+        <span class="s">Pass 3</span><b>Edit to answer it</b>
+        <small>The weak part of the note shows itself here.</small>
+      </div>
+      <i aria-hidden="true">→</i>
+      <div class="ha-draft">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-loop"></use></svg>
+        <span class="s">Pass 4</span><b>Predict that reply</b>
+        <small>Run the same move on the sharper draft.</small>
+      </div>
+      <i aria-hidden="true">→</i>
+      <div class="ha-draft is-out">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-check"></use></svg>
+        <span class="s">Outcome</span><b>You know the answer</b>
+        <small>The note stays in drafts.</small>
+      </div>
+    </div>
+  </div>
+
+  <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-lens"></use></svg>Tool 5. A change of perspective is worth fifty IQ points</h3>
   <p><a href="https://www.highagency.com/" target="_blank" rel="noreferrer">The essay uses this parable</a>: a wealthy man walks into a New York bank and asks to borrow five thousand dollars for two
   weeks. The bank wants security, so he hands over the keys to a Rolls Royce. Staff laugh about
   it after he leaves and park the car in the basement. He returns, repays the loan with about
@@ -1132,13 +1359,41 @@ extra_js: /js/components/high-agency.js
   price.</p>
   <p>The lesson does not depend on the story being literal. A better frame can reveal an option
   that the obvious framing hides.</p>
+
+  <div class="ha-lab">
+    <div class="ha-lab-head">
+      <div>
+        <p class="t-eyebrow">Diagram</p>
+        <h5>One transaction, two frames</h5>
+      </div>
+      <span class="ha-lab-hint">Nothing about the facts changed</span>
+    </div>
+    <div class="ha-reframe">
+      <div class="ha-frame">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-coins"></use></svg>
+        <span class="k">The obvious frame</span>
+        <b>A small loan against a car</b>
+        <p>The bank sees security, paperwork, and about fifteen dollars of interest.</p>
+      </div>
+      <div class="ha-frame-swap" aria-hidden="true">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-lens"></use></svg>
+        <span>same facts</span>
+      </div>
+      <div class="ha-frame is-on">
+        <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-key"></use></svg>
+        <span class="k">The better frame</span>
+        <b>Two weeks of secure parking</b>
+        <p>The same paperwork, priced against every garage in Manhattan.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
      08 · THE EXERCISE
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="exercise">
-  <h2><span class="n">08</span> Turn intention into action</h2>
+  <h2><span class="n">08</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-clipboard"></use></svg> Turn intention into action</h2>
   <p class="ha-deck">Reading changes nothing by itself. This ten-minute exercise asks you to act.</p>
 
   <p><a href="https://www.highagency.com/" target="_blank" rel="noreferrer">The essay proposes starting from a value</a>,
@@ -1197,12 +1452,12 @@ extra_js: /js/components/high-agency.js
      09 · LIBRARY
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="library">
-  <h2><span class="n">09</span> The library</h2>
+  <h2><span class="n">09</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-books"></use></svg> The library</h2>
   <p class="ha-deck">Examples collected in <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">the original essay</a>, followed by my lesson from each. Unless another source is linked, treat them as the essay's accounts.</p>
 
   <div class="ha-lib">
     <div class="ha-lib-card">
-      <span class="cat">Case 01</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-film"></use></svg>Case 01</span>
       <h5>A truck driver and a photocopier</h5>
       <p>A twenty year old lorry driver wanted to make films and could not pay for film school.
       Between shifts he sat in the USC library, pulled the staples out of film students' theses,
@@ -1211,7 +1466,7 @@ extra_js: /js/components/high-agency.js
       <p class="lesson"><b>The line:</b> the gate was on the tuition, never on the knowledge.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat">Case 02</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-seedling"></use></svg>Case 02</span>
       <h5>A six year old and a YouTube search</h5>
       <p>Cole Summers asked his father how people get rich. His father, recovering from a long run
       of surgeries, told him to go and watch videos about Warren Buffett. He set up a company at
@@ -1220,14 +1475,14 @@ extra_js: /js/components/high-agency.js
       <p class="lesson"><b>The line:</b> nobody checked whether he was allowed to. Including him.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat">Case 03</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-flame"></use></svg>Case 03</span>
       <h5>Burn the boats</h5>
       <p>Good intentions do not guarantee action. A public commitment can add a real social cost
       to quitting. The added cost can help, although it does not guarantee follow-through.</p>
       <p class="lesson"><b>The line:</b> design the consequence before you need the motivation.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat">Case 04</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-hourglass"></use></svg>Case 04</span>
       <h5>The ticking clock</h5>
       <p>The essay's example is an offer structured so the payment falls every month it goes
       undelivered. You do not need to feel motivated when the cost of a slow week is written on
@@ -1235,14 +1490,14 @@ extra_js: /js/components/high-agency.js
       <p class="lesson"><b>The line:</b> you can create urgency through the structure of a commitment.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat">Case 05</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-coins"></use></svg>Case 05</span>
       <h5>The trillion dollar test</h5>
       <p>If solving this paid a trillion dollars, and failing carried a death sentence, would you
       find a way? If the answer is yes, the problem was never capability. It was price.</p>
       <p class="lesson"><b>The line:</b> “impossible” often means the current cost exceeds your commitment.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat">Case 06</span>
+      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>Case 06</span>
       <h5>The suitcase</h5>
       <p>People walked on the moon before wheeled luggage became a commercial product. Bernard
       Sadow filed his <a href="https://patents.google.com/patent/US3653474A/en" target="_blank" rel="noreferrer">rolling-luggage patent in 1970</a>.</p>
@@ -1255,7 +1510,7 @@ extra_js: /js/components/high-agency.js
      10 · WHY I KEEP THIS
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="why">
-  <h2><span class="n">10</span> Why I keep this page</h2>
+  <h2><span class="n">10</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-compass"></use></svg> Why I keep this page</h2>
 
   <p>My research measures how safety alignment changes a model's calibration and where the cost
   is greatest. That work connects directly to this essay.</p>
@@ -1277,15 +1532,29 @@ extra_js: /js/components/high-agency.js
   <div class="ha-coda" aria-label="The high-agency loop: see the situation, locate the movable constraint, act, and let reality answer">
     <p class="ha-coda-kicker">The whole method</p>
     <div class="ha-coda-path">
-      <div><span>01</span><b>See what is true</b><small>not merely what is customary</small></div>
+      <div><span>01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><b>See what is true</b><small>not merely what is customary</small></div>
       <i aria-hidden="true">→</i>
-      <div><span>02</span><b>Find what can move</b><small>a rule, price, path, person, or skill</small></div>
+      <div><span>02</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-key"></use></svg><b>Find what can move</b><small>a rule, price, path, person, or skill</small></div>
       <i aria-hidden="true">→</i>
-      <div><span>03</span><b>Make contact</b><small>test it in the world</small></div>
+      <div><span>03</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-target"></use></svg><b>Make contact</b><small>test it in the world</small></div>
       <i aria-hidden="true">→</i>
-      <div class="answer"><span>04</span><b>Let reality answer</b><small>then update without vanity</small></div>
+      <div class="answer"><span>04</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-verify"></use></svg><b>Let reality answer</b><small>then update without vanity</small></div>
     </div>
     <p class="ha-coda-line"><span>The wall is real.</span> The first route rarely is.</p>
+  </div>
+
+  <div class="ha-badges" id="badges">
+    <div class="ha-badges-head">
+      <div>
+        <p class="t-eyebrow">Your progress</p>
+        <h5>Twelve things this page asks you to actually do</h5>
+      </div>
+      <span class="ha-badges-count"><b id="ha-badge-n">0</b> of 12</span>
+    </div>
+    <div class="ha-badges-track" aria-hidden="true"><i id="ha-badge-fill"></i></div>
+    <div class="ha-badge-grid" id="ha-badge-grid" role="list" aria-label="Progress badges"></div>
+    <p class="ha-badges-foot" id="ha-badge-foot" role="status"></p>
+    <div class="ha-btn-row"><button class="ha-btn" id="ha-badge-reset" type="button">Reset my progress</button></div>
   </div>
 
   <div class="ha-credit">

@@ -1258,6 +1258,234 @@
     });
   }
 
+  /* ══ The tap ═══════════════════════════════════════════ */
+  function tapFigure() {
+    var fig = $('#ha-tapfig');
+    var btn = $('#ha-tap-btn');
+    var say = $('#ha-tap-say');
+    if (!fig || !btn) return;
+
+    var OFF = 'Two of these are opinions about the water. The third one changes how much there is.';
+    var ON = 'Same glass, more water. That is the whole difference between reading a situation and moving it.';
+
+    btn.addEventListener('click', function () {
+      var on = fig.classList.toggle('is-on');
+      btn.textContent = on ? 'Turn it off again' : 'Turn the tap';
+      if (say) say.textContent = on ? ON : OFF;
+      if (on) award('tap');
+    });
+  }
+
+  /* ══ Five lines of software, as an install panel ═══════ */
+  function softwareOS() {
+    var wrap = $('#ha-os');
+    if (!wrap) return;
+    var rows = $$('.ha-os-row', wrap);
+    var hint = $('#ha-os-hint');
+    var fill = $('#ha-os-fill');
+    var state = load('os', {});
+
+    function paint() {
+      var n = 0;
+      rows.forEach(function (r) {
+        var on = !!state[r.dataset.line];
+        r.classList.toggle('is-on', on);
+        var b = $('.ha-os-btn', r);
+        if (b) {
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          b.textContent = on ? 'Installed' : 'Install';
+        }
+        if (on) n++;
+      });
+      if (hint) hint.textContent = n + ' of ' + rows.length + ' installed';
+      if (fill) fill.style.width = (n / rows.length * 100) + '%';
+      save('os', state);
+      if (n === rows.length) award('os');
+    }
+
+    rows.forEach(function (r) {
+      var b = $('.ha-os-btn', r);
+      if (!b) return;
+      b.addEventListener('click', function () {
+        state[r.dataset.line] = !state[r.dataset.line];
+        paint();
+      });
+    });
+    paint();
+  }
+
+  /* ══ The razor, as a balance ═══════════════════════════ */
+  function razorScale() {
+    var scale = $('#ha-scale');
+    if (!scale) return;
+    $$('[data-razor]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pickA = btn.dataset.razor === 'a';
+        var input = $(pickA ? '#ha-razor-a' : '#ha-razor-b');
+        if (input && !input.value.trim()) return;
+        scale.classList.toggle('is-a', pickA);
+        scale.classList.toggle('is-b', !pickA);
+      });
+    });
+  }
+
+  /* ══ Badges ════════════════════════════════════════════
+     Twelve marks, one per widget that asks for a real action.
+     Nothing is sent anywhere; the record is local storage. */
+  var BADGES = [
+    { k: 'call', icon: 'hai-phone', name: 'The phone call', how: 'Name the person you would ring.' },
+    { k: 'signals', icon: 'hai-checklist', name: 'Ten signals', how: 'Work through the checklist honestly.' },
+    { k: 'wheels', icon: 'hai-wheel', name: 'Flat tyre', how: 'Take a wheel off the tricycle.' },
+    { k: 'quiz', icon: 'hai-triangle', name: 'Three wheels', how: 'Answer twelve questions and score them.' },
+    { k: 'tap', icon: 'hai-tap', name: 'The tap', how: 'Fill the third glass yourself.' },
+    { k: 'os', icon: 'hai-chip', name: 'Five lines', how: 'Install all five beliefs.' },
+    { k: 'gate', icon: 'hai-unlock', name: 'The physics gate', how: 'Run one impossible problem through it.' },
+    { k: 'gurus', icon: 'hai-spiral', name: 'No adults', how: 'Turn every card on the pedestal over.' },
+    { k: 'ladder', icon: 'hai-ladder', name: 'Level one', how: 'Break something too big into five levels.' },
+    { k: 'game', icon: 'hai-gamepad', name: 'Six situations', how: 'Play the trap diagnostic to the end.' },
+    { k: 'flow', icon: 'hai-flow', name: 'Walked the chart', how: 'Follow the flow chart to a terminal node.' },
+    { k: 'sheet', icon: 'hai-pen', name: 'Done, not planned', how: 'Tick off one micro step on the worksheet.' }
+  ];
+
+  var earned = {};
+
+  function badgeToast(b) {
+    var el = $('#ha-toast');
+    if (!el) return;
+    el.innerHTML = '<svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#' + b.icon + '"></use></svg>' +
+      '<span>Unlocked. <b>' + escapeHtml(b.name) + '</b></span>';
+    el.classList.add('is-on');
+    clearTimeout(badgeToast._t);
+    badgeToast._t = setTimeout(function () { el.classList.remove('is-on'); }, 2600);
+  }
+
+  function award(key) {
+    if (earned[key]) return;
+    earned[key] = true;
+    save('badges', earned);
+    var b = BADGES.filter(function (x) { return x.k === key; })[0];
+    if (b) badgeToast(b);
+    paintBadges(key);
+  }
+
+  function paintBadges(fresh) {
+    var n = BADGES.filter(function (b) { return earned[b.k]; }).length;
+    var pct = n / BADGES.length * 100;
+
+    var grid = $('#ha-badge-grid');
+    if (grid) {
+      grid.innerHTML = '';
+      BADGES.forEach(function (b) {
+        var on = !!earned[b.k];
+        var d = document.createElement('div');
+        d.className = 'ha-badge' + (on ? ' is-on' : '') + (b.k === fresh ? ' is-new' : '');
+        d.setAttribute('role', 'listitem');
+        d.innerHTML = '<svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#' + (on ? b.icon : 'hai-lock') + '"></use></svg>' +
+          '<span class="state" aria-hidden="true">' + (on ? '&#10003;' : '&middot;') + '</span>' +
+          '<b>' + escapeHtml(b.name) + '<span class="ha-sr">. ' + (on ? 'Done.' : 'Not done yet.') + '</span></b>' +
+          '<small>' + escapeHtml(b.how) + '</small>';
+        grid.appendChild(d);
+      });
+    }
+
+    var num = $('#ha-badge-n');
+    if (num) num.textContent = n;
+    var bar = $('#ha-badge-fill');
+    if (bar) bar.style.width = pct + '%';
+
+    var hud = $('#ha-hud');
+    if (hud) {
+      hud.hidden = false;
+      hud.classList.toggle('is-full', n === BADGES.length);
+      hud.setAttribute('aria-label', n + ' of ' + BADGES.length + ' done. Jump to your progress.');
+    }
+    var hn = $('#ha-hud-n');
+    if (hn) hn.textContent = n;
+    var hf = $('#ha-hud-fill');
+    if (hf) hf.style.width = pct + '%';
+
+    var foot = $('#ha-badge-foot');
+    if (foot) {
+      foot.innerHTML = n === 0
+        ? 'Nothing done yet. Every mark below needs one small action on this page.'
+        : n < BADGES.length
+          ? 'You have done <b>' + n + '</b> of the twelve. The ones still locked are the ones that ask for something.'
+          : 'All twelve. Reading is finished. The worksheet is the part that touches the world.';
+    }
+  }
+
+  function badges() {
+    earned = load('badges', {}) || {};
+    paintBadges();
+
+    var reset = $('#ha-badge-reset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        earned = {};
+        save('badges', earned);
+        paintBadges();
+      });
+    }
+
+    /* Watch the existing widgets rather than editing each one. */
+    function on(sel, ev, key, guard) {
+      var el = $(sel);
+      if (!el) return;
+      el.addEventListener(ev, function () { if (!guard || guard()) award(key); });
+    }
+    function within(sel, key) {
+      var el = $(sel);
+      if (!el) return;
+      el.addEventListener('click', function () { award(key); });
+    }
+
+    on('#ha-anchor-btn', 'click', 'call', function () {
+      var i = $('#ha-anchor-input');
+      return !!(i && i.value.trim());
+    });
+    within('#ha-signals', 'signals');
+    within('#ha-trike', 'wheels');
+    on('#ha-quiz-score', 'click', 'quiz');
+    on('#ha-gate-btn', 'click', 'gate', function () {
+      var i = $('#ha-gate-input');
+      return !!(i && i.value.trim());
+    });
+    on('#ha-pedestal-all', 'click', 'gurus');
+    on('#ha-level-btn', 'click', 'ladder', function () {
+      var i = $('#ha-level-input');
+      return !!(i && i.value.trim());
+    });
+
+    var micro = $('#ha-ws-micro');
+    if (micro) {
+      micro.addEventListener('change', function (e) {
+        if (e.target && e.target.type === 'checkbox' && e.target.checked) award('sheet');
+      });
+    }
+
+    /* Two widgets signal completion by rewriting their own output. */
+    var summary = $('#ha-game-summary');
+    if (summary && window.MutationObserver) {
+      new MutationObserver(function () {
+        if (summary.classList.contains('is-on')) award('game');
+      }).observe(summary, { attributes: true, attributeFilter: ['class'] });
+    }
+    var flowSay = $('#ha-flow-say');
+    if (flowSay && window.MutationObserver) {
+      new MutationObserver(function () {
+        var row = $('#ha-flow-btns', flowSay);
+        if (!row) return;
+        var done = $$('button', row).some(function (b) { return b.textContent === 'Start again'; });
+        if (done) award('flow');
+      }).observe(flowSay, { childList: true, subtree: true });
+    }
+
+    /* Anything already stored from an earlier visit counts. */
+    if (Object.keys(load('signals', {})).length) award('signals');
+    if (Object.keys(load('quiz', {})).length === QUESTIONS.length) award('quiz');
+    if (load('anchor', '')) award('call');
+  }
+
   /* ══ Boot ══════════════════════════════════════════════ */
   function storyRail() {
     var rail = $('#ha-story-rail');
@@ -1282,9 +1510,11 @@
   }
 
   function init() {
+    try { badges(); } catch (e) { /* the board is optional; the page is not */ }
     [progress, storyRail, jailCell, signals, tricycle, quiz, spectrum, physicsGate, asteroid,
       durations, pedestal, decay, nows, wilbur, midwit, inversion, loopBreak,
-      levels, trapGame, flowChart, worksheet, razor].forEach(function (fn) {
+      levels, trapGame, flowChart, worksheet, razor,
+      tapFigure, softwareOS, razorScale].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
   }
