@@ -2154,3 +2154,112 @@ Replace `feliren` with the actual Buttondown username.
 - [ ] No CLS regression from image/typography changes (target < 0.1)
 - [x] `grep -n "style=" _pages/*.md index.html` returns no presentational inline styles after the consolidation pass
 - [x] README.md updated with Lighthouse scores and May 2026 changelog
+
+---
+
+## RFC-014: Modernize the Core Portfolio Pages
+
+**Status:** PLANNED — live Playwright audit completed 2026-08-23; no implementation started
+
+**Scope:** Homepage, Research, Use Cases, and Contact at desktop and mobile widths
+
+**Evidence:** All four live pages returned HTTP 200 with zero JavaScript errors and zero viewport overflow at 1440×1000 and 390×844. Current rendered heights: Homepage 6,958/13,198px, Research 1,532/2,884px, Use Cases 5,442/13,939px, Contact 2,041/2,851px (desktop/mobile).
+
+### Design direction
+
+- Keep the quiet, technical identity; do not add glassmorphism, animated gradients, excessive glow, or generic startup decoration.
+- Modernize through stronger hierarchy, fewer visible borders, more varied content geometry, clearer featured-versus-archive treatment, and more intentional use of the blue accent.
+- Retain Manrope + Space Grotesk, but stop relying on very small metadata and near-identical card treatments to create hierarchy.
+- Localize the point-cloud motif to heroes and section transitions. Fade or remove it behind dense grids, metadata, contact methods, and empty final grid columns.
+
+### P0 — Shared design-system pass
+
+- [ ] **Reduce “everything is a card.”** Establish three surface levels:
+  1. Canvas: no border for ordinary content.
+  2. Grouped surface: faint background and optional top rule.
+  3. Interactive surface: border, focus state, and hover response.
+- [ ] Reserve complete bordered rectangles for clickable or genuinely self-contained objects. Convert passive statistics, metadata, timeline entries, and simple link groups to open layouts or divided rows.
+- [ ] **Strengthen the type hierarchy.** Target approximately: hero 56–76px desktop / 40–48px mobile; page title 42–52px / 32–38px; section title 26–32px; card title 17–20px; body 15–17px; essential metadata ≥12.5–13px.
+- [ ] **Modernize filter controls.** Use a filled active state, visible result counts, and sticky positioning on Research and Use Cases. On mobile, use a one-line horizontally scrollable rail instead of wrapping pills into several rows.
+- [ ] **Constrain the point cloud.** Give each page a deliberate crop; fade it before dense content; do not let it compete with card copy or occupy empty archive columns near the footer.
+- [ ] Verify all new interactive elements have 44px mobile targets, visible keyboard focus, reduced-motion behavior, and sufficient contrast in both themes.
+
+### P1 — Homepage: position → proof → current work → selected work → background
+
+The homepage is currently 6,958px desktop and 13,198px mobile and functions simultaneously as landing page, résumé, research statement, current-status page, technology inventory, and archive.
+
+- [ ] **Recompose the hero as a borderless asymmetric layout.** Copy and actions on the left; portrait integrated into the right side rather than placed inside a circular profile widget.
+- [ ] Lead with the work rather than the name. Candidate headline: **“Making safety-trained models useful beyond English and beyond text.”** Keep “Vicky Feliren” as identity rather than the largest informational claim.
+- [ ] Add a compact credibility row below the hero: `7 papers · ACL / IEEE / RSE · 5+ years production ML · Jakarta`.
+- [ ] Reduce the hero to one positioning paragraph, two actions, and one current-work signal. Remove repeated social/contact controls from the critical reading path.
+- [ ] Replace the six equal statistic cards with three selected proof points tied to outcomes, not generic counts.
+- [ ] Turn “This Month” into one prominent dated panel containing the active research question and thesis milestone.
+- [ ] Add a “Selected Work” section with three high-signal projects using varied geometry rather than another uniform card grid.
+- [ ] Condense the full work, education, teaching, talks, awards, and technology inventory. Keep a short background timeline on the homepage and move or disclose the complete record.
+- [ ] On mobile, combine portrait and identity into a compact block, keep two actions, and present credibility as a horizontally scrollable proof strip.
+- [ ] Add a clear final route into Research, Use Cases, or Contact instead of ending with a long résumé/archive sequence.
+
+### P1 — Research: featured work + year-grouped archive
+
+Research is technically clean but gives all seven papers nearly equal visual weight.
+
+- [ ] Add a compact research thesis above the archive covering: calibration under safety alignment; multilingual/multicultural evaluation; reliable multimodal systems.
+- [ ] Feature the two most important or current papers in a larger split layout with contribution, key finding, venue, and primary paper action.
+- [ ] Group the remaining publications by year (`2026`, `2025`, `Earlier`) in denser archive rows instead of a uniform three-column card grid.
+- [ ] Use a consistent contribution label: `First author`, `Major contributor`, or `Contributor`.
+- [ ] Make the venue a first-class credibility signal and visually subordinate long author lists.
+- [ ] Put full author lists and abstracts behind one accessible expandable detail region.
+- [ ] Give research filters visible counts and sticky behavior; use a horizontal rail on mobile.
+- [ ] Preserve DOI, author, abstract, ORCID, Scholar, and structured-data coverage during the visual restructure.
+
+### P1 — Use Cases: featured cases + compact case index
+
+Use Cases is the densest page: 5,442px desktop and 13,939px mobile. Its pipeline diagrams are distinctive, but every card also competes with tags, venue, role, hook, technology stack, source link, and CTA.
+
+- [ ] Divide the page into **three featured cases** with full diagrams and a **compact case index** for everything else.
+- [ ] Give every case the same educational order: **Problem → Intervention → Evidence → Limitation/status**.
+- [ ] Keep one category label and at most three visible technologies in the primary reading path; disclose the remainder behind `+N`.
+- [ ] Add category counts to the filter rail: `All 22 · Safety 6 · Ongoing 4 · Earth 5 · Cultural 3 · Production 4` (derive real counts from data).
+- [ ] Make the filter rail sticky on desktop and horizontally scrollable on mobile.
+- [ ] Strengthen the card action so “Read case” is clearly interactive without adding large animation.
+- [ ] On desktop hover/focus, keep the diagram stable while the summary surface and CTA gain emphasis.
+- [ ] Avoid empty final grid columns by switching the archive to a one- or two-column editorial list when fewer cards remain.
+- [ ] Preserve all individual use-case URLs, banner alt text, external sources, and category filtering.
+
+### P1 — Contact: compact availability and qualification
+
+Contact has a strong portrait, but desktop leaves a large empty band between introduction and engagement cards, while mobile places a large portrait before explaining why someone should make contact.
+
+- [ ] Replace the tall hero with a compact two-column availability composition: engagement types and actions on the left, portrait on the right.
+- [ ] Show `Based in Jakarta · working internationally` and make Email the dominant action, with LinkedIn secondary.
+- [ ] Bring Research Collaboration, Applied Roles, Speaking, and Mentorship into the opening rather than repeating them below it.
+- [ ] For each engagement type, state: **good fit**, **context to include**, and **expected response path**.
+- [ ] Replace five oversized contact cards with a compact action directory:
+  - Email — Copy address
+  - LinkedIn — Open profile
+  - GitHub — View code
+  - Scholar — View publications
+  - Medium — Read essays
+- [ ] On mobile, introduce the offer and availability before the full portrait; keep the portrait materially smaller than the current first-screen treatment.
+- [ ] If Calendly is enabled later, keep scheduling secondary to qualified email contact.
+
+### Recommended implementation order
+
+1. [ ] Refine shared surface, typography, filter, focus, and background rules in `css/styles.css`.
+2. [ ] Recompose the homepage in `index.html` and `_data/index.yml`.
+3. [ ] Introduce featured/archive hierarchy in `_pages/publications.md`.
+4. [ ] Reduce use-case density and add featured/index modes in `_pages/usecases.md` and `_data/usecases.yml`.
+5. [ ] Consolidate Contact’s hero, engagement qualification, and link actions in `_pages/contact.md` and `_data/contact.yml`.
+6. [ ] Run Playwright comparison screenshots at 1440px, 768px, 390px, and 375px in dark and light themes.
+
+### Acceptance criteria
+
+- [ ] Homepage and Use Cases mobile heights are materially reduced without hiding essential information.
+- [ ] Each page has one obvious primary action and one unmistakable visual focal point above the fold.
+- [ ] Passive content no longer looks clickable; interactive content has visible hover, focus, and tap affordances.
+- [ ] Research makes featured/current work distinguishable from archive entries in under five seconds.
+- [ ] Use Cases exposes problem, intervention, evidence, and limitation/status consistently.
+- [ ] Contact communicates availability, fit, and the preferred contact action before the first viewport ends on desktop and mobile.
+- [ ] No horizontal overflow or page-level JavaScript errors at all audited widths.
+- [ ] Lighthouse Accessibility remains 100; CLS stays below 0.1; no regression in structured data or internal URLs.
+- [ ] Final Playwright screenshots are reviewed page-by-page in both themes rather than relying only on automated metrics.

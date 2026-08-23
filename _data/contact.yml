@@ -4,12 +4,20 @@ intro_sub: 'I study calibration under safety alignment and ways to keep safe mod
 engagements:
   - type: 'Research Collaboration'
     description: "I welcome work on the alignment tax, calibration, honesty, abstention, and evaluation beyond English. I am especially interested in measuring the costs of safety training and where they fall."
+    include: 'The research question, available evidence or data, and the contribution you have in mind.'
+    response: 'If it overlaps, I will suggest a concrete question or next working conversation.'
   - type: 'Research & Applied Roles'
     description: 'I am open to research and applied scientist roles worldwide, especially in alignment finetuning, calibration, evaluation, and reliable multimodal or multilingual systems.'
+    include: 'The problem the team owns, the expected scope, location or working model, and likely timeline.'
+    response: 'I will reply with fit, availability, and any questions needed before a formal process.'
   - type: 'Speaking'
     description: 'I speak at conferences, universities, and panels about AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
+    include: 'The audience, format, proposed topic, date, location, and whether travel or remote participation is expected.'
+    response: 'I will confirm topic fit, availability, and the format I can contribute most usefully.'
   - type: 'Mentorship'
     description: "I mentor early-career researchers and engineers entering AI safety and trustworthy AI. This includes graduate applications and applied science careers, especially across Southeast Asia."
+    include: 'Your current stage, the decision you face, what you have tried, and the specific feedback you need.'
+    response: 'When capacity allows, I will offer a focused reply, resource, or short conversation.'
 
 availability_headline: "Currently open for: research collaboration on calibration and safety alignment, conference talks, and mentorship."
 email_scope: "I respond to research collaboration (calibration and safety alignment, evaluation, multimodal and multilingual AI), conference talks, and career mentorship."
