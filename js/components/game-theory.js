@@ -111,7 +111,7 @@
           '<div class="gt-facts">' + facts.map(function (f) {
             return '<span class="gt-fact' + (f.on ? ' on' : '') + '">' + esc(f.t) + '</span>';
           }).join('') + '</div>' +
-          '<div class="move"><b>The move.</b> ' + esc(g.move) + '</div>';
+          '<div class="move"><b>Try this.</b> ' + esc(g.move) + '</div>';
       }
 
       $$('td', host).forEach(function (td) {
@@ -240,8 +240,8 @@
           '<span class="num">' + vd.toFixed(2) + '</span>' +
           '</div>' +
           '<p>' + (holds
-            ? 'At δ = ' + d.toFixed(2) + ' the future is worth enough that one betrayal costs more than it gains. Nothing about either person has changed. Only the horizon has.'
-            : 'At δ = ' + d.toFixed(2) + ' the relationship is too short to discipline anyone. Appeals to decency will not fix this, because the arithmetic favours defecting.') +
+            ? 'At δ = ' + d.toFixed(2) + ', one betrayal costs more than it gains because future rounds carry enough weight.'
+            : 'At δ = ' + d.toFixed(2) + ', the relationship is too short for future losses to outweigh the gain from defecting.') +
           '</p>' +
           '<p>The threshold is δ* = (T &minus; R) / (T &minus; P) = ' + dStar.toFixed(2) +
           ', so cooperation holds exactly when the future carries at least that much weight.</p>';
@@ -286,7 +286,7 @@
     },
     d: {
       t: 'Irreversible and ruinous',
-      body: 'Extreme leverage, one concentrated bet, anything where the bad case ends your ability to keep playing.',
+      body: 'Extreme borrowing, one concentrated bet, or any choice whose bad case ends your ability to keep playing.',
       rule: 'Require overwhelming evidence, or decline. Expected value stops being the right test here.'
     }
   };
@@ -393,14 +393,14 @@
         if (ev <= 0) {
           msg = 'The edge is gone. With <b>E[X] ≤ 0</b> no bet size saves this, and sizing up only reaches ruin faster.';
         } else if (f > kelly * 1.6 && kelly > 0) {
-          msg = 'The edge is real and the sizing is not. You are betting <b>' + (f * 100).toFixed(0) +
+          msg = 'The edge is positive, but the stake is too large. You are betting <b>' + (f * 100).toFixed(0) +
             '%</b> where the growth-optimal fraction is <b>' + (kelly * 100).toFixed(0) +
-            '%</b>. Overbetting a winning game is the most common way to lose it.';
+            '%</b>. A winning game can still ruin you when the stake is too large.';
         } else if (ruined > 0) {
-          msg = 'Positive expected value, and <b>' + Math.round(ruined / RUNS * 100) +
-            '%</b> of paths still hit the floor. Average outcomes are not what you experience. You experience one path.';
+          msg = 'The expected value is positive, yet <b>' + Math.round(ruined / RUNS * 100) +
+            '%</b> of paths still hit the floor. In practice, you experience one path through the distribution.';
         } else {
-          msg = 'Edge, sizing and survival are all in order. This is the only configuration where compounding does the work for you.';
+          msg = 'The edge, stake and survival rate are compatible here, so compounding has room to work.';
         }
         note.innerHTML = msg;
       }
@@ -423,14 +423,14 @@
     var rows = $$('.gt-cq', wrap);
 
     var NOTE = [
-      'Nothing checked. Before deciding, work through the list. Most bad calls are made without knowing which game is being played.',
+      'Nothing checked. Work through the list before deciding which move fits this game.',
       'One down. Eight assumptions still unexamined.',
-      'Two. Keep going, the awkward ones are usually further down.',
+      'Two checked. Seven assumptions remain.',
       'Three of nine.',
       'Four. Past halfway.',
-      'Five. The remaining questions are the ones people skip.',
+      'Five checked. Four remain.',
       'Six of nine.',
-      'Seven. Two left, and they are usually irreversibility and the response you are ignoring.',
+      'Seven checked. Two remain.',
       'Eight. One question stands between you and a decision you can defend.',
       '<b>All nine.</b> You know the game, the players, the order, the information and the exits. Now decide, and size the bet to how reversible it is.'
     ];
@@ -481,8 +481,8 @@
 
       if (!out) return;
       if (vals.length < 5) {
-        out.innerHTML = '<p class="t">Score at least five</p><p>The reading is not the average. ' +
-          'It is which domain is currently holding the rest of the system down.</p>';
+        out.innerHTML = '<p class="t">Score at least five</p><p>The dashboard looks for the domain ' +
+          'currently limiting the rest of the system.</p>';
         save('dash', scores);
         return;
       }
@@ -495,11 +495,11 @@
       var html = '<p class="t">Bottleneck: <span class="bottleneck">' + esc(worst.k) + '</span> at ' + worst.v + '</p>';
       html += '<p>Mean score ' + mean.toFixed(1) + ', minimum ' + worst.v + '. ' +
         'If life utility behaves anything like <span class="m">min(<span class="op">x</span><sub>1</sub>, …, <span class="op">x</span><sub>n</sub>)</span> ' +
-        'rather than an average, then raising ' + esc(worst.k) + ' is worth more than improving anything already strong.</p>';
+        'then raising ' + esc(worst.k) + ' may matter more than improving an area that is already strong.</p>';
       if (brokenFloor.length) {
         html += '<p><b>' + brokenFloor.map(function (x) { return esc(x.k); }).join(', ') +
           '</b> ' + (brokenFloor.length === 1 ? 'is' : 'are') + ' below the floor. ' +
-          'A domain marked floor is one no other score compensates for. Money does not fix recovery, and status does not fix meaning.</p>';
+          'A domain marked floor has no direct substitute. Money cannot restore recovery, and status cannot provide meaning.</p>';
       }
       out.innerHTML = html;
       save('dash', scores);
@@ -526,9 +526,253 @@
     render();
   }
 
+
+  /* ══ Five simultaneous games ═══════════════════════════ */
+  function five() {
+    var host = $('#gt-five');
+    if (!host) return;
+    var read = $('#gt-five-read');
+    var items = DATA.five || [];
+    function show(i) {
+      $$('.gt-layer', host).forEach(function (b, k) { b.classList.toggle('is-on', k === i); });
+      var f = items[i];
+      if (f && read) read.innerHTML = '<p class="ask">' + esc(f.ask) + '</p><p>' + esc(f.note) + '</p>';
+    }
+    $$('.gt-layer', host).forEach(function (b, i) {
+      b.addEventListener('click', function () { show(i); });
+      b.addEventListener('mouseenter', function () { show(i); });
+    });
+    show(0);
+  }
+
+  /* ══ The 17 domains ════════════════════════════════════ */
+  function domains() {
+    var wrap = $('#gt-domains');
+    if (!wrap) return;
+    var count = $('#gt-dcount');
+    var pills = $$('.gt-dfilters .filter-pill');
+    var expand = $('#gt-dexpand');
+
+    $$('.gt-domain', wrap).forEach(function (c) {
+      var btn = $('button', c);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var open = c.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    function apply(kind) {
+      var n = 0;
+      $$('.gt-domain', wrap).forEach(function (c) {
+        var match = kind === 'all' || c.dataset.group === kind;
+        c.hidden = !match;
+        if (match) n++;
+      });
+      if (count) count.textContent = n + (n === 1 ? ' domain' : ' domains');
+    }
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (o) { o.classList.remove('is-active'); });
+        p.classList.add('is-active');
+        apply(p.dataset.filter || 'all');
+      });
+    });
+    if (expand) {
+      expand.addEventListener('click', function () {
+        var open = expand.dataset.open === 'true';
+        $$('.gt-domain', wrap).forEach(function (c) {
+          c.classList.toggle('is-open', !open);
+          var b = $('button', c);
+          if (b) b.setAttribute('aria-expanded', !open ? 'true' : 'false');
+        });
+        expand.dataset.open = open ? 'false' : 'true';
+        expand.textContent = open ? 'Expand all' : 'Collapse all';
+      });
+    }
+    apply('all');
+  }
+
+  /* ══ Explore versus exploit ════════════════════════════ */
+  /*
+   * UCB1. Each arm scores mean plus an exploration bonus that grows with total
+   * time and shrinks with how often that arm has been tried. Raising c is
+   * literally choosing to explore more.
+   */
+  function ucb() {
+    var range = $('#gt-ucb-c');
+    if (!range) return;
+    var host = $('#gt-ucb-bars');
+    var read = $('#gt-ucb-read');
+    var cVal = $('#gt-ucb-c-val');
+
+    // three options: a proven path, a promising one, and a barely-tried one
+    var ARMS = [
+      { name: 'Current path', mu: 0.72, n: 380 },
+      { name: 'Adjacent bet', mu: 0.58, n: 40 },
+      { name: 'Untested idea', mu: 0.45, n: 4 }
+    ];
+    var t = ARMS.reduce(function (a, x) { return a + x.n; }, 0);
+    var X0 = 60, X1 = 480, Y0 = 26, Y1 = 156;
+
+    function paint() {
+      var c = +range.value / 100;
+      if (cVal) cVal.textContent = c.toFixed(2);
+
+      var scored = ARMS.map(function (a) {
+        var bonus = c * Math.sqrt(Math.log(t) / a.n);
+        return { name: a.name, mu: a.mu, n: a.n, bonus: bonus, score: a.mu + bonus };
+      });
+      var best = scored.reduce(function (m, x) { return x.score > m.score ? x : m; }, scored[0]);
+      var vMax = Math.max(1.4, Math.max.apply(null, scored.map(function (x) { return x.score; })) * 1.1);
+
+      var w = (X1 - X0) / scored.length;
+      var html = '';
+      scored.forEach(function (a, i) {
+        var cx = X0 + i * w + w * 0.5;
+        var bw = w * 0.46;
+        var hMu = (a.mu / vMax) * (Y1 - Y0);
+        var hTot = (a.score / vMax) * (Y1 - Y0);
+        html +=
+          '<rect class="bar-bonus" x="' + (cx - bw / 2).toFixed(1) + '" y="' + (Y1 - hTot).toFixed(1) +
+          '" width="' + bw.toFixed(1) + '" height="' + (hTot - hMu).toFixed(1) + '"/>' +
+          '<rect class="bar-mean" x="' + (cx - bw / 2).toFixed(1) + '" y="' + (Y1 - hMu).toFixed(1) +
+          '" width="' + bw.toFixed(1) + '" height="' + hMu.toFixed(1) + '"/>';
+        if (a.name === best.name) {
+          html += '<rect class="bar-pick" x="' + (cx - bw / 2 - 3).toFixed(1) + '" y="' + (Y1 - hTot - 3).toFixed(1) +
+            '" width="' + (bw + 6).toFixed(1) + '" height="' + (hTot + 3).toFixed(1) + '" rx="3"/>';
+        }
+        html += '<text class="blab' + (a.name === best.name ? ' pick' : '') + '" x="' + cx.toFixed(1) +
+          '" y="' + (Y1 + 16) + '">' + esc(a.name) + '</text>';
+        html += '<text class="blab" x="' + cx.toFixed(1) + '" y="' + (Y1 + 30) + '" style="font-size:9.5px">n = ' + a.n + '</text>';
+      });
+      if (host) host.innerHTML = html;
+
+      if (read) {
+        read.innerHTML =
+          '<p class="t">Pick: ' + esc(best.name) + '</p>' +
+          '<p>At <span class="m">c = ' + c.toFixed(2) + '</span> the bonus on the untested idea is ' +
+          scored[2].bonus.toFixed(2) + ', against ' + scored[0].bonus.toFixed(2) + ' for the path you already know. ' +
+          'Grey is the observed mean. Blue shows the extra weight given to limited evidence.</p>' +
+          '<p>' + (c < 0.35
+            ? 'Low c exploits. Sensible when the environment is stable and your advantage is compounding.'
+            : c < 0.9
+              ? 'At moderate c, the adjacent option starts to lead. It combines some evidence with room to learn.'
+              : 'High c explores. Correct when you are early, when the environment just changed, or when returns have flattened.') +
+          '</p>';
+      }
+      save('ucb', +range.value);
+    }
+    range.addEventListener('input', paint);
+    var saved = load('ucb', null);
+    if (saved !== null) range.value = saved;
+    paint();
+  }
+
+  /* ══ Trust as capital ══════════════════════════════════ */
+  /*
+   * T(t+1) = (1-rho)T + a*R - b*D with b > a. Reliability accrues slowly and
+   * a single defection subtracts far more than one round of good behaviour adds.
+   */
+  function trustCapital() {
+    var range = $('#gt-trust-b');
+    if (!range) return;
+    var read = $('#gt-trust-read');
+    var curve = $('#gt-trust-curve');
+    var area = $('#gt-trust-area');
+    var brk = $('#gt-trust-break');
+    var bVal = $('#gt-trust-b-val');
+
+    var X0 = 54, X1 = 500, Y0 = 26, Y1 = 160;
+    var N = 60, BREAK = 40;
+    var rho = 0.01, a = 0.05;
+
+    function paint() {
+      var b = +range.value / 10;
+      if (bVal) bVal.textContent = b.toFixed(1) + '×';
+
+      var T = 0, pts = [], recovered = null;
+      var peak = 0;
+      for (var i = 0; i <= N; i++) {
+        pts.push(T);
+        if (T > peak && i <= BREAK) peak = T;
+        var D = (i === BREAK) ? 1 : 0;
+        T = (1 - rho) * T + a * 1 - (a * b) * D * 10;
+        if (T < 0) T = 0;
+        if (i > BREAK && recovered === null && T >= peak) recovered = i - BREAK;
+      }
+      var vMax = Math.max(1, Math.max.apply(null, pts) * 1.15);
+      function px(i) { return X0 + (i / N) * (X1 - X0); }
+      function py(v) { return Y1 - clamp(v / vMax, 0, 1) * (Y1 - Y0); }
+
+      var d = pts.map(function (v, i) { return (i ? 'L' : 'M') + px(i).toFixed(1) + ' ' + py(v).toFixed(1); }).join('');
+      if (curve) curve.setAttribute('d', d);
+      if (area) area.setAttribute('d', d + 'L' + px(N).toFixed(1) + ' ' + Y1 + 'L' + X0 + ' ' + Y1 + 'Z');
+      if (brk) { brk.setAttribute('x1', px(BREAK)); brk.setAttribute('x2', px(BREAK)); }
+
+      var lost = peak > 0 ? Math.min(100, Math.round((1 - pts[BREAK + 1] / peak) * 100)) : 0;
+      if (read) {
+        read.innerHTML =
+          '<p class="t">One defection at round ' + BREAK + '</p>' +
+          '<p><span class="big">' + lost + '%</span> of the trust built over ' + BREAK +
+          ' rounds of reliability, gone in one.</p>' +
+          '<p>' + (recovered === null
+            ? 'It does not return to its previous level within the window shown. That is what <span class="m">b &gt; a</span> means in practice.'
+            : 'Recovery to the previous level takes another <b>' + recovered + '</b> rounds, against the one round it took to lose.') +
+          '</p>' +
+          '<p>Reputation grows slowly and can fall quickly. Compare any one-off gain with the years spent building the trust it would use.</p>';
+      }
+      save('trustb', +range.value);
+    }
+    range.addEventListener('input', paint);
+    var saved = load('trustb', null);
+    if (saved !== null) range.value = saved;
+    paint();
+  }
+
+  /* ══ Regimes ═══════════════════════════════════════════ */
+  function regimes() {
+    var host = $('#gt-regimes');
+    if (!host) return;
+    $$('.gt-regime', host).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var on = b.classList.contains('is-on');
+        $$('.gt-regime', host).forEach(function (o) { o.classList.remove('is-on'); });
+        if (!on) b.classList.add('is-on');
+      });
+    });
+  }
+
+  /* ══ Readiness against opportunity ═════════════════════ */
+  function readiness() {
+    var svg = $('#gt-ready');
+    if (!svg) return;
+    var read = $('#gt-ready-read');
+    var items = {};
+    (DATA.readiness || []).forEach(function (r) { items[r.q] = r; });
+    function show(k) {
+      $$('g.r', svg).forEach(function (g) { g.classList.toggle('is-on', g.dataset.r === k); });
+      var r = items[k];
+      if (r && read) {
+        read.innerHTML = '<p class="t">' + esc(r.t) + '</p><p>' + esc(r.body) + '</p>' +
+          '<p class="rule">' + esc(r.rule) + '</p>';
+      }
+    }
+    $$('g.r', svg).forEach(function (g) {
+      g.addEventListener('mouseenter', function () { show(g.dataset.r); });
+      g.addEventListener('focus', function () { show(g.dataset.r); });
+      g.addEventListener('click', function () { show(g.dataset.r); });
+      g.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(g.dataset.r); }
+      });
+    });
+    show('ho');
+  }
+
   /* ══ Boot ══════════════════════════════════════════════ */
   function init() {
-    [progress, matrix, shadow, levers, quadrants, ruin, classifier, dashboard]
+    [progress, matrix, shadow, levers, quadrants, ruin, classifier, dashboard,
+      five, domains, ucb, trustCapital, regimes, readiness]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

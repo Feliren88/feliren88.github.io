@@ -72,8 +72,17 @@
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--bg) 45%, var(--surface));
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
 .gt-eq .eq {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0.65rem;
+  text-align: center;
   font-family: var(--math);
   font-size: 1.16rem;
   line-height: 1.9;
@@ -82,6 +91,24 @@
   font-style: italic;
 }
 .gt-eq .eq .op, .gt-eq .eq .num { font-style: normal; }
+.gt-eq .eq.is-derivation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65em;
+}
+.gt-eq .eq.is-derivation .term {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38em;
+  white-space: nowrap;
+}
+.gt-eq .eq.is-derivation .rel {
+  display: inline-block;
+  flex: 0 0 auto;
+  font-style: normal;
+  line-height: 1;
+}
 .gt-eq .gloss {
   margin: 0.7rem 0 0;
   font-size: var(--fs-xs);
@@ -95,14 +122,23 @@
 .gt-eq.is-boxed { border-left-color: var(--cta); background: color-mix(in srgb, var(--cta) 8%, var(--surface)); }
 
 /* A stacked fraction that stays readable at body size. */
-.frac { display: inline-flex; flex-direction: column; vertical-align: -0.55em; text-align: center; margin: 0 0.18em; }
-.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.35em 0.1em; }
-.frac > span:last-child { padding: 0.1em 0.35em 0; }
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.15;
+  margin: 0 0.22em;
+  transform: translateY(-0.04em);
+}
+.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.38em 0.12em; }
+.frac > span:last-child { padding: 0.12em 0.38em 0; }
 
 /* Term key under an equation. */
 .gt-terms { display: grid; gap: 0.35rem; margin-top: 0.8rem; }
-.gt-term { display: grid; grid-template-columns: 5.2rem 1fr; gap: 0.7rem; align-items: baseline; }
-.gt-term dt { font-family: var(--math); font-style: italic; font-size: var(--fs-md); color: var(--accent); }
+.gt-term { display: grid; grid-template-columns: minmax(7.5rem, 11rem) minmax(0, 1fr); gap: 0.7rem; align-items: baseline; }
+.gt-term dt { font-family: var(--math); font-style: italic; font-size: var(--fs-md); color: var(--accent); overflow-wrap: anywhere; }
 .gt-term dd { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; }
 
 /* ── Icons ────────────────────────────────────────────── */
@@ -470,8 +506,208 @@
 @media (max-width: 560px) {
   .gt-lab, .gt-final, .gt-note { padding: var(--card-pad-sm); }
   .gt-part h3 { margin-top: 1.5rem; }
-  .gt-eq .eq { font-size: 1.04rem; }
+  .gt-eq { padding-inline: 0.65rem; }
+  .gt-eq .eq { font-size: 1.04rem; padding-inline: 0.45rem; }
   .gt-cq { grid-template-columns: auto 1fr; }
   .gt-cq .qtog { grid-column: 1 / -1; justify-self: start; margin-top: 0.45rem; }
-  .gt-term { grid-template-columns: 4.2rem 1fr; }
+  .gt-term { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+
+/* ════════════════════════════════════════════════════════
+   Expansion: five layers, 17 domains, regimes, readiness
+   ════════════════════════════════════════════════════════ */
+
+/* ── Five simultaneous games ──────────────────────────── */
+.gt-five { display: grid; gap: 0.45rem; }
+.gt-layer {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: center;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: 0.8rem 0.95rem;
+  width: 100%; text-align: left; font-family: inherit; cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.gt-layer:hover, .gt-layer.is-on { border-color: var(--cta); transform: translateX(3px); }
+.gt-layer .ico {
+  display: grid; place-items: center; width: 2.3rem; height: 2.3rem;
+  border-radius: var(--radius-md); font-size: 1.3rem; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.gt-layer.is-on .ico, .gt-layer:hover .ico { color: var(--cta); background: color-mix(in srgb, var(--cta) 18%, transparent); }
+.gt-layer .k { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); display: block; }
+.gt-layer .vs { font-size: var(--fs-xs); color: var(--muted); display: block; margin-top: 0.12rem; }
+.gt-layer .depth {
+  font-family: var(--math); font-size: var(--fs-2xs); font-style: italic;
+  color: var(--muted); white-space: nowrap;
+}
+.gt-five-read {
+  margin-top: var(--gap-2); border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface)); padding: var(--card-pad-sm);
+}
+.gt-five-read .ask {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700;
+  color: var(--text); margin: 0 0 0.4rem;
+}
+.gt-five-read p { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+
+/* ── 17 domains ───────────────────────────────────────── */
+.gt-dfilters { display: flex; flex-wrap: wrap; gap: var(--gap-1); margin: 0 0 var(--gap-2); }
+.gt-dcount { font-size: var(--fs-xs); color: var(--muted); margin: 0 0 var(--gap-2); }
+.gt-domains { display: grid; gap: var(--gap-2); }
+.gt-domain {
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md); background: var(--surface); overflow: hidden;
+  scroll-margin-top: 92px;
+}
+.gt-domain[hidden] { display: none; }
+.gt-domain > button {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: center;
+  width: 100%; text-align: left; font-family: inherit;
+  background: none; border: 0; color: inherit; padding: 0.9rem 1rem; cursor: pointer;
+}
+.gt-domain > button:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.gt-domain .dico {
+  display: grid; place-items: center; width: 2.35rem; height: 2.35rem;
+  border-radius: var(--radius-md); border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent); font-size: 1.3rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.gt-domain:hover .dico, .gt-domain.is-open .dico { color: var(--cta); background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.gt-domain .dk { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-title); font-weight: 700; color: var(--text); display: block; line-height: 1.35; }
+.gt-domain .dg { font-size: var(--fs-xs); color: var(--muted); display: block; margin-top: 0.15rem; }
+.gt-domain .chev { color: var(--muted); font-size: var(--fs-sm); transition: transform 0.25s ease; }
+.gt-domain.is-open .chev { transform: rotate(90deg); }
+.gt-domain-body { display: none; padding: 0 1rem 1rem; }
+.gt-domain.is-open .gt-domain-body { display: block; animation: gt-rise 0.3s ease both; }
+@keyframes gt-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.gt-drow2 { margin-bottom: 0.75rem; }
+.gt-drow2:last-child { margin-bottom: 0; }
+.gt-drow2 .k {
+  display: block; font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs);
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.25rem;
+}
+.gt-drow2 p { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-drow2.risk .k { color: var(--muted); }
+.gt-domain .dask {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); color: var(--text);
+  line-height: 1.55; border-top: 1px solid var(--line); padding-top: 0.75rem; margin-top: 0.8rem;
+}
+.gt-domain .dmath {
+  font-family: var(--math); font-style: italic; font-size: var(--fs-md); color: var(--text);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-radius: var(--radius-sm); padding: 0.45rem 0.65rem; margin-top: 0.7rem;
+  overflow-x: auto; white-space: nowrap; text-align: center;
+  scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+}
+.gt-domain .dmath sub, .gt-domain .dmath sup { font-style: normal; }
+.gt-gtags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.55rem; }
+.gt-gtag {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs); font-weight: 700;
+  letter-spacing: 0.04em; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.16rem 0.5rem;
+}
+
+/* ── Explore / exploit ────────────────────────────────── */
+.gt-ucb-wrap {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: center;
+}
+@media (max-width: 760px) { .gt-ucb-wrap { grid-template-columns: 1fr; } }
+.gt-ucb { width: 100%; height: auto; display: block; }
+.gt-ucb .ax { stroke: var(--line-strong); stroke-width: 1.4; }
+.gt-ucb .grid { stroke: var(--line); stroke-width: 1; }
+.gt-ucb .bar-mean { fill: color-mix(in srgb, var(--muted) 40%, transparent); }
+.gt-ucb .bar-bonus { fill: color-mix(in srgb, var(--cta) 45%, transparent); }
+.gt-ucb .bar-pick { stroke: var(--cta); stroke-width: 2; fill: none; }
+.gt-ucb .blab { font-family: "Space Grotesk", sans-serif; font-size: 10.5px; fill: var(--muted); text-anchor: middle; }
+.gt-ucb .blab.pick { fill: var(--cta); font-weight: 700; }
+.gt-ucb .tick { font-size: 10px; fill: var(--muted); }
+.gt-ucb-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 10rem;
+}
+.gt-ucb-read .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-ucb-read p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-ucb-read p:last-child { margin-bottom: 0; }
+
+/* ── Trust capital ────────────────────────────────────── */
+.gt-trust-wrap {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: center;
+}
+@media (max-width: 760px) { .gt-trust-wrap { grid-template-columns: 1fr; } }
+.gt-tcap { width: 100%; height: auto; display: block; }
+.gt-tcap .ax { stroke: var(--line-strong); stroke-width: 1.4; }
+.gt-tcap .grid { stroke: var(--line); stroke-width: 1; }
+.gt-tcap .curve { fill: none; stroke: var(--cta); stroke-width: 2.5; }
+.gt-tcap .area { fill: color-mix(in srgb, var(--cta) 12%, transparent); stroke: none; }
+.gt-tcap .break { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.gt-tcap .tick { font-size: 10px; fill: var(--muted); }
+.gt-tcap .clab { font-family: "Space Grotesk", sans-serif; font-size: 10.5px; font-weight: 700; }
+.gt-trust-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 10rem;
+}
+.gt-trust-read .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-trust-read p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-trust-read p:last-child { margin-bottom: 0; }
+.gt-trust-read .big { font-family: var(--math); font-size: 1.5rem; font-weight: 700; color: var(--accent); font-style: italic; }
+
+/* ── Regimes ──────────────────────────────────────────── */
+.gt-regimes { display: grid; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr)); gap: var(--gap-2); }
+.gt-regime {
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--surface); padding: var(--card-pad-sm);
+  display: flex; flex-direction: column; gap: 0.45rem;
+  text-align: left; width: 100%; font-family: inherit; cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.gt-regime:hover, .gt-regime.is-on { border-color: var(--cta); transform: translateY(-2px); }
+.gt-regime .ico {
+  display: grid; place-items: center; width: 2.3rem; height: 2.3rem;
+  border-radius: var(--radius-md); font-size: 1.3rem; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.gt-regime.is-on .ico, .gt-regime:hover .ico { color: var(--cta); background: color-mix(in srgb, var(--cta) 18%, transparent); }
+.gt-regime h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); color: var(--text); margin: 0; }
+.gt-regime .when { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; }
+.gt-regime .opt {
+  margin-top: auto; padding-top: 0.55rem; border-top: 1px solid var(--line);
+  font-size: var(--fs-xs); color: var(--muted); line-height: 1.6;
+}
+.gt-regime .opt b { color: var(--accent); }
+.gt-regime .avoid { font-size: var(--fs-xs); color: var(--muted); line-height: 1.6; margin: 0.3rem 0 0; }
+.gt-regime .avoid b { color: var(--text); }
+
+/* ── Readiness 2x2 ────────────────────────────────────── */
+.gt-ready-wrap {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: center;
+}
+@media (max-width: 720px) { .gt-ready-wrap { grid-template-columns: 1fr; } }
+.gt-ready { width: 100%; height: auto; display: block; }
+.gt-ready .field { fill: none; stroke: var(--line); stroke-width: 1; }
+.gt-ready .cell { fill: var(--surface); opacity: 0; transition: opacity 0.2s ease; }
+.gt-ready g.r { cursor: pointer; }
+.gt-ready g.r:hover .cell, .gt-ready g.r.is-on .cell { opacity: 0.9; }
+.gt-ready .rn { font-family: "Space Grotesk", sans-serif; font-size: 12.5px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+.gt-ready .axlabel { font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 700; fill: var(--muted); }
+.gt-ready .arrow { stroke: var(--line-strong); stroke-width: 1.4; fill: none; }
+.gt-ready-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 9rem;
+}
+.gt-ready-read .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-ready-read p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-ready-read .rule { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-sm); font-weight: 700; color: var(--cta); margin: 0; }
+
+@media (max-width: 560px) {
+  .gt-layer { grid-template-columns: auto 1fr; }
+  .gt-layer .depth { display: none; }
+  .gt-domain > button { grid-template-columns: auto 1fr auto; }
 }

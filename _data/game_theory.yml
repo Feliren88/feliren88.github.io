@@ -14,7 +14,7 @@ games:
     rows: ["Cooperate", "Defect"]
     cols: ["Cooperate", "Defect"]
     payoffs: [[[3, 3], [0, 5]], [[5, 0], [1, 1]]]
-    reading: "Defecting beats cooperating whatever the other does, so both defect and both end on 1 when they could have had 3."
+    reading: "Defecting pays more whatever the other player does. Both defect and receive 1, though mutual cooperation would give each player 3."
     move: "Make the relationship repeat. When the future matters enough, conditional cooperation becomes rational."
     solved:
       pure: [[1, 1]]
@@ -159,8 +159,8 @@ levers:
 
   - key: "Rules"
     icon: gt-rules
-    ask: "Which constraints are real, and which are just habit?"
-    example: "Constant interruption is a protocol failure. Set the protocol rather than absorbing the cost."
+    ask: "Which constraints are real, and which come from habit?"
+    example: "Constant interruptions point to a bad protocol. Change the protocol so you stop absorbing the cost."
 
   - key: "Arena"
     icon: gt-arena
@@ -235,7 +235,7 @@ laws:
 
 dashboard:
   - key: "Career"
-    ask: "Is capability compounding, or just responsibility?"
+    ask: "Is my capability growing along with my responsibility?"
     floor: false
 
   - key: "Money"
@@ -313,3 +313,246 @@ classifier:
 
   - q: "What response am I ignoring?"
     why: "The move that fails is usually the one that assumed nobody would react."
+
+five:
+  - key: "External"
+    icon: gt-arena
+    vs: "Employers, markets, competitors, institutions"
+    ask: "What do they do after I move?"
+    note: "This is the visible game. It matters, though the other four layers may shape the decade more."
+
+  - key: "Cooperative"
+    icon: gt-players
+    vs: "Partners, friends, colleagues, family"
+    ask: "Can we make more together than apart?"
+    note: "Much of life's value is made with other people. Treating every shared problem as a contest destroys some of that value."
+
+  - key: "Intrapersonal"
+    icon: gt-sequence
+    vs: "Tomorrow-you, tired-you, frightened-you"
+    ask: "What am I committing my future self to?"
+    note: "Your future selves cannot object to choices you make for them today. Debt, habits, contracts and specialisation all belong to this layer."
+
+  - key: "Against nature"
+    icon: gt-ruin
+    vs: "Illness, markets, timing, accident"
+    ask: "What survives if the draw goes badly?"
+    note: "Nature is indifferent. Build plans that can survive bad timing, illness and an unlucky draw."
+
+  - key: "Meta"
+    icon: gt-tree
+    vs: "The choice of which game to enter"
+    ask: "Why am I playing this one at all?"
+    note: "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play."
+
+domains:
+  - key: "Career"
+    icon: gt-career
+    group: work
+    games: ["Signalling", "Tournament", "Repeated bargaining"]
+    winning: "Capability that is hard to replace, with results other people can verify."
+    risk: "Becoming indispensable in a role that creates no bargaining power. Praise rises while outside options stay flat."
+    ask: "Does my future bargaining power grow with this responsibility?"
+    math: "Skill → Scarcity → Evidence → Bargaining Power → Choice"
+
+  - key: "Income"
+    icon: gt-payoffs
+    group: money
+    games: ["Bargaining", "Information asymmetry", "Market competition"]
+    winning: "Pay that grows with judgement, scarcity or ownership. Hours worked become less important."
+    risk: "One employer, one client, one credential. Dependency turns a good income into a fragile one."
+    ask: "What mechanism decides what this can eventually pay?"
+    math: "Income ∝ Hours &rarr; Income ∝ Judgement, Scarcity, Ownership"
+
+  - key: "Wealth"
+    icon: gt-optionality
+    group: money
+    games: ["Repeated stochastic game", "Ruin problem"]
+    winning: "Staying in the game long enough for returns to compound."
+    risk: "Position sizes that carry real ruin risk. One bad sequence and the compounding stops."
+    ask: "If the downside lands at the worst moment, am I still playing?"
+    math: "W<sub>t+1</sub> = W<sub>t</sub>(1 + r) − C &nbsp;subject to&nbsp; P(ruin) &lt; ε"
+
+  - key: "Ownership"
+    icon: gt-leverage
+    group: money
+    games: ["Market entry", "Repeated competition", "Signalling"]
+    winning: "Holding a claim on value you helped create, so the upside is not entirely someone else's."
+    risk: "Entering because ownership sounds like freedom, without a customer or an unfair advantage."
+    ask: "What happens if this works and the incumbent responds rationally?"
+    math: ""
+
+  - key: "Relationships"
+    icon: gt-trust
+    group: people
+    games: ["Repeated Prisoner's Dilemma", "Stag Hunt", "Trust game"]
+    winning: "A relationship in which conflict can be repaired reliably."
+    risk: "Treating it as zero-sum. Winning the argument while lowering the value of the relationship."
+    ask: "Does repeated interaction here increase trust and capability, or steadily reduce them?"
+    math: "δ ≥ (T − R) / (T − P)"
+
+  - key: "Family"
+    icon: gt-players
+    group: people
+    games: ["Public goods", "Common-pool resource", "Coordination"]
+    winning: "Contributions and authority made explicit, so the load does not silently fall on one person."
+    risk: "Free-riding on invisible labour. Nobody intends it, and the structure produces it anyway."
+    ask: "Is this a character problem or an incentive problem?"
+    math: ""
+
+  - key: "Network"
+    icon: gt-players
+    group: people
+    games: ["Coalition formation", "Repeated trust", "Public goods"]
+    winning: "A smaller set of trusted relationships can be worth more than a large contact list. These people would still take your call without the job titles."
+    risk: "Treating a network as something to extract from. People remember that behaviour."
+    ask: "Am I contributing here, or only withdrawing?"
+    math: ""
+
+  - key: "Reputation"
+    icon: gt-equilibrium
+    group: people
+    games: ["Costly signalling"]
+    winning: "Signals that are expensive to fake. Shipped work, kept promises, consistent judgement."
+    risk: "Spending a decade of trust on one transaction. It rebuilds far slower than it breaks."
+    ask: "Could someone without the underlying capability afford to send this signal?"
+    math: "T<sub>t+1</sub> = (1 − ρ)T<sub>t</sub> + aR<sub>t</sub> − bD<sub>t</sub>, &nbsp; b &gt; a"
+
+  - key: "Authority"
+    icon: gt-rules
+    group: work
+    games: ["Mechanism design", "Principal-agent"]
+    winning: "Responsibility, authority and accountability roughly in balance."
+    risk: "Responsibility far exceeding authority. You absorb the blame for outcomes you cannot control."
+    ask: "Am I being given power, or only exposure?"
+    math: "Responsibility ≈ Authority ≈ Accountability"
+
+  - key: "Learning"
+    icon: gt-tree
+    group: self
+    games: ["Explore versus exploit"]
+    winning: "Knowledge that transfers, compounds, and eventually changes what you do."
+    risk: "Consuming information because it feels productive, without using it to change a decision or action."
+    ask: "Can I use this yet, or have I only read about it?"
+    math: "UCB<sub>i</sub> = μ̂<sub>i</sub> + c√(ln t / n<sub>i</sub>)"
+
+  - key: "Creativity"
+    icon: gt-arena
+    group: self
+    games: ["Differentiation", "Attention competition"]
+    winning: "Work at the intersection of genuine curiosity and non-generic knowledge."
+    risk: "Optimising novelty without usefulness, or usefulness without distinctiveness."
+    ask: "Which term in the product is closest to zero?"
+    math: "Value = Novelty × Relevance × Execution × Distribution"
+
+  - key: "Identity"
+    icon: gt-information
+    group: self
+    games: ["Self-signalling", "Social comparison"]
+    winning: "Confidence built through evidence, repetition and recovery."
+    risk: "Outsourcing your sense of self to recognition. Praise then sets your direction, and so does criticism."
+    ask: "Does repeating this make me more capable, or only more approved of?"
+    math: "Confidence = f(Evidence, Repetition, Recovery)"
+
+  - key: "Emotion"
+    icon: gt-sequence
+    group: self
+    games: ["Present self versus future self"]
+    winning: "Deciding from equilibrium. Recognising which internal player currently holds the pen."
+    risk: "Local relief that raises the future cost. Avoidance and overwork both do this."
+    ask: "Which version of me is making this call, and on what horizon?"
+    math: ""
+
+  - key: "Meaning"
+    icon: gt-optionality
+    group: self
+    games: ["Finite life, unbounded appetite"]
+    winning: "Sources of meaning that do not depend on outranking anyone."
+    risk: "Rank-based satisfaction. The reference group climbs with you and the target keeps moving."
+    ask: "Would I value this with no spectators?"
+    math: "Satisfaction = f(rank) ⇒ no terminal state"
+
+  - key: "Geography"
+    icon: gt-arena
+    group: self
+    games: ["Matching", "Network effects", "Option value"]
+    winning: "An environment that amplifies you. No location is good in the abstract."
+    risk: "Committing permanently on holiday data. A visit and a life are different samples."
+    ask: "What version of me does this place encourage?"
+    math: ""
+
+  - key: "Recovery"
+    icon: gt-repeat
+    group: self
+    games: ["Common-pool resource"]
+    winning: "Recovery scheduled as part of the work, including when the work remains unfinished."
+    risk: "Every domain withdrawing from one biological account with nobody governing the withdrawals."
+    ask: "Is this replenishing energy or borrowing it from tomorrow?"
+    math: "Demand &gt; Regeneration ⇒ fragility"
+
+  - key: "Vitality"
+    icon: gt-slow
+    group: self
+    games: ["Long-horizon resource preservation"]
+    winning: "Output that remains sustainable for years."
+    risk: "Converting a temporary biological capacity into a permanent expectation."
+    ask: "Is the current pace something I could hold for a decade?"
+    math: "Sustainable = Intensity × Consistency × Years"
+
+regimes:
+  - key: "Expansion"
+    icon: gt-fast
+    when: "Evidence is strong and the environment rewards scale."
+    opt: "Exposure, ownership, hiring, visibility"
+    avoid: "Hedging so heavily you cannot press the advantage"
+
+  - key: "Experimentation"
+    icon: gt-tree
+    when: "Uncertainty is high and commitments are still reversible."
+    opt: "Information, variety, cheap reversible bets"
+    avoid: "Committing before the evidence arrives"
+
+  - key: "Consolidation"
+    icon: gt-rules
+    when: "Growth outran the systems holding it up."
+    opt: "Processes, reserves, recurring economics"
+    avoid: "Adding new fronts before the current one is stable"
+
+  - key: "Defence"
+    icon: gt-trust
+    when: "Downside risk has risen or the ground is moving."
+    opt: "Solvency, reputation, optionality"
+    avoid: "Concentrating further to recover losses"
+
+  - key: "Recovery"
+    icon: gt-slow
+    when: "Capacity is depleted and judgement is degraded."
+    opt: "Health, bandwidth, relationship repair"
+    avoid: "Making irreversible decisions while depleted"
+
+  - key: "Transition"
+    icon: gt-exit
+    when: "The current game no longer fits, but the next is unbuilt."
+    opt: "Runway, option value, information"
+    avoid: "Burning the boat before the alternative exists"
+
+readiness:
+  - q: lr
+    t: "Recovery"
+    body: "You have little capacity and few good openings. Rebuild the base before forcing a move."
+    rule: "Protect resources. Stop the bleeding first."
+
+  - q: hr
+    t: "Positioning"
+    body: "You are ready, but the environment offers little. Use the quiet period to prepare."
+    rule: "Build skill, network and runway now. The opening arrives on its own schedule."
+
+  - q: lo
+    t: "Controlled participation"
+    body: "A real opening you are not yet built for. Take part without betting the system."
+    rule: "Capture upside at small size. Learn fast."
+
+  - q: ho
+    t: "Expansion"
+    body: "Readiness and opportunity have arrived together. This combination is rare and may not last."
+    rule: "Concentrate enough effort to use the opening while it exists."

@@ -110,7 +110,9 @@ def esc(s):
     return '"' + str(s).replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 
-def emit(games, laws, levers, dashboard, classifier):
+def emit(src):
+    games, laws, levers = src['games'], src['laws'], src['levers']
+    dashboard, classifier = src['dashboard'], src['classifier']
     L = [
         '# Game theory — /game-theory/',
         '# Consumed by _pages/game-theory.md and js/components/game-theory.js.',
@@ -169,7 +171,46 @@ def emit(games, laws, levers, dashboard, classifier):
         L.append(f"  - q: {esc(x['q'])}")
         L.append(f"    why: {esc(x['why'])}")
         L.append('')
+
+    L.append('five:')
+    for x in src['five']:
+        L.append(f"  - key: {esc(x['key'])}")
+        L.append(f"    icon: {x['icon']}")
+        L.append(f"    vs: {esc(x['vs'])}")
+        L.append(f"    ask: {esc(x['ask'])}")
+        L.append(f"    note: {esc(x['note'])}")
+        L.append('')
+
+    L.append('domains:')
+    for x in src['domains']:
+        L.append(f"  - key: {esc(x['key'])}")
+        L.append(f"    icon: {x['icon']}")
+        L.append(f"    group: {x['group']}")
+        L.append(f"    games: [{', '.join(esc(g) for g in x['games'])}]")
+        L.append(f"    winning: {esc(x['winning'])}")
+        L.append(f"    risk: {esc(x['risk'])}")
+        L.append(f"    ask: {esc(x['ask'])}")
+        L.append(f"    math: {esc(x['math']) if x.get('math') else '\"\"'}")
+        L.append('')
+
+    L.append('regimes:')
+    for x in src['regimes']:
+        L.append(f"  - key: {esc(x['key'])}")
+        L.append(f"    icon: {x['icon']}")
+        L.append(f"    when: {esc(x['when'])}")
+        L.append(f"    opt: {esc(x['opt'])}")
+        L.append(f"    avoid: {esc(x['avoid'])}")
+        L.append('')
+
+    L.append('readiness:')
+    for x in src['readiness']:
+        L.append(f"  - q: {x['q']}")
+        L.append(f"    t: {esc(x['t'])}")
+        L.append(f"    body: {esc(x['body'])}")
+        L.append(f"    rule: {esc(x['rule'])}")
+        L.append('')
     return '\n'.join(L)
+
 
 
 def main():
@@ -194,7 +235,7 @@ def main():
                        'C' if s['dominant_col'] is not None else '-'])
         print(f"{g['id']:22s} {cells[:18]:18s} {'yes' if s['mixed'] else 'no':8s} {dom:6s} {s['zero_sum']}")
 
-    text = emit(src['games'], src['laws'], src['levers'], src['dashboard'], src['classifier'])
+    text = emit(src)
     if args.check:
         if not os.path.exists(args.out):
             print('\nno data file to check against')
