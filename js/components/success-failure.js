@@ -106,10 +106,140 @@
     sections.forEach(function (section) { observer.observe(section); });
   }
 
+  /* ── Exposure dial ───────────────────────────────────────
+     The same idea at 5% and at 100% is two different decisions, so the
+     track above it becomes something you can actually move. */
+  function initExposure() {
+    var range = document.getElementById('sf-exposure');
+    if (!range) return;
+    var pct = document.getElementById('sf-exposure-pct');
+    var band = document.getElementById('sf-exposure-band');
+    var say = document.getElementById('sf-exposure-say');
+    var track = document.querySelector('.sf-exposure-track');
+
+    var BANDS = [
+      { max: 15, key: 'probe', name: 'Probe', line: 'Small enough that being wrong costs information and nothing else.' },
+      { max: 45, key: 'position', name: 'Position', line: 'Large enough to matter, small enough that a bad outcome stays survivable.' },
+      { max: 100, key: 'commit', name: 'Commit', line: 'Only with repeated evidence, and only while the downside stays inside what you can absorb.' }
+    ];
+
+    function paint() {
+      var v = +range.value;
+      var b = BANDS.filter(function (x) { return v <= x.max; })[0] || BANDS[2];
+      if (pct) pct.textContent = v;
+      if (band) { band.textContent = b.name; band.dataset.band = b.key; }
+      if (say) say.textContent = b.line;
+      if (track) track.dataset.band = b.key;
+      range.style.setProperty('--sf-pos', v + '%');
+      range.setAttribute('aria-valuetext', v + ' percent, ' + b.name);
+    }
+    range.addEventListener('input', paint);
+    paint();
+  }
+
+  /* ── The eighteen-domain scorecard ───────────────────────
+     A win in one domain can hide damage in another, which you only see by
+     putting all eighteen on one axis. Ratings are local storage only. */
+  function initScorecard() {
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.sf-rate'));
+    if (!groups.length) return;
+
+    var bars = document.getElementById('sf-bars');
+    var count = document.getElementById('sf-rated-n');
+    var say = document.getElementById('sf-scorecard-say');
+    var reset = document.getElementById('sf-rate-reset');
+    var KEY = 'sf:ratings';
+
+    var scores = {};
+    try { scores = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { scores = {}; }
+
+    function titleOf(group) {
+      var card = group.closest('details');
+      var label = card && card.querySelector('summary span:not(.ico)');
+      return label ? label.textContent.trim() : group.dataset.domain;
+    }
+
+    var domains = groups.map(function (g) {
+      return { id: g.dataset.domain, title: titleOf(g), group: g };
+    });
+
+    function paint() {
+      var rated = domains.filter(function (d) { return scores[d.id] !== undefined; });
+      if (count) count.textContent = rated.length;
+
+      groups.forEach(function (g) {
+        var v = scores[g.dataset.domain];
+        Array.prototype.slice.call(g.querySelectorAll('button')).forEach(function (b) {
+          var on = v !== undefined && +b.dataset.v === v;
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          b.classList.toggle('is-on', on);
+        });
+        g.classList.toggle('is-set', v !== undefined);
+      });
+
+      if (bars) {
+        bars.innerHTML = '';
+        domains.forEach(function (d) {
+          var v = scores[d.id];
+          var state = v === undefined ? 'none' : v > 0 ? 'up' : v < 0 ? 'down' : 'mid';
+          var cell = document.createElement('span');
+          cell.className = 'sf-bar is-' + state;
+          cell.title = d.title + (v === undefined ? ': not rated' :
+            v > 0 ? ': rising' : v < 0 ? ': falling' : ': flat');
+          cell.innerHTML = '<i></i><em>' + d.title + '</em>';
+          bars.appendChild(cell);
+        });
+      }
+
+      if (!say) return;
+      if (!rated.length) {
+        say.textContent = 'Nothing rated yet. Open a domain above and say where it is heading.';
+        return;
+      }
+      var up = rated.filter(function (d) { return scores[d.id] > 0; });
+      var down = rated.filter(function (d) { return scores[d.id] < 0; });
+      var parts = [];
+      parts.push('<b>' + up.length + '</b> rising, <b>' +
+        (rated.length - up.length - down.length) + '</b> flat, <b>' + down.length + '</b> falling.');
+      if (down.length && up.length) {
+        parts.push('Something is climbing while <b>' + down[0].title.toLowerCase() +
+          '</b> falls. That is the pattern this section exists to catch.');
+      } else if (down.length) {
+        parts.push('<b>' + down[0].title.toLowerCase() + '</b> is the one constraining the rest.');
+      } else if (rated.length === domains.length) {
+        parts.push('Nothing falling across all eighteen. Check the review cadence below rather than trusting one reading.');
+      }
+      say.innerHTML = parts.join(' ');
+    }
+
+    groups.forEach(function (g) {
+      g.addEventListener('click', function (event) {
+        var btn = event.target.closest('button[data-v]');
+        if (!btn) return;
+        var id = g.dataset.domain, v = +btn.dataset.v;
+        if (scores[id] === v) delete scores[id]; else scores[id] = v;
+        try { localStorage.setItem(KEY, JSON.stringify(scores)); } catch (e) { /* private mode */ }
+        paint();
+      });
+    });
+
+    if (reset) {
+      reset.addEventListener('click', function () {
+        scores = {};
+        try { localStorage.removeItem(KEY); } catch (e) { /* private mode */ }
+        paint();
+      });
+    }
+
+    paint();
+  }
+
   function init() {
     try { initRouter(); } catch (error) { /* The static action key remains usable. */ }
     try { initProgress(); } catch (error) { /* Reading remains unaffected. */ }
     try { initStoryRail(); } catch (error) { /* Navigation remains usable. */ }
+    try { initExposure(); } catch (error) { /* The static track still reads. */ }
+    try { initScorecard(); } catch (error) { /* The domains still open and read. */ }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
