@@ -273,8 +273,14 @@
        radius instead, where the space is, and flip on the left half so no word
        is upside down. */
     function label(txt,r,a,cls,size,radial,room){
-      var p=pt(r,a), deg=a*180/Math.PI, flip=(deg>90&&deg<270);
-      var anchor = radial ? (flip?'end':'start') : 'middle';
+      var p=pt(r,a), deg=(a*180/Math.PI%360+360)%360, flip=(deg>90&&deg<270);
+      /* The rotation already decides which way the glyphs run: unflipped, local
+         +x points outward and the anchor sits at the band's inner edge; flipped,
+         local +x points inward and the anchor sits at the outer edge. Either way
+         the text starts at its anchor and runs into the band, so both are
+         "start". Using "end" on the flipped half ran those words back out
+         through the outer ring, which is what broke joy, love and surprise. */
+      var anchor = radial ? 'start' : 'middle';
       var rot = flip?deg+180:deg;
       var t=mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),class:cls,
         'text-anchor':anchor,'dominant-baseline':'middle','font-size':size,
@@ -309,8 +315,8 @@
     /* Radial labels start just inside the band's inner edge, or just inside its
        outer edge when they read right-to-left. */
     function radialR(r0,r1,a){
-      var deg=a*180/Math.PI;
-      return (deg>90&&deg<270) ? r1-4 : r0+4;
+      var deg=(a*180/Math.PI%360+360)%360;
+      return (deg>90&&deg<270) ? r1-5 : r0+5;
     }
 
     var seg=TAU/fams.length;
