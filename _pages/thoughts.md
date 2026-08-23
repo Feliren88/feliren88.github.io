@@ -36,6 +36,12 @@ permalink: /writings/
 <span class="essay-feature-desc">Most decisions are not solo problems. Solve eight payoff matrices, watch cooperation become rational as the horizon lengthens, and run a ruin simulation.</span>
 <span class="read-more">Open the note →</span>
 </a>
+<a class="essay-feature" href="/success-failure/">
+<span class="essay-feature-label">Interactive note</span>
+<span class="essay-feature-title">Success &amp; Failure</span>
+<span class="essay-feature-desc">How to diagnose a result, scale what repeats, recover without escalating, and choose the next move without turning the outcome into identity.</span>
+<span class="read-more">Open the manual →</span>
+</a>
 </div>
 
 <div class="writings-divider"></div>

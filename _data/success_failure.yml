@@ -1,0 +1,117 @@
+actions:
+  - key: scale
+    title: Scale
+    icon: sf-scale
+    summary: Increase exposure because the mechanism repeats, compounds, fits, and survives the larger bet.
+  - key: maintain
+    title: Maintain
+    icon: sf-maintain
+    summary: Keep the current size. The result works, but more scale adds little or strains capacity.
+  - key: adapt
+    title: Adapt
+    icon: sf-adapt
+    summary: Keep the objective and change the strategy, channel, timing, partner, or arena.
+  - key: pause
+    title: Pause
+    icon: sf-pause
+    summary: Preserve the option while readiness, information, energy, or conditions improve.
+  - key: hedge
+    title: Hedge
+    icon: sf-hedge
+    summary: Keep useful exposure while limiting concentration and damage in a bad outcome.
+  - key: exit
+    title: Exit
+    icon: sf-exit
+    summary: Stop when future value, learning, and optionality stay low while opportunity cost remains high.
+
+domains:
+  - title: Career trajectory
+    icon: sf-career
+    good: Harder problems, transferable proof, better people, ownership, authority, and wider options.
+    false: A title without authority, salary without skill growth, or prestige that raises the cost of leaving.
+    response: Treat one rejection as noise. Treat repeated independent rejection as evidence about positioning, proof, skill, or market fit.
+  - title: Income
+    icon: sf-money
+    good: Cash flow rises through better judgment, scarce skill, distribution, or terms rather than longer hours alone.
+    false: Pay rises while time, autonomy, or bargaining power falls.
+    response: Identify the mechanism that sets pay. Improve alternatives before negotiating and reduce dependence on one payer.
+  - title: Wealth resilience
+    icon: sf-shield
+    good: Durable assets, liquidity, and the ability to absorb shocks increase.
+    false: Paper gains hide borrowed exposure, illiquidity, or concentration that could end future participation.
+    response: Protect some, reinvest some, and keep some liquid. Review the thesis after a loss instead of trying to win the loss back.
+  - title: Ownership
+    icon: sf-asset
+    good: More of the upside from value created accrues to you through equity, assets, or reusable work.
+    false: Responsibility grows while the economic upside remains fixed or belongs elsewhere.
+    response: Clarify what you own, what can compound, and whether the extra responsibility changes your share of the result.
+  - title: Relationship quality
+    icon: sf-relationship
+    good: Trust, honesty, autonomy, and repair capacity increase over repeated disagreements.
+    false: The relationship looks stable because one person suppresses conflict or loses the freedom to disagree.
+    response: Repair one conflict. Diagnose a repeated pattern. Reduce exposure after repeated betrayal. Do not negotiate incompatible values away.
+  - title: Family and home
+    icon: sf-relationship
+    good: Home restores energy, responsibilities are visible, and contribution remains reciprocal over time.
+    false: Surface peace depends on invisible labour, avoidance, or one person carrying the shared system.
+    response: Make labour, authority, resources, and boundaries explicit. Repair the arrangement instead of repeating emotional appeals.
+  - title: Emotional equilibrium
+    icon: sf-pause
+    good: Strong emotion can be felt without forcing an immediate, irreversible decision.
+    false: Achievement depends on overwork, or relief depends on avoidance that enlarges tomorrow's problem.
+    response: Stabilize first. Reduce commitment size, separate facts from interpretation, then choose a reversible next step.
+  - title: Identity coherence
+    icon: sf-identity
+    good: Confidence follows evidence, practice, competence, and recovery.
+    false: Praise, status, or one visible result becomes proof of who you must remain.
+    response: Describe the mechanism and conditions behind the result. Keep the identity provisional enough to update.
+  - title: Learning
+    icon: sf-learning
+    good: Knowledge becomes application, feedback, judgment, and better performance.
+    false: Consumption feels productive while behaviour and results remain unchanged.
+    response: Change practice method, feedback frequency, difficulty, environment, teacher, or project before consuming more.
+  - title: Creativity
+    icon: sf-adapt
+    good: Work builds skill, a body of work, distinctiveness, intellectual property, and distribution.
+    false: Views substitute for durable work, or originality has no relevance, execution, or route to an audience.
+    response: Separate weak work from weak distribution, wrong audience, and bad timing before changing the product.
+  - title: Network
+    icon: sf-leadership
+    good: Trust density, reciprocity, diversity, and useful reach increase.
+    false: Contact count rises while relationships remain extractive, shallow, or dependent on titles.
+    response: Invest through reliability, contribution, introductions, and shared work. Reduce exposure to repeated extraction.
+  - title: Reputation
+    icon: sf-reputation
+    good: Repeated work gives others evidence of competence and reliability.
+    false: Visibility grows faster than the evidence beneath it, or one public identity blocks necessary change.
+    response: Repair damage with acknowledgement, changed behaviour, repeated evidence, and time. Intentions alone carry little signal.
+  - title: Authority
+    icon: sf-leadership
+    good: Responsibility, information, resources, decision rights, and accountability remain in proportion.
+    false: Responsibility grows without resources or authority, or good outcomes require constant intervention.
+    response: Inspect incentives, information, decision rights, accountability, norms, and selection before blaming motivation.
+  - title: Geography and environment
+    icon: sf-route
+    good: The location improves opportunity, network, daily fit, learning, and the quality of ordinary routines.
+    false: Vacation impressions or prestige hide cost, friction, isolation, regulation, or poor occupational fit.
+    response: Visit, work temporarily, build an initial network, and observe a normal week before making the move hard to reverse.
+  - title: Meaning
+    icon: sf-capacity
+    good: Some value remains independent of rank, applause, and visible achievement.
+    false: Each success raises the comparison group and moves the point at which life is allowed to feel sufficient.
+    response: Protect work, love, service, craft, curiosity, or presence that you would still value without spectators.
+  - title: Recovery
+    icon: sf-pause
+    good: Energy is replenished before every demand has been completed.
+    false: Rest is postponed until an empty task list that never arrives.
+    response: Treat recovery as operating infrastructure and govern withdrawals from the shared energy account.
+  - title: Vitality
+    icon: sf-repeat
+    good: The current intensity can be repeated consistently across years.
+    false: Temporary biological capacity becomes the permanent expectation for normal output.
+    response: Judge the pace by sustainable output across time, not by the strongest short burst.
+  - title: Optionality
+    icon: sf-route
+    good: Credible future moves increase through savings, portable skills, trust, low fixed costs, and wider access.
+    false: Keeping every door open prevents commitment to the best evidenced path.
+    response: Create options while uncertainty is high. Exercise one when evidence, fit, and compounding converge.

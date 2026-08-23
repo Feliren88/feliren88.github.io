@@ -19,6 +19,7 @@
     if (path.indexOf('/principles') === 0) return '/writings';
     if (path.indexOf('/stoic') === 0) return '/writings';
     if (path.indexOf('/game-theory') === 0) return '/writings';
+    if (path.indexOf('/success-failure') === 0) return '/writings';
     var item = NAV_ITEMS.find(function(n) { return path === n.href || (n.href !== '/' && path.indexOf(n.href) === 0); });
     return item ? item.page : '/';
   }
