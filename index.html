@@ -115,91 +115,13 @@ description: Applied Scientist working on calibration under safety alignment. I 
       {% endfor %}
     </div>
 
-    <div id="track-record" class="about-section">
-      <h2>Track Record</h2>
-      <div class="split-grid">
-        <div>
-          <p class="column-title">WORK EXPERIENCE</p>
-          <ol id="work-experience-list" class="timeline">
-            {% for item in site.data.experience.work_experience %}
-            <li>
-              <p class="time">{{ item.dates }}</p>
-              <h3>{{ item.title }}</h3>
-              <p class="loc">{{ item.location }}</p>
-            </li>
-            {% endfor %}
-          </ol>
-          <p class="column-title mt-md">PATENT</p>
-          <ol id="patents-list" class="timeline short">
-            {% for item in site.data.experience.patents %}
-            <li>
-              <p class="time">{{ item.dates }}</p>
-              <h3>{{ item.title }}</h3>
-              <p class="loc">{{ item.location }}</p>
-            </li>
-            {% endfor %}
-          </ol>
-          {% if site.data.experience.talks %}
-          <p class="column-title mt-md">TALKS</p>
-          <ol id="talks-list" class="timeline short">
-            {% for item in site.data.experience.talks %}
-            <li>
-              <p class="time">{{ item.dates }}</p>
-              <h3>{{ item.title }}</h3>
-              <p class="loc">{{ item.location }}</p>
-            </li>
-            {% endfor %}
-          </ol>
-          {% endif %}
-        </div>
-        <div>
-          <p class="column-title">EDUCATION</p>
-          <ol id="education-list" class="timeline short">
-            {% for item in site.data.experience.education %}
-            <li>
-              <p class="time">{{ item.dates }}</p>
-              <h3>{{ item.title }}</h3>
-              <p class="loc">{{ item.location }}</p>
-            </li>
-            {% endfor %}
-          </ol>
-          <p class="column-title mt-md">TEACHING</p>
-          <ol id="teaching-list" class="timeline short">
-            {% for item in site.data.experience.teaching %}
-            <li>
-              <p class="time">{{ item.dates }}</p>
-              <h3>{{ item.title }}</h3>
-              <p class="loc">{{ item.location }}</p>
-            </li>
-            {% endfor %}
-          </ol>
-        </div>
+    <div class="about-section home-depth-routes">
+      <h2>Go deeper</h2>
+      <p class="section-prose">The personal narrative and the complete professional record now have separate homes.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/about/">Read About</a>
+        <a class="btn btn-secondary" href="/cv/">Curriculum Vitae</a>
       </div>
-    </div>
-
-    <div id="recognition" class="about-section">
-      <h2>Recognition</h2>
-      <ul class="award-pills">
-        {% for key in site.data.awards %}
-        {% assign award = key[1] %}
-        {% if award.category %}
-        <li>
-          <span class="tag">{{ award.category }}</span>
-          {% if award.url %}
-          <a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>
-          {% else %}
-          {{ award.title }}
-          {% endif %}
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <p class="column-title mt-lg">PROFESSIONAL SERVICE</p>
-      <ul class="award-pills">
-        {% for item in site.data.awards.service %}
-        <li><strong>{{ item.role }}:</strong> {{ item.description }}</li>
-        {% endfor %}
-      </ul>
     </div>
 
   </div>

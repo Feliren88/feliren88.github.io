@@ -2157,6 +2157,24 @@ Replace `feliren` with the actual Buttondown username.
 
 ---
 
+## RFC-015: Separate the About Narrative from the Curriculum Vitae
+
+**Status:** DELIVERED — 2026-08-23
+
+**Scope:** `/about/`, `/cv/`, primary navigation, and the résumé-heavy portion of the homepage
+
+### Delivered
+
+- [x] Replaced the `/about/` redirect with a complete four-chapter visual narrative: question, path, method, and current direction.
+- [x] Created `/cv/` as the canonical long-form record for experience, education, patent, teaching, speaking, awards, and professional service.
+- [x] Added deliberate cross-links between About, CV, Research, and Contact.
+- [x] Changed primary and footer navigation so About resolves to `/about/` rather than the homepage.
+- [x] Removed the full work/education/awards record from the homepage and replaced it with concise About and CV routes.
+- [x] Added page-scoped responsive styling in `css/about.css`, including desktop and mobile visual narratives.
+- [x] Verified generated `/about/` and `/cv/` routes through Jekyll and reviewed desktop/mobile Playwright screenshots.
+
+---
+
 ## RFC-014: Modernize the Core Portfolio Pages
 
 **Status:** PLANNED — live Playwright audit completed 2026-08-23; no implementation started

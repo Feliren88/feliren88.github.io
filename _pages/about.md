@@ -4,158 +4,110 @@ title: About Vicky Feliren
 subtitle: AI Safety & Applied Scientist
 description: Vicky Feliren is an Applied Scientist studying AI safety, calibration, and reliable multimodal and multilingual systems.
 permalink: /about/
-redirect_to: /
+extra_css: /css/about.css
+hide_title: true
 ---
-
-<p class="eyebrow">WHO I AM</p>
-
-<img src="/assets/img/profile_2_bg.webp" alt="" class="profile-bg" aria-hidden="true" draggable="false" fetchpriority="high">
-
-<div id="about-hero" class="about-hero">
-  {% for paragraph in site.data.about.hero %}
-  <p>{{ paragraph }}</p>
-  {% endfor %}
-</div>
-
-<div id="about-sections">
-  {% for section in site.data.about.sections %}
-  <div class="about-section">
-    <h3>{{ section.title }}</h3>
-    
-    {% if section.content %}
-    <p style="line-height:1.7;max-width:44rem">{{ section.content }}</p>
-    {% endif %}
-    
-    {% if section.cards %}
-    <div class="about-grid">
-      {% for card in section.cards %}
-      <div class="about-card">
-        <h4>{{ card.title }}</h4>
-        <p>{{ card.description }}</p>
+<article class="about-story">
+  <header class="about-story-hero">
+    <div class="about-story-copy">
+      <p class="eyebrow">ABOUT · JAKARTA, INDONESIA</p>
+      <h1>I look for what breaks <em>before</em> a system is trusted.</h1>
+      <p class="about-story-lead">I’m Vicky Feliren, an applied scientist working where AI safety, uncertainty, and underrepresented data meet. My work asks a practical question: when a model becomes safer, does it remain useful for the people and inputs its training represented least?</p>
+      <div class="about-story-actions">
+        <a class="btn btn-primary" href="/research/">Explore the research</a>
+        <a class="about-text-link" href="/cv/">View curriculum vitae <span aria-hidden="true">↗</span></a>
       </div>
-      {% endfor %}
+      <ul class="about-proof-strip" aria-label="Selected credentials">
+        <li><strong>7</strong><span>peer-reviewed papers</span></li>
+        <li><strong>5+ yrs</strong><span>production ML</span></li>
+        <li><strong>IEEE · ACL · RSE</strong><span>publication venues</span></li>
+      </ul>
     </div>
-    {% endif %}
-    
-    {% if section.engage %}
-    <div class="about-grid">
-      {% for item in section.engage %}
-      <div class="about-card">
-        <h4>{{ item.type }}</h4>
-        <p>{{ item.description }}</p>
+    <figure class="about-portrait">
+      <div class="about-portrait-frame">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/profile-450.webp 450w, /assets/img/profile.webp 880w" sizes="(max-width: 760px) 72vw, 390px">
+          <img src="/assets/img/profile.webp" alt="Vicky Feliren" width="880" height="880" fetchpriority="high">
+        </picture>
+        <span class="about-portrait-coordinate">06.20° S · 106.85° E</span>
       </div>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
-  {% endfor %}
-</div>
+      <figcaption>Applied Scientist · AI safety and reliable multimodal systems</figcaption>
+    </figure>
+  </header>
 
-<div id="track-record" class="about-section">
-  <h3>Track Record</h3>
-  <div class="split-grid">
-    <div>
-      <p class="column-title">WORK EXPERIENCE</p>
-      <ol id="work-experience-list" class="timeline">
-        {% for item in site.data.experience.work_experience %}
-        <li>
-          <p class="time">{{ item.dates }}</p>
-          <h3>{{ item.title }}</h3>
-          <p class="loc">{{ item.location }}</p>
-        </li>
-        {% endfor %}
-      </ol>
-    </div>
-    <div>
-      <p class="column-title">EDUCATION</p>
-      <ol id="education-list" class="timeline short">
-        {% for item in site.data.experience.education %}
-        <li>
-          <p class="time">{{ item.dates }}</p>
-          <h3>{{ item.title }}</h3>
-          <p class="loc">{{ item.location }}</p>
-        </li>
-        {% endfor %}
-      </ol>
-      <p class="column-title" style="margin-top:1.2rem">PATENT</p>
-      <ol id="patents-list" class="timeline short">
-        {% for item in site.data.experience.patents %}
-        <li>
-          <p class="time">{{ item.dates }}</p>
-          <h3>{{ item.title }}</h3>
-          <p class="loc">{{ item.location }}</p>
-        </li>
-        {% endfor %}
-      </ol>
-      <p class="column-title" style="margin-top:1.2rem">TEACHING</p>
-      <ol id="teaching-list" class="timeline short">
-        {% for item in site.data.experience.teaching %}
-        <li>
-          <p class="time">{{ item.dates }}</p>
-          <h3>{{ item.title }}</h3>
-          <p class="loc">{{ item.location }}</p>
-        </li>
-        {% endfor %}
-      </ol>
-      <p class="column-title" style="margin-top:1.2rem">SPEAKING</p>
-      <ol id="talks-list" class="timeline short">
-        {% for item in site.data.experience.talks %}
-        <li>
-          <p class="time">{{ item.dates }}</p>
-          <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-          <p class="loc">{{ item.location }}</p>
-        </li>
-        {% endfor %}
-      </ol>
-    </div>
-  </div>
-</div>
+  <nav class="about-story-nav" aria-label="On this page">
+    <span>Follow the thread</span>
+    <a href="#question">01 Question</a>
+    <a href="#path">02 Path</a>
+    <a href="#method">03 Method</a>
+    <a href="#direction">04 Direction</a>
+  </nav>
 
-<div id="recognition" class="about-section">
-  <h3>Recognition</h3>
-  <ul class="award-pills">
-    {% for key in site.data.awards %}
-    {% assign award = key[1] %}
-    {% if award.category %}
-    <li>
-      <span class="tag">{{ award.category }}</span>
-      {% if award.url %}
-      <a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>
-      {% else %}
-      {{ award.title }}
-      {% endif %}
-      <span class="time-inline">{{ award.year }}</span>
-    </li>
-    {% endif %}
-    {% endfor %}
-  </ul>
-  <p class="column-title" style="margin-top:2rem">PROFESSIONAL SERVICE</p>
-  <ul class="award-pills">
-    {% for item in site.data.awards.service %}
-    <li><strong>{{ item.role }}:</strong> {{ item.description }}</li>
-    {% endfor %}
-  </ul>
-</div>
+  <section class="about-chapter" id="question">
+    <div class="about-chapter-index"><span>01</span><p>The question</p></div>
+    <div class="about-chapter-body">
+      <p class="about-kicker">Safety is not only about changing an answer.</p>
+      <h2>It is also about knowing when that answer should be trusted.</h2>
+      <div class="about-prose-columns">
+        <p>Safety training can change how well a model’s confidence matches its accuracy. Once that calibration slips, the model may continue when it should defer—or abstain so often that it is no longer useful. Average benchmark scores can hide where that trade-off is being paid.</p>
+        <p>I study the distribution beneath the average: which languages, input types, and communities absorb the largest cost. I am especially interested in Southeast Asia, where the world’s linguistic and visual variety is still poorly represented in mainstream datasets and evaluations.</p>
+      </div>
+      <div class="about-equation" role="img" aria-label="Safety alignment leads to changed confidence, which affects deference and ultimately determines trustworthy use">
+        <span>Safety alignment</span><i>→</i><span>Changed confidence</span><i>→</i><span>Deference</span><i>→</i><strong>Trustworthy use</strong>
+      </div>
+    </div>
+  </section>
 
-<style>
-  .profile-bg { position: absolute; right: -80px; top: 80px; width: 720px; z-index: -1; user-select: none; -webkit-user-drag: none; border-radius: 0; }
-  @media (max-width: 1200px) { .profile-bg { position: static; width: 100%; max-width: 500px; margin: 2rem auto; opacity: 1; } }
-  .about-hero { font-size: 1.25rem; line-height: 1.7; max-width: 44rem; }
-  .about-hero p { margin-bottom: 1.2rem; }
-  .about-hero strong { color: var(--accent); }
-  .about-hero a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-  .about-hero a:hover { color: var(--accent); }
-  .about-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-  .about-section h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.8rem; }
-  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-  .about-card { padding: 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
-  .about-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
-  .about-card p { font-size: 0.95rem; line-height: 1.5; }
-  .award-pills { list-style: none; padding: 0; margin: 0.8rem 0 0; }
-  .award-pills li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; flex-wrap: wrap; }
-  .award-pills li:last-child { border-bottom: none; }
-  .award-pills .tag { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); flex-shrink: 0; }
-  .award-pills a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-  .award-pills a:hover { color: var(--accent); }
-  .award-pills .time-inline { color: var(--muted); font-size: 0.85rem; margin-left: auto; flex-shrink: 0; }
-</style>
+  <section class="about-chapter" id="path">
+    <div class="about-chapter-index"><span>02</span><p>The path</p></div>
+    <div class="about-chapter-body">
+      <p class="about-kicker">Research shaped by systems that had consequences.</p>
+      <h2>From production constraints to research guarantees.</h2>
+      <div class="about-path" role="list">
+        <article role="listitem"><time>2021</time><div><small>Public systems</small><h3>Jakarta Smart City</h3><p>Forecasting municipal waste taught me that model quality matters only when it changes a real allocation decision.</p></div></article>
+        <article role="listitem"><time>2021—23</time><div><small>Production ML</small><h3>Finance and identity</h3><p>Biometrics, credit, and fraud systems made calibration, auditability, and failure costs operational—not theoretical.</p></div></article>
+        <article role="listitem"><time>2022—25</time><div><small>Multimodal research</small><h3>Earth observation</h3><p>Satellite systems across sensors and regions made distribution shift visible in every map.</p></div></article>
+        <article role="listitem"><time>2024—now</time><div><small>Open science</small><h3>Southeast Asian AI</h3><p>SEACrowd connected the technical problem to the missing languages, cultures, and visual worlds behind it.</p></div></article>
+        <article role="listitem" class="is-current"><time>Now</time><div><small>AI safety</small><h3>Calibration under alignment</h3><p>I bring those threads together: measure the hidden cost, then recover useful deference with guarantees.</p></div></article>
+      </div>
+      <a class="about-inline-cta" href="/cv/">The complete chronology lives in the CV <span>→</span></a>
+    </div>
+  </section>
+
+  <section class="about-chapter" id="method">
+    <div class="about-chapter-index"><span>03</span><p>The method</p></div>
+    <div class="about-chapter-body">
+      <p class="about-kicker">How I decide what deserves attention.</p>
+      <h2>Start with the failure boundary, then build back toward use.</h2>
+      <div class="about-method-grid">
+        <article><span>01</span><h3>Find the hidden average</h3><p>Disaggregate the result until the users and inputs carrying the cost become visible.</p></article>
+        <article><span>02</span><h3>Make uncertainty legible</h3><p>Turn confidence into a measurable decision variable—not a decorative score.</p></article>
+        <article><span>03</span><h3>Test outside the comfortable case</h3><p>Use multilingual, multicultural, and multimodal inputs that expose brittle assumptions.</p></article>
+        <article><span>04</span><h3>Recover with a bound</h3><p>Prefer interventions whose limits can be stated clearly enough for someone else to trust.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-chapter" id="direction">
+    <div class="about-chapter-index"><span>04</span><p>The direction</p></div>
+    <div class="about-chapter-body">
+      <p class="about-kicker">The next question is already in motion.</p>
+      <h2>Can aligned models keep calibrated judgment beyond English and beyond text?</h2>
+      <div class="about-direction-panel">
+        <div>
+          <span class="about-status"><i></i> Current research direction</span>
+          <p>I am measuring how alignment changes calibration across languages and modalities, then testing whether distribution-free abstention can recover reliable deference without erasing usefulness.</p>
+        </div>
+        <dl>
+          <div><dt>Measure</dt><dd>Calibration tax by input group</dd></div>
+          <div><dt>Intervene</dt><dd>Bounded abstention after alignment</dd></div>
+          <div><dt>Evaluate</dt><dd>Multilingual + multimodal systems</dd></div>
+        </dl>
+      </div>
+      <div class="about-closing">
+        <p>The work is public. The complete record is separate. Choose the depth you need.</p>
+        <div><a class="btn btn-primary" href="/research/">Read the research</a><a class="btn btn-secondary" href="/cv/">Open the CV</a><a class="about-text-link" href="/contact/">Start a conversation →</a></div>
+      </div>
+    </div>
+  </section>
+</article>
