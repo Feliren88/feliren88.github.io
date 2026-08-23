@@ -262,10 +262,14 @@
     var DATA; try{ DATA=JSON.parse(el.textContent); }catch(e){ return; }
     var cats=(DATA&&DATA.categories)||[];
     var gew=(DATA&&DATA.gew)||null;
+    var mine=(DATA&&DATA.mine)||null;
     if(!cats.length) return;
 
     var read=document.getElementById('ue-wheel-read');
     var NS='http://www.w3.org/2000/svg';
+    /* Each view sizes its own canvas. My wheel carries zone names outside its
+       outermost ring, which needs more room than the other two. */
+    var BOX={cats:638,axes:638,mine:780};
     var CX=319,CY=319,TAU=Math.PI*2;
     var fitQueue=[];
     var view='cats';
@@ -382,7 +386,9 @@
     /* ── View two: valence across, control up ── */
     function buildAxes(){
       if(!gew) return;
-      var R0=120,R1=300, fams=gew.families||[], n=fams.length, seg=TAU/n;
+      /* The ring is pulled in so the axis names and the quadrant names sit
+         outside it rather than on top of the families. */
+      var R0=100,R1=230, fams=gew.families||[], n=fams.length, seg=TAU/n;
       var QH={ph:44,pl:150,nl:214,nh:8};
       /* The instrument's own spoke order: down the right from just past the top,
          then on round and up the left. */
@@ -391,7 +397,7 @@
       /* quadrant backing, drawn first so the spokes sit over it */
       [['ph',-Math.PI/2,0],['pl',0,Math.PI/2],['nl',Math.PI/2,Math.PI],['nh',Math.PI,Math.PI*1.5]]
         .forEach(function(q){
-          host.appendChild(mk('path',{d:arc(0,R1+16,q[1],q[2]),class:'ue-quad ue-quad-'+q[0],
+          host.appendChild(mk('path',{d:arc(0,R1,q[1],q[2]),class:'ue-quad ue-quad-'+q[0],
             style:'--h:'+QH[q[0]]}));
         });
 
@@ -414,29 +420,103 @@
         host.appendChild(label(f.name,radialR(R0,R1,(a0+a1)/2),(a0+a1)/2,'ue-wt ue-wt-cat',12,R1-R0-14));
       });
 
-      /* the two axes and their ends */
-      host.appendChild(mk('line',{x1:CX-R1-14,y1:CY,x2:CX+R1+14,y2:CY,class:'ue-axis'}));
-      host.appendChild(mk('line',{x1:CX,y1:CY-R1-14,x2:CX,y2:CY+R1+14,class:'ue-axis'}));
-      [[CX-R1-6,CY-8,'start','Unpleasant'],[CX+R1+6,CY-8,'end','Pleasant'],
-       [CX+6,CY-R1-6,'start','High control'],[CX+6,CY+R1+16,'start','Low control']]
+      /* The two axes, drawn past the ring, with their ends named clear of it. */
+      host.appendChild(mk('line',{x1:CX-R1-10,y1:CY,x2:CX+R1+10,y2:CY,class:'ue-axis'}));
+      host.appendChild(mk('line',{x1:CX,y1:CY-R1-10,x2:CX,y2:CY+R1+10,class:'ue-axis'}));
+      [[6,CY+4,'start','Unpleasant'],
+       [632,CY+4,'end','Pleasant'],
+       [CX,CY-R1-20,'middle','High control'],
+       [CX,CY+R1+30,'middle','Low control']]
         .forEach(function(t){
           host.appendChild(mk('text',{x:t[0],y:t[1],'text-anchor':t[2],class:'ue-axlab','font-size':13},t[3]));
         });
-      /* quadrant names, this page's shorthand */
+      /* Quadrant names, this page's shorthand, seated on the diagonals outside
+         the ring so they do not sit over any family. */
+      var QR=R1+70;
       (gew.quadrants||[]).forEach(function(q){
-        var pos={ph:[CX+R1*0.62,CY-R1*0.62],pl:[CX+R1*0.62,CY+R1*0.62],
-                 nl:[CX-R1*0.62,CY+R1*0.62],nh:[CX-R1*0.62,CY-R1*0.62]}[q.key];
-        if(!pos) return;
-        host.appendChild(mk('text',{x:pos[0],y:pos[1],'text-anchor':'middle',
+        var a={ph:-Math.PI/4,pl:Math.PI/4,nl:Math.PI*0.75,nh:-Math.PI*0.75}[q.key];
+        if(a===undefined) return;
+        var p=pt(QR,a);
+        host.appendChild(mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),'text-anchor':'middle',
           class:'ue-qlab','font-size':13,style:'--h:'+QH[q.key]},q.short));
       });
       hub(R0-8,'Which one?','pick a word');
     }
 
+
+    /* ── View three: my own wheel ── */
+    function buildMine(){
+      if(!mine) return;
+      var R0=64,R1=132,R2=214,R3=286;
+      var fams=mine.families||[], n=fams.length, seg=TAU/n, start=-Math.PI/2-seg/2;
+      var zones={}; (mine.zones||[]).forEach(function(z){ zones[z.key]=z; });
+
+      fams.forEach(function(f,fi){
+        var a0=start+fi*seg, a1=a0+seg, hue=f.hue;
+        var z=zones[f.zone]||{};
+        function seat(p,d){
+          p.addEventListener('click',function(){
+            select(p,d);
+            if(read) read.insertAdjacentHTML('beforeend',
+              '<p class="ue-wheel-quad"><b>'+esc(z.short||'')+'</b> '+esc(z.axes||'')+'. '+esc(z.body||'')+'</p>');
+          });
+          p.addEventListener('keydown',function(e){
+            if(e.key==='Enter'||e.key===' '){ e.preventDefault(); p.dispatchEvent(new MouseEvent('click')); }
+          });
+        }
+
+        var p1=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-m1',style:'--h:'+hue,
+          tabindex:'0',role:'button','aria-label':f.name+'. '+(f.def||'')});
+        seat(p1,{name:f.name,trail:'family',def:f.def,urge:f.urge,counter:f.counter,hue:hue});
+        host.appendChild(p1);
+        host.appendChild(label(f.name,radialR(R0,R1,(a0+a1)/2),(a0+a1)/2,'ue-wt ue-wt-m',11,R1-R0-12));
+
+        var inner=f.inner||[], iseg=seg/Math.max(1,inner.length);
+        inner.forEach(function(it,ii){
+          var b0=a0+ii*iseg, b1=b0+iseg;
+          var p2=mk('path',{d:arc(R1,R2,b0,b1),class:'ue-seg ue-seg-m2',style:'--h:'+hue,
+            tabindex:'0',role:'button','aria-label':it.name+', '+f.name+'. '+(it.def||'')});
+          seat(p2,{name:it.name,trail:f.name,def:it.def,urge:f.urge,counter:f.counter,hue:hue});
+          host.appendChild(p2);
+          host.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-m',10,R2-R1-12));
+
+          var outs=it.outer||[], oseg=iseg/Math.max(1,outs.length);
+          outs.forEach(function(o,oi){
+            var c0=b0+oi*oseg, c1=c0+oseg;
+            var p3=mk('path',{d:arc(R2,R3,c0,c1),class:'ue-seg ue-seg-m3',style:'--h:'+hue,
+              tabindex:'0',role:'button','aria-label':o.w+', '+f.name+'. '+(o.def||'')});
+            seat(p3,{name:o.w,trail:f.name+' \u203a '+it.name,def:o.def,urge:f.urge,counter:f.counter,hue:hue});
+            host.appendChild(p3);
+            host.appendChild(label(o.w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-m ue-wt-m3',9,R3-R2-12));
+          });
+        });
+      });
+
+      /* Zone names outside the rings, each at the middle of its own arc. */
+      (mine.zones||[]).forEach(function(z){
+        var members=fams.map(function(f,i){ return f.zone===z.key?i:-1; }).filter(function(i){ return i>=0; });
+        if(!members.length) return;
+        var mid=start+(members[0]+(members[members.length-1]+1))/2*seg;
+        /* Centring the name on its radius pushes the box's inner corners back
+           into the ring, so anchor it away from the wheel instead. */
+        var co=Math.cos(mid);
+        var anchor = Math.abs(co)<0.3 ? 'middle' : (co>0 ? 'start' : 'end');
+        var p=pt(R3+20,mid);
+        host.appendChild(mk('text',{x:p[0].toFixed(1),y:(p[1]+4).toFixed(1),'text-anchor':anchor,
+          class:'ue-qlab','font-size':13,style:'--h:'+({ph:44,pl:150,nl:214,nh:8}[z.key]||200)},z.short));
+      });
+
+      hub(R0-6,'Which one?','pick a word');
+    }
+
     function render(){
       host.innerHTML='';
       fitQueue.length=0;
+      var box=BOX[view]||638;
+      CX=CY=box/2;
+      host.setAttribute('viewBox','0 0 '+box+' '+box);
       if(view==='cats'){ buildCats(); clearPanel('Select any category. Twenty-seven, from self-report.'); }
+      else if(view==='mine'){ buildMine(); clearPanel('Select any word. Eight families, written for this page.'); }
       else { buildAxes(); clearPanel('Select any family. Placed by valence across and control up.'); }
       host.dataset.view=view;
       fitLabels();
@@ -470,7 +550,8 @@
     var cl=document.getElementById('ue-wheel-clear');
     if(cl) cl.addEventListener('click',function(){
       clearPanel(view==='cats'?'Select any category. Twenty-seven, from self-report.'
-                              :'Select any family. Placed by valence across and control up.');
+                : view==='mine'?'Select any word. Eight families, written for this page.'
+                :'Select any family. Placed by valence across and control up.');
     });
 
     render();

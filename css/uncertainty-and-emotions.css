@@ -214,9 +214,6 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-wheel-wrap{display:grid;gap:1.2rem;justify-items:center}
 .ue-wheel{display:block;width:100%;height:auto;max-width:min(54rem,calc(100vw - 2rem));margin:0 auto;overflow:visible}
 .ue-wheel-read{width:100%;max-width:44rem}
-.ue-seg{fill:hsl(var(--h) 58% 52%);stroke:var(--bg);stroke-width:1.2;cursor:pointer;transition:opacity .15s ease,filter .15s ease}
-.ue-seg:hover,.ue-seg:focus-visible{opacity:1;filter:brightness(1.14)}
-.ue-seg.is-on{opacity:1;stroke:var(--text);stroke-width:2.2;filter:brightness(1.18)}
 .ue-wt{fill:#fff;pointer-events:none;font-family:"Space Grotesk",sans-serif;paint-order:stroke}
 .ue-hub-c{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.4}
 .ue-hub-t{fill:var(--text);font-family:"Space Grotesk",sans-serif;font-weight:700}
@@ -388,7 +385,13 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-seg{stroke:var(--bg);stroke-width:1.4;cursor:pointer;transition:filter .15s ease,opacity .15s ease}
 .ue-seg-cat{fill:hsl(var(--h) 52% 48%)}
 .ue-seg-gew{fill:hsl(var(--h) 46% 52%)}
-.ue-seg:hover,.ue-seg:focus-visible{filter:brightness(1.16);outline:none}
+/* An outline on an SVG arc is drawn round its bounding box, which for a wedge
+   is a rectangle covering its neighbours. Suppress it in every state and show
+   focus with the wedge's own stroke instead. */
+.ue-seg:hover{filter:brightness(1.16)}
+.ue-seg:focus,.ue-seg:focus-visible,.ue-seg:active{outline:none!important;box-shadow:none}
+.ue-wheel :focus,.ue-wheel :focus-visible{outline:none!important}
+.ue-seg:focus-visible{stroke:var(--text);stroke-width:2.6;filter:brightness(1.16)}
 .ue-seg.is-on{stroke:var(--text);stroke-width:2.6;filter:brightness(1.2)}
 .ue-quad{fill:hsl(var(--h) 42% 50%);opacity:.10;stroke:none}
 .ue-axis{stroke:var(--line-strong);stroke-width:1.2;stroke-dasharray:4 5}
@@ -396,6 +399,7 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-qlab{fill:hsl(var(--h) 50% 55%);font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:.04em}
 .ue-wt{fill:#fff;pointer-events:none;font-family:"Space Grotesk",sans-serif}
 .ue-wheel[data-view="axes"] .ue-wt{fill:#0f1c26}
+.ue-wheel[data-view="mine"] .ue-wt{fill:#fff}
 
 .ue-wheel-near{margin:.7rem 0 0!important;font-size:.82rem;color:var(--muted)!important;border-left:2px solid var(--ue-gold);padding-left:.6rem}
 .ue-wheel-quad{margin:.7rem 0 0!important;font-size:.85rem;line-height:1.55}
@@ -406,3 +410,13 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-wheel-cite .for-cats,.ue-wheel-cite .for-axes{display:none}
 .ue-wheel-cite[data-view="cats"] .for-cats,.ue-wheel-cite[data-view="axes"] .for-axes{display:block}
 .ue-wheel-cite b{color:var(--text)}
+
+/* My wheel: three rings, zone names outside them */
+.ue-seg-m1{fill:hsl(var(--h) 56% 42%)}
+.ue-seg-m2{fill:hsl(var(--h) 52% 53%)}
+.ue-seg-m3{fill:hsl(var(--h) 46% 65%)}
+.ue-wheel[data-view="mine"] .ue-wt-m{fill:#fff}
+.ue-wheel[data-view="mine"] .ue-wt-m3{fill:#12212e}
+.ue-wheel-cite .for-mine{display:none}
+.ue-wheel-cite[data-view="mine"] .for-mine{display:block}
+.ue-wheel-cite[data-view="mine"] .for-cats,.ue-wheel-cite[data-view="mine"] .for-axes{display:none}

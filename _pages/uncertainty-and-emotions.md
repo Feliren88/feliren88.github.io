@@ -249,6 +249,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div class="ue-wheel-views" id="ue-wheel-views" role="group" aria-label="Choose a wheel">
       <button type="button" data-view="cats" class="is-on" aria-pressed="true">27 categories<small>Cowen &amp; Keltner, 2017</small></button>
       <button type="button" data-view="axes" aria-pressed="false">Valence and control<small>Geneva Emotion Wheel</small></button>
+      <button type="button" data-view="mine" aria-pressed="false">My wheel<small>written for this page</small></button>
     </div>
     <div class="ue-wheel-wrap">
       <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 638 638" role="img"
@@ -274,6 +275,12 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <a href="https://www.unige.ch/cisa/gew" target="_blank" rel="noreferrer">Instrument</a>.
       The twenty families and their order are the instrument's. The two axes and the four quadrants
       are Scherer's; the short quadrant names are my own shorthand.</p>
+      <p class="for-mine"><b>My wheel.</b> Eight families, twenty-four broader words and seventy-three
+      finer ones, with every definition written for this page. It is not from the literature and is
+      not a summary of the two wheels above. The four zones use the same axes the Geneva wheel uses,
+      but they are arcs sized to the families rather than four equal quarters, and which family sits
+      where is my judgement. Fear sits on the low-control side here and on the high-control side on
+      the Geneva instrument. Both are shown rather than reconciled.</p>
       <p class="always">Definitions describe each published category in plain English. The lines
       about urges and about what to do are my reading and are not findings from either paper.
       The main opposing account holds that emotions are constructed in the moment rather than read
