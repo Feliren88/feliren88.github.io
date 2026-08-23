@@ -255,6 +255,10 @@ extra_js: /js/components/uncertainty-and-emotions.js
       </div>
     </div>
     <div class="ue-btn-row"><button class="ue-btn" id="ue-wheel-clear" type="button">Clear selection</button></div>
+    <p class="ue-wheel-source">The three-ring layout follows the format Gloria Willcox introduced in
+    The Feeling Wheel, Transactional Analysis Journal 12(4), 1982. Grouping emotions into eight
+    families follows Robert Plutchik's 1980 wheel, though the eight here are not his set. The words
+    on this wheel and every definition are my own, written for this page.</p>
   </div>
 
   <div class="ue-anatomy" aria-label="One emotion separated into information, an action urge, and physical energy">

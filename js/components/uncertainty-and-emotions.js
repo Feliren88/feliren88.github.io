@@ -328,8 +328,9 @@
 
       /* inner ring: the family */
       var p=mk('path',{d:arc(R0,R1,a0,a1),class:'ue-seg ue-seg-1',
-        style:'--h:'+hue,tabindex:'0',role:'button','aria-label':f.name});
+        style:'--h:'+hue,tabindex:'0',role:'button','aria-label':f.name+'. '+(f.def||'')});
       p.dataset.fam=fi; p.dataset.level='1';
+      p.dataset.def=f.def||'';
       g.appendChild(p);
       g.appendChild(label(f.name,(R0+R1)/2,(a0+a1)/2,'ue-wt ue-wt-1',13,false,(a1-a0)*((R0+R1)/2)*0.86));
 
@@ -339,19 +340,21 @@
       inner.forEach(function(it,ii){
         var b0=a0+ii*iseg, b1=b0+iseg;
         var q=mk('path',{d:arc(R1,R2,b0,b1),class:'ue-seg ue-seg-2',
-          style:'--h:'+hue,tabindex:'0',role:'button','aria-label':it.name+', '+f.name});
+          style:'--h:'+hue,tabindex:'0',role:'button','aria-label':it.name+', '+f.name+'. '+(it.def||'')});
         q.dataset.fam=fi; q.dataset.level='2'; q.dataset.word=it.name;
+        q.dataset.def=it.def||''; q.dataset.parent=f.name;
         g.appendChild(q);
         g.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-2',11,true,R2-R1-12));
 
         /* outer ring: the finer words */
         var outs=it.outer||[];
         var oseg=iseg/Math.max(1,outs.length);
-        outs.forEach(function(w,oi){
-          var c0=b0+oi*oseg, c1=c0+oseg;
+        outs.forEach(function(o,oi){
+          var w=o.w, c0=b0+oi*oseg, c1=c0+oseg;
           var r=mk('path',{d:arc(R2,R3,c0,c1),class:'ue-seg ue-seg-3',
-            style:'--h:'+hue,tabindex:'0',role:'button','aria-label':w+', '+f.name});
+            style:'--h:'+hue,tabindex:'0',role:'button','aria-label':w+', '+f.name+'. '+(o.def||'')});
           r.dataset.fam=fi; r.dataset.level='3'; r.dataset.word=w;
+          r.dataset.def=o.def||''; r.dataset.parent=it.name;
           g.appendChild(r);
           g.appendChild(label(w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-3',10,true,R3-R2-12));
         });
@@ -379,14 +382,21 @@
       hubS.textContent=word===f.name?'family':'in '+f.name.toLowerCase();
       host.style.setProperty('--sel-h',f.hue);
       if(read){
+        var lvl=p.dataset.level;
+        var trail = lvl==='3' ? esc(f.name)+' &rsaquo; '+esc(p.dataset.parent||'')
+                  : lvl==='2' ? esc(f.name)
+                  : 'family';
         read.innerHTML=
           '<p class="ue-wheel-word" style="--h:'+f.hue+'">'+esc(word)+
-            '<span>'+esc(f.name)+'</span></p>'+
+            '<span>'+trail+'</span></p>'+
+          '<p class="ue-wheel-def">'+esc(p.dataset.def||'')+'</p>'+
           '<dl class="ue-wheel-parts">'+
             '<div><dt>What it points at</dt><dd>'+esc(f.points_at)+'</dd></div>'+
             '<div><dt>What it urges</dt><dd>'+esc(f.urge)+'</dd></div>'+
             '<div class="do"><dt>One action that does not wait for it to stop</dt><dd>'+esc(f.counter)+'</dd></div>'+
-          '</dl>';
+          '</dl>'+
+          (lvl==='1' ? '' :
+            '<p class="ue-wheel-scope">These three describe the whole '+esc(f.name)+' family.</p>');
       }
     }
     function clear(){

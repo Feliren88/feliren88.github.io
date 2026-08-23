@@ -1,123 +1,315 @@
 # Emotion wheel for /uncertainty-and-emotions/
 #
-# Eight families, each with an inner band of three broader words and an outer
-# band of finer ones. Rendered as a sunburst by js/components/uncertainty-and-emotions.js
-# and read through the JSON island the page emits.
+# Eight families, each with three broader words and their finer ones. Rendered
+# as a sunburst by js/components/uncertainty-and-emotions.js through the JSON
+# island the page emits.
 #
-# Every family carries the three parts the page already asks a reader to
-# separate: what the feeling points at, what it urges you to do, and one
-# action that does not require the feeling to stop first. The register is
-# plain English throughout; nothing here is a diagnosis or a clinical term.
+# Every word carries its own `def`: one line saying what that word means and,
+# where it helps, how it differs from its neighbours. No two words share a
+# definition, and no word appears twice on the wheel.
+#
+# `points_at`, `urge` and `counter` sit at family level because they describe
+# what the whole family does. Fear urges escape whether it arrives as worry or
+# as panic. The page labels them as belonging to the family, so the difference
+# between a definition and a response stays visible.
+#
+# Outer words are kept to eleven characters so they fit their band. Bare Off,
+# On, Yes and No parse as booleans in YAML, so every word is quoted.
+#
+# Provenance. The three-ring layout follows the format Gloria Willcox introduced
+# in The Feeling Wheel, Transactional Analysis Journal 12(4), 274-276, 1982.
+# Grouping into eight families follows Robert Plutchik's 1980 wheel, though the
+# eight families here are not his set: his are joy, trust, fear, surprise,
+# sadness, anticipation, anger and disgust. The words below and every definition
+# were written for this page and are not taken from either source.
 
 families:
   - key: fear
     name: Fear
     hue: 262
+    def: The response to a threat you expect but have not met yet.
     points_at: A possible threat, often one that has not happened yet.
     urge: Escape it, avoid it, or make it certain before you move.
     counter: Name the specific outcome you are protecting against, then take the smallest step towards it.
     inner:
-      - name: Anxious
-        outer: ["Worried", "Uneasy", "Jumpy", "Dreading"]
-      - name: Scared
-        outer: ["Startled", "Alarmed", "Panicked"]
-      - name: Insecure
-        outer: ["Exposed", "Inadequate", "Doubtful"]
+      - name: "Anxious"
+        def: Fear stretched over time, with no single moment to point at.
+        outer:
+          - w: "Worried"
+            def: Turning a possible bad outcome over in your head, again and again.
+          - w: "Uneasy"
+            def: A low background sense that something is off, with no named cause.
+          - w: "Jumpy"
+            def: The body already braced, so ordinary noises land as alarms.
+          - w: "Dreading"
+            def: Treating something unpleasant as certain, and counting down to it.
+      - name: "Scared"
+        def: Fear with a clear object, arriving fast.
+        outer:
+          - w: "Startled"
+            def: The half-second jolt that comes before you know what caused it.
+          - w: "Alarmed"
+            def: Sudden fear that something needs your attention right now.
+          - w: "Panicked"
+            def: Fear loud enough that the body moves before you decide anything.
+      - name: "Insecure"
+        def: Fear pointed at your own standing rather than at an event.
+        outer:
+          - w: "Exposed"
+            def: Seen in a way you did not choose.
+          - w: "Inadequate"
+            def: Measuring yourself against a demand and coming up short.
+          - w: "Doubtful"
+            def: Unsure of your own judgement on something you already decided.
 
   - key: anger
     name: Anger
     hue: 8
+    def: The response to something crossing a line you hold.
     points_at: A boundary crossed, a rule broken, or something blocked.
     urge: Push back, argue, retaliate, or make someone understand.
     counter: Write down what was crossed. Decide the outcome you want before you speak.
     inner:
-      - name: Frustrated
-        outer: ["Blocked", "Impatient", "Exasperated"]
-      - name: Resentful
-        outer: ["Bitter", "Overlooked", "Unthanked"]
-      - name: Furious
-        outer: ["Outraged", "Seething", "Scornful"]
+      - name: "Frustrated"
+        def: Anger at being blocked, rather than at a person.
+        outer:
+          - w: "Blocked"
+            def: Wanting to move and finding the way shut.
+          - w: "Impatient"
+            def: Anger at how long something is taking.
+          - w: "Exasperated"
+            def: Worn down by the same obstacle returning.
+      - name: "Resentful"
+        def: Anger kept rather than spoken, building across time.
+        outer:
+          - w: "Bitter"
+            def: Old anger that has settled and stopped looking for a resolution.
+          - w: "Overlooked"
+            def: Anger at being passed over or not counted.
+          - w: "Unthanked"
+            def: Anger at effort that was taken and never acknowledged.
+      - name: "Furious"
+        def: Anger at full volume, arriving fast.
+        outer:
+          - w: "Outraged"
+            def: Anger on behalf of a rule you believe everyone shares.
+          - w: "Seething"
+            def: Full anger held inside and not shown.
+          - w: "Scornful"
+            def: Anger mixed with looking down on the person.
 
   - key: sadness
     name: Sadness
     hue: 214
+    def: The response to losing something that mattered.
     points_at: A loss, a distance, or something that mattered and is gone.
     urge: Withdraw, go quiet, stop trying.
     counter: Let it be present and keep one small commitment to another person today.
     inner:
-      - name: Lonely
-        outer: ["Isolated", "Excluded", "Cut off"]
-      - name: Disappointed
-        outer: ["Let down", "Deflated", "Discouraged"]
-      - name: Grieving
-        outer: ["Heavy", "Aching", "Numb"]
+      - name: "Lonely"
+        def: Sadness about distance from other people.
+        outer:
+          - w: "Isolated"
+            def: Cut off by circumstance, with nobody within reach.
+          - w: "Excluded"
+            def: Others are together and you were not included.
+          - w: "Adrift"
+            def: Among people and still unable to reach them.
+      - name: "Disappointed"
+        def: Sadness at the gap between what you expected and what came.
+        outer:
+          - w: "Let down"
+            def: Someone did not do the thing you were counting on.
+          - w: "Deflated"
+            def: Effort that came to less than it should have.
+          - w: "Discouraged"
+            def: Enough disappointment that you doubt trying again.
+      - name: "Grieving"
+        def: Sadness at a loss that will not be reversed.
+        outer:
+          - w: "Heavy"
+            def: Sadness with weight, slowing everything down.
+          - w: "Aching"
+            def: Sadness that keeps returning to the same absence.
+          - w: "Numb"
+            def: Sadness so large that the feeling has gone quiet.
 
   - key: shame
     name: Shame
     hue: 286
+    def: The response to falling short of who you meant to be.
     points_at: A gap between what you did and who you want to be.
     urge: Hide, over-explain, confess repeatedly, or seek reassurance.
     counter: Say the accurate sentence once, repair what you can, then continue.
     inner:
-      - name: Embarrassed
-        outer: ["Watched", "Awkward", "Exposed"]
-      - name: Guilty
-        outer: ["Regretful", "Remorseful", "Blameworthy"]
-      - name: Worthless
-        outer: ["Defective", "Small", "Unlovable"]
+      - name: "Embarrassed"
+        def: Shame about how one moment looked to other people.
+        outer:
+          - w: "Watched"
+            def: Aware of being observed and wanting to be less visible.
+          - w: "Awkward"
+            def: Caught not knowing how to behave.
+          - w: "Cringing"
+            def: Replaying the moment later and flinching at it.
+      - name: "Guilty"
+        def: Shame about a specific act, rather than about yourself.
+        outer:
+          - w: "Regretful"
+            def: Wishing you had chosen differently.
+          - w: "Remorseful"
+            def: Regret plus the wish to put it right.
+          - w: "Blameworthy"
+            def: Holding yourself as the cause of a harm.
+      - name: "Worthless"
+        def: Shame that has spread from one act to your whole self.
+        outer:
+          - w: "Defective"
+            def: Believing something in you is wrong at the root.
+          - w: "Small"
+            def: Reduced, as though you take up less space than others.
+          - w: "Unlovable"
+            def: Believing that being known fully would end the closeness.
 
   - key: disgust
     name: Disgust
     hue: 96
+    def: The response to something that violates what you hold clean or right.
     points_at: Something that violates what you value, or feels contaminating.
     urge: Reject it, clean it, distance yourself, get rid of the thought.
     counter: Let the thought stay in the room without arguing with it or removing it.
     inner:
-      - name: Repelled
-        outer: ["Revolted", "Queasy", "Repulsed"]
-      - name: Disapproving
-        outer: ["Judgemental", "Appalled", "Let down"]
-      - name: Self-disgust
-        outer: ["Ashamed", "Tainted", "Off"]
+      - name: "Repelled"
+        def: Disgust in the body, pulling you back from something.
+        outer:
+          - w: "Revolted"
+            def: A strong pull away, close to nausea.
+          - w: "Queasy"
+            def: Mild physical disgust, unsettled rather than violent.
+          - w: "Repulsed"
+            def: Wanting no contact with it at all.
+      - name: "Disapproving"
+        def: Disgust aimed at conduct rather than at a substance.
+        outer:
+          - w: "Judgemental"
+            def: Measuring someone against your standard and finding them short.
+          - w: "Appalled"
+            def: Shocked that a person would act this way.
+          - w: "Dismayed"
+            def: A drop in your estimate of someone.
+      - name: "Self-disgust"
+        def: Disgust turned back on yourself.
+        outer:
+          - w: "Sickened"
+            def: Disgust at something you did or thought.
+          - w: "Tainted"
+            def: Marked by contact with something you consider wrong.
+          - w: "Unclean"
+            def: Wanting to wash off something that is not physical.
 
   - key: joy
     name: Joy
     hue: 44
+    def: The response to something good being present.
     points_at: Something is going well, or something you care about is here.
     urge: Hold on to it, or check whether you are allowed to have it.
     counter: Stay in it for a full minute without auditing whether it will last.
     inner:
-      - name: Content
-        outer: ["Settled", "Easy", "Grateful"]
-      - name: Excited
-        outer: ["Eager", "Buzzing", "Playful"]
-      - name: Proud
-        outer: ["Capable", "Seen", "Satisfied"]
+      - name: "Content"
+        def: Joy at rest, with nothing further needed.
+        outer:
+          - w: "Settled"
+            def: Nothing pulling at you, and no next thing required.
+          - w: "Easy"
+            def: Effort has dropped away for a while.
+          - w: "Grateful"
+            def: Aware that something good came partly from outside you.
+      - name: "Excited"
+        def: Joy with energy in it, pointed forward.
+        outer:
+          - w: "Eager"
+            def: Ready to start, and impatient for it.
+          - w: "Buzzing"
+            def: More energy than the moment actually needs.
+          - w: "Playful"
+            def: Enjoying something with no purpose beyond the enjoying.
+      - name: "Proud"
+        def: Joy at something you did, or something you belong to.
+        outer:
+          - w: "Capable"
+            def: The quiet version. You know you can do the thing.
+          - w: "Seen"
+            def: Someone noticed the part you wanted noticed.
+          - w: "Satisfied"
+            def: The work is finished and it meets your own standard.
 
   - key: love
     name: Love
     hue: 336
+    def: The response to someone whose wellbeing matters to you as your own.
     points_at: Closeness, care, or someone whose wellbeing is bound up with yours.
     urge: Move closer, or test whether the feeling is real enough.
     counter: Act warmly without asking the feeling to prove itself first.
     inner:
-      - name: Affectionate
-        outer: ["Warm", "Tender", "Fond"]
-      - name: Trusting
-        outer: ["Safe", "Open", "Relieved"]
-      - name: Longing
-        outer: ["Missing", "Yearning", "Wistful"]
+      - name: "Affectionate"
+        def: Love showing up as warmth in ordinary contact.
+        outer:
+          - w: "Warm"
+            def: Simple gladness at someone being there.
+          - w: "Tender"
+            def: Care for someone at a moment when they are fragile.
+          - w: "Fond"
+            def: Steady mild affection built up over time.
+      - name: "Trusting"
+        def: Love showing up as a lowered guard.
+        outer:
+          - w: "Safe"
+            def: Not needing to manage how you come across.
+          - w: "Open"
+            def: Willing to be known without editing yourself.
+          - w: "Relieved"
+            def: The guard coming down after being up too long.
+      - name: "Longing"
+        def: Love pointed at someone who is not here.
+        outer:
+          - w: "Missing"
+            def: Aware of one specific absence.
+          - w: "Yearning"
+            def: Wanting closeness that is currently out of reach.
+          - w: "Wistful"
+            def: Missing something you know will not come back.
 
   - key: surprise
     name: Surprise
     hue: 178
+    def: The response to reality not matching what you predicted.
     points_at: Something did not match what you expected.
     urge: Resolve the mismatch immediately.
     counter: Note what changed. Decide whether it changes the decision or only the feeling.
     inner:
-      - name: Confused
-        outer: ["Disoriented", "Unsure", "Torn"]
-      - name: Startled
-        outer: ["Jolted", "Shaken", "Amazed"]
-      - name: Curious
-        outer: ["Interested", "Intrigued", "Drawn"]
+      - name: "Confused"
+        def: Surprise that has not yet resolved into an explanation.
+        outer:
+          - w: "Disoriented"
+            def: The frame you were using no longer fits.
+          - w: "Unsure"
+            def: Two readings of the same thing both look possible.
+          - w: "Torn"
+            def: Pulled between options that each cost something.
+      - name: "Shocked"
+        def: Surprise arriving faster than you can absorb it.
+        outer:
+          - w: "Jolted"
+            def: The body reacted before you understood why.
+          - w: "Shaken"
+            def: Surprise that left the ground feeling less steady.
+          - w: "Amazed"
+            def: Surprise at something larger or better than expected.
+      - name: "Curious"
+        def: Surprise that opened into interest rather than alarm.
+        outer:
+          - w: "Interested"
+            def: Wanting to know more, without urgency.
+          - w: "Intrigued"
+            def: Pulled towards a puzzle.
+          - w: "Drawn"
+            def: Wanting to move closer to it.
