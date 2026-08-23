@@ -187,11 +187,11 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-surf"/></svg> One wave, start to finish</p>
     <div class="ue-wavesteps">
       <span class="w1"><svg class="ue-i"><use href="#ue-urgency"/></svg><b>It rises</b><small>faster than you expected</small></span>
-      <span class="w2"><svg class="ue-i"><use href="#ue-distress"/></svg><b>It peaks</b><small>this is the part that feels unbearable and is not</small></span>
+      <span class="w2"><svg class="ue-i"><use href="#ue-distress"/></svg><b>It peaks</b><small>the part that feels unbearable while it lasts</small></span>
       <span class="w3"><svg class="ue-i"><use href="#ue-allow"/></svg><b>It falls</b><small>on its own, without being solved</small></span>
       <span class="w4"><svg class="ue-i"><use href="#ue-steady"/></svg><b>You are still here</b><small>and the next one arrives smaller</small></span>
     </div>
-    <p class="ue-wave-note">Nothing on this line requires you to make the feeling stop. It requires you to still be doing something you chose while it happens.</p>
+    <p class="ue-wave-note">This line asks you to keep doing what you chose while the feeling runs.</p>
   </div>
 
   <div class="ue-success"><svg class="ue-i"><use href="#ue-gauge"/></svg><span>Success is measured here</span><b>chosen action despite uncertainty</b><small>Anxiety may fall, stay, or rise. Its level does not grade the exercise.</small></div>
@@ -207,7 +207,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div class="ue-primer-what">
       <p><b>An emotion is a signal with a body attached.</b> Something happens, your mind reads it in a
       particular way, the body changes to match, and you get an urge to do something. That whole bundle
-      arrives at once and feels like a single thing. It is four things, and they can be separated.</p>
+      arrives at once and feels like a single thing. It is four things, and you can take them apart.</p>
     </div>
 
     <div class="ue-primer-parts">
@@ -217,24 +217,23 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <i aria-hidden="true">→</i>
       <div class="s3"><svg class="ue-i"><use href="#ue-battery"/></svg><b>3. The body answers</b><span>Heart, breath, gut, jaw, temperature. This is the part that makes it feel like a fact.</span></div>
       <i aria-hidden="true">→</i>
-      <div class="s4"><svg class="ue-i"><use href="#ue-magnet"/></svg><b>4. An urge appears</b><span>Do something, or stop doing something. The urge is a suggestion, not an instruction.</span></div>
+      <div class="s4"><svg class="ue-i"><use href="#ue-magnet"/></svg><b>4. An urge appears</b><span>Do something, or stop doing something. You can answer an urge instead of obeying it.</span></div>
     </div>
 
     <div class="ue-primer-note">
       <p><b>The reading is the part you can question.</b> The event already happened and the body is already
-      moving. The story your mind attached is the piece with room in it, and the urge is the piece you get
-      to answer rather than obey.</p>
+      moving. The story your mind attached is the part still open to question.</p>
     </div>
 
     <div class="ue-primer-facts">
       <div><svg class="ue-i"><use href="#ue-curveline"/></svg><b>Every emotion ends</b><span>None of them are permanent, including the ones that feel permanent while they are happening.</span></div>
       <div><svg class="ue-i"><use href="#ue-allow"/></svg><b>Feeling it is not agreeing with it</b><span>You can notice fear without treating the danger as real, and notice guilt without being guilty.</span></div>
       <div><svg class="ue-i"><use href="#ue-label"/></svg><b>Naming it turns the volume down</b><span>A vague bad feeling is bigger than a named one. The wheel below is for finding the name.</span></div>
-      <div><svg class="ue-i"><use href="#ue-openq"/></svg><b>None of them are forbidden</b><span>There is no emotion you are not allowed to have. There are only actions worth choosing carefully.</span></div>
+      <div><svg class="ue-i"><use href="#ue-openq"/></svg><b>None of them are forbidden</b><span>Every emotion is allowed. Actions are the part worth choosing carefully.</span></div>
     </div>
 
     <div class="ue-primer-vs">
-      <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-venn"/></svg> Two things people mix up</p>
+      <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-venn"/></svg> Four words people mix up</p>
       <div class="ue-vsgrid">
         <div><span class="a">A feeling</span><span class="b">arrives on its own, cannot be ordered, and passes</span></div>
         <div><span class="a">A mood</span><span class="b">lasts longer, has no single trigger, and colours everything you read</span></div>
@@ -248,7 +247,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <div class="ue-wheel-block" id="ue-wheel-block">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-wheelmark"/></svg> Find the word before you decide what to do</p>
     <div class="ue-wheel-wrap">
-      <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 452 452" role="img"
+      <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 638 638" role="img"
            aria-label="A wheel of emotion words in three rings. Select any segment to read what it points at, what it urges, and one action that does not require the feeling to stop.">
       </svg>
       <div class="ue-wheel-read" id="ue-wheel-read" role="status">
@@ -314,7 +313,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <div><svg class="ue-i"><use href="#ue-breathe"/></svg><b>Longer out-breath</b><span>Make the exhale longer than the inhale for one minute.</span></div>
       <div><svg class="ue-i"><use href="#ue-release"/></svg><b>Release</b><span>Tense a muscle group hard, hold, then let go. Repeat once.</span></div>
     </div>
-    <p class="ue-lever-note">These buy you a few minutes of steadier judgment. They are not a way to make the feeling go away, and they do not need to work before you continue.</p>
+    <p class="ue-lever-note">These buy a few minutes of steadier judgment. They will not remove the feeling, and you can carry on before they work.</p>
   </div>
 
 
@@ -460,7 +459,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <div class="closed"><svg class="ue-i"><use href="#ue-fact"/></svg><b>What can be settled</b><span>Facts you can check once. Actions you can take. Repairs you can make.</span></div>
       <div class="open"><svg class="ue-i"><use href="#ue-infinity"/></svg><b>What stays open</b><span>Whether you will feel this again. Whether you were understood. Whether it was the best possible choice.</span></div>
     </div>
-    <p class="ue-accept-note">The second column does not shrink by being argued with. It shrinks in importance when you keep acting while it is still open.</p>
+    <p class="ue-accept-note">Arguing with the second column does not shrink it. It matters less each time you act while it stays open.</p>
   </div>
 
   <p class="ue-compassion">Speak to yourself as you would to someone you respect: accurately, without humiliation, and without inventing a guarantee. Kindness helps you return to the work. It does not require pretending the work is easy.</p>

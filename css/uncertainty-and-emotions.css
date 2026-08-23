@@ -210,9 +210,9 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 
 /* 05 · the wheel */
 .ue-wheel-block{margin:1.6rem 0;padding:1.1rem;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
-.ue-wheel-block{margin-inline:calc(50% - 50vw);padding-inline:max(1rem,calc(50vw - 30rem));border-radius:0;border-inline:0}
+.ue-wheel-block{margin-inline:calc(50% - 50vw);padding-inline:max(.75rem,calc(50vw - 34rem));border-radius:0;border-inline:0}
 .ue-wheel-wrap{display:grid;gap:1.2rem;justify-items:center}
-.ue-wheel{display:block;width:100%;height:auto;max-width:min(46rem,calc(100vw - 3rem));margin:0 auto}
+.ue-wheel{display:block;width:100%;height:auto;max-width:min(54rem,calc(100vw - 2rem));margin:0 auto;overflow:visible}
 .ue-wheel-read{width:100%;max-width:44rem}
 .ue-seg{fill:hsl(var(--h) 58% 52%);stroke:var(--bg);stroke-width:1.2;cursor:pointer;transition:opacity .15s ease,filter .15s ease}
 .ue-seg-1{fill:hsl(var(--h) 58% 44%)}

@@ -57,7 +57,7 @@ families:
     hue: 286
     points_at: A gap between what you did and who you want to be.
     urge: Hide, over-explain, confess repeatedly, or seek reassurance.
-    counter: Say the accurate sentence once, repair what can be repaired, then continue.
+    counter: Say the accurate sentence once, repair what you can, then continue.
     inner:
       - name: Embarrassed
         outer: ["Watched", "Awkward", "Exposed"]
@@ -83,7 +83,7 @@ families:
   - key: joy
     name: Joy
     hue: 44
-    points_at: Something is going well, or matters to you and is present.
+    points_at: Something is going well, or something you care about is here.
     urge: Hold on to it, or check whether you are allowed to have it.
     counter: Stay in it for a full minute without auditing whether it will last.
     inner:

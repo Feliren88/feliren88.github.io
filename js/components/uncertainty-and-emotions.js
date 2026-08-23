@@ -220,7 +220,7 @@
       if(say){
         say.textContent = mode==='relieve'
           ? 'Each relief move ends that wave early. The next one starts higher, and the gap between them gets shorter.'
-          : 'One wave, allowed to finish. Nothing was solved and it came down anyway. That is the part the relief move never lets you find out.';
+          : 'One wave, allowed to finish. Nothing was solved and it came down anyway. The relief move ends the wave before you get to see that.';
       }
     }
 
@@ -250,7 +250,7 @@
 
     var read=document.getElementById('ue-wheel-read');
     var NS='http://www.w3.org/2000/svg';
-    var CX=226,CY=226,R0=44,R1=88,R2=158,R3=214;
+    var CX=319,CY=319,R0=60,R1=132,R2=226,R3=307;
     var TAU=Math.PI*2;
 
     function pt(r,a){ return [CX+r*Math.cos(a), CY+r*Math.sin(a)]; }
@@ -272,19 +272,39 @@
        The family ring is laid along its arc; the two outer rings run along the
        radius instead, where the space is, and flip on the left half so no word
        is upside down. */
-    function label(txt,r,a,cls,size,radial){
+    function label(txt,r,a,cls,size,radial,room){
       var p=pt(r,a), deg=a*180/Math.PI, flip=(deg>90&&deg<270);
-      var rot, anchor;
-      if(radial){
-        rot=flip?deg+180:deg;
-        anchor=flip?'end':'start';
-      }else{
-        rot=flip?deg+180:deg;
-        anchor='middle';
-      }
-      return mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),class:cls,
+      var anchor = radial ? (flip?'end':'start') : 'middle';
+      var rot = flip?deg+180:deg;
+      var t=mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),class:cls,
         'text-anchor':anchor,'dominant-baseline':'middle','font-size':size,
         transform:'rotate('+rot.toFixed(1)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')'}, txt);
+      t.dataset.room=room.toFixed(1);
+      t.dataset.size=size;
+      fitQueue.push(t);
+      return t;
+    }
+
+    /* Guessing at font metrics is what put words outside their bands. Ask the
+       browser instead: measure each label once it is in the document, shrink it
+       until it fits the space it was given, and if a long word is still over,
+       let the renderer condense it to exactly that width. */
+    var fitQueue=[];
+    function fitLabels(){
+      fitQueue.forEach(function(t){
+        var room=+t.dataset.room, size=+t.dataset.size;
+        var w;
+        try{ w=t.getComputedTextLength(); }catch(e){ return; }
+        if(!w||w<=room) return;
+        var shrunk=Math.max(size*0.72, size*room/w);
+        t.setAttribute('font-size',shrunk.toFixed(2));
+        try{ w=t.getComputedTextLength(); }catch(e){ return; }
+        if(w>room){
+          t.setAttribute('textLength',room.toFixed(1));
+          t.setAttribute('lengthAdjust','spacingAndGlyphs');
+        }
+      });
+      fitQueue.length=0;
     }
     /* Radial labels start just inside the band's inner edge, or just inside its
        outer edge when they read right-to-left. */
@@ -305,7 +325,7 @@
         style:'--h:'+hue,tabindex:'0',role:'button','aria-label':f.name});
       p.dataset.fam=fi; p.dataset.level='1';
       g.appendChild(p);
-      g.appendChild(label(f.name,(R0+R1)/2,(a0+a1)/2,'ue-wt ue-wt-1',11.5,false));
+      g.appendChild(label(f.name,(R0+R1)/2,(a0+a1)/2,'ue-wt ue-wt-1',13,false,(a1-a0)*((R0+R1)/2)*0.86));
 
       /* middle ring: three broader words */
       var inner=f.inner||[];
@@ -316,7 +336,7 @@
           style:'--h:'+hue,tabindex:'0',role:'button','aria-label':it.name+', '+f.name});
         q.dataset.fam=fi; q.dataset.level='2'; q.dataset.word=it.name;
         g.appendChild(q);
-        g.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-2',9,true));
+        g.appendChild(label(it.name,radialR(R1,R2,(b0+b1)/2),(b0+b1)/2,'ue-wt ue-wt-2',11,true,R2-R1-12));
 
         /* outer ring: the finer words */
         var outs=it.outer||[];
@@ -327,7 +347,7 @@
             style:'--h:'+hue,tabindex:'0',role:'button','aria-label':w+', '+f.name});
           r.dataset.fam=fi; r.dataset.level='3'; r.dataset.word=w;
           g.appendChild(r);
-          g.appendChild(label(w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-3',7.8,true));
+          g.appendChild(label(w,radialR(R2,R3,(c0+c1)/2),(c0+c1)/2,'ue-wt ue-wt-3',10,true,R3-R2-12));
         });
       });
       host.appendChild(g);
@@ -335,10 +355,10 @@
 
     /* the hub keeps whatever was chosen last */
     var hub=mk('g',{class:'ue-hub'});
-    hub.appendChild(mk('circle',{cx:CX,cy:CY,r:R0-4,class:'ue-hub-c'}));
-    var hubT=mk('text',{x:CX,y:CY-4,class:'ue-hub-t','text-anchor':'middle','font-size':15});
+    hub.appendChild(mk('circle',{cx:CX,cy:CY,r:R0-5,class:'ue-hub-c'}));
+    var hubT=mk('text',{x:CX,y:CY-6,class:'ue-hub-t','text-anchor':'middle','font-size':20});
     hubT.textContent='Which one?';
-    var hubS=mk('text',{x:CX,y:CY+14,class:'ue-hub-s','text-anchor':'middle','font-size':9.5});
+    var hubS=mk('text',{x:CX,y:CY+16,class:'ue-hub-s','text-anchor':'middle','font-size':12});
     hubS.textContent='pick a word';
     hub.appendChild(hubT); hub.appendChild(hubS);
     host.appendChild(hub);
@@ -381,6 +401,19 @@
     });
     var cl=document.getElementById('ue-wheel-clear');
     if(cl) cl.addEventListener('click',clear);
+
+    fitLabels();
+    /* Web fonts can land after the first measurement and change every width. */
+    if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
+      document.fonts.ready.then(function(){
+        all('.ue-wt',host).forEach(function(t){
+          t.removeAttribute('textLength'); t.removeAttribute('lengthAdjust');
+          t.setAttribute('font-size',t.dataset.size);
+          fitQueue.push(t);
+        });
+        fitLabels();
+      });
+    }
   }
 
   /* ── Which band, and what fits it ────────────────────────
@@ -396,7 +429,7 @@
         a:'Lower the speed first. Cold, movement, a longer out-breath. Then come back to the question.'},
       mid:{t:'Able to choose',
         p:'You can feel something and still steer. This is the only band where a considered decision belongs.',
-        a:'Do the thing you chose. This is where practice counts, and the feeling does not have to be absent.'},
+        a:'Do the thing you chose. Practice counts here, with the feeling still present.'},
       under:{t:'Switched off',
         p:'Flat, foggy, far away. Nothing feels urgent because nothing feels like much at all.',
         a:'Raise the signal gently. Stand, cold water, light, one small physical task. Do not decide anything large from here.'}
@@ -438,9 +471,9 @@
         var d=+before.value-+after.value;
         out.innerHTML = !what.value.trim()
           ? 'Name the uncertainty above, then log the round.'
-          : d>0 ? 'It came down <b>'+d+'</b> without the relief move. That is the evidence this page keeps asking for.'
-          : d===0 ? 'It stayed level. The round still counts: you did it with the feeling present.'
-          : 'It rose. That happens, and the round still counts. The measure is what you did, not where the number landed.';
+          : d>0 ? 'It came down <b>'+d+'</b> without the relief move.'
+          : d===0 ? 'It stayed level. The round counts anyway, because you did it with the feeling present.'
+          : 'It rose. That happens. What you did is the record here, not where the number landed.';
       }
     }
     function paint(){
