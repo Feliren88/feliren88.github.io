@@ -265,9 +265,9 @@ extra_js: /js/components/uncertainty-and-emotions.js
       captures 27 distinct categories of emotion bridged by continuous gradients.
       <i>PNAS</i>, 114(38), E7900&ndash;E7909, from 2,185 videos rated by 853 participants.
       <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5617253/" target="_blank" rel="noreferrer">Read it</a>.
-      The paper's finding is that these categories are bridged by continuous gradients and that
-      the boundaries between many of them are fuzzy, so a ring of separate wedges is a
-      simplification of a high-dimensional space.</p>
+      The paper's own finding is that these categories are bridged by continuous gradients, with
+      fuzzy boundaries between many of them. A ring of separate wedges simplifies a
+      high-dimensional space.</p>
       <p class="for-axes"><b>Valence and control.</b> The Geneva Emotion Wheel. Scherer, K. R. (2005).
       What are emotions? And how can they be measured? <i>Social Science Information</i>, 44(4),
       693&ndash;727; instrument version 3.0 in Scherer, Shuman, Fontaine &amp; Soriano (2013),
@@ -276,8 +276,8 @@ extra_js: /js/components/uncertainty-and-emotions.js
       The twenty families and their order are the instrument's. The two axes and the four quadrants
       are Scherer's; the short quadrant names are my own shorthand.</p>
       <p class="for-mine"><b>My wheel.</b> Eight families, twenty-four broader words and seventy-three
-      finer ones, with every definition written for this page. It is not from the literature and is
-      not a summary of the two wheels above. The four zones use the same axes the Geneva wheel uses,
+      finer ones, with every definition written for this page. I wrote it for this page, and it stands
+      apart from the two wheels above. The four zones use the same axes the Geneva wheel uses,
       but they are arcs sized to the families rather than four equal quarters, and which family sits
       where is my judgement. Fear sits on the low-control side here and on the high-control side on
       the Geneva instrument. Both are shown rather than reconciled.</p>

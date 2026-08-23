@@ -343,7 +343,7 @@
             (d.urge?'<div><dt>What it urges</dt><dd>'+esc(d.urge)+'</dd></div>':'')+
             (d.counter?'<div class="do"><dt>One action that does not wait for it to stop</dt><dd>'+esc(d.counter)+'</dd></div>':'')+
           '</dl>'+
-          '<p class="ue-wheel-scope">The definition is the researchers’ category. These two lines are this page’s own reading, not a finding.</p>'
+          '<p class="ue-wheel-scope">The definition is the researchers’ category. The two lines above it are my reading.</p>'
           : '')+
         (d.near&&d.near.length ?
           '<p class="ue-wheel-near">The study reports a smooth gradient between this and '+

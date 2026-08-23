@@ -56,7 +56,7 @@ categories:
   - name: "Calmness"
     def: A settled state with nothing pressing for attention.
     urge: Keep everything as it is, and avoid whatever might disturb it.
-    counter: Let it be temporary. It does not have to be defended to be real.
+    counter: It will pass, and it does not need defending to be real.
     near: ["Aesthetic appreciation"]
 
   - name: "Aesthetic appreciation"
@@ -78,18 +78,18 @@ categories:
   - name: "Adoration"
     def: Warm absorbed attention on someone you hold dear.
     urge: Move closer and stay there.
-    counter: Let it be expressed plainly rather than tested for proof.
+    counter: Say it plainly instead of testing it for proof.
 
   - name: "Romance"
     def: Attraction to someone bound up with wanting a shared future.
     urge: Move closer, and check whether it is returned.
-    counter: Let the evidence accumulate at its own pace.
+    counter: Give the evidence time to accumulate.
     near: ["Sexual desire"]
 
   - name: "Sexual desire"
     def: Physical wanting directed at another person.
     urge: Act on it, or suppress it entirely.
-    counter: Notice it without treating either the wanting or the not-acting as a verdict on you.
+    counter: Notice it. Neither acting nor declining is a verdict on you.
     near: ["Romance", "Craving"]
 
   - name: "Craving"
@@ -157,7 +157,7 @@ categories:
   - name: "Boredom"
     def: Attention with nothing it wants to settle on.
     urge: Find stimulation immediately.
-    counter: Let the empty stretch stand. It is where the next idea usually arrives.
+    counter: The empty stretch is where the next idea usually arrives. Sit in it.
 
   - name: "Sadness"
     def: The response to losing something that mattered.
@@ -167,7 +167,7 @@ categories:
   - name: "Empathic pain"
     def: Distress at another person's suffering.
     urge: Fix it, or look away.
-    counter: Stay present and offer the specific help you can actually give.
+    counter: Stay present and offer the specific help you can give.
 
   - name: "Anxiety"
     def: Apprehension about a threat that has not arrived and may not.
@@ -184,7 +184,7 @@ categories:
   - name: "Horror"
     def: Fear mixed with revulsion at something you cannot look away from.
     urge: Get away from it and get it out of your mind.
-    counter: Let the image be there without arguing with it or replacing it.
+    counter: Do not argue with the image or swap it for another.
     near: ["Fear", "Disgust"]
 
   - name: "Disgust"
@@ -224,19 +224,19 @@ gew:
     - key: nh
       short: "Antagonistic"
       axes: "Unpleasant, high control"
-      body: "Something crossed a line and you have power to push back. These pull outward, at a target."
+      body: "Something crossed a line and you have power to push back. The pull is outward, at a target."
     - key: ph
       short: "Engaging"
       axes: "Pleasant, high control"
-      body: "Something is going well and you are the one moving. These pull you forward into it."
+      body: "Something is going well and you are the one moving. They carry you forward."
     - key: pl
       short: "Receptive"
       axes: "Pleasant, low control"
-      body: "Something good is here and you are not steering it. These ask you to receive rather than act."
+      body: "Something good is here and you are not steering it. The work is to receive it."
     - key: nl
       short: "Resigned"
       axes: "Unpleasant, low control"
-      body: "Something went wrong and you could not prevent it. These pull inward and downward."
+      body: "Something went wrong and you could not prevent it. Everything turns inward and slows."
   families:
     - name: "Interest"
       q: ph
