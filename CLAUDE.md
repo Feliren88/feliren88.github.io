@@ -119,7 +119,7 @@ feliren88.github.io/
 │   ├── high-agency.md    # Interactive personal note on George Mack's High Agency essay (/high-agency/) — loads css/high-agency.css + js/components/high-agency.js via the `extra_css` / `extra_js` front matter hooks; ~20 self-contained widgets (quiz, trap game, flow chart, worksheet) that persist to localStorage under the `ha:` prefix; icons come from `_includes/high-agency-icons.html`, and a twelve-badge progress board (`#badges`, floating `.ha-hud` pill) unlocks as the reader uses each widget, stored under `ha:badges`
 │   ├── game-theory.md    # Interactive personal note on strategic decision-making (/game-theory/) — content in `_data/game_theory.yml`, icons in `_includes/game-theory-icons.html`, localStorage prefix `gt:`
 │   ├── stoic.md          # Interactive personal note on Stoicism (/stoic/) — Marcus Aurelius and Epictetus; content in `_data/stoic.yml`, icons in `_includes/stoic-icons.html`, localStorage prefix `st:`
-│   ├── principles.md     # Interactive personal note, The Life Operating Principle (/principles/) — content lives in `_data/principles.yml`, rendered by Liquid AND emitted as a JSON island (`#pr-data`) that js/components/principles.js searches; localStorage prefix `pr:`
+│   ├── principles.md     # Interactive personal note, The Life Operating Principle (/principles/) — content lives in `_data/principles.yml`, rendered by Liquid AND emitted as a JSON island (`#pr-data`) that js/components/principles.js searches; localStorage prefix `pr:`; every situation also carries a `viz:` block that principles.js turns into a diagram inside its card (see "Situation diagrams" below), and opening a card records it under `pr:seen` for the explored counter
 │   ├── about.md
 │   ├── skills.md
 │   ├── experience.md
@@ -327,6 +327,49 @@ empty object first would overwrite the reader's record.
 It also wires itself to the existing widgets from the outside, using delegated listeners and
 two `MutationObserver`s, rather than editing each widget to report in. Adding a badge means
 adding one entry to `BADGES` and one listener, and leaves the twenty existing widgets alone.
+
+### Situation diagrams (`/principles/`)
+
+Every situation in `_data/principles.yml` carries a `viz:` block, and `situationViz()` in
+`js/components/principles.js` renders it into the top of that situation's card body.
+
+**Labels are quoted, never invented.** Each label must be lifted from that situation's own
+`trigger`, `ask`, `rule`, `steps` or `body`. A diagram restates what the card already says.
+It is not a place to add a claim, and there are no numbers in any of them.
+
+Fifteen archetypes. Label-heavy ones are HTML so the text wraps and stays selectable;
+geometric ones are SVG:
+
+| HTML | SVG |
+|---|---|
+| `split` `order` `stack` `chips` `test` `bands` | `gate` `threshold` `trend` `rings` `scale` `loop` `funnel` `hub` `pattern` |
+
+`bands` started as SVG and had to move. At six categories the names are wider than the
+bands are, and only real text flow keeps them off each other.
+
+Two rules the SVG builders exist to enforce, both of which produced visible bugs first:
+
+- **Size the box from the labels, not from a guess.** `label()` returns the box it actually
+  occupied; builders add up `bottom` and pass the result to `svg()`. A fixed height clips
+  any label that wraps to three lines.
+- **A label above a node grows upward.** `label(..., grow)` takes `up`, `mid` or `down`.
+  Without it the second line of a top label lands on the node it belongs to. `shift()` then
+  drops the whole drawing if a top label still overshoots `y=0`.
+
+There is no browser in this environment, so check the geometry by script. The three
+harnesses under the session scratchpad build all 51 diagrams, assert every label and shape
+sits inside its viewBox, and assert no two labels overlap each other or a node:
+
+```bash
+# extract the builders, dump the data, then run the three checks
+python3 -c "s=open('js/components/principles.js').read();\
+a=s.index('  var VZ = 320;');b=s.index('  function situationViz()');\
+open('/tmp/builders.js','w').write(s[a:b])"
+```
+
+The checkers stub `esc` and `clamp`, `eval` that slice, and run every `viz` block through
+`BUILD`. Re-create them if they are gone; a diagram that overflows or overlaps is invisible
+to every other test in the repo.
 
 ## Jekyll Configuration
 

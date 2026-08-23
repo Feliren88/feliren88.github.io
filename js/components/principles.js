@@ -845,6 +845,358 @@
     show('protect');
   }
 
+  /* ══ Situation diagrams ════════════════════════════════
+     One diagram per situation, built from the `viz` block in
+     _data/principles.yml. Every label in a spec is lifted from that
+     situation's own trigger, ask, rule, steps or body, so a diagram
+     restates what the card already says and never asserts anything new.
+
+     Label-heavy shapes are HTML so the text wraps and stays selectable.
+     Geometric shapes are SVG. Colour is always a custom property, so
+     both themes are handled without a second definition. */
+
+  var VZ = 320;  // SVG user-space width every builder draws into
+  var LH = 13;   // line height for wrapped SVG labels
+
+  /* Break a label into lines of roughly `per` characters. */
+  function wrap(text, per) {
+    var words = String(text).split(/\s+/), lines = [], line = '';
+    words.forEach(function (w) {
+      if (!line) { line = w; return; }
+      if ((line + ' ' + w).length <= per) line += ' ' + w;
+      else { lines.push(line); line = w; }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  /* Wrapped <text>, plus the box it actually occupies, so callers can size
+     the diagram from its labels instead of guessing.
+
+     `grow` says which way the extra lines go: "down" from y (the default),
+     "up" so the block ends at y, or "mid" so it straddles y. A label sitting
+     above a node has to grow upward, or its second line lands on the node. */
+  function label(text, x, y, per, cls, anchor, grow) {
+    var lines = wrap(text, per), n = lines.length;
+    var top = grow === 'up' ? y - (n - 1) * LH
+      : grow === 'mid' ? y - (n - 1) * LH / 2
+        : y;
+    var a = anchor ? ' text-anchor="' + anchor + '"' : '';
+    var t = '<text class="pv-t' + (cls ? ' ' + cls : '') + '"' + a + '>' +
+      lines.map(function (l, i) {
+        return '<tspan x="' + x + '" y="' + (top + i * LH).toFixed(1) + '">' + esc(l) + '</tspan>';
+      }).join('') + '</text>';
+    return { svg: t, lines: n, top: top - 9, bottom: top + (n - 1) * LH };
+  }
+
+  function svg(h, inner) {
+    return '<svg class="pv-svg" viewBox="0 0 ' + VZ + ' ' + Math.ceil(h) + '" role="img" aria-hidden="true">' +
+      inner + '</svg>';
+  }
+
+  /* Radial labels can reach above y=0. Rather than clip them, move the whole
+     drawing down by however far it overshot and grow the box to match. */
+  function shift(top, h, inner) {
+    var dy = top < 2 ? 2 - top : 0;
+    return svg(h + dy, dy ? '<g transform="translate(0,' + dy.toFixed(1) + ')">' + inner + '</g>' : inner);
+  }
+
+  function maxBottom() {
+    return Math.max.apply(null, Array.prototype.slice.call(arguments).map(function (o) { return o.bottom; }));
+  }
+
+  var BUILD = {
+    /* One input, two or three labelled branches. */
+    split: function (v) {
+      var outs = (v.out || []).map(function (o) {
+        return '<li class="pv-branch' + (o.on ? ' is-on' : '') + '"><span>' + esc(o.k) + '</span></li>';
+      }).join('');
+      return '<div class="pv pv-split">' +
+        '<p class="pv-in">' + esc(v['in']) + '</p>' +
+        '<ul class="pv-branches">' + outs + '</ul></div>';
+    },
+
+    /* Numbered stages that must run in sequence. */
+    order: function (v) {
+      var li = (v.items || []).map(function (t, i) {
+        return '<li><b>' + (i + 1) + '</b><span>' + esc(t) + '</span></li>';
+      }).join('');
+      return '<ol class="pv pv-order">' + li + '</ol>';
+    },
+
+    /* A priority stack. The last item is the foundation and sits at the bottom. */
+    stack: function (v) {
+      var items = v.items || [];
+      return '<ul class="pv pv-stack">' + items.map(function (t, i) {
+        return '<li class="' + (i === items.length - 1 ? 'is-base' : '') + '"><span>' + esc(t) + '</span></li>';
+      }).join('') + '</ul>';
+    },
+
+    /* Grouped chips, where the source text is genuinely an unordered list. */
+    chips: function (v) {
+      return '<div class="pv pv-chips">' + (v.groups || []).map(function (grp) {
+        var chips = (grp.items || []).map(function (c) {
+          return '<span class="pv-chip">' + esc(c) + '</span>';
+        }).join('');
+        return '<div class="pv-group' + (grp.on ? ' is-on' : '') + '">' +
+          '<span class="pv-gk">' + esc(grp.k) + '</span>' +
+          '<div class="pv-chiprow">' + chips + '</div></div>';
+      }).join('') + '</div>';
+    },
+
+    /* Assumption, cheap probe, evidence, and back round again. */
+    test: function (v) {
+      return '<div class="pv pv-test">' +
+        '<div class="pv-tbox">' + esc(v.claim) + '</div>' +
+        '<i aria-hidden="true">&rarr;</i>' +
+        '<div class="pv-tbox is-on">' + esc(v.probe) + '</div>' +
+        '<i aria-hidden="true">&rarr;</i>' +
+        '<div class="pv-tbox">' + esc(v.result) + '</div>' +
+        '<span class="pv-tloop" aria-hidden="true"></span></div>';
+    },
+
+    /* A path that has to stop before it continues. The two end labels sit on
+       one row and the stop label drops to the next, so they cannot collide. */
+    gate: function (v) {
+      var a = label(v.before, 8, 72, 20, 'pv-t-dim', 'start');
+      var b = label(v.after, 312, 72, 20, 'pv-t-go', 'end');
+      var c = label(v.stop, 160, Math.max(a.bottom, b.bottom) + 20, 34, 'pv-t-stop', 'middle');
+      return svg(c.bottom + 12,
+        '<line class="pv-line" x1="8" y1="34" x2="120" y2="34"/>' +
+        '<line class="pv-stop" x1="132" y1="14" x2="132" y2="54"/>' +
+        '<line class="pv-line pv-dash" x1="144" y1="34" x2="196" y2="34"/>' +
+        '<line class="pv-line pv-go" x1="208" y1="34" x2="300" y2="34"/>' +
+        '<path class="pv-head" d="M298 28 312 34 298 40Z"/>' +
+        a.svg + b.svg + c.svg);
+    },
+
+    /* A bar with the evidence threshold marked on it. */
+    threshold: function (v) {
+      var m = clamp(+v.mark || 0.5, 0.04, 0.96), x = 20 + m * 280;
+      var lo = label(v.lo, 20, 70, 20, 'pv-t-dim', 'start');
+      var hi = label(v.hi, 300, 70, 20, 'pv-t-dim', 'end');
+      var lab = label(v.label, 160, maxBottom(lo, hi) + 22, 38, 'pv-t-go', 'middle');
+      return svg(lab.bottom + 12,
+        '<rect class="pv-track" x="20" y="30" width="280" height="14" rx="7"/>' +
+        '<rect class="pv-fill" x="20" y="30" width="' + (m * 280).toFixed(1) + '" height="14" rx="7"/>' +
+        '<line class="pv-stop" x1="' + x.toFixed(1) + '" y1="18" x2="' + x.toFixed(1) + '" y2="56"/>' +
+        lo.svg + hi.svg + lab.svg);
+    },
+
+    /* Two curves: one climbing fast, one climbing slowly. */
+    trend: function (v) {
+      var f = label(v.fast, 20, 126, 24, 'pv-t-stop', 'start');
+      var s = label(v.slow, 304, 126, 24, 'pv-t-go', 'end');
+      return svg(maxBottom(f, s) + 12,
+        '<line class="pv-axis" x1="20" y1="104" x2="304" y2="104"/>' +
+        '<line class="pv-axis" x1="20" y1="8" x2="20" y2="104"/>' +
+        '<path class="pv-curve pv-curve-fast" d="M20 104 C90 100 130 66 170 44 S250 16 300 12"/>' +
+        '<path class="pv-curve pv-curve-slow" d="M20 104 C100 100 170 92 230 84 S280 78 300 76"/>' +
+        '<circle class="pv-dot pv-dot-fast" cx="300" cy="12" r="4"/>' +
+        '<circle class="pv-dot pv-dot-slow" cx="300" cy="76" r="4"/>' +
+        f.svg + s.svg);
+    },
+
+    /* A protected core inside what it makes possible. */
+    rings: function (v) {
+      var mid = label(v.mid, 182, 50, 17, 'pv-t-go', 'start');
+      var out = label(v.outer, 182, Math.max(mid.bottom + 24, 116), 17, 'pv-t-dim', 'start');
+      return svg(Math.max(out.bottom + 12, 172),
+        '<circle class="pv-ring" cx="84" cy="86" r="72"/>' +
+        '<circle class="pv-ring" cx="84" cy="86" r="46"/>' +
+        '<circle class="pv-core" cx="84" cy="86" r="24"/>' +
+        '<text class="pv-t pv-t-core" x="84" y="90" text-anchor="middle">' + esc(v.core) + '</text>' +
+        '<line class="pv-lead" x1="130" y1="58" x2="176" y2="46"/>' +
+        '<line class="pv-lead" x1="152" y1="118" x2="176" y2="' + (out.bottom - 8) + '"/>' +
+        mid.svg + out.svg);
+    },
+
+    /* A balance, left level, because the card asks you to weigh them. */
+    scale: function (v) {
+      var a = label(v.a, 46, 92, 15, 'pv-t-dim', 'middle');
+      var b = label(v.b, 274, 92, 15, 'pv-t-go', 'middle');
+      return svg(maxBottom(a, b) + 12,
+        '<path class="pv-stand" d="M120 96h80M160 96V44"/>' +
+        '<path class="pv-pivot" d="m160 26 10 18h-20Z"/>' +
+        '<line class="pv-beam" x1="46" y1="28" x2="274" y2="28"/>' +
+        '<line class="pv-cord" x1="46" y1="28" x2="46" y2="52"/>' +
+        '<path class="pv-dish" d="M18 52h56l-10 18H28Z"/>' +
+        '<line class="pv-cord" x1="274" y1="28" x2="274" y2="52"/>' +
+        '<path class="pv-dish pv-dish-on" d="M246 52h56l-10 18h-36Z"/>' +
+        a.svg + b.svg);
+    },
+
+    /* A cycle. Centred, so the widest label on either side has room, and the
+       exit (when the source names one) drops below rather than pushing right. */
+    loop: function (v) {
+      var nodes = v.nodes || [], n = nodes.length;
+      var cx = 160, cy = 88, r = 54, out = '', bottom = cy + r, top = 0;
+      out += '<circle class="pv-ring pv-ring-dash" cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>';
+      nodes.forEach(function (t, i) {
+        var a = (-90 + i * 360 / n) * Math.PI / 180;
+        var co = Math.cos(a), si = Math.sin(a);
+        out += '<circle class="pv-node" cx="' + (cx + r * co).toFixed(1) + '" cy="' + (cy + r * si).toFixed(1) + '" r="7"/>';
+        var anchor = Math.abs(co) < 0.35 ? 'middle' : (co > 0 ? 'start' : 'end');
+        var grow = si < -0.35 ? 'up' : (Math.abs(si) <= 0.35 ? 'mid' : 'down');
+        var l = label(t, +(cx + (r + 16) * co).toFixed(1), +(cy + (r + 16) * si + 4).toFixed(1), 12, '', anchor, grow);
+        out += l.svg;
+        bottom = Math.max(bottom, l.bottom);
+        top = Math.min(top, l.top);
+      });
+      if (v.exit) {
+        var arrowTop = bottom + 16;
+        out += '<line class="pv-line pv-go" x1="' + cx + '" y1="' + arrowTop + '" x2="' + cx + '" y2="' + (arrowTop + 22) + '"/>' +
+          '<path class="pv-head" d="M' + (cx - 6) + ' ' + (arrowTop + 20) + ' ' + cx + ' ' + (arrowTop + 32) + ' ' + (cx + 6) + ' ' + (arrowTop + 20) + 'Z"/>';
+        var ex = label(v.exit, cx, arrowTop + 50, 36, 'pv-t-go', 'middle');
+        out += ex.svg;
+        bottom = ex.bottom;
+      }
+      return shift(top, bottom + 14, out);
+    },
+
+    /* Many things in, one thing out. */
+    funnel: function (v) {
+      var a = label(v.wide, 16, 112, 22, 'pv-t-dim', 'start');
+      var b = label(v.narrow, 304, 112, 22, 'pv-t-go', 'end');
+      return svg(maxBottom(a, b) + 12,
+        '<path class="pv-funnel" d="M16 14h288l-96 54v26l-96 16V68Z"/>' + a.svg + b.svg);
+    },
+
+    /* One centre, a spoke for each thing to read off it. */
+    hub: function (v) {
+      var nodes = v.nodes || [], n = nodes.length, cx = 160, cy = 80, r = 50, out = '', bottom = cy + r, top = 0;
+      nodes.forEach(function (t, i) {
+        var a = (-90 + i * 360 / n) * Math.PI / 180;
+        var co = Math.cos(a), si = Math.sin(a);
+        var x = cx + r * co, y = cy + r * si;
+        out += '<line class="pv-spoke" x1="' + cx + '" y1="' + cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '"/>';
+        out += '<circle class="pv-node pv-node-on" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6"/>';
+        var anchor = Math.abs(co) < 0.35 ? 'middle' : (co > 0 ? 'start' : 'end');
+        var grow = si < -0.35 ? 'up' : (Math.abs(si) <= 0.35 ? 'mid' : 'down');
+        var l = label(t, +(cx + (r + 16) * co).toFixed(1), +(cy + (r + 16) * si + 4).toFixed(1), 12, '', anchor, grow);
+        out += l.svg;
+        bottom = Math.max(bottom, l.bottom);
+        top = Math.min(top, l.top);
+      });
+      out += '<circle class="pv-core" cx="' + cx + '" cy="' + cy + '" r="22"/>' +
+        '<text class="pv-t pv-t-core" x="' + cx + '" y="' + (cy + 4) + '" text-anchor="middle">' + esc(v.center) + '</text>';
+      return shift(top, bottom + 14, out);
+    },
+
+    /* Scattered days, the two outliers greyed, the pattern drawn through. */
+    pattern: function (v) {
+      var pts = [0.52, 0.34, 0.61, 0.10, 0.58, 0.44, 0.66, 0.40, 0.93, 0.49, 0.38, 0.57];
+      var hiI = pts.indexOf(0.93), loI = pts.indexOf(0.10);
+      var out = '<line class="pv-axis" x1="20" y1="92" x2="304" y2="92"/>';
+      pts.forEach(function (p, i) {
+        var x = 28 + i * 24, y = 88 - p * 68;
+        out += '<circle class="pv-dot' + (i === hiI || i === loI ? ' pv-dot-out' : '') +
+          '" cx="' + x + '" cy="' + y.toFixed(1) + '" r="4"/>';
+      });
+      out += '<line class="pv-curve pv-curve-slow" x1="26" y1="58" x2="306" y2="52"/>';
+      var hi = label(v.hi, clamp(28 + hiI * 24, 60, 260), 14, 22, 'pv-t-dim', 'middle');
+      var lo = label(v.lo, clamp(28 + loI * 24, 60, 260), 110, 22, 'pv-t-dim', 'middle');
+      return svg(lo.bottom + 12, out + hi.svg + lo.svg);
+    },
+
+    /* A strip of named bands, with one marked when the source names one.
+       HTML rather than SVG: at six bands the names are wider than the bands
+       are, and only real text flow keeps them off each other. */
+    bands: function (v) {
+      var mark = +v.mark;
+      return '<div class="pv pv-bandrow">' + (v.items || []).map(function (t, i) {
+        return '<div class="pv-band' + (i === mark ? ' is-on' : '') + '">' +
+          '<i aria-hidden="true"></i><span>' + esc(t) + '</span></div>';
+      }).join('') + '</div>';
+    }
+  };
+
+  function situationViz() {
+    var byId = {};
+    (DATA.situations || []).forEach(function (s) { byId[s.id] = s; });
+
+    $$('.pr-card').forEach(function (card) {
+      var s = byId[(card.id || '').replace(/^sit-/, '')];
+      if (!s || !s.viz || !BUILD[s.viz.type]) return;
+      var body = $('.pr-card-body', card);
+      if (!body || $('.pr-viz', body)) return;
+
+      var block = document.createElement('div');
+      block.className = 'pr-block pr-viz pv-' + s.viz.type;
+      var html = '<span class="k">The shape of it</span>' + BUILD[s.viz.type](s.viz);
+      if (s.viz.cap) html += '<p class="pv-cap">' + esc(s.viz.cap) + '</p>';
+      block.innerHTML = html;
+      body.insertBefore(block, body.firstChild);
+    });
+  }
+
+  /* ══ Situations explored ═══════════════════════════════
+     A card counts as explored once it has been opened. The record is local
+     storage only, and it drives the counter above the grid, a tick on the
+     matching glyph, and a quiet marker on the card itself. */
+  function explored() {
+    var wrap = $('#pr-cards');
+    if (!wrap) return;
+
+    var total = (DATA.situations || []).length;
+    var seen = load('seen', {}) || {};
+    var fill = $('#pr-seen-fill');
+    var num = $('#pr-seen-n');
+    var say = $('#pr-seen-say');
+    var reset = $('#pr-seen-reset');
+
+    function paint() {
+      var ids = Object.keys(seen).filter(function (k) { return seen[k]; });
+      var n = ids.length;
+      if (num) num.textContent = n;
+      if (fill) fill.style.width = (total ? n / total * 100 : 0) + '%';
+      $$('.pr-card', wrap).forEach(function (c) {
+        c.classList.toggle('is-seen', !!seen[(c.id || '').replace(/^sit-/, '')]);
+      });
+      $$('.pr-map-cell').forEach(function (c) {
+        c.classList.toggle('is-seen', !!seen[c.dataset.go]);
+      });
+      if (say) {
+        say.textContent = n === 0
+          ? 'Nothing opened yet. Open the one you are actually in.'
+          : n < total
+            ? 'Opened so far. The rest are here when you need them.'
+            : 'All of them opened. The eight-step sequence covers what is left.';
+      }
+    }
+
+    /* Watch the cards rather than the controls. A card opens from a click, from
+       Expand all, from a search result and from a #sit- deep link, and only the
+       class tells you it happened whichever route was taken. */
+    function sweep() {
+      var added = false;
+      $$('.pr-card', wrap).forEach(function (c) {
+        if (!c.classList.contains('is-open')) return;
+        var id = (c.id || '').replace(/^sit-/, '');
+        if (id && !seen[id]) { seen[id] = true; added = true; }
+      });
+      if (added) { save('seen', seen); paint(); }
+    }
+
+    if (window.MutationObserver) {
+      new MutationObserver(sweep).observe(wrap, {
+        subtree: true, attributes: true, attributeFilter: ['class']
+      });
+    } else {
+      wrap.addEventListener('click', function () { setTimeout(sweep, 0); });
+    }
+
+    if (reset) {
+      reset.addEventListener('click', function () {
+        seen = {};
+        save('seen', seen);
+        paint();
+      });
+    }
+
+    paint();
+  }
+
   /* ══ Boot ══════════════════════════════════════════════ */
   function narrativeRail() {
     var links = $$('.pr-story-rail a');
@@ -860,8 +1212,8 @@
   }
 
   function init() {
-    [progress, narrativeRail, consoleSearch, cards, sixQuestions, dial, sequence,
-      doors, situationMap, orbit, fork].forEach(function (fn) {
+    [progress, narrativeRail, consoleSearch, situationViz, cards, explored, sixQuestions,
+      dial, sequence, doors, situationMap, orbit, fork].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
   }

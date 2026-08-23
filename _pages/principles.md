@@ -258,8 +258,18 @@ extra_js: /js/components/principles.js
   </div>
   <p class="pr-map-read" id="pr-map-read" role="status">Hover a glyph to name it. Tap to open it.</p>
 
+  <div class="pr-seen">
+    <div class="pr-seen-head">
+      <span class="pr-seen-k">Explored</span>
+      <span class="pr-seen-num"><b id="pr-seen-n">0</b> of {{ site.data.principles.situations | size }}</span>
+      <p class="pr-seen-say" id="pr-seen-say" role="status"></p>
+    </div>
+    <div class="pr-seen-track" aria-hidden="true"><i id="pr-seen-fill"></i></div>
+  </div>
+
   <div class="pr-btn-row" style="margin-top:0;margin-bottom:var(--gap-2)">
     <button class="pr-btn" id="pr-expand" type="button" data-open="false">Expand all</button>
+    <button class="pr-btn" id="pr-seen-reset" type="button">Reset explored</button>
   </div>
 
   <div class="pr-cards" id="pr-cards">

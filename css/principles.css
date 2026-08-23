@@ -908,3 +908,284 @@ body:has(.principles) #pointcloud-bg,body:has(.principles) .shape-toggle-btn{dis
   .pr-step { grid-template-columns: 1fr; gap: 0.45rem; }
   .pr-step .sk { justify-self: start; }
 }
+
+/* ════════════════════════════════════════════════════════
+   Situation diagrams
+   One per situation, built by situationViz() in principles.js from
+   the `viz` block in _data/principles.yml. Label-heavy shapes are
+   HTML so text wraps; geometric shapes are SVG. Colour is always a
+   custom property, so both themes are handled here once.
+   ════════════════════════════════════════════════════════ */
+
+.pr-viz { margin-bottom: 1rem; }
+.pv { margin: 0; }
+.pv-svg { display: block; width: 100%; height: auto; max-width: 30rem; overflow: visible; }
+.pv-cap {
+  margin: 0.55rem 0 0;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Shared SVG vocabulary */
+.pv-svg .pv-t { font-size: 11px; fill: var(--muted); font-family: inherit; }
+.pv-svg .pv-t-go { fill: var(--accent); font-weight: 600; }
+.pv-svg .pv-t-stop { fill: var(--text); font-weight: 600; }
+.pv-svg .pv-t-dim { fill: var(--muted); opacity: 0.8; }
+.pv-svg .pv-t-core { fill: var(--cta-text); font-size: 10.5px; font-weight: 700; }
+.pv-svg .pv-line { stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; }
+.pv-svg .pv-go { stroke: var(--accent); }
+.pv-svg .pv-dash { stroke-dasharray: 4 5; opacity: 0.7; }
+.pv-svg .pv-stop { stroke: var(--cta); stroke-width: 4; stroke-linecap: round; }
+.pv-svg .pv-head { fill: var(--accent); stroke: none; }
+.pv-svg .pv-axis { stroke: var(--line-strong); stroke-width: 1.4; }
+.pv-svg .pv-track { fill: color-mix(in srgb, var(--muted) 20%, transparent); }
+.pv-svg .pv-fill { fill: color-mix(in srgb, var(--accent) 45%, transparent); }
+.pv-svg .pv-ring { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
+.pv-svg .pv-ring-dash { stroke-dasharray: 5 5; }
+.pv-svg .pv-core { fill: var(--accent); stroke: none; }
+.pv-svg .pv-node { fill: var(--surface); stroke: var(--border-ui); stroke-width: 1.6; }
+.pv-svg .pv-node-on { fill: var(--accent); stroke: none; }
+.pv-svg .pv-lead, .pv-svg .pv-spoke { stroke: var(--line-strong); stroke-width: 1.3; }
+.pv-svg .pv-curve { fill: none; stroke-width: 2.4; stroke-linecap: round; }
+.pv-svg .pv-curve-fast { stroke: var(--cta); }
+.pv-svg .pv-curve-slow { stroke: var(--accent); stroke-dasharray: 5 4; }
+.pv-svg .pv-dot { fill: var(--accent); }
+.pv-svg .pv-dot-fast { fill: var(--cta); }
+.pv-svg .pv-dot-slow { fill: var(--accent); }
+.pv-svg .pv-dot-out { fill: var(--muted); opacity: 0.4; }
+.pv-svg .pv-stand { fill: none; stroke: var(--muted); stroke-width: 2.6; stroke-linecap: round; }
+.pv-svg .pv-pivot { fill: var(--muted); stroke: none; }
+.pv-svg .pv-beam { stroke: var(--text); stroke-width: 3; stroke-linecap: round; }
+.pv-svg .pv-cord { stroke: var(--line-strong); stroke-width: 1.4; }
+.pv-svg .pv-dish { fill: color-mix(in srgb, var(--muted) 14%, var(--surface)); stroke: var(--border-ui); stroke-width: 1.5; stroke-linejoin: round; }
+.pv-svg .pv-dish-on { fill: color-mix(in srgb, var(--accent) 24%, var(--surface)); stroke: var(--accent); }
+.pv-svg .pv-funnel { fill: color-mix(in srgb, var(--accent) 12%, transparent); stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
+
+/* bands — named categories, one marked when the source names one */
+.pv-bandrow { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pv-bandrow .pv-band { flex: 1 1 4.2rem; min-width: 0; text-align: center; }
+.pv-bandrow .pv-band i {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--muted) 26%, transparent);
+  margin-bottom: 0.35rem;
+}
+.pv-bandrow .pv-band span {
+  display: block;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.pv-bandrow .pv-band.is-on i { background: var(--accent); }
+.pv-bandrow .pv-band.is-on span { color: var(--accent); font-weight: 700; }
+
+/* split — one input, two or three branches */
+.pv-split .pv-in {
+  margin: 0 0 0.55rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+.pv-split .pv-branches { list-style: none; margin: 0; padding: 0 0 0 1.1rem; display: grid; gap: 0.35rem; }
+.pv-split .pv-branch {
+  position: relative;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 0.5rem 0.7rem;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.pv-split .pv-branch::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: -0.35rem;
+  bottom: 50%;
+  width: 0.75rem;
+  border-left: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  border-bottom-left-radius: 6px;
+}
+.pv-split .pv-branch:first-child::before { top: -0.55rem; }
+.pv-split .pv-branch.is-on {
+  border-left-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  color: var(--text);
+}
+
+/* order — numbered stages that must run in sequence */
+.pv-order { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pv-order li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 0.4rem 0.6rem;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  line-height: 1.35;
+}
+.pv-order li b {
+  flex: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-2xs);
+  color: var(--cta-text);
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 0.06rem 0.34rem;
+}
+
+/* stack — a priority stack resting on its foundation */
+.pv-stack { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.pv-stack li {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 0.38rem 0.65rem;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.4;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 26rem;
+}
+.pv-stack li.is-base {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* chips — grouped, unordered lists */
+.pv-chips { display: grid; gap: 0.6rem; }
+.pv-group {
+  border-left: 2px solid var(--line-strong);
+  padding-left: 0.7rem;
+}
+.pv-group.is-on { border-left-color: var(--accent); }
+.pv-gk {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.pv-group.is-on .pv-gk { color: var(--accent); }
+.pv-chiprow { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+.pv-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0.16rem 0.55rem;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.pv-group.is-on .pv-chip {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  color: var(--text);
+}
+
+/* test — assumption, cheap probe, evidence, round again */
+.pv-test {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding-bottom: 1.1rem;
+}
+.pv-test .pv-tbox {
+  flex: 1 1 6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 0.5rem 0.6rem;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pv-test .pv-tbox.is-on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  color: var(--text);
+  font-weight: 600;
+}
+.pv-test > i { align-self: center; color: var(--accent); font-style: normal; }
+.pv-test .pv-tloop {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0.15rem;
+  height: 0.7rem;
+  border: 1px dashed var(--line-strong);
+  border-top: 0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+@media (max-width: 620px) {
+  .pv-test { flex-direction: column; padding-bottom: 0; }
+  .pv-test > i { transform: rotate(90deg); }
+  .pv-test .pv-tloop { display: none; }
+  .pv-svg .pv-t { font-size: 12.5px; }
+}
+
+/* ── Situations explored ──────────────────────────────── */
+.pr-seen { margin: 0 0 var(--gap-2); }
+.pr-seen-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+.pr-seen-k {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-2xs);
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent);
+}
+.pr-seen-num { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-sm); color: var(--muted); }
+.pr-seen-num b { color: var(--text); }
+.pr-seen-say { margin: 0; font-size: var(--fs-xs); color: var(--muted); flex: 1 1 12rem; }
+.pr-seen-track {
+  height: 5px; border-radius: 999px; margin-top: 0.45rem;
+  background: color-mix(in srgb, var(--muted) 22%, transparent);
+  overflow: hidden;
+}
+.pr-seen-track i {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transition: width 0.45s ease;
+}
+
+/* A glyph and a card both carry a quiet mark once opened. */
+/* The base rule is not positioned, so the dot needs a containing block. */
+.pr-map-cell.is-seen {
+  position: relative;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+.pr-map-cell.is-seen::after {
+  content: "";
+  position: absolute;
+  right: 3px; bottom: 3px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.pr-card.is-seen > button .trg::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.35em;
+  margin-left: 0.4rem;
+}

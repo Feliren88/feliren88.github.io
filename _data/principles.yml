@@ -33,6 +33,14 @@ situations:
       - Escalate only if the behaviour continues.
     rule: Anger provides information. Decide your response separately.
     reversible: false
+    viz:
+      type: split
+      in: "What happened"
+      out:
+        - k: "The actual offence"
+          on: true
+        - k: "Your interpretation of it"
+          on: false
 
   - id: afraid
     trigger: When afraid
@@ -42,6 +50,16 @@ situations:
       - Fear produces two bad reflexes. Avoid everything, or control everything. Do neither automatically.
       - Classify the fear as probable, possible, unlikely, imagined, or preventable. Protect against the realistic downside and stop there.
     rule: Manage risk. Do not worship safety.
+    viz:
+      type: bands
+      cap: "Protect against the realistic downside and stop there."
+      mark: 0
+      items:
+        - "probable"
+        - "possible"
+        - "unlikely"
+        - "imagined"
+        - "preventable"
 
   - id: confused
     trigger: When confused
@@ -51,6 +69,14 @@ situations:
       - Do not solve ten problems at once. Write down what you know, what you do not know, what information would genuinely change the decision, and what information is merely comforting to collect.
       - Set a deadline. When enough evidence exists, decide.
     rule: More thinking helps only while it can still change the decision.
+    viz:
+      type: split
+      in: "Everything in your head"
+      out:
+        - k: "Would change the decision"
+          on: true
+        - k: "Comforting to collect"
+          on: false
 
   - id: overwhelmed
     trigger: When overwhelmed
@@ -67,6 +93,17 @@ situations:
       - Important relationships
       - The next necessary action
     rule: Under overload, protect the foundation before optimising the future.
+    viz:
+      type: stack
+      cap: "Protect the foundation before optimising the future."
+      items:
+        - "The next necessary action"
+        - "Important relationships"
+        - "Legal obligations"
+        - "Essential money"
+        - "Sleep"
+        - "Health"
+        - "Physical safety"
 
   - id: exhausted
     trigger: When exhausted
@@ -75,6 +112,12 @@ situations:
     body:
       - I do not trust major conclusions reached while exhausted. I restore sleep, food, movement, quiet and basic routine first, then reconsider.
     rule: Do not redesign your life while depleted.
+    viz:
+      type: gate
+      before: "A major conclusion"
+      stop: "Sleep, food, movement, quiet"
+      after: "Reconsider"
+      cap: "Do not redesign your life while depleted."
 
   - id: emergency
     trigger: When something has just gone wrong
@@ -88,6 +131,14 @@ situations:
     body:
       - Never reverse that order. Do not make a major decision merely to stop an uncomfortable feeling.
     rule: Stabilise first. Understand second. Decide third. Act fourth.
+    viz:
+      type: order
+      cap: "Never reverse that order."
+      items:
+        - "Stabilise"
+        - "Understand"
+        - "Decide"
+        - "Act"
 
   - id: career
     trigger: When making a career decision
@@ -97,6 +148,20 @@ situations:
       - Never evaluate a role on salary and title alone. Ask whether it increases at least two of capability, judgement, network, ownership, reputation, autonomy, or future earning power.
       - Be careful with more money plus more responsibility plus no new leverage. That combination is a golden cage.
     rule: Do not confuse being needed with progressing.
+    viz:
+      type: chips
+      cap: "More money plus more responsibility plus no new leverage is a golden cage."
+      groups:
+        - k: "Does it increase at least two of these?"
+          on: true
+          items:
+            - "Capability"
+            - "Judgement"
+            - "Network"
+            - "Ownership"
+            - "Reputation"
+            - "Autonomy"
+            - "Future earning power"
 
   - id: unbearable-work
     trigger: When work becomes unbearable
@@ -106,6 +171,23 @@ situations:
       - Before asking whether to quit, name the component. Manager, role, company, industry, pay, workload, autonomy, values, geography, or your own expectations.
       - Do not demolish the whole structure if one part can be repaired. Do not keep repairing something whose basic architecture is wrong.
     rule: Fix the component when possible. Leave the system when necessary.
+    viz:
+      type: chips
+      cap: "Fix the component when possible. Leave the system when necessary."
+      groups:
+        - k: "Name the component"
+          on: true
+          items:
+            - "Manager"
+            - "Role"
+            - "Company"
+            - "Industry"
+            - "Pay"
+            - "Workload"
+            - "Autonomy"
+            - "Values"
+            - "Geography"
+            - "Your own expectations"
 
   - id: promotion
     trigger: When offered a promotion
@@ -115,6 +197,14 @@ situations:
       - Responsibility without authority is dangerous. Responsibility without compensation is exploitation. Authority without competence is dangerous.
       - Authority with competence, resources and accountability is the version worth having.
     rule: Never accept importance merely because it flatters your identity.
+    viz:
+      type: split
+      in: "What is being offered"
+      out:
+        - k: "Greater authority"
+          on: true
+        - k: "Only greater responsibility"
+          on: false
 
   - id: business
     trigger: When starting a business
@@ -126,6 +216,12 @@ situations:
     body:
       - Work through the real questions. Is there a real customer? A real problem? Will someone pay? Can the economics work? What is your unfair advantage? How long can you survive if growth is slow?
     rule: Experiment cheaply before believing expensively.
+    viz:
+      type: test
+      claim: "An assumption"
+      probe: "A cheap test this month"
+      result: "Evidence"
+      cap: "Experiment cheaply before believing expensively."
 
   - id: partners
     trigger: When choosing business partners
@@ -135,6 +231,29 @@ situations:
       - Brilliance alone is insufficient. Evaluate ethics, emotional stability, incentives, financial discipline, communication, reliability and reputation.
       - Before you begin, agree ownership, responsibilities, decision rights, compensation, how disagreements get settled, and exit terms.
     rule: Trust people emotionally. Structure agreements professionally.
+    viz:
+      type: chips
+      cap: "Trust people emotionally. Structure agreements professionally."
+      groups:
+        - k: "Evaluate"
+          on: false
+          items:
+            - "Ethics"
+            - "Emotional stability"
+            - "Incentives"
+            - "Financial discipline"
+            - "Communication"
+            - "Reliability"
+            - "Reputation"
+        - k: "Agree before you begin"
+          on: true
+          items:
+            - "Ownership"
+            - "Responsibilities"
+            - "Decision rights"
+            - "Compensation"
+            - "How disagreements settle"
+            - "Exit terms"
 
   - id: invest
     trigger: When considering an investment
@@ -149,6 +268,26 @@ situations:
     body:
       - Understand how money is made here, how it can be lost, the liquidity, the concentration, the leverage, and the worst case.
     rule: Never risk something essential to obtain something nonessential.
+    viz:
+      type: chips
+      cap: "Never risk something essential to obtain something nonessential."
+      groups:
+        - k: "Understand"
+          on: true
+          items:
+            - "How money is made here"
+            - "How it can be lost"
+            - "Liquidity"
+            - "Concentration"
+            - "Leverage"
+            - "The worst case"
+        - k: "Not a reason"
+          on: false
+          items:
+            - "Everyone else is earning"
+            - "Fear of missing out"
+            - "Someone sounds confident"
+            - "To recover a loss"
 
   - id: money-up
     trigger: When money increases
@@ -158,6 +297,14 @@ situations:
       - Do not raise your lifestyle to match the new number straight away. Put the increase into safety, freedom, assets, knowledge and bargaining power first.
       - Avoid building a life that forces you to keep doing work you will eventually hate.
     rule: Use money to build freedom from bad choices.
+    viz:
+      type: split
+      in: "The increase"
+      out:
+        - k: "Safety, freedom, assets, bargaining power"
+          on: true
+        - k: "Lifestyle raised to match"
+          on: false
 
   - id: money-down
     trigger: When money decreases
@@ -167,6 +314,27 @@ situations:
       - Cut unnecessary fixed costs, status spending, ego spending, and commitments that return little.
       - Preserve housing, health, food, essential insurance, productive tools, critical relationships, and your capacity to earn again.
     rule: During contraction, protect the machine that can rebuild.
+    viz:
+      type: chips
+      cap: "Protect the machine that can rebuild."
+      groups:
+        - k: "Cut"
+          on: false
+          items:
+            - "Unnecessary fixed costs"
+            - "Status spending"
+            - "Ego spending"
+            - "Low-return commitments"
+        - k: "Preserve"
+          on: true
+          items:
+            - "Housing"
+            - "Health"
+            - "Food"
+            - "Essential insurance"
+            - "Productive tools"
+            - "Critical relationships"
+            - "Capacity to earn"
 
   - id: purchase
     trigger: When making a major purchase
@@ -176,6 +344,23 @@ situations:
       - Wait when excitement is unusually high. Then ask what freedom you are exchanging for it.
       - The real price includes maintenance, debt, attention, storage, insurance, and sometimes an inability to leave a job.
     rule: Count the full price, including the freedom you give up.
+    viz:
+      type: chips
+      cap: "Count the full price, including the freedom you give up."
+      groups:
+        - k: "The sticker"
+          on: false
+          items:
+            - "The price you were quoted"
+        - k: "Also the price"
+          on: true
+          items:
+            - "Maintenance"
+            - "Debt"
+            - "Attention"
+            - "Storage"
+            - "Insurance"
+            - "Being unable to leave a job"
 
   - id: negotiate
     trigger: When negotiating
@@ -185,6 +370,11 @@ situations:
       - Know your preferred outcome, your minimum acceptable outcome, your alternatives, and what you are willing to walk away from.
       - The strongest person in the room is rarely the loudest. It is the one who can leave.
     rule: Options create bargaining power.
+    viz:
+      type: scale
+      a: "This offer"
+      b: "Your credible alternative"
+      cap: "The strongest person in the room is the one who can leave."
 
   - id: relationship-start
     trigger: When entering a relationship
@@ -194,6 +384,14 @@ situations:
       - Chemistry begins the connection. Judge its long-term potential through reliability, honesty, conflict behaviour, accountability, financial behaviour, treatment of people with less power, respect for boundaries, apologies, and consistency between words and actions.
       - Attraction tells you to approach. Character tells you whether to stay.
     rule: Choose long-term partners by their repeated behaviour.
+    viz:
+      type: split
+      in: "What each one tells you"
+      out:
+        - k: "Character: whether to stay"
+          on: true
+        - k: "Attraction: whether to approach"
+          on: false
 
   - id: infatuated
     trigger: When deeply attracted to someone
@@ -202,6 +400,11 @@ situations:
     body:
       - Stay curious about who they actually are. Do not explain away repeated bad behaviour because the connection feels exceptional.
     rule: Compatibility requires evidence beyond emotional intensity.
+    viz:
+      type: trend
+      fast: "The future you are building"
+      slow: "The evidence you have"
+      cap: "Compatibility requires evidence beyond emotional intensity."
 
   - id: conflict
     trigger: When relationship conflict begins
@@ -215,6 +418,14 @@ situations:
     body:
       - Do not silently accumulate evidence against someone.
     rule: Early honesty is cheaper than late resentment.
+    viz:
+      type: order
+      cap: "Early honesty is cheaper than late resentment."
+      items:
+        - "Say what happened"
+        - "Say how it affected you"
+        - "Say what you need"
+        - "Ask what they need"
 
   - id: stay-or-leave
     trigger: When deciding whether to stay or leave
@@ -226,6 +437,11 @@ situations:
       - Do not stay on sunk cost alone. Do not leave merely because intimacy takes effort.
     rule: Judge the full pattern across many conversations.
     reversible: false
+    viz:
+      type: pattern
+      lo: "one unusually bad day"
+      hi: "one unusually good day"
+      cap: "Judge the full pattern across many conversations."
 
   - id: family
     trigger: When dealing with family
@@ -235,6 +451,14 @@ situations:
       - Respect does not require unlimited access. Love does not require permanent obedience.
       - Help people without becoming responsible for every consequence of their decisions.
     rule: Compassion without boundaries eventually becomes resentment.
+    viz:
+      type: split
+      in: "What is being asked of you"
+      out:
+        - k: "Support"
+          on: true
+        - k: "Rescue from something they refuse to address"
+          on: false
 
   - id: friends
     trigger: When dealing with friends
@@ -244,6 +468,11 @@ situations:
       - It does not need to be equal every week. Over a year there should be mutual concern, effort, honesty, respect and goodwill.
       - Do not stay loyal to people who punish your growth. Do not drop good people because your circumstances improved.
     rule: Protect relationships that want both your wellbeing and your growth.
+    viz:
+      type: scale
+      a: "What you give"
+      b: "What you receive"
+      cap: "Not equal every week. Over a year there should be reciprocity."
 
   - id: power
     trigger: When dealing with powerful people
@@ -253,6 +482,14 @@ situations:
       - Do not become submissive because they have status. Do not become rebellious because they have authority.
       - Study their incentives and find where your interests genuinely overlap. Stay respectful without surrendering judgement.
     rule: Understand power without becoming psychologically owned by it.
+    viz:
+      type: hub
+      center: "Them"
+      cap: "Stay respectful without surrendering judgement."
+      nodes:
+        - "What they want"
+        - "What they control"
+        - "What they fear"
 
   - id: criticised
     trigger: When someone criticises you
@@ -261,6 +498,16 @@ situations:
     body:
       - Take the useful information and discard the hostility. If it is accurate, improve. If it is inaccurate but consequential, clarify. If it is inaccurate and irrelevant, move on.
     rule: Accept that you cannot control every interpretation of you.
+    viz:
+      type: split
+      in: "The criticism"
+      out:
+        - k: "Accurate: improve"
+          on: true
+        - k: "Inaccurate but consequential: clarify"
+          on: false
+        - k: "Inaccurate and irrelevant: move on"
+          on: false
 
   - id: embarrassed
     trigger: When publicly embarrassed
@@ -270,6 +517,12 @@ situations:
       - Correct important factual errors. Take responsibility where it belongs. Do not overexplain. Then keep behaving consistently.
       - Most reputational repair comes from consistent future behaviour. One perfect statement cannot do that work alone.
     rule: Behave your way out. Do not talk your way out.
+    viz:
+      type: gate
+      before: "The event"
+      stop: "Do not overexplain"
+      after: "Consistent future behaviour"
+      cap: "Behave your way out. Do not talk your way out."
 
   - id: lie
     trigger: When tempted to lie
@@ -278,6 +531,11 @@ situations:
     body:
       - Small lies carry ongoing maintenance costs. Tell the truth tactfully and early where you can.
     rule: Do not borrow comfort from the future at compound interest.
+    viz:
+      type: trend
+      fast: "The maintenance cost"
+      slow: "Today's discomfort avoided"
+      cap: "Do not borrow comfort from the future at compound interest."
 
   - id: betrayed
     trigger: When someone betrays your trust
@@ -288,6 +546,13 @@ situations:
       - Document the facts.
       - Then decide whether the relationship can be repaired.
     rule: Protection first. Judgement second. Revenge never as strategy.
+    viz:
+      type: order
+      cap: "Protection first. Judgement second. Revenge never as strategy."
+      items:
+        - "Protect"
+        - "Document the facts"
+        - "Then judge the relationship"
 
   - id: relocate
     trigger: When relocating
@@ -297,6 +562,26 @@ situations:
       - Liking a city is the small question. Consider people, professional opportunity, cost, culture, safety, lifestyle, relationships, learning and future mobility.
       - Places change behaviour by changing what counts as normal.
     rule: Environments edit you slowly and without asking.
+    viz:
+      type: chips
+      cap: "Environments edit you slowly and without asking."
+      groups:
+        - k: "The small question"
+          on: false
+          items:
+            - "Do I like the city"
+        - k: "The real questions"
+          on: true
+          items:
+            - "People"
+            - "Professional opportunity"
+            - "Cost"
+            - "Culture"
+            - "Safety"
+            - "Lifestyle"
+            - "Relationships"
+            - "Learning"
+            - "Future mobility"
 
   - id: mentors
     trigger: When choosing people to learn from
@@ -305,6 +590,14 @@ situations:
     body:
       - Someone can be brilliant at making money and terrible at living. Someone can be famous and privately miserable. Someone can be accomplished and destructive to everyone near them.
     rule: Never copy a strategy without examining the life it produces.
+    viz:
+      type: split
+      in: "What you are copying"
+      out:
+        - k: "Their life"
+          on: true
+        - k: "Only their results"
+          on: false
 
   - id: learning
     trigger: When learning something difficult
@@ -320,6 +613,15 @@ situations:
     body:
       - Capability grows when you apply information in practice.
     rule: If you cannot use it, you do not own it yet.
+    viz:
+      type: loop
+      cap: "If you cannot use it, you do not own it yet."
+      nodes:
+        - "Learn"
+        - "Practise"
+        - "Produce"
+        - "Feedback"
+        - "Correct"
 
   - id: procrastinating
     trigger: When procrastinating
@@ -329,6 +631,11 @@ situations:
       - It is usually uncertainty, possible failure, boredom, embarrassment, complexity, or commitment.
       - Shrink the first step until avoiding it takes more effort than doing it. Then begin.
     rule: Name the discomfort and the task gets smaller.
+    viz:
+      type: funnel
+      wide: "The whole task"
+      narrow: "A first step so small that avoiding it costs more"
+      cap: "Name the discomfort and the task gets smaller."
 
   - id: perfectionism
     trigger: When perfectionism appears
@@ -337,6 +644,14 @@ situations:
     body:
       - Some mistakes are expensive. Most are harmless. Spend perfection only where errors genuinely matter.
     rule: Precision is a resource. Allocate it intelligently.
+    viz:
+      type: split
+      in: "This piece of work"
+      out:
+        - k: "Errors genuinely matter: precision"
+          on: false
+        - k: "Harmless: completion"
+          on: false
 
   - id: health
     trigger: When health starts deteriorating
@@ -345,6 +660,12 @@ situations:
     body:
       - Protect the physical system that makes every other ambition possible. Get proper care, avoid self-diagnosis, and reduce the load.
     rule: Health is the foundation that makes success possible.
+    viz:
+      type: rings
+      core: "Health"
+      mid: "Every other ambition"
+      outer: "The load you can pause, delegate, simplify or stop"
+      cap: "Health is the foundation that makes success possible."
 
   - id: lonely
     trigger: When lonely
@@ -353,6 +674,14 @@ situations:
     body:
       - Loneliness lowers standards. Build connection deliberately through friends, family, communities, hobbies, professional groups, volunteering and shared learning.
     rule: Temporary loneliness is sometimes the cost of leaving the wrong environment first.
+    viz:
+      type: split
+      in: "Loneliness"
+      out:
+        - k: "Build connection deliberately"
+          on: true
+        - k: "Lower your standards because it is familiar"
+          on: false
 
   - id: bored
     trigger: When bored
@@ -361,6 +690,19 @@ situations:
     body:
       - Do not destroy something stable simply to feel alive. Add novelty deliberately before creating chaos by accident.
     rule: Add novelty deliberately while preserving what still works.
+    viz:
+      type: chips
+      cap: "Add novelty deliberately before creating chaos by accident."
+      groups:
+        - k: "What is actually missing"
+          on: true
+          items:
+            - "Challenge"
+            - "Learning"
+            - "Creativity"
+            - "People"
+            - "Movement"
+            - "Rest"
 
   - id: jealous
     trigger: When jealous
@@ -370,6 +712,14 @@ situations:
       - Separate what you genuinely desire from what you want others to see you possessing.
       - Use envy as information. Never as a decision-maker.
     rule: Use envy to identify a desire, then decide whether that desire deserves pursuit.
+    viz:
+      type: split
+      in: "The envy"
+      out:
+        - k: "What you genuinely want"
+          on: true
+        - k: "What you want to be seen possessing"
+          on: false
 
   - id: comparing
     trigger: When comparing yourself to others
@@ -378,6 +728,24 @@ situations:
     body:
       - Compare trajectories over time. You rarely know another person's starting point, debt, support, private suffering, luck, sacrifices or hidden advantages.
     rule: Compare trajectories over time.
+    viz:
+      type: chips
+      cap: "Compare trajectories over time."
+      groups:
+        - k: "What you see"
+          on: false
+          items:
+            - "Their result"
+        - k: "What you do not see"
+          on: true
+          items:
+            - "Their starting point"
+            - "Debt"
+            - "Support"
+            - "Private suffering"
+            - "Luck"
+            - "Sacrifices"
+            - "Hidden advantages"
 
   - id: praised
     trigger: When praised
@@ -386,6 +754,14 @@ situations:
     body:
       - Enjoy it. But if praise sets your direction, criticism will also control you.
     rule: Receive validation without becoming dependent on it.
+    viz:
+      type: split
+      in: "Praise"
+      out:
+        - k: "Steering your direction"
+          on: false
+        - k: "Just pleasing you"
+          on: false
 
   - id: succeeding
     trigger: When succeeding
@@ -394,6 +770,19 @@ situations:
     body:
       - This is one of the most dangerous moments. Income can rise while health deteriorates, relationships weaken, curiosity disappears, freedom shrinks and responsibility becomes unbearable.
     rule: Measure the whole life across every important dimension.
+    viz:
+      type: chips
+      cap: "Income can rise while every other dimension falls."
+      groups:
+        - k: "What exactly is succeeding?"
+          on: true
+          items:
+            - "Income"
+            - "Health"
+            - "Relationships"
+            - "Curiosity"
+            - "Freedom"
+            - "Responsibility"
 
   - id: failing
     trigger: When failing
@@ -402,6 +791,20 @@ situations:
     body:
       - Separate bad strategy, bad timing, bad execution, insufficient skill, insufficient resources, random bad luck, and a fundamentally bad idea. They have different fixes.
     rule: A mistake becomes expensive only when you refuse to learn from it.
+    viz:
+      type: chips
+      cap: "They have different fixes."
+      groups:
+        - k: "Which one was it?"
+          on: true
+          items:
+            - "Bad strategy"
+            - "Bad timing"
+            - "Bad execution"
+            - "Insufficient skill"
+            - "Insufficient resources"
+            - "Random bad luck"
+            - "A bad idea"
 
   - id: repeating
     trigger: When something repeatedly fails
@@ -410,6 +813,14 @@ situations:
     body:
       - After the third serious repetition, stop calling it bad luck. Ask what warning you ignored, what assumption keeps returning, what kind of person or environment keeps producing this, and what boundary should have existed earlier.
     rule: Repeated pain usually points to a problem in the system.
+    viz:
+      type: loop
+      exit: "After the third time, look at the system"
+      cap: "Repeated pain usually points to a problem in the system."
+      nodes:
+        - "It happens"
+        - "You explain it"
+        - "It happens again"
 
   - id: opportunities
     trigger: When opportunities suddenly multiply
@@ -418,6 +829,11 @@ situations:
     body:
       - Opportunity has a hidden cost, and the cost is fragmentation. Prefer one direction that compounds over five unrelated ones that consume attention.
     rule: A good opportunity can still be the wrong opportunity.
+    viz:
+      type: funnel
+      wide: "Five unrelated directions"
+      narrow: "One direction that compounds"
+      cap: "A good opportunity can still be the wrong opportunity."
 
   - id: two-goods
     trigger: When choosing between two good options
@@ -426,6 +842,11 @@ situations:
     body:
       - Ask which teaches more, puts better people around you, increases ownership, preserves flexibility, and exposes you to valuable problems.
     rule: Choose according to the long-term options each path preserves.
+    viz:
+      type: scale
+      a: "Easy to recreate later"
+      b: "Hard to recreate later"
+      cap: "Choose according to the options each path preserves."
 
   - id: irreversible
     trigger: When the decision is hard to reverse
@@ -436,6 +857,13 @@ situations:
       - Slow down. Get independent perspectives. Consider the downside honestly. Do not let urgency created by another person replace your own judgement.
     rule: The harder a decision is to reverse, the higher the evidence threshold.
     reversible: false
+    viz:
+      type: threshold
+      label: "Evidence needed before you commit"
+      lo: "easy to undo"
+      hi: "hard to undo"
+      cap: "The harder a decision is to reverse, the higher the threshold."
+      mark: 0.86
 
   - id: reversible
     trigger: When the decision is easy to reverse
@@ -446,6 +874,12 @@ situations:
       - Months of speculation lose to one cheap experiment.
     rule: Reversible decisions deserve speed. Irreversible ones deserve patience.
     reversible: true
+    viz:
+      type: test
+      claim: "The question"
+      probe: "The smallest real test"
+      result: "Real information"
+      cap: "Months of speculation lose to one cheap experiment."
 
   - id: changed
     trigger: When circumstances suddenly change
@@ -454,6 +888,14 @@ situations:
     body:
       - Do not defend the old plan out of habit. Plans exist to serve reality, and reality owes your plan nothing.
     rule: Accept the facts and update the plan.
+    viz:
+      type: split
+      in: "The facts changed"
+      out:
+        - k: "Update the plan"
+          on: true
+        - k: "Defend the old plan out of habit"
+          on: false
 
   - id: wrong
     trigger: When you were wrong
@@ -462,6 +904,17 @@ situations:
     body:
       - Say it plainly. I was wrong. Then find the cause and change the process that produced the conclusion.
     rule: Being wrong is temporary. Refusing to update makes it permanent.
+    viz:
+      type: bands
+      cap: "Find the cause, then change the process that produced it."
+      mark: -1
+      items:
+        - "information"
+        - "reasoning"
+        - "ego"
+        - "incentives"
+        - "wishful thinking"
+        - "fear"
 
   - id: everyone-agrees
     trigger: When everyone agrees with you
@@ -470,6 +923,14 @@ situations:
     body:
       - Become slightly suspicious. Go and find someone intelligent who disagrees, especially before a major financial, professional or strategic commitment.
     rule: Treat unanimous agreement as a reason to check for missing dissent.
+    viz:
+      type: split
+      in: "Unanimous agreement"
+      out:
+        - k: "A reason to look for missing dissent"
+          on: true
+        - k: "Confirmation that you are right"
+          on: false
 
   - id: everyone-disagrees
     trigger: When everyone disagrees with you
@@ -478,6 +939,12 @@ situations:
     body:
       - Do not assume you are visionary. You may simply be wrong. Search for evidence and let reality arbitrate.
     rule: Independence requires your own reasoning and a willingness to agree when the evidence supports agreement.
+    viz:
+      type: test
+      claim: "Your view"
+      probe: "A cheap test"
+      result: "Let reality arbitrate"
+      cap: "You may simply be wrong. Search for evidence."
 
   - id: going-well
     trigger: When life is going exceptionally well
@@ -487,6 +954,14 @@ situations:
       - Prepare quietly. Maintain savings, health, relationships, skills, humility and alternatives.
       - Good periods create the resources that difficult periods spend.
     rule: Do not consume everything prosperity gives you.
+    viz:
+      type: split
+      in: "What this period gives"
+      out:
+        - k: "Savings, health, skills, alternatives"
+          on: true
+        - k: "Consumed now"
+          on: false
 
   - id: going-badly
     trigger: When life is going badly
@@ -500,6 +975,14 @@ situations:
     body:
       - Do not demand that one decision repair everything at once.
     rule: Survival first. Positioning second. Expansion third.
+    viz:
+      type: order
+      cap: "Do not demand that one decision repair everything at once."
+      items:
+        - "Stop the damage"
+        - "Regain stability"
+        - "Recover information"
+        - "Rebuild options"
 
 # The eight-step sequence for when nothing above fits
 sequence:
