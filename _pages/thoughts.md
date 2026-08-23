@@ -30,6 +30,12 @@ permalink: /writings/
 <span class="essay-feature-desc">Marcus Aurelius and Epictetus as a working manual. Sort what is actually up to you, and search the passages by the state you are in.</span>
 <span class="read-more">Open the note →</span>
 </a>
+<a class="essay-feature" href="/game-theory/">
+<span class="essay-feature-label">Interactive note</span>
+<span class="essay-feature-title">Game Theory of Life</span>
+<span class="essay-feature-desc">Most decisions are not solo problems. Solve eight payoff matrices, watch cooperation become rational as the horizon lengthens, and run a ruin simulation.</span>
+<span class="read-more">Open the note →</span>
+</a>
 </div>
 
 <div class="writings-divider"></div>

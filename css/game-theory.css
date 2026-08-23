@@ -1,0 +1,477 @@
+/* ════════════════════════════════════════════════════════
+   Game theory — /game-theory/
+   Page-scoped, loaded via `extra_css`. Colour comes only
+   from the tokens in styles.css, so both themes work.
+   Same architecture as stoic.css and principles.css.
+   ════════════════════════════════════════════════════════ */
+
+.page-header .subtitle { max-width: none; }
+
+.game-theory {
+  --fs-2xs: 0.8rem;
+  --fs-xs: 0.88rem;
+  --fs-sm: 0.97rem;
+  --fs-md: 1.04rem;
+  --fs-base: 1.09rem;
+  --fs-title: 1.28rem;
+  --fs-heading: clamp(1.55rem, 2.8vw, 2rem);
+  /* one family for every mathematical glyph on the page */
+  --math: "Latin Modern Math", "STIX Two Math", "Cambria Math", Georgia, serif;
+}
+.game-theory .page-content { max-width: 52rem; }
+
+/* ── Reading progress ─────────────────────────────────── */
+.gt-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60; pointer-events: none; }
+.gt-progress span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent-2), var(--cta));
+  transition: width 0.1s linear;
+}
+
+/* ── Prose ────────────────────────────────────────────── */
+.gt-prose p, .gt-prose li { color: var(--muted); line-height: 1.78; font-size: var(--fs-base); }
+.gt-prose p { margin: 0 0 0.95rem; }
+.gt-prose ul, .gt-prose ol { padding-left: 1.3rem; margin: 0 0 0.95rem; }
+.gt-prose li { margin: 0.4rem 0; }
+.gt-prose b, .gt-prose strong { color: var(--text); font-weight: 600; }
+.gt-prose a {
+  color: var(--text); text-decoration: underline;
+  text-decoration-color: var(--accent); text-underline-offset: 3px;
+}
+.gt-prose a:hover { color: var(--accent); }
+
+.gt-part { margin: 0 0 var(--gap-4); scroll-margin-top: 92px; }
+.gt-part + .gt-part { padding-top: var(--gap-4); border-top: 1px solid var(--line); }
+.gt-part h2 {
+  display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-heading); color: var(--text);
+  margin: 0 0 0.4rem; line-height: 1.25;
+}
+.gt-part h2 .n { font-size: var(--fs-sm); font-weight: 700; color: var(--accent); letter-spacing: 0.06em; }
+.gt-part h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-title); color: var(--text);
+  margin: 1.9rem 0 0.7rem; scroll-margin-top: 92px;
+}
+.gt-deck { margin: 0 0 1.4rem; color: var(--muted); font-size: var(--fs-md); line-height: 1.6; max-width: 62ch; }
+.gt-part > p, .gt-part > .gt-deck { max-width: 68ch; }
+
+/* ── Maths ────────────────────────────────────────────── */
+/* Inline symbols. Italic for variables, upright for operators. */
+.m { font-family: var(--math); font-style: italic; font-size: 1.06em; color: var(--text); white-space: nowrap; }
+.m .op, .m .num { font-style: normal; }
+.m sub, .m sup { font-size: 0.68em; font-style: normal; }
+
+/* Display equations. Scrollable so a long line never breaks the page. */
+.gt-eq {
+  margin: 1.2rem 0;
+  padding: 0.9rem 1.05rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 45%, var(--surface));
+  overflow-x: auto;
+}
+.gt-eq .eq {
+  font-family: var(--math);
+  font-size: 1.16rem;
+  line-height: 1.9;
+  color: var(--text);
+  white-space: nowrap;
+  font-style: italic;
+}
+.gt-eq .eq .op, .gt-eq .eq .num { font-style: normal; }
+.gt-eq .gloss {
+  margin: 0.7rem 0 0;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.65;
+  white-space: normal;
+  font-family: inherit;
+  font-style: normal;
+}
+.gt-eq .gloss b { color: var(--text); font-weight: 600; }
+.gt-eq.is-boxed { border-left-color: var(--cta); background: color-mix(in srgb, var(--cta) 8%, var(--surface)); }
+
+/* A stacked fraction that stays readable at body size. */
+.frac { display: inline-flex; flex-direction: column; vertical-align: -0.55em; text-align: center; margin: 0 0.18em; }
+.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.35em 0.1em; }
+.frac > span:last-child { padding: 0.1em 0.35em 0; }
+
+/* Term key under an equation. */
+.gt-terms { display: grid; gap: 0.35rem; margin-top: 0.8rem; }
+.gt-term { display: grid; grid-template-columns: 5.2rem 1fr; gap: 0.7rem; align-items: baseline; }
+.gt-term dt { font-family: var(--math); font-style: italic; font-size: var(--fs-md); color: var(--accent); }
+.gt-term dd { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; }
+
+/* ── Icons ────────────────────────────────────────────── */
+.gt-i {
+  width: 1em; height: 1em; display: block; flex-shrink: 0;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.gt-i .gt-i-fill { fill: currentColor; stroke: none; }
+
+/* ── Lab shell ────────────────────────────────────────── */
+.gt-lab {
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+  padding: var(--card-pad-lg);
+  margin: 0 0 var(--gap-4);
+  scroll-margin-top: 92px;
+}
+.gt-lab-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--gap-2); flex-wrap: wrap; margin-bottom: 0.9rem;
+}
+.gt-lab-head .t-eyebrow { margin: 0; }
+.gt-lab-head h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-title); color: var(--text); margin: 0.15rem 0 0; }
+.gt-hint { font-size: var(--fs-xs); color: var(--muted); }
+
+.gt-btn {
+  font-family: inherit; font-size: var(--fs-xs); font-weight: 700;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--border-ui); border-radius: var(--radius-md);
+  padding: 0.42rem 0.8rem; cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.gt-btn:hover { color: var(--text); border-color: var(--accent); transform: translateY(-1px); }
+.gt-btn.is-primary { background: var(--cta); color: var(--cta-text); border-color: var(--cta); }
+.gt-btn.is-primary:hover { color: var(--cta-text); opacity: 0.9; }
+.gt-btn[disabled] { opacity: 0.45; cursor: not-allowed; transform: none; }
+.gt-btn-row { display: flex; flex-wrap: wrap; gap: var(--gap-1); margin-top: var(--gap-2); align-items: center; }
+
+.gt-input {
+  width: 100%; font-family: inherit; font-size: var(--fs-base); color: var(--text);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  border: 1px solid var(--border-ui); border-radius: var(--radius-md);
+  padding: 0.7rem 0.85rem; line-height: 1.5;
+}
+.gt-range { width: 100%; accent-color: var(--accent); height: 1.6rem; cursor: pointer; }
+.gt-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ── Payoff matrix ────────────────────────────────────── */
+.gt-game-wrap {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: start;
+}
+@media (max-width: 760px) { .gt-game-wrap { grid-template-columns: 1fr; } }
+
+.gt-matrix-scroll { overflow-x: auto; }
+.gt-matrix {
+  border-collapse: separate; border-spacing: 0;
+  font-size: var(--fs-sm); min-width: 300px; width: 100%;
+}
+.gt-matrix caption {
+  caption-side: top; text-align: left;
+  font-size: var(--fs-2xs); color: var(--muted);
+  padding-bottom: 0.5rem; letter-spacing: 0.04em;
+}
+.gt-matrix th {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-2xs); font-weight: 700;
+  color: var(--muted); letter-spacing: 0.05em;
+  padding: 0.4rem 0.5rem; text-align: center; font-weight: 700;
+}
+.gt-matrix th.corner { color: var(--accent); text-align: left; font-size: var(--fs-2xs); }
+.gt-matrix th.rowh { text-align: right; padding-right: 0.7rem; white-space: nowrap; }
+.gt-matrix td {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 0.75rem 0.6rem;
+  text-align: center;
+  font-family: var(--math);
+  font-size: 1.06rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  min-width: 5.4rem;
+}
+.gt-matrix td:hover { border-color: var(--accent); color: var(--text); }
+.gt-matrix td .pr { color: var(--text); }
+.gt-matrix td .pc { color: var(--muted); }
+/* Nash equilibrium cells */
+.gt-matrix td.is-ne {
+  border-color: var(--cta);
+  background: color-mix(in srgb, var(--cta) 15%, var(--surface));
+  color: var(--text);
+}
+.gt-matrix td.is-ne .pc { color: var(--text); }
+.gt-matrix td.is-ne::after {
+  content: "NE";
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-2xs); font-weight: 700; font-style: normal;
+  color: var(--cta); letter-spacing: 0.08em; margin-top: 0.2rem;
+}
+/* Pareto-efficient cells get a marker on the corner */
+.gt-matrix td.is-pareto { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent); }
+.gt-matrix td.is-sel { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.gt-game-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 11rem;
+}
+.gt-game-read .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-game-read p { margin: 0 0 0.6rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-game-read p:last-child { margin-bottom: 0; }
+.gt-game-read .lab {
+  display: block; font-size: var(--fs-2xs); letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.2rem;
+}
+.gt-game-read .move { border-top: 1px solid var(--line); padding-top: 0.7rem; margin-top: 0.7rem; }
+.gt-game-read .move b { color: var(--text); }
+
+.gt-facts { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
+.gt-fact {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-2xs); font-weight: 700;
+  letter-spacing: 0.05em; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.55rem;
+}
+.gt-fact.on { color: var(--cta); border-color: color-mix(in srgb, var(--cta) 55%, transparent); }
+
+.gt-game-tabs { display: flex; flex-wrap: wrap; gap: var(--gap-1); margin-bottom: var(--gap-2); }
+
+/* ── Repeated game / shadow of the future ─────────────── */
+.gt-delta-wrap {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: center;
+}
+@media (max-width: 760px) { .gt-delta-wrap { grid-template-columns: 1fr; } }
+.gt-delta { width: 100%; height: auto; display: block; }
+.gt-delta .ax { stroke: var(--line-strong); stroke-width: 1.4; }
+.gt-delta .grid { stroke: var(--line); stroke-width: 1; }
+.gt-delta .band-defect { fill: color-mix(in srgb, var(--muted) 16%, transparent); }
+.gt-delta .band-coop { fill: color-mix(in srgb, var(--cta) 16%, transparent); }
+.gt-delta .curve-coop { fill: none; stroke: var(--cta); stroke-width: 2.5; }
+.gt-delta .curve-defect { fill: none; stroke: var(--muted); stroke-width: 2.5; stroke-dasharray: 5 4; }
+.gt-delta .thresh { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.gt-delta .scrub { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+.gt-delta .dot-coop { fill: var(--cta); }
+.gt-delta .dot-defect { fill: var(--muted); }
+.gt-delta .tick { font-size: 10.5px; fill: var(--muted); }
+.gt-delta .clab { font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 700; }
+.gt-delta-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 10rem;
+}
+.gt-delta-read .verdict {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+.gt-delta-read .verdict.coop { color: var(--cta); }
+.gt-delta-read .verdict.defect { color: var(--accent); }
+.gt-delta-read p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-delta-read p:last-child { margin-bottom: 0; }
+.gt-delta-read .calc {
+  font-family: var(--math); font-size: var(--fs-md); color: var(--text);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-radius: var(--radius-sm); padding: 0.45rem 0.6rem; margin: 0.5rem 0;
+  overflow-x: auto; white-space: nowrap; font-style: italic;
+}
+.gt-delta-read .calc .op, .gt-delta-read .calc .num { font-style: normal; }
+
+/* ── Seven levers ─────────────────────────────────────── */
+.gt-levers { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: var(--gap-2); }
+.gt-lever {
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--surface); padding: var(--card-pad-sm);
+  display: flex; flex-direction: column; gap: 0.45rem;
+  text-align: left; width: 100%; font-family: inherit; cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.gt-lever:hover, .gt-lever.is-on { border-color: var(--cta); transform: translateY(-2px); }
+.gt-lever .ico {
+  display: grid; place-items: center; width: 2.4rem; height: 2.4rem;
+  border-radius: var(--radius-md); font-size: 1.4rem; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.gt-lever.is-on .ico, .gt-lever:hover .ico { color: var(--cta); background: color-mix(in srgb, var(--cta) 18%, transparent); }
+.gt-lever h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); color: var(--text); margin: 0; }
+.gt-lever .ask { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; }
+.gt-lever .ex {
+  margin-top: auto; padding-top: 0.55rem; border-top: 1px solid var(--line);
+  font-size: var(--fs-xs); color: var(--muted); line-height: 1.6;
+}
+
+/* ── Risk quadrants ───────────────────────────────────── */
+.gt-quad-wrap {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-3); align-items: center;
+}
+@media (max-width: 720px) { .gt-quad-wrap { grid-template-columns: 1fr; } }
+.gt-quad { width: 100%; height: auto; display: block; }
+.gt-quad .field { fill: none; stroke: var(--line); stroke-width: 1; }
+.gt-quad .cell { fill: var(--surface); opacity: 0; transition: opacity 0.2s ease; }
+.gt-quad g.q { cursor: pointer; }
+.gt-quad g.q:hover .cell, .gt-quad g.q.is-on .cell { opacity: 0.9; }
+.gt-quad .qn {
+  font-family: "Space Grotesk", sans-serif; font-size: 12.5px; font-weight: 700;
+  fill: var(--text); text-anchor: middle;
+}
+.gt-quad .qd { font-size: 10px; fill: var(--muted); text-anchor: middle; }
+.gt-quad .axlabel {
+  font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 700; fill: var(--muted);
+}
+.gt-quad .arrow { stroke: var(--line-strong); stroke-width: 1.4; fill: none; }
+.gt-quad g.q.danger .qn { fill: var(--accent); }
+.gt-quad-read {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface));
+  padding: var(--card-pad-sm); min-height: 10rem;
+}
+.gt-quad-read .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-quad-read p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-quad-read p:last-child { margin-bottom: 0; }
+.gt-quad-read .rule {
+  font-family: "Space Grotesk", sans-serif; font-size: var(--fs-sm); font-weight: 700;
+  color: var(--cta); margin-top: 0.5rem;
+}
+
+/* ── Ruin simulator ───────────────────────────────────── */
+.gt-ruin-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-2); margin-bottom: var(--gap-2); }
+.gt-ruin-ctl label { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+.gt-ruin-ctl .val { font-family: var(--math); font-size: var(--fs-md); color: var(--accent); font-style: italic; }
+.gt-ruin { width: 100%; height: auto; display: block; }
+.gt-ruin .ax { stroke: var(--line-strong); stroke-width: 1.4; }
+.gt-ruin .grid { stroke: var(--line); stroke-width: 1; }
+.gt-ruin .path-live { fill: none; stroke: color-mix(in srgb, var(--cta) 55%, transparent); stroke-width: 1.1; }
+.gt-ruin .path-dead { fill: none; stroke: color-mix(in srgb, var(--accent) 65%, transparent); stroke-width: 1.1; }
+.gt-ruin .ruin-line { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.gt-ruin .tick { font-size: 10px; fill: var(--muted); }
+.gt-ruin-read { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--gap-1); margin-top: var(--gap-2); }
+.gt-ruin-read div {
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 0.7rem 0.8rem; background: var(--surface);
+}
+.gt-ruin-read .k { font-size: var(--fs-2xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.gt-ruin-read .v { font-family: var(--math); font-size: 1.35rem; font-weight: 700; color: var(--text); margin-top: 0.15rem; font-style: italic; }
+.gt-ruin-read .v.bad { color: var(--accent); }
+.gt-ruin-note { margin-top: var(--gap-2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-ruin-note b { color: var(--text); }
+
+/* ── Classifier ───────────────────────────────────────── */
+.gt-classifier { display: grid; gap: 0.5rem; }
+.gt-cq {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 0.75rem; align-items: center;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: 0.75rem 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.gt-cq.is-done { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.gt-cq .qn { font-family: var(--math); font-size: var(--fs-sm); color: var(--accent); width: 1.5rem; font-style: italic; }
+.gt-cq .qt { font-size: var(--fs-md); color: var(--text); line-height: 1.5; }
+.gt-cq .qw { display: block; margin-top: 0.25rem; font-size: var(--fs-xs); color: var(--muted); line-height: 1.6; }
+.gt-cq .qtog {
+  font-family: inherit; font-size: var(--fs-2xs); font-weight: 700; color: var(--muted);
+  background: none; border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.28rem 0.6rem; cursor: pointer; white-space: nowrap; transition: all 0.15s ease;
+}
+.gt-cq .qtog:hover { border-color: var(--accent); color: var(--text); }
+.gt-cq.is-done .qtog { background: var(--accent); border-color: var(--accent); color: var(--cta-text); }
+.gt-cverdict {
+  margin-top: var(--gap-2); border-top: 1px solid var(--line); padding-top: var(--gap-2);
+  font-size: var(--fs-sm); color: var(--muted); line-height: 1.7;
+}
+.gt-cverdict b { color: var(--text); }
+
+/* ── Laws ─────────────────────────────────────────────── */
+.gt-laws { display: grid; gap: 0.5rem; counter-reset: law; }
+.gt-law {
+  display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; align-items: start;
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md); background: var(--surface);
+  padding: 0.85rem 0.95rem;
+}
+.gt-law .n {
+  font-family: var(--math); font-size: var(--fs-sm); font-weight: 700;
+  color: var(--cta-text); background: var(--accent);
+  border-radius: var(--radius-sm); padding: 0.15rem 0.45rem; font-style: normal;
+}
+.gt-law h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); color: var(--text); margin: 0 0 0.2rem; line-height: 1.4; }
+.gt-law p { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.65; }
+
+/* ── Dashboard ────────────────────────────────────────── */
+.gt-dash { display: grid; gap: 0.4rem; }
+.gt-drow {
+  display: grid; grid-template-columns: 8.5rem 1fr auto; gap: 0.8rem; align-items: center;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: 0.6rem 0.8rem;
+}
+@media (max-width: 560px) { .gt-drow { grid-template-columns: 1fr auto; } .gt-drow .dq { grid-column: 1 / -1; } }
+.gt-drow .dk { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-sm); font-weight: 700; color: var(--text); }
+.gt-drow .dk .fl {
+  display: inline-block; font-size: var(--fs-2xs); color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px; padding: 0 0.35rem; margin-left: 0.3rem; letter-spacing: 0.05em;
+}
+.gt-drow .dq { font-size: var(--fs-sm); color: var(--muted); line-height: 1.5; }
+.gt-scale { display: flex; gap: 0.2rem; }
+.gt-scale button {
+  width: 1.65rem; height: 1.65rem; padding: 0;
+  font-family: var(--math); font-size: var(--fs-2xs); font-weight: 700; font-style: normal;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  cursor: pointer; transition: all 0.14s ease;
+}
+.gt-scale button:hover { border-color: var(--accent); color: var(--text); }
+.gt-scale button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--cta-text); }
+.gt-drow.is-low { border-left: 3px solid var(--accent); }
+.gt-dash-out {
+  margin-top: var(--gap-2); border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg) 50%, var(--surface)); padding: var(--card-pad-sm);
+}
+.gt-dash-out .t { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); font-weight: 700; color: var(--text); margin: 0 0 0.4rem; }
+.gt-dash-out p { margin: 0 0 0.55rem; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
+.gt-dash-out p:last-child { margin-bottom: 0; }
+.gt-dash-out .bottleneck { color: var(--accent); font-weight: 700; }
+
+/* ── Closing ──────────────────────────────────────────── */
+.gt-loops { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: var(--gap-2); }
+.gt-loop {
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--surface); padding: var(--card-pad-sm);
+}
+.gt-loop.good { border-left: 3px solid var(--cta); }
+.gt-loop.bad { border-left: 3px solid var(--accent); }
+.gt-loop h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-md); color: var(--text); margin: 0 0 0.6rem; }
+.gt-loop ol { margin: 0; padding-left: 1.1rem; }
+.gt-loop li { font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; margin: 0.15rem 0; }
+.gt-loop .out { margin: 0.7rem 0 0; padding-top: 0.6rem; border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--muted); }
+.gt-loop .out b { color: var(--text); }
+
+.gt-final {
+  border: 1px solid var(--border-ui); border-radius: var(--radius-lg);
+  background: var(--surface-soft); padding: var(--card-pad-lg); margin-top: var(--gap-3);
+}
+.gt-final p { margin: 0 0 0.8rem; font-size: var(--fs-base); color: var(--muted); line-height: 1.8; }
+.gt-final p:last-child { margin-bottom: 0; }
+.gt-final b { color: var(--text); }
+
+.gt-note {
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--surface); padding: var(--card-pad-lg); margin-top: var(--gap-4);
+}
+.gt-note p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.75; margin: 0 0 0.7rem; }
+.gt-note p:last-child { margin-bottom: 0; }
+.gt-note b { color: var(--text); }
+.gt-note a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.gt-note a:hover { color: var(--accent); }
+
+/* ── Small screens ────────────────────────────────────── */
+@media (max-width: 560px) {
+  .gt-lab, .gt-final, .gt-note { padding: var(--card-pad-sm); }
+  .gt-part h3 { margin-top: 1.5rem; }
+  .gt-eq .eq { font-size: 1.04rem; }
+  .gt-cq { grid-template-columns: auto 1fr; }
+  .gt-cq .qtog { grid-column: 1 / -1; justify-self: start; margin-top: 0.45rem; }
+  .gt-term { grid-template-columns: 4.2rem 1fr; }
+}

@@ -12,7 +12,7 @@ const PRECACHE = [
   '/contact/',
   '/css/styles.css?v=40',
   '/js/main.js?v=8',
-  '/js/components/nav.js?v=6',
+  '/js/components/nav.js?v=7',
   '/js/components/timeline.js?v=3',
   '/assets/fonts/manrope-latin.woff2',
   '/assets/fonts/manrope-latin-ext.woff2',
