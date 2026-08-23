@@ -3,9 +3,16 @@ layout: page
 title: Writings
 description: Articles on trustworthy AI, conformal prediction, multimodal systems, Southeast Asian AI, and personal reflections, published on Medium.
 permalink: /writings/
+layout-class: page writings-page
 ---
 
 <div class="essay-feature-block">
+<a class="essay-feature" href="/story/">
+<span class="essay-feature-label">Visual story</span>
+<span class="essay-feature-title">A Method for What Breaks</span>
+<span class="essay-feature-desc">A life built through difficult systems, the trap of becoming useful, and the long work of deciding what deserves carrying.</span>
+<span class="read-more">Enter the story →</span>
+</a>
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
 <span class="essay-feature-label">Essay</span>
 <span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
@@ -40,6 +47,12 @@ permalink: /writings/
 <span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Success &amp; Failure</span>
 <span class="essay-feature-desc">How to diagnose a result, scale what repeats, recover without escalating, and choose the next move without turning the outcome into identity.</span>
+<span class="read-more">Open the manual →</span>
+</a>
+<a class="essay-feature" href="/uncertainty-and-emotions/">
+<span class="essay-feature-label">Interactive manual</span>
+<span class="essay-feature-title">The Uncertainty Operating System</span>
+<span class="essay-feature-desc">How to spot the certainty trap, manage an intense state, decide under doubt, and keep moving while an answer remains unavailable.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 </div>
@@ -276,28 +289,92 @@ permalink: /writings/
 
   /* ── Featured Essay ──────────────────────────────────── */
   .essay-feature-block {
+    counter-reset: feature;
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--gap-2);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    grid-auto-rows: minmax(11rem, auto);
+    gap: clamp(0.65rem, 1.2vw, 1rem);
+    width: min(92rem, calc(100vw - 2rem));
+    margin-inline: 50%;
+    transform: translateX(-50%);
+    padding: clamp(0.4rem, 1.5vw, 1.1rem);
   }
   .essay-feature {
-    display: block;
+    counter-increment: feature;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 0;
+    min-height: 14rem;
     text-decoration: none;
-    padding: var(--card-pad-sm) var(--card-pad-lg);
+    padding: clamp(1.15rem, 2.4vw, 2rem);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--surface);
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    border-radius: clamp(0.8rem, 1.4vw, 1.3rem);
+    background:
+      radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 34%),
+      var(--surface);
+    overflow: hidden;
+    isolation: isolate;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
-  .essay-feature:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
+  .essay-feature::before {
+    content: counter(feature, decimal-leading-zero);
+    position: absolute;
+    z-index: -1;
+    top: -0.12em;
+    right: 0.08em;
+    color: color-mix(in srgb, var(--accent) 9%, transparent);
+    font: 600 clamp(5rem, 10vw, 10rem)/1 "Space Grotesk", sans-serif;
+    letter-spacing: -0.08em;
+    pointer-events: none;
+  }
+  .essay-feature::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: auto 1.5rem 1.2rem auto;
+    width: 2.2rem;
+    height: 1px;
+    background: var(--accent);
+    transform-origin: right;
+    transition: width 0.25s ease;
+  }
+  .essay-feature:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 14px 32px color-mix(in srgb, #000 22%, transparent); }
+  .essay-feature:hover::after { width: 4.5rem; }
+  .essay-feature:nth-child(1) { grid-column: span 8; grid-row: span 2; min-height: 30rem; background: linear-gradient(145deg, #101723, #182637 58%, #2c2928); }
+  .essay-feature:nth-child(1) .essay-feature-title { max-width: 10ch; color: #f2eee6; font-size: clamp(2.4rem, 5vw, 5.2rem); line-height: 0.94; letter-spacing: -0.055em; }
+  .essay-feature:nth-child(1) .essay-feature-desc { max-width: 42rem; color: #b9c0c8; font-size: 1rem; }
+  .essay-feature:nth-child(1) .essay-feature-label,.essay-feature:nth-child(1) .read-more { color: #d6a642; }
+  .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
+  .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
+  .essay-feature:nth-child(3), .essay-feature:nth-child(4) { grid-column: span 6; min-height: 19rem; }
+  .essay-feature:nth-child(5) { grid-column: span 4; min-height: 22rem; }
+  .essay-feature:nth-child(6) { grid-column: span 8; min-height: 22rem; background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface) 58%); }
+  .essay-feature:nth-child(7), .essay-feature:nth-child(8) { grid-column: span 6; min-height: 19rem; }
+  .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
   .essay-feature-label {
     display: block;
     font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
   }
-  .essay-feature-title { display: block; font-family: var(--font-display, inherit); font-size: 1.15rem; font-weight: 700; line-height: 1.3; color: var(--text); margin-bottom: 0.35rem; }
-  .essay-feature-desc { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
-  .essay-feature .read-more { display: inline-block; margin-top: 0.55rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
+  .essay-feature-title { display: block; max-width: 18ch; font-family: "Space Grotesk", var(--font-display, sans-serif); font-size: clamp(1.35rem, 2.3vw, 2.15rem); font-weight: 650; line-height: 1.08; letter-spacing: -0.035em; color: var(--text); margin-bottom: 0.65rem; }
+  .essay-feature-desc { display: block; max-width: 58ch; color: var(--muted); font-size: 0.92rem; line-height: 1.62; }
+  .essay-feature .read-more { display: inline-block; width: max-content; margin-top: 1rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .essay-feature-block { grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100%, calc(100vw - 1.5rem)); padding: 0; }
+    .essay-feature:nth-child(n) { grid-column: span 1; grid-row: span 1; min-height: 18rem; }
+    .essay-feature:nth-child(1) { grid-column: 1 / -1; min-height: 25rem; }
+    .essay-feature:nth-child(1) .essay-feature-title { font-size: clamp(2.6rem, 8vw, 4.4rem); }
+  }
+  @media (max-width: 580px) {
+    .essay-feature-block { grid-template-columns: 1fr; width: 100%; transform: none; margin-inline: 0; }
+    .essay-feature:nth-child(n) { grid-column: 1; min-height: 15rem; }
+    .essay-feature:nth-child(1) { min-height: 23rem; }
+  }
 
   /* ── Research Notes ──────────────────────────────────── */
   .notes-section { margin-bottom: 0.5rem; }

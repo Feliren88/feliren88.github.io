@@ -11,6 +11,29 @@ extra_js: /js/components/high-agency.js
 
 <div class="ha-progress" aria-hidden="true"><span id="ha-progress-fill"></span></div>
 
+<div class="ha-story-hero" aria-labelledby="ha-story-title">
+  <div class="ha-story-copy">
+    <p class="ha-story-kicker">A field guide for unclear situations</p>
+    <div class="ha-story-title" id="ha-story-title" role="heading" aria-level="1">The normal method<br><i>stops here.</i></div>
+    <p>High agency begins with the second question: what can still be moved?</p>
+  </div>
+  <svg class="ha-route" viewBox="0 0 560 430" role="img" aria-label="A route reaches a wall, searches along it, finds a movable hinge, and continues on the other side.">
+    <defs><marker id="ha-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z"/></marker></defs>
+    <path class="route-before" d="M40 335C115 335 118 255 190 255h56"/>
+    <path class="wall" d="M270 65v305"/>
+    <path class="route-search" d="M246 255c-60 0-56-102 8-102"/>
+    <circle class="hinge" cx="270" cy="153" r="12"/>
+    <path class="route-after" d="M282 153c62 0 52-70 118-70s71 69 120 69" marker-end="url(#ha-arrow)"/>
+    <text x="40" y="368">the assigned route</text><text x="286" y="350">“impossible”</text><text x="298" y="138">a variable moves</text><text x="405" y="61">changed reality</text>
+  </svg>
+</div>
+
+<nav class="ha-story-rail" id="ha-story-rail" aria-label="High Agency story progress">
+  <a href="#see-it" data-ha-act="1"><b>I</b><span>See the system</span></a>
+  <a href="#software" data-ha-act="2"><b>II</b><span>Reject the default</span></a>
+  <a href="#tools" data-ha-act="3"><b>III</b><span>Move through it</span></a>
+</nav>
+
 <div class="note-block" role="note">
   <span class="note-badge">Source</span>
   <p>These are my notes on <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">High Agency</a>
@@ -358,6 +381,7 @@ extra_js: /js/components/high-agency.js
 <!-- ═══════════════════════════════════════════════════════
      03 · FIVE LINES OF SOFTWARE
      ═══════════════════════════════════════════════════════ -->
+<div class="ha-turn" data-turn="II"><span>Act II</span><b>The first answer describes the current arrangement. It does not define the edge of the possible.</b></div>
 <section class="ha-part ha-prose" id="software">
   <h2><span class="n">03</span> Five lines of software</h2>
   <p class="ha-deck">The essay identifies five beliefs that support independent action.</p>
@@ -982,6 +1006,7 @@ extra_js: /js/components/high-agency.js
 <!-- ═══════════════════════════════════════════════════════
      07 · TOOLS
      ═══════════════════════════════════════════════════════ -->
+<div class="ha-turn" data-turn="III"><span>Act III</span><b>Agency becomes visible when analysis ends and contact with reality begins.</b></div>
 <section class="ha-part ha-prose" id="tools">
   <h2><span class="n">07</span> Five tools</h2>
   <p class="ha-deck">The essay closes with practical instruments. I have made the first one
@@ -1248,6 +1273,20 @@ extra_js: /js/components/high-agency.js
 
   <p>The other line I keep is that limits are the work. If the honest answer is that you cannot
   yet do the thing, that is a finding, and findings are useful in both directions.</p>
+
+  <div class="ha-coda" aria-label="The high-agency loop: see the situation, locate the movable constraint, act, and let reality answer">
+    <p class="ha-coda-kicker">The whole method</p>
+    <div class="ha-coda-path">
+      <div><span>01</span><b>See what is true</b><small>not merely what is customary</small></div>
+      <i aria-hidden="true">→</i>
+      <div><span>02</span><b>Find what can move</b><small>a rule, price, path, person, or skill</small></div>
+      <i aria-hidden="true">→</i>
+      <div><span>03</span><b>Make contact</b><small>test it in the world</small></div>
+      <i aria-hidden="true">→</i>
+      <div class="answer"><span>04</span><b>Let reality answer</b><small>then update without vanity</small></div>
+    </div>
+    <p class="ha-coda-line"><span>The wall is real.</span> The first route rarely is.</p>
+  </div>
 
   <div class="ha-credit">
     <p><b style="color:var(--text)">Credit.</b> Every idea, story and framing on this page comes

@@ -648,8 +648,21 @@
   }
 
   /* ══ Boot ══════════════════════════════════════════════ */
+  function narrativeRail() {
+    var links = $$('.st-story-rail a');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var sections = links.map(function (link) { return $(link.getAttribute('href')); }).filter(Boolean);
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (link) { link.classList.toggle('is-current', link.getAttribute('href') === '#' + entry.target.id); });
+      });
+    }, { rootMargin: '-25% 0px -60% 0px', threshold: 0 });
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
   function init() {
-    [progress, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame]
+    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

@@ -18,7 +18,37 @@
   /* one family for every mathematical glyph on the page */
   --math: "Latin Modern Math", "STIX Two Math", "Cambria Math", Georgia, serif;
 }
+/* Let boards and matrices use the page while prose remains at reading width. */
+body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{display:none!important}
+.game-theory .page-content{max-width:64rem!important}.game-theory .gt-part{margin-bottom:2.25rem!important}.game-theory .gt-part+.gt-part{padding-top:2.25rem!important}
 .game-theory .page-content { max-width: 52rem; }
+
+/* Narrative board and strategy spine */
+.gt-kicker { margin: 0 0 .6rem !important; color: var(--accent) !important; font: 700 var(--fs-xs)/1.2 "Space Grotesk",sans-serif !important; letter-spacing: .11em; text-transform: uppercase; }
+.gt-lead { max-width: 16ch; margin: 0 0 1.5rem !important; color: var(--text) !important; font: 650 clamp(2rem,5.8vw,4.1rem)/1 "Space Grotesk",sans-serif !important; letter-spacing: -.045em; }
+.gt-story-board { position: relative; display: grid; grid-template-columns: 9rem minmax(8rem,1fr) 9rem; grid-template-rows: auto 4rem auto; align-items: center; gap: .5rem 1rem; margin: 1.8rem 0 1rem; padding: clamp(1.1rem,3vw,1.7rem); border: 1px solid var(--border-ui); border-radius: var(--radius-lg); background: radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--cta) 8%,var(--surface)),var(--surface) 60%); overflow: hidden; }
+.gt-story-player,.gt-story-position { position: relative; z-index: 2; display: grid; place-items: center; gap: .35rem; min-height: 8rem; padding: .8rem; border: 1px solid var(--border-ui); border-radius: 50%; background: var(--surface); color: var(--text); font: 650 var(--fs-sm)/1.2 "Space Grotesk",sans-serif; text-align: center; }
+.gt-story-player .gt-i,.gt-story-position .gt-i { color: var(--accent); font-size: 1.65rem; }
+.gt-story-player small,.gt-story-position small { color: var(--muted); font: 500 .68rem/1.3 Georgia,serif; }
+.gt-story-player.them { grid-column: 3; }.gt-story-position { grid-column: 2; grid-row: 3; border-radius: var(--radius-lg); min-height: 5rem; }
+.gt-story-flight { grid-column: 2; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .4rem; color: var(--muted); font-size: .7rem; text-align: center; }
+.gt-story-flight i { width: .6rem; height: .6rem; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); transform: rotate(45deg); }
+.gt-story-flight::before { content:""; position:absolute; left: 10rem; right: 10rem; top: calc(1.7rem + 4rem); height:1px; background:linear-gradient(90deg,var(--accent),var(--cta)); z-index:-1; }
+.gt-story-return { grid-column: 1/4; grid-row: 2; align-self: stretch; display:grid; place-items:end center; border: 1px solid var(--line-strong); border-top:0; border-radius: 0 0 50% 50%; color:var(--muted); font-size:.7rem; }
+.gt-story-return span { padding:.2rem .45rem; background:var(--surface); }.gt-story-return i{width:.55rem;height:.55rem;border-right:1px solid var(--accent);border-bottom:1px solid var(--accent);transform:rotate(45deg);margin-bottom:-.3rem}
+.gt-story-rail { position:sticky; top:4.4rem; z-index:8; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin:0 0 2.2rem; border:1px solid var(--border-ui); border-radius:var(--radius-md); background:var(--line); overflow:hidden; box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent); }
+.gt-story-rail a { display:grid; grid-template-columns:auto 1fr; gap:.4rem; align-items:center; padding:.55rem .6rem; background:color-mix(in srgb,var(--surface) 94%,transparent); color:var(--muted); text-decoration:none; font-size:.7rem; line-height:1.25; }
+.gt-story-rail a:hover{color:var(--text);background:var(--surface)}.gt-story-rail span{color:var(--accent);font:700 .62rem/1 "Space Grotesk",sans-serif}
+.gt-story-rail a.is-current{color:var(--text);box-shadow:inset 0 -2px var(--cta)}
+
+/* Different strategic ideas receive different scene shapes. */
+#horizon .gt-lab,#levers .gt-lab,#risk .gt-lab,#regimes .gt-lab { width:min(68rem,calc(100vw - 2rem)); margin-inline:50%; transform:translateX(-50%); border:0; border-radius:1.5rem; padding:clamp(1.2rem,4vw,2.5rem); }
+#horizon .gt-lab { background:linear-gradient(90deg,color-mix(in srgb,var(--muted) 5%,var(--surface)),color-mix(in srgb,var(--cta) 9%,var(--surface))); }
+#levers .gt-lab { background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--accent) 10%,var(--surface)),var(--surface) 68%); }
+#risk .gt-lab { background:linear-gradient(135deg,color-mix(in srgb,var(--cta) 7%,var(--surface)),var(--surface) 45%,color-mix(in srgb,var(--accent) 9%,var(--surface))); }
+#regimes .gt-lab { background:conic-gradient(from 210deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface),color-mix(in srgb,var(--cta) 7%,var(--surface)),var(--surface)); }
+.gt-loop.good { border-color:var(--cta); border-radius:2rem 2rem .7rem .7rem; }.gt-loop.bad { border-color:var(--accent); border-radius:.7rem .7rem 2rem 2rem; }
+@media(max-width:760px){.gt-story-board{grid-template-columns:1fr;grid-template-rows:auto auto auto auto auto}.gt-story-player.them,.gt-story-position,.gt-story-flight,.gt-story-return{grid-column:1;grid-row:auto}.gt-story-flight::before{display:none}.gt-story-return{min-height:3.5rem;border-radius:0 0 50% 50%}.gt-story-rail{position:relative;top:auto;grid-template-columns:1fr 1fr}.gt-story-rail a:last-child{grid-column:1/-1}}
 
 /* ── Reading progress ─────────────────────────────────── */
 .gt-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60; pointer-events: none; }

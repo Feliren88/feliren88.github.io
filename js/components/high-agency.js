@@ -1259,8 +1259,30 @@
   }
 
   /* ══ Boot ══════════════════════════════════════════════ */
+  function storyRail() {
+    var rail = $('#ha-story-rail');
+    if (!rail) return;
+    var links = $$('a', rail);
+    var anchors = [$('#see-it'), $('#software'), $('#tools')].filter(Boolean);
+    var ticking = false;
+    function paint() {
+      var line = window.innerHeight * 0.38;
+      var current = anchors[0];
+      anchors.forEach(function (anchor) { if (anchor.getBoundingClientRect().top <= line) current = anchor; });
+      var active = String(anchors.indexOf(current) + 1);
+      links.forEach(function (link) {
+        var on = link.dataset.haAct === active;
+        link.classList.toggle('is-on', on);
+        if (on) link.setAttribute('aria-current', 'step'); else link.removeAttribute('aria-current');
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
+    paint();
+  }
+
   function init() {
-    [progress, jailCell, signals, tricycle, quiz, spectrum, physicsGate, asteroid,
+    [progress, storyRail, jailCell, signals, tricycle, quiz, spectrum, physicsGate, asteroid,
       durations, pedestal, decay, nows, wilbur, midwit, inversion, loopBreak,
       levels, trapGame, flowChart, worksheet, razor].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }

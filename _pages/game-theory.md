@@ -19,6 +19,18 @@ extra_js: /js/components/game-theory.js
      00 · THE SHIFT
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="shift">
+  <p class="gt-kicker">Move, response, position</p>
+  <p class="gt-lead">Your move changes their options. Their response changes yours.</p>
+  <div class="gt-story-board" aria-label="A strategic move creates a response and a new position">
+    <div class="gt-story-player you"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-sequence"/></svg><span>Your move</span><small>a</small></div>
+    <div class="gt-story-flight"><span>changes their incentives</span><i aria-hidden="true"></i></div>
+    <div class="gt-story-player them"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-players"/></svg><span>Their response</span><small>BR(a)</small></div>
+    <div class="gt-story-return"><span>creates the position you keep</span><i aria-hidden="true"></i></div>
+    <div class="gt-story-position"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-equilibrium"/></svg><span>New position</span><small>play again, redesign, or exit</small></div>
+  </div>
+  <nav class="gt-story-rail" aria-label="Game Theory narrative">
+    <a href="#games"><span>01</span>Read the game</a><a href="#horizon"><span>02</span>Change the horizon</a><a href="#levers"><span>03</span>Change the rules</a><a href="#risk"><span>04</span>Size the bet</a><a href="#dashboard"><span>05</span>Protect the whole system</a>
+  </nav>
   <p class="gt-deck">Most important decisions involve other people. They respond to your move, and
   their response changes what your move was worth.</p>
 
@@ -47,7 +59,7 @@ extra_js: /js/components/game-theory.js
      01 · EIGHT GAMES
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="games">
-  <h2><span class="n">01</span> Eight games you are already in <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-equilibrium"/></svg></h2>
+  <h2><span class="n">01</span> Recognise the game <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-equilibrium"/></svg></h2>
   <p class="gt-deck">Recurring problems often share the same structure. Once you recognise it, the
   available moves become clearer.</p>
 
@@ -104,7 +116,7 @@ extra_js: /js/components/game-theory.js
      02 · FIVE AT ONCE
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="five">
-  <h2><span class="n">02</span> Five games at once <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-players"/></svg></h2>
+  <h2><span class="n">02</span> See all five boards <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-players"/></svg></h2>
   <p class="gt-deck">A major decision affects five games at once. A win on one board can hide
   losses on the others.</p>
 
@@ -139,7 +151,7 @@ extra_js: /js/components/game-theory.js
      02 · THE HORIZON
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="horizon">
-  <h2><span class="n">03</span> Why the horizon changes the answer <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-repeat"/></svg></h2>
+  <h2><span class="n">03</span> Lengthen the horizon <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-repeat"/></svg></h2>
   <p class="gt-deck">Repeat the Prisoner's Dilemma and cooperation can become rational. The people
   stay the same; the prospect of another round changes their incentives.</p>
 
@@ -281,7 +293,7 @@ extra_js: /js/components/game-theory.js
      04 · RISK AND RUIN
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="risk">
-  <h2><span class="n">05</span> Risk and ruin <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-ruin"/></svg></h2>
+  <h2><span class="n">05</span> Size the bet before the upside <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-ruin"/></svg></h2>
   <p class="gt-deck">Some risks deserve a chance. A loss that ends the game needs a hard limit.</p>
 
   <p>Sort any decision on two axes: can you undo it, and how bad is the bad case. The four
@@ -619,7 +631,7 @@ extra_js: /js/components/game-theory.js
      06 · THE BOTTLENECK
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="dashboard">
-  <h2><span class="n">08</span> Find the binding constraint <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-optionality"/></svg></h2>
+  <h2><span class="n">08</span> Find the floor that binds <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-optionality"/></svg></h2>
   <p class="gt-deck">One collapsed part of life can cap everything else, however good the rest
   looks.</p>
 

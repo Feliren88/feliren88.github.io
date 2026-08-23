@@ -93,9 +93,23 @@
     window.addEventListener('resize', update);
   }
 
+  function initStoryRail() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sf-story-rail a'));
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (link) { link.classList.toggle('is-current', link.getAttribute('href') === '#' + entry.target.id); });
+      });
+    }, { rootMargin: '-18% 0px -65% 0px', threshold: 0 });
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
   function init() {
     try { initRouter(); } catch (error) { /* The static action key remains usable. */ }
     try { initProgress(); } catch (error) { /* Reading remains unaffected. */ }
+    try { initStoryRail(); } catch (error) { /* Navigation remains usable. */ }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

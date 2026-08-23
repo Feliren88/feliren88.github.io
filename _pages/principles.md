@@ -22,6 +22,17 @@ extra_js: /js/components/principles.js
   <div class="pr-central">
     <p class="t-eyebrow" style="margin:0 0 0.5rem">The central rule</p>
     <p class="lead-rule">Protect your future ability to choose.</p>
+    <div class="pr-story-path" aria-label="Decision path from pressure to deliberate scale">
+      {% assign pr_story_labels = "Pressure,Stop,Test,Protect,Scale" | split: "," %}
+      {% assign pr_story_icons = "pi-now,pi-stop,pi-see,pi-horizon,pi-scale" | split: "," %}
+      {% for label in pr_story_labels %}
+      <div class="pr-story-node{% if label == 'Test' %} is-gate{% endif %}"><svg class="pr-i" viewBox="0 0 24 24"><use href="#{{ pr_story_icons[forloop.index0] }}"/></svg><span>{{ label }}</span>{% if label == 'Test' %}<small>six questions</small>{% endif %}</div>
+      {% unless forloop.last %}<span class="pr-story-arrow" aria-hidden="true">→</span>{% endunless %}
+      {% endfor %}
+    </div>
+    <nav class="pr-story-rail" aria-label="Principles narrative">
+      <a href="#six"><span>01</span>Interrogate the choice</a><a href="#reversibility"><span>02</span>Set the speed</a><a href="#situations"><span>03</span>Name the situation</a><a href="#sequence"><span>04</span>Recover the process</a><a href="#protect"><span>05</span>Protect the base</a>
+    </nav>
     <p>Pressure narrows attention to immediate relief. When I am angry, afraid, excited, or
     uncertain, I replace the first question in my head with a better one.</p>
     <div class="pr-swap">
@@ -82,7 +93,7 @@ extra_js: /js/components/principles.js
      THE SIX QUESTIONS
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="six">
-  <h2><span class="n">01</span> The six questions</h2>
+  <h2><span class="n">01</span> Read reality through six questions</h2>
   <p class="pr-deck">Before any important decision, answer these. A clear answer matters more
   than a strong opinion.</p>
 
@@ -220,7 +231,7 @@ extra_js: /js/components/principles.js
      THE SITUATIONS
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="situations">
-  <h2><span class="n">03</span> The situations</h2>
+  <h2><span class="n">03</span> Find the situation you are in</h2>
   <p class="pr-deck">Every state worth having a prepared answer for. Use the filters or describe
   the situation in your own words with the search box above.</p>
 
@@ -298,8 +309,8 @@ extra_js: /js/components/principles.js
      THE SEQUENCE
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="sequence">
-  <h2><span class="n">04</span> When nothing above fits</h2>
-  <p class="pr-deck">When no specific rule fits, I follow these steps. They stop me from making a
+  <h2><span class="n">04</span> Move through the operating sequence</h2>
+  <p class="pr-deck">These steps stop me from making a
   major decision before I understand the problem, protect the essentials and test an option.</p>
 
   <div class="pr-console">
@@ -356,7 +367,7 @@ extra_js: /js/components/principles.js
      WHAT TO PROTECT
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="protect">
-  <h2><span class="n">05</span> The five things to protect</h2>
+  <h2><span class="n">05</span> Protect the floor</h2>
   <p class="pr-deck">When several problems arrive at once, I protect these five first.</p>
 
   <!-- Five nodes orbiting the thing they exist to protect. Hovering one dims

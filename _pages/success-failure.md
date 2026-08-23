@@ -31,6 +31,10 @@ extra_js: /js/components/success-failure.js
     </div>
   </div>
 
+  <nav class="sf-story-rail" aria-label="Learning route">
+    <a href="#four-outcomes"><span>01</span>Read the result</a><a href="#diagnosis"><span>02</span>Find the cause</a><a href="#lanes"><span>03</span>Choose a lane</a><a href="#guardrails"><span>04</span>Protect the game</a><a href="#review"><span>05</span>Close the loop</a>
+  </nav>
+
   <div class="sf-eq">
     <p class="eq">O = f(S, G, T, E, P, I, L, X)</p>
     <dl class="sf-terms">

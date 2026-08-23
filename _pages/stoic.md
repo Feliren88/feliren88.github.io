@@ -19,6 +19,19 @@ extra_js: /js/components/stoic.js
      00 · THE TWO MEN
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="two">
+  <p class="st-kicker">Event, judgment, response</p>
+  <p class="st-lead">The event arrives once. The mind can replay it all day.</p>
+  <div class="st-story-map" aria-label="Stoic visual model from event to character">
+    {% assign st_story_labels = "Event,Impression,Assent,Response,Character" | split: "," %}
+    {% assign st_story_icons = "si-event,si-impression,si-assent,si-response,si-action" | split: "," %}
+    {% for label in st_story_labels %}
+    <div class="st-story-node{% if label == 'Assent' %} is-gate{% endif %}"><svg class="st-i" viewBox="0 0 24 24"><use href="#{{ st_story_icons[forloop.index0] }}"/></svg><span>{{ label }}</span>{% if label == 'Assent' %}<small>your move</small>{% endif %}</div>
+    {% unless forloop.last %}<span class="st-story-arrow" aria-hidden="true">→</span>{% endunless %}
+    {% endfor %}
+  </div>
+  <nav class="st-story-rail" aria-label="Stoic narrative">
+    <a href="#control"><span>01</span>Draw the boundary</a><a href="#judgement"><span>02</span>Find the gap</a><a href="#disciplines"><span>03</span>Train the response</a><a href="#above"><span>04</span>Change the scale</a><a href="#death"><span>05</span>Release the outcome</a>
+  </nav>
   <p class="st-deck">An emperor and a former slave left us two of the clearest accounts of Roman
   Stoicism. Much of the advice overlaps.</p>
 
@@ -64,7 +77,7 @@ extra_js: /js/components/stoic.js
      01 · THE ONE IDEA
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="control">
-  <h2><span class="n">01</span> The one idea</h2>
+  <h2><span class="n">01</span> Draw the boundary</h2>
   <p class="st-deck">The <i>Enchiridion</i> begins with the distinction that supports the rest of
   the book.</p>
 
@@ -122,7 +135,7 @@ extra_js: /js/components/stoic.js
      02 · THE GAP
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="judgement">
-  <h2><span class="n">02</span> The gap</h2>
+  <h2><span class="n">02</span> Find the lever in the gap</h2>
   <p class="st-deck">Epictetus locates distress in the judgement we add to an event.</p>
 
   <div class="st-quote">
@@ -185,7 +198,7 @@ extra_js: /js/components/stoic.js
      03 · THREE DISCIPLINES
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="disciplines">
-  <h2><span class="n">03</span> Three disciplines</h2>
+  <h2><span class="n">03</span> Train the whole response</h2>
   <p class="st-deck">Marcus returns to three jobs: see clearly, act well, and accept what follows.
   They often happen at once.</p>
 
@@ -230,7 +243,7 @@ extra_js: /js/components/stoic.js
      04 · THE PASSAGES
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="passages">
-  <h2><span class="n">04</span> The passages</h2>
+  <h2><span class="n">04</span> Retrieve the right passage</h2>
   <p class="st-deck">Neither book is organised around the moment when you need it. This index is.
   Start with what is happening.</p>
 
@@ -296,7 +309,7 @@ extra_js: /js/components/stoic.js
      05 · THE VIEW FROM ABOVE
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="above">
-  <h2><span class="n">05</span> The view from above</h2>
+  <h2><span class="n">05</span> Change the scale</h2>
   <p class="st-deck">Marcus repeatedly looks at his troubles from farther away. The distance restores
   their scale. Then he returns to the work in front of him.</p>
 
@@ -341,7 +354,7 @@ extra_js: /js/components/stoic.js
      06 · THE PRACTICES
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="practices">
-  <h2><span class="n">06</span> The practices</h2>
+  <h2><span class="n">06</span> Return to the day</h2>
   <p class="st-deck">These books ask for practice. A few drills appear again and again.</p>
 
   <div class="st-practices">
@@ -424,7 +437,7 @@ extra_js: /js/components/stoic.js
      07 · ON DEATH
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="death">
-  <h2><span class="n">07</span> On death, and on being forgotten</h2>
+  <h2><span class="n">07</span> Test the problem against time</h2>
   <p class="st-deck">Marcus writes about death constantly. Remembering it is how he brings his
   attention back to the afternoon he still has.</p>
 
