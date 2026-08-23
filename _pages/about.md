@@ -10,7 +10,7 @@ hide_title: true
 <article class="about-story">
   <header class="about-story-hero">
     <div class="about-story-copy">
-      <p class="eyebrow">ABOUT · JAKARTA, INDONESIA</p>
+      <p class="eyebrow">ABOUT VICKY FELIREN</p>
       <h1>I look for what breaks <em>before</em> a system is trusted.</h1>
       <p class="about-story-lead">I’m Vicky Feliren, an applied scientist working where AI safety, uncertainty, and underrepresented data meet. My work asks a practical question: when a model becomes safer, does it remain useful for the people and inputs its training represented least?</p>
       <div class="about-story-actions">
@@ -29,7 +29,6 @@ hide_title: true
           <source type="image/webp" srcset="/assets/img/profile-450.webp 450w, /assets/img/profile.webp 880w" sizes="(max-width: 760px) 72vw, 390px">
           <img src="/assets/img/profile.webp" alt="Vicky Feliren" width="880" height="880" fetchpriority="high">
         </picture>
-        <span class="about-portrait-coordinate">06.20° S · 106.85° E</span>
       </div>
       <figcaption>Applied Scientist · AI safety and reliable multimodal systems</figcaption>
     </figure>

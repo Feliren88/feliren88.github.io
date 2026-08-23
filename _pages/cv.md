@@ -30,9 +30,9 @@ hide_title: true
     <div><p class="column-title">SPEAKING</p>{% for item in site.data.experience.talks %}<article class="cv-mini"><time>{{ item.dates }}</time><h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3><p>{{ item.location }}</p></article>{% endfor %}</div>
   </div></section>
 
-  <section class="cv-section" id="recognition"><header><span>04</span><h2>Recognition</h2></header><div class="cv-awards">
+  <section class="cv-section" id="recognition"><header><span>04</span><h2>Recognition</h2></header><div class="cv-recognition-body"><div class="cv-awards">
     {% for key in site.data.awards %}{% assign award = key[1] %}{% if award.category %}<article><span>{{ award.year }}</span><div><small>{{ award.category }}</small><h3>{% if award.url %}<a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>{% else %}{{ award.title }}{% endif %}</h3></div></article>{% endif %}{% endfor %}
-  </div><div class="cv-service"><p class="column-title">PROFESSIONAL SERVICE</p>{% for item in site.data.awards.service %}<p><strong>{{ item.role }}</strong> — {{ item.description }}</p>{% endfor %}</div></section>
+  </div><div class="cv-service"><p class="column-title">PROFESSIONAL SERVICE</p>{% for item in site.data.awards.service %}<article><h3>{{ item.role }}</h3><p>{{ item.description }}</p></article>{% endfor %}</div></div></section>
 
   <footer class="cv-footer"><p>Looking for the ideas behind the record?</p><a class="btn btn-primary" href="/about/">Return to About</a><a class="btn btn-secondary" href="/contact/">Contact me</a></footer>
 </article>
