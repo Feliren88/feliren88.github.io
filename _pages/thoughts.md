@@ -24,6 +24,12 @@ permalink: /writings/
 <span class="essay-feature-desc">A personal operating manual for decisions under pressure. Search by how you feel, set the reversibility dial, run the six questions.</span>
 <span class="read-more">Open the note →</span>
 </a>
+<a class="essay-feature" href="/stoic/">
+<span class="essay-feature-label">Interactive note</span>
+<span class="essay-feature-title">Stoic</span>
+<span class="essay-feature-desc">Marcus Aurelius and Epictetus as a working manual. Sort what is actually up to you, and search the passages by the state you are in.</span>
+<span class="read-more">Open the note →</span>
+</a>
 </div>
 
 <div class="writings-divider"></div>
