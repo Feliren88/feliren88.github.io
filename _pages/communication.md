@@ -38,8 +38,50 @@ extra_js: /js/components/communication.js
   <blockquote>Do not speak at the level where you understand the problem. Speak at the level where the other person can enter it.</blockquote>
 </header>
 
+<figure class="cm-fig" id="fig-transfer">
+  <figcaption><span class="n">Figure 1</span><b>Saying more transfers less</b><em>Move the slider.</em></figcaption>
+  <div class="cm-fig-body">
+    <svg class="cm-fig-svg" viewBox="0 0 560 220" role="img" aria-label="Ideas in your head, the message you send, and what lands in theirs.">
+      <text class="cf-lab" x="66" y="18" text-anchor="middle">In your head</text>
+      <text class="cf-lab" x="280" y="18" text-anchor="middle">What you say</text>
+      <text class="cf-lab" x="494" y="18" text-anchor="middle">What lands</text>
+      <g id="cf-mine"></g>
+      <rect class="cf-pipe" x="150" y="92" width="260" height="36" rx="18"/>
+      <rect class="cf-flow" id="cf-flow" x="150" y="92" width="0" height="36" rx="18"/>
+      <text class="cf-pipenum" id="cf-said" x="280" y="116" text-anchor="middle">0</text>
+      <g id="cf-theirs"></g>
+    </svg>
+    <label class="cm-fig-ctl">
+      <span>How much you say</span>
+      <input type="range" id="cf-range" min="1" max="40" value="6" step="1">
+    </label>
+    <div class="cm-fig-read">
+      <div><b id="cf-landed">0</b><span>ideas landed</span></div>
+      <div><b id="cf-pct">0%</b><span>of what you said</span></div>
+      <p id="cf-say" role="status"></p>
+    </div>
+  </div>
+</figure>
+
 <section class="cm-part cm-prose" id="objective">
   <div class="cm-heading"><span>02</span><div><h2>Choose the job before the words</h2><p>Many conversations fail because each person is doing a different job.</p></div></div>
+
+<figure class="cm-fig" id="fig-objective">
+  <figcaption><span class="n">Figure 2</span><b>Two people, two jobs</b><em>Pick one on each side.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-two">
+      <div class="cf-side">
+        <span class="cf-who you">You want to</span>
+        <div class="cf-opts" id="cf-mine-opts"></div>
+      </div>
+      <div class="cf-side">
+        <span class="cf-who them">They want to</span>
+        <div class="cf-opts" id="cf-their-opts"></div>
+      </div>
+    </div>
+    <div class="cf-verdict" id="cf-verdict" role="status"></div>
+  </div>
+</figure>
   <div class="cm-crossed" aria-label="Two people entering one conversation with different objectives">
     <div><small>Person A</small><b>Solve it</b><i>→</i></div>
     <div class="cm-collision">same words<br><strong>different jobs</strong></div>
@@ -74,6 +116,21 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="structure">
   <div class="cm-heading"><span>03</span><div><h2>Build a path into the idea</h2><p>Start at the surface. Add depth only when it helps.</p></div></div>
+
+<figure class="cm-fig" id="fig-depth">
+  <figcaption><span class="n">Figure 3</span><b>One idea, five depths</b><em>Slide to go deeper.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-depth-bars" id="cf-depth-bars" aria-hidden="true"></div>
+    <label class="cm-fig-ctl">
+      <span>Depth</span>
+      <input type="range" id="cf-depth" min="1" max="5" value="1" step="1">
+    </label>
+    <div class="cf-depth-out">
+      <p class="cf-msg" id="cf-depth-msg"></p>
+      <p class="cf-for" id="cf-depth-for"></p>
+    </div>
+  </div>
+</figure>
 
   <div class="cm-ladder-wrap">
     <div class="cm-ladder" id="cm-ladder" aria-label="Five levels of explanation">
@@ -150,6 +207,30 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="timing">
   <div class="cm-heading"><span>04</span><div><h2>Make the middle visible</h2><p>Silence can look like agreement while your concern grows in private.</p></div></div>
+
+<figure class="cm-fig" id="fig-silence">
+  <figcaption><span class="n">Figure 4</span><b>What silence costs</b><em>Drag the days.</em></figcaption>
+  <div class="cm-fig-body">
+    <svg class="cm-fig-svg" viewBox="0 0 560 190" role="img" aria-label="A small unsaid concern growing over time until it becomes a sudden rejection.">
+      <line class="cf-ax" x1="40" y1="150" x2="530" y2="150"/>
+      <path class="cf-grow" id="cf-grow"/>
+      <line class="cf-thresh" x1="40" y1="52" x2="530" y2="52"/>
+      <text class="cf-lab" x="46" y="46">it comes out all at once</text>
+      <circle class="cf-head" id="cf-head" cx="40" cy="150" r="7"/>
+      <text class="cf-lab" x="40" y="170">day 0</text>
+      <text class="cf-lab" x="530" y="170" text-anchor="end">day 30</text>
+    </svg>
+    <label class="cm-fig-ctl">
+      <span>Days you stay quiet</span>
+      <input type="range" id="cf-days" min="0" max="30" value="0" step="1">
+    </label>
+    <div class="cm-fig-read">
+      <div><b id="cf-day-n">0</b><span>days</span></div>
+      <div><b id="cf-cost">1 min</b><span>to say it now</span></div>
+      <p id="cf-silence-say" role="status"></p>
+    </div>
+  </div>
+</figure>
   <div class="cm-timeline" aria-label="A hidden concern becoming a sudden rejection">
     <div class="cm-private"><span>silence</span><span>analysis</span><span>certainty</span><b>sudden rejection</b></div>
     <div class="cm-public"><span>early concern</span><span>test it</span><span>update</span><b>clear decision</b></div>
@@ -175,6 +256,22 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="listen">
   <div class="cm-heading"><span>05</span><div><h2>Receive before you respond</h2><p>Your fastest solution can still be the wrong response.</p></div></div>
+
+<figure class="cm-fig" id="fig-listen">
+  <figcaption><span class="n">Figure 5</span><b>The point comes last</b><em>Drag where you cut in.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-track" id="cf-track" aria-hidden="true"></div>
+    <label class="cm-fig-ctl">
+      <span>Where you interrupt</span>
+      <input type="range" id="cf-cut" min="10" max="100" value="35" step="5">
+    </label>
+    <div class="cm-fig-read">
+      <div><b id="cf-heard">0%</b><span>of what they said</span></div>
+      <div><b id="cf-point">Missed</b><span>their actual point</span></div>
+      <p id="cf-listen-say" role="status"></p>
+    </div>
+  </div>
+</figure>
   <div class="cm-lara">
     <div><b>L</b><span>Listen</span><small>Do not prepare your answer.</small></div>
     <i>→</i><div><b>A</b><span>Acknowledge</span><small>Name why it makes sense.</small></div>
@@ -216,6 +313,17 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="conflict">
   <div class="cm-heading"><span>06</span><div><h2>Turn conflict into usable information</h2><p>Describe what happened. Do not put the person on trial.</p></div></div>
+
+<figure class="cm-fig" id="fig-conflict">
+  <figcaption><span class="n">Figure 6</span><b>Same event, two sentences</b><em>Switch the framing.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-toggle" id="cf-frame" role="group" aria-label="Choose a framing">
+      <button type="button" data-frame="judge">Put them on trial</button>
+      <button type="button" data-frame="observe" class="is-on">Describe what happened</button>
+    </div>
+    <div class="cf-chain" id="cf-chain"></div>
+  </div>
+</figure>
   <div class="cm-before-after">
     <div class="bad"><small>Character verdict</small><p>“You are unreliable.”</p></div>
     <i>→</i>
@@ -252,6 +360,29 @@ extra_js: /js/components/communication.js
 <section class="cm-part cm-prose" id="influence">
   <div class="cm-heading"><span>07</span><div><h2>Influence without unnecessary threat</h2><p>Begin in their world. Move one bridge at a time.</p></div></div>
 
+<figure class="cm-fig" id="fig-influence">
+  <figcaption><span class="n">Figure 7</span><b>One bridge at a time</b><em>Drag how far you ask them to move.</em></figcaption>
+  <div class="cm-fig-body">
+    <svg class="cm-fig-svg" viewBox="0 0 560 150" role="img" aria-label="The distance between where they stand and what you are asking, crossed in one leap or in stages.">
+      <line class="cf-ax" x1="40" y1="96" x2="520" y2="96"/>
+      <circle class="cf-them" cx="40" cy="96" r="9"/>
+      <text class="cf-lab" x="40" y="122" text-anchor="middle">them</text>
+      <circle class="cf-ask" id="cf-ask" cx="200" cy="96" r="9"/>
+      <text class="cf-lab" id="cf-ask-lab" x="200" y="122" text-anchor="middle">your ask</text>
+      <g id="cf-bridges"></g>
+    </svg>
+    <label class="cm-fig-ctl">
+      <span>Distance of the ask</span>
+      <input type="range" id="cf-dist" min="1" max="10" value="2" step="1">
+    </label>
+    <div class="cm-fig-read">
+      <div><b id="cf-steps">1</b><span>step needed</span></div>
+      <div><b id="cf-odds">High</b><span>chance they move</span></div>
+      <p id="cf-inf-say" role="status"></p>
+    </div>
+  </div>
+</figure>
+
   <div class="cm-persuasion">
     <span>Their objective</span><i>→</i><span>Their obstacle</span><i>→</i><span>Your proposal</span><i>→</i><span>Evidence</span><i>→</i><span>Cost</span><i>→</i><span>Next step</span>
   </div>
@@ -282,6 +413,20 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="lead">
   <div class="cm-heading"><span>08</span><div><h2>Make work easier to coordinate</h2><p>Authority increases the need for explicit priorities, ownership, standards, and trade-offs.</p></div></div>
+
+<figure class="cm-fig" id="fig-lead">
+  <figcaption><span class="n">Figure 8</span><b>Every unsaid thing costs</b><em>Turn each one on.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-switches" id="cf-switches" role="group" aria-label="What has been made explicit">
+      <button type="button" data-sw="priority">Priority</button>
+      <button type="button" data-sw="owner">Owner</button>
+      <button type="button" data-sw="standard">Standard</button>
+      <button type="button" data-sw="tradeoff">Trade-off</button>
+    </div>
+    <div class="cf-cost"><i id="cf-cost-fill"></i><span id="cf-cost-lab">4 things left to guess</span></div>
+    <p id="cf-lead-say" role="status"></p>
+  </div>
+</figure>
 
   <div class="cm-leader-message">
     <article><b>Why</b><span>Why are we doing this?</span></article>
@@ -318,6 +463,20 @@ extra_js: /js/components/communication.js
 
 <section class="cm-part cm-prose" id="contexts">
   <div class="cm-heading"><span>09</span><div><h2>Change the format, not the truth</h2><p>Different contexts need different amounts of warmth, detail, speed, and structure.</p></div></div>
+
+<figure class="cm-fig" id="fig-context">
+  <figcaption><span class="n">Figure 9</span><b>Same truth, four formats</b><em>Pick where you are.</em></figcaption>
+  <div class="cm-fig-body">
+    <div class="cf-toggle wide" id="cf-ctx" role="group" aria-label="Choose a context">
+      <button type="button" data-ctx="work" class="is-on">At work</button>
+      <button type="button" data-ctx="close">With someone close</button>
+      <button type="button" data-ctx="crisis">In a crisis</button>
+      <button type="button" data-ctx="public">In public</button>
+    </div>
+    <div class="cf-dials" id="cf-dials"></div>
+    <p class="cf-msg" id="cf-ctx-msg"></p>
+  </div>
+</figure>
   <div class="cm-context-tabs" role="tablist" aria-label="Communication contexts">
     <button role="tab" aria-selected="true" data-context="digital">Digital</button>
     <button role="tab" aria-selected="false" data-context="relationship">Relationships</button>
