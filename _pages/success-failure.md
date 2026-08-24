@@ -402,6 +402,15 @@ extra_js: /js/components/success-failure.js
       <li><button type="button" data-phase="scaling"><span>06</span><b>Scaling judgment</b><small>teams · systems · capital</small></button></li>
       <li><button type="button" data-phase="transmitting"><span>07</span><b>Allocating &amp; transmitting</b><small>guide · govern · teach</small></button></li>
     </ol>
+    <div class="sf-phase-detail" id="sf-phase-detail" aria-live="polite" hidden>
+      <div class="sf-phase-detail-visual" id="sf-phase-detail-visual" aria-hidden="true"></div>
+      <div class="sf-phase-detail-copy">
+        <header><span id="sf-phase-detail-number"></span><h3 id="sf-phase-detail-title"></h3></header>
+        <p id="sf-phase-detail-explanation"></p>
+        <div class="sf-phase-order"><span>Why this position</span><p id="sf-phase-detail-order"></p></div>
+        <div class="sf-phase-gate"><span id="sf-phase-detail-gate-label">Gate to the next milestone</span><strong id="sf-phase-detail-gate"></strong></div>
+      </div>
+    </div>
   </figure>
 
   <figure class="sf-architecture-visual">
