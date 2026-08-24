@@ -449,7 +449,122 @@
     paint('work');
   }
 
-  [figTransfer, figObjective, figDepth, figSilence, figListen,
+  /* ── Complete reference · independent, filterable lesson cards ── */
+  function manualLibrary() {
+    var manual = one('#complete-manual');
+    var filters = one('#cm-manual-filters');
+    if (!manual || !filters) return;
+
+    var topics = {
+      Foundations: [1, 2, 3, 11, 12, 13, 16, 17, 24, 25, 26, 52, 88, 89, 104, 121, 122],
+      Structure: [4, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 24, 25, 26, 56, 57, 61, 62, 63, 87, 88, 89, 116, 121],
+      Confidence: [14, 15, 18, 19, 20, 21, 46, 47, 78, 82, 83, 90, 102, 103, 108, 115],
+      Listening: [3, 12, 22, 23, 27, 28, 29, 34, 36, 37, 49, 55, 76, 85, 86, 91, 94, 95, 100, 119],
+      Conflict: [19, 30, 31, 33, 34, 35, 36, 37, 48, 49, 54, 75, 76, 79, 80, 81, 83, 84, 85, 90, 109, 110, 117, 118],
+      Influence: [23, 35, 36, 37, 38, 39, 43, 44, 67, 68, 69, 93, 94, 96, 99, 100, 117],
+      Negotiation: [31, 40, 41, 42, 43, 44, 45, 46, 71, 74, 81, 111, 112, 120],
+      Leadership: [6, 16, 45, 48, 49, 50, 51, 53, 54, 55, 56, 57, 58, 59, 60, 62, 63, 77, 78, 96, 97, 98, 105, 106, 107, 113, 118, 120],
+      Relationships: [28, 29, 32, 33, 34, 64, 65, 66, 70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 91, 92, 93, 95, 110, 114, 119],
+      Writing: [6, 7, 8, 11, 16, 24, 25, 56, 57, 61, 62, 63, 64, 65, 66, 77, 78, 87, 88],
+      'High stakes': [20, 31, 40, 41, 42, 46, 47, 77, 78, 79, 80, 81, 82, 96, 101, 111, 112, 115],
+      Scripts: [5, 6, 9, 17, 21, 27, 30, 31, 32, 45, 47, 51, 53, 54, 60, 62, 68, 75, 77, 78, 105, 106, 107, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121]
+    };
+    var tagByRule = {};
+    Object.keys(topics).forEach(function (topic) {
+      topics[topic].forEach(function (n) {
+        (tagByRule[n] || (tagByRule[n] = [])).push(topic);
+      });
+    });
+
+    function lessonVisual(n, title, tags) {
+      var topic = tags[0], k = n % 5, art;
+      if (topic === 'Structure' || topic === 'Writing') {
+        art = '<path class="vg" d="M16 24H144M16 55H144M16 86H144"/><rect class="va" x="16" y="16" width="' + (106-k*7) + '" height="16" rx="8"/><rect class="vb" x="16" y="47" width="' + (82-k*5) + '" height="16" rx="8"/><rect class="vc" x="16" y="78" width="' + (54-k*3) + '" height="16" rx="8"/>';
+      } else if (topic === 'Confidence' || topic === 'High stakes') {
+        art = '<path class="vg" d="M22 88A58 58 0 0 1 138 88"/><path class="vb" d="M22 88A58 58 0 0 1 80 30"/><path class="va" d="M80 30A58 58 0 0 1 138 88"/><path class="vi" d="M80 88L' + (45+k*14) + ' ' + (42+k*3) + '"/><circle class="va" cx="80" cy="88" r="6"/>';
+      } else if (topic === 'Listening' || topic === 'Relationships') {
+        art = '<circle class="vb" cx="47" cy="55" r="31"/><circle class="va" cx="113" cy="55" r="31"/><path class="vg" d="M70 55C78 ' + (28+k*4) + ' 85 ' + (82-k*3) + ' 92 55"/><circle class="vc" cx="80" cy="55" r="' + (7+k*2) + '"/>';
+      } else if (topic === 'Conflict' || topic === 'Influence' || topic === 'Negotiation') {
+        art = '<circle class="vi" cx="20" cy="55" r="7"/><path class="vd" d="M27 55C56 55 58 22 84 22H140"/><path class="va" d="M27 55C56 55 58 88 84 88H140"/><circle class="vd" cx="140" cy="22" r="7"/><circle class="va" cx="140" cy="88" r="7"/><path class="vg" d="M78 14V97"/>';
+      } else if (topic === 'Leadership') {
+        art = '<circle class="va" cx="80" cy="22" r="11"/><path class="vg" d="M80 33V51M80 51L35 78M80 51L80 84M80 51L125 78"/><circle class="vc" cx="35" cy="80" r="12"/><circle class="vc" cx="80" cy="86" r="12"/><circle class="vc" cx="125" cy="80" r="12"/>';
+      } else if (topic === 'Scripts') {
+        art = '<rect class="vc" x="12" y="18" width="38" height="28" rx="6"/><rect class="vb" x="61" y="18" width="38" height="28" rx="6"/><rect class="va" x="110" y="66" width="38" height="28" rx="6"/><path class="vg" d="M50 32H61M80 46V80H110"/>';
+      } else {
+        art = '<circle class="vb" cx="28" cy="55" r="21"/><circle class="va" cx="132" cy="55" r="21"/><path class="vg" d="M49 55H111"/><path class="va" d="M76 42L90 55 76 68"/><circle class="vc" cx="80" cy="55" r="' + (5+k*2) + '"/>';
+      }
+      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': ' + topic + ' diagram') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + esc(topic) + '</figcaption></figure>';
+    }
+
+    var grid = document.createElement('div');
+    grid.className = 'cm-manual-grid';
+    var cards = [];
+    all('.cm-chapter-body>article', manual).forEach(function (article) {
+      var n = +(article.id.match(/\d+/) || [0])[0];
+      var oldHeader = article.querySelector(':scope>header');
+      if (!oldHeader) return;
+      var title = oldHeader.querySelector('h3').textContent;
+      var tags = tagByRule[n] || ['Foundations'];
+      var card = document.createElement('details');
+      card.className = 'cm-lesson-card';
+      card.id = article.id;
+      card.dataset.tags = tags.join('|');
+      var summary = document.createElement('summary');
+      summary.innerHTML = '<span class="cm-lesson-number">' + String(n).padStart(2, '0') + '</span>' +
+        '<span class="cm-lesson-title">' + esc(title) + '</span><i aria-hidden="true"></i>';
+      var tagRow = document.createElement('div');
+      tagRow.className = 'cm-lesson-tags';
+      tagRow.innerHTML = tags.map(function (tag) { return '<span>' + esc(tag) + '</span>'; }).join('');
+      var body = document.createElement('div');
+      body.className = 'cm-lesson-body';
+      Array.prototype.slice.call(article.children).forEach(function (child) {
+        if (child !== oldHeader) body.appendChild(child);
+      });
+      card.appendChild(summary);
+      card.insertAdjacentHTML('beforeend', lessonVisual(n, title, tags));
+      card.appendChild(tagRow);
+      card.appendChild(body);
+      grid.appendChild(card);
+      cards.push(card);
+    });
+    all('.cm-chapter', manual).forEach(function (chapter) { chapter.remove(); });
+    var finalRules = one('.cm-final-rules', manual);
+    manual.insertBefore(grid, finalRules);
+
+    var active = 'All';
+    var names = ['All'].concat(Object.keys(topics));
+    filters.innerHTML = names.map(function (name) {
+      return '<button type="button" data-topic="' + esc(name) + '" aria-pressed="' + (name === 'All') + '">' + esc(name) + '</button>';
+    }).join('');
+    function paint() {
+      var shown = 0;
+      cards.forEach(function (card) {
+        var visible = active === 'All' || card.dataset.tags.split('|').indexOf(active) > -1;
+        card.hidden = !visible;
+        if (visible) shown++;
+      });
+      all('button', filters).forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.topic === active));
+      });
+      one('#cm-manual-count').textContent = shown + (shown === 1 ? ' lesson' : ' lessons');
+    }
+    filters.addEventListener('click', function (event) {
+      var button = event.target.closest('button[data-topic]');
+      if (!button) return;
+      active = button.dataset.topic;
+      paint();
+    });
+    paint();
+    if (/^#cm-rule-\d+$/.test(window.location.hash)) {
+      var linkedCard = one(window.location.hash, grid);
+      if (linkedCard) {
+        linkedCard.open = true;
+        window.requestAnimationFrame(function () { linkedCard.scrollIntoView(); });
+      }
+    }
+  }
+
+  [manualLibrary, figTransfer, figObjective, figDepth, figSilence, figListen,
    figConflict, figInfluence, figLead, figContext].forEach(function (fn) {
     try { fn(); } catch (e) { /* one figure must not take the page down */ }
   });
