@@ -408,6 +408,19 @@ extra_js: /js/components/success-failure.js
         <header><span id="sf-phase-detail-number"></span><h3 id="sf-phase-detail-title"></h3></header>
         <p id="sf-phase-detail-explanation"></p>
         <div class="sf-phase-order"><span>Why this position</span><p id="sf-phase-detail-order"></p></div>
+        <div class="sf-phase-criteria">
+          <div class="sf-phase-criteria-tabs" role="tablist" aria-label="Milestone readiness categories">
+            <button type="button" role="tab" data-criterion="prerequisites">Prerequisites</button>
+            <button type="button" role="tab" data-criterion="hard">Hard skills</button>
+            <button type="button" role="tab" data-criterion="soft">Soft skills</button>
+            <button type="button" role="tab" data-criterion="requirements">Requirements</button>
+            <button type="button" role="tab" data-criterion="readiness">Ready when</button>
+          </div>
+          <div class="sf-phase-criteria-panel" role="tabpanel">
+            <span id="sf-phase-criteria-label"></span>
+            <ul id="sf-phase-criteria-list"></ul>
+          </div>
+        </div>
         <div class="sf-phase-gate"><span id="sf-phase-detail-gate-label">Gate to the next milestone</span><strong id="sf-phase-detail-gate"></strong></div>
       </div>
     </div>

@@ -591,6 +591,11 @@
         order: 'Direction chosen before evidence is mostly guesswork. Capability comes first because it creates the self-knowledge and credibility needed to make a serious commitment.',
         gate: 'Name one valuable problem you solve unusually well.',
         legend: [['read', 'Capability built'], ['win', 'Evidence validated'], ['line', 'Fit becomes clearer']],
+        prerequisites: ['A stable practice routine', 'Access to real problems and feedback', 'Baseline literacy in the chosen domain'],
+        hard: ['Domain fundamentals', 'Structured research and problem solving', 'Fluency with the field’s core tools', 'End-to-end project delivery'],
+        soft: ['Reliability under ordinary pressure', 'Receiving correction without defensiveness', 'Deliberate practice and curiosity', 'Frustration tolerance'],
+        requirements: ['Completed work, not coursework alone', 'External feedback from competent people', 'A record of errors and lessons', 'A repeatable baseline standard'],
+        readiness: ['You solve familiar problems without step-by-step supervision', 'Your skill transfers across more than one project', 'Others trust you to finish important work', 'You can name the problem class where you are strongest'],
         art: '<svg viewBox="0 0 320 190"><path class="axis" d="M38 158H286"/><rect class="a" x="52" y="126" width="48" height="32" rx="4"/><rect class="b" x="116" y="92" width="48" height="66" rx="4"/><rect class="c" x="180" y="52" width="48" height="106" rx="4"/><path class="arrow" d="M68 112L132 76L196 36L270 22"/><path class="head" d="M258 18L274 20L265 34"/><circle class="proof" cx="76" cy="110" r="6"/><circle class="proof" cx="140" cy="74" r="6"/><circle class="proof" cx="204" cy="34" r="6"/><text x="76" y="177">SKILL</text><text x="140" y="177">PROOF</text><text x="204" y="177">FIT</text></svg>'
       },
       choosing: {
@@ -599,6 +604,11 @@
         order: 'Commitment becomes intelligent only after capability produces evidence. It must precede leverage because a system that compounds the wrong direction creates faster drift, not progress.',
         gate: 'Become the person competent people associate with one difficult problem.',
         legend: [['line', 'Explored routes'], ['read', 'Committed route'], ['win', 'Target problem']],
+        prerequisites: ['Evidence from the proving phase', 'A credible body of work', 'Exposure to several environments', 'Enough runway to reject a clearly bad fit'],
+        hard: ['Market and problem research', 'Opportunity comparison', 'Professional positioning', 'Network and stakeholder mapping'],
+        soft: ['Accurate self-assessment', 'Boundary setting', 'Decision-making under uncertainty', 'Commitment without premature certainty'],
+        requirements: ['One chosen problem class', 'A field worth sustained commitment', 'A deliberate stop-doing list', 'Peers who raise your standard'],
+        readiness: ['People say “talk to them about this problem”', 'You reject impressive but misaligned work', 'New learning compounds in one direction', 'The first ownership opportunity becomes visible'],
         art: '<svg viewBox="0 0 320 190"><circle class="origin" cx="52" cy="95" r="9"/><path class="dim" d="M62 95C122 95 135 38 205 38H270M62 95C122 95 135 152 205 152H270"/><path class="main" d="M62 95H270"/><path class="head" d="M257 86L274 95L257 104"/><circle class="target" cx="218" cy="95" r="22"/><circle class="target" cx="218" cy="95" r="8"/><text x="52" y="122">OPTIONS</text><text x="218" y="132">CHOSEN GAME</text></svg>'
       },
       leverage: {
@@ -607,6 +617,11 @@
         order: 'Leverage follows direction because compounding needs a stable target. It comes before ownership because there must first be a repeatable value engine worth capturing.',
         gate: 'Make one part of your contribution scale beyond your own hours.',
         legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
+        prerequisites: ['A clear direction', 'Repeated demand for the same expertise', 'A method that works more than once', 'Access to users and feedback'],
+        hard: ['Process and system design', 'Documentation and knowledge architecture', 'Productization or automation', 'Delegation and quality control'],
+        soft: ['Abstracting patterns from cases', 'Teaching clearly', 'Patience with iteration', 'Maintaining standards through others'],
+        requirements: ['A named repeatable method', 'A reusable asset or workflow', 'A distribution channel', 'A measure of output beyond hours worked'],
+        readiness: ['Someone else can use your method successfully', 'Useful output continues without your constant presence', 'Marginal effort falls as value repeats', 'Demand becomes recurring rather than accidental'],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="78" cy="95" r="28"/><text class="inside" x="78" y="99">EXPERTISE</text><path class="main" d="M108 95H160"/><path class="head" d="M149 87L164 95L149 103"/><path class="branch" d="M164 95L218 36M164 95H218M164 95L218 154"/><circle class="out" cx="220" cy="34" r="10"/><circle class="out" cx="220" cy="95" r="10"/><circle class="out" cx="220" cy="156" r="10"/><text class="outside" x="241" y="38">IP</text><text class="outside" x="241" y="99">SYSTEM</text><text class="outside" x="241" y="160">TEAM</text></svg>'
       },
       ownership: {
@@ -615,6 +630,11 @@
         order: 'Ownership follows leverage because repeatable value makes upside identifiable and negotiable. It precedes authority because bearing consequences improves incentives and decision quality.',
         gate: 'Know exactly how you participate when the work succeeds dramatically.',
         legend: [['read', 'Total value created'], ['win', 'Upside owned'], ['line', 'Participation flow']],
+        prerequisites: ['A working leverage engine', 'Evidence of value created', 'Basic financial runway', 'Clear understanding of the value chain'],
+        hard: ['Contract, equity, and incentive mechanics', 'Unit economics and cash-flow reading', 'Asset valuation and risk analysis', 'Capital-allocation fundamentals'],
+        soft: ['Negotiating without apology or entitlement', 'Thinking like an owner', 'Downside discipline', 'Patience for compounding'],
+        requirements: ['Explicit rights to economic upside', 'Defined accountability and decision rights', 'Liquidity outside the main bet', 'Protection against destructive concentration'],
+        readiness: ['Some income or wealth grows through ownership', 'You know your upside in a dramatic success', 'You evaluate decisions as allocations of capital', 'You can say no without immediate financial panic'],
         art: '<svg viewBox="0 0 320 190"><circle class="ring" cx="112" cy="94" r="62"/><path class="slice" d="M112 94V32A62 62 0 0 1 166 126Z"/><circle class="hole" cx="112" cy="94" r="29"/><path class="main" d="M178 94H272"/><path class="head" d="M259 85L276 94L259 103"/><text x="112" y="98">VALUE</text><text x="227" y="78">UPSIDE</text><text x="227" y="112">PARTICIPATION</text></svg>'
       },
       authority: {
@@ -623,6 +643,11 @@
         order: 'Authority should follow demonstrated value and ownership, not title alone. Judgment must first operate with evidence, incentives, and consequences before others safely defer to it.',
         gate: 'Be trusted to decide which problems deserve attention.',
         legend: [['win', 'Candidate options'], ['read', 'Judgment filter'], ['line', 'Selected decision']],
+        prerequisites: ['Consequences tied to prior decisions', 'A record of sound calls', 'Deep domain expertise', 'Trust from capable peers'],
+        hard: ['Decision and prioritization frameworks', 'Scenario and risk analysis', 'Resource allocation', 'Incentive and organizational design'],
+        soft: ['Calibrated judgment', 'Communicating uncertainty', 'Constructive conflict and courage', 'Visible accountability for outcomes'],
+        requirements: ['Decision rights matched by resources', 'Ownership of ambiguous problems', 'A decision journal with outcomes', 'Access to relevant information before choices'],
+        readiness: ['People consult you before committing resources', 'Your decisions survive changing conditions', 'Others execute from your direction without micromanagement', 'You consistently identify the problem behind the request'],
         art: '<svg viewBox="0 0 320 190"><path class="funnel" d="M38 34H282L205 100V152H115V100Z"/><circle class="option" cx="78" cy="58" r="8"/><circle class="option" cx="126" cy="58" r="8"/><circle class="option" cx="174" cy="58" r="8"/><circle class="option" cx="222" cy="58" r="8"/><circle class="option" cx="258" cy="58" r="8"/><path class="main" d="M160 112V170"/><path class="head" d="M151 158L160 174L169 158"/><text x="160" y="91">SELECT</text><text x="160" y="187">DECISION</text></svg>'
       },
       scaling: {
@@ -631,6 +656,11 @@
         order: 'Scale amplifies both wisdom and error. It belongs after authority because judgment must prove reliable in bounded decisions before a larger system carries it outward.',
         gate: 'Build a system that works without making you its permanent bottleneck.',
         legend: [['read', 'Judgment hub'], ['win', 'Multiplier nodes'], ['line', 'Delegated reach']],
+        prerequisites: ['Trusted judgment', 'Principles that can be explained', 'Capable lieutenants or partners', 'Resources worth multiplying'],
+        hard: ['Operating-system design', 'Organizational design and delegation', 'Portfolio or program management', 'Information and performance dashboards'],
+        soft: ['Trusting without abandoning oversight', 'Selecting and developing talent', 'Setting context instead of prescribing tasks', 'Letting go of personal indispensability'],
+        requirements: ['Clear decision architecture', 'Fast feedback and correction loops', 'Explicit ownership across the system', 'Redundancy for critical roles'],
+        readiness: ['The system performs during your absence', 'Judgment travels across teams, assets, or products', 'You are no longer the routine bottleneck', 'Most time moves from firefighting to selection'],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="160" cy="95" r="30"/><text class="inside" x="160" y="99">JUDGMENT</text><path class="branch" d="M160 65V26M186 78L244 45M190 104L258 122M174 123L198 168M145 124L112 164M132 106L62 132M132 80L68 48"/><circle class="out" cx="160" cy="20" r="11"/><circle class="out" cx="254" cy="39" r="11"/><circle class="out" cx="270" cy="126" r="11"/><circle class="out" cx="202" cy="174" r="11"/><circle class="out" cx="106" cy="170" r="11"/><circle class="out" cx="50" cy="136" r="11"/><circle class="out" cx="57" cy="42" r="11"/></svg>'
       },
       transmitting: {
@@ -639,9 +669,37 @@
         order: 'Transmission comes last because discernment requires a long record of learning, choosing, owning, and scaling. What is passed onward should be tested knowledge rather than borrowed certainty.',
         gate: 'Make what you learned useful beyond your own direct involvement.', final: true,
         legend: [['read', 'Tested discernment'], ['line', 'Transmission waves'], ['win', 'People and systems reached']],
+        prerequisites: ['Systems that operate without constant intervention', 'Financial and professional optionality', 'A long record of decisions and consequences', 'An identity larger than one operating role'],
+        hard: ['Capital allocation', 'Governance and fiduciary thinking', 'Mentorship and knowledge design', 'Portfolio, institution, or succession building'],
+        soft: ['Discernment about people and opportunities', 'Stewardship', 'Humility about what cannot be known', 'Generativity and patience'],
+        requirements: ['Explicit investment and selection principles', 'Successor and mentorship pathways', 'Protected attention for high-leverage decisions', 'Vehicles that carry knowledge or capital forward'],
+        readiness: ['Other people make better decisions because of your guidance', 'Institutions or assets endure beyond your involvement', 'Capital reaches worthy problems with discipline', 'Your knowledge is transferable rather than trapped in reputation'],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="92" cy="95" r="22"/><circle class="wave" cx="92" cy="95" r="45"/><circle class="wave" cx="92" cy="95" r="70"/><path class="main" d="M164 95H276"/><path class="head" d="M263 86L280 95L263 104"/><circle class="seed" cx="224" cy="58" r="8"/><circle class="seed" cx="252" cy="95" r="8"/><circle class="seed" cx="224" cy="132" r="8"/><text x="92" y="99">DISCERN</text><text x="238" y="157">BEYOND SELF</text></svg>'
       }
     };
+    var criteriaTabs = Array.prototype.slice.call(document.querySelectorAll('.sf-phase-criteria-tabs button[data-criterion]'));
+    var criteriaList = document.getElementById('sf-phase-criteria-list');
+    var criteriaLabel = document.getElementById('sf-phase-criteria-label');
+    var criterion = 'readiness';
+    var currentContent = null;
+    var criterionLabels = {
+      prerequisites: 'What must already be true',
+      hard: 'Technical and operational mastery',
+      soft: 'Behavioral mastery',
+      requirements: 'What this phase must contain',
+      readiness: 'Observable upgrade signals'
+    };
+    function renderCriterion() {
+      if (!currentContent || !criteriaList || !criteriaLabel) return;
+      criteriaLabel.textContent = criterionLabels[criterion];
+      criteriaList.innerHTML = currentContent[criterion].map(function (item) { return '<li>' + item + '</li>'; }).join('');
+      criteriaTabs.forEach(function (tab) {
+        var selected = tab.dataset.criterion === criterion;
+        tab.classList.toggle('is-on', selected);
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.tabIndex = selected ? 0 : -1;
+      });
+    }
     function choose(key, remember) {
       var button = buttons.find(function (item) { return item.dataset.phase === key; });
       var content = phase[key];
@@ -661,6 +719,8 @@
       document.getElementById('sf-phase-detail-gate').textContent = content.gate;
       document.getElementById('sf-phase-detail-gate-label').textContent = content.final ? 'Completion signal' : 'Gate to the next milestone';
       document.getElementById('sf-phase-detail-visual').innerHTML = content.art + '<div class="sf-phase-legend">' + content.legend.map(function (item) { return '<span><i class="' + item[0] + '"></i>' + item[1] + '</span>'; }).join('') + '</div>';
+      currentContent = content;
+      renderCriterion();
       detail.hidden = false;
       if (remember) {
         committed = key;
@@ -674,6 +734,17 @@
       button.addEventListener('focus', function () { choose(button.dataset.phase, false); });
       button.addEventListener('mouseleave', function () { if (committed) choose(committed, false); });
       button.addEventListener('blur', function () { if (committed) choose(committed, false); });
+    });
+    criteriaTabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () { criterion = tab.dataset.criterion; renderCriterion(); });
+      tab.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        var next = (index + (event.key === 'ArrowRight' ? 1 : -1) + criteriaTabs.length) % criteriaTabs.length;
+        criterion = criteriaTabs[next].dataset.criterion;
+        renderCriterion();
+        criteriaTabs[next].focus();
+      });
     });
     var saved = '';
     try { saved = localStorage.getItem('sf-life-phase') || ''; } catch (error) { /* Start unselected. */ }
