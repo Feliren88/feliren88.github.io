@@ -1,8 +1,8 @@
 ---
 layout: page
-title: The Uncertainty Operating System
-subtitle: How to think, act, and decide when you cannot be certain
-description: A practical guide to reading emotional signals, acting under uncertainty, and knowing when you have enough information.
+title: Working with Uncertainty
+subtitle: How to decide while some questions remain open
+description: How to read emotional signals, stop repeated checking, gather enough information, and act while doubt remains.
 permalink: /uncertainty-and-emotions/
 layout-class: page uncertainty-emotions
 extra_css: /css/uncertainty-and-emotions.css
@@ -16,8 +16,8 @@ extra_js: /js/components/uncertainty-and-emotions.js
 <header class="ue-hero" aria-labelledby="ue-hero-title">
   <div>
     <p class="ue-kicker">A field manual for unresolved questions</p>
-    <h1 id="ue-hero-title">You do not need certainty to proceed.</h1>
-    <p>The useful skill is separating what the situation requires from what discomfort demands. You do not have to make every doubt disappear.</p>
+    <h1 id="ue-hero-title">You can proceed without certainty.</h1>
+    <p>Separate what the situation requires from what discomfort demands. Doubt can remain while you move.</p>
   </div>
   <div class="ue-hero-model" aria-label="The operating shift from resolving uncertainty to choosing action">
     <div class="old"><small>The reflex</small><b>Uncertainty</b><i>→</i><b>Resolve it</b><span>life waits</span></div>
@@ -53,7 +53,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <button data-step="4"><svg class="ue-i"><use href="#ue-anchor"/></svg><b>Relief</b><small>brief, but persuasive</small></button>
   </div>
   <p class="ue-loop-read" id="ue-loop-read" role="status">Tap a stage. The loop feels useful because relief is real. Its cost arrives in the next round.</p>
-  <div class="ue-shift"><span>Old objective</span><b>uncertainty → certainty</b><strong>becomes</strong><span>Trained objective</span><b>uncertainty → proceed anyway</b></div>
+  <div class="ue-shift"><span>The reflex</span><b>uncertainty → settle every doubt</b><strong>becomes</strong><span>The practice</span><b>uncertainty → choose the next action</b></div>
   <p>A threat signal may arrive as a thought, image, memory, sensation, urge, doubt, or a feeling that something is wrong. Read it as a prompt to look, not a verdict. Check the available facts, the actual stakes, and whether the situation calls for action now.</p>
 </section>
 
@@ -94,7 +94,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 </section>
 
 <section class="ue-part ue-prose" id="games">
-  <h2><span>03</span><svg class="ue-i ue-h2-i"><use href="#ue-dice"/></svg> The short game and the long game</h2>
+  <h2><span>03</span><svg class="ue-i ue-h2-i"><use href="#ue-dice"/></svg> Count what happens next</h2>
   <p class="ue-deck">A certainty move can make sense now but cost you more over time.</p>
   <div class="ue-payoffs">
     <article class="short"><header><svg class="ue-i"><use href="#ue-cycle"/></svg><div><small>Strategy C</small><h3>Resolve uncertainty</h3></div></header><div class="now"><span>now</span><b>+5</b><p>Distress falls.</p></div><div class="later"><span>next rounds</span><b>−2</b><p>The mind learns that every doubt needs an answer.</p></div></article>
@@ -143,7 +143,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 <section class="ue-part ue-prose" id="training">
   <h2><span>04</span><svg class="ue-i ue-h2-i"><use href="#ue-dumbbell"/></svg> Practise the gap</h2>
   <p class="ue-deck">Create a gap between the urge for relief and your response. That gap gives judgment time to return.</p>
-  <div class="ue-formula"><div><svg class="ue-i"><use href="#ue-alarm"/></svg><b>Uncertainty</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-open"/></svg><b>Non-resolution</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-move"/></svg><b>Chosen action</b></div><i>=</i><strong>Freedom training</strong></div>
+  <div class="ue-formula"><div><svg class="ue-i"><use href="#ue-alarm"/></svg><b>Uncertainty</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-open"/></svg><b>An open question</b></div><i>+</i><div><svg class="ue-i"><use href="#ue-move"/></svg><b>Chosen action</b></div><i>=</i><strong>Practice</strong></div>
 
   <div class="ue-curveviz">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-curveline"/></svg> What the feeling does when you do not act on it</p>
@@ -251,9 +251,9 @@ extra_js: /js/components/uncertainty-and-emotions.js
     </div>
 
     <div class="ue-primer-facts">
-      <div><svg class="ue-i"><use href="#ue-curveline"/></svg><b>Every emotion ends</b><span>None of them are permanent, including the ones that feel permanent while they are happening.</span></div>
+      <div><svg class="ue-i"><use href="#ue-curveline"/></svg><b>Emotions change</b><span>Intensity rises and falls, even when a feeling seems fixed while you are inside it.</span></div>
       <div><svg class="ue-i"><use href="#ue-allow"/></svg><b>Feeling it is not agreeing with it</b><span>You can notice fear without treating the danger as real, and notice guilt without being guilty.</span></div>
-      <div><svg class="ue-i"><use href="#ue-label"/></svg><b>Naming it turns the volume down</b><span>A vague bad feeling is bigger than a named one. The wheel below is for finding the name.</span></div>
+      <div><svg class="ue-i"><use href="#ue-label"/></svg><b>Name it before you act</b><span>A precise word gives you something specific to inspect. Use the wheel below when “bad” is all you have.</span></div>
       <div><svg class="ue-i"><use href="#ue-openq"/></svg><b>None of them are forbidden</b><span>Every emotion is allowed. Actions are the part worth choosing carefully.</span></div>
     </div>
 
@@ -367,7 +367,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div class="ue-band-read" id="ue-band-read" role="status"></div>
   </div>
 
-  <div class="ue-three"><p><svg class="ue-i"><use href="#ue-distress"/></svg><b>Distress</b> is not proof of danger.</p><p><svg class="ue-i"><use href="#ue-urgency"/></svg><b>Urgency</b> is not proof of importance.</p><p><svg class="ue-i"><use href="#ue-signal"/></svg><b>Emotion</b> is a signal, not a command.</p></div>
+  <div class="ue-three"><p><svg class="ue-i"><use href="#ue-distress"/></svg>Check <b>danger</b> against the facts.</p><p><svg class="ue-i"><use href="#ue-urgency"/></svg>Check <b>importance</b> against the stakes.</p><p><svg class="ue-i"><use href="#ue-signal"/></svg>Check <b>action</b> against your judgment.</p></div>
 
   <div class="ue-levers">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-release"/></svg> Four ways to lower the speed in under two minutes</p>
@@ -392,15 +392,15 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <div><span class="f">Shame</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> hide or over-explain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">say what happened once, repair what you can, and carry on</span></div>
       <div><span class="f">Doubt</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> keep checking until you feel certain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">allow the uncertainty to remain and return to the task</span></div>
     </div>
-    <p class="ue-opp-note"><b>This is not a rule to ignore emotion.</b> Fear should move you away from real danger. Anger may identify a real violation. Sadness may show that rest is needed. The opposite action is useful only when the urge is stronger than the facts justify or keeps you trapped after the immediate problem has passed.</p>
+    <p class="ue-opp-note"><b>Follow emotion when it fits the facts.</b> Fear should move you away from real danger. Anger may identify a real violation. Sadness may show that rest is needed. Use the opposite action only when the urge is stronger than the facts justify or keeps you trapped after the immediate problem has passed.</p>
   </div>
 
-  <div class="ue-warning"><svg class="ue-i"><use href="#ue-pause"/></svg><b>Calming down is optional. Slowing down is enough.</b><p>Use breathing, movement, or sensory grounding to regain choice. Do not make a calm feeling the entry fee for continuing.</p></div>
+  <div class="ue-warning"><svg class="ue-i"><use href="#ue-pause"/></svg><b>Slow down enough to choose.</b><p>Use breathing, movement, or sensory grounding to regain choice. You can continue while still upset.</p></div>
 </section>
 
 <section class="ue-part ue-prose" id="budget">
   <h2><span>06</span><svg class="ue-i ue-h2-i"><use href="#ue-wallet"/></svg> Give uncertainty a budget</h2>
-  <p class="ue-deck">Check in proportion to the external problem, not in proportion to anxiety.</p>
+  <p class="ue-deck">Let the external stakes decide how much checking the problem deserves.</p>
   <div class="ue-budget" id="ue-budget">
     <button data-answer="Check the account or receipt once. The answer is a finite external fact."><b>A</b><svg class="ue-i"><use href="#ue-fact"/></svg><span>Actionable</span><small>Did I pay the electricity bill?</small></button>
     <button data-answer="Gather decision-relevant evidence, set a deadline, then choose."><b>B</b><svg class="ue-i"><use href="#ue-search"/></svg><span>Researchable</span><small>Which job has better economics?</small></button>
@@ -411,8 +411,8 @@ extra_js: /js/components/uncertainty-and-emotions.js
 </section>
 
 <section class="ue-part ue-prose" id="decisions">
-  <h2><span>07</span><svg class="ue-i ue-h2-i"><use href="#ue-fork"/></svg> Do not confuse new anxiety with new information</h2>
-  <p class="ue-deck">Reopen a decision when the world changes. When only your feelings change, pause instead of reviewing it automatically.</p>
+  <h2><span>07</span><svg class="ue-i ue-h2-i"><use href="#ue-fork"/></svg> Reopen decisions for new information</h2>
+  <p class="ue-deck">Reopen a decision when the world changes. If only your anxiety rose, pause before reviewing it again.</p>
   <div class="ue-decision" id="ue-decision">
     <p><svg class="ue-i"><use href="#ue-fork"/></svg> After deciding, what changed?</p>
     <div><button data-decision="evidence"><svg class="ue-i"><use href="#ue-newevidence"/></svg>New external evidence</button><button data-decision="anxiety"><svg class="ue-i"><use href="#ue-wave"/></svg>Only anxiety rose</button></div>
@@ -480,7 +480,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   </div>
 
   <div class="ue-courage"><div><svg class="ue-i"><use href="#ue-shield"/></svg><span>Courage</span><b>chosen action despite fear</b></div><div><svg class="ue-i"><use href="#ue-steady"/></svg><span>Confidence</span><b>trust in your ability to respond</b></div></div>
-  <p>You do not need proof that nothing bad will happen. You need a reasonable reading of the situation, a proportionate response, and enough trust that you can handle what follows.</p>
+  <p>Act from a reasonable reading of the situation, a proportionate response, and enough trust that you can handle what follows.</p>
   <div class="ue-practice-log" aria-label="Practice review">
     <div><svg class="ue-i"><use href="#ue-openq"/></svg><small>Before</small><b>What am I unsure about?</b><span>Name one unresolved question.</span></div>
     <div><svg class="ue-i"><use href="#ue-magnet"/></svg><small>During</small><b>What is the urge?</b><span>Notice what promises immediate relief.</span></div>
@@ -490,7 +490,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="support">
   <h2><span>09</span><svg class="ue-i ue-h2-i"><use href="#ue-hands"/></svg> Support without borrowed certainty</h2>
-  <p class="ue-deck">Good support keeps a person present long enough to decide. It does not supply unlimited reassurance.</p>
+  <p class="ue-deck">Good support keeps a person present long enough to decide without answering the same fear forever.</p>
   <div class="ue-support">
     <article><header><svg class="ue-i"><use href="#ue-ask"/></svg><div><small>When asking for help</small><h3>Ask for company or perspective</h3></div></header><ul aria-label="Examples of asking for help"><li>“Sit with me while I make the call.”</li><li>“What fact do you think I am missing?”</li><li>“Help me return to the plan I already chose.”</li></ul></article>
     <article><header><svg class="ue-i"><use href="#ue-steady"/></svg><div><small>When helping someone</small><h3>Offer steadiness, not guarantees</h3></div></header><ul aria-label="Examples of helping someone"><li>“I can see this is hard.”</li><li>“I do not have a guarantee, but I can stay with you.”</li><li>“What did you decide before the worry rose?”</li></ul></article>
@@ -505,14 +505,14 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="reset">
   <h2><span>10</span><svg class="ue-i ue-h2-i"><use href="#ue-restart"/></svg> Recover without a trial</h2>
-  <p class="ue-deck">A difficult round does not require self-punishment or a full review. Ask what you can adjust next.</p>
+  <p class="ue-deck">After a difficult round, skip the trial. Ask what you can adjust next.</p>
 
   <div class="ue-stopseq">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-stop"/></svg> Before any of that, four beats</p>
     <div class="ue-stopgrid">
       <span><svg class="ue-i"><use href="#ue-stop"/></svg><b>Stop</b><small>no message, no decision, no review</small></span>
       <span><svg class="ue-i"><use href="#ue-pause"/></svg><b>Step back</b><small>put one metre and one minute between you and it</small></span>
-      <span><svg class="ue-i"><use href="#ue-notice"/></svg><b>Look</b><small>what actually happened, in plain words</small></span>
+      <span><svg class="ue-i"><use href="#ue-notice"/></svg><b>Look</b><small>what happened, in plain words</small></span>
       <span><svg class="ue-i"><use href="#ue-smallstep"/></svg><b>Go on</b><small>the next useful action, at a size you can repeat</small></span>
     </div>
   </div>

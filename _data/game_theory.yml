@@ -148,12 +148,12 @@ levers:
   - key: "Players"
     icon: gt-players
     ask: "Who is at the table, and who could be?"
-    example: "A bad cofounder is rarely a negotiation problem. It is a casting problem."
+    example: "Negotiating harder will not fix a poor choice of cofounder. Change who is at the table."
     viz:
       type: swap
       before: "Negotiate harder"
       after: "Change who is at the table"
-      cap: "A bad cofounder is a casting problem."
+      cap: "Change who is at the table."
 
   - key: "Payoffs"
     icon: gt-payoffs
@@ -164,7 +164,7 @@ levers:
       a: "Asking for collaboration"
       b: "What comp rewards"
       heavy: "b"
-      cap: "The reward structure wins."
+      cap: "Collaboration follows the reward structure."
 
   - key: "Information"
     icon: gt-information
@@ -232,7 +232,7 @@ laws:
   - n: 2
     icon: gt-repeat
     law: "Most human games repeat"
-    why: "The same people come back, which turns reputation into an asset and makes betrayal expensive."
+    why: "The same people come back. That is what makes reputation an asset and betrayal expensive."
     viz:
       type: loop
       cap: "The same people come back."
@@ -312,13 +312,13 @@ laws:
 
   - n: 9
     icon: gt-sunk
-    law: "Sunk cost has no vote"
-    why: "What you already spent is a fact about the past. Only future costs and benefits are decidable."
+    law: "Exclude sunk cost from the next decision"
+    why: "What you already spent is a fact about the past. Compare only the future costs and benefits you can still change."
     viz:
       type: dichotomy
       mine: "Future costs and benefits"
       theirs: "What you already spent"
-      cap: "The past gets no vote."
+      cap: "Compare the future costs and benefits."
 
   - n: 10
     icon: gt-exit
@@ -343,7 +343,7 @@ laws:
 
   - n: 12
     icon: gt-l-incentives
-    law: "Incentives beat intentions"
+    law: "Check incentives against stated intentions"
     why: "When the stated goal and the reward structure disagree, the reward structure wins."
     viz:
       type: scale
@@ -377,12 +377,12 @@ laws:
   - n: 15
     icon: gt-l-choose
     law: "Choose games carefully"
-    why: "Strong players spend less of their life in games where winning means nothing."
+    why: "Spend less of your life in games where winning gives you nothing you value."
     viz:
       type: dichotomy
       mine: "Games worth winning"
       theirs: "Games where winning costs too much"
-      cap: "Strong players spend less life in the second."
+      cap: "Spend less time in games where winning costs too much."
 
 dashboard:
   - key: "Career"
@@ -492,7 +492,7 @@ five:
     icon: gt-arena
     vs: "Employers, markets, competitors, institutions"
     ask: "What do they do after I move?"
-    note: "The visible game matters, though the other four layers may shape the decade more."
+    note: "This is the visible game. It matters, though the other four layers may shape the decade more."
     viz:
       type: split
       in: "Your move"
@@ -542,7 +542,7 @@ five:
     icon: gt-tree
     vs: "The choice of which game to enter"
     ask: "Why am I playing this one at all?"
-    note: "Question the frame itself. Choosing a better game can matter more than improving your play."
+    note: "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play."
     viz:
       type: swap
       before: "Play this game harder"
@@ -576,7 +576,7 @@ domains:
       type: spread
       many: "One employer, one client"
       few: "Pay that grows with ownership"
-      cap: "Dependency turns a good income into a hostage."
+      cap: "Dependency makes a good income fragile."
 
   - key: "Wealth"
     icon: gt-wealth
@@ -605,7 +605,7 @@ domains:
       before: "Ownership sounds like freedom"
       pause: "A customer, an advantage"
       after: "A claim worth holding"
-      cap: "The upside has to be real first."
+      cap: "Verify the customer and the advantage first."
 
   - key: "Relationships"
     icon: gt-trust
@@ -763,7 +763,7 @@ domains:
       a: "A visit"
       b: "A life there"
       heavy: "b"
-      cap: "Different samples entirely."
+      cap: "A visit gives weak evidence about daily life."
 
   - key: "Recovery"
     icon: gt-recovery
@@ -836,7 +836,7 @@ regimes:
       type: dichotomy
       mine: "Solvency, reputation, optionality"
       theirs: "Concentrating further to recover"
-      cap: "The ground is moving."
+      cap: "Protect solvency while downside risk is rising."
 
   - key: "Recovery"
     icon: gt-slow

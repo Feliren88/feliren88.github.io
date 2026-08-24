@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Success & Failure
-subtitle: Diagnose the outcome. Protect the larger game. Choose the next move.
-description: A visual guide to diagnosing wins and losses, scaling repeatable success, recovering from failure, and deciding when to adapt, pause, hedge, or exit.
+subtitle: Learn what caused the result, then choose what to do next.
+description: How to learn from a win or loss without mistaking luck for skill, repeating a costly mistake, or risking your ability to continue.
 permalink: /success-failure/
 layout-class: page success-failure
 extra_css: /css/success-failure.css
@@ -13,7 +13,7 @@ extra_js: /js/components/success-failure.js
 {% include success-failure-icons.html %}
 
 <section class="sf-part sf-prose sf-opening" id="outcome">
-  <p class="sf-kicker">An operating manual for the result after the plan</p>
+  <p class="sf-kicker">What to do after the plan meets reality</p>
 
   <figure class="sf-fig" id="sfig-luck">
     <figcaption><span class="n">Figure 1</span><b>One result tells you less than you think</b><em>Drag how much of this game is luck.</em></figcaption>
@@ -36,8 +36,8 @@ extra_js: /js/components/success-failure.js
     </div>
   </figure>
   <p class="sf-lead">Treat the outcome as evidence.</p>
-  <p>A strategy used under specific conditions produced a result. Now learn what caused it without
-  treating one win as proof of brilliance or one loss as proof of incompetence.</p>
+  <p>You tried a strategy under specific conditions and got a result. Find out what caused it before
+  you call one win brilliance or one loss incompetence.</p>
 
   <div class="sf-hero-map" aria-label="An outcome passes through diagnosis before one of six responses">
     <div class="sf-node sf-node-origin"><svg class="sf-i"><use href="#sf-outcome"/></svg><span>Outcome</span></div>
@@ -93,8 +93,7 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose" id="four-outcomes">
   <h2><span class="n">01</span> Four kinds of outcome <svg class="sf-i"><use href="#sf-capacity"/></svg></h2>
-  <p class="sf-deck">The visible result tells only half the story. The other half is how it affects
-  your future capacity.</p>
+  <p class="sf-deck">Judge a result twice: by what happened and by what it left you able to do.</p>
 
   <figure class="sf-fig" id="sfig-quad">
     <figcaption><span class="n">Figure 2</span><b>Place your last result</b><em>Move both sliders.</em></figcaption>
@@ -151,8 +150,7 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose" id="diagnosis">
   <h2><span class="n">02</span> Diagnose before reacting <svg class="sf-i"><use href="#sf-diagnose"/></svg></h2>
-  <p class="sf-deck">Stop unnecessary escalation. Separate what happened from the story you are
-  tempted to tell about it.</p>
+  <p class="sf-deck">Separate what happened from the verdict you are tempted to draw about yourself.</p>
 
   <figure class="sf-fig" id="sfig-narrow">
     <figcaption><span class="n">Figure 3</span><b>Each answer removes a cause</b><em>Answer what you can.</em></figcaption>
@@ -190,11 +188,11 @@ extra_js: /js/components/success-failure.js
 </section>
 
 <section class="sf-part sf-prose" id="lanes">
-  <h2><span class="n">03</span> Two operating lanes <svg class="sf-i"><use href="#sf-route"/></svg></h2>
+  <h2><span class="n">03</span> What to do after a win or loss <svg class="sf-i"><use href="#sf-route"/></svg></h2>
   <p class="sf-deck">Success needs restraint before scale. Failure needs stability before another bet.</p>
 
   <figure class="sf-fig" id="sfig-order">
-    <figcaption><span class="n">Figure 4</span><b>The order is the method</b><em>Start from a later step and see the cost.</em></figcaption>
+    <figcaption><span class="n">Figure 4</span><b>Skipping steps changes the result</b><em>Start from a later step and see the cost.</em></figcaption>
     <div class="sf-fig-body">
       <div class="sx-toggle" id="sx-lane" role="group" aria-label="Choose a lane">
         <button type="button" data-lane="win" class="is-on">After a win</button>
@@ -275,7 +273,7 @@ extra_js: /js/components/success-failure.js
       <article><svg class="sf-i" aria-hidden="true"><use href="#sf-emotion"/></svg><h3>Emotional load</h3><p>As emotional load rises, reduce decision irreversibility and commitment size.</p></article>
       <article><svg class="sf-i" aria-hidden="true"><use href="#sf-concentration"/></svg><h3>Concentration</h3><p>Diversify before one client, institution, person, platform, or identity controls too much value.</p></article>
       <article><svg class="sf-i" aria-hidden="true"><use href="#sf-budget"/></svg><h3>Failure budget</h3><p>Fund bounded losses that buy learning. Do not let experiments threaten the foundation.</p></article>
-      <article><svg class="sf-i" aria-hidden="true"><use href="#sf-bandwidth"/></svg><h3>Success capacity</h3><p>Every opportunity displaces time, attention, energy, reputation, and identity bandwidth.</p></article>
+      <article><svg class="sf-i" aria-hidden="true"><use href="#sf-bandwidth"/></svg><h3>Capacity</h3><p>Every opportunity consumes time, attention, and energy. It can also narrow what others expect you to keep doing.</p></article>
     </div>
   </div>
   <div class="sf-eq"><p class="eq">D<sub>t</sub> = B<sub>f</sub> &minus; C<sub>f</sub></p>
@@ -352,7 +350,7 @@ extra_js: /js/components/success-failure.js
     <article class="bad"><svg class="sf-i" aria-hidden="true"><use href="#sf-fragile"/></svg><h3>Failure that escalates</h3><p>Failure <span>&rarr;</span> ego threat <span>&rarr;</span> denial <span>&rarr;</span> larger bad bet <span>&rarr;</span> more failure</p><small>break this loop before sunk cost becomes identity</small></article>
   </div>
   <div class="sf-final-choice"><span><svg class="sf-i" aria-hidden="true"><use href="#sf-medal"/></svg>Choose</span><strong>Scale · Maintain · Adapt · Pause · Hedge · Exit</strong></div>
-  <p class="sf-final">Success should make future success easier without making the person more fragile; failure should make future failure less likely without destroying the resources required to continue playing.</p>
+  <p class="sf-final">After each round, keep what improved your next attempt and stop what made the next mistake harder to survive.</p>
 
   <figure class="sf-fig" id="sfig-compound">
     <figcaption><span class="n">Figure 5</span><b>Both loops compound</b><em>Run the rounds.</em></figcaption>
@@ -373,7 +371,7 @@ extra_js: /js/components/success-failure.js
       <label class="sf-fig-ctl"><span>Rounds played</span>
         <input type="range" id="sx-rounds" min="1" max="12" value="1" step="1"></label>
       <div class="sx-legend">
-        <span class="lg-good"><i></i><span><b>Success that compounds</b><small>competence buys options, which buy better rooms</small></span></span>
+        <span class="lg-good"><i></i><span><b>Success that compounds</b><small>competence creates more credible choices</small></span></span>
         <span class="lg-recover"><i></i><span><b>Failure that teaches</b><small>the loss is paid once and becomes a better bet</small></span></span>
         <span class="lg-bad"><i></i><span><b>Failure that escalates</b><small>denial funds a larger bad bet</small></span></span>
       </div>
@@ -396,7 +394,7 @@ extra_js: /js/components/success-failure.js
     <ol class="sf-phase-path" id="sf-phase-path">
       <li><button type="button" data-phase="proving"><span>01</span><b>Proving capability</b><small>skill · proof · fit</small></button></li>
       <li><button type="button" data-phase="choosing"><span>02</span><b>Choosing direction</b><small>field · people · focus</small></button></li>
-      <li><button type="button" data-phase="leverage"><span>03</span><b>Building leverage</b><small>method · system · IP</small></button></li>
+      <li><button type="button" data-phase="leverage"><span>03</span><b>Building an advantage</b><small>method · system · IP</small></button></li>
       <li><button type="button" data-phase="ownership"><span>04</span><b>Expanding ownership</b><small>equity · assets · upside</small></button></li>
       <li><button type="button" data-phase="authority"><span>05</span><b>Establishing authority</b><small>trust · selection · decisions</small></button></li>
       <li><button type="button" data-phase="scaling"><span>06</span><b>Scaling judgment</b><small>teams · systems · capital</small></button></li>

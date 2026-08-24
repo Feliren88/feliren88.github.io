@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Game Theory of Life
-subtitle: Other people respond to your decisions. Plan for what they do next.
-description: A practical note on strategic decisions, with eight payoff matrices, a cooperation model, a ruin simulation, and a bottleneck check.
+title: Game Theory for Decisions
+subtitle: Other people respond to your choices. Include what they do next.
+description: My notes on strategic decisions, with computed payoff matrices, repeated cooperation, bargaining, ruin risk, and competing demands across life.
 permalink: /game-theory/
 layout-class: page game-theory
 extra_css: /css/game-theory.css
@@ -31,7 +31,7 @@ extra_js: /js/components/game-theory.js
   <nav class="gt-story-rail" aria-label="Game Theory narrative">
     <a href="#games"><span>01</span>Read the game</a><a href="#horizon"><span>02</span>Change the horizon</a><a href="#levers"><span>03</span>Change the rules</a><a href="#risk"><span>04</span>Size the bet</a><a href="#dashboard"><span>05</span>Protect the whole system</a>
   </nav>
-  <p class="gt-deck">Most important decisions involve other people. They respond to your move, and
+  <p class="gt-deck">Many important decisions involve other people. They respond to your move, and
   their response changes what your move was worth.</p>
 
   <p>Ask whether a choice still works after everyone responds. A good first move can produce a bad
@@ -110,8 +110,8 @@ extra_js: /js/components/game-theory.js
     </div>
   </div>
 
-  <p>Two things worth noticing as you click through. The Prisoner's Dilemma and Public Goods are the
-  games where both players have a <b>dominant strategy</b>. In both cases that strategy leads
+  <p>The Prisoner's Dilemma and Public Goods are the games where both players have a
+  <b>dominant strategy</b>. In both cases that strategy leads
   somewhere neither wanted. Matching Pennies is genuinely zero-sum and has no stable pure strategy.</p>
 
   <p>Salary talks, arguments with a partner and supplier negotiations rarely have a fixed pot. How
@@ -363,7 +363,7 @@ extra_js: /js/components/game-theory.js
     </div>
   </div>
 
-  <h3 id="ruin">Positive expected value is not enough</h3>
+  <h3 id="ruin">Protect against ruin even with positive expected value</h3>
 
   <p>A bet can have a genuine edge and still ruin you. You never experience the average across every
   possible future. You experience one path, in order, and a path that touches zero stops.</p>
@@ -456,7 +456,7 @@ extra_js: /js/components/game-theory.js
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="classifier">
   <h2><span class="n">06</span> Before you decide <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-tree"/></svg></h2>
-  <p class="gt-deck">These nine questions reveal the assumptions behind a decision.</p>
+  <p class="gt-deck">Use these nine questions to expose the assumptions behind a decision.</p>
 
   <div class="gt-lab">
     <div class="gt-lab-head">
@@ -645,7 +645,7 @@ extra_js: /js/components/game-theory.js
      06 · THE BOTTLENECK
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="dashboard">
-  <h2><span class="n">08</span> Find the floor that binds <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-optionality"/></svg></h2>
+  <h2><span class="n">08</span> Find the weakest domain <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-optionality"/></svg></h2>
   <p class="gt-deck">One collapsed part of life can cap everything else, however good the rest
   looks.</p>
 
@@ -656,7 +656,7 @@ extra_js: /js/components/game-theory.js
       <span class="op">&sum;</span> w<sub>i</sub> x<sub>i</sub>
     </p>
     <dl class="gt-terms">
-      <div class="gt-term"><dt>U</dt><dd>overall life utility in this simplified model</dd></div>
+      <div class="gt-term"><dt>U</dt><dd>whole-life utility in this simplified model</dd></div>
       <div class="gt-term"><dt>≈</dt><dd>an approximation, not an exact equality or measured law</dd></div>
       <div class="gt-term"><dt>x<sub>i</sub></dt><dd>the score for life domain <span class="m">i</span></dd></div>
       <div class="gt-term"><dt>n</dt><dd>the number of domains included</dd></div>
@@ -707,7 +707,7 @@ extra_js: /js/components/game-theory.js
     <div class="gt-lab-head">
       <div>
         <p class="t-eyebrow">Periods</p>
-        <h5>Six regimes, six different correct answers</h5>
+        <h5>Six regimes with different priorities</h5>
       </div>
       <span class="gt-hint">Tap one</span>
     </div>
@@ -784,7 +784,7 @@ extra_js: /js/components/game-theory.js
   <p class="gt-deck">These are the rules I take from the models above.</p>
 
   <div class="gt-lawbar">
-    <span class="k"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-medal"/></svg>Laws I actually keep</span>
+    <span class="k"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-medal"/></svg>Laws I use</span>
     <span class="num"><b id="gt-law-n">0</b> of 15</span>
     <div class="gt-lawbar-track" aria-hidden="true"><i id="gt-law-fill"></i></div>
     <button class="gt-btn" id="gt-law-reset" type="button">Clear</button>
@@ -892,8 +892,8 @@ extra_js: /js/components/game-theory.js
   incentives, and try to leave people out of it.</p>
 
   <div class="gt-final">
-    <p><b>Protect the downside. Keep the ability to walk. Test cheaply before committing heavily.
-    Leave games whose rewards cost you your agency or integrity.</b></p>
+    <p><b>Protect the downside and keep the ability to walk. Test cheaply before committing heavily,
+    and leave games whose rewards cost you agency or integrity.</b></p>
   </div>
 
   <div class="gt-note">

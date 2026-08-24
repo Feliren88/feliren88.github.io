@@ -16,7 +16,7 @@ situations:
   - id: angry
     trigger: When angry
     group: pressure
-    ask: What boundary was actually crossed, and what outcome do I want?
+    ask: What boundary was crossed, and what outcome do I want?
     donts:
       - Send the message now
       - Resign now
@@ -26,9 +26,9 @@ situations:
     steps:
       - Stop communicating for now.
       - Write down exactly what happened.
-      - Separate the actual offence from your interpretation of it.
+      - Separate the offence from your interpretation of it.
       - Name the boundary that was crossed.
-      - Decide what outcome you actually want.
+      - Decide what outcome you want.
       - Communicate the boundary once you are calm.
       - Escalate only if the behaviour continues.
     rule: Anger provides information. Decide your response separately.
@@ -37,7 +37,7 @@ situations:
       type: split
       in: "What happened"
       out:
-        - k: "The actual offence"
+        - k: "The offence"
           on: true
         - k: "Your interpretation of it"
           on: false
@@ -47,7 +47,7 @@ situations:
     group: pressure
     ask: What exactly am I afraid will happen?
     body:
-      - Fear produces two bad reflexes. Avoid everything, or control everything. Do neither automatically.
+      - Fear can push you to avoid everything or control everything. Pause before following either urge.
       - Classify the fear as probable, possible, unlikely, imagined, or preventable. Protect against the realistic downside and stop there.
     rule: Manage risk. Do not worship safety.
     viz:
@@ -146,11 +146,11 @@ situations:
     ask: Three years from now, what will I own or know because I took this?
     body:
       - Never evaluate a role on salary and title alone. Ask whether it increases at least two of capability, judgement, network, ownership, reputation, autonomy, or future earning power.
-      - Be careful with more money plus more responsibility plus no new leverage. That combination is a golden cage.
+      - More money and responsibility can still leave you with no new autonomy and a higher cost of leaving.
     rule: Do not confuse being needed with progressing.
     viz:
       type: chips
-      cap: "More money plus more responsibility plus no new leverage is a golden cage."
+      cap: "More responsibility can raise the cost of leaving without adding autonomy."
       groups:
         - k: "Does it increase at least two of these?"
           on: true
@@ -215,13 +215,13 @@ situations:
       - Start merely because you want freedom
     body:
       - Work through the real questions. Is there a real customer? A real problem? Will someone pay? Can the economics work? What is your unfair advantage? How long can you survive if growth is slow?
-    rule: Experiment cheaply before believing expensively.
+    rule: Test the riskiest assumption before committing substantial time or money.
     viz:
       type: test
       claim: "An assumption"
       probe: "A cheap test this month"
       result: "Evidence"
-      cap: "Experiment cheaply before believing expensively."
+      cap: "Test the riskiest assumption first."
 
   - id: partners
     trigger: When choosing business partners
@@ -230,10 +230,10 @@ situations:
     body:
       - Brilliance alone is insufficient. Evaluate ethics, emotional stability, incentives, financial discipline, communication, reliability and reputation.
       - Before you begin, agree ownership, responsibilities, decision rights, compensation, how disagreements get settled, and exit terms.
-    rule: Trust people emotionally. Structure agreements professionally.
+    rule: Trust the person, and write down how the partnership will work.
     viz:
       type: chips
-      cap: "Trust people emotionally. Structure agreements professionally."
+      cap: "Write down how the partnership will work."
       groups:
         - k: "Evaluate"
           on: false
@@ -266,7 +266,7 @@ situations:
       - Invest because you need a large return
       - Invest to recover a previous loss
     body:
-      - Understand how money is made here, how it can be lost, the liquidity, the concentration, the leverage, and the worst case.
+      - Understand how money is made here, how it can be lost, the liquidity, the concentration, the debt exposure, and the worst case.
     rule: Never risk something essential to obtain something nonessential.
     viz:
       type: chips
@@ -279,7 +279,7 @@ situations:
             - "How it can be lost"
             - "Liquidity"
             - "Concentration"
-            - "Leverage"
+            - "Debt exposure"
             - "The worst case"
         - k: "Not a reason"
           on: false
@@ -368,13 +368,13 @@ situations:
     ask: What is my credible alternative?
     body:
       - Know your preferred outcome, your minimum acceptable outcome, your alternatives, and what you are willing to walk away from.
-      - The strongest person in the room is rarely the loudest. It is the one who can leave.
+      - The person with a credible alternative can reject bad terms without bluffing.
     rule: Options create bargaining power.
     viz:
       type: scale
       a: "This offer"
       b: "Your credible alternative"
-      cap: "The strongest person in the room is the one who can leave."
+      cap: "A credible alternative lets you reject bad terms."
 
   - id: relationship-start
     trigger: When entering a relationship
@@ -382,7 +382,7 @@ situations:
     ask: What patterns does this person's behaviour reveal?
     body:
       - Chemistry begins the connection. Judge its long-term potential through reliability, honesty, conflict behaviour, accountability, financial behaviour, treatment of people with less power, respect for boundaries, apologies, and consistency between words and actions.
-      - Attraction tells you to approach. Character tells you whether to stay.
+      - Attraction may start the relationship. Repeated behaviour tells you whether to stay.
     rule: Choose long-term partners by their repeated behaviour.
     viz:
       type: split
@@ -398,7 +398,7 @@ situations:
     group: people
     ask: Am I building a future faster than I am accumulating evidence?
     body:
-      - Stay curious about who they actually are. Do not explain away repeated bad behaviour because the connection feels exceptional.
+      - Stay curious about who they are. Do not explain away repeated bad behaviour because the connection feels exceptional.
     rule: Compatibility requires evidence beyond emotional intensity.
     viz:
       type: trend
@@ -417,10 +417,10 @@ situations:
       - Ask what they need.
     body:
       - Do not silently accumulate evidence against someone.
-    rule: Early honesty is cheaper than late resentment.
+    rule: Raise a persistent problem while it is still small enough to repair.
     viz:
       type: order
-      cap: "Early honesty is cheaper than late resentment."
+      cap: "Raise a persistent problem while it is still small."
       items:
         - "Say what happened"
         - "Say how it affected you"
@@ -561,10 +561,10 @@ situations:
     body:
       - Liking a city is the small question. Consider people, professional opportunity, cost, culture, safety, lifestyle, relationships, learning and future mobility.
       - Places change behaviour by changing what counts as normal.
-    rule: Environments edit you slowly and without asking.
+    rule: Choose an environment whose daily norms support the person you want to become.
     viz:
       type: chips
-      cap: "Environments edit you slowly and without asking."
+      cap: "Daily norms shape your behaviour."
       groups:
         - k: "The small question"
           on: false
@@ -586,7 +586,7 @@ situations:
   - id: mentors
     trigger: When choosing people to learn from
     group: self
-    ask: Do I actually want their life, or only their results?
+    ask: Do I want their life, or only their results?
     body:
       - Someone can be brilliant at making money and terrible at living. Someone can be famous and privately miserable. Someone can be accomplished and destructive to everyone near them.
     rule: Never copy a strategy without examining the life it produces.
@@ -643,7 +643,7 @@ situations:
     ask: Does this need precision, or only completion?
     body:
       - Some mistakes are expensive. Most are harmless. Spend perfection only where errors genuinely matter.
-    rule: Precision is a resource. Allocate it intelligently.
+    rule: Spend extra care where an error would be costly.
     viz:
       type: split
       in: "This piece of work"
@@ -659,13 +659,13 @@ situations:
     ask: What can be paused, delegated, simplified or stopped?
     body:
       - Protect the physical system that makes every other ambition possible. Get proper care, avoid self-diagnosis, and reduce the load.
-    rule: Health is the foundation that makes success possible.
+    rule: Reduce the load and get proper care before protecting the work.
     viz:
       type: rings
       core: "Health"
       mid: "Every other ambition"
       outer: "The load you can pause, delegate, simplify or stop"
-      cap: "Health is the foundation that makes success possible."
+      cap: "Protect the body that carries the work."
 
   - id: lonely
     trigger: When lonely
@@ -789,7 +789,7 @@ situations:
     group: self
     ask: What did reality just teach me?
     body:
-      - Separate bad strategy, bad timing, bad execution, insufficient skill, insufficient resources, random bad luck, and a fundamentally bad idea. They have different fixes.
+      - Separate bad strategy, bad timing, bad execution, insufficient skill, insufficient resources, random bad luck, and a bad idea. They have different fixes.
     rule: A mistake becomes expensive only when you refuse to learn from it.
     viz:
       type: chips
@@ -827,7 +827,7 @@ situations:
     group: decide
     ask: Do these reinforce each other, or fragment me?
     body:
-      - Opportunity has a hidden cost, and the cost is fragmentation. Prefer one direction that compounds over five unrelated ones that consume attention.
+      - Each opportunity divides your attention. Prefer one direction that builds on itself over five unrelated commitments.
     rule: A good opportunity can still be the wrong opportunity.
     viz:
       type: funnel
@@ -886,7 +886,7 @@ situations:
     group: decide
     ask: If I were starting today with what I now know, would I choose the same strategy?
     body:
-      - Do not defend the old plan out of habit. Plans exist to serve reality, and reality owes your plan nothing.
+      - Do not defend the old plan out of habit. Keep it only if the new facts still support it.
     rule: Accept the facts and update the plan.
     viz:
       type: split
@@ -903,7 +903,7 @@ situations:
     ask: Was it information, reasoning, ego, incentives, wishful thinking, or fear?
     body:
       - Say it plainly. I was wrong. Then find the cause and change the process that produced the conclusion.
-    rule: Being wrong is temporary. Refusing to update makes it permanent.
+    rule: Name the error, find its cause, and change the process that produced it.
     viz:
       type: bands
       cap: "Find the cause, then change the process that produced it."
@@ -952,7 +952,7 @@ situations:
     ask: What am I building for the period when this stops?
     body:
       - Prepare quietly. Maintain savings, health, relationships, skills, humility and alternatives.
-      - Good periods create the resources that difficult periods spend.
+      - Use good periods to build the savings, health, relationships, skills and alternatives that a difficult period may require.
     rule: Do not consume everything prosperity gives you.
     viz:
       type: split
@@ -974,7 +974,7 @@ situations:
       - Rebuild options.
     body:
       - Do not demand that one decision repair everything at once.
-    rule: Survival first. Positioning second. Expansion third.
+    rule: Stop further damage, regain stability, then rebuild options.
     viz:
       type: order
       cap: "Do not demand that one decision repair everything at once."

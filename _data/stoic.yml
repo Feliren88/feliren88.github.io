@@ -84,7 +84,7 @@ passages:
     source: encheiridion
     ref: "12"
     quote: "Say to yourself, \"This is the price paid for apathy, for tranquillity, and nothing is to be had for nothing.\" When you call your servant, it is possible that he may not come; or, if he does, he may not do what you want."
-    take: "He prices calm honestly rather than pretending it is free. Spilled oil is what a settled mind costs today. Practising on small losses is the whole method, because nobody learns it during a large one."
+    take: "He prices calm honestly rather than pretending it is free. Spilled oil is what a settled mind costs today. Practise on small losses before a large one tests you."
     search: "want improve reject reasonings these neglect affairs i'll income don't correct servant better hunger exempt grief fear live affluence perturbation unhappy begin therefore little things spilt wine stolen yourself price paid apathy tranquillity nothing call possible come means importance power give disturbance"
     viz:
       type: scale
@@ -335,7 +335,7 @@ passages:
       cap: "Earning more proves your holdings are larger."
 
   - id: when-you-are-working-out-how-big-a-house-or-car-
-    situation: "When you are working out how big a house or car you actually need"
+    situation: "When you are working out how big a house or car you need"
     group: desire
     source: encheiridion
     ref: "39"
@@ -364,7 +364,7 @@ passages:
       cap: "One concession becomes a habit."
 
   - id: when-you-want-to-know-whether-you-are-actually-g
-    situation: "When you want to know whether you are actually getting better at this"
+    situation: "When you want to know whether you are getting better at this"
     group: control
     source: encheiridion
     ref: "48"
@@ -385,7 +385,7 @@ passages:
     source: meditations
     ref: "2.1"
     quote: "Begin the morning by saying to thyself, I shall meet with the busy-body, the ungrateful, arrogant, deceitful, envious, unsocial."
-    take: "He rehearses the irritation in advance, so the day cannot ambush him. The catch is he still owes those people cooperation once they turn up."
+    take: "He rehearses the irritation in advance, so the day cannot ambush him. Once those people turn up, he still owes them cooperation."
     search: "begin morning saying thyself meet busybody ungrateful arrogant deceitful envious unsocial these things happen reason ignorance good evil seen nature beautiful ugly wrong akin only same blood seed participates intelligence portion divinity neither injured angry kinsman hate made operation like feet hands eyelids rows upper"
     viz:
       type: order
@@ -444,14 +444,14 @@ passages:
     source: meditations
     ref: "3.7"
     quote: "Never value anything as profitable to thyself which shall compel thee to break thy promise, to lose thy self-respect, to hate any man, to suspect, to curse, to act the hypocrite, to desire anything which needs walls and curtains."
-    take: "The test here is almost physical. If a gain needs a closed door to survive, he says stop counting it as gain."
+    take: "If a gain needs a closed door to survive, Marcus says to stop counting it as gain."
     search: "never value anything profitable thyself compel break promise lose self respect hate suspect curse hypocrite desire needs walls curtains preferred everything else intelligence daemon worship excellence acts tragic part groan need either solitude much company chief live without pursuing flying death whether longer shorter time"
     viz:
       type: gate
       before: "The gain"
       pause: "Does it need a closed door"
       after: "Stop counting it"
-      cap: "The test here is almost physical."
+      cap: "A gain that needs a closed door does not survive the test."
 
   - id: when-your-saved-for-later-pile-keeps-growing-and
     situation: "When your saved-for-later pile keeps growing and you never open it"
@@ -732,11 +732,11 @@ passages:
     source: meditations
     ref: "10.12"
     quote: "And if thou seest clear, go by this way content, without turning back: but if thou dost not see clear, stop and take the best advisers."
-    take: "See clearly and go, or admit that you do not see and go and get advice. The part people skip is the instruction not to turn back once you have moved."
+    take: "See clearly and go, or admit that you do not see and get advice. Once you have moved, the instruction is not to turn back."
     search: "need suspicious fear since power inquire ought seest clear content without turning back dost stop take best advisers other things oppose according powers consideration keeping appears just reach object fail failure attempting follows reason both tranquil active same time also cheerful collected"
     viz:
       type: order
-      cap: "The part people skip is the last one."
+      cap: "Once you move, do not turn back."
       items:
         - "See clearly, or admit you do not"
         - "Go, or get advice"
@@ -820,13 +820,13 @@ passages:
     source: encheiridion
     ref: "8"
     quote: "Don't demand that things happen as you wish, but wish that they happen as they do happen, and you will go on well."
-    take: "The shortest instruction either man gives, and the least popular. He is not asking you to approve of what happened, only to stop staking your peace on a rerun."
+    take: "Epictetus asks you to stop staking your peace on a rerun of what happened. Approval is not required."
     search: "don't demand things happen wish well"
     viz:
       type: dichotomy
       mine: "Where you stake your peace"
       theirs: "What already happened"
-      cap: "The shortest instruction, and the least popular."
+      cap: "Stop staking your peace on a rerun."
 
   - id: when-a-thought-arrives-already-dressed-as-a-cata
     situation: "When a thought arrives already dressed as a catastrophe"

@@ -1,8 +1,8 @@
 ---
 layout: page
 title: High Agency
-subtitle: A practical note on George Mack's essay, with interactive diagrams and exercises
-description: A plain-English guide to high agency, with a self-check, decision flow chart, trap exercise, and action worksheet.
+subtitle: My notes on George Mack's essay, turned into exercises
+description: Test how you respond to unclear problems, weak answers, untested limits, rumination, and goals that feel too large to begin.
 permalink: /high-agency/
 layout-class: page high-agency
 extra_css: /css/high-agency.css
@@ -19,8 +19,8 @@ extra_js: /js/components/high-agency.js
 <div class="ha-story-hero" aria-labelledby="ha-story-title">
   <div class="ha-story-copy">
     <p class="ha-story-kicker">A field guide for unclear situations</p>
-    <div class="ha-story-title" id="ha-story-title" role="heading" aria-level="1">The normal method<br><i>stops here.</i></div>
-    <p>High agency begins with the second question: what can still be moved?</p>
+    <div class="ha-story-title" id="ha-story-title" role="heading" aria-level="1">Ask what can<br><i>still be moved.</i></div>
+    <p>A rule, price, route, person, or skill may change the situation.</p>
   </div>
   <svg class="ha-route" viewBox="0 0 560 430" role="img" aria-label="A route reaches a wall, searches along it, finds a movable hinge, and continues on the other side.">
     <defs><marker id="ha-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z"/></marker></defs>
@@ -108,8 +108,8 @@ extra_js: /js/components/high-agency.js
   </div>
 
   <h3 id="spotting"><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-verify"></use></svg>How to spot them</h3>
-  <p>The essay lists ten common signs. Select the ones that describe you honestly.
-  There is no external score, and your answers stay in your browser.</p>
+  <p>The essay lists ten common signs. Select the ones your recent behaviour supports.
+  Your answers stay in your browser.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -202,7 +202,7 @@ extra_js: /js/components/high-agency.js
       </div>
     </div>
     <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin:var(--gap-2) 0 0">
-      The hard problem went first. The easy one had been in everybody's hands the whole time.</p>
+      People solved powered flight before they solved the suitcase people carried every day.</p>
   </div>
 </section>
 
@@ -214,8 +214,8 @@ extra_js: /js/components/high-agency.js
   <p class="ha-deck">The essay defines agency as three traits: clear thinking, action, and
   willingness to reject a weak answer.</p>
 
-  <p>Optimism says the glass is half full. Pessimism says it is half empty. High agency says
-  you can turn on the tap. The people you would call from that jail cell may differ in age,
+  <p>Optimism calls the glass half full. Pessimism calls it half empty. Agency turns on the tap.
+  The people you would call from that jail cell may differ in age,
   education, politics, and temperament. They share a habit of shaping events. They refuse to
   wait for events to shape them.</p>
 
@@ -263,7 +263,7 @@ extra_js: /js/components/high-agency.js
       </g>
     </svg>
     <div class="ha-btn-row"><button class="ha-btn is-primary" id="ha-tap-btn" type="button">Turn the tap</button></div>
-    <p class="ha-tally" id="ha-tap-say" role="status">Two of these are opinions about the water. The third one changes how much there is.</p>
+    <p class="ha-tally" id="ha-tap-say" role="status">The tap changes how much water there is.</p>
   </div>
 
   <p>The essay breaks it into clear thinking, a bias to action, and disagreeability, and calls
@@ -353,7 +353,7 @@ extra_js: /js/components/high-agency.js
   Schools often reward the same habits. Low agency is common because those habits are common.
   They can still be examined and changed.</p>
 
-  <p>The good news in the essay is short. You have agency over your agency.</p>
+  <p>The essay treats agency as a habit you can practise.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -1301,8 +1301,8 @@ extra_js: /js/components/high-agency.js
   predicts the reply to that. By the end the answer is usually obvious and he does not send it.
   None of the three know they are mentors.</p>
   <div class="ha-quote">
-    <p>The value was never in the reply. It was in writing something good enough to deserve one.</p>
-    <cite>My reading of Sivers, in one line</cite>
+    <p>Writing for a demanding reader can expose the answer before you send the question.</p>
+    <cite>My reading of Sivers</cite>
   </div>
 
   <div class="ha-lab">
@@ -1353,8 +1353,8 @@ extra_js: /js/components/high-agency.js
   fifteen dollars of interest, and is asked why a millionaire needed five thousand dollars.
   His answer is that he could not find anywhere else in Manhattan to park for two weeks at that
   price.</p>
-  <p>The lesson does not depend on whether the story is literal. A better frame can reveal an option
-  that the obvious framing hides.</p>
+  <p>Whether or not the story happened, pricing the transaction as parking reveals an option
+  that the loan frame hides.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -1459,7 +1459,7 @@ extra_js: /js/components/high-agency.js
       Between shifts he sat in the USC library, pulled the staples out of film students' theses,
       and photocopied them. Six months of that gave him an education in effects and cinematography.
       His name is James Cameron.</p>
-      <p class="lesson"><b>The line:</b> the gate was on the tuition, never on the knowledge.</p>
+      <p class="lesson">Film-school tuition was closed to him. The theses in its library were available.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-seedling"></use></svg>Case 02</span>
@@ -1468,14 +1468,14 @@ extra_js: /js/components/high-agency.js
       of surgeries, told him to go and watch videos about Warren Buffett. He set up a company at
       seven breeding rabbits, taught himself corporate tax at nine, and bought and renovated a
       house at ten using YouTube for the trades.</p>
-      <p class="lesson"><b>The line:</b> nobody checked whether he was allowed to. Including him.</p>
+      <p class="lesson">Nobody checked whether he was old enough to begin. He did not check either.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-flame"></use></svg>Case 03</span>
       <h5>Burn the boats</h5>
       <p>Good intentions do not guarantee action. A public commitment can add a real social cost
       to quitting. The added cost can help, although it does not guarantee follow-through.</p>
-      <p class="lesson"><b>The line:</b> design the consequence before you need the motivation.</p>
+      <p class="lesson">Design the consequence before you need the motivation.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-hourglass"></use></svg>Case 04</span>
@@ -1483,33 +1483,33 @@ extra_js: /js/components/high-agency.js
       <p>The essay's example is an offer structured so the payment falls every month it goes
       undelivered. You do not need to feel motivated when the cost of a slow week is written on
       the wall in front of you.</p>
-      <p class="lesson"><b>The line:</b> you can create urgency through the structure of a commitment.</p>
+      <p class="lesson">Put urgency into the terms of the commitment.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-coins"></use></svg>Case 05</span>
       <h5>The trillion dollar test</h5>
       <p>If solving this paid a trillion dollars, and failing carried a death sentence, would you
       find a way? If the answer is yes, the problem was never capability. It was price.</p>
-      <p class="lesson"><b>The line:</b> “impossible” often means the current cost exceeds your commitment.</p>
+      <p class="lesson">“Impossible” may mean that the current cost exceeds your commitment.</p>
     </div>
     <div class="ha-lib-card">
       <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>Case 06</span>
       <h5>The suitcase</h5>
       <p>People walked on the moon before wheeled luggage became a commercial product. Bernard
       Sadow filed his <a href="https://patents.google.com/patent/US3653474A/en" target="_blank" rel="noreferrer">rolling-luggage patent in 1970</a>.</p>
-      <p class="lesson"><b>The line:</b> the biggest unsolved problems are usually in your hands.</p>
+      <p class="lesson">Ordinary objects can carry obvious problems for years.</p>
     </div>
   </div>
 
   <div class="ha-lab" id="hafig-gate">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Figure</p><h5>What was actually in the way</h5></div>
+      <div><p class="t-eyebrow">Figure</p><h5>What stood in the way</h5></div>
       <span class="ha-lab-hint">Pick a case</span>
     </div>
     <div class="hg-pick" id="hg-pick" role="group" aria-label="Choose a case"></div>
     <div class="hg-gates">
       <div class="hg-gate assumed"><span class="k">What looked like the barrier</span><b id="hg-assumed">&nbsp;</b></div>
-      <div class="hg-gate real"><span class="k">What was actually stopping them</span><b id="hg-real">&nbsp;</b></div>
+      <div class="hg-gate real"><span class="k">What stopped them</span><b id="hg-real">&nbsp;</b></div>
     </div>
     <p class="ha-tally" id="hg-say" role="status">Six cases, one shape. Select any of them.</p>
   </div>
@@ -1518,7 +1518,7 @@ extra_js: /js/components/high-agency.js
   <div class="ha-lab" id="hafig-test">
     <div class="ha-lab-head">
       <div><p class="t-eyebrow">Figure</p><h5>Test the gate</h5></div>
-      <span class="ha-lab-hint">Drag how many you actually push on</span>
+      <span class="ha-lab-hint">Drag how many you push on</span>
     </div>
     <div class="hg-row" id="hgt-row"><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Film school tuition</em><em class="open">the theses sat in an open library</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Being six years old</em><em class="open">nobody asked his age</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Unreliable motivation</em><em class="open">a public commitment supplied the cost</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not feeling urgent</em><em class="open">the terms could carry a clock</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not capable enough</em><em class="open">the price was the obstacle</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Luggage must be carried</em><em class="open">nothing held the wheels off</em></span></div>
     <label class="hg-ctl" for="hgt-range">How many of the six barriers you test</label>
@@ -1565,14 +1565,14 @@ extra_js: /js/components/high-agency.js
       <i aria-hidden="true">→</i>
       <div class="answer"><span>04</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-verify"></use></svg><b>Let reality answer</b><small>then update without vanity</small></div>
     </div>
-    <p class="ha-coda-line"><span>The wall is real.</span> The first route rarely is.</p>
+    <p class="ha-coda-line">Test the route before treating the limit as fixed.</p>
   </div>
 
   <div class="ha-badges" id="badges">
     <div class="ha-badges-head">
       <div>
         <p class="t-eyebrow">Your progress</p>
-        <h5>Twelve things this page asks you to actually do</h5>
+        <h5>Twelve things this page asks you to do</h5>
       </div>
       <span class="ha-badges-count"><b id="ha-badge-n">0</b> of 12</span>
     </div>

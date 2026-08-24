@@ -311,11 +311,11 @@
       "key": "Players",
       "icon": "gt-players",
       "ask": "Who is at the table, and who could be?",
-      "example": "A bad cofounder is rarely a negotiation problem. It is a casting problem.",
+      "example": "Negotiating harder will not fix a poor choice of cofounder. Change who is at the table.",
       "viz": {
         "before": "Negotiate harder",
         "after": "Change who is at the table",
-        "cap": "A bad cofounder is a casting problem.",
+        "cap": "Change who is at the table.",
         "type": "swap"
       }
     },
@@ -328,7 +328,7 @@
         "a": "Asking for collaboration",
         "b": "What comp rewards",
         "heavy": "b",
-        "cap": "The reward structure wins.",
+        "cap": "Collaboration follows the reward structure.",
         "type": "scale"
       }
     },
@@ -504,13 +504,13 @@
       }
     },
     {
-      "law": "Sunk cost has no vote",
-      "why": "What you already spent is a fact about the past. Only future costs and benefits are decidable.",
+      "law": "Exclude sunk cost from the next decision",
+      "why": "What you already spent is a fact about the past. Compare only the future costs and benefits you can still change.",
       "icon": "gt-sunk",
       "viz": {
         "mine": "Future costs and benefits",
         "theirs": "What you already spent",
-        "cap": "The past gets no vote.",
+        "cap": "Compare the future costs and benefits.",
         "type": "dichotomy"
       }
     },
@@ -538,7 +538,7 @@
       }
     },
     {
-      "law": "Incentives beat intentions",
+      "law": "Check incentives against stated intentions",
       "why": "When the stated goal and the reward structure disagree, the reward structure wins.",
       "icon": "gt-l-incentives",
       "viz": {
@@ -576,12 +576,12 @@
     },
     {
       "law": "Choose games carefully",
-      "why": "Strong players spend less of their life in games where winning means nothing.",
+      "why": "Spend less of your life in games where winning gives you nothing you value.",
       "icon": "gt-l-choose",
       "viz": {
         "mine": "Games worth winning",
         "theirs": "Games where winning costs too much",
-        "cap": "Strong players spend less life in the second.",
+        "cap": "Spend less time in games where winning costs too much.",
         "type": "dichotomy"
       }
     }
@@ -828,7 +828,7 @@
       "viz": {
         "many": "One employer, one client",
         "few": "Pay that grows with ownership",
-        "cap": "Dependency turns a good income into a hostage.",
+        "cap": "Dependency makes a good income fragile.",
         "type": "spread"
       }
     },
@@ -868,7 +868,7 @@
         "before": "Ownership sounds like freedom",
         "pause": "A customer, an advantage",
         "after": "A claim worth holding",
-        "cap": "The upside has to be real first.",
+        "cap": "Verify the customer and the advantage first.",
         "type": "gate"
       }
     },
@@ -1081,7 +1081,7 @@
         "a": "A visit",
         "b": "A life there",
         "heavy": "b",
-        "cap": "Different samples entirely.",
+        "cap": "A visit gives weak evidence about daily life.",
         "type": "scale"
       }
     },
@@ -1171,7 +1171,7 @@
       "viz": {
         "mine": "Solvency, reputation, optionality",
         "theirs": "Concentrating further to recover",
-        "cap": "The ground is moving.",
+        "cap": "Protect solvency while downside risk is rising.",
         "type": "dichotomy"
       }
     },

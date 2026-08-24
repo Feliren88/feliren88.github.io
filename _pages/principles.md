@@ -1,8 +1,8 @@
 ---
 layout: page
 title: My Life Principles
-subtitle: One rule and a practical system for making decisions under pressure
-description: My guide to difficult decisions, built around six questions, reversibility, and a clear sequence of actions.
+subtitle: The questions I use when pressure weakens my judgment
+description: My rules for slowing irreversible choices, testing reversible ones, protecting the essentials, and deciding under pressure.
 permalink: /principles/
 layout-class: page principles
 extra_css: /css/principles.css
@@ -60,10 +60,10 @@ extra_js: /js/components/principles.js
       </div>
       <p class="pr-doors-hint">Six months from now. Tap either question above.</p>
     </div>
-    <p>Immediate comfort does not tell me whether a decision is sound. I judge a choice by its
-    consequences. The relief or excitement it creates today is not enough.</p>
-    <p>My rule is direct: <b>never sacrifice long-term freedom for short-term relief, ego,
-    money, approval, anger, excitement or fear.</b></p>
+    <p>I judge a choice by its consequences. Relief and excitement tell me how the choice feels
+    today; they cannot tell me what it will cost six months from now.</p>
+    <p>I protect long-term freedom when relief, ego, money, approval, anger, excitement or fear
+    pushes me towards a quick answer.</p>
   </div>
 
   <p class="pr-deck">I wrote this guide for moments when pressure weakens my judgment.
@@ -437,7 +437,7 @@ extra_js: /js/components/principles.js
      CLOSING
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="closing">
-  <h2><span class="n">06</span> One principle for every obstacle</h2>
+  <h2><span class="n">06</span> Use the rule under pressure</h2>
 
   <!-- Same obstacle, two questions. The width of each path is the number of
        options you still have afterwards, which is the argument in one picture. -->
@@ -470,7 +470,7 @@ extra_js: /js/components/principles.js
     <p>When something difficult happens, do not ask <b>how do I make this discomfort disappear.</b>
     Ask <b>what action protects the future while dealing honestly with the present.</b></p>
     <p>When uncertainty remains, protect the downside. Tell the truth early. Keep good
-    options open. Test before committing. Leave when the structure is fundamentally wrong. Commit
+    options open. Test before committing. Leave when the structure is wrong. Commit
     deeply when reality repeatedly proves that it is right.</p>
   </div>
 

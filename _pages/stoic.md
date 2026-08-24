@@ -49,8 +49,8 @@ extra_js: /js/components/stoic.js
   <nav class="st-story-rail" aria-label="Stoic narrative">
     <a href="#control"><span>01</span>Draw the boundary</a><a href="#judgement"><span>02</span>Find the gap</a><a href="#disciplines"><span>03</span>Train the response</a><a href="#above"><span>04</span>Change the scale</a><a href="#death"><span>05</span>Release the outcome</a>
   </nav>
-  <p class="st-deck">An emperor and a former slave left us two of the clearest accounts of Roman
-  Stoicism. Much of the advice overlaps.</p>
+  <p class="st-deck">An emperor and a former slave left two accounts of Roman Stoicism.
+  Much of their advice overlaps.</p>
 
   <div class="st-two">
     <div class="st-man">
@@ -190,7 +190,7 @@ extra_js: /js/components/stoic.js
         <span class="sico" aria-hidden="true"><svg class="st-i" viewBox="0 0 24 24"><use href="#si-assent"/></svg></span>
         <span><span class="sk">Judgement</span>
         <span class="sv">Do you agree with the impression?</span>
-        <span class="sn">Judgment is the lever, and the only part of the chain that is yours.</span>
+        <span class="sn">You can decide whether to accept the impression as true.</span>
         <span class="st-judges" id="st-m-judgements"></span></span>
       </div>
       <div class="st-arrow" aria-hidden="true">&darr;</div>
@@ -424,7 +424,7 @@ extra_js: /js/components/stoic.js
     </svg>
     <div class="st-day-read" id="st-day-read" role="status">
       <p class="t">The shape of a day</p>
-      <p>Two of the practices on this page sit at the ends of a day. Select a point to see what belongs there.</p>
+      <p>Select a point to see when each practice belongs.</p>
     </div>
   </div>
 
@@ -512,8 +512,8 @@ extra_js: /js/components/stoic.js
   <p class="st-deck">Marcus writes about death constantly. Remembering it is how he brings his
   attention back to the afternoon he still has.</p>
 
-  <p>He dwells on posthumous fame and how quickly it fades. The most powerful man alive kept reminding
-  himself that his name would soon mean very little.</p>
+  <p>He dwells on posthumous fame and how quickly it fades. An emperor kept reminding himself that
+  his name would soon mean very little.</p>
 
   <div class="st-lab">
     <div class="st-lab-head">
@@ -574,7 +574,7 @@ extra_js: /js/components/stoic.js
   <div class="st-lab st-verdict-lab" id="st-verdict-lab">
     <div class="st-lab-head"><div><p class="t-eyebrow">Reading test</p><h5>Keep the tool without forcing a tidy conclusion</h5></div><span class="st-lab-hint">Select both sides</span></div>
     <div class="st-verdict-grid"><button type="button" data-st-verdict="keep"><b>Keep</b><span>Examine the judgment added to an event.</span></button><button type="button" data-st-verdict="open"><b>Leave unresolved</b><span>Whether distance from loss can coexist with loving fully.</span></button></div>
-    <p class="st-verdict-read" id="st-verdict-read" role="status">A useful text does not require agreement with every claim.</p>
+    <p class="st-verdict-read" id="st-verdict-read" role="status">Keep the useful claim and leave the unresolved one open.</p>
   </div>
 
   <div class="st-final">

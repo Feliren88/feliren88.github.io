@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Communication 101
-subtitle: Think deeply. Make the important part easy to receive.
-description: A visual operating system for clear explanations, difficult conversations, persuasion, negotiation, leadership, writing, and relationships.
+title: Communication
+subtitle: Make the important part easy to receive.
+description: How I structure explanations, raise unfinished concerns, listen before solving, handle conflict, negotiate, and close decisions.
 permalink: /communication/
 layout-class: page communication
 extra_css: /css/communication.css
@@ -35,7 +35,7 @@ extra_js: /js/components/communication.js
     <div class="cm-channel"><i></i><b>translate</b><small>select · order · simplify</small></div>
     <div class="cm-received"><span></span><span></span><span></span><strong>shared understanding</strong></div>
   </div>
-  <blockquote>Do not speak at the level where you understand the problem. Speak at the level where the other person can enter it.</blockquote>
+  <blockquote>Start where the other person can enter the problem, then add depth as they need it.</blockquote>
 </header>
 
 <figure class="cm-fig" id="fig-transfer">
@@ -70,7 +70,7 @@ extra_js: /js/components/communication.js
 </figure>
 
 <section class="cm-part cm-prose" id="objective">
-  <div class="cm-heading"><span>02</span><div><h2>Choose the job before the words</h2><p>Many conversations fail because each person is doing a different job.</p></div></div>
+  <div class="cm-heading"><span>02</span><div><h2>Choose the job before the words</h2><p>A conversation stalls when one person is solving and the other wants to be understood.</p></div></div>
 
 <figure class="cm-fig" id="fig-objective">
   <figcaption><span class="n">Figure 2</span><b>Two people, two jobs</b><em>Pick one on each side.</em></figcaption>
@@ -243,8 +243,8 @@ extra_js: /js/components/communication.js
   </div>
   <blockquote>“I am not ready to give a final view, but I do have a concern.”</blockquote>
   <div class="cm-clarity-gauge">
-    <div><span>0%</span><i></i><strong style="--p:75%">Speak here</strong><i></i><span>100%</span></div>
-    <p>For reversible discussions, speak at roughly 70–80% clarity. Save courtroom-level certainty for irreversible, legal, public, financial, or highly consequential claims.</p>
+    <div><span>forming</span><i></i><strong style="--p:75%">Speak here</strong><i></i><span>settled</span></div>
+    <p>In a reversible discussion, speak once you can name the concern and how you will test it. Demand much stronger evidence for legal, public, financial, or irreversible claims.</p>
   </div>
   <div class="cm-script-row">
     <article><small>Concern is 20% formed</small><p>“I cannot fully explain it yet, but I am uncomfortable with the dependency we are creating. I will test the concern and come back tomorrow.”</p></article>
@@ -304,7 +304,7 @@ extra_js: /js/components/communication.js
     <article><b>Know</b><p>What do they already understand?</p></article>
     <article><b>Care</b><p>What outcome matters to them?</p></article>
     <article><b>Fear</b><p>What hidden concern are they protecting?</p></article>
-    <article><b>Do</b><p>What action can they actually take?</p></article>
+    <article><b>Do</b><p>What action can they take?</p></article>
   </div>
   <div class="cm-doors">
     <p><b>CEO</b><span>speed and organisational risk</span></p>
@@ -498,7 +498,7 @@ extra_js: /js/components/communication.js
     <article><b>Manipulated</b><p>Reduce explanation: “No.” “That does not work for me.”</p></article>
     <article><b>Outpaced</b><p>“I want to answer the substance, not the pace. Give me a moment.”</p></article>
     <article><b>Interrupted</b><p>“Let me finish this point, then I want your response.”</p></article>
-    <article><b>You interrupt</b><p>“Sorry—I cut you off. Finish your thought.”</p></article>
+    <article><b>You interrupt</b><p>“Sorry, I cut you off. Finish your thought.”</p></article>
     <article><b>Technical material</b><p>What · why · how · example · exception. Do not lead with the edge case.</p></article>
     <article><b>Someone’s problem</b><p>Ask “Do you want an idea?” before solving.</p></article>
     <article><b>Care is invisible</b><p>Name it: “I handled this because I wanted to take something off your plate.”</p></article>
@@ -546,7 +546,7 @@ extra_js: /js/components/communication.js
     <p>the part that matters</p><i>+</i><p>the right order</p><i>+</i><p>the right depth</p><i>+</i><p>the implication</p><i>+</i><p>room to respond</p>
     <strong>shared understanding sufficient for the next right action</strong>
   </div>
-  <blockquote class="cm-final-quote">Think as deeply as necessary. Communicate as simply as possible. Say the difficult thing early. Never make another person work harder than necessary to understand what you mean.</blockquote>
+  <blockquote class="cm-final-quote">Before you speak, decide what must land. Say it early, give the reason, and leave room for a response.</blockquote>
 </section>
 
 {% include communication-icons.html %}
