@@ -61,6 +61,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">Your understanding is more developed than your explanation. Nine working figures: watch what lands fall as you say more, find where two people are doing different jobs, and see what a week of silence costs.</span>
 <span class="read-more">Open the manual →</span>
 </a>
+<a class="essay-feature" href="/self-love/">
+<span class="essay-feature-label">Interactive visual essay</span>
+<span class="essay-feature-title">Self-Love as Risk Control</span>
+<span class="essay-feature-desc">Capacity is not consent. Test the achievement treadmill, open the golden cage, govern the shadow side of strength, and decide as trustee for the person who inherits the life.</span>
+<span class="read-more">Open the visual essay →</span>
+</a>
 </div>
 
 <div class="writings-divider"></div>
