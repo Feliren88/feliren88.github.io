@@ -648,6 +648,158 @@
   }
 
   /* ══ Boot ══════════════════════════════════════════════ */
+
+  /* ══ Where the 59 passages come from ═══════════════════
+     Three charts, all counted from _data/stoic.yml at run time rather than
+     written down, so they cannot drift from the passages below them. The
+     theme bars drive the same filter as the pills. */
+  function corpus() {
+    var host = $('#st-corpus');
+    if (!host) return;
+    var P = DATA.passages || [];
+    if (!P.length) return;
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(n, a, t) {
+      var e = document.createElementNS(NS, n);
+      Object.keys(a || {}).forEach(function (k) { e.setAttribute(k, a[k]); });
+      if (t != null) e.textContent = t;
+      return e;
+    }
+
+    var med = P.filter(function (p) { return p.source === 'meditations'; });
+    var enc = P.filter(function (p) { return p.source === 'encheiridion'; });
+
+    /* ── Meditations, by book ── */
+    (function () {
+      var svg = $('#st-books');
+      if (!svg) return;
+      var BOOKS = 12, W = 520, H = 150, L = 26, B = 118;
+      var counts = [];
+      for (var b = 1; b <= BOOKS; b++) {
+        counts.push(med.filter(function (p) { return parseInt(String(p.ref), 10) === b; }).length);
+      }
+      var max = Math.max.apply(null, counts) || 1;
+      var bw = (W - L - 14) / BOOKS;
+      svg.appendChild(mk('line', { x1: L, y1: B, x2: W - 8, y2: B, class: 'st-ax' }));
+      counts.forEach(function (c, i) {
+        var x = L + i * bw, h = c / max * 84;
+        svg.appendChild(mk('rect', {
+          x: (x + 3).toFixed(1), y: (B - h).toFixed(1), width: (bw - 6).toFixed(1),
+          height: h.toFixed(1), rx: 2, class: 'st-bar' + (c ? '' : ' is-empty')
+        }));
+        if (c) svg.appendChild(mk('text', {
+          x: (x + bw / 2).toFixed(1), y: (B - h - 5).toFixed(1),
+          'text-anchor': 'middle', class: 'st-barn'
+        }, c));
+        svg.appendChild(mk('text', {
+          x: (x + bw / 2).toFixed(1), y: B + 15, 'text-anchor': 'middle', class: 'st-tick'
+        }, i + 1));
+      });
+      svg.appendChild(mk('text', { x: L, y: B + 34, class: 'st-tick' }, 'book'));
+      var cap = $('#st-books-cap');
+      if (cap) {
+        var used = counts.filter(Boolean).length;
+        cap.textContent = med.length + ' passages, drawn from ' + used + ' of the twelve books.';
+      }
+    })();
+
+    /* ── Encheiridion, by chapter ── */
+    (function () {
+      var svg = $('#st-chapters');
+      if (!svg) return;
+      var N = 53, W = 520, L = 10, Y = 30;
+      var have = {};
+      enc.forEach(function (p) { have[parseInt(String(p.ref), 10)] = true; });
+      var cw = (W - L * 2) / N;
+      for (var c = 1; c <= N; c++) {
+        svg.appendChild(mk('rect', {
+          x: (L + (c - 1) * cw + 0.6).toFixed(2), y: have[c] ? Y - 14 : Y - 5,
+          width: (cw - 1.2).toFixed(2), height: have[c] ? 28 : 10, rx: 1.5,
+          class: 'st-chap' + (have[c] ? ' is-on' : '')
+        }));
+      }
+      [1, 10, 20, 30, 40, 53].forEach(function (c) {
+        svg.appendChild(mk('text', {
+          x: (L + (c - 0.5) * cw).toFixed(1), y: Y + 30, 'text-anchor': 'middle', class: 'st-tick'
+        }, c));
+      });
+      var cap = $('#st-chapters-cap');
+      if (cap) cap.textContent = enc.length + ' passages, spread across ' +
+        Object.keys(have).length + ' of the fifty-three chapters.';
+    })();
+
+    /* ── Themes, and a way into the list ── */
+    (function () {
+      var wrap = $('#st-themes');
+      if (!wrap) return;
+      var LABEL = {
+        control: 'What is up to you', judgement: 'Judgement', action: 'Action',
+        desire: 'Desire', others: 'Other people', adversity: 'Adversity', death: 'Death'
+      };
+      var counts = {};
+      P.forEach(function (p) { counts[p.group] = (counts[p.group] || 0) + 1; });
+      var keys = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+      var max = Math.max.apply(null, keys.map(function (k) { return counts[k]; })) || 1;
+      wrap.innerHTML = keys.map(function (k) {
+        var n = counts[k];
+        return '<button class="st-theme" type="button" data-theme="' + k + '">' +
+          '<span class="k">' + esc(LABEL[k] || k) + '</span>' +
+          '<span class="track"><i style="width:' + (n / max * 100).toFixed(1) + '%"></i></span>' +
+          '<span class="n">' + n + '</span></button>';
+      }).join('');
+      wrap.addEventListener('click', function (e) {
+        var b = e.target.closest('.st-theme');
+        if (!b) return;
+        var pill = $('.filter-pill[data-filter="' + b.dataset.theme + '"]');
+        if (pill) {
+          pill.click();
+          var list = $('#st-cards');
+          if (list && list.scrollIntoView) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    })();
+
+    /* ── The split between the two books ── */
+    (function () {
+      var el = $('#st-split');
+      if (!el) return;
+      var m = med.length, e2 = enc.length, t = m + e2;
+      el.innerHTML =
+        '<span class="med" style="flex:' + m + '"><b>' + m + '</b>Meditations</span>' +
+        '<span class="enc" style="flex:' + e2 + '"><b>' + e2 + '</b>Encheiridion</span>';
+      var cap = $('#st-split-cap');
+      if (cap) cap.textContent = t + ' passages in total, verified word for word against the two source texts.';
+    })();
+  }
+
+  /* ══ The shape of a Stoic day ══════════════════════════
+     Morning rehearsal, the day itself, evening review. The two ends are the
+     practices this page already describes; the middle is where they are spent. */
+  function dayArc() {
+    var svg = $('#st-day');
+    if (!svg) return;
+    var read = $('#st-day-read');
+    var COPY = {
+      dawn: { t: 'Before the day', p: 'Name what may go wrong and who may behave badly. Decide now what your own conduct will be, so the day cannot supply the answer for you.' },
+      noon: { t: 'During the day', p: 'Impressions arrive faster than judgement. The work is the pause between what happens and what you call it.' },
+      dusk: { t: 'After the day', p: 'Go back over it without a verdict on yourself. What was in your control, how did you use it, and what will you do differently.' }
+    };
+    $$('.st-day-node', svg).forEach(function (n) {
+      function show() {
+        $$('.st-day-node', svg).forEach(function (o) { o.classList.toggle('is-on', o === n); });
+        var c = COPY[n.dataset.part];
+        if (c && read) read.innerHTML = '<p class="t">' + esc(c.t) + '</p><p>' + esc(c.p) + '</p>';
+      }
+      n.addEventListener('mouseenter', show);
+      n.addEventListener('focus', show);
+      n.addEventListener('click', show);
+      n.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); }
+      });
+    });
+  }
+
   function narrativeRail() {
     var links = $$('.st-story-rail a');
     if (!links.length || !('IntersectionObserver' in window)) return;
@@ -662,7 +814,7 @@
   }
 
   function init() {
-    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame]
+    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

@@ -261,6 +261,36 @@ extra_js: /js/components/stoic.js
     <div class="st-results" id="st-results" role="status" aria-live="polite"></div>
   </div>
 
+  <div class="st-corpus" id="st-corpus">
+    <p class="st-viz-k">Where these passages come from</p>
+
+    <div class="st-split-wrap">
+      <div class="st-split" id="st-split" aria-hidden="true"></div>
+      <p class="st-cap" id="st-split-cap"></p>
+    </div>
+
+    <div class="st-charts">
+      <div class="st-chart">
+        <h4>Meditations, by book</h4>
+        <svg id="st-books" viewBox="0 0 520 160" role="img"
+             aria-label="How many passages come from each of the twelve books of the Meditations."></svg>
+        <p class="st-cap" id="st-books-cap"></p>
+      </div>
+      <div class="st-chart">
+        <h4>Encheiridion, by chapter</h4>
+        <svg id="st-chapters" viewBox="0 0 520 70" role="img"
+             aria-label="Which of the fifty-three chapters of the Encheiridion are drawn on."></svg>
+        <p class="st-cap" id="st-chapters-cap"></p>
+      </div>
+    </div>
+
+    <div class="st-chart">
+      <h4>By theme</h4>
+      <div class="st-themes" id="st-themes" role="group" aria-label="Filter the passages by theme"></div>
+      <p class="st-cap">Select a theme to filter the list below.</p>
+    </div>
+  </div>
+
   <div class="st-filters filter-bar" role="group" aria-label="Filter passages by kind">
     <button class="filter-pill is-active" data-filter="all">All</button>
     <button class="filter-pill" data-filter="control">Control</button>
@@ -356,6 +386,32 @@ extra_js: /js/components/stoic.js
 <section class="st-part st-prose" id="practices">
   <h2><span class="n">06</span> Return to the day</h2>
   <p class="st-deck">These books ask for practice. A few drills appear again and again.</p>
+
+
+  <div class="st-lab">
+    <div class="st-lab-head">
+      <div><p class="t-eyebrow">Diagram</p><h5>The shape of a day</h5></div>
+      <span class="st-hint">Select a point on the arc</span>
+    </div>
+    <svg class="st-day" id="st-day" viewBox="0 0 520 190" role="img"
+         aria-label="An arc across one day, marked before the day, during it, and after it.">
+      <path class="st-day-arc" d="M40 150 C130 40 390 40 480 150"/>
+      <line class="st-day-ground" x1="20" y1="150" x2="500" y2="150"/>
+      <g class="st-day-node" data-part="dawn" tabindex="0" role="button" aria-label="Before the day">
+        <circle cx="40" cy="150" r="11"/><text x="40" y="176" text-anchor="middle">before</text>
+      </g>
+      <g class="st-day-node" data-part="noon" tabindex="0" role="button" aria-label="During the day">
+        <circle cx="260" cy="72" r="11"/><text x="260" y="52" text-anchor="middle">during</text>
+      </g>
+      <g class="st-day-node" data-part="dusk" tabindex="0" role="button" aria-label="After the day">
+        <circle cx="480" cy="150" r="11"/><text x="480" y="176" text-anchor="middle">after</text>
+      </g>
+    </svg>
+    <div class="st-day-read" id="st-day-read" role="status">
+      <p class="t">The shape of a day</p>
+      <p>Two of the practices on this page sit at the ends of a day. Select a point to see what belongs there.</p>
+    </div>
+  </div>
 
   <div class="st-practices">
     <div class="st-practice">

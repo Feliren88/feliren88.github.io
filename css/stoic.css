@@ -449,3 +449,51 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .st-man .row { grid-template-columns: 4.8rem 1fr; }
   .st-stage { grid-template-columns: 1fr; gap: 0.5rem; }
 }
+
+/* ── Corpus charts ────────────────────────────────────────
+   All three are counted from _data/stoic.yml at run time, so they cannot
+   disagree with the passages listed underneath them. */
+.st-corpus{margin:0 0 var(--gap-3);padding:1.15rem;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+.st-viz-k{margin:0 0 .9rem!important;font:700 .72rem "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--st-accent,var(--accent))!important}
+.st-split-wrap{margin-bottom:1.2rem}
+.st-split{display:flex;gap:3px;height:2.6rem;border-radius:var(--radius-sm);overflow:hidden}
+.st-split span{display:grid;place-content:center;gap:.05rem;text-align:center;font-size:.68rem;color:var(--bg);line-height:1.2}
+.st-split b{font:700 1rem "Space Grotesk",sans-serif}
+.st-split .med{background:color-mix(in srgb,var(--accent) 78%,var(--bg))}
+.st-split .enc{background:color-mix(in srgb,var(--accent-2) 74%,var(--bg))}
+.st-cap{margin:.45rem 0 0!important;font-size:.76rem!important;color:var(--muted)!important;line-height:1.5}
+.st-charts{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+.st-chart h4{margin:0 0 .5rem;font:700 .8rem "Space Grotesk",sans-serif;color:var(--text)}
+.st-chart svg{display:block;width:100%;height:auto}
+.st-ax{stroke:var(--line-strong);stroke-width:1.2}
+.st-bar{fill:color-mix(in srgb,var(--accent) 62%,transparent)}
+.st-bar.is-empty{fill:color-mix(in srgb,var(--muted) 16%,transparent)}
+.st-barn{font:700 10px "Space Grotesk",sans-serif;fill:var(--text)}
+.st-tick{font-size:9.5px;fill:var(--muted)}
+.st-chap{fill:color-mix(in srgb,var(--muted) 16%,transparent)}
+.st-chap.is-on{fill:color-mix(in srgb,var(--accent-2) 72%,transparent)}
+.st-themes{display:grid;gap:.28rem}
+.st-theme{display:grid;grid-template-columns:9.5rem 1fr 2rem;gap:.6rem;align-items:center;width:100%;padding:.3rem .45rem;border:1px solid transparent;border-radius:var(--radius-sm);background:none;color:var(--muted);font:inherit;font-size:.8rem;text-align:left;cursor:pointer}
+.st-theme:hover{border-color:var(--accent);color:var(--text)}
+.st-theme .track{height:.55rem;border-radius:999px;background:color-mix(in srgb,var(--muted) 14%,transparent);overflow:hidden}
+.st-theme .track i{display:block;height:100%;background:color-mix(in srgb,var(--accent) 62%,transparent)}
+.st-theme .n{font:700 .82rem "Space Grotesk",sans-serif;color:var(--text);text-align:right}
+
+/* ── The shape of a day ───────────────────────────────── */
+.st-day{display:block;width:100%;height:auto;max-width:34rem;margin:0 auto}
+.st-day-arc{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-dasharray:6 6;opacity:.75}
+.st-day-ground{stroke:var(--line-strong);stroke-width:1.2}
+.st-day-node{cursor:pointer}
+.st-day-node circle{fill:var(--surface);stroke:var(--border-ui);stroke-width:2;transition:fill .18s ease,stroke .18s ease}
+.st-day-node text{font:700 11px "Space Grotesk",sans-serif;fill:var(--muted)}
+.st-day-node:hover circle,.st-day-node.is-on circle{fill:var(--accent);stroke:var(--accent)}
+.st-day-node:hover text,.st-day-node.is-on text{fill:var(--text)}
+.st-day-read{margin-top:var(--gap-2);padding:.85rem 1rem;border-left:3px solid var(--accent);background:var(--surface-soft);min-height:4.5rem}
+.st-day-read .t{margin:0 0 .3rem!important;font:700 .95rem "Space Grotesk",sans-serif;color:var(--text)!important}
+.st-day-read p{margin:0;font-size:.9rem;line-height:1.6}
+
+@media(max-width:720px){
+  .st-charts{grid-template-columns:1fr}
+  .st-theme{grid-template-columns:7.5rem 1fr 1.8rem;font-size:.76rem}
+  .st-corpus{padding:.9rem}
+}

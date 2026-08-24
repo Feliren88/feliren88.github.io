@@ -13,11 +13,7 @@ extra_js: /js/components/high-agency.js
 
 {% include high-agency-icons.html %}
 
-<a class="ha-hud" id="ha-hud" href="#badges" hidden>
-  <svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-medal"></use></svg>
-  <span class="ha-hud-num"><b id="ha-hud-n">0</b>/12</span>
-  <span class="ha-hud-track" aria-hidden="true"><i id="ha-hud-fill"></i></span>
-</a>
+<a class="ha-hud" id="ha-hud" href="#badges" hidden><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-medal"></use></svg><span class="ha-hud-num"><b id="ha-hud-n">0</b>/12</span><span class="ha-hud-track" aria-hidden="true"><i id="ha-hud-fill"></i></span></a>
 <div class="ha-toast" id="ha-toast" role="status" aria-live="polite"></div>
 
 <div class="ha-story-hero" aria-labelledby="ha-story-title">
