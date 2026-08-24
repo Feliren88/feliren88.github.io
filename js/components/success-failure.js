@@ -583,12 +583,14 @@
     if (!path) return;
     var buttons = Array.prototype.slice.call(path.querySelectorAll('button[data-phase]'));
     var detail = document.getElementById('sf-phase-detail');
+    var committed = '';
     var phase = {
       proving: {
         number: 'Milestone 01', title: 'Proving capability',
         explanation: 'This phase turns potential into evidence. Difficult, real work reveals which skills transfer, which environments sharpen performance, and which problems are worth solving repeatedly.',
         order: 'Direction chosen before evidence is mostly guesswork. Capability comes first because it creates the self-knowledge and credibility needed to make a serious commitment.',
         gate: 'Name one valuable problem you solve unusually well.',
+        legend: [['read', 'Capability built'], ['win', 'Evidence validated'], ['line', 'Fit becomes clearer']],
         art: '<svg viewBox="0 0 320 190"><path class="axis" d="M38 158H286"/><rect class="a" x="52" y="126" width="48" height="32" rx="4"/><rect class="b" x="116" y="92" width="48" height="66" rx="4"/><rect class="c" x="180" y="52" width="48" height="106" rx="4"/><path class="arrow" d="M68 112L132 76L196 36L270 22"/><path class="head" d="M258 18L274 20L265 34"/><circle class="proof" cx="76" cy="110" r="6"/><circle class="proof" cx="140" cy="74" r="6"/><circle class="proof" cx="204" cy="34" r="6"/><text x="76" y="177">SKILL</text><text x="140" y="177">PROOF</text><text x="204" y="177">FIT</text></svg>'
       },
       choosing: {
@@ -596,6 +598,7 @@
         explanation: 'This phase converts broad capability into deliberate commitment. The field, problem class, collaborators, and unwanted tradeoffs become explicit enough to guide the next stretch of work.',
         order: 'Commitment becomes intelligent only after capability produces evidence. It must precede leverage because a system that compounds the wrong direction creates faster drift, not progress.',
         gate: 'Become the person competent people associate with one difficult problem.',
+        legend: [['line', 'Explored routes'], ['read', 'Committed route'], ['win', 'Target problem']],
         art: '<svg viewBox="0 0 320 190"><circle class="origin" cx="52" cy="95" r="9"/><path class="dim" d="M62 95C122 95 135 38 205 38H270M62 95C122 95 135 152 205 152H270"/><path class="main" d="M62 95H270"/><path class="head" d="M257 86L274 95L257 104"/><circle class="target" cx="218" cy="95" r="22"/><circle class="target" cx="218" cy="95" r="8"/><text x="52" y="122">OPTIONS</text><text x="218" y="132">CHOSEN GAME</text></svg>'
       },
       leverage: {
@@ -603,6 +606,7 @@
         explanation: 'This phase makes expertise reusable. A method becomes a product, system, team, distribution channel, recurring asset, or body of intellectual property instead of disappearing when the workday ends.',
         order: 'Leverage follows direction because compounding needs a stable target. It comes before ownership because there must first be a repeatable value engine worth capturing.',
         gate: 'Make one part of your contribution scale beyond your own hours.',
+        legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="78" cy="95" r="28"/><text class="inside" x="78" y="99">EXPERTISE</text><path class="main" d="M108 95H160"/><path class="head" d="M149 87L164 95L149 103"/><path class="branch" d="M164 95L238 38M164 95H258M164 95L238 152"/><circle class="out" cx="248" cy="32" r="18"/><circle class="out" cx="270" cy="95" r="18"/><circle class="out" cx="248" cy="158" r="18"/><text x="248" y="35">IP</text><text x="270" y="98">SYSTEM</text><text x="248" y="161">TEAM</text></svg>'
       },
       ownership: {
@@ -610,6 +614,7 @@
         explanation: 'This phase changes value from compensation into participation. Equity, assets, reusable work, and aligned terms allow successful outcomes to build optionality beyond the next payment.',
         order: 'Ownership follows leverage because repeatable value makes upside identifiable and negotiable. It precedes authority because bearing consequences improves incentives and decision quality.',
         gate: 'Know exactly how you participate when the work succeeds dramatically.',
+        legend: [['read', 'Total value created'], ['win', 'Upside owned'], ['line', 'Participation flow']],
         art: '<svg viewBox="0 0 320 190"><circle class="ring" cx="112" cy="94" r="62"/><path class="slice" d="M112 94V32A62 62 0 0 1 166 126Z"/><circle class="hole" cx="112" cy="94" r="29"/><path class="main" d="M178 94H272"/><path class="head" d="M259 85L276 94L259 103"/><text x="112" y="98">VALUE</text><text x="227" y="78">UPSIDE</text><text x="227" y="112">PARTICIPATION</text></svg>'
       },
       authority: {
@@ -617,6 +622,7 @@
         explanation: 'This phase shifts the work from production to selection. People seek judgment before committing resources because previous decisions have repeatedly survived contact with reality.',
         order: 'Authority should follow demonstrated value and ownership, not title alone. Judgment must first operate with evidence, incentives, and consequences before others safely defer to it.',
         gate: 'Be trusted to decide which problems deserve attention.',
+        legend: [['win', 'Candidate options'], ['read', 'Judgment filter'], ['line', 'Selected decision']],
         art: '<svg viewBox="0 0 320 190"><path class="funnel" d="M38 34H282L205 100V152H115V100Z"/><circle class="option" cx="78" cy="58" r="8"/><circle class="option" cx="126" cy="58" r="8"/><circle class="option" cx="174" cy="58" r="8"/><circle class="option" cx="222" cy="58" r="8"/><circle class="option" cx="258" cy="58" r="8"/><path class="main" d="M160 112V170"/><path class="head" d="M151 158L160 174L169 158"/><text x="160" y="91">SELECT</text><text x="160" y="187">DECISION</text></svg>'
       },
       scaling: {
@@ -624,6 +630,7 @@
         explanation: 'This phase multiplies sound judgment through people, systems, information, and capital. Results no longer require personal intervention in every operational detail.',
         order: 'Scale amplifies both wisdom and error. It belongs after authority because judgment must prove reliable in bounded decisions before a larger system carries it outward.',
         gate: 'Build a system that works without making you its permanent bottleneck.',
+        legend: [['read', 'Judgment hub'], ['win', 'Multiplier nodes'], ['line', 'Delegated reach']],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="160" cy="95" r="30"/><text class="inside" x="160" y="99">JUDGMENT</text><path class="branch" d="M160 65V26M186 78L244 45M190 104L258 122M174 123L198 168M145 124L112 164M132 106L62 132M132 80L68 48"/><circle class="out" cx="160" cy="20" r="11"/><circle class="out" cx="254" cy="39" r="11"/><circle class="out" cx="270" cy="126" r="11"/><circle class="out" cx="202" cy="174" r="11"/><circle class="out" cx="106" cy="170" r="11"/><circle class="out" cx="50" cy="136" r="11"/><circle class="out" cx="57" cy="42" r="11"/></svg>'
       },
       transmitting: {
@@ -631,6 +638,7 @@
         explanation: 'This phase turns accumulated discernment into durable benefit beyond direct work. Capital, mentorship, governance, teaching, writing, and institutions carry useful judgment into other lives and future decisions.',
         order: 'Transmission comes last because discernment requires a long record of learning, choosing, owning, and scaling. What is passed onward should be tested knowledge rather than borrowed certainty.',
         gate: 'Make what you learned useful beyond your own direct involvement.', final: true,
+        legend: [['read', 'Tested discernment'], ['line', 'Transmission waves'], ['win', 'People and systems reached']],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="92" cy="95" r="22"/><circle class="wave" cx="92" cy="95" r="45"/><circle class="wave" cx="92" cy="95" r="70"/><path class="main" d="M164 95H276"/><path class="head" d="M263 86L280 95L263 104"/><circle class="seed" cx="224" cy="58" r="8"/><circle class="seed" cx="252" cy="95" r="8"/><circle class="seed" cx="224" cy="132" r="8"/><text x="92" y="99">DISCERN</text><text x="238" y="157">BEYOND SELF</text></svg>'
       }
     };
@@ -652,9 +660,10 @@
       document.getElementById('sf-phase-detail-order').textContent = content.order;
       document.getElementById('sf-phase-detail-gate').textContent = content.gate;
       document.getElementById('sf-phase-detail-gate-label').textContent = content.final ? 'Completion signal' : 'Gate to the next milestone';
-      document.getElementById('sf-phase-detail-visual').innerHTML = content.art;
+      document.getElementById('sf-phase-detail-visual').innerHTML = content.art + '<div class="sf-phase-legend">' + content.legend.map(function (item) { return '<span><i class="' + item[0] + '"></i>' + item[1] + '</span>'; }).join('') + '</div>';
       detail.hidden = false;
       if (remember) {
+        committed = key;
         try { localStorage.setItem('sf-life-phase', key); } catch (error) { /* Selection still works. */ }
       }
     }
@@ -663,10 +672,12 @@
       button.addEventListener('click', function () { choose(button.dataset.phase, true); });
       button.addEventListener('mouseenter', function () { choose(button.dataset.phase, false); });
       button.addEventListener('focus', function () { choose(button.dataset.phase, false); });
+      button.addEventListener('mouseleave', function () { if (committed) choose(committed, false); });
+      button.addEventListener('blur', function () { if (committed) choose(committed, false); });
     });
     var saved = '';
     try { saved = localStorage.getItem('sf-life-phase') || ''; } catch (error) { /* Start unselected. */ }
-    if (saved) choose(saved, false);
+    if (saved) { committed = saved; choose(saved, false); }
   }
 
   function init() {
