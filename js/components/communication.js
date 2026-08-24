@@ -493,7 +493,11 @@
       } else {
         art = '<circle class="vb" cx="28" cy="55" r="21"/><circle class="va" cx="132" cy="55" r="21"/><path class="vg" d="M49 55H111"/><path class="va" d="M76 42L90 55 76 68"/><circle class="vc" cx="80" cy="55" r="' + (5+k*2) + '"/>';
       }
-      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': ' + topic + ' diagram') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + esc(topic) + '</figcaption></figure>';
+      /* The chart family explains the topic; the lesson symbol makes every one
+         of the 122 plots recognizably and semantically distinct. */
+      art += '<circle class="vmark" cx="139" cy="19" r="15"/>' +
+        '<svg class="vicon" x="127" y="7" width="24" height="24"><use href="#cmi-' + n + '"/></svg>';
+      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': unique ' + topic + ' diagram') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + esc(topic) + ' · ' + String(n).padStart(3, '0') + '</figcaption></figure>';
     }
 
     var grid = document.createElement('div');

@@ -543,4 +543,5 @@ extra_js: /js/components/communication.js
   <blockquote class="cm-final-quote">Think as deeply as necessary. Communicate as simply as possible. Say the difficult thing early. Never make another person work harder than necessary to understand what you mean.</blockquote>
 </section>
 
+{% include communication-icons.html %}
 {% include communication-manual.html %}
