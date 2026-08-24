@@ -240,7 +240,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <i aria-hidden="true">→</i>
       <div class="s2"><svg class="ue-i"><use href="#ue-label"/></svg><b>2. You read it</b><span>Your mind decides what it means. This step is fast, invisible, and often wrong.</span></div>
       <i aria-hidden="true">→</i>
-      <div class="s3"><svg class="ue-i"><use href="#ue-battery"/></svg><b>3. The body answers</b><span>Heart, breath, gut, jaw, temperature. This is the part that makes it feel like a fact.</span></div>
+      <div class="s3"><svg class="ue-i"><use href="#ue-battery"/></svg><b>3. The body answers</b><span>Heart, breath, gut, jaw, temperature. The bodily alarm makes the interpretation feel factual.</span></div>
       <i aria-hidden="true">→</i>
       <div class="s4"><svg class="ue-i"><use href="#ue-magnet"/></svg><b>4. An urge appears</b><span>Do something, or stop doing something. You can answer an urge instead of obeying it.</span></div>
     </div>
@@ -262,7 +262,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <div class="ue-vsgrid">
         <div><span class="a">A feeling</span><span class="b">arrives on its own, cannot be ordered, and passes</span></div>
         <div><span class="a">A mood</span><span class="b">lasts longer, has no single trigger, and colours everything you read</span></div>
-        <div><span class="a">A thought</span><span class="b">is a sentence in your head, and can be true, false, or simply loud</span></div>
+        <div><span class="a">A thought</span><span class="b">is a sentence in your head; it can be true, false, or loud</span></div>
         <div><span class="a">An action</span><span class="b">is the only one of the four you choose, and the only one anyone else can see</span></div>
       </div>
     </div>
@@ -402,7 +402,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <h2><span>06</span><svg class="ue-i ue-h2-i"><use href="#ue-wallet"/></svg> Give uncertainty a budget</h2>
   <p class="ue-deck">Check in proportion to the external problem, not in proportion to anxiety.</p>
   <div class="ue-budget" id="ue-budget">
-    <button data-answer="Check the account or receipt once. This is a finite fact in the world."><b>A</b><svg class="ue-i"><use href="#ue-fact"/></svg><span>Actionable</span><small>Did I pay the electricity bill?</small></button>
+    <button data-answer="Check the account or receipt once. The answer is a finite external fact."><b>A</b><svg class="ue-i"><use href="#ue-fact"/></svg><span>Actionable</span><small>Did I pay the electricity bill?</small></button>
     <button data-answer="Gather decision-relevant evidence, set a deadline, then choose."><b>B</b><svg class="ue-i"><use href="#ue-search"/></svg><span>Researchable</span><small>Which job has better economics?</small></button>
     <button data-answer="No useful amount of analysis can buy this guarantee. Accept residual uncertainty."><b>C</b><svg class="ue-i"><use href="#ue-infinity"/></svg><span>Unresolvable</span><small>Can I know I will never regret this?</small></button>
   </div>
@@ -446,7 +446,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div class="ue-rung" style="--w:24%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>2/10</b><span>Leave a minor message imperfect</span></div>
     <div class="ue-rung" style="--w:36%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>3/10</b><span>Do not reread a routine email</span></div>
     <div class="ue-rung" style="--w:52%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>4–5/10</b><span>Make a small decision without extra research</span></div>
-    <div class="ue-rung" style="--w:70%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>6/10</b><span>Enter a meaningful situation without trying to settle every doubt</span></div>
+    <div class="ue-rung" style="--w:70%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>6/10</b><span>Enter a consequential situation without trying to settle every doubt</span></div>
     <div class="ue-rung" style="--w:90%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>7–8/10</b><span>Tolerate personally difficult ambiguity</span></div>
   </div>
   <div class="ue-runbar">
@@ -490,7 +490,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="support">
   <h2><span>09</span><svg class="ue-i ue-h2-i"><use href="#ue-hands"/></svg> Support without borrowed certainty</h2>
-  <p class="ue-deck">Good support helps a person remain present and make a decision. It does not become an unlimited answer service.</p>
+  <p class="ue-deck">Good support keeps a person present long enough to decide. It does not supply unlimited reassurance.</p>
   <div class="ue-support">
     <article><header><svg class="ue-i"><use href="#ue-ask"/></svg><div><small>When asking for help</small><h3>Ask for company or perspective</h3></div></header><ul aria-label="Examples of asking for help"><li>“Sit with me while I make the call.”</li><li>“What fact do you think I am missing?”</li><li>“Help me return to the plan I already chose.”</li></ul></article>
     <article><header><svg class="ue-i"><use href="#ue-steady"/></svg><div><small>When helping someone</small><h3>Offer steadiness, not guarantees</h3></div></header><ul aria-label="Examples of helping someone"><li>“I can see this is hard.”</li><li>“I do not have a guarantee, but I can stay with you.”</li><li>“What did you decide before the worry rose?”</li></ul></article>
@@ -526,7 +526,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
   <div class="ue-fig" id="uefig-resume">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-restart"/></svg> After a setback: judge yourself or adjust the next step</p>
-    <p class="ue-resume-intro">Suppose you returned to checking, avoidance, or repeated review. You now have two different problems to solve. Judging yourself asks what the setback says about you. Reviewing it asks what made the step hard and what you can change before trying again. Only the second question helps you restart.</p>
+    <p class="ue-resume-intro">Suppose you returned to checking, avoidance, or repeated review. Self-judgment turns the setback into a verdict about you. Review identifies what made the step hard and what to change before the next attempt. Only review produces a usable restart.</p>
     <div class="rs-pick" id="rs-pick" role="group" aria-label="Choose a response">
       <button type="button" data-rs="trial">Judge yourself and plan a perfect restart</button>
       <button type="button" data-rs="curious" class="is-on">Find what made it hard and restart smaller</button>

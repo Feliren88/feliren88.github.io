@@ -77,7 +77,7 @@
     { t: 'Whether someone lies about you', mine: false,
       why: 'Their tongue, their act. You get no vote in it, and pretending otherwise is where the suffering starts.' },
     { t: 'Whether you become the thing they accused you of', mine: true,
-      why: 'This is the whole of your exposure. Marcus says the best revenge is not to become like the wrongdoer.' },
+      why: 'Your conduct is the whole exposure. Marcus says the best revenge is not to become like the wrongdoer.' },
     { t: 'How long you live', mine: false,
       why: 'Not yours, and Marcus returns to it constantly. The length was never the variable worth arguing about.' },
     { t: 'What you do with this afternoon', mine: true,
@@ -272,7 +272,7 @@
       key: 'will',
       label: 'Will',
       greek: 'the discipline of desire',
-      body: 'Want what happens. This is the hardest of the three and the one that decides the other two, because desire aimed at things outside your control guarantees the disturbance.',
+      body: 'Want what happens. This demand is the hardest of the three and governs the other two: desire aimed outside your control guarantees disturbance.',
       cue: 'Confine desire to what is yours.'
     }
   ];

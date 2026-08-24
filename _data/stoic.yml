@@ -130,7 +130,7 @@ passages:
     source: encheiridion
     ref: "16"
     quote: "Instead, distinguish within your own mind, and be prepared to say, \"It's not the accident that distresses this person., because it doesn't distress another person; it is the judgment which he makes about it.\" As far as words go, however, don't reduce yourself to his level, and certainly do not moan with him."
-    take: "He allows the sympathy out loud, including saying the sad words alongside them. What he blocks is agreeing inwardly that the event itself is the ruin. I find that split very hard to hold in the moment."
+    take: "Say the sad words with them. Do not also decide that the event has ruined them. I find that split very hard to hold in the moment."
     search: "anyone weeping grief because gone abroad dead suffered affairs careful appearance misdirect instead distinguish within mind prepared it's accident distresses person doesn't distress another judgment makes about words however don't reduce yourself level certainly moan inwardly either"
     viz:
       type: split
@@ -369,7 +369,7 @@ passages:
     source: encheiridion
     ref: "48"
     quote: "The marks of a proficient are, that he censures no one, praises no one, blames no one, accuses no one, says nothing concerning himself as being anybody, or knowing anything: when he is, in any instance, hindered or restrained, he accuses himself; and, if he is praised, he secretly laughs at the person who praises him."
-    take: "This is a checklist for progress: no blaming, no boasting, no defending yourself. The hardest item is making no defence when someone censures you, since silence looks like agreement."
+    take: "His checklist for progress is severe: no blaming, no boasting, no self-defence. The last item is hardest because silence can look like agreement."
     search: "condition characteristic vulgar person never expects either benefit hurt himself externals philosopher marks proficient censures praises blames accuses says nothing concerning anybody knowing anything instance hindered restrained praised secretly laughs censured makes defense goes about caution sick injured people dreading move right before perfectly fixed"
     viz:
       type: order
@@ -704,7 +704,7 @@ passages:
     source: meditations
     ref: "9.29"
     quote: "Set thyself in motion, if it is in thy power, and do not look about thee to see if any one will observe it; nor yet expect Plato's Republic: but be content if the smallest thing goes on well, and consider such an event to be no small matter."
-    take: "Do the small thing, unwatched, and count it as real work. This is aimed at the person who will only act if the fix is total and someone is looking."
+    take: "Do the small thing unwatched and count it as real work. The instruction is for anyone who acts only when the fix is total or someone is looking."
     search: "universal cause like winter torrent carries everything along worthless these poor people engaged matters political suppose playing philosopher drivellers well nature requires thyself motion power look about observe expect plato's republic content smallest thing goes consider event small matter change men's opinions without else slavery"
     viz:
       type: shrink
@@ -787,7 +787,7 @@ passages:
       cap: "Character shows in conduct."
 
   - id: when-you-have-written-off-a-skill-as-something-y
-    situation: "When you have written off a skill as something you simply do not have"
+    situation: "When you have written off a skill as something you do not have"
     group: action
     source: meditations
     ref: "12.6"

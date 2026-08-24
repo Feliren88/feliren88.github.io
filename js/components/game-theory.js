@@ -124,7 +124,7 @@
           bits.push('You play <b>' + esc(g.rows[i]) + '</b>, they play <b>' + esc(g.cols[j]) + '</b>. ' +
             'You get ' + p[0] + ', they get ' + p[1] + '.');
           if (cellIn(s.pure, i, j)) {
-            bits.push('This is a Nash equilibrium: neither of you gains by changing alone.');
+            bits.push('Nash equilibrium: neither of you gains by changing alone.');
           } else {
             // name who would deviate and to what
             var rowAlt = g.payoffs[1 - i][j][0], colAlt = g.payoffs[i][1 - j][1];
@@ -276,7 +276,7 @@
       rule: 'Act now. Deliberation costs more than the mistake would.'
     },
     b: {
-      t: 'Reversible, meaningful downside',
+      t: 'Reversible, consequential downside',
       body: 'A contract you can exit, a move you could undo, a role you could leave. Real cost, but you get out.',
       rule: 'Pilot it. Buy information at small size before committing at full size.'
     },
@@ -718,7 +718,7 @@
           '<p><span class="big">' + lost + '%</span> of the trust built over ' + BREAK +
           ' rounds of reliability, gone in one.</p>' +
           '<p>' + (recovered === null
-            ? 'It does not return to its previous level within the window shown. That is what <span class="m">b &gt; a</span> means in practice.'
+            ? 'It does not recover within the window shown: <span class="m">b &gt; a</span> in practice.'
             : 'Recovery to the previous level takes another <b>' + recovered + '</b> rounds, against the one round it took to lose.') +
           '</p>' +
           '<p>Reputation grows slowly and can fall quickly. Compare any one-off gain with the years spent building the trust it would use.</p>';

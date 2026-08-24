@@ -412,7 +412,7 @@
         var missing = rows.filter(function (r) { return !state[r.dataset.q]; })[0];
         out.className = 'pr-verdict warn';
         out.innerHTML = 'One left: <b>' + esc($('.qt', missing).textContent) + '</b> ' +
-          'That is the one worth sitting with before you commit.';
+          'Sit with that one before you commit.';
       } else {
         out.className = 'pr-verdict warn';
         out.innerHTML = '<b>' + unclear + ' of ' + rows.length + '</b> still unanswered. ' +
@@ -452,7 +452,7 @@
     {
       max: 70,
       title: 'Hard to undo',
-      body: 'Reversing this means unwinding commitments other people have made around your decision. The cost is real and it lands on more than just you.',
+      body: 'Reversing this means unwinding commitments other people have made around your decision. They absorb part of the cost.',
       advice: 'Get one independent perspective from someone with no stake in the answer. Write down the downside case before you commit.'
     },
     {
@@ -1158,7 +1158,7 @@
       });
       if (say) {
         say.textContent = n === 0
-          ? 'Nothing opened yet. Open the one you are actually in.'
+          ? 'Nothing opened yet. Open the situation you are in.'
           : n < total
             ? 'Opened so far. The rest are here when you need them.'
             : 'All of them opened. The eight-step sequence covers what is left.';

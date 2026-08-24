@@ -966,7 +966,7 @@ extra_js: /js/components/high-agency.js
     <p>The midwit trap makes a simple task needlessly complex. One person takes the obvious
     action. Another studies the problem and returns to that same action. The person in the
     middle mistakes complexity for intelligence.</p>
-    <p class="sounds">Before I start I should really understand the landscape properly.</p>
+    <p class="sounds">Before I start, I should understand everything properly.</p>
 
     <div class="ha-lab">
       <div class="ha-lab-head">
@@ -1250,10 +1250,10 @@ extra_js: /js/components/high-agency.js
   <p class="ha-mafia-read" id="ha-mafia-read" role="status">Run the room in order. The method ends in action, not a better meeting.</p>
 
   <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-razor"></use></svg>Tool 3. The story razor</h3>
-  <p>When two options are otherwise equal, ask which one makes the better story. This is
-  <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">Amjad Masad's rule as presented in the essay</a>.
+  <p>When two options are otherwise equal, ask which one makes the better story. The essay
+  attributes this rule to <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">Amjad Masad</a>.
   Use it only as a tie-breaker after evaluating risk. If both choices are sound, choose the one
-  that makes you an active author of your life.</p>
+  that puts you in the active role.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -1283,12 +1283,12 @@ extra_js: /js/components/high-agency.js
       <div class="ha-razor-opt">
         <label class="ha-label" for="ha-razor-a">Option A</label>
         <input class="ha-input" id="ha-razor-a" type="text" placeholder="The sensible one" autocomplete="off">
-        <div class="ha-btn-row"><button class="ha-btn" type="button" data-razor="a">This is the better story</button></div>
+        <div class="ha-btn-row"><button class="ha-btn" type="button" data-razor="a">Better story</button></div>
       </div>
       <div class="ha-razor-opt">
         <label class="ha-label" for="ha-razor-b">Option B</label>
         <input class="ha-input" id="ha-razor-b" type="text" placeholder="The one that scares you" autocomplete="off">
-        <div class="ha-btn-row"><button class="ha-btn" type="button" data-razor="b">This is the better story</button></div>
+        <div class="ha-btn-row"><button class="ha-btn" type="button" data-razor="b">Better story</button></div>
       </div>
     </div>
     <p class="ha-razor-verdict" id="ha-razor-out" role="status"></p>
@@ -1542,7 +1542,7 @@ extra_js: /js/components/high-agency.js
 
   <p>In my work, vague questions often hide behind “more thinking,” while over-scoping hides
   behind “being thorough.” I make progress when I can state a claim plainly enough to test and
-  disprove it. That is the same discipline this essay promotes.</p>
+  disprove it. The essay demands the same discipline.</p>
 
   <p>There is one place I would push back. Disagreeability is a real ingredient and it is also
   the one most easily faked. Refusing to update looks identical to independent thinking from
@@ -1557,7 +1557,7 @@ extra_js: /js/components/high-agency.js
   <div class="ha-coda" aria-label="The high-agency loop: see the situation, locate the movable constraint, act, and let reality answer">
     <p class="ha-coda-kicker">The whole method</p>
     <div class="ha-coda-path">
-      <div><span>01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><b>See what is true</b><small>not merely what is customary</small></div>
+      <div><span>01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><b>See what is true</b><small>not what is customary</small></div>
       <i aria-hidden="true">→</i>
       <div><span>02</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-key"></use></svg><b>Find what can move</b><small>a rule, price, path, person, or skill</small></div>
       <i aria-hidden="true">→</i>

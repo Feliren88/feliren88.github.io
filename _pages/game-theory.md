@@ -334,7 +334,7 @@ extra_js: /js/components/game-theory.js
           <text class="qn" x="355" y="92">Slow down</text>
           <text class="qd" x="355" y="110">irreversible, survivable</text>
         </g>
-        <g class="q" data-q="b" tabindex="0" role="button" aria-label="Reversible with meaningful downside">
+        <g class="q" data-q="b" tabindex="0" role="button" aria-label="Reversible with consequential downside">
           <rect class="cell" x="70" y="150" width="190" height="100"/>
           <svg class="gt-i" viewBox="0 0 24 24" width="22" height="22" x="154" y="157" style="overflow:visible;color:var(--accent)"><use href="#gt-pilot"/></svg>
           <text class="qn" x="165" y="192">Pilot it</text>
@@ -878,8 +878,8 @@ extra_js: /js/components/game-theory.js
   <p>I work on calibration: the gap between what a system believes and what is true. Game theory
   adds an environment that watches the system and responds.</p>
 
-  <p>This is also how I think about safety work. A model may optimise its stated objective and ignore
-  how people respond. That is the same error as evaluating a decision without the
+  <p>The same logic applies to safety work. A model may optimise its stated objective and ignore
+  how people respond. The error is equivalent to evaluating a decision without the
   <span class="m">BR</span> term. More intelligence does not repair a badly specified game.</p>
 
   <p>I do not use the formalism to predict outcomes. Real payoffs are unknown, people are

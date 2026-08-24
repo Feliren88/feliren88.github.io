@@ -232,7 +232,7 @@ laws:
   - n: 2
     icon: gt-repeat
     law: "Most human games repeat"
-    why: "The same people come back. That is what makes reputation an asset and betrayal expensive."
+    why: "The same people come back, which turns reputation into an asset and makes betrayal expensive."
     viz:
       type: loop
       cap: "The same people come back."
@@ -492,7 +492,7 @@ five:
     icon: gt-arena
     vs: "Employers, markets, competitors, institutions"
     ask: "What do they do after I move?"
-    note: "This is the visible game. It matters, though the other four layers may shape the decade more."
+    note: "The visible game matters, though the other four layers may shape the decade more."
     viz:
       type: split
       in: "Your move"
@@ -542,7 +542,7 @@ five:
     icon: gt-tree
     vs: "The choice of which game to enter"
     ask: "Why am I playing this one at all?"
-    note: "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play."
+    note: "Question the frame itself. Choosing a better game can matter more than improving your play."
     viz:
       type: swap
       before: "Play this game harder"

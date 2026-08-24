@@ -768,7 +768,7 @@ situations:
     group: self
     ask: What exactly is succeeding?
     body:
-      - This is one of the most dangerous moments. Income can rise while health deteriorates, relationships weaken, curiosity disappears, freedom shrinks and responsibility becomes unbearable.
+      - Few moments are more dangerous. Income can rise while health deteriorates, relationships weaken, curiosity disappears, freedom shrinks and responsibility becomes unbearable.
     rule: Measure the whole life across every important dimension.
     viz:
       type: chips
@@ -937,14 +937,14 @@ situations:
     group: decide
     ask: What cheap test would let reality settle this?
     body:
-      - Do not assume you are visionary. You may simply be wrong. Search for evidence and let reality arbitrate.
+      - Do not assume you are visionary. You may be wrong. Search for evidence and let reality arbitrate.
     rule: Independence requires your own reasoning and a willingness to agree when the evidence supports agreement.
     viz:
       type: test
       claim: "Your view"
       probe: "A cheap test"
       result: "Let reality arbitrate"
-      cap: "You may simply be wrong. Search for evidence."
+      cap: "You may be wrong. Search for evidence."
 
   - id: going-well
     trigger: When life is going exceptionally well

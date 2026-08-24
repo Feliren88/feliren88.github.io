@@ -7,7 +7,7 @@
     maintain: { title: 'Maintain', icon: 'sf-maintain', reason: 'The current exposure remains useful, but the evidence or available capacity does not support a larger commitment yet.' },
     adapt: { title: 'Adapt', icon: 'sf-adapt', reason: 'Keep the objective. Change the strategy, channel, timing, partner, positioning, or arena before spending another attempt.' },
     pause: { title: 'Pause', icon: 'sf-pause', reason: 'The objective may still be sound, but readiness or external conditions are weak. Preserve the option and build what is missing.' },
-    hedge: { title: 'Hedge', icon: 'sf-hedge', reason: 'Useful exposure remains, but uncertainty and downside are both meaningful. Limit concentration while evidence develops.' },
+    hedge: { title: 'Hedge', icon: 'sf-hedge', reason: 'The exposure still has value, but a bad result would hurt. Keep the position small while evidence develops.' },
     exit: { title: 'Exit', icon: 'sf-exit', reason: 'The future result is no longer worth wanting. Past investment does not create a claim on future time, money, or identity.' }
   };
 
@@ -15,9 +15,9 @@
     goal: { title: 'If this works as designed, do you still want the result?', note: 'Judge the life and obligations created by success, not the status attached to it.', yes: 'conditions', no: 'exit' },
     conditions: { title: 'Do current conditions and your readiness support another move?', note: 'Consider energy, timing, information, resources, and the surrounding environment.', yes: 'strategy', no: 'pause' },
     strategy: { title: 'Is there evidence that the present strategy is sound?', note: 'A valuable objective does not make its current route correct.', yes: 'repeatable', no: 'adapt' },
-    repeatable: { title: 'Has the result repeated under meaningfully independent conditions?', note: 'One result is data. Repetition is stronger evidence of a mechanism.', yes: 'capacity', no: 'downside' },
+    repeatable: { title: 'Has the result repeated under independent conditions?', note: 'One result is data. Repetition gives stronger evidence that the method caused it.', yes: 'capacity', no: 'downside' },
     capacity: { title: 'Can a larger version survive failure and fit available capacity?', note: 'Check concentration, fixed obligations, energy, reversibility, and what scale displaces.', yes: 'scale', no: 'maintain' },
-    downside: { title: 'Would another attempt create meaningful downside or concentration?', note: 'Uncertainty alone does not require delay. Uncertainty combined with damage requires protection.', yes: 'hedge', no: 'maintain' }
+    downside: { title: 'Could another attempt cause serious damage or concentration?', note: 'Uncertainty alone does not require delay. Protect against uncertainty that can do lasting harm.', yes: 'hedge', no: 'maintain' }
   };
 
   function icon(id) {
@@ -203,7 +203,7 @@
         (rated.length - up.length - down.length) + '</b> flat, <b>' + down.length + '</b> falling.');
       if (down.length && up.length) {
         parts.push('Something is climbing while <b>' + down[0].title.toLowerCase() +
-          '</b> falls. That is the pattern this section exists to catch.');
+          '</b> falls. The whole-system view is meant to catch that divergence.');
       } else if (down.length) {
         parts.push('<b>' + down[0].title.toLowerCase() + '</b> is the one constraining the rest.');
       } else if (rated.length === domains.length) {
@@ -434,7 +434,7 @@
     var v = sxOne('#sx-visible'), c = sxOne('#sx-capacity');
     if (!v || !c) return;
     var NAME = {
-      tr: ['Real success', 'Reward arrived with capability. This is the one worth scaling.'],
+      tr: ['Real success', 'Reward arrived with capability. Scale only if the mechanism repeats.'],
       tl: ['Productive failure', 'It cost you, and you can do more than before. Keep the information.'],
       br: ['False success', 'It looks like a win and left you with less room. Check what it depleted.'],
       bl: ['Destructive failure', 'It cost you and took capacity with it. Stabilise before deciding anything.']
@@ -587,7 +587,7 @@
     var phase = {
       proving: {
         number: 'Milestone 01', title: 'Proving capability',
-        explanation: 'This phase turns potential into evidence. Difficult, real work reveals which skills transfer, which environments sharpen performance, and which problems are worth solving repeatedly.',
+        explanation: 'Potential becomes evidence through difficult, real work. The record shows which skills transfer, where performance improves, and which problems remain worth solving.',
         order: 'Direction chosen before evidence is mostly guesswork. Capability comes first because it creates the self-knowledge and credibility needed to make a serious commitment.',
         gate: 'Name one valuable problem you solve unusually well.',
         legend: [['read', 'Capability built'], ['win', 'Evidence validated'], ['line', 'Fit becomes clearer']],
@@ -600,8 +600,8 @@
       },
       choosing: {
         number: 'Milestone 02', title: 'Choosing direction',
-        explanation: 'This phase converts broad capability into deliberate commitment. The field, problem class, collaborators, and unwanted tradeoffs become explicit enough to guide the next stretch of work.',
-        order: 'Commitment becomes intelligent only after capability produces evidence. It must precede leverage because a system that compounds the wrong direction creates faster drift, not progress.',
+        explanation: 'Broad capability now needs a target. Choose the field, problem class, collaborators, and tradeoffs that will govern the next stretch of work.',
+        order: 'Evidence must precede commitment. Commitment must precede leverage; otherwise the system compounds drift.',
         gate: 'Become the person competent people associate with one difficult problem.',
         legend: [['line', 'Explored routes'], ['read', 'Committed route'], ['win', 'Target problem']],
         prerequisites: ['Evidence from the proving phase', 'A credible body of work', 'Exposure to several environments', 'Enough runway to reject a clearly bad fit'],
@@ -613,8 +613,8 @@
       },
       leverage: {
         number: 'Milestone 03', title: 'Building leverage',
-        explanation: 'This phase makes expertise reusable. A method becomes a product, system, team, distribution channel, recurring asset, or body of intellectual property instead of disappearing when the workday ends.',
-        order: 'Leverage follows direction because compounding needs a stable target. It comes before ownership because there must first be a repeatable value engine worth capturing.',
+        explanation: 'Make expertise reusable. Turn the method into a product, system, team, distribution channel, recurring asset, or body of intellectual property that survives the workday.',
+        order: 'Leverage needs a stable direction. Ownership comes later, once a repeatable source of value exists to capture.',
         gate: 'Make one part of your contribution scale beyond your own hours.',
         legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
         prerequisites: ['A clear direction', 'Repeated demand for the same expertise', 'A method that works more than once', 'Access to users and feedback'],
@@ -626,8 +626,8 @@
       },
       ownership: {
         number: 'Milestone 04', title: 'Expanding ownership',
-        explanation: 'This phase changes value from compensation into participation. Equity, assets, reusable work, and aligned terms allow successful outcomes to build optionality beyond the next payment.',
-        order: 'Ownership follows leverage because repeatable value makes upside identifiable and negotiable. It precedes authority because bearing consequences improves incentives and decision quality.',
+        explanation: 'Move from compensation toward participation. Equity, assets, reusable work, and explicit terms let a good outcome create value beyond the next payment.',
+        order: 'Repeatable value makes upside visible enough to negotiate. Ownership then ties decisions to their consequences before authority expands.',
         gate: 'Know exactly how you participate when the work succeeds dramatically.',
         legend: [['read', 'Total value created'], ['win', 'Upside owned'], ['line', 'Participation flow']],
         prerequisites: ['A working leverage engine', 'Evidence of value created', 'Basic financial runway', 'Clear understanding of the value chain'],
@@ -639,8 +639,8 @@
       },
       authority: {
         number: 'Milestone 05', title: 'Establishing authority',
-        explanation: 'This phase shifts the work from production to selection. People seek judgment before committing resources because previous decisions have repeatedly survived contact with reality.',
-        order: 'Authority should follow demonstrated value and ownership, not title alone. Judgment must first operate with evidence, incentives, and consequences before others safely defer to it.',
+        explanation: 'The work shifts from production to selection. People ask before committing resources because earlier decisions survived contact with reality.',
+        order: 'Authority must rest on demonstrated value and consequence, not title. Others can defer only after judgment has been tested against evidence and incentives.',
         gate: 'Be trusted to decide which problems deserve attention.',
         legend: [['win', 'Candidate options'], ['read', 'Judgment filter'], ['line', 'Selected decision']],
         prerequisites: ['Consequences tied to prior decisions', 'A record of sound calls', 'Deep domain expertise', 'Trust from capable peers'],
@@ -652,8 +652,8 @@
       },
       scaling: {
         number: 'Milestone 06', title: 'Scaling judgment',
-        explanation: 'This phase multiplies sound judgment through people, systems, information, and capital. Results no longer require personal intervention in every operational detail.',
-        order: 'Scale amplifies both wisdom and error. It belongs after authority because judgment must prove reliable in bounded decisions before a larger system carries it outward.',
+        explanation: 'Extend sound judgment through people, systems, information, and capital. Results should no longer depend on personal intervention in every detail.',
+        order: 'Scale amplifies both sound and bad judgment. Test decisions at bounded size before a larger system carries them outward.',
         gate: 'Build a system that works without making you its permanent bottleneck.',
         legend: [['read', 'Judgment hub'], ['win', 'Multiplier nodes'], ['line', 'Delegated reach']],
         prerequisites: ['Trusted judgment', 'Principles that can be explained', 'Capable lieutenants or partners', 'Resources worth multiplying'],
@@ -665,8 +665,8 @@
       },
       transmitting: {
         number: 'Milestone 07', title: 'Allocating & transmitting',
-        explanation: 'This phase turns accumulated discernment into durable benefit beyond direct work. Capital, mentorship, governance, teaching, writing, and institutions carry useful judgment into other lives and future decisions.',
-        order: 'Transmission comes last because discernment requires a long record of learning, choosing, owning, and scaling. What is passed onward should be tested knowledge rather than borrowed certainty.',
+        explanation: 'Put accumulated discernment to work beyond direct execution. Capital, mentorship, governance, teaching, writing, and institutions can carry tested judgment into later decisions.',
+        order: 'Discernment requires a long record of learning, choosing, owning, and scaling. Pass on tested knowledge, not borrowed certainty.',
         gate: 'Make what you learned useful beyond your own direct involvement.', final: true,
         legend: [['read', 'Tested discernment'], ['line', 'Transmission waves'], ['win', 'People and systems reached']],
         prerequisites: ['Systems that operate without constant intervention', 'Financial and professional optionality', 'A long record of decisions and consequences', 'An identity larger than one operating role'],

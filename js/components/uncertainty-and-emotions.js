@@ -579,7 +579,7 @@
         p:'Speed is up, the body is loud, and everything feels like it must be settled now. A decision made here is really the alarm choosing.',
         a:'Lower the speed first. Cold, movement, a longer out-breath. Then come back to the question.'},
       mid:{t:'Able to choose',
-        p:'You can feel something and still steer. This is the only band where a considered decision belongs.',
+        p:'You can feel something and still steer. Only this band supports a considered decision.',
         a:'Do the thing you chose. Practice counts here, with the feeling still present.'},
       under:{t:'Switched off',
         p:'Flat, foggy, far away. Nothing feels urgent because nothing feels like much at all.',
@@ -674,7 +674,7 @@
 
   function directSections(){
     function wire(selector,itemSelector,prompt,copy){var root=document.querySelector(selector);if(!root)return;var read=document.createElement('p');read.className='ue-direct-read';read.setAttribute('role','status');read.textContent=prompt;root.insertAdjacentElement('afterend',read);var items=all(itemSelector,root);root.classList.add('ue-direct-set');items.forEach(function(item,i){item.classList.add('ue-direct-item');item.tabIndex=0;item.setAttribute('role','button');function choose(){items.forEach(function(x){x.classList.toggle('is-pick',x===item);});root.classList.add('has-pick');read.textContent=copy(item,i);}item.addEventListener('click',choose);item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});}
-    wire('.ue-moves',':scope > div','Select a move to inspect the function it serves.',function(item){return item.querySelector('b').textContent+': the behavior becomes a certainty move when its main job is immediate relief rather than solving a finite external problem.';});
+    wire('.ue-moves',':scope > div','Select a move to inspect what it does.',function(item){return item.querySelector('b').textContent+': it becomes a certainty move when immediate relief replaces solving a finite external problem.';});
     var expected=0;wire('.ue-reset',':scope > div','Run the recovery sequence in order.',function(item,i){if(i>expected)return 'Run the sequence in order. Description comes before diagnosis, and diagnosis comes before the smaller restart.';expected=Math.max(expected,i+1);return item.querySelector('strong').textContent+': '+item.querySelector('span').lastChild.textContent.trim();});
   }
 

@@ -163,7 +163,7 @@
       });
 
       if (down.length === 0) {
-        out.innerHTML = '<p class="t">Three wheels. It rolls.</p><p>This is the combination the essay calls high agency. ' +
+        out.innerHTML = '<p class="t">Three wheels. It rolls.</p><p>The essay calls this combination high agency. ' +
           'It is rare because the three traits pull against each other. Clear thinkers tend to keep thinking. ' +
           'People with a bias to action tend to skip the thinking. Take a wheel off and see what breaks.</p>';
       } else if (down.length === 1) {
@@ -174,7 +174,7 @@
           down.map(function (d) { return TRIKE[d].label.toLowerCase(); }).join(' and ') +
           ' are both gone. The remaining vehicle cannot move, however hard you push it.</p>';
       } else {
-        out.innerHTML = '<p class="t">No wheels.</p><p>This is the default setting. ' +
+        out.innerHTML = '<p class="t">No wheels.</p><p>The default setting. ' +
           'A brain built for a small tribe and a school system built for a factory can produce it. ' +
           'Put the wheels back on and read the rest.</p>';
       }
@@ -233,7 +233,7 @@
     },
     live: {
       name: 'Live player',
-      text: 'You name the problem, you move on it, and you keep going when someone tells you no. This is the person your friends ring from the cell.'
+      text: 'You name the problem, move on it, and keep going when someone tells you no. Your friends ring this person from the cell.'
     }
   };
 
@@ -688,7 +688,7 @@
       btn.textContent = broken ? 'Put me back in the loop' : 'Take one action now';
       if (say) {
         say.textContent = broken
-          ? 'The loop did not resolve. It got interrupted. That is the only way it ever ends.'
+          ? 'The loop did not resolve; you interrupted it. Waiting would have kept it running.'
           : 'Round and round. Each lap feels like progress because it uses the same energy as thinking.';
       }
     });
@@ -765,7 +765,7 @@
         { t: 'Feel the size of it and quietly put it off again.', k: 'overwhelm',
           why: 'You compared level zero to level one hundred and skipped the only part you can act on.' },
         { t: 'Read ten pages tonight and write down every bit you did not follow.', k: 'high',
-          why: 'That is level one, and it is small enough to be undeniable. The confusion list becomes level two.' },
+          why: 'Level one is small enough to be undeniable. The confusion list becomes level two.' },
         { t: 'Tell a few people it is something you are getting into.', k: 'vague',
           why: 'Saying it out loud feels like a commitment. It is a description of a feeling.' }
       ]
@@ -995,7 +995,7 @@
     },
     n7: { say: 'You have agency on this problem. Nothing left to diagnose. Run the chart again tomorrow.', term: true },
     o1: { say: 'The vague trap. Get it onto a surface outside your head. Paper, whiteboard, a walk with one question, a person who will interrupt you.', term: true, trap: '#trap-vague' },
-    o2: { say: 'Then you have found a genuine limit. This is the rarest outcome on the chart. Spend your agency somewhere else.', term: true },
+    o2: { say: 'You found a genuine limit, the rarest outcome on the chart. Spend your agency somewhere else.', term: true },
     o3: { say: 'The attachment trap. Ask what you would do with ten times the agency, and take the first three answers seriously.', term: true, trap: '#trap-attachment' },
     o4: { say: 'The midwit trap. Invert it. Ask how you would guarantee failure, then flip each answer.', term: true, trap: '#trap-midwit' },
     o5: { say: 'The overwhelm trap. Write down everything you could possibly do. That list is level one, and you can do it now.', term: true, trap: '#trap-overwhelm' },
@@ -1253,7 +1253,7 @@
         if (!chosen) { (pickA ? a : b).focus(); return; }
         out.innerHTML = 'At a dinner in five years, <b>' + escapeHtml(chosen) + '</b> is the one you tell. ' +
           (other ? 'Nobody is ever going to ask about ' + escapeHtml(other) + '. ' : '') +
-          'If it turns out to be the wrong call, you still end up with the story. That is the whole razor.';
+          'If it turns out to be wrong, you still end up with the story. The razor has done its job.';
       });
     });
   }
@@ -1266,7 +1266,7 @@
     if (!fig || !btn) return;
 
     var OFF = 'Two of these are opinions about the water. The third one changes how much there is.';
-    var ON = 'Same glass, more water. That is the whole difference between reading a situation and moving it.';
+    var ON = 'Same glass, more water. Reading became movement.';
 
     btn.addEventListener('click', function () {
       var on = fig.classList.toggle('is-on');

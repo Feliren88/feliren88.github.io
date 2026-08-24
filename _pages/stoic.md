@@ -162,7 +162,7 @@ extra_js: /js/components/stoic.js
   </div>
 
   <p>This can sound like a denial that anything bad happens. I read it more narrowly. An event creates
-  an immediate impression. We then decide whether to accept it as true. That is where we can act.</p>
+  an immediate impression. We then decide whether to accept it as true. Choice begins there.</p>
 
   <div class="st-lab">
     <div class="st-lab-head">
@@ -190,7 +190,7 @@ extra_js: /js/components/stoic.js
         <span class="sico" aria-hidden="true"><svg class="st-i" viewBox="0 0 24 24"><use href="#si-assent"/></svg></span>
         <span><span class="sk">Judgement</span>
         <span class="sv">Do you agree with the impression?</span>
-        <span class="sn">This is the lever. It is also the only part of the chain that is yours.</span>
+        <span class="sn">Judgment is the lever, and the only part of the chain that is yours.</span>
         <span class="st-judges" id="st-m-judgements"></span></span>
       </div>
       <div class="st-arrow" aria-hidden="true">&darr;</div>
@@ -206,7 +206,7 @@ extra_js: /js/components/stoic.js
   </div>
 
   <p>Marcus turns the idea into a useful test: stop at what was reported. Someone spoke badly of you.
-  That is the report. The report does not say that you were harmed; your mind added that part.</p>
+  The report ends there. It does not say that you were harmed; your mind added that part.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
