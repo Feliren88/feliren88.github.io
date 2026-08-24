@@ -11,3 +11,22 @@
 .cv-service h3{margin:0;font-size:.92rem;color:var(--text)}
 .cv-service article p{margin:0;color:var(--muted);font-size:.84rem;line-height:1.6;max-width:46rem}
 @media(max-width:800px){.cv-service article{grid-template-columns:1fr;gap:.35rem}}
+
+/* ── Mobile corrections ───────────────────────────────────
+   The page is 94vw wide, so the gutter is about 11px on a phone. Two
+   decorations were reaching past it and pushing the whole page sideways. */
+@media(max-width:640px){
+  /* The portrait's offset border sat 8% outside its own right edge. */
+  .about-portrait-frame:before{inset:6% 0 -4% 8%}
+  /* The direction panel pulled 1.2rem wider than the page on each side. */
+  .about-direction-panel{margin-inline:0}
+  /* Give the scrolling strips an edge that shows they move. */
+  .about-proof-strip{-webkit-overflow-scrolling:touch}
+  .about-story-nav{gap:1.1rem}
+}
+@media(max-width:420px){
+  .about-story-copy h1{font-size:clamp(2.4rem,11vw,3.4rem)}
+  .about-equation{font-size:.8rem}
+  .about-method-grid article{padding:1.4rem}
+  .about-chapter-body>h2{font-size:1.9rem}
+}
