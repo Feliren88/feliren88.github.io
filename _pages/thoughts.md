@@ -366,13 +366,12 @@ layout-class: page writings-page
   .essay-feature:nth-child(5) { grid-column: span 4; min-height: 22rem; }
   .essay-feature:nth-child(6) { grid-column: span 8; min-height: 22rem; background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface) 58%); }
   .essay-feature:nth-child(7), .essay-feature:nth-child(8) { grid-column: span 6; min-height: 19rem; }
-  /* The ninth closes the grid on a full row of its own. Without a rule here it
-     falls back to one of twelve columns and renders as a sliver. */
-  .essay-feature:nth-child(9) { grid-column: 1 / -1; min-height: 17rem; background: linear-gradient(115deg, color-mix(in srgb, var(--cta) 9%, var(--surface)), var(--surface) 62%); }
-  .essay-feature:nth-child(9) .essay-feature-title { max-width: 22ch; font-size: clamp(1.6rem, 2.6vw, 2.5rem); }
-  .essay-feature:nth-child(9) .essay-feature-desc { max-width: 62ch; }
-  /* Anything added after this keeps a sensible half-row instead of a sliver. */
-  .essay-feature:nth-child(n+10) { grid-column: span 6; min-height: 19rem; }
+  /* Communication and Self-Love form one paired row. */
+  .essay-feature:nth-child(9), .essay-feature:nth-child(10) { grid-column:span 6;min-height:19rem }
+  .essay-feature:nth-child(9) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
+  /* Later additions keep a sensible half-row instead of becoming slivers. */
+  .essay-feature:nth-child(n+11) { grid-column:span 6;min-height:19rem }
   .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
   .essay-feature-label {
     display: block;
