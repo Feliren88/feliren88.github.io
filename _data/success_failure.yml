@@ -30,88 +30,180 @@ domains:
     good: Harder problems, transferable proof, better people, ownership, authority, and wider options.
     false_signal: A title without authority, salary without skill growth, or prestige that raises the cost of leaving.
     response: Treat one rejection as noise. Treat repeated independent rejection as evidence about positioning, proof, skill, or market fit.
+    viz:
+      type: diverge
+      up: "Title and prestige"
+      down: "Authority and options"
+      cap: "A title without authority raises the cost of leaving."
   - title: Income
     icon: sf-money
     good: Cash flow rises through better judgment, scarce skill, distribution, or terms rather than longer hours alone.
     false_signal: Pay rises while time, autonomy, or bargaining power falls.
     response: Identify the mechanism that sets pay. Improve alternatives before negotiating and reduce dependence on one payer.
+    viz:
+      type: diverge
+      up: "Pay"
+      down: "Time, autonomy, bargaining power"
+      cap: "Cash flow can rise on longer hours alone."
   - title: Wealth resilience
     icon: sf-resilience
     good: Durable assets, liquidity, and the ability to absorb shocks increase.
     false_signal: Paper gains hide borrowed exposure, illiquidity, or concentration that could end future participation.
     response: Protect some, reinvest some, and keep some liquid. Review the thesis after a loss instead of trying to win the loss back.
+    viz:
+      type: surface
+      top: "Paper gains"
+      under: "Borrowed exposure, illiquidity, concentration"
+      cap: "The number holds until participation has to end."
   - title: Ownership
     icon: sf-asset
     good: More of the upside from value created accrues to you through equity, assets, or reusable work.
     false_signal: Responsibility grows while the economic upside remains fixed or belongs elsewhere.
     response: Clarify what you own, what can compound, and whether the extra responsibility changes your share of the result.
+    viz:
+      type: balance
+      a: "Responsibility"
+      b: "Upside that accrues to you"
+      tip: "a"
+      cap: "Responsibility can grow while the upside belongs elsewhere."
   - title: Relationship quality
     icon: sf-relationship
     good: Trust, honesty, autonomy, and repair capacity increase over repeated disagreements.
     false_signal: The relationship looks stable because one person suppresses conflict or loses the freedom to disagree.
     response: Repair one conflict. Diagnose a repeated pattern. Reduce exposure after repeated betrayal. Do not negotiate incompatible values away.
+    viz:
+      type: surface
+      top: "Looks stable"
+      under: "One person suppressing conflict"
+      cap: "Repair capacity is what rises over repeated disagreements."
   - title: Family and home
     icon: sf-home
     good: Home restores energy, responsibilities are visible, and contribution remains reciprocal over time.
     false_signal: Surface peace depends on invisible labour, avoidance, or one person carrying the shared system.
     response: Make labour, authority, resources, and boundaries explicit. Repair the arrangement instead of repeating emotional appeals.
+    viz:
+      type: surface
+      top: "Surface peace"
+      under: "Invisible labour carried by one person"
+      cap: "Contribution stays reciprocal only while it stays visible."
   - title: Emotional equilibrium
     icon: sf-equilibrium
     good: Strong emotion can be felt without forcing an immediate, irreversible decision.
     false_signal: Achievement depends on overwork, or relief depends on avoidance that enlarges tomorrow's problem.
     response: Stabilize first. Reduce commitment size, separate facts from interpretation, then choose a reversible next step.
+    viz:
+      type: debt
+      now: "Relief today"
+      later: "Tomorrow's problem, enlarged"
+      cap: "Avoidance borrows, and the balance grows."
   - title: Identity coherence
     icon: sf-identity
     good: Confidence follows evidence, practice, competence, and recovery.
     false_signal: Praise, status, or one visible result becomes proof of who you must remain.
     response: Describe the mechanism and conditions behind the result. Keep the identity provisional enough to update.
+    viz:
+      type: ratchet
+      goal: "Who you must remain"
+      reach: "One visible result"
+      cap: "Praise can harden into a role you cannot leave."
   - title: Learning
     icon: sf-learning
     good: Knowledge becomes application, feedback, judgment, and better performance.
     false_signal: Consumption feels productive while behaviour and results remain unchanged.
     response: Change practice method, feedback frequency, difficulty, environment, teacher, or project before consuming more.
+    viz:
+      type: diverge
+      up: "Consumption"
+      down: "Behaviour and results"
+      cap: "Reading feels productive while nothing downstream moves."
   - title: Creativity
     icon: sf-creativity
     good: Work builds skill, a body of work, distinctiveness, intellectual property, and distribution.
     false_signal: Views substitute for durable work, or originality has no relevance, execution, or route to an audience.
     response: Separate weak work from weak distribution, wrong audience, and bad timing before changing the product.
+    viz:
+      type: diverge
+      up: "Views"
+      down: "Durable body of work"
+      cap: "Attention can substitute for the work that lasts."
   - title: Network
     icon: sf-network
     good: Trust density, reciprocity, diversity, and useful reach increase.
     false_signal: Contact count rises while relationships remain extractive, shallow, or dependent on titles.
     response: Invest through reliability, contribution, introductions, and shared work. Reduce exposure to repeated extraction.
+    viz:
+      type: spread
+      many: "Contact count"
+      few: "Trust density and reciprocity"
+      cap: "Reach counts only where the relationship is not extractive."
   - title: Reputation
     icon: sf-reputation
     good: Repeated work gives others evidence of competence and reliability.
     false_signal: Visibility grows faster than the evidence beneath it, or one public identity blocks necessary change.
     response: Repair damage with acknowledgement, changed behaviour, repeated evidence, and time. Intentions alone carry little signal.
+    viz:
+      type: diverge
+      up: "Visibility"
+      down: "Evidence beneath it"
+      cap: "Visibility can outrun the record that justifies it."
   - title: Authority
     icon: sf-leadership
     good: Responsibility, information, resources, decision rights, and accountability remain in proportion.
     false_signal: Responsibility grows without resources or authority, or good outcomes require constant intervention.
     response: Inspect incentives, information, decision rights, accountability, norms, and selection before blaming motivation.
+    viz:
+      type: balance
+      a: "Responsibility"
+      b: "Resources and decision rights"
+      tip: "a"
+      cap: "These four are meant to stay in proportion."
   - title: Geography and environment
     icon: sf-geography
     good: The location improves opportunity, network, daily fit, learning, and the quality of ordinary routines.
     false_signal: Vacation impressions or prestige hide cost, friction, isolation, regulation, or poor occupational fit.
     response: Visit, work temporarily, build an initial network, and observe a normal week before making the move hard to reverse.
+    viz:
+      type: surface
+      top: "Vacation impression"
+      under: "Cost, friction, isolation, fit"
+      cap: "Prestige hides what daily life there actually costs."
   - title: Meaning
     icon: sf-meaning
     good: Some value remains independent of rank, applause, and visible achievement.
     false_signal: Each success raises the comparison group and moves the point at which life is allowed to feel sufficient.
     response: Protect work, love, service, craft, curiosity, or presence that you would still value without spectators.
+    viz:
+      type: ratchet
+      goal: "Enough"
+      reach: "Each success"
+      cap: "Every win raises the comparison group."
   - title: Recovery
     icon: sf-recovery
     good: Energy is replenished before every demand has been completed.
     false_signal: Rest is postponed until an empty task list that never arrives.
     response: Treat recovery as operating infrastructure and govern withdrawals from the shared energy account.
+    viz:
+      type: defer
+      thing: "Rest"
+      until: "An empty task list"
+      cap: "The condition for resting never arrives."
   - title: Vitality
     icon: sf-vitality
     good: The current intensity can be repeated consistently across years.
     false_signal: Temporary biological capacity becomes the permanent expectation for normal output.
     response: Judge the pace by sustainable output across time, not by the strongest short burst.
+    viz:
+      type: diverge
+      up: "Expected output"
+      down: "Capacity that can repeat"
+      cap: "Temporary capacity becomes the permanent expectation."
   - title: Optionality
     icon: sf-optionality
     good: Credible future moves increase through savings, portable skills, trust, low fixed costs, and wider access.
     false_signal: Keeping every door open prevents commitment to the best evidenced path.
     response: Create options while uncertainty is high. Exercise one when evidence, fit, and compounding converge.
+    viz:
+      type: spread
+      many: "Doors kept open"
+      few: "Commitment to the evidenced path"
+      cap: "Keeping everything open prevents the one move worth making."

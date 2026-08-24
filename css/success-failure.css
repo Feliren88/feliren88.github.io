@@ -138,7 +138,8 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
 .sf-guard-grid p { margin:0; font-size:var(--fs-xs); line-height:1.55; }
 
 /* Domains and review */
-.sf-domains { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+/* One column: each row now opens onto a diagram, which needs the width. */
+.sf-domains { display:grid; grid-template-columns:1fr; gap:.6rem; }
 .sf-domains details { border:1px solid var(--border-ui); border-radius:var(--radius-md); background:var(--surface); overflow:hidden; }
 .sf-domains summary { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.65rem; padding:.8rem; cursor:pointer; color:var(--text); font:650 var(--fs-sm)/1.2 "Space Grotesk",sans-serif; list-style:none; }
 .sf-domains summary::-webkit-details-marker { display:none; }
@@ -297,3 +298,46 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
   .sf-bars { grid-template-columns:repeat(auto-fit,minmax(2.1rem,1fr)); }
 }
 .sf-final-choice span .sf-i { display:inline-block; vertical-align:-.15em; margin-right:.4rem; font-size:1.1em; }
+
+/* ── A diagram inside each domain ─────────────────────── */
+.sf-viz{display:grid;grid-template-columns:minmax(0,17rem) minmax(0,1fr);gap:.9rem 1.2rem;align-items:center;margin:0 0 .9rem;padding:.85rem;border:1px solid var(--line);border-radius:var(--radius-md);background:color-mix(in srgb,var(--sf-read) 4%,var(--surface))}
+.sf-viz-svg{display:block;width:100%;height:auto}
+.sf-viz-key{display:grid;gap:.35rem;align-content:center}
+.sf-viz-key span{display:flex;align-items:center;gap:.45rem;font-size:var(--fs-xs);color:var(--muted);line-height:1.45}
+.sf-viz-key i{flex:none;width:.7rem;height:.7rem;border-radius:2px;background:var(--muted)}
+.sf-viz-key .up i,.sf-viz-key .top i,.sf-viz-key .now i,.sf-viz-key .thin i,.sf-viz-key .step i{background:var(--sf-win)}
+.sf-viz-key .down i,.sf-viz-key .under i,.sf-viz-key .later i,.sf-viz-key .heavy i,.sf-viz-key .goal i{background:var(--sf-loss)}
+.sf-viz-key .thick i,.sf-viz-key .light i{background:var(--sf-read)}
+.sf-viz-cap{grid-column:1/-1;margin:0!important;font-size:var(--fs-2xs);color:var(--muted);line-height:1.55}
+
+.sf-viz-svg .ax{stroke:var(--line-strong);stroke-width:1.2}
+.sf-viz-svg .up{fill:none;stroke:var(--sf-win);stroke-width:2.4;stroke-linecap:round}
+.sf-viz-svg .down{fill:none;stroke:var(--sf-loss);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:5 4}
+.sf-viz-svg .dot-up{fill:var(--sf-win)}.sf-viz-svg .dot-down{fill:var(--sf-loss)}
+.sf-viz-svg .dot-o{fill:var(--muted)}
+.sf-viz-svg .top{fill:color-mix(in srgb,var(--sf-win) 26%,transparent);stroke:var(--sf-win);stroke-width:1.4}
+.sf-viz-svg .under{fill:color-mix(in srgb,var(--sf-loss) 18%,transparent);stroke:var(--sf-loss);stroke-width:1.4;stroke-dasharray:4 3}
+.sf-viz-svg .crack{fill:none;stroke:var(--sf-loss);stroke-width:1.6;opacity:.75}
+.sf-viz-svg .lab-t{font-size:10px;fill:var(--text)}
+.sf-viz-svg .lab-u{font-size:10px;fill:var(--muted)}
+.sf-viz-svg .stand{fill:none;stroke:var(--muted);stroke-width:2.4;stroke-linecap:round}
+.sf-viz-svg .pivot{fill:var(--muted)}
+.sf-viz-svg .beam{stroke:var(--text);stroke-width:2.6;stroke-linecap:round}
+.sf-viz-svg .dish{fill:color-mix(in srgb,var(--sf-read) 22%,var(--surface));stroke:var(--sf-read);stroke-width:1.4;stroke-linejoin:round}
+.sf-viz-svg .dish.heavy{fill:color-mix(in srgb,var(--sf-loss) 24%,var(--surface));stroke:var(--sf-loss)}
+.sf-viz-svg .now{fill:color-mix(in srgb,var(--sf-win) 32%,transparent);stroke:var(--sf-win);stroke-width:1.3}
+.sf-viz-svg .later{fill:color-mix(in srgb,var(--sf-loss) 22%,transparent);stroke:var(--sf-loss);stroke-width:1.3}
+.sf-viz-svg .arrow{stroke:var(--muted);stroke-width:1.6}
+.sf-viz-svg .head{fill:var(--muted)}
+.sf-viz-svg .step{fill:var(--sf-win)}
+.sf-viz-svg .hop{stroke:var(--line-strong);stroke-width:1.4}
+.sf-viz-svg .goal{stroke:var(--sf-loss);stroke-width:2.4;stroke-linecap:round}
+.sf-viz-svg .hop2{fill:none;stroke:var(--sf-win);stroke-width:1.8}
+.sf-viz-svg .never{stroke:var(--sf-loss);stroke-width:2;stroke-dasharray:4 3}
+.sf-viz-svg .thin{fill:color-mix(in srgb,var(--sf-win) 45%,transparent)}
+.sf-viz-svg .thick{fill:var(--sf-read)}
+
+@media(max-width:640px){
+  .sf-viz{grid-template-columns:1fr;gap:.6rem}
+  .sf-viz-svg{max-width:22rem;margin:0 auto}
+}

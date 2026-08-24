@@ -211,7 +211,7 @@ extra_js: /js/components/success-failure.js
   <p class="sf-deck">A win in one domain can conceal damage in another. Review the whole system before calling the trajectory successful.</p>
   <div class="sf-domains">
     {% for domain in site.data.success_failure.domains %}
-    <details {% if forloop.first %}open{% endif %}>
+    <details {% if forloop.first %}open{% endif %}{% if domain.viz %} data-viz='{{ domain.viz | jsonify }}'{% endif %}>
       <summary><span class="ico"><svg class="sf-i"><use href="#{{ domain.icon }}"/></svg></span><span>{{ domain.title }}</span><i aria-hidden="true"></i></summary>
       <div class="sf-domain-body">
         <p class="sig is-good"><b><svg class="sf-i" aria-hidden="true"><use href="#sf-rising"/></svg>Good signal</b>{{ domain.good }}</p>
