@@ -665,7 +665,13 @@
     nums(); paint();
   }
 
-  [curveViz,wheel,bands,planner].forEach(function(fn){
+  function supportLab(){
+    var host=document.getElementById('ue-support-lab');if(!host)return;
+    var copy={fact:'Answer the finite fact once: check the account or receipt. A factual question deserves a factual answer.',company:'Offer presence without taking ownership: stay with them while they act, and let the decision remain theirs.',guarantee:'Do not provide another guarantee. Name the repeated certainty request, offer steadiness, and return to the decision or plan already made.'};
+    all('button',host).forEach(function(button){button.addEventListener('click',function(){all('button',host).forEach(function(b){b.classList.toggle('is-on',b===button);});document.getElementById('ue-support-read').textContent=copy[button.dataset.ueSupport];});});
+  }
+
+  [curveViz,wheel,bands,planner,supportLab].forEach(function(fn){
     try{ fn(); }catch(e){ /* one widget must not take the page down */ }
   });
 

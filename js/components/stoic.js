@@ -923,9 +923,15 @@
     }, { rootMargin: '-25% 0px -60% 0px', threshold: 0 });
     sections.forEach(function (section) { observer.observe(section); });
   }
+  function verdict() {
+    var lab = $('#st-verdict-lab'); if (!lab) return;
+    var chosen = {}, read = $('#st-verdict-read');
+    var copy = {keep:'Keep the calibration move: separate the event from the prediction your first impression adds.',open:'Leave the moral tension open: the text does not establish that emotional distance is compatible with loving someone fully.'};
+    $$('[data-st-verdict]', lab).forEach(function (button) { button.addEventListener('click', function () { var key=button.dataset.stVerdict; chosen[key]=!chosen[key]; button.classList.toggle('is-on',chosen[key]); button.setAttribute('aria-pressed',chosen[key]?'true':'false'); if(chosen.keep&&chosen.open) read.textContent='Both can remain true: use the passage that improves judgment, and refuse to manufacture agreement where the text leaves a real cost.'; else if(chosen[key]) read.textContent=copy[key]; else read.textContent='A useful text does not require agreement with every claim.'; }); });
+  }
 
   function init() {
-    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc, passageViz]
+    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc, passageViz, verdict]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

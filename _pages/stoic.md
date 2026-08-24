@@ -554,6 +554,12 @@ extra_js: /js/components/stoic.js
   loan. I do not know how to square that distance with loving someone fully. I keep the passages
   that help and leave this one unresolved.</p>
 
+  <div class="st-lab st-verdict-lab" id="st-verdict-lab">
+    <div class="st-lab-head"><div><p class="t-eyebrow">Reading test</p><h5>Keep the tool without forcing a tidy conclusion</h5></div><span class="st-lab-hint">Select both sides</span></div>
+    <div class="st-verdict-grid"><button type="button" data-st-verdict="keep"><b>Keep</b><span>Examine the judgment added to an event.</span></button><button type="button" data-st-verdict="open"><b>Leave unresolved</b><span>Whether distance from loss can coexist with loving fully.</span></button></div>
+    <p class="st-verdict-read" id="st-verdict-read" role="status">A useful text does not require agreement with every claim.</p>
+  </div>
+
   <div class="st-final">
     <p><b>An event may be outside your control. The judgement you add to it is still yours to
     examine.</b></p>

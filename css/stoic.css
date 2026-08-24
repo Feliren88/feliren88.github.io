@@ -582,3 +582,4 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .sv-gate .pause i{height:1rem}
   .sv-scale .fulcrum{justify-self:center}
 }
+.st-verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.st-verdict-grid button{padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--muted);text-align:left;cursor:pointer}.st-verdict-grid button b{display:block;margin-bottom:.25rem;color:var(--text);font:700 .86rem "Space Grotesk",sans-serif}.st-verdict-grid button span{font-size:.78rem;line-height:1.5}.st-verdict-grid button.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.st-verdict-read{min-height:2.8rem;margin:.7rem 0 0!important;padding:.65rem;border-left:3px solid var(--accent);color:var(--muted)!important;font-size:.8rem!important}@media(max-width:560px){.st-verdict-grid{grid-template-columns:1fr}}

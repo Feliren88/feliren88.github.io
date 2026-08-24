@@ -1210,10 +1210,15 @@
     }, { rootMargin: '-25% 0px -60% 0px', threshold: 0 });
     sections.forEach(function (section) { observer.observe(section); });
   }
+  function trades() {
+    var buttons=$$('.pr-trade[data-pr-trade]'); if(!buttons.length)return;
+    var reads=['Health can fund a short emergency. It cannot become the permanent price of money.','Integrity may cost an opportunity. Treating integrity as spendable changes the person making the next decision.','Freedom can be constrained for a defined purpose. Status is not enough reason to surrender it indefinitely.','Ambition may require an intense season. Good relationships still need an explicit route back into the schedule.','Security can justify a stable interval. If curiosity never returns, the temporary shelter has become a ceiling.'];
+    buttons.forEach(function(button){button.addEventListener('click',function(){buttons.forEach(function(item){item.classList.remove('is-on');item.setAttribute('aria-pressed','false');});button.classList.add('is-on');button.setAttribute('aria-pressed','true');$('#pr-trade-read').textContent=reads[+button.dataset.prTrade];$('#pr-trade-fill').style.width='100%';setTimeout(function(){$('#pr-trade-fill').style.width='28%';},30);});});
+  }
 
   function init() {
     [progress, narrativeRail, consoleSearch, situationViz, cards, explored, sixQuestions,
-      dial, sequence, doors, situationMap, orbit, fork].forEach(function (fn) {
+      dial, sequence, doors, situationMap, orbit, fork, trades].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
   }

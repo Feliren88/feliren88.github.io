@@ -14,6 +14,27 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose sf-opening" id="outcome">
   <p class="sf-kicker">An operating manual for the result after the plan</p>
+
+  <figure class="sf-fig" id="sfig-luck">
+    <figcaption><span class="n">Figure 1</span><b>One result tells you less than you think</b><em>Drag how much of this game is luck.</em></figcaption>
+    <div class="sf-fig-body">
+      <svg class="sf-fig-svg" viewBox="0 0 560 170" role="img" aria-label="Twenty runs of the same strategy, spread wider as luck increases.">
+        <line class="sx-ax" x1="30" y1="132" x2="534" y2="132"/>
+        <text class="sx-lab" x="30" y="152">worse</text>
+        <text class="sx-lab" x="534" y="152" text-anchor="end">better</text>
+        <line class="sx-true" id="sx-true" x1="282" y1="26" x2="282" y2="132"/>
+        <text class="sx-lab sx-truelab" id="sx-truelab" x="282" y="20" text-anchor="middle">what the strategy is worth</text>
+        <g id="sx-runs"></g>
+      </svg>
+      <label class="sf-fig-ctl"><span>How much luck is in this game</span>
+        <input type="range" id="sx-luck" min="0" max="100" value="20" step="5"></label>
+      <div class="sf-fig-read">
+        <div><b id="sx-spread">0</b><span>spread across 20 runs</span></div>
+        <div><b id="sx-runs-needed">1</b><span>runs before you can tell</span></div>
+        <p id="sx-say" role="status"></p>
+      </div>
+    </div>
+  </figure>
   <p class="sf-lead">Treat the outcome as evidence.</p>
   <p>A strategy used under specific conditions produced a result. Now learn what caused it without
   treating one win as proof of brilliance or one loss as proof of incompetence.</p>
@@ -75,16 +96,47 @@ extra_js: /js/components/success-failure.js
   <p class="sf-deck">The visible result tells only half the story. The other half is how it affects
   your future capacity.</p>
 
+  <figure class="sf-fig" id="sfig-quad">
+    <figcaption><span class="n">Figure 2</span><b>Place your last result</b><em>Move both sliders.</em></figcaption>
+    <div class="sf-fig-body">
+      <div class="sx-quadwrap">
+        <svg class="sf-fig-svg" viewBox="0 0 300 300" role="img" aria-label="A result plotted against visible outcome and future capacity.">
+          <rect class="sx-q sx-q-tl" x="20" y="20" width="130" height="130" rx="4"/>
+          <rect class="sx-q sx-q-tr" x="150" y="20" width="130" height="130" rx="4"/>
+          <rect class="sx-q sx-q-bl" x="20" y="150" width="130" height="130" rx="4"/>
+          <rect class="sx-q sx-q-br" x="150" y="150" width="130" height="130" rx="4"/>
+          <text class="sx-qlab" x="85" y="88">Productive</text><text class="sx-qlab" x="85" y="104">failure</text>
+          <text class="sx-qlab" x="215" y="88">Real</text><text class="sx-qlab" x="215" y="104">success</text>
+          <text class="sx-qlab" x="85" y="218">Destructive</text><text class="sx-qlab" x="85" y="234">failure</text>
+          <text class="sx-qlab" x="215" y="218">False</text><text class="sx-qlab" x="215" y="234">success</text>
+          <line class="sx-ax" x1="150" y1="20" x2="150" y2="280"/>
+          <line class="sx-ax" x1="20" y1="150" x2="280" y2="150"/>
+          <circle class="sx-you" id="sx-you" cx="150" cy="150" r="9"/>
+        </svg>
+      </div>
+      <label class="sf-fig-ctl"><span>Visible result</span>
+        <input type="range" id="sx-visible" min="0" max="100" value="72" step="2"></label>
+      <label class="sf-fig-ctl"><span>What it did to your future capacity</span>
+        <input type="range" id="sx-capacity" min="0" max="100" value="30" step="2"></label>
+      <div class="sf-fig-read">
+        <div><b id="sx-quad">False success</b><span>where this lands</span></div>
+        <p id="sx-quad-say" role="status"></p>
+      </div>
+    </div>
+  </figure>
+
   <div class="sf-matrix" aria-label="Outcome matrix comparing visible result with future capacity">
     <div class="sf-axis sf-axis-y"><span>Future capacity falls</span><span>Future capacity rises</span></div>
     <div class="sf-quadrants">
-      <article class="sf-quadrant failure"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-productive"/></svg>Failure / capacity rises</span><h3>Productive failure</h3><p>A bounded loss buys useful information, preserves options, and improves the next attempt.</p></article>
-      <article class="sf-quadrant success"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-real"/></svg>Success / capacity rises</span><h3>Real success</h3><p>Reward arrives with capability, ownership, trust, energy, or stronger future choices.</p></article>
-      <article class="sf-quadrant failure"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-destructive"/></svg>Failure / capacity falls</span><h3>Destructive failure</h3><p>The loss damages solvency, integrity, health, reputation, or the ability to continue.</p></article>
-      <article class="sf-quadrant success"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-false"/></svg>Success / capacity falls</span><h3>False success</h3><p>Visible gain hides depletion, dependency, concentration, identity lock-in, or lost autonomy.</p></article>
+      <article class="sf-quadrant failure" data-sf-explore="Productive failure" tabindex="0" role="button"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-productive"/></svg>Failure / capacity rises</span><h3>Productive failure</h3><p>A bounded loss buys useful information, preserves options, and improves the next attempt.</p></article>
+      <article class="sf-quadrant success" data-sf-explore="Real success" tabindex="0" role="button"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-real"/></svg>Success / capacity rises</span><h3>Real success</h3><p>Reward arrives with capability, ownership, trust, energy, or stronger future choices.</p></article>
+      <article class="sf-quadrant failure" data-sf-explore="Destructive failure" tabindex="0" role="button"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-destructive"/></svg>Failure / capacity falls</span><h3>Destructive failure</h3><p>The loss damages solvency, integrity, health, reputation, or the ability to continue.</p></article>
+      <article class="sf-quadrant success" data-sf-explore="False success" tabindex="0" role="button"><span class="sf-code"><svg class="sf-i" aria-hidden="true"><use href="#sf-false"/></svg>Success / capacity falls</span><h3>False success</h3><p>Visible gain hides depletion, dependency, concentration, identity lock-in, or lost autonomy.</p></article>
     </div>
     <div class="sf-axis sf-axis-x"><span>Visible failure</span><span>Visible success</span></div>
   </div>
+
+  <p class="sf-explore-read" data-sf-read="four-outcomes" role="status">Select a quadrant to isolate the visible result from what the next round inherits.</p>
 
   <div class="sf-pair-eq">
     <div class="sf-eq compact"><p class="eq">L + O<sub>p</sub> &gt; C<sub>f</sub></p><p class="gloss">A failure is productive when learning and option value exceed its cost.</p></div>
@@ -101,6 +153,15 @@ extra_js: /js/components/success-failure.js
   <h2><span class="n">02</span> Diagnose before reacting <svg class="sf-i"><use href="#sf-diagnose"/></svg></h2>
   <p class="sf-deck">Stop unnecessary escalation. Separate what happened from the story you are
   tempted to tell about it.</p>
+
+  <figure class="sf-fig" id="sfig-narrow">
+    <figcaption><span class="n">Figure 3</span><b>Each answer removes a cause</b><em>Answer what you can.</em></figcaption>
+    <div class="sf-fig-body">
+      <div class="sx-qs" id="sx-qs" role="group" aria-label="Rule out what you can"></div>
+      <div class="sx-causes" id="sx-causes"></div>
+      <p id="sx-narrow-say" role="status"></p>
+    </div>
+  </figure>
 
   <div class="sf-cause-orbit">
     <div class="sf-cause-core"><svg class="sf-i"><use href="#sf-outcome"/></svg><span>Result</span></div>
@@ -131,6 +192,23 @@ extra_js: /js/components/success-failure.js
 <section class="sf-part sf-prose" id="lanes">
   <h2><span class="n">03</span> Two operating lanes <svg class="sf-i"><use href="#sf-route"/></svg></h2>
   <p class="sf-deck">Success needs restraint before scale. Failure needs stability before another bet.</p>
+
+  <figure class="sf-fig" id="sfig-order">
+    <figcaption><span class="n">Figure 4</span><b>The order is the method</b><em>Start from a later step and see the cost.</em></figcaption>
+    <div class="sf-fig-body">
+      <div class="sx-toggle" id="sx-lane" role="group" aria-label="Choose a lane">
+        <button type="button" data-lane="win" class="is-on">After a win</button>
+        <button type="button" data-lane="loss">After a loss</button>
+      </div>
+      <ol class="sx-steps" id="sx-steps"></ol>
+      <label class="sf-fig-ctl"><span>Where you start</span>
+        <input type="range" id="sx-start" min="1" max="5" value="1" step="1"></label>
+      <div class="sf-fig-read">
+        <div><b id="sx-skipped">0</b><span>steps skipped</span></div>
+        <p id="sx-order-say" role="status"></p>
+      </div>
+    </div>
+  </figure>
 
   <div class="sf-lanes">
     <article class="sf-lane success">
@@ -252,6 +330,8 @@ extra_js: /js/components/success-failure.js
 <section class="sf-part sf-prose" id="review">
   <h2><span class="n">07</span> Review the trajectory <svg class="sf-i"><use href="#sf-asset"/></svg></h2>
   <p class="sf-deck">Review outcomes often enough to catch a trap before it becomes an identity.</p>
+  <div class="sf-review-switch" id="sf-review-switch" role="group" aria-label="Choose a review cadence"><button type="button" data-sf-review="monthly">Run monthly review</button><button type="button" data-sf-review="quarterly">Run quarterly review</button><button type="button" data-sf-review="alarms">Check alarm signals</button></div>
+  <p class="sf-review-read" id="sf-review-read" role="status">Choose the review that matches the evidence you need.</p>
   <div class="sf-review">
     <article><span>Monthly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-win"/></svg><h3>Wins</h3><p>What worked? Why? What became easier? Which durable asset resulted? What should remain small?</p></article>
     <article><span>Monthly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-loss"/></svg><h3>Losses</h3><p>What failed? Where did reality diverge? What did it cost and teach? Retry, adapt, pause, hedge, or exit?</p></article>
@@ -273,4 +353,30 @@ extra_js: /js/components/success-failure.js
   </div>
   <div class="sf-final-choice"><span><svg class="sf-i" aria-hidden="true"><use href="#sf-medal"/></svg>Choose</span><strong>Scale · Maintain · Adapt · Pause · Hedge · Exit</strong></div>
   <p class="sf-final">Success should make future success easier without making the person more fragile; failure should make future failure less likely without destroying the resources required to continue playing.</p>
+
+  <figure class="sf-fig" id="sfig-compound">
+    <figcaption><span class="n">Figure 5</span><b>Both loops compound</b><em>Run the rounds.</em></figcaption>
+    <div class="sf-fig-body">
+      <svg class="sf-fig-svg" viewBox="0 0 560 180" role="img" aria-label="Three loops over repeated rounds: one opening options, one recovering, one closing them.">
+        <line class="sx-ax" x1="34" y1="150" x2="534" y2="150"/>
+        <line class="sx-ax" x1="34" y1="14" x2="34" y2="150"/>
+        <text class="sx-lab" x="34" y="168">round 1</text>
+        <text class="sx-lab" x="534" y="168" text-anchor="end">round 12</text>
+        <path class="sx-good" id="sx-good"/>
+        <path class="sx-recover" id="sx-recover"/>
+        <path class="sx-bad" id="sx-bad"/>
+        <circle class="sx-dot-good" id="sx-dot-good" r="4.5"/>
+        <circle class="sx-dot-recover" id="sx-dot-recover" r="4.5"/>
+        <circle class="sx-dot-bad" id="sx-dot-bad" r="4.5"/>
+      </svg>
+      <label class="sf-fig-ctl"><span>Rounds played</span>
+        <input type="range" id="sx-rounds" min="1" max="12" value="1" step="1"></label>
+      <div class="sf-fig-read">
+        <div class="is-ok"><b id="sx-v-good">100</b><span>options open</span></div>
+        <div class="is-warn"><b id="sx-v-recover">100</b><span>after learning</span></div>
+        <div class="is-bad"><b id="sx-v-bad">100</b><span>after escalating</span></div>
+        <p id="sx-loops-say" role="status"></p>
+      </div>
+    </div>
+  </figure>
 </section>

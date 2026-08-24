@@ -1189,3 +1189,4 @@ body:has(.principles) #pointcloud-bg,body:has(.principles) .shape-toggle-btn{dis
   vertical-align: 0.35em;
   margin-left: 0.4rem;
 }
+.pr-trade{font:inherit;cursor:pointer;text-align:inherit}.pr-trade.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.pr-trade-clock{display:grid;grid-template-columns:auto minmax(5rem,1fr);gap:.45rem .7rem;align-items:center;margin-top:.75rem;padding:.75rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}.pr-trade-clock>span{color:var(--accent);font:700 .65rem "Space Grotesk",sans-serif;text-transform:uppercase;letter-spacing:.08em}.pr-trade-clock>i{height:5px;border-radius:999px;background:var(--line);overflow:hidden}.pr-trade-clock>i b{display:block;width:0;height:100%;background:var(--accent);transition:width .35s}.pr-trade-clock>strong{grid-column:1/-1;color:var(--muted);font:500 .8rem/1.5 "Space Grotesk",sans-serif}

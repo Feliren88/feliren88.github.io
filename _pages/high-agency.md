@@ -1241,12 +1241,13 @@ extra_js: /js/components/high-agency.js
   Gather the sharpest people you know. State the real problem without protecting your pride.
   Shut the door, put the phones away, test ideas against one another, and act on the strongest
   option before the group leaves.</p>
-  <div class="ha-grid cols-4">
-    <div class="ha-card"><span class="tag">Step 1</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-users"></use></svg>Gather</h5><p>Invite people who will challenge your thinking.</p></div>
-    <div class="ha-card"><span class="tag">Step 2</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-message"></use></svg>Confess</h5><p>The real problem, stated plainly.</p></div>
-    <div class="ha-card"><span class="tag">Step 3</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-door"></use></svg>Seal</h5><p>Door shut. Phones down.</p></div>
-    <div class="ha-card"><span class="tag">Step 4</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bolt"></use></svg>Rally</h5><p>Ideas back and forth. Act before you leave.</p></div>
+  <div class="ha-grid cols-4 ha-mafia" id="ha-mafia">
+    <button type="button" class="ha-card" data-ha-mafia="0"><span class="tag">Step 1</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-users"></use></svg>Gather</h5><p>Invite people who will challenge your thinking.</p></button>
+    <button type="button" class="ha-card" data-ha-mafia="1"><span class="tag">Step 2</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-message"></use></svg>Confess</h5><p>The real problem, stated plainly.</p></button>
+    <button type="button" class="ha-card" data-ha-mafia="2"><span class="tag">Step 3</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-door"></use></svg>Seal</h5><p>Door shut. Phones down.</p></button>
+    <button type="button" class="ha-card" data-ha-mafia="3"><span class="tag">Step 4</span><h5><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-bolt"></use></svg>Rally</h5><p>Ideas back and forth. Act before you leave.</p></button>
   </div>
+  <p class="ha-mafia-read" id="ha-mafia-read" role="status">Run the room in order. The method ends in action, not a better meeting.</p>
 
   <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-razor"></use></svg>Tool 3. The story razor</h3>
   <p>When two options are otherwise equal, ask which one makes the better story. This is

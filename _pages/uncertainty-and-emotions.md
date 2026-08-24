@@ -468,6 +468,11 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <article><svg class="ue-i"><use href="#ue-ask"/></svg><small>When asking for help</small><h3>Ask for company or perspective</h3><p>“Sit with me while I make the call.” “What fact do you think I am missing?” “Help me return to the plan I already chose.”</p></article>
     <article><svg class="ue-i"><use href="#ue-steady"/></svg><small>When helping someone</small><h3>Offer steadiness, not guarantees</h3><p>“I can see this is hard.” “I do not have a guarantee, but I can stay with you.” “What did you decide before the worry rose?”</p></article>
   </div>
+  <div class="ue-support-lab" id="ue-support-lab">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-hands"/></svg> What does this request need?</p>
+    <div><button type="button" data-ue-support="fact">“Did the payment go through?”</button><button type="button" data-ue-support="company">“Stay with me while I make the call.”</button><button type="button" data-ue-support="guarantee">“Tell me again that I chose correctly.”</button></div>
+    <p id="ue-support-read" role="status">Choose a request. The useful response depends on whether it seeks a fact, company, or borrowed certainty.</p>
+  </div>
   <p>Agree on the boundary before the pressure peaks. Decide which questions deserve a factual answer, which decisions belong to the person making them, and how support will respond when the same request returns.</p>
 </section>
 

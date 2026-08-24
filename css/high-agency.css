@@ -671,6 +671,7 @@ input[type="range"].ha-range {
 @media (max-width: 560px) {
   .ha-dur-row { grid-template-columns: 1fr; gap: 0.35rem; }
 }
+.ha-mafia .ha-card{font:inherit;text-align:left;cursor:pointer}.ha-mafia .ha-card.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.ha-mafia .ha-card.is-next{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}.ha-mafia-read{min-height:2.8rem;margin:.65rem 0 var(--gap-2)!important;padding:.65rem .75rem;border-left:3px solid var(--accent);background:var(--surface);color:var(--muted)!important;font-size:.8rem!important}
 .ha-dur-row .who { font-size: var(--fs-sm); color: var(--text); font-weight: 600; line-height: 1.4; }
 .ha-dur-row .who small { display: block; color: var(--muted); font-weight: 400; font-size: var(--fs-2xs); }
 .ha-dur-bar {

@@ -439,6 +439,7 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
   .ue-zone b{font-size:.72rem}
   .ue-zone small{display:none}
 }
+.ue-support-lab{margin:.8rem 0;padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}.ue-support-lab>div{display:flex;flex-wrap:wrap;gap:.45rem}.ue-support-lab button{flex:1 1 12rem;padding:.65rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:transparent;color:var(--muted);font:inherit;text-align:left;cursor:pointer}.ue-support-lab button.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface));color:var(--text)}.ue-support-lab>p:last-child{min-height:3rem;margin:.7rem 0 0!important;padding:.65rem;border-left:3px solid var(--accent);color:var(--muted)!important;font-size:.82rem!important}
 
 /* ── The wheel on a phone ─────────────────────────────────
    At 360px a 638-unit viewBox renders its labels at about 4.5px. The wheel

@@ -362,6 +362,222 @@
     });
   }
 
+  function reviewLens() {
+    var host=document.getElementById('sf-review-switch'); if(!host)return;
+    var cards=Array.prototype.slice.call(document.querySelectorAll('.sf-review article')),warnings=document.querySelector('.sf-warnings');
+    var copy={monthly:'Monthly: inspect individual wins and losses while the causes are still recoverable. Ask what worked, what diverged, and what the result built or cost.',quarterly:'Quarterly: step above individual outcomes. Look for compounding, deterioration, bottlenecks, concentration, and an over-optimized score.',alarms:'Alarm review: repeated patterns matter more than one mood. Look for identity lock-in, rising stakes, unlearned lessons, or a system that cannot function without you.'};
+    Array.prototype.slice.call(host.querySelectorAll('button')).forEach(function(button){button.addEventListener('click',function(){var mode=button.dataset.sfReview;Array.prototype.slice.call(host.querySelectorAll('button')).forEach(function(b){b.classList.toggle('is-on',b===button);});cards.forEach(function(card,i){card.classList.toggle('is-focus',mode==='monthly'?i<2:mode==='quarterly'?i>=2:false);});document.querySelector('.sf-review').classList.toggle('has-focus',mode!=='alarms');warnings.classList.toggle('is-focus',mode==='alarms');document.getElementById('sf-review-read').textContent=copy[mode];});});
+  }
+
+  function exploreStatics() {
+    var configs=[{root:'.sf-quadrants',items:'.sf-quadrant',read:'[data-sf-read="four-outcomes"]',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('p').textContent}},{root:'.sf-diagnostic-grid',items:'article',prompt:'Select a diagnostic question. One result cannot reveal its own cause.',copy:function(i){return i.querySelector('h3').textContent+' test: '+i.querySelector('p').textContent}},{root:'.sf-lanes',items:'.sf-lane',prompt:'Select the observed result. A win and a loss require different first moves.',copy:function(i){return i.classList.contains('success')?'After a win, attribution and independent repetition come before scale.':'After a loss, stabilize the resources needed to continue before choosing another bet.'}},{root:'.sf-loops-chain',items:'article',prompt:'Select a chain to see what the next round inherits.',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('small').textContent}}];
+    configs.forEach(function(cfg){var root=document.querySelector(cfg.root);if(!root)return;var read=cfg.read?document.querySelector(cfg.read):null;if(!read){read=document.createElement('p');read.className='sf-explore-read';read.setAttribute('role','status');read.textContent=cfg.prompt;root.insertAdjacentElement('afterend',read);}var items=Array.prototype.slice.call(root.querySelectorAll(cfg.items));root.classList.add('sf-explore-set');items.forEach(function(item){item.classList.add('sf-explore-item');item.tabIndex=0;item.setAttribute('role','button');function choose(){items.forEach(function(x){x.classList.toggle('is-pick',x===item);});root.classList.add('has-pick');read.textContent=cfg.copy(item);}item.addEventListener('click',choose);item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});});
+  }
+
+
+  /* ── Five working figures ────────────────────────────────
+     Each takes one control and answers immediately, so the claim in the text
+     beside it demonstrates itself rather than being illustrated. Numbers are
+     shaped to make one point and are not measurements. */
+
+  function sxEl(n, a) {
+    var e = document.createElementNS('http://www.w3.org/2000/svg', n);
+    Object.keys(a || {}).forEach(function (k) { e.setAttribute(k, a[k]); });
+    return e;
+  }
+  function sxOne(s) { return document.querySelector(s); }
+  function sxAll(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+  /* 1 · One result tells you less than you think.
+     Twenty runs of the same strategy. The strategy's real worth never moves;
+     only the noise around it does. At high luck a single run says nothing. */
+  function sxLuck() {
+    var r = sxOne('#sx-luck');
+    if (!r) return;
+    var X0 = 40, X1 = 524, TRUE_X = 0.56;
+    /* a fixed pseudo-random set, so dragging changes spread and not the seed */
+    var SEED = [0.42, -0.71, 0.13, 0.88, -0.36, 0.64, -0.92, 0.27, 0.55, -0.18,
+                0.76, -0.49, 0.05, -0.83, 0.31, 0.69, -0.24, 0.94, -0.61, 0.09];
+    function paint() {
+      var luck = +r.value / 100;
+      var host = sxOne('#sx-runs');
+      host.innerHTML = '';
+      var xs = SEED.map(function (n) {
+        return Math.max(0.02, Math.min(0.98, TRUE_X + n * luck * 0.44));
+      });
+      xs.forEach(function (p, i) {
+        host.appendChild(sxEl('circle', {
+          cx: (X0 + p * (X1 - X0)).toFixed(1),
+          cy: (44 + (i % 5) * 18).toFixed(1), r: 5, class: 'sx-run'
+        }));
+      });
+      var tx = X0 + TRUE_X * (X1 - X0);
+      sxOne('#sx-true').setAttribute('x1', tx); sxOne('#sx-true').setAttribute('x2', tx);
+      sxOne('#sx-truelab').setAttribute('x', tx);
+      var lo = Math.min.apply(null, xs), hi = Math.max.apply(null, xs);
+      sxOne('#sx-spread').textContent = Math.round((hi - lo) * 100);
+      /* runs needed rises with the square of the noise */
+      var need = Math.max(1, Math.round(1 + Math.pow(luck * 10, 2) / 3.2));
+      sxOne('#sx-runs-needed').textContent = need;
+      sxOne('#sx-say').textContent = luck <= 0.1
+        ? 'Almost no luck here. One result is close to the truth about the strategy.'
+        : luck >= 0.6
+          ? 'Any single run lands almost anywhere. A win here is not evidence yet.'
+          : 'The result carries signal and noise together. Repeat it before scaling.';
+    }
+    r.addEventListener('input', paint);
+    paint();
+  }
+
+  /* 2 · Place your last result. Two axes, four names. */
+  function sxQuad() {
+    var v = sxOne('#sx-visible'), c = sxOne('#sx-capacity');
+    if (!v || !c) return;
+    var NAME = {
+      tr: ['Real success', 'Reward arrived with capability. This is the one worth scaling.'],
+      tl: ['Productive failure', 'It cost you, and you can do more than before. Keep the information.'],
+      br: ['False success', 'It looks like a win and left you with less room. Check what it depleted.'],
+      bl: ['Destructive failure', 'It cost you and took capacity with it. Stabilise before deciding anything.']
+    };
+    function paint() {
+      var x = +v.value / 100, y = +c.value / 100;
+      var cx = 20 + x * 260, cy = 280 - y * 260;
+      var you = sxOne('#sx-you');
+      you.setAttribute('cx', cx.toFixed(1)); you.setAttribute('cy', cy.toFixed(1));
+      var key = (y >= 0.5 ? 't' : 'b') + (x >= 0.5 ? 'r' : 'l');
+      sxAll('.sx-q').forEach(function (q) { q.classList.remove('is-on'); });
+      var lit = sxOne('.sx-q-' + key);
+      if (lit) lit.classList.add('is-on');
+      sxOne('#sx-quad').textContent = NAME[key][0];
+      sxOne('#sx-quad-say').textContent = NAME[key][1];
+    }
+    v.addEventListener('input', paint); c.addEventListener('input', paint);
+    paint();
+  }
+
+  /* 3 · Each answer removes a cause. */
+  var SX_Q = [
+    ['Was the objective still worth wanting?', 'Objective'],
+    ['Was the route suited to the objective?', 'Strategy'],
+    ['Was the plan carried out to standard?', 'Execution'],
+    ['Did the move fit the current regime?', 'Timing'],
+    ['Did a hidden variable change it?', 'Information'],
+    ['Did another player react unexpectedly?', 'Response'],
+    ['Could this be ordinary randomness?', 'Noise']
+  ];
+  function sxNarrow() {
+    var host = sxOne('#sx-qs');
+    if (!host) return;
+    var ruled = {};
+    host.innerHTML = SX_Q.map(function (q, i) {
+      return '<button type="button" data-i="' + i + '"><span>' + q[0] + '</span><em>rule out</em></button>';
+    }).join('');
+    function paint() {
+      sxAll('#sx-qs button').forEach(function (b) { b.classList.toggle('is-off', !!ruled[b.dataset.i]); });
+      var left = SX_Q.filter(function (_, i) { return !ruled[i]; });
+      sxOne('#sx-causes').innerHTML = SX_Q.map(function (q, i) {
+        return '<span class="' + (ruled[i] ? 'is-out' : '') + '">' + q[1] + '</span>';
+      }).join('');
+      var say = sxOne('#sx-narrow-say');
+      say.textContent = left.length === SX_Q.length
+        ? 'Seven causes are still open. One result cannot tell you which.'
+        : left.length > 1
+          ? left.length + ' causes still fit what you know.'
+          : left.length === 1
+            ? 'One cause left: ' + left[0][1].toLowerCase() + '. Now you have something to fix.'
+            : 'You have ruled out everything. One of them was wrong.';
+    }
+    host.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-i]');
+      if (!b) return;
+      ruled[b.dataset.i] = !ruled[b.dataset.i];
+      paint();
+    });
+    paint();
+  }
+
+  /* 4 · The order is the method. */
+  var SX_LANE = {
+    win: [['Attribute', 'you do not know what caused it'],
+          ['Repeat', 'one win is still one win'],
+          ['Stress-test', 'you have not asked what breaks'],
+          ['Capture', 'nothing was turned into an asset'],
+          ['Scale', '']],
+    loss: [['Stabilize', 'you are deciding while still bleeding'],
+           ['Locate', 'you do not know where it diverged'],
+           ['Separate', 'signal and noise are still mixed'],
+           ['Extract', 'the information is unrecorded'],
+           ['Respond', '']]
+  };
+  function sxOrder() {
+    var r = sxOne('#sx-start');
+    if (!r) return;
+    var lane = 'win';
+    function paint() {
+      var start = +r.value, steps = SX_LANE[lane];
+      sxOne('#sx-steps').innerHTML = steps.map(function (s, i) {
+        var skipped = i < start - 1;
+        return '<li class="' + (skipped ? 'is-skipped' : '') + '"><b>' + (i + 1) + '</b>' +
+          '<span>' + s[0] + '</span></li>';
+      }).join('');
+      sxOne('#sx-skipped').textContent = start - 1;
+      var missing = steps.slice(0, start - 1).map(function (s) { return s[1]; }).filter(Boolean);
+      sxOne('#sx-order-say').textContent = start === 1
+        ? 'Full sequence. Each step gives the next one something to work with.'
+        : 'Starting here means ' + missing.join(', and ') + '.';
+    }
+    sxOne('#sx-lane').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-lane]');
+      if (!b) return;
+      lane = b.dataset.lane;
+      sxAll('#sx-lane button').forEach(function (x) { x.classList.toggle('is-on', x === b); });
+      paint();
+    });
+    r.addEventListener('input', paint);
+    paint();
+  }
+
+  /* 5 · Both loops compound. */
+  function sxCompound() {
+    var r = sxOne('#sx-rounds');
+    if (!r) return;
+    var X0 = 40, X1 = 528, Y0 = 20, Y1 = 150, N = 12;
+    function good(k) { return 100 * Math.pow(1.13, k - 1); }
+    function recov(k) { return 100 * Math.pow(1.05, k - 1); }
+    function bad(k) { return 100 * Math.pow(0.83, k - 1); }
+    var TOP = good(N);
+    function px(k) { return X0 + (k - 1) / (N - 1) * (X1 - X0); }
+    function py(v) { return Y1 - Math.min(1, v / TOP) * (Y1 - Y0); }
+    function path(fn, upto) {
+      var d = '';
+      for (var k = 1; k <= upto; k++) d += (k > 1 ? 'L' : 'M') + px(k).toFixed(1) + ' ' + py(fn(k)).toFixed(1);
+      return d;
+    }
+    function paint() {
+      var k = +r.value;
+      [['#sx-good', good], ['#sx-recover', recov], ['#sx-bad', bad]].forEach(function (p) {
+        sxOne(p[0]).setAttribute('d', path(p[1], k));
+      });
+      [['#sx-dot-good', good], ['#sx-dot-recover', recov], ['#sx-dot-bad', bad]].forEach(function (p) {
+        var el = sxOne(p[0]);
+        el.setAttribute('cx', px(k).toFixed(1)); el.setAttribute('cy', py(p[1](k)).toFixed(1));
+      });
+      sxOne('#sx-v-good').textContent = Math.round(good(k));
+      sxOne('#sx-v-recover').textContent = Math.round(recov(k));
+      sxOne('#sx-v-bad').textContent = Math.round(bad(k));
+      sxOne('#sx-loops-say').textContent = k === 1
+        ? 'All three start in the same place. The difference is only what happens next.'
+        : 'After ' + k + ' rounds the gap is ' + Math.round(good(k) - bad(k)) +
+          '. Nothing dramatic happened in any single round.';
+    }
+    r.addEventListener('input', paint);
+    paint();
+  }
+
+  [sxLuck, sxQuad, sxNarrow, sxOrder, sxCompound].forEach(function (fn) {
+    try { fn(); } catch (e) { /* one figure must not take the page down */ }
+  });
+
   function init() {
     try { initRouter(); } catch (error) { /* The static action key remains usable. */ }
     try { initProgress(); } catch (error) { /* Reading remains unaffected. */ }
@@ -369,6 +585,8 @@
     try { initExposure(); } catch (error) { /* The static track still reads. */ }
     try { initScorecard(); } catch (error) { /* The domains still open and read. */ }
     try { domainViz(); } catch (error) { /* The domain text still reads without its diagram. */ }
+    try { reviewLens(); } catch (error) { /* The review cards remain readable. */ }
+    try { exploreStatics(); } catch (error) { /* Static explanations remain available. */ }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

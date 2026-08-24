@@ -423,13 +423,14 @@ extra_js: /js/components/principles.js
 
   <div class="pr-trades">
     {% for t in site.data.principles.trades %}
-    <div class="pr-trade">
+    <button class="pr-trade" type="button" data-pr-trade="{{ forloop.index0 }}" aria-pressed="false">
       <span class="give">{{ t.give }}</span>
       <span class="arrow" aria-hidden="true">traded for</span>
       <span class="get">{{ t.get }}</span>
-    </div>
+    </button>
     {% endfor %}
   </div>
+  <div class="pr-trade-clock" id="pr-trade-clock" aria-live="polite"><span>Temporary trade</span><i><b id="pr-trade-fill"></b></i><strong id="pr-trade-read">Select a trade to inspect what must be restored.</strong></div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════

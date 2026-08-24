@@ -1508,13 +1508,19 @@
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
     paint();
   }
+  function mafia() {
+    var host=$('#ha-mafia'); if(!host)return; var buttons=$$('[data-ha-mafia]',host),step=-1;
+    var copy=['Gather people who improve the argument, not people chosen to confirm it.','State the actual problem without protecting status or hiding the embarrassing constraint.','Remove the exits that let attention fragment: door shut, phones down, one problem in the room.','Test ideas against one another and leave with a named action. Without this step, the technique produced conversation rather than agency.'];
+    function paint(){buttons.forEach(function(b,i){b.classList.toggle('is-on',i<=step);b.classList.toggle('is-next',i===step+1);});}
+    buttons.forEach(function(button){button.addEventListener('click',function(){var n=+button.dataset.haMafia;if(n===0)step=0;else if(n===step+1)step=n;else{$('#ha-mafia-read').textContent='Run the steps in order. Each one creates the conditions required by the next.';return;}paint();$('#ha-mafia-read').textContent=copy[n];});});paint();
+  }
 
   function init() {
     try { badges(); } catch (e) { /* the board is optional; the page is not */ }
     [progress, storyRail, jailCell, signals, tricycle, quiz, spectrum, physicsGate, asteroid,
       durations, pedestal, decay, nows, wilbur, midwit, inversion, loopBreak,
       levels, trapGame, flowChart, worksheet, razor,
-      tapFigure, softwareOS, razorScale].forEach(function (fn) {
+      tapFigure, softwareOS, razorScale, mafia].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
   }
