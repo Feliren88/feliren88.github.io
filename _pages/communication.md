@@ -41,16 +41,22 @@ extra_js: /js/components/communication.js
 <figure class="cm-fig" id="fig-transfer">
   <figcaption><span class="n">Figure 1</span><b>Saying more transfers less</b><em>Move the slider.</em></figcaption>
   <div class="cm-fig-body">
-    <svg class="cm-fig-svg" viewBox="0 0 560 220" role="img" aria-label="Ideas in your head, the message you send, and what lands in theirs.">
-      <text class="cf-lab" x="66" y="18" text-anchor="middle">In your head</text>
-      <text class="cf-lab" x="280" y="18" text-anchor="middle">What you say</text>
-      <text class="cf-lab" x="494" y="18" text-anchor="middle">What lands</text>
-      <g id="cf-mine"></g>
-      <rect class="cf-pipe" x="150" y="92" width="260" height="36" rx="18"/>
-      <rect class="cf-flow" id="cf-flow" x="150" y="92" width="0" height="36" rx="18"/>
-      <text class="cf-pipenum" id="cf-said" x="280" y="116" text-anchor="middle">0</text>
-      <g id="cf-theirs"></g>
-    </svg>
+    <div class="cf-transfer-plot" role="img" aria-label="Forty ideas in your head are compressed into a selected message; only some of that message lands with the listener.">
+      <section class="cf-transfer-stage source">
+        <header><small>Source</small><b>In your head</b><span>40 connected ideas</span></header>
+        <div class="cf-idea-dots" id="cf-mine" aria-hidden="true"></div>
+      </section>
+      <div class="cf-transfer-arrow" aria-hidden="true"><i></i><span>select</span></div>
+      <section class="cf-transfer-stage message">
+        <header><small>Message</small><b>What you say</b><span>ordered and compressed</span></header>
+        <div class="cf-message-meter"><i id="cf-flow"></i><b id="cf-said">6 ideas</b></div>
+      </section>
+      <div class="cf-transfer-arrow" aria-hidden="true"><i></i><span>receive</span></div>
+      <section class="cf-transfer-stage received">
+        <header><small>Result</small><b>What lands</b><span id="cf-landed-label">4 ideas retained</span></header>
+        <div class="cf-idea-dots" id="cf-theirs" aria-hidden="true"></div>
+      </section>
+    </div>
     <label class="cm-fig-ctl">
       <span>How much you say</span>
       <input type="range" id="cf-range" min="1" max="40" value="6" step="1">

@@ -161,12 +161,10 @@
     var TOTAL = 40;
     var mine = one('#cf-mine'), theirs = one('#cf-theirs');
 
-    function dots(host, n, cls, x0, y0) {
+    function dots(host, n, cls) {
       host.innerHTML = '';
       for (var i = 0; i < n; i++) {
-        host.appendChild(svgNS('circle', {
-          cx: x0 + (i % 5) * 15, cy: y0 + Math.floor(i / 5) * 15, r: 5, class: cls
-        }));
+        var dot=document.createElement('i');dot.className=cls;host.appendChild(dot);
       }
     }
     function landed(said) {
@@ -178,10 +176,11 @@
 
     function paint() {
       var said = +range.value, got = landed(said);
-      dots(mine, TOTAL, 'cf-dot mine', 28, 32);
-      dots(theirs, got, 'cf-dot theirs', 456, 32);
-      one('#cf-flow').setAttribute('width', (said / TOTAL * 260).toFixed(1));
-      one('#cf-said').textContent = said;
+      dots(mine, TOTAL, 'mine');
+      dots(theirs, got, 'theirs');
+      one('#cf-flow').style.width = (said / TOTAL * 100).toFixed(1)+'%';
+      one('#cf-said').textContent = said+(said===1?' idea':' ideas');
+      one('#cf-landed-label').textContent=got+(got===1?' idea retained':' ideas retained');
       one('#cf-landed').textContent = got;
       one('#cf-pct').textContent = said ? Math.round(got / said * 100) + '%' : '0%';
       var say = one('#cf-say');
