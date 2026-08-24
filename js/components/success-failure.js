@@ -607,7 +607,7 @@
         order: 'Leverage follows direction because compounding needs a stable target. It comes before ownership because there must first be a repeatable value engine worth capturing.',
         gate: 'Make one part of your contribution scale beyond your own hours.',
         legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
-        art: '<svg viewBox="0 0 320 190"><circle class="core" cx="78" cy="95" r="28"/><text class="inside" x="78" y="99">EXPERTISE</text><path class="main" d="M108 95H160"/><path class="head" d="M149 87L164 95L149 103"/><path class="branch" d="M164 95L238 38M164 95H258M164 95L238 152"/><circle class="out" cx="248" cy="32" r="18"/><circle class="out" cx="270" cy="95" r="18"/><circle class="out" cx="248" cy="158" r="18"/><text x="248" y="35">IP</text><text x="270" y="98">SYSTEM</text><text x="248" y="161">TEAM</text></svg>'
+        art: '<svg viewBox="0 0 320 190"><circle class="core" cx="78" cy="95" r="28"/><text class="inside" x="78" y="99">EXPERTISE</text><path class="main" d="M108 95H160"/><path class="head" d="M149 87L164 95L149 103"/><path class="branch" d="M164 95L218 36M164 95H218M164 95L218 154"/><circle class="out" cx="220" cy="34" r="10"/><circle class="out" cx="220" cy="95" r="10"/><circle class="out" cx="220" cy="156" r="10"/><text class="outside" x="241" y="38">IP</text><text class="outside" x="241" y="99">SYSTEM</text><text class="outside" x="241" y="160">TEAM</text></svg>'
       },
       ownership: {
         number: 'Milestone 04', title: 'Expanding ownership',
