@@ -583,3 +583,29 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .sv-scale .fulcrum{justify-self:center}
 }
 .st-verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.st-verdict-grid button{padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--muted);text-align:left;cursor:pointer}.st-verdict-grid button b{display:block;margin-bottom:.25rem;color:var(--text);font:700 .86rem "Space Grotesk",sans-serif}.st-verdict-grid button span{font-size:.78rem;line-height:1.5}.st-verdict-grid button.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.st-verdict-read{min-height:2.8rem;margin:.7rem 0 0!important;padding:.65rem;border-left:3px solid var(--accent);color:var(--muted)!important;font-size:.8rem!important}@media(max-width:560px){.st-verdict-grid{grid-template-columns:1fr}}
+
+/* ── What your peace is resting on ────────────────────────
+   The split is the doctrine, so it is movable. Shift the footing onto things
+   outside your control, then let the news go badly and read what is left. */
+.st-fig{margin:1.4rem 0;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--accent) 4%,var(--surface));overflow:hidden}
+.st-fig figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:.45rem .8rem;padding:.7rem .95rem;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.st-fig figcaption .n{font:700 .64rem "Space Grotesk",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.st-fig figcaption b{font:700 1.02rem "Space Grotesk",sans-serif;color:var(--text)}
+.st-fig figcaption em{font-style:normal;font-size:.78rem;color:var(--muted)}
+.st-fig-body{padding:.95rem}
+.st-fig-ctl{display:grid;gap:.25rem;margin:.6rem 0}
+.st-fig-ctl span{font:700 .7rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.st-fig-ctl input[type=range]{width:100%;height:1.5rem;accent-color:var(--accent);cursor:pointer}
+.st-fig-row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:.5rem 0}
+.st-fig-btn{padding:.5rem .8rem;border:1px solid var(--border-ui);border-radius:var(--radius-md);background:var(--surface);color:var(--text);font:600 .84rem "Space Grotesk",sans-serif;cursor:pointer}
+.st-fig-btn:hover{border-color:var(--accent)}
+.sy-bar{display:flex;height:2.2rem;border-radius:var(--radius-sm);overflow:hidden}
+.sy-bar i{display:block;transition:width .18s ease}
+.sy-out{background:color-mix(in srgb,var(--cta) 45%,transparent)}
+.sy-in{background:var(--accent)}
+.sy-key{display:flex;justify-content:space-between;margin-top:.3rem;font-size:.72rem;color:var(--muted)}
+.sy-key .in{color:var(--accent);font-weight:700}
+.sy-gauge{position:relative;flex:1 1 12rem;height:1.6rem;border-radius:999px;background:color-mix(in srgb,var(--muted) 16%,transparent);overflow:hidden}
+.sy-gauge i{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .3s ease}
+.sy-gauge span{position:absolute;inset:0;display:grid;place-items:center;font:700 .74rem "Space Grotesk",sans-serif;color:var(--text)}
+#sy-say{margin:.5rem 0 0!important;font-size:.9rem!important;line-height:1.55;color:var(--text)!important}

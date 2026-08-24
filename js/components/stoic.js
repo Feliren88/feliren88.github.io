@@ -911,6 +911,44 @@
     });
   }
 
+
+  /* ══ What your peace is resting on ═════════════════════
+     The split is the whole doctrine, so it should be movable. Put more of your
+     footing on things you do not control, then let the news go badly and watch
+     what is left standing. */
+  function restFigure() {
+    var share = $('#sy-share');
+    if (!share) return;
+    var shocked = false;
+    function paint() {
+      var out = +share.value, inn = 100 - out;
+      $('#sy-out').style.width = out + '%';
+      $('#sy-in').style.width = inn + '%';
+      var left = shocked ? inn : 100;
+      var fill = $('#sy-gauge-fill');
+      if (fill) fill.style.width = left + '%';
+      var lab = $('#sy-gauge-lab');
+      if (lab) lab.textContent = shocked ? left + ' left standing' : 'steady';
+      var say = $('#sy-say');
+      if (!say) return;
+      say.textContent = !shocked
+        ? (out >= 70 ? 'Most of your footing is on things another person decides.'
+           : out >= 35 ? 'Some of it is outside your hands.'
+           : 'Almost all of it is on your own conduct.')
+        : (left <= 30 ? 'The news took most of it, because most of it was never yours.'
+           : left >= 70 ? 'The news landed and the footing held.'
+           : 'Part of it went with the news.');
+    }
+    share.addEventListener('input', function () { paint(); });
+    var btn = $('#sy-shock');
+    if (btn) btn.addEventListener('click', function () {
+      shocked = !shocked;
+      btn.textContent = shocked ? 'Reset' : 'The news arrives badly';
+      paint();
+    });
+    paint();
+  }
+
   function narrativeRail() {
     var links = $$('.st-story-rail a');
     if (!links.length || !('IntersectionObserver' in window)) return;
@@ -931,7 +969,7 @@
   }
 
   function init() {
-    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc, passageViz, verdict]
+    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc, passageViz, verdict, restFigure]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });

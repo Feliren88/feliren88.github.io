@@ -20,6 +20,23 @@ extra_js: /js/components/stoic.js
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="two">
   <p class="st-kicker">Event, judgment, response</p>
+
+  <figure class="st-fig" id="stfig-rest">
+    <figcaption><span class="n">Figure</span><b>What your peace is resting on</b><em>Move the slider, then break the news.</em></figcaption>
+    <div class="st-fig-body">
+      <div class="sy-stack" aria-hidden="true">
+        <div class="sy-bar"><i class="sy-out" id="sy-out"></i><i class="sy-in" id="sy-in"></i></div>
+        <div class="sy-key"><span class="out">not up to you</span><span class="in">up to you</span></div>
+      </div>
+      <label class="st-fig-ctl"><span>How much rests on things outside your control</span>
+        <input type="range" id="sy-share" min="0" max="100" value="70" step="5"></label>
+      <div class="st-fig-row">
+        <button class="st-fig-btn" id="sy-shock" type="button">The news arrives badly</button>
+        <div class="sy-gauge"><i id="sy-gauge-fill"></i><span id="sy-gauge-lab">steady</span></div>
+      </div>
+      <p id="sy-say" role="status"></p>
+    </div>
+  </figure>
   <p class="st-lead">The event arrives once. The mind can replay it all day.</p>
   <div class="st-story-map" aria-label="Stoic visual model from event to character">
     {% assign st_story_labels = "Event,Impression,Assent,Response,Character" | split: "," %}
