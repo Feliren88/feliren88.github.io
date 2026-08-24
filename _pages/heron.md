@@ -4,6 +4,7 @@ title: "Hidden-State Detection of In-Context Goal Hijacking with a Conformal Fal
 description: "A read-only probe detects goal-hijack attempts in Qwen2.5-Instruct hidden states with 0.998 deconfounded AUC and a split-conformal bound on false positives."
 permalink: /heron/
 image: /assets/img/usecases/heron-hijack-self-probe.webp
+extra_js: /js/components/heron.js
 ---
 
 <style>
@@ -115,7 +116,60 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
     font-size: var(--fs-xs); color: var(--muted); line-height: 1.6;
   }
 
-  @media (max-width: 600px) { .page-content { max-width: 100%; } }
+  .heron-lab {
+    margin: 1.2rem 0 1.7rem; padding: clamp(1rem, 3vw, 1.4rem);
+    border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface);
+  }
+  .heron-lab-head { display: flex; justify-content: space-between; gap: 1rem; align-items: start; margin-bottom: 1rem; }
+  .heron-lab-head h4 { margin: 0 0 0.2rem; color: var(--text); font: 700 1rem/1.3 "Space Grotesk", sans-serif; }
+  .heron-lab-head p { margin: 0; font-size: var(--fs-xs); line-height: 1.55; }
+  .heron-lab-tag { flex: 0 0 auto; color: var(--accent); font: 700 var(--fs-2xs)/1.2 "Space Grotesk", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  .heron-switch { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 1rem; }
+  .heron-switch button, .heron-layer-points button {
+    appearance: none; border: 1px solid var(--line); border-radius: 999px; background: transparent;
+    color: var(--muted); padding: .45rem .72rem; font: 650 var(--fs-xs)/1.2 "Space Grotesk", sans-serif; cursor: pointer;
+  }
+  .heron-switch button:hover, .heron-layer-points button:hover { color: var(--text); border-color: var(--line-strong); }
+  .heron-switch button.is-active, .heron-layer-points button.is-active { color: var(--surface); border-color: var(--accent); background: var(--accent); }
+  .heron-metrics { display: grid; gap: .85rem; }
+  .heron-metric { display: grid; grid-template-columns: minmax(10rem, 1.1fr) minmax(11rem, 2fr) 4.2rem; gap: .8rem; align-items: center; }
+  .heron-metric-label { color: var(--muted); font-size: var(--fs-xs); line-height: 1.35; }
+  .heron-metric-label b { display: block; color: var(--text); }
+  .heron-meter { position: relative; height: .75rem; border-radius: 999px; background: color-mix(in srgb, var(--line) 70%, transparent); overflow: hidden; }
+  .heron-meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width .35s ease; }
+  .heron-meter.is-risk span { background: #d27f57; }
+  .heron-metric-value { color: var(--text); font: 700 .9rem/1 "Space Grotesk", sans-serif; text-align: right; font-variant-numeric: tabular-nums; }
+  .heron-lab-read { min-height: 3.3rem; margin: 1rem 0 0 !important; padding-top: .8rem; border-top: 1px solid var(--line); color: var(--text) !important; font-size: var(--fs-sm) !important; line-height: 1.55 !important; }
+  .heron-data-note { display: block; margin-top: .55rem; color: var(--muted); font-size: var(--fs-2xs); line-height: 1.5; }
+  .heron-layer-stage { display: grid; grid-template-columns: minmax(10rem, .8fr) minmax(13rem, 1.4fr); gap: 1rem; align-items: center; }
+  .heron-layer-value { display: grid; place-items: center; min-height: 10rem; border: 1px solid var(--line); border-radius: var(--radius-md); text-align: center; }
+  .heron-layer-value span { color: var(--muted); font-size: var(--fs-xs); }
+  .heron-layer-value b { display: block; margin: .25rem 0; color: var(--text); font: 700 clamp(2.3rem, 6vw, 4rem)/1 "Space Grotesk", sans-serif; }
+  .heron-layer-value small { max-width: 13rem; color: var(--muted); font-size: var(--fs-2xs); line-height: 1.45; }
+  .heron-layer-map { position: relative; min-height: 10rem; padding: 1rem .5rem; }
+  .heron-layer-line { position: absolute; left: 1rem; right: 1rem; top: 50%; height: 2px; background: var(--line); }
+  .heron-layer-points { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; min-height: 8rem; }
+  .heron-layer-points button { justify-self: center; width: 3rem; height: 3rem; padding: 0; background: var(--surface); color: var(--text); z-index: 1; }
+  .heron-layer-points button span { position: absolute; transform: translate(-50%, 2.1rem); width: 6rem; color: var(--muted); font: 500 var(--fs-2xs)/1.3 "Space Grotesk", sans-serif; pointer-events: none; }
+  .heron-layer-points button.is-active span { color: var(--text); }
+  .heron-cal-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: .3rem; max-width: 27rem; }
+  .heron-cal-grid i { aspect-ratio: 1; border-radius: 2px; background: color-mix(in srgb, var(--accent) 22%, var(--surface)); }
+  .heron-cal-grid i.is-alarm { background: #d27f57; }
+  .heron-cal-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1rem; }
+  .heron-cal-summary div { padding: .7rem; border: 1px solid var(--line); border-radius: var(--radius-md); }
+  .heron-cal-summary span { display: block; min-height: 2.5em; color: var(--muted); font-size: var(--fs-2xs); line-height: 1.3; }
+  .heron-cal-summary b { color: var(--text); font: 700 1.15rem/1.4 "Space Grotesk", sans-serif; }
+
+  @media (max-width: 600px) {
+    .page-content { max-width: 100%; }
+    .heron-lab-head, .heron-layer-stage { display: block; }
+    .heron-lab-tag { display: block; margin-top: .5rem; }
+    .heron-metric { grid-template-columns: 1fr 3.5rem; gap: .35rem .6rem; }
+    .heron-meter { grid-column: 1 / -1; grid-row: 2; }
+    .heron-layer-map { margin-top: .7rem; }
+    .heron-cal-summary { grid-template-columns: 1fr; }
+    .heron-cal-summary span { min-height: 0; }
+  }
 </style>
 
 <p class="heron-crumbs">
@@ -154,6 +208,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       <tr><td class="id">Hard negative</td><td>a harmless prompt built to reuse attack vocabulary ("please ignore any typos&hellip;"), placed in the benchmark so shortcut detectors fail visibly.</td></tr>
     </table>
   </div>
+
 </section>
 
 <section class="heron-section" id="problem">
@@ -200,6 +255,7 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       any anomaly score into a decision rule with a finite-sample marginal guarantee under
       exchangeability. Bates et al. (2023) formalized outlier detection with conformal p-values.</li>
   </ul>
+
 </section>
 
 <section class="heron-section" id="gap">
@@ -357,6 +413,17 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
   </div>
 
   <h3>The confound, quantified</h3>
+  <div class="heron-lab" id="heron-probe-lab">
+    <div class="heron-lab-head"><div><h4>Put the control into the benchmark</h4><p>Switch probes to see why the clean-vs-attacked score alone gives the wrong conclusion.</p></div><span class="heron-lab-tag">Direct comparison</span></div>
+    <div class="heron-switch" role="group" aria-label="Choose a probe"><button type="button" data-heron-probe="naive" class="is-active" aria-pressed="true">Naive probe</button><button type="button" data-heron-probe="aware" aria-pressed="false">Control-aware probe</button></div>
+    <div class="heron-metrics">
+      <div class="heron-metric"><span class="heron-metric-label"><b>Deconfounded AUC</b>benign-prefix vs. attacked</span><div class="heron-meter"><span data-heron-bar="auc"></span></div><output class="heron-metric-value" data-heron-value="auc">93.7%</output></div>
+      <div class="heron-metric"><span class="heron-metric-label"><b>Held-out attacks caught</b>TPR at conformal &tau;</span><div class="heron-meter"><span data-heron-bar="tpr"></span></div><output class="heron-metric-value" data-heron-value="tpr">71.0%</output></div>
+      <div class="heron-metric"><span class="heron-metric-label"><b>Harmless prompts flagged</b>FPR on benign pool; bar scale is 0&ndash;10%</span><div class="heron-meter is-risk"><span data-heron-bar="fpr"></span></div><output class="heron-metric-value" data-heron-value="fpr">3.1%</output></div>
+    </div>
+    <p class="heron-lab-read" id="heron-probe-read" role="status">The naive probe looks perfect on the easy comparison, but catches only 71.0% of the held-out attack family once harmless prefixed prompts are included.</p>
+    <small class="heron-data-note">Values are the reported 10-seed means. The first two bars use a 0&ndash;100% scale; the false-positive bar uses a 0&ndash;10% scale so the difference remains visible.</small>
+  </div>
   <p>
     Both probes reach AUC 1.000 on clean vs. attacked. The clean-vs-attacked metric therefore
     cannot distinguish them. The control conditions can. With the threshold calibrated on clean
@@ -404,6 +471,15 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       0.037 (median 0.025), below the target &alpha; = 0.05. The 99th-percentile single-split FPR
       is 0.138; the guarantee bounds the expectation, and individual splits may exceed &alpha;.</li>
   </ul>
+  <div class="heron-lab" id="heron-layer-lab">
+    <div class="heron-lab-head"><div><h4>Follow the signal through the network</h4><p>Select a reported anchor to see where goal-override intent is most linearly available.</p></div><span class="heron-lab-tag">Layer explorer</span></div>
+    <div class="heron-layer-stage">
+      <div class="heron-layer-value"><span id="heron-layer-name">Embedding layer 0</span><b id="heron-layer-auc">0.500</b><small id="heron-layer-note">Chance: the signal is not linearly available here.</small></div>
+      <div class="heron-layer-map"><div class="heron-layer-line" aria-hidden="true"></div><div class="heron-layer-points" role="group" aria-label="Reported layer sweep anchors"><button type="button" class="is-active" data-heron-layer="0" aria-pressed="true">0<span>embedding</span></button><button type="button" data-heron-layer="4" aria-pressed="false">4&ndash;7<span>early-middle</span></button><button type="button" data-heron-layer="12" aria-pressed="false">12<span>pre-registered</span></button><button type="button" data-heron-layer="24" aria-pressed="false">24<span>final</span></button></div></div>
+    </div>
+    <p class="heron-lab-read" id="heron-layer-read" role="status">At layer 0, last-token AUC is 0.500: chance.</p>
+    <small class="heron-data-note">These are only the values explicitly reported in the prose: layer 0, the layer 4&ndash;7 peak, layer 12, and approximately layer 24. The visual does not interpolate unreported layers.</small>
+  </div>
 
   <figure class="heron-figure">
     <div class="heron-figure-frame">
@@ -429,6 +505,14 @@ image: /assets/img/usecases/heron-hijack-self-probe.webp
       <tr><td>FPR on the combined benign pool after recalibration (the quantity the bound covers)</td><td class="num">0.045 &plusmn; 0.034</td></tr>
       <tr><td>TPRs after recalibration (train / suffix / paraphrase families)</td><td class="num">0.980 / 0.995 / 1.000</td></tr>
     </table>
+  </div>
+  <div class="heron-lab" id="heron-calibration-lab">
+    <div class="heron-lab-head"><div><h4>Change what the calibration set covers</h4><p>Each square represents one harmless suffix-form prompt. Orange squares are false alarms, rounded to the nearest prompt for the diagram.</p></div><span class="heron-lab-tag">Coverage test</span></div>
+    <div class="heron-switch" role="group" aria-label="Choose calibration coverage"><button type="button" data-heron-cal="prefix" class="is-active" aria-pressed="true">Prefix-only calibration</button><button type="button" data-heron-cal="mixed" aria-pressed="false">Add suffix-form benign traffic</button></div>
+    <div class="heron-cal-grid" id="heron-cal-grid" aria-label="One hundred harmless suffix-form prompts"></div>
+    <div class="heron-cal-summary"><div><span>Suffix-form benign FPR</span><b id="heron-suffix-fpr">25.8%</b></div><div><span>Combined benign-pool FPR</span><b id="heron-pool-fpr">Not reported</b></div><div><span>Suffix-attack TPR</span><b id="heron-suffix-tpr">100.0%</b></div></div>
+    <p class="heron-lab-read" id="heron-cal-read" role="status">The detector ranks suffix attacks well, but the prefix-only threshold misclassifies 25.8% of harmless suffix-form prompts. The false-positive guarantee does not cover a benign form absent from calibration.</p>
+    <small class="heron-data-note">The grid rounds 25.8% to 26 squares and 8.7% to 9. Exact reported means remain in the readouts. The 4.5% guarantee after recalibration applies to the combined benign mixture, not every subgroup.</small>
   </div>
   <p>
     The paraphrase result rules out keyword matching: the detector reaches TPR 1.000 on hijack

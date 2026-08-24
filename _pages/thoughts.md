@@ -55,6 +55,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">How to spot the certainty trap, manage an intense state, decide under doubt, and keep moving while an answer remains unavailable.</span>
 <span class="read-more">Open the manual →</span>
 </a>
+<a class="essay-feature" href="/communication/">
+<span class="essay-feature-label">Interactive manual</span>
+<span class="essay-feature-title">Communication 101</span>
+<span class="essay-feature-desc">Your understanding is more developed than your explanation. Nine working figures: watch what lands fall as you say more, find where two people are doing different jobs, and see what a week of silence costs.</span>
+<span class="read-more">Open the manual →</span>
+</a>
 </div>
 
 <div class="writings-divider"></div>
