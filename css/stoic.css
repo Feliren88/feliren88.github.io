@@ -497,3 +497,88 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .st-theme{grid-template-columns:7.5rem 1fr 1.8rem;font-size:.76rem}
   .st-corpus{padding:.9rem}
 }
+
+/* ── A diagram inside every passage ───────────────────────
+   Eleven shapes. Labels come from each passage's own situation and take, so a
+   reader who reaches for the picture first gets the same claim as the prose. */
+.st-viz{margin:0 0 1rem;padding:.85rem .95rem;border:1px solid var(--line);border-radius:var(--radius-md);background:color-mix(in srgb,var(--accent) 4%,var(--surface))}
+.st-viz>.k{display:block;margin-bottom:.6rem;font:700 .66rem "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.st-viz-cap{margin:.6rem 0 0!important;font-size:.78rem!important;color:var(--muted)!important;line-height:1.55}
+.sv b{font:600 .92rem "Space Grotesk",sans-serif;color:var(--text);line-height:1.3}
+
+/* yours / not yours */
+.sv-dich{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.sv-dich>div{padding:.65rem .7rem;border-radius:var(--radius-sm);border:1px solid var(--line)}
+.sv-dich .k{display:block;margin-bottom:.2rem;font:700 .6rem "Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.sv-dich .mine{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.sv-dich .mine .k{color:var(--accent)}
+.sv-dich .theirs{opacity:.72}
+.sv-dich .theirs .k{color:var(--muted)}
+
+/* the pause between */
+.sv-gate{display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem;align-items:center;text-align:center;font-size:.85rem;color:var(--muted)}
+.sv-gate .a,.sv-gate .b{padding:.55rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.sv-gate .b{border-color:var(--accent);color:var(--text)}
+.sv-gate .pause{display:grid;gap:.2rem;justify-items:center;font:700 .68rem "Space Grotesk",sans-serif;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.sv-gate .pause i{display:block;width:2px;height:1.5rem;background:var(--accent)}
+
+/* weighed */
+.sv-scale{display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem;align-items:center}
+.sv-scale .pan{padding:.6rem .7rem;border:1px solid var(--line);border-radius:var(--radius-sm);text-align:center;opacity:.7}
+.sv-scale .pan.is-heavy{opacity:1;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);transform:translateY(4px)}
+.sv-scale .fulcrum{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:12px solid var(--muted)}
+
+/* relabelled */
+.sv-swap{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:.88rem}
+.sv-swap .from{padding:.5rem .65rem;border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 60%,transparent)}
+.sv-swap i{color:var(--accent);font-style:normal;font-size:1.1rem}
+.sv-swap .to{padding:.5rem .65rem;border:1px solid var(--accent);border-radius:var(--radius-sm);background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--text);font-weight:600}
+
+/* one in, several readings */
+.sv-split .in{margin:0 0 .45rem!important;font:600 .9rem "Space Grotesk",sans-serif;color:var(--text)!important}
+.sv-split ul{list-style:none;margin:0;padding:0 0 0 1rem;display:grid;gap:.3rem}
+.sv-split li{position:relative;padding:.45rem .6rem;border:1px solid var(--line);border-left:3px solid var(--line-strong);border-radius:var(--radius-sm);font-size:.85rem;color:var(--muted)}
+.sv-split li:before{content:"";position:absolute;left:-1rem;top:-.3rem;bottom:50%;width:.7rem;border-left:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);border-bottom-left-radius:5px}
+.sv-split li.is-on{border-left-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--text)}
+
+/* in order */
+.sv-order{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.sv-order li{display:flex;align-items:center;gap:.4rem;padding:.4rem .6rem;border:1px solid var(--line);border-radius:var(--radius-sm);font-size:.83rem;color:var(--text)}
+.sv-order li b{font:700 .62rem "Space Grotesk",sans-serif;color:var(--cta-text);background:var(--accent);border-radius:3px;padding:.1rem .32rem}
+.sv-order li.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+
+/* rungs */
+.sv-ladder{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.sv-ladder li{position:relative;padding:.5rem .7rem;border:1px solid var(--line);border-radius:var(--radius-sm);font-size:.85rem;color:var(--muted);background:var(--surface)}
+.sv-ladder li.is-on{border-color:var(--accent);color:var(--text);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.sv-ladder em{float:right;font-style:normal;font:700 .62rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+
+/* large beside small */
+.sv-shrink{display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:center}
+.sv-shrink .big{padding:1.1rem .8rem;border:1px dashed var(--line-strong);border-radius:var(--radius-sm);text-align:center;font-size:.85rem;color:var(--muted)}
+.sv-shrink .small{padding:.5rem .7rem;border:1px solid var(--accent);border-radius:var(--radius-sm);background:color-mix(in srgb,var(--accent) 10%,transparent);font-size:.85rem;font-weight:600;color:var(--text)}
+
+/* a limit, and past it */
+.sv-measure{display:grid;gap:.35rem}
+.sv-measure .lim{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border:1px solid var(--accent);border-radius:var(--radius-sm);background:color-mix(in srgb,var(--accent) 10%,transparent);font-size:.85rem;color:var(--text)}
+.sv-measure .lim i{flex:none;width:3px;height:1.1rem;background:var(--accent)}
+.sv-measure .beyond{padding:.5rem .7rem;border:1px dashed var(--line-strong);border-radius:var(--radius-sm);font-size:.83rem;color:var(--muted)}
+
+/* a core inside */
+.sv-rings{position:relative;display:grid;place-items:center;gap:.4rem;padding:1rem;border:1px dashed var(--line-strong);border-radius:var(--radius-md);text-align:center}
+.sv-rings .outer{font-size:.78rem;color:var(--muted)}
+.sv-rings .core{padding:.5rem .8rem;border:1px solid var(--accent);border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);font-size:.85rem;font-weight:600;color:var(--text)}
+
+/* a cycle */
+.sv-loop{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:center}
+.sv-loop svg{width:5.4rem;height:auto}
+.sv-loop .ring{fill:none;stroke:var(--line-strong);stroke-width:2;stroke-dasharray:5 5}
+.sv-loop .node{fill:var(--accent)}
+.sv-loop ul{list-style:none;margin:0;padding:0;display:grid;gap:.2rem}
+.sv-loop li{font-size:.83rem;color:var(--muted)}
+
+@media(max-width:560px){
+  .sv-dich,.sv-gate,.sv-scale,.sv-shrink,.sv-loop{grid-template-columns:1fr}
+  .sv-gate .pause i{height:1rem}
+  .sv-scale .fulcrum{justify-self:center}
+}

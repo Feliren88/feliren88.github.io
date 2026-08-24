@@ -21,6 +21,13 @@ passages:
     quote: "If you are going to bathe, picture to yourself the things which usually happen in the bath: some people splash the water, some push, some use abusive language, and others steal."
     take: "Rehearse the shoving and the rudeness before you go in. Then add a second aim you can still hit, which is keeping your own conduct steady. A bad room cannot take that one from you."
     search: "going about action remind yourself nature bathe picture things usually happen bath people splash water push abusive language others steal thus safely keep mind state conformable same manner regard every other hindrance arises bathing ready only desired bothered"
+    viz:
+      type: order
+      cap: "A bad room cannot take the second aim from you."
+      items:
+        - "Picture the shoving"
+        - "Name your own conduct"
+        - "Walk in"
 
   - id: when-you-are-about-to-tell-someone-they-ruined-y
     situation: "When you are about to tell someone they ruined your day"
@@ -30,6 +37,14 @@ passages:
     quote: "An uninstructed person will lay the fault of his own bad condition upon others. Someone just starting instruction will lay the fault on himself. Some who is perfectly instructed will place blame neither on others nor on himself."
     take: "Epictetus describes a ladder: first you blame others, then yourself, then nobody. Self-criticism may be progress, but it is still only the middle rung."
     search: "disturbed things principles notions form concerning death instance terrible else appeared socrates terror consists notion therefore hindered grieved never attribute others ourselves uninstructed person fault condition upon someone just starting instruction himself perfectly instructed place blame neither"
+    viz:
+      type: ladder
+      cap: "Self-criticism is the middle rung, not the top."
+      mark: 1
+      rungs:
+        - "Blame others"
+        - "Blame yourself"
+        - "Blame nobody"
 
   - id: when-something-unpleasant-lands-on-you-and-you-d
     situation: "When something unpleasant lands on you and you do not know what to do first"
@@ -39,6 +54,15 @@ passages:
     quote: "With every accident, ask yourself what abilities you have for making a proper use of it. If you see an attractive person, you will find that self-restraint is the ability you have against your desire. If you are in pain, you will find fortitude. If you hear unpleasant language, you will find patience."
     take: "Every event arrives with a matching capacity, and the question is which one this needs. Abusive words ask for patience, pain asks for endurance. Naming the faculty gives you something to do instead of a reaction to have."
     search: "every accident yourself abilities making proper attractive person find self restraint ability against desire pain fortitude hear unpleasant language patience thus habituated appearances things hurry away along"
+    viz:
+      type: split
+      in: "What landed on you"
+      cap: "Every event arrives with a matching capacity."
+      out:
+        - k: "Abusive words: patience"
+          on: true
+        - k: "Pain: endurance"
+          on: true
 
   - id: when-you-lose-something-or-someone-and-want-to-c
     situation: "When you lose something or someone and want to call it theft"
@@ -48,6 +72,11 @@ passages:
     quote: "Never say of anything, \"I have lost it\"; but, \"I have returned it.\" Is your child dead? It is returned."
     take: "Calling a loss a return can sound like wordplay. Epictetus wants you to remember that you held the thing on loan. He then makes the harsher point that the identity of the collector changes nothing."
     search: "never anything lost returned child dead wife estate taken away well likewise took difference giver assigns take back while gives possess care don't view just travelers hotel"
+    viz:
+      type: swap
+      before: "It was taken"
+      after: "It was returned"
+      cap: "You held the thing on loan."
 
   - id: when-something-small-breaks-at-home-and-you-feel
     situation: "When something small breaks at home and you feel your temper going"
@@ -57,6 +86,12 @@ passages:
     quote: "Say to yourself, \"This is the price paid for apathy, for tranquillity, and nothing is to be had for nothing.\" When you call your servant, it is possible that he may not come; or, if he does, he may not do what you want."
     take: "He prices calm honestly rather than pretending it is free. Spilled oil is what a settled mind costs today. Practising on small losses is the whole method, because nobody learns it during a large one."
     search: "want improve reject reasonings these neglect affairs i'll income don't correct servant better hunger exempt grief fear live affluence perturbation unhappy begin therefore little things spilt wine stolen yourself price paid apathy tranquillity nothing call possible come means importance power give disturbance"
+    viz:
+      type: scale
+      a: "Spilled oil"
+      b: "A settled mind"
+      heavy: "b"
+      cap: "This is what calm costs today."
 
   - id: when-you-notice-how-much-one-person-s-approval-s
     situation: "When you notice how much one person's approval steers your choices"
@@ -66,6 +101,11 @@ passages:
     quote: "He is the master of every other person who is able to confer or remove whatever that person wishes either to have or to avoid. Whoever, then, would be free, let him wish nothing, let him decline nothing, which depends on others else he must necessarily be a slave."
     take: "Whoever can grant or withhold the thing you want has power over you, whatever the org chart says. I read this as a warning about my own wanting. I gave the other person that power."
     search: "wish children wife friends live ever stupid control things cannot belong others likewise servant without fault fool vice something else desires undisappointed exercise therefore master every other person able confer remove whatever wishes either avoid whoever free nothing decline depends necessarily slave"
+    viz:
+      type: rings
+      core: "What you want"
+      outer: "Whoever can grant it"
+      cap: "Wanting is what hands over the power."
 
   - id: when-the-promotion-or-the-invitation-has-not-com
     situation: "When the promotion or the invitation has not come round to you yet"
@@ -75,6 +115,14 @@ passages:
     quote: "Don't stretch your desire towards it, but wait till it reaches you. Do this with regard to children, to a wife, to public posts, to riches, and you will eventually be a worthy partner of the feasts of the gods."
     take: "The banquet rule is about timing more than restraint. Take a share when the dish reaches you, and do not lean down the table for it. Reaching early is what turns wanting into being pushed about."
     search: "remember behave life dinner party anything brought around hand take share moderation pass don't stop come stretch desire towards wait till reaches regard children wife public posts riches eventually worthy partner feasts gods even things before able reject only also empire doing diogenes heraclitus others"
+    viz:
+      type: order
+      cap: "Do not lean down the table for it."
+      mark: 2
+      items:
+        - "The dish is elsewhere"
+        - "It reaches you"
+        - "Take a share"
 
   - id: when-a-friend-is-falling-apart-and-you-can-feel-
     situation: "When a friend is falling apart and you can feel their panic getting into you"
@@ -84,6 +132,15 @@ passages:
     quote: "Instead, distinguish within your own mind, and be prepared to say, \"It's not the accident that distresses this person., because it doesn't distress another person; it is the judgment which he makes about it.\" As far as words go, however, don't reduce yourself to his level, and certainly do not moan with him."
     take: "He allows the sympathy out loud, including saying the sad words alongside them. What he blocks is agreeing inwardly that the event itself is the ruin. I find that split very hard to hold in the moment."
     search: "anyone weeping grief because gone abroad dead suffered affairs careful appearance misdirect instead distinguish within mind prepared it's accident distresses person doesn't distress another judgment makes about words however don't reduce yourself level certainly moan inwardly either"
+    viz:
+      type: split
+      in: "Their grief"
+      cap: "Sympathy out loud, without the inward assent."
+      out:
+        - k: "Say the sad words with them"
+          on: true
+        - k: "Agree the event is ruin"
+          on: false
 
   - id: when-the-role-you-have-been-handed-is-smaller-th
     situation: "When the role you have been handed is smaller than the one you wanted"
@@ -93,6 +150,11 @@ passages:
     quote: "For this is your business, to act well the character assigned you; to choose it is another's."
     take: "Someone else handles the casting; you handle the performance. Epictetus says nothing here about whether the part is fair. He asks only how well you will play it."
     search: "remember actor drama kind author pleases make short long pleasure poor cripple governor private person naturally business well character assigned choose another's"
+    viz:
+      type: dichotomy
+      mine: "How well you play it"
+      theirs: "Which part you are given"
+      cap: "Someone else handles the casting."
 
   - id: when-someone-says-something-cutting-and-you-can-
     situation: "When someone says something cutting and you can feel the reply forming"
@@ -102,6 +164,12 @@ passages:
     quote: "When, therefore, anyone provokes you, be assured that it is your own opinion which provokes you. Try, therefore, in the first place, not to be hurried away with the appearance. For if you once gain time and respite, you will more easily command yourself."
     take: "He locates the injury in your opinion about the words. I find his advice to wait more useful than the theory. A short delay weakens the urge to answer in kind."
     search: "remember gives language blow insults principle represents these things insulting therefore anyone provokes assured opinion first place hurried away appearance once gain time respite easily command yourself"
+    viz:
+      type: gate
+      before: "The words"
+      pause: "Wait"
+      after: "Your reply"
+      cap: "A short delay weakens the urge to answer in kind."
 
   - id: when-you-catch-yourself-scheming-hard-over-somet
     situation: "When you catch yourself scheming hard over something small"
@@ -111,6 +179,11 @@ passages:
     quote: "Let death and exile, and all other things which appear terrible be daily before your eyes, but chiefly death, and you win never entertain any abject thought, nor too eagerly covet anything."
     take: "A daily thought of death gives petty worries and greedy plans their proper scale. Remembering to do it on an ordinary day is harder than understanding the advice."
     search: "death exile other things appear terrible daily before eyes chiefly never entertain abject thought eagerly covet anything"
+    viz:
+      type: shrink
+      big: "The scheme"
+      small: "Its size next to one day"
+      cap: "A daily thought of death gives it scale."
 
   - id: when-someone-less-capable-gets-the-invitation-th
     situation: "When someone less capable gets the invitation, the promotion, or the seat at the table"
@@ -120,6 +193,12 @@ passages:
     quote: "So, in the present case, you have not been invited to such a person's entertainment, because you have not paid him the price for which a supper is sold. It is sold for praise; it is sold for attendance."
     take: "Epictetus treats access as a purchase, with flattery and attendance as the price. If you refused to pay it, you still hold what you kept, so the grievance does not stand."
     search: "anyone preferred before entertainment compliment admitted consultation these things good ought glad gotten evil don't grieved remember cannot without using same means others acquire control expect thought worthy equal share frequent door great attend praise unjust insatiable unwilling price sold nothing much lettuce fifty cents"
+    viz:
+      type: scale
+      a: "The invitation"
+      b: "What you refused to pay"
+      heavy: "b"
+      cap: "Access was a purchase, and you kept the price."
 
   - id: when-something-of-yours-breaks-or-goes-wrong-and
     situation: "When something of yours breaks or goes wrong and you spiral over it"
@@ -129,6 +208,11 @@ passages:
     quote: "For example, when our neighbor's boy breaks a cup, or the like, we are presently ready to say, \"These things will happen.\" Be assured, then, that when your own cup likewise is broken, you ought to be affected just as when another's cup was broken."
     take: "Notice how calmly you take the identical loss when it lands on a neighbour. He asks you to lend yourself that same tone. Easy with a cup, brutal when he extends it to a dead child."
     search: "nature learned those things don't distinguish each other example neighbor's breaks like presently ready these happen assured likewise broken ought affected just another's apply manner greater child wife another dead human accident anyone's happens alas wretched remembered hearing same thing concerning others"
+    viz:
+      type: swap
+      before: "When it is yours"
+      after: "When it is a neighbour's"
+      cap: "Lend yourself the tone you already use for others."
 
   - id: when-a-stranger-s-remark-online-sours-your-whole
     situation: "When a stranger's remark online sours your whole day"
@@ -138,6 +222,11 @@ passages:
     quote: "And do you feel no shame in handing over your own mind to be confused and mystified by anyone who happens to verbally attack you?"
     take: "The comparison is blunt. You would fight anyone who handed your body to a passer-by, yet you hand over your mind for free and feel nothing about it."
     search: "person gave body stranger certainly angry feel shame handing over mind confused mystified anyone happens verbally attack"
+    viz:
+      type: dichotomy
+      mine: "Your mind"
+      theirs: "A stranger’s remark"
+      cap: "You would not hand over your body so cheaply."
 
   - id: when-you-are-about-to-start-a-demanding-course-j
     situation: "When you are about to start a demanding course, job, or training plan"
@@ -147,6 +236,13 @@ passages:
     quote: "In every affair consider what precedes and follows, and then undertake it. Otherwise you will begin with spirit; but not having thought of the consequences, when some of them appear you will shamefully desist."
     take: "Count the full cost first, including the dull, painful and humiliating parts, then decide. His real target is sampling. Try on every identity and you end up being nothing in particular."
     search: "every affair consider precedes follows undertake otherwise begin spirit having thought consequences appear shamefully desist conquer olympic games advantage engage conform rules submit diet refrain dainties exercise body whether choose stated hour heat cold drink water sometimes even wine word give yourself master physician combat"
+    viz:
+      type: order
+      cap: "His real target is sampling."
+      items:
+        - "Count the dull parts"
+        - "Count the painful parts"
+        - "Then decide"
 
   - id: when-a-parent-or-sibling-behaves-badly-and-you-a
     situation: "When a parent or sibling behaves badly and you are weighing cutting them off"
@@ -156,6 +252,11 @@ passages:
     quote: "Consider not what he does, but what you are to do to keep your own faculty of choice in a state conformable to nature."
     take: "Nature gave you a father, not a good one, so your side of the relation holds whatever he does. It is a hard doctrine. He offers no exit clause for real harm, which is where I part company with him."
     search: "duties universally measured relations anyone father implied children take care submit everything patiently listen reproaches correction naturally entitled good only brother unjust well keep situation towards consider faculty choice state conformable nature another hurt unless please think manner therefore find idea neighbor citizen general corresponding"
+    viz:
+      type: dichotomy
+      mine: "Your side of the relation"
+      theirs: "How they behave"
+      cap: "Nature gave you a father, not a good one."
 
   - id: when-someone-tells-you-a-third-party-has-been-cr
     situation: "When someone tells you a third party has been criticising you behind your back"
@@ -165,6 +266,11 @@ passages:
     quote: "If anyone tells you that such a person speaks ill of you, don't make excuses about what is said of you, but answer: \" He does not know my other faults, else he would not have mentioned only these.\" It is not necessary for you to appear often at public spectacles."
     take: "Instead of mounting a defence, concede more than the critic managed to find. It ends the drama in one line, and it only works if you genuinely hold your faults lightly."
     search: "immediately prescribe character form conduce yourself keep both alone company part silent speak merely necessary words however enter though sparingly into discourse sometimes occasion calls common subjects gladiators horse races athletic champions feasts vulgar topics conversation principally either blame praise make comparisons able bring over"
+    viz:
+      type: swap
+      before: "Mount a defence"
+      after: "Concede more than they found"
+      cap: "It ends the drama in one line."
 
   - id: when-someone-criticises-you-unfairly-in-front-of
     situation: "When someone criticises you unfairly in front of other people"
@@ -174,6 +280,15 @@ passages:
     quote: "When any person harms you, or speaks badly of you, remember that he acts or speaks from a supposition of its being his duty."
     take: "Epictetus says the person attacking you is following what seems right to him. I find that cools the anger quickly, though it does nothing about the harm already done."
     search: "person harms speaks badly remember acts supposition duty possible follow appears right himself therefore judges wrong appearance hurt since deceived anyone suppose true proposition false about setting these principles meekly bear reviles upon every occasion seemed"
+    viz:
+      type: split
+      in: "Their attack"
+      cap: "It cools the anger, and does nothing about the harm."
+      out:
+        - k: "What seems right to them"
+          on: true
+        - k: "A verdict on you"
+          on: false
 
   - id: when-a-relative-wrongs-you-and-you-still-have-to
     situation: "When a relative wrongs you and you still have to see them at Christmas"
@@ -183,6 +298,12 @@ passages:
     quote: "Everything has two handles, the one by which it may be carried, the other by which it cannot."
     take: "Choose which true fact about the relationship you carry. This can help, though it can also become an excuse to ignore an injustice you ought to name."
     search: "everything handles carried other cannot brother acts unjustly don't hold action handle injustice opposite brought thus"
+    viz:
+      type: scale
+      a: "The wrong they did"
+      b: "The relation you keep"
+      heavy: "b"
+      cap: "Choose which true fact you carry."
 
   - id: when-you-catch-yourself-reading-one-habit-as-pro
     situation: "When you catch yourself reading one habit as proof of someone's character"
@@ -192,6 +313,12 @@ passages:
     quote: "For, unless you perfectly understand the principle from which anyone acts, how should you know if he acts ill?"
     take: "Describe what the person did before you rate it. Most of my worst reactions come from calling an act wrong while I still lack the facts."
     search: "anyone bathe mighty little time don't drink great quantity wine drinks unless perfectly understand principle acts know thus hazard assenting appearances fully comprehend"
+    viz:
+      type: gate
+      before: "What they did"
+      pause: "Describe it"
+      after: "Rate it"
+      cap: "Most bad reactions come from rating before describing."
 
   - id: when-you-compare-your-salary-or-job-title-agains
     situation: "When you compare your salary or job title against a friend's"
@@ -201,6 +328,11 @@ passages:
     quote: "These reasonings are unconnected: \"I am richer than you, therefore I am better\"; \"I am more eloquent than you, therefore I am better.\" The connection is rather this: \"I am richer than you, therefore my property is greater than yours;\" \"I am more eloquent than you, therefore my style is better than yours.\" But you, after all, are neither property nor style."
     take: "Earning more proves your holdings are larger and proves nothing else. The gap he points at is between the things attached to you and you."
     search: "these reasonings unconnected richer therefore better eloquent connection rather property greater style after neither"
+    viz:
+      type: dichotomy
+      mine: "You"
+      theirs: "The things attached to you"
+      cap: "Earning more proves your holdings are larger."
 
   - id: when-you-are-working-out-how-big-a-house-or-car-
     situation: "When you are working out how big a house or car you actually need"
@@ -210,6 +342,11 @@ passages:
     quote: "The body is to everyone the measure of the possessions proper for it, just as the foot is of the shoe."
     take: "The body sets the size of what you need, as a foot sets the size of a shoe. Past that measure there is no natural place to stop, which is why upgrades never feel finished."
     search: "body everyone measure possessions proper just foot shoe therefore stop keep move beyond necessarily carried forward down cliff case fitness comes first gilded purple studded jewels once exceeds bound"
+    viz:
+      type: measure
+      limit: "What the body needs"
+      beyond: "No natural place to stop"
+      cap: "A foot sets the size of a shoe."
 
   - id: when-you-keep-moving-the-date-you-will-finally-s
     situation: "When you keep moving the date you will finally start"
@@ -219,6 +356,12 @@ passages:
     quote: "If, therefore, you will be negligent and slothful, and always add procrastination to procrastination, purpose to purpose, and fix day after day in which you will attend to yourself, you will insensibly continue without proficiency, and, living and dying, persevere in being one of the vulgar."
     take: "Stop choosing future dates to begin. Epictetus treats the present moment as the test and warns how easily one concession becomes a habit."
     search: "whatever moral rules deliberately proposed yourself abide laws guilty impiety violating don't regard anyone says after concern long thinking worthy highest improvements follow distinctions reason received philosophical theorems ought familiar other master wait throw upon delay reforming longer grown therefore negligent slothful always procrastination purpose"
+    viz:
+      type: gate
+      before: "Now"
+      pause: "The concession"
+      after: "A later date"
+      cap: "One concession becomes a habit."
 
   - id: when-you-want-to-know-whether-you-are-actually-g
     situation: "When you want to know whether you are actually getting better at this"
@@ -228,6 +371,13 @@ passages:
     quote: "The marks of a proficient are, that he censures no one, praises no one, blames no one, accuses no one, says nothing concerning himself as being anybody, or knowing anything: when he is, in any instance, hindered or restrained, he accuses himself; and, if he is praised, he secretly laughs at the person who praises him."
     take: "This is a checklist for progress: no blaming, no boasting, no defending yourself. The hardest item is making no defence when someone censures you, since silence looks like agreement."
     search: "condition characteristic vulgar person never expects either benefit hurt himself externals philosopher marks proficient censures praises blames accuses says nothing concerning anybody knowing anything instance hindered restrained praised secretly laughs censured makes defense goes about caution sick injured people dreading move right before perfectly fixed"
+    viz:
+      type: order
+      cap: "The last is the hardest."
+      items:
+        - "No blaming"
+        - "No boasting"
+        - "No defending yourself"
 
   - id: when-you-wake-up-already-dreading-the-people-you
     situation: "When you wake up already dreading the people you have to deal with today"
@@ -237,6 +387,13 @@ passages:
     quote: "Begin the morning by saying to thyself, I shall meet with the busy-body, the ungrateful, arrogant, deceitful, envious, unsocial."
     take: "He rehearses the irritation in advance, so the day cannot ambush him. The catch is he still owes those people cooperation once they turn up."
     search: "begin morning saying thyself meet busybody ungrateful arrogant deceitful envious unsocial these things happen reason ignorance good evil seen nature beautiful ugly wrong akin only same blood seed participates intelligence portion divinity neither injured angry kinsman hate made operation like feet hands eyelids rows upper"
+    viz:
+      type: order
+      cap: "The day cannot ambush him."
+      items:
+        - "Rehearse the irritation"
+        - "They turn up"
+        - "You still owe cooperation"
 
   - id: when-you-are-stuck-guessing-what-a-colleague-rea
     situation: "When you are stuck guessing what a colleague really thinks of you"
@@ -246,6 +403,12 @@ passages:
     quote: "Through not observing what is in the mind of another a man has seldom been seen to be unhappy; but those who do not observe the movements of their own minds must of necessity be unhappy."
     take: "He ranks two blind spots against each other. Not knowing another person's mind rarely costs you, while not tracking your own costs you every time."
     search: "through observing mind another seldom seen unhappy those observe movements minds necessity"
+    viz:
+      type: scale
+      a: "Not knowing their mind"
+      b: "Not tracking your own"
+      heavy: "b"
+      cap: "One blind spot costs you every time."
 
   - id: when-you-feel-cheated-out-of-the-years-you-assum
     situation: "When you feel cheated out of the years you assumed you would get"
@@ -255,6 +418,11 @@ passages:
     quote: "Though thou shouldst be going to live three thousand years, and as many times ten thousand years, still remember that no man loses any other life than this which he now lives, nor lives any other than this which he now loses."
     take: "Death can only take the present, because the past and the future were never yours to hold. So the long liver and the early death lose the same amount."
     search: "though shouldest going live three thousand years many times still remember loses other life lives longest shortest thus brought same present perish lost appears mere moment cannot lose either past future take these things bear mind eternity like forms come round circle makes difference whether"
+    viz:
+      type: shrink
+      big: "The years you assumed"
+      small: "The present, which is all it can take"
+      cap: "The long liver and the early death lose the same."
 
   - id: when-you-cannot-get-started-until-someone-tells-
     situation: "When you cannot get started until someone tells you it is fine"
@@ -264,6 +432,11 @@ passages:
     quote: "A man then must stand erect, not be kept erect by others."
     take: "He wants a cheerfulness that does not need topping up by other people. It bites when your steadiness runs on praise, which arrives on someone else's schedule."
     search: "labor unwillingly without regard common interest consideration distraction studied ornament thoughts either many words busy about things further deity guardian living manly ripe engaged matter political roman ruler taken post like waiting signal summons life ready having need neither oath man's testimony cheerful also seek"
+    viz:
+      type: rings
+      core: "Your own cheerfulness"
+      outer: "Topping up from other people"
+      cap: "It arrives on someone else’s schedule."
 
   - id: when-a-shortcut-would-pay-off-but-you-would-have
     situation: "When a shortcut would pay off but you would have to keep it quiet"
@@ -273,6 +446,12 @@ passages:
     quote: "Never value anything as profitable to thyself which shall compel thee to break thy promise, to lose thy self-respect, to hate any man, to suspect, to curse, to act the hypocrite, to desire anything which needs walls and curtains."
     take: "The test here is almost physical. If a gain needs a closed door to survive, he says stop counting it as gain."
     search: "never value anything profitable thyself compel break promise lose self respect hate suspect curse hypocrite desire needs walls curtains preferred everything else intelligence daemon worship excellence acts tragic part groan need either solitude much company chief live without pursuing flying death whether longer shorter time"
+    viz:
+      type: gate
+      before: "The gain"
+      pause: "Does it need a closed door"
+      after: "Stop counting it"
+      cap: "The test here is almost physical."
 
   - id: when-your-saved-for-later-pile-keeps-growing-and
     situation: "When your saved-for-later pile keeps growing and you never open it"
@@ -282,6 +461,11 @@ passages:
     quote: "No longer wander at hazard; for neither wilt thou read thy own memoirs, nor the acts of the ancient Romans and Hellenes, and the selections from books which thou wast reserving for thy old age."
     take: "Marcus catches himself saving books for an old age that may never arrive. He tells himself to drop the plan and use what he has already read."
     search: "longer wander hazard neither wilt read memoirs acts ancient romans hellenes selections books wast reserving hasten hast before throwing away idle hopes come carest thyself while power memoranda notes like"
+    viz:
+      type: swap
+      before: "Saving it for later"
+      after: "Using what you have read"
+      cap: "The old age you are saving for may not arrive."
 
   - id: when-someone-attacks-you-and-you-start-seeing-yo
     situation: "When someone attacks you and you start seeing yourself through their eyes"
@@ -291,6 +475,17 @@ passages:
     quote: "Do not have such an opinion of things as he has who does thee wrong, or such as he wishes thee to have, but look at them as they are in truth."
     take: "He rejects two framings at once, the one the attacker holds and the one the attacker wants you to hold. What is left is looking at the thing as it is."
     search: "opinion things wrong wishes look truth"
+    viz:
+      type: split
+      in: "The attack"
+      cap: "He rejects two framings at once."
+      out:
+        - k: "Their framing"
+          on: false
+        - k: "The framing they want you to hold"
+          on: false
+        - k: "The thing as it is"
+          on: true
 
   - id: when-you-have-been-busy-all-day-and-cannot-say-w
     situation: "When you have been busy all day and cannot say what for"
@@ -300,6 +495,14 @@ passages:
     quote: "Accordingly on every occasion a man should ask himself, Is this one of the unnecessary things?"
     take: "The question is meant to be asked during the work, not in a weekly review. He extends it to thoughts as well, since stray thoughts breed stray tasks."
     search: "occupy thyself things says philosopher wouldst tranquil consider better necessary whatever reason animal naturally social requires brings only tranquillity comes doing well also greatest part unnecessary takes away leisure less uneasiness accordingly every occasion himself take acts thoughts thus superfluous follow after"
+    viz:
+      type: loop
+      cap: "Asked during the work, not in a weekly review."
+      nodes:
+        - "Act"
+        - "Ask what for"
+        - "Stray thought"
+        - "Stray task"
 
   - id: when-something-goes-badly-wrong-and-you-feel-sin
     situation: "When something goes badly wrong and you feel singled out by it"
@@ -309,6 +512,15 @@ passages:
     quote: "Remember too on every occasion which leads thee to vexation to apply this principle: not that this is a misfortune, but that to bear it nobly is good fortune."
     take: "Marcus puts the good fortune in the response. The event could happen to anyone; bearing it well remains rare and difficult."
     search: "like promontory against waves continually break stands firm tames fury water around unhappy because happened happy though continue free pain neither crushed present fearing future thing every continued occasion rather misfortune good fortune dost cases call man's deviation nature seem contrary well knowest prevent just"
+    viz:
+      type: split
+      in: "The event"
+      cap: "Marcus puts the good fortune in the response."
+      out:
+        - k: "Could happen to anyone"
+          on: false
+        - k: "Bearing it well"
+          on: true
 
   - id: when-the-alarm-goes-off-and-you-cannot-make-your
     situation: "When the alarm goes off and you cannot make yourself get up"
@@ -318,6 +530,12 @@ passages:
     quote: "In he morning when thou risest unwillingly, let this thought be present- I am rising to the work of a human being."
     take: "Marcus argues with himself about staying in bed. He notices that he will exhaust himself for money or a craft, yet resists the work he thinks belongs to a human life."
     search: "morning risest unwillingly thought present rising work human dissatisfied going things exist brought into world made clothes keep myself warm pleasant dost take pleasure action exertion little plants birds ants spiders bees working together order several parts universe unwilling make haste according nature necessary rest"
+    viz:
+      type: scale
+      a: "Effort for money or a craft"
+      b: "The work you think is yours"
+      heavy: "a"
+      cap: "He notices which one he will exhaust himself for."
 
   - id: when-you-feel-you-are-not-clever-enough-for-the-
     situation: "When you feel you are not clever enough for the job you have"
@@ -327,6 +545,11 @@ passages:
     quote: "Show those qualities then which are altogether in thy power, sincerity, gravity, endurance of labour, aversion to pleasure, contentment with thy portion and with few things, benevolence, frankness, no love of superfluity, freedom from trifling magnanimity."
     take: "The qualities he lists are dull ones like sincerity, endurance and frankness. None of them needs talent, which removes the excuse that you were not born able."
     search: "sayest cannot admire sharpness wits many other things canst formed nature show those qualities altogether power sincerity gravity endurance labor aversion pleasure contentment portion benevolence frankness love superfluity freedom trifling magnanimity dost immediately able exhibit excuse natural incapacity unfitness still remainest voluntarily below mark compelled"
+    viz:
+      type: measure
+      limit: "Sincerity, endurance, frankness"
+      beyond: "Talent you were not born with"
+      cap: "None of them needs talent."
 
   - id: when-a-colleague-keeps-blocking-work-you-need-to
     situation: "When a colleague keeps blocking work you need to finish"
@@ -336,6 +559,11 @@ passages:
     quote: "Now it is true that these may impede my action, but they are no impediments to my affects and disposition, which have the power of acting conditionally and changing: for the mind converts and changes every hindrance to its activity into an aid; and so that which is a hindrance is made a furtherance to an act."
     take: "He grants that a person can genuinely stop your action. The narrower claim is that your disposition can turn the block into material to work with."
     search: "respect nearest thing good endure make themselves obstacles proper acts becomes things indifferent less wind wild beast true these impede action impediments affects disposition power acting conditionally changing mind converts changes every hindrance activity into made furtherance obstacle road helps"
+    viz:
+      type: swap
+      before: "A block"
+      after: "Material to work with"
+      cap: "A person can genuinely stop your action."
 
   - id: when-you-are-planning-how-to-get-even-with-someo
     situation: "When you are planning how to get even with someone"
@@ -345,6 +573,11 @@ passages:
     quote: "The best way of avenging thyself is not to become like the wrong doer."
     take: "One sentence, and no argument attached. It moves revenge from a debt they owe you into a risk you are running."
     search: "best avenging thyself become like wrong doer"
+    viz:
+      type: swap
+      before: "A debt they owe you"
+      after: "A risk you are running"
+      cap: "One sentence, and no argument attached."
 
   - id: when-you-badly-want-something-mainly-because-oth
     situation: "When you badly want something mainly because other people admire it"
@@ -354,6 +587,11 @@ passages:
     quote: "Just in the same way ought we to act all through life, and where there are things which appear most worthy of our approbation, we ought to lay them bare and look at their worthlessness and strip them of all the words by which they are exalted."
     take: "Marcus reduces wine to grape juice and a purple robe to dyed wool. Describe the thing without its flattering language and see whether you still want it."
     search: "meat before eatables receive impression dead body fish bird again falernian only little grape juice purple robe sheep's wool dyed blood shell these impressions reach things themselves penetrate kind just same ought through life where appear worthy approbation bare look worthlessness strip words exalted outward"
+    viz:
+      type: swap
+      before: "Wine, a purple robe"
+      after: "Grape juice, dyed wool"
+      cap: "Describe it without the flattering language."
 
   - id: when-someone-tells-you-in-front-of-others-that-y
     situation: "When someone tells you, in front of others, that you are wrong"
@@ -363,6 +601,12 @@ passages:
     quote: "If any man is able to convince me and show me that I do not think or act right, I will gladly change; for I seek the truth by which no man was ever injured."
     take: "He separates the sting of being corrected from the harm of staying wrong. A fair check is naming the last time you changed your mind out loud."
     search: "able convince show think right gladly change seek truth ever injured abides error ignorance"
+    viz:
+      type: scale
+      a: "The sting of correction"
+      b: "The harm of staying wrong"
+      heavy: "b"
+      cap: "Name the last time you changed your mind out loud."
 
   - id: when-you-are-stuck-on-something-and-too-proud-to
     situation: "When you are stuck on something and too proud to ask for help"
@@ -372,6 +616,15 @@ passages:
     quote: "Be not ashamed to be helped; for it is thy business to do thy duty like a soldier in the assault on a town."
     take: "The image is a lame soldier who cannot reach the battlements alone. Refusing the hand up protects your pride and loses the wall."
     search: "ashamed helped business duty like soldier assault town lame canst mount battlements alone help another possible"
+    viz:
+      type: split
+      in: "Refusing the hand up"
+      cap: "A lame soldier cannot reach the battlements alone."
+      out:
+        - k: "Your pride, protected"
+          on: false
+        - k: "The wall, lost"
+          on: false
 
   - id: when-you-keep-putting-your-real-life-off-until-c
     situation: "When you keep putting your real life off until conditions improve"
@@ -381,6 +634,11 @@ passages:
     quote: "Consider thyself to be dead, and to have completed thy life up to the present time; and live according to nature the remainder which is allowed thee."
     take: "He asks you to count the life you have lived as already spent. What is left reads as a remainder, and a remainder is hard to postpone."
     search: "consider thyself dead completed life present time live according nature remainder allowed"
+    viz:
+      type: shrink
+      big: "The life you have lived"
+      small: "The remainder"
+      cap: "A remainder is hard to postpone."
 
   - id: when-a-plan-you-rehearsed-falls-apart-on-the-day
     situation: "When a plan you rehearsed falls apart on the day"
@@ -390,6 +648,12 @@ passages:
     quote: "The art of life is more like the wrestler's art than the dancer's, in respect of this, that it should stand ready and firm to meet onsets which are sudden and unexpected."
     take: "A dancer trains a set sequence; a wrestler trains to meet whatever comes. He thinks life pays the second skill, so rehearsal buys you less than readiness."
     search: "life like wrestler's dancer's respect stand ready firm meet onsets sudden unexpected"
+    viz:
+      type: scale
+      a: "A rehearsed sequence"
+      b: "Meeting whatever comes"
+      heavy: "b"
+      cap: "Life pays the second skill."
 
   - id: when-your-whole-workload-or-the-year-ahead-feels
     situation: "When your whole workload or the year ahead feels unbearable all at once"
@@ -399,6 +663,11 @@ passages:
     quote: "Let not thy thoughts at once embrace all the various troubles which thou mayest expect to befall thee: but on every occasion ask thyself, What is there in this which is intolerable and past bearing?"
     take: "He asks you to stop totalling the future and test only the hour you are in. Dread usually sums many separate hours, and no single one of them is unbearable."
     search: "disturb thyself thinking whole life thoughts once embrace various troubles mayest expect befall every occasion intolerable past bearing wilt ashamed confess next place remember neither future pains only present reduced very little circumscribest chidest mind unable hold against even"
+    viz:
+      type: shrink
+      big: "The year ahead, totalled"
+      small: "The hour you are in"
+      cap: "Dread sums hours that were never faced together."
 
   - id: when-you-get-a-worrying-message-and-your-mind-ra
     situation: "When you get a worrying message and your mind races to the worst case"
@@ -408,6 +677,12 @@ passages:
     quote: "I do see; but that he is in danger, I do not see."
     take: "Keep the report and remove the forecast you attached to it. His example of a sick child shows how hard this is, because fear makes the forecast feel like another fact."
     search: "nothing thyself first appearances report suppose reported certain person speaks hast injured child sick danger thus always abide within happens rather something like knows everything world"
+    viz:
+      type: gate
+      before: "The report"
+      pause: "Remove the forecast"
+      after: "What is left"
+      cap: "Fear makes the forecast feel like part of the news."
 
   - id: when-you-keep-replaying-something-unfair-a-colle
     situation: "When you keep replaying something unfair a colleague did to you"
@@ -417,6 +692,11 @@ passages:
     quote: "It is thy duty to leave another man's wrongful act there where it is."
     take: "The wrong belongs where it happened, so carrying it home is work you are adding yourself. It bites because rehearsing an injury feels like taking it seriously."
     search: "duty leave another man's wrongful where"
+    viz:
+      type: dichotomy
+      mine: "What you carry home"
+      theirs: "Where the wrong happened"
+      cap: "Rehearsing an injury feels like taking it seriously."
 
   - id: when-the-problem-is-far-too-big-to-fix-and-nobod
     situation: "When the problem is far too big to fix and nobody would notice your part"
@@ -426,6 +706,11 @@ passages:
     quote: "Set thyself in motion, if it is in thy power, and do not look about thee to see if any one will observe it; nor yet expect Plato's Republic: but be content if the smallest thing goes on well, and consider such an event to be no small matter."
     take: "Do the small thing, unwatched, and count it as real work. This is aimed at the person who will only act if the fix is total and someone is looking."
     search: "universal cause like winter torrent carries everything along worthless these poor people engaged matters political suppose playing philosopher drivellers well nature requires thyself motion power look about observe expect plato's republic content smallest thing goes consider event small matter change men's opinions without else slavery"
+    viz:
+      type: shrink
+      big: "The whole problem"
+      small: "The small thing, unwatched"
+      cap: "Aimed at the person who acts only if the fix is total."
 
   - id: when-you-badly-want-an-outcome-that-is-not-yours
     situation: "When you badly want an outcome that is not yours to decide"
@@ -435,6 +720,11 @@ passages:
     quote: "Thou thus: How shall I not be afraid to lose him? In fine, turn thy prayers this way, and see what comes."
     take: "He rewrites the request rather than the world, praying to lose the fear instead of keeping the son. It is a colder prayer, and the only one you can act on yourself."
     search: "either gods power dost pray give faculty fearing things fearest desiring desirest pained anything rather these happen certainly operate purposes perhaps wilt placed well better like free desire slavish abject told even begin prays thus able woman another released lose little afraid fine turn prayers"
+    viz:
+      type: swap
+      before: "Keep the son"
+      after: "Lose the fear"
+      cap: "He rewrites the request rather than the world."
 
   - id: when-you-are-stuck-on-a-decision-and-afraid-of-c
     situation: "When you are stuck on a decision and afraid of choosing wrong"
@@ -444,6 +734,13 @@ passages:
     quote: "And if thou seest clear, go by this way content, without turning back: but if thou dost not see clear, stop and take the best advisers."
     take: "See clearly and go, or admit that you do not see and go and get advice. The part people skip is the instruction not to turn back once you have moved."
     search: "need suspicious fear since power inquire ought seest clear content without turning back dost stop take best advisers other things oppose according powers consideration keeping appears just reach object fail failure attempting follows reason both tranquil active same time also cheerful collected"
+    viz:
+      type: order
+      cap: "The part people skip is the last one."
+      items:
+        - "See clearly, or admit you do not"
+        - "Go, or get advice"
+        - "Do not turn back"
 
   - id: when-you-find-out-that-a-colleague-holds-you-in-
     situation: "When you find out that a colleague holds you in contempt"
@@ -453,6 +750,11 @@ passages:
     quote: "But I will look to this, that I be not discovered doing or saying anything deserving of contempt."
     take: "Marcus splits the case in two and keeps only his half. Their contempt is their business, and his job is to give it nothing true to feed on."
     search: "suppose despise look himself discovered doing saying anything deserving contempt hate mild benevolent towards every ready show even mistake reproachfully making display endurance nobly honestly like great phocion unless indeed only assumed interior parts ought seen gods neither dissatisfied complaining evil agreeable nature satisfied moment"
+    viz:
+      type: dichotomy
+      mine: "Giving it nothing true to feed on"
+      theirs: "Their contempt"
+      cap: "Marcus keeps only his half."
 
   - id: when-your-mind-keeps-chewing-over-the-same-thoug
     situation: "When your mind keeps chewing over the same thought at 2am"
@@ -462,6 +764,12 @@ passages:
     quote: "There are four principal aberrations of the superior faculty against which thou shouldst be constantly on thy guard, and when thou hast detected them, thou shouldst wipe them out and say on each occasion thus: this thought is not necessary: this tends to destroy social union: this which thou art going to say comes not from the real thoughts."
     take: "Marcus asks whether the thought is needed. Most late-night rumination fails that test. Saying so plainly can be enough to let the thought go."
     search: "four principal aberrations superior faculty against shouldst constantly guard hast detected wipe each occasion thus thought necessary tends destroy social union going comes real thoughts consider among absurd things speak fourth reproach thyself anything evidence diviner part within overpowered yielding less honorable perishable body gross"
+    viz:
+      type: gate
+      before: "The thought"
+      pause: "Is it needed"
+      after: "Let it go"
+      cap: "Most late-night rumination fails that test."
 
   - id: when-someone-opens-a-negotiation-by-telling-you-
     situation: "When someone opens a negotiation by telling you how straight they are"
@@ -471,6 +779,12 @@ passages:
     quote: "There is no occasion to give this notice. It will soon show itself by acts."
     take: "Character shows in conduct. Someone who announces his honesty has given you no proof of bad faith, but he has given you a reason to watch what he does next."
     search: "unsound insincere says determined deal fair doing occasion give notice soon show itself acts voice ought plainly written forehead man's character immediately shows eyes just beloved forthwith reads everything lovers honest good exactly like smells strong bystander comes near smell whether choose affectation simplicity crooked"
+    viz:
+      type: scale
+      a: "What he announces"
+      b: "What he does"
+      heavy: "b"
+      cap: "Character shows in conduct."
 
   - id: when-you-have-written-off-a-skill-as-something-y
     situation: "When you have written off a skill as something you simply do not have"
@@ -480,6 +794,11 @@ passages:
     quote: "Practise thyself even in the things which thou despairest of accomplishing. For even the left hand, which is ineffectual for all other things for want of practice, holds the bridle more vigorously than the right hand; for it has been practised in this."
     take: "The left hand is useless everywhere except at the one job it has been drilled in. Marcus reads that as evidence about practice rather than talent, so work at what you gave up on."
     search: "practise thyself even things despairest accomplishing left hand ineffectual other want practice holds bridle vigorously right practised"
+    viz:
+      type: measure
+      limit: "The one job it was drilled in"
+      beyond: "Everywhere it was never practised"
+      cap: "Evidence about practice rather than talent."
 
   - id: when-you-fear-your-work-or-your-life-will-be-cut
     situation: "When you fear your work or your life will be cut off unfinished"
@@ -489,6 +808,11 @@ passages:
     quote: "Any one activity whatever it may be, when it has ceased at its proper time, suffers no evil because it has ceased."
     take: "Marcus applies the thought to a single act and then to a whole life. Its end does not make the time before it incomplete."
     search: "hast citizen great state world difference make whether five years three conformable laws just where hardship tyrant unjust judge sends away nature brought into same praetor employed actor dismisses stage finished acts only sayest well life whole drama complete determined once cause composition dissolution neither"
+    viz:
+      type: shrink
+      big: "A whole life"
+      small: "A single act"
+      cap: "Its end does not make the time before it incomplete."
 
   - id: when-you-keep-wishing-a-settled-outcome-had-gone
     situation: "When you keep wishing a settled outcome had gone the other way"
@@ -498,6 +822,11 @@ passages:
     quote: "Don't demand that things happen as you wish, but wish that they happen as they do happen, and you will go on well."
     take: "The shortest instruction either man gives, and the least popular. He is not asking you to approve of what happened, only to stop staking your peace on a rerun."
     search: "don't demand things happen wish well"
+    viz:
+      type: dichotomy
+      mine: "Where you stake your peace"
+      theirs: "What already happened"
+      cap: "The shortest instruction, and the least popular."
 
   - id: when-a-thought-arrives-already-dressed-as-a-cata
     situation: "When a thought arrives already dressed as a catastrophe"
@@ -507,6 +836,12 @@ passages:
     quote: "Work, therefore to be able to say to every harsh appearance, \"You are but an appearance, and not absolutely the thing you appear to be.\" And then examine it by those rules which you have, and first, and chiefly, by this: whether it concerns the things which are in our own control, or those which are not."
     take: "Say it to the impression itself, out loud if that helps. The move buys the half second in which you can still check whether the thing is what it claims."
     search: "things control others opinion pursuit desire aversion word whatever actions body property reputation command nature free unrestrained unhindered those weak slavish restrained belonging remember suppose also belongs hindered lament disturbed find fault both gods only really ever compel restrain further accuse nothing against hurt enemies"
+    viz:
+      type: gate
+      before: "The impression"
+      pause: "Say it is only an impression"
+      after: "Check what it claims"
+      cap: "The move buys half a second."
 
   - id: when-you-love-someone-and-the-thought-of-losing-
     situation: "When you love someone and the thought of losing them frightens you"
@@ -516,6 +851,12 @@ passages:
     quote: "If you kiss your child, or your wife, say that you only kiss things which are human, and thus you will not be disturbed if either of them dies."
     take: "I find this passage cold. It may buy steadiness, but Epictetus never fully admits what that distance could cost a loving relationship."
     search: "regard whatever objects give delight useful deeply loved remember tell yourself general nature beginning insignificant things example fond specific ceramic remind only cups breaks disturbed kiss child wife human thus either dies"
+    viz:
+      type: scale
+      a: "Steadiness"
+      b: "What the distance costs"
+      heavy: "a"
+      cap: "I find this passage cold."
 
   - id: when-illness-or-an-injury-takes-away-what-you-co
     situation: "When illness or an injury takes away what you could do"
@@ -525,6 +866,11 @@ passages:
     quote: "Sickness is a hindrance to the body, but not to your ability to choose, unless that is your choice. Lameness is a hindrance to the leg, but not to your ability to choose."
     take: "Epictetus grants the physical limit. An injured leg stops the leg. Whether the injury also governs your judgement remains a separate question."
     search: "sickness hindrance body ability choose unless choice lameness yourself regard everything happens obstacles hindrances something else"
+    viz:
+      type: dichotomy
+      mine: "Your judgement"
+      theirs: "What the leg can do"
+      cap: "An injured leg stops the leg."
 
   - id: when-an-urge-arrives-and-you-are-about-to-give-i
     situation: "When an urge arrives and you are about to give in to it"
@@ -534,6 +880,12 @@ passages:
     quote: "If you are struck by the appearance of any promised pleasure, guard yourself against being hurried away by it; but let the affair wait your leisure, and procure yourself some delay."
     take: "Delay first, then run the comparison: the time during, against the time just after. He asks you to weigh the pleasure against the version of you that follows it."
     search: "struck appearance promised pleasure guard yourself against hurried away affair wait leisure procure delay bring mind both points time enjoy repent reproach after enjoyed before opposition these glad applaud abstain even though appear seasonable gratification take heed enticing agreeable attractive force subdue much better conscious"
+    viz:
+      type: scale
+      a: "The time during"
+      b: "The time just after"
+      heavy: "b"
+      cap: "Delay first, then run the comparison."
 
   - id: when-losing-a-title-or-an-income-makes-you-feel-
     situation: "When losing a title or an income makes you feel like nobody"
@@ -543,3 +895,8 @@ passages:
     quote: "And how is it true that you will be nobody anywhere, when you ought to be somebody in those things only which are in your own control, in which you may be of the greatest consequence?"
     take: "Standing is awarded by other people, so it was never a place you could be somebody. He points you at the one arena where the rank is genuinely yours to earn."
     search: "don't allow considerations these distress live dishonor nobody anywhere evil involved means another engaged anything base business power admitted entertainment after true ought somebody those things only control greatest consequence friends unassisted mean money make roman citizens told among affair others give himself well share"
+    viz:
+      type: dichotomy
+      mine: "The arena where rank is yours"
+      theirs: "Standing awarded by others"
+      cap: "It was never a place you could be somebody."

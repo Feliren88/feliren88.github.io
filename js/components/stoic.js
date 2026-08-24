@@ -800,6 +800,117 @@
     });
   }
 
+
+  /* ══ A diagram inside every passage ════════════════════
+     Eleven shapes, chosen per passage from the `viz` block in
+     _data/stoic.yml. Every label is lifted from that passage's own situation
+     or take, never from the quote, which that file forbids editing. A diagram
+     restates the passage for a reader who takes a picture faster than a
+     paragraph; the paragraph stays exactly where it was.
+
+     Label-heavy shapes are HTML so the words wrap and stay selectable.
+     Only the two geometric ones are SVG. */
+  function passageViz() {
+    var byId = {};
+    (DATA.passages || []).forEach(function (p) { byId[p.id] = p; });
+
+    var BUILD = {
+      /* what is yours, and what is not */
+      dichotomy: function (v) {
+        return '<div class="sv sv-dich">' +
+          '<div class="mine"><span class="k">Up to you</span><b>' + esc(v.mine) + '</b></div>' +
+          '<div class="theirs"><span class="k">Not up to you</span><b>' + esc(v.theirs) + '</b></div></div>';
+      },
+      /* a pause wedged between the event and the answer */
+      gate: function (v) {
+        return '<div class="sv sv-gate">' +
+          '<span class="a">' + esc(v.before) + '</span>' +
+          '<span class="pause"><i></i>' + esc(v.pause) + '</span>' +
+          '<span class="b">' + esc(v.after) + '</span></div>';
+      },
+      /* two things weighed, one heavier */
+      scale: function (v) {
+        var hb = v.heavy === 'b';
+        return '<div class="sv sv-scale">' +
+          '<div class="pan' + (hb ? '' : ' is-heavy') + '"><b>' + esc(v.a) + '</b></div>' +
+          '<span class="fulcrum" aria-hidden="true"></span>' +
+          '<div class="pan' + (hb ? ' is-heavy' : '') + '"><b>' + esc(v.b) + '</b></div></div>';
+      },
+      /* the same thing, relabelled */
+      swap: function (v) {
+        return '<div class="sv sv-swap">' +
+          '<span class="from">' + esc(v.before) + '</span>' +
+          '<i aria-hidden="true">&rarr;</i>' +
+          '<span class="to">' + esc(v.after) + '</span></div>';
+      },
+      /* one input, two or three readings */
+      split: function (v) {
+        return '<div class="sv sv-split"><p class="in">' + esc(v['in']) + '</p><ul>' +
+          (v.out || []).map(function (o) {
+            return '<li class="' + (o.on ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
+          }).join('') + '</ul></div>';
+      },
+      /* steps in an order that matters */
+      order: function (v) {
+        var mark = typeof v.mark === 'number' ? v.mark : -1;
+        return '<ol class="sv sv-order">' + (v.items || []).map(function (t, i) {
+          return '<li class="' + (i === mark ? 'is-on' : '') + '"><b>' + (i + 1) + '</b><span>' + esc(t) + '</span></li>';
+        }).join('') + '</ol>';
+      },
+      /* rungs, with the one you are on marked */
+      ladder: function (v) {
+        var rungs = v.rungs || [], mark = typeof v.mark === 'number' ? v.mark : -1;
+        return '<ul class="sv sv-ladder">' + rungs.map(function (t, i) {
+          return '<li class="' + (i === mark ? 'is-on' : '') + '">' + esc(t) +
+            (i === mark ? '<em>you are here</em>' : '') + '</li>';
+        }).reverse().join('') + '</ul>';
+      },
+      /* a large thing set beside the small one you can actually hold */
+      shrink: function (v) {
+        return '<div class="sv sv-shrink">' +
+          '<span class="big">' + esc(v.big) + '</span>' +
+          '<span class="small">' + esc(v.small) + '</span></div>';
+      },
+      /* a natural limit, and what lies past it */
+      measure: function (v) {
+        return '<div class="sv sv-measure">' +
+          '<span class="lim"><i></i>' + esc(v.limit) + '</span>' +
+          '<span class="beyond">' + esc(v.beyond) + '</span></div>';
+      },
+      /* something small at the centre of something larger */
+      rings: function (v) {
+        return '<div class="sv sv-rings">' +
+          '<span class="outer">' + esc(v.outer) + '</span>' +
+          '<span class="core">' + esc(v.core) + '</span></div>';
+      },
+      /* a cycle that keeps returning */
+      loop: function (v) {
+        var n = (v.nodes || []).length, cx = 74, cy = 74, r = 46, out = '';
+        out += '<circle class="ring" cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>';
+        (v.nodes || []).forEach(function (t, i) {
+          var a = (-90 + i * 360 / n) * Math.PI / 180;
+          out += '<circle class="node" cx="' + (cx + r * Math.cos(a)).toFixed(1) +
+            '" cy="' + (cy + r * Math.sin(a)).toFixed(1) + '" r="5"/>';
+        });
+        return '<div class="sv sv-loop">' +
+          '<svg viewBox="0 0 148 148" aria-hidden="true">' + out + '</svg>' +
+          '<ul>' + (v.nodes || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+      }
+    };
+
+    $$('.st-card').forEach(function (card) {
+      var p = byId[(card.id || '').replace(/^pas-/, '')];
+      if (!p || !p.viz || !BUILD[p.viz.type]) return;
+      var body = $('.st-card-body', card);
+      if (!body || $('.st-viz', body)) return;
+      var box = document.createElement('div');
+      box.className = 'st-viz st-viz-' + p.viz.type;
+      box.innerHTML = '<span class="k">The shape of it</span>' + BUILD[p.viz.type](p.viz) +
+        (p.viz.cap ? '<p class="st-viz-cap">' + esc(p.viz.cap) + '</p>' : '');
+      body.insertBefore(box, body.firstChild);
+    });
+  }
+
   function narrativeRail() {
     var links = $$('.st-story-rail a');
     if (!links.length || !('IntersectionObserver' in window)) return;
@@ -814,7 +925,7 @@
   }
 
   function init() {
-    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc]
+    [progress, narrativeRail, sorter, machine, triad, consoleSearch, cards, zoom, premeditate, fame, corpus, dayArc, passageViz]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
