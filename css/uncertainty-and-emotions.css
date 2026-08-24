@@ -63,6 +63,7 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-rounds-svg .ax{stroke:var(--line-strong);stroke-width:1.3}
 .ue-rounds-svg .zero{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 4;opacity:.8}
 .ue-rounds-svg .tick{font-size:11px;fill:var(--muted)}
+.ue-rounds-svg .axis-title,.ue-fig-svg .axis-title{font:600 10px "Space Grotesk",sans-serif;fill:var(--muted);letter-spacing:.04em;text-transform:uppercase}
 .ue-rounds-svg .clab{font:600 11.5px "Space Grotesk",sans-serif}
 .ue-rounds-svg #ue-lab-c{fill:var(--ue-warm)}.ue-rounds-svg #ue-lab-u{fill:var(--ue-cool)}
 .ue-rounds-svg .line-c{fill:none;stroke:var(--ue-warm);stroke-width:2.6;stroke-linecap:round}
@@ -272,8 +273,10 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 
 /* 05 · urge against useful direction */
 .ue-opp{margin:1.5rem 0}
+.ue-opp-intro{margin:.2rem 0 .8rem!important;font-size:.9rem!important;line-height:1.65!important;color:var(--muted)!important}
 .ue-opp-rows{display:grid;gap:.35rem}
 .ue-opp-rows>div{display:grid;grid-template-columns:5.5rem minmax(0,1fr) auto minmax(0,1fr);gap:.6rem;align-items:center;padding:.6rem .8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);font-size:.86rem}
+.ue-opp-rows>.ue-opp-head{padding:.15rem .8rem;border:0;background:transparent;color:var(--muted);font:700 .66rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase}
 .ue-opp-rows .f{font:700 .8rem "Space Grotesk",sans-serif;color:var(--text)}
 .ue-opp-rows .u{display:flex;align-items:center;gap:.35rem;color:var(--muted)}
 .ue-opp-rows .u .ue-i{width:1rem;height:1rem;flex:none;color:var(--ue-warm)}
@@ -333,7 +336,10 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
   .ue-wavesteps,.ue-lever-grid,.ue-stopgrid{grid-template-columns:1fr 1fr}
   .ue-bands{grid-template-columns:1fr}
   .ue-opp-rows>div{grid-template-columns:1fr;gap:.25rem}
-  .ue-opp-rows i{display:none}
+  .ue-opp-rows>.ue-opp-head{display:none}
+  .ue-opp-rows .u:before{content:"Urge";min-width:3.2rem;color:var(--muted);font:700 .64rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .ue-opp-rows .o:before{content:"Better response";display:block;margin-bottom:.15rem;color:var(--muted);font:700 .64rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .ue-opp-rows>div>i{display:none}
 }
 @media(max-width:460px){
   .ue-wavesteps,.ue-lever-grid,.ue-stopgrid{grid-template-columns:1fr}
@@ -431,6 +437,8 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-wheel-swipe{display:none;margin:.4rem 0 0!important;text-align:center;font-size:.72rem;color:var(--muted)!important}
 .ue-wheel-zones{position:absolute;inset:3rem 5.6rem;pointer-events:none}
 .ue-zone{position:absolute;transform:translate(-50%,-50%);display:grid;gap:.05rem;justify-items:center;text-align:center;max-width:8.5rem;padding:.3rem .55rem;border-radius:var(--radius-md);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px)}
+.ue-zone-left{transform:translate(0,-50%);justify-items:start;text-align:left}
+.ue-zone-right{transform:translate(-100%,-50%);justify-items:end;text-align:right}
 .ue-zone b{font:700 .82rem "Space Grotesk",sans-serif;color:hsl(var(--zh) 52% 55%);letter-spacing:.03em}
 .ue-zone small{font-size:.66rem;color:var(--muted);line-height:1.3}
 .ue-zone-ph{--zh:44}.ue-zone-pl{--zh:150}.ue-zone-nl{--zh:214}.ue-zone-nh{--zh:8}

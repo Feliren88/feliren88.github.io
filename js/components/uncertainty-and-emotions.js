@@ -324,7 +324,8 @@
     function zoneChips(list){
       if(!chips) return;
       chips.innerHTML=(list||[]).map(function(z){
-        return '<span class="ue-zone ue-zone-'+z.key+'" style="left:'+z.x.toFixed(2)+
+        var side=z.x<46?'left':(z.x>54?'right':'centre');
+        return '<span class="ue-zone ue-zone-'+z.key+' ue-zone-'+side+'" style="left:'+z.x.toFixed(2)+
           '%;top:'+z.y.toFixed(2)+'%"><b>'+esc(z.short)+'</b><small>'+esc(z.axes)+'</small></span>';
       }).join('');
       chips.hidden=!(list&&list.length);

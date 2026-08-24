@@ -308,7 +308,7 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
 .sf-viz-key .up i,.sf-viz-key .top i,.sf-viz-key .now i,.sf-viz-key .thin i,.sf-viz-key .step i{background:var(--sf-win)}
 .sf-viz-key .down i,.sf-viz-key .under i,.sf-viz-key .later i,.sf-viz-key .heavy i,.sf-viz-key .goal i{background:var(--sf-loss)}
 .sf-viz-key .thick i,.sf-viz-key .light i{background:var(--sf-read)}
-.sf-viz-cap{grid-column:1/-1;margin:0!important;font-size:var(--fs-2xs);color:var(--muted);line-height:1.55}
+.sf-domain-body .sf-viz-cap{display:block;grid-column:1/-1;grid-template-columns:none;width:100%;min-width:0;margin:0!important;font-size:var(--fs-2xs);color:var(--muted);line-height:1.55;overflow-wrap:normal;word-break:normal}
 
 .sf-viz-svg .ax{stroke:var(--line-strong);stroke-width:1.2}
 .sf-viz-svg .up{fill:none;stroke:var(--sf-win);stroke-width:2.4;stroke-linecap:round}
@@ -410,9 +410,9 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
 }
 /* Figure 5 needed naming: three lines with no key is a puzzle, not a figure. */
 .sx-legend{display:grid;gap:.3rem;margin:.2rem 0 .5rem}
-.sx-legend span{display:grid;grid-template-columns:1.6rem 1fr;gap:.5rem;align-items:baseline;font-size:var(--fs-xs);color:var(--muted);line-height:1.5}
+.sx-legend>span{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.5rem;align-items:start;font-size:var(--fs-xs);color:var(--muted);line-height:1.5}
 .sx-legend i{display:block;height:3px;border-radius:2px;margin-top:.5rem}
-.sx-legend b{color:var(--text);font-weight:650}
+.sx-legend>span>span{display:flex;flex-wrap:wrap;gap:.08rem .4rem;min-width:0}.sx-legend b{color:var(--text);font-weight:650}.sx-legend small{color:var(--muted);font:inherit}
 .sx-legend .lg-good i{background:var(--sf-win)}
 .sx-legend .lg-recover i{background:var(--sf-read)}
 .sx-legend .lg-bad i{background:var(--sf-loss)}

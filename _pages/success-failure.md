@@ -361,7 +361,7 @@ extra_js: /js/components/success-failure.js
         <line class="sx-ax" x1="34" y1="150" x2="534" y2="150"/>
         <line class="sx-ax" x1="34" y1="14" x2="34" y2="150"/>
         <text class="sx-lab" x="34" y="168">round 1</text>
-        <text class="sx-lab sx-yl" x="8" y="20" transform="rotate(-90 8 20)">options open</text>
+        <text class="sx-lab sx-yl" x="0" y="0" text-anchor="middle" transform="translate(14 82) rotate(-90)">options open</text>
         <text class="sx-lab" x="534" y="168" text-anchor="end">round 12</text>
         <path class="sx-good" id="sx-good"/>
         <path class="sx-recover" id="sx-recover"/>
@@ -373,9 +373,9 @@ extra_js: /js/components/success-failure.js
       <label class="sf-fig-ctl"><span>Rounds played</span>
         <input type="range" id="sx-rounds" min="1" max="12" value="1" step="1"></label>
       <div class="sx-legend">
-        <span class="lg-good"><i></i><b>Success that compounds</b> competence buys options, which buy better rooms</span>
-        <span class="lg-recover"><i></i><b>Failure that teaches</b> the loss is paid once and becomes a better bet</span>
-        <span class="lg-bad"><i></i><b>Failure that escalates</b> denial funds a larger bad bet</span>
+        <span class="lg-good"><i></i><span><b>Success that compounds</b><small>competence buys options, which buy better rooms</small></span></span>
+        <span class="lg-recover"><i></i><span><b>Failure that teaches</b><small>the loss is paid once and becomes a better bet</small></span></span>
+        <span class="lg-bad"><i></i><span><b>Failure that escalates</b><small>denial funds a larger bad bet</small></span></span>
       </div>
       <p class="sx-explain">The line is the options you still have. All three begin at
       100. No single round changes much, which is why the loop you are in is hard to feel

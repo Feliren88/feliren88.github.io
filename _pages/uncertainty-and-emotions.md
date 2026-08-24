@@ -70,6 +70,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-cycle"/></svg> What the move buys, and what it builds</p>
     <svg class="ue-fig-svg" viewBox="0 0 520 170" role="img"
          aria-label="Relief stays flat with each repetition while the urge that follows grows stronger.">
+      <text class="axis-title" x="42" y="11">illustrative index</text>
       <line class="ax" x1="42" y1="140" x2="500" y2="140"/>
       <line class="ax" x1="42" y1="14" x2="42" y2="140"/>
       <text class="tick" x="42" y="158">1st time</text>
@@ -103,6 +104,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <div class="ue-rounds">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-dice"/></svg> Running total, round by round</p>
     <svg class="ue-rounds-svg" id="ue-rounds" viewBox="0 0 520 220" role="img" aria-label="Cumulative payoff for resolving uncertainty against leaving it unresolved, over repeated rounds.">
+      <text class="axis-title" x="46" y="11">cumulative payoff</text>
       <line class="ax" x1="46" y1="186" x2="500" y2="186"/>
       <line class="ax" x1="46" y1="16" x2="46" y2="186"/>
       <line class="zero" x1="46" y1="120" x2="500" y2="120"/>
@@ -380,15 +382,17 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 
   <div class="ue-opp">
-    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-opposite"/></svg> When the urge does not fit the facts</p>
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-opposite"/></svg> When a feeling's instruction does not match the situation</p>
+    <p class="ue-opp-intro">Every feeling comes with an urge to act. First ask whether the facts support that urge. If they do, act on the problem. If they do not, choose a small action in the other direction. The aim is not to deny the feeling. It is to stop the feeling from deciding for you.</p>
     <div class="ue-opp-rows">
-      <div><span class="f">Fear</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> avoid it entirely</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">approach it at a size you can repeat</span></div>
-      <div><span class="f">Anger</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> strike back now</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">step out, then state the boundary once</span></div>
-      <div><span class="f">Sadness</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> withdraw and stop</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">keep one small commitment to someone</span></div>
-      <div><span class="f">Shame</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> hide or over-explain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">say it once, repair it, carry on</span></div>
-      <div><span class="f">Doubt</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> check until it feels settled</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">leave it open and return to the task</span></div>
+      <div class="ue-opp-head" aria-hidden="true"><span>Feeling</span><span>What it urges you to do</span><i></i><span>If the facts do not support that urge</span></div>
+      <div><span class="f">Fear</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> avoid it entirely</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">approach it in a small step you can repeat</span></div>
+      <div><span class="f">Anger</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> strike back now</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">step away, then state the boundary once</span></div>
+      <div><span class="f">Sadness</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> withdraw and stop</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">keep one small commitment to another person</span></div>
+      <div><span class="f">Shame</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> hide or over-explain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">say what happened once, repair what you can, and carry on</span></div>
+      <div><span class="f">Doubt</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> keep checking until you feel certain</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">allow the uncertainty to remain and return to the task</span></div>
     </div>
-    <p class="ue-opp-note">Follow the urge when the facts support it. When they do not, the useful direction is usually the one the feeling is arguing against.</p>
+    <p class="ue-opp-note"><b>This is not a rule to ignore emotion.</b> Fear should move you away from real danger. Anger may identify a real violation. Sadness may show that rest is needed. The opposite action is useful only when the urge is stronger than the facts justify or keeps you trapped after the immediate problem has passed.</p>
   </div>
 
   <div class="ue-warning"><svg class="ue-i"><use href="#ue-pause"/></svg><b>Calming down is optional. Slowing down is enough.</b><p>Use breathing, movement, or sensory grounding to regain choice. Do not make a calm feeling the entry fee for continuing.</p></div>
