@@ -361,6 +361,7 @@ extra_js: /js/components/success-failure.js
         <line class="sx-ax" x1="34" y1="150" x2="534" y2="150"/>
         <line class="sx-ax" x1="34" y1="14" x2="34" y2="150"/>
         <text class="sx-lab" x="34" y="168">round 1</text>
+        <text class="sx-lab sx-yl" x="8" y="20" transform="rotate(-90 8 20)">options open</text>
         <text class="sx-lab" x="534" y="168" text-anchor="end">round 12</text>
         <path class="sx-good" id="sx-good"/>
         <path class="sx-recover" id="sx-recover"/>
@@ -371,10 +372,18 @@ extra_js: /js/components/success-failure.js
       </svg>
       <label class="sf-fig-ctl"><span>Rounds played</span>
         <input type="range" id="sx-rounds" min="1" max="12" value="1" step="1"></label>
+      <div class="sx-legend">
+        <span class="lg-good"><i></i><b>Success that compounds</b> competence buys options, which buy better rooms</span>
+        <span class="lg-recover"><i></i><b>Failure that teaches</b> the loss is paid once and becomes a better bet</span>
+        <span class="lg-bad"><i></i><b>Failure that escalates</b> denial funds a larger bad bet</span>
+      </div>
+      <p class="sx-explain">The line is the options you still have. All three begin at
+      100. No single round changes much, which is why the loop you are in is hard to feel
+      from inside it.</p>
       <div class="sf-fig-read">
-        <div class="is-ok"><b id="sx-v-good">100</b><span>options open</span></div>
-        <div class="is-warn"><b id="sx-v-recover">100</b><span>after learning</span></div>
-        <div class="is-bad"><b id="sx-v-bad">100</b><span>after escalating</span></div>
+        <div class="is-ok"><b id="sx-v-good">100</b><span>compounds</span></div>
+        <div class="is-warn"><b id="sx-v-recover">100</b><span>teaches</span></div>
+        <div class="is-bad"><b id="sx-v-bad">100</b><span>escalates</span></div>
         <p id="sx-loops-say" role="status"></p>
       </div>
     </div>

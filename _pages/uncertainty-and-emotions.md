@@ -65,6 +65,29 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div><svg class="ue-i"><use href="#ue-evidence"/></svg><b>In the world</b><p>Searching again, checking again, comparing evidence, testing a reaction, delaying, or avoiding the situation.</p></div>
     <div><svg class="ue-i"><use href="#ue-people"/></svg><b>Borrowed certainty</b><p>Asking someone else to confirm that you are safe, good, correct, forgiven, or unlikely to regret the choice.</p></div>
   </div>
+
+  <div class="ue-fig" id="uefig-relief">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-cycle"/></svg> What the move buys, and what it builds</p>
+    <svg class="ue-fig-svg" viewBox="0 0 520 170" role="img"
+         aria-label="Relief stays flat with each repetition while the urge that follows grows stronger.">
+      <line class="ax" x1="42" y1="140" x2="500" y2="140"/>
+      <line class="ax" x1="42" y1="14" x2="42" y2="140"/>
+      <text class="tick" x="42" y="158">1st time</text>
+      <text class="tick" x="500" y="158" text-anchor="end">20th time</text>
+      <path class="rl-relief" id="rl-relief"/>
+      <path class="rl-urge" id="rl-urge"/>
+      <circle class="rl-dot rl-dot-relief" id="rl-dot-relief" r="4.5"/>
+      <circle class="rl-dot rl-dot-urge" id="rl-dot-urge" r="4.5"/>
+    </svg>
+    <label class="ue-sr" for="ue-reps">How many times you have done the move</label>
+    <input class="ue-range" id="ue-reps" type="range" min="1" max="20" value="1" step="1">
+    <div class="ue-fig-read">
+      <div><span class="k">Times</span><b id="rl-n">1</b></div>
+      <div class="a"><span class="k">Relief it buys</span><b id="rl-relief-v">100</b></div>
+      <div class="b"><span class="k">Next urge</span><b id="rl-urge-v">100</b></div>
+      <p id="rl-say" role="status"></p>
+    </div>
+  </div>
   <p>The behaviour alone does not settle the question. Checking a bill can solve an external problem. Rechecking it until anxiety gives permission to stop serves a different function. Ask: <b>What does the situation require, and what am I doing only to feel sure?</b></p>
   <div class="ue-equation"><span>relief now</span><i>→</i><span>dependence later</span></div>
 </section>
@@ -495,6 +518,20 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <div><b>2</b><svg class="ue-i"><use href="#ue-nojudge"/></svg><span><strong>Drop the verdict</strong>Describe what happened without turning it into a character judgment.</span></div>
     <div><b>3</b><svg class="ue-i"><use href="#ue-pressure"/></svg><span><strong>Find the pressure point</strong>Was the step too large, the stakes unclear, or your capacity already low?</span></div>
     <div><b>4</b><svg class="ue-i"><use href="#ue-smallstep"/></svg><span><strong>Resume smaller</strong>Take the next useful action at a size you can repeat.</span></div>
+  </div>
+
+  <div class="ue-fig" id="uefig-resume">
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-restart"/></svg> Two ways back after a difficult round</p>
+    <div class="rs-pick" id="rs-pick" role="group" aria-label="Choose a response">
+      <button type="button" data-rs="trial">Hold a trial</button>
+      <button type="button" data-rs="curious" class="is-on">Find the adjustment</button>
+    </div>
+    <div class="rs-track" id="rs-track" aria-hidden="true"></div>
+    <div class="ue-fig-read">
+      <div><span class="k">Days before you resume</span><b id="rs-days-n">1</b></div>
+      <div><span class="k">Size you resume at</span><b id="rs-size">Repeatable</b></div>
+      <p id="rs-say" role="status"></p>
+    </div>
   </div>
 
   <div class="ue-accept">

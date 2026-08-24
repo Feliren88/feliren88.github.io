@@ -671,7 +671,25 @@
     all('button',host).forEach(function(button){button.addEventListener('click',function(){all('button',host).forEach(function(b){b.classList.toggle('is-on',b===button);});document.getElementById('ue-support-read').textContent=copy[button.dataset.ueSupport];});});
   }
 
-  [curveViz,wheel,bands,planner,supportLab].forEach(function(fn){
+  function directSections(){
+    function wire(selector,itemSelector,prompt,copy){var root=document.querySelector(selector);if(!root)return;var read=document.createElement('p');read.className='ue-direct-read';read.setAttribute('role','status');read.textContent=prompt;root.insertAdjacentElement('afterend',read);var items=all(itemSelector,root);root.classList.add('ue-direct-set');items.forEach(function(item,i){item.classList.add('ue-direct-item');item.tabIndex=0;item.setAttribute('role','button');function choose(){items.forEach(function(x){x.classList.toggle('is-pick',x===item);});root.classList.add('has-pick');read.textContent=copy(item,i);}item.addEventListener('click',choose);item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});}
+    wire('.ue-moves',':scope > div','Select a move to inspect the function it serves.',function(item){return item.querySelector('b').textContent+': the behavior becomes a certainty move when its main job is immediate relief rather than solving a finite external problem.';});
+    var expected=0;wire('.ue-reset',':scope > div','Run the recovery sequence in order.',function(item,i){if(i>expected)return 'Run the sequence in order. Description comes before diagnosis, and diagnosis comes before the smaller restart.';expected=Math.max(expected,i+1);return item.querySelector('strong').textContent+': '+item.querySelector('span').lastChild.textContent.trim();});
+  }
+
+  function reliefFigure(){
+    var range=document.getElementById('ue-reps');if(!range)return;var relief=document.getElementById('rl-relief'),urge=document.getElementById('rl-urge');
+    function x(i){return 40+i/19*460}function y(v){return 145-(v-90)/130*118}function path(fn){var d=[];for(var i=0;i<20;i++)d.push((i?'L':'M')+x(i).toFixed(1)+' '+y(fn(i)).toFixed(1));return d.join(' ')}
+    relief.setAttribute('d',path(function(){return 100}));urge.setAttribute('d',path(function(i){return 100+i*6}));
+    function paint(){var n=+range.value,i=n-1,u=100+i*6;document.getElementById('rl-n').textContent=n;document.getElementById('rl-relief-v').textContent='100';document.getElementById('rl-urge-v').textContent=u;var dots=[[document.getElementById('rl-dot-relief'),100],[document.getElementById('rl-dot-urge'),u]];dots.forEach(function(d){d[0].setAttribute('cx',x(i));d[0].setAttribute('cy',y(d[1]));});document.getElementById('rl-say').textContent=n===1?'One move buys real relief. The index starts at 100 for both lines.':'Relief still arrives, while the next urge has gained authority. These are illustrative index values, not measured clinical effects.';}range.addEventListener('input',paint);paint();
+  }
+  function resumeFigure(){
+    var host=document.getElementById('uefig-resume'),group=document.getElementById('rs-track');if(!host||!group)return;
+    function paint(mode){all('[data-rs]',host).forEach(function(b){b.classList.toggle('is-on',b.dataset.rs===mode);});var days=mode==='trial'?14:1;group.innerHTML='';for(var i=0;i<14;i++){var c=document.createElement('i');c.className='rs-day'+(i===days-1?' is-return':'');group.appendChild(c);}document.getElementById('rs-days-n').textContent=days;document.getElementById('rs-size').textContent=mode==='trial'?'Too large':'Repeatable';document.getElementById('rs-say').textContent=mode==='trial'?'A self-trial delays the return and often demands a dramatic restart. The fourteen-day display is illustrative.':'Curiosity finds one adjustment and permits a smaller return. The one-day display is illustrative, not a prescribed recovery time.';}
+    all('[data-rs]',host).forEach(function(b){b.addEventListener('click',function(){paint(b.dataset.rs);});});paint('curious');
+  }
+
+  [curveViz,wheel,bands,planner,supportLab,directSections,reliefFigure,resumeFigure].forEach(function(fn){
     try{ fn(); }catch(e){ /* one widget must not take the page down */ }
   });
 

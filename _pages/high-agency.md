@@ -1500,6 +1500,35 @@ extra_js: /js/components/high-agency.js
       <p class="lesson"><b>The line:</b> the biggest unsolved problems are usually in your hands.</p>
     </div>
   </div>
+
+  <div class="ha-lab" id="hafig-gate">
+    <div class="ha-lab-head">
+      <div><p class="t-eyebrow">Figure</p><h5>What was actually in the way</h5></div>
+      <span class="ha-lab-hint">Pick a case</span>
+    </div>
+    <div class="hg-pick" id="hg-pick" role="group" aria-label="Choose a case"></div>
+    <div class="hg-gates">
+      <div class="hg-gate assumed"><span class="k">What looked like the barrier</span><b id="hg-assumed">&nbsp;</b></div>
+      <div class="hg-gate real"><span class="k">What was actually stopping them</span><b id="hg-real">&nbsp;</b></div>
+    </div>
+    <p class="ha-tally" id="hg-say" role="status">Six cases, one shape. Select any of them.</p>
+  </div>
+
+
+  <div class="ha-lab" id="hafig-test">
+    <div class="ha-lab-head">
+      <div><p class="t-eyebrow">Figure</p><h5>Test the gate</h5></div>
+      <span class="ha-lab-hint">Drag how many you actually push on</span>
+    </div>
+    <div class="hg-row" id="hgt-row"><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Film school tuition</em><em class="open">the theses sat in an open library</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Being six years old</em><em class="open">nobody asked his age</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Unreliable motivation</em><em class="open">a public commitment supplied the cost</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not feeling urgent</em><em class="open">the terms could carry a clock</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not capable enough</em><em class="open">the price was the obstacle</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Luggage must be carried</em><em class="open">nothing held the wheels off</em></span></div>
+    <label class="hg-ctl" for="hgt-range">How many of the six barriers you test</label>
+    <input class="ha-range" id="hgt-range" type="range" min="0" max="6" value="0" step="1">
+    <div class="hg-read">
+      <div><b id="hgt-open">0</b><span>found open</span></div>
+      <div><b id="hgt-shut">6</b><span>still assumed shut</span></div>
+      <p id="hgt-say" role="status"></p>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════

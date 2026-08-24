@@ -668,10 +668,13 @@ input[type="range"].ha-range {
   gap: var(--gap-2);
   align-items: center;
 }
+.hg-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;margin:.7rem 0}.hg-row i{height:4.5rem;border:1px solid var(--line);border-radius:.35rem .35rem 0 0;background:linear-gradient(90deg,var(--surface) 46%,var(--line) 47% 53%,var(--surface) 54%);transition:transform .25s,opacity .25s}.hg-row i.is-open{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface));transform:perspective(8rem) rotateY(58deg);transform-origin:left;opacity:.7}.hg-ctl{display:block;margin:.5rem 0;color:var(--muted);font-size:.78rem}.hg-read{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.6rem}.hg-read>div{padding:.6rem;border:1px solid var(--line);border-radius:var(--radius-sm)}.hg-read b{display:block;color:var(--text);font:700 1.2rem "Space Grotesk",sans-serif}.hg-read span{color:var(--muted);font-size:.7rem}.hg-read p{grid-column:1/-1;margin:0!important;color:var(--muted)!important;font-size:.8rem!important}
 @media (max-width: 560px) {
   .ha-dur-row { grid-template-columns: 1fr; gap: 0.35rem; }
 }
 .ha-mafia .ha-card{font:inherit;text-align:left;cursor:pointer}.ha-mafia .ha-card.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.ha-mafia .ha-card.is-next{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}.ha-mafia-read{min-height:2.8rem;margin:.65rem 0 var(--gap-2)!important;padding:.65rem .75rem;border-left:3px solid var(--accent);background:var(--surface);color:var(--muted)!important;font-size:.8rem!important}
+.ha-lib-card{cursor:pointer;transition:opacity .2s,border-color .2s,background .2s}.ha-lib.has-pick .ha-lib-card:not(.is-pick){opacity:.34}.ha-lib-card.is-pick{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface));opacity:1}.ha-lib-read{min-height:3rem;margin:.7rem 0!important;padding:.65rem .75rem;border-left:3px solid var(--accent);background:var(--surface);color:var(--muted)!important;font-size:.82rem!important}
+.hg-pick{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}.hg-pick button{width:2.4rem;height:2.4rem;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--muted);font:700 .72rem "Space Grotesk",sans-serif;cursor:pointer}.hg-pick button.is-on{border-color:var(--accent);background:var(--accent);color:var(--cta-text)}.hg-gates{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.hg-gate{min-height:7rem;padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}.hg-gate.real{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}.hg-gate .k{display:block;margin-bottom:.45rem;color:var(--muted);font:700 .65rem "Space Grotesk",sans-serif;text-transform:uppercase;letter-spacing:.07em}.hg-gate b{color:var(--text);font:650 .95rem/1.45 "Space Grotesk",sans-serif}@media(max-width:560px){.hg-gates{grid-template-columns:1fr}}
 .ha-dur-row .who { font-size: var(--fs-sm); color: var(--text); font-weight: 600; line-height: 1.4; }
 .ha-dur-row .who small { display: block; color: var(--muted); font-weight: 400; font-size: var(--fs-2xs); }
 .ha-dur-bar {
@@ -1722,3 +1725,18 @@ input[type="range"].ha-range {
   .ha-os-row { grid-template-columns: auto minmax(0, 1fr); }
   .ha-os-btn { grid-column: 2; grid-row: auto; justify-self: start; }
 }
+/* Test-the-gate figure. The swinging bar reuses .hg-row i above; this only
+   adds the caption under each gate and the readout. */
+.hgt-cell{display:grid;gap:.3rem}
+.hgt-cell em{font-style:normal;font-size:.68rem;line-height:1.35;color:var(--muted);text-align:center}
+.hgt-cell i.is-open ~ em{color:var(--text)}
+.hg-ctl{display:block;margin:.5rem 0 .2rem;font:700 .7rem "Space Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hg-read{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.5rem;margin-top:.6rem}
+.hg-read>div{display:grid}
+.hg-read b{font:700 1.5rem/1 "Space Grotesk",sans-serif;color:var(--accent)}
+.hg-read span{font-size:.7rem;color:var(--muted)}
+.hg-read p{flex:1 1 14rem;margin:0!important;font-size:.88rem!important;line-height:1.5}
+.hgt-cell .open{display:none}
+.hgt-cell.is-open .shut{display:none}
+.hgt-cell.is-open .open{display:block;color:var(--text)}
+.hgt-cell.is-open i{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface));transform:perspective(8rem) rotateY(58deg);transform-origin:left;opacity:.7}

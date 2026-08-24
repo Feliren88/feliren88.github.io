@@ -408,3 +408,13 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
   .sx-steps{flex-direction:column}
   .sx-toggle{flex-direction:column}
 }
+/* Figure 5 needed naming: three lines with no key is a puzzle, not a figure. */
+.sx-legend{display:grid;gap:.3rem;margin:.2rem 0 .5rem}
+.sx-legend span{display:grid;grid-template-columns:1.6rem 1fr;gap:.5rem;align-items:baseline;font-size:var(--fs-xs);color:var(--muted);line-height:1.5}
+.sx-legend i{display:block;height:3px;border-radius:2px;margin-top:.5rem}
+.sx-legend b{color:var(--text);font-weight:650}
+.sx-legend .lg-good i{background:var(--sf-win)}
+.sx-legend .lg-recover i{background:var(--sf-read)}
+.sx-legend .lg-bad i{background:var(--sf-loss)}
+.sx-explain{margin:0 0 .6rem!important;font-size:var(--fs-xs)!important;color:var(--muted)!important;line-height:1.55}
+.sx-yl{font-size:10px}

@@ -1486,6 +1486,7 @@
     if (load('anchor', '')) award('call');
   }
 
+
   /* ══ Boot ══════════════════════════════════════════════ */
   function storyRail() {
     var rail = $('#ha-story-rail');
@@ -1515,12 +1516,31 @@
     buttons.forEach(function(button){button.addEventListener('click',function(){var n=+button.dataset.haMafia;if(n===0)step=0;else if(n===step+1)step=n;else{$('#ha-mafia-read').textContent='Run the steps in order. Each one creates the conditions required by the next.';return;}paint();$('#ha-mafia-read').textContent=copy[n];});});paint();
   }
 
+  function library() {
+    var root=$('.ha-lib');if(!root)return;var cards=$$('.ha-lib-card',root),read=document.createElement('p');read.className='ha-lib-read';read.setAttribute('role','status');read.textContent='Select a case to isolate the constraint it refused to treat as final.';root.insertAdjacentElement('afterend',read);
+    cards.forEach(function(card){card.tabIndex=0;card.setAttribute('role','button');function choose(e){if(e&&e.target.closest('a'))return;cards.forEach(function(x){x.classList.toggle('is-pick',x===card);});root.classList.add('has-pick');read.textContent=card.querySelector('.lesson').textContent.replace('The line:','').trim();}card.addEventListener('click',choose);card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});
+  }
+
+  function gateCasesFigure() {
+    var host=$('#hafig-gate'),pick=$('#hg-pick');if(!host||!pick)return;
+    var cases=[['Film school tuition','Access to the knowledge'],['Being too young to begin','Waiting for permission'],['Unreliable motivation','No designed consequence'],['Not feeling urgent','A commitment with no time cost'],['An impossible problem','The price of solving it'],['A mature product category','Failure to inspect nearby friction']];
+    cases.forEach(function(row,i){var button=document.createElement('button');button.type='button';button.textContent=String(i+1).padStart(2,'0');button.setAttribute('aria-label','Case '+(i+1));button.addEventListener('click',function(){Array.prototype.slice.call(pick.children).forEach(function(b){b.classList.toggle('is-on',b===button);});$('#hg-assumed').textContent=row[0];$('#hg-real').textContent=row[1];$('#hg-say').textContent='The visible barrier and the operative constraint are not the same. Agency begins by testing which one is real.';});pick.appendChild(button);});
+    pick.firstChild.click();
+  }
+
+  function gateFigure() {
+    var host=$('#hafig-test'),range=$('#hgt-range'),row=$('#hgt-row');if(!host||!range||!row)return;
+    for(var i=0;i<6;i++){var gate=document.createElement('i');gate.setAttribute('aria-hidden','true');row.appendChild(gate);}
+    function paint(){var n=+range.value;Array.prototype.slice.call(row.children).forEach(function(g,i){g.classList.toggle('is-open',i<n);});$('#hgt-open').textContent=n;$('#hgt-shut').textContent=6-n;$('#hgt-say').textContent=n===0?'An untested barrier is still an assumption.':n<6?'Testing converts some imagined gates into evidence. The untested remainder stays unknown.':'All six examples test the barrier instead of granting it authority in advance.';}
+    range.addEventListener('input',paint);paint();
+  }
+
   function init() {
     try { badges(); } catch (e) { /* the board is optional; the page is not */ }
     [progress, storyRail, jailCell, signals, tricycle, quiz, spectrum, physicsGate, asteroid,
       durations, pedestal, decay, nows, wilbur, midwit, inversion, loopBreak,
       levels, trapGame, flowChart, worksheet, razor,
-      tapFigure, softwareOS, razorScale, mafia].forEach(function (fn) {
+      tapFigure, softwareOS, razorScale, mafia, library, gateCasesFigure, gateFigure].forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
   }
