@@ -418,3 +418,58 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
 .sx-legend .lg-bad i{background:var(--sf-loss)}
 .sx-explain{margin:0 0 .6rem!important;font-size:var(--fs-xs)!important;color:var(--muted)!important;line-height:1.55}
 .sx-yl{font-size:10px}
+
+/* 09 · life-phase milestones */
+.sf-milestones{border-top:3px solid var(--sf-read)}
+.sf-success-formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.45rem;margin:1.2rem 0;padding:1rem;border:1px solid var(--line);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--sf-read) 5%,var(--surface))}
+.sf-success-formula span{padding:.42rem .65rem;border-radius:999px;background:var(--surface);color:var(--text);font:650 var(--fs-xs)/1.2 "Space Grotesk",sans-serif}
+.sf-success-formula i{color:var(--sf-read);font-style:normal;font-weight:700}
+.sf-phase-map{margin:1.4rem 0;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden}
+.sf-phase-map figcaption{display:grid;gap:.2rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--sf-read) 8%,transparent)}
+.sf-phase-map figcaption b{color:var(--text);font:700 var(--fs-lg)/1.2 "Space Grotesk",sans-serif}
+.sf-phase-map figcaption span{color:var(--muted);font-size:var(--fs-xs)}
+.sf-phase-path{--phase-progress:0%;position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.5rem;list-style:none;margin:0;padding:1.2rem .75rem}
+.sf-phase-path:before{content:"";position:absolute;left:8%;right:8%;top:2.15rem;height:2px;background:linear-gradient(90deg,var(--sf-read) 0 var(--phase-progress),var(--line-strong) var(--phase-progress) 100%)}
+.sf-phase-path li{position:relative;min-width:0}
+.sf-phase-path button{display:grid;justify-items:center;gap:.35rem;width:100%;padding:0 .2rem;border:0;background:transparent;color:var(--muted);font:inherit;text-align:center;cursor:pointer}
+.sf-phase-path button>span{display:grid;place-items:center;z-index:1;width:2rem;height:2rem;border:2px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--muted);font:700 .62rem/1 "Space Grotesk",sans-serif}
+.sf-phase-path b{color:var(--text);font:650 .72rem/1.25 "Space Grotesk",sans-serif}
+.sf-phase-path small{font-size:.62rem;line-height:1.3;color:var(--muted)}
+.sf-phase-path button:hover>span,.sf-phase-path button:focus-visible>span,.sf-phase-path button.is-current>span{border-color:var(--sf-read);background:var(--sf-read);color:var(--cta-text)}
+.sf-phase-path button.is-past>span{border-color:var(--sf-read);background:color-mix(in srgb,var(--sf-read) 20%,var(--surface));color:var(--sf-read)}
+.sf-phase-path button.is-current b{color:var(--sf-read)}
+.sf-phase-read{min-height:3rem;margin:0!important;padding:.75rem 1rem;border-top:1px solid var(--line);background:color-mix(in srgb,var(--sf-read) 5%,transparent);color:var(--text)!important;font-size:var(--fs-sm)!important;line-height:1.55}
+.sf-milestone-chart{margin:1.2rem 0;border:1px solid var(--border-ui);border-radius:var(--radius-lg);overflow:hidden}
+.sf-milestone-head,.sf-milestone-chart article{display:grid;grid-template-columns:1.05fr 1.15fr 1.45fr 1.45fr;gap:1rem;align-items:start}
+.sf-milestone-head{padding:.6rem .8rem;background:var(--text);color:var(--bg);font:700 .62rem/1.2 "Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.sf-milestone-chart article{padding:.85rem .8rem;border-top:1px solid var(--line);background:var(--surface);transition:background .2s,border-color .2s}
+.sf-milestone-chart article:first-of-type{border-top:0}
+.sf-milestone-chart h3,.sf-milestone-chart p{margin:0!important}
+.sf-milestone-chart h3{display:flex;gap:.5rem;color:var(--text);font:650 .86rem/1.35 "Space Grotesk",sans-serif}
+.sf-milestone-chart h3 span{flex:none;color:var(--sf-read);font-size:.65rem;padding-top:.15rem}
+.sf-milestone-chart p{color:var(--muted)!important;font-size:.75rem!important;line-height:1.5}
+.sf-milestone-chart p b{color:var(--text);font-weight:650}
+.sf-milestone-chart article.is-current{background:color-mix(in srgb,var(--sf-read) 10%,var(--surface));box-shadow:inset 3px 0 0 var(--sf-read)}
+.sf-milestone-compass{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.2rem}
+.sf-milestone-compass>p{grid-column:1/-1;display:grid;gap:.25rem;margin:0!important;padding:1rem;border-radius:var(--radius-lg);background:var(--text);color:var(--bg)!important;text-align:center}
+.sf-milestone-compass>p span{font:700 .62rem/1 "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.sf-milestone-compass>p strong{font:650 clamp(1.15rem,3vw,1.55rem)/1.2 "Space Grotesk",sans-serif}
+.sf-milestone-compass>div{display:grid;gap:.3rem;padding:.9rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.sf-milestone-compass>div b{color:var(--text);font:650 .85rem/1.2 "Space Grotesk",sans-serif}
+.sf-milestone-compass>div:first-of-type{border-top:3px solid var(--sf-win)}
+.sf-milestone-compass>div:last-of-type{border-top:3px solid var(--sf-loss)}
+.sf-milestone-compass>div span{color:var(--muted);font-size:var(--fs-xs);line-height:1.5}
+.sf-architecture-visual{margin:1rem 0 0;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden}
+.sf-architecture-visual figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;padding:.8rem 1rem;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--sf-win) 8%,transparent)}
+.sf-architecture-visual figcaption span{color:var(--sf-win);font:700 .64rem/1 "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.sf-architecture-visual figcaption b{color:var(--text);font:650 var(--fs-lg)/1.2 "Space Grotesk",sans-serif}
+.sf-architecture-map{position:relative;max-width:42rem;height:24rem;margin:auto}
+.sf-architecture-map svg{position:absolute;inset:0;width:100%;height:100%}
+.sf-architecture-map path{fill:none;stroke:var(--line-strong);stroke-width:2;stroke-dasharray:5 5;vector-effect:non-scaling-stroke}
+.sf-arch-node,.sf-arch-core{position:absolute;z-index:1;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:999px;background:var(--surface);color:var(--text);font:650 .78rem/1.25 "Space Grotesk",sans-serif;text-align:center}
+.sf-arch-node{min-width:7.2rem;min-height:2.7rem;padding:.4rem .65rem;border:1px solid var(--sf-win)}
+.sf-arch-core{left:50%;top:50%;width:7.5rem;height:7.5rem;border:2px solid var(--sf-read);background:color-mix(in srgb,var(--sf-read) 12%,var(--surface));font-size:1rem}
+.sf-arch-core i{color:var(--sf-read);font-style:normal}
+.sf-arch-1{left:50%;top:12%}.sf-arch-2{left:81%;top:24%}.sf-arch-3{left:81%;top:76%}.sf-arch-4{left:50%;top:88%}.sf-arch-5{left:19%;top:76%}.sf-arch-6{left:19%;top:24%}
+@media(max-width:760px){.sf-phase-path{grid-template-columns:1fr;padding:.75rem}.sf-phase-path:before{left:1.72rem;right:auto;top:1.75rem;bottom:1.75rem;width:2px;height:auto;background:linear-gradient(180deg,var(--sf-read) 0 var(--phase-progress),var(--line-strong) var(--phase-progress) 100%)}.sf-phase-path button{grid-template-columns:2rem minmax(0,1fr);grid-template-rows:auto auto;gap:.1rem .65rem;justify-items:start;padding:.25rem;text-align:left}.sf-phase-path button>span{grid-row:1/3}.sf-phase-path b{font-size:.8rem}.sf-phase-path small{font-size:.68rem}.sf-milestone-head{display:none}.sf-milestone-chart{display:grid;gap:.65rem;border:0;overflow:visible}.sf-milestone-chart article{grid-template-columns:1fr;gap:.55rem;padding:1rem;border:1px solid var(--border-ui)!important;border-radius:var(--radius-md)}.sf-milestone-chart p:before{content:attr(data-label);display:block;margin-bottom:.15rem;color:var(--sf-read);font:700 .58rem/1.2 "Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase}.sf-milestone-compass{grid-template-columns:1fr}}
+@media(max-width:520px){.sf-architecture-map{height:23rem}.sf-arch-node{min-width:5.8rem;font-size:.68rem}.sf-arch-core{width:6.2rem;height:6.2rem;font-size:.85rem}.sf-arch-2,.sf-arch-3{left:78%}.sf-arch-5,.sf-arch-6{left:22%}.sf-architecture-visual figcaption{align-items:flex-start;flex-direction:column}}

@@ -578,6 +578,34 @@
     try { fn(); } catch (e) { /* one figure must not take the page down */ }
   });
 
+  function initMilestones() {
+    var path = document.getElementById('sf-phase-path');
+    if (!path) return;
+    var buttons = Array.prototype.slice.call(path.querySelectorAll('button[data-phase]'));
+    function choose(key, remember) {
+      var button = buttons.find(function (item) { return item.dataset.phase === key; });
+      if (!button) return;
+      var currentIndex = buttons.indexOf(button);
+      path.style.setProperty('--phase-progress', (currentIndex / (buttons.length - 1) * 100) + '%');
+      buttons.forEach(function (item, index) {
+        var current = item === button;
+        item.classList.toggle('is-current', current);
+        item.classList.toggle('is-past', index < currentIndex);
+        item.setAttribute('aria-pressed', current ? 'true' : 'false');
+      });
+      if (remember) {
+        try { localStorage.setItem('sf-life-phase', key); } catch (error) { /* Selection still works. */ }
+      }
+    }
+    buttons.forEach(function (button) {
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', function () { choose(button.dataset.phase, true); });
+    });
+    var saved = '';
+    try { saved = localStorage.getItem('sf-life-phase') || ''; } catch (error) { /* Start unselected. */ }
+    if (saved) choose(saved, false);
+  }
+
   function init() {
     try { initRouter(); } catch (error) { /* The static action key remains usable. */ }
     try { initProgress(); } catch (error) { /* Reading remains unaffected. */ }
@@ -587,6 +615,7 @@
     try { domainViz(); } catch (error) { /* The domain text still reads without its diagram. */ }
     try { reviewLens(); } catch (error) { /* The review cards remain readable. */ }
     try { exploreStatics(); } catch (error) { /* Static explanations remain available. */ }
+    try { initMilestones(); } catch (error) { /* The milestone chart remains readable. */ }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

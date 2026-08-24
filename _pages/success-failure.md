@@ -389,3 +389,34 @@ extra_js: /js/components/success-failure.js
     </div>
   </figure>
 </section>
+
+<section class="sf-part sf-milestones" id="milestones" aria-label="Life phase milestones">
+  <figure class="sf-phase-map sf-milestone-visual">
+    <figcaption><span>Milestone graph</span><b>Life phases</b></figcaption>
+    <ol class="sf-phase-path" id="sf-phase-path">
+      <li><button type="button" data-phase="proving"><span>01</span><b>Proving capability</b><small>skill · proof · fit</small></button></li>
+      <li><button type="button" data-phase="choosing"><span>02</span><b>Choosing direction</b><small>field · people · focus</small></button></li>
+      <li><button type="button" data-phase="leverage"><span>03</span><b>Building leverage</b><small>method · system · IP</small></button></li>
+      <li><button type="button" data-phase="ownership"><span>04</span><b>Expanding ownership</b><small>equity · assets · upside</small></button></li>
+      <li><button type="button" data-phase="authority"><span>05</span><b>Establishing authority</b><small>trust · selection · decisions</small></button></li>
+      <li><button type="button" data-phase="scaling"><span>06</span><b>Scaling judgment</b><small>teams · systems · capital</small></button></li>
+      <li><button type="button" data-phase="transmitting"><span>07</span><b>Allocating &amp; transmitting</b><small>guide · govern · teach</small></button></li>
+    </ol>
+  </figure>
+
+  <figure class="sf-architecture-visual">
+    <figcaption><span>Success architecture</span><b>Value + freedom</b></figcaption>
+    <div class="sf-architecture-map" role="img" aria-label="Mastery, autonomy, ownership, judgment, strong relationships, and sustainable energy converge into value and freedom.">
+      <span class="sf-arch-node sf-arch-1">Mastery</span>
+      <span class="sf-arch-node sf-arch-2">Autonomy</span>
+      <span class="sf-arch-node sf-arch-3">Ownership</span>
+      <span class="sf-arch-node sf-arch-4">Judgment</span>
+      <span class="sf-arch-node sf-arch-5">Strong<br>relationships</span>
+      <span class="sf-arch-node sf-arch-6">Sustainable<br>energy</span>
+      <span class="sf-arch-core">Value<br><i>+</i><br>freedom</span>
+      <svg viewBox="0 0 600 360" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M300 180L300 44M300 180L485 86M300 180L485 274M300 180L300 316M300 180L115 274M300 180L115 86"/>
+      </svg>
+    </div>
+  </figure>
+</section>
