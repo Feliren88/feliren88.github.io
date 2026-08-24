@@ -2,7 +2,7 @@
 layout: page
 title: Success & Failure
 subtitle: Diagnose the outcome. Protect the larger game. Choose the next move.
-description: A visual operating manual for diagnosing wins and losses, scaling repeatable success, recovering from failure, and deciding when to adapt, pause, hedge, or exit.
+description: A visual guide to diagnosing wins and losses, scaling repeatable success, recovering from failure, and deciding when to adapt, pause, hedge, or exit.
 permalink: /success-failure/
 layout-class: page success-failure
 extra_css: /css/success-failure.css
@@ -15,9 +15,8 @@ extra_js: /js/components/success-failure.js
 <section class="sf-part sf-prose sf-opening" id="outcome">
   <p class="sf-kicker">An operating manual for the result after the plan</p>
   <p class="sf-lead">Treat the outcome as evidence.</p>
-  <p>A particular strategy, used under particular conditions, produced a result. The next job is to
-  learn what caused it without turning one win into proof of brilliance or one loss into proof of
-  incompetence.</p>
+  <p>A strategy used under specific conditions produced a result. Now learn what caused it without
+  treating one win as proof of brilliance or one loss as proof of incompetence.</p>
 
   <div class="sf-hero-map" aria-label="An outcome passes through diagnosis before one of six responses">
     <div class="sf-node sf-node-origin"><svg class="sf-i"><use href="#sf-outcome"/></svg><span>Outcome</span></div>
@@ -73,8 +72,8 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose" id="four-outcomes">
   <h2><span class="n">01</span> Four kinds of outcome <svg class="sf-i"><use href="#sf-capacity"/></svg></h2>
-  <p class="sf-deck">The visible result tells only half the story. The other half is what it does to
-  future capacity.</p>
+  <p class="sf-deck">The visible result tells only half the story. The other half is how it affects
+  your future capacity.</p>
 
   <div class="sf-matrix" aria-label="Outcome matrix comparing visible result with future capacity">
     <div class="sf-axis sf-axis-y"><span>Future capacity falls</span><span>Future capacity rises</span></div>
@@ -100,7 +99,7 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose" id="diagnosis">
   <h2><span class="n">02</span> Diagnose before reacting <svg class="sf-i"><use href="#sf-diagnose"/></svg></h2>
-  <p class="sf-deck">Freeze unnecessary escalation. Separate what happened from the story you are
+  <p class="sf-deck">Stop unnecessary escalation. Separate what happened from the story you are
   tempted to tell about it.</p>
 
   <div class="sf-cause-orbit">
@@ -126,7 +125,7 @@ extra_js: /js/components/success-failure.js
     <article><span>IV</span><svg class="sf-i" aria-hidden="true"><use href="#sf-timing"/></svg><h3>Timing</h3><p>The strategy may work later. Preserve the option and build readiness.</p></article>
     <article><span>V</span><svg class="sf-i" aria-hidden="true"><use href="#sf-objective"/></svg><h3>Objective</h3><p>Success exposed the wrong goal. Use the new value information to redesign it.</p></article>
   </div>
-  <p class="sf-rule"><svg class="sf-i"><use href="#sf-identity"/></svg><span>One result cannot identify its own cause. Use hypotheses, not identity conclusions.</span></p>
+  <p class="sf-rule"><svg class="sf-i"><use href="#sf-identity"/></svg><span>One result cannot reveal its own cause. Test possible causes instead of drawing conclusions about who you are.</span></p>
 </section>
 
 <section class="sf-part sf-prose" id="lanes">
@@ -208,10 +207,10 @@ extra_js: /js/components/success-failure.js
 
 <section class="sf-part sf-prose" id="domains">
   <h2><span class="n">06</span> Read the signal across 18 domains <svg class="sf-i"><use href="#sf-repeat"/></svg></h2>
-  <p class="sf-deck">A win in one domain can conceal damage in another. Review the whole system before calling the trajectory successful.</p>
+  <p class="sf-deck">A win in one area can hide damage in another. Review the whole system before calling the direction successful.</p>
   <div class="sf-domains">
     {% for domain in site.data.success_failure.domains %}
-    <details {% if forloop.first %}open{% endif %}{% if domain.viz %} data-viz='{{ domain.viz | jsonify }}'{% endif %}>
+    <details {% if forloop.first %}open{% endif %}{% if domain.viz %} data-viz="{{ domain.viz | jsonify | escape }}"{% endif %}>
       <summary><span class="ico"><svg class="sf-i"><use href="#{{ domain.icon }}"/></svg></span><span>{{ domain.title }}</span><i aria-hidden="true"></i></summary>
       <div class="sf-domain-body">
         <p class="sig is-good"><b><svg class="sf-i" aria-hidden="true"><use href="#sf-rising"/></svg>Good signal</b>{{ domain.good }}</p>

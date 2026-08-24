@@ -2,7 +2,7 @@
 layout: page
 title: My Life Principles
 subtitle: One rule and a practical system for making decisions under pressure
-description: My personal operating manual for difficult decisions, built around six questions, reversibility, and a clear sequence for action.
+description: My guide to difficult decisions, built around six questions, reversibility, and a clear sequence of actions.
 permalink: /principles/
 layout-class: page principles
 extra_css: /css/principles.css
@@ -66,8 +66,8 @@ extra_js: /js/components/principles.js
     money, approval, anger, excitement or fear.</b></p>
   </div>
 
-  <p class="pr-deck">This personal operating manual is designed for moments
-  when pressure weakens my judgment. Search for the situation you face and start there.</p>
+  <p class="pr-deck">I wrote this guide for moments when pressure weakens my judgment.
+  Search for the situation you face and start there.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -168,12 +168,12 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="reversibility">
   <h2><span class="n">02</span> Reversibility sets the speed</h2>
-  <p class="pr-deck">Many bad decisions begin with the wrong pace. The right choice made too
-  quickly or too slowly can still produce a poor result.</p>
+  <p class="pr-deck">Many bad decisions begin at the wrong pace. Even the right choice can go badly
+  when made too quickly or too slowly.</p>
 
-  <p>Reversible decisions deserve speed, because the information you want is on the other side of
-  doing it. Irreversible decisions deserve patience, because the evidence bar should rise with the
-  cost of being wrong. Drag the dial, or tap an example.</p>
+  <p>Make reversible decisions quickly because acting gives you the information you need.
+  Take more time with irreversible decisions because the evidence bar should rise with the cost
+  of being wrong. Drag the dial, or tap an example.</p>
 
   <div class="pr-console">
     <div class="pr-console-head">
@@ -232,7 +232,7 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="situations">
   <h2><span class="n">03</span> Find the situation you are in</h2>
-  <p class="pr-deck">Every state worth having a prepared answer for. Use the filters or describe
+  <p class="pr-deck">These are situations worth preparing for. Use the filters or describe
   the situation in your own words with the search box above.</p>
 
   <div class="pr-filters filter-bar" role="group" aria-label="Filter situations by kind">
@@ -320,8 +320,8 @@ extra_js: /js/components/principles.js
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="sequence">
   <h2><span class="n">04</span> Move through the operating sequence</h2>
-  <p class="pr-deck">These steps stop me from making a
-  major decision before I understand the problem, protect the essentials and test an option.</p>
+  <p class="pr-deck">These steps stop me from making a major decision before I understand the problem,
+  protect the essentials, and test an option.</p>
 
   <div class="pr-console">
     <div class="pr-console-head">
@@ -474,7 +474,7 @@ extra_js: /js/components/principles.js
   </div>
 
   <div class="pr-note">
-    <p><b>On this page.</b> This personal operating manual records the standards I set for myself.
+    <p><b>On this page.</b> This guide records the standards I set for myself.
     I keep it because the states it covers are exactly the states in which I reason worst, and a
     written answer beats an improvised one when I am angry or tired.</p>
     <p>This manual also reflects my research on calibration. In both models and people, sound

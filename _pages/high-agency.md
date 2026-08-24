@@ -71,7 +71,7 @@ extra_js: /js/components/high-agency.js
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="see-it">
   <h2><span class="n">00</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg> See it first</h2>
-  <p class="ha-deck">High agency is easier to recognise in a person than to define. The essay
+  <p class="ha-deck">It is easier to recognise high agency in a person than to define it. The essay
   starts with examples, so this note does too.</p>
 
   <p>In 1964, a judge said he could not define obscenity and knew it when he saw it.
@@ -98,7 +98,7 @@ extra_js: /js/components/high-agency.js
   </div>
 
   <p>You probably chose that person because you trust them to find a way through an unclear
-  situation. Their title, income, and intelligence matter less than their ability to act
+  situation. Their title, income, and intelligence matter less than whether they can act
   without a map.</p>
 
   <div class="ha-quote">
@@ -177,8 +177,8 @@ extra_js: /js/components/high-agency.js
   <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>Low agency in one image</h3>
   <p>People reached the moon in 1969. Bernard Sadow filed his
   <a href="https://patents.google.com/patent/US3653474A/en" target="_blank" rel="noreferrer">rolling-luggage patent in 1970</a>.
-  The comparison shows how an ordinary inconvenience can remain visible for years without
-  being treated as a problem worth solving.</p>
+  An ordinary inconvenience can remain obvious for years without anyone treating it as a
+  problem worth solving.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -347,8 +347,7 @@ extra_js: /js/components/high-agency.js
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="diagnose">
   <h2><span class="n">02</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-gauge"></use></svg> Do you have agency?</h2>
-  <p class="ha-deck">Most people do not begin with high agency. The useful point is that the
-  habit can change.</p>
+  <p class="ha-deck">Most people do not begin with high agency, but the habit can change.</p>
 
   <p>People learn early to follow social rules, avoid risk, and wait for permission.
   Schools often reward the same habits. Low agency is common because those habits are common.
@@ -462,7 +461,7 @@ extra_js: /js/components/high-agency.js
 <div class="ha-turn" data-turn="II"><span>Act II</span><b>The first answer describes the current arrangement. It does not define the edge of the possible.</b></div>
 <section class="ha-part ha-prose" id="software">
   <h2><span class="n">03</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-chip"></use></svg> Five lines of software</h2>
-  <p class="ha-deck">The essay identifies five beliefs that support independent action.</p>
+  <p class="ha-deck">The essay names five beliefs that support independent action.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -582,8 +581,8 @@ extra_js: /js/components/high-agency.js
       </div>
     </div>
     <p style="font-size:var(--fs-2xs);color:var(--muted);margin-top:var(--gap-2);line-height:1.6">
-      The numbers are made up to make one point. Agency is the reason you cannot quote fixed
-      odds on anything humans are still working on.</p>
+      The numbers are made up. They show why you cannot give fixed odds for anything humans
+      are still working on.</p>
   </div>
 
   <h3 id="soft-2">2. There is no way</h3>
@@ -622,7 +621,7 @@ extra_js: /js/components/high-agency.js
   </div>
 
   <h3 id="soft-3">3. There are no adults</h3>
-  <p>Passivity often rests on a belief that competent adults are handling the problem.
+  <p>Passivity often comes from believing that competent adults are handling the problem.
   We stop believing in Santa and the tooth fairy, yet keep believing in an unseen group of
   adults who fully understand the situation.</p>
 
@@ -889,13 +888,13 @@ extra_js: /js/components/high-agency.js
      ═══════════════════════════════════════════════════════ -->
 <section class="ha-part ha-prose" id="traps">
   <h2><span class="n">05</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-trap"></use></svg> Five low agency traps</h2>
-  <p class="ha-deck">The same framework identifies five habits that weaken agency.</p>
+  <p class="ha-deck">The same framework names five habits that weaken agency.</p>
 
   <p>Low agency can mean staying stuck on a searchable problem, delaying an important call,
   or letting the room's average opinion replace your own judgement.</p>
 
-  <p>Each trap below has the same shape. A description, what it sounds like from the inside,
-  and the one question that gets you out.</p>
+  <p>Each trap below includes a description, what it sounds like from the inside, and the one
+  question that gets you out.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">
@@ -942,7 +941,7 @@ extra_js: /js/components/high-agency.js
   <!-- Vague -->
   <div class="ha-trap" id="trap-vague">
     <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-fog"></use></svg><span class="tn">TRAP 01</span> The vague trap</h4>
-    <p>The vague trap avoids a clear problem statement. A person can think for years without
+    <p>The vague trap avoids stating the problem clearly. A person can think for years without
     defining what needs to change. Images and moods feel important but give action no target.</p>
     <p class="sounds">Things have not really been right for a while and I am not sure what to do about it.</p>
     <div class="ha-escape">
@@ -1108,7 +1107,7 @@ extra_js: /js/components/high-agency.js
   <!-- Overwhelm -->
   <div class="ha-trap" id="trap-overwhelm">
     <h4><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-mountain"></use></svg><span class="tn">TRAP 05</span> The overwhelm trap</h4>
-    <p>The overwhelm trap compares the starting point with the final goal in one step.
+    <p>The overwhelm trap compares where you are now with the final goal in one step.
     Learning quantum mechanics, earning a black belt, or building an aeroplane then feels
     like one impossible action.</p>
     <p class="sounds">I would not even know where to begin.</p>
@@ -1172,8 +1171,8 @@ extra_js: /js/components/high-agency.js
 <div class="ha-turn" data-turn="III"><span>Act III</span><b>Agency becomes visible when analysis ends and contact with reality begins.</b></div>
 <section class="ha-part ha-prose" id="tools">
   <h2><span class="n">07</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-toolbox"></use></svg> Five tools</h2>
-  <p class="ha-deck">The essay closes with practical instruments. I have made the first one
-  clickable, because a flow chart you can walk is worth more than a flow chart you can look at.</p>
+  <p class="ha-deck">The essay closes with practical tools. I made the first one clickable because
+  using a flow chart teaches you more than looking at one.</p>
 
   <h3><svg class="ha-i ha-i-h3" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-flow"></use></svg>Tool 1. The high agency flow chart</h3>
   <p>Bring one stuck problem. Answer honestly. Every terminal node is either a named trap with
@@ -1353,7 +1352,7 @@ extra_js: /js/components/high-agency.js
   fifteen dollars of interest, and is asked why a millionaire needed five thousand dollars.
   His answer is that he could not find anywhere else in Manhattan to park for two weeks at that
   price.</p>
-  <p>The lesson does not depend on the story being literal. A better frame can reveal an option
+  <p>The lesson does not depend on whether the story is literal. A better frame can reveal an option
   that the obvious framing hides.</p>
 
   <div class="ha-lab">

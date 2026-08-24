@@ -262,9 +262,9 @@ laws:
       cap: "Some games really are fixed."
       out:
         - k: "Genuinely zero-sum"
-          on: true
+          sel: true
         - k: "Misread as shareable"
-          on: false
+          sel: false
 
   - n: 5
     icon: gt-l-response
@@ -499,9 +499,9 @@ five:
       cap: "The visible game."
       out:
         - k: "Employers, markets, competitors"
-          on: true
+          sel: true
         - k: "Institutions"
-          on: true
+          sel: true
 
   - key: "Cooperative"
     icon: gt-players

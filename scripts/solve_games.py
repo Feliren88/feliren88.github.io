@@ -132,7 +132,7 @@ def viz_lines(x, indent):
         for o in v['out']:
             L.append(pad + '    - k: ' + esc(o[0] if isinstance(o, (list, tuple)) else o['k']))
             on = o[1] if isinstance(o, (list, tuple)) else o['on']
-            L.append(pad + '      on: ' + ('true' if on else 'false'))
+            L.append(pad + '      sel: ' + ('true' if on else 'false'))
     return L
 
 

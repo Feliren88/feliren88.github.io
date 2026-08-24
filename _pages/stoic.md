@@ -78,8 +78,7 @@ extra_js: /js/components/stoic.js
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="control">
   <h2><span class="n">01</span> Draw the boundary</h2>
-  <p class="st-deck">The <i>Enchiridion</i> begins with the distinction that supports the rest of
-  the book.</p>
+  <p class="st-deck">The <i>Enchiridion</i> begins with the distinction behind the rest of the book.</p>
 
   <div class="st-quote">
     <p>Some things are in our control and others not. Things in our control are opinion, pursuit,
@@ -145,9 +144,8 @@ extra_js: /js/components/stoic.js
     <cite>Epictetus, Enchiridion 5, trans. Elizabeth Carter</cite>
   </div>
 
-  <p>This can sound like a denial that anything bad happens. I read it more narrowly. An event brings
-  an immediate impression, and we decide whether to accept it as true. That decision is where we
-  still have some room to move.</p>
+  <p>This can sound like a denial that anything bad happens. I read it more narrowly. An event creates
+  an immediate impression. We then decide whether to accept it as true. That is where we can act.</p>
 
   <div class="st-lab">
     <div class="st-lab-head">
@@ -340,8 +338,8 @@ extra_js: /js/components/stoic.js
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="above">
   <h2><span class="n">05</span> Change the scale</h2>
-  <p class="st-deck">Marcus repeatedly looks at his troubles from farther away. The distance restores
-  their scale. Then he returns to the work in front of him.</p>
+  <p class="st-deck">Marcus repeatedly looks at his troubles from farther away. Distance puts them back
+  in proportion. Then he returns to the work in front of him.</p>
 
   <div class="st-lab">
     <div class="st-lab-head">
@@ -547,9 +545,9 @@ extra_js: /js/components/stoic.js
   <p>My work measures the gap between what a system believes and what turns out to be true. Epictetus
   often sounds as if he is studying the same gap in people.</p>
 
-  <p>In <i>Enchiridion</i> 5, the event supplies the data and the first impression supplies a
-  prediction. We suffer when we accept that prediction without checking it. I recognise this as a
-  calibration problem, described eighteen centuries before the term existed.</p>
+  <p>In <i>Enchiridion</i> 5, the event provides the data and the first impression makes a prediction.
+  We suffer when we accept that prediction without checking it. I recognise this as a calibration
+  problem described eighteen centuries before the term existed.</p>
 
   <p>I distrust tidy readings of Stoicism. Modern retellings sell composure and often hide its cost.
   Epictetus asks you to think of a person much as you think of a cup: human, breakable and held on

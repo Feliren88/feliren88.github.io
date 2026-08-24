@@ -60,8 +60,8 @@ extra_js: /js/components/game-theory.js
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="games">
   <h2><span class="n">01</span> Recognise the game <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-equilibrium"/></svg></h2>
-  <p class="gt-deck">Recurring problems often share the same structure. Once you recognise it, the
-  available moves become clearer.</p>
+  <p class="gt-deck">Recurring problems often share a structure. Once you recognise it, your
+  options become clearer.</p>
 
   <p>Read a matrix like this. You pick a row, the other player picks a column, and the cell shows
   what each of you gets as <span class="m">(u<sub>you</sub>, u<sub>them</sub>)</span>. A cell is a
@@ -123,7 +123,7 @@ extra_js: /js/components/game-theory.js
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="five">
   <h2><span class="n">02</span> See all five boards <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-players"/></svg></h2>
-  <p class="gt-deck">A major decision affects five games at once. A win on one board can hide
+  <p class="gt-deck">A major decision affects five games at once. Winning on one board can hide
   losses on the others.</p>
 
   <div class="gt-lab">
@@ -145,7 +145,7 @@ extra_js: /js/components/game-theory.js
         </span>
         <span class="depth">L{{ forloop.index }}</span>
       </button>
-      {% if f.viz %}<div class="gt-vizslot" data-viz='{{ f.viz | jsonify }}'></div>{% endif %}
+      {% if f.viz %}<div class="gt-vizslot" data-viz="{{ f.viz | jsonify | escape }}"></div>{% endif %}
       </div>
       {% endfor %}
     </div>
@@ -234,10 +234,10 @@ extra_js: /js/components/game-theory.js
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="levers">
   <h2><span class="n">04</span> Change the game itself <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-leverage"/></svg></h2>
-  <p class="gt-deck">A better move may still leave you stuck in a bad game. Sometimes the rules,
-  players or exit need to change.</p>
+  <p class="gt-deck">A better move can still leave you stuck in a bad game. Sometimes you need to
+  change the rules, players, or exit.</p>
 
-  <p>A game is defined by seven things. When you feel stuck, you are usually optimising the move
+  <p>Seven things define a game. When you feel stuck, you are usually trying to improve your move
   while treating the other six as fixed:</p>
 
   <div class="gt-eq">
@@ -273,7 +273,7 @@ extra_js: /js/components/game-theory.js
         <p class="ask">{{ l.ask }}</p>
         <p class="ex">{{ l.example }}</p>
       </button>
-      {% if l.viz %}<div class="gt-vizslot" data-viz='{{ l.viz | jsonify }}'></div>{% endif %}
+      {% if l.viz %}<div class="gt-vizslot" data-viz="{{ l.viz | jsonify | escape }}"></div>{% endif %}
       </div>
       {% endfor %}
     </div>
@@ -456,7 +456,7 @@ extra_js: /js/components/game-theory.js
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="classifier">
   <h2><span class="n">06</span> Before you decide <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-tree"/></svg></h2>
-  <p class="gt-deck">These nine questions expose the assumptions hidden inside a decision.</p>
+  <p class="gt-deck">These nine questions reveal the assumptions behind a decision.</p>
 
   <div class="gt-lab">
     <div class="gt-lab-head">
@@ -523,7 +523,7 @@ extra_js: /js/components/game-theory.js
         </div>
         {% if d.math != "" %}<div class="dmath">{{ d.math }}</div>{% endif %}
         <p class="dask">{{ d.ask }}</p>
-        {% if d.viz %}<div class="gt-vizslot" data-viz='{{ d.viz | jsonify }}'></div>{% endif %}
+        {% if d.viz %}<div class="gt-vizslot" data-viz="{{ d.viz | jsonify | escape }}"></div>{% endif %}
         <div class="gt-gtags">
           {% for g in d.games %}<span class="gt-gtag">{{ g }}</span>{% endfor %}
         </div>
@@ -721,7 +721,7 @@ extra_js: /js/components/game-theory.js
         <p class="opt"><b>Optimise:</b> {{ r.opt }}</p>
         <p class="avoid"><b>Avoid:</b> {{ r.avoid }}</p>
       </button>
-      {% if r.viz %}<div class="gt-vizslot" data-viz='{{ r.viz | jsonify }}'></div>{% endif %}
+      {% if r.viz %}<div class="gt-vizslot" data-viz="{{ r.viz | jsonify | escape }}"></div>{% endif %}
       </div>
       {% endfor %}
     </div>
@@ -798,7 +798,7 @@ extra_js: /js/components/game-theory.js
       <span>
         <h5>{{ l.law }}</h5>
         <p>{{ l.why }}</p>
-        {% if l.viz %}<div class="gt-vizslot" data-viz='{{ l.viz | jsonify }}'></div>{% endif %}
+        {% if l.viz %}<div class="gt-vizslot" data-viz="{{ l.viz | jsonify | escape }}"></div>{% endif %}
       </span>
       <button class="gt-law-tick" type="button" aria-pressed="false"
               aria-label="Mark law {{ l.n }} as one I keep"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-check"/></svg></button>
@@ -882,7 +882,7 @@ extra_js: /js/components/game-theory.js
   how people respond. That is the same error as evaluating a decision without the
   <span class="m">BR</span> term. More intelligence does not repair a badly specified game.</p>
 
-  <p>I do not treat the formalism as a prediction engine. Real payoffs are unknown, people are
+  <p>I do not use the formalism to predict outcomes. Real payoffs are unknown, people are
   inconsistent, and the model assumes you can rank outcomes you have never experienced. I use it
   to ask three questions: who else moves, what happens next, and does the bad case leave me able to
   keep playing?</p>

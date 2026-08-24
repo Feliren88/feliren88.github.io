@@ -847,7 +847,7 @@
       split: function (v) {
         return '<div class="sv sv-split"><p class="in">' + esc(v['in']) + '</p><ul>' +
           (v.out || []).map(function (o) {
-            return '<li class="' + (o.on ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
+            return '<li class="' + (o.sel ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
           }).join('') + '</ul></div>';
       },
       /* steps in an order that matters */

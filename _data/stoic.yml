@@ -60,9 +60,9 @@ passages:
       cap: "Every event arrives with a matching capacity."
       out:
         - k: "Abusive words: patience"
-          on: true
+          sel: true
         - k: "Pain: endurance"
-          on: true
+          sel: true
 
   - id: when-you-lose-something-or-someone-and-want-to-c
     situation: "When you lose something or someone and want to call it theft"
@@ -138,9 +138,9 @@ passages:
       cap: "Sympathy out loud, without the inward assent."
       out:
         - k: "Say the sad words with them"
-          on: true
+          sel: true
         - k: "Agree the event is ruin"
-          on: false
+          sel: false
 
   - id: when-the-role-you-have-been-handed-is-smaller-th
     situation: "When the role you have been handed is smaller than the one you wanted"
@@ -286,9 +286,9 @@ passages:
       cap: "It cools the anger, and does nothing about the harm."
       out:
         - k: "What seems right to them"
-          on: true
+          sel: true
         - k: "A verdict on you"
-          on: false
+          sel: false
 
   - id: when-a-relative-wrongs-you-and-you-still-have-to
     situation: "When a relative wrongs you and you still have to see them at Christmas"
@@ -481,11 +481,11 @@ passages:
       cap: "He rejects two framings at once."
       out:
         - k: "Their framing"
-          on: false
+          sel: false
         - k: "The framing they want you to hold"
-          on: false
+          sel: false
         - k: "The thing as it is"
-          on: true
+          sel: true
 
   - id: when-you-have-been-busy-all-day-and-cannot-say-w
     situation: "When you have been busy all day and cannot say what for"
@@ -518,9 +518,9 @@ passages:
       cap: "Marcus puts the good fortune in the response."
       out:
         - k: "Could happen to anyone"
-          on: false
+          sel: false
         - k: "Bearing it well"
-          on: true
+          sel: true
 
   - id: when-the-alarm-goes-off-and-you-cannot-make-your
     situation: "When the alarm goes off and you cannot make yourself get up"
@@ -622,9 +622,9 @@ passages:
       cap: "A lame soldier cannot reach the battlements alone."
       out:
         - k: "Your pride, protected"
-          on: false
+          sel: false
         - k: "The wall, lost"
-          on: false
+          sel: false
 
   - id: when-you-keep-putting-your-real-life-off-until-c
     situation: "When you keep putting your real life off until conditions improve"

@@ -1,8 +1,8 @@
 ---
 layout: page
 title: The Uncertainty Operating System
-subtitle: How to think, act, decide, and govern yourself when certainty is unavailable
-description: A practical operating manual for reading emotional signals, acting under uncertainty, and deciding when more information is enough.
+subtitle: How to think, act, and decide when you cannot be certain
+description: A practical guide to reading emotional signals, acting under uncertainty, and knowing when you have enough information.
 permalink: /uncertainty-and-emotions/
 layout-class: page uncertainty-emotions
 extra_css: /css/uncertainty-and-emotions.css
@@ -17,7 +17,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <div>
     <p class="ue-kicker">A field manual for unresolved questions</p>
     <h1 id="ue-hero-title">You do not need certainty to proceed.</h1>
-    <p>The useful skill is not making every doubt disappear. It is separating what the situation requires from what discomfort demands.</p>
+    <p>The useful skill is separating what the situation requires from what discomfort demands. You do not have to make every doubt disappear.</p>
   </div>
   <div class="ue-hero-model" aria-label="The operating shift from resolving uncertainty to choosing action">
     <div class="old"><small>The reflex</small><b>Uncertainty</b><i>→</i><b>Resolve it</b><span>life waits</span></div>
@@ -59,7 +59,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="moves">
   <h2><span>02</span><svg class="ue-i ue-h2-i"><use href="#ue-cycle"/></svg> Certainty moves</h2>
-  <p class="ue-deck">A certainty move is something done mainly to make doubt, fear, guilt, or an unwanted possibility feel resolved.</p>
+  <p class="ue-deck">A certainty move is something you do mainly to settle doubt, fear, guilt, or an unwanted possibility.</p>
   <div class="ue-moves">
     <div><svg class="ue-i"><use href="#ue-cycle"/></svg><b>Inside the head</b><p>Reviewing memory, replaying a conversation, analysing motives, checking feelings, suppressing a thought, replacing it with a safe one.</p></div>
     <div><svg class="ue-i"><use href="#ue-evidence"/></svg><b>In the world</b><p>Searching again, checking again, comparing evidence, testing a reaction, delaying, or avoiding the situation.</p></div>
@@ -71,7 +71,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="games">
   <h2><span>03</span><svg class="ue-i ue-h2-i"><use href="#ue-dice"/></svg> The short game and the long game</h2>
-  <p class="ue-deck">A certainty move can be locally rational and globally expensive.</p>
+  <p class="ue-deck">A certainty move can make sense now but cost you more over time.</p>
   <div class="ue-payoffs">
     <article class="short"><header><svg class="ue-i"><use href="#ue-cycle"/></svg><div><small>Strategy C</small><h3>Resolve uncertainty</h3></div></header><div class="now"><span>now</span><b>+5</b><p>Distress falls.</p></div><div class="later"><span>next rounds</span><b>−2</b><p>The mind learns that every doubt needs an answer.</p></div></article>
     <div class="ue-vs">versus</div>
@@ -105,7 +105,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
   </div>
 
   <div class="ue-equation big"><span>best move<sub>short</sub></span><b>≠</b><span>best move<sub>long</sub></span></div>
-  <p>The numbers show the direction of the trade, not measured values. Immediate relief can still carry a larger cost across repeated decisions.</p>
+  <p>The numbers show the trade-off, not measured values. Immediate relief can cost more across repeated decisions.</p>
   <div class="ue-tax"><svg class="ue-i"><use href="#ue-scale"/></svg><div><h3>The certainty tax</h3><p>time resolving + opportunities avoided + attention consumed + dependence created</p></div><b>How much am I willing to pay to know for sure?</b></div>
   <div class="ue-taxbars" aria-label="The four costs named above, shown as a stack">
     <span class="ue-taxbar t1"><svg class="ue-i"><use href="#ue-clock"/></svg><em>time resolving</em></span>
@@ -205,9 +205,9 @@ extra_js: /js/components/uncertainty-and-emotions.js
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-brain"/></svg> Start here if you have never taken one apart</p>
 
     <div class="ue-primer-what">
-      <p><b>An emotion is a signal with a body attached.</b> Something happens, your mind reads it in a
-      particular way, the body changes to match, and you get an urge to do something. That whole bundle
-      arrives at once and feels like a single thing. It is four things, and you can take them apart.</p>
+      <p><b>An emotion is a signal with a body attached.</b> Something happens. Your mind interprets it,
+      your body responds, and you feel an urge to act. These four parts arrive together and feel like
+      one thing, but you can separate them.</p>
     </div>
 
     <div class="ue-primer-parts">
@@ -221,8 +221,8 @@ extra_js: /js/components/uncertainty-and-emotions.js
     </div>
 
     <div class="ue-primer-note">
-      <p><b>The reading is the part you can question.</b> The event already happened and the body is already
-      moving. The story your mind attached is the part still open to question.</p>
+      <p><b>You can question your interpretation.</b> The event already happened and your body is already
+      responding. You can still question the story your mind attached to it.</p>
     </div>
 
     <div class="ue-primer-facts">
@@ -385,7 +385,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="decisions">
   <h2><span>07</span><svg class="ue-i ue-h2-i"><use href="#ue-fork"/></svg> Do not confuse new anxiety with new information</h2>
-  <p class="ue-deck">Reopen a decision when the world changes. A changed internal state calls for a pause, not an automatic review.</p>
+  <p class="ue-deck">Reopen a decision when the world changes. When only your feelings change, pause instead of reviewing it automatically.</p>
   <div class="ue-decision" id="ue-decision">
     <p><svg class="ue-i"><use href="#ue-fork"/></svg> After deciding, what changed?</p>
     <div><button data-decision="evidence"><svg class="ue-i"><use href="#ue-newevidence"/></svg>New external evidence</button><button data-decision="anxiety"><svg class="ue-i"><use href="#ue-wave"/></svg>Only anxiety rose</button></div>
@@ -473,7 +473,7 @@ extra_js: /js/components/uncertainty-and-emotions.js
 
 <section class="ue-part ue-prose" id="reset">
   <h2><span>10</span><svg class="ue-i ue-h2-i"><use href="#ue-restart"/></svg> Recover without a trial</h2>
-  <p class="ue-deck">A difficult round does not require self-punishment or a complete postmortem. Use curiosity to find the next workable adjustment.</p>
+  <p class="ue-deck">A difficult round does not require self-punishment or a full review. Ask what you can adjust next.</p>
 
   <div class="ue-stopseq">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-stop"/></svg> Before any of that, four beats</p>

@@ -809,7 +809,7 @@
     split: function (v) {
       return '<div class="gv gv-split"><p class="in">' + esc(v['in']) + '</p><ul>' +
         (v.out || []).map(function (o) {
-          return '<li class="' + (o.on ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
+          return '<li class="' + (o.sel ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
         }).join('') + '</ul></div>';
     },
     measure: function (v) {
