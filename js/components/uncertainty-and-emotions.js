@@ -435,7 +435,7 @@
       host.appendChild(mk('line',{x1:CX-R1-14,y1:CY,x2:CX+R1+14,y2:CY,class:'ue-axis'}));
       host.appendChild(mk('line',{x1:CX,y1:CY-R1-14,x2:CX,y2:CY+R1+14,class:'ue-axis'}));
 
-      var k=(R1+30)/(BOX/2);
+      var k=(R1+14)/(BOX/2);
       var out=[];
       [['ax',Math.PI,'Unpleasant',''],['ax',0,'Pleasant',''],
        ['ax',-Math.PI/2,'High control',''],['ax',Math.PI/2,'Low control','']]
@@ -510,8 +510,8 @@
         if(!members.length) return null;
         var mid=start+(members[0]+(members[members.length-1]+1))/2*seg;
         return {short:z.short,axes:z.axes,key:z.key,
-                x:50+50*Math.cos(mid)*((R3+30)/(BOX/2)),
-                y:50+50*Math.sin(mid)*((R3+30)/(BOX/2))};
+                x:50+50*Math.cos(mid)*((R3+14)/(BOX/2)),
+                y:50+50*Math.sin(mid)*((R3+14)/(BOX/2))};
       }).filter(Boolean));
 
       hub(R0-6,'Which one?','pick a word');
