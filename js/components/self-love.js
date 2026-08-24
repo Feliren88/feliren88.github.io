@@ -34,11 +34,11 @@
       var d = +demand.value, w = +willing.value, gap = d - w;
       one('#sl-load').style.height = (3 + d * .1) + 'rem';
       one('#sl-boundary').style.bottom = (4 + w * .1) + 'rem';
-      one('#sl-load-label').textContent = d > 76 ? 'heavy demand' : d > 45 ? 'meaningful demand' : 'bounded demand';
+      one('#sl-load-label').textContent = d > 76 ? 'heavy demand' : d > 45 ? 'substantial demand' : 'bounded demand';
       var status = one('#sl-consent-status'), copy = one('#sl-consent-copy');
-      if (gap > 18) { status.textContent = 'Capacity is being mistaken for permission.'; copy.textContent = 'The demand sits well beyond what you consent to give. Surviving it would not make the arrangement acceptable.'; }
+      if (gap > 18) { status.textContent = 'Capacity is being mistaken for permission.'; copy.textContent = 'The demand exceeds what you consent to give. Surviving it would not make the arrangement acceptable.'; }
       else if (gap > 0) { status.textContent = 'Renegotiate the load.'; copy.textContent = 'The gap is small enough to discuss, but large enough to become resentment if it stays unnamed.'; }
-      else { status.textContent = 'The load fits the consent.'; copy.textContent = 'This may still be difficult. The difference is that the difficulty has been chosen rather than silently assigned.'; }
+      else { status.textContent = 'The load fits the consent.'; copy.textContent = 'The work may still be difficult, but its cost has been chosen rather than silently assigned.'; }
     }
     demand.addEventListener('input', paint); willing.addEventListener('input', paint); paint();
   }
@@ -61,9 +61,9 @@
       var validation = rounds ? Math.max(10, 76 - rounds * 10) : 0;
       one('.sl-validation').style.setProperty('--validation', validation + '%');
       var answer = one('#sl-trial-answer');
-      if (!rounds) answer.textContent = 'The first achievement is still ahead. Notice what the mind promises it will settle.';
-      else if (rounds < 3) answer.textContent = 'The result landed. Relief appeared. The standard moved before worth became secure.';
-      else answer.textContent = rounds + ' achievements completed. The record improved; the internal trial did not end.';
+      if (!rounds) answer.textContent = 'Before the first achievement, the mind promises that success will make you feel worthy.';
+      else if (rounds < 3) answer.textContent = 'The result brought relief, but the standard moved before worth felt secure.';
+      else answer.textContent = 'After ' + rounds + ' achievements, the record improved while the internal trial continued.';
     }
     button.addEventListener('click', function () { rounds = Math.min(7, rounds + 1); paint(); });
     reset.addEventListener('click', function () { rounds = 0; paint(); }); paint();
@@ -79,13 +79,13 @@
       one('#sl-reward-bar').style.width = r + '%'; one('#sl-freedom-bar').style.width = freedom + '%';
       all('#sl-cage-bars i').forEach(function (bar, index) { bar.style.opacity = index < Math.round(r / 10) ? (on ? .22 : .82) : .05; });
       var answer = one('#sl-cage-answer');
-      answer.textContent = on ? 'Success is allowed to grow only while exit power, health, and choice remain protected.' : (r > 68 ? 'The rewards are now financing the reason it feels impossible to leave.' : 'Visible reward is rising faster than the freedom needed to choose it again.');
+      answer.textContent = on ? 'Keep raising the rewards only while exit power, health, and choice remain intact.' : (r > 68 ? 'The rewards now finance the reason leaving feels impossible.' : 'Visible reward is rising faster than the freedom needed to choose it again.');
     }
     reward.addEventListener('input', paint); protect.addEventListener('click', function () { protect.setAttribute('aria-pressed', protect.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); paint(); }); paint();
   }
 
   var STRENGTHS = [
-    ['Intelligence','Rationalizes self-neglect','Creates better choices'],['Discipline','Endures unhealthy situations','Builds meaningful things'],['Responsibility','Carries everyone','Chooses worthy obligations'],['Ambition','Never feels enough','Pursues meaningful mastery'],['Independence','Becomes emotionally isolated','Protects healthy autonomy'],['Adaptability','Normalizes bad environments','Navigates change intelligently'],['Loyalty','Stays too long','Commits deeply with boundaries'],['Strategic thinking','Overthinks life','Designs life intentionally'],['Competence','Becomes exploited','Gains authority and ownership'],['Resilience','Tolerates unnecessary pain','Recovers and redirects'],['High standards','Becomes perfectionism','Produces excellence'],['Self-control','Suppresses needs','Responds rather than reacts']
+    ['Intelligence','Rationalizes self-neglect','Creates better choices'],['Discipline','Endures unhealthy situations','Builds work worth sustaining'],['Responsibility','Carries everyone','Chooses worthy obligations'],['Ambition','Never feels enough','Pursues mastery worth having'],['Independence','Becomes emotionally isolated','Protects healthy autonomy'],['Adaptability','Normalizes bad environments','Changes course without normalizing harm'],['Loyalty','Stays too long','Commits deeply with boundaries'],['Strategic thinking','Overthinks life','Turns strategy toward deliberate choices'],['Competence','Becomes exploited','Gains authority and ownership'],['Resilience','Tolerates unnecessary pain','Recovers and redirects'],['High standards','Becomes perfectionism','Produces excellence'],['Self-control','Suppresses needs','Names needs before acting']
   ];
   function strengths() {
     var host = one('#sl-strength-list'); if (!host) return;
@@ -108,16 +108,16 @@
     function paint() {
       var t = +input.value / 100, x = 44 + t * 636, y = 220 - Math.pow(t, 2.35) * 184, cost = Math.round(Math.pow(t, 2.35) * 100);
       one('#sl-speak-line').setAttribute('x1', x); one('#sl-speak-line').setAttribute('x2', x); one('#sl-speak-dot').setAttribute('cx', x); one('#sl-speak-dot').setAttribute('cy', y); one('#sl-timing-cost').textContent = cost;
-      one('#sl-timing-answer').textContent = t < .35 ? 'The issue is still small enough to describe without prosecution. Early speech protects both people from private escalation.' : t < .7 ? 'Interpretation has begun hardening around the facts. The conversation now carries more history than the original issue.' : 'The decision may look sudden from outside because the entire argument happened privately first.';
+      one('#sl-timing-answer').textContent = t < .35 ? 'The issue is still small enough to describe without building a case. Speaking now keeps private interpretations from hardening.' : t < .7 ? 'Interpretation has begun hardening around the facts. The conversation now carries more history than the original issue.' : 'The decision may look sudden from outside because the entire argument happened privately first.';
     }
     input.addEventListener('input', paint); paint();
   }
 
   var SCENARIOS = {
-    work:{inherits:'health, options, and professional identity',refuse:'Refuse permanent emergency as the normal operating model.',protect:'Protect sleep, portable skill, reputation, and enough runway to leave.',say:'“This load is not sustainable under the current authority and resources.”',choose:'Choose work that deserves your capacity instead of merely consuming it.'},
+    work:{inherits:'health, options, and professional identity',refuse:'Refuse permanent emergency as the normal operating model.',protect:'Protect sleep, portable skill, reputation, and enough runway to leave.',say:'“This load is not sustainable under the current authority and resources.”',choose:'Choose work that deserves your capacity instead of consuming it.'},
     relationship:{inherits:'trust, attachment patterns, and accumulated silence',refuse:'Refuse reciprocity that exists only when you overgive.',protect:'Protect honesty, autonomy, dignity, and the ability to repair conflict.',say:'“This is what I need, and I need to know whether it can exist here.”',choose:'Choose repair when it is mutual; choose departure when self-erasure is the price.'},
-    approval:{inherits:'a life optimized for other people’s reactions',refuse:'Refuse applause as the final authority on a private life.',protect:'Protect the internal reference point that can hear advice without obeying it.',say:'“I understand the disappointment. This is still my decision.”',choose:'Choose the aligned option even when the impressive option is easier to explain.'},
-    sunk:{inherits:'the future cost of defending a past decision',refuse:'Refuse to spend more future merely to justify what has already been spent.',protect:'Protect remaining time, capital, health, and the option to redirect.',say:'“The original investment is gone. I am deciding from today forward.”',choose:'Choose using future value and cost, not the emotional weight of history.'}
+    approval:{inherits:'a life optimized for other people’s reactions',refuse:'Refuse applause as the final authority on a private life.',protect:'Protect the judgment that can hear advice without surrendering the decision.',say:'“I understand the disappointment. This is still my decision.”',choose:'Choose what fits your life, even when the impressive option is easier to explain.'},
+    sunk:{inherits:'the future cost of defending a past decision',refuse:'Refuse to spend more of your future only to justify what has already been spent.',protect:'Protect remaining time, capital, health, and the option to redirect.',say:'“The original investment is gone. I am deciding from today forward.”',choose:'Choose using future value and cost, not the emotional weight of history.'}
   };
   function trustee() {
     var scenario = 'work', direction = '';

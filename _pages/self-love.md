@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Self-Love
-subtitle: A risk-control system for a capable life.
-description: A visual operating manual for protecting capacity, freedom, health, relationships, and self-respect from successful self-abandonment.
+subtitle: Risk control for people who can endure too much.
+description: A visual guide to keeping intelligence, discipline, and ambition from turning endurance into self-abandonment.
 permalink: /self-love/
 layout-class: page self-love
 extra_css: /css/self-love.css
@@ -14,7 +14,7 @@ extra_js: /js/components/self-love.js
 <section class="sl-section sl-hero" id="control-system">
   <p class="sl-kicker">The person you must not abandon</p>
   <h1>Your strengths need a governor.</h1>
-  <p class="sl-hero-deck">Self-love is not a confidence exercise. It is the control system that stops intelligence, discipline, ambition, and resilience from constructing a life that succeeds against the person living it.</p>
+  <p class="sl-hero-deck">Self-love keeps intelligence, discipline, ambition, and resilience from building a life that rewards everyone except the person living it.</p>
 
   <div class="sl-control-map" role="img" aria-label="Personal strengths pass through self-love and become either self-abandonment or chosen contribution.">
     <div class="sl-power-bank">
@@ -34,7 +34,7 @@ extra_js: /js/components/self-love.js
 </nav>
 
 <section class="sl-section" id="consent">
-  <header class="sl-section-head"><span>01 · Capacity is not consent</span><h2>Being able to carry it is not a reason to agree.</h2></header>
+  <header class="sl-section-head"><span>01 · Set the load by consent</span><h2>Let consent decide your obligations.</h2></header>
   <figure class="sl-figure sl-load-figure">
     <figcaption><b>Capacity / consent control</b><span>Move the load and the protection threshold.</span></figcaption>
     <div class="sl-load-stage" aria-hidden="true">
@@ -52,9 +52,9 @@ extra_js: /js/components/self-love.js
 </section>
 
 <section class="sl-section" id="trial">
-  <header class="sl-section-head"><span>02 · End the trial</span><h2>Achievement can express worth. It cannot manufacture it.</h2></header>
+  <header class="sl-section-head"><span>02 · End the trial</span><h2>Treat achievement as an expression of worth, never its source.</h2></header>
   <figure class="sl-figure sl-trial-figure">
-    <figcaption><b>The moving standard</b><span>Complete achievements and watch the finish line move.</span></figcaption>
+    <figcaption><b>The moving standard</b><span>Add achievements and watch the finish line move.</span></figcaption>
     <div class="sl-trial-stage">
       <svg viewBox="0 0 700 260" role="img" aria-label="Achievement rises while the standard repeatedly moves higher and validation fades.">
         <line class="sl-axis" x1="52" y1="220" x2="655" y2="220"/>
@@ -86,11 +86,11 @@ extra_js: /js/components/self-love.js
     <button type="button" class="sl-protect" id="sl-protect" aria-pressed="false"><i></i><span>Protect freedom as success rises</span></button>
     <p class="sl-figure-answer" id="sl-cage-answer" role="status"></p>
   </figure>
-  <p class="sl-question">Successful for whom?</p>
+  <p class="sl-question">Track what success costs the person living it.</p>
 </section>
 
 <section class="sl-section" id="strengths">
-  <header class="sl-section-head"><span>04 · Govern the strengths</span><h2>The same quality can build a life or quietly consume it.</h2></header>
+  <header class="sl-section-head"><span>04 · Govern the strengths</span><h2>Every strength carries a failure mode.</h2></header>
   <div class="sl-strength-system">
     <div class="sl-strength-list" id="sl-strength-list" role="listbox" aria-label="Choose a strength"></div>
     <div class="sl-strength-viz" aria-live="polite">
@@ -143,7 +143,7 @@ extra_js: /js/components/self-love.js
 
 <section class="sl-section sl-closing">
   <div class="sl-final-system">
-    <span>extraordinary life</span><i>+</i><span>protected person</span><strong>both are the responsibility</strong>
+    <span>extraordinary life</span><i>+</i><span>protected person</span><strong>both are your responsibility</strong>
   </div>
   <blockquote>“If I genuinely loved and respected myself, what would I refuse, what would I protect, what would I say, and what would I choose now?”</blockquote>
 </section>
