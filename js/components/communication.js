@@ -492,9 +492,57 @@
         86: { label: 'Teach-back · AHRQ', url: 'https://www.ahrq.gov/patient-safety/reports/engage/teachback.html', art: '<path class="vg" d="M48 35H111M118 45V70M109 79H50M41 70V45"/><path class="va" d="M103 30L112 35 103 40M123 62L118 71 113 62M57 84L48 79 57 74M36 53L41 44 46 53"/><text class="vl" x="80" y="22">EXPLAIN CLEARLY</text><text class="vl" x="132" y="57">ASK</text><text class="vl" x="80" y="95">OWN WORDS</text><text class="vl" x="27" y="57">CHECK</text><circle class="vb" cx="80" cy="55" r="18"/><text class="vl" x="80" y="53">CLARIFY</text><text class="vs" x="80" y="62">AND RETEACH</text>' },
         88: { label: 'Pareto · 80/20', url: 'https://en.wikipedia.org/wiki/Pareto_principle', art: '<path class="vg" d="M18 91H146M18 16V91"/><path class="va" d="M18 91C30 48 41 31 50 26C68 17 101 15 146 15"/><path class="vb" d="M44 91V27H18"/><path class="vg" d="M44 27H146" stroke-dasharray="3 3"/><text class="vl" x="44" y="103">20% INPUT</text><text class="vl" x="18" y="22">80%</text><text class="vs" x="104" y="40">VITAL FEW</text>' }
       }[n];
+      var structured = {
+        4:['Headline','Reason','Evidence','Implication','Detail'],5:['Conclusion','Reason','Implication'],
+        6:['Bottom line','Why','Need from you'],7:['Answer','Key-line reasons','Supporting evidence'],
+        8:['Situation','Complication','Question','Answer'],9:['Point','Reason','Example','Point restated'],
+        10:['First point','Second point','Third point'],14:['High confidence','Moderate confidence','Working hypothesis'],
+        16:['Fact','Interpretation','Recommendation'],17:['View','Why','Uncertainty','Recommendation','Need'],
+        19:['Silence','Analysis','Certainty','Strong rejection'],22:['Prior knowledge','What they care about','Hidden worry','Usable action'],
+        25:['Example','Pattern','Principle'],26:['10 seconds','30 seconds','2 minutes','10 minutes'],
+        27:['Listen','Affirm','Respond','Add information'],30:['Situation','Observable behavior','Impact'],
+        31:['Describe','Express','Specify','Consequences'],32:['Observation','Feeling','Need','Request'],
+        33:['Small problem','Mention it','Observe response','Clarify','Decide'],37:['Ask','Find assumption','Confirm objective','Add evidence','Offer alternative','Invite correction'],
+        38:['Their objective','Their obstacle','Your proposal','Evidence','Cost','Next step'],40:['Negotiated deal','Compare with BATNA','Accept or walk away'],43:['Position','Underlying interest','Generate options'],
+        41:['Ideal','Target','Minimum acceptable','Walk-away'],48:['Name the error','Name the impact','Correct it'],
+        50:['Direction','Meaning','Priorities'],51:['Why','What','What not','Who','When','Decision rights','Success'],
+        53:['Objective','Constraints','Authority','Deadline','Quality bar','Check-in'],54:['Continue','Change','Why','Next'],
+        56:['Question','Answer','Three reasons','Evidence','Risk','Recommendation','Next action'],58:['They must know','You must learn','Decision wanted','Expected objection','Sentence to say'],
+        60:['Decision','Owner','Deadline','Open issue','Next checkpoint'],61:['Subject','Conclusion','Reason','Action'],
+        62:['Status','What changed','Why it matters','Next','Need'],67:['Notice','Connect','Ask','Exit'],
+        68:['5 sec: identity','20 sec: problem','60 sec: why and difference'],71:['Acknowledge concern','Repeat decision','Repeat without new reasons'],
+        75:['Explain','Responsibility','Regret','Repair','Prevent repeat','Request forgiveness'],76:['Acknowledgment','Repair','Changed behavior'],
+        77:['Known','Unknown','What we are doing','What people should do','Next information','Consistent updates','Trusted messenger','Information may change'],78:['Known','Unknown','Recommendation','Downside if wrong','Change trigger'],
+        86:['Explain clearly','Ask for own words','Check understanding','Clarify and reteach'],87:['What is it?','Why it matters','How it works','Example','Exception'],
+        89:['Answer','Stop at complete'],96:['Recommendation','Business consequence','Risk','Ask'],
+        97:['Why','Good outcome','Decision freedom','Escalation point'],100:['Term','Plain definition','Example'],
+        105:['Your outcome','Their outcome','Must understand','Need to learn','Sentence to say'],
+        106:['Listen','Headline','Three reasons','Check understanding','Invite view','Surface disagreement','Decision','Next step'],
+        107:['Decision','Unresolved','Owner','Deadline','Intent matched?','Written recap'],
+        108:['Thinking','Disagreement','Emotional','Strategic'],115:['Unknown','Current guess','Needed information','Return time'],
+        116:['Recommendation','Reasons','Largest risk','Change condition'],117:['Shared objective','Disputed assumption','Concern','Test instead'],
+        118:['Situation','Result','Needed change'],119:['Listen','Think together','Solve'],120:['Capacity','Trade-off','Choose priority'],
+        121:['Outcome','Audience','Headline','Three reasons','Concern','Ask'],122:['Right part','Right order','Right depth','Implication','Room to respond','Next right action']
+      }[n];
+      var sources = {
+        10:{label:'Rule of three · Toastmasters',url:'https://content.toastmasters.org/image/upload/toastmaster-magazine-april-2011.pdf'},
+        71:{label:'Broken record · CCI',url:'https://www.cci.health.wa.gov.au/-/media/CCI/Consumer-Modules/Assert-Yourself/Assert-Yourself---04---How-to-Behave-More-Assertively.pdf'},
+        75:{label:'Effective apology · Berkeley',url:'https://ggia.berkeley.edu/practice/making_an_effective_apology'},
+        77:{label:'Crisis communication · GCS',url:'https://www.communications.gov.uk/publication/crisis-comms-planning-guide/'}
+      }[n];
+      function numberedFlow(steps, cycle) {
+        var count=steps.length, points=[];
+        if(cycle){points=[[80,18],[128,55],[80,92],[32,55]];}
+        else if(count<=4){for(var i=0;i<count;i++)points.push([24+(count===1?56:i*112/(count-1)),55]);}
+        else {var top=Math.ceil(count/2), bottom=count-top, j;for(j=0;j<top;j++)points.push([22+(top===1?58:j*116/(top-1)),30]);for(j=0;j<bottom;j++)points.push([138-(bottom===1?58:j*116/(bottom-1)),80]);}
+        var paths='';for(var p=0;p<points.length-1;p++)paths+='<path class="vg" d="M'+points[p][0]+' '+points[p][1]+'L'+points[p+1][0]+' '+points[p+1][1]+'"/>';
+        if(cycle)paths+='<path class="vg" d="M32 55Q32 18 70 18"/>';
+        return paths+points.map(function(pt,i){return '<circle class="'+(['va','vb','vc','vd'][i%4])+'" cx="'+pt[0]+'" cy="'+pt[1]+'" r="11"/><text class="vn" x="'+pt[0]+'" y="'+(pt[1]+3)+'">'+(i+1)+'</text>';}).join('');
+      }
+      if(structured && (!established || [8,9,27,30,31,32,86].indexOf(n)>-1)) art=numberedFlow(structured,n===27||n===86);
       if (established) {
-        art = established.art;
-      } else {
+        if(!art) art = established.art;
+      } else if (!art) {
         /* Every non-framework lesson has its own hand-drawn semantic symbol.
            It is the illustration—not a badge pasted onto a category chart. */
         art = '<circle class="vhalo" cx="80" cy="52" r="39"/>' +
@@ -502,8 +550,10 @@
           '<circle class="vdot" cx="26" cy="72" r="3"/><circle class="vdot" cx="138" cy="65" r="3"/>' +
           '<svg class="vlesson" x="48" y="20" width="64" height="64"><use href="#cmi-' + n + '"/></svg>';
       }
-      var caption = established ? '<a href="' + established.url + '" target="_blank" rel="noopener">' + esc(established.label) + '</a>' : esc(title);
-      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': lesson illustration') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + caption + ' · ' + String(n).padStart(3, '0') + '</figcaption></figure>';
+      var credit=established||sources;
+      var caption = credit ? '<a href="' + credit.url + '" target="_blank" rel="noopener">' + esc(credit.label) + '</a>' : esc(title);
+      var key=structured?'<ol class="cm-viz-key">'+structured.map(function(step,i){return '<li><b>'+(i+1)+'</b><span>'+esc(step)+'</span></li>';}).join('')+'</ol>':'';
+      return '<figure class="cm-lesson-viz'+(structured?' has-key':'')+'" role="img" aria-label="' + esc(title + ': lesson illustration') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg>'+key+'<figcaption>' + caption + ' · ' + String(n).padStart(3, '0') + '</figcaption></figure>';
     }
 
     var grid = document.createElement('div');
