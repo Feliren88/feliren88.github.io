@@ -142,3 +142,4 @@ body:has(.communication) #pointcloud-bg,body:has(.communication) .shape-toggle-b
 .cm-lesson-card[open]{grid-column:auto}
 .cm-lesson-viz .vmark{fill:color-mix(in srgb,var(--cm-blue) 8%,var(--surface));stroke:var(--line);stroke-width:1}
 .cm-lesson-viz .vicon{color:var(--cm-blue);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.cm-lesson-viz .vl{fill:var(--text);font:650 7px/1 "Space Grotesk",sans-serif;text-anchor:middle}.cm-lesson-viz .vs{fill:var(--muted);font:600 5.5px/1 "Space Grotesk",sans-serif;text-anchor:middle}.cm-lesson-viz figcaption a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:2px}
