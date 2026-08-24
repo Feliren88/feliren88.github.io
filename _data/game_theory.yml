@@ -149,112 +149,240 @@ levers:
     icon: gt-players
     ask: "Who is at the table, and who could be?"
     example: "A bad cofounder is rarely a negotiation problem. It is a casting problem."
+    viz:
+      type: swap
+      before: "Negotiate harder"
+      after: "Change who is at the table"
+      cap: "A bad cofounder is a casting problem."
 
   - key: "Payoffs"
     icon: gt-payoffs
     ask: "What is each person rewarded for?"
     example: "If comp rewards beating colleagues, no amount of asking for collaboration will produce it."
+    viz:
+      type: scale
+      a: "Asking for collaboration"
+      b: "What comp rewards"
+      heavy: "b"
+      cap: "The reward structure wins."
 
   - key: "Information"
     icon: gt-information
     ask: "Who knows what, and what stays hidden?"
     example: "Mistrust often means low observability. Make the work visible before appealing to good faith."
+    viz:
+      type: swap
+      before: "Appeal to good faith"
+      after: "Make the work visible"
+      cap: "Mistrust often means low observability."
 
   - key: "Sequence"
     icon: gt-sequence
     ask: "Who moves first, and can that change?"
     example: "Split one irreversible commitment into stages and each stage buys information for the next."
+    viz:
+      type: order
+      cap: "Split one irreversible commitment into stages."
+      items:
+        - "Stage one"
+        - "Buys information"
+        - "Stage two"
 
   - key: "Rules"
     icon: gt-rules
     ask: "Which constraints are real, and which come from habit?"
     example: "Constant interruptions point to a bad protocol. Change the protocol so you stop absorbing the cost."
+    viz:
+      type: swap
+      before: "Absorb the interruptions"
+      after: "Change the protocol"
+      cap: "A bad protocol, not a bad day."
 
   - key: "Arena"
     icon: gt-arena
     ask: "Is this the right place to be playing at all?"
     example: "In a commodity market everyone competes on price. Differentiate, or find a market where you are scarce."
+    viz:
+      type: dichotomy
+      mine: "A market where you are scarce"
+      theirs: "A commodity market"
+      cap: "Differentiate, or move."
 
   - key: "Exit"
     icon: gt-exit
     ask: "What happens if you walk, and how good is that?"
     example: "Your bargaining power is set before the negotiation by how survivable no-deal is."
+    viz:
+      type: measure
+      limit: "How survivable no-deal is"
+      beyond: "Anything you say at the table"
+      cap: "Bargaining power is set before the negotiation."
 
 laws:
   - n: 1
     icon: gt-l-survival
     law: "Survival precedes optimisation"
     why: "Nothing compounds after ruin. Expected value stops being the right measure once a loss ends your ability to keep playing."
+    viz:
+      type: measure
+      limit: "Survival"
+      beyond: "Everything you would optimise"
+      cap: "Nothing compounds after ruin."
 
   - n: 2
     icon: gt-repeat
     law: "Most human games repeat"
     why: "The same people come back. That is what makes reputation an asset and betrayal expensive."
+    viz:
+      type: loop
+      cap: "The same people come back."
+      nodes:
+        - "You act"
+        - "They remember"
+        - "You meet again"
 
   - n: 3
     icon: gt-l-positive
     law: "Most valuable games are positive-sum"
     why: "Treating a joint problem as a contest destroys the surplus you were both there to create."
+    viz:
+      type: scale
+      a: "Winning the contest"
+      b: "The surplus you could share"
+      heavy: "b"
+      cap: "Treating a joint problem as a contest destroys it."
 
   - n: 4
     icon: gt-l-zero
     law: "Some games really are zero-sum"
     why: "One promotion, one contract, one auction. Misreading these as cooperative is its own kind of loss."
+    viz:
+      type: split
+      in: "One promotion, one contract"
+      cap: "Some games really are fixed."
+      out:
+        - k: "Genuinely zero-sum"
+          on: true
+        - k: "Misread as shareable"
+          on: false
 
   - n: 5
     icon: gt-l-response
     law: "Include the response"
     why: "Evaluate a decision after everyone else has replied to it."
+    viz:
+      type: gate
+      before: "Your move"
+      pause: "Their reply"
+      after: "What it was worth"
+      cap: "Evaluate after everyone has replied."
 
   - n: 6
     icon: gt-rules
     law: "Change the game before playing harder"
     why: "Effort inside a badly structured game is the most expensive way to lose."
+    viz:
+      type: swap
+      before: "Play harder"
+      after: "Change the structure"
+      cap: "Effort inside a bad game is expensive."
 
   - n: 7
     icon: gt-information
     law: "Information has option value"
     why: "Under uncertainty, a cheap experiment is usually worth more than a confident decision."
+    viz:
+      type: scale
+      a: "Deciding now"
+      b: "A cheap experiment"
+      heavy: "b"
+      cap: "Under uncertainty, information is worth more."
 
   - n: 8
     icon: gt-l-escalate
     law: "Escalate commitment with evidence"
     why: "Small bet, then evidence, then large bet. Reversing that order is how people lose big."
+    viz:
+      type: order
+      cap: "Reversing that order is how people get hurt."
+      items:
+        - "Small bet"
+        - "Evidence"
+        - "Large bet"
 
   - n: 9
     icon: gt-sunk
     law: "Sunk cost has no vote"
     why: "What you already spent is a fact about the past. Only future costs and benefits are decidable."
+    viz:
+      type: dichotomy
+      mine: "Future costs and benefits"
+      theirs: "What you already spent"
+      cap: "The past gets no vote."
 
   - n: 10
     icon: gt-exit
     law: "Improve your outside option first"
     why: "Bargaining power is built before the conversation, by making no-deal survivable."
+    viz:
+      type: gate
+      before: "Build the alternative"
+      pause: "Then talk"
+      after: "Better terms"
+      cap: "Power is built before the conversation."
 
   - n: 11
     icon: gt-l-reputation
     law: "Reputation compounds and decays asymmetrically"
     why: "It takes years to build and one transaction to spend. Price it accordingly."
+    viz:
+      type: diverge
+      up: "Years to build"
+      down: "One transaction to spend"
+      cap: "It rebuilds far slower than it breaks."
 
   - n: 12
     icon: gt-l-incentives
     law: "Incentives beat intentions"
     why: "When the stated goal and the reward structure disagree, the reward structure wins."
+    viz:
+      type: scale
+      a: "The stated goal"
+      b: "The reward structure"
+      heavy: "b"
+      cap: "When they disagree, the rewards win."
 
   - n: 13
     icon: gt-l-agency
     law: "Avoid success that costs you agency"
     why: "A well-paid role you cannot leave is a trap that looks like an achievement."
+    viz:
+      type: diverge
+      up: "Pay and status"
+      down: "Your ability to leave"
+      cap: "A trap that looks like an achievement."
 
   - n: 14
     icon: gt-l-trajectory
     law: "Optimise the trajectory"
     why: "Ask whether today's choice improves the sequence of states that follows."
+    viz:
+      type: order
+      cap: "Ask what today improves downstream."
+      items:
+        - "This choice"
+        - "The next state"
+        - "The sequence after"
 
   - n: 15
     icon: gt-l-choose
     law: "Choose games carefully"
     why: "Strong players spend less of their life in games where winning means nothing."
+    viz:
+      type: dichotomy
+      mine: "Games worth winning"
+      theirs: "Games where winning costs too much"
+      cap: "Strong players spend less life in the second."
 
 dashboard:
   - key: "Career"
@@ -365,30 +493,61 @@ five:
     vs: "Employers, markets, competitors, institutions"
     ask: "What do they do after I move?"
     note: "This is the visible game. It matters, though the other four layers may shape the decade more."
+    viz:
+      type: split
+      in: "Your move"
+      cap: "The visible game."
+      out:
+        - k: "Employers, markets, competitors"
+          on: true
+        - k: "Institutions"
+          on: true
 
   - key: "Cooperative"
     icon: gt-players
     vs: "Partners, friends, colleagues, family"
     ask: "Can we make more together than apart?"
     note: "Much of life's value is made with other people. Treating every shared problem as a contest destroys some of that value."
+    viz:
+      type: scale
+      a: "Treating it as a contest"
+      b: "What you make together"
+      heavy: "b"
+      cap: "Much of life’s value is made with other people."
 
   - key: "Intrapersonal"
     icon: gt-sequence
     vs: "Tomorrow-you, tired-you, frightened-you"
     ask: "What am I committing my future self to?"
     note: "Your future selves cannot object to choices you make for them today. Debt, habits, contracts and specialisation all belong to this layer."
+    viz:
+      type: gate
+      before: "Today-you decides"
+      pause: "They cannot object"
+      after: "Tomorrow-you pays"
+      cap: "Your future selves are players too."
 
   - key: "Against nature"
     icon: gt-ruin
     vs: "Illness, markets, timing, accident"
     ask: "What survives if the draw goes badly?"
     note: "Nature is indifferent. Build plans that can survive bad timing, illness and an unlucky draw."
+    viz:
+      type: measure
+      limit: "What survives a bad draw"
+      beyond: "Plans that need good timing"
+      cap: "Nature is indifferent."
 
   - key: "Meta"
     icon: gt-tree
     vs: "The choice of which game to enter"
     ask: "Why am I playing this one at all?"
     note: "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play."
+    viz:
+      type: swap
+      before: "Play this game harder"
+      after: "Choose a better game"
+      cap: "This layer questions the frame itself."
 
 domains:
   - key: "Career"
@@ -399,6 +558,11 @@ domains:
     risk: "Becoming indispensable in a role that creates no bargaining power. Praise rises while outside options stay flat."
     ask: "Does my future bargaining power grow with this responsibility?"
     math: "Skill → Scarcity → Evidence → Bargaining Power → Choice"
+    viz:
+      type: diverge
+      up: "Praise and indispensability"
+      down: "Bargaining power"
+      cap: "Hard to replace is not the same as strong."
 
   - key: "Income"
     icon: gt-payoffs
@@ -408,6 +572,11 @@ domains:
     risk: "One employer, one client, one credential. Dependency turns a good income into a fragile one."
     ask: "What mechanism decides what this can eventually pay?"
     math: "Income ∝ Hours &rarr; Income ∝ Judgement, Scarcity, Ownership"
+    viz:
+      type: spread
+      many: "One employer, one client"
+      few: "Pay that grows with ownership"
+      cap: "Dependency turns a good income into a hostage."
 
   - key: "Wealth"
     icon: gt-wealth
@@ -417,6 +586,11 @@ domains:
     risk: "Position sizes that carry real ruin risk. One bad sequence and the compounding stops."
     ask: "If the downside lands at the worst moment, am I still playing?"
     math: "W<sub>t+1</sub> = W<sub>t</sub>(1 + r) − C &nbsp;subject to&nbsp; P(ruin) &lt; ε"
+    viz:
+      type: measure
+      limit: "Position sizes you survive"
+      beyond: "Real ruin risk"
+      cap: "One bad sequence ends the compounding."
 
   - key: "Ownership"
     icon: gt-leverage
@@ -426,6 +600,12 @@ domains:
     risk: "Entering because ownership sounds like freedom, without a customer or an unfair advantage."
     ask: "What happens if this works and the incumbent responds rationally?"
     math: ""
+    viz:
+      type: gate
+      before: "Ownership sounds like freedom"
+      pause: "A customer, an advantage"
+      after: "A claim worth holding"
+      cap: "The upside has to be real first."
 
   - key: "Relationships"
     icon: gt-trust
@@ -435,6 +615,12 @@ domains:
     risk: "Treating it as zero-sum. Winning the argument while lowering the value of the relationship."
     ask: "Does repeated interaction here increase trust and capability, or steadily reduce them?"
     math: "δ ≥ (T − R) / (T − P)"
+    viz:
+      type: scale
+      a: "Winning the argument"
+      b: "The value of the relationship"
+      heavy: "b"
+      cap: "Treating it as zero-sum lowers both."
 
   - key: "Family"
     icon: gt-home
@@ -444,6 +630,11 @@ domains:
     risk: "Free-riding on invisible labour. Nobody intends it, and the structure produces it anyway."
     ask: "Is this a character problem or an incentive problem?"
     math: ""
+    viz:
+      type: surface
+      top: "Things run smoothly"
+      under: "Invisible labour"
+      cap: "Nobody intends it; the structure produces it."
 
   - key: "Network"
     icon: gt-network
@@ -453,6 +644,11 @@ domains:
     risk: "Treating a network as something to extract from. People remember that behaviour."
     ask: "Am I contributing here, or only withdrawing?"
     math: ""
+    viz:
+      type: spread
+      many: "A large contact list"
+      few: "Trusted relationships"
+      cap: "People remember extraction."
 
   - key: "Reputation"
     icon: gt-equilibrium
@@ -462,6 +658,11 @@ domains:
     risk: "Spending a decade of trust on one transaction. It rebuilds far slower than it breaks."
     ask: "Could someone without the underlying capability afford to send this signal?"
     math: "T<sub>t+1</sub> = (1 − ρ)T<sub>t</sub> + aR<sub>t</sub> − bD<sub>t</sub>, &nbsp; b &gt; a"
+    viz:
+      type: diverge
+      up: "A decade of trust"
+      down: "One transaction"
+      cap: "It compounds and decays asymmetrically."
 
   - key: "Authority"
     icon: gt-rules
@@ -471,6 +672,12 @@ domains:
     risk: "Responsibility far exceeding authority. You absorb the blame for outcomes you cannot control."
     ask: "Am I being given power, or only exposure?"
     math: "Responsibility ≈ Authority ≈ Accountability"
+    viz:
+      type: scale
+      a: "Responsibility"
+      b: "Authority you actually hold"
+      heavy: "a"
+      cap: "You absorb blame for outcomes you cannot control."
 
   - key: "Learning"
     icon: gt-tree
@@ -480,6 +687,11 @@ domains:
     risk: "Consuming information because it feels productive, without using it to change a decision or action."
     ask: "Can I use this yet, or have I only read about it?"
     math: "UCB<sub>i</sub> = μ̂<sub>i</sub> + c√(ln t / n<sub>i</sub>)"
+    viz:
+      type: diverge
+      up: "Information consumed"
+      down: "What you can now do"
+      cap: "It feels productive either way."
 
   - key: "Creativity"
     icon: gt-creativity
@@ -489,6 +701,11 @@ domains:
     risk: "Optimising novelty without usefulness, or usefulness without distinctiveness."
     ask: "Which term in the product is closest to zero?"
     math: "Value = Novelty × Relevance × Execution × Distribution"
+    viz:
+      type: dichotomy
+      mine: "Curiosity and non-generic knowledge"
+      theirs: "Novelty without usefulness"
+      cap: "Both halves are required."
 
   - key: "Identity"
     icon: gt-identity
@@ -498,6 +715,11 @@ domains:
     risk: "Outsourcing your sense of self to recognition. Praise then sets your direction, and so does criticism."
     ask: "Does repeating this make me more capable, or only more approved of?"
     math: "Confidence = f(Evidence, Repetition, Recovery)"
+    viz:
+      type: rings
+      core: "Evidence, repetition, recovery"
+      outer: "Recognition from others"
+      cap: "Praise then sets your direction."
 
   - key: "Emotion"
     icon: gt-emotion
@@ -507,6 +729,12 @@ domains:
     risk: "Local relief that raises the future cost. Avoidance and overwork both do this."
     ask: "Which version of me is making this call, and on what horizon?"
     math: ""
+    viz:
+      type: gate
+      before: "The urge"
+      pause: "Which player is deciding"
+      after: "The move"
+      cap: "Local relief raises the future cost."
 
   - key: "Meaning"
     icon: gt-meaning
@@ -516,6 +744,11 @@ domains:
     risk: "Rank-based satisfaction. The reference group climbs with you and the target keeps moving."
     ask: "Would I value this with no spectators?"
     math: "Satisfaction = f(rank) ⇒ no terminal state"
+    viz:
+      type: measure
+      limit: "Meaning that needs no rank"
+      beyond: "A reference group that climbs with you"
+      cap: "The target keeps moving."
 
   - key: "Geography"
     icon: gt-geography
@@ -525,6 +758,12 @@ domains:
     risk: "Committing permanently on holiday data. A visit and a life are different samples."
     ask: "What version of me does this place encourage?"
     math: ""
+    viz:
+      type: scale
+      a: "A visit"
+      b: "A life there"
+      heavy: "b"
+      cap: "Different samples entirely."
 
   - key: "Recovery"
     icon: gt-recovery
@@ -534,6 +773,11 @@ domains:
     risk: "Every domain withdrawing from one biological account with nobody governing the withdrawals."
     ask: "Is this replenishing energy or borrowing it from tomorrow?"
     math: "Demand &gt; Regeneration ⇒ fragility"
+    viz:
+      type: surface
+      top: "Every domain drawing down"
+      under: "One biological account"
+      cap: "Nobody is governing the account."
 
   - key: "Vitality"
     icon: gt-vitality
@@ -543,6 +787,11 @@ domains:
     risk: "Converting a temporary biological capacity into a permanent expectation."
     ask: "Is the current pace something I could hold for a decade?"
     math: "Sustainable = Intensity × Consistency × Years"
+    viz:
+      type: diverge
+      up: "Expectation"
+      down: "Capacity that repeats"
+      cap: "A temporary capacity becomes permanent expectation."
 
 regimes:
   - key: "Expansion"
@@ -550,36 +799,66 @@ regimes:
     when: "Evidence is strong and the environment rewards scale."
     opt: "Exposure, ownership, hiring, visibility"
     avoid: "Hedging so heavily you cannot press the advantage"
+    viz:
+      type: dichotomy
+      mine: "Exposure, ownership, hiring"
+      theirs: "Hedging so heavily you cannot press"
+      cap: "Evidence is strong; press it."
 
   - key: "Experimentation"
     icon: gt-tree
     when: "Uncertainty is high and commitments are still reversible."
     opt: "Information, variety, cheap reversible bets"
     avoid: "Committing before the evidence arrives"
+    viz:
+      type: dichotomy
+      mine: "Information, variety, cheap reversals"
+      theirs: "Committing before evidence arrives"
+      cap: "Commitments are still reversible."
 
   - key: "Consolidation"
     icon: gt-rules
     when: "Growth outran the systems holding it up."
     opt: "Processes, reserves, recurring economics"
     avoid: "Adding new fronts before the current one is stable"
+    viz:
+      type: dichotomy
+      mine: "Processes, reserves, recurring economics"
+      theirs: "Adding new fronts"
+      cap: "Growth outran the systems holding it up."
 
   - key: "Defence"
     icon: gt-trust
     when: "Downside risk has risen or the ground is moving."
     opt: "Solvency, reputation, optionality"
     avoid: "Concentrating further to recover losses"
+    viz:
+      type: dichotomy
+      mine: "Solvency, reputation, optionality"
+      theirs: "Concentrating further to recover"
+      cap: "The ground is moving."
 
   - key: "Recovery"
     icon: gt-slow
     when: "Capacity is depleted and judgement is degraded."
     opt: "Health, bandwidth, relationship repair"
     avoid: "Making irreversible decisions while depleted"
+    viz:
+      type: dichotomy
+      mine: "Health, bandwidth, relationships"
+      theirs: "Irreversible decisions while depleted"
+      cap: "Judgement is degraded."
 
   - key: "Transition"
     icon: gt-exit
     when: "The current game no longer fits, but the next is unbuilt."
     opt: "Runway, option value, information"
     avoid: "Burning the boat before the alternative exists"
+    viz:
+      type: dichotomy
+      mine: "Runway, option value, information"
+      theirs: "Burning the boat too early"
+      cap: "The next game is unbuilt."
 
 readiness:
   - q: lr

@@ -311,120 +311,279 @@
       "key": "Players",
       "icon": "gt-players",
       "ask": "Who is at the table, and who could be?",
-      "example": "A bad cofounder is rarely a negotiation problem. It is a casting problem."
+      "example": "A bad cofounder is rarely a negotiation problem. It is a casting problem.",
+      "viz": {
+        "before": "Negotiate harder",
+        "after": "Change who is at the table",
+        "cap": "A bad cofounder is a casting problem.",
+        "type": "swap"
+      }
     },
     {
       "key": "Payoffs",
       "icon": "gt-payoffs",
       "ask": "What is each person rewarded for?",
-      "example": "If comp rewards beating colleagues, no amount of asking for collaboration will produce it."
+      "example": "If comp rewards beating colleagues, no amount of asking for collaboration will produce it.",
+      "viz": {
+        "a": "Asking for collaboration",
+        "b": "What comp rewards",
+        "heavy": "b",
+        "cap": "The reward structure wins.",
+        "type": "scale"
+      }
     },
     {
       "key": "Information",
       "icon": "gt-information",
       "ask": "Who knows what, and what stays hidden?",
-      "example": "Mistrust often means low observability. Make the work visible before appealing to good faith."
+      "example": "Mistrust often means low observability. Make the work visible before appealing to good faith.",
+      "viz": {
+        "before": "Appeal to good faith",
+        "after": "Make the work visible",
+        "cap": "Mistrust often means low observability.",
+        "type": "swap"
+      }
     },
     {
       "key": "Sequence",
       "icon": "gt-sequence",
       "ask": "Who moves first, and can that change?",
-      "example": "Split one irreversible commitment into stages and each stage buys information for the next."
+      "example": "Split one irreversible commitment into stages and each stage buys information for the next.",
+      "viz": {
+        "items": [
+          "Stage one",
+          "Buys information",
+          "Stage two"
+        ],
+        "cap": "Split one irreversible commitment into stages.",
+        "type": "order"
+      }
     },
     {
       "key": "Rules",
       "icon": "gt-rules",
       "ask": "Which constraints are real, and which come from habit?",
-      "example": "Constant interruptions point to a bad protocol. Change the protocol so you stop absorbing the cost."
+      "example": "Constant interruptions point to a bad protocol. Change the protocol so you stop absorbing the cost.",
+      "viz": {
+        "before": "Absorb the interruptions",
+        "after": "Change the protocol",
+        "cap": "A bad protocol, not a bad day.",
+        "type": "swap"
+      }
     },
     {
       "key": "Arena",
       "icon": "gt-arena",
       "ask": "Is this the right place to be playing at all?",
-      "example": "In a commodity market everyone competes on price. Differentiate, or find a market where you are scarce."
+      "example": "In a commodity market everyone competes on price. Differentiate, or find a market where you are scarce.",
+      "viz": {
+        "mine": "A market where you are scarce",
+        "theirs": "A commodity market",
+        "cap": "Differentiate, or move.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Exit",
       "icon": "gt-exit",
       "ask": "What happens if you walk, and how good is that?",
-      "example": "Your bargaining power is set before the negotiation by how survivable no-deal is."
+      "example": "Your bargaining power is set before the negotiation by how survivable no-deal is.",
+      "viz": {
+        "limit": "How survivable no-deal is",
+        "beyond": "Anything you say at the table",
+        "cap": "Bargaining power is set before the negotiation.",
+        "type": "measure"
+      }
     }
   ],
   "laws": [
     {
       "law": "Survival precedes optimisation",
       "why": "Nothing compounds after ruin. Expected value stops being the right measure once a loss ends your ability to keep playing.",
-      "icon": "gt-l-survival"
+      "icon": "gt-l-survival",
+      "viz": {
+        "limit": "Survival",
+        "beyond": "Everything you would optimise",
+        "cap": "Nothing compounds after ruin.",
+        "type": "measure"
+      }
     },
     {
       "law": "Most human games repeat",
       "why": "The same people come back. That is what makes reputation an asset and betrayal expensive.",
-      "icon": "gt-repeat"
+      "icon": "gt-repeat",
+      "viz": {
+        "nodes": [
+          "You act",
+          "They remember",
+          "You meet again"
+        ],
+        "cap": "The same people come back.",
+        "type": "loop"
+      }
     },
     {
       "law": "Most valuable games are positive-sum",
       "why": "Treating a joint problem as a contest destroys the surplus you were both there to create.",
-      "icon": "gt-l-positive"
+      "icon": "gt-l-positive",
+      "viz": {
+        "a": "Winning the contest",
+        "b": "The surplus you could share",
+        "heavy": "b",
+        "cap": "Treating a joint problem as a contest destroys it.",
+        "type": "scale"
+      }
     },
     {
       "law": "Some games really are zero-sum",
       "why": "One promotion, one contract, one auction. Misreading these as cooperative is its own kind of loss.",
-      "icon": "gt-l-zero"
+      "icon": "gt-l-zero",
+      "viz": {
+        "in": "One promotion, one contract",
+        "out": [
+          [
+            "Genuinely zero-sum",
+            1
+          ],
+          [
+            "Misread as shareable",
+            0
+          ]
+        ],
+        "cap": "Some games really are fixed.",
+        "type": "split"
+      }
     },
     {
       "law": "Include the response",
       "why": "Evaluate a decision after everyone else has replied to it.",
-      "icon": "gt-l-response"
+      "icon": "gt-l-response",
+      "viz": {
+        "before": "Your move",
+        "pause": "Their reply",
+        "after": "What it was worth",
+        "cap": "Evaluate after everyone has replied.",
+        "type": "gate"
+      }
     },
     {
       "law": "Change the game before playing harder",
       "why": "Effort inside a badly structured game is the most expensive way to lose.",
-      "icon": "gt-rules"
+      "icon": "gt-rules",
+      "viz": {
+        "before": "Play harder",
+        "after": "Change the structure",
+        "cap": "Effort inside a bad game is expensive.",
+        "type": "swap"
+      }
     },
     {
       "law": "Information has option value",
       "why": "Under uncertainty, a cheap experiment is usually worth more than a confident decision.",
-      "icon": "gt-information"
+      "icon": "gt-information",
+      "viz": {
+        "a": "Deciding now",
+        "b": "A cheap experiment",
+        "heavy": "b",
+        "cap": "Under uncertainty, information is worth more.",
+        "type": "scale"
+      }
     },
     {
       "law": "Escalate commitment with evidence",
       "why": "Small bet, then evidence, then large bet. Reversing that order is how people lose big.",
-      "icon": "gt-l-escalate"
+      "icon": "gt-l-escalate",
+      "viz": {
+        "items": [
+          "Small bet",
+          "Evidence",
+          "Large bet"
+        ],
+        "cap": "Reversing that order is how people get hurt.",
+        "type": "order"
+      }
     },
     {
       "law": "Sunk cost has no vote",
       "why": "What you already spent is a fact about the past. Only future costs and benefits are decidable.",
-      "icon": "gt-sunk"
+      "icon": "gt-sunk",
+      "viz": {
+        "mine": "Future costs and benefits",
+        "theirs": "What you already spent",
+        "cap": "The past gets no vote.",
+        "type": "dichotomy"
+      }
     },
     {
       "law": "Improve your outside option first",
       "why": "Bargaining power is built before the conversation, by making no-deal survivable.",
-      "icon": "gt-exit"
+      "icon": "gt-exit",
+      "viz": {
+        "before": "Build the alternative",
+        "pause": "Then talk",
+        "after": "Better terms",
+        "cap": "Power is built before the conversation.",
+        "type": "gate"
+      }
     },
     {
       "law": "Reputation compounds and decays asymmetrically",
       "why": "It takes years to build and one transaction to spend. Price it accordingly.",
-      "icon": "gt-l-reputation"
+      "icon": "gt-l-reputation",
+      "viz": {
+        "up": "Years to build",
+        "down": "One transaction to spend",
+        "cap": "It rebuilds far slower than it breaks.",
+        "type": "diverge"
+      }
     },
     {
       "law": "Incentives beat intentions",
       "why": "When the stated goal and the reward structure disagree, the reward structure wins.",
-      "icon": "gt-l-incentives"
+      "icon": "gt-l-incentives",
+      "viz": {
+        "a": "The stated goal",
+        "b": "The reward structure",
+        "heavy": "b",
+        "cap": "When they disagree, the rewards win.",
+        "type": "scale"
+      }
     },
     {
       "law": "Avoid success that costs you agency",
       "why": "A well-paid role you cannot leave is a trap that looks like an achievement.",
-      "icon": "gt-l-agency"
+      "icon": "gt-l-agency",
+      "viz": {
+        "up": "Pay and status",
+        "down": "Your ability to leave",
+        "cap": "A trap that looks like an achievement.",
+        "type": "diverge"
+      }
     },
     {
       "law": "Optimise the trajectory",
       "why": "Ask whether today's choice improves the sequence of states that follows.",
-      "icon": "gt-l-trajectory"
+      "icon": "gt-l-trajectory",
+      "viz": {
+        "items": [
+          "This choice",
+          "The next state",
+          "The sequence after"
+        ],
+        "cap": "Ask what today improves downstream.",
+        "type": "order"
+      }
     },
     {
       "law": "Choose games carefully",
       "why": "Strong players spend less of their life in games where winning means nothing.",
-      "icon": "gt-l-choose"
+      "icon": "gt-l-choose",
+      "viz": {
+        "mine": "Games worth winning",
+        "theirs": "Games where winning costs too much",
+        "cap": "Strong players spend less life in the second.",
+        "type": "dichotomy"
+      }
     }
   ],
   "dashboard": [
@@ -560,35 +719,76 @@
       "icon": "gt-arena",
       "vs": "Employers, markets, competitors, institutions",
       "ask": "What do they do after I move?",
-      "note": "This is the visible game. It matters, though the other four layers may shape the decade more."
+      "note": "This is the visible game. It matters, though the other four layers may shape the decade more.",
+      "viz": {
+        "in": "Your move",
+        "out": [
+          [
+            "Employers, markets, competitors",
+            1
+          ],
+          [
+            "Institutions",
+            1
+          ]
+        ],
+        "cap": "The visible game.",
+        "type": "split"
+      }
     },
     {
       "key": "Cooperative",
       "icon": "gt-players",
       "vs": "Partners, friends, colleagues, family",
       "ask": "Can we make more together than apart?",
-      "note": "Much of life's value is made with other people. Treating every shared problem as a contest destroys some of that value."
+      "note": "Much of life's value is made with other people. Treating every shared problem as a contest destroys some of that value.",
+      "viz": {
+        "a": "Treating it as a contest",
+        "b": "What you make together",
+        "heavy": "b",
+        "cap": "Much of life’s value is made with other people.",
+        "type": "scale"
+      }
     },
     {
       "key": "Intrapersonal",
       "icon": "gt-sequence",
       "vs": "Tomorrow-you, tired-you, frightened-you",
       "ask": "What am I committing my future self to?",
-      "note": "Your future selves cannot object to choices you make for them today. Debt, habits, contracts and specialisation all belong to this layer."
+      "note": "Your future selves cannot object to choices you make for them today. Debt, habits, contracts and specialisation all belong to this layer.",
+      "viz": {
+        "before": "Today-you decides",
+        "pause": "They cannot object",
+        "after": "Tomorrow-you pays",
+        "cap": "Your future selves are players too.",
+        "type": "gate"
+      }
     },
     {
       "key": "Against nature",
       "icon": "gt-ruin",
       "vs": "Illness, markets, timing, accident",
       "ask": "What survives if the draw goes badly?",
-      "note": "Nature is indifferent. Build plans that can survive bad timing, illness and an unlucky draw."
+      "note": "Nature is indifferent. Build plans that can survive bad timing, illness and an unlucky draw.",
+      "viz": {
+        "limit": "What survives a bad draw",
+        "beyond": "Plans that need good timing",
+        "cap": "Nature is indifferent.",
+        "type": "measure"
+      }
     },
     {
       "key": "Meta",
       "icon": "gt-tree",
       "vs": "The choice of which game to enter",
       "ask": "Why am I playing this one at all?",
-      "note": "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play."
+      "note": "This layer lets you question the frame itself. Choosing a better game can matter more than improving your play.",
+      "viz": {
+        "before": "Play this game harder",
+        "after": "Choose a better game",
+        "cap": "This layer questions the frame itself.",
+        "type": "swap"
+      }
     }
   ],
   "domains": [
@@ -604,7 +804,13 @@
       "winning": "Capability that is hard to replace, with results other people can verify.",
       "risk": "Becoming indispensable in a role that creates no bargaining power. Praise rises while outside options stay flat.",
       "ask": "Does my future bargaining power grow with this responsibility?",
-      "math": "Skill → Scarcity → Evidence → Bargaining Power → Choice"
+      "math": "Skill → Scarcity → Evidence → Bargaining Power → Choice",
+      "viz": {
+        "up": "Praise and indispensability",
+        "down": "Bargaining power",
+        "cap": "Hard to replace is not the same as strong.",
+        "type": "diverge"
+      }
     },
     {
       "key": "Income",
@@ -618,7 +824,13 @@
       "winning": "Pay that grows with judgement, scarcity or ownership. Hours worked become less important.",
       "risk": "One employer, one client, one credential. Dependency turns a good income into a fragile one.",
       "ask": "What mechanism decides what this can eventually pay?",
-      "math": "Income ∝ Hours &rarr; Income ∝ Judgement, Scarcity, Ownership"
+      "math": "Income ∝ Hours &rarr; Income ∝ Judgement, Scarcity, Ownership",
+      "viz": {
+        "many": "One employer, one client",
+        "few": "Pay that grows with ownership",
+        "cap": "Dependency turns a good income into a hostage.",
+        "type": "spread"
+      }
     },
     {
       "key": "Wealth",
@@ -631,7 +843,13 @@
       "winning": "Staying in the game long enough for returns to compound.",
       "risk": "Position sizes that carry real ruin risk. One bad sequence and the compounding stops.",
       "ask": "If the downside lands at the worst moment, am I still playing?",
-      "math": "W<sub>t+1</sub> = W<sub>t</sub>(1 + r) − C &nbsp;subject to&nbsp; P(ruin) &lt; ε"
+      "math": "W<sub>t+1</sub> = W<sub>t</sub>(1 + r) − C &nbsp;subject to&nbsp; P(ruin) &lt; ε",
+      "viz": {
+        "limit": "Position sizes you survive",
+        "beyond": "Real ruin risk",
+        "cap": "One bad sequence ends the compounding.",
+        "type": "measure"
+      }
     },
     {
       "key": "Ownership",
@@ -645,7 +863,14 @@
       "winning": "Holding a claim on value you helped create, so the upside is not entirely someone else's.",
       "risk": "Entering because ownership sounds like freedom, without a customer or an unfair advantage.",
       "ask": "What happens if this works and the incumbent responds rationally?",
-      "math": null
+      "math": null,
+      "viz": {
+        "before": "Ownership sounds like freedom",
+        "pause": "A customer, an advantage",
+        "after": "A claim worth holding",
+        "cap": "The upside has to be real first.",
+        "type": "gate"
+      }
     },
     {
       "key": "Relationships",
@@ -659,7 +884,14 @@
       "winning": "A relationship in which conflict can be repaired reliably.",
       "risk": "Treating it as zero-sum. Winning the argument while lowering the value of the relationship.",
       "ask": "Does repeated interaction here increase trust and capability, or steadily reduce them?",
-      "math": "δ ≥ (T − R) / (T − P)"
+      "math": "δ ≥ (T − R) / (T − P)",
+      "viz": {
+        "a": "Winning the argument",
+        "b": "The value of the relationship",
+        "heavy": "b",
+        "cap": "Treating it as zero-sum lowers both.",
+        "type": "scale"
+      }
     },
     {
       "key": "Family",
@@ -673,7 +905,13 @@
       "winning": "Contributions and authority made explicit, so the load does not silently fall on one person.",
       "risk": "Free-riding on invisible labour. Nobody intends it, and the structure produces it anyway.",
       "ask": "Is this a character problem or an incentive problem?",
-      "math": null
+      "math": null,
+      "viz": {
+        "top": "Things run smoothly",
+        "under": "Invisible labour",
+        "cap": "Nobody intends it; the structure produces it.",
+        "type": "surface"
+      }
     },
     {
       "key": "Network",
@@ -687,7 +925,13 @@
       "winning": "A smaller set of trusted relationships can be worth more than a large contact list. These people would still take your call without the job titles.",
       "risk": "Treating a network as something to extract from. People remember that behaviour.",
       "ask": "Am I contributing here, or only withdrawing?",
-      "math": null
+      "math": null,
+      "viz": {
+        "many": "A large contact list",
+        "few": "Trusted relationships",
+        "cap": "People remember extraction.",
+        "type": "spread"
+      }
     },
     {
       "key": "Reputation",
@@ -699,7 +943,13 @@
       "winning": "Signals that are expensive to fake. Shipped work, kept promises, consistent judgement.",
       "risk": "Spending a decade of trust on one transaction. It rebuilds far slower than it breaks.",
       "ask": "Could someone without the underlying capability afford to send this signal?",
-      "math": "T<sub>t+1</sub> = (1 − ρ)T<sub>t</sub> + aR<sub>t</sub> − bD<sub>t</sub>, &nbsp; b &gt; a"
+      "math": "T<sub>t+1</sub> = (1 − ρ)T<sub>t</sub> + aR<sub>t</sub> − bD<sub>t</sub>, &nbsp; b &gt; a",
+      "viz": {
+        "up": "A decade of trust",
+        "down": "One transaction",
+        "cap": "It compounds and decays asymmetrically.",
+        "type": "diverge"
+      }
     },
     {
       "key": "Authority",
@@ -712,7 +962,14 @@
       "winning": "Responsibility, authority and accountability roughly in balance.",
       "risk": "Responsibility far exceeding authority. You absorb the blame for outcomes you cannot control.",
       "ask": "Am I being given power, or only exposure?",
-      "math": "Responsibility ≈ Authority ≈ Accountability"
+      "math": "Responsibility ≈ Authority ≈ Accountability",
+      "viz": {
+        "a": "Responsibility",
+        "b": "Authority you actually hold",
+        "heavy": "a",
+        "cap": "You absorb blame for outcomes you cannot control.",
+        "type": "scale"
+      }
     },
     {
       "key": "Learning",
@@ -724,7 +981,13 @@
       "winning": "Knowledge that transfers, compounds, and eventually changes what you do.",
       "risk": "Consuming information because it feels productive, without using it to change a decision or action.",
       "ask": "Can I use this yet, or have I only read about it?",
-      "math": "UCB<sub>i</sub> = μ̂<sub>i</sub> + c√(ln t / n<sub>i</sub>)"
+      "math": "UCB<sub>i</sub> = μ̂<sub>i</sub> + c√(ln t / n<sub>i</sub>)",
+      "viz": {
+        "up": "Information consumed",
+        "down": "What you can now do",
+        "cap": "It feels productive either way.",
+        "type": "diverge"
+      }
     },
     {
       "key": "Creativity",
@@ -737,7 +1000,13 @@
       "winning": "Work at the intersection of genuine curiosity and non-generic knowledge.",
       "risk": "Optimising novelty without usefulness, or usefulness without distinctiveness.",
       "ask": "Which term in the product is closest to zero?",
-      "math": "Value = Novelty × Relevance × Execution × Distribution"
+      "math": "Value = Novelty × Relevance × Execution × Distribution",
+      "viz": {
+        "mine": "Curiosity and non-generic knowledge",
+        "theirs": "Novelty without usefulness",
+        "cap": "Both halves are required.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Identity",
@@ -750,7 +1019,13 @@
       "winning": "Confidence built through evidence, repetition and recovery.",
       "risk": "Outsourcing your sense of self to recognition. Praise then sets your direction, and so does criticism.",
       "ask": "Does repeating this make me more capable, or only more approved of?",
-      "math": "Confidence = f(Evidence, Repetition, Recovery)"
+      "math": "Confidence = f(Evidence, Repetition, Recovery)",
+      "viz": {
+        "core": "Evidence, repetition, recovery",
+        "outer": "Recognition from others",
+        "cap": "Praise then sets your direction.",
+        "type": "rings"
+      }
     },
     {
       "key": "Emotion",
@@ -762,7 +1037,14 @@
       "winning": "Deciding from equilibrium. Recognising which internal player currently holds the pen.",
       "risk": "Local relief that raises the future cost. Avoidance and overwork both do this.",
       "ask": "Which version of me is making this call, and on what horizon?",
-      "math": null
+      "math": null,
+      "viz": {
+        "before": "The urge",
+        "pause": "Which player is deciding",
+        "after": "The move",
+        "cap": "Local relief raises the future cost.",
+        "type": "gate"
+      }
     },
     {
       "key": "Meaning",
@@ -774,7 +1056,13 @@
       "winning": "Sources of meaning that do not depend on outranking anyone.",
       "risk": "Rank-based satisfaction. The reference group climbs with you and the target keeps moving.",
       "ask": "Would I value this with no spectators?",
-      "math": "Satisfaction = f(rank) ⇒ no terminal state"
+      "math": "Satisfaction = f(rank) ⇒ no terminal state",
+      "viz": {
+        "limit": "Meaning that needs no rank",
+        "beyond": "A reference group that climbs with you",
+        "cap": "The target keeps moving.",
+        "type": "measure"
+      }
     },
     {
       "key": "Geography",
@@ -788,7 +1076,14 @@
       "winning": "An environment that amplifies you. No location is good in the abstract.",
       "risk": "Committing permanently on holiday data. A visit and a life are different samples.",
       "ask": "What version of me does this place encourage?",
-      "math": null
+      "math": null,
+      "viz": {
+        "a": "A visit",
+        "b": "A life there",
+        "heavy": "b",
+        "cap": "Different samples entirely.",
+        "type": "scale"
+      }
     },
     {
       "key": "Recovery",
@@ -800,7 +1095,13 @@
       "winning": "Recovery scheduled as part of the work, including when the work remains unfinished.",
       "risk": "Every domain withdrawing from one biological account with nobody governing the withdrawals.",
       "ask": "Is this replenishing energy or borrowing it from tomorrow?",
-      "math": "Demand &gt; Regeneration ⇒ fragility"
+      "math": "Demand &gt; Regeneration ⇒ fragility",
+      "viz": {
+        "top": "Every domain drawing down",
+        "under": "One biological account",
+        "cap": "Nobody is governing the account.",
+        "type": "surface"
+      }
     },
     {
       "key": "Vitality",
@@ -812,7 +1113,13 @@
       "winning": "Output that remains sustainable for years.",
       "risk": "Converting a temporary biological capacity into a permanent expectation.",
       "ask": "Is the current pace something I could hold for a decade?",
-      "math": "Sustainable = Intensity × Consistency × Years"
+      "math": "Sustainable = Intensity × Consistency × Years",
+      "viz": {
+        "up": "Expectation",
+        "down": "Capacity that repeats",
+        "cap": "A temporary capacity becomes permanent expectation.",
+        "type": "diverge"
+      }
     }
   ],
   "regimes": [
@@ -821,42 +1128,78 @@
       "icon": "gt-fast",
       "when": "Evidence is strong and the environment rewards scale.",
       "opt": "Exposure, ownership, hiring, visibility",
-      "avoid": "Hedging so heavily you cannot press the advantage"
+      "avoid": "Hedging so heavily you cannot press the advantage",
+      "viz": {
+        "mine": "Exposure, ownership, hiring",
+        "theirs": "Hedging so heavily you cannot press",
+        "cap": "Evidence is strong; press it.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Experimentation",
       "icon": "gt-tree",
       "when": "Uncertainty is high and commitments are still reversible.",
       "opt": "Information, variety, cheap reversible bets",
-      "avoid": "Committing before the evidence arrives"
+      "avoid": "Committing before the evidence arrives",
+      "viz": {
+        "mine": "Information, variety, cheap reversals",
+        "theirs": "Committing before evidence arrives",
+        "cap": "Commitments are still reversible.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Consolidation",
       "icon": "gt-rules",
       "when": "Growth outran the systems holding it up.",
       "opt": "Processes, reserves, recurring economics",
-      "avoid": "Adding new fronts before the current one is stable"
+      "avoid": "Adding new fronts before the current one is stable",
+      "viz": {
+        "mine": "Processes, reserves, recurring economics",
+        "theirs": "Adding new fronts",
+        "cap": "Growth outran the systems holding it up.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Defence",
       "icon": "gt-trust",
       "when": "Downside risk has risen or the ground is moving.",
       "opt": "Solvency, reputation, optionality",
-      "avoid": "Concentrating further to recover losses"
+      "avoid": "Concentrating further to recover losses",
+      "viz": {
+        "mine": "Solvency, reputation, optionality",
+        "theirs": "Concentrating further to recover",
+        "cap": "The ground is moving.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Recovery",
       "icon": "gt-slow",
       "when": "Capacity is depleted and judgement is degraded.",
       "opt": "Health, bandwidth, relationship repair",
-      "avoid": "Making irreversible decisions while depleted"
+      "avoid": "Making irreversible decisions while depleted",
+      "viz": {
+        "mine": "Health, bandwidth, relationships",
+        "theirs": "Irreversible decisions while depleted",
+        "cap": "Judgement is degraded.",
+        "type": "dichotomy"
+      }
     },
     {
       "key": "Transition",
       "icon": "gt-exit",
       "when": "The current game no longer fits, but the next is unbuilt.",
       "opt": "Runway, option value, information",
-      "avoid": "Burning the boat before the alternative exists"
+      "avoid": "Burning the boat before the alternative exists",
+      "viz": {
+        "mine": "Runway, option value, information",
+        "theirs": "Burning the boat too early",
+        "cap": "The next game is unbuilt.",
+        "type": "dichotomy"
+      }
     }
   ],
   "readiness": [

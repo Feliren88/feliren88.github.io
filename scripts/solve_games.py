@@ -110,6 +110,32 @@ def esc(s):
     return '"' + str(s).replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 
+def viz_lines(x, indent):
+    """Serialise a `viz` block. Written here rather than in the data file
+    because _data/game_theory.yml is generated and a hand edit is lost."""
+    v = x.get('viz')
+    if not v:
+        return []
+    pad = ' ' * indent
+    L = [pad + 'viz:', pad + '  type: ' + v['type']]
+    for k in ('in', 'mine', 'theirs', 'core', 'outer', 'before', 'pause', 'after',
+              'a', 'b', 'heavy', 'up', 'down', 'top', 'under', 'many', 'few',
+              'limit', 'beyond', 'cap'):
+        if k in v:
+            L.append(pad + '  %s: %s' % (k, esc(v[k])))
+    for lk in ('items', 'nodes'):
+        if lk in v:
+            L.append(pad + '  %s:' % lk)
+            L += [pad + '    - ' + esc(i) for i in v[lk]]
+    if 'out' in v:
+        L.append(pad + '  out:')
+        for o in v['out']:
+            L.append(pad + '    - k: ' + esc(o[0] if isinstance(o, (list, tuple)) else o['k']))
+            on = o[1] if isinstance(o, (list, tuple)) else o['on']
+            L.append(pad + '      on: ' + ('true' if on else 'false'))
+    return L
+
+
 def emit(src):
     games, laws, levers = src['games'], src['laws'], src['levers']
     dashboard, classifier = src['dashboard'], src['classifier']
@@ -151,6 +177,7 @@ def emit(src):
         L.append(f"    icon: {x['icon']}")
         L.append(f"    ask: {esc(x['ask'])}")
         L.append(f"    example: {esc(x['example'])}")
+        L += viz_lines(x, 4)
         L.append('')
 
     L.append('laws:')
@@ -159,6 +186,7 @@ def emit(src):
         L.append(f"    icon: {x['icon']}")
         L.append(f"    law: {esc(x['law'])}")
         L.append(f"    why: {esc(x['why'])}")
+        L += viz_lines(x, 4)
         L.append('')
 
     L.append('dashboard:')
@@ -183,6 +211,7 @@ def emit(src):
         L.append(f"    vs: {esc(x['vs'])}")
         L.append(f"    ask: {esc(x['ask'])}")
         L.append(f"    note: {esc(x['note'])}")
+        L += viz_lines(x, 4)
         L.append('')
 
     L.append('domains:')
@@ -195,6 +224,7 @@ def emit(src):
         L.append(f"    risk: {esc(x['risk'])}")
         L.append(f"    ask: {esc(x['ask'])}")
         L.append(f"    math: {esc(x['math']) if x.get('math') else '\"\"'}")
+        L += viz_lines(x, 4)
         L.append('')
 
     L.append('regimes:')
@@ -204,6 +234,7 @@ def emit(src):
         L.append(f"    when: {esc(x['when'])}")
         L.append(f"    opt: {esc(x['opt'])}")
         L.append(f"    avoid: {esc(x['avoid'])}")
+        L += viz_lines(x, 4)
         L.append('')
 
     L.append('readiness:')

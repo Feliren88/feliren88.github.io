@@ -136,6 +136,7 @@ extra_js: /js/components/game-theory.js
     </div>
     <div class="gt-five" id="gt-five">
       {% for f in site.data.game_theory.five %}
+      <div class="gt-item">
       <button class="gt-layer" type="button">
         <span class="ico" aria-hidden="true"><svg class="gt-i" viewBox="0 0 24 24"><use href="#{{ f.icon }}"/></svg></span>
         <span>
@@ -144,6 +145,8 @@ extra_js: /js/components/game-theory.js
         </span>
         <span class="depth">L{{ forloop.index }}</span>
       </button>
+      {% if f.viz %}<div class="gt-vizslot" data-viz='{{ f.viz | jsonify }}'></div>{% endif %}
+      </div>
       {% endfor %}
     </div>
     <div class="gt-five-read" id="gt-five-read" role="status"></div>
@@ -263,12 +266,15 @@ extra_js: /js/components/game-theory.js
     </div>
     <div class="gt-levers" id="gt-levers">
       {% for l in site.data.game_theory.levers %}
+      <div class="gt-item">
       <button class="gt-lever" type="button">
         <span class="ico" aria-hidden="true"><svg class="gt-i" viewBox="0 0 24 24"><use href="#{{ l.icon }}"/></svg></span>
         <h5>{{ l.key }}</h5>
         <p class="ask">{{ l.ask }}</p>
         <p class="ex">{{ l.example }}</p>
       </button>
+      {% if l.viz %}<div class="gt-vizslot" data-viz='{{ l.viz | jsonify }}'></div>{% endif %}
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -517,6 +523,7 @@ extra_js: /js/components/game-theory.js
         </div>
         {% if d.math != "" %}<div class="dmath">{{ d.math }}</div>{% endif %}
         <p class="dask">{{ d.ask }}</p>
+        {% if d.viz %}<div class="gt-vizslot" data-viz='{{ d.viz | jsonify }}'></div>{% endif %}
         <div class="gt-gtags">
           {% for g in d.games %}<span class="gt-gtag">{{ g }}</span>{% endfor %}
         </div>
@@ -706,6 +713,7 @@ extra_js: /js/components/game-theory.js
     </div>
     <div class="gt-regimes" id="gt-regimes">
       {% for r in site.data.game_theory.regimes %}
+      <div class="gt-item">
       <button class="gt-regime" type="button">
         <span class="ico" aria-hidden="true"><svg class="gt-i" viewBox="0 0 24 24"><use href="#{{ r.icon }}"/></svg></span>
         <h5>{{ r.key }}</h5>
@@ -713,6 +721,8 @@ extra_js: /js/components/game-theory.js
         <p class="opt"><b>Optimise:</b> {{ r.opt }}</p>
         <p class="avoid"><b>Avoid:</b> {{ r.avoid }}</p>
       </button>
+      {% if r.viz %}<div class="gt-vizslot" data-viz='{{ r.viz | jsonify }}'></div>{% endif %}
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -788,6 +798,7 @@ extra_js: /js/components/game-theory.js
       <span>
         <h5>{{ l.law }}</h5>
         <p>{{ l.why }}</p>
+        {% if l.viz %}<div class="gt-vizslot" data-viz='{{ l.viz | jsonify }}'></div>{% endif %}
       </span>
       <button class="gt-law-tick" type="button" aria-pressed="false"
               aria-label="Mark law {{ l.n }} as one I keep"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-check"/></svg></button>

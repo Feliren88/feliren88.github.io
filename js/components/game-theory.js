@@ -770,6 +770,98 @@
     show('ho');
   }
 
+
+  /* ══ A diagram on every list item ══════════════════════
+     The five list sections on this page are checklists, which is the hardest
+     shape to read if text is not your fastest route in. Each item now carries
+     a picture of the same claim, built from the `viz` block in
+     _data/game_theory.yml. Twelve shapes, and every label is lifted from the
+     item's own text. Not a word is removed; the drawing sits beside it.
+
+     Shapes are HTML so the words wrap, stay selectable, and inherit the theme. */
+  var GTVIZ = {
+    dichotomy: function (v) {
+      return '<div class="gv gv-dich">' +
+        '<div class="a"><span class="k">Do</span><b>' + esc(v.mine) + '</b></div>' +
+        '<div class="b"><span class="k">Not this</span><b>' + esc(v.theirs) + '</b></div></div>';
+    },
+    swap: function (v) {
+      return '<div class="gv gv-swap"><span class="from">' + esc(v.before) + '</span>' +
+        '<i aria-hidden="true">&rarr;</i><span class="to">' + esc(v.after) + '</span></div>';
+    },
+    scale: function (v) {
+      var hb = v.heavy === 'b';
+      return '<div class="gv gv-scale">' +
+        '<div class="pan' + (hb ? '' : ' is-heavy') + '"><b>' + esc(v.a) + '</b></div>' +
+        '<span class="f" aria-hidden="true"></span>' +
+        '<div class="pan' + (hb ? ' is-heavy' : '') + '"><b>' + esc(v.b) + '</b></div></div>';
+    },
+    order: function (v) {
+      return '<ol class="gv gv-order">' + (v.items || []).map(function (t, i) {
+        return '<li><b>' + (i + 1) + '</b><span>' + esc(t) + '</span></li>';
+      }).join('') + '</ol>';
+    },
+    gate: function (v) {
+      return '<div class="gv gv-gate"><span class="a">' + esc(v.before) + '</span>' +
+        '<span class="p"><i></i>' + esc(v.pause) + '</span>' +
+        '<span class="b">' + esc(v.after) + '</span></div>';
+    },
+    split: function (v) {
+      return '<div class="gv gv-split"><p class="in">' + esc(v['in']) + '</p><ul>' +
+        (v.out || []).map(function (o) {
+          return '<li class="' + (o.on ? 'is-on' : '') + '">' + esc(o.k) + '</li>';
+        }).join('') + '</ul></div>';
+    },
+    measure: function (v) {
+      return '<div class="gv gv-measure"><span class="lim"><i></i>' + esc(v.limit) + '</span>' +
+        '<span class="bey">' + esc(v.beyond) + '</span></div>';
+    },
+    diverge: function (v) {
+      return '<div class="gv gv-diverge">' +
+        '<span class="up"><i></i>' + esc(v.up) + '</span>' +
+        '<span class="down"><i></i>' + esc(v.down) + '</span></div>';
+    },
+    surface: function (v) {
+      return '<div class="gv gv-surface">' +
+        '<span class="top">' + esc(v.top) + '</span>' +
+        '<span class="under">' + esc(v.under) + '</span></div>';
+    },
+    spread: function (v) {
+      return '<div class="gv gv-spread">' +
+        '<span class="many"><i></i><i></i><i></i><i></i><i></i>' + esc(v.many) + '</span>' +
+        '<span class="few"><i></i>' + esc(v.few) + '</span></div>';
+    },
+    rings: function (v) {
+      return '<div class="gv gv-rings"><span class="outer">' + esc(v.outer) + '</span>' +
+        '<span class="core">' + esc(v.core) + '</span></div>';
+    },
+    loop: function (v) {
+      return '<ul class="gv gv-loop">' + (v.nodes || []).map(function (t) {
+        return '<li>' + esc(t) + '</li>';
+      }).join('') + '</ul>';
+    }
+  };
+
+  function gvBox(v) {
+    var build = GTVIZ[v && v.type];
+    if (!build) return '';
+    return '<div class="gt-viz gt-viz-' + v.type + '">' + build(v) +
+      (v.cap ? '<p class="gt-viz-cap">' + esc(v.cap) + '</p>' : '') + '</div>';
+  }
+
+  /* One selector for all five sections: each item carries its own spec, so
+     nothing here depends on matching a row back to a data index. */
+  function listViz() {
+    $$('.gt-vizslot[data-viz]').forEach(function (slot) {
+      if (slot.dataset.done) return;
+      var v;
+      try { v = JSON.parse(slot.getAttribute('data-viz')); } catch (e) { return; }
+      var html = gvBox(v);
+      if (html) slot.innerHTML = html;
+      slot.dataset.done = '1';
+    });
+  }
+
   /* ══ Boot ══════════════════════════════════════════════ */
   function narrativeRail() {
     var links = $$('.gt-story-rail a');
@@ -896,7 +988,7 @@
 
   function init() {
     [progress, narrativeRail, matrix, shapes, lawTicks, shadow, levers, quadrants, ruin,
-      classifier, dashboard, five, domains, ucb, trustCapital, regimes, readiness]
+      classifier, dashboard, five, domains, ucb, trustCapital, regimes, readiness, listViz]
       .forEach(function (fn) {
         try { fn(); } catch (e) { /* one broken widget must not take the page down */ }
       });
