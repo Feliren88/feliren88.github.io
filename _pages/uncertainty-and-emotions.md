@@ -492,8 +492,8 @@ extra_js: /js/components/uncertainty-and-emotions.js
   <h2><span>09</span><svg class="ue-i ue-h2-i"><use href="#ue-hands"/></svg> Support without borrowed certainty</h2>
   <p class="ue-deck">Good support helps a person remain present and make a decision. It does not become an unlimited answer service.</p>
   <div class="ue-support">
-    <article><svg class="ue-i"><use href="#ue-ask"/></svg><small>When asking for help</small><h3>Ask for company or perspective</h3><p>“Sit with me while I make the call.” “What fact do you think I am missing?” “Help me return to the plan I already chose.”</p></article>
-    <article><svg class="ue-i"><use href="#ue-steady"/></svg><small>When helping someone</small><h3>Offer steadiness, not guarantees</h3><p>“I can see this is hard.” “I do not have a guarantee, but I can stay with you.” “What did you decide before the worry rose?”</p></article>
+    <article><header><svg class="ue-i"><use href="#ue-ask"/></svg><div><small>When asking for help</small><h3>Ask for company or perspective</h3></div></header><ul aria-label="Examples of asking for help"><li>“Sit with me while I make the call.”</li><li>“What fact do you think I am missing?”</li><li>“Help me return to the plan I already chose.”</li></ul></article>
+    <article><header><svg class="ue-i"><use href="#ue-steady"/></svg><div><small>When helping someone</small><h3>Offer steadiness, not guarantees</h3></div></header><ul aria-label="Examples of helping someone"><li>“I can see this is hard.”</li><li>“I do not have a guarantee, but I can stay with you.”</li><li>“What did you decide before the worry rose?”</li></ul></article>
   </div>
   <div class="ue-support-lab" id="ue-support-lab">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-hands"/></svg> What does this request need?</p>
@@ -525,15 +525,17 @@ extra_js: /js/components/uncertainty-and-emotions.js
   </div>
 
   <div class="ue-fig" id="uefig-resume">
-    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-restart"/></svg> Two ways back after a difficult round</p>
+    <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-restart"/></svg> After a setback: judge yourself or adjust the next step</p>
+    <p class="ue-resume-intro">Suppose you returned to checking, avoidance, or repeated review. You now have two different problems to solve. Judging yourself asks what the setback says about you. Reviewing it asks what made the step hard and what you can change before trying again. Only the second question helps you restart.</p>
     <div class="rs-pick" id="rs-pick" role="group" aria-label="Choose a response">
-      <button type="button" data-rs="trial">Hold a trial</button>
-      <button type="button" data-rs="curious" class="is-on">Find the adjustment</button>
+      <button type="button" data-rs="trial">Judge yourself and plan a perfect restart</button>
+      <button type="button" data-rs="curious" class="is-on">Find what made it hard and restart smaller</button>
     </div>
+    <p class="rs-track-label">Illustrative delay before restarting</p>
     <div class="rs-track" id="rs-track" aria-hidden="true"></div>
     <div class="ue-fig-read">
-      <div><span class="k">Days before you resume</span><b id="rs-days-n">1</b></div>
-      <div><span class="k">Size you resume at</span><b id="rs-size">Repeatable</b></div>
+      <div><span class="k">Illustrative wait</span><b id="rs-days-n">1 day</b></div>
+      <div><span class="k">Next attempt</span><b id="rs-size">Smaller and repeatable</b></div>
       <p id="rs-say" role="status"></p>
     </div>
   </div>

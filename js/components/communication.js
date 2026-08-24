@@ -476,23 +476,8 @@
       });
     });
 
-    function lessonVisual(n, title, tags) {
-      var topic = tags[0], k = n % 5, art;
-      if (topic === 'Structure' || topic === 'Writing') {
-        art = '<path class="vg" d="M16 24H144M16 55H144M16 86H144"/><rect class="va" x="16" y="16" width="' + (106-k*7) + '" height="16" rx="8"/><rect class="vb" x="16" y="47" width="' + (82-k*5) + '" height="16" rx="8"/><rect class="vc" x="16" y="78" width="' + (54-k*3) + '" height="16" rx="8"/>';
-      } else if (topic === 'Confidence' || topic === 'High stakes') {
-        art = '<path class="vg" d="M22 88A58 58 0 0 1 138 88"/><path class="vb" d="M22 88A58 58 0 0 1 80 30"/><path class="va" d="M80 30A58 58 0 0 1 138 88"/><path class="vi" d="M80 88L' + (45+k*14) + ' ' + (42+k*3) + '"/><circle class="va" cx="80" cy="88" r="6"/>';
-      } else if (topic === 'Listening' || topic === 'Relationships') {
-        art = '<circle class="vb" cx="47" cy="55" r="31"/><circle class="va" cx="113" cy="55" r="31"/><path class="vg" d="M70 55C78 ' + (28+k*4) + ' 85 ' + (82-k*3) + ' 92 55"/><circle class="vc" cx="80" cy="55" r="' + (7+k*2) + '"/>';
-      } else if (topic === 'Conflict' || topic === 'Influence' || topic === 'Negotiation') {
-        art = '<circle class="vi" cx="20" cy="55" r="7"/><path class="vd" d="M27 55C56 55 58 22 84 22H140"/><path class="va" d="M27 55C56 55 58 88 84 88H140"/><circle class="vd" cx="140" cy="22" r="7"/><circle class="va" cx="140" cy="88" r="7"/><path class="vg" d="M78 14V97"/>';
-      } else if (topic === 'Leadership') {
-        art = '<circle class="va" cx="80" cy="22" r="11"/><path class="vg" d="M80 33V51M80 51L35 78M80 51L80 84M80 51L125 78"/><circle class="vc" cx="35" cy="80" r="12"/><circle class="vc" cx="80" cy="86" r="12"/><circle class="vc" cx="125" cy="80" r="12"/>';
-      } else if (topic === 'Scripts') {
-        art = '<rect class="vc" x="12" y="18" width="38" height="28" rx="6"/><rect class="vb" x="61" y="18" width="38" height="28" rx="6"/><rect class="va" x="110" y="66" width="38" height="28" rx="6"/><path class="vg" d="M50 32H61M80 46V80H110"/>';
-      } else {
-        art = '<circle class="vb" cx="28" cy="55" r="21"/><circle class="va" cx="132" cy="55" r="21"/><path class="vg" d="M49 55H111"/><path class="va" d="M76 42L90 55 76 68"/><circle class="vc" cx="80" cy="55" r="' + (5+k*2) + '"/>';
-      }
+    function lessonVisual(n, title) {
+      var art;
       var established = {
         6: { label: 'BLUF · U.S. Army', url: 'https://www.armyupress.army.mil/Journals/Military-Review/English-Edition-Archives/January-February-2021/McNitt-Military-Writing/', art: '<rect class="va" x="16" y="15" width="112" height="22" rx="4"/><text class="vl" x="72" y="29">BOTTOM LINE</text><path class="vg" d="M28 49H116M28 61H107M28 73H98M28 85H84"/><path class="vb" d="M20 10V91"/>' },
         7: { label: 'Minto Pyramid', url: 'https://www.barbaraminto.com/', art: '<path class="vg" d="M80 29L43 53M80 29L80 53M80 29L117 53M43 69L27 88M43 69L57 88M80 69L72 88M80 69L88 88M117 69L103 88M117 69L133 88"/><rect class="va" x="54" y="12" width="52" height="18" rx="4"/><text class="vl" x="80" y="24">ANSWER</text><rect class="vb" x="25" y="52" width="36" height="17" rx="4"/><rect class="vb" x="62" y="52" width="36" height="17" rx="4"/><rect class="vb" x="99" y="52" width="36" height="17" rx="4"/><text class="vs" x="80" y="63">KEY LINE</text><text class="vs" x="80" y="102">SUPPORTING EVIDENCE</text>' },
@@ -507,13 +492,18 @@
         86: { label: 'Teach-back · AHRQ', url: 'https://www.ahrq.gov/patient-safety/reports/engage/teachback.html', art: '<path class="vg" d="M48 35H111M118 45V70M109 79H50M41 70V45"/><path class="va" d="M103 30L112 35 103 40M123 62L118 71 113 62M57 84L48 79 57 74M36 53L41 44 46 53"/><text class="vl" x="80" y="22">EXPLAIN CLEARLY</text><text class="vl" x="132" y="57">ASK</text><text class="vl" x="80" y="95">OWN WORDS</text><text class="vl" x="27" y="57">CHECK</text><circle class="vb" cx="80" cy="55" r="18"/><text class="vl" x="80" y="53">CLARIFY</text><text class="vs" x="80" y="62">AND RETEACH</text>' },
         88: { label: 'Pareto · 80/20', url: 'https://en.wikipedia.org/wiki/Pareto_principle', art: '<path class="vg" d="M18 91H146M18 16V91"/><path class="va" d="M18 91C30 48 41 31 50 26C68 17 101 15 146 15"/><path class="vb" d="M44 91V27H18"/><path class="vg" d="M44 27H146" stroke-dasharray="3 3"/><text class="vl" x="44" y="103">20% INPUT</text><text class="vl" x="18" y="22">80%</text><text class="vs" x="104" y="40">VITAL FEW</text>' }
       }[n];
-      if (established) art = established.art;
-      /* The chart family explains the topic; the lesson symbol makes every one
-         of the 122 plots recognizably and semantically distinct. */
-      art += '<circle class="vmark" cx="147" cy="13" r="10"/>' +
-        '<svg class="vicon" x="140" y="6" width="14" height="14"><use href="#cmi-' + n + '"/></svg>';
-      var caption = established ? '<a href="' + established.url + '" target="_blank" rel="noopener">' + esc(established.label) + '</a>' : esc(topic);
-      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': unique ' + topic + ' diagram') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + caption + ' · ' + String(n).padStart(3, '0') + '</figcaption></figure>';
+      if (established) {
+        art = established.art;
+      } else {
+        /* Every non-framework lesson has its own hand-drawn semantic symbol.
+           It is the illustration—not a badge pasted onto a category chart. */
+        art = '<circle class="vhalo" cx="80" cy="52" r="39"/>' +
+          '<path class="vorbit" d="M24 72C47 94 111 98 139 65"/>' +
+          '<circle class="vdot" cx="26" cy="72" r="3"/><circle class="vdot" cx="138" cy="65" r="3"/>' +
+          '<svg class="vlesson" x="48" y="20" width="64" height="64"><use href="#cmi-' + n + '"/></svg>';
+      }
+      var caption = established ? '<a href="' + established.url + '" target="_blank" rel="noopener">' + esc(established.label) + '</a>' : esc(title);
+      return '<figure class="cm-lesson-viz" role="img" aria-label="' + esc(title + ': lesson illustration') + '"><svg viewBox="0 0 160 110" aria-hidden="true">' + art + '</svg><figcaption>' + caption + ' · ' + String(n).padStart(3, '0') + '</figcaption></figure>';
     }
 
     var grid = document.createElement('div');
@@ -532,6 +522,7 @@
       var summary = document.createElement('summary');
       summary.innerHTML = '<span class="cm-lesson-number">' + String(n).padStart(2, '0') + '</span>' +
         '<span class="cm-lesson-title">' + esc(title) + '</span><i aria-hidden="true"></i>';
+      summary.insertAdjacentHTML('beforeend', lessonVisual(n, title));
       var tagRow = document.createElement('div');
       tagRow.className = 'cm-lesson-tags';
       tagRow.innerHTML = tags.map(function (tag) { return '<span>' + esc(tag) + '</span>'; }).join('');
@@ -541,7 +532,6 @@
         if (child !== oldHeader) body.appendChild(child);
       });
       card.appendChild(summary);
-      card.insertAdjacentHTML('beforeend', lessonVisual(n, title, tags));
       card.appendChild(tagRow);
       card.appendChild(body);
       grid.appendChild(card);
