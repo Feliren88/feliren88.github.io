@@ -212,7 +212,7 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-wheel-block{margin:1.6rem 0;padding:1.1rem;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
 .ue-wheel-block{margin-inline:calc(50% - 50vw);padding-inline:max(.75rem,calc(50vw - 34rem));border-radius:0;border-inline:0}
 .ue-wheel-wrap{display:grid;gap:1.2rem;justify-items:center}
-.ue-wheel{display:block;width:100%;height:auto;max-width:min(54rem,calc(100vw - 2rem));margin:0 auto;overflow:visible}
+.ue-wheel{display:block;width:100%;height:auto;margin:0 auto;overflow:visible}
 .ue-wheel-read{width:100%;max-width:44rem}
 .ue-wt{fill:#fff;pointer-events:none;font-family:"Space Grotesk",sans-serif;paint-order:stroke}
 .ue-hub-c{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.4}
@@ -420,3 +420,80 @@ body:has(.uncertainty-emotions) #pointcloud-bg,body:has(.uncertainty-emotions) .
 .ue-wheel-cite .for-mine{display:none}
 .ue-wheel-cite[data-view="mine"] .for-mine{display:block}
 .ue-wheel-cite[data-view="mine"] .for-cats,.ue-wheel-cite[data-view="mine"] .for-axes{display:none}
+
+/* Zone names live outside the wheel as HTML, so the rings can use the whole
+   square instead of leaving a margin for text. */
+/* The stage carries the chips, so it must be as wide as the wheel even when
+   the screen is not. The scroller pans it. Padding leaves room for the chips,
+   which sit just outside the ring. */
+.ue-wheel-scroll{width:100%;max-width:min(56rem,100%);margin:0 auto;overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch}
+.ue-wheel-stage{position:relative;width:100%;margin:0 auto;padding:2.9rem 4.4rem;box-sizing:border-box}
+.ue-wheel-swipe{display:none;margin:.4rem 0 0!important;text-align:center;font-size:.72rem;color:var(--muted)!important}
+.ue-wheel-zones{position:absolute;inset:2.9rem 4.4rem;pointer-events:none}
+.ue-zone{position:absolute;transform:translate(-50%,-50%);display:grid;gap:.05rem;justify-items:center;text-align:center;white-space:nowrap;padding:.3rem .55rem;border-radius:var(--radius-md);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px)}
+.ue-zone b{font:700 .82rem "Space Grotesk",sans-serif;color:hsl(var(--zh) 52% 55%);letter-spacing:.03em}
+.ue-zone small{font-size:.66rem;color:var(--muted);line-height:1.3}
+.ue-zone-ph{--zh:44}.ue-zone-pl{--zh:150}.ue-zone-nl{--zh:214}.ue-zone-nh{--zh:8}
+@media(max-width:560px){
+  .ue-zone{padding:.2rem .35rem}
+  .ue-zone b{font-size:.72rem}
+  .ue-zone small{display:none}
+}
+
+/* ── The wheel on a phone ─────────────────────────────────
+   At 360px a 638-unit viewBox renders its labels at about 4.5px. The wheel
+   keeps a legible minimum size instead and pans sideways. */
+@media(max-width:760px){
+  .ue-wheel-stage{min-width:36rem;padding:2.2rem 3.4rem}
+  .ue-wheel-zones{inset:2.2rem 3.4rem}
+  .ue-wheel-swipe{display:block}
+  .ue-wheel-block{padding-inline:.6rem}
+  .ue-wheel-views{gap:.3rem}
+  .ue-wheel-views button{flex:1 1 8rem;padding:.5rem .6rem;font-size:.84rem}
+  .ue-wheel-views button small{font-size:.66rem}
+  .ue-wheel-read{padding:.8rem .9rem}
+  .ue-wheel-word{font-size:1.2rem!important}
+  .ue-wheel-def{font-size:.95rem!important}
+  .ue-wheel-cite{font-size:.74rem}
+  .ue-wheel-cite p{font-size:.74rem!important}
+}
+@media(max-width:420px){
+  .ue-wheel-stage{min-width:32rem;padding:1.9rem 2.9rem}
+  .ue-wheel-zones{inset:1.9rem 2.9rem}
+}
+
+/* ── Mobile corrections ───────────────────────────────────
+   Everything here is a size or a stacking fix. No content changes. */
+@media(max-width:560px){
+  /* Chart text is set in viewBox units, so it shrinks with the drawing. At a
+     360px screen these were landing at 6 to 7px. */
+  .ue-rounds-svg .tick,.ue-voi-svg .tick,.ue-curve-svg .tick{font-size:15px}
+  .ue-rounds-svg .clab,.ue-voi-svg .clab,.ue-voi-svg .decide{font-size:15px}
+  .ue-curve-svg .cutlab{font-size:14.5px}
+  .ue-overlap-svg .lab{font-size:16px}
+  .ue-overlap-svg .cap{font-size:14px}
+
+  /* The reflex and trained-response rows read better stacked than as three
+     squeezed columns. */
+  .ue-hero-model>div:not(.pivot){grid-template-columns:1fr;gap:.15rem;text-align:center}
+  .ue-hero-model span{text-align:center}
+  .ue-hero-model i{transform:rotate(90deg);line-height:1;margin:.1rem auto}
+
+  /* Readings under the charts */
+  .ue-curve-read,.ue-rounds-read{gap:.5rem 1rem}
+  .ue-curve-read b,.ue-rounds-read b{font-size:1.05rem}
+
+  /* Tighten the blocks that carry an icon plus two lines */
+  .ue-primer-parts>div,.ue-wavesteps span,.ue-lever-grid div,.ue-stopgrid span,
+  .ue-accept-two>div,.ue-bands button,.ue-curve-modes button{padding:.65rem}
+  .ue-vsgrid>div{grid-template-columns:1fr;gap:.15rem}
+  .ue-plan-row{grid-template-columns:minmax(0,1fr) auto;row-gap:.25rem}
+  .ue-plan-row button{grid-row:1;justify-self:end}
+  .ue-plan-row .n{grid-column:1/-1}
+
+  /* Section headings and decks */
+  .ue-part{margin-bottom:2.4rem}
+  .ue-part+.ue-part{padding-top:2.4rem}
+  .ue-deck{font-size:1.04rem!important}
+  .ue-prose p,.ue-prose li{font-size:1rem}
+}

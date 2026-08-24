@@ -269,7 +269,7 @@
     var NS='http://www.w3.org/2000/svg';
     /* Each view sizes its own canvas. My wheel carries zone names outside its
        outermost ring, which needs more room than the other two. */
-    var BOX={cats:638,axes:638,mine:780};
+    var BOX=638;
     var CX=319,CY=319,TAU=Math.PI*2;
     var fitQueue=[];
     var view='cats';
@@ -318,6 +318,16 @@
         if(w>room){ t.setAttribute('textLength',room.toFixed(1)); t.setAttribute('lengthAdjust','spacingAndGlyphs'); }
       });
       fitQueue.length=0;
+    }
+
+    var chips=document.getElementById('ue-wheel-zones');
+    function zoneChips(list){
+      if(!chips) return;
+      chips.innerHTML=(list||[]).map(function(z){
+        return '<span class="ue-zone ue-zone-'+z.key+'" style="left:'+z.x.toFixed(2)+
+          '%;top:'+z.y.toFixed(2)+'%"><b>'+esc(z.short)+'</b><small>'+esc(z.axes)+'</small></span>';
+      }).join('');
+      chips.hidden=!(list&&list.length);
     }
 
     var hubT,hubS;
@@ -388,7 +398,7 @@
       if(!gew) return;
       /* The ring is pulled in so the axis names and the quadrant names sit
          outside it rather than on top of the families. */
-      var R0=100,R1=230, fams=gew.families||[], n=fams.length, seg=TAU/n;
+      var R0=130,R1=300, fams=gew.families||[], n=fams.length, seg=TAU/n;
       var QH={ph:44,pl:150,nl:214,nh:8};
       /* The instrument's own spoke order: down the right from just past the top,
          then on round and up the left. */
@@ -420,26 +430,26 @@
         host.appendChild(label(f.name,radialR(R0,R1,(a0+a1)/2),(a0+a1)/2,'ue-wt ue-wt-cat',12,R1-R0-14));
       });
 
-      /* The two axes, drawn past the ring, with their ends named clear of it. */
-      host.appendChild(mk('line',{x1:CX-R1-10,y1:CY,x2:CX+R1+10,y2:CY,class:'ue-axis'}));
-      host.appendChild(mk('line',{x1:CX,y1:CY-R1-10,x2:CX,y2:CY+R1+10,class:'ue-axis'}));
-      [[6,CY+4,'start','Unpleasant'],
-       [632,CY+4,'end','Pleasant'],
-       [CX,CY-R1-20,'middle','High control'],
-       [CX,CY+R1+30,'middle','Low control']]
+      /* Only the axis lines stay in the SVG. Their names and the quadrant
+         names are HTML, which is what lets the ring fill the square. */
+      host.appendChild(mk('line',{x1:CX-R1-14,y1:CY,x2:CX+R1+14,y2:CY,class:'ue-axis'}));
+      host.appendChild(mk('line',{x1:CX,y1:CY-R1-14,x2:CX,y2:CY+R1+14,class:'ue-axis'}));
+
+      var k=(R1+30)/(BOX/2);
+      var out=[];
+      [['ax',Math.PI,'Unpleasant',''],['ax',0,'Pleasant',''],
+       ['ax',-Math.PI/2,'High control',''],['ax',Math.PI/2,'Low control','']]
         .forEach(function(t){
-          host.appendChild(mk('text',{x:t[0],y:t[1],'text-anchor':t[2],class:'ue-axlab','font-size':13},t[3]));
+          out.push({key:'ax',short:t[2],axes:'',
+                    x:50+50*Math.cos(t[1])*k, y:50+50*Math.sin(t[1])*k});
         });
-      /* Quadrant names, this page's shorthand, seated on the diagonals outside
-         the ring so they do not sit over any family. */
-      var QR=R1+70;
       (gew.quadrants||[]).forEach(function(q){
         var a={ph:-Math.PI/4,pl:Math.PI/4,nl:Math.PI*0.75,nh:-Math.PI*0.75}[q.key];
         if(a===undefined) return;
-        var p=pt(QR,a);
-        host.appendChild(mk('text',{x:p[0].toFixed(1),y:p[1].toFixed(1),'text-anchor':'middle',
-          class:'ue-qlab','font-size':13,style:'--h:'+QH[q.key]},q.short));
+        out.push({key:q.key,short:q.short,axes:q.axes,
+                  x:50+50*Math.cos(a)*k, y:50+50*Math.sin(a)*k});
       });
+      zoneChips(out);
       hub(R0-8,'Which one?','pick a word');
     }
 
@@ -447,7 +457,7 @@
     /* ── View three: my own wheel ── */
     function buildMine(){
       if(!mine) return;
-      var R0=64,R1=132,R2=214,R3=286;
+      var R0=72,R1=146,R2=228,R3=312;
       var fams=mine.families||[], n=fams.length, seg=TAU/n, start=-Math.PI/2-seg/2;
       var zones={}; (mine.zones||[]).forEach(function(z){ zones[z.key]=z; });
 
@@ -492,19 +502,17 @@
         });
       });
 
-      /* Zone names outside the rings, each at the middle of its own arc. */
-      (mine.zones||[]).forEach(function(z){
+      /* Zone names sit outside the rings as HTML rather than inside the SVG.
+         Kept in the SVG they would have to fit the same square as the wheel,
+         which is what was holding the rings back from filling it. */
+      zoneChips((mine.zones||[]).map(function(z){
         var members=fams.map(function(f,i){ return f.zone===z.key?i:-1; }).filter(function(i){ return i>=0; });
-        if(!members.length) return;
+        if(!members.length) return null;
         var mid=start+(members[0]+(members[members.length-1]+1))/2*seg;
-        /* Centring the name on its radius pushes the box's inner corners back
-           into the ring, so anchor it away from the wheel instead. */
-        var co=Math.cos(mid);
-        var anchor = Math.abs(co)<0.3 ? 'middle' : (co>0 ? 'start' : 'end');
-        var p=pt(R3+20,mid);
-        host.appendChild(mk('text',{x:p[0].toFixed(1),y:(p[1]+4).toFixed(1),'text-anchor':anchor,
-          class:'ue-qlab','font-size':13,style:'--h:'+({ph:44,pl:150,nl:214,nh:8}[z.key]||200)},z.short));
-      });
+        return {short:z.short,axes:z.axes,key:z.key,
+                x:50+50*Math.cos(mid)*((R3+30)/(BOX/2)),
+                y:50+50*Math.sin(mid)*((R3+30)/(BOX/2))};
+      }).filter(Boolean));
 
       hub(R0-6,'Which one?','pick a word');
     }
@@ -512,9 +520,10 @@
     function render(){
       host.innerHTML='';
       fitQueue.length=0;
-      var box=BOX[view]||638;
+      var box=BOX;
       CX=CY=box/2;
       host.setAttribute('viewBox','0 0 '+box+' '+box);
+      zoneChips([]);
       if(view==='cats'){ buildCats(); clearPanel('Select any category. Twenty-seven, from self-report.'); }
       else if(view==='mine'){ buildMine(); clearPanel('Select any word. Eight families, written for this page.'); }
       else { buildAxes(); clearPanel('Select any family. Placed by valence across and control up.'); }

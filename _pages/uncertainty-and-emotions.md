@@ -252,9 +252,15 @@ extra_js: /js/components/uncertainty-and-emotions.js
       <button type="button" data-view="mine" aria-pressed="false">My wheel<small>written for this page</small></button>
     </div>
     <div class="ue-wheel-wrap">
+      <div class="ue-wheel-scroll">
+      <div class="ue-wheel-stage">
+      <div class="ue-wheel-zones" id="ue-wheel-zones" aria-hidden="true" hidden></div>
       <svg class="ue-wheel" id="ue-wheel" viewBox="0 0 638 638" role="img"
            aria-label="A wheel of emotion words in three rings. Select any segment to read what it points at, what it urges, and one action that does not require the feeling to stop.">
       </svg>
+      </div>
+      </div>
+      <p class="ue-wheel-swipe" aria-hidden="true">Swipe the wheel sideways</p>
       <div class="ue-wheel-read" id="ue-wheel-read" role="status">
         <p class="ue-wheel-hint"><svg class="ue-i"><use href="#ue-eye"/></svg> Select any word. The centre keeps whatever you chose last.</p>
       </div>
