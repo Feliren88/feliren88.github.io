@@ -145,7 +145,7 @@
         ? 'The demand for guarantees has collapsed the map to three familiar choices.'
         : visibleDepth === 2
           ? 'Some exploration remains. Distant possibilities disappear before evidence can reach them.'
-          : 'Low certainty feels exposed. It also keeps discovery, reinvention, ownership, and new work available.';
+          : 'Low certainty keeps discovery, reinvention, ownership, and new work available while the evidence develops.';
     }
     slider.addEventListener('input', update); update();
   }
@@ -174,7 +174,7 @@
 
   function initGame() {
     var scenarios = [
-      { tag: 'career', title: 'Your role pays well and consumes every exit route.', copy: 'Responsibility grows each quarter. Ownership, energy, and decision power do not.', actions: [
+      { tag: 'career', title: 'Your role pays well and consumes every exit route.', copy: 'Responsibility grows each quarter while ownership, energy, and decision power shrink.', actions: [
         ['Carry more', -1, 'More endurance deepens the dependence. Capability has turned into permanent availability.'],
         ['Negotiate terms', 2, 'A deadline, decision rights, and ownership test whether the role can become inhabitable.'],
         ['Leave tomorrow', 0, 'Leaving may be right. Panic has skipped the work of making the downside survivable.'] ] },
@@ -186,7 +186,7 @@
         ['Explain it better', 0, 'Clarity cannot substitute for reciprocity. The pattern already contains behavioral evidence.'],
         ['Set an observable boundary', 2, 'A boundary makes the required change and consequence visible.'],
         ['Pretend it is fine', -1, 'Silence transfers the entire cost to your future self.'] ] },
-      { tag: 'uncertainty', title: 'Two paths fit your values. Neither comes with a guarantee.', copy: 'More thinking now produces discomfort, not new evidence.', actions: [
+      { tag: 'uncertainty', title: 'Two paths fit your values. Neither comes with a guarantee.', copy: 'More thinking now produces discomfort without adding evidence.', actions: [
         ['Wait for certainty', -1, 'The unavailable guarantee has become a condition for action.'],
         ['Choose a reversible test', 2, 'A small commitment buys information without pretending the unknowns are gone.'],
         ['Ask everyone', 0, 'Advice can add evidence. It cannot remove your responsibility for the choice.'] ] },
@@ -226,7 +226,7 @@
       ['pattern', 'Find what keeps repeating.', 'A second failure gives you a comparison. Examine the conditions, incentives, and decisions that produced both.', '<circle cx="65" cy="80" r="28"/><circle cx="120" cy="80" r="28"/><circle cx="175" cy="80" r="28"/><path d="M93 80H92M148 80H147"/>'],
       ['architecture', 'Change the system that creates the break.', 'Move upstream. Redesign the rule, incentive, handoff, or boundary so good outcomes require less heroism.', '<path d="M35 125V75L75 45L115 75V125Z"/><path d="M115 125V62L155 32L198 62V125"/><path d="M72 125V92H94V125M150 82H175"/>'],
       ['method', 'Make the knowledge portable.', 'Write the checklist, model, standard, or tool. Private pattern recognition becomes useful beyond the person who earned it.', '<path d="M52 30H173V132H52Z"/><path d="M75 58H150M75 80H150M75 102H128"/><path d="M186 48V145H70"/>'],
-      ['release', 'Build something that can survive your absence.', 'The mature system does not prove your value by needing you forever. It preserves the lesson and returns your attention.', '<circle cx="120" cy="82" r="42"/><path d="M120 40V18M120 146V124M78 82H55M185 82H162"/><path d="M102 82L115 95L143 65"/>']
+      ['release', 'Build something that can survive your absence.', 'A mature system preserves the lesson, works without constant rescue, and returns your attention.', '<circle cx="120" cy="82" r="42"/><path d="M120 40V18M120 146V124M78 82H55M185 82H162"/><path d="M102 82L115 95L143 65"/>']
     ];
     var buttons = Array.prototype.slice.call(document.querySelectorAll('#lc-arch-track button'));
     function select(index) {

@@ -68,7 +68,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="uncertainty">
-  <header class="lc-section-head"><span>03 · Keep the future open</span><h2>Certainty closes doors. Uncertainty leaves several unlocked.</h2><p>Fear counts the bad futures. Move through the field to see the upside it leaves out.</p></header>
+  <header class="lc-section-head"><span>03 · Keep the future open</span><h2>Demanding certainty closes doors before evidence arrives.</h2><p>Fear counts the bad futures first. Use the field to inspect the possibilities it omitted.</p></header>
   <figure class="lc-panel lc-future-map">
     <figcaption><b>Possibility field</b><span>Move the certainty dial.</span></figcaption>
     <svg id="lc-future-svg" viewBox="0 0 800 430" role="img" aria-label="A branching map with more possible futures when certainty is lower">
@@ -77,7 +77,7 @@ extra_js: /js/components/life-challenges.js
     <label class="lc-certainty"><span>Demand for certainty</span><input id="lc-certainty" type="range" min="0" max="100" value="38"><b id="lc-door-count"></b></label>
     <p class="lc-answer" id="lc-uncertainty-copy"></p>
   </figure>
-  <blockquote class="lc-quote">Freedom needs an open future. An open future contains uncertainty.</blockquote>
+  <blockquote class="lc-quote">When the downside is survivable, a reversible test buys more information than waiting for a guarantee.</blockquote>
 </section>
 
 <section class="lc-section" id="pressure">
@@ -97,7 +97,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="game">
-  <header class="lc-section-head"><span>05 · The obstacle game</span><h2>What does this difficulty ask of you?</h2><p>There is no universal brave answer. Sometimes courage persists. Sometimes it leaves.</p></header>
+  <header class="lc-section-head"><span>05 · The obstacle game</span><h2>Read what the difficulty requires.</h2><p>Courage may mean persisting, negotiating, running a smaller test, or leaving. The situation decides which response fits.</p></header>
   <div class="lc-game">
     <div class="lc-game-top"><span id="lc-game-round">scenario 1 of 5</span><b id="lc-game-score">0 agency</b></div>
     <div class="lc-game-card" id="lc-game-card"><small id="lc-game-tag"></small><h3 id="lc-game-title"></h3><p id="lc-game-copy"></p></div>
@@ -132,7 +132,7 @@ extra_js: /js/components/life-challenges.js
     <article><span>build</span><p>How do I avoid paying for the same lesson twice?</p></article>
   </div>
   <div class="lc-final">
-    <p>Even when the obstacle is outside your control, you can work on the conversion.</p>
+    <p>Write down the obstacle, the protection you need, and one reversible next move.</p>
     <div><span>failure → information</span><span>constraint → design</span><span>delay → preparation</span><span>disillusionment → truth</span><span>mortality → priorities</span></div>
   </div>
 </section>
