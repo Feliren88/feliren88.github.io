@@ -22,9 +22,45 @@
       ]
     },
     abstain: { kicker: 'Capability needs a stopping rule', title: 'Build the boundary.', copy: 'Measure the evidence. When support weakens, stop predicting and send the decision for review.', steps: ['Evidence', 'Measure', 'Abstain', 'Review'], nodes: [[95,110,'evidence','circle'],[275,220,'support','square'],[465,110,'stop','diamond'],[650,220,'review','circle']] },
-    agency: { kicker: 'You can begin before you are sure', title: 'Turn intent into evidence.', copy: 'Notice what is happening. Run one small test, learn from the result, and use it to choose your next move.', steps: ['Notice', 'Test', 'Learn', 'Move'], nodes: [[95,220,'notice','circle'],[280,100,'test','diamond'],[465,220,'learn','square'],[650,100,'move','circle']] },
-    decision: { kicker: 'Pressure changes what comes first', title: 'Protect the floor.', copy: 'Name the kind of decision you face. Slow down what cannot be undone, test what can, and leave yourself room to try again.', steps: ['Classify', 'Protect', 'Test', 'Commit'], nodes: [[95,105,'classify','square'],[275,220,'floor','diamond'],[465,105,'test','circle'],[650,220,'commit','square']] },
-    control: { kicker: 'You still choose your response', title: 'Find what is yours.', copy: 'Separate what happened from what you think about it. Then choose the next action that is still in your hands.', steps: ['Event', 'Judgment', 'Choice', 'Action'], nodes: [[95,220,'event','circle'],[275,105,'judgment','square'],[465,220,'choice','diamond'],[650,105,'action','circle']] },
+    agency: {
+      narrative: true,
+      kicker: 'The application sat open for eleven days',
+      title: 'She kept waiting to feel ready.',
+      copy: 'Each night she changed one sentence, closed the laptop, and promised herself she would send it tomorrow.',
+      steps: ['Wait', 'Send', 'Learn', 'Move'],
+      frames: [
+        ['The application sat open for eleven days', 'She kept waiting to feel ready.', 'Each night she changed one sentence, closed the laptop, and promised herself she would send it tomorrow.'],
+        ['On the twelfth night, she stopped editing', 'Her hand shook when she pressed send.', 'Nothing inside her felt certain. The application left anyway.'],
+        ['The reply was kind and specific', 'They wanted a stronger sample.', 'The answer hurt. It also told her which piece of work to rebuild.'],
+        ['Six weeks later, she sent it again', 'This time, they said yes.', 'She read the reply twice, covered her mouth with one hand, and let herself believe it.']
+      ]
+    },
+    decision: {
+      narrative: true,
+      kicker: 'The call came while he was still at dinner',
+      title: 'They needed an answer tonight.',
+      copy: 'The room went quiet. Urgency made every option feel final.',
+      steps: ['Pressure', 'Protect', 'Test', 'Decide'],
+      frames: [
+        ['The call came while he was still at dinner', 'They needed an answer tonight.', 'The room went quiet. Urgency made every option feel final.'],
+        ['He wrote down what could not be lost', 'Payroll. Trust. The ability to try again.', 'He would not risk those three things. The price, timing, and scope could change.'],
+        ['He asked for forty-eight hours', 'Then he tested the weakest assumption.', 'One customer call exposed the number everyone else had treated as certain.'],
+        ['He gave the answer the next evening', 'He spoke slowly enough to mean every word.', 'He named what the decision protected, what it risked, and the number that would make him change course.']
+      ]
+    },
+    control: {
+      narrative: true,
+      kicker: 'At 6:40, the hospital called',
+      title: 'There was nothing he could fix from the hallway.',
+      copy: 'He refreshed the same message, paced between two chairs, and tried to think his way into a different outcome.',
+      steps: ['Receive', 'Separate', 'Choose', 'Stay'],
+      frames: [
+        ['At 6:40, the hospital called', 'There was nothing he could fix from the hallway.', 'He refreshed the same message, paced between two chairs, and tried to think his way into a different outcome.'],
+        ['He opened his notebook', 'One page became two columns.', 'On the left: the diagnosis, the wait, the doctor’s decision. On the right: who to call, what to bring, where to sit.'],
+        ['He was still afraid when he stood up', 'He knew what to do for the next ten minutes.', 'He called his sister, bought two coffees, and returned to the chair beside the door.'],
+        ['When the doctor came out, he was still afraid', 'He listened to every word.', 'Then he went inside, pulled the chair closer, and held his father’s hand.']
+      ]
+    },
     strategy: { kicker: 'Every move changes what comes next', title: 'Watch the response.', copy: 'Your move changes the other person’s choices. Their response changes what makes sense for you to do next.', steps: ['Choose', 'Respond', 'Update', 'Repeat'], nodes: [[95,105,'you','circle'],[275,220,'them','circle'],[465,105,'payoff','square'],[650,220,'next round','diamond']] },
     feedback: {
       narrative: true,
@@ -39,7 +75,19 @@
         ['A week later, he tried again', 'The result had become useful.', 'He changed the timing, kept the part that worked, and refused to turn one loss into an identity.']
       ]
     },
-    uncertainty: { kicker: 'The future is still open', title: 'Act without a guarantee.', copy: 'Name what you feel and gather facts that could change the decision. Stop when more thought only repeats the same fear.', steps: ['Feel', 'Check', 'Choose', 'Proceed'], nodes: [[95,105,'feeling','circle'],[275,220,'evidence','square'],[465,105,'choice','diamond'],[650,220,'proceed','circle']] },
+    uncertainty: {
+      narrative: true,
+      kicker: 'At 2:13 a.m., she checked again',
+      title: 'The answer had not changed.',
+      copy: 'She reread the message, searched the same question, and felt relief for less than a minute.',
+      steps: ['Check', 'Loop', 'Stop', 'Live'],
+      frames: [
+        ['At 2:13 a.m., she checked again', 'The answer had not changed.', 'She reread the message, searched the same question, and felt relief for less than a minute.'],
+        ['By 2:46, she had opened fourteen tabs', 'Each answer created another question.', 'Her body wanted certainty. The screen could only offer more words.'],
+        ['She put the phone in the kitchen', 'The doubt came with her to bed.', 'She felt her feet against the floor, counted ten slow breaths, and eventually slept.'],
+        ['At nine, she made the call', 'Her voice shook on the first word.', 'She asked the one question that could change her decision, wrote down the answer, and went to work.']
+      ]
+    },
     signal: { kicker: 'The other person needs a clear path', title: 'Make it easy to follow.', copy: 'Give the listener a clear point, enough context, and a next step they can question or use.', steps: ['Intent', 'Structure', 'Signal', 'Received'], nodes: [[95,220,'intent','circle'],[275,105,'structure','square'],[465,220,'signal','diamond'],[650,105,'received','circle']] },
     consent: {
       narrative: true,
@@ -98,6 +146,7 @@
     if (key === 'feedback') return buildFeedbackNarrativeCanvas(canvas, svg);
     if (key === 'consent') return buildConsentNarrativeCanvas(canvas, svg);
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
+    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
     night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49M405 220l-42 34"/><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
@@ -178,6 +227,57 @@
     svg.appendChild(build);
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: [hurt, shelter, name, build], nodes: [], edges: [] };
+  }
+
+  function buildEmotionalNarrativeCanvas(canvas, svg, sceneKey) {
+    var stories = {
+      agency: {
+        label: 'A woman stops waiting to feel ready, sends her work, learns from the reply, and tries again',
+        frames: [
+          '<rect class="em-screen" x="145" y="58" width="460" height="238" rx="12"/><text class="em-screen-label" x="190" y="96">APPLICATION · DRAFT 11</text><path class="em-message-line" d="M190 128h330M190 158h280M190 188h350M190 218h245"/><rect class="em-result-mark" x="444" y="244" width="116" height="34" rx="17"/><text class="em-result-word" x="502" y="266">NOT SENT</text><circle class="em-head" cx="92" cy="228" r="21"/><path class="em-person" d="M92 249v55m-30 36 30-36 30 36M92 269l38 14"/><text x="375" y="345">Eleven nights. Eleven versions. Nothing sent.</text>',
+          '<rect class="em-screen" x="155" y="62" width="440" height="230" rx="12"/><text class="em-screen-label" x="195" y="100">READY TO SEND</text><path class="em-message-line" d="M195 132h320M195 162h270M195 192h340"/><rect class="em-result-mark" x="425" y="226" width="130" height="42" rx="21"/><text class="em-result-word" x="490" y="252">SEND</text><path class="em-arrow" d="m356 260 42-22-11 18 18 8-7 13-18-9-6 20z"/><text x="375" y="345">Her hand shook. She sent it anyway.</text>',
+          '<rect class="em-message" x="135" y="66" width="480" height="225" rx="12"/><text class="em-message-small" x="180" y="108">REPLY</text><path class="em-message-line" d="M180 138h355M180 170h310M180 202h350"/><rect class="em-result-mark" x="180" y="230" width="220" height="36" rx="18"/><text class="em-result-word" x="290" y="253">STRENGTHEN THE SAMPLE</text><text x="375" y="345">The no came with one useful sentence.</text>',
+          '<path class="em-road" d="M80 270C210 270 255 110 375 110s165 160 295 160"/><circle class="em-attempt-old" cx="112" cy="270" r="24"/><circle class="em-attempt-next" cx="640" cy="270" r="30"/><path class="em-arrow" d="m624 270 13 12 22-28"/><g class="em-carry"><rect x="304" y="82" width="142" height="58" rx="8"/><text x="375" y="108">SAMPLE</text><text class="em-carry-word" x="375" y="131">rebuilt</text></g><text x="375" y="345">Six weeks later, the second application went through.</text>'
+        ]
+      },
+      decision: {
+        label: 'An urgent call interrupts dinner; a man protects the essentials, checks an assumption, and answers the next day',
+        frames: [
+          '<path class="em-message-line" d="M100 270h550M185 270v-98h380v98"/><circle class="em-head" cx="300" cy="202" r="21"/><path class="em-person" d="M300 223v47m-30 47 30-47 30 47M300 244l45 15"/><path class="em-clock" d="M500 118a42 42 0 1 1-.1 0M500 130v27l20 12"/><rect class="em-result-mark" x="365" y="184" width="126" height="42" rx="21"/><text class="em-result-word" x="428" y="210">ANSWER TONIGHT</text><text x="375" y="345">Dinner went cold while the room waited.</text>',
+          '<rect class="em-note" x="155" y="48" width="440" height="262" rx="9"/><text class="em-note-title" x="195" y="88">WHAT MUST SURVIVE</text><path class="em-note-rule" d="M195 112h355M195 170h355M195 228h355M195 286h355"/><text class="em-note-key" x="210" y="148">payroll</text><text class="em-note-value" x="535" y="148">protect</text><text class="em-note-key" x="210" y="206">trust</text><text class="em-note-value" x="535" y="206">protect</text><text class="em-note-key" x="210" y="264">another attempt</text><text class="em-note-value" x="535" y="264">protect</text><text x="375" y="345">He read the three lines aloud before answering.</text>',
+          '<rect class="em-message" x="108" y="85" width="210" height="150" rx="10"/><rect class="em-message" x="432" y="85" width="210" height="150" rx="10"/><text class="em-message-small" x="148" y="122">THE FORECAST</text><text class="em-screen-value" x="213" y="183">82%</text><text class="em-message-small" x="472" y="122">CUSTOMER SAID</text><text class="em-screen-value" x="537" y="183">31%</text><path class="em-arrow" d="M335 159h78m-17-15 17 15-17 15"/><text x="375" y="345">One call changed the number everyone had trusted.</text>',
+          '<rect class="em-page" x="170" y="58" width="410" height="248" rx="9"/><text class="em-page-label" x="215" y="114">DECISION</text><path class="em-note-rule" d="M215 140h320M215 184h320M215 228h240"/><path class="em-arrow" d="m474 252 15 14 26-34"/><text x="375" y="345">He answered the next evening and named the risk aloud.</text>'
+        ]
+      },
+      control: {
+        label: 'A man waits in a hospital hallway, separates what he controls, and stays beside his father',
+        frames: [
+          '<path class="em-office" d="M70 296h610M110 296V70h530v226M110 150h530"/><rect class="em-message" x="265" y="92" width="220" height="58" rx="8"/><text class="em-result-word" x="375" y="127">PLEASE WAIT HERE</text><circle class="em-head" cx="220" cy="230" r="22"/><path class="em-person" d="M220 252l35 44m-35-44-20 44"/><path class="em-clock" d="M558 190a34 34 0 1 1-.1 0M558 201v21l14 9"/><text x="375" y="345">He walked the same twelve steps again and again.</text>',
+          '<rect class="em-note" x="120" y="55" width="510" height="245" rx="8"/><path class="em-note-rule" d="M375 55v245M155 108h185M410 108h185"/><text class="em-note-title" x="170" y="89">NOT MINE</text><text class="em-note-title" x="425" y="89">MINE</text><text class="em-note-key" x="170" y="145">the diagnosis</text><text class="em-note-key" x="425" y="145">call my sister</text><text class="em-note-key" x="170" y="190">the wait</text><text class="em-note-key" x="425" y="190">bring coffee</text><text class="em-note-key" x="170" y="235">the doctor’s choice</text><text class="em-note-key" x="425" y="235">stay nearby</text><text x="375" y="345">The right column was short enough to do.</text>',
+          '<path class="em-office" d="M115 295h520M165 295v-70h140v70M445 295v-70h140v70"/><path class="em-cup" d="M336 208h38v33c0 13-38 13-38 0zM374 216h13v16h-13"/><path class="em-cup" d="M392 208h38v33c0 13-38 13-38 0zM430 216h13v16h-13"/><circle class="em-head" cx="275" cy="166" r="22"/><path class="em-person" d="M275 188v60m-35 47 35-47 35 47M275 210l48 20"/><text x="375" y="345">He made the call and came back with two coffees.</text>',
+          '<circle class="em-head" cx="300" cy="160" r="23"/><path class="em-person" d="M300 183v78m-42 58 42-58 42 58M300 210l62 35"/><circle class="em-head em-helper" cx="450" cy="175" r="23"/><path class="em-person em-helper" d="M450 198v63m-42 58 42-58 42 58M450 220l-88 25"/><path class="em-open-gate" d="M570 75v225h82"/><text x="375" y="345">He pulled the chair closer and took his father’s hand.</text>'
+        ]
+      },
+      uncertainty: {
+        label: 'A woman checks the same message through the night, puts down her phone, and asks one useful question in the morning',
+        frames: [
+          '<rect class="em-screen" x="260" y="48" width="230" height="270" rx="24"/><text class="em-screen-label" x="375" y="84">2:13 AM</text><rect class="em-message" x="285" y="112" width="180" height="82" rx="10"/><path class="em-message-line" d="M307 137h136M307 162h102"/><circle class="em-head" cx="152" cy="226" r="22"/><path class="em-person" d="M152 248v53m-32 39 32-39 32 39M152 266l73 4"/><text x="375" y="345">She opened the same message again.</text>',
+          '<g class="em-requests"><rect x="82" y="62" width="180" height="42" rx="7"/><rect x="486" y="65" width="180" height="42" rx="7"/><rect x="62" y="145" width="180" height="42" rx="7"/><rect x="508" y="150" width="180" height="42" rx="7"/><rect x="96" y="235" width="180" height="42" rx="7"/><rect x="474" y="238" width="180" height="42" rx="7"/></g><circle class="em-head" cx="375" cy="170" r="25"/><path class="em-person" d="M375 195v72m-40 58 40-58 40 58M375 220l-50 30m50-30 50 30"/><text class="em-screen-value" x="375" y="115">14</text><text x="375" y="345">Fourteen tabs gave her fourteen ways to worry.</text>',
+          '<rect class="em-screen" x="90" y="90" width="116" height="160" rx="18"/><text class="em-screen-label" x="148" y="128">KITCHEN</text><path class="em-message-line" d="M112 160h72M112 188h72"/><path class="em-room" d="M320 285V105h330v180M320 214h330"/><circle class="em-head" cx="468" cy="220" r="21"/><path class="em-person" d="M468 242l35 43m-35-43-20 43"/><path class="em-thought-line" d="M206 171C285 171 310 212 430 220"/><text x="375" y="345">The doubt followed her. The phone stayed in the kitchen.</text>',
+          '<rect class="em-message" x="145" y="74" width="460" height="205" rx="12"/><text class="em-message-small" x="190" y="116">9:00 AM · CALL</text><path class="em-message-line" d="M190 146h330M190 178h280"/><rect class="em-result-mark" x="190" y="212" width="320" height="42" rx="21"/><text class="em-result-word" x="350" y="238">ONE QUESTION THAT CHANGES THE DECISION</text><text x="375" y="345">She asked it once, wrote down the answer, and went to work.</text>'
+        ]
+      }
+    };
+    var story = stories[sceneKey];
+    svg.setAttribute('aria-label', story.label);
+    var frames = story.frames.map(function (markup, index) {
+      var frame = svgEl('g', { class: 'em-story-frame em-deep-' + sceneKey + '-' + index });
+      frame.innerHTML = markup;
+      svg.appendChild(frame);
+      return frame;
+    });
+    canvas.appendChild(svg);
+    return { canvas: canvas, svg: svg, frames: frames, nodes: [], edges: [] };
   }
 
   var host = el('section', 'em-story');
