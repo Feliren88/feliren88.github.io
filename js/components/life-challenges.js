@@ -74,7 +74,7 @@
   function initComfort() {
     var moments = [
       { label: 'Pressure', title: 'A hard day does not need a life lesson.', now: 'Reduce the load enough to sleep, eat, think, and ask for help. Capacity cannot recover while every resource remains committed.', later: 'When the pressure falls, record which responsibility lacked authority, support, or a boundary.' },
-      { label: 'Failure', title: 'A bad result is not a final account of you.', now: 'Stabilize the practical damage. You can postpone the story about what this says about your character.', later: 'Find where your model first parted from reality. Keep the information without turning the result into an identity.' },
+      { label: 'Failure', title: 'A bad result is not a final account of you.', now: 'Stabilise the practical damage. You can postpone the story about what this says about your character.', later: 'Find where your model first parted from reality. Keep the information without turning the result into an identity.' },
       { label: 'Delay', title: 'Waiting can hurt even when the work is sound.', now: 'The effort and hope were real. You do not have to call the delay a gift while you are living through it.', later: 'Use the extra time where it improves readiness: skill, runway, evidence, relationships, or the structure beneath the outcome.' },
       { label: 'Loss', title: 'Some pain has no useful fix.', now: 'Stay near people who can share the weight without rushing you toward an explanation. Presence is enough for now.', later: 'Meaning may come through changed priorities, deeper care, or what you choose to protect. It does not have to justify what was lost.' },
       { label: 'Reinvention', title: 'You can be between identities without being lost.', now: 'Keep ordinary routines and close relationships while the next direction remains unproven. You still exist without the old role.', later: 'Build one small artifact in the new direction. Evidence can gradually replace the story you no longer believe.' }
@@ -88,7 +88,7 @@
     function update() {
       var item = moments[selected];
       var distance = +slider.value;
-      var phase = distance < 34 ? 'Stabilize first' : distance < 68 ? 'Regain room' : 'Reflect when ready';
+      var phase = distance < 34 ? 'Stabilise first' : distance < 68 ? 'Regain room' : 'Reflect when ready';
       stage.style.setProperty('--distance', distance + '%');
       stage.dataset.phase = distance < 34 ? 'now' : distance < 68 ? 'middle' : 'later';
       $('lc-comfort-phase').textContent = phase;
@@ -230,7 +230,7 @@
         ['Run a postmortem', 2, 'Separating mechanism from identity turns the result into a better model.'],
         ['Start a bigger bet', -1, 'Escalation tries to erase shame with another outcome. It compounds the risk.'] ] },
       { tag: 'relationship', title: 'The same conflict returns after several honest conversations.', copy: 'You keep repairing. The other person keeps promising.', actions: [
-        ['Explain it better', 0, 'Clarity cannot substitute for reciprocity. The pattern already contains behavioral evidence.'],
+        ['Explain it better', 0, 'Clarity cannot substitute for reciprocity. The pattern already contains behavioural evidence.'],
         ['Set an observable boundary', 2, 'A boundary makes the required change and consequence visible.'],
         ['Pretend it is fine', -1, 'Silence transfers the entire cost to your future self.'] ] },
       { tag: 'uncertainty', title: 'Two paths fit your values. Neither comes with a guarantee.', copy: 'More thinking now produces discomfort without adding evidence.', actions: [

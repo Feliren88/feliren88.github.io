@@ -365,12 +365,12 @@
   function reviewLens() {
     var host=document.getElementById('sf-review-switch'); if(!host)return;
     var cards=Array.prototype.slice.call(document.querySelectorAll('.sf-review article')),warnings=document.querySelector('.sf-warnings');
-    var copy={monthly:'Monthly: inspect individual wins and losses while the causes are still recoverable. Ask what worked, what diverged, and what the result built or cost.',quarterly:'Quarterly: step above individual outcomes. Look for compounding, deterioration, bottlenecks, concentration, and an over-optimized score.',alarms:'Alarm review: repeated patterns matter more than one mood. Look for identity lock-in, rising stakes, unlearned lessons, or a system that cannot function without you.'};
+    var copy={monthly:'Monthly: inspect individual wins and losses while the causes are still recoverable. Ask what worked, what diverged, and what the result built or cost.',quarterly:'Quarterly: step above individual outcomes. Look for compounding, deterioration, bottlenecks, concentration, and an over-optimised score.',alarms:'Alarm review: repeated patterns matter more than one mood. Look for identity lock-in, rising stakes, unlearned lessons, or a system that cannot function without you.'};
     Array.prototype.slice.call(host.querySelectorAll('button')).forEach(function(button){button.addEventListener('click',function(){var mode=button.dataset.sfReview;Array.prototype.slice.call(host.querySelectorAll('button')).forEach(function(b){b.classList.toggle('is-on',b===button);});cards.forEach(function(card,i){card.classList.toggle('is-focus',mode==='monthly'?i<2:mode==='quarterly'?i>=2:false);});document.querySelector('.sf-review').classList.toggle('has-focus',mode!=='alarms');warnings.classList.toggle('is-focus',mode==='alarms');document.getElementById('sf-review-read').textContent=copy[mode];});});
   }
 
   function exploreStatics() {
-    var configs=[{root:'.sf-quadrants',items:'.sf-quadrant',read:'[data-sf-read="four-outcomes"]',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('p').textContent}},{root:'.sf-diagnostic-grid',items:'article',prompt:'Select a diagnostic question. One result cannot reveal its own cause.',copy:function(i){return i.querySelector('h3').textContent+' test: '+i.querySelector('p').textContent}},{root:'.sf-lanes',items:'.sf-lane',prompt:'Select the observed result. A win and a loss require different first moves.',copy:function(i){return i.classList.contains('success')?'After a win, attribution and independent repetition come before scale.':'After a loss, stabilize the resources needed to continue before choosing another bet.'}},{root:'.sf-loops-chain',items:'article',prompt:'Select a chain to see what the next round inherits.',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('small').textContent}}];
+    var configs=[{root:'.sf-quadrants',items:'.sf-quadrant',read:'[data-sf-read="four-outcomes"]',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('p').textContent}},{root:'.sf-diagnostic-grid',items:'article',prompt:'Select a diagnostic question. One result cannot reveal its own cause.',copy:function(i){return i.querySelector('h3').textContent+' test: '+i.querySelector('p').textContent}},{root:'.sf-lanes',items:'.sf-lane',prompt:'Select the observed result. A win and a loss require different first moves.',copy:function(i){return i.classList.contains('success')?'After a win, attribution and independent repetition come before scale.':'After a loss, stabilise the resources needed to continue before choosing another bet.'}},{root:'.sf-loops-chain',items:'article',prompt:'Select a chain to see what the next round inherits.',copy:function(i){return i.querySelector('h3').textContent+': '+i.querySelector('small').textContent}}];
     configs.forEach(function(cfg){var root=document.querySelector(cfg.root);if(!root)return;var read=cfg.read?document.querySelector(cfg.read):null;if(!read){read=document.createElement('p');read.className='sf-explore-read';read.setAttribute('role','status');read.textContent=cfg.prompt;root.insertAdjacentElement('afterend',read);}var items=Array.prototype.slice.call(root.querySelectorAll(cfg.items));root.classList.add('sf-explore-set');items.forEach(function(item){item.classList.add('sf-explore-item');item.tabIndex=0;item.setAttribute('role','button');function choose(){items.forEach(function(x){x.classList.toggle('is-pick',x===item);});root.classList.add('has-pick');read.textContent=cfg.copy(item);}item.addEventListener('click',choose);item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});});
   }
 
@@ -510,7 +510,7 @@
           ['Stress-test', 'you have not asked what breaks'],
           ['Capture', 'nothing was turned into an asset'],
           ['Scale', '']],
-    loss: [['Stabilize', 'you are deciding while still bleeding'],
+    loss: [['Stabilise', 'you are deciding while still bleeding'],
            ['Locate', 'you do not know where it diverged'],
            ['Separate', 'signal and noise are still mixed'],
            ['Extract', 'the information is unrecorded'],
@@ -625,7 +625,7 @@
         gate: 'Make one part of your contribution scale beyond your own hours.',
         legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
         prerequisites: ['A clear direction', 'Repeated demand for the same expertise', 'A method that works more than once', 'Access to users and feedback'],
-        hard: ['Process and system design', 'Documentation and knowledge architecture', 'Productization or automation', 'Delegation and quality control'],
+        hard: ['Process and system design', 'Documentation and knowledge architecture', 'Productisation or automation', 'Delegation and quality control'],
         soft: ['Abstracting patterns from cases', 'Teaching clearly', 'Patience with iteration', 'Maintaining standards through others'],
         requirements: ['A named repeatable method', 'A reusable asset or workflow', 'A distribution channel', 'A measure of output beyond hours worked'],
         readiness: ['Someone else can use your method successfully', 'Useful output continues without your constant presence', 'Marginal effort falls as value repeats', 'Demand becomes recurring rather than accidental'],
@@ -651,7 +651,7 @@
         gate: 'Be trusted to decide which problems deserve attention.',
         legend: [['win', 'Candidate options'], ['read', 'Judgment filter'], ['line', 'Selected decision']],
         prerequisites: ['Consequences tied to prior decisions', 'A record of sound calls', 'Deep domain expertise', 'Trust from capable peers'],
-        hard: ['Decision and prioritization frameworks', 'Scenario and risk analysis', 'Resource allocation', 'Incentive and organizational design'],
+        hard: ['Decision and prioritisation frameworks', 'Scenario and risk analysis', 'Resource allocation', 'Incentive and organisational design'],
         soft: ['Calibrated judgment', 'Communicating uncertainty', 'Constructive conflict and courage', 'Visible accountability for outcomes'],
         requirements: ['Decision rights matched by resources', 'Ownership of ambiguous problems', 'A decision journal with outcomes', 'Access to relevant information before choices'],
         readiness: ['People consult you before committing resources', 'Your decisions survive changing conditions', 'Others execute from your direction without micromanagement', 'You consistently identify the problem behind the request'],
@@ -664,7 +664,7 @@
         gate: 'Build a system that works without making you its permanent bottleneck.',
         legend: [['read', 'Judgment hub'], ['win', 'Multiplier nodes'], ['line', 'Delegated reach']],
         prerequisites: ['Trusted judgment', 'Principles that can be explained', 'Capable lieutenants or partners', 'Resources worth multiplying'],
-        hard: ['Operating-system design', 'Organizational design and delegation', 'Portfolio or program management', 'Information and performance dashboards'],
+        hard: ['Operating-system design', 'Organisational design and delegation', 'Portfolio or program management', 'Information and performance dashboards'],
         soft: ['Trusting without abandoning oversight', 'Selecting and developing talent', 'Setting context instead of prescribing tasks', 'Letting go of personal indispensability'],
         requirements: ['Clear decision architecture', 'Fast feedback and correction loops', 'Explicit ownership across the system', 'Redundancy for critical roles'],
         readiness: ['The system performs during your absence', 'Judgment travels across teams, assets, or products', 'You are no longer the routine bottleneck', 'Most time moves from firefighting to selection'],
@@ -692,7 +692,7 @@
     var criterionLabels = {
       prerequisites: 'What must already be true',
       hard: 'Technical and operational mastery',
-      soft: 'Behavioral mastery',
+      soft: 'Behavioural mastery',
       requirements: 'What this phase must contain',
       readiness: 'Observable upgrade signals'
     };

@@ -628,7 +628,7 @@ motion_scene: agency
   We stop believing in Santa and the tooth fairy, yet keep believing in an unseen group of
   adults who fully understand the situation.</p>
 
-  <p>The cards below summarize examples collected in <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">the original essay</a>. Their mistakes do not cancel their work; they show why no accomplished person should be treated as infallible. Tap a card.</p>
+  <p>The cards below summarise examples collected in <a href="https://www.highagency.com/" target="_blank" rel="noreferrer">the original essay</a>. Their mistakes do not cancel their work; they show why no accomplished person should be treated as infallible. Tap a card.</p>
 
   <div class="ha-lab">
     <div class="ha-lab-head">

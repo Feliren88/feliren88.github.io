@@ -63,7 +63,7 @@ motion_scene: conversion
       <div class="lc-comfort-picker" id="lc-comfort-picker" role="listbox" aria-label="Choose what feels difficult"></div>
       <label class="lc-distance" for="lc-distance"><span>Distance from the event</span><input id="lc-distance" type="range" min="0" max="100" value="18"><small><span>Inside it</span><span>Regaining room</span><span>Ready to reflect</span></small></label>
     </div>
-    <div class="lc-comfort-status"><span id="lc-comfort-phase">Stabilize first</span><h3 id="lc-comfort-title">A hard day does not need a life lesson.</h3></div>
+    <div class="lc-comfort-status"><span id="lc-comfort-phase">Stabilise first</span><h3 id="lc-comfort-title">A hard day does not need a life lesson.</h3></div>
     <div class="lc-comfort-notes" aria-live="polite">
       <article class="lc-comfort-now"><small>What helps now</small><p id="lc-comfort-now"></p></article>
       <article class="lc-comfort-later"><small>What may help later</small><p id="lc-comfort-later"></p></article>

@@ -348,11 +348,11 @@ motion_scene: signal
   <div class="cm-before-after">
     <div class="bad"><small>Character verdict</small><p>“You are unreliable.”</p></div>
     <i>→</i>
-    <div class="good"><small>Situation · behavior · impact</small><p>“The report arrived two days late without warning, so I had to delay the client review. I need earlier notice.”</p></div>
+    <div class="good"><small>Situation · behaviour · impact</small><p>“The report arrived two days late without warning, so I had to delay the client review. I need earlier notice.”</p></div>
   </div>
 
   <div class="cm-conflict-models">
-    <article><header><b>SBI</b><span>Feedback</span></header><ol><li>Situation</li><li>Behavior</li><li>Impact</li></ol></article>
+    <article><header><b>SBI</b><span>Feedback</span></header><ol><li>Situation</li><li>Behaviour</li><li>Impact</li></ol></article>
     <article><header><b>DESC</b><span>Firm boundary</span></header><ol><li>Describe</li><li>Express</li><li>Specify</li><li>Consequence</li></ol></article>
     <article><header><b>OFNR</b><span>Personal conflict</span></header><ol><li>Observation</li><li>Feeling</li><li>Need</li><li>Request</li></ol></article>
     <article><header><b>Steelman</b><span>Disagreement</span></header><ol><li>Summarise</li><li>Ask “Is that fair?”</li><li>Then challenge</li></ol></article>
@@ -374,7 +374,7 @@ motion_scene: signal
 
   <div class="cm-apology">
     <span>1 · What I did</span><span>2 · The impact</span><span>3 · Responsibility</span><span>4 · The correction</span>
-    <p>Do not add “but you also.” That belongs in another conversation. Judge an apology by acknowledgment → repair → changed behavior.</p>
+    <p>Do not add “but you also.” That belongs in another conversation. Judge an apology by acknowledgment → repair → changed behaviour.</p>
   </div>
 </section>
 
@@ -517,7 +517,7 @@ motion_scene: signal
     <article><b>Technical material</b><p>What · why · how · example · exception. Do not lead with the edge case.</p></article>
     <article><b>Someone’s problem</b><p>Ask “Do you want an idea?” before solving.</p></article>
     <article><b>Care is invisible</b><p>Name it: “I handled this because I wanted to take something off your plate.”</p></article>
-    <article><b>Praise</b><p>Name the exact behavior so the person knows what you value.</p></article>
+    <article><b>Praise</b><p>Name the exact behaviour so the person knows what you value.</p></article>
     <article><b>Cross-cultural</b><p>Do not infer agreement, hostility, honesty, confidence, or weakness from style alone.</p></article>
     <article><b>Serious text conflict</b><p>Use text to name the issue and arrange the conversation, not prosecute the case.</p></article>
   </div>

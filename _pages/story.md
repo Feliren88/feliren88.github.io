@@ -69,7 +69,7 @@ motion_scene: repair
         <p>Whenever he succeeded, he tended to see the next weakness. Whenever he learned something, the boundary of what he did not know became more visible. He had little interest in being the loudest student. He cared about being difficult to disprove.</p>
         <p>He could finish an assignment correctly and still think about the possibility that he had misunderstood the question. He could understand a concept better than most of the room and remain preoccupied by the part he had not yet mastered. So he developed slowly. Privately. Layer by layer.</p>
         <p>There were years when learning seemed to happen without much warmth around it. Knowledge accumulated, but it felt less like discovery than equipment being packed for an expedition whose destination had not been revealed.</p>
-        <p>He became increasingly interested not merely in solving questions but in examining the systems that produced the questions. Why had the organization designed the process this way? Why did one incentive create another behavior? Why did intelligent people tolerate obviously inefficient arrangements merely because the arrangements were old?</p>
+        <p>The systems that produced the questions started to interest him more than the questions did. Why had the organisation designed the process this way? Why did one incentive create another behaviour? Why did intelligent people tolerate obviously inefficient arrangements merely because the arrangements were old?</p>
         <p>He did not yet know that this would become the central pattern of his life. He thought he was simply learning.</p>
       </div>
       <div class="ms-stack" aria-hidden="true"><i>memory</i><i>method</i><i>mechanism</i><i>incentive</i><i>structure</i></div>
@@ -82,9 +82,9 @@ motion_scene: repair
       <p>In his early twenties, the world became harder. He liked that more than he expected.</p>
       <p>The problems stopped being academic. Mistakes now had consequences. There were deadlines, money, clients, managers, systems that could fail, people who depended on decisions being correct.</p>
       <p>He entered professional life expecting that experienced adults would possess methods for these things. Instead, he discovered something both frightening and exhilarating. Often, nobody knew.</p>
-      <p>Organizations were collections of habits, incentives, personalities, forgotten compromises and temporary solutions that had somehow survived long enough to acquire names.</p>
+      <p>Organisations were collections of habits, incentives, personalities, forgotten compromises and temporary solutions that had somehow survived long enough to acquire names.</p>
       <p>Other people became overwhelmed when too many variables appeared at once. He became quieter. What was known? What was assumed? Which variable constrained the others? Who had authority? Who had information? Who bore the cost of failure?</p>
-      <p>Which rule was real, and which existed because nobody had challenged it? Organizations were less like machines than they appeared from outside. That gap between appearance and operation was where his advantage first appeared.</p>
+      <p>Which rule was real, and which existed because nobody had challenged it? Organisations were less like machines than they appeared from outside. That gap between appearance and operation was where his advantage first appeared.</p>
       <p>He did not always produce an answer quickly. But his answers tended to survive contact with reality. People noticed. Someone said, “Give it to him. He’ll figure it out.”</p>
       <p>It felt good. It was perhaps the most dangerous compliment he could have received.</p>
     </div><div class="ms-proof"><span>unknown</span><i>→</i><span>taken apart</span><i>→</i><span>survives reality</span><strong>“He’ll figure it out.”</strong></div></article>
@@ -95,7 +95,7 @@ motion_scene: repair
       <p>His reputation became specific. He was the person called when the normal method stopped working.</p>
       <p>He was not charismatic in the conventional executive sense. That did not matter. He asked good questions. He was difficult to impress. He could see when language was concealing uncertainty.</p>
       <p>With each success came another responsibility. With each responsibility came more trust. With trust came better compensation. Then access. Then larger decisions.</p>
-      <p>Organizations discovered that if you gave a capable person responsibility without ownership, he would often compensate for the missing ownership with effort.</p>
+      <p>Organisations discovered that if you gave a capable person responsibility without ownership, he would often compensate for the missing ownership with effort.</p>
       <p>He began carrying more. There was always another urgent question. Another meeting. Another risk. Another situation in which someone said, “We really need you on this.” Titles never interested him as much as the permission they granted. He wanted enough authority to fix what was broken.</p>
       <p>His competence became infrastructure. And infrastructure, by definition, is expected to remain available.</p>
       <p>From outside, these were the best years yet. Yet at home, late at night, there was sometimes an inexplicable absence. He could point to everything that was working. And still something was missing.</p>
@@ -107,7 +107,7 @@ motion_scene: repair
     <article class="ms-scene" data-chapter="V"><div class="ms-chapter"><span>V</span><h3>The Question at Twenty-Nine</h3></div><div class="ms-prose">
       <p>The crisis did not arrive dramatically. There was no cinematic resignation. No spectacular betrayal. No collapse. That would have been easier.</p>
       <p>Instead, the structure simply stopped convincing him.</p>
-      <p>One evening he remained in the office after almost everyone else had left. A difficult project was nearly solved. Once it was solved, the organization would own the improvement. His reward would be another assignment.</p>
+      <p>One evening he remained in the office after almost everyone else had left. A difficult project was nearly solved. Once it was solved, the organisation would own the improvement. His reward would be another assignment.</p>
       <p>He should have felt satisfaction. Instead he saw the whole exchange at once: the system would remain, the knowledge would remain mostly in his head, and his ability to solve it would qualify him for the next version.</p>
       <p>For the first time he asked a question that capability could not answer.</p>
       <blockquote>If I become exceptionally good at this, what kind of life does that create?</blockquote>
@@ -121,7 +121,7 @@ motion_scene: repair
       <p>He resisted his own preference for dramatic clarity. He had learned enough about risk to understand that disillusionment was not automatically insight. So he experimented.</p>
       <p>He changed responsibilities. He declined certain opportunities despite their compensation. He studied subjects nobody had asked him to study. He kept private notes about recurring failures across projects.</p>
       <p>He did not resign the following morning. He changed responsibilities, accepted some opportunities because they gave him authority over method, and tested whether his dissatisfaction survived contact with alternatives.</p>
-      <p>Organizations confused activity with control. Teams measured what was easy rather than what mattered. Decision-makers concealed uncertainty instead of structuring it. Good ideas disappeared because nobody converted them into procedures capable of surviving mediocre execution.</p>
+      <p>Organisations confused activity with control. Teams measured what was easy rather than what mattered. Decision-makers concealed uncertainty instead of structuring it. Good ideas disappeared because nobody converted them into procedures capable of surviving mediocre execution.</p>
       <p>The question was no longer technical. It was architectural. What kind of life should surround the work? What should he own? How much money was enough to protect freedom without becoming the variable that chose everything else?</p>
       <p>Which people deserved access to his deepest attention? Which responsibilities were meaningful, and which merely exploited his capacity to endure them? He functioned well when a problem was hard. When the rules themselves were unclear, he became restless. He wanted the right path before choosing it, but no such answer existed.</p>
       <p>He discovered that some questions could not be solved by increasing resolution. Eventually one had to choose a structure and live inside it long enough to discover what it produced.</p>
@@ -154,11 +154,11 @@ motion_scene: repair
 
     <article class="ms-scene" data-chapter="IX"><div class="ms-chapter"><span>IX</span><h3>Ownership</h3></div><div class="ms-prose">
       <p>By the middle of his thirties, his work had become difficult to describe with a job title. That pleased him.</p>
-      <p>He advised several organizations. He helped design systems whose failures would have been expensive. He built tools internally, then discovered they could be used elsewhere.</p>
-      <p>He occasionally invested alongside people whose judgment he respected. He refused to create an organization whose main purpose was managing the organization.</p>
+      <p>He advised several organisations. He helped design systems whose failures would have been expensive. He built tools internally, then discovered they could be used elsewhere.</p>
+      <p>He occasionally invested alongside people whose judgment he respected. He refused to create an organisation whose main purpose was managing the organisation.</p>
       <p>His small firm never became enormous. A handful of excellent people were enough. He preferred colleagues capable of disagreeing with him. Especially the ones who could say, “You're making this too complicated.” Or worse: “You're solving the wrong problem.”</p>
       <p>His wealth began changing form. Earlier, money had mostly been compensation for carrying responsibility. Now some of it came from ownership. Nothing transformed overnight. It compounded.</p>
-      <p>A small equity position. A licensing arrangement. Long-term participation in something he had helped architect. The source of money now reflected what happened to the system after his direct labor ended.</p>
+      <p>A small equity position. A licensing arrangement. Long-term participation in something he had helped architect. The source of money now reflected what happened to the system after his direct labour ended.</p>
       <p>That suited him. He trusted slow things that could survive inspection.</p>
     </div><div class="ms-compound"><span>judgment</span><span>method</span><span>tool</span><span>ownership</span><span>time</span><b>work that keeps working</b></div></article>
   </section>
@@ -167,20 +167,20 @@ motion_scene: repair
     <header class="ms-act-head"><span>Act V</span><h2>Transmission</h2><p>The work could travel farther than the person who made it.</p></header>
     <article class="ms-scene" data-chapter="X"><div class="ms-chapter"><span>X</span><h3>The Public Work</h3></div><div class="ms-prose">
       <p>For most of his life he had resisted publication. The framework was incomplete. The data needed another pass. The edge cases were unresolved.</p>
-      <p>His private standards were brutal because private knowledge could remain infinitely refined. Public knowledge could be criticized.</p>
+      <p>His private standards were brutal because private knowledge could remain infinitely refined. Public knowledge could be criticised.</p>
       <p>He always had another reason to wait. Someone else had probably expressed the idea better. Another pass might resolve the edge cases. The method could stay safe from criticism for as long as it stayed private.</p>
-      <p>Eventually the contradiction became unavoidable. He had spent decades complaining that organizations repeatedly rediscovered the same lessons. Yet he had left much of what he knew inside private documents and conversations.</p>
+      <p>Eventually the contradiction became unavoidable. He had spent decades complaining that organisations repeatedly rediscovered the same lessons. Yet he had left much of what he knew inside private documents and conversations.</p>
       <p>So in his early forties he began publishing seriously. Long pieces. Technical essays. Frameworks. Standards. A book that took several years because he refused to release it until its method had survived several environments.</p>
       <p>It did not make him famous in the ordinary way. Something better happened. The right people found it.</p>
       <p>A researcher in another country used one of his models. A regulator quoted a definition. A founder redesigned part of a company around an idea he had written at home one rainy night years earlier.</p>
       <p>A technical team adopted a decision framework without ever meeting him. The right kind of visibility had found him: the work moved while his daily life remained his own.</p>
-      <p>His name traveled farther than he did. The work could be public. He could remain private.</p>
+      <p>His name travelled farther than he did. The work could be public. He could remain private.</p>
     </div><div class="ms-ripple" aria-label="An idea moving outward"><i></i><i></i><i></i><i></i><span>method</span><small>researcher</small><small>team</small><small>regulator</small></div></article>
 
     <article class="ms-scene" data-chapter="XI"><div class="ms-chapter"><span>XI</span><h3>The Difference Between Being Known and Being Watched</h3></div><div class="ms-prose">
       <p>Success arrived again in his forties. People invited him to speak. He often declined. They offered executive positions. He accepted advisory roles instead.</p>
       <p>Earlier in life, prestige had provided evidence that he mattered. Now prestige became another resource to allocate.</p>
-      <p>Organizations wanted his reputation attached to theirs. He became careful about which ones received it.</p>
+      <p>Organisations wanted his reputation attached to theirs. He became careful about which ones received it.</p>
       <p>He had learned the difference between recognition and exposure. Recognition said: <em>Your judgment has survived enough reality that we trust it.</em> Exposure said: <em>Please perform yourself continuously for strangers.</em></p>
       <p>His influence expanded behind the visible layer. A method he had developed became common practice in a small but important field. Some misunderstood it. Some improved it.</p>
       <p>Students learned versions of it without knowing its origin. He found this strangely satisfying. Durability mattered more than attribution.</p>
@@ -191,9 +191,9 @@ motion_scene: repair
       <p>His late forties and fifties became the most productive period of his life. Not because he worked the longest hours. Because the decades finally began stacking rather than competing.</p>
       <p>The analyst's appetite for difficulty remained. The operator's knowledge of consequences remained. The advisor's understanding of incentives remained. The owner's patience remained. The writer's ability to state the method had finally developed.</p>
       <p>Experience had also given him something intelligence alone could not: he had been wrong enough times. He had watched ambition, fear, fatigue, and ordinary incentives break designs that were elegant on paper.</p>
-      <p>He had watched elegant theories fail against ordinary human behavior. He had seen organizations destroy value while every individual pursued incentives that made sense locally. He no longer believed good judgment meant eliminating uncertainty.</p>
+      <p>He had watched elegant theories fail against ordinary human behaviour. He had seen organisations destroy value while every individual pursued incentives that made sense locally. He no longer believed good judgment meant eliminating uncertainty.</p>
       <p>Good judgment meant determining what must be known, what could remain unknown, what could be made reversible and what must be protected from failure.</p>
-      <p>Younger professionals came to him wanting answers. He disappointed them. He gave them questions. What breaks if your assumption is wrong? Who owns the downside? What are you optimizing without realizing it? What are you building that remains when you leave?</p>
+      <p>Younger professionals came to him wanting answers. He disappointed them. He gave them questions. What breaks if your assumption is wrong? Who owns the downside? What are you optimising without realising it? What are you building that remains when you leave?</p>
       <p>Which part is reversible? Why must this decision be made now? What would you do if nobody knew your title afterward? The questions shifted attention away from appearing correct and toward the structure of the choice.</p>
       <p>They often disliked these questions. Years later they wrote to thank him.</p>
     </div><div class="ms-layers"><span>analyst</span><span>operator</span><span>advisor</span><span>owner</span><span>writer</span><b>judgment</b></div></article>
@@ -202,12 +202,12 @@ motion_scene: repair
   <section class="ms-act" id="dismantling" data-act="6">
     <header class="ms-act-head"><span>Act VI</span><h2>Selection</h2><p>Mastery did not prevent rebuilding. It changed what he kept.</p></header>
     <article class="ms-scene" data-chapter="XIII"><div class="ms-chapter"><span>XIII</span><h3>The Dismantling</h3></div><div class="ms-prose">
-      <p>His fifties also brought disruption. Some partnerships ended. One major venture required reorganization. Work became more international.</p>
+      <p>His fifties also brought disruption. Some partnerships ended. One major venture required reorganisation. Work became more international.</p>
       <p>For a period he spent substantial time away from the base he had protected so carefully. Structures he had built no longer fit perfectly.</p>
       <p>He discovered that mastery did not exempt anyone from rebuilding. In younger years, disruption had felt like evidence that he had chosen incorrectly. Now he saw it differently.</p>
       <p>A durable structure was one that could be altered without losing its governing purpose.</p>
       <p>He dismantled parts of his professional life. Sold some interests. Kept others. Reduced the number of clients. Expanded the work that could be transmitted without him.</p>
-      <p>Dismantling was not retreat. It was maintenance at the scale of a life: remove what no longer served the purpose, preserve what did, and give the remaining parts more room.</p>
+      <p>Dismantling was maintenance at the scale of a life: remove what no longer served the purpose, preserve what did, and give the remaining parts more room.</p>
       <p>He wrote again. The second major book was shorter than the first. Better too. He no longer needed to prove that he had considered every possible objection.</p>
       <p>That was one of the great gifts of age. Not certainty. Selection.</p>
     </div><div class="ms-selection"><span>keep</span><i></i><span>alter</span><i></i><span>release</span><b>governing purpose</b></div></article>
@@ -242,8 +242,8 @@ motion_scene: repair
       <p>A carefully designed chair. A mechanical instrument. Pieces of prototypes. Printed drafts filled with corrections. A workshop that surprised people who knew only his professional work.</p>
       <p>He liked things whose form explained their function. He liked tools that felt inevitable in the hand. He liked diagrams whose arrangement made bad reasoning difficult.</p>
       <p>He had spent years treating aesthetic judgment as something unserious. Later he discovered that precision and beauty had never been separate instincts in him.</p>
-      <p>This private craft never became another business. That was important. Not everything needed monetization. Some things had to remain outside the economy to remind him that value existed before price.</p>
-      <p>The house held work nobody had commissioned and objects nobody needed to approve. Its atmosphere was not a backdrop to his life. It was one of the structures through which the life became his.</p>
+      <p>This private craft never became another business. That was important. Not everything needed monetisation. Some things had to remain outside the economy to remind him that value existed before price.</p>
+      <p>The house held work nobody had commissioned and objects nobody needed to approve. Its atmosphere was one of the structures through which the life became his.</p>
       <p>Visitors expected the private life of an important man. What they found was the private life of someone who had spent decades trying to understand what deserved to last.</p>
     </div><div class="ms-shelf"><i></i><span>books</span><span>tools</span><span>drafts</span><span>badly made objects</span><b>value before price</b></div></article>
 
@@ -260,7 +260,7 @@ motion_scene: repair
     <article class="ms-scene" data-chapter="XVIII"><div class="ms-chapter"><span>XVIII</span><h3>The Last Professional Years</h3></div><div class="ms-prose">
       <p>In his seventies, people still sent him difficult problems. This amused him.</p>
       <p>The technology changed. The institutions changed. The language changed. The underlying mistakes changed less than everyone imagined.</p>
-      <p>People still confused measurements with reality. Still rewarded behavior they publicly condemned. Still built organizations in which everyone individually behaved rationally and the collective outcome was absurd.</p>
+      <p>People still confused measurements with reality. Still rewarded behaviour they publicly condemned. Still built organisations in which everyone individually behaved rationally and the collective outcome was absurd.</p>
       <p>They still underestimated maintenance, overestimated charisma, and wanted certainty where only judgment was available.</p>
       <p>He remained useful. But he was no longer the load-bearing wall.</p>
       <p>He had spent decades constructing methods, institutions and people capable of operating without him. When he disappeared for three months, nothing collapsed.</p>
@@ -289,7 +289,7 @@ motion_scene: repair
       <p>There would be no final analysis sufficient to remove mortality. No perfect sequence of decisions that made loss impossible. No structure in which everyone stayed.</p>
       <p>The only remaining question was whether the life had become sufficiently his before it ended.</p>
       <p>The things that remained were different: a house shaped deliberately over decades; a handful of people who knew him beyond his competence; work that continued without his supervision; students who had become teachers.</p>
-      <p>Organizations he once worked for had merged, renamed themselves or disappeared. Urgent projects were forgotten. Compensation that had once seemed enormous had become numbers in old files. Methods he had written clearly enough for strangers to use still entered rooms he would never see.</p>
+      <p>Organisations he once worked for had merged, renamed themselves or disappeared. Urgent projects were forgotten. Compensation that had once seemed enormous had become numbers in old files. Methods he had written clearly enough for strangers to use still entered rooms he would never see.</p>
       <p>He had once believed success meant becoming impossible to replace. Late in life he understood the opposite. The highest form of success was to become unnecessary without becoming irrelevant.</p>
     </div><div class="ms-reversal"><span>young</span><b>impossible to replace</b><i>→</i><span>old</span><b>unnecessary<br>without becoming irrelevant</b></div></article>
 

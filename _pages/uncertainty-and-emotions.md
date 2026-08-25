@@ -386,7 +386,7 @@ motion_scene: uncertainty
 
   <div class="ue-opp">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-opposite"/></svg> When a feeling's instruction does not match the situation</p>
-    <p class="ue-opp-intro">Every feeling comes with an urge to act. First ask whether the facts support that urge. If they do, act on the problem. If they do not, choose a small action in the other direction. The aim is not to deny the feeling. It is to stop the feeling from deciding for you.</p>
+    <p class="ue-opp-intro">Every feeling comes with an urge to act. First ask whether the facts support that urge. If they do, act on the problem. If they do not, choose a small action in the other direction. The feeling stays. The aim is to stop it from deciding for you.</p>
     <div class="ue-opp-rows">
       <div class="ue-opp-head" aria-hidden="true"><span>Feeling</span><span>What it urges you to do</span><i></i><span>If the facts do not support that urge</span></div>
       <div><span class="f">Fear</span><span class="u"><svg class="ue-i"><use href="#ue-magnet"/></svg> avoid it entirely</span><i aria-hidden="true"><svg class="ue-i"><use href="#ue-opposite"/></svg></i><span class="o">approach it in a small step you can repeat</span></div>

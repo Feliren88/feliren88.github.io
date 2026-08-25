@@ -227,9 +227,9 @@ motion_scene: feedback
       </ol>
     </article>
     <article class="sf-lane failure">
-      <header><span><svg class="sf-i" aria-hidden="true"><use href="#sf-loss"/></svg>After a loss</span><h3>Stabilize, then choose</h3></header>
+      <header><span><svg class="sf-i" aria-hidden="true"><use href="#sf-loss"/></svg>After a loss</span><h3>Stabilise, then choose</h3></header>
       <ol>
-        <li><b>Stabilize.</b><span>Protect money, health, confidence, relationships, attention, and reputation.</span></li>
+        <li><b>Stabilise.</b><span>Protect money, health, confidence, relationships, attention, and reputation.</span></li>
         <li><b>Locate.</b><span>Find where reality first diverged from the model.</span></li>
         <li><b>Separate.</b><span>Distinguish signal from noise and arena error from personal inadequacy.</span></li>
         <li><b>Extract.</b><span>Write down the information purchased and the system change it requires.</span></li>
@@ -341,7 +341,7 @@ motion_scene: feedback
     <article><span>Monthly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-win"/></svg><h3>Wins</h3><p>What worked? Why? What became easier? Which durable asset resulted? What should remain small?</p></article>
     <article><span>Monthly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-loss"/></svg><h3>Losses</h3><p>What failed? Where did reality diverge? What did it cost and teach? Retry, adapt, pause, hedge, or exit?</p></article>
     <article><span>Quarterly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-system"/></svg><h3>System</h3><p>What compounds? What deteriorates? Which domain is the bottleneck? Where is risk concentrating?</p></article>
-    <article><span>Quarterly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-trajectory"/></svg><h3>Trajectory</h3><p>Does the highest score matter, or is it over-optimized? Does the lowest score constrain everything else?</p></article>
+    <article><span>Quarterly</span><svg class="sf-i" aria-hidden="true"><use href="#sf-trajectory"/></svg><h3>Trajectory</h3><p>Does the highest score matter, or is it over-optimised? Does the lowest score constrain everything else?</p></article>
   </div>
   <div class="sf-warnings">
     <article><svg class="sf-i" aria-hidden="true"><use href="#sf-alarm"/></svg><h3>Success-trap alarms</h3><ul><li>I cannot leave because I make too much money.</li><li>The system cannot function without me.</li><li>I hate the lifestyle, but I am good at it.</li><li>One more achievement will let me live properly.</li></ul></article>
