@@ -156,10 +156,11 @@
      Forty things sit in your head. Say too few and they cannot follow. Say too
      many and they keep a shrinking share. The curve peaks in between. */
   function figTransfer() {
-    var range = one('#cf-range');
-    if (!range) return;
+    var range = one('#cf-range'), context = one('#cf-context'), check = one('#cf-check');
+    if (!range || !context) return;
     var TOTAL = 40;
     var mine = one('#cf-mine'), theirs = one('#cf-theirs');
+    var checked = false;
 
     function dots(host, n, cls) {
       host.innerHTML = '';
@@ -167,15 +168,17 @@
         var dot=document.createElement('i');dot.className=cls;host.appendChild(dot);
       }
     }
-    function landed(said) {
+    function landed(said, shared) {
       /* A share of what you said survives, and that share shrinks as you add
          more. Never more than you said, and the absolute number peaks in the
          middle: that peak is the whole point of the figure. */
-      return Math.max(0, Math.round(said * Math.exp(-(said - 1) / 14)));
+      var kept = said * Math.exp(-(said - 1) / (10 + shared * .14));
+      if (checked) kept += Math.min(said - kept, 2 + shared * .04);
+      return Math.max(0, Math.round(kept));
     }
 
     function paint() {
-      var said = +range.value, got = landed(said);
+      var said = +range.value, shared = +context.value, got = landed(said, shared);
       dots(mine, TOTAL, 'mine');
       dots(theirs, got, 'theirs');
       one('#cf-flow').style.width = (said / TOTAL * 100).toFixed(1)+'%';
@@ -183,17 +186,22 @@
       one('#cf-landed-label').textContent=got+(got===1?' idea retained':' ideas retained');
       one('#cf-landed').textContent = got;
       one('#cf-pct').textContent = said ? Math.round(got / said * 100) + '%' : '0%';
+      one('#cf-shared').textContent = shared + '%';
+      if (check) { check.setAttribute('aria-pressed', checked ? 'true' : 'false'); check.textContent = checked ? 'Understanding checked' : 'Check what they heard'; }
       var say = one('#cf-say');
       if (!say) return;
-      say.textContent = said <= 3
-        ? 'Too little. They cannot reach the idea from here.'
-        : got >= landed(said - 1) && got >= landed(said + 1)
-          ? 'About right. This is as much as gets through.'
-          : said > 14
-            ? 'You are saying more and they are keeping less.'
-            : 'Still climbing. A little more would land.';
+      say.textContent = checked
+        ? 'Their summary exposed the gap and recovered part of the message. Correct the missing piece instead of repeating everything.'
+        : said <= 3 && shared < 40
+          ? 'The message is short, but the listener lacks the context needed to enter it.'
+          : said > 18 && shared < 55
+            ? 'Detail has outrun the channel. They are dropping ideas before the message ends.'
+            : shared > 70
+              ? 'Shared context carries part of the explanation. Say the decision and the difference.'
+              : 'The message fits the channel. Ask them to summarize before you add more.';
     }
-    range.addEventListener('input', paint);
+    range.addEventListener('input', paint); context.addEventListener('input', paint);
+    if (check) check.addEventListener('click', function () { checked = !checked; paint(); });
     paint();
   }
 
@@ -346,18 +354,31 @@
   function figConflict() {
     var host = one('#cf-frame');
     if (!host) return;
+    var stress = one('#cf-stress'), current = 'observe';
     function paint(k) {
+      current = k;
       all('#cf-frame button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.frame === k); });
       var chain = one('#cf-chain');
       chain.className = 'cf-chain is-' + k;
       chain.innerHTML = CM_FRAME[k].map(function (s, i) {
         return '<span>' + esc(s) + '</span>' + (i < 3 ? '<i aria-hidden="true">&rarr;</i>' : '');
       }).join('');
+      var pressure = stress ? +stress.value : 45;
+      var defense = Math.min(96, Math.round(k === 'judge' ? 52 + pressure * .44 : 8 + pressure * .3));
+      var attention = 100 - defense;
+      one('#cf-defense-fill').style.width = attention + '%';
+      one('#cf-defense-value').textContent = attention + '%';
+      one('#cf-defense-copy').textContent = k === 'judge'
+        ? 'The character verdict spends attention on self-defense. Higher pressure leaves less room to examine the event.'
+        : pressure > 70
+          ? 'A concrete observation preserves some attention, though the room is already strained. Slow down and ask what they heard.'
+          : 'The event stays visible. Both people have enough attention left to explain, correct, and agree on a change.';
     }
     host.addEventListener('click', function (e) {
       var b = e.target.closest('button[data-frame]');
       if (b) paint(b.dataset.frame);
     });
+    if (stress) stress.addEventListener('input', function () { paint(current); });
     paint('observe');
   }
 

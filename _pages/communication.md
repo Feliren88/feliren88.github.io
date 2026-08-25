@@ -39,7 +39,7 @@ extra_js: /js/components/communication.js
 </header>
 
 <figure class="cm-fig" id="fig-transfer">
-  <figcaption><span class="n">Figure 1</span><b>Saying more transfers less</b><em>Move the slider.</em></figcaption>
+  <figcaption><span class="n">Figure 1</span><b>Build shared understanding</b><em>Change the message and the channel.</em></figcaption>
   <div class="cm-fig-body">
     <div class="cf-transfer-plot" role="img" aria-label="Forty ideas in your head are compressed into a selected message; only some of that message lands with the listener.">
       <section class="cf-transfer-stage source">
@@ -61,9 +61,15 @@ extra_js: /js/components/communication.js
       <span>How much you say</span>
       <input type="range" id="cf-range" min="1" max="40" value="6" step="1">
     </label>
+    <label class="cm-fig-ctl">
+      <span>Context you already share</span>
+      <input type="range" id="cf-context" min="0" max="100" value="25" step="5">
+    </label>
+    <button class="cf-check" id="cf-check" type="button" aria-pressed="false">Check what they heard</button>
     <div class="cm-fig-read">
       <div><b id="cf-landed">0</b><span>ideas landed</span></div>
       <div><b id="cf-pct">0%</b><span>of what you said</span></div>
+      <div><b id="cf-shared">25%</b><span>shared context</span></div>
       <p id="cf-say" role="status"></p>
     </div>
   </div>
@@ -328,6 +334,12 @@ extra_js: /js/components/communication.js
       <button type="button" data-frame="observe" class="is-on">Describe what happened</button>
     </div>
     <div class="cf-chain" id="cf-chain"></div>
+    <label class="cm-fig-ctl">
+      <span>Pressure already in the room</span>
+      <input type="range" id="cf-stress" min="0" max="100" value="45" step="5">
+    </label>
+    <div class="cf-defense"><span>attention available for the issue</span><i><b id="cf-defense-fill"></b></i><strong id="cf-defense-value">0%</strong></div>
+    <p class="cf-defense-copy" id="cf-defense-copy" role="status"></p>
   </div>
 </figure>
   <div class="cm-before-after">
