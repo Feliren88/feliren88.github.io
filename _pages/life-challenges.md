@@ -69,11 +69,17 @@ motion_scene: conversion
   </div>
   <div class="lc-meaning-path">
     <p>We cannot prove that hardship was assigned, deserved, or designed. It still does not have to get the final word.</p>
-    <ol aria-label="From hardship to meaning">
-      <li><small>Unchosen</small><strong>What happened</strong></li>
-      <li><small>Partly yours</small><strong>How you respond</strong></li>
-      <li><small>Built slowly</small><strong>What remains</strong></li>
-    </ol>
+    <div class="lc-meaning-journey" role="img" aria-label="What happened is unchosen. How you respond is partly yours. What remains is built slowly.">
+      <svg viewBox="0 0 900 230" aria-hidden="true">
+        <path class="lc-meaning-trail" d="M35 168C176 16 284 206 448 112S704 42 866 88"/>
+        <circle class="lc-meaning-start" cx="44" cy="159" r="12"/>
+        <circle class="lc-meaning-middle" cx="448" cy="112" r="16"/>
+        <path class="lc-meaning-mark" d="m850 82 16 6-10 14"/>
+      </svg>
+      <span class="lc-meaning-note is-happened"><small>Unchosen</small><strong>What happened</strong></span>
+      <span class="lc-meaning-note is-response"><small>Partly yours</small><strong>How you respond</strong></span>
+      <span class="lc-meaning-note is-remains"><small>Built slowly</small><strong>What remains</strong></span>
+    </div>
   </div>
 </section>
 
