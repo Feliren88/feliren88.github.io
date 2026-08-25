@@ -325,24 +325,51 @@
 
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ticking = false;
+
+  // Scroll spent settling into the pin before the first beat, and holding the last
+  // beat before the scene releases. Without these the sequence opened already in
+  // motion and cut away mid-beat, which is most of why it read as hurried.
+  var LEAD = 0.09, TAIL = 0.09;
+  var lastStage = -1;
+
   function alignToViewport() {
     host.style.setProperty('--em-gutter', root.getBoundingClientRect().left.toFixed(2) + 'px');
   }
   function paint() {
     var rect = host.getBoundingClientRect();
     var span = Math.max(1, host.offsetHeight - innerHeight);
-    var progress = reduced ? 1 : Math.max(0, Math.min(1, -rect.top / span));
+    var raw = reduced ? 1 : Math.max(0, Math.min(1, -rect.top / span));
+    var progress = Math.max(0, Math.min(1, (raw - LEAD) / (1 - LEAD - TAIL)));
     host.style.setProperty('--em-p', progress.toFixed(4));
     host.style.setProperty('--em-x', (20 + progress * 55).toFixed(2) + '%');
-    var stage = Math.min(3, Math.floor(progress * 4));
-    if (scene.frames) {
-      copy.querySelector('.em-kicker').textContent = scene.frames[stage][0];
-      copy.querySelector('h2').textContent = scene.frames[stage][1];
-      copy.querySelector('p').textContent = scene.frames[stage][2];
-      narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
+
+    var count = scene.steps.length;
+    var scaled = progress * count;
+    var stage = Math.min(count - 1, Math.floor(scaled));
+    // How far through the current beat, so the step rail can show sub-beat progress.
+    host.style.setProperty('--em-t', Math.max(0, Math.min(1, scaled - stage)).toFixed(4));
+
+    // Only touch the DOM when the beat actually changes. Rewriting the copy on every
+    // scroll frame restarted the CSS animation each time, so it could never play.
+    if (stage !== lastStage) {
+      lastStage = stage;
+      if (scene.frames) {
+        copy.querySelector('.em-kicker').textContent = scene.frames[stage][0];
+        copy.querySelector('h2').textContent = scene.frames[stage][1];
+        copy.querySelector('p').textContent = scene.frames[stage][2];
+        narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
+      }
+      read.querySelector('b').textContent = '0' + (stage + 1); read.querySelector('span').textContent = scene.steps[stage];
+      Array.prototype.forEach.call(steps.children, function (item, index) {
+        item.classList.toggle('is-active', index <= stage);
+        item.classList.toggle('is-current', index === stage);
+      });
+      if (!reduced) {
+        copy.classList.remove('is-turning');
+        void copy.offsetWidth;  // restart the animation rather than let it no-op
+        copy.classList.add('is-turning');
+      }
     }
-    read.querySelector('b').textContent = '0' + (stage + 1); read.querySelector('span').textContent = scene.steps[stage];
-    Array.prototype.forEach.call(steps.children, function (item, index) { item.classList.toggle('is-active', index <= stage); });
     nodes.forEach(function (node, index) { var local = Math.max(0, Math.min(1, (progress - index * .22) * 4)); node.style.opacity = (.12 + local * .88).toFixed(3); node.style.transform = 'scale(' + (.72 + local * .28).toFixed(3) + ')'; });
     edges.forEach(function (edge, index) { var local = Math.max(0, Math.min(1, (progress - index * .24) * 3.2)); edge.style.strokeDashoffset = (1 - local).toFixed(3); });
     ticking = false;
