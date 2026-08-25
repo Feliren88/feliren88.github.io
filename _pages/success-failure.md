@@ -28,9 +28,13 @@ extra_js: /js/components/success-failure.js
       </svg>
       <label class="sf-fig-ctl"><span>How much luck is in this game</span>
         <input type="range" id="sx-luck" min="0" max="100" value="20" step="5"></label>
+      <label class="sf-fig-ctl"><span>Underlying strategy quality</span>
+        <input type="range" id="sx-quality" min="0" max="100" value="56" step="2"></label>
+      <button class="sx-rerun" id="sx-rerun" type="button">Run 20 more attempts</button>
       <div class="sf-fig-read">
         <div><b id="sx-spread">0</b><span>spread across 20 runs</span></div>
         <div><b id="sx-runs-needed">1</b><span>runs before you can tell</span></div>
+        <div><b id="sx-median">0</b><span>median observed result</span></div>
         <p id="sx-say" role="status"></p>
       </div>
     </div>

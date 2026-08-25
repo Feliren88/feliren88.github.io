@@ -21,10 +21,15 @@ extra_js: /js/components/self-love.js
       <span>intelligence</span><span>discipline</span><span>ambition</span><span>adaptability</span><span>responsibility</span><span>resilience</span>
     </div>
     <div class="sl-control-core"><i></i><strong>self-love</strong><small>governs the load</small></div>
+    <div class="sl-flow-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="sl-control-outcomes">
       <div class="is-shadow"><small>ungoverned</small><b>successful<br>self-abandonment</b></div>
       <div class="is-safe"><small>governed</small><b>chosen<br>contribution</b></div>
     </div>
+  </div>
+  <div class="sl-governor">
+    <label><span>Self-protection in the system</span><input id="sl-governor" type="range" min="0" max="100" value="52"></label>
+    <div><b id="sl-governor-state">negotiated effort</b><p id="sl-governor-copy" role="status"></p></div>
   </div>
   <blockquote>“I expect a lot from you because I believe in what you can become. But I will not destroy you to prove it.”</blockquote>
 </section>

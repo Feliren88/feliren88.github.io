@@ -392,26 +392,30 @@
      Twenty runs of the same strategy. The strategy's real worth never moves;
      only the noise around it does. At high luck a single run says nothing. */
   function sxLuck() {
-    var r = sxOne('#sx-luck');
-    if (!r) return;
-    var X0 = 40, X1 = 524, TRUE_X = 0.56;
+    var r = sxOne('#sx-luck'), quality = sxOne('#sx-quality'), rerun = sxOne('#sx-rerun');
+    if (!r || !quality) return;
+    var X0 = 40, X1 = 524, batch = 0;
     /* a fixed pseudo-random set, so dragging changes spread and not the seed */
     var SEED = [0.42, -0.71, 0.13, 0.88, -0.36, 0.64, -0.92, 0.27, 0.55, -0.18,
                 0.76, -0.49, 0.05, -0.83, 0.31, 0.69, -0.24, 0.94, -0.61, 0.09];
     function paint() {
       var luck = +r.value / 100;
+      var trueX = .08 + (+quality.value / 100) * .84;
       var host = sxOne('#sx-runs');
       host.innerHTML = '';
-      var xs = SEED.map(function (n) {
-        return Math.max(0.02, Math.min(0.98, TRUE_X + n * luck * 0.44));
+      var xs = SEED.map(function (_, index) {
+        var n = batch === 0 ? SEED[index] : Math.sin((index + 1) * (batch + 3) * 12.9898) * 43758.5453;
+        if (batch > 0) n = (n - Math.floor(n)) * 2 - 1;
+        return Math.max(0.02, Math.min(0.98, trueX + n * luck * 0.44));
       });
       xs.forEach(function (p, i) {
-        host.appendChild(sxEl('circle', {
+        var dot = sxEl('circle', {
           cx: (X0 + p * (X1 - X0)).toFixed(1),
           cy: (44 + (i % 5) * 18).toFixed(1), r: 5, class: 'sx-run'
-        }));
+        });
+        dot.style.setProperty('--sx-i', i); host.appendChild(dot);
       });
-      var tx = X0 + TRUE_X * (X1 - X0);
+      var tx = X0 + trueX * (X1 - X0);
       sxOne('#sx-true').setAttribute('x1', tx); sxOne('#sx-true').setAttribute('x2', tx);
       sxOne('#sx-truelab').setAttribute('x', tx);
       var lo = Math.min.apply(null, xs), hi = Math.max.apply(null, xs);
@@ -419,13 +423,16 @@
       /* runs needed rises with the square of the noise */
       var need = Math.max(1, Math.round(1 + Math.pow(luck * 10, 2) / 3.2));
       sxOne('#sx-runs-needed').textContent = need;
+      var ordered = xs.slice().sort(function (a, b) { return a - b; });
+      sxOne('#sx-median').textContent = Math.round((ordered[9] + ordered[10]) * 50);
       sxOne('#sx-say').textContent = luck <= 0.1
         ? 'Almost no luck here. One result is close to the truth about the strategy.'
         : luck >= 0.6
-          ? 'Any single run lands almost anywhere. A win here is not evidence yet.'
+          ? 'Any single run can land almost anywhere. One win carries little evidence about the strategy.'
           : 'The result carries signal and noise together. Repeat it before scaling.';
     }
-    r.addEventListener('input', paint);
+    r.addEventListener('input', paint); quality.addEventListener('input', paint);
+    if (rerun) rerun.addEventListener('click', function () { batch += 1; paint(); });
     paint();
   }
 
@@ -601,7 +608,7 @@
       choosing: {
         number: 'Milestone 02', title: 'Choosing direction',
         explanation: 'Broad capability now needs a target. Choose the field, problem class, collaborators, and tradeoffs that will govern the next stretch of work.',
-        order: 'Evidence must precede commitment. Commitment must precede leverage; otherwise the system compounds drift.',
+        order: 'Evidence must precede commitment. Commitment must come before compounding advantage, or the system compounds drift.',
         gate: 'Become the person competent people associate with one difficult problem.',
         legend: [['line', 'Explored routes'], ['read', 'Committed route'], ['win', 'Target problem']],
         prerequisites: ['Evidence from the proving phase', 'A credible body of work', 'Exposure to several environments', 'Enough runway to reject a clearly bad fit'],
@@ -612,9 +619,9 @@
         art: '<svg viewBox="0 0 320 190"><circle class="origin" cx="52" cy="95" r="9"/><path class="dim" d="M62 95C122 95 135 38 205 38H270M62 95C122 95 135 152 205 152H270"/><path class="main" d="M62 95H270"/><path class="head" d="M257 86L274 95L257 104"/><circle class="target" cx="218" cy="95" r="22"/><circle class="target" cx="218" cy="95" r="8"/><text x="52" y="122">OPTIONS</text><text x="218" y="132">CHOSEN GAME</text></svg>'
       },
       leverage: {
-        number: 'Milestone 03', title: 'Building leverage',
+        number: 'Milestone 03', title: 'Building an advantage',
         explanation: 'Make expertise reusable. Turn the method into a product, system, team, distribution channel, recurring asset, or body of intellectual property that survives the workday.',
-        order: 'Leverage needs a stable direction. Ownership comes later, once a repeatable source of value exists to capture.',
+        order: 'A compounding advantage needs a stable direction. Ownership comes later, once a repeatable source of value exists to capture.',
         gate: 'Make one part of your contribution scale beyond your own hours.',
         legend: [['read', 'Expertise source'], ['win', 'Reusable channels'], ['line', 'One-to-many reach']],
         prerequisites: ['A clear direction', 'Repeated demand for the same expertise', 'A method that works more than once', 'Access to users and feedback'],
@@ -630,7 +637,7 @@
         order: 'Repeatable value makes upside visible enough to negotiate. Ownership then ties decisions to their consequences before authority expands.',
         gate: 'Know exactly how you participate when the work succeeds dramatically.',
         legend: [['read', 'Total value created'], ['win', 'Upside owned'], ['line', 'Participation flow']],
-        prerequisites: ['A working leverage engine', 'Evidence of value created', 'Basic financial runway', 'Clear understanding of the value chain'],
+        prerequisites: ['A working advantage engine', 'Evidence of value created', 'Basic financial runway', 'Clear understanding of the value chain'],
         hard: ['Contract, equity, and incentive mechanics', 'Unit economics and cash-flow reading', 'Asset valuation and risk analysis', 'Capital-allocation fundamentals'],
         soft: ['Negotiating without apology or entitlement', 'Thinking like an owner', 'Downside discipline', 'Patience for compounding'],
         requirements: ['Explicit rights to economic upside', 'Defined accountability and decision rights', 'Liquidity outside the main bet', 'Protection against destructive concentration'],
@@ -672,7 +679,7 @@
         prerequisites: ['Systems that operate without constant intervention', 'Financial and professional optionality', 'A long record of decisions and consequences', 'An identity larger than one operating role'],
         hard: ['Capital allocation', 'Governance and fiduciary thinking', 'Mentorship and knowledge design', 'Portfolio, institution, or succession building'],
         soft: ['Discernment about people and opportunities', 'Stewardship', 'Humility about what cannot be known', 'Generativity and patience'],
-        requirements: ['Explicit investment and selection principles', 'Successor and mentorship pathways', 'Protected attention for high-leverage decisions', 'Vehicles that carry knowledge or capital forward'],
+        requirements: ['Explicit investment and selection principles', 'Successor and mentorship pathways', 'Protected attention for consequential decisions', 'Vehicles that carry knowledge or capital forward'],
         readiness: ['Other people make better decisions because of your guidance', 'Institutions or assets endure beyond your involvement', 'Capital reaches worthy problems with discipline', 'Your knowledge is transferable rather than trapped in reputation'],
         art: '<svg viewBox="0 0 320 190"><circle class="core" cx="92" cy="95" r="22"/><circle class="wave" cx="92" cy="95" r="45"/><circle class="wave" cx="92" cy="95" r="70"/><path class="main" d="M164 95H276"/><path class="head" d="M263 86L280 95L263 104"/><circle class="seed" cx="224" cy="58" r="8"/><circle class="seed" cx="252" cy="95" r="8"/><circle class="seed" cx="224" cy="132" r="8"/><text x="92" y="99">DISCERN</text><text x="238" y="157">BEYOND SELF</text></svg>'
       }

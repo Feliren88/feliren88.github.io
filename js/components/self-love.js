@@ -27,6 +27,33 @@
     sections.forEach(function (section) { observer.observe(section); });
   }
 
+  function governor() {
+    var input = one('#sl-governor'), map = one('.sl-control-map');
+    if (!input || !map) return;
+    function paint() {
+      var value = +input.value;
+      var shadow = map.querySelector('.sl-control-outcomes .is-shadow');
+      var safe = map.querySelector('.sl-control-outcomes .is-safe');
+      map.style.setProperty('--sl-govern', value / 100);
+      map.style.setProperty('--sl-flow-y', (35 + value * .3) + '%');
+      map.style.setProperty('--sl-ring', (value / 100) + 'rem');
+      map.dataset.governor = value < 34 ? 'absent' : value < 68 ? 'negotiated' : 'active';
+      shadow.style.opacity = Math.max(.18, 1 - value / 115);
+      safe.style.opacity = Math.max(.18, .18 + value / 100);
+      if (value < 34) {
+        one('#sl-governor-state').textContent = 'capacity without protection';
+        one('#sl-governor-copy').textContent = 'Discipline and resilience are routing demand straight into endurance. Other people receive the output; you inherit the cost.';
+      } else if (value < 68) {
+        one('#sl-governor-state').textContent = 'negotiated effort';
+        one('#sl-governor-copy').textContent = 'Limits have entered the system, though pressure can still override them. Name the conditions under which your yes expires.';
+      } else {
+        one('#sl-governor-state').textContent = 'chosen contribution';
+        one('#sl-governor-copy').textContent = 'Your strengths remain available while consent, health, exit power, and recovery constrain how much the system may take.';
+      }
+    }
+    input.addEventListener('input', paint); paint();
+  }
+
   function consent() {
     var demand = one('#sl-demand'), willing = one('#sl-consent');
     if (!demand || !willing) return;
@@ -132,6 +159,6 @@
     directionButtons.forEach(function (button) { button.addEventListener('click', function () { direction = button.dataset.direction; paint(); }); }); paint();
   }
 
-  function init() { progress(); rail(); consent(); trial(); cage(); strengths(); timing(); trustee(); }
+  function init() { progress(); rail(); governor(); consent(); trial(); cage(); strengths(); timing(); trustee(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 }());
