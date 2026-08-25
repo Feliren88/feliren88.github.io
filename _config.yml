@@ -88,3 +88,13 @@ defaults:
       path: "_pages"
     values:
       layout: page
+  # Search-console ownership tokens. They are real files at fixed paths, but they
+  # are not pages, and jekyll-sitemap otherwise picks up every .html static file.
+  - scope:
+      path: "google41769159a82c477f.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "yandex_3f8f613ab592ef84.html"
+    values:
+      sitemap: false
