@@ -58,18 +58,21 @@ extra_js: /js/components/life-challenges.js
   <div class="lc-comfort-stage" id="lc-comfort-stage">
     <div class="lc-comfort-controls">
       <div class="lc-comfort-picker" id="lc-comfort-picker" role="listbox" aria-label="Choose what feels difficult"></div>
-      <label class="lc-distance"><span>Distance from the event</span><input id="lc-distance" type="range" min="0" max="100" value="18"><small><i>inside it</i><i>room to reflect</i></small></label>
+      <label class="lc-distance" for="lc-distance"><span>Distance from the event</span><input id="lc-distance" type="range" min="0" max="100" value="18"><small><span>Inside it</span><span>Regaining room</span><span>Ready to reflect</span></small></label>
     </div>
-    <div class="lc-comfort-visual" aria-hidden="true"><i></i><i></i><i></i><strong id="lc-comfort-word">pressure</strong></div>
-    <div class="lc-comfort-status"><span id="lc-comfort-phase">stabilize first</span><b id="lc-comfort-title">A hard day does not need a life lesson.</b></div>
+    <div class="lc-comfort-status"><span id="lc-comfort-phase">Stabilize first</span><h3 id="lc-comfort-title">A hard day does not need a life lesson.</h3></div>
     <div class="lc-comfort-notes" aria-live="polite">
-      <article><small>What helps now</small><p id="lc-comfort-now"></p></article>
-      <article><small>What may help later</small><p id="lc-comfort-later"></p></article>
+      <article class="lc-comfort-now"><small>What helps now</small><p id="lc-comfort-now"></p></article>
+      <article class="lc-comfort-later"><small>What may help later</small><p id="lc-comfort-later"></p></article>
     </div>
   </div>
   <div class="lc-meaning-path">
     <p>We cannot prove that hardship was assigned, deserved, or designed. It still does not have to get the final word.</p>
-    <div><span><small>unchosen</small>what happened</span><i>→</i><span><small>partly yours</small>how you respond</span><i>→</i><span><small>built slowly</small>what remains</span></div>
+    <ol aria-label="From hardship to meaning">
+      <li><small>Unchosen</small><strong>What happened</strong></li>
+      <li><small>Partly yours</small><strong>How you respond</strong></li>
+      <li><small>Built slowly</small><strong>What remains</strong></li>
+    </ol>
   </div>
 </section>
 
@@ -182,5 +185,4 @@ extra_js: /js/components/life-challenges.js
 
     <p>The road was never clear.<br>Still, my feet learned the ground.<br>Still, I chose what to carry.<br>Still, where no road remained,<br>I began one.</p>
   </div>
-  <footer><span>uncertainty</span><i></i><span>choice</span><i></i><span>authorship</span></footer>
 </section>

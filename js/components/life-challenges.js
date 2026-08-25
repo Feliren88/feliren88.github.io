@@ -88,10 +88,9 @@
     function update() {
       var item = moments[selected];
       var distance = +slider.value;
-      var phase = distance < 34 ? 'stabilize first' : distance < 68 ? 'regain room' : 'reflect when ready';
+      var phase = distance < 34 ? 'Stabilize first' : distance < 68 ? 'Regain room' : 'Reflect when ready';
       stage.style.setProperty('--distance', distance + '%');
       stage.dataset.phase = distance < 34 ? 'now' : distance < 68 ? 'middle' : 'later';
-      $('lc-comfort-word').textContent = item.label.toLowerCase();
       $('lc-comfort-phase').textContent = phase;
       $('lc-comfort-title').textContent = item.title;
       $('lc-comfort-now').textContent = item.now;
