@@ -71,6 +71,54 @@
     update();
   }
 
+  function initComfort() {
+    var moments = [
+      { label: 'Pressure', title: 'A hard day does not need a life lesson.', now: 'Reduce the load enough to sleep, eat, think, and ask for help. Capacity cannot recover while every resource remains committed.', later: 'When the pressure falls, record which responsibility lacked authority, support, or a boundary.' },
+      { label: 'Failure', title: 'A bad result is not a final account of you.', now: 'Stabilize the practical damage. You can postpone the story about what this says about your character.', later: 'Find where your model first parted from reality. Keep the information without turning the result into an identity.' },
+      { label: 'Delay', title: 'Waiting can hurt even when the work is sound.', now: 'The effort and hope were real. You do not have to call the delay a gift while you are living through it.', later: 'Use the extra time where it improves readiness: skill, runway, evidence, relationships, or the structure beneath the outcome.' },
+      { label: 'Loss', title: 'Some pain has no useful fix.', now: 'Stay near people who can share the weight without rushing you toward an explanation. Presence is enough for now.', later: 'Meaning may come through changed priorities, deeper care, or what you choose to protect. It does not have to justify what was lost.' },
+      { label: 'Reinvention', title: 'You can be between identities without being lost.', now: 'Keep ordinary routines and close relationships while the next direction remains unproven. You still exist without the old role.', later: 'Build one small artifact in the new direction. Evidence can gradually replace the story you no longer believe.' }
+    ];
+    var picker = $('lc-comfort-picker');
+    var slider = $('lc-distance');
+    var stage = $('lc-comfort-stage');
+    if (!picker || !slider || !stage) return;
+    var selected = 0;
+
+    function update() {
+      var item = moments[selected];
+      var distance = +slider.value;
+      var phase = distance < 34 ? 'stabilize first' : distance < 68 ? 'regain room' : 'reflect when ready';
+      stage.style.setProperty('--distance', distance + '%');
+      stage.dataset.phase = distance < 34 ? 'now' : distance < 68 ? 'middle' : 'later';
+      $('lc-comfort-word').textContent = item.label.toLowerCase();
+      $('lc-comfort-phase').textContent = phase;
+      $('lc-comfort-title').textContent = item.title;
+      $('lc-comfort-now').textContent = item.now;
+      $('lc-comfort-later').textContent = item.later;
+    }
+
+    moments.forEach(function (item, index) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.setAttribute('role', 'option');
+      button.textContent = item.label;
+      button.addEventListener('click', function () {
+        selected = index;
+        Array.prototype.forEach.call(picker.children, function (child, childIndex) {
+          child.classList.toggle('is-active', childIndex === index);
+          child.setAttribute('aria-selected', childIndex === index ? 'true' : 'false');
+        });
+        update();
+      });
+      picker.appendChild(button);
+    });
+    picker.children[0].classList.add('is-active');
+    picker.children[0].setAttribute('aria-selected', 'true');
+    slider.addEventListener('input', update);
+    update();
+  }
+
   function initDiagnosis() {
     var data = [
       { label: 'Skill gap', title: 'The task exceeds your current skill.', copy: 'The goal may still fit. The missing piece is competence you can name and practice.', action: 'Shrink the task and train the missing move.' },
@@ -240,7 +288,7 @@
   }
 
   function init() {
-    buildHero(); initProgress(); initConversion(); initDiagnosis(); initFutureMap(); initPressure(); initGame(); initArchitecture();
+    buildHero(); initProgress(); initConversion(); initComfort(); initDiagnosis(); initFutureMap(); initPressure(); initGame(); initArchitecture();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

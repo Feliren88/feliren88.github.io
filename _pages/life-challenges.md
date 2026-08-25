@@ -29,7 +29,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <nav class="lc-rail" aria-label="Life challenges learning path">
-  <a href="#conversion"><span>01</span>Convert</a><a href="#diagnosis"><span>02</span>Diagnose</a><a href="#uncertainty"><span>03</span>Explore</a><a href="#pressure"><span>04</span>Regulate</a><a href="#game"><span>05</span>Choose</a><a href="#architecture"><span>06</span>Build</a>
+  <a href="#conversion"><span>01</span>Convert</a><a href="#comfort"><span>02</span>Comfort</a><a href="#diagnosis"><span>03</span>Diagnose</a><a href="#uncertainty"><span>04</span>Explore</a><a href="#pressure"><span>05</span>Regulate</a><a href="#game"><span>06</span>Choose</a><a href="#architecture"><span>07</span>Build</a>
 </nav>
 
 <section class="lc-section" id="conversion">
@@ -53,8 +53,28 @@ extra_js: /js/components/life-challenges.js
   <div class="lc-formula"><span>adversity</span><i>+</i><span>reflection</span><i>+</i><span>support</span><i>+</i><span>recovery</span><i>+</i><span>adaptation</span><i>→</i><strong>potential growth</strong></div>
 </section>
 
+<section class="lc-section lc-comfort" id="comfort">
+  <header class="lc-section-head"><span>02 · Before the lesson</span><h2>You are allowed to hurt before you learn from it.</h2><p>Pain can remain painful. Growth, if it comes, often arrives after enough safety, support, and distance to think clearly.</p></header>
+  <div class="lc-comfort-stage" id="lc-comfort-stage">
+    <div class="lc-comfort-controls">
+      <div class="lc-comfort-picker" id="lc-comfort-picker" role="listbox" aria-label="Choose what feels difficult"></div>
+      <label class="lc-distance"><span>Distance from the event</span><input id="lc-distance" type="range" min="0" max="100" value="18"><small><i>inside it</i><i>room to reflect</i></small></label>
+    </div>
+    <div class="lc-comfort-visual" aria-hidden="true"><i></i><i></i><i></i><strong id="lc-comfort-word">pressure</strong></div>
+    <div class="lc-comfort-status"><span id="lc-comfort-phase">stabilize first</span><b id="lc-comfort-title">A hard day does not need a life lesson.</b></div>
+    <div class="lc-comfort-notes" aria-live="polite">
+      <article><small>What helps now</small><p id="lc-comfort-now"></p></article>
+      <article><small>What may help later</small><p id="lc-comfort-later"></p></article>
+    </div>
+  </div>
+  <div class="lc-meaning-path">
+    <p>We cannot prove that hardship was assigned, deserved, or designed. It still does not have to get the final word.</p>
+    <div><span><small>unchosen</small>what happened</span><i>→</i><span><small>partly yours</small>how you respond</span><i>→</i><span><small>built slowly</small>what remains</span></div>
+  </div>
+</section>
+
 <section class="lc-section" id="diagnosis">
-  <header class="lc-section-head"><span>02 · Read the resistance</span><h2>An obstacle is data before it is a verdict.</h2><p>The same friction can ask you to strengthen, change strategy, wait, or leave. Diagnose it before you obey it.</p></header>
+  <header class="lc-section-head"><span>03 · Read the resistance</span><h2>An obstacle is data before it is a verdict.</h2><p>The same friction can ask you to strengthen, change strategy, wait, or leave. Diagnose it before you obey it.</p></header>
   <div class="lc-diagnosis">
     <div class="lc-obstacle-picker" id="lc-obstacle-picker" role="listbox" aria-label="Choose what the obstacle may reveal"></div>
     <div class="lc-scan">
@@ -68,7 +88,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="uncertainty">
-  <header class="lc-section-head"><span>03 · Keep the future open</span><h2>Demanding certainty closes doors before evidence arrives.</h2><p>Fear counts the bad futures first. Use the field to inspect the possibilities it omitted.</p></header>
+  <header class="lc-section-head"><span>04 · Keep the future open</span><h2>Demanding certainty closes doors before evidence arrives.</h2><p>Fear counts the bad futures first. Use the field to inspect the possibilities it omitted.</p></header>
   <figure class="lc-panel lc-future-map">
     <figcaption><b>Possibility field</b><span>Move the certainty dial.</span></figcaption>
     <svg id="lc-future-svg" viewBox="0 0 800 430" role="img" aria-label="A branching map with more possible futures when certainty is lower">
@@ -81,7 +101,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="pressure">
-  <header class="lc-section-head"><span>04 · Regulate the load</span><h2>Maximum difficulty is a bad target.</h2><p>Pressure can build capacity until recovery disappears. Past that point, it damages the system it was supposed to train.</p></header>
+  <header class="lc-section-head"><span>05 · Regulate the load</span><h2>Maximum difficulty is a bad target.</h2><p>Pressure can build capacity until recovery disappears. Past that point, it damages the system it was supposed to train.</p></header>
   <figure class="lc-panel lc-pressure-chart">
     <figcaption><b>Development under pressure</b><span>Find the useful zone without treating overload as virtue.</span></figcaption>
     <svg viewBox="0 0 760 330" role="img" aria-label="Development rises with challenge, peaks in a stretch zone, then falls under destructive overload">
@@ -97,7 +117,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="game">
-  <header class="lc-section-head"><span>05 · The obstacle game</span><h2>Read what the difficulty requires.</h2><p>Courage may mean persisting, negotiating, running a smaller test, or leaving. The situation decides which response fits.</p></header>
+  <header class="lc-section-head"><span>06 · The obstacle game</span><h2>Read what the difficulty requires.</h2><p>Courage may mean persisting, negotiating, running a smaller test, or leaving. The situation decides which response fits.</p></header>
   <div class="lc-game">
     <div class="lc-game-top"><span id="lc-game-round">scenario 1 of 5</span><b id="lc-game-score">0 agency</b></div>
     <div class="lc-game-card" id="lc-game-card"><small id="lc-game-tag"></small><h3 id="lc-game-title"></h3><p id="lc-game-copy"></p></div>
@@ -108,7 +128,7 @@ extra_js: /js/components/life-challenges.js
 </section>
 
 <section class="lc-section" id="architecture">
-  <header class="lc-section-head"><span>06 · Build from it</span><h2>Stop becoming better at the same rescue.</h2><p>A recurring problem should eventually become a boundary, a method, or a system that no longer needs your heroics.</p></header>
+  <header class="lc-section-head"><span>07 · Build from it</span><h2>Stop becoming better at the same rescue.</h2><p>A recurring problem should eventually become a boundary, a method, or a system that no longer needs your heroics.</p></header>
   <div class="lc-architecture">
     <div class="lc-arch-track" id="lc-arch-track">
       <button type="button" data-stage="0"><span>01</span><b>Fix</b><small>Can I handle this?</small></button>
@@ -135,4 +155,32 @@ extra_js: /js/components/life-challenges.js
     <p>Write down the obstacle, the protection you need, and one reversible next move.</p>
     <div><span>failure → information</span><span>constraint → design</span><span>delay → preparation</span><span>disillusionment → truth</span><span>mortality → priorities</span></div>
   </div>
+</section>
+
+<section class="lc-section lc-poem" id="poem">
+  <header class="lc-poem-head"><span>Closing poem</span><h2>The Road Was Never Clear</h2></header>
+  <div class="lc-poem-body">
+    <p>I would not call the wound a teacher<br>while it is still open.<br>Some days ask for no wisdom,<br>only water, sleep,<br>and someone who does not leave.</p>
+
+    <p>Later, perhaps, I will look back<br>and find that pressure taught my hands<br>the weight they could carry,<br>and the weight they should refuse.</p>
+
+    <p>Failure left no blessing at the door.<br>It left evidence:<br>the weak joint in the plan,<br>the promise that could not bear weather,<br>the name I had mistaken for myself.</p>
+
+    <p>Delay gave me no answer.<br>It gave the roots another season<br>before the branches had to hold.<br>I could not see the work underground.<br>I know now that it was work.</p>
+
+    <p>Uncertainty kept one gate unlocked.<br>Through it came fear,<br>then choice,<br>then a life I could not have planned<br>from the safety of the old one.</p>
+
+    <p>I learned that being needed<br>can feel like being trapped;<br>that a title can become a room<br>whose door closes softly;<br>that competence earns burdens<br>unless judgment learns to choose.</p>
+
+    <p>So I stopped repairing the same wall<br>with better hands.<br>I studied the crack.<br>I moved the foundation.<br>I wrote down what the ruin knew.</p>
+
+    <p>Some losses never became useful.<br>I carried them because they were mine.<br>They changed the way I sit beside sorrow,<br>how slowly I speak,<br>who I make time to love.</p>
+
+    <p>I cannot say the universe sent the storm.<br>I cannot say I deserved it,<br>or that every broken thing<br>was secretly arranged for my good.</p>
+
+    <p>I can say what I built afterward:<br>a boundary where I once disappeared,<br>a method where I once exhausted myself,<br>a door where I once found a wall,<br>a place at the table for another tired person.</p>
+
+    <p>The road was never clear.<br>Still, my feet learned the ground.<br>Still, I chose what to carry.<br>Still, where no road remained,<br>I began one.</p>
+  </div>
+  <footer><span>uncertainty</span><i></i><span>choice</span><i></i><span>authorship</span></footer>
 </section>
