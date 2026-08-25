@@ -88,6 +88,9 @@
 
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ticking = false;
+  function alignToViewport() {
+    host.style.setProperty('--em-gutter', root.getBoundingClientRect().left.toFixed(2) + 'px');
+  }
   function paint() {
     var rect = host.getBoundingClientRect();
     var span = Math.max(1, host.offsetHeight - innerHeight);
@@ -103,5 +106,6 @@
   }
   function requestPaint() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
   skip.addEventListener('click', function () { host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' }); });
-  addEventListener('scroll', requestPaint, { passive: true }); addEventListener('resize', requestPaint); paint();
+  function resize() { alignToViewport(); requestPaint(); }
+  addEventListener('scroll', requestPaint, { passive: true }); addEventListener('resize', resize); alignToViewport(); paint();
 })();
