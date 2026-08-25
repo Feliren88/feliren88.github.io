@@ -10,10 +10,12 @@ const PRECACHE = [
   '/research/',
   '/writings/',
   '/contact/',
-  '/css/styles.css?v=40',
-  '/js/main.js?v=8',
-  '/js/components/nav.js?v=7',
-  '/js/components/timeline.js?v=3',
+  // Built through the same include the layout uses, so these byte-match the URLs
+  // the page actually requests. A near-miss is silently fetched and stored twice.
+  '{% include asset.html path="/css/styles.css" %}',
+  '{% include asset.html path="/js/main.js" %}',
+  '{% include asset.html path="/js/components/nav.js" %}',
+  '{% include asset.html path="/js/components/timeline.js" %}',
   '/assets/fonts/manrope-latin.woff2',
   '/assets/fonts/manrope-latin-ext.woff2',
   '/assets/fonts/spacegrotesk-latin.woff2',

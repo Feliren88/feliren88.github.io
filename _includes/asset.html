@@ -1,0 +1,26 @@
+{%- comment -%}
+Cache-busted URL for a site asset. Pass an absolute source path:
+
+    <link rel="stylesheet" href="{% include asset.html path='/css/styles.css' %}">
+    <script src="{% include asset.html path='/js/main.js' %}"></script>
+    {% include asset.html path=page.extra_css %}
+
+The token is the file's own modified time, so editing one stylesheet busts that
+stylesheet and leaves the rest of the site cached. This replaces the hand-kept
+`?v=` numbers that used to live inline: those had to be bumped by hand on every
+edit, one shared number covered all ten page-scoped stylesheets at once, and
+three of them had to be kept identical in two files.
+
+sw.js must build its PRECACHE entries through this same include. A precache URL
+that does not byte-match the URL the page requests is fetched and stored twice,
+and the stale copy is the one the page gets.
+
+If the path does not resolve to a file, this falls back to the build time. That
+is always safe, just less precise: every unresolved asset busts on each deploy.
+{%- endcomment -%}
+{%- assign _asset = site.static_files | where: 'path', include.path | first -%}
+{%- if _asset -%}
+{{- include.path | relative_url }}?v={{ _asset.modified_time | date: '%s' -}}
+{%- else -%}
+{{- include.path | relative_url }}?v={{ site.time | date: '%s' -}}
+{%- endif -%}

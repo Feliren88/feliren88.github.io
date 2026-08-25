@@ -157,7 +157,7 @@ feliren88.github.io/
 │       ├── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
 │       └── usecases/            # Generated pipeline diagrams (20 WebP, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
 ├── css/
-│   ├── styles.css       # @font-face, custom properties, all component styles (current: v28)
+│   ├── styles.css       # @font-face, custom properties, all component styles
 │   ├── high-agency.css  # Page-scoped styles for /high-agency/ only
 │   ├── principles.css   # Page-scoped styles for /principles/ only
 │   ├── stoic.css        # Page-scoped styles for /stoic/ only
@@ -182,13 +182,47 @@ extra_js: /js/components/high-agency.js
 
 `default.html` emits a `<link>` after `styles.css` and a deferred `<script>` after `nav.js`
 when those keys are present. Use this for one-off pages heavy enough that their CSS would
-bloat the global stylesheet. Both are cache-busted with `?v=3` in `default.html`; **bump that whenever you edit
-`high-agency.css`, `principles.css` or their scripts**, or returning visitors get stale assets.
+bloat the global stylesheet. Cache-busting is automatic: every asset URL is emitted through
+`{% include asset.html path='...' %}`, which appends the file's own modified time. There is no
+version number to bump, and no way to bust one file by editing another.
 
 Page-scoped CSS should shadow the global type-scale tokens rather than hard-code sizes.
 `/high-agency/` is a long-form reading page, so it re-declares `--fs-base` and friends on
 `.high-agency` (set via `layout-class` front matter). Every token-driven size on that page
 grows together and no other page moves.
+
+### The scroll scene shared by the eleven writings (`css/essay-motion.css`)
+
+Eleven pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
+front matter key:
+
+```yaml
+motion_scene: repair    # one of the eleven keys below
+```
+
+`default.html` then sets `data-motion-scene` on `<html>` and loads
+`css/essay-motion.css` + `js/components/essay-motion.js`. The JS holds the copy and
+the SVG geometry; the CSS holds every colour. The eleven keys are `repair` (/story/),
+`abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
+`uncertainty`, `signal`, `consent`, `conversion`.
+
+**Never write a hex literal into this file.** Every colour resolves through a token
+declared twice at the top, once under `html[data-motion-scene]` and once under
+`html[data-theme="light"][data-motion-scene]`. A raw hex is invisible in whichever
+theme it was not chosen for, which is exactly the bug this structure exists to stop.
+Tokens are tiered, and the tier is the meaning: `--em-ink` through `--em-ink-faint`
+for text, `--em-hair` through `--em-line-4` for strokes, plus `--em-bg`, `--em-panel`,
+`--em-warm` (the human figure) and `--em-helper` (a second person).
+
+Light values were **solved, not chosen**: each one lands on the same contrast ratio
+against `--em-bg` that its dark counterpart has, holding hue and saturation constant.
+If you add a token, solve it the same way rather than eyeballing it, or that stroke
+will read at a different weight in one theme than the other.
+
+`--em-accent` is per-scene and is declared on the **root element, not `.em-story`**.
+The page-callout rules in the lower half of the file style elements that sit beside
+the scene rather than inside it. Scoped to `.em-story` the variable never reached
+them and those declarations silently dropped out of the cascade.
 
 ### Computing a claim rather than asserting it (`/game-theory/`)
 
@@ -390,10 +424,30 @@ to every other test in the repo.
 ## Jekyll Configuration
 
 ### SEO
-Uses `jekyll-seo-tag` plugin for automatic meta tags via `{% seo %}`. Configure in `_config.yml`.
+Uses `jekyll-seo-tag` for meta tags via `{% seo %}`. Four of its behaviours are not
+obvious and each one caused a real gap on this site:
+
+- **`site.image` is ignored.** The plugin reads `og:image` from `page.image` only. A
+  `defaults` entry in `_config.yml` supplies it site-wide; page front matter overrides
+  it, which is how each use case gets its own banner. Without a resolved image the card
+  also degrades from `summary_large_image` to plain `summary`.
+- **`page.date` is the switch for article markup.** Setting it emits `og:type=article`,
+  `article:published_time`, *and* a full `BlogPosting` JSON-LD block. That is why the
+  eleven writings carry `date` and `last_modified_at`, and why nothing else does. Do not
+  hand-write a second `BlogPosting`; it will duplicate the one the plugin already emits.
+- **A `robots:` front matter key does nothing on its own.** `default.html` emits it
+  explicitly. An absent robots meta means indexable, which is what every page but
+  `/project/` wants.
+- **`sitemap: false` also emits noindex.** Use it to withhold a page. `_config.yml` uses
+  it via `defaults` to keep the two search-console ownership tokens out of the sitemap,
+  which works because Jekyll's StaticFile does read front matter defaults.
+
+Never pair a `robots.txt` `Disallow` with a `noindex` meta on the same URL. The disallow
+stops Google fetching the page, so it never reads the noindex, and the URL can stay in
+the index with no description. Let it be crawled and serve the noindex.
 
 ### Structured Data (JSON-LD)
-Two JSON-LD blocks exist:
+Four sources, three hand-written and one from the plugin:
 
 **1. Person schema** — in `_layouts/default.html` (appears on every page). Properties:
 - Identity: `name`, `alternateName`, `gender`, `description` (includes he/him), `disambiguatingDescription`, `image`
@@ -409,8 +463,19 @@ When adding new publications, **only update `_data/publications.yml`** — both 
 
 Valid `kind` values: `geospatial`, `cultural`, `nlp`, `applied`.
 
+**3. BreadcrumbList** — in `_layouts/default.html`, emitted for any page with a `date`,
+which in practice is the eleven writings. Home → Writings → this page.
+
+**4. BlogPosting** — emitted by `jekyll-seo-tag` itself, also keyed on `page.date`. It is
+not in the layout and must not be added there.
+
 ### Sitemap
-Auto-generated by `jekyll-sitemap` plugin into `/sitemap.xml`.
+Auto-generated by `jekyll-sitemap` into `/sitemap.xml`. It lists every `.html` static
+file, not only pages, so anything dropped into the repo root shows up as if it were a
+page. Withhold one with a scoped `sitemap: false` in `_config.yml` `defaults`.
+
+After changing anything in this section, re-run the audit in `CONTRIBUTING.md` and
+confirm it still reports zero flags.
 
 ### Permalinks
 Clean URLs without `.html`:
@@ -532,7 +597,7 @@ Content stored in `_data/*.yml` — accessed via `site.data.<filename>.<key>`
 ### JavaScript
 - ES6+ syntax
 - IIFE wrapper in nav.js
-- Current versions: `main.js?v=7`, `nav.js?v=3`
+- Asset URLs are cache-busted automatically; see `_includes/asset.html`
 
 ## Accessibility (WCAG 2.1 AA)
 
@@ -587,7 +652,10 @@ Cards on `/usecases/` and the top of each use case detail page show a pre-render
 3. Commit both. Use cases without a spec (e.g. `vln-conformal-prediction`) render no banner. New use cases also need `image: /assets/img/usecases/<id>.webp` in their detail page front matter for the og:image.
 
 ### Update Styles
-Edit `css/styles.css`, bump the version query string in `_layouts/default.html` (`?v=28` → `?v=29`), and update the matching entry in `sw.js` PRECACHE array.
+Edit `css/styles.css` and stop. Cache-busting and the `sw.js` PRECACHE entry both derive from
+the file's modified time via `_includes/asset.html`. Do not add a `?v=` by hand: a literal
+version in a URL will not match the one the service worker precaches, and the browser ends up
+holding two copies of the same file.
 
 ### Add a New Button or Interactive Link
 Use `border: 1px solid var(--border-ui)` — not `--line` or `--line-strong` — to maintain 3:1 non-text contrast (WCAG 1.4.11).

@@ -58,13 +58,21 @@ sitemap:
   changefreq: monthly
   priority: 0.5
 
-# Exclude from processing
+# Exclude from processing.
+# Repo documentation and build tooling. Jekyll copies anything it does not
+# recognise straight into _site/, so maintenance scripts are published unless
+# named here. scripts/heron is re-included below; it holds a real linked page.
 exclude:
   - node_modules
   - vendor
   - CLAUDE.md
+  - CONTRIBUTING.md
   - backlog.md
+  - scripts/audit_seo.py
   - scripts/generate_uc_banners.py
+  - scripts/solve_games.py
+  - scripts/verify_stoic_quotes.py
+  - scripts/games.json
   - notes
 
 # Permalink structure
