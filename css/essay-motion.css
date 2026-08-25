@@ -20,3 +20,60 @@ html[data-motion-scene="repair"] .em-story{--em-accent:#d6a24b}html[data-motion-
 /* Shared editorial eyebrow across the eleven featured writings. */
 html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span){display:flex!important;align-items:center;gap:.65rem;color:#8f9baa!important;font:600 clamp(.94rem,1.2vw,1.08rem)/1.35 "Manrope",sans-serif!important;letter-spacing:-.018em!important;text-transform:none!important}
 html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span):before{content:"";flex:0 0 auto;width:.42rem;height:.42rem;border-radius:50%;background:var(--em-accent);box-shadow:0 0 1.4rem color-mix(in srgb,var(--em-accent) 50%,transparent)}
+
+/* Page-specific callouts. No repeated left-stripe template. */
+html[data-motion-scene] .page-content :is(blockquote,.ce-force,.ce-split button,.ha-quote,.ha-trapcard,.ha-trap,.sounds,.ha-mafia-read,.ha-lib-read,.ha-ws-step,.pr-card,.st-quote,.st-card,.st-day-read,.st-verdict-read,.gt-eq,.gt-domain,.gt-law,.gt-loop,.sf-explore-read,.sf-rule,.sf-domain-body .sig,.sf-review-read,.sf-explore-item,.ue-note,.ue-loop-read,.ue-direct-read,.ue-primer,.ue-primer-note,.ue-oern-read,.ue-band-read,.ue-warning,.ue-budget-read,.ue-rung,.ue-plan-out,.ue-compassion,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict,.sl-control-outcomes div,.sl-strength-result,.sl-compass-answer,.lc-hero-rule,.lc-quote){box-sizing:border-box;border-left:0!important}
+
+/* Story: a quotation belongs to the voice, not a decorated box. */
+html[data-motion-scene="repair"] .page-content blockquote{position:relative;padding:1.25rem 0 1.25rem clamp(2.6rem,5vw,4.5rem)!important;border:0!important;background:transparent!important;font-family:Georgia,serif}
+html[data-motion-scene="repair"] .page-content blockquote:before{content:"“";position:absolute;left:0;top:.55rem;color:var(--em-accent);font:400 clamp(3.5rem,7vw,6rem)/1 Georgia,serif;opacity:.72}
+
+/* Knowing: evidence cards use a horizon line and a clear choice state. */
+html[data-motion-scene="abstain"] .page-content :is(.ce-force,.ce-split button){position:relative;border:1px solid color-mix(in srgb,var(--em-accent) 28%,transparent)!important;border-radius:1rem!important;background:linear-gradient(180deg,color-mix(in srgb,var(--em-accent) 8%,transparent),transparent 45%)!important;overflow:hidden}
+html[data-motion-scene="abstain"] .page-content :is(.ce-force,.ce-split button):before{content:"";position:absolute;inset:0 18% auto;height:2px;background:var(--em-accent);opacity:.7}
+
+/* High agency: open quotes, notches, and quiet instrument readouts. */
+html[data-motion-scene="agency"] .page-content .ha-quote{position:relative;padding:1.4rem 0 1.4rem 3.25rem!important;border:0!important;background:transparent!important}
+html[data-motion-scene="agency"] .page-content .ha-quote:before{content:"“";position:absolute;left:0;top:.65rem;color:var(--em-accent);font:400 4rem/1 Georgia,serif}
+html[data-motion-scene="agency"] .page-content :is(.ha-trapcard,.ha-trap){position:relative;border:1px solid color-mix(in srgb,currentColor 16%,transparent)!important;border-radius:.85rem!important;overflow:hidden}
+html[data-motion-scene="agency"] .page-content :is(.ha-trapcard,.ha-trap):after{content:"";position:absolute;right:.8rem;top:.8rem;width:.55rem;height:.55rem;border-top:2px solid var(--em-accent);border-right:2px solid var(--em-accent)}
+html[data-motion-scene="agency"] .page-content :is(.sounds,.ha-mafia-read,.ha-lib-read,.ha-ws-step){border:0!important;border-radius:999px!important;background:color-mix(in srgb,var(--em-accent) 9%,transparent)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--em-accent) 22%,transparent)}
+
+/* Principles: one calm card edge, marked at the corner. */
+html[data-motion-scene="decision"] .page-content .pr-card{position:relative;border:1px solid color-mix(in srgb,var(--em-accent) 24%,transparent)!important;border-radius:.35rem!important}
+html[data-motion-scene="decision"] .page-content .pr-card:after{content:"";position:absolute;right:0;top:0;width:1.15rem;height:1.15rem;background:linear-gradient(225deg,var(--em-accent) 0 48%,transparent 50%);opacity:.55}
+
+/* Stoic: marginal marks and unboxed quotations. */
+html[data-motion-scene="control"] .page-content .st-quote{position:relative;padding:1.3rem 0 1.3rem 3.4rem!important;border:0!important;background:transparent!important;font-family:Georgia,serif}
+html[data-motion-scene="control"] .page-content .st-quote:before{content:"§";position:absolute;left:.2rem;top:1.25rem;color:var(--em-accent);font:400 1.45rem Georgia,serif}
+html[data-motion-scene="control"] .page-content .st-card{position:relative;border:1px solid color-mix(in srgb,currentColor 15%,transparent)!important;border-radius:.6rem!important;box-shadow:inset 0 3px 0 color-mix(in srgb,var(--em-accent) 65%,transparent)}
+html[data-motion-scene="control"] .page-content :is(.st-day-read,.st-verdict-read){border:0!important;border-radius:.7rem!important;background:color-mix(in srgb,var(--em-accent) 8%,transparent)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--em-accent) 22%,transparent)}
+
+/* Game theory: bracketed analysis plates and corner coordinates. */
+html[data-motion-scene="strategy"] .page-content :is(.gt-eq,.gt-domain,.gt-law,.gt-loop){position:relative;border:1px solid color-mix(in srgb,var(--em-accent) 24%,transparent)!important;border-radius:.25rem!important;background-image:linear-gradient(90deg,var(--em-accent) 9px,transparent 9px),linear-gradient(180deg,var(--em-accent) 9px,transparent 9px)!important;background-size:1px 9px,9px 1px!important;background-repeat:no-repeat!important;background-position:right .7rem top .7rem!important}
+html[data-motion-scene="strategy"] .page-content :is(.gt-eq,.gt-domain,.gt-law,.gt-loop):after{content:"";position:absolute;right:.7rem;bottom:.7rem;width:9px;height:9px;border-right:1px solid var(--em-accent);border-bottom:1px solid var(--em-accent);opacity:.7}
+html[data-motion-scene="strategy"] .page-content li.is-on{border-left-width:1px!important;box-shadow:inset 0 2px 0 var(--em-accent)}
+html[data-motion-scene="strategy"] .page-content .gv-split li{position:relative;border-left-width:1px!important;background-image:linear-gradient(90deg,var(--em-accent) 7px,transparent 7px),linear-gradient(180deg,var(--em-accent) 7px,transparent 7px)!important;background-size:1px 7px,7px 1px!important;background-repeat:no-repeat!important;background-position:right .55rem top .55rem!important}
+
+/* Success and failure: status lights instead of verdict stripes. */
+html[data-motion-scene="feedback"] .page-content :is(.sf-explore-read,.sf-rule,.sf-domain-body .sig,.sf-review-read){position:relative;border:0!important;border-radius:999px!important;background:color-mix(in srgb,var(--em-accent) 9%,transparent)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--em-accent) 22%,transparent)}
+html[data-motion-scene="feedback"] .page-content :is(.sf-explore-read,.sf-rule,.sf-domain-body .sig,.sf-review-read):before{content:"";display:inline-block;width:.5rem;height:.5rem;margin-right:.7rem;border-radius:50%;background:var(--em-accent)}
+html[data-motion-scene="feedback"] .page-content .sf-explore-item{border:1px solid color-mix(in srgb,currentColor 15%,transparent)!important;border-radius:1rem!important;box-shadow:inset 0 3px 0 color-mix(in srgb,var(--em-accent) 65%,transparent)}
+
+/* Uncertainty: soft fields with no hard directional edge. */
+html[data-motion-scene="uncertainty"] .page-content :is(.ue-note,.ue-loop-read,.ue-direct-read,.ue-primer,.ue-primer-note,.ue-oern-read,.ue-band-read,.ue-warning,.ue-budget-read,.ue-rung,.ue-plan-out,.ue-compassion,.closed,.open){border:1px solid color-mix(in srgb,var(--em-accent) 20%,transparent)!important;border-radius:1.15rem!important;background-image:radial-gradient(circle at 88% 18%,color-mix(in srgb,var(--em-accent) 13%,transparent),transparent 36%)!important;box-shadow:0 12px 35px color-mix(in srgb,var(--em-accent) 5%,transparent)}
+html[data-motion-scene="uncertainty"] .page-content :is(#ue-support-read,.ue-stopgrid span){border:1px solid color-mix(in srgb,var(--em-accent) 20%,transparent)!important;border-radius:1.15rem!important;background:radial-gradient(circle at 88% 18%,color-mix(in srgb,var(--em-accent) 13%,transparent),transparent 40%)!important;box-shadow:0 12px 35px color-mix(in srgb,var(--em-accent) 5%,transparent)}
+
+/* Communication: statements become speech, with a small folded tail. */
+html[data-motion-scene="signal"] .page-content :is(blockquote,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict){position:relative;border:1px solid color-mix(in srgb,var(--em-accent) 22%,transparent)!important;border-radius:1rem 1rem 1rem .25rem!important;background:color-mix(in srgb,var(--em-accent) 6%,transparent)!important}
+html[data-motion-scene="signal"] .page-content :is(blockquote,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict):after{content:"";position:absolute;left:.8rem;bottom:-.42rem;width:.72rem;height:.72rem;border-left:1px solid color-mix(in srgb,var(--em-accent) 22%,transparent);border-bottom:1px solid color-mix(in srgb,var(--em-accent) 22%,transparent);background:inherit;transform:skewY(-35deg)}
+
+/* Self-love: safe and shadow states fill the whole surface. */
+html[data-motion-scene="consent"] .page-content :is(.sl-control-outcomes div,.sl-strength-result,.sl-compass-answer){position:relative;border:1px solid color-mix(in srgb,var(--em-accent) 22%,transparent)!important;border-radius:1.25rem!important;background:linear-gradient(145deg,color-mix(in srgb,var(--em-accent) 12%,transparent),transparent 64%)!important;box-shadow:0 16px 44px color-mix(in srgb,var(--em-accent) 6%,transparent)}
+html[data-motion-scene="consent"] .page-content :is(.sl-control-outcomes div,.sl-strength-result):after{content:"";position:absolute;right:1rem;top:1rem;width:.62rem;height:.62rem;border-radius:50%;background:var(--em-accent);opacity:.7}
+
+/* Life challenges: the statement stands alone; the quote reads like a pause. */
+html[data-motion-scene="conversion"] .page-content .lc-hero-rule{max-width:38rem;margin-inline:auto!important;padding:1.4rem 0!important;border:0!important;background:transparent!important;text-align:center;box-shadow:inset 0 1px color-mix(in srgb,var(--em-accent) 30%,transparent),inset 0 -1px color-mix(in srgb,var(--em-accent) 30%,transparent)}
+html[data-motion-scene="conversion"] .page-content .lc-quote{max-width:44rem;margin-inline:auto!important;padding:1.4rem 0!important;border:0!important;background:transparent!important;text-align:center;font-family:Georgia,serif}
+
+@media(max-width:560px){html[data-motion-scene="repair"] .page-content blockquote,html[data-motion-scene="agency"] .page-content .ha-quote,html[data-motion-scene="control"] .page-content .st-quote{padding-left:2.6rem!important}html[data-motion-scene="signal"] .page-content :is(blockquote,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict){border-radius:.8rem .8rem .8rem .2rem!important}}

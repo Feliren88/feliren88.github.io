@@ -10,15 +10,15 @@
   var scenes = {
     repair: {
       narrative: true,
-      kicker: 'The bargain began quietly',
-      title: 'He learned to be useful.',
-      copy: 'As a boy, knowing how things worked made the world feel safer.',
+      kicker: 'As a boy, he fixed what he could',
+      title: 'Being useful made him feel safe.',
+      copy: 'A stuck drawer, a missed detail, a problem nobody else saw. Each repair made the room feel steadier.',
       steps: ['Notice', 'Needed', 'Trapped', 'Choose'],
       frames: [
-        ['The bargain began quietly', 'He learned to be useful.', 'As a boy, knowing how things worked made the world feel safer.'],
-        ['People began to rely on him', 'Every answer brought another problem.', 'Trust felt good. It also taught everyone where to bring the next urgent thing.'],
-        ['Success began to close around him', 'Being needed left less room to live.', 'The work was going well. At night, he could no longer tell whether he owned his life or only managed its demands.'],
-        ['One question broke the pattern', 'What kind of life does this create?', 'At twenty-nine, alone in the office, he opened a blank document and began to choose what his ability was for.']
+        ['As a boy, he fixed what he could', 'Being useful made him feel safe.', 'A stuck drawer, a missed detail, a problem nobody else saw. Each repair made the room feel steadier.'],
+        ['Soon, people came looking for him', 'Every answer brought another request.', 'He liked being trusted. He did not notice how quickly trust became expectation.'],
+        ['Years later, the work was nearly done', 'His life had no room left.', 'The project was succeeding. He was still at his desk, tired, needed, and unsure whose life he had built.'],
+        ['At twenty-nine, he opened a blank page', 'What is my ability for?', 'He wrote down what he wanted to protect, what he wanted to build, and which burdens were never his.']
       ]
     },
     abstain: { kicker: 'Capability needs a stopping rule', title: 'Build the boundary.', copy: 'Measure the evidence. When support weakens, stop predicting and send the decision for review.', steps: ['Evidence', 'Measure', 'Abstain', 'Review'], nodes: [[95,110,'evidence','circle'],[275,220,'support','square'],[465,110,'stop','diamond'],[650,220,'review','circle']] },
@@ -28,43 +28,43 @@
     strategy: { kicker: 'Every move changes what comes next', title: 'Watch the response.', copy: 'Your move changes the other person’s choices. Their response changes what makes sense for you to do next.', steps: ['Choose', 'Respond', 'Update', 'Repeat'], nodes: [[95,105,'you','circle'],[275,220,'them','circle'],[465,105,'payoff','square'],[650,220,'next round','diamond']] },
     feedback: {
       narrative: true,
-      kicker: 'The result arrived first',
-      title: 'The reason came later.',
-      copy: 'One line on a screen could lift his whole day or flatten it.',
+      kicker: 'The message arrived at 4:17',
+      title: 'His stomach dropped before he finished reading.',
+      copy: 'Three words on a screen turned months of work into a judgment about who he was.',
       steps: ['Result', 'Feeling', 'Look Back', 'Continue'],
       frames: [
-        ['The result arrived first', 'The reason came later.', 'One line on a screen could lift his whole day or flatten it.'],
-        ['The feeling rushed to explain everything', 'He made one result mean too much.', 'A win said he was brilliant. A loss said he was not enough. Neither one told him what caused it.'],
-        ['He waited before changing the plan', 'First, let the sting pass.', 'He slept, spoke to someone he trusted, and wrote down what happened while the details were still clear.'],
-        ['The result became smaller and more useful', 'One attempt is not a verdict.', 'He kept the lesson, changed the next move, and left the shame behind.']
+        ['The message arrived at 4:17', 'His stomach dropped before he finished reading.', 'Three words on a screen turned months of work into a judgment about who he was.'],
+        ['By dinner, the story had grown', 'He had failed. Maybe he was a failure.', 'Shame filled every gap the message left open. He could no longer separate the result from himself.'],
+        ['He did not rewrite his life that night', 'He called someone who knew him.', 'The next morning, he wrote down what he controlled, what he missed, and what nobody could have known.'],
+        ['A week later, he tried again', 'The result had become useful.', 'He changed the timing, kept the part that worked, and refused to turn one loss into an identity.']
       ]
     },
     uncertainty: { kicker: 'The future is still open', title: 'Act without a guarantee.', copy: 'Name what you feel and gather facts that could change the decision. Stop when more thought only repeats the same fear.', steps: ['Feel', 'Check', 'Choose', 'Proceed'], nodes: [[95,105,'feeling','circle'],[275,220,'evidence','square'],[465,105,'choice','diamond'],[650,220,'proceed','circle']] },
     signal: { kicker: 'The other person needs a clear path', title: 'Make it easy to follow.', copy: 'Give the listener a clear point, enough context, and a next step they can question or use.', steps: ['Intent', 'Structure', 'Signal', 'Received'], nodes: [[95,220,'intent','circle'],[275,105,'structure','square'],[465,220,'signal','diamond'],[650,105,'received','circle']] },
     consent: {
       narrative: true,
-      kicker: 'Everyone knew they could handle it',
-      title: 'So everyone kept asking.',
-      copy: 'They answered late messages, fixed missed details, and called the exhaustion responsibility.',
+      kicker: 'They always answered',
+      title: 'Soon, nobody asked if they could.',
+      copy: 'The messages came late. They fixed the missed details, calmed the worried people, and went to bed carrying tomorrow.',
       steps: ['Carry', 'Disappear', 'Ask', 'Return'],
       frames: [
-        ['Everyone knew they could handle it', 'So everyone kept asking.', 'They answered late messages, fixed missed details, and called the exhaustion responsibility.'],
-        ['Their strength hid the cost', 'Their life worked for everyone else.', 'They kept promises to other people by breaking small, quiet promises to themselves.'],
-        ['One question made the cost visible', 'Would I ask this of someone I loved?', 'The answer was no. For the first time, their own pain counted as evidence.'],
-        ['The boundary did not end their care', 'It gave them a place inside it.', 'They could still help. They no longer had to disappear in order to prove their love.']
+        ['They always answered', 'Soon, nobody asked if they could.', 'The messages came late. They fixed the missed details, calmed the worried people, and went to bed carrying tomorrow.'],
+        ['Their calendar was full of other people', 'Their own name barely appeared.', 'They kept every promise except sleep, quiet, and the small plans they had made for themselves.'],
+        ['One night, they asked a fair question', 'Would I demand this from someone I love?', 'They would have told that person to rest. Their own exhaustion deserved the same care.'],
+        ['The next request received an honest answer', 'I can help tomorrow.', 'Nobody was abandoned. They had finally stopped abandoning themselves.']
       ]
     },
     conversion: {
       narrative: true,
-      kicker: 'Nothing had to be learned that night',
-      title: 'It hurt. That was enough.',
-      copy: 'Some days need water, sleep, and one person who does not leave.',
+      kicker: 'That night, there was no lesson',
+      title: 'There was only hurt.',
+      copy: 'They drank water, closed the door, and sat beside someone who did not ask them to explain.',
       steps: ['Hurt', 'Shelter', 'Name', 'Build'],
       frames: [
-        ['Nothing had to be learned that night', 'It hurt. That was enough.', 'Some days need water, sleep, and one person who does not leave.'],
-        ['Meaning could wait', 'Care came first.', 'A meal. A closed door. A hand nearby. Enough safety for the body to stop bracing.'],
-        ['Later, the pieces had names', 'The damage became clear.', 'A promise had failed. A limit had been crossed. A part of life needed to be rebuilt.'],
-        ['The pain stayed painful', 'Still, it did not choose the ending.', 'From what remained, they built a boundary, a better method, and room for another tired person.']
+        ['That night, there was no lesson', 'There was only hurt.', 'They drank water, closed the door, and sat beside someone who did not ask them to explain.'],
+        ['A friend warmed a bowl of soup', 'The body softened first.', 'No advice. No demand for meaning. A hand nearby until the shaking stopped.'],
+        ['Weeks later, they could name what happened', 'A promise broke. A limit was crossed.', 'Naming the damage showed them what needed repair and what should never be rebuilt.'],
+        ['They used what was left', 'The next life had firmer ground.', 'They made one boundary, changed one method, and knew how to sit quietly beside the next person in pain.']
       ]
     }
   };
@@ -103,11 +103,11 @@
     svg.appendChild(night);
 
     var needed = svgEl('g', { class: 'em-story-frame em-story-needed' });
-    needed.innerHTML = '<circle class="em-head" cx="375" cy="123" r="25"/><path class="em-person" d="M375 148v108m-48 67 48-67 48 67M375 184l-55 42m55-42 55 42"/><g class="em-load"><rect x="95" y="80" width="130" height="48" rx="6"/><text x="160" y="109">problem</text><rect x="525" y="95" width="130" height="48" rx="6"/><text x="590" y="124">urgency</text><rect x="88" y="202" width="150" height="48" rx="6"/><text x="163" y="231">trust</text><rect x="512" y="220" width="155" height="48" rx="6"/><text x="589" y="249">responsibility</text></g><path class="em-pull" d="M225 104C290 110 310 150 350 177M525 119C462 127 445 154 400 177M238 226C295 225 315 215 350 197M512 244C458 237 435 218 400 197"/><text x="375" y="350">“We really need you on this.”</text>';
+    needed.innerHTML = '<circle class="em-head" cx="375" cy="123" r="25"/><path class="em-person" d="M375 148v108m-48 67 48-67 48 67M375 184l-55 42m55-42 55 42"/><g class="em-load"><rect x="95" y="80" width="130" height="48" rx="6"/><text x="160" y="109">problem</text><rect x="525" y="95" width="130" height="48" rx="6"/><text x="590" y="124">urgency</text><rect x="88" y="202" width="150" height="48" rx="6"/><text x="163" y="231">trust</text><rect x="512" y="220" width="155" height="48" rx="6"/><text x="589" y="249">responsibility</text></g><path class="em-pull" d="M225 104C290 110 310 150 350 177M525 119C462 127 445 154 400 177M238 226C295 225 315 215 350 197M512 244C458 237 435 218 400 197"/><text x="375" y="350">“Can you take one more thing?”</text>';
     svg.appendChild(needed);
 
     var trapped = svgEl('g', { class: 'em-story-frame em-story-trapped' });
-    trapped.innerHTML = '<path class="em-office" d="M96 304h558M142 304V126h466v178M142 214h466"/><rect class="em-screen" x="257" y="150" width="236" height="116" rx="8"/><text class="em-screen-label" x="375" y="188">PROJECT</text><text class="em-screen-value" x="375" y="235">99%</text><circle class="em-head" cx="210" cy="244" r="20"/><path class="em-person" d="M210 264l32 40m-32-40-18 40"/><path class="em-clock" d="M565 155a32 32 0 1 1-.1 0M565 166v22l15 9"/><text x="375" y="344">The work was nearly done. His room was gone.</text>';
+    trapped.innerHTML = '<path class="em-office" d="M96 304h558M142 304V126h466v178M142 214h466"/><rect class="em-screen" x="257" y="150" width="236" height="116" rx="8"/><text class="em-screen-label" x="375" y="188">PROJECT</text><text class="em-screen-value" x="375" y="235">99%</text><circle class="em-head" cx="210" cy="244" r="20"/><path class="em-person" d="M210 264l32 40m-32-40-18 40"/><path class="em-clock" d="M565 155a32 32 0 1 1-.1 0M565 166v22l15 9"/><text x="375" y="344">The project was at 99%. He was still there.</text>';
     svg.appendChild(trapped);
 
     var choice = svgEl('g', { class: 'em-story-frame em-story-choice' });
@@ -132,7 +132,7 @@
     svg.appendChild(review);
 
     var continueFrame = svgEl('g', { class: 'em-story-frame em-feedback-continue' });
-    continueFrame.innerHTML = '<path class="em-road" d="M70 270C220 270 245 115 375 115s155 155 305 155"/><circle class="em-attempt-old" cx="120" cy="270" r="24"/><text class="em-attempt-label" x="120" y="318">one result</text><circle class="em-attempt-next" cx="630" cy="270" r="28"/><text class="em-attempt-label" x="630" y="318">next attempt</text><path class="em-arrow" d="m615 270 13 12 21-27"/><g class="em-carry"><rect x="305" y="86" width="140" height="58" rx="8"/><text x="375" y="111">KEEP</text><text class="em-carry-word" x="375" y="133">the lesson</text></g><text x="375" y="350">The next move carried information, not a sentence about his worth.</text>';
+    continueFrame.innerHTML = '<path class="em-road" d="M70 270C220 270 245 115 375 115s155 155 305 155"/><circle class="em-attempt-old" cx="120" cy="270" r="24"/><text class="em-attempt-label" x="120" y="318">one result</text><circle class="em-attempt-next" cx="630" cy="270" r="28"/><text class="em-attempt-label" x="630" y="318">next attempt</text><path class="em-arrow" d="m615 270 13 12 21-27"/><g class="em-carry"><rect x="305" y="86" width="140" height="58" rx="8"/><text x="375" y="111">KEEP</text><text class="em-carry-word" x="375" y="133">what worked</text></g><text x="375" y="350">He changed the next attempt, not his opinion of himself.</text>';
     svg.appendChild(continueFrame);
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: [result, feeling, review, continueFrame], nodes: [], edges: [] };
@@ -141,7 +141,7 @@
   function buildConsentNarrativeCanvas(canvas, svg) {
     svg.setAttribute('aria-label', 'A capable person carries everyone else’s needs, sees their own absence, and draws a boundary that includes them');
     var carry = svgEl('g', { class: 'em-story-frame em-consent-carry' });
-    carry.innerHTML = '<circle class="em-head" cx="375" cy="112" r="24"/><path class="em-person" d="M375 136v108m-48 72 48-72 48 72M375 176l-78 50m78-50 78 50"/><g class="em-requests"><rect x="82" y="72" width="150" height="45" rx="7"/><text x="157" y="100">Can you fix this?</text><rect x="518" y="88" width="145" height="45" rx="7"/><text x="590" y="116">We need you.</text><rect x="74" y="204" width="160" height="45" rx="7"/><text x="154" y="232">One more thing.</text><rect x="520" y="220" width="150" height="45" rx="7"/><text x="595" y="248">It is urgent.</text></g><path class="em-pull" d="M232 95 350 172M518 111 400 172M234 226 350 194M520 242 400 194"/><text x="375" y="348">Ability became an open door with no closing time.</text>';
+    carry.innerHTML = '<circle class="em-head" cx="375" cy="112" r="24"/><path class="em-person" d="M375 136v108m-48 72 48-72 48 72M375 176l-78 50m78-50 78 50"/><g class="em-requests"><rect x="82" y="72" width="150" height="45" rx="7"/><text x="157" y="100">Can you fix this?</text><rect x="518" y="88" width="145" height="45" rx="7"/><text x="590" y="116">We need you.</text><rect x="74" y="204" width="160" height="45" rx="7"/><text x="154" y="232">One more thing.</text><rect x="520" y="220" width="150" height="45" rx="7"/><text x="595" y="248">It is urgent.</text></g><path class="em-pull" d="M232 95 350 172M518 111 400 172M234 226 350 194M520 242 400 194"/><text x="375" y="348">Every request assumed the answer would be yes.</text>';
     svg.appendChild(carry);
 
     var disappear = svgEl('g', { class: 'em-story-frame em-consent-disappear' });
@@ -153,7 +153,7 @@
     svg.appendChild(ask);
 
     var returnFrame = svgEl('g', { class: 'em-story-frame em-consent-return' });
-    returnFrame.innerHTML = '<path class="em-boundary" d="M375 42v276"/><circle class="em-head" cx="245" cy="126" r="24"/><path class="em-person" d="M245 150v92m-44 70 44-70 44 70M245 184l-44 30m44-30 44 30"/><g class="em-care"><circle cx="505" cy="118" r="26"/><circle cx="565" cy="192" r="26"/><circle cx="490" cy="266" r="26"/></g><path class="em-open-gate" d="M375 180h82v80h-82"/><text class="em-boundary-word" x="415" y="168">consent</text><text x="375" y="348">Care could cross the line. Demands needed permission.</text>';
+    returnFrame.innerHTML = '<path class="em-boundary" d="M375 42v276"/><circle class="em-head" cx="245" cy="126" r="24"/><path class="em-person" d="M245 150v92m-44 70 44-70 44 70M245 184l-44 30m44-30 44 30"/><g class="em-care"><circle cx="505" cy="118" r="26"/><circle cx="565" cy="192" r="26"/><circle cx="490" cy="266" r="26"/></g><path class="em-open-gate" d="M375 180h82v80h-82"/><text class="em-boundary-word" x="415" y="168">consent</text><text x="375" y="348">They still cared. They started answering honestly.</text>';
     svg.appendChild(returnFrame);
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: [carry, disappear, ask, returnFrame], nodes: [], edges: [] };
