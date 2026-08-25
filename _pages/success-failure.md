@@ -4,6 +4,8 @@ title: Success & Failure
 subtitle: Learn what caused the result, then choose what to do next.
 description: How to learn from a win or loss without mistaking luck for skill, repeating a costly mistake, or risking your ability to continue.
 permalink: /success-failure/
+date: 2026-08-23
+last_modified_at: 2026-08-25
 layout-class: page success-failure
 extra_css: /css/success-failure.css
 extra_js: /js/components/success-failure.js

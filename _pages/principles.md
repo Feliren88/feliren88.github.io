@@ -4,6 +4,8 @@ title: My Life Principles
 subtitle: The questions I use when pressure weakens my judgment
 description: My rules for slowing irreversible choices, testing reversible ones, protecting the essentials, and deciding under pressure.
 permalink: /principles/
+date: 2026-08-22
+last_modified_at: 2026-08-25
 layout-class: page principles
 extra_css: /css/principles.css
 extra_js: /js/components/principles.js

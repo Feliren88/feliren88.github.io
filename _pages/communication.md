@@ -4,6 +4,8 @@ title: Communication
 subtitle: Make the important part easy to receive.
 description: How I structure explanations, raise unfinished concerns, listen before solving, handle conflict, negotiate, and close decisions.
 permalink: /communication/
+date: 2026-08-24
+last_modified_at: 2026-08-25
 layout-class: page communication
 extra_css: /css/communication.css
 extra_js: /js/components/communication.js

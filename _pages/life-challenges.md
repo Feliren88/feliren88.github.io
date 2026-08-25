@@ -4,6 +4,8 @@ title: Life Challenges
 subtitle: What you build from pain matters more than pain itself.
 description: An interactive visual essay about converting uncertainty, failure, pressure, delay, and reinvention into judgment, agency, and a larger life.
 permalink: /life-challenges/
+date: 2026-08-25
+last_modified_at: 2026-08-25
 layout-class: page life-challenges
 extra_css: /css/life-challenges.css
 extra_js: /js/components/life-challenges.js

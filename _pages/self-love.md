@@ -4,6 +4,8 @@ title: Self-Love
 subtitle: Risk control for people who can endure too much.
 description: A visual guide to keeping intelligence, discipline, and ambition from turning endurance into self-abandonment.
 permalink: /self-love/
+date: 2026-08-24
+last_modified_at: 2026-08-25
 layout-class: page self-love
 extra_css: /css/self-love.css
 extra_js: /js/components/self-love.js

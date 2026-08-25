@@ -11,7 +11,7 @@
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
     <link rel="stylesheet" href="{{ '/css/styles.css?v=40' | relative_url }}">
     {% if page.extra_css %}<link rel="stylesheet" href="{{ page.extra_css | relative_url }}?v=36">{% endif %}
-    {% if page.motion_scene %}<link rel="stylesheet" href="{{ '/css/essay-motion.css' | relative_url }}?v=6">{% endif %}
+    {% if page.motion_scene %}<link rel="stylesheet" href="{{ '/css/essay-motion.css' | relative_url }}?v=8">{% endif %}
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -22,7 +22,13 @@
     <!-- End Google Tag Manager -->
     
     {% seo %}
-    
+
+    {% comment %}
+      jekyll-seo-tag ignores a `robots:` front matter key, so emit it here.
+      Absent tag means indexable, which is what every page except /project/ wants.
+    {% endcomment %}
+    {% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% endif %}
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -326,6 +332,25 @@
       "description": "Invited talk on data synthesis, data privacy, and responsible data management."
     }
     </script>
+
+    {% comment %}
+      Long-form writings. jekyll-seo-tag already emits the BlogPosting itself
+      once page.date is set, so only the breadcrumb trail is added here.
+      Keyed on page.date so the two can never disagree about what is an article.
+    {% endcomment %}
+    {% if page.date %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ '/' | absolute_url }}" },
+        { "@type": "ListItem", "position": 2, "name": "Writings", "item": "{{ '/writings/' | absolute_url }}" },
+        { "@type": "ListItem", "position": 3, "name": {{ page.title | strip_html | jsonify }}, "item": "{{ page.url | absolute_url }}" }
+      ]
+    }
+    </script>
+    {% endif %}
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>

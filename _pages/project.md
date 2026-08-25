@@ -2,7 +2,8 @@
 layout: page
 title: Career Timeline
 permalink: /project/
-robots: noindex, nofollow
+robots: noindex, follow
+sitemap: false
 ---
 
 <div id="career-timeline" class="timeline-mount" role="region" aria-label="Career timeline visualization"></div>

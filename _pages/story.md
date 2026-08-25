@@ -4,6 +4,8 @@ title: A Method for What Breaks
 subtitle: A life built around the question underneath the problem
 description: The story of a boy who learned to carry difficult systems, then had to decide what deserved carrying.
 permalink: /story/
+date: 2026-08-23
+last_modified_at: 2026-08-25
 layout-class: page method-story
 extra_css: /css/story.css
 extra_js: /js/components/story.js

@@ -4,6 +4,8 @@ title: High Agency
 subtitle: My notes on George Mack's essay, turned into exercises
 description: Test how you respond to unclear problems, weak answers, untested limits, rumination, and goals that feel too large to begin.
 permalink: /high-agency/
+date: 2026-08-22
+last_modified_at: 2026-08-25
 layout-class: page high-agency
 extra_css: /css/high-agency.css
 extra_js: /js/components/high-agency.js

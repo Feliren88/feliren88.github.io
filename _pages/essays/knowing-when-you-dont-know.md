@@ -4,6 +4,8 @@ title: Knowing when you don't know is the core safety property
 subtitle: Why safe deployment depends on models knowing when to abstain
 description: An essay on why AI systems must recognise the limits of their ability and stop before uncertainty becomes harm.
 permalink: /essays/knowing-when-you-dont-know/
+date: 2026-06-30
+last_modified_at: 2026-08-25
 layout-class: page calibrated-essay
 motion_scene: abstain
 ---

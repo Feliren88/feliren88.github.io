@@ -81,7 +81,9 @@ defaults:
       path: ""
     values:
       layout: default
-      robots: "index, follow" # Ensures all pages are indexable by default
+      # jekyll-seo-tag reads og:image from page.image only, never site.image.
+      # Setting it here gives every page a social card; front matter overrides it.
+      image: /assets/img/profile.webp
   - scope:
       path: "_pages"
     values:

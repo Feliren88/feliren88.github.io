@@ -4,6 +4,8 @@ title: Game Theory for Decisions
 subtitle: Other people respond to your choices. Include what they do next.
 description: My notes on strategic decisions, with computed payoff matrices, repeated cooperation, bargaining, ruin risk, and competing demands across life.
 permalink: /game-theory/
+date: 2026-08-23
+last_modified_at: 2026-08-25
 layout-class: page game-theory
 extra_css: /css/game-theory.css
 extra_js: /js/components/game-theory.js

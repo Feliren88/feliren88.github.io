@@ -4,6 +4,8 @@ title: Working with Uncertainty
 subtitle: How to decide while some questions remain open
 description: How to read emotional signals, stop repeated checking, gather enough information, and act while doubt remains.
 permalink: /uncertainty-and-emotions/
+date: 2026-08-23
+last_modified_at: 2026-08-25
 layout-class: page uncertainty-emotions
 extra_css: /css/uncertainty-and-emotions.css
 extra_js: /js/components/uncertainty-and-emotions.js

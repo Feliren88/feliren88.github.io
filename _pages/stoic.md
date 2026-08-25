@@ -4,6 +4,8 @@ title: Stoic
 subtitle: What Marcus Aurelius and Epictetus are still useful for
 description: Notes and exercises from the Meditations and the Enchiridion, organised around the problems that send me back to them.
 permalink: /stoic/
+date: 2026-08-23
+last_modified_at: 2026-08-25
 layout-class: page stoic
 extra_css: /css/stoic.css
 extra_js: /js/components/stoic.js
