@@ -5,11 +5,16 @@ Cache-busted URL for a site asset. Pass an absolute source path:
     <script src="{% include asset.html path='/js/main.js' %}"></script>
     {% include asset.html path=page.extra_css %}
 
-The token is the file's own modified time, so editing one stylesheet busts that
-stylesheet and leaves the rest of the site cached. This replaces the hand-kept
-`?v=` numbers that used to live inline: those had to be bumped by hand on every
-edit, one shared number covered all ten page-scoped stylesheets at once, and
-three of them had to be kept identical in two files.
+The token is the file's modified time. This replaces the hand-kept `?v=` numbers
+that used to live inline: those had to be bumped by hand on every edit, one
+shared number covered all ten page-scoped stylesheets at once, and three of them
+had to be kept identical in two files.
+
+Granularity differs by environment, and both are correct. Locally, mtimes are
+per-file, so editing one stylesheet busts only that stylesheet. On GitHub Pages
+the checkout does not preserve mtimes, so every file carries the deploy time and
+all assets bust together on each deploy. The win here is that the number is never
+wrong and never has to be remembered, not that production caching is optimal.
 
 sw.js must build its PRECACHE entries through this same include. A precache URL
 that does not byte-match the URL the page requests is fetched and stored twice,

@@ -102,10 +102,15 @@ Every stylesheet and script URL is emitted through one include:
 <link rel="stylesheet" href="{% include asset.html path='/css/styles.css' %}">
 ```
 
-It appends the file's own modified time. `sw.js` builds its `PRECACHE` entries through
-the same include so the two byte-match. A literal version number breaks that match, and
-the browser then holds two copies of one file and serves the stale one. There is no
-version to bump anywhere; if you find an instruction saying otherwise, it is stale.
+It appends the file's modified time. `sw.js` builds its `PRECACHE` entries through the
+same include so the two byte-match. A literal version number breaks that match, and the
+browser then holds two copies of one file and serves the stale one. There is no version
+to bump anywhere; if you find an instruction saying otherwise, it is stale.
+
+Locally the token is per-file. On GitHub Pages the checkout does not preserve mtimes, so
+every asset carries the deploy time and they all bust together. Both are correct; the
+point is that the number cannot be forgotten or fall out of sync, not that production
+caching is maximally granular.
 
 ### Never write a hex colour into `css/essay-motion.css`
 
