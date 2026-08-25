@@ -338,6 +338,21 @@ h1 {
   margin-top: 0;
 }
 
+/*
+  Several pages narrow the reading column with a `max-width` on .page-content
+  (/stoic/ 62rem, /principles/ 62rem, /communication/ 64rem, /high-agency/ 52rem).
+  A block with a max-width and no auto margin collapses to the left of its parent,
+  so the column hung up to 388px left of the full-width .page-header above it, and
+  every full-bleed diagram that centres on .page-content inherited the same lean.
+
+  Centring here rather than in each page's stylesheet means a new narrowed column
+  cannot reintroduce it. On a page that sets no max-width this is a no-op: the
+  column already fills its parent, and auto margins resolve to zero.
+*/
+.page-content {
+  margin-inline: auto;
+}
+
 .lead {
   margin: 0.85rem 0 0;
   color: var(--muted);
