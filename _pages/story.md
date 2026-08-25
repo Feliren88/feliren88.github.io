@@ -7,6 +7,7 @@ permalink: /story/
 layout-class: page method-story
 extra_css: /css/story.css
 extra_js: /js/components/story.js
+motion_scene: repair
 ---
 
 <div class="ms-progress" aria-hidden="true"><span id="ms-progress-fill"></span></div>

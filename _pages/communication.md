@@ -7,6 +7,7 @@ permalink: /communication/
 layout-class: page communication
 extra_css: /css/communication.css
 extra_js: /js/components/communication.js
+motion_scene: signal
 ---
 
 <div class="cm-progress" aria-hidden="true"><span id="cm-progress-fill"></span></div>

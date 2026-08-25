@@ -7,6 +7,7 @@ permalink: /self-love/
 layout-class: page self-love
 extra_css: /css/self-love.css
 extra_js: /js/components/self-love.js
+motion_scene: consent
 ---
 
 <div class="sl-progress" aria-hidden="true"><span id="sl-progress-fill"></span></div>

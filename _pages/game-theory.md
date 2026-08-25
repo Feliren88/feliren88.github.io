@@ -7,6 +7,7 @@ permalink: /game-theory/
 layout-class: page game-theory
 extra_css: /css/game-theory.css
 extra_js: /js/components/game-theory.js
+motion_scene: strategy
 ---
 
 <div class="gt-progress" aria-hidden="true"><span id="gt-progress-fill"></span></div>

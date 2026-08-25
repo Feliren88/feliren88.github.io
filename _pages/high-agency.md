@@ -7,6 +7,7 @@ permalink: /high-agency/
 layout-class: page high-agency
 extra_css: /css/high-agency.css
 extra_js: /js/components/high-agency.js
+motion_scene: agency
 ---
 
 <div class="ha-progress" aria-hidden="true"><span id="ha-progress-fill"></span></div>

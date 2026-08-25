@@ -7,6 +7,7 @@ permalink: /uncertainty-and-emotions/
 layout-class: page uncertainty-emotions
 extra_css: /css/uncertainty-and-emotions.css
 extra_js: /js/components/uncertainty-and-emotions.js
+motion_scene: uncertainty
 ---
 
 <div class="ue-progress" aria-hidden="true"><span id="ue-progress-fill"></span></div>

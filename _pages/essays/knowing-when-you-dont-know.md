@@ -5,6 +5,7 @@ subtitle: Why safe deployment depends on models knowing when to abstain
 description: An essay on why AI systems must recognise the limits of their ability and stop before uncertainty becomes harm.
 permalink: /essays/knowing-when-you-dont-know/
 layout-class: page calibrated-essay
+motion_scene: abstain
 ---
 
 <style>

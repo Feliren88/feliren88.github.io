@@ -7,6 +7,7 @@ permalink: /success-failure/
 layout-class: page success-failure
 extra_css: /css/success-failure.css
 extra_js: /js/components/success-failure.js
+motion_scene: feedback
 ---
 
 <div class="sf-progress" aria-hidden="true"><span id="sf-progress-fill"></span></div>

@@ -7,6 +7,7 @@ permalink: /principles/
 layout-class: page principles
 extra_css: /css/principles.css
 extra_js: /js/components/principles.js
+motion_scene: decision
 ---
 
 <div class="pr-progress" aria-hidden="true"><span id="pr-progress-fill"></span></div>

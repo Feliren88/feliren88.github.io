@@ -7,6 +7,7 @@ permalink: /stoic/
 layout-class: page stoic
 extra_css: /css/stoic.css
 extra_js: /js/components/stoic.js
+motion_scene: control
 ---
 
 <div class="st-progress" aria-hidden="true"><span id="st-progress-fill"></span></div>

@@ -7,6 +7,7 @@ permalink: /life-challenges/
 layout-class: page life-challenges
 extra_css: /css/life-challenges.css
 extra_js: /js/components/life-challenges.js
+motion_scene: conversion
 ---
 
 <div class="lc-progress" aria-hidden="true"><span id="lc-progress-fill"></span></div>
