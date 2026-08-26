@@ -14,6 +14,9 @@ motion_scene: decision
 
 <div class="pr-progress" aria-hidden="true"><span id="pr-progress-fill"></span></div>
 
+<nav class="pr-story-rail" aria-label="Principles narrative">
+      <a href="#six"><span>01</span>Interrogate the choice</a><a href="#reversibility"><span>02</span>Set the speed</a><a href="#situations"><span>03</span>Name the situation</a><a href="#sequence"><span>04</span>Recover the process</a><a href="#protect"><span>05</span>Protect the base</a>
+    </nav>
 <script type="application/json" id="pr-data">{{ site.data.principles | jsonify }}</script>
 
 {% include principles-icons.html %}
@@ -33,9 +36,7 @@ motion_scene: decision
       {% unless forloop.last %}<span class="pr-story-arrow" aria-hidden="true">→</span>{% endunless %}
       {% endfor %}
     </div>
-    <nav class="pr-story-rail" aria-label="Principles narrative">
-      <a href="#six"><span>01</span>Interrogate the choice</a><a href="#reversibility"><span>02</span>Set the speed</a><a href="#situations"><span>03</span>Name the situation</a><a href="#sequence"><span>04</span>Recover the process</a><a href="#protect"><span>05</span>Protect the base</a>
-    </nav>
+    
     <p>Pressure narrows attention to immediate relief. When I am angry, afraid, excited, or
     uncertain, I replace the first question in my head with a better one.</p>
     <div class="pr-swap">

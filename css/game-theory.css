@@ -36,7 +36,7 @@ body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{d
 .gt-story-flight::before { content:""; position:absolute; left: 10rem; right: 10rem; top: calc(1.7rem + 4rem); height:1px; background:linear-gradient(90deg,var(--accent),var(--cta)); z-index:-1; }
 .gt-story-return { grid-column: 1/4; grid-row: 2; align-self: stretch; display:grid; place-items:end center; border: 1px solid var(--line-strong); border-top:0; border-radius: 0 0 50% 50%; color:var(--muted); font-size:.7rem; }
 .gt-story-return span { padding:.2rem .45rem; background:var(--surface); }.gt-story-return i{width:.55rem;height:.55rem;border-right:1px solid var(--accent);border-bottom:1px solid var(--accent);transform:rotate(45deg);margin-bottom:-.3rem}
-.gt-story-rail { position:sticky; top:4.4rem; z-index:8; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin:0 0 2.2rem; border:1px solid var(--border-ui); border-radius:var(--radius-md); background:var(--line); overflow:hidden; box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent); }
+.gt-story-rail { position:sticky; top:3.875rem; z-index:8; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin:0 0 2.2rem; border:1px solid var(--border-ui); border-radius:var(--radius-md); background:var(--line); overflow:hidden; box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent); }
 .gt-story-rail a { display:grid; grid-template-columns:auto 1fr; gap:.4rem; align-items:center; padding:.55rem .6rem; background:color-mix(in srgb,var(--surface) 94%,transparent); color:var(--muted); text-decoration:none; font-size:.7rem; line-height:1.25; }
 .gt-story-rail a:hover{color:var(--text);background:var(--surface)}.gt-story-rail span{color:var(--accent);font:700 .62rem/1 "Space Grotesk",sans-serif}
 .gt-story-rail a.is-current{color:var(--text);box-shadow:inset 0 -2px var(--cta)}
@@ -931,3 +931,11 @@ body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{d
   .gv-dich,.gv-scale,.gv-gate{grid-template-columns:1fr}
   .gv-scale .f{justify-self:center}
 }
+
+/*
+  Landing offset for the rail links. The rail is sticky under the fixed topbar, so a
+  section scrolled to by hash would otherwise stop underneath both and read as though
+  the click missed. 9rem clears the tallest rail on the site; the ids come from that
+  page's own rail, so adding a rail entry means adding it here too.
+*/
+#games,#horizon,#levers,#risk,#dashboard{scroll-margin-top:9rem}

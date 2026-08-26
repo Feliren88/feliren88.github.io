@@ -32,7 +32,7 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
 .st-story-node.is-gate { position: relative; padding: .75rem .55rem; border: 1px solid var(--cta); border-radius: var(--radius-md); background: color-mix(in srgb,var(--cta) 10%,var(--surface)); color: var(--text); }
 .st-story-node.is-gate::before { content: "choice"; position: absolute; top: -.55rem; padding: .1rem .4rem; border-radius: 999px; background: var(--surface); color: var(--cta); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; }
 .st-story-arrow { color: var(--line-strong); font-size: 1.2rem; }
-.st-story-rail { position: sticky; top: 4.4rem; z-index: 8; display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; margin: 0 0 2.2rem; border: 1px solid var(--border-ui); border-radius: var(--radius-md); background: var(--line); overflow: hidden; box-shadow: 0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent); }
+.st-story-rail { position: sticky; top: 3.875rem; z-index: 8; display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; margin: 0 0 2.2rem; border: 1px solid var(--border-ui); border-radius: var(--radius-md); background: var(--line); overflow: hidden; box-shadow: 0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent); }
 .st-story-rail a { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .4rem; min-width: 0; padding: .55rem .6rem; background: color-mix(in srgb,var(--surface) 94%,transparent); color: var(--muted); text-decoration: none; font-size: .7rem; line-height: 1.25; }
 .st-story-rail a:hover { color: var(--text); background: var(--surface); }
 .st-story-rail a.is-current { color: var(--text); box-shadow: inset 0 -2px var(--cta); }
@@ -609,3 +609,11 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
 .sy-gauge i{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .3s ease}
 .sy-gauge span{position:absolute;inset:0;display:grid;place-items:center;font:700 .74rem "Space Grotesk",sans-serif;color:var(--text)}
 #sy-say{margin:.5rem 0 0!important;font-size:.9rem!important;line-height:1.55;color:var(--text)!important}
+
+/*
+  Landing offset for the rail links. The rail is sticky under the fixed topbar, so a
+  section scrolled to by hash would otherwise stop underneath both and read as though
+  the click missed. 9rem clears the tallest rail on the site; the ids come from that
+  page's own rail, so adding a rail entry means adding it here too.
+*/
+#control,#judgement,#disciplines,#above,#death{scroll-margin-top:9rem}

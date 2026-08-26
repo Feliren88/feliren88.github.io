@@ -14,6 +14,9 @@ motion_scene: consent
 
 <div class="sl-progress" aria-hidden="true"><span id="sl-progress-fill"></span></div>
 
+<nav class="sl-rail" aria-label="Self-love visual sequence">
+  <a href="#consent"><span>01</span>Consent</a><a href="#trial"><span>02</span>Worth</a><a href="#cage"><span>03</span>Freedom</a><a href="#strengths"><span>04</span>Governor</a><a href="#timing"><span>05</span>Speak</a><a href="#trustee"><span>06</span>Choose</a>
+</nav>
 <section class="sl-section sl-hero" id="control-system">
   <p class="sl-kicker">The person you must not abandon</p>
   <h1>Your strengths need a governor.</h1>
@@ -36,10 +39,6 @@ motion_scene: consent
   </div>
   <blockquote>“I expect a lot from you because I believe in what you can become. But I will not destroy you to prove it.”</blockquote>
 </section>
-
-<nav class="sl-rail" aria-label="Self-love visual sequence">
-  <a href="#consent"><span>01</span>Consent</a><a href="#trial"><span>02</span>Worth</a><a href="#cage"><span>03</span>Freedom</a><a href="#strengths"><span>04</span>Governor</a><a href="#timing"><span>05</span>Speak</a><a href="#trustee"><span>06</span>Choose</a>
-</nav>
 
 <section class="sl-section" id="consent">
   <header class="sl-section-head"><span>01 · Set the load by consent</span><h2>Let consent decide your obligations.</h2></header>

@@ -10,7 +10,7 @@
 
 body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-toggle-btn{display:none!important}
 .success-failure .page-content{max-width:64rem}.sf-part{margin-bottom:2.25rem}.sf-part+.sf-part{padding-top:2.25rem}
-.sf-story-rail{position:sticky;top:4.4rem;z-index:8;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin:0 0 1.5rem;border:1px solid var(--border-ui);border-radius:var(--radius-md);background:var(--line);overflow:hidden;box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent)}
+.sf-story-rail{position:sticky;top:3.875rem;z-index:8;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin:0 0 1.5rem;border:1px solid var(--border-ui);border-radius:var(--radius-md);background:var(--line);overflow:hidden;box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 85%,transparent)}
 .sf-story-rail a{display:grid;grid-template-columns:auto 1fr;gap:.4rem;align-items:center;min-width:0;padding:.58rem .65rem;background:color-mix(in srgb,var(--surface) 94%,transparent);color:var(--muted);text-decoration:none;font-size:.72rem;line-height:1.25}.sf-story-rail span{color:var(--sf-read);font:700 .62rem/1 "Space Grotesk",sans-serif}.sf-story-rail a:hover{color:var(--text);background:var(--surface)}
 .sf-story-rail a.is-current{color:var(--text);box-shadow:inset 0 -2px var(--sf-read)}
 @media(max-width:720px){.sf-story-rail{position:relative;top:auto;grid-template-columns:1fr 1fr}.sf-story-rail a:last-child{grid-column:1/-1}}
@@ -499,3 +499,11 @@ body:has(.success-failure) #pointcloud-bg,body:has(.success-failure) .shape-togg
 .sf-arch-1{left:50%;top:12%}.sf-arch-2{left:81%;top:24%}.sf-arch-3{left:81%;top:76%}.sf-arch-4{left:50%;top:88%}.sf-arch-5{left:19%;top:76%}.sf-arch-6{left:19%;top:24%}
 @media(max-width:760px){.sf-phase-path{grid-template-columns:1fr;padding:.75rem}.sf-phase-path:before{left:1.72rem;right:auto;top:1.75rem;bottom:1.75rem;width:2px;height:auto;background:linear-gradient(180deg,var(--sf-read) 0 var(--phase-progress),var(--line-strong) var(--phase-progress) 100%)}.sf-phase-path button{grid-template-columns:2rem minmax(0,1fr);grid-template-rows:auto auto;gap:.1rem .65rem;justify-items:start;padding:.25rem;text-align:left}.sf-phase-path button>span{grid-row:1/3}.sf-phase-path b{font-size:.8rem}.sf-phase-path small{font-size:.68rem}.sf-phase-detail{grid-template-columns:1fr;margin:0 .6rem .6rem}.sf-phase-detail-visual{min-height:15rem;padding:.65rem}.sf-phase-detail-visual svg{max-width:22rem}.sf-phase-detail-copy header{align-items:flex-start;flex-direction:column;gap:.3rem}.sf-phase-criteria-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.sf-phase-criteria-tabs button:last-child{grid-column:1/-1}.sf-phase-criteria-panel ul{grid-template-columns:1fr}.sf-milestone-head{display:none}.sf-milestone-chart{display:grid;gap:.65rem;border:0;overflow:visible}.sf-milestone-chart article{grid-template-columns:1fr;gap:.55rem;padding:1rem;border:1px solid var(--border-ui)!important;border-radius:var(--radius-md)}.sf-milestone-chart p:before{content:attr(data-label);display:block;margin-bottom:.15rem;color:var(--sf-read);font:700 .58rem/1.2 "Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase}.sf-milestone-compass{grid-template-columns:1fr}}
 @media(max-width:520px){.sf-architecture-map{height:23rem}.sf-arch-node{min-width:5.8rem;font-size:.68rem}.sf-arch-core{width:6.2rem;height:6.2rem;font-size:.85rem}.sf-arch-2,.sf-arch-3{left:78%}.sf-arch-5,.sf-arch-6{left:22%}.sf-architecture-visual figcaption{align-items:flex-start;flex-direction:column}}
+
+/*
+  Landing offset for the rail links. The rail is sticky under the fixed topbar, so a
+  section scrolled to by hash would otherwise stop underneath both and read as though
+  the click missed. 9rem clears the tallest rail on the site; the ids come from that
+  page's own rail, so adding a rail entry means adding it here too.
+*/
+#four-outcomes,#diagnosis,#lanes,#guardrails,#review{scroll-margin-top:9rem}

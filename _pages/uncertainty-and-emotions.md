@@ -13,6 +13,15 @@ motion_scene: uncertainty
 ---
 
 <div class="ue-progress" aria-hidden="true"><span id="ue-progress-fill"></span></div>
+
+<nav class="ue-toc" aria-label="On this page">
+  <a href="#trap"><b>01</b><svg class="ue-i"><use href="#ue-trap"/></svg>The trap</a><a href="#moves"><b>02</b><svg class="ue-i"><use href="#ue-cycle"/></svg>Certainty moves</a>
+  <a href="#games"><b>03</b><svg class="ue-i"><use href="#ue-dice"/></svg>Two games</a><a href="#training"><b>04</b><svg class="ue-i"><use href="#ue-dumbbell"/></svg>Training</a>
+  <a href="#state"><b>05</b><svg class="ue-i"><use href="#ue-brain"/></svg>State skills</a><a href="#budget"><b>06</b><svg class="ue-i"><use href="#ue-wallet"/></svg>Uncertainty budget</a>
+  <a href="#decisions"><b>07</b><svg class="ue-i"><use href="#ue-fork"/></svg>Decisions</a><a href="#practice"><b>08</b><svg class="ue-i"><use href="#ue-ladder"/></svg>Practice</a>
+  <a href="#support"><b>09</b><svg class="ue-i"><use href="#ue-hands"/></svg>Support</a><a href="#reset"><b>10</b><svg class="ue-i"><use href="#ue-restart"/></svg>Reset</a>
+</nav>
+
 <script type="application/json" id="ue-wheel-data">{{ site.data.emotion_wheel | jsonify }}</script>
 {% include uncertainty-icons.html %}
 
@@ -33,14 +42,6 @@ motion_scene: uncertainty
   <span><svg class="ue-i"><use href="#ue-hand"/></svg>Boundary</span>
   <p>This manual addresses ordinary decisions, emotional pressure, and incomplete information. It cannot tell you whether a specific situation is safe. When there is credible danger, a major health concern, or risk to anyone's safety, get qualified help and respond to the facts.</p>
 </div>
-
-<nav class="ue-toc" aria-label="On this page">
-  <a href="#trap"><b>01</b><svg class="ue-i"><use href="#ue-trap"/></svg>The trap</a><a href="#moves"><b>02</b><svg class="ue-i"><use href="#ue-cycle"/></svg>Certainty moves</a>
-  <a href="#games"><b>03</b><svg class="ue-i"><use href="#ue-dice"/></svg>Two games</a><a href="#training"><b>04</b><svg class="ue-i"><use href="#ue-dumbbell"/></svg>Training</a>
-  <a href="#state"><b>05</b><svg class="ue-i"><use href="#ue-brain"/></svg>State skills</a><a href="#budget"><b>06</b><svg class="ue-i"><use href="#ue-wallet"/></svg>Uncertainty budget</a>
-  <a href="#decisions"><b>07</b><svg class="ue-i"><use href="#ue-fork"/></svg>Decisions</a><a href="#practice"><b>08</b><svg class="ue-i"><use href="#ue-ladder"/></svg>Practice</a>
-  <a href="#support"><b>09</b><svg class="ue-i"><use href="#ue-hands"/></svg>Support</a><a href="#reset"><b>10</b><svg class="ue-i"><use href="#ue-restart"/></svg>Reset</a>
-</nav>
 
 <div class="ue-route" aria-label="Learning route through the manual">
   <span><svg class="ue-i"><use href="#ue-notice"/></svg><b>1 · Notice</b>See the loop</span><i>→</i><span><svg class="ue-i"><use href="#ue-evidence"/></svg><b>2 · Read</b>Separate signal from fact</span><i>→</i><span><svg class="ue-i"><use href="#ue-dumbbell"/></svg><b>3 · Practise</b>Make room for doubt</span><i>→</i><span><svg class="ue-i"><use href="#ue-target"/></svg><b>4 · Choose</b>Take the next useful action</span>
@@ -271,7 +272,6 @@ motion_scene: uncertainty
     </div>
   </div>
 
-
   <div class="ue-wheel-block" id="ue-wheel-block">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-wheelmark"/></svg> Find the word before you decide what to do</p>
     <div class="ue-wheel-views" id="ue-wheel-views" role="group" aria-label="Choose a wheel">
@@ -383,7 +383,6 @@ motion_scene: uncertainty
     <p class="ue-lever-note">These buy a few minutes of steadier judgment. They will not remove the feeling, and you can carry on before they work.</p>
   </div>
 
-
   <div class="ue-opp">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-opposite"/></svg> When a feeling's instruction does not match the situation</p>
     <p class="ue-opp-intro">Every feeling comes with an urge to act. First ask whether the facts support that urge. If they do, act on the problem. If they do not, choose a small action in the other direction. The feeling stays. The aim is to stop it from deciding for you.</p>
@@ -458,7 +457,6 @@ motion_scene: uncertainty
     <div class="ue-runbar-track" aria-hidden="true"><i id="ue-rung-fill"></i></div>
     <button class="ue-btn" id="ue-rung-reset" type="button">Clear</button>
   </div>
-
 
   <div class="ue-planner" id="ue-planner">
     <p class="ue-viz-k"><svg class="ue-i"><use href="#ue-plan"/></svg> Plan one rung, then run it</p>

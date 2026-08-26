@@ -14,6 +14,11 @@ motion_scene: agency
 
 <div class="ha-progress" aria-hidden="true"><span id="ha-progress-fill"></span></div>
 
+<nav class="ha-story-rail" id="ha-story-rail" aria-label="High Agency story progress">
+  <a href="#see-it" data-ha-act="1"><b>I</b><span>See the system</span></a>
+  <a href="#software" data-ha-act="2"><b>II</b><span>Reject the default</span></a>
+  <a href="#tools" data-ha-act="3"><b>III</b><span>Move through it</span></a>
+</nav>
 {% include high-agency-icons.html %}
 
 <a class="ha-hud" id="ha-hud" href="#badges" hidden><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-medal"></use></svg><span class="ha-hud-num"><b id="ha-hud-n">0</b>/12</span><span class="ha-hud-track" aria-hidden="true"><i id="ha-hud-fill"></i></span></a>
@@ -35,12 +40,6 @@ motion_scene: agency
     <text x="40" y="368">the assigned route</text><text x="286" y="350">“impossible”</text><text x="298" y="138">a variable moves</text><text x="405" y="61">changed reality</text>
   </svg>
 </div>
-
-<nav class="ha-story-rail" id="ha-story-rail" aria-label="High Agency story progress">
-  <a href="#see-it" data-ha-act="1"><b>I</b><span>See the system</span></a>
-  <a href="#software" data-ha-act="2"><b>II</b><span>Reject the default</span></a>
-  <a href="#tools" data-ha-act="3"><b>III</b><span>Move through it</span></a>
-</nav>
 
 <div class="note-block" role="note">
   <span class="note-badge">Source</span>
@@ -1516,7 +1515,6 @@ motion_scene: agency
     </div>
     <p class="ha-tally" id="hg-say" role="status">Six cases, one shape. Select any of them.</p>
   </div>
-
 
   <div class="ha-lab" id="hafig-test">
     <div class="ha-lab-head">

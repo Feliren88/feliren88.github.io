@@ -3,6 +3,18 @@
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   var bar=document.getElementById('ue-progress-fill');
   if(bar){var busy=false,paint=function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';busy=false;};addEventListener('scroll',function(){if(!busy){busy=true;requestAnimationFrame(paint);}},{passive:true});paint();}
+  // Light up the rail entry for whichever section the reader is in. Same observer
+  // and same margins the other ten writings use, so the rails behave alike.
+  var railLinks=all('.ue-toc a');
+  if('IntersectionObserver' in window && railLinks.length){
+    var railObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting)return;
+        railLinks.forEach(function(link){link.classList.toggle('is-current',link.hash==='#'+entry.target.id);});
+      });
+    },{rootMargin:'-22% 0px -65% 0px'});
+    railLinks.forEach(function(link){var section=document.querySelector(link.hash);if(section)railObserver.observe(section);});
+  }
   var loopCopy=['An unknown appears. The mind may treat not knowing as a problem by itself.','Possibility becomes danger before the evidence has changed.','The body and mind demand an answer on the alarm system\'s timetable.','Checking, reviewing, asking again, analysing, or avoiding buys relief.','Relief rewards the move. The next alarm arrives with more authority.'];
   all('#ue-loop button').forEach(function(b){b.addEventListener('click',function(){all('#ue-loop button').forEach(function(x){x.classList.remove('is-on');});b.classList.add('is-on');document.getElementById('ue-loop-read').textContent=loopCopy[+b.dataset.step];});});
   all('#ue-oern button').forEach(function(b){b.addEventListener('click',function(){all('#ue-oern button').forEach(function(x){x.classList.remove('is-on');});b.classList.add('is-on');document.getElementById('ue-oern-read').textContent=b.dataset.copy;});});

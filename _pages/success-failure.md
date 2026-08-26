@@ -13,6 +13,10 @@ motion_scene: feedback
 ---
 
 <div class="sf-progress" aria-hidden="true"><span id="sf-progress-fill"></span></div>
+
+<nav class="sf-story-rail" aria-label="Learning route">
+    <a href="#four-outcomes"><span>01</span>Read the result</a><a href="#diagnosis"><span>02</span>Find the cause</a><a href="#lanes"><span>03</span>Choose a lane</a><a href="#guardrails"><span>04</span>Protect the game</a><a href="#review"><span>05</span>Close the loop</a>
+  </nav>
 {% include success-failure-icons.html %}
 
 <section class="sf-part sf-prose sf-opening" id="outcome">
@@ -58,9 +62,7 @@ motion_scene: feedback
     </div>
   </div>
 
-  <nav class="sf-story-rail" aria-label="Learning route">
-    <a href="#four-outcomes"><span>01</span>Read the result</a><a href="#diagnosis"><span>02</span>Find the cause</a><a href="#lanes"><span>03</span>Choose a lane</a><a href="#guardrails"><span>04</span>Protect the game</a><a href="#review"><span>05</span>Close the loop</a>
-  </nav>
+  
 
   <div class="sf-fan" aria-label="Eight factors feed one observed outcome">
     <div class="sf-fan-inputs">

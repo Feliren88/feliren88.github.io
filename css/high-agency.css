@@ -29,7 +29,7 @@ body:has(.high-agency) #pointcloud-bg,body:has(.high-agency) .shape-toggle-btn{d
 .ha-story-hero::before{content:"";position:absolute;width:34rem;height:34rem;border:1px solid color-mix(in srgb,var(--accent) 18%,transparent);border-radius:50%;right:-12rem;top:-14rem;box-shadow:0 0 0 7rem color-mix(in srgb,var(--accent) 3%,transparent),0 0 0 14rem color-mix(in srgb,var(--accent) 2%,transparent)}
 .ha-story-copy{position:relative;z-index:2}.ha-story-kicker{font:700 .72rem "Space Grotesk",sans-serif!important;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)!important}.ha-story-title{font:600 clamp(3.25rem,6.8vw,6.2rem)/.9 "Space Grotesk",sans-serif;letter-spacing:-.065em;color:var(--text);margin:1rem 0 1.4rem}.ha-story-title i{font:400 italic 1.05em Georgia,serif;color:var(--accent)}.ha-story-copy>p:last-child{font:400 clamp(1.05rem,1.8vw,1.3rem)/1.65 Georgia,serif;color:var(--muted);max-width:35rem}
 .ha-route{position:relative;z-index:2;width:100%;height:auto;overflow:visible}.ha-route path,.ha-route circle{fill:none;stroke-linecap:round;stroke-linejoin:round}.ha-route .route-before{stroke:var(--muted);stroke-width:4}.ha-route .wall{stroke:var(--text);stroke-width:8}.ha-route .route-search{stroke:var(--accent);stroke-width:3;stroke-dasharray:7 8}.ha-route .hinge{stroke:var(--cta);stroke-width:5;fill:var(--surface)}.ha-route .route-after{stroke:var(--cta);stroke-width:5}.ha-route marker path{fill:var(--cta);stroke:none}.ha-route text{font:600 13px "Space Grotesk",sans-serif;fill:var(--muted)}
-.ha-story-rail{position:sticky;top:3px;z-index:55;display:flex;justify-content:center;margin:0 calc(50% - 50vw) 2.5rem;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.ha-story-rail a{display:flex;align-items:center;gap:.5rem;padding:.75rem 1.4rem;text-decoration:none;color:var(--muted);font-size:.8rem;border-bottom:2px solid transparent}.ha-story-rail a b{color:var(--accent)}.ha-story-rail a.is-on{color:var(--text);border-bottom-color:var(--accent)}
+.ha-story-rail{position:sticky;top:3.875rem;z-index:55;display:flex;justify-content:center;margin:0 calc(50% - 50vw) 2.5rem;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.ha-story-rail a{display:flex;align-items:center;gap:.5rem;padding:.75rem 1.4rem;text-decoration:none;color:var(--muted);font-size:.8rem;border-bottom:2px solid transparent}.ha-story-rail a b{color:var(--accent)}.ha-story-rail a.is-on{color:var(--text);border-bottom-color:var(--accent)}
 .ha-turn{margin:7rem calc(50% - 50vw) 4rem;padding:5rem max(1.5rem,calc(50vw - 26rem));min-height:22rem;display:grid;grid-template-columns:7rem 1fr;align-items:center;background:linear-gradient(125deg,color-mix(in srgb,var(--accent) 11%,var(--surface)),var(--bg));border-block:1px solid color-mix(in srgb,var(--accent) 35%,var(--line))}.ha-turn span{font:700 .75rem "Space Grotesk",sans-serif;color:var(--accent);text-transform:uppercase;letter-spacing:.15em}.ha-turn b{font:400 clamp(1.8rem,4vw,3.4rem)/1.15 Georgia,serif;color:var(--text);max-width:20ch}
 
 /* Keep the measure readable even though the labs want the full width. */
@@ -1740,3 +1740,11 @@ input[type="range"].ha-range {
 .hgt-cell.is-open .shut{display:none}
 .hgt-cell.is-open .open{display:block;color:var(--text)}
 .hgt-cell.is-open i{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface));transform:perspective(8rem) rotateY(58deg);transform-origin:left;opacity:.7}
+
+/*
+  Landing offset for the rail links. The rail is sticky under the fixed topbar, so a
+  section scrolled to by hash would otherwise stop underneath both and read as though
+  the click missed. 9rem clears the tallest rail on the site; the ids come from that
+  page's own rail, so adding a rail entry means adding it here too.
+*/
+#see-it,#software,#tools{scroll-margin-top:9rem}

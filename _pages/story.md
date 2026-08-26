@@ -14,6 +14,15 @@ motion_scene: repair
 
 <div class="ms-progress" aria-hidden="true"><span id="ms-progress-fill"></span></div>
 
+<nav class="ms-rail" id="ms-rail" aria-label="Story progress">
+  <a href="#boy" data-act="1"><b>I</b><span>Attention</span></a>
+  <a href="#proof" data-act="2"><b>II</b><span>Usefulness</span></a>
+  <a href="#question" data-act="3"><b>III</b><span>The trap</span></a>
+  <a href="#base" data-act="4"><b>IV</b><span>Ownership</span></a>
+  <a href="#public" data-act="5"><b>V</b><span>Transmission</span></a>
+  <a href="#dismantling" data-act="6"><b>VI</b><span>Selection</span></a>
+  <a href="#last" data-act="7"><b>VII</b><span>What remains</span></a>
+</nav>
 <div class="ms-hero" aria-labelledby="ms-title">
   <div class="ms-night" aria-hidden="true">
     <span class="window w1"></span><span class="window w2"></span><span class="window w3"></span>
@@ -29,16 +38,6 @@ motion_scene: repair
   <p class="ms-lede">He learned people as he learned machines: by what happened when pressure was applied.</p>
   <a class="ms-enter" href="#boy"><span>Begin at night</span><i aria-hidden="true">↓</i></a>
 </div>
-
-<nav class="ms-rail" id="ms-rail" aria-label="Story progress">
-  <a href="#boy" data-act="1"><b>I</b><span>Attention</span></a>
-  <a href="#proof" data-act="2"><b>II</b><span>Usefulness</span></a>
-  <a href="#question" data-act="3"><b>III</b><span>The trap</span></a>
-  <a href="#base" data-act="4"><b>IV</b><span>Ownership</span></a>
-  <a href="#public" data-act="5"><b>V</b><span>Transmission</span></a>
-  <a href="#dismantling" data-act="6"><b>VI</b><span>Selection</span></a>
-  <a href="#last" data-act="7"><b>VII</b><span>What remains</span></a>
-</nav>
 
 <main class="ms-story">
   <section class="ms-act is-night" id="boy" data-act="1">

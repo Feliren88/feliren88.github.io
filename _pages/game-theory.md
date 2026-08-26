@@ -14,6 +14,9 @@ motion_scene: strategy
 
 <div class="gt-progress" aria-hidden="true"><span id="gt-progress-fill"></span></div>
 
+<nav class="gt-story-rail" aria-label="Game Theory narrative">
+    <a href="#games"><span>01</span>Read the game</a><a href="#horizon"><span>02</span>Change the horizon</a><a href="#levers"><span>03</span>Change the rules</a><a href="#risk"><span>04</span>Size the bet</a><a href="#dashboard"><span>05</span>Protect the whole system</a>
+  </nav>
 <script type="application/json" id="gt-data">{{ site.data.game_theory | jsonify }}</script>
 
 {% include game-theory-icons.html %}
@@ -31,9 +34,7 @@ motion_scene: strategy
     <div class="gt-story-return"><span>creates the position you keep</span><i aria-hidden="true"></i></div>
     <div class="gt-story-position"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-equilibrium"/></svg><span>New position</span><small>play again, redesign, or exit</small></div>
   </div>
-  <nav class="gt-story-rail" aria-label="Game Theory narrative">
-    <a href="#games"><span>01</span>Read the game</a><a href="#horizon"><span>02</span>Change the horizon</a><a href="#levers"><span>03</span>Change the rules</a><a href="#risk"><span>04</span>Size the bet</a><a href="#dashboard"><span>05</span>Protect the whole system</a>
-  </nav>
+  
   <p class="gt-deck">Many important decisions involve other people. They respond to your move, and
   their response changes what your move was worth.</p>
 

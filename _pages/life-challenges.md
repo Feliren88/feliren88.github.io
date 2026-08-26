@@ -14,6 +14,9 @@ motion_scene: conversion
 
 <div class="lc-progress" aria-hidden="true"><span id="lc-progress-fill"></span></div>
 
+<nav class="lc-rail" aria-label="Life challenges learning path">
+  <a href="#conversion"><span>01</span>Convert</a><a href="#comfort"><span>02</span>Comfort</a><a href="#diagnosis"><span>03</span>Diagnose</a><a href="#uncertainty"><span>04</span>Explore</a><a href="#pressure"><span>05</span>Regulate</a><a href="#game"><span>06</span>Choose</a><a href="#architecture"><span>07</span>Build</a>
+</nav>
 <section class="lc-hero lc-section" id="silver-lining">
   <div class="lc-hero-copy">
     <p class="lc-kicker">The silver lining of a difficult life</p>
@@ -30,10 +33,6 @@ motion_scene: conversion
   </div>
   <p class="lc-hero-rule">Extract value from unavoidable difficulty without turning pain into a virtue.</p>
 </section>
-
-<nav class="lc-rail" aria-label="Life challenges learning path">
-  <a href="#conversion"><span>01</span>Convert</a><a href="#comfort"><span>02</span>Comfort</a><a href="#diagnosis"><span>03</span>Diagnose</a><a href="#uncertainty"><span>04</span>Explore</a><a href="#pressure"><span>05</span>Regulate</a><a href="#game"><span>06</span>Choose</a><a href="#architecture"><span>07</span>Build</a>
-</nav>
 
 <section class="lc-section" id="conversion">
   <header class="lc-section-head"><span>01 · The conversion model</span><h2>Growth needs more than pain.</h2><p>Challenge supplies raw material. What happens next depends on how you meet it.</p></header>

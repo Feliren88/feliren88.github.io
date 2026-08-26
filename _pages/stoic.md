@@ -14,6 +14,9 @@ motion_scene: control
 
 <div class="st-progress" aria-hidden="true"><span id="st-progress-fill"></span></div>
 
+<nav class="st-story-rail" aria-label="Stoic narrative">
+    <a href="#control"><span>01</span>Draw the boundary</a><a href="#judgement"><span>02</span>Find the gap</a><a href="#disciplines"><span>03</span>Train the response</a><a href="#above"><span>04</span>Change the scale</a><a href="#death"><span>05</span>Release the outcome</a>
+  </nav>
 <script type="application/json" id="st-data">{{ site.data.stoic | jsonify }}</script>
 
 {% include stoic-icons.html %}
@@ -49,9 +52,7 @@ motion_scene: control
     {% unless forloop.last %}<span class="st-story-arrow" aria-hidden="true">→</span>{% endunless %}
     {% endfor %}
   </div>
-  <nav class="st-story-rail" aria-label="Stoic narrative">
-    <a href="#control"><span>01</span>Draw the boundary</a><a href="#judgement"><span>02</span>Find the gap</a><a href="#disciplines"><span>03</span>Train the response</a><a href="#above"><span>04</span>Change the scale</a><a href="#death"><span>05</span>Release the outcome</a>
-  </nav>
+  
   <p class="st-deck">An emperor and a former slave left two accounts of Roman Stoicism.
   Much of their advice overlaps.</p>
 
@@ -404,7 +405,6 @@ motion_scene: control
 <section class="st-part st-prose" id="practices">
   <h2><span class="n">06</span> Return to the day</h2>
   <p class="st-deck">These books ask for practice. A few drills appear again and again.</p>
-
 
   <div class="st-lab">
     <div class="st-lab-head">
