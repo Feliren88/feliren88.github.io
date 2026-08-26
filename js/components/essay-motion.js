@@ -148,15 +148,15 @@
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
     if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
-    night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49M405 220l-42 34"/><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
+    night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><g class="em-fig em-fig-boy"><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49"/><path class="em-person em-arm" d="M405 220l-42 34"/></g><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
 
     var needed = svgEl('g', { class: 'em-story-frame em-story-needed' });
-    needed.innerHTML = '<circle class="em-head" cx="375" cy="123" r="25"/><path class="em-person" d="M375 148v108m-48 67 48-67 48 67M375 184l-55 42m55-42 55 42"/><g class="em-load"><rect x="95" y="80" width="130" height="48" rx="6"/><text x="160" y="109">problem</text><rect x="525" y="95" width="130" height="48" rx="6"/><text x="590" y="124">urgency</text><rect x="88" y="202" width="150" height="48" rx="6"/><text x="163" y="231">trust</text><rect x="512" y="220" width="155" height="48" rx="6"/><text x="589" y="249">responsibility</text></g><path class="em-pull" d="M225 104C290 110 310 150 350 177M525 119C462 127 445 154 400 177M238 226C295 225 315 215 350 197M512 244C458 237 435 218 400 197"/><text x="375" y="350">“Can you take one more thing?”</text>';
+    needed.innerHTML = '<g class="em-fig em-fig-pulled"><circle class="em-head" cx="375" cy="123" r="25"/><path class="em-person" d="M375 148v108m-48 67 48-67 48 67"/><path class="em-person em-arm em-arm-l" d="M375 184l-55 42"/><path class="em-person em-arm em-arm-r" d="M375 184l55 42"/></g><g class="em-load"><rect x="95" y="80" width="130" height="48" rx="6"/><text x="160" y="109">problem</text><rect x="525" y="95" width="130" height="48" rx="6"/><text x="590" y="124">urgency</text><rect x="88" y="202" width="150" height="48" rx="6"/><text x="163" y="231">trust</text><rect x="512" y="220" width="155" height="48" rx="6"/><text x="589" y="249">responsibility</text></g><path class="em-pull" d="M225 104C290 110 310 150 350 177M525 119C462 127 445 154 400 177M238 226C295 225 315 215 350 197M512 244C458 237 435 218 400 197"/><text x="375" y="350">“Can you take one more thing?”</text>';
     svg.appendChild(needed);
 
     var trapped = svgEl('g', { class: 'em-story-frame em-story-trapped' });
-    trapped.innerHTML = '<path class="em-office" d="M96 304h558M142 304V126h466v178M142 214h466"/><rect class="em-screen" x="257" y="150" width="236" height="116" rx="8"/><text class="em-screen-label" x="375" y="188">PROJECT</text><text class="em-screen-value" x="375" y="235">99%</text><circle class="em-head" cx="210" cy="244" r="20"/><path class="em-person" d="M210 264l32 40m-32-40-18 40"/><path class="em-clock" d="M565 155a32 32 0 1 1-.1 0M565 166v22l15 9"/><text x="375" y="344">The project was at 99%. He was still there.</text>';
+    trapped.innerHTML = '<path class="em-office" d="M96 304h558M142 304V126h466v178M142 214h466"/><rect class="em-screen" x="257" y="150" width="236" height="116" rx="8"/><text class="em-screen-label" x="375" y="188">PROJECT</text><text class="em-screen-value" x="375" y="235">99%</text><g class="em-fig em-fig-spent"><circle class="em-head" cx="210" cy="244" r="20"/><path class="em-person" d="M210 264l32 40m-32-40-18 40"/></g><path class="em-clock" d="M565 155a32 32 0 1 1-.1 0M565 166v22l15 9"/><text x="375" y="344">The project was at 99%. He was still there.</text>';
     svg.appendChild(trapped);
 
     var choice = svgEl('g', { class: 'em-story-frame em-story-choice' });
@@ -169,11 +169,11 @@
   function buildFeedbackNarrativeCanvas(canvas, svg) {
     svg.setAttribute('aria-label', 'A result causes a painful first reaction, then becomes a lesson for the next attempt');
     var result = svgEl('g', { class: 'em-story-frame em-feedback-result' });
-    result.innerHTML = '<rect class="em-message" x="150" y="72" width="450" height="210" rx="12"/><text class="em-message-small" x="190" y="112">RESULT</text><path class="em-message-line" d="M190 138h320M190 167h250M190 196h285"/><rect class="em-result-mark" x="190" y="222" width="165" height="34" rx="17"/><text class="em-result-word" x="272" y="244">NOT THIS TIME</text><circle class="em-head" cx="650" cy="240" r="22"/><path class="em-person" d="M650 262v58m-35 28 35-28 35 28M650 282l-32 18"/><text x="375" y="340">The body heard it before the mind understood it.</text>';
+    result.innerHTML = '<rect class="em-message" x="150" y="72" width="450" height="210" rx="12"/><text class="em-message-small" x="190" y="112">RESULT</text><path class="em-message-line" d="M190 138h320M190 167h250M190 196h285"/><rect class="em-result-mark" x="190" y="222" width="165" height="34" rx="17"/><text class="em-result-word" x="272" y="244">NOT THIS TIME</text><g class="em-fig em-fig-drop"><circle class="em-head" cx="650" cy="240" r="22"/><path class="em-person" d="M650 262v58m-35 28 35-28 35 28"/><path class="em-person em-arm" d="M650 282l-32 18"/></g><text x="375" y="340">The body heard it before the mind understood it.</text>';
     svg.appendChild(result);
 
     var feeling = svgEl('g', { class: 'em-story-frame em-feedback-feeling' });
-    feeling.innerHTML = '<circle class="em-head" cx="375" cy="158" r="30"/><path class="em-person" d="M375 188v78m-44 62 44-62 44 62M375 218l-46 29m46-29 46 29"/><g class="em-thoughts"><text x="205" y="105">I failed.</text><text x="545" y="105">I am a failure.</text><text x="205" y="235">They were right.</text><text x="545" y="235">I should stop.</text></g><path class="em-thought-line" d="M340 145 252 112M410 145l88-33M340 184l-88 40M410 184l88 40"/><text x="375" y="350">Pain wrote a verdict before the facts arrived.</text>';
+    feeling.innerHTML = '<g class="em-fig em-fig-curl"><circle class="em-head" cx="375" cy="158" r="30"/><path class="em-person" d="M375 188v78m-44 62 44-62 44 62M375 218l-46 29m46-29 46 29"/></g><g class="em-thoughts"><text x="205" y="105">I failed.</text><text x="545" y="105">I am a failure.</text><text x="205" y="235">They were right.</text><text x="545" y="235">I should stop.</text></g><path class="em-thought-line" d="M340 145 252 112M410 145l88-33M340 184l-88 40M410 184l88 40"/><text x="375" y="350">Pain wrote a verdict before the facts arrived.</text>';
     svg.appendChild(feeling);
 
     var review = svgEl('g', { class: 'em-story-frame em-feedback-review' });
@@ -190,7 +190,7 @@
   function buildConsentNarrativeCanvas(canvas, svg) {
     svg.setAttribute('aria-label', 'A capable person carries everyone else’s needs, sees their own absence, and draws a boundary that includes them');
     var carry = svgEl('g', { class: 'em-story-frame em-consent-carry' });
-    carry.innerHTML = '<circle class="em-head" cx="375" cy="112" r="24"/><path class="em-person" d="M375 136v108m-48 72 48-72 48 72M375 176l-78 50m78-50 78 50"/><g class="em-requests"><rect x="82" y="72" width="150" height="45" rx="7"/><text x="157" y="100">Can you fix this?</text><rect x="518" y="88" width="145" height="45" rx="7"/><text x="590" y="116">We need you.</text><rect x="74" y="204" width="160" height="45" rx="7"/><text x="154" y="232">One more thing.</text><rect x="520" y="220" width="150" height="45" rx="7"/><text x="595" y="248">It is urgent.</text></g><path class="em-pull" d="M232 95 350 172M518 111 400 172M234 226 350 194M520 242 400 194"/><text x="375" y="348">Every request assumed the answer would be yes.</text>';
+    carry.innerHTML = '<g class="em-fig em-fig-laden"><circle class="em-head" cx="375" cy="112" r="24"/><path class="em-person" d="M375 136v108m-48 72 48-72 48 72"/><path class="em-person em-arm em-arm-l" d="M375 176l-78 50"/><path class="em-person em-arm em-arm-r" d="M375 176l78 50"/></g><g class="em-requests"><rect x="82" y="72" width="150" height="45" rx="7"/><text x="157" y="100">Can you fix this?</text><rect x="518" y="88" width="145" height="45" rx="7"/><text x="590" y="116">We need you.</text><rect x="74" y="204" width="160" height="45" rx="7"/><text x="154" y="232">One more thing.</text><rect x="520" y="220" width="150" height="45" rx="7"/><text x="595" y="248">It is urgent.</text></g><path class="em-pull" d="M232 95 350 172M518 111 400 172M234 226 350 194M520 242 400 194"/><text x="375" y="348">Every request assumed the answer would be yes.</text>';
     svg.appendChild(carry);
 
     var disappear = svgEl('g', { class: 'em-story-frame em-consent-disappear' });
@@ -198,11 +198,11 @@
     svg.appendChild(disappear);
 
     var ask = svgEl('g', { class: 'em-story-frame em-consent-ask' });
-    ask.innerHTML = '<rect class="em-mirror" x="250" y="48" width="250" height="250" rx="125"/><circle class="em-head" cx="375" cy="125" r="24"/><path class="em-person" d="M375 149v80m-42 58 42-58 42 58M375 178l-39 25m39-25 39 25"/><text class="em-mirror-question" x="375" y="326">Would I ask this of someone I loved?</text>';
+    ask.innerHTML = '<rect class="em-mirror" x="250" y="48" width="250" height="250" rx="125"/><g class="em-fig em-fig-mirror"><circle class="em-head" cx="375" cy="125" r="24"/><path class="em-person" d="M375 149v80m-42 58 42-58 42 58M375 178l-39 25m39-25 39 25"/></g><text class="em-mirror-question" x="375" y="326">Would I ask this of someone I loved?</text>';
     svg.appendChild(ask);
 
     var returnFrame = svgEl('g', { class: 'em-story-frame em-consent-return' });
-    returnFrame.innerHTML = '<path class="em-boundary" d="M375 42v276"/><circle class="em-head" cx="245" cy="126" r="24"/><path class="em-person" d="M245 150v92m-44 70 44-70 44 70M245 184l-44 30m44-30 44 30"/><g class="em-care"><circle cx="505" cy="118" r="26"/><circle cx="565" cy="192" r="26"/><circle cx="490" cy="266" r="26"/></g><path class="em-open-gate" d="M375 180h82v80h-82"/><text class="em-boundary-word" x="415" y="168">consent</text><text x="375" y="348">They still cared. They started answering honestly.</text>';
+    returnFrame.innerHTML = '<path class="em-boundary" d="M375 42v276"/><g class="em-fig em-fig-upright"><circle class="em-head" cx="245" cy="126" r="24"/><path class="em-person" d="M245 150v92m-44 70 44-70 44 70M245 184l-44 30m44-30 44 30"/></g><g class="em-care"><circle cx="505" cy="118" r="26"/><circle cx="565" cy="192" r="26"/><circle cx="490" cy="266" r="26"/></g><path class="em-open-gate" d="M375 180h82v80h-82"/><text class="em-boundary-word" x="415" y="168">consent</text><text x="375" y="348">They still cared. They started answering honestly.</text>';
     svg.appendChild(returnFrame);
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: [carry, disappear, ask, returnFrame], nodes: [], edges: [] };
@@ -211,11 +211,11 @@
   function buildConversionNarrativeCanvas(canvas, svg) {
     svg.setAttribute('aria-label', 'A person survives a storm, receives care, names what broke, and builds a path from what remains');
     var hurt = svgEl('g', { class: 'em-story-frame em-life-hurt' });
-    hurt.innerHTML = '<path class="em-storm" d="M60 75h630M92 38 55 118m110-92-54 116m130-99-48 102m128-115-58 126m138-117-55 118m142-125-53 118m133-112-48 105"/><circle class="em-head" cx="375" cy="188" r="24"/><path class="em-person em-seated" d="M375 212l-34 48 69 1m-35-49 39 38m-73 10-25 48m94-47 28 47"/><path class="em-ground" d="M70 309h610"/><text x="375" y="345">There was no lesson yet. There was only the weather.</text>';
+    hurt.innerHTML = '<path class="em-storm" d="M60 75h630M92 38 55 118m110-92-54 116m130-99-48 102m128-115-58 126m138-117-55 118m142-125-53 118m133-112-48 105"/><g class="em-fig em-fig-rock"><circle class="em-head" cx="375" cy="188" r="24"/><path class="em-person em-seated" d="M375 212l-34 48 69 1m-35-49 39 38m-73 10-25 48m94-47 28 47"/></g><path class="em-ground" d="M70 309h610"/><text x="375" y="345">There was no lesson yet. There was only the weather.</text>';
     svg.appendChild(hurt);
 
     var shelter = svgEl('g', { class: 'em-story-frame em-life-shelter' });
-    shelter.innerHTML = '<path class="em-roof" d="M120 172 375 52l255 120M160 154v158m430-158v158"/><circle class="em-head" cx="330" cy="190" r="22"/><path class="em-person" d="M330 212v62m-36 43 36-43 36 43M330 237l-35 23"/><circle class="em-head em-helper" cx="445" cy="178" r="22"/><path class="em-person em-helper" d="M445 200v74m-36 43 36-43 36 43M445 225l-70 34"/><path class="em-cup" d="M248 252h42v36c0 14-42 14-42 0zM290 260h14v18h-14"/><text x="375" y="345">Before meaning, there was shelter.</text>';
+    shelter.innerHTML = '<path class="em-roof" d="M120 172 375 52l255 120M160 154v158m430-158v158"/><g class="em-fig em-fig-soften"><circle class="em-head" cx="330" cy="190" r="22"/><path class="em-person" d="M330 212v62m-36 43 36-43 36 43"/><path class="em-person em-arm" d="M330 237l-35 23"/></g><g class="em-fig em-fig-nearby"><circle class="em-head em-helper" cx="445" cy="178" r="22"/><path class="em-person em-helper" d="M445 200v74m-36 43 36-43 36 43"/><path class="em-person em-helper em-arm" d="M445 225l-70 34"/></g><path class="em-cup" d="M248 252h42v36c0 14-42 14-42 0zM290 260h14v18h-14"/><text x="375" y="345">Before meaning, there was shelter.</text>';
     svg.appendChild(shelter);
 
     var name = svgEl('g', { class: 'em-story-frame em-life-name' });
@@ -223,7 +223,7 @@
     svg.appendChild(name);
 
     var build = svgEl('g', { class: 'em-story-frame em-life-build' });
-    build.innerHTML = '<path class="em-ravine" d="M45 276h170l55 55m435-55H535l-55 55"/><g class="em-bridge"><rect x="205" y="238" width="85" height="24"/><rect x="292" y="222" width="85" height="24"/><rect x="379" y="222" width="85" height="24"/><rect x="466" y="238" width="85" height="24"/></g><text class="em-bridge-word" x="248" y="255">boundary</text><text class="em-bridge-word" x="334" y="239">method</text><text class="em-bridge-word" x="421" y="239">courage</text><text class="em-bridge-word" x="508" y="255">care</text><circle class="em-head" cx="160" cy="185" r="21"/><path class="em-person" d="M160 206v55m-30 42 30-42 30 42M160 225l36 20"/><circle class="em-head em-helper" cx="605" cy="185" r="21"/><path class="em-person em-helper" d="M605 206v55m-30 42 30-42 30 42M605 225l-36 20"/><text x="375" y="345">What they built could carry someone else, too.</text>';
+    build.innerHTML = '<path class="em-ravine" d="M45 276h170l55 55m435-55H535l-55 55"/><g class="em-bridge"><g class="em-plank"><rect x="205" y="238" width="85" height="24"/><text class="em-bridge-word" x="248" y="255">boundary</text></g><g class="em-plank"><rect x="292" y="222" width="85" height="24"/><text class="em-bridge-word" x="334" y="239">method</text></g><g class="em-plank"><rect x="379" y="222" width="85" height="24"/><text class="em-bridge-word" x="421" y="239">courage</text></g><g class="em-plank"><rect x="466" y="238" width="85" height="24"/><text class="em-bridge-word" x="508" y="255">care</text></g></g><g class="em-fig em-fig-builder"><circle class="em-head" cx="160" cy="185" r="21"/><path class="em-person" d="M160 206v55m-30 42 30-42 30 42M160 225l36 20"/></g><g class="em-fig em-fig-crosser"><circle class="em-head em-helper" cx="605" cy="185" r="21"/><path class="em-person em-helper" d="M605 206v55m-30 42 30-42 30 42M605 225l-36 20"/></g><text x="375" y="345">What they built could carry someone else, too.</text>';
     svg.appendChild(build);
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: [hurt, shelter, name, build], nodes: [], edges: [] };
@@ -234,7 +234,7 @@
       agency: {
         label: 'A woman stops waiting to feel ready, sends her work, learns from the reply, and tries again',
         frames: [
-          '<rect class="em-screen" x="145" y="58" width="460" height="238" rx="12"/><text class="em-screen-label" x="190" y="96">APPLICATION · DRAFT 11</text><path class="em-message-line" d="M190 128h330M190 158h280M190 188h350M190 218h245"/><rect class="em-result-mark" x="444" y="244" width="116" height="34" rx="17"/><text class="em-result-word" x="502" y="266">NOT SENT</text><circle class="em-head" cx="92" cy="228" r="21"/><path class="em-person" d="M92 249v55m-30 36 30-36 30 36M92 269l38 14"/><text x="375" y="345">Eleven nights. Eleven versions. Nothing sent.</text>',
+          '<rect class="em-screen" x="145" y="58" width="460" height="238" rx="12"/><text class="em-screen-label" x="190" y="96">APPLICATION · DRAFT 11</text><path class="em-message-line" d="M190 128h330M190 158h280M190 188h350M190 218h245"/><rect class="em-result-mark" x="444" y="244" width="116" height="34" rx="17"/><text class="em-result-word" x="502" y="266">NOT SENT</text><g class="em-fig em-fig-hesitate"><circle class="em-head" cx="92" cy="228" r="21"/><path class="em-person" d="M92 249v55m-30 36 30-36 30 36"/><path class="em-person em-arm" d="M92 269l38 14"/></g><text x="375" y="345">Eleven nights. Eleven versions. Nothing sent.</text>',
           '<rect class="em-screen" x="155" y="62" width="440" height="230" rx="12"/><text class="em-screen-label" x="195" y="100">READY TO SEND</text><path class="em-message-line" d="M195 132h320M195 162h270M195 192h340"/><rect class="em-result-mark" x="425" y="226" width="130" height="42" rx="21"/><text class="em-result-word" x="490" y="252">SEND</text><path class="em-arrow" d="m356 260 42-22-11 18 18 8-7 13-18-9-6 20z"/><text x="375" y="345">Her hand shook. She sent it anyway.</text>',
           '<rect class="em-message" x="135" y="66" width="480" height="225" rx="12"/><text class="em-message-small" x="180" y="108">REPLY</text><path class="em-message-line" d="M180 138h355M180 170h310M180 202h350"/><rect class="em-result-mark" x="180" y="230" width="220" height="36" rx="18"/><text class="em-result-word" x="290" y="253">STRENGTHEN THE SAMPLE</text><text x="375" y="345">The no came with one useful sentence.</text>',
           '<path class="em-road" d="M80 270C210 270 255 110 375 110s165 160 295 160"/><circle class="em-attempt-old" cx="112" cy="270" r="24"/><circle class="em-attempt-next" cx="640" cy="270" r="30"/><path class="em-arrow" d="m624 270 13 12 22-28"/><g class="em-carry"><rect x="304" y="82" width="142" height="58" rx="8"/><text x="375" y="108">SAMPLE</text><text class="em-carry-word" x="375" y="131">rebuilt</text></g><text x="375" y="345">Six weeks later, the second application went through.</text>'
@@ -243,7 +243,7 @@
       decision: {
         label: 'An urgent call interrupts dinner; a man protects the essentials, checks an assumption, and answers the next day',
         frames: [
-          '<path class="em-message-line" d="M100 270h550M185 270v-98h380v98"/><circle class="em-head" cx="300" cy="202" r="21"/><path class="em-person" d="M300 223v47m-30 47 30-47 30 47M300 244l45 15"/><path class="em-clock" d="M500 118a42 42 0 1 1-.1 0M500 130v27l20 12"/><rect class="em-result-mark" x="365" y="184" width="126" height="42" rx="21"/><text class="em-result-word" x="428" y="210">ANSWER TONIGHT</text><text x="375" y="345">Dinner went cold while the room waited.</text>',
+          '<path class="em-message-line" d="M100 270h550M185 270v-98h380v98"/><g class="em-fig em-fig-held"><circle class="em-head" cx="300" cy="202" r="21"/><path class="em-person" d="M300 223v47m-30 47 30-47 30 47"/><path class="em-person em-arm" d="M300 244l45 15"/></g><path class="em-clock" d="M500 118a42 42 0 1 1-.1 0M500 130v27l20 12"/><rect class="em-result-mark" x="365" y="184" width="126" height="42" rx="21"/><text class="em-result-word" x="428" y="210">ANSWER TONIGHT</text><text x="375" y="345">Dinner went cold while the room waited.</text>',
           '<rect class="em-note" x="155" y="48" width="440" height="262" rx="9"/><text class="em-note-title" x="195" y="88">WHAT MUST SURVIVE</text><path class="em-note-rule" d="M195 112h355M195 170h355M195 228h355M195 286h355"/><text class="em-note-key" x="210" y="148">payroll</text><text class="em-note-value" x="535" y="148">protect</text><text class="em-note-key" x="210" y="206">trust</text><text class="em-note-value" x="535" y="206">protect</text><text class="em-note-key" x="210" y="264">another attempt</text><text class="em-note-value" x="535" y="264">protect</text><text x="375" y="345">He read the three lines aloud before answering.</text>',
           '<rect class="em-message" x="108" y="85" width="210" height="150" rx="10"/><rect class="em-message" x="432" y="85" width="210" height="150" rx="10"/><text class="em-message-small" x="148" y="122">THE FORECAST</text><text class="em-screen-value" x="213" y="183">82%</text><text class="em-message-small" x="472" y="122">CUSTOMER SAID</text><text class="em-screen-value" x="537" y="183">31%</text><path class="em-arrow" d="M335 159h78m-17-15 17 15-17 15"/><text x="375" y="345">One call changed the number everyone had trusted.</text>',
           '<rect class="em-page" x="170" y="58" width="410" height="248" rx="9"/><text class="em-page-label" x="215" y="114">DECISION</text><path class="em-note-rule" d="M215 140h320M215 184h320M215 228h240"/><path class="em-arrow" d="m474 252 15 14 26-34"/><text x="375" y="345">He answered the next evening and named the risk aloud.</text>'
@@ -252,18 +252,18 @@
       control: {
         label: 'A man waits in a hospital hallway, separates what he controls, and stays beside his father',
         frames: [
-          '<path class="em-office" d="M70 296h610M110 296V70h530v226M110 150h530"/><rect class="em-message" x="265" y="92" width="220" height="58" rx="8"/><text class="em-result-word" x="375" y="127">PLEASE WAIT HERE</text><circle class="em-head" cx="220" cy="230" r="22"/><path class="em-person" d="M220 252l35 44m-35-44-20 44"/><path class="em-clock" d="M558 190a34 34 0 1 1-.1 0M558 201v21l14 9"/><text x="375" y="345">He walked the same twelve steps again and again.</text>',
+          '<path class="em-office" d="M70 296h610M110 296V70h530v226M110 150h530"/><rect class="em-message" x="265" y="92" width="220" height="58" rx="8"/><text class="em-result-word" x="375" y="127">PLEASE WAIT HERE</text><g class="em-fig em-fig-pace"><circle class="em-head" cx="220" cy="230" r="22"/><path class="em-person" d="M220 252l35 44m-35-44-20 44"/></g><path class="em-clock" d="M558 190a34 34 0 1 1-.1 0M558 201v21l14 9"/><text x="375" y="345">He walked the same twelve steps again and again.</text>',
           '<rect class="em-note" x="120" y="55" width="510" height="245" rx="8"/><path class="em-note-rule" d="M375 55v245M155 108h185M410 108h185"/><text class="em-note-title" x="170" y="89">NOT MINE</text><text class="em-note-title" x="425" y="89">MINE</text><text class="em-note-key" x="170" y="145">the diagnosis</text><text class="em-note-key" x="425" y="145">call my sister</text><text class="em-note-key" x="170" y="190">the wait</text><text class="em-note-key" x="425" y="190">bring coffee</text><text class="em-note-key" x="170" y="235">the doctor’s choice</text><text class="em-note-key" x="425" y="235">stay nearby</text><text x="375" y="345">The right column was short enough to do.</text>',
-          '<path class="em-office" d="M115 295h520M165 295v-70h140v70M445 295v-70h140v70"/><path class="em-cup" d="M336 208h38v33c0 13-38 13-38 0zM374 216h13v16h-13"/><path class="em-cup" d="M392 208h38v33c0 13-38 13-38 0zM430 216h13v16h-13"/><circle class="em-head" cx="275" cy="166" r="22"/><path class="em-person" d="M275 188v60m-35 47 35-47 35 47M275 210l48 20"/><text x="375" y="345">He made the call and came back with two coffees.</text>',
-          '<circle class="em-head" cx="300" cy="160" r="23"/><path class="em-person" d="M300 183v78m-42 58 42-58 42 58M300 210l62 35"/><circle class="em-head em-helper" cx="450" cy="175" r="23"/><path class="em-person em-helper" d="M450 198v63m-42 58 42-58 42 58M450 220l-88 25"/><path class="em-open-gate" d="M570 75v225h82"/><text x="375" y="345">He pulled the chair closer and took his father’s hand.</text>'
+          '<path class="em-office" d="M115 295h520M165 295v-70h140v70M445 295v-70h140v70"/><path class="em-cup" d="M336 208h38v33c0 13-38 13-38 0zM374 216h13v16h-13"/><path class="em-cup" d="M392 208h38v33c0 13-38 13-38 0zM430 216h13v16h-13"/><g class="em-fig em-fig-stand"><circle class="em-head" cx="275" cy="166" r="22"/><path class="em-person" d="M275 188v60m-35 47 35-47 35 47"/><path class="em-person em-arm" d="M275 210l48 20"/></g><text x="375" y="345">He made the call and came back with two coffees.</text>',
+          '<g class="em-fig em-fig-son"><circle class="em-head" cx="300" cy="160" r="23"/><path class="em-person" d="M300 183v78m-42 58 42-58 42 58"/><path class="em-person em-arm" d="M300 210l62 35"/></g><g class="em-fig em-fig-father"><circle class="em-head em-helper" cx="450" cy="175" r="23"/><path class="em-person em-helper" d="M450 198v63m-42 58 42-58 42 58"/><path class="em-person em-helper em-arm" d="M450 220l-88 25"/></g><path class="em-open-gate" d="M570 75v225h82"/><text x="375" y="345">He pulled the chair closer and took his father’s hand.</text>'
         ]
       },
       uncertainty: {
         label: 'A woman checks the same message through the night, puts down her phone, and asks one useful question in the morning',
         frames: [
-          '<rect class="em-screen" x="260" y="48" width="230" height="270" rx="24"/><text class="em-screen-label" x="375" y="84">2:13 AM</text><rect class="em-message" x="285" y="112" width="180" height="82" rx="10"/><path class="em-message-line" d="M307 137h136M307 162h102"/><circle class="em-head" cx="152" cy="226" r="22"/><path class="em-person" d="M152 248v53m-32 39 32-39 32 39M152 266l73 4"/><text x="375" y="345">She opened the same message again.</text>',
-          '<g class="em-requests"><rect x="82" y="62" width="180" height="42" rx="7"/><rect x="486" y="65" width="180" height="42" rx="7"/><rect x="62" y="145" width="180" height="42" rx="7"/><rect x="508" y="150" width="180" height="42" rx="7"/><rect x="96" y="235" width="180" height="42" rx="7"/><rect x="474" y="238" width="180" height="42" rx="7"/></g><circle class="em-head" cx="375" cy="170" r="25"/><path class="em-person" d="M375 195v72m-40 58 40-58 40 58M375 220l-50 30m50-30 50 30"/><text class="em-screen-value" x="375" y="115">14</text><text x="375" y="345">Fourteen tabs gave her fourteen ways to worry.</text>',
-          '<rect class="em-screen" x="90" y="90" width="116" height="160" rx="18"/><text class="em-screen-label" x="148" y="128">KITCHEN</text><path class="em-message-line" d="M112 160h72M112 188h72"/><path class="em-room" d="M320 285V105h330v180M320 214h330"/><circle class="em-head" cx="468" cy="220" r="21"/><path class="em-person" d="M468 242l35 43m-35-43-20 43"/><path class="em-thought-line" d="M206 171C285 171 310 212 430 220"/><text x="375" y="345">The doubt followed her. The phone stayed in the kitchen.</text>',
+          '<rect class="em-screen" x="260" y="48" width="230" height="270" rx="24"/><text class="em-screen-label" x="375" y="84">2:13 AM</text><rect class="em-message" x="285" y="112" width="180" height="82" rx="10"/><path class="em-message-line" d="M307 137h136M307 162h102"/><g class="em-fig em-fig-check"><circle class="em-head" cx="152" cy="226" r="22"/><path class="em-person" d="M152 248v53m-32 39 32-39 32 39"/><path class="em-person em-arm" d="M152 266l73 4"/></g><text x="375" y="345">She opened the same message again.</text>',
+          '<g class="em-requests"><rect x="82" y="62" width="180" height="42" rx="7"/><rect x="486" y="65" width="180" height="42" rx="7"/><rect x="62" y="145" width="180" height="42" rx="7"/><rect x="508" y="150" width="180" height="42" rx="7"/><rect x="96" y="235" width="180" height="42" rx="7"/><rect x="474" y="238" width="180" height="42" rx="7"/></g><g class="em-fig em-fig-swamped"><circle class="em-head" cx="375" cy="170" r="25"/><path class="em-person" d="M375 195v72m-40 58 40-58 40 58"/><path class="em-person em-arm em-arm-l" d="M375 220l-50 30"/><path class="em-person em-arm em-arm-r" d="M375 220l50 30"/></g><text class="em-screen-value" x="375" y="115">14</text><text x="375" y="345">Fourteen tabs gave her fourteen ways to worry.</text>',
+          '<rect class="em-screen" x="90" y="90" width="116" height="160" rx="18"/><text class="em-screen-label" x="148" y="128">KITCHEN</text><path class="em-message-line" d="M112 160h72M112 188h72"/><path class="em-room" d="M320 285V105h330v180M320 214h330"/><g class="em-fig em-fig-restless"><circle class="em-head" cx="468" cy="220" r="21"/><path class="em-person" d="M468 242l35 43m-35-43-20 43"/></g><path class="em-thought-line" d="M206 171C285 171 310 212 430 220"/><text x="375" y="345">The doubt followed her. The phone stayed in the kitchen.</text>',
           '<rect class="em-message" x="145" y="74" width="460" height="205" rx="12"/><text class="em-message-small" x="190" y="116">9:00 AM · CALL</text><path class="em-message-line" d="M190 146h330M190 178h280"/><rect class="em-result-mark" x="190" y="212" width="320" height="42" rx="21"/><text class="em-result-word" x="350" y="238">ONE QUESTION THAT CHANGES THE DECISION</text><text x="375" y="345">She asked it once, wrote down the answer, and went to work.</text>'
         ]
       }
@@ -287,8 +287,13 @@
   copy.appendChild(el('span', 'em-kicker', scene.kicker));
   copy.appendChild(el('h2', '', scene.title));
   copy.appendChild(el('p', '', scene.copy));
+  // Position only. The beat labels used to be printed here and again in a four-up
+  // rail below the canvas, which named every turn of the story before the reader
+  // reached it. scene.steps still sets how many beats there are; nothing prints it.
+  var count = scene.steps.length;
   var read = el('div', 'em-stage-read');
-  read.appendChild(el('b', '', '01')); read.appendChild(el('i')); read.appendChild(el('span', '', scene.steps[0])); copy.appendChild(read);
+  read.appendChild(el('b', '', '01')); read.appendChild(el('i')); read.appendChild(el('span', '', '0' + count));
+  copy.appendChild(read);
   pin.appendChild(copy);
 
   var narrative = scene.narrative ? buildNarrativeCanvas() : null;
@@ -314,9 +319,9 @@
   });
   if (!narrative) canvas.appendChild(svg); pin.appendChild(canvas);
 
-  var steps = el('ol', 'em-steps');
-  scene.steps.forEach(function (label, index) { var item = el('li'); item.appendChild(el('b', '', '0' + (index + 1))); item.appendChild(el('span', '', label)); steps.appendChild(item); });
-  pin.appendChild(steps);
+  // An unlabelled scrubber replaces that rail. The reader still needs to know how
+  // much of a four-screen pinned section is left; they do not need it spoiled.
+  var track = el('div', 'em-track'); track.appendChild(el('i')); pin.appendChild(track);
   var skip = el('button', 'em-skip', 'Skip scene ↓'); skip.type = 'button'; pin.appendChild(skip);
   host.appendChild(pin);
 
@@ -324,58 +329,110 @@
   if (anchor && anchor.nextSibling) root.insertBefore(host, anchor.nextSibling); else root.appendChild(host);
 
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ticking = false;
 
   // Scroll spent settling into the pin before the first beat, and holding the last
   // beat before the scene releases. Without these the sequence opened already in
   // motion and cut away mid-beat, which is most of why it read as hurried.
   var LEAD = 0.09, TAIL = 0.09;
-  var lastStage = -1;
+
+  /*
+    Two numbers, both in beats rather than seconds, because everything here is a
+    position on the scroll rather than a moment in time.
+
+    XFADE is how long a pair of frames overlaps. Each frame's opacity is a ramp
+    centred on its own beat and half a beat wider on each side, so on a boundary
+    both land on exactly 0.5 and the canvas never blinks empty between beats. The
+    old code toggled a class and let a CSS transition run, which meant the dissolve
+    played at its own speed regardless of how fast you were scrolling, and reversed
+    into itself if you scrubbed back.
+
+    WORDS is the same idea for the copy. It dips to nothing exactly on the boundary,
+    which is the frame where the text is swapped, so the swap happens behind a fade
+    it is already committed to rather than as a visible jump.
+  */
+  var XFADE = 0.34, WORDS = 0.17;
+  var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
+
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function smooth(v) { return v * v * (3 - 2 * v); }
 
   function alignToViewport() {
     host.style.setProperty('--em-gutter', root.getBoundingClientRect().left.toFixed(2) + 'px');
   }
-  function paint() {
+  function measure() {
     var rect = host.getBoundingClientRect();
     var span = Math.max(1, host.offsetHeight - innerHeight);
-    var raw = reduced ? 1 : Math.max(0, Math.min(1, -rect.top / span));
-    var progress = Math.max(0, Math.min(1, (raw - LEAD) / (1 - LEAD - TAIL)));
-    host.style.setProperty('--em-p', progress.toFixed(4));
-    host.style.setProperty('--em-x', (20 + progress * 55).toFixed(2) + '%');
+    var raw = reduced ? 1 : clamp01(-rect.top / span);
+    target = clamp01((raw - LEAD) / (1 - LEAD - TAIL));
+  }
+  function render(p) {
+    host.style.setProperty('--em-p', p.toFixed(4));
+    host.style.setProperty('--em-x', (20 + p * 55).toFixed(2) + '%');
 
-    var count = scene.steps.length;
-    var scaled = progress * count;
+    var scaled = p * count;
     var stage = Math.min(count - 1, Math.floor(scaled));
-    // How far through the current beat, so the step rail can show sub-beat progress.
-    host.style.setProperty('--em-t', Math.max(0, Math.min(1, scaled - stage)).toFixed(4));
 
-    // Only touch the DOM when the beat actually changes. Rewriting the copy on every
-    // scroll frame restarted the CSS animation each time, so it could never play.
+    if (narrative) {
+      var reach = 0.5 + XFADE / 2;
+      narrative.frames.forEach(function (frame, index) {
+        var centre = index + 0.5;
+        // The outer half of the first and last beats has nothing to dissolve with,
+        // so those two hold at full instead of opening and closing on a half fade.
+        var away = (index === 0 && scaled < centre) || (index === count - 1 && scaled > centre)
+          ? 0 : Math.abs(scaled - centre);
+        frame.style.opacity = smooth(clamp01((reach - away) / XFADE)).toFixed(4);
+      });
+    }
+
+    // Hold the opening beat's words in place instead of fading them up from nothing:
+    // the lead-in keeps p at 0 for most of a screen, and the column would sit empty.
+    var into = stage === 0 ? 1 : clamp01((scaled - stage) / WORDS);
+    var out = stage === count - 1 ? 1 : clamp01((stage + 1 - scaled) / WORDS);
+    var k = smooth(Math.min(into, out));
+    copy.style.opacity = k.toFixed(3);
+    copy.style.transform = 'translateY(' + ((1 - k) * 0.8).toFixed(3) + 'rem)';
+
     if (stage !== lastStage) {
       lastStage = stage;
       if (scene.frames) {
         copy.querySelector('.em-kicker').textContent = scene.frames[stage][0];
         copy.querySelector('h2').textContent = scene.frames[stage][1];
         copy.querySelector('p').textContent = scene.frames[stage][2];
-        narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
       }
-      read.querySelector('b').textContent = '0' + (stage + 1); read.querySelector('span').textContent = scene.steps[stage];
-      Array.prototype.forEach.call(steps.children, function (item, index) {
-        item.classList.toggle('is-active', index <= stage);
-        item.classList.toggle('is-current', index === stage);
-      });
-      if (!reduced) {
-        copy.classList.remove('is-turning');
-        void copy.offsetWidth;  // restart the animation rather than let it no-op
-        copy.classList.add('is-turning');
-      }
+      // The class no longer carries the fade, only which figure animations run.
+      if (narrative) narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
+      read.querySelector('b').textContent = '0' + (stage + 1);
     }
-    nodes.forEach(function (node, index) { var local = Math.max(0, Math.min(1, (progress - index * .22) * 4)); node.style.opacity = (.12 + local * .88).toFixed(3); node.style.transform = 'scale(' + (.72 + local * .28).toFixed(3) + ')'; });
-    edges.forEach(function (edge, index) { var local = Math.max(0, Math.min(1, (progress - index * .24) * 3.2)); edge.style.strokeDashoffset = (1 - local).toFixed(3); });
-    ticking = false;
+    nodes.forEach(function (node, index) { var local = smooth(clamp01((p - index * .22) * 4)); node.style.opacity = (.12 + local * .88).toFixed(3); node.style.transform = 'scale(' + (.72 + local * .28).toFixed(3) + ')'; });
+    edges.forEach(function (edge, index) { var local = smooth(clamp01((p - index * .24) * 3.2)); edge.style.strokeDashoffset = (1 - local).toFixed(3); });
   }
-  function requestPaint() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+
+  /*
+    The scene follows the scroll rather than snapping to it. A wheel notch moves the
+    target instantly; the value actually drawn chases it down, so a flick reads as
+    one continuous move and a scrub back reverses without a seam.
+
+    The follow is exponential and framed as "fraction of the gap still left after a
+    full second", so it settles in the same wall-clock time at 60Hz and at 120Hz
+    instead of running twice as fast on a ProMotion display. dt is capped so a
+    backgrounded tab does not resume with a single enormous jump.
+  */
+  function tick(now) {
+    queued = false;
+    measure();
+    if (reduced) { eased = target; render(eased); return; }
+    var dt = last ? Math.min(0.064, (now - last) / 1000) : 0.016;
+    last = now;
+    eased += (target - eased) * (1 - Math.pow(0.0016, dt));
+    if (Math.abs(target - eased) < 0.00008) { eased = target; last = 0; render(eased); return; }
+    render(eased);
+    request();
+  }
+  function request() { if (!queued) { queued = true; requestAnimationFrame(tick); } }
+
   skip.addEventListener('click', function () { host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' }); });
-  function resize() { alignToViewport(); requestPaint(); }
-  addEventListener('scroll', requestPaint, { passive: true }); addEventListener('resize', resize); alignToViewport(); paint();
+  function resize() { alignToViewport(); measure(); eased = target; last = 0; render(eased); }
+  addEventListener('scroll', request, { passive: true });
+  addEventListener('resize', resize);
+  alignToViewport(); measure(); eased = target; render(eased);
 })();
