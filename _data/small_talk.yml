@@ -1,32 +1,77 @@
 # All /small-talk/ content. Prose is hand-written; nothing here is generated.
 # House style applies: British spelling, short sentences, no em dashes.
 
+# ── Visual story. One evening, six decisions. ───────────────────────────────
+story:
+  - beat: Before the first word
+    title: Three good conversations are enough.
+    body: "Arun enters a room full of people and feels the familiar pressure to perform. He changes the assignment: find one easy person, have two conversations worth continuing, take a break, then decide whether he wants one more."
+    notice: Who is standing alone, who has an open posture and where the room feels least intense.
+    do: Put his phone away, relax his face and warm up with someone easy.
+    avoid: Scanning for the most important person before acknowledging anyone nearby.
+    line: I only need to make the next interaction easy.
+  - beat: Shared context
+    title: The room supplies the opening.
+    body: At the drinks table, another guest looks at the unfamiliar coffee setup. Arun does not invent a dazzling opener. He uses the small thing already in front of both of them.
+    notice: They are sharing the same minor uncertainty and the other guest is not rushing away.
+    do: "Say, “Have you worked out which one is coffee?” Then let the answer set the pace."
+    avoid: Leading with a job title or asking for personal information before any warmth exists.
+    line: Ordinary is easy to answer.
+  - beat: Curiosity with edges
+    title: One noun keeps the thread alive.
+    body: The guest mentions that she has just returned from Seoul for a project. Arun can follow Seoul, the project or the travel. He chooses the detail that carried the most energy and stays with it.
+    notice: Her voice lifts when she mentions the work, and she gives more than a one-word answer.
+    do: "Ask, “What kind of project?” After two questions, share a related detail of his own."
+    avoid: Cycling through unrelated questions until the exchange feels like a survey.
+    line: Her answer already contains the next question.
+  - beat: From facts to meaning
+    title: Depth arrives through pacing.
+    body: The conversation moves from the event, to her work, to what she enjoys about it. Arun offers a small opinion and she asks him something back. Mutual curiosity is the signal that they can move beyond the room.
+    notice: Longer answers, reciprocal questions, relaxed posture and a subject neither person wants to drop.
+    do: "Move one rung deeper: “What part of the work do you actually enjoy?”"
+    avoid: Asking a level-seven question while the other person is still giving level-two answers.
+    line: Go deeper only when both people are already leaning that way.
+  - beat: A quiet two seconds
+    title: A pause is allowed to be a pause.
+    body: Both people stop speaking. Arun feels the urge to diagnose the silence and rescue the conversation. He waits. She takes a breath and continues her story. Nothing was broken.
+    notice: She has not turned away, reached for her phone or closed her posture.
+    do: Wait for two seconds. If the pause continues, return to the setting or the last useful thread.
+    avoid: Treating missing words as evidence that the interaction has failed.
+    line: Silence carries information too.
+  - beat: Before the energy turns
+    title: Leave while the conversation still feels good.
+    body: Arun has enjoyed the exchange, but his attention is starting to thin. He appreciates the conversation, gives a simple reason to go and leaves a door open because he genuinely wants to continue it.
+    notice: His own energy, the natural end of the topic and whether another meeting would be welcome.
+    do: "Say, “I enjoyed that. I’m going to find my colleague, but I’d like to continue this sometime.”"
+    avoid: Inventing a long excuse or staying until interest turns into resentment.
+    line: A clean exit protects the connection.
+
 # ── The loop. Seven moves that work almost anywhere. ────────────────────────
 loop:
   - key: notice
     icon: sm-eye
     verb: Notice
     claim: Find something you already share.
-    body: Shared context is the safest opening because it asks for no vulnerability. The room supplies the subject, so neither of you has to invent one.
+    body: Shared context asks for little vulnerability. The room supplies the subject, so neither of you has to invent one.
     lines:
       - The room, the venue, the queue
       - The event and whoever is hosting it
       - The food, the coffee, the weather
       - The talk that just finished
       - The journey in
-    watch: Anything you can both see is fair game.
+    watch: Start with something you can both see.
   - key: open
     icon: sm-door
     verb: Open
     claim: Say something easy to answer.
-    body: An ordinary opening works. A remarkable one raises the cost of replying, because now they have to match it.
+    body: An ordinary opening is easy to answer. A clever one can make the other person feel they have to match it.
     lines:
       - How are you finding it so far?
       - Have you been here before?
       - How do you know the host?
       - What brought you here?
       - How is your week going?
-    watch: Ordinary is the point. Give them a low bar to clear.
+    watch: Keep the opening easy to answer.
   - key: ask
     icon: sm-ask
     verb: Ask
@@ -37,18 +82,18 @@ loop:
       - What keeps you busy these days?
       - What are you working on at the moment?
       - How did you end up here?
-    watch: Bounded beats broad. They pick the door they walk through.
+    watch: Give them a clear subject and let them choose how much to share.
   - key: follow
     icon: sm-thread
     verb: Follow
     claim: Take one word from their answer.
-    body: Following their last sentence keeps the thread alive. Starting a fresh topic every fifteen seconds reads as a survey.
+    body: Following their last sentence keeps the thread alive. A fresh topic every fifteen seconds feels like a survey.
     lines:
       - Pick the most interesting noun they said
       - Ask about that one thing
       - Let them hand you the next noun
       - Follow the energy, not your agenda
-    watch: Their answer already contains your next question.
+    watch: Look for the next question inside their answer.
   - key: share
     icon: sm-swap
     verb: Share
@@ -59,7 +104,7 @@ loop:
       - A related experience
       - Something you got wrong
       - What you are looking forward to
-    watch: Curiosity plus reciprocity. Questions alone are not conversation.
+    watch: Questions need some reciprocity to feel like conversation.
   - key: bridge
     icon: sm-bridge
     verb: Bridge
@@ -69,17 +114,17 @@ loop:
       - What part of it do you actually enjoy?
       - How did you end up doing that?
       - What changed your mind about it?
-    watch: Depth is a destination, not an opening move.
+    watch: Wait for some mutual interest before going deeper.
   - key: exit
     icon: sm-exit
     verb: Exit
     claim: Leave cleanly and early enough.
-    body: Appreciate, give a reason, optionally leave a door open. No elaborate excuse is required and a long one sounds invented.
+    body: Show appreciation, give a reason and leave the door open if you want to continue. A long excuse sounds invented.
     lines:
       - Good talking with you. I am going to find my colleague.
       - Really enjoyed that. I am going to grab some food.
       - I should circulate, but I would like to continue this sometime.
-    watch: Knowing how to leave is part of knowing how to start.
+    watch: A clean exit keeps a good conversation from dragging.
 
 # ── The ladder. Depth is earned by pacing, not by ambition. ─────────────────
 ladder:
@@ -94,7 +139,7 @@ ladder:
   - level: 3
     kind: Experience
     ask: Have you worked in this field long?
-    note: First step towards the person rather than the room.
+    note: This is the first question about the person rather than the room.
   - level: 4
     kind: Preference
     ask: What part of it do you actually enjoy?
@@ -102,7 +147,7 @@ ladder:
   - level: 5
     kind: Story
     ask: How did you end up doing that?
-    note: Invites a narrative. This is where conversations become memorable.
+    note: Invites a story and gives you something specific to remember.
   - level: 6
     kind: Perspective
     ask: What changed your view on it?
@@ -110,7 +155,7 @@ ladder:
   - level: 7
     kind: Meaning
     ask: What makes the work worthwhile for you?
-    note: Only lands once the earlier rungs have been climbed.
+    note: Ask this only after the earlier questions have built some trust.
 
 # ── Safe topic families. The mnemonic is PEWFIC. ────────────────────────────
 topics:
@@ -171,7 +216,7 @@ variables:
     low: First names, easy greetings, quick informality
     high: Titles, surnames, careful greetings
     read: Are people using titles and surnames?
-    move: Start one notch more formal than you think is needed, then relax to match. Becoming informal is easy. Repairing premature familiarity is not.
+    move: Start one notch more formal than you think is needed, then relax to match. It is easier to loosen up than recover from premature familiarity.
   - key: hierarchy
     n: 2
     name: Hierarchy
@@ -195,7 +240,7 @@ variables:
     low: Restraint, calm, measured reactions, comfortable silence
     high: Animated voices, expressive faces, laughter, enthusiasm
     read: How much reaction does a good story get here?
-    move: Warmth is encoded differently in different places. Restrained is not cold and animated is not insincere. Where more warmth is expected, add reaction rather than personality.
+    move: Different places show warmth differently. Restraint can still be warm, and animation can be sincere. Where people expect more warmth, make your reactions easier to read.
   - key: space
     n: 5
     name: Space and touch
@@ -219,7 +264,7 @@ variables:
     low: Agenda first, then business, then decision
     high: Person first, then relationship, then trust, then business
     read: Does business start immediately or after tea?
-    move: In relationship-first settings the small talk is the work. Going straight to the agenda reads as a lack of interest and lowers trust.
+    move: In relationship-first settings, small talk builds the trust needed for the work. Going straight to the agenda can read as disinterest.
 
 # ── Broad tendencies. Not rules about individuals. ──────────────────────────
 atlas:
@@ -238,7 +283,7 @@ atlas:
   - place: Australia and New Zealand
     region: apac
     style: Informal and quick to first names. Light humour is the currency.
-    note: Status-consciousness reads badly. Keep credentials out of the opening.
+    note: Keep credentials out of the opening. Status-consciousness tends to land badly.
   - place: Germany, Austria, Switzerland
     region: europe
     style: A little more formal at first. Substantive questions are welcome early.
@@ -258,7 +303,7 @@ atlas:
   - place: Latin America
     region: americas
     style: Relational warmth matters. Family and social connection may arrive early.
-    note: Do not rush to the task. The relationship is the route to it.
+    note: Spend time on the relationship before moving to the task.
   - place: Indonesia and Malaysia
     region: apac
     style: Politeness, harmony and context awareness matter. Food, place, family and shared context all open well.
@@ -317,7 +362,7 @@ settings:
     open: What brought you here?
     then: What are you working on? Then, what is interesting about that problem?
     exit: I would enjoy continuing this. Are you easiest to reach on email?
-    watch: The target is two to four conversations worth continuing, not a pocket of cards.
+    watch: Aim for two to four conversations worth continuing.
   - key: senior
     group: Professional
     name: A very senior person
@@ -325,7 +370,7 @@ settings:
     open: Ask about something specific they said or did.
     then: You mentioned the team decentralised last year. What was hardest about making that work?
     exit: Thank you, that was genuinely useful. I will let you get on.
-    watch: They receive endless attempts to impress. Specific curiosity is rarer and lands better.
+    watch: Senior people hear plenty of attempts to impress them. A specific question is more useful.
   - key: junior
     group: Professional
     name: Someone more junior
@@ -341,7 +386,7 @@ settings:
     open: How has your week been?
     then: Did you come in from out of town? Have you worked with this team before?
     exit: Let the host or the senior person make the transition to business.
-    watch: Ninety seconds of ordinary contact is not wasted time. It sets the temperature.
+    watch: Ninety seconds of ordinary contact helps everyone settle before the meeting.
   - key: dinner
     group: Professional
     name: Client dinner
@@ -349,7 +394,7 @@ settings:
     open: Travel, food, the city, how they got into the work.
     then: Aim for roughly two thirds human and one third professional.
     exit: Let the meal end before the agenda reappears.
-    watch: A dinner that becomes a second board meeting is a worse dinner and a worse meeting.
+    watch: Do not turn dinner into a second board meeting.
   - key: interview
     group: Professional
     name: Interview, before the questions
@@ -365,7 +410,7 @@ settings:
     open: How is your day going?
     then: What are you working on today? Any plans for the weekend?
     exit: Right, back to it. Enjoy the rest of your day.
-    watch: Three minutes of ordinary contact has value. It does not need an agenda.
+    watch: Three minutes of ordinary contact can be worthwhile without an agenda.
   - key: elite
     group: Professional
     name: Stranger at a high-status event
@@ -389,7 +434,7 @@ settings:
     open: This moves faster than it looks.
     then: If they answer warmly, continue. If not, let it go.
     exit: Turn back to your phone. No awkwardness owed.
-    watch: Recognising that someone does not want to talk is part of the skill.
+    watch: Notice when someone does not want to continue.
   - key: transit
     group: Passing
     name: Aeroplane or train
@@ -413,7 +458,7 @@ settings:
     open: How do you know the couple?
     then: How long have you known them? Did you come far? Been to this venue before?
     exit: Lovely to meet you. I am going to find my seat.
-    watch: The opening question is nearly perfect because every answer is a story.
+    watch: This opening works because almost every answer leads to a story.
   - key: birthday
     group: Social
     name: Birthday party
@@ -429,7 +474,7 @@ settings:
     open: I am very sorry.
     then: How are you holding up? Or a specific memory. I remember how kind he was when...
     exit: Stay nearby. Presence is the point, not conversation.
-    watch: Do not optimise this. Silence is welcome and forced positivity is not.
+    watch: Let silence stand. Forced positivity rarely helps.
   - key: religious
     group: Social
     name: Religious ceremony
@@ -486,7 +531,7 @@ scripts:
   - key: sixty
     name: The sixty-second professional
     formula: Open, narrow, offer the adjacent thing, hand it back
-    body: This is the transition from small talk into substance. Once you have named the overlap, the conversation stops being small talk.
+    body: This moves the conversation towards substance. Naming the overlap gives both of you something concrete to discuss.
     example: What brought you to the event? ... What part of that are you focused on? ... Interesting. I have been working on something adjacent. The overlap is probably how you decide what counts as a real failure. How are you approaching that?
     fail: Reaching substance before they have agreed to go there.
 
@@ -557,7 +602,7 @@ repair:
     icon: sm-tag2
     do: Rescue them before they have to ask.
     say: It is Vicky. We met at the conference last month.
-    note: Social elegance is mostly reducing the other person's embarrassment.
+    note: Make it easy for them to recover without embarrassment.
   - key: language
     name: English is not their first language
     icon: sm-globe
@@ -575,7 +620,7 @@ repair:
     icon: sm-mirror
     do: Mirror the variables, never the accent or the mannerisms.
     say: Match their formality, pace, disclosure, energy and distance.
-    note: That is calibration. Imitation is something else and everyone can tell.
+    note: Match the level of familiarity without imitating the person.
 
 # ── Manner. What the body and the listening do. ─────────────────────────────
 manner:

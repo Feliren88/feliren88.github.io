@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Small Talk
-subtitle: Reconnaissance with warmth.
-description: A field manual for people who prefer depth. What small talk is actually for, a seven-move loop, the ladder from weather to meaning, seven cultural variables to read instead of memorising countries, twenty settings, and the repair lines for when it goes wrong.
+subtitle: A practical way into better conversations.
+description: A field manual for people who prefer depth. What small talk does, a seven-move loop, a path from weather to meaning, seven cultural cues, twenty settings, and ways to recover when a conversation stalls.
 permalink: /small-talk/
 date: 2026-08-26
 last_modified_at: 2026-08-26
@@ -15,7 +15,7 @@ motion_scene: rapport
 <div class="sm-progress" aria-hidden="true"><span id="smw-progress-fill"></span></div>
 
 <nav class="sm-rail" aria-label="Manual sections">
-  <a href="#calibration"><b>01</b><span>Calibration</span></a><a href="#loop"><b>02</b><span>The loop</span></a><a href="#ladder"><b>03</b><span>The ladder</span></a><a href="#topics"><b>04</b><span>Topics</span></a><a href="#variables"><b>05</b><span>Variables</span></a><a href="#atlas"><b>06</b><span>Atlas</span></a><a href="#settings"><b>07</b><span>Settings</span></a><a href="#scripts"><b>08</b><span>Scripts</span></a><a href="#repair"><b>09</b><span>Repair</span></a><a href="#manner"><b>10</b><span>Manner</span></a>
+  <a href="#story"><b>00</b><span>Story</span></a><a href="#calibration"><b>01</b><span>Calibration</span></a><a href="#loop"><b>02</b><span>The loop</span></a><a href="#ladder"><b>03</b><span>The ladder</span></a><a href="#topics"><b>04</b><span>Topics</span></a><a href="#variables"><b>05</b><span>Variables</span></a><a href="#atlas"><b>06</b><span>Atlas</span></a><a href="#settings"><b>07</b><span>Settings</span></a><a href="#scripts"><b>08</b><span>Scripts</span></a><a href="#repair"><b>09</b><span>Repair</span></a><a href="#manner"><b>10</b><span>Manner</span></a>
 </nav>
 
 <script type="application/json" id="smw-data">{{ site.data.small_talk | jsonify }}</script>
@@ -24,18 +24,67 @@ motion_scene: rapport
 <header class="sm-hero" aria-labelledby="sm-hero-title">
   <div>
     <p class="sm-kicker">Interactive manual</p>
-    <h1 id="sm-hero-title">Small talk is not performance. It is calibration.</h1>
-    <p class="sm-lead">Long stretches of social performance drain me, and a few good relationships suit me better than a wide network. That is a constraint, not an excuse. This is the manual I wrote so that ordinary conversation stops costing more than it returns.</p>
-    <p class="sm-lead sm-lead-2">The aim is not to be fascinating. The aim is to make one other person feel seen, comfortable, respected and slightly known.</p>
+    <h1 id="sm-hero-title">Small talk helps two people find their footing.</h1>
+    <p class="sm-lead">Long stretches of socialising drain me. A few good relationships suit me better than a wide network. I wrote this manual to make ordinary conversation feel less costly and more worthwhile.</p>
+    <p class="sm-lead sm-lead-2">I want the other person to feel seen, comfortable, respected and slightly known.</p>
   </div>
   <div class="sm-hero-seq" role="img" aria-label="The sequence: seen, then comfortable, then respected, then slightly known">
     <span><b>01</b>Seen</span><i aria-hidden="true">→</i><span><b>02</b>Comfortable</span><i aria-hidden="true">→</i><span><b>03</b>Respected</span><i aria-hidden="true">→</i><span><b>04</b>Slightly known</span>
   </div>
 </header>
 
+<section class="sm-part sm-story" id="story" aria-labelledby="sm-story-title">
+  <div class="sm-story-head">
+    <div>
+      <p class="sm-kicker">One evening, six decisions</p>
+      <h2 id="sm-story-title">Watch the conversation change</h2>
+    </div>
+    <p>Arun does not become the loudest person in the room. He notices, responds and gives the conversation somewhere to go. Choose a scene to see what he is reading beneath the words.</p>
+  </div>
+
+  <div class="sm-story-stage" id="smw-story">
+    <div class="sm-story-scenes" role="tablist" aria-label="Six moments in a conversation">
+      <button type="button" class="sm-scene is-on" role="tab" aria-selected="true" data-story="0">
+        <span class="sm-scene-no">01</span><span class="sm-scene-art sm-art-arrive" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-crowd sm-crowd-a"></i><i class="sm-lamp"></i></span><b>Arrive</b><small>Lower the target</small>
+      </button>
+      <button type="button" class="sm-scene" role="tab" aria-selected="false" data-story="1">
+        <span class="sm-scene-no">02</span><span class="sm-scene-art sm-art-notice" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-person sm-other"></i><i class="sm-cup"></i></span><b>Notice</b><small>Use what is shared</small>
+      </button>
+      <button type="button" class="sm-scene" role="tab" aria-selected="false" data-story="2">
+        <span class="sm-scene-no">03</span><span class="sm-scene-art sm-art-follow" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-person sm-other"></i><i class="sm-thread-line"></i></span><b>Follow</b><small>Stay with one thread</small>
+      </button>
+      <button type="button" class="sm-scene" role="tab" aria-selected="false" data-story="3">
+        <span class="sm-scene-no">04</span><span class="sm-scene-art sm-art-bridge" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-person sm-other"></i><i class="sm-depth"></i></span><b>Bridge</b><small>Earn the depth</small>
+      </button>
+      <button type="button" class="sm-scene" role="tab" aria-selected="false" data-story="4">
+        <span class="sm-scene-no">05</span><span class="sm-scene-art sm-art-pause" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-person sm-other"></i><i class="sm-pause-dots"></i></span><b>Pause</b><small>Do not rescue it</small>
+      </button>
+      <button type="button" class="sm-scene" role="tab" aria-selected="false" data-story="5">
+        <span class="sm-scene-no">06</span><span class="sm-scene-art sm-art-exit" aria-hidden="true"><i class="sm-person sm-arun"></i><i class="sm-person sm-other"></i><i class="sm-door-line"></i></span><b>Leave</b><small>Close it cleanly</small>
+      </button>
+    </div>
+
+    <div class="sm-story-panel" id="smw-story-panel" role="tabpanel" aria-live="polite">
+      <div class="sm-story-copy">
+        <p class="sm-story-beat">Before the first word</p>
+        <h3>Three good conversations are enough.</h3>
+        <p>Arun enters a room full of people and feels the familiar pressure to perform. He changes the assignment: find one easy person, have two conversations worth continuing, take a break, then decide whether he wants one more.</p>
+      </div>
+      <dl class="sm-story-read">
+        <div><dt>He notices</dt><dd>Who is standing alone, who has an open posture and where the room feels least intense.</dd></div>
+        <div><dt>He does</dt><dd>Puts his phone away, relaxes his face and warms up with someone easy.</dd></div>
+        <div><dt>He avoids</dt><dd>Scanning for the most important person before acknowledging anyone nearby.</dd></div>
+      </dl>
+      <blockquote>“I only need to make the next interaction easy.”</blockquote>
+    </div>
+  </div>
+
+  <noscript><p class="sm-note">The six scenes show a simple progression: arrive with a small target, open from shared context, follow one detail, share enough to reach depth, let pauses breathe, and leave with appreciation.</p></noscript>
+</section>
+
 <section class="sm-part sm-prose" id="calibration">
   <h2><span>01</span><svg class="sm-i sm-h2-i"><use href="#sm-eye"/></svg> What it is actually for</h2>
-  <p class="sm-deck">An analytical mind can misread small talk because its information content is close to zero. That is the wrong measurement. The content is not the message.</p>
+  <p class="sm-deck">An analytical mind can dismiss small talk because it carries little information. But the exchange is doing social work.</p>
 
   <div class="sm-decode">
     <p class="sm-decode-said">Busy week?</p>
@@ -48,7 +97,7 @@ motion_scene: rapport
     </ul>
   </div>
 
-  <p>Several things happen at once, and none of them are about the week.</p>
+  <p>Several things happen at once. The week is only the opening.</p>
 
   <table class="sm-table">
     <thead><tr><th>Function</th><th>What is happening</th></tr></thead>
@@ -63,9 +112,9 @@ motion_scene: rapport
     </tbody>
   </table>
 
-  <p class="sm-rule">Small talk is reconnaissance with warmth.</p>
+  <p class="sm-rule">Small talk lets two people read each other without much risk.</p>
 
-  <p>My advantage here is observation. I notice what someone emphasises, whether they answer briefly or expansively, which topics produce energy and which make them withdraw. The failure mode is not blindness. It is overprocessing.</p>
+  <p>Observation helps me here. I notice what someone emphasises, whether they answer briefly or expansively, and which topics bring energy or make them withdraw. My problem is that I can overprocess all of it.</p>
 
   <div class="sm-two">
     <div class="sm-bad">
@@ -78,12 +127,12 @@ motion_scene: rapport
     </div>
   </div>
 
-  <p class="sm-note">The one thing never to signal is that the conversation is beneath me. Coffee is rarely about coffee. Traffic is rarely about traffic. Treat the surface topic as a handshake and answer the real question, which is whether I am someone worth talking to.</p>
+  <p class="sm-note">I never want to signal that the conversation is beneath me. Coffee and traffic are easy ways to ask whether I am open, friendly and worth talking to.</p>
 </section>
 
 <section class="sm-part sm-prose" id="loop">
   <h2><span>02</span><svg class="sm-i sm-h2-i"><use href="#sm-thread"/></svg> The loop</h2>
-  <p class="sm-deck">Seven moves that work in most rooms. Walk through them and each one shows what to actually say.</p>
+  <p class="sm-deck">Seven moves that work in most rooms, with examples of what to say.</p>
 
   <div class="sm-loop" id="smw-loop" role="group" aria-label="The seven-move small-talk loop">
     <div class="sm-loop-steps" role="tablist" aria-label="Moves">
@@ -93,7 +142,7 @@ motion_scene: rapport
   </div>
 
   <h3>Follow the noun</h3>
-  <p>This is the single most useful habit. When stuck, take the most interesting noun from their last sentence and ask about that. Their answer hands you the next noun, and the conversation sustains itself.</p>
+  <p>When I get stuck, I take the most interesting noun from their last sentence and ask about it. Their answer usually supplies the next thread.</p>
 
   <div class="sm-noun" id="smw-noun" role="group" aria-label="Follow the noun practice">
     <p class="sm-noun-said" id="smw-noun-said"></p>
@@ -104,7 +153,7 @@ motion_scene: rapport
   </div>
 
   <h3>The three-question limit</h3>
-  <p>After two or three questions in a row, say something myself. Otherwise it stops being a conversation and becomes an interview, and people can feel the difference immediately.</p>
+  <p>After two or three questions, I share something too. Questions without reciprocity start to feel like an interview.</p>
 
   <div class="sm-two">
     <div class="sm-bad">
@@ -117,12 +166,12 @@ motion_scene: rapport
     </div>
   </div>
 
-  <p class="sm-rule">Curiosity plus reciprocity. Roughly two thirds them, one third me, never counted at the time.</p>
+  <p class="sm-rule">Stay curious and reciprocate. Roughly two thirds them and one third me, though I never count in the moment.</p>
 </section>
 
 <section class="sm-part sm-prose" id="ladder">
   <h2><span>03</span><svg class="sm-i sm-h2-i"><use href="#sm-steps"/></svg> The ladder</h2>
-  <p class="sm-deck">Seven rungs from the room to what matters. I will always prefer the top three. That is exactly why the bottom four need respecting.</p>
+  <p class="sm-deck">Seven rungs lead from the room to what matters. I prefer the top three, so I have to give the first four enough time.</p>
 
   <div class="sm-ladder" id="smw-ladder" role="group" aria-label="The conversation ladder">
     {% for r in site.data.small_talk.ladder %}
@@ -131,7 +180,7 @@ motion_scene: rapport
     <p class="sm-rung-note" id="smw-ladder-note" role="status">Choose a rung.</p>
   </div>
 
-  <p class="sm-rule">Depth is earned through pacing. Small talk is the bridge to it.</p>
+  <p class="sm-rule">Pacing is what makes depth possible.</p>
 
   <h3>How long any of this should last</h3>
   <table class="sm-table">
@@ -141,7 +190,7 @@ motion_scene: rapport
     </tbody>
   </table>
 
-  <p class="sm-note">The question is never how to make small talk last longer. It is how quickly we can find out whether there is a deeper conversation worth having.</p>
+  <p class="sm-note">I use small talk to find out whether there is a deeper conversation worth having.</p>
 </section>
 
 <section class="sm-part sm-prose" id="topics">
@@ -156,7 +205,7 @@ motion_scene: rapport
   <p class="sm-pewfic-out" id="smw-pewfic-out" role="status">Pick a letter for openings.</p>
 
   <h3>Topics that need calibration</h3>
-  <p>None of these are forbidden. Their meaning simply changes enormously with culture, setting and relationship, so I let the other person set the depth first.</p>
+  <p>None of these are forbidden. Their meaning changes enormously with culture, setting and relationship, so I let the other person set the depth first.</p>
 
   <div class="sm-calibrate">
     {% for c in site.data.small_talk.calibrate %}
@@ -173,7 +222,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="variables">
   <h2><span>05</span><svg class="sm-i sm-h2-i"><use href="#sm-globe"/></svg> Seven variables</h2>
-  <p class="sm-deck">Memorising two hundred countries does not work and produces stereotypes anyway. Reading seven variables in the room does work. Set them and the manual tells you the posture.</p>
+  <p class="sm-deck">Country-by-country rules are impossible to memorise and invite stereotypes. These seven cues offer a better way to read the room.</p>
 
   <div class="sm-vars" id="smw-vars" role="group" aria-label="Cultural variable calibration">
     {% for v in site.data.small_talk.variables %}
@@ -194,7 +243,7 @@ motion_scene: rapport
 
   <p class="sm-rule">Mirror formality, pace, disclosure, energy and distance. Never mirror an accent.</p>
 
-  <p class="sm-note">When the rule is genuinely unknown, observe first, then move one step more conservative than the local maximum. That single habit prevents most serious mistakes.</p>
+  <p class="sm-note">When I do not know the rule, I observe first and start slightly more conservatively than the people around me.</p>
 </section>
 
 <section class="sm-part sm-prose" id="atlas">
@@ -229,7 +278,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="settings">
   <h2><span>07</span><svg class="sm-i sm-h2-i"><use href="#sm-event"/></svg> Twenty rooms</h2>
-  <p class="sm-deck">Pick the room. Each one gives an opening, where to take it, how to leave, and the mistake that room invites.</p>
+  <p class="sm-deck">Pick the room for an opening, a direction, an exit and a common mistake.</p>
 
   <div class="sm-filter" id="smw-set-filter" role="group" aria-label="Filter settings">
     <button type="button" class="sm-pill is-on" data-group="all">All</button>
@@ -246,7 +295,7 @@ motion_scene: rapport
   <div class="sm-setting-out" id="smw-setting-out" role="status" aria-live="polite"></div>
 
   <h3>The energy budget</h3>
-  <p>Continuous social performance depletes me, so treating competence as endless networking would be a category error. At an event, three good conversations beat thirty introductions.</p>
+  <p>Continuous socialising depletes me. At an event, I would rather have three good conversations than make thirty introductions.</p>
 
   <ol class="sm-budget">
     <li><b>Arrive</b><span>Warm up on someone easy. The first conversation is a rehearsal.</span></li>
@@ -259,7 +308,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="scripts">
   <h2><span>08</span><svg class="sm-i sm-h2-i"><use href="#sm-clipboard"/></svg> Scripts</h2>
-  <p class="sm-deck">Four things worth having ready, because these are the moments where hesitation costs the most.</p>
+  <p class="sm-deck">I keep four answers ready for moments when hesitation gets in the way.</p>
 
   <div class="sm-scripts" id="smw-scripts">
     {% for s in site.data.small_talk.scripts %}
@@ -278,7 +327,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="repair">
   <h2><span>09</span><svg class="sm-i sm-h2-i"><use href="#sm-wrench"/></svg> Repair</h2>
-  <p class="sm-deck">Conversation fails in a small number of predictable ways. Each has a line that works.</p>
+  <p class="sm-deck">Conversations tend to stall in familiar ways. A prepared line can help me recover.</p>
 
   <div class="sm-repair" id="smw-repair" role="group" aria-label="Repair situations">
     {% for r in site.data.small_talk.repair %}
@@ -288,7 +337,7 @@ motion_scene: rapport
   <div class="sm-repair-out" id="smw-repair-out" role="status" aria-live="polite"></div>
 
   <h3>Validation before analysis</h3>
-  <p>This is the one I get wrong most often. Someone describes a problem and I reach for the diagnosis, when what was on offer was a moment of sympathy.</p>
+  <p>I get this one wrong often. Someone describes a problem and I reach for a diagnosis when they wanted sympathy.</p>
   <p class="sm-chain"><span>Acknowledge</span><i aria-hidden="true">→</i><span>Clarify</span><i aria-hidden="true">→</i><span>Analyse only if invited</span></p>
 
   <div class="sm-two">
@@ -302,12 +351,12 @@ motion_scene: rapport
     </div>
   </div>
 
-  <p class="sm-note">The second answer may eventually be the first one. It is the sequencing that is wrong, not the content.</p>
+  <p class="sm-note">The advice may still be useful later. The mistake is giving it before I have listened.</p>
 </section>
 
 <section class="sm-part sm-prose" id="manner">
   <h2><span>10</span><svg class="sm-i sm-h2-i"><use href="#sm-hand"/></svg> Manner</h2>
-  <p class="sm-deck">The goal is not to look charismatic. The goal is to look available.</p>
+  <p class="sm-deck">I want to look available.</p>
 
   <table class="sm-table sm-body-table">
     <thead><tr><th>Signal</th><th>Target</th></tr></thead>
@@ -317,7 +366,7 @@ motion_scene: rapport
   </table>
 
   <h3>Make the listening legible</h3>
-  <p>I process intensely and show almost none of it. Internal attention is invisible, so it has to be said out loud even when I already understand.</p>
+  <p>I listen intensely but show little of it. Because attention is invisible, I need to make mine audible even when I already understand.</p>
   <p class="sm-chips">{% for l in site.data.small_talk.manner.listening %}<span>{{ l }}</span>{% endfor %}</p>
 
   <h3>Compliments and humour</h3>
@@ -339,13 +388,13 @@ motion_scene: rapport
   <p class="sm-rule">Underestimate your humour privileges with strangers.</p>
 
   <h3>The mode</h3>
-  <p>Not the charismatic networker, and not the silent genius either. The mode that actually fits is calm, observant, curious, lightly funny, specific, respectful and selectively open.</p>
+  <p>The mode that fits me is calm, observant, curious, lightly funny, specific, respectful and selectively open.</p>
   <p class="sm-chain sm-chain-lg"><span>Warmth</span><i aria-hidden="true">→</i><span>Curiosity</span><i aria-hidden="true">→</i><span>Specificity</span><i aria-hidden="true">→</i><span>Depth</span></p>
 </section>
 
 <footer class="sm-coda">
-  <p class="sm-coda-kicker">The whole manual, compressed</p>
+  <p class="sm-coda-kicker">Keep this in mind</p>
   <h2>Make the interaction easy for the other person.</h2>
   <p>Recognise them. Give them an easy opening. Listen. Follow something they care about. Reveal a little. Respect the boundary. Leave cleanly.</p>
-  <p class="sm-coda-last">The rule I actually need is the shortest one. Stop trying to be interesting during small talk and be interested instead. The depth can arrive later, and with the right people it will.</p>
+  <p class="sm-coda-last">During small talk, I try to be interested instead of interesting. If there is room for depth, it can come later.</p>
 </footer>

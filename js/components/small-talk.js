@@ -53,6 +53,40 @@
     links.forEach(function (a) { var s = one(a.hash); if (s) obs.observe(s); });
   }
 
+  /* Six linked scenes turn the reference material into one evening. Text stays
+     in the data file so the visual sequence and the detailed manual agree. */
+  function story() {
+    var wrap = one('#smw-story'), panel = one('#smw-story-panel');
+    if (!wrap || !panel || !D.story) return;
+    var tabs = all('.sm-scene', wrap);
+    function show(i) {
+      var s = D.story[i];
+      if (!s) return;
+      tabs.forEach(function (b, n) {
+        b.classList.toggle('is-on', n === i);
+        b.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      });
+      panel.innerHTML =
+        '<div class="sm-story-copy"><p class="sm-story-beat">' + esc(s.beat) + '</p>' +
+        '<h3>' + esc(s.title) + '</h3><p>' + esc(s.body) + '</p></div>' +
+        '<dl class="sm-story-read">' +
+        '<div><dt>He notices</dt><dd>' + esc(s.notice) + '</dd></div>' +
+        '<div><dt>He does</dt><dd>' + esc(s.do) + '</dd></div>' +
+        '<div><dt>He avoids</dt><dd>' + esc(s.avoid) + '</dd></div></dl>' +
+        '<blockquote>“' + esc(s.line) + '”</blockquote>';
+    }
+    tabs.forEach(function (b, i) {
+      b.addEventListener('click', function () { show(i); });
+      b.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        var next = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[next].focus(); show(next);
+      });
+    });
+    show(0);
+  }
+
   /* The seven moves. Each tab renders its own lines rather than hiding markup. */
   function loop() {
     var wrap = one('#smw-loop'), body = one('#smw-loop-body');
@@ -246,7 +280,7 @@
     });
   }
 
-  [progress, rail, loop, noun, ladder, pewfic, variables, settings, repair,
+  [progress, rail, story, loop, noun, ladder, pewfic, variables, settings, repair,
     function () { filterBar('#smw-atlas-filter', '.sm-place', 'region'); },
     function () { filterBar('#smw-set-filter', '.sm-setting', 'group'); }
   ].forEach(function (fn) {
