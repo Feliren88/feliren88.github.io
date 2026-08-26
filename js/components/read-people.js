@@ -2,9 +2,9 @@
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.from((r||document).querySelectorAll(s))};
   var evidence=[
     ['Level 1 · weakest','One gesture can mean many things. Record it without naming a cause.'],
-    ['Level 2 · tentative','Several changes pointing together justify a working hypothesis.'],
-    ['Level 3 · useful','A change from this person’s normal behaviour deserves attention.'],
-    ['Level 4 · strong','The same pattern across topics or settings supports a trait-level reading.'],
+    ['Level 2 · possible','Several changes pointing the same way support a first explanation.'],
+    ['Level 3 · useful','A change from this person’s usual behaviour deserves attention.'],
+    ['Level 4 · strong','The same pattern across topics or settings may reveal part of their character.'],
     ['Level 5 · strongest','Watch what happens when honesty, loyalty, competence, or courage costs something.']
   ];
   $$('.rp-evidence-scale button').forEach(function(b){b.addEventListener('click',function(){var n=+b.dataset.level-1;$$('.rp-evidence-scale button').forEach(function(x){x.classList.remove('is-on')});b.classList.add('is-on');$('#rp-evidence-read').innerHTML='<span>'+evidence[n][0]+'</span><p>'+evidence[n][1]+'</p>'})});
@@ -12,15 +12,15 @@
   function probability(k){var v=updates[k];['a','b','c'].forEach(function(x,i){$('#rp-h'+x).textContent=v[i]+'%';$('#rp-b'+x).style.width=v[i]+'%'});probs={a:v[0],b:v[1],c:v[2]}}
   $$('.rp-evidence-buttons button').forEach(function(b){b.addEventListener('click',function(){probability(b.dataset.evidence)})});probability('reset');
   var states={
-    power:['Power lowers the cost of showing existing tendencies.',['shares credit','protects juniors','accepts dissent','owns failure','uses discretion']],
-    stress:['Pressure exposes how someone usually regulates themselves.',['controls','withdraws','blames','collaborates','becomes more precise']],
-    failure:['Failure shows how someone protects their ego and whether they learn.',['denies','repairs','asks for feedback','changes method','updates without collapse']],
+    power:['Power makes it easier to show habits that were already there.',['shares credit','protects junior staff','accepts disagreement','owns failure','handles private information with care']],
+    stress:['Pressure shows how someone usually copes.',['controls','withdraws','blames','works with others','becomes more precise']],
+    failure:['Failure shows how someone protects their pride and whether they learn.',['denies','repairs','asks for feedback','changes method','changes their mind without falling apart']],
     success:['Success changes status and options. Watch what follows.',['shares credit','rewards support','inflates risk','forgets contributors','becomes generous']],
-    boundary:['A polite no exposes assumptions about entitlement.',['accepts','pressures','guilts','punishes','keeps negotiating']]
+    boundary:['A polite no shows whether someone feels entitled to your yes.',['accepts','pressures','uses guilt','punishes','keeps negotiating']]
   };
   function showState(k){var d=states[k];$('#rp-state-panel').innerHTML='<h3>'+d[0]+'</h3><p>Observe the pattern. One reaction remains a clue, not a verdict.</p><ul>'+d[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'}
   $$('.rp-state-tabs button').forEach(function(b){b.addEventListener('click',function(){$$('.rp-state-tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');showState(b.dataset.state)})});showState('power');
-  var room={formal:'A holds the title. Titles do not guarantee real influence.',expert:'B gets attention when technical uncertainty appears.',informal:'The room checks C before it reacts. C has informal approval power.',connector:'D repairs tension and carries information between groups.',performer:'E draws attention, though attention and authority are different.'};
+  var room={formal:'A holds the title. A title does not guarantee real influence.',expert:'People turn to B when they are unsure about a technical issue.',informal:'The room checks C before it reacts. C has influence without a formal title.',connector:'D eases tension and carries information between groups.',performer:'E draws attention, but attention is not the same as authority.'};
   $$('.rp-room button').forEach(function(b){b.addEventListener('click',function(){$$('.rp-room button').forEach(function(x){x.classList.remove('is-on')});b.classList.add('is-on');$('#rp-room-read').textContent=room[b.dataset.role]})});$$('.rp-room button')[2].classList.add('is-on');
   var stakes=$('#rp-stakes'), stakeCopy=['A casual conversation can rest on light evidence.','A small commitment needs one clean follow-through.','Meaningful responsibility needs repeated evidence across contexts.','A close relationship needs evidence through stress, repair, and boundaries.','Control of major assets needs long observation and independent checks.'];
   function setStake(){var n=+stakes.value;$('#rp-threshold-fill').style.width=(n*20)+'%';$('#rp-threshold-copy').textContent=stakeCopy[n-1]} stakes.addEventListener('input',setStake);setStake();
