@@ -84,7 +84,7 @@ passages:
     source: encheiridion
     ref: "12"
     quote: "Say to yourself, \"This is the price paid for apathy, for tranquillity, and nothing is to be had for nothing.\" When you call your servant, it is possible that he may not come; or, if he does, he may not do what you want."
-    take: "He prices calm honestly rather than pretending it is free. Spilled oil is what a settled mind costs today. Practise on small losses before a large one tests you."
+    take: "He gives calm a price. Spilled oil is what a settled mind costs today. Practise on small losses before a large one tests you."
     search: "want improve reject reasonings these neglect affairs i'll income don't correct servant better hunger exempt grief fear live affluence perturbation unhappy begin therefore little things spilt wine stolen yourself price paid apathy tranquillity nothing call possible come means importance power give disturbance"
     viz:
       type: scale
@@ -99,7 +99,7 @@ passages:
     source: encheiridion
     ref: "14"
     quote: "He is the master of every other person who is able to confer or remove whatever that person wishes either to have or to avoid. Whoever, then, would be free, let him wish nothing, let him decline nothing, which depends on others else he must necessarily be a slave."
-    take: "Whoever can grant or withhold the thing you want has power over you, whatever the org chart says. I read this as a warning about my own wanting. I gave the other person that power."
+    take: "Whoever can grant or withhold what you want has power over you. The org chart changes nothing. I read this as a warning about my own wanting. I gave the other person that power."
     search: "wish children wife friends live ever stupid control things cannot belong others likewise servant without fault fool vice something else desires undisappointed exercise therefore master every other person able confer remove whatever wishes either avoid whoever free nothing decline depends necessarily slave"
     viz:
       type: rings
@@ -191,7 +191,7 @@ passages:
     source: encheiridion
     ref: "25"
     quote: "So, in the present case, you have not been invited to such a person's entertainment, because you have not paid him the price for which a supper is sold. It is sold for praise; it is sold for attendance."
-    take: "Epictetus treats access as a purchase, with flattery and attendance as the price. If you refused to pay it, you still hold what you kept, so the grievance does not stand."
+    take: "Epictetus treats access as a purchase, with flattery and attendance as the price. You refused to pay and kept the price. The grievance no longer stands."
     search: "anyone preferred before entertainment compliment admitted consultation these things good ought glad gotten evil don't grieved remember cannot without using same means others acquire control expect thought worthy equal share frequent door great attend praise unjust insatiable unwilling price sold nothing much lettuce fifty cents"
     viz:
       type: scale
@@ -220,7 +220,7 @@ passages:
     source: encheiridion
     ref: "28"
     quote: "And do you feel no shame in handing over your own mind to be confused and mystified by anyone who happens to verbally attack you?"
-    take: "The comparison is blunt. You would fight anyone who handed your body to a passer-by, yet you hand over your mind for free and feel nothing about it."
+    take: "The comparison is blunt. You would fight anyone who handed your body to a passer-by. Yet you hand over your mind for free."
     search: "person gave body stranger certainly angry feel shame handing over mind confused mystified anyone happens verbally attack"
     viz:
       type: dichotomy
@@ -250,7 +250,7 @@ passages:
     source: encheiridion
     ref: "30"
     quote: "Consider not what he does, but what you are to do to keep your own faculty of choice in a state conformable to nature."
-    take: "Nature gave you a father, not a good one, so your side of the relation holds whatever he does. It is a hard doctrine. He offers no exit clause for real harm, which is where I part company with him."
+    take: "Nature gave you a father regardless of his quality. Your side of the relation holds whatever he does. It is a hard doctrine. He offers no exit clause for real harm, which is where I part company with him."
     search: "duties universally measured relations anyone father implied children take care submit everything patiently listen reproaches correction naturally entitled good only brother unjust well keep situation towards consider faculty choice state conformable nature another hurt unless please think manner therefore find idea neighbor citizen general corresponding"
     viz:
       type: dichotomy
@@ -264,7 +264,7 @@ passages:
     source: encheiridion
     ref: "33"
     quote: "If anyone tells you that such a person speaks ill of you, don't make excuses about what is said of you, but answer: \" He does not know my other faults, else he would not have mentioned only these.\" It is not necessary for you to appear often at public spectacles."
-    take: "Instead of mounting a defence, concede more than the critic managed to find. It ends the drama in one line, and it only works if you genuinely hold your faults lightly."
+    take: "Concede more than the critic managed to find. The reply ends the drama in one line. It works only if you hold your faults lightly."
     search: "immediately prescribe character form conduce yourself keep both alone company part silent speak merely necessary words however enter though sparingly into discourse sometimes occasion calls common subjects gladiators horse races athletic champions feasts vulgar topics conversation principally either blame praise make comparisons able bring over"
     viz:
       type: swap
@@ -296,7 +296,7 @@ passages:
     source: encheiridion
     ref: "43"
     quote: "Everything has two handles, the one by which it may be carried, the other by which it cannot."
-    take: "Choose which true fact about the relationship you carry. This can help, though it can also become an excuse to ignore an injustice you ought to name."
+    take: "Choose which true fact about the relationship you carry. This can help. It can also excuse an injustice you ought to name."
     search: "everything handles carried other cannot brother acts unjustly don't hold action handle injustice opposite brought thus"
     viz:
       type: scale
@@ -340,7 +340,7 @@ passages:
     source: encheiridion
     ref: "39"
     quote: "The body is to everyone the measure of the possessions proper for it, just as the foot is of the shoe."
-    take: "The body sets the size of what you need, as a foot sets the size of a shoe. Past that measure there is no natural place to stop, which is why upgrades never feel finished."
+    take: "The body sets the size of need, as a foot sizes a shoe. Past that measure, no natural stopping place remains. Upgrades never feel finished."
     search: "body everyone measure possessions proper just foot shoe therefore stop keep move beyond necessarily carried forward down cliff case fitness comes first gilded purple studded jewels once exceeds bound"
     viz:
       type: measure
@@ -401,7 +401,7 @@ passages:
     source: meditations
     ref: "2.8"
     quote: "Through not observing what is in the mind of another a man has seldom been seen to be unhappy; but those who do not observe the movements of their own minds must of necessity be unhappy."
-    take: "He ranks two blind spots against each other. Not knowing another person's mind rarely costs you, while not tracking your own costs you every time."
+    take: "He ranks two blind spots. Reading another person's mind rarely helps. Failing to track your own mind costs you every time."
     search: "through observing mind another seldom seen unhappy those observe movements minds necessity"
     viz:
       type: scale
@@ -473,7 +473,7 @@ passages:
     source: meditations
     ref: "4.11"
     quote: "Do not have such an opinion of things as he has who does thee wrong, or such as he wishes thee to have, but look at them as they are in truth."
-    take: "He rejects two framings at once, the one the attacker holds and the one the attacker wants you to hold. What is left is looking at the thing as it is."
+    take: "He rejects the attacker's framing and the one they want you to adopt. What remains is the thing itself."
     search: "opinion things wrong wishes look truth"
     viz:
       type: split
@@ -528,7 +528,7 @@ passages:
     source: meditations
     ref: "5.1"
     quote: "In he morning when thou risest unwillingly, let this thought be present- I am rising to the work of a human being."
-    take: "Marcus argues with himself about staying in bed. He notices that he will exhaust himself for money or a craft, yet resists the work he thinks belongs to a human life."
+    take: "Marcus argues with himself about staying in bed. He will exhaust himself for money or a craft. Yet he resists the work of a human life."
     search: "morning risest unwillingly thought present rising work human dissatisfied going things exist brought into world made clothes keep myself warm pleasant dost take pleasure action exertion little plants birds ants spiders bees working together order several parts universe unwilling make haste according nature necessary rest"
     viz:
       type: scale
@@ -675,7 +675,7 @@ passages:
     source: meditations
     ref: "8.49"
     quote: "I do see; but that he is in danger, I do not see."
-    take: "Keep the report and remove the forecast you attached to it. His example of a sick child shows how hard this is, because fear makes the forecast feel like another fact."
+    take: "Keep the report and remove your forecast. His sick-child example shows the difficulty. Fear makes the forecast feel like another fact."
     search: "nothing thyself first appearances report suppose reported certain person speaks hast injured child sick danger thus always abide within happens rather something like knows everything world"
     viz:
       type: gate
@@ -718,7 +718,7 @@ passages:
     source: meditations
     ref: "9.40"
     quote: "Thou thus: How shall I not be afraid to lose him? In fine, turn thy prayers this way, and see what comes."
-    take: "He rewrites the request rather than the world, praying to lose the fear instead of keeping the son. It is a colder prayer, and the only one you can act on yourself."
+    take: "He changes the request he controls. He prays to lose the fear of losing his son. It is a colder prayer, and the only one he can act on."
     search: "either gods power dost pray give faculty fearing things fearest desiring desirest pained anything rather these happen certainly operate purposes perhaps wilt placed well better like free desire slavish abject told even begin prays thus able woman another released lose little afraid fine turn prayers"
     viz:
       type: swap
@@ -777,7 +777,7 @@ passages:
     source: meditations
     ref: "11.15"
     quote: "There is no occasion to give this notice. It will soon show itself by acts."
-    take: "Character shows in conduct. Someone who announces his honesty has given you no proof of bad faith, but he has given you a reason to watch what he does next."
+    take: "Character shows in conduct. Announced honesty proves no bad faith. It does give you a reason to watch what happens next."
     search: "unsound insincere says determined deal fair doing occasion give notice soon show itself acts voice ought plainly written forehead man's character immediately shows eyes just beloved forthwith reads everything lovers honest good exactly like smells strong bystander comes near smell whether choose affectation simplicity crooked"
     viz:
       type: scale
@@ -792,7 +792,7 @@ passages:
     source: meditations
     ref: "12.6"
     quote: "Practise thyself even in the things which thou despairest of accomplishing. For even the left hand, which is ineffectual for all other things for want of practice, holds the bridle more vigorously than the right hand; for it has been practised in this."
-    take: "The left hand is useless everywhere except at the one job it has been drilled in. Marcus reads that as evidence about practice rather than talent, so work at what you gave up on."
+    take: "The left hand is useless outside the one job it practises. Marcus sees evidence that practice matters more than talent. Return to the skill you abandoned."
     search: "practise thyself even things despairest accomplishing left hand ineffectual other want practice holds bridle vigorously right practised"
     viz:
       type: measure
@@ -834,7 +834,7 @@ passages:
     source: encheiridion
     ref: "1"
     quote: "Work, therefore to be able to say to every harsh appearance, \"You are but an appearance, and not absolutely the thing you appear to be.\" And then examine it by those rules which you have, and first, and chiefly, by this: whether it concerns the things which are in our own control, or those which are not."
-    take: "Say it to the impression itself, out loud if that helps. The move buys the half second in which you can still check whether the thing is what it claims."
+    take: "Say it to the impression itself, out loud if that helps. The move buys half a second. Use it to check the claim."
     search: "things control others opinion pursuit desire aversion word whatever actions body property reputation command nature free unrestrained unhindered those weak slavish restrained belonging remember suppose also belongs hindered lament disturbed find fault both gods only really ever compel restrain further accuse nothing against hurt enemies"
     viz:
       type: gate

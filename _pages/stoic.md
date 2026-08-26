@@ -84,14 +84,13 @@ motion_scene: control
     </div>
   </div>
 
-  <p class="st-two-note">Marcus had read Epictetus. In the first book of the <b>Meditations</b>, he
-  thanks the man who lent him a copy of the lectures. The emperor was privately taking advice from
+  <p class="st-two-note">Marcus had read Epictetus. In <b>Meditations</b> 1, he thanks the man who
+  lent him a copy of the lectures. The emperor was privately taking advice from
   a former slave about the limits of his control. I have always liked that detail.</p>
 
-  <p>The <b>Meditations</b> here is George Long's translation and the <b>Enchiridion</b> is Elizabeth
-  Carter's, both long out of copyright. I checked each quotation against those texts. Many familiar
-  Stoic lines come from another translation, and a few are modern paraphrases with an ancient name
-  attached.</p>
+  <p>The page uses George Long's <b>Meditations</b> and Elizabeth Carter's <b>Enchiridion</b>. Both
+  translations are long out of copyright. I checked every quotation against those texts. Other
+  translations contain many familiar lines. Some lines are modern paraphrases carrying an ancient name.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -107,8 +106,7 @@ motion_scene: control
     <cite>Epictetus, Enchiridion 1, trans. Elizabeth Carter</cite>
   </div>
 
-  <p>Outcomes matter, but they never belong to you in full. Your choices do. Epictetus asks you to
-  put your effort there.</p>
+  <p>Your choices belong to you more fully than outcomes do. Epictetus asks you to put your effort there.</p>
 
   <div class="st-lab" id="st-sorter">
     <div class="st-lab-head">
@@ -147,8 +145,8 @@ motion_scene: control
   </div>
 
   <p>The line gets blurry in practice. Habits affect your health. Conduct affects your reputation.
-  Epictetus treats the split as absolute; I cannot. I still use the exercise because I keep claiming
-  control over things that were never mine to settle.</p>
+  Epictetus treats the split as absolute; I cannot. I still use the exercise because I claim control
+  over things that were never mine to settle.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -209,7 +207,7 @@ motion_scene: control
     </div>
   </div>
 
-  <p>Marcus turns the idea into a useful test: stop at what was reported. Someone spoke badly of you.
+  <p>Marcus turns the idea into a test. Stop at what was reported. Someone spoke badly of you.
   The report ends there. It does not say that you were harmed; your mind added that part.</p>
 </section>
 
@@ -254,8 +252,7 @@ motion_scene: control
   </div>
 
   <p>These jobs can pull against each other. The wish to accept an event can make you soften what you
-  see. Neither writer says enough about that risk, and it is one reason I distrust neat readings of
-  Stoicism.</p>
+  see. Neither writer says enough about that risk. It is one reason I distrust neat readings of Stoicism.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -263,8 +260,8 @@ motion_scene: control
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="passages">
   <h2><span class="n">04</span> Retrieve the right passage</h2>
-  <p class="st-deck">Neither book is organised around the moment when you need it. This index is.
-  Start with what is happening.</p>
+  <p class="st-deck">This index reorganises both books around the moment when you need them. Start
+  with what is happening.</p>
 
   <div class="st-lab">
     <div class="st-lab-head">
@@ -570,8 +567,8 @@ motion_scene: control
   problem described eighteen centuries before the term existed.</p>
 
   <p>I distrust tidy readings of Stoicism. Modern retellings sell composure and often hide its cost.
-  Epictetus asks you to think of a person much as you think of a cup: human, breakable and held on
-  loan. I do not know how to square that distance with loving someone fully. I keep the passages
+  Epictetus compares a person with a cup: human, breakable and held on loan. I do not know how to
+  square that distance with loving someone fully. I keep the passages
   that help and leave this one unresolved.</p>
 
   <div class="st-lab st-verdict-lab" id="st-verdict-lab">
@@ -586,8 +583,8 @@ motion_scene: control
   </div>
 
   <div class="st-note">
-    <p><b>On the text.</b> The <i>Meditations</i> is quoted in <b>George Long</b>'s translation and
-    the <i>Enchiridion</i> in <b>Elizabeth Carter</b>'s, both long out of copyright. Every quotation
+    <p><b>On the text.</b> The page quotes <b>George Long</b>'s <i>Meditations</i> and
+    <b>Elizabeth Carter</b>'s <i>Enchiridion</i>. Both translations are long out of copyright. Every quotation
     was extracted from the source and checked character by character. Many popular versions use
     another translator; others are paraphrases or inventions. That is why some familiar lines do
     not appear here.</p>
@@ -595,8 +592,8 @@ motion_scene: control
     references are chapter numbers, which are the same across editions.</p>
     <p>Nothing you type here is transmitted anywhere. The exercises are held in your browser's local
     storage and clearing your browser data removes them.</p>
-    <p>The same interactive treatment is applied to
-    <a href="/high-agency/">my notes on George Mack's High Agency</a> and to
+    <p>I use the same interactive treatment for
+    <a href="/high-agency/">my High Agency notes</a> and
     <a href="/principles/">my own operating manual</a>.</p>
   </div>
 </section>

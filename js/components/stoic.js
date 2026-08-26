@@ -65,7 +65,7 @@
     { t: 'Whether your flight is cancelled', mine: false,
       why: 'Weather, crews and airlines are not your acts. Wanting it otherwise adds a second problem to the first.' },
     { t: 'Whether you take it out on the person at the desk', mine: true,
-      why: 'They did not ground the plane. What you do in the queue is entirely yours, and it is the only part anyone will remember.' },
+      why: 'They did not ground the plane. Your conduct in the queue is yours. It is also the part people will remember.' },
     { t: 'Whether your work is well thought of', mine: false,
       why: 'Reputation lives in other people. Epictetus files it with property and office, under things that can be taken.' },
     { t: 'Whether the work is actually good', mine: true,
@@ -139,7 +139,7 @@
     });
 
     function finish() {
-      if (itemEl) itemEl.textContent = 'That is the whole exercise.';
+      if (itemEl) itemEl.textContent = 'Exercise complete.';
       if (fb) { fb.classList.remove('is-on'); fb.innerHTML = ''; }
       bins.forEach(function (b) { b.disabled = true; });
       if (nextBtn) nextBtn.style.display = 'none';
@@ -258,21 +258,21 @@
       key: 'perception',
       label: 'Perception',
       greek: 'the discipline of assent',
-      body: 'Stop at what actually happened. Marcus tells himself to say nothing beyond what the first appearance reports: it was said, not I was injured. The addition is where suffering enters.',
+      body: 'Stop at what happened. Marcus reports the first appearance only: it was said. “I was injured” is the addition. Suffering enters there.',
       cue: 'Say only what a camera saw.'
     },
     {
       key: 'action',
       label: 'Action',
       greek: 'the discipline of impulse',
-      body: 'Act for the common good, and act with a reservation. You commit to the effort, not to the outcome, because the outcome was never the part you held.',
+      body: 'Act for the common good, with a reservation. Commit to the effort. The outcome was never the part you held.',
       cue: 'Do the just thing, hold the result loosely.'
     },
     {
       key: 'will',
       label: 'Will',
       greek: 'the discipline of desire',
-      body: 'Want what happens. This demand is the hardest of the three and governs the other two: desire aimed outside your control guarantees disturbance.',
+      body: 'Want what happens. This is the hardest demand and it governs the other two. Desire aimed outside your control guarantees disturbance.',
       cue: 'Confine desire to what is yours.'
     }
   ];
@@ -429,7 +429,7 @@
         .slice(0, 6);
 
       if (!hits.length) {
-        out.innerHTML = '<p class="st-empty">Nothing matched. Try a feeling rather than a situation, ' +
+        out.innerHTML = '<p class="st-empty">Nothing matched. Try a feeling or a plain description, ' +
           'or browse the list below.</p>';
         return;
       }
@@ -781,7 +781,7 @@
     if (!svg) return;
     var read = $('#st-day-read');
     var COPY = {
-      dawn: { t: 'Before the day', p: 'Name what may go wrong and who may behave badly. Decide now what your own conduct will be, so the day cannot supply the answer for you.' },
+      dawn: { t: 'Before the day', p: 'Name what may go wrong and who may behave badly. Choose your conduct now. Do not let the day choose it.' },
       noon: { t: 'During the day', p: 'Impressions arrive faster than judgement. The work is the pause between what happens and what you call it.' },
       dusk: { t: 'After the day', p: 'Go back over it without a verdict on yourself. What was in your control, how did you use it, and what will you do differently.' }
     };
@@ -964,8 +964,8 @@
   function verdict() {
     var lab = $('#st-verdict-lab'); if (!lab) return;
     var chosen = {}, read = $('#st-verdict-read');
-    var copy = {keep:'Keep the calibration move: separate the event from the prediction your first impression adds.',open:'Leave the moral tension open: the text does not establish that emotional distance is compatible with loving someone fully.'};
-    $$('[data-st-verdict]', lab).forEach(function (button) { button.addEventListener('click', function () { var key=button.dataset.stVerdict; chosen[key]=!chosen[key]; button.classList.toggle('is-on',chosen[key]); button.setAttribute('aria-pressed',chosen[key]?'true':'false'); if(chosen.keep&&chosen.open) read.textContent='Both can remain true: use the passage that improves judgment, and refuse to manufacture agreement where the text leaves a real cost.'; else if(chosen[key]) read.textContent=copy[key]; else read.textContent='A useful text does not require agreement with every claim.'; }); });
+    var copy = {keep:'Keep the calibration move. Separate the event from the prediction added by your first impression.',open:'Leave the moral tension open. The text never establishes that emotional distance can coexist with loving someone fully.'};
+    $$('[data-st-verdict]', lab).forEach(function (button) { button.addEventListener('click', function () { var key=button.dataset.stVerdict; chosen[key]=!chosen[key]; button.classList.toggle('is-on',chosen[key]); button.setAttribute('aria-pressed',chosen[key]?'true':'false'); if(chosen.keep&&chosen.open) read.textContent='Use the passage that improves judgement. Leave its real cost unresolved.'; else if(chosen[key]) read.textContent=copy[key]; else read.textContent='A useful text does not require agreement with every claim.'; }); });
   }
 
   function init() {
