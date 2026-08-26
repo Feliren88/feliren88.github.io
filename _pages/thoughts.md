@@ -31,6 +31,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">A personal operating manual for decisions under pressure. Search by how you feel, set the reversibility dial, run the six questions.</span>
 <span class="read-more">Open the note →</span>
 </a>
+<a class="essay-feature" href="/curious/">
+<span class="essay-feature-label">Interactive field guide</span>
+<span class="essay-feature-title">Stay Curious</span>
+<span class="essay-feature-desc">Notice what does not fit, test the explanation, and update when the evidence earns it. Keep one live question without turning research into avoidance.</span>
+<span class="read-more">Open the field guide →</span>
+</a>
 <a class="essay-feature" href="/stoic/">
 <span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Stoic</span>
@@ -380,16 +386,17 @@ layout-class: page writings-page
   .essay-feature:nth-child(1) .essay-feature-label,.essay-feature:nth-child(1) .read-more { color: #d6a642; }
   .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
   .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
-  .essay-feature:nth-child(3), .essay-feature:nth-child(4) { grid-column: span 6; min-height: 19rem; }
+  /* High Agency, Life Operating Principle, and Curious share one row. */
+  .essay-feature:nth-child(n+3):nth-child(-n+5) { grid-column:span 4;min-height:19rem }
   /* Stoic, Game Theory, and Read People share one even row. */
-  .essay-feature:nth-child(n+5):nth-child(-n+7) { grid-column:span 4;min-height:22rem }
-  .essay-feature:nth-child(6) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(7) { background:linear-gradient(145deg,color-mix(in srgb,#c86f58 11%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(n+6):nth-child(-n+8) { grid-column:span 4;min-height:22rem }
+  .essay-feature:nth-child(7) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(8) { background:linear-gradient(145deg,color-mix(in srgb,#c86f58 11%,var(--surface)),var(--surface) 62%) }
   /* The remaining manuals keep the same three-card rhythm. */
-  .essay-feature:nth-child(n+8):nth-child(-n+13) { grid-column:span 4;min-height:21rem }
-  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(12) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(n+9):nth-child(-n+14) { grid-column:span 4;min-height:21rem }
+  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(12) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(13) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
   .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
   .essay-feature-label {
     display: block;
