@@ -196,7 +196,7 @@ levers:
       type: swap
       before: "Absorb the interruptions"
       after: "Change the protocol"
-      cap: "A bad protocol, not a bad day."
+      cap: "The protocol keeps producing the interruption."
 
   - key: "Arena"
     icon: gt-arena
@@ -562,7 +562,7 @@ domains:
       type: diverge
       up: "Praise and indispensability"
       down: "Bargaining power"
-      cap: "Hard to replace is not the same as strong."
+      cap: "Scarcity matters when it improves your options."
 
   - key: "Income"
     icon: gt-payoffs
@@ -596,7 +596,7 @@ domains:
     icon: gt-leverage
     group: money
     games: ["Market entry", "Repeated competition", "Signalling"]
-    winning: "Holding a claim on value you helped create, so the upside is not entirely someone else's."
+    winning: "Holding a claim on value you helped create and sharing in the upside."
     risk: "Entering because ownership sounds like freedom, without a customer or an unfair advantage."
     ask: "What happens if this works and the incumbent responds rationally?"
     math: ""
@@ -876,7 +876,7 @@ readiness:
   - q: lo
     icon: gt-controlled
     t: "Controlled participation"
-    body: "A real opening you are not yet built for. Take part without betting the system."
+    body: "A real opening has arrived before you are ready. Take part at a size the whole system can survive."
     rule: "Capture upside at small size. Learn fast."
 
   - q: ho

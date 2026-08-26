@@ -659,7 +659,7 @@
             ? 'Low c exploits. Sensible when the environment is stable and your advantage is compounding.'
             : c < 0.9
               ? 'At moderate c, the adjacent option starts to lead. It combines some evidence with room to learn.'
-              : 'High c explores. Correct when you are early, when the environment just changed, or when returns have flattened.') +
+              : 'High c favours exploration. Use it early, after the environment changes, or when returns flatten.') +
           '</p>';
       }
       save('ucb', +range.value);
@@ -946,7 +946,7 @@
   }
 
   /* ══ Laws you keep ═════════════════════════════════════
-     Fifteen laws is a list until you have to say which ones you actually
+     Fifteen laws is a list until you have to say which ones you
      follow. Ticks are local storage only. */
   function lawTicks() {
     var laws = $$('.gt-law[data-law]');

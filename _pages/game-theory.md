@@ -1,11 +1,11 @@
 ---
 layout: page
 title: Game Theory for Decisions
-subtitle: Other people respond to your choices. Include what they do next.
-description: My notes on strategic decisions, with computed payoff matrices, repeated cooperation, bargaining, ruin risk, and competing demands across life.
+subtitle: Other people respond to your choices. Include what they do next
+description: Working notes on strategic decisions, computed payoff matrices, repeated cooperation, bargaining, and ruin risk.
 permalink: /game-theory/
 date: 2026-08-23
-last_modified_at: 2026-08-25
+last_modified_at: 2026-08-26
 layout-class: page game-theory
 extra_css: /css/game-theory.css
 extra_js: /js/components/game-theory.js
@@ -35,8 +35,7 @@ motion_scene: strategy
     <div class="gt-story-position"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-equilibrium"/></svg><span>New position</span><small>play again, redesign, or exit</small></div>
   </div>
   
-  <p class="gt-deck">Many important decisions involve other people. They respond to your move, and
-  their response changes what your move was worth.</p>
+  <p class="gt-deck">Other people respond to your move, and their response changes what the move was worth.</p>
 
   <p>Ask whether a choice still works after everyone responds. A good first move can produce a bad
   final position.</p>
@@ -114,9 +113,8 @@ motion_scene: strategy
     </div>
   </div>
 
-  <p>The Prisoner's Dilemma and Public Goods are the games where both players have a
-  <b>dominant strategy</b>. In both cases that strategy leads
-  somewhere neither wanted. Matching Pennies is genuinely zero-sum and has no stable pure strategy.</p>
+  <p>In the Prisoner's Dilemma and Public Goods, both players have a <b>dominant strategy</b>.
+  Following it leaves both worse off. Matching Pennies is genuinely zero-sum and has no stable pure strategy.</p>
 
   <p>Salary talks, arguments with a partner and supplier negotiations rarely have a fixed pot. How
   you play can create or destroy value. You can win the argument and leave both sides worse off.</p>
@@ -127,8 +125,7 @@ motion_scene: strategy
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="five">
   <h2><span class="n">02</span> See all five boards <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-players"/></svg></h2>
-  <p class="gt-deck">A major decision affects five games at once. Winning on one board can hide
-  losses on the others.</p>
+  <p class="gt-deck">A major decision affects five games at once. A win on one board can hide losses on the others.</p>
 
   <div class="gt-lab">
     <div class="gt-lab-head">
@@ -238,8 +235,7 @@ motion_scene: strategy
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="levers">
   <h2><span class="n">04</span> Change the game itself <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-leverage"/></svg></h2>
-  <p class="gt-deck">A better move can still leave you stuck in a bad game. Sometimes you need to
-  change the rules, players, or exit.</p>
+  <p class="gt-deck">A better move can still leave you stuck. Change the rules, the players, or your ability to exit.</p>
 
   <p>Seven things define a game. When you feel stuck, you are usually trying to improve your move
   while treating the other six as fixed:</p>
@@ -468,7 +464,7 @@ motion_scene: strategy
         <p class="t-eyebrow">Checklist</p>
         <h5>Name the game first</h5>
       </div>
-      <span class="gt-hint">Mark each one honestly</span>
+      <span class="gt-hint">Answer before committing</span>
     </div>
     <div class="gt-classifier" id="gt-classifier">
       {% for c in site.data.game_theory.classifier %}
@@ -536,9 +532,8 @@ motion_scene: strategy
     {% endfor %}
   </div>
 
-  <p>A strong result in one domain may do little for a failing one. Money cannot replace recovery,
-  and status cannot supply meaning. Scoring the domains separately makes those gaps harder to
-  ignore.</p>
+  <p>A strong result in one domain may do little for a failing one. Score them separately so money
+  does not disguise exhaustion or status disguise a lack of meaning.</p>
 
   <h3 id="explore">Explore against exploit</h3>
 
@@ -676,7 +671,7 @@ motion_scene: strategy
     <div class="gt-lab-head">
       <div>
         <p class="t-eyebrow">Dashboard</p>
-        <h5>Score at least five, honestly</h5>
+        <h5>Score at least five domains</h5>
       </div>
       <span class="gt-hint">Stays in this browser</span>
     </div>
@@ -694,9 +689,8 @@ motion_scene: strategy
     <div class="gt-btn-row"><button class="gt-btn" id="gt-dash-reset" type="button">Clear</button></div>
   </div>
 
-  <p>Nothing else substitutes for a domain marked <b>floor</b>. Money cannot buy back recovery, and
-  status cannot supply meaning. A broken floor deserves attention even when everything else looks
-  good.</p>
+  <p>A <b>floor</b> marks something the other domains cannot replace. Raise it before optimising a
+  score that is already healthy.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -776,8 +770,8 @@ motion_scene: strategy
     </div>
   </div>
 
-  <p>High readiness with little opportunity can feel like failure. It is useful preparation time.
-  Openings arrive on their own schedule, and preparation determines what you can do with them.</p>
+  <p>High readiness with little opportunity can feel like failure. Use the quiet period to build
+  skill, relationships, and runway. You cannot schedule the opening, but you can prepare for it.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -785,7 +779,7 @@ motion_scene: strategy
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="laws">
   <h2><span class="n">10</span> Fifteen laws <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-l-choose"/></svg></h2>
-  <p class="gt-deck">These are the rules I take from the models above.</p>
+  <p class="gt-deck">These are the rules I keep from the models above.</p>
 
   <div class="gt-lawbar">
     <span class="k"><svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#gt-medal"/></svg>Laws I use</span>
@@ -846,8 +840,8 @@ motion_scene: strategy
     </div>
   </div>
 
-  <p>The tell is the direction of your exit costs. If leaving got harder this year while the reward
-  got larger, you are in the second loop regardless of how the first one felt.</p>
+  <p>Watch the direction of your exit costs. If leaving became harder while the reward grew, you are
+  in the second loop regardless of how the first one felt.</p>
 
   <div class="gt-eq is-boxed">
     <p class="eq">

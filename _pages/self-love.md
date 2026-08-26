@@ -1,11 +1,11 @@
 ---
 layout: page
 title: Self-Love
-subtitle: Risk control for people who can endure too much.
-description: A visual guide to keeping intelligence, discipline, and ambition from turning endurance into self-abandonment.
+subtitle: Risk control for people who can endure too much
+description: A visual guide to protecting consent, freedom, and future choices from the cost of endless endurance.
 permalink: /self-love/
 date: 2026-08-24
-last_modified_at: 2026-08-25
+last_modified_at: 2026-08-26
 layout-class: page self-love
 extra_css: /css/self-love.css
 extra_js: /js/components/self-love.js
@@ -20,7 +20,7 @@ motion_scene: consent
 <section class="sl-section sl-hero" id="control-system">
   <p class="sl-kicker">The person you must not abandon</p>
   <h1>Your strengths need a governor.</h1>
-  <p class="sl-hero-deck">Self-love keeps intelligence, discipline, ambition, and resilience from building a life that rewards everyone except the person living it.</p>
+  <p class="sl-hero-deck">Self-love keeps intelligence, discipline, ambition, and resilience from building a life that rewards everyone except you.</p>
 
   <div class="sl-control-map" role="img" aria-label="Personal strengths pass through self-love and become either self-abandonment or chosen contribution.">
     <div class="sl-power-bank">
@@ -59,7 +59,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="trial">
-  <header class="sl-section-head"><span>02 · End the trial</span><h2>Treat achievement as an expression of worth, never its source.</h2></header>
+  <header class="sl-section-head"><span>02 · End the trial</span><h2>Let achievement express the worth you already have.</h2></header>
   <figure class="sl-figure sl-trial-figure">
     <figcaption><b>The moving standard</b><span>Add achievements and watch the finish line move.</span></figcaption>
     <div class="sl-trial-stage">
@@ -72,7 +72,7 @@ motion_scene: consent
       <div class="sl-validation"><span>felt worthy</span><i id="sl-validation-fill"></i></div>
     </div>
     <div class="sl-button-row"><button type="button" class="sl-action" id="sl-achieve">Complete another achievement</button><button type="button" class="sl-quiet" id="sl-trial-reset">Reset</button></div>
-    <p class="sl-figure-answer" id="sl-trial-answer" role="status">The first achievement is still ahead. Notice what the mind promises it will settle.</p>
+    <p class="sl-figure-answer" id="sl-trial-answer" role="status">The first achievement is still ahead. What do you expect it to settle?</p>
   </figure>
   <div class="sl-loop" aria-label="The achievement validation treadmill"><span>achievement</span><i>→</i><span>temporary validation</span><i>→</i><span>higher standard</span><i>→</i><span>renewed inadequacy</span><i>↻</i></div>
 </section>
@@ -110,7 +110,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="timing">
-  <header class="sl-section-head"><span>05 · Speak earlier</span><h2>Discomfort deserves attention before it becomes certainty.</h2></header>
+  <header class="sl-section-head"><span>05 · Speak earlier</span><h2>Speak while you can still describe what happened.</h2></header>
   <figure class="sl-figure sl-timing-figure">
     <figcaption><b>The cost of delayed communication</b><span>Move the moment when the issue is spoken.</span></figcaption>
     <div class="sl-timing-stage">
@@ -119,7 +119,7 @@ motion_scene: consent
         <path class="sl-damage-line" id="sl-damage-line"></path>
         <line class="sl-speak-line" id="sl-speak-line" y1="26" y2="224"></line>
         <circle class="sl-speak-dot" id="sl-speak-dot" r="7"></circle>
-        <text class="sl-svg-label" x="42" y="244">first discomfort</text><text class="sl-svg-label" x="684" y="244" text-anchor="end">private certainty</text>
+        <text class="sl-svg-label" x="42" y="244">first discomfort</text><text class="sl-svg-label" x="684" y="244" text-anchor="end">the story hardens</text>
       </svg>
       <div class="sl-timing-cost"><b id="sl-timing-cost">0</b><span>accumulated repair cost</span></div>
     </div>
@@ -142,7 +142,7 @@ motion_scene: consent
     <button type="button" data-direction="refuse"><span>refuse</span><b>What must stop?</b></button>
     <button type="button" data-direction="protect"><span>protect</span><b>What must remain intact?</b></button>
     <button type="button" data-direction="say"><span>say</span><b>What truth is overdue?</b></button>
-    <button type="button" data-direction="choose"><span>choose</span><b>What serves the life?</b></button>
+    <button type="button" data-direction="choose"><span>choose</span><b>Which choice can I live with?</b></button>
     <div class="sl-compass-core"><span>self-respect</span><i></i></div>
   </div>
   <p class="sl-compass-answer" id="sl-compass-answer" role="status">Choose a pressure, then ask from one direction.</p>
@@ -150,7 +150,7 @@ motion_scene: consent
 
 <section class="sl-section sl-closing">
   <div class="sl-final-system">
-    <span>extraordinary life</span><i>+</i><span>protected person</span><strong>both are your responsibility</strong>
+    <span>ambitious life</span><i>+</i><span>protected person</span><strong>you are responsible for both</strong>
   </div>
   <blockquote>“If I genuinely loved and respected myself, what would I refuse, what would I protect, what would I say, and what would I choose now?”</blockquote>
 </section>

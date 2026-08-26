@@ -42,13 +42,13 @@
       safe.style.opacity = Math.max(.18, .18 + value / 100);
       if (value < 34) {
         one('#sl-governor-state').textContent = 'capacity without protection';
-        one('#sl-governor-copy').textContent = 'Discipline and resilience are routing demand straight into endurance. Other people receive the output; you inherit the cost.';
+        one('#sl-governor-copy').textContent = 'Discipline and resilience turn every demand into something to endure. Other people receive the output; you inherit the cost.';
       } else if (value < 68) {
         one('#sl-governor-state').textContent = 'negotiated effort';
-        one('#sl-governor-copy').textContent = 'Limits have entered the system, though pressure can still override them. Name the conditions under which your yes expires.';
+        one('#sl-governor-copy').textContent = 'You have limits, though pressure can still override them. Name the conditions under which your yes expires.';
       } else {
         one('#sl-governor-state').textContent = 'chosen contribution';
-        one('#sl-governor-copy').textContent = 'Your strengths remain available while consent, health, exit power, and recovery constrain how much the system may take.';
+        one('#sl-governor-copy').textContent = 'Your strengths remain available because consent, health, exit power, and recovery limit what others may ask of you.';
       }
     }
     input.addEventListener('input', paint); paint();
@@ -65,7 +65,7 @@
       var status = one('#sl-consent-status'), copy = one('#sl-consent-copy');
       if (gap > 18) { status.textContent = 'Capacity is being mistaken for permission.'; copy.textContent = 'The demand exceeds what you consent to give. Surviving it would not make the arrangement acceptable.'; }
       else if (gap > 0) { status.textContent = 'Renegotiate the load.'; copy.textContent = 'The gap is small enough to discuss, but large enough to become resentment if it stays unnamed.'; }
-      else { status.textContent = 'The load fits the consent.'; copy.textContent = 'The work may still be difficult, but its cost has been chosen rather than silently assigned.'; }
+      else { status.textContent = 'The load fits the consent.'; copy.textContent = 'The work may still be difficult. You chose its cost instead of having it assigned in silence.'; }
     }
     demand.addEventListener('input', paint); willing.addEventListener('input', paint); paint();
   }
@@ -88,9 +88,9 @@
       var validation = rounds ? Math.max(10, 76 - rounds * 10) : 0;
       one('.sl-validation').style.setProperty('--validation', validation + '%');
       var answer = one('#sl-trial-answer');
-      if (!rounds) answer.textContent = 'Before the first achievement, the mind promises that success will make you feel worthy.';
+      if (!rounds) answer.textContent = 'Before the first achievement, you expect success to make you feel worthy.';
       else if (rounds < 3) answer.textContent = 'The result brought relief, but the standard moved before worth felt secure.';
-      else answer.textContent = 'After ' + rounds + ' achievements, the record improved while the internal trial continued.';
+      else answer.textContent = 'After ' + rounds + ' achievements, your record improved and the trial continued.';
     }
     button.addEventListener('click', function () { rounds = Math.min(7, rounds + 1); paint(); });
     reset.addEventListener('click', function () { rounds = 0; paint(); }); paint();
@@ -106,7 +106,7 @@
       one('#sl-reward-bar').style.width = r + '%'; one('#sl-freedom-bar').style.width = freedom + '%';
       all('#sl-cage-bars i').forEach(function (bar, index) { bar.style.opacity = index < Math.round(r / 10) ? (on ? .22 : .82) : .05; });
       var answer = one('#sl-cage-answer');
-      answer.textContent = on ? 'Keep raising the rewards only while exit power, health, and choice remain intact.' : (r > 68 ? 'The rewards now finance the reason leaving feels impossible.' : 'Visible reward is rising faster than the freedom needed to choose it again.');
+      answer.textContent = on ? 'Raise the rewards while exit power, health, and choice remain intact.' : (r > 68 ? 'The rewards now pay for the commitments that make leaving feel impossible.' : 'Visible reward is rising faster than your freedom to choose it again.');
     }
     reward.addEventListener('input', paint); protect.addEventListener('click', function () { protect.setAttribute('aria-pressed', protect.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); paint(); }); paint();
   }
@@ -135,7 +135,7 @@
     function paint() {
       var t = +input.value / 100, x = 44 + t * 636, y = 220 - Math.pow(t, 2.35) * 184, cost = Math.round(Math.pow(t, 2.35) * 100);
       one('#sl-speak-line').setAttribute('x1', x); one('#sl-speak-line').setAttribute('x2', x); one('#sl-speak-dot').setAttribute('cx', x); one('#sl-speak-dot').setAttribute('cy', y); one('#sl-timing-cost').textContent = cost;
-      one('#sl-timing-answer').textContent = t < .35 ? 'The issue is still small enough to describe without building a case. Speaking now keeps private interpretations from hardening.' : t < .7 ? 'Interpretation has begun hardening around the facts. The conversation now carries more history than the original issue.' : 'The decision may look sudden from outside because the entire argument happened privately first.';
+      one('#sl-timing-answer').textContent = t < .35 ? 'The issue is still small enough to describe without building a case. Speak before private interpretations harden.' : t < .7 ? 'Your interpretation has begun hardening around the facts. The conversation now carries more history than the original issue.' : 'The decision may look sudden from outside because the entire argument happened privately first.';
     }
     input.addEventListener('input', paint); paint();
   }
@@ -153,7 +153,7 @@
       scenarioButtons.forEach(function (button) { button.classList.toggle('is-on', button.dataset.scenario === scenario); });
       directionButtons.forEach(function (button) { button.classList.toggle('is-on', button.dataset.direction === direction); });
       one('#sl-future-inherits').textContent = SCENARIOS[scenario].inherits;
-      one('#sl-compass-answer').textContent = direction ? SCENARIOS[scenario][direction] : 'Choose one direction from which to protect the future stakeholder.';
+      one('#sl-compass-answer').textContent = direction ? SCENARIOS[scenario][direction] : 'Choose one question to ask on behalf of your future self.';
     }
     scenarioButtons.forEach(function (button) { button.addEventListener('click', function () { scenario = button.dataset.scenario; direction = ''; paint(); }); });
     directionButtons.forEach(function (button) { button.addEventListener('click', function () { direction = button.dataset.direction; paint(); }); }); paint();

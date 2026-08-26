@@ -19,7 +19,7 @@ story:
     line: Ordinary is easy to answer.
   - beat: Curiosity with edges
     title: One noun keeps the thread alive.
-    body: The guest mentions that she has just returned from Seoul for a project. Arun can follow Seoul, the project or the travel. He chooses the detail that carried the most energy and stays with it.
+    body: The guest says she has returned from Seoul for a project. Arun can follow Seoul, the project or the travel. He chooses the detail that carried the most energy and stays with it.
     notice: Her voice lifts when she mentions the work, and she gives more than a one-word answer.
     do: "Ask, “What kind of project?” After two questions, share a related detail of his own."
     avoid: Cycling through unrelated questions until the exchange feels like a survey.
@@ -28,7 +28,7 @@ story:
     title: Depth arrives through pacing.
     body: The conversation moves from the event, to her work, to what she enjoys about it. Arun offers a small opinion and she asks him something back. Mutual curiosity is the signal that they can move beyond the room.
     notice: Longer answers, reciprocal questions, relaxed posture and a subject neither person wants to drop.
-    do: "Move one rung deeper: “What part of the work do you actually enjoy?”"
+    do: "Move one step deeper: “What part of the work do you enjoy?”"
     avoid: Asking a level-seven question while the other person is still giving level-two answers.
     line: Go deeper only when both people are already leaning that way.
   - beat: A quiet two seconds
@@ -104,14 +104,14 @@ loop:
       - A related experience
       - Something you got wrong
       - What you are looking forward to
-    watch: Questions need some reciprocity to feel like conversation.
+    watch: Share something too, so the exchange feels like a conversation.
   - key: bridge
     icon: sm-bridge
     verb: Bridge
     claim: Move up a rung if the energy is there.
     body: When a topic produces real interest on both sides, follow it upward. The small talk has done its job and can end.
     lines:
-      - What part of it do you actually enjoy?
+      - What part of it do you enjoy?
       - How did you end up doing that?
       - What changed your mind about it?
     watch: Wait for some mutual interest before going deeper.
@@ -142,7 +142,7 @@ ladder:
     note: This is the first question about the person rather than the room.
   - level: 4
     kind: Preference
-    ask: What part of it do you actually enjoy?
+    ask: What part of it do you enjoy?
     note: Asks for an opinion. Most people are pleased to be asked.
   - level: 5
     kind: Story
@@ -197,7 +197,7 @@ calibrate:
   - topic: Religion
     why: Central identity in some societies and strictly private in others.
   - topic: Politics
-    why: Carries asymmetric downside with someone you have just met.
+    why: A disagreement can cost much more than avoiding the topic with someone new.
   - topic: Property and wealth
     why: Normal status conversation in some places and vulgar in others.
   - topic: Appearance
@@ -270,7 +270,7 @@ variables:
 atlas:
   - place: United States
     region: americas
-    style: Friendly, energetic and informal. Work, place and hobbies open well. Moderate self-disclosure is expected and welcome.
+    style: Friendly, energetic and informal. Work, place and hobbies open well. People often share some personal detail early.
     note: Add visible enthusiasm. "How's it going?" wants "Good, busy week, how about you?" rather than a status report.
   - place: Canada
     region: americas
@@ -286,7 +286,7 @@ atlas:
     note: Keep credentials out of the opening. Status-consciousness tends to land badly.
   - place: Germany, Austria, Switzerland
     region: europe
-    style: A little more formal at first. Substantive questions are welcome early.
+    style: A little more formal at first. Deeper questions are welcome early.
     note: Reduced chitchat is not coolness. Silence is allowed and does not need filling.
   - place: Netherlands and Scandinavia
     region: europe
@@ -334,7 +334,7 @@ atlas:
     note: Respect forms of address and religious convention. Do not assume Western norms across genders.
   - place: Turkey
     region: mena
-    style: Hospitality and personal warmth matter. Conversation can turn substantive quickly.
+    style: Hospitality and personal warmth matter. Conversation can become deep quickly.
     note: Accept the tea. Refusing hospitality is the misstep, not accepting it.
   - place: Sub-Saharan African settings
     region: africa
@@ -342,7 +342,7 @@ atlas:
     note: Greet properly and unhurriedly. Transactional visitors routinely underestimate this.
   - place: International professional circles
     region: global
-    style: Culturally neutral by default. Polite, curious, moderate disclosure, professional context.
+    style: Start polite and curious. Share a little, and use the work setting as common ground.
     note: Assume nothing from a name or an accent. Observe the subculture, not the nationality.
 
 # ── Settings. Twenty rooms and what actually works in each. ─────────────────
@@ -480,7 +480,7 @@ settings:
     name: Religious ceremony
     icon: sm-arch
     open: Is there anything I should know before we go in?
-    then: Follow the host. Dress and behave a little conservatively when unsure.
+    then: Follow the host. When unsure, dress and act with a little more care.
     exit: Thank you for having me. That was good of you.
     watch: Genuine curiosity is welcome. A ceremony is not the place to test a belief.
   - key: family
@@ -514,13 +514,13 @@ scripts:
     name: "“What do you do?”"
     formula: Domain, then function, then why it matters
     body: Give one sentence and stop. If they are interested they will ask, and then you have permission for the second layer.
-    example: I work on AI safety. Mostly I measure what a model actually knows about its own limits, because a system that overstates its confidence is hard to trust.
-    fail: A five-minute professional ontology answers a question nobody asked.
+    example: I work on AI safety. I measure how well a model knows its own limits, because a model that sounds too sure can be hard to trust.
+    fail: A five-minute account of your whole field answers a question nobody asked.
   - key: tellmeabout
     name: "“Tell me about yourself”"
     formula: Present, one background detail, one human detail
     body: Three short beats is enough. The human detail is what makes the answer memorable and gives them somewhere to go.
-    example: I work on calibration in language models. I came to it through remote sensing and a lot of messy data. Outside work I am usually reading something unrelated or looking for somewhere good to eat.
+    example: I study whether language models know when they may be wrong. I came to it through remote sensing and a lot of messy data. Outside work I am usually reading something unrelated or looking for somewhere good to eat.
     fail: A chronological career history from university onwards.
   - key: thirty
     name: The thirty-second opener
@@ -531,7 +531,7 @@ scripts:
   - key: sixty
     name: The sixty-second professional
     formula: Open, narrow, offer the adjacent thing, hand it back
-    body: This moves the conversation towards substance. Naming the overlap gives both of you something concrete to discuss.
+    body: This moves the conversation towards a real topic. Naming the overlap gives both of you something clear to discuss.
     example: What brought you to the event? ... What part of that are you focused on? ... Interesting. I have been working on something adjacent. The overlap is probably how you decide what counts as a real failure. How are you approaching that?
     fail: Reaching substance before they have agreed to go there.
 
@@ -542,13 +542,13 @@ repair:
     icon: sm-pause
     do: Do nothing for two seconds. A pause is not a failure.
     say: So how do you know everyone here?
-    note: Structural thinkers read missing information as a signal. Usually it is just a pause.
+    note: Some people treat silence as a warning sign. Most of the time, it is only a pause.
   - key: oneword
     name: A one-word answer
     icon: sm-short
     do: Try once more, then let it go gracefully.
     say: Anything particularly useful so far?
-    note: They may be tired, shy, waiting for someone or simply private. Social feedback is noisy.
+    note: They may be tired, shy, waiting for someone or private. One short answer tells you little.
   - key: toomuch
     name: Someone who will not stop
     icon: sm-wave
@@ -566,7 +566,7 @@ repair:
     icon: sm-wrench
     do: Acknowledge, clarify, and analyse only if invited.
     say: That sounds draining. Has it been the workload or more the people side?
-    note: They may want empathy rather than architecture. Diagnosis is a strength that overruns easily.
+    note: They may want care before advice. It is easy to start solving before you have listened.
   - key: disagree
     name: Something you disagree with
     icon: sm-split
@@ -578,7 +578,7 @@ repair:
     icon: sm-flag
     do: Engage narrowly or decline warmly. Both are fine.
     say: I try not to get too deep into politics at social events.
-    note: With a stranger the downside is asymmetric. With a client it is worse.
+    note: With a stranger, disagreement can cost more than avoiding the topic. With a client, the cost may be higher.
   - key: religion
     name: Religion arrives
     icon: sm-arch
@@ -619,7 +619,7 @@ repair:
     name: You are not sure how to pitch it
     icon: sm-mirror
     do: Mirror the variables, never the accent or the mannerisms.
-    say: Match their formality, pace, disclosure, energy and distance.
+    say: Match their formality, pace, openness, energy and distance.
     note: Match the level of familiarity without imitating the person.
 
 # ── Manner. What the body and the listening do. ─────────────────────────────
@@ -692,7 +692,7 @@ durations:
     note: Long enough to find out whether there is more to say.
   - band: Real connection
     span: Let it run
-    note: Once it turns substantive it has stopped being small talk.
+    note: Once the conversation becomes deep, let it continue.
 
 # ── Follow-the-noun practice sentences. ─────────────────────────────────────
 nouns:

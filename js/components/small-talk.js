@@ -180,9 +180,9 @@
                   'Open one notch formal, then follow their lead down.',
                   'Use titles until invited otherwise. Greet carefully.',
                   'Titles and surnames throughout. Let them offer the first name.'],
-      hierarchy: ['Speak freely across levels. Deference will feel odd here.',
+      hierarchy: ['Speak freely across levels. Formal respect for rank may feel odd here.',
                   'Rank is light. Normal courtesy is enough.',
-                  'Notice who defers to whom before you settle in.',
+                  'Notice who follows whose lead before you settle in.',
                   'Let senior people open topics. Avoid casual interruption.',
                   'Address by rank, wait to be brought in, disagree privately if at all.'],
       directness: ['Read the implication. A soft no is still a no.',
@@ -199,10 +199,10 @@
               'Stay a step back and let them close it.',
               'Let them lead entirely on contact and distance.',
               'Contact is likely. Follow their greeting, do not initiate.',
-              'Expect closeness and embraces. Withdrawing will register.'],
+              'Expect closeness and embraces. Pulling away will be noticed.'],
       privacy: ['Personal questions are warmth here. Answer briefly and ask back.',
                 'Expect family and home to come up early. It is not intrusion.',
-                'Let them open the personal register first.',
+                'Let them share personal details first.',
                 'Keep to work and place until they go further.',
                 'Stay on neutral ground. Personal questions will land badly.'],
       relationship: ['Get to the agenda. Long preamble reads as time-wasting.',
@@ -218,7 +218,7 @@
         var line = (advice[v.key] || [])[val] || '';
         return '<li><b>' + esc(v.name) + '.</b> ' + esc(line) + '</li>';
       }).join('');
-      out.innerHTML = '<h4>Your posture for this room</h4><ul>' + items + '</ul>';
+      out.innerHTML = '<h4>How to enter this room</h4><ul>' + items + '</ul>';
     }
     all('input.sm-range', wrap).forEach(function (r) { r.addEventListener('input', paint); });
     paint();

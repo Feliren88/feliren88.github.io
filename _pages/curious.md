@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Stay Curious
-subtitle: An operating system for staying in contact with reality
+subtitle: A field guide for staying in contact with reality
 description: Notice what does not fit, ask better questions, test your explanations, update your model, and act before research becomes avoidance.
 permalink: /curious/
 date: 2026-08-26
@@ -36,10 +36,10 @@ hide_title: true
 </header>
 
 <section class="cq-intro cq-prose">
-  <p class="cq-lead">Curiosity converts a closed conclusion into an open investigation.</p>
+  <p class="cq-lead">Curiosity reopens a conclusion long enough to test it.</p>
   <div class="cq-reframes">
     <p><s>This failed.</s><strong>What did the failure reveal?</strong></p>
-    <p><s>This person is difficult.</s><strong>What would make their behavior make sense?</strong></p>
+    <p><s>This person is difficult.</s><strong>What would make their behaviour make sense?</strong></p>
     <p><s>I am bad at this.</s><strong>Which part can I train?</strong></p>
     <p><s>This is impossible.</s><strong>Under what conditions could it work?</strong></p>
   </div>
@@ -47,7 +47,7 @@ hide_title: true
 
 <section class="cq-part cq-prose" id="map">
   <div class="cq-section-head"><span>01</span><div><p class="cq-kicker">The map</p><h2>Curiosity has five working parts</h2></div></div>
-  <p class="cq-deck">Questions alone are cheap. Mature curiosity pays attention, tolerates uncertainty, tests its ideas, and updates after the result.</p>
+  <p class="cq-deck">Questions are cheap. Curiosity also notices, tolerates uncertainty, tests its ideas, and updates after the result.</p>
 
   <div class="cq-equation" aria-label="Curiosity equals attention plus questions plus uncertainty tolerance plus experimentation plus updating">
     <div><b>Attention</b><small>See what does not fit</small></div><i>+</i>
@@ -58,7 +58,7 @@ hide_title: true
   </div>
 
   <div class="cq-loop-wrap">
-    <div class="cq-loop-copy"><p class="cq-kicker">The recursive loop</p><h3>Every answer should improve the next question.</h3><p>Start with attention, not explanation. Model what you see, make the belief produce a prediction, then compare that prediction with what happens.</p></div>
+    <div class="cq-loop-copy"><p class="cq-kicker">The recursive loop</p><h3>Every answer should improve the next question.</h3><p>Start by noticing. Build a model, state its prediction, then compare that prediction with what happens.</p></div>
     <svg class="cq-loop" viewBox="0 0 500 500" role="img" aria-label="A loop from notice to question, investigate, model, test, observe, update, and question again">
       <circle class="cq-orbit" cx="250" cy="250" r="178"/>
       <g data-loop="0"><circle cx="250" cy="72" r="28"/><text x="250" y="76">Notice</text></g>
@@ -76,7 +76,7 @@ hide_title: true
   <div class="cq-modes">
     <article><span>01</span><h3>Explore</h3><p>What is out there?</p><small>Discovery widens the field.</small></article>
     <article><span>02</span><h3>Understand</h3><p>Why does this happen?</p><small>Explanation finds structure.</small></article>
-    <article><span>03</span><h3>Apply</h3><p>What can I do with it?</p><small>Use turns learning into evidence.</small></article>
+    <article><span>03</span><h3>Apply</h3><p>What can I do with it?</p><small>Use puts learning in contact with evidence.</small></article>
   </div>
 </section>
 
@@ -85,7 +85,7 @@ hide_title: true
   <p class="cq-deck">Begin with what you can observe. Interpretation comes later.</p>
 
   <div class="cq-ladder" id="cq-ladder">
-    <button type="button" data-step="0"><span>01</span><b>What is happening?</b><small>Describe behavior before naming motive.</small></button>
+    <button type="button" data-step="0"><span>01</span><b>What is happening?</b><small>Describe behaviour before naming motive.</small></button>
     <button type="button" data-step="1"><span>02</span><b>Compared with what?</b><small>Find the baseline behind the claim.</small></button>
     <button type="button" data-step="2"><span>03</span><b>What else could explain it?</b><small>Force at least three hypotheses.</small></button>
     <button type="button" data-step="3"><span>04</span><b>What would prove me wrong?</b><small>Name evidence before looking for it.</small></button>
@@ -95,7 +95,7 @@ hide_title: true
   <div class="cq-ladder-read" id="cq-ladder-read" role="status"><b>Start with observation.</b><p>“He is angry” is an interpretation. “His answers became shorter and his voice got louder” is something another person could verify.</p></div>
 
   <div class="cq-assumption">
-    <div><p class="cq-kicker">Assumption inverter</p><h3>Try the opposite without believing it.</h3><p>Reversing a claim exposes the architecture hiding beneath it.</p></div>
+    <div><p class="cq-kicker">Assumption inverter</p><h3>Try the opposite without believing it.</h3><p>A reversed claim reveals which assumptions hold the original in place.</p></div>
     <div class="cq-inverter" id="cq-inverter">
       <button type="button" aria-pressed="false"><span>People need more motivation.</span><span>People are motivated; the environment blocks them.</span></button>
       <button type="button" aria-pressed="false"><span>We need more customers.</span><span>We need fewer, better customers.</span></button>
@@ -106,7 +106,7 @@ hide_title: true
 
 <section class="cq-part cq-prose" id="test">
   <div class="cq-section-head"><span>03</span><div><p class="cq-kicker">The lab</p><h2>Make the explanation earn your confidence</h2></div></div>
-  <p class="cq-deck">A useful model predicts what you should see. Write the hypothesis first; the tool turns it into a test.</p>
+  <p class="cq-deck">A useful model predicts what you should see. Write the hypothesis first, then turn it into a test.</p>
 
   <div class="cq-lab">
     <label for="cq-hypothesis">I think this is happening because…</label>
@@ -120,7 +120,7 @@ hide_title: true
   </div>
 
   <div class="cq-zoom">
-    <div><p class="cq-kicker">Change the resolution</p><h3>Move between scales.</h3><p>The same event looks different through a person, a network, and a system. Strong thinkers zoom in and out before deciding where to intervene.</p></div>
+    <div><p class="cq-kicker">Change the resolution</p><h3>Move between scales.</h3><p>The same event looks different through a person, network, or system. Change scale before choosing where to intervene.</p></div>
     <div class="cq-zoom-chart" id="cq-zoom-chart">
       <button type="button" data-zoom="micro" aria-pressed="true"><b>Micro</b><small>person</small></button>
       <button type="button" data-zoom="meso" aria-pressed="false"><b>Meso</b><small>team / network</small></button>
@@ -132,13 +132,13 @@ hide_title: true
 
 <section class="cq-part cq-prose" id="apply">
   <div class="cq-section-head"><span>04</span><div><p class="cq-kicker">The field</p><h2>Use curiosity where judgment hardens</h2></div></div>
-  <p class="cq-deck">The subject changes. The move stays the same: replace the label with a mechanism you can investigate.</p>
+  <p class="cq-deck">Across subjects, replace a fixed label with a mechanism you can investigate.</p>
 
   <div class="cq-domains" id="cq-domains">
     <button type="button" data-domain="self" aria-pressed="true">Self</button><button type="button" data-domain="people">People</button><button type="button" data-domain="work">Work</button><button type="button" data-domain="world">World</button>
   </div>
   <div class="cq-domain-stage" id="cq-domain-stage">
-    <p class="cq-domain-label">SELF</p><h3>Turn identity into a trainable component.</h3>
+    <p class="cq-domain-label">SELF</p><h3>Break identity claims into trainable parts.</h3>
     <div class="cq-before-after"><p><span>CLOSED</span>“I am terrible at networking.”</p><p><span>OPEN</span>“Is the hard part initiating, entering a group, remembering names, or following up?”</p></div>
     <div class="cq-prompt-grid"><p>What happens immediately before the pattern?</p><p>What need am I trying to meet?</p><p>Which conditions make this easier?</p></div>
   </div>
@@ -151,7 +151,7 @@ hide_title: true
 
 <section class="cq-part cq-prose" id="limits">
   <div class="cq-section-head"><span>05</span><div><p class="cq-kicker">The guardrails</p><h2>Curiosity needs an exit</h2></div></div>
-  <p class="cq-deck">Without commitment, curiosity fragments attention. Without boundaries, it becomes intrusion. Without a stopping rule, it becomes anxiety with better vocabulary.</p>
+  <p class="cq-deck">Curiosity needs commitment, boundaries, and a stopping rule. Otherwise it scatters attention, intrudes, or gives anxiety better vocabulary.</p>
 
   <div class="cq-balance">
     <div class="cq-balance-copy"><p class="cq-kicker">Explore / exploit</p><h3 id="cq-balance-title">Balanced inquiry</h3><p id="cq-balance-text">Keep enough range to discover, then stay long enough for the work to compound.</p></div>
@@ -159,9 +159,9 @@ hide_title: true
   </div>
 
   <div class="cq-dark-grid">
-    <article><span>01</span><h3>Novelty addiction</h3><p>More tabs, books, and beginnings. Nothing built.</p><b>Choose one thread and make something.</b></article>
+    <article><span>01</span><h3>Novelty addiction</h3><p>You collect tabs, books, and beginnings without building anything.</p><b>Choose one thread and make something.</b></article>
     <article><span>02</span><h3>Research as avoidance</h3><p>Another expert feels safer than a decision.</p><b>Ask whether more evidence could change the choice.</b></article>
-    <article><span>03</span><h3>Permanent doubt</h3><p>Skepticism hardens until no claim can survive.</p><b>Aim for calibrated belief, not zero uncertainty.</b></article>
+    <article><span>03</span><h3>Permanent doubt</h3><p>Scepticism hardens until no claim can survive.</p><b>Keep belief proportional to the evidence.</b></article>
     <article><span>04</span><h3>Intrusion</h3><p>Interest ignores privacy, consent, or timing.</p><b>People do not owe you access.</b></article>
   </div>
 
@@ -170,7 +170,7 @@ hide_title: true
 
 <section class="cq-part cq-prose" id="practice">
   <div class="cq-section-head"><span>06</span><div><p class="cq-kicker">The practice</p><h2>Keep one live question</h2></div></div>
-  <p class="cq-deck">You do not need to investigate everything. Capture what matters, pick one thread, and let the rest wait.</p>
+  <p class="cq-deck">Investigate selectively. Capture what matters, pick one thread, and let the rest wait.</p>
 
   <div class="cq-queue">
     <div class="cq-queue-head"><div><p class="cq-kicker">Private question queue</p><h3>What are you trying to understand?</h3></div><span>Saved only in this browser</span></div>

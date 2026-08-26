@@ -1,8 +1,8 @@
 ---
 layout: page
 title: How to Read People
-subtitle: A field manual for observing behaviour without inventing certainty.
-description: A practical system for reading behaviour, motives, incentives, character, and social dynamics through evidence and calibration.
+subtitle: A field manual for observing behaviour without inventing certainty
+description: Observe behaviour, test competing explanations, and match trust to the evidence.
 permalink: /read-people/
 date: 2026-08-26
 last_modified_at: 2026-08-26
@@ -27,9 +27,9 @@ image: /assets/img/read-people-hero.webp
 
 <header class="rp-hero" id="observe">
   <div class="rp-hero-copy">
-    <p class="rp-kicker">A field manual for pattern-driven minds</p>
+    <p class="rp-kicker">Observation before interpretation</p>
     <h1>See patterns quickly. Believe them slowly.</h1>
-    <p>Reading people is an inference problem. Observe what changed, generate competing explanations, then test what each one predicts.</p>
+    <p>Reading people means making inferences under uncertainty. Notice what changed, keep several explanations alive, and test what each one predicts.</p>
     <div class="rp-hero-rule"><span>First law</span><strong>Inference ≠ mind-reading</strong></div>
   </div>
   <figure class="rp-hero-art">
@@ -43,7 +43,7 @@ image: /assets/img/read-people-hero.webp
 </section>
 
 <section class="rp-part" id="infer">
-  <div class="rp-heading"><span>01</span><div><h2>Build evidence before a story</h2><p>A gesture is weak evidence. Repeated change under real stakes is much stronger.</p></div></div>
+  <div class="rp-heading"><span>01</span><div><h2>Observe before you explain</h2><p>One gesture tells you little. A repeated change under real stakes tells you more.</p></div></div>
 
   <div class="rp-evidence">
     <div class="rp-evidence-scale" role="img" aria-label="Evidence grows from a single signal to repeated behaviour under consequence">
@@ -57,7 +57,7 @@ image: /assets/img/read-people-hero.webp
   </div>
 
   <div class="rp-baseline-grid">
-    <article><span>Absolute behaviour</span><div class="rp-bars"><i style="--v:72%"></i><i style="--v:67%"></i><i style="--v:75%"></i><i class="hot" style="--v:78%"></i></div><p>They speak quickly. That may be normal.</p></article>
+    <article><span>What you see</span><div class="rp-bars"><i style="--v:72%"></i><i style="--v:67%"></i><i style="--v:75%"></i><i class="hot" style="--v:78%"></i></div><p>They speak quickly. That may be normal.</p></article>
     <div class="rp-minus">−</div>
     <article><span>Personal baseline</span><div class="rp-bars base"><i style="--v:70%"></i><i style="--v:68%"></i><i style="--v:71%"></i><i style="--v:69%"></i></div><p>Compare the person with themselves.</p></article>
     <div class="rp-equals">=</div>
@@ -65,15 +65,15 @@ image: /assets/img/read-people-hero.webp
   </div>
 
   <div class="rp-rule-grid">
-    <article><b>Baseline first</b><p>Learn the person’s normal pace, posture, humour, gaze, and energy.</p></article>
-    <article><b>Context first</b><p>Ask what the role, room, culture, or immediate pressure already explains.</p></article>
-    <article><b>Actions first</b><p>Track time, attention, money, sacrifice, and repeated choices.</p></article>
-    <article><b>Specifics first</b><p>Move from claims to examples: “What happened the last time?”</p></article>
+    <article><b>Find the baseline</b><p>Learn the person’s normal pace, posture, humour, gaze, and energy.</p></article>
+    <article><b>Account for context</b><p>Ask what the role, room, culture, or immediate pressure already explains.</p></article>
+    <article><b>Follow their choices</b><p>Track time, attention, money, sacrifice, and repeated decisions.</p></article>
+    <article><b>Ask for specifics</b><p>Move from claims to examples: “What happened the last time?”</p></article>
   </div>
 </section>
 
 <section class="rp-part" id="character">
-  <div class="rp-heading"><span>02</span><div><h2>Read the mechanism, not the label</h2><p>The same behaviour can come from different motives. Keep those mechanisms separate.</p></div></div>
+  <div class="rp-heading"><span>02</span><div><h2>Ask what could produce the behaviour</h2><p>Different motives can produce the same action. Keep those explanations separate.</p></div></div>
 
   <div class="rp-hypothesis-tool">
     <header><span>Three-hypothesis rule</span><h3>Why did they cancel?</h3><p>Choose the next piece of evidence. Watch the probabilities move.</p></header>
@@ -109,9 +109,9 @@ image: /assets/img/read-people-hero.webp
     <article><span>Protect</span><h3>Where does defensiveness spike?</h3><p>It may mark identity investment: status, intelligence, morality, independence, or belonging.</p></article>
     <article><span>Spend</span><h3>Where do resources go?</h3><p>Time, attention, money, and sacrifice reveal priorities better than declarations.</p></article>
     <article><span>Trade</span><h3>What wins under conflict?</h3><p>Repeated trade-offs expose the person’s real value hierarchy.</p></article>
-    <article><span>Admire</span><h3>What earns their respect?</h3><p>The chosen trait often points towards an aspirational value.</p></article>
+    <article><span>Admire</span><h3>What earns their respect?</h3><p>The trait they name may be one they want to develop.</p></article>
     <article><span>Envy</span><h3>What draws excess criticism?</h3><p>Repetition may reveal aspiration, threat, or conflict. It never proves projection.</p></article>
-    <article><span>Brag</span><h3>What image do they sell?</h3><p>Repeated boasts show what they value and want others to value in them.</p></article>
+    <article><span>Brag</span><h3>What image do they sell?</h3><p>Repeated boasts show what they want others to notice and reward.</p></article>
   </div>
 </section>
 
@@ -141,7 +141,7 @@ image: /assets/img/read-people-hero.webp
   </figure>
 
   <div class="rp-trust">
-    <header><span>Trust ladder</span><h3>Let evidence increase exposure</h3><p>Charisma does not skip a rung.</p></header>
+    <header><span>Trust ladder</span><h3>Increase exposure as evidence grows</h3><p>Charisma does not count as follow-through.</p></header>
     <ol><li><b>Conversation</b><span>low exposure</span></li><li><b>Small commitment</b><span>test follow-through</span></li><li><b>Modest responsibility</b><span>observe repair</span></li><li><b>Meaningful dependence</b><span>verify consistency</span></li><li><b>High-stakes trust</b><span>earned over time</span></li></ol>
   </div>
 
@@ -175,7 +175,7 @@ image: /assets/img/read-people-hero.webp
 </section>
 
 <section class="rp-part" id="train">
-  <div class="rp-heading"><span>05</span><div><h2>Train calibration, not confidence</h2><p>Record predictions before the outcome. Hindsight can make any story feel obvious.</p></div></div>
+  <div class="rp-heading"><span>05</span><div><h2>Train calibrated judgment</h2><p>Record predictions before the outcome. Hindsight can make any story feel obvious.</p></div></div>
 
   <div class="rp-calendar">
     <article><b>01–05</b><span>Observe facts only</span><p>Separate what happened from what you inferred.</p></article>
@@ -188,7 +188,7 @@ image: /assets/img/read-people-hero.webp
   </div>
 
   <div class="rp-journal">
-    <header><span>10-minute drill</span><h3>One interaction. Six fields.</h3></header>
+    <header><span>10-minute drill</span><h3>Review one interaction in six fields</h3></header>
     <div><label>Observed<textarea placeholder="Only visible or audible facts"></textarea></label><label>Changed<textarea placeholder="What differed from baseline?"></textarea></label><label>Hypotheses<textarea placeholder="H1, benign H2, different H3"></textarea></label><label>Incentives<textarea placeholder="What did each person want or fear?"></textarea></label><label>Prediction<textarea placeholder="What should happen next?"></textarea></label><label>Confidence<input type="range" min="0" max="100" value="50"><output>50%</output></label></div>
     <p>Saved in this browser.</p>
   </div>
@@ -200,8 +200,8 @@ image: /assets/img/read-people-hero.webp
 
   <div class="rp-final">
     <div><span>Accuracy</span><i>+</i><span>Empathy</span><i>+</i><span>Boundaries</span></div>
-    <p>Understand the person’s internal logic. Keep enough distance to protect your choices.</p>
-    <strong>Predict behaviour. Do not claim the soul.</strong>
+    <p>Understand the person’s internal logic while keeping enough distance to protect your choices.</p>
+    <strong>Match trust to repeated evidence.</strong>
   </div>
 </section>
 

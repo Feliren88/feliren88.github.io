@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Small Talk
-subtitle: A practical way into better conversations.
-description: A field manual for people who prefer depth. What small talk does, a seven-move loop, a path from weather to meaning, seven cultural cues, twenty settings, and ways to recover when a conversation stalls.
+subtitle: A practical way into better conversations
+description: A guide for people who prefer deeper conversations but still need an easy place to start.
 permalink: /small-talk/
 date: 2026-08-26
 last_modified_at: 2026-08-26
@@ -15,7 +15,7 @@ motion_scene: rapport
 <div class="sm-progress" aria-hidden="true"><span id="smw-progress-fill"></span></div>
 
 <nav class="sm-rail" aria-label="Manual sections">
-  <a href="#story"><b>00</b><span>Story</span></a><a href="#calibration"><b>01</b><span>Calibration</span></a><a href="#loop"><b>02</b><span>The loop</span></a><a href="#ladder"><b>03</b><span>The ladder</span></a><a href="#topics"><b>04</b><span>Topics</span></a><a href="#variables"><b>05</b><span>Variables</span></a><a href="#atlas"><b>06</b><span>Atlas</span></a><a href="#settings"><b>07</b><span>Settings</span></a><a href="#scripts"><b>08</b><span>Scripts</span></a><a href="#repair"><b>09</b><span>Repair</span></a><a href="#manner"><b>10</b><span>Manner</span></a>
+  <a href="#story"><b>00</b><span>Story</span></a><a href="#calibration"><b>01</b><span>Purpose</span></a><a href="#loop"><b>02</b><span>The loop</span></a><a href="#ladder"><b>03</b><span>The ladder</span></a><a href="#topics"><b>04</b><span>Topics</span></a><a href="#variables"><b>05</b><span>Cues</span></a><a href="#atlas"><b>06</b><span>Atlas</span></a><a href="#settings"><b>07</b><span>Settings</span></a><a href="#scripts"><b>08</b><span>Scripts</span></a><a href="#repair"><b>09</b><span>Repair</span></a><a href="#manner"><b>10</b><span>Manner</span></a>
 </nav>
 
 <script type="application/json" id="smw-data">{{ site.data.small_talk | jsonify }}</script>
@@ -83,16 +83,16 @@ motion_scene: rapport
 </section>
 
 <section class="sm-part sm-prose" id="calibration">
-  <h2><span>01</span><svg class="sm-i sm-h2-i"><use href="#sm-eye"/></svg> What it is actually for</h2>
-  <p class="sm-deck">An analytical mind can dismiss small talk because it carries little information. But the exchange is doing social work.</p>
+  <h2><span>01</span><svg class="sm-i sm-h2-i"><use href="#sm-eye"/></svg> What small talk is for</h2>
+  <p class="sm-deck">Small talk may carry little information, but it helps two people feel safe enough to continue.</p>
 
   <div class="sm-decode">
     <p class="sm-decode-said">Busy week?</p>
-    <p class="sm-decode-note">What is actually being asked</p>
+    <p class="sm-decode-note">What the question may mean</p>
     <ul>
       <li>I acknowledge you.</li>
       <li>Are you open to interaction?</li>
-      <li>What emotional temperature should I use?</li>
+      <li>What mood should I match?</li>
       <li>Can we build a little trust before anything important?</li>
     </ul>
   </div>
@@ -104,17 +104,17 @@ motion_scene: rapport
     <tbody>
       <tr><td>Recognition</td><td>I see you.</td></tr>
       <tr><td>Safety</td><td>I am friendly and predictable.</td></tr>
-      <tr><td>Calibration</td><td>How formal, open, energetic or private are you?</td></tr>
-      <tr><td>Affiliation</td><td>We are temporarily on the same side.</td></tr>
+      <tr><td>Reading the room</td><td>How formal, open, energetic or private are you?</td></tr>
+      <tr><td>Connection</td><td>We are on the same side for now.</td></tr>
       <tr><td>Information</td><td>What kind of person are you?</td></tr>
-      <tr><td>Trust</td><td>Could this become more substantive?</td></tr>
+      <tr><td>Trust</td><td>Could this become a deeper conversation?</td></tr>
       <tr><td>Transition</td><td>Strangers to acquaintances.</td></tr>
     </tbody>
   </table>
 
   <p class="sm-rule">Small talk lets two people read each other without much risk.</p>
 
-  <p>Observation helps me here. I notice what someone emphasises, whether they answer briefly or expansively, and which topics bring energy or make them withdraw. My problem is that I can overprocess all of it.</p>
+  <p>Observation helps me here. I notice what someone stresses, whether they give a short or long answer, and which topics bring energy or make them pull back. My problem is that I can think too much about all of it.</p>
 
   <div class="sm-two">
     <div class="sm-bad">
@@ -153,7 +153,7 @@ motion_scene: rapport
   </div>
 
   <h3>The three-question limit</h3>
-  <p>After two or three questions, I share something too. Questions without reciprocity start to feel like an interview.</p>
+  <p>After two or three questions, I share something too. If I only ask questions, the conversation starts to feel like an interview.</p>
 
   <div class="sm-two">
     <div class="sm-bad">
@@ -195,7 +195,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="topics">
   <h2><span>04</span><svg class="sm-i sm-h2-i"><use href="#sm-pin"/></svg> Topics</h2>
-  <p class="sm-deck">Six families instead of a hundred memorised scripts. The mnemonic is PEWFIC.</p>
+  <p class="sm-deck">Six topic groups are easier to remember than a hundred scripts. I use PEWFIC.</p>
 
   <div class="sm-pewfic" id="smw-pewfic" role="group" aria-label="Six safe topic families">
     {% for t in site.data.small_talk.topics %}
@@ -204,7 +204,7 @@ motion_scene: rapport
   </div>
   <p class="sm-pewfic-out" id="smw-pewfic-out" role="status">Pick a letter for openings.</p>
 
-  <h3>Topics that need calibration</h3>
+  <h3>Topics that need more care</h3>
   <p>None of these are forbidden. Their meaning changes enormously with culture, setting and relationship, so I let the other person set the depth first.</p>
 
   <div class="sm-calibrate">
@@ -222,7 +222,7 @@ motion_scene: rapport
 
 <section class="sm-part sm-prose" id="variables">
   <h2><span>05</span><svg class="sm-i sm-h2-i"><use href="#sm-globe"/></svg> Seven variables</h2>
-  <p class="sm-deck">Country-by-country rules are impossible to memorise and invite stereotypes. These seven cues offer a better way to read the room.</p>
+  <p class="sm-deck">Country-by-country rules are hard to remember and can create stereotypes. These seven cues help me read the room in front of me.</p>
 
   <div class="sm-vars" id="smw-vars" role="group" aria-label="Cultural variable calibration">
     {% for v in site.data.small_talk.variables %}
@@ -241,9 +241,9 @@ motion_scene: rapport
 
   <div class="sm-posture" id="smw-posture" role="status" aria-live="polite"></div>
 
-  <p class="sm-rule">Mirror formality, pace, disclosure, energy and distance. Never mirror an accent.</p>
+  <p class="sm-rule">Match their formality, pace, openness, energy and distance. Never copy an accent.</p>
 
-  <p class="sm-note">When I do not know the rule, I observe first and start slightly more conservatively than the people around me.</p>
+  <p class="sm-note">When I do not know the rule, I watch first and begin a little more formally than the people around me.</p>
 </section>
 
 <section class="sm-part sm-prose" id="atlas">
@@ -271,8 +271,8 @@ motion_scene: rapport
   </div>
 
   <h3>Indonesia, specifically</h3>
-  <p>This one matters most to me. The working default is warm, respectful, non-boastful and context-aware. Food-oriented conversation often works socially rather than literally, and <span class="sm-lang">sudah makan?</span> is a greeting more than a question about lunch.</p>
-  <p>Questions about where someone lives, where they are from, family, school, work and hometown can arrive earlier than in some Western professional settings. Reading every one of them through American privacy norms is a mistake. At the same time, multinational Jakarta in technology, finance and consulting often runs closer to global corporate convention.</p>
+  <p>This one matters most to me. A good starting point is warm, respectful and modest. Talk about food often shows care, and <span class="sm-lang">sudah makan?</span> can be a greeting rather than a real question about lunch.</p>
+  <p>Questions about home, family, school and work can arrive earlier than they do in some Western offices. American ideas about privacy do not explain every question. Multinational workplaces in Jakarta may follow global office norms more closely.</p>
   <p class="sm-rule">Observe the subculture, not only the nationality.</p>
 </section>
 
@@ -299,9 +299,9 @@ motion_scene: rapport
 
   <ol class="sm-budget">
     <li><b>Arrive</b><span>Warm up on someone easy. The first conversation is a rehearsal.</span></li>
-    <li><b>Two</b><span>Find two conversations worth continuing. That is the actual target.</span></li>
-    <li><b>Break</b><span>Step outside. Refilling is not rude, and nobody is counting.</span></li>
-    <li><b>One more</b><span>Then a third, if the energy is genuinely there.</span></li>
+    <li><b>Two</b><span>Find two conversations worth continuing. That is the target.</span></li>
+    <li><b>Break</b><span>Step outside. Taking a break is not rude, and nobody is counting.</span></li>
+    <li><b>One more</b><span>Have a third conversation if you still have the energy.</span></li>
     <li><b>Leave</b><span>Go before resentment sets in. Leaving early is a strategy.</span></li>
   </ol>
 </section>
@@ -322,7 +322,7 @@ motion_scene: rapport
     {% endfor %}
   </div>
 
-  <p class="sm-note">The two-layer answer matters most at high-status events. Give one sentence, then stop and let them choose whether to go deeper. Leading with credentials invites a comparison nobody enjoys.</p>
+  <p class="sm-note">At high-status events, give one sentence and stop. Let them choose whether to ask more. Starting with credentials invites a comparison nobody enjoys.</p>
 </section>
 
 <section class="sm-part sm-prose" id="repair">
@@ -336,13 +336,13 @@ motion_scene: rapport
   </div>
   <div class="sm-repair-out" id="smw-repair-out" role="status" aria-live="polite"></div>
 
-  <h3>Validation before analysis</h3>
+  <h3>Show care before giving advice</h3>
   <p>I get this one wrong often. Someone describes a problem and I reach for a diagnosis when they wanted sympathy.</p>
   <p class="sm-chain"><span>Acknowledge</span><i aria-hidden="true">→</i><span>Clarify</span><i aria-hidden="true">→</i><span>Analyse only if invited</span></p>
 
   <div class="sm-two">
     <div class="sm-bad">
-      <span class="sm-tagline">Premature</span>
+      <span class="sm-tagline">Too soon</span>
       <p>You need stronger boundaries.</p>
     </div>
     <div class="sm-good">
@@ -365,8 +365,8 @@ motion_scene: rapport
     </tbody>
   </table>
 
-  <h3>Make the listening legible</h3>
-  <p>I listen intensely but show little of it. Because attention is invisible, I need to make mine audible even when I already understand.</p>
+  <h3>Show that you are listening</h3>
+  <p>I listen closely but do not always show it. The other person cannot see attention, so I need to respond out loud.</p>
   <p class="sm-chips">{% for l in site.data.small_talk.manner.listening %}<span>{{ l }}</span>{% endfor %}</p>
 
   <h3>Compliments and humour</h3>
@@ -385,7 +385,7 @@ motion_scene: rapport
     </div>
   </div>
 
-  <p class="sm-rule">Underestimate your humour privileges with strangers.</p>
+  <p class="sm-rule">Be more careful with humour around strangers.</p>
 
   <h3>The mode</h3>
   <p>The mode that fits me is calm, observant, curious, lightly funny, specific, respectful and selectively open.</p>

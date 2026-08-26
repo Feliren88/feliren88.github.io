@@ -8,24 +8,24 @@
   var loop=$$('.cq-loop g[data-loop]'), loopN=0;if(loop.length&&!matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval(function(){loop.forEach(function(g,i){g.classList.toggle('is-on',i===loopN)});loopN=(loopN+1)%loop.length},850)}
   var ladderCopy=[
     ['Start with observation.','“He is angry” is an interpretation. “His answers became shorter and his voice got louder” is something another person could verify.'],
-    ['Give the claim a baseline.','“Sales are bad” means little until you compare them with the plan, last month, competitors, or normal seasonality.'],
-    ['Protect yourself from the first story.','Busy, uncertain, forgetful, or uninterested can all explain a late reply. Keep alternatives alive until evidence separates them.'],
+    ['Give the claim a baseline.','“Sales are bad” means little without the plan, last month, competitors, or normal seasonality.'],
+    ['Protect yourself from the first story.','A late reply may signal overload, uncertainty, forgetfulness, or low interest. Keep alternatives alive until evidence separates them.'],
     ['Let the belief take a risk.','If price causes churn, discounts should retain some customers. If discounts do nothing, investigate onboarding, value, or fit.'],
     ['Search the negative space.','Who left before complaining? Which data was never collected? Who stays quiet because dissent carries a cost?'],
-    ['Create information through action.','Try a small pricing test, a short project, or one changed condition. Reversible action often teaches faster than debate.']
+    ['Create information through action.','Try a small pricing test, short project, or changed condition. Reversible action often teaches faster than debate.']
   ];
   var ladderRead=$('#cq-ladder-read');$$('#cq-ladder button').forEach(function(b){b.addEventListener('click',function(){var n=+b.dataset.step;$$('#cq-ladder button').forEach(function(x){x.classList.toggle('is-active',x===b)});ladderRead.innerHTML='<b>'+ladderCopy[n][0]+'</b><p>'+ladderCopy[n][1]+'</p>'})});
   $$('#cq-inverter button').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true')})});
 
-  var hypothesis=$('#cq-hypothesis');$('#cq-build-test').addEventListener('click',function(){var h=hypothesis.value.trim();if(!h){hypothesis.focus();return}$('#cq-expect').textContent='Write one observable result that should follow if: “'+h+'”';$('#cq-falsify').textContent='Look for a result the explanation cannot comfortably explain away.';$('#cq-cheap').textContent='Change one condition, observe one behavior, or ask for one piece of disconfirming evidence.'});
+  var hypothesis=$('#cq-hypothesis');$('#cq-build-test').addEventListener('click',function(){var h=hypothesis.value.trim();if(!h){hypothesis.focus();return}$('#cq-expect').textContent='Write one observable result that should follow from this claim: “'+h+'”';$('#cq-falsify').textContent='Look for a result the explanation cannot comfortably explain away.';$('#cq-cheap').textContent='Change one condition, observe one behaviour, or seek one piece of disconfirming evidence.'});
   var zoomCopy={micro:'What did one person do, feel, expect, or avoid?',meso:'Which roles, incentives, relationships, or handoffs shaped the event?',macro:'Which market, institution, history, technology, or cultural norm set the conditions?'};
   $$('#cq-zoom-chart button').forEach(function(b){b.addEventListener('click',function(){$$('#cq-zoom-chart button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});$('#cq-zoom-read').textContent=zoomCopy[b.dataset.zoom]})});
 
   var domains={
-    self:['SELF','Turn identity into a trainable component.','“I am terrible at networking.”','“Is the hard part initiating, entering a group, remembering names, or following up?”',['What happens immediately before the pattern?','What need am I trying to meet?','Which conditions make this easier?']],
+    self:['SELF','Break identity claims into trainable parts.','“I am terrible at networking.”','“Is the hard part initiating, entering a group, remembering names, or following up?”',['What happens immediately before the pattern?','What need am I trying to meet?','Which conditions make this easier?']],
     people:['PEOPLE','Replace the label with conditions.','“She is difficult.”','“When does working together become difficult, and what is she protecting?”',['What seems important to them?','How do they behave under pressure?','What would they consider fair?']],
     work:['WORK','Find the decision behind the task.','“We need to finish this report.”','“Who uses it, which decision does it support, and what happens if we stop?”',['Where does value come from?','What is the bottleneck?','What breaks at ten times the volume?']],
-    world:['WORLD','Read the system around the event.','“This is how things are done.”','“Which history, incentive, constraint, or technology made this normal?”',['Who benefits?','Who changes behavior next?','Which cost is hidden or delayed?']]
+    world:['WORLD','Read the system around the event.','“This is how things are done.”','“Which history, incentive, constraint, or technology made this normal?”',['Who benefits?','Who changes behaviour next?','Which cost is hidden or delayed?']]
   };
   $$('#cq-domains button').forEach(function(b){b.addEventListener('click',function(){var d=domains[b.dataset.domain], stage=$('#cq-domain-stage');$$('#cq-domains button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});stage.innerHTML='<p class="cq-domain-label">'+d[0]+'</p><h3>'+d[1]+'</h3><div class="cq-before-after"><p><span>CLOSED</span>'+d[2]+'</p><p><span>OPEN</span>'+d[3]+'</p></div><div class="cq-prompt-grid">'+d[4].map(function(x){return'<p>'+x+'</p>'}).join('')+'</div>'})});
 

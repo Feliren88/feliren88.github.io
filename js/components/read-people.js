@@ -13,8 +13,8 @@
   $$('.rp-evidence-buttons button').forEach(function(b){b.addEventListener('click',function(){probability(b.dataset.evidence)})});probability('reset');
   var states={
     power:['Power lowers the cost of showing existing tendencies.',['shares credit','protects juniors','accepts dissent','owns failure','uses discretion']],
-    stress:['Pressure reveals the default regulation strategy.',['controls','withdraws','blames','collaborates','becomes more precise']],
-    failure:['Failure tests ego flexibility and learning.',['denies','repairs','asks for feedback','changes method','updates without collapse']],
+    stress:['Pressure exposes how someone usually regulates themselves.',['controls','withdraws','blames','collaborates','becomes more precise']],
+    failure:['Failure shows how someone protects their ego and whether they learn.',['denies','repairs','asks for feedback','changes method','updates without collapse']],
     success:['Success changes status and options. Watch what follows.',['shares credit','rewards support','inflates risk','forgets contributors','becomes generous']],
     boundary:['A polite no exposes assumptions about entitlement.',['accepts','pressures','guilts','punishes','keeps negotiating']]
   };
