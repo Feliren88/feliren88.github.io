@@ -55,6 +55,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">How to spot the certainty trap, manage an intense state, decide under doubt, and keep moving while an answer remains unavailable.</span>
 <span class="read-more">Open the manual →</span>
 </a>
+<a class="essay-feature" href="/life-challenges/">
+<span class="essay-feature-label">Interactive visual essay</span>
+<span class="essay-feature-title">The Silver Lining of a Difficult Life</span>
+<span class="essay-feature-desc">Difficulty supplies raw material. Growth depends on what surrounds it. Test the conditions that turn pressure into capacity, map the futures that certainty erases, and decide whether an obstacle asks you to strengthen, redesign, wait, or leave.</span>
+<span class="read-more">Enter the field guide →</span>
+</a>
 <a class="essay-feature" href="/small-talk/">
 <span class="essay-feature-label">Interactive manual</span>
 <span class="essay-feature-title">Small Talk as Calibration</span>
@@ -72,12 +78,6 @@ layout-class: page writings-page
 <span class="essay-feature-title">Self-Love as Risk Control</span>
 <span class="essay-feature-desc">Capacity is not consent. Test the achievement treadmill, open the golden cage, govern the shadow side of strength, and decide as trustee for the person who inherits the life.</span>
 <span class="read-more">Open the visual essay →</span>
-</a>
-<a class="essay-feature" href="/life-challenges/">
-<span class="essay-feature-label">Interactive visual essay</span>
-<span class="essay-feature-title">The Silver Lining of a Difficult Life</span>
-<span class="essay-feature-desc">Difficulty supplies raw material. Growth depends on what surrounds it. Test the conditions that turn pressure into capacity, map the futures that certainty erases, and decide whether an obstacle asks you to strengthen, redesign, wait, or leave.</span>
-<span class="read-more">Enter the field guide →</span>
 </a>
 </div>
 
@@ -377,14 +377,11 @@ layout-class: page writings-page
   .essay-feature:nth-child(3), .essay-feature:nth-child(4) { grid-column: span 6; min-height: 19rem; }
   .essay-feature:nth-child(5) { grid-column: span 4; min-height: 22rem; }
   .essay-feature:nth-child(6) { grid-column: span 8; min-height: 22rem; background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface) 58%); }
-  .essay-feature:nth-child(7), .essay-feature:nth-child(8) { grid-column: span 6; min-height: 19rem; }
-  /* Communication, Self-Love, and Life Challenges form one row. */
-  .essay-feature:nth-child(9), .essay-feature:nth-child(10), .essay-feature:nth-child(11) { grid-column:span 4;min-height:21rem }
-  .essay-feature:nth-child(9) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
-  /* Later additions keep a sensible half-row instead of becoming slivers. */
-  .essay-feature:nth-child(n+12) { grid-column:span 6;min-height:19rem }
+  /* The final six manuals form two even rows of three. */
+  .essay-feature:nth-child(n+7):nth-child(-n+12) { grid-column:span 4;min-height:21rem }
+  .essay-feature:nth-child(9) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
   .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
   .essay-feature-label {
     display: block;
