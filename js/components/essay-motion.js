@@ -287,13 +287,10 @@
   copy.appendChild(el('span', 'em-kicker', scene.kicker));
   copy.appendChild(el('h2', '', scene.title));
   copy.appendChild(el('p', '', scene.copy));
-  // Position only. The beat labels used to be printed here and again in a four-up
-  // rail below the canvas, which named every turn of the story before the reader
-  // reached it. scene.steps still sets how many beats there are; nothing prints it.
+  // scene.steps sets how many beats there are, and nothing on screen prints it.
+  // A labelled four-up rail and then a bare "01 / 04" counter both used to sit
+  // here, and each gave away the shape or the length of the story on arrival.
   var count = scene.steps.length;
-  var read = el('div', 'em-stage-read');
-  read.appendChild(el('b', '', '01')); read.appendChild(el('i')); read.appendChild(el('span', '', '0' + count));
-  copy.appendChild(read);
   pin.appendChild(copy);
 
   var narrative = scene.narrative ? buildNarrativeCanvas() : null;
@@ -350,7 +347,7 @@
     which is the frame where the text is swapped, so the swap happens behind a fade
     it is already committed to rather than as a visible jump.
   */
-  var XFADE = 0.34, WORDS = 0.17;
+  var XFADE = 0.34, WORDS = 0.17, CAPTION = 0.13;
   var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
 
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -381,6 +378,11 @@
         var away = (index === 0 && scaled < centre) || (index === count - 1 && scaled > centre)
           ? 0 : Math.abs(scaled - centre);
         frame.style.opacity = smooth(clamp01((reach - away) / XFADE)).toFixed(4);
+        // Drawings may overlap through the handover; their captions may not. Two
+        // sentences at half opacity on top of each other are unreadable, and since
+        // this fade tracks scroll rather than time, stopping on a boundary used to
+        // leave them stacked indefinitely. Text is gone by the boundary instead.
+        frame.style.setProperty('--em-cap', smooth(clamp01((0.5 - away) / CAPTION)).toFixed(4));
       });
     }
 
@@ -401,7 +403,6 @@
       }
       // The class no longer carries the fade, only which figure animations run.
       if (narrative) narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
-      read.querySelector('b').textContent = '0' + (stage + 1);
     }
     nodes.forEach(function (node, index) { var local = smooth(clamp01((p - index * .22) * 4)); node.style.opacity = (.12 + local * .88).toFixed(3); node.style.transform = 'scale(' + (.72 + local * .28).toFixed(3) + ')'; });
     edges.forEach(function (edge, index) { var local = smooth(clamp01((p - index * .24) * 3.2)); edge.style.strokeDashoffset = (1 - local).toFixed(3); });
