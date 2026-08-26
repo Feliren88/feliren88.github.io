@@ -55,6 +55,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">How to spot the certainty trap, manage an intense state, decide under doubt, and keep moving while an answer remains unavailable.</span>
 <span class="read-more">Open the manual →</span>
 </a>
+<a class="essay-feature" href="/small-talk/">
+<span class="essay-feature-label">Interactive manual</span>
+<span class="essay-feature-title">Small Talk as Calibration</span>
+<span class="essay-feature-desc">A field manual for people who prefer depth. A seven-move loop, the ladder from weather to meaning, seven cultural variables to read instead of memorising countries, twenty rooms with their openings and exits, and the repair line for every way it goes wrong.</span>
+<span class="read-more">Open the manual →</span>
+</a>
 <a class="essay-feature" href="/communication/">
 <span class="essay-feature-label">Interactive manual</span>
 <span class="essay-feature-title">Communication 101</span>

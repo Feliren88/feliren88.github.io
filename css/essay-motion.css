@@ -1,4 +1,4 @@
-/* Shared cinematic interlude for the eleven featured writings. */
+/* Shared cinematic interlude for the twelve featured writings. */
 
 /*
   Scene palette.
@@ -65,7 +65,7 @@ html[data-theme="light"][data-motion-scene]{
 
 /*
   No --em-accent here. Declaring it on .em-story shadowed the per-scene value the
-  root sets, so every scene drew in the site accent and the eleven read as one
+  root sets, so every scene drew in the site accent and the twelve read as one
   colour inside the band while their page callouts below were correctly themed.
   The fallback lives with the other tokens at the top of this file instead.
 */
@@ -234,9 +234,37 @@ html[data-motion-scene="conversion"] .em-life-build.is-active .em-plank:nth-chil
 @keyframes em-cv-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.4px)}}
 @keyframes em-cv-rest{from{transform:rotate(-7deg)}to{transform:rotate(0)}}
 @keyframes em-cv-plank{from{transform:translateY(9px);opacity:0}to{transform:translateY(0);opacity:1}}
+/* /small-talk/ — hanging back, opening anyway, leaning in, leaving early. */
+html[data-motion-scene="rapport"] .em-deep-rapport-0.is-active .em-fig-edge{animation:em-rp2-hover 6.2s ease-in-out infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-0.is-active .em-fig-edge .em-arm{transform-origin:150px 236px;animation:em-rp2-fidget 2.4s ease-in-out infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-0.is-active .em-clusters circle{animation:em-rp2-chatter 3.6s ease-in-out infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-0.is-active .em-clusters circle:nth-child(2n){animation-delay:.5s}
+html[data-motion-scene="rapport"] .em-deep-rapport-0.is-active .em-clusters circle:nth-child(3n){animation-delay:1s}
+html[data-motion-scene="rapport"] .em-deep-rapport-1.is-active .em-fig-say{animation:em-rp2-step 1.5s cubic-bezier(.22,.7,.3,1) both,em-rp2-breathe 6.4s ease-in-out 1.5s infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-1.is-active .em-fig-hear{animation:em-rp2-breathe 6.4s ease-in-out 1.5s infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-1.is-active .em-message{transform-box:view-box;transform-origin:375px 98px;animation:em-rp2-said 1.3s cubic-bezier(.2,.75,.3,1) both}
+html[data-motion-scene="rapport"] .em-deep-rapport-2.is-active .em-fig-lean{animation:em-rp2-lean-l 1.7s cubic-bezier(.24,.68,.3,1) both,em-rp2-breathe 7s ease-in-out 1.7s infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-2.is-active .em-fig-lean2{animation:em-rp2-lean-r 1.7s cubic-bezier(.24,.68,.3,1) both,em-rp2-breathe 7s ease-in-out 1.7s infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-2.is-active .em-shared{transform-box:view-box;transform-origin:376px 238px;animation:em-rp2-spark 3.2s ease-in-out infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-3.is-active .em-fig-away{animation:em-rp2-leave 2.2s cubic-bezier(.3,.6,.35,1) both}
+html[data-motion-scene="rapport"] .em-deep-rapport-3.is-active .em-fig-kept{animation:em-rp2-breathe 7s ease-in-out infinite}
+html[data-motion-scene="rapport"] .em-deep-rapport-3.is-active .em-keep{animation:em-rp2-thread 3s linear infinite}
+@keyframes em-rp2-hover{0%,100%{transform:translateX(0)}30%{transform:translateX(9px)}46%{transform:translateX(4px)}70%{transform:translateX(-3px)}}
+@keyframes em-rp2-fidget{0%,100%{transform:rotate(0)}35%{transform:rotate(6deg)}62%{transform:rotate(-2deg)}}
+@keyframes em-rp2-chatter{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes em-rp2-step{from{transform:translateX(-26px)}to{transform:translateX(0)}}
+@keyframes em-rp2-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes em-rp2-said{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes em-rp2-lean-l{from{transform:translateX(-16px)}to{transform:translateX(0)}}
+@keyframes em-rp2-lean-r{from{transform:translateX(16px)}to{transform:translateX(0)}}
+@keyframes em-rp2-spark{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.22);opacity:1}}
+@keyframes em-rp2-leave{from{transform:translateX(-40px)}to{transform:translateX(0)}}
+@keyframes em-rp2-thread{to{stroke-dashoffset:-12}}
+
 .em-message,.em-note{fill:var(--em-panel);stroke:var(--em-line-3);stroke-width:1.5}.em-message-small,.em-note-title{fill:var(--em-ink-dim)!important;font:650 11px "Space Grotesk",sans-serif!important;text-anchor:start!important;letter-spacing:.14em}.em-message-line,.em-note-rule{fill:none;stroke:var(--em-line);stroke-width:1.5}.em-result-mark{fill:color-mix(in srgb,var(--em-accent) 15%,var(--em-panel));stroke:var(--em-accent);stroke-width:1.5}.em-result-word{fill:var(--em-ink)!important;font:650 11px "Space Grotesk",sans-serif!important;letter-spacing:.08em}.em-thoughts text{fill:var(--em-ink-2);font:550 16px "Manrope",sans-serif}.em-thought-line{fill:none;stroke:var(--em-line-2);stroke-width:1.25;stroke-dasharray:3 6}.em-note-key{fill:var(--em-ink-2)!important;font:550 15px "Manrope",sans-serif!important;text-anchor:start!important}.em-note-value{fill:var(--em-accent)!important;font:650 13px "Space Grotesk",sans-serif!important;text-anchor:end!important;text-transform:uppercase}.em-road{fill:none;stroke:var(--em-line-2);stroke-width:2}.em-attempt-old{fill:var(--em-panel);stroke:var(--em-line-4);stroke-width:1.5}.em-attempt-next{fill:var(--em-panel);stroke:var(--em-accent);stroke-width:2}.em-attempt-label{fill:var(--em-ink-dim)!important;font-size:12px!important}.em-arrow{fill:none;stroke:var(--em-accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.em-carry rect{fill:var(--em-panel);stroke:var(--em-accent);stroke-width:1.5}.em-carry text{fill:var(--em-ink-dim);font:650 10px "Space Grotesk",sans-serif;letter-spacing:.12em}.em-carry .em-carry-word{fill:var(--em-ink);font-size:13px;letter-spacing:0}
 html[data-motion-scene="feedback"] .em-head,html[data-motion-scene="feedback"] .em-person{stroke:var(--em-accent)}
 .em-requests rect{fill:var(--em-panel);stroke:var(--em-line-3);stroke-width:1.4}.em-requests text{fill:var(--em-ink-2);font:550 13px "Manrope",sans-serif}.em-calendar{fill:none;stroke:var(--em-line-3);stroke-width:1.5}.em-days rect{fill:var(--em-panel);stroke:var(--em-line);stroke-width:1}.em-calendar-word{fill:var(--em-ink-2)!important;font:550 13px "Manrope",sans-serif!important}.em-calendar-word.em-faded{fill:var(--em-ink-faint)!important}.em-mirror{fill:var(--em-panel);stroke:var(--em-line-4);stroke-width:1.5}.em-mirror-question{fill:var(--em-ink)!important;font:550 18px Georgia,serif!important}.em-boundary{fill:none;stroke:var(--em-accent);stroke-width:2;stroke-dasharray:5 7}.em-care circle{fill:var(--em-panel);stroke:var(--em-line-3);stroke-width:1.5}.em-open-gate{fill:none;stroke:var(--em-accent);stroke-width:2}.em-boundary-word{fill:var(--em-accent)!important;font:650 11px "Space Grotesk",sans-serif!important;letter-spacing:.12em}.em-consent-disappear.is-active .em-faded{animation:em-fade-self 1.5s ease-in-out infinite alternate}@keyframes em-fade-self{to{opacity:.18}}
+.em-clusters circle{fill:none;stroke:var(--em-line-3);stroke-width:1.5}.em-shared{fill:color-mix(in srgb,var(--em-accent) 30%,transparent);stroke:var(--em-accent);stroke-width:2}.em-keep{fill:none;stroke:var(--em-accent);stroke-width:2;stroke-dasharray:5 7}
 .em-storm{fill:none;stroke:var(--em-line-2);stroke-width:1.4;stroke-linecap:round}.em-ground{fill:none;stroke:var(--em-line-2);stroke-width:1.5}.em-roof{fill:none;stroke:var(--em-line-4);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.em-helper{stroke:var(--em-helper)!important}.em-cup{fill:var(--em-panel);stroke:var(--em-warm);stroke-width:1.5}.em-broken{fill:none;stroke:var(--em-warm);stroke-width:2;stroke-linejoin:round}.em-tags rect{fill:var(--em-panel);stroke:var(--em-line-3);stroke-width:1.2}.em-tags text{fill:var(--em-ink-2);font:550 12px "Manrope",sans-serif}.em-ravine{fill:none;stroke:var(--em-line-2);stroke-width:2}.em-bridge rect{fill:var(--em-panel);stroke:var(--em-warm);stroke-width:1.5}.em-bridge-word{fill:var(--em-ink)!important;font:650 10px "Space Grotesk",sans-serif!important}.em-life-hurt.is-active .em-storm{animation:em-rain-shift 1.2s linear infinite}@keyframes em-rain-shift{to{transform:translate(-18px,20px)}}
 html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em-person{stroke:var(--em-accent)}html[data-motion-scene="conversion"] .em-head,html[data-motion-scene="conversion"] .em-person{stroke:var(--em-accent)}
 /*
@@ -253,8 +281,8 @@ html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em
   Light values are darkened rather than re-hued: same colour identity per scene,
   enough contrast to stay legible as text and as a hairline on a light surface.
 */
-html[data-motion-scene="repair"]{--em-accent:#d6a24b}html[data-motion-scene="abstain"]{--em-accent:#69b9c4}html[data-motion-scene="agency"]{--em-accent:#e5a957}html[data-motion-scene="decision"]{--em-accent:#8ab1c8}html[data-motion-scene="control"]{--em-accent:#c9a96b}html[data-motion-scene="strategy"]{--em-accent:#8fc5ae}html[data-motion-scene="feedback"]{--em-accent:#df806c}html[data-motion-scene="uncertainty"]{--em-accent:#a99bd7}html[data-motion-scene="signal"]{--em-accent:#64bec8}html[data-motion-scene="consent"]{--em-accent:#db9bb5}html[data-motion-scene="conversion"]{--em-accent:#d8a147}
-html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[data-theme="light"][data-motion-scene="abstain"]{--em-accent:#12707e}html[data-theme="light"][data-motion-scene="agency"]{--em-accent:#8e610f}html[data-theme="light"][data-motion-scene="decision"]{--em-accent:#356585}html[data-theme="light"][data-motion-scene="control"]{--em-accent:#7d6224}html[data-theme="light"][data-motion-scene="strategy"]{--em-accent:#237257}html[data-theme="light"][data-motion-scene="feedback"]{--em-accent:#a8422c}html[data-theme="light"][data-motion-scene="uncertainty"]{--em-accent:#564699}html[data-theme="light"][data-motion-scene="signal"]{--em-accent:#106f7c}html[data-theme="light"][data-motion-scene="consent"]{--em-accent:#9a4665}html[data-theme="light"][data-motion-scene="conversion"]{--em-accent:#8e610e}
+html[data-motion-scene="repair"]{--em-accent:#d6a24b}html[data-motion-scene="abstain"]{--em-accent:#69b9c4}html[data-motion-scene="agency"]{--em-accent:#e5a957}html[data-motion-scene="decision"]{--em-accent:#8ab1c8}html[data-motion-scene="control"]{--em-accent:#c9a96b}html[data-motion-scene="strategy"]{--em-accent:#8fc5ae}html[data-motion-scene="feedback"]{--em-accent:#df806c}html[data-motion-scene="uncertainty"]{--em-accent:#a99bd7}html[data-motion-scene="signal"]{--em-accent:#64bec8}html[data-motion-scene="consent"]{--em-accent:#db9bb5}html[data-motion-scene="conversion"]{--em-accent:#d8a147}html[data-motion-scene="rapport"]{--em-accent:#a8bd7f}
+html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[data-theme="light"][data-motion-scene="abstain"]{--em-accent:#12707e}html[data-theme="light"][data-motion-scene="agency"]{--em-accent:#8e610f}html[data-theme="light"][data-motion-scene="decision"]{--em-accent:#356585}html[data-theme="light"][data-motion-scene="control"]{--em-accent:#7d6224}html[data-theme="light"][data-motion-scene="strategy"]{--em-accent:#237257}html[data-theme="light"][data-motion-scene="feedback"]{--em-accent:#a8422c}html[data-theme="light"][data-motion-scene="uncertainty"]{--em-accent:#564699}html[data-theme="light"][data-motion-scene="signal"]{--em-accent:#106f7c}html[data-theme="light"][data-motion-scene="consent"]{--em-accent:#9a4665}html[data-theme="light"][data-motion-scene="conversion"]{--em-accent:#8e610e}html[data-theme="light"][data-motion-scene="rapport"]{--em-accent:#4f6b1f}
 @media(max-width:1100px){.em-story{height:420vh}.em-pin{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto;gap:.8rem;height:100svh;min-height:0;padding:4.75rem clamp(1.25rem,5vw,3rem) 1rem}.em-copy h2{max-width:15ch;margin:.55rem 0 .7rem;font-size:clamp(2rem,5.8vw,3.5rem);line-height:.94}.em-copy p{max-width:42rem;font-size:.9rem;line-height:1.5}.em-canvas{display:grid;place-items:center;min-height:0}.em-canvas svg{width:min(100%,48rem);max-height:38vh}.em-skip{top:1rem}}
 @media(max-width:560px){.em-story{height:340vh}.em-pin{padding-inline:1.25rem}.em-copy h2{max-width:12ch;font-size:clamp(2rem,10vw,3.25rem)}.em-copy p{font-size:.86rem}.em-canvas svg{max-height:38vh}}
 @media(max-width:560px){.em-skip{top:.9rem;right:1.25rem;font-size:.6rem}}
@@ -268,7 +296,7 @@ html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[da
 @media(prefers-reduced-motion:reduce){html[data-motion-scene] .em-story-frame,html[data-motion-scene] .em-story-frame *{animation:none!important}}
 @media(prefers-reduced-motion:reduce){.em-track{display:none}.em-story{height:auto}.em-pin{position:relative;height:auto;min-height:0}.em-story{--em-p:1!important}.em-skip{display:none}}
 
-/* Shared editorial eyebrow across the eleven featured writings. */
+/* Shared editorial eyebrow across the twelve featured writings. */
 html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span){display:flex!important;align-items:center;gap:.65rem;color:var(--em-ink-soft)!important;font:600 clamp(.94rem,1.2vw,1.08rem)/1.35 "Manrope",sans-serif!important;letter-spacing:-.018em!important;text-transform:none!important}
 html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span):before{content:"";flex:0 0 auto;width:.42rem;height:.42rem;border-radius:50%;background:var(--em-accent);box-shadow:0 0 1.4rem color-mix(in srgb,var(--em-accent) 50%,transparent)}
 

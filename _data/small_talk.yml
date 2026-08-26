@@ -1,0 +1,693 @@
+# All /small-talk/ content. Prose is hand-written; nothing here is generated.
+# House style applies: British spelling, short sentences, no em dashes.
+
+# ── The loop. Seven moves that work almost anywhere. ────────────────────────
+loop:
+  - key: notice
+    icon: sm-eye
+    verb: Notice
+    claim: Find something you already share.
+    body: Shared context is the safest opening because it asks for no vulnerability. The room supplies the subject, so neither of you has to invent one.
+    lines:
+      - The room, the venue, the queue
+      - The event and whoever is hosting it
+      - The food, the coffee, the weather
+      - The talk that just finished
+      - The journey in
+    watch: Anything you can both see is fair game.
+  - key: open
+    icon: sm-door
+    verb: Open
+    claim: Say something easy to answer.
+    body: An ordinary opening works. A remarkable one raises the cost of replying, because now they have to match it.
+    lines:
+      - How are you finding it so far?
+      - Have you been here before?
+      - How do you know the host?
+      - What brought you here?
+      - How is your week going?
+    watch: Ordinary is the point. Give them a low bar to clear.
+  - key: ask
+    icon: sm-ask
+    verb: Ask
+    claim: One open question with edges on it.
+    body: "“Tell me about yourself” is too wide to answer. A bounded question lets them choose which part of life to hand over."
+    lines:
+      - What kind of work are you involved in?
+      - What keeps you busy these days?
+      - What are you working on at the moment?
+      - How did you end up here?
+    watch: Bounded beats broad. They pick the door they walk through.
+  - key: follow
+    icon: sm-thread
+    verb: Follow
+    claim: Take one word from their answer.
+    body: Following their last sentence keeps the thread alive. Starting a fresh topic every fifteen seconds reads as a survey.
+    lines:
+      - Pick the most interesting noun they said
+      - Ask about that one thing
+      - Let them hand you the next noun
+      - Follow the energy, not your agenda
+    watch: Their answer already contains your next question.
+  - key: share
+    icon: sm-swap
+    verb: Share
+    claim: Put something of your own in.
+    body: Two or three questions in, contribute. Otherwise the exchange turns into an interview and they start wondering what you want.
+    lines:
+      - A small opinion
+      - A related experience
+      - Something you got wrong
+      - What you are looking forward to
+    watch: Curiosity plus reciprocity. Questions alone are not conversation.
+  - key: bridge
+    icon: sm-bridge
+    verb: Bridge
+    claim: Move up a rung if the energy is there.
+    body: When a topic produces real interest on both sides, follow it upward. The small talk has done its job and can end.
+    lines:
+      - What part of it do you actually enjoy?
+      - How did you end up doing that?
+      - What changed your mind about it?
+    watch: Depth is a destination, not an opening move.
+  - key: exit
+    icon: sm-exit
+    verb: Exit
+    claim: Leave cleanly and early enough.
+    body: Appreciate, give a reason, optionally leave a door open. No elaborate excuse is required and a long one sounds invented.
+    lines:
+      - Good talking with you. I am going to find my colleague.
+      - Really enjoyed that. I am going to grab some food.
+      - I should circulate, but I would like to continue this sometime.
+    watch: Knowing how to leave is part of knowing how to start.
+
+# ── The ladder. Depth is earned by pacing, not by ambition. ─────────────────
+ladder:
+  - level: 1
+    kind: Environment
+    ask: Have you tried the food?
+    note: Costs nothing to answer. Establishes that you are friendly.
+  - level: 2
+    kind: Activity
+    ask: What brought you to this event?
+    note: Still about the situation. Lets them decide how much to say.
+  - level: 3
+    kind: Experience
+    ask: Have you worked in this field long?
+    note: First step towards the person rather than the room.
+  - level: 4
+    kind: Preference
+    ask: What part of it do you actually enjoy?
+    note: Asks for an opinion. Most people are pleased to be asked.
+  - level: 5
+    kind: Story
+    ask: How did you end up doing that?
+    note: Invites a narrative. This is where conversations become memorable.
+  - level: 6
+    kind: Perspective
+    ask: What changed your view on it?
+    note: Assumes they have thought about it. Flattering and usually true.
+  - level: 7
+    kind: Meaning
+    ask: What makes the work worthwhile for you?
+    note: Only lands once the earlier rungs have been climbed.
+
+# ── Safe topic families. The mnemonic is PEWFIC. ────────────────────────────
+topics:
+  - letter: P
+    name: Place
+    icon: sm-pin
+    examples: neighbourhood, venue, city, the journey in, where they grew up
+  - letter: E
+    name: Event
+    icon: sm-event
+    examples: the host, the conference, the wedding, the activity, the programme
+  - letter: W
+    name: Work and study
+    icon: sm-work
+    examples: field, project, industry, what they are learning
+  - letter: F
+    name: Food
+    icon: sm-food
+    examples: the restaurant, local specialities, coffee, what to order here
+  - letter: I
+    name: Interests
+    icon: sm-star
+    examples: books, sport, travel, hobbies, technology, music
+  - letter: C
+    name: Current life
+    icon: sm-clock
+    examples: the weekend, plans, something recent, what is next
+
+# ── Topics that need calibration rather than avoidance. ─────────────────────
+calibrate:
+  - topic: Salary
+    why: Ordinary in some workplaces and intrusive in others.
+  - topic: Age
+    why: Routine in cultures where it sets the form of address. Sensitive elsewhere.
+  - topic: Marriage
+    why: Everyday conversation in many places. Highly personal in others.
+  - topic: Children
+    why: Common, and capable of landing on real pain without warning.
+  - topic: Religion
+    why: Central identity in some societies and strictly private in others.
+  - topic: Politics
+    why: Carries asymmetric downside with someone you have just met.
+  - topic: Property and wealth
+    why: Normal status conversation in some places and vulgar in others.
+  - topic: Appearance
+    why: A compliment in one setting and an intrusion in another.
+  - topic: Dating
+    why: Varies with age, culture, workplace and how well you know them.
+  - topic: Family status
+    why: Warm rapport-building in many cultures and off limits elsewhere.
+
+# ── The seven variables. Read these instead of memorising countries. ────────
+variables:
+  - key: formality
+    n: 1
+    name: Formality
+    icon: sm-tie
+    low: First names, easy greetings, quick informality
+    high: Titles, surnames, careful greetings
+    read: Are people using titles and surnames?
+    move: Start one notch more formal than you think is needed, then relax to match. Becoming informal is easy. Repairing premature familiarity is not.
+  - key: hierarchy
+    n: 2
+    name: Hierarchy
+    icon: sm-steps
+    low: Rank matters little, people speak freely across levels
+    high: Age, seniority and rank shape who speaks and when
+    read: Does the room defer to anyone in particular?
+    move: Where rank is visible, let senior people open topics and avoid casual interruption. Respect hierarchy socially while keeping your own judgement intact.
+  - key: directness
+    n: 3
+    name: Directness
+    icon: sm-arrow
+    low: Meaning arrives through implication, tone and context
+    high: People say the thing plainly
+    read: When someone disagrees, do they say so?
+    move: "In higher-context settings, “That might be difficult” often means no. Take politeness as politeness rather than as agreement."
+  - key: expressive
+    n: 4
+    name: Expressiveness
+    icon: sm-spark
+    low: Restraint, calm, measured reactions, comfortable silence
+    high: Animated voices, expressive faces, laughter, enthusiasm
+    read: How much reaction does a good story get here?
+    move: Warmth is encoded differently in different places. Restrained is not cold and animated is not insincere. Where more warmth is expected, add reaction rather than personality.
+  - key: space
+    n: 5
+    name: Space and touch
+    icon: sm-hand
+    low: More distance, less contact, greeting at arm's length
+    high: Closer standing, easy contact, embraces on meeting
+    read: How are people greeting each other?
+    move: Let the other person set physical familiarity, especially across gender or religious lines. Handshakes, bows, embraces and distance all vary.
+  - key: privacy
+    n: 6
+    name: Privacy
+    icon: sm-lock
+    low: Personal questions arrive early and mean warmth
+    high: Personal life stays out of early conversation
+    read: What are locals asking each other?
+    move: A personal question is often rapport rather than intrusion. Answer at whatever depth suits you, then move the conversation on.
+  - key: relationship
+    n: 7
+    name: Relationship before task
+    icon: sm-link
+    low: Agenda first, then business, then decision
+    high: Person first, then relationship, then trust, then business
+    read: Does business start immediately or after tea?
+    move: In relationship-first settings the small talk is the work. Going straight to the agenda reads as a lack of interest and lowers trust.
+
+# ── Broad tendencies. Not rules about individuals. ──────────────────────────
+atlas:
+  - place: United States
+    region: americas
+    style: Friendly, energetic and informal. Work, place and hobbies open well. Moderate self-disclosure is expected and welcome.
+    note: Add visible enthusiasm. "How's it going?" wants "Good, busy week, how about you?" rather than a status report.
+  - place: Canada
+    region: americas
+    style: Friendly with a little more restraint. Polite curiosity travels well.
+    note: Boasting lands badly. Understatement is safer.
+  - place: United Kingdom
+    region: europe
+    style: Understated. Situational humour and shared inconvenience work well.
+    note: Read understatement carefully. "Not bad" often means good, and earnestness too early can sit oddly.
+  - place: Australia and New Zealand
+    region: apac
+    style: Informal and quick to first names. Light humour is the currency.
+    note: Status-consciousness reads badly. Keep credentials out of the opening.
+  - place: Germany, Austria, Switzerland
+    region: europe
+    style: A little more formal at first. Substantive questions are welcome early.
+    note: Reduced chitchat is not coolness. Silence is allowed and does not need filling.
+  - place: Netherlands and Scandinavia
+    region: europe
+    style: Egalitarian, direct and restrained. Plain speech is respected.
+    note: Status display works against you. Keep it level.
+  - place: France
+    region: europe
+    style: Politeness and form matter at the start. Culture, food, place and ideas open well.
+    note: Greet properly before anything else. The greeting is not a formality here.
+  - place: Italy, Spain, Portugal, Greece
+    region: europe
+    style: More relational and expressive on average. Food, place, family and travel work well.
+    note: Warmth carries the conversation. Pure efficiency reads as coldness.
+  - place: Latin America
+    region: americas
+    style: Relational warmth matters. Family and social connection may arrive early.
+    note: Do not rush to the task. The relationship is the route to it.
+  - place: Indonesia and Malaysia
+    region: apac
+    style: Politeness, harmony and context awareness matter. Food, place, family and shared context all open well.
+    note: Confrontation costs more than it gains. Indirect signals carry real meaning.
+  - place: Singapore
+    region: apac
+    style: Multicultural and professionally efficient in English. Social backgrounds vary widely.
+    note: Read the person rather than the passport. Assume less than usual.
+  - place: Japan
+    region: apac
+    style: Restraint, politeness and situational awareness. Silence participates in the conversation.
+    note: Leave space. Resist rescuing every pause. Avoid forcing intimacy early.
+  - place: South Korea
+    region: apac
+    style: Age and seniority shape address and interaction. Shared meals and mutual connections matter.
+    note: If unsure of the right form of address, err formal. Proving equality by being casual backfires.
+  - place: China
+    region: apac
+    style: Relationship and context matter. Food, city, travel, education and industry open well.
+    note: Avoid putting anyone on the spot. "That may be difficult" is often a refusal.
+  - place: India
+    region: apac
+    style: Warmth can arrive quickly. Family, education, work, city and food generate conversation.
+    note: Regional variation is enormous. Corporate Bengaluru and a family gathering in Lucknow are different rooms.
+  - place: Gulf and Arab contexts
+    region: mena
+    style: Hospitality and relationship-building come first. Travel, city, food and business all work.
+    note: Respect forms of address and religious convention. Do not assume Western norms across genders.
+  - place: Turkey
+    region: mena
+    style: Hospitality and personal warmth matter. Conversation can turn substantive quickly.
+    note: Accept the tea. Refusing hospitality is the misstep, not accepting it.
+  - place: Sub-Saharan African settings
+    region: africa
+    style: Enormously diverse. Greetings and relational acknowledgement often carry real weight.
+    note: Greet properly and unhurriedly. Transactional visitors routinely underestimate this.
+  - place: International professional circles
+    region: global
+    style: Culturally neutral by default. Polite, curious, moderate disclosure, professional context.
+    note: Assume nothing from a name or an accent. Observe the subculture, not the nationality.
+
+# ── Settings. Twenty rooms and what actually works in each. ─────────────────
+settings:
+  - key: conference
+    group: Professional
+    name: Professional conference
+    icon: sm-badge
+    open: What brought you to this conference?
+    then: Follow the specific thing they name, then offer the adjacent thing you are working on.
+    exit: I am going to catch the next session, but good talking with you.
+    watch: "“What do you do?” every time is a wasted opening. Ask what brought them."
+  - key: networking
+    group: Professional
+    name: Networking event
+    icon: sm-network
+    open: What brought you here?
+    then: What are you working on? Then, what is interesting about that problem?
+    exit: I would enjoy continuing this. Are you easiest to reach on email?
+    watch: The target is two to four conversations worth continuing, not a pocket of cards.
+  - key: senior
+    group: Professional
+    name: A very senior person
+    icon: sm-crown
+    open: Ask about something specific they said or did.
+    then: You mentioned the team decentralised last year. What was hardest about making that work?
+    exit: Thank you, that was genuinely useful. I will let you get on.
+    watch: They receive endless attempts to impress. Specific curiosity is rarer and lands better.
+  - key: junior
+    group: Professional
+    name: Someone more junior
+    icon: sm-seed
+    open: How are you finding the role?
+    then: What have you been enjoying? Anything surprising so far?
+    exit: Good to meet you. Come and find me if that thing comes up again.
+    watch: Power changes what a question means. Skip the five-year-plan interrogation.
+  - key: premeeting
+    group: Professional
+    name: Before a meeting starts
+    icon: sm-table
+    open: How has your week been?
+    then: Did you come in from out of town? Have you worked with this team before?
+    exit: Let the host or the senior person make the transition to business.
+    watch: Ninety seconds of ordinary contact is not wasted time. It sets the temperature.
+  - key: dinner
+    group: Professional
+    name: Client dinner
+    icon: sm-dinner
+    open: Travel, food, the city, how they got into the work.
+    then: Aim for roughly two thirds human and one third professional.
+    exit: Let the meal end before the agenda reappears.
+    watch: A dinner that becomes a second board meeting is a worse dinner and a worse meeting.
+  - key: interview
+    group: Professional
+    name: Interview, before the questions
+    icon: sm-clipboard
+    open: They ask how your journey over was.
+    then: Give them something to respond to. I left absurdly early because I did not trust the traffic, so I had time for coffee.
+    exit: The interviewer will transition. Let them.
+    watch: A one-word "Fine" wastes the only friendly moment on offer.
+  - key: kitchen
+    group: Professional
+    name: Office kitchen
+    icon: sm-mug
+    open: How is your day going?
+    then: What are you working on today? Any plans for the weekend?
+    exit: Right, back to it. Enjoy the rest of your day.
+    watch: Three minutes of ordinary contact has value. It does not need an agenda.
+  - key: elite
+    group: Professional
+    name: Stranger at a high-status event
+    icon: sm-glass
+    open: What brought you here?
+    then: If asked what you do, give one line and pause. Expand only if they lean in.
+    exit: Good to meet you. I am going to say hello to a few people.
+    watch: Leading with credentials invites a comparison you did not want.
+  - key: elevator
+    group: Passing
+    name: Lift
+    icon: sm-lift
+    open: Morning.
+    then: Busy day? If the answer is one word, smile and stop.
+    exit: Nothing required. The doors do it for you.
+    watch: A successful interaction here can last four seconds.
+  - key: queue
+    group: Passing
+    name: Queue
+    icon: sm-queue
+    open: This moves faster than it looks.
+    then: If they answer warmly, continue. If not, let it go.
+    exit: Turn back to your phone. No awkwardness owed.
+    watch: Recognising that someone does not want to talk is part of the skill.
+  - key: transit
+    group: Passing
+    name: Aeroplane or train
+    icon: sm-plane
+    open: Heading home or heading away?
+    then: Headphones, laptop and a short answer mean leave them be. A closed book and a return question mean go ahead.
+    exit: I will let you get back to it.
+    watch: You are sharing a small space for hours. Misreading this is expensive for both of you.
+  - key: neighbour
+    group: Social
+    name: New neighbour
+    icon: sm-home
+    open: Hi, I do not think we have met. I am Vicky.
+    then: How long have you been in the building? Anything I should know about the area?
+    exit: Good to meet you properly. Knock if you need anything.
+    watch: Asking for local knowledge gives them the pleasant role.
+  - key: wedding
+    group: Social
+    name: Wedding
+    icon: sm-rings
+    open: How do you know the couple?
+    then: How long have you known them? Did you come far? Been to this venue before?
+    exit: Lovely to meet you. I am going to find my seat.
+    watch: The opening question is nearly perfect because every answer is a story.
+  - key: birthday
+    group: Social
+    name: Birthday party
+    icon: sm-cake
+    open: How do you know the birthday person?
+    then: What have you been up to lately? What are you enjoying outside work?
+    exit: Great to meet you. I am going to top this up.
+    watch: Move off the exchange of job titles early. It is a party.
+  - key: funeral
+    group: Social
+    name: Funeral or memorial
+    icon: sm-candle
+    open: I am very sorry.
+    then: How are you holding up? Or a specific memory. I remember how kind he was when...
+    exit: Stay nearby. Presence is the point, not conversation.
+    watch: Do not optimise this. Silence is welcome and forced positivity is not.
+  - key: religious
+    group: Social
+    name: Religious ceremony
+    icon: sm-arch
+    open: Is there anything I should know before we go in?
+    then: Follow the host. Dress and behave a little conservatively when unsure.
+    exit: Thank you for having me. That was good of you.
+    watch: Genuine curiosity is welcome. A ceremony is not the place to test a belief.
+  - key: family
+    group: Social
+    name: Family gathering
+    icon: sm-family
+    open: Food, travel, hobbies, recent projects, family history.
+    then: History already exists here, so small talk is often conflict management.
+    exit: Nothing dramatic there. How have things been with you?
+    watch: You are allowed to redirect. A neutral bridge is not rudeness.
+  - key: date
+    group: Social
+    name: First date
+    icon: sm-heart
+    open: How has your week been?
+    then: What do you enjoy when nobody is making you do anything? Then, how did you get into that?
+    exit: I have enjoyed this. I would like to do it again.
+    watch: Avoid both the interview and the immediate psychological autopsy. Share ordinary, imperfect things.
+  - key: partnerfamily
+    group: Social
+    name: Meeting a partner's family
+    icon: sm-house2
+    open: Family history, food, hometown, traditions, travel.
+    then: Ask how they know certain people. Let them tell you the family stories.
+    exit: Thank you for having me. The food was genuinely excellent.
+    watch: Ask your partner beforehand about sensitive topics, titles, greetings and dynamics. Preparation is part of the skill.
+
+# ── Scripts worth having ready. ─────────────────────────────────────────────
+scripts:
+  - key: whatdoyoudo
+    name: "“What do you do?”"
+    formula: Domain, then function, then why it matters
+    body: Give one sentence and stop. If they are interested they will ask, and then you have permission for the second layer.
+    example: I work on AI safety. Mostly I measure what a model actually knows about its own limits, because a system that overstates its confidence is hard to trust.
+    fail: A five-minute professional ontology answers a question nobody asked.
+  - key: tellmeabout
+    name: "“Tell me about yourself”"
+    formula: Present, one background detail, one human detail
+    body: Three short beats is enough. The human detail is what makes the answer memorable and gives them somewhere to go.
+    example: I work on calibration in language models. I came to it through remote sensing and a lot of messy data. Outside work I am usually reading something unrelated or looking for somewhere good to eat.
+    fail: A chronological career history from university onwards.
+  - key: thirty
+    name: The thirty-second opener
+    formula: Name, easy question, follow, small offering
+    body: Works almost anywhere and needs no cleverness. The last move is to follow whatever they found most interesting.
+    example: Hi, I am Vicky. How do you know everyone here? ... Oh, interesting, how did you get involved with that? ... That makes sense. I came through the organiser. First time here for me.
+    fail: Trying to make the opening remarkable.
+  - key: sixty
+    name: The sixty-second professional
+    formula: Open, narrow, offer the adjacent thing, hand it back
+    body: This is the transition from small talk into substance. Once you have named the overlap, the conversation stops being small talk.
+    example: What brought you to the event? ... What part of that are you focused on? ... Interesting. I have been working on something adjacent. The overlap is probably how you decide what counts as a real failure. How are you approaching that?
+    fail: Reaching substance before they have agreed to go there.
+
+# ── Recovery. Small talk fails in predictable ways. ─────────────────────────
+repair:
+  - key: silence
+    name: An awkward silence
+    icon: sm-pause
+    do: Do nothing for two seconds. A pause is not a failure.
+    say: So how do you know everyone here?
+    note: Structural thinkers read missing information as a signal. Usually it is just a pause.
+  - key: oneword
+    name: A one-word answer
+    icon: sm-short
+    do: Try once more, then let it go gracefully.
+    say: Anything particularly useful so far?
+    note: They may be tired, shy, waiting for someone or simply private. Social feedback is noisy.
+  - key: toomuch
+    name: Someone who will not stop
+    icon: sm-wave
+    do: Use their next breath. You do not need a perfect opening.
+    say: That is interesting, especially the part about the rollout. I am going to grab a drink, but good talking with you.
+    note: Waiting indefinitely for a natural gap is how forty minutes disappear.
+  - key: compete
+    name: The urge to top their story
+    icon: sm-trophy
+    do: Receive first. Relate afterwards, if at all.
+    say: What took you there?
+    note: "“I have been three times” turns their moment into your turn."
+  - key: fixing
+    name: The urge to solve it
+    icon: sm-wrench
+    do: Acknowledge, clarify, and analyse only if invited.
+    say: That sounds draining. Has it been the workload or more the people side?
+    note: They may want empathy rather than architecture. Diagnosis is a strength that overruns easily.
+  - key: disagree
+    name: Something you disagree with
+    icon: sm-split
+    do: Ask before you correct. Small talk requires no verdict.
+    say: What makes you see it that way?
+    note: If it matters, say you see it differently and explain lightly. Then move on.
+  - key: politics
+    name: Politics arrives
+    icon: sm-flag
+    do: Engage narrowly or decline warmly. Both are fine.
+    say: I try not to get too deep into politics at social events.
+    note: With a stranger the downside is asymmetric. With a client it is worse.
+  - key: religion
+    name: Religion arrives
+    icon: sm-arch
+    do: Respect first. Ask only if the curiosity is genuine.
+    say: Is that an important tradition in your family?
+    note: Small talk is not comparative theology. Skip "but do you really believe".
+  - key: personal
+    name: A question that is too personal
+    icon: sm-shield
+    do: Answer at the depth you choose, then offer another road.
+    say: I keep that part of life fairly private. Work has been interesting lately though.
+    note: No apology needed. A soft boundary plus a redirect ends it without friction.
+  - key: forgotname
+    name: You have forgotten their name
+    icon: sm-tag
+    do: Ask in the first minute rather than hiding it for thirty.
+    say: Sorry, remind me of your name again?
+    note: Then use it immediately. Right, Daniel, good to see you again.
+  - key: theyforgot
+    name: They have forgotten yours
+    icon: sm-tag2
+    do: Rescue them before they have to ask.
+    say: It is Vicky. We met at the conference last month.
+    note: Social elegance is mostly reducing the other person's embarrassment.
+  - key: language
+    name: English is not their first language
+    icon: sm-globe
+    do: Become clearer rather than louder.
+    say: Shorter sentences, fewer idioms, one question at a time.
+    note: Fluency is not intelligence. Slowing down is a courtesy, not a concession.
+  - key: yourlanguage
+    name: Your own language is limited
+    icon: sm-book
+    do: Learn seven words and admit the rest.
+    say: My Indonesian is terrible, sorry. Hello, thank you, please, excuse me, nice to meet you, delicious, goodbye.
+    note: Humility works better than pretending fluency, which collapses on the second sentence.
+  - key: mirroring
+    name: You are not sure how to pitch it
+    icon: sm-mirror
+    do: Mirror the variables, never the accent or the mannerisms.
+    say: Match their formality, pace, disclosure, energy and distance.
+    note: That is calibration. Imitation is something else and everyone can tell.
+
+# ── Manner. What the body and the listening do. ─────────────────────────────
+manner:
+  body:
+    - signal: Face
+      target: Relaxed
+    - signal: Smile
+      target: Small and genuine
+    - signal: Eye contact
+      target: Regular, not continuous
+    - signal: Arms
+      target: Uncrossed where practical
+    - signal: Torso
+      target: Turned slightly towards them
+    - signal: Voice
+      target: Audible and unhurried
+    - signal: Distance
+      target: Mirror the local norm
+    - signal: Nodding
+      target: Occasional
+    - signal: Phone
+      target: Away
+  listening:
+    - Right.
+    - That makes sense.
+    - Really?
+    - I did not know that.
+    - What happened after that?
+    - How did that turn out?
+  compliments:
+    good:
+      - That was a very clear explanation.
+      - I like how you have set this space up.
+      - You handled that question well.
+      - That is a good jacket.
+    risky:
+      - Bodies
+      - Age
+      - Attractiveness in professional settings
+      - Wealth markers
+      - Religious symbols
+  humour:
+    safe:
+      - Self-deprecation
+      - Situational absurdity
+      - Shared inconvenience
+      - Gentle observation
+    risky:
+      - Ethnicity
+      - Religion
+      - Politics
+      - Gender
+      - Disability
+      - Someone's accent
+      - Class
+      - Trauma
+      - Insulting the host
+
+# ── How long, and how much of it. ───────────────────────────────────────────
+durations:
+  - band: Passing contact
+    span: 10 to 60 seconds
+    note: A lift, a corridor, a queue. Recognition is the whole job.
+  - band: Workplace
+    span: 1 to 5 minutes
+    note: The kitchen, the pre-meeting, the corridor after a talk.
+  - band: Social event
+    span: 5 to 15 minutes
+    note: Long enough to find out whether there is more to say.
+  - band: Real connection
+    span: Let it run
+    note: Once it turns substantive it has stopped being small talk.
+
+# ── Follow-the-noun practice sentences. ─────────────────────────────────────
+nouns:
+  - said: My sister just moved to Melbourne.
+    picks:
+      - word: sister
+        follow: Is she the older one? What made her decide to go?
+      - word: moved
+        follow: How is she finding the move? Was it a big upheaval?
+      - word: Melbourne
+        follow: What took her to Melbourne? Have you been over yet?
+  - said: I just got back from Seoul for a project.
+    picks:
+      - word: Seoul
+        follow: How was Seoul? Did you get any time outside the office?
+      - word: project
+        follow: What kind of project? Is it wrapping up or just starting?
+      - word: got back
+        follow: Do you travel out there often? How is the jet lag?
+  - said: We finally finished the renovation last month.
+    picks:
+      - word: finished
+        follow: How does it feel to have it done? What is the first thing you did?
+      - word: renovation
+        follow: What did you change? Did it go the way you expected?
+      - word: last month
+        follow: How long did the whole thing take in the end?
+  - said: I started running again after a long break.
+    picks:
+      - word: running
+        follow: Where do you run? Is it road or trail?
+      - word: again
+        follow: What got you back into it?
+      - word: break
+        follow: Was that an injury, or just life getting in the way?
+  - said: My team is moving to a new office near the harbour.
+    picks:
+      - word: team
+        follow: How big is the team now? Has it grown recently?
+      - word: office
+        follow: Is the new place better? What is it like?
+      - word: harbour
+        follow: That side of town is nice. Will your commute change much?

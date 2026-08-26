@@ -1,0 +1,242 @@
+/*
+  Page-scoped styles for /small-talk/ only.
+
+  Two page-local accents. --sm-warm carries the human side (openings, warmth,
+  the things to say) and --sm-cool the analytic side (structure, calibration,
+  the things to read). Both are declared per theme rather than once, because a
+  single value bright enough to clear 4.5:1 on the dark background lands near
+  3:1 on the light one, and these carry small bold label text in both.
+  Solved against --bg: warm 6.95:1 dark and 5.09:1 light, cool 6.09 and 5.48.
+*/
+.small-talk{--sm-warm:#d08a5e;--sm-cool:#5d9a9b;--fs-base:1.02rem}
+html[data-theme="light"] .small-talk{--sm-warm:#9c5426;--sm-cool:#2f6b6c}
+.small-talk .page-content{max-width:74rem}
+
+/* Reading progress, same device the other manuals use. */
+.sm-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:30;background:transparent;pointer-events:none}
+.sm-progress span{display:block;height:100%;width:0;background:var(--sm-warm);box-shadow:0 0 12px color-mix(in srgb,var(--sm-warm) 60%,transparent)}
+
+/*
+  The section rail. Sticky, and mounted as a direct child of .page-content above
+  the hero: position:sticky only sticks inside its own parent, so a rail nested
+  in a section stops sticking the moment that section ends. 3.875rem seats it
+  flush under the 62px fixed topbar rather than behind it.
+*/
+.sm-rail{position:sticky;top:3.875rem;z-index:12;display:grid;grid-template-columns:repeat(10,1fr);margin:0 0 1.5rem;border:1px solid var(--border-ui);border-radius:var(--radius-md);overflow:hidden;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(12px)}
+.sm-rail a{display:grid;justify-items:center;gap:.15rem;padding:.5rem .25rem;color:var(--muted);font-size:.64rem;line-height:1.2;text-align:center;text-decoration:none;border-right:1px solid var(--line)}
+.sm-rail a:last-child{border-right:0}
+.sm-rail b{color:var(--sm-warm);font:700 .56rem/1 "Space Grotesk",sans-serif}
+.sm-rail a:hover{color:var(--text)}
+.sm-rail a.is-current{color:var(--text);background:var(--surface);box-shadow:inset 0 -3px var(--sm-warm)}
+
+/* Symbols carry geometry only; every presentational value lives here. */
+.sm-i{width:1.05rem;height:1.05rem;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sm-h2-i{width:1.5rem;height:1.5rem;color:var(--sm-warm)}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.sm-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding:clamp(2rem,5vw,4rem) 0 clamp(2.5rem,6vw,4.5rem);border-bottom:1px solid var(--line)}
+.sm-kicker{margin:0;color:var(--sm-warm);font:700 .72rem/1 "Space Grotesk",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.sm-hero h1{margin:1rem 0 1.2rem;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.03;letter-spacing:-.03em;max-width:18ch}
+.sm-lead{margin:0 0 .9rem;max-width:44rem;color:var(--muted);font-size:1.02rem;line-height:1.7}
+.sm-lead-2{color:var(--text)}
+.sm-hero-seq{display:grid;gap:.4rem;padding:1.2rem;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface)}
+.sm-hero-seq span{display:grid;gap:.15rem;font-size:.9rem;color:var(--text)}
+.sm-hero-seq b{color:var(--sm-warm);font:700 .6rem "Space Grotesk",sans-serif;letter-spacing:.1em}
+.sm-hero-seq i{color:var(--sm-cool);font-style:normal;font-size:.85rem}
+
+/* ── Sections ─────────────────────────────────────────────────────────── */
+.sm-part{padding:clamp(2.5rem,6vw,4.5rem) 0;border-bottom:1px solid var(--line)}
+.sm-part h2{display:flex;align-items:center;gap:.7rem;margin:0 0 1rem;font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.025em}
+.sm-part h2>span{color:var(--sm-warm);font:700 .8rem "Space Grotesk",sans-serif}
+.sm-part h3{margin:2.6rem 0 .8rem;font-size:1.12rem;letter-spacing:-.015em}
+.sm-prose p{max-width:46rem;color:var(--muted);line-height:1.75}
+.sm-deck{color:var(--text)!important;font-size:1.06rem}
+.sm-note{padding:1rem 1.2rem;border-left:2px solid var(--sm-cool);background:color-mix(in srgb,var(--surface) 60%,transparent);border-radius:0 var(--radius-md) var(--radius-md) 0}
+
+/* The boxed statements from the source, rendered as callouts rather than maths. */
+.sm-rule{max-width:46rem;margin:1.6rem 0;padding:1.1rem 1.3rem;border:1px solid color-mix(in srgb,var(--sm-warm) 40%,transparent);border-radius:var(--radius-md);background:color-mix(in srgb,var(--sm-warm) 8%,transparent);color:var(--text)!important;font-size:1.02rem;font-weight:650;line-height:1.5}
+
+.sm-table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.9rem}
+.sm-table th{text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--border-ui);color:var(--muted);font:700 .68rem "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.sm-table td{padding:.62rem .8rem;border-bottom:1px solid var(--line);color:var(--text);vertical-align:top}
+.sm-table td:first-child{color:var(--sm-cool);font-weight:650;white-space:nowrap}
+.sm-span{color:var(--sm-warm)!important;font:650 .82rem "Space Grotesk",sans-serif;white-space:nowrap}
+
+.sm-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
+.sm-two>div{padding:1.1rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.sm-two p{margin:.5rem 0 0;color:var(--text);font-size:.94rem;line-height:1.55}
+.sm-bad{box-shadow:inset 3px 0 var(--muted)}
+.sm-good{box-shadow:inset 3px 0 var(--sm-warm)}
+.sm-tagline{display:block;color:var(--muted);font:700 .62rem "Space Grotesk",sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.sm-good .sm-tagline{color:var(--sm-warm)}
+.sm-tagline-risk{margin-top:1.1rem}
+
+.sm-chain{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;margin:1.2rem 0}
+.sm-chain span{padding:.42rem .8rem;border:1px solid var(--border-ui);border-radius:999px;color:var(--text);font-size:.84rem}
+.sm-chain i{color:var(--sm-warm);font-style:normal}
+.sm-chain-lg span{font-size:.95rem;font-weight:650;border-color:color-mix(in srgb,var(--sm-warm) 45%,transparent)}
+.sm-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0}
+.sm-chips span{padding:.38rem .75rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);font-size:.85rem}
+.sm-lang{color:var(--sm-warm);font-style:italic}
+
+/* ── 01 Decode block ──────────────────────────────────────────────────── */
+.sm-decode{max-width:46rem;margin:1.5rem 0;padding:1.3rem;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface)}
+.sm-decode-said{margin:0!important;color:var(--text)!important;font-size:1.35rem;font-weight:650;letter-spacing:-.02em}
+.sm-decode-note{margin:.9rem 0 .5rem!important;color:var(--muted)!important;font:700 .62rem "Space Grotesk",sans-serif!important;letter-spacing:.12em;text-transform:uppercase}
+.sm-decode ul{margin:0;padding-left:1.1rem;color:var(--text)}
+.sm-decode li{margin:.3rem 0;line-height:1.55}
+
+/* ── 02 Loop ──────────────────────────────────────────────────────────── */
+.sm-loop{margin:1.5rem 0;border:1px solid var(--border-ui);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface)}
+.sm-loop-steps{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line)}
+.sm-loop-steps button{display:grid;justify-items:center;gap:.3rem;padding:.75rem .3rem;border:0;border-right:1px solid var(--line);background:none;color:var(--muted);font:600 .68rem "Space Grotesk",sans-serif;cursor:pointer}
+.sm-loop-steps button:last-child{border-right:0}
+.sm-loop-steps button:hover{color:var(--text)}
+.sm-loop-steps button.is-on{color:var(--text);background:color-mix(in srgb,var(--sm-warm) 12%,transparent);box-shadow:inset 0 -3px var(--sm-warm)}
+.sm-loop-body{padding:1.4rem}
+.sm-loop-claim{margin:0 0 .5rem;color:var(--text);font-size:1.2rem;font-weight:650;letter-spacing:-.02em}
+.sm-loop-body p{margin:0 0 .9rem;color:var(--muted);line-height:1.7}
+.sm-loop-lines{display:grid;gap:.4rem;margin:0 0 1rem;padding:0;list-style:none}
+.sm-loop-lines li{padding:.5rem .8rem;border-left:2px solid color-mix(in srgb,var(--sm-warm) 55%,transparent);background:color-mix(in srgb,var(--sm-warm) 6%,transparent);color:var(--text);font-size:.93rem}
+.sm-loop-watch{margin:0!important;color:var(--sm-cool)!important;font-size:.88rem;font-weight:600}
+
+/* ── 02 Follow the noun ───────────────────────────────────────────────── */
+.sm-noun{margin:1.3rem 0;padding:1.3rem;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface)}
+.sm-noun-said{margin:0 0 .8rem!important;color:var(--text)!important;font-size:1.12rem;font-style:italic}
+.sm-noun-prompt{margin:0 0 .6rem!important;color:var(--muted)!important;font:700 .62rem "Space Grotesk",sans-serif!important;letter-spacing:.12em;text-transform:uppercase}
+.sm-noun-picks{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem}
+.sm-noun-picks button{padding:.45rem .9rem;border:1px solid var(--border-ui);border-radius:999px;background:none;color:var(--text);font-size:.9rem;cursor:pointer}
+.sm-noun-picks button:hover{border-color:var(--sm-warm);color:var(--sm-warm)}
+.sm-noun-picks button.is-on{background:color-mix(in srgb,var(--sm-warm) 16%,transparent);border-color:var(--sm-warm);color:var(--text)}
+.sm-noun-out{margin:0 0 .9rem!important;min-height:1.4em;color:var(--text)!important;font-size:.98rem}
+.sm-btn{padding:.5rem 1rem;border:1px solid var(--border-ui);border-radius:var(--radius-md);background:none;color:var(--muted);font:600 .78rem "Space Grotesk",sans-serif;cursor:pointer}
+.sm-btn:hover{color:var(--text);border-color:var(--sm-warm)}
+
+/* ── 03 Ladder ────────────────────────────────────────────────────────── */
+.sm-ladder{display:grid;gap:.4rem;margin:1.4rem 0}
+.sm-rung{display:grid;grid-template-columns:2.1rem 8.5rem 1fr;align-items:center;gap:.8rem;width:100%;padding:.72rem .9rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--text);text-align:left;cursor:pointer}
+.sm-rung:hover{border-color:var(--sm-warm)}
+.sm-rung.is-on{border-color:var(--sm-warm);background:color-mix(in srgb,var(--sm-warm) 9%,transparent)}
+.sm-rung b{color:var(--sm-warm);font:700 1rem "Space Grotesk",sans-serif}
+.sm-rung-kind{color:var(--sm-cool);font-weight:650;font-size:.86rem}
+.sm-rung-ask{color:var(--muted);font-size:.9rem}
+.sm-rung-note{margin:.6rem 0 0!important;min-height:1.4em;color:var(--text)!important;font-size:.93rem}
+
+/* ── 04 PEWFIC and calibration ────────────────────────────────────────── */
+.sm-pewfic{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin:1.4rem 0 .8rem}
+.sm-pewfic button{display:grid;justify-items:center;gap:.35rem;padding:.9rem .4rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--text);cursor:pointer;font-size:.78rem}
+.sm-pewfic button:hover{border-color:var(--sm-warm)}
+.sm-pewfic button.is-on{border-color:var(--sm-warm);background:color-mix(in srgb,var(--sm-warm) 10%,transparent)}
+.sm-pewfic b{color:var(--sm-warm);font:700 1.15rem "Space Grotesk",sans-serif}
+.sm-pewfic-out{margin:0 0 1rem!important;min-height:1.4em;color:var(--text)!important;font-size:.95rem}
+.sm-calibrate{display:grid;gap:1px;margin:1.2rem 0;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;background:var(--line)}
+.sm-cal-row{display:grid;grid-template-columns:11rem 1fr;gap:1rem;padding:.65rem .9rem;background:var(--bg)}
+.sm-cal-row b{color:var(--sm-cool);font-size:.9rem}
+.sm-cal-row span{color:var(--muted);font-size:.9rem}
+
+/* ── 05 Variables ─────────────────────────────────────────────────────── */
+.sm-vars{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.5rem 0}
+.sm-var{padding:1rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.sm-var-head{display:flex;align-items:center;gap:.5rem;color:var(--sm-warm)}
+.sm-var-head b{color:var(--text);font:650 .95rem "Space Grotesk",sans-serif}
+.sm-var-read{margin:.5rem 0 .7rem!important;color:var(--sm-cool)!important;font-size:.85rem;font-style:italic}
+.sm-var-scale{display:grid;grid-template-columns:1fr;gap:.35rem}
+.sm-var-pole{color:var(--muted);font-size:.74rem;line-height:1.35}
+.sm-range{width:100%;accent-color:var(--sm-warm)}
+.sm-var-move{margin:.7rem 0 0!important;color:var(--muted)!important;font-size:.86rem;line-height:1.6}
+.sm-posture{margin:1.2rem 0;padding:1.2rem 1.3rem;border:1px solid color-mix(in srgb,var(--sm-cool) 42%,transparent);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--sm-cool) 8%,transparent)}
+.sm-posture h4{margin:0 0 .6rem;color:var(--text);font-size:.95rem}
+.sm-posture ul{margin:0;padding-left:1.1rem;color:var(--text)}
+.sm-posture li{margin:.28rem 0;font-size:.92rem;line-height:1.55}
+
+/* ── 06 Atlas ─────────────────────────────────────────────────────────── */
+.sm-filter{display:flex;flex-wrap:wrap;gap:.45rem;margin:1.3rem 0}
+.sm-pill{padding:.42rem .9rem;border:1px solid var(--border-ui);border-radius:999px;background:none;color:var(--muted);font:600 .76rem "Space Grotesk",sans-serif;cursor:pointer}
+.sm-pill:hover{color:var(--text)}
+.sm-pill.is-on{background:color-mix(in srgb,var(--sm-warm) 15%,transparent);border-color:var(--sm-warm);color:var(--text)}
+.sm-atlas{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:.8rem;margin:1.2rem 0}
+.sm-place{padding:1rem 1.1rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.sm-place[hidden]{display:none}
+.sm-place h4{margin:0 0 .5rem;color:var(--sm-warm);font-size:.95rem}
+.sm-place-style{margin:0 0 .6rem!important;color:var(--text)!important;font-size:.88rem;line-height:1.6}
+.sm-place-note{margin:0!important;color:var(--muted)!important;font-size:.83rem;line-height:1.55}
+.sm-place-note span{display:block;color:var(--sm-cool);font:700 .58rem "Space Grotesk",sans-serif;letter-spacing:.12em;text-transform:uppercase}
+
+/* ── 07 Settings ──────────────────────────────────────────────────────── */
+.sm-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr));gap:.5rem;margin:1.2rem 0}
+.sm-settings button{display:flex;align-items:center;gap:.5rem;padding:.65rem .8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--text);font-size:.84rem;text-align:left;cursor:pointer}
+.sm-settings button:hover{border-color:var(--sm-warm)}
+.sm-settings button.is-on{border-color:var(--sm-warm);background:color-mix(in srgb,var(--sm-warm) 10%,transparent)}
+.sm-settings button[hidden]{display:none}
+.sm-setting-out{min-height:2rem;margin:1rem 0}
+.sm-card{padding:1.3rem;border:1px solid var(--border-ui);border-radius:var(--radius-lg);background:var(--surface)}
+.sm-card h4{margin:0 0 .9rem;color:var(--sm-warm);font-size:1.05rem}
+.sm-card dl{display:grid;grid-template-columns:6.5rem 1fr;gap:.55rem 1rem;margin:0}
+.sm-card dt{color:var(--muted);font:700 .62rem "Space Grotesk",sans-serif;letter-spacing:.1em;text-transform:uppercase;padding-top:.15rem}
+.sm-card dd{margin:0;color:var(--text);font-size:.93rem;line-height:1.6}
+.sm-card .sm-say{color:var(--text);font-style:italic}
+.sm-card .sm-watch{color:var(--sm-cool)}
+.sm-budget{display:grid;gap:.5rem;margin:1.2rem 0;padding:0;list-style:none;counter-reset:b}
+.sm-budget li{display:grid;grid-template-columns:6rem 1fr;gap:1rem;padding:.7rem .9rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.sm-budget b{color:var(--sm-warm);font:650 .88rem "Space Grotesk",sans-serif}
+.sm-budget span{color:var(--muted);font-size:.9rem;line-height:1.55}
+
+/* ── 08 Scripts ───────────────────────────────────────────────────────── */
+.sm-scripts{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.4rem 0}
+.sm-script{padding:1.2rem;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+.sm-script h4{margin:0 0 .35rem;color:var(--text);font-size:1rem}
+.sm-script-formula{margin:0 0 .7rem!important;color:var(--sm-warm)!important;font:650 .74rem "Space Grotesk",sans-serif!important;letter-spacing:.04em}
+.sm-script-body{margin:0 0 .9rem!important;color:var(--muted)!important;font-size:.9rem;line-height:1.65}
+.sm-script-eg{margin:0 0 .8rem;padding:.85rem 1rem;border:0;border-left:2px solid var(--sm-warm);border-radius:0 var(--radius-md) var(--radius-md) 0;background:color-mix(in srgb,var(--sm-warm) 7%,transparent);color:var(--text);font-size:.92rem;line-height:1.6;font-style:italic}
+.sm-script-fail{margin:0!important;color:var(--muted)!important;font-size:.84rem}
+.sm-script-fail span{display:block;color:var(--sm-cool);font:700 .58rem "Space Grotesk",sans-serif;letter-spacing:.12em;text-transform:uppercase}
+
+/* ── 09 Repair ────────────────────────────────────────────────────────── */
+.sm-repair{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.5rem;margin:1.2rem 0}
+.sm-repair button{display:flex;align-items:center;gap:.5rem;padding:.62rem .8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--text);font-size:.84rem;text-align:left;cursor:pointer}
+.sm-repair button:hover{border-color:var(--sm-warm)}
+.sm-repair button.is-on{border-color:var(--sm-warm);background:color-mix(in srgb,var(--sm-warm) 10%,transparent)}
+.sm-repair-out{min-height:2rem;margin:1rem 0}
+
+/* ── 10 Manner ────────────────────────────────────────────────────────── */
+.sm-body-table td:first-child{color:var(--sm-cool)!important}
+.sm-two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.2rem 0}
+.sm-two-col ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--text)}
+.sm-two-col li{margin:.25rem 0;font-size:.9rem;line-height:1.5}
+.sm-risk{color:var(--muted)!important}
+
+/* ── Coda ─────────────────────────────────────────────────────────────── */
+.sm-coda{padding:clamp(2.5rem,6vw,4.5rem) 0}
+.sm-coda-kicker{margin:0 0 .6rem;color:var(--sm-warm);font:700 .66rem "Space Grotesk",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.sm-coda h2{margin:0 0 1rem;font-size:clamp(1.7rem,3.6vw,2.7rem);letter-spacing:-.03em;max-width:20ch}
+.sm-coda p{max-width:46rem;color:var(--muted);line-height:1.75}
+.sm-coda-last{color:var(--text)!important;font-weight:600}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .sm-hero{grid-template-columns:1fr}
+  .sm-vars,.sm-scripts,.sm-two,.sm-two-col{grid-template-columns:1fr}
+  .sm-loop-steps{grid-template-columns:repeat(4,1fr)}
+  .sm-loop-steps button{border-bottom:1px solid var(--line)}
+  .sm-pewfic{grid-template-columns:repeat(3,1fr)}
+  .sm-card dl{grid-template-columns:1fr}
+  .sm-card dt{padding-top:.4rem}
+  .sm-rung{grid-template-columns:1.8rem 1fr;row-gap:.2rem}
+  .sm-rung-ask{grid-column:2}
+}
+@media(max-width:720px){
+  .sm-rail{grid-template-columns:repeat(5,1fr);position:relative;top:auto}
+  .sm-cal-row{grid-template-columns:1fr;gap:.15rem}
+  .sm-budget li{grid-template-columns:1fr;gap:.2rem}
+  .sm-loop-steps{grid-template-columns:repeat(3,1fr)}
+  .sm-pewfic{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){.small-talk *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/*
+  Landing offset for the rail links. The rail is sticky under the fixed topbar,
+  so a section scrolled to by hash would otherwise stop underneath both and read
+  as though the click missed. 9rem clears the tallest rail on the site; the ids
+  come from this page's own rail, so adding a rail entry means adding it here.
+*/
+#calibration,#loop,#ladder,#topics,#variables,#atlas,#settings,#scripts,#repair,#manner{scroll-margin-top:9rem}

@@ -1,5 +1,5 @@
 /**
- * Scroll-built explanatory scenes for the eleven featured writings.
+ * Scroll-built explanatory scenes for the twelve featured writings.
  * Scene construction follows Manim's staged-object model; the pinned scrub
  * follows the scroll-linked sequencing used by GSAP and Apple product pages.
  */
@@ -102,6 +102,19 @@
         ['The next request received an honest answer', 'I can help tomorrow.', 'Nobody was abandoned. They had finally stopped abandoning themselves.']
       ]
     },
+    rapport: {
+      narrative: true,
+      kicker: 'He stood at the edge of the room',
+      title: 'Everyone else was already mid-conversation.',
+      copy: 'He had rehearsed something clever on the way over. Standing there, none of it seemed worth saying out loud.',
+      steps: ['Edge', 'Open', 'Land', 'Leave'],
+      frames: [
+        ['He stood at the edge of the room', 'Everyone else was already mid-conversation.', 'He had rehearsed something clever on the way over. Standing there, none of it seemed worth saying out loud.'],
+        ['He said something ordinary instead', 'It turned out to be enough.', 'He asked how they knew the host. The question was unremarkable, and the person answered it gladly.'],
+        ['The third question found something real', 'They both stopped performing.', 'He followed one word from her answer, and the conversation stopped being about the room.'],
+        ['He left after three conversations', 'One of them was worth keeping.', 'He went home earlier than everyone else, with one name he actually wanted to write to.']
+      ]
+    },
     conversion: {
       narrative: true,
       kicker: 'That night, there was no lesson',
@@ -146,7 +159,7 @@
     if (key === 'feedback') return buildFeedbackNarrativeCanvas(canvas, svg);
     if (key === 'consent') return buildConsentNarrativeCanvas(canvas, svg);
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
-    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty') return buildEmotionalNarrativeCanvas(canvas, svg, key);
+    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
     night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><g class="em-fig em-fig-boy"><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49"/><path class="em-person em-arm" d="M405 220l-42 34"/></g><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
@@ -256,6 +269,15 @@
           '<rect class="em-note" x="120" y="55" width="510" height="245" rx="8"/><path class="em-note-rule" d="M375 55v245M155 108h185M410 108h185"/><text class="em-note-title" x="170" y="89">NOT MINE</text><text class="em-note-title" x="425" y="89">MINE</text><text class="em-note-key" x="170" y="145">the diagnosis</text><text class="em-note-key" x="425" y="145">call my sister</text><text class="em-note-key" x="170" y="190">the wait</text><text class="em-note-key" x="425" y="190">bring coffee</text><text class="em-note-key" x="170" y="235">the doctor’s choice</text><text class="em-note-key" x="425" y="235">stay nearby</text><text x="375" y="345">The right column was short enough to do.</text>',
           '<path class="em-office" d="M115 295h520M165 295v-70h140v70M445 295v-70h140v70"/><path class="em-cup" d="M336 208h38v33c0 13-38 13-38 0zM374 216h13v16h-13"/><path class="em-cup" d="M392 208h38v33c0 13-38 13-38 0zM430 216h13v16h-13"/><g class="em-fig em-fig-stand"><circle class="em-head" cx="275" cy="166" r="22"/><path class="em-person" d="M275 188v60m-35 47 35-47 35 47"/><path class="em-person em-arm" d="M275 210l48 20"/></g><text x="375" y="345">He made the call and came back with two coffees.</text>',
           '<g class="em-fig em-fig-son"><circle class="em-head" cx="300" cy="160" r="23"/><path class="em-person" d="M300 183v78m-42 58 42-58 42 58"/><path class="em-person em-arm" d="M300 210l62 35"/></g><g class="em-fig em-fig-father"><circle class="em-head em-helper" cx="450" cy="175" r="23"/><path class="em-person em-helper" d="M450 198v63m-42 58 42-58 42 58"/><path class="em-person em-helper em-arm" d="M450 220l-88 25"/></g><path class="em-open-gate" d="M570 75v225h82"/><text x="375" y="345">He pulled the chair closer and took his father’s hand.</text>'
+        ]
+      },
+      rapport: {
+        label: 'A man stands apart at a crowded event, opens with something ordinary, finds a real conversation, and leaves early with one worth keeping',
+        frames: [
+          '<path class="em-room" d="M60 300h630M100 300V70h550v230M100 150h550"/><g class="em-clusters"><circle cx="300" cy="196" r="17"/><circle cx="346" cy="188" r="17"/><circle cx="324" cy="232" r="17"/><circle cx="470" cy="184" r="17"/><circle cx="516" cy="196" r="17"/><circle cx="498" cy="236" r="17"/><circle cx="600" cy="200" r="17"/><circle cx="642" cy="214" r="17"/></g><g class="em-fig em-fig-edge"><circle class="em-head" cx="150" cy="196" r="21"/><path class="em-person" d="M150 217v56m-28 40 28-40 28 40"/><path class="em-person em-arm" d="M150 236l-22 26"/></g><text x="375" y="345">The clever opening he rehearsed stayed in his pocket.</text>',
+          '<g class="em-fig em-fig-say"><circle class="em-head" cx="270" cy="176" r="22"/><path class="em-person" d="M270 198v62m-32 46 32-46 32 46"/><path class="em-person em-arm" d="M270 220l40 16"/></g><g class="em-fig em-fig-hear"><circle class="em-head em-helper" cx="480" cy="176" r="22"/><path class="em-person em-helper" d="M480 198v62m-32 46 32-46 32 46"/><path class="em-person em-helper em-arm" d="M480 220l-40 16"/></g><rect class="em-message" x="298" y="72" width="154" height="52" rx="12"/><text class="em-result-word" x="375" y="104">HOW DO YOU KNOW THE HOST?</text><path class="em-thought-line" d="M330 128 292 152"/><text x="375" y="345">Unremarkable, and she answered it gladly.</text>',
+          '<g class="em-fig em-fig-lean"><circle class="em-head" cx="300" cy="170" r="23"/><path class="em-person" d="M300 193v64m-34 50 34-50 34 50"/><path class="em-person em-arm" d="M300 216l58 22"/></g><g class="em-fig em-fig-lean2"><circle class="em-head em-helper" cx="452" cy="170" r="23"/><path class="em-person em-helper" d="M452 193v64m-34 50 34-50 34 50"/><path class="em-person em-helper em-arm" d="M452 216l-58 22"/></g><circle class="em-shared" cx="376" cy="238" r="15"/><rect class="em-result-mark" x="286" y="76" width="180" height="38" rx="19"/><text class="em-result-word" x="376" y="100">THE THIRD QUESTION</text><text x="375" y="345">Neither of them was performing any more.</text>',
+          '<path class="em-open-gate" d="M604 78v224h74"/><g class="em-fig em-fig-away"><circle class="em-head" cx="512" cy="180" r="21"/><path class="em-person" d="M512 201v58m-26 44 26-44 30 44"/><path class="em-person em-arm" d="M512 222l34 12"/></g><g class="em-fig em-fig-kept"><circle class="em-head em-helper" cx="196" cy="184" r="21"/><path class="em-person em-helper" d="M196 205v58m-26 44 26-44 26 44"/><path class="em-person em-helper em-arm" d="M196 226l30 14"/></g><path class="em-keep" d="M232 236C300 250 400 246 478 224"/><g class="em-carry"><rect x="300" y="86" width="152" height="56" rx="8"/><text x="376" y="111">KEEP</text><text class="em-carry-word" x="376" y="133">one name</text></g><text x="375" y="345">Home early, with someone he actually wanted to write to.</text>'
         ]
       },
       uncertainty: {
