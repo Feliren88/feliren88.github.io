@@ -43,6 +43,12 @@ layout-class: page writings-page
 <span class="essay-feature-desc">Most decisions are not solo problems. Solve eight payoff matrices, watch cooperation become rational as the horizon lengthens, and run a ruin simulation.</span>
 <span class="read-more">Open the note →</span>
 </a>
+<a class="essay-feature" href="/read-people/">
+<span class="essay-feature-label">Interactive field manual</span>
+<span class="essay-feature-title">How to Read People</span>
+<span class="essay-feature-desc">Observe change, build three plausible explanations, and test what each one predicts. Read behaviour without pretending you can read minds.</span>
+<span class="read-more">Open the field manual →</span>
+</a>
 <a class="essay-feature" href="/success-failure/">
 <span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Success &amp; Failure</span>
@@ -375,13 +381,15 @@ layout-class: page writings-page
   .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
   .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
   .essay-feature:nth-child(3), .essay-feature:nth-child(4) { grid-column: span 6; min-height: 19rem; }
-  .essay-feature:nth-child(5) { grid-column: span 4; min-height: 22rem; }
-  .essay-feature:nth-child(6) { grid-column: span 8; min-height: 22rem; background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface) 58%); }
-  /* The final six manuals form two even rows of three. */
-  .essay-feature:nth-child(n+7):nth-child(-n+12) { grid-column:span 4;min-height:21rem }
-  .essay-feature:nth-child(9) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
+  /* Stoic, Game Theory, and Read People share one even row. */
+  .essay-feature:nth-child(n+5):nth-child(-n+7) { grid-column:span 4;min-height:22rem }
+  .essay-feature:nth-child(6) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(7) { background:linear-gradient(145deg,color-mix(in srgb,#c86f58 11%,var(--surface)),var(--surface) 62%) }
+  /* The remaining manuals keep the same three-card rhythm. */
+  .essay-feature:nth-child(n+8):nth-child(-n+13) { grid-column:span 4;min-height:21rem }
+  .essay-feature:nth-child(10) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
+  .essay-feature:nth-child(12) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
   .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
   .essay-feature-label {
     display: block;
