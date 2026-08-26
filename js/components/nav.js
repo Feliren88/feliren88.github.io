@@ -17,6 +17,7 @@
     if (path.indexOf('/essays/') === 0) return '/writings';
     if (path.indexOf('/high-agency') === 0) return '/writings';
     if (path.indexOf('/principles') === 0) return '/writings';
+    if (path.indexOf('/curious') === 0) return '/writings';
     if (path.indexOf('/stoic') === 0) return '/writings';
     if (path.indexOf('/game-theory') === 0) return '/writings';
     if (path.indexOf('/success-failure') === 0) return '/writings';
