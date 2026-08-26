@@ -27,6 +27,52 @@
   var fields=$$('.rp-journal textarea');fields.forEach(function(f,i){var key='rp:journal:'+i;try{f.value=localStorage.getItem(key)||''}catch(e){}f.addEventListener('input',function(){try{localStorage.setItem(key,f.value)}catch(e){}})});
   var confidence=$('.rp-journal input[type=range]'), output=$('.rp-journal output');confidence.addEventListener('input',function(){output.value=confidence.value+'%'});
   var refSearch=$('#rp-ref-search'), refFilter='all', refCards=$$('.rp-ref-grid details');
+  var refVizTypes=('facets model ladder baseline context actions pull shield spotlight compare target loss balance signals face gaze voice pause pronouns detail '+
+    'audiences hierarchy pressure repair success apology boundary exchange curiosity gossip humour status proof calm care trust judgement climb loyalty integrity '+
+    'trap praise rush bond followup bargain leader team room gaze proximity silence mismatch question verify update fork fork state capacity impact ownership levels observe baseline predict journal motives question story history group contexts bias feedback sequence drill screen interview bargain child mirror empathy perspective game record partner forecast decision stakes ladder systems hunch caution structure compassion sequence dimensions predict unknown').split(' ');
+  var vizFamilies={
+    facets:'nodes',model:'nodes',context:'orbit',audiences:'people',team:'people',room:'people',group:'people',dimensions:'nodes',
+    ladder:'steps',hierarchy:'steps',climb:'steps',levels:'steps',stakes:'steps',
+    baseline:'chart',pressure:'chart',forecast:'chart',predict:'chart',update:'chart',feedback:'chart',
+    actions:'compare',compare:'compare',balance:'compare',proof:'compare',judgement:'compare',capacity:'compare',impact:'compare',mismatch:'compare',state:'compare',
+    pull:'target',spotlight:'target',target:'target',detail:'target',focus:'target',motives:'target',
+    shield:'boundary',loss:'boundary',boundary:'boundary',trust:'boundary',integrity:'boundary',caution:'boundary',
+    signals:'wave',voice:'wave',pause:'wave',silence:'wave',hunch:'wave',
+    face:'person',gaze:'person',status:'person',calm:'person',leader:'person',child:'person',mirror:'person',empathy:'person',perspective:'person',
+    pronouns:'speech',question:'speech',story:'speech',gossip:'speech',humour:'speech',praise:'speech',interview:'speech',
+    exchange:'exchange',care:'exchange',loyalty:'exchange',bond:'exchange',followup:'exchange',partner:'exchange',compassion:'exchange',
+    repair:'path',success:'path',apology:'path',rush:'path',sequence:'path',drill:'path',history:'path',record:'path',
+    curiosity:'fork',fork:'fork',verify:'fork',bias:'fork',decision:'fork',unknown:'fork',
+    trap:'tangle',ownership:'tangle',systems:'tangle',structure:'tangle',
+    bargain:'arrows',game:'arrows',manipulation:'arrows',flattery:'arrows',
+    screen:'frame',observe:'frame',journal:'frame',contexts:'frame',program:'frame'
+  };
+  function refViz(type,n){
+    var family=vizFamilies[type]||type, a=n%3, common='viewBox="0 0 144 64" aria-hidden="true" focusable="false"';
+    var seed=(n+1)*7919, points=[];for(var j=0;j<6;j++){seed=(seed*48271)%2147483647;points.push((18+j*22)+','+(53-(seed%9)))}
+    var signature='<polyline class="signature" points="'+points.join(' ')+'"/><circle class="signature-dot" cx="'+(18+(n%6)*22)+'" cy="'+(53-(seed%9))+'" r="2.5"/>';
+    var svg={
+      nodes:'<circle cx="25" cy="32" r="8"/><circle class="hot" cx="72" cy="16" r="6"/><circle class="cool" cx="113" cy="37" r="9"/><path d="M33 30 66 18M78 19l27 15M34 35l70 2"/>',
+      orbit:'<circle cx="72" cy="32" r="9"/><ellipse class="dash" cx="72" cy="32" rx="49" ry="22"/><circle class="hot fill" cx="'+(27+a*5)+'" cy="32" r="4"/><circle class="cool fill" cx="114" cy="21" r="4"/>',
+      people:'<circle cx="72" cy="15" r="6"/><path d="M62 49V31q0-9 10-9t10 9v18M23 46V35q0-7 7-7t7 7v11M107 46V35q0-7 7-7t7 7v11"/><path class="dash" d="M38 35 61 28M83 28l23 7"/>',
+      steps:'<path d="M18 51h27V39h27V27h27V15h27"/><circle class="hot fill" cx="'+(45+a*27)+'" cy="'+(39-a*12)+'" r="5"/>',
+      chart:'<path d="M16 49h113M24 16v33"/><path class="cool" d="m25 42 25-3 22-15 24 6 27-17"/><path class="dash" d="M72 12v39"/><circle class="hot fill" cx="72" cy="24" r="4"/>',
+      compare:'<circle cx="39" cy="31" r="18"/><circle class="cool" cx="105" cy="31" r="18"/><path class="hot" d="M58 31h28"/><circle class="hot fill" cx="72" cy="31" r="4"/>',
+      target:'<circle cx="72" cy="32" r="23"/><circle cx="72" cy="32" r="12"/><circle class="hot fill" cx="72" cy="32" r="4"/><path class="cool" d="m18 49 31-12"/>',
+      boundary:'<circle cx="45" cy="32" r="9"/><circle class="cool" cx="105" cy="32" r="9"/><path class="hot" d="M72 10v44"/><path class="dash" d="M55 32h10M79 32h16"/>',
+      wave:'<path d="M14 32h18l7-14 12 30 13-25 12 18 10-9h44"/><circle class="hot fill" cx="'+(51+a*13)+'" cy="'+(48-a*7)+'" r="4"/>',
+      person:'<circle cx="72" cy="16" r="8"/><path d="M57 53V35q0-11 15-11t15 11v18"/><path class="cool" d="M18 31h27M99 31h27"/><circle class="hot fill" cx="'+(30+a*42)+'" cy="31" r="4"/>',
+      speech:'<path d="M20 13h78q13 0 13 13t-13 13H62L48 52V39H20Q7 39 7 26t13-13Z"/><circle class="hot fill" cx="39" cy="26" r="3"/><circle cx="58" cy="26" r="3"/><circle class="cool fill" cx="77" cy="26" r="3"/>',
+      exchange:'<circle cx="27" cy="32" r="9"/><circle cx="117" cy="32" r="9"/><path class="hot" d="m41 23 23-9 8 5M103 41l-23 9-8-5"/><path class="cool" d="M42 32h60"/>',
+      path:'<circle cx="18" cy="42" r="5"/><circle class="hot fill" cx="126" cy="18" r="5"/><path class="cool" d="M23 42c25 0 18-25 43-25s23 30 55 3"/><path class="dash" d="M23 51h98"/>',
+      fork:'<path d="M18 32h35M53 32c20 0 14-18 34-18h38M53 32c20 0 14 18 34 18h38"/><circle class="hot fill" cx="53" cy="32" r="4"/><circle class="cool fill" cx="125" cy="14" r="4"/>',
+      tangle:'<circle cx="35" cy="32" r="9"/><path class="hot" d="M49 32c12-25 39 25 51 0s31 8 13 18M49 32c17 17 30-20 48 0"/><circle class="cool" cx="121" cy="32" r="9"/>',
+      arrows:'<circle cx="32" cy="32" r="9"/><circle cx="112" cy="32" r="9"/><path class="hot" d="m47 23 42-10 9 5M97 43 55 53l-9-5"/><path class="dash" d="M47 32h50"/>',
+      frame:'<rect x="19" y="10" width="106" height="44" rx="5"/><circle cx="50" cy="32" r="7"/><circle class="hot fill" cx="76" cy="24" r="4"/><circle class="cool fill" cx="99" cy="39" r="5"/><path class="dash" d="M33 46 110 17"/>'
+    }[family];
+    return '<span class="rp-ref-viz" data-viz="'+type+'-'+(n+1)+'"><svg '+common+'>'+svg+signature+'</svg></span>';
+  }
+  refCards.forEach(function(card,i){var summary=$('summary',card),title=$('summary span',card),type=refVizTypes[i]||'unknown';summary.insertAdjacentHTML('afterbegin',refViz(type,i));card.dataset.viz=type+'-'+(i+1);if(title)summary.setAttribute('aria-label',(i+1)+'. '+title.textContent)});
   function filterReference(){var q=(refSearch.value||'').trim().toLowerCase(),visible=0;refCards.forEach(function(card){var tags=card.dataset.tags||'',text=card.textContent.toLowerCase(),show=(refFilter==='all'||tags.split(' ').indexOf(refFilter)>-1)&&(!q||text.indexOf(q)>-1);card.hidden=!show;if(show)visible++});$('#rp-ref-count').textContent=visible}
   refSearch.addEventListener('input',filterReference);$$('.rp-ref-filters button').forEach(function(b){b.addEventListener('click',function(){$$('.rp-ref-filters button').forEach(function(x){x.classList.remove('is-on')});b.classList.add('is-on');refFilter=b.dataset.refFilter;filterReference()})});filterReference();
   function progress(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight, pct=max?100*h.scrollTop/max:0;$('#rp-progress-fill').style.width=pct+'%';var y=h.scrollTop+150,current='observe';$$('.rp-part,.rp-hero').forEach(function(s){if(s.offsetTop<=y)current=s.id});$$('.rp-rail a').forEach(function(a){a.classList.toggle('is-current',a.getAttribute('href')==='#'+current)})}
