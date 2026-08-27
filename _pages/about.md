@@ -6,6 +6,7 @@ description: Vicky Feliren is an Applied Scientist studying AI safety, calibrati
 permalink: /about/
 extra_css: /css/about.css
 hide_title: true
+motion_scene: record
 ---
 <article class="about-story">
   <header class="about-story-hero">
@@ -33,6 +34,11 @@ hide_title: true
       <figcaption>Applied Scientist · AI safety and reliable multimodal systems</figcaption>
     </figure>
   </header>
+
+  <!-- essay-motion.js replaces this with the five-beat scene. It sits above the
+       sticky nav on purpose: the nav would otherwise stay pinned across the whole
+       interlude. See the [data-scene-slot] note in js/components/essay-motion.js. -->
+  <div data-scene-slot></div>
 
   <nav class="about-story-nav" aria-label="On this page">
     <span>Follow the thread</span>

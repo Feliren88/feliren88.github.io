@@ -43,13 +43,15 @@
      through them. Hold the portrait ratio and shrink the frame instead —
      that keeps the desktop composition and leaves the headline near the top. */
   .about-portrait{max-width:none}
-  .about-portrait-frame{max-width:min(56%,230px)}
-  .about-portrait-frame:before{inset:8% -10% -6% 16%}
+  /* Centred, and the offset frame is symmetrical here so the pair reads as
+     centred too. Left-aligned it left a dead column beside the photo. */
+  .about-portrait-frame{max-width:min(56%,230px);margin-inline:auto}
+  .about-portrait-frame:before{inset:8% -13% -6% -13%}
   /* height="880" is a presentational hint, and it beats aspect-ratio for as
      long as the used height is not auto — without this the crop never happens
      and the portrait renders 880px tall whatever the frame is. */
   .about-portrait img{height:auto;aspect-ratio:4/5;object-position:center 20%}
-  .about-portrait figcaption{margin-top:1.2rem}
+  .about-portrait figcaption{margin-top:1.2rem;text-align:center}
 
   .about-story-copy h1{font-size:clamp(2.3rem,10vw,3.5rem);max-width:none;margin:.5rem 0 1.1rem}
   .about-story-lead{font-size:1.02rem;line-height:1.65}

@@ -1,5 +1,5 @@
 /**
- * Scroll-built explanatory scenes for the twelve featured writings.
+ * Scroll-built explanatory scenes for the twelve featured writings and /about/.
  * Scene construction follows Manim's staged-object model; the pinned scrub
  * follows the scroll-linked sequencing used by GSAP and Apple product pages.
  */
@@ -127,6 +127,26 @@
         ['Weeks later, they could name what happened', 'A promise broke. A limit was crossed.', 'Naming the damage showed them what needed repair and what should never be rebuilt.'],
         ['They used what was left', 'The next life had firmer ground.', 'They made one boundary, changed one method, and knew how to sit quietly beside the next person in pain.']
       ]
+    },
+    /*
+      The only five-beat scene, and the only one on a page rather than a writing.
+      Every claim in it is traceable to _data/experience.yml, publications.yml or
+      awards.yml. Nothing here states a result the record does not state: beat five
+      names the question the hackathon entry asked, not an outcome it reported.
+    */
+    record: {
+      narrative: true,
+      kicker: 'Jakarta, 2021. The city needed a number',
+      title: 'It had to change a decision.',
+      copy: 'I forecast municipal waste for Jakarta Smart City. The number guided how the city planned its resources. Model quality counts when it changes a decision, and not before.',
+      steps: ['City', 'Bank', 'Satellite', 'Region', 'Safety'],
+      frames: [
+        ['Jakarta, 2021. The city needed a number', 'It had to change a decision.', 'I forecast municipal waste for Jakarta Smart City. The number guided how the city planned its resources. Model quality counts when it changes a decision, and not before.'],
+        ['Then a wrong answer reached someone’s account', 'A wrong score cost real money.', 'At GDP Labs I built biometric and credit systems for Indonesian banks. Fraud detection and audited scoring followed. Calibration stopped being a metric and became an operating requirement.'],
+        ['Monash, 2022. The satellite bands disagreed', 'So I built the fusion network.', 'ProCANet combines multispectral bands with progressive cross-attention to segment floods. IEEE GRSL published it with me as first author. I then contributed to a mining-footprint paper in Remote Sensing of Environment.'],
+        ['2024. Southeast Asia was missing from the data', 'So we built the dataset.', 'SEA-VL brought together more than fifty researchers across five countries. We crowdsourced, crawled and generated images that English-first datasets never held. ACL 2025 accepted the result.'],
+        ['June 2026. A caption that contradicts its image', 'Does it stop, or answer anyway?', 'We tested whether vision-language models notice the conflict in low-resource languages. The question is whether they abstain before answering confidently and wrongly. The work won the Asia-Pacific regional award at the Global South AI Safety Hackathon.']
+      ]
     }
   };
   var scene = scenes[key];
@@ -159,7 +179,7 @@
     if (key === 'feedback') return buildFeedbackNarrativeCanvas(canvas, svg);
     if (key === 'consent') return buildConsentNarrativeCanvas(canvas, svg);
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
-    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport') return buildEmotionalNarrativeCanvas(canvas, svg, key);
+    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport' || key === 'record') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
     night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><g class="em-fig em-fig-boy"><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49"/><path class="em-person em-arm" d="M405 220l-42 34"/></g><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
@@ -280,6 +300,23 @@
           '<path class="em-open-gate" d="M604 78v224h74"/><g class="em-fig em-fig-away"><circle class="em-head" cx="512" cy="180" r="21"/><path class="em-person" d="M512 201v58m-26 44 26-44 30 44"/><path class="em-person em-arm" d="M512 222l34 12"/></g><g class="em-fig em-fig-kept"><circle class="em-head em-helper" cx="196" cy="184" r="21"/><path class="em-person em-helper" d="M196 205v58m-26 44 26-44 26 44"/><path class="em-person em-helper em-arm" d="M196 226l30 14"/></g><path class="em-keep" d="M232 236C300 250 400 246 478 224"/><g class="em-carry"><rect x="300" y="86" width="152" height="56" rx="8"/><text x="376" y="111">KEEP</text><text class="em-carry-word" x="376" y="133">one name</text></g><text x="375" y="345">Home early, with someone he actually wanted to write to.</text>'
         ]
       },
+      /*
+        Five drawings for /about/. Each one shows the same shape: several inputs
+        that do not agree, something built to reconcile them, and the decision that
+        came out the other side. Text inside a frame is a label, never a claim the
+        copy has not already made, and there are no numbers anywhere except the
+        two the record states (fifty researchers, five countries).
+      */
+      record: {
+        label: 'Five pieces of work: a city waste forecast, bank decision systems, a flood segmentation network, a Southeast Asian vision-language dataset, and a test of whether models abstain under conflict',
+        frames: [
+          '<rect class="em-screen" x="62" y="58" width="318" height="198" rx="10"/><text class="em-screen-label" x="221" y="94">WASTE FORECAST</text><path class="em-note-rule" d="M100 232h244"/><path class="em-road" d="M100 214l44-24 44 10 44-42 44 14 44-40 24 8"/><circle class="em-attempt-next" cx="344" cy="140" r="10"/><path class="em-arrow" d="M400 156h58m-16-14 16 14-16 14"/><g class="em-load"><rect x="500" y="66" width="176" height="46" rx="7"/><text x="588" y="95">where</text><rect x="500" y="134" width="176" height="46" rx="7"/><text x="588" y="163">when</text><rect x="500" y="202" width="176" height="46" rx="7"/><text x="588" y="231">how much</text></g><path class="em-pull" d="M470 146c14-28 16-46 30-56m-30 66h30m-30 10c14 28 16 46 30 56"/><text x="375" y="344">Forecasts guided where the city sent its resources.</text>',
+          '<rect class="em-note" x="70" y="52" width="396" height="240" rx="9"/><text class="em-note-title" x="108" y="90">CREDIT DECISION</text><path class="em-note-rule" d="M108 112h320M108 170h320M108 228h320"/><text class="em-note-key" x="122" y="146">identity match</text><text class="em-note-value" x="416" y="146">verified</text><text class="em-note-key" x="122" y="204">fraud signal</text><text class="em-note-value" x="416" y="204">clear</text><text class="em-note-key" x="122" y="262">model confidence</text><text class="em-note-value" x="416" y="262">high</text><path class="em-arrow" d="M488 168h56m-16-14 16 14-16 14"/><g class="em-fig em-fig-holder"><circle class="em-head" cx="612" cy="100" r="24"/><path class="em-person" d="M612 124v76m-40 56 40-56 40 56M612 152l-38 24m38-24 38 24"/></g><rect class="em-result-mark" x="512" y="276" width="200" height="40" rx="20"/><text class="em-result-word" x="612" y="301">A REAL ACCOUNT</text><text x="375" y="344">Every decision the model made landed on a person.</text>',
+          '<g class="em-load"><rect x="54" y="60" width="156" height="44" rx="6"/><text x="132" y="88">optical</text><rect x="54" y="126" width="156" height="44" rx="6"/><text x="132" y="154">near infrared</text><rect x="54" y="192" width="156" height="44" rx="6"/><text x="132" y="220">short-wave IR</text></g><path class="em-pull" d="M210 82c70 6 92 46 108 58M210 148c70 4 92 14 108 18M210 214c70-4 92-14 108-18"/><rect class="em-node-shape" x="318" y="118" width="150" height="100" rx="14"/><text class="em-result-word" x="393" y="162">PROGRESSIVE</text><text class="em-result-word" x="393" y="182">CROSS-ATTENTION</text><path class="em-arrow" d="M486 168h44m-16-14 16 14-16 14"/><rect class="em-screen" x="546" y="96" width="152" height="148" rx="8"/><text class="em-screen-label" x="622" y="128">FLOOD EXTENT</text><path class="em-broken" d="M566 200c28-22 42 8 68-12s30 18 46 4"/><g class="em-carry"><rect x="252" y="256" width="246" height="54" rx="8"/><text x="375" y="280">ISSUED PATENT</text><text class="em-carry-word" x="375" y="300">aquaculture pond detection</text></g><text x="375" y="344">One architecture, reviewed and published under my name.</text>',
+          '<g class="em-clusters"><circle cx="62" cy="126" r="13"/><circle cx="88" cy="86" r="13"/><circle cx="128" cy="122" r="13"/><circle cx="76" cy="166" r="13"/><circle cx="132" cy="198" r="13"/><circle cx="86" cy="234" r="13"/><circle cx="172" cy="84" r="13"/><circle cx="178" cy="164" r="13"/><circle cx="168" cy="242" r="13"/><circle cx="122" cy="276" r="13"/><circle cx="214" cy="122" r="13"/><circle cx="212" cy="208" r="13"/></g><text class="em-attempt-label" x="138" y="314">50+ researchers · 5 countries</text><path class="em-pull" d="M234 148c14-28 18-46 32-54m-32 64h32m-32 10c14 28 18 46 32 54"/><g class="em-load"><rect x="266" y="70" width="156" height="44" rx="6"/><text x="344" y="98">crowdsource</text><rect x="266" y="136" width="156" height="44" rx="6"/><text x="344" y="164">crawl</text><rect x="266" y="202" width="156" height="44" rx="6"/><text x="344" y="230">generate</text></g><path class="em-arrow" d="M440 156h48m-16-14 16 14-16 14"/><rect class="em-screen" x="504" y="80" width="190" height="146" rx="8"/><text class="em-screen-label" x="599" y="114">SEA-VL</text><path class="em-note-rule" d="M528 140h142M528 168h142M528 196h104"/><g class="em-carry"><rect x="504" y="242" width="190" height="54" rx="8"/><text x="599" y="266">ACCEPTED</text><text class="em-carry-word" x="599" y="286">ACL 2025</text></g><text x="375" y="344">Images that English-first datasets had never held.</text>',
+          '<rect class="em-screen" x="54" y="56" width="198" height="146" rx="8"/><text class="em-screen-label" x="153" y="86">IMAGE</text><path class="em-road" d="M74 180l40-42 30 28 34-46 50 60"/><circle class="em-attempt-old" cx="212" cy="116" r="14"/><rect class="em-message" x="54" y="226" width="198" height="72" rx="10"/><text class="em-result-word" x="153" y="256">CAPTION</text><path class="em-message-line" d="M78 274h150"/><path class="em-pull" d="M252 138c22 10 32 22 40 32M252 258c22-12 32-24 40-34"/><path class="em-broken" d="M298 158l40 40m0-40-40 40"/><path class="em-arrow" d="M348 166l50-42m-2 22 2-22-22 2"/><path class="em-arrow" d="M348 202l50 42m-2-22 2 22-22-2"/><rect class="em-note" x="410" y="82" width="286" height="60" rx="10"/><text class="em-result-word" x="553" y="118">ANSWER ANYWAY</text><rect class="em-result-mark" x="410" y="222" width="286" height="60" rx="18"/><text class="em-result-word" x="553" y="258">STOP AND SAY SO</text><text x="375" y="344">Low-resource languages are where that choice gets hard.</text>'
+        ]
+      },
       uncertainty: {
         label: 'A woman checks the same message through the night, puts down her phone, and asks one useful question in the morning',
         frames: [
@@ -344,8 +381,25 @@
   var skip = el('button', 'em-skip', 'Skip scene ↓'); skip.type = 'button'; pin.appendChild(skip);
   host.appendChild(pin);
 
-  var anchor = root.querySelector(':scope > [class*="-hero"]') || Array.prototype.find.call(root.children, function (child) { return child.matches && child.matches('header, section'); });
-  if (anchor && anchor.nextSibling) root.insertBefore(host, anchor.nextSibling); else root.appendChild(host);
+  /*
+    Twelve writings put the scene after their own hero, which the two lookups below
+    find on their own. /about/ needs it deeper than that: the hero is nested inside
+    <article class="about-story">, and the scene has to land before that article's
+    sticky section nav, or the nav stays pinned over the whole interlude. A page can
+    therefore mark the spot itself with an empty [data-scene-slot], and the scene
+    takes its place.
+  */
+  var slot = document.querySelector('[data-scene-slot]');
+  if (slot && slot.parentNode) {
+    slot.parentNode.replaceChild(host, slot);
+  } else {
+    var anchor = root.querySelector(':scope > [class*="-hero"]') || Array.prototype.find.call(root.children, function (child) { return child.matches && child.matches('header, section'); });
+    if (anchor && anchor.nextSibling) root.insertBefore(host, anchor.nextSibling); else root.appendChild(host);
+  }
+
+  // The pin holds for one screen per beat, so the section has to be as tall as the
+  // story is long. Every height in the stylesheet is a multiple of this.
+  host.style.setProperty('--em-beats', count);
 
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -375,8 +429,12 @@
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function smooth(v) { return v * v * (3 - 2 * v); }
 
+  // The scene is 100vw and pulls itself back out to the left edge, so it has to
+  // measure the column it actually sits in. That is .page-content on the writings
+  // and the narrower .about-story article on /about/.
   function alignToViewport() {
-    host.style.setProperty('--em-gutter', root.getBoundingClientRect().left.toFixed(2) + 'px');
+    var column = host.parentElement || root;
+    host.style.setProperty('--em-gutter', column.getBoundingClientRect().left.toFixed(2) + 'px');
   }
   function measure() {
     var rect = host.getBoundingClientRect();

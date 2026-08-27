@@ -195,20 +195,40 @@ Page-scoped CSS should shadow the global type-scale tokens rather than hard-code
 `.high-agency` (set via `layout-class` front matter). Every token-driven size on that page
 grows together and no other page moves.
 
-### The scroll scene shared by the twelve writings (`css/essay-motion.css`)
+### The scroll scene shared by the writings and `/about/` (`css/essay-motion.css`)
 
-Twelve pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
+Thirteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
 front matter key:
 
 ```yaml
-motion_scene: repair    # one of the twelve keys below
+motion_scene: repair    # one of the thirteen keys below
 ```
 
 `default.html` then sets `data-motion-scene` on `<html>` and loads
 `css/essay-motion.css` + `js/components/essay-motion.js`. The JS holds the copy and
-the SVG geometry; the CSS holds every colour. The twelve keys are `repair` (/story/),
+the SVG geometry; the CSS holds every colour. The keys are `repair` (/story/),
 `abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
-`uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/).
+`uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/), and
+`record` (/about/).
+
+`/curious/` sets `motion_scene: curiosity`, which is **not** one of these keys, so
+that page silently renders no scene. Either add the scene or drop the key.
+
+Three things about `record` generalise to any scene added later:
+
+- **Beat count is not fixed at four.** `record` has five. `scene.steps.length` is the
+  count, the JS writes it to `--em-beats` on the host, and every `.em-story` height in
+  the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; the
+  pin holds for one screen per beat and a wrong height desynchronises the scrub.
+- **A page can choose where the scene lands.** The default is after the page's own
+  hero, found by two lookups in the JS. `/about/` needs it deeper than that, so it
+  marks the spot with an empty `<div data-scene-slot></div>` and the scene replaces
+  that node. On `/about/` the slot sits between the hero and `.about-story-nav`,
+  because a sticky nav placed above the scene stays pinned across the whole interlude.
+- **Every claim in `record` is traceable** to `_data/experience.yml`,
+  `_data/publications.yml` or `_data/awards.yml`. Beat five names the question the
+  hackathon entry asked rather than a result, because `awards.yml` does not report one.
+  Text inside a drawing is a label, never a claim the copy has not already made.
 
 **Never write a hex literal into this file.** Every colour resolves through a token
 declared twice at the top, once under `html[data-motion-scene]` and once under
