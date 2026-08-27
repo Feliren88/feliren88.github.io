@@ -445,11 +445,11 @@ motion_scene: uncertainty
   <h2><span>08</span><svg class="ue-i ue-h2-i"><use href="#ue-ladder"/></svg> Build capacity gradually</h2>
   <p class="ue-deck">Start with a manageable uncertainty, repeat it, and increase the difficulty when you can keep choosing your response.</p>
   <div class="ue-ladder" aria-label="Example uncertainty ladder">
-    <div class="ue-rung" style="--w:24%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>2/10</b><span>Leave a minor message imperfect</span></div>
-    <div class="ue-rung" style="--w:36%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>3/10</b><span>Do not reread a routine email</span></div>
-    <div class="ue-rung" style="--w:52%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>4–5/10</b><span>Make a small decision without extra research</span></div>
-    <div class="ue-rung" style="--w:70%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>6/10</b><span>Enter a consequential situation without trying to settle every doubt</span></div>
-    <div class="ue-rung" style="--w:90%"><button class="ue-rung-tick" type="button" aria-pressed="false"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>7–8/10</b><span>Tolerate personally difficult ambiguity</span></div>
+    <div class="ue-rung" style="--w:24%"><button class="ue-rung-tick" type="button" aria-pressed="false" aria-label="Mark as held: Leave a minor message imperfect"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>2/10</b><span>Leave a minor message imperfect</span></div>
+    <div class="ue-rung" style="--w:36%"><button class="ue-rung-tick" type="button" aria-pressed="false" aria-label="Mark as held: Do not reread a routine email"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>3/10</b><span>Do not reread a routine email</span></div>
+    <div class="ue-rung" style="--w:52%"><button class="ue-rung-tick" type="button" aria-pressed="false" aria-label="Mark as held: Make a small decision without extra research"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>4–5/10</b><span>Make a small decision without extra research</span></div>
+    <div class="ue-rung" style="--w:70%"><button class="ue-rung-tick" type="button" aria-pressed="false" aria-label="Mark as held: Enter a consequential situation without trying to settle every doubt"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>6/10</b><span>Enter a consequential situation without trying to settle every doubt</span></div>
+    <div class="ue-rung" style="--w:90%"><button class="ue-rung-tick" type="button" aria-pressed="false" aria-label="Mark as held: Tolerate personally difficult ambiguity"><svg class="ue-i"><use href="#ue-check"/></svg></button><b>7–8/10</b><span>Tolerate personally difficult ambiguity</span></div>
   </div>
   <div class="ue-runbar">
     <span class="k"><svg class="ue-i"><use href="#ue-ladder"/></svg> Rungs held</span>
@@ -465,11 +465,11 @@ motion_scene: uncertainty
         <input class="ue-input" id="ue-plan-what" type="text" placeholder="Name it in one line" autocomplete="off"></label>
       <label class="p2"><span><svg class="ue-i"><use href="#ue-nocheck"/></svg>The relief move I am not doing</span>
         <input class="ue-input" id="ue-plan-skip" type="text" placeholder="What I would normally do to feel sure" autocomplete="off"></label>
-      <div class="p3"><span>Difficulty before</span>
-        <input class="ue-range" id="ue-plan-before" type="range" min="0" max="10" step="1" value="5">
+      <div class="p3"><span id="ue-plan-before-l">Difficulty before</span>
+        <input class="ue-range" id="ue-plan-before" type="range" min="0" max="10" step="1" value="5" aria-labelledby="ue-plan-before-l">
         <b id="ue-plan-before-v">5</b></div>
-      <div class="p4"><span>Difficulty after</span>
-        <input class="ue-range" id="ue-plan-after" type="range" min="0" max="10" step="1" value="5">
+      <div class="p4"><span id="ue-plan-after-l">Difficulty after</span>
+        <input class="ue-range" id="ue-plan-after" type="range" min="0" max="10" step="1" value="5" aria-labelledby="ue-plan-after-l">
         <b id="ue-plan-after-v">5</b></div>
     </div>
     <div class="ue-plan-out" id="ue-plan-out" role="status"></div>

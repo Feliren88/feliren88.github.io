@@ -591,7 +591,7 @@
       card.dataset.tags = tags.join('|');
       var summary = document.createElement('summary');
       summary.innerHTML = '<span class="cm-lesson-number">' + String(n).padStart(2, '0') + '</span>' +
-        '<span class="cm-lesson-title">' + esc(title) + '</span><i aria-hidden="true"></i>';
+        '<h3 class="cm-lesson-title">' + esc(title) + '</h3><i aria-hidden="true"></i>';
       summary.insertAdjacentHTML('beforeend', lessonVisual(n, title));
       var tagRow = document.createElement('div');
       tagRow.className = 'cm-lesson-tags';

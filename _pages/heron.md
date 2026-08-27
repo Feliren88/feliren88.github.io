@@ -195,7 +195,7 @@ extra_js: /js/components/heron.js
 </nav>
 
 <section class="heron-section" id="terms">
-  <h3 style="margin-top:0;">Terms used on this page</h3>
+  <h2 style="margin-top:0;">Terms used on this page</h2>
   <div class="heron-table-wrap">
     <table class="heron-table">
       <tr><th>Term</th><th>Plain meaning</th></tr>

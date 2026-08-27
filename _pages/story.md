@@ -39,7 +39,7 @@ motion_scene: repair
   <a class="ms-enter" href="#boy"><span>Begin at night</span><i aria-hidden="true">↓</i></a>
 </div>
 
-<main class="ms-story">
+<div class="ms-story">
   <section class="ms-act is-night" id="boy" data-act="1">
     <header class="ms-act-head"><span>Act I</span><h2>Attention</h2><p>Before he understood systems, he noticed arrangements.</p></header>
 
@@ -309,6 +309,6 @@ motion_scene: repair
       <p>On a shelf in a room he had designed himself sat the final edition of his last book. Inside the cover, beneath the title, there was no photograph. No biography longer than a paragraph. No catalogue of awards.</p>
     </div><div class="ms-book"><div class="cover"><small>A METHOD FOR<br>WHAT BREAKS</small></div><div class="inside"><b>Build what remains useful after you are gone.</b><span>Do not confuse being needed with being free.</span></div></div></article>
   </section>
-</main>
+</div>
 
 <footer class="ms-end"><span aria-hidden="true">∎</span><p>The circumstances do not belong to this story.<br>What mattered happened before them.</p></footer>

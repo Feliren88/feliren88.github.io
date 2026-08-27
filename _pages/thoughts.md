@@ -97,7 +97,7 @@ layout-class: page writings-page
 
 {% if site.data.notes %}
 <div class="notes-section">
-  <p class="t-eyebrow" style="margin-bottom:0.5rem">Research Notes</p>
+  <h2 class="t-eyebrow" style="margin:0 0 0.5rem;font-weight:inherit;line-height:inherit">Research Notes</h2>
   <p class="section-note" style="margin-top:0">Short notes on what research papers show, where their limits lie, and why those limits matter.</p>
   <div class="notes-list">
     {% for note in site.data.notes %}
@@ -118,7 +118,7 @@ layout-class: page writings-page
 
 {% if site.data.features %}
 <div class="features-section">
-  <p class="t-eyebrow" style="margin-bottom:0.75rem">Featured In</p>
+  <h2 class="t-eyebrow" style="margin:0 0 0.75rem;font-weight:inherit;line-height:inherit">Featured In</h2>
   <div class="features-grid">
     {% for feature in site.data.features %}
     <div class="feature-card{% if feature.image %} feature-card--has-img{% endif %}">

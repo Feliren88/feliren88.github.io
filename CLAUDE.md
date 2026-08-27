@@ -644,6 +644,28 @@ The site targets WCAG 2.1 AA compliance. Key implementations:
 - **Filter groups**: All filter bars use `role="group"` + `aria-label`
 - **Note blocks**: Use `role="note"` on `.note-block`
 
+### Known: the document outline skips ranks on five pages
+
+`/game-theory/`, `/high-agency/`, `/principles/`, `/stoic/` and `/small-talk/` jump
+from h2 straight to h5 (h4 on small-talk), 53 headings in total. Screen-reader users
+navigating by heading lose the nesting. It is a best-practice failure rather than a
+2.1 AA one, which is why it is recorded rather than patched.
+
+It is not a one-line fix, and a retag was attempted and reverted. Three things bite:
+
+- `styles.css` resets `h1, h2, h3, strong` but not h4 to h6, so a heading promoted
+  into that list silently gains `margin: 0`, Space Grotesk and `line-height: 1.1`.
+- each page has a section-wide prose rule (`.gt-part h3`, `.ha-part h3`, `.sm-part h3`,
+  `.ha-part h4`) that captures every component heading once the ranks move. Scoping
+  those to `> h3` fixes it, and is a prerequisite for any retag.
+- the stylesheets select these headings by element inside a class scope, roughly 15
+  selectors, and `high-agency.js`, `small-talk.js` and `communication.js` emit some
+  of them, so tag, rule and template have to move together.
+
+Doing it properly means scoping the prose rules first, then renaming, then pinning
+`line-height` and `font-family` per component, checking each against a baseline build
+rather than by eye. A partial attempt left 226 headings rendering differently.
+
 ## Performance
 
 - **All-WebP images**: No PNG/JPG/SVG originals remain. Hero uses `<picture>` with `profile-450.webp 450w` / `profile.webp 880w` srcset.
