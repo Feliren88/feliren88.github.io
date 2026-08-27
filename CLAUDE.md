@@ -289,12 +289,18 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   that reaches out and never completes, the forecast that crosses the room, the run
   of confident answers that meets a barrier and stops.
 
-  **A beat has four parts, and the hold is the one that is easy to lose.** Arrive,
-  act, hold, dissolve, set by `ARRIVE_END`, `ACT_START` and `ACT_END`. `XFADE` puts
-  a frame at full opacity only until 0.83 of its beat, so an act that runs past
-  that completes while already fading and the finished drawing is never once seen
-  whole. That reads as a beat being snatched away just as it pays off. Keep
-  `ACT_END` comfortably under 0.83.
+  **A beat is arrive, act, then hold**, set by `ARRIVE_END`, `ACT_START` and
+  `ACT_END` as fractions of `BEAT_SECONDS`. The hold used to be the part that was
+  easy to lose, because it was the tail of a scroll distance and `XFADE` dropped a
+  frame below full opacity after 0.83 of it; an act running past that finished
+  while already dissolving, so the payoff was never seen whole. On the clock the
+  hold is however long the reader stays, so only the performance needs budgeting.
+
+  Measured on the current values, a beat assembles in about a quarter of a second
+  and stops moving about 1.25s after it starts. Lengthening `BEAT_SECONDS` does not
+  buy the reader more time to look, since the hold runs until they scroll; it only
+  makes the beat slower to say what it came to say. Arrival gets the smallest share
+  on purpose — parts sliding into place is the least interesting thing a beat does.
 
   Because an act writes inline styles, **no CSS animation may touch a property an
   act writes**. A running animation beats an inline style, so the loop would

@@ -524,12 +524,17 @@
       ACT_END      hold     finished, full opacity, nothing moving but ambience
       0.83         dissolve handover to the next beat
 
-    The hold is the part that was missing. XFADE puts a frame at full opacity only
-    until 0.83 of its beat, so anything still animating after that completes while
-    already fading, and the reader never sees the finished drawing. Keep ACT_END
-    comfortably below 0.83 if these are ever retuned.
+    The hold no longer has to be budgeted for. It used to be the tail of a scroll
+    distance, so an act that ran past 0.83 finished while the frame was already
+    dissolving and the drawing was never seen whole. On the clock the hold is
+    simply however long the reader stays, and the fractions below only have to
+    divide the performance itself.
+
+    Arrival is deliberately the smallest share. A drawing that takes its time
+    assembling reads as slow rather than considered, and the parts arriving is the
+    least interesting thing a beat does; the act is the part worth watching.
   */
-  var ARRIVE_END = 0.34, ACT_START = 0.32, ACT_END = 0.66;
+  var ARRIVE_END = 0.26, ACT_START = 0.24, ACT_END = 0.66;
   var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
 
   /*
@@ -549,8 +554,16 @@
 
     The clock only runs while the scene is on screen, or the beats play out to an
     empty room and are over before anyone reaches them.
+
+    It covers the performance, not the reading. Measured on these values a beat
+    reads as assembled about a quarter of a second in, because the spring crosses
+    full on its overshoot well before it settles, and stops moving about 1.25s
+    after it starts; everything past ACT_END is idle time the loop winds down
+    through. Lengthening this does not give the reader longer to look, because the
+    hold runs until they scroll. It only makes the beat slower to say what it came
+    to say.
   */
-  var BEAT_SECONDS = 4.6;
+  var BEAT_SECONDS = 2.6;
   var beatT = 0, clockStage = -1, onScreen = true;
   // A beat already passed holds its finished state; one not yet reached shows
   // nothing, so the frame fading in underneath the current one is not a spoiler.
