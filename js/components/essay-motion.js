@@ -161,7 +161,10 @@
       copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
       steps: ['Record', 'Banking systems', 'Built from zero', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership', 'AI safety'],
       highlights: [
-        ['7 peer-reviewed papers', '1 patent', '12 awards and scholarships', '5+ years', 'finance, retail, public services, agriculture, and energy', 'Fortune 500 companies'],
+        // The four figures here are already stated in the stat strip directly above
+        // the scene, and at six marks the emphasis stopped sorting the sentence.
+        // What is left is the part the strip does not say.
+        ['finance, retail, public services, agriculture, and energy', 'Fortune 500 companies'],
         ['more than 1M logins', '99.99%'],
         ['forecasts and shared tools'],
         ['top-ranked journal', '7 papers', '109 languages'],
