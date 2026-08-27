@@ -532,6 +532,30 @@
   var ARRIVE_END = 0.34, ACT_START = 0.32, ACT_END = 0.66;
   var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
 
+  /*
+    The beat plays on a clock. The scroll only chooses which beat.
+
+    Every move inside a beat used to be a function of scroll position, so a reader
+    who stopped to read stopped the drawing with them: the only way to see a beat
+    perform was to keep the wheel turning, and standing still left a half-built
+    picture on screen. The beat shape above is now walked by BEAT_SECONDS of wall
+    clock, started when the beat arrives. Scroll still picks the beat, cross-fades
+    the pair and carries the copy out on the boundary, which is the part a reader
+    expects to control.
+
+    What this trades away is scrubbing. An act is no longer reversible by dragging
+    backwards, because it is no longer a function of the scrollbar. Going back to a
+    beat replays it from the start instead.
+
+    The clock only runs while the scene is on screen, or the beats play out to an
+    empty room and are over before anyone reaches them.
+  */
+  var BEAT_SECONDS = 4.6;
+  var beatT = 0, clockStage = -1, onScreen = true;
+  // A beat already passed holds its finished state; one not yet reached shows
+  // nothing, so the frame fading in underneath the current one is not a spoiler.
+  function beatLocal(index, stage, auto) { return index < stage ? 1 : index > stage ? 0 : auto; }
+
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function smooth(v) { return v * v * (3 - 2 * v); }
   /*
@@ -989,14 +1013,12 @@
     var column = host.parentElement || root;
     host.style.setProperty('--em-gutter', column.getBoundingClientRect().left.toFixed(2) + 'px');
   }
-  // The lead-in holds p at 0 for most of a screen. The cinematic branch opens its
-  // first beat against this instead, so arriving at the pin is itself a move.
-  var entry = 0;
+  // The lead-in holds p at 0 for most of a screen. The opening beat no longer
+  // takes its cue from that, because its clock is already running by then.
   function measure() {
     var rect = host.getBoundingClientRect();
     var reach = Math.max(1, host.offsetHeight - innerHeight);
     var raw = reduced ? 1 : clamp01(-rect.top / reach);
-    entry = reduced ? 1 : clamp01(raw / LEAD);
     target = clamp01((raw - LEAD) / (1 - LEAD - TAIL));
   }
   function render(p) {
@@ -1010,6 +1032,11 @@
 
     var scaled = p * count;
     var stage = Math.min(count - 1, Math.floor(scaled));
+
+    // Arriving at a beat restarts its clock, on the way back up as well as down,
+    // so a beat returned to performs again rather than sitting there finished.
+    if (stage !== clockStage) { clockStage = stage; beatT = 0; }
+    var auto = reduced ? 1 : clamp01(beatT / BEAT_SECONDS);
 
     if (narrative) {
       var reach = 0.5 + XFADE / 2;
@@ -1047,14 +1074,13 @@
 
           /*
             Then each part of that beat arrives on its own beat. The stagger runs
-            over the first half of the beat and the last child waits about a third
-            of it, which is slow enough to be read as a sequence and quick enough
-            that a fast scroll does not leave the drawing half-built.
+            over the first third of the beat and the last child waits about a third
+            of that, which is slow enough to be read as a sequence and quick enough
+            to be finished well inside the hold.
           */
           var shot = shots[index];
-          var open = index === 0
-            ? Math.max(entry, span(scaled, 0, ARRIVE_END))
-            : span(scaled, index, index + ARRIVE_END);
+          var local = beatLocal(index, stage, auto);
+          var open = span(local, 0, ARRIVE_END);
           shot.kids.forEach(function (kid, order) {
             var delay = Math.min(0.34, order * 0.045);
             var k = ARRIVE(span(open, delay, 1));
@@ -1084,7 +1110,7 @@
             It now ends at ACT_END, which leaves a hold of about a sixth of a beat
             with the finished picture at full opacity and nothing moving on it.
           */
-          if (shot.act) shot.act(span(scaled, index + ACT_START, index + ACT_END));
+          if (shot.act) shot.act(span(local, ACT_START, ACT_END));
         }
         // Drawings may overlap through the handover; their captions may not. Two
         // sentences at half opacity on top of each other are unreadable, and since
@@ -1110,12 +1136,12 @@
 
     if (lines && !reduced) {
       /*
-        The three lines arrive in reading order rather than as one block. The
-        opening beat takes its cue from the lead-in, so the column is already
-        composing itself while the pin is still settling, and the exit fade stays
-        shared so the whole column leaves together on the boundary.
+        The three lines arrive in reading order rather than as one block, on the
+        beat's own clock, so the column composes itself while the pin is still
+        settling. The exit fade stays on the scroll and stays shared, so the whole
+        column leaves together on the boundary the reader is driving towards.
       */
-      var enter = stage === 0 ? Math.max(entry, span(scaled, 0, WORDS)) : span(scaled, stage, stage + WORDS * 1.6);
+      var enter = span(auto, 0, ARRIVE_END);
       var leaving = smooth(out);
       lines.forEach(function (line, order) {
         var k2 = outCubic(span(enter, order * 0.13, 1));
@@ -1139,8 +1165,22 @@
       // The class no longer carries the fade, only which figure animations run.
       if (narrative) narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
     }
-    nodes.forEach(function (node, index) { var local = smooth(clamp01((p - index * .22) * 4)); node.style.opacity = (.12 + local * .88).toFixed(3); node.style.transform = 'scale(' + (.72 + local * .28).toFixed(3) + ')'; });
-    edges.forEach(function (edge, index) { var local = smooth(clamp01((p - index * .24) * 3.2)); edge.style.strokeDashoffset = (1 - local).toFixed(3); });
+    /*
+      The three node scenes carry one node and one outgoing edge per beat, so each
+      pair belongs to a beat and rides that beat's clock: the node lands while the
+      beat arrives, then its edge reaches forward during the act towards the node
+      the next beat will bring. Passed nodes stay lit, which is the diagram
+      accumulating rather than replaying.
+    */
+    nodes.forEach(function (node, index) {
+      var k3 = smooth(span(beatLocal(index, stage, auto), 0, ARRIVE_END));
+      node.style.opacity = (.12 + k3 * .88).toFixed(3);
+      node.style.transform = 'scale(' + (.72 + k3 * .28).toFixed(3) + ')';
+    });
+    edges.forEach(function (edge, index) {
+      var k4 = smooth(span(beatLocal(index, stage, auto), ACT_START, ACT_END));
+      edge.style.strokeDashoffset = (1 - k4).toFixed(3);
+    });
   }
 
   /*
@@ -1159,12 +1199,33 @@
     if (reduced) { eased = target; render(eased); return; }
     var dt = last ? Math.min(0.064, (now - last) / 1000) : 0.016;
     last = now;
+    // The clock is the second reason to keep drawing, and it runs only where it
+    // can be seen. dt is already capped, so a tab returning to the foreground
+    // resumes the beat rather than jumping to the end of it.
+    if (onScreen) beatT += dt;
     eased += (target - eased) * (1 - Math.pow(0.0016, dt));
-    if (Math.abs(target - eased) < 0.00008) { eased = target; last = 0; render(eased); return; }
+    if (Math.abs(target - eased) < 0.00008) eased = target;
     render(eased);
-    request();
+    // Two things can still be moving: the scroll settling into its target, and the
+    // beat performing. Keep the loop alive for either, and let it stop once the
+    // beat has finished and is being held, so a read stays at zero frames.
+    if (eased !== target || (onScreen && beatT < BEAT_SECONDS)) { request(); return; }
+    last = 0;
   }
   function request() { if (!queued) { queued = true; requestAnimationFrame(tick); } }
+
+  /*
+    Beats are held off until the scene is actually on screen, and restarted when it
+    comes back, so the sequence is never already spent by the time it is reached.
+    The host is several screens tall, so this fires at its edges and nowhere else.
+  */
+  if ('IntersectionObserver' in window) {
+    onScreen = false;
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) { beatT = 0; last = 0; request(); }
+    }, { threshold: 0 }).observe(host);
+  }
 
   skip.addEventListener('click', function () { host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' }); });
   function resize() { alignToViewport(); measure(); eased = target; last = 0; render(eased); }

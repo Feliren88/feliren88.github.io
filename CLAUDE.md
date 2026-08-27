@@ -209,7 +209,8 @@ motion_scene: repair    # one of the fourteen keys below
 the SVG geometry; the CSS holds every colour. The keys are `repair` (/story/),
 `abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
 `uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/),
-`curiosity` (/curious/), and `record` (/about/).
+`curiosity` (/curious/), and `record`, which is on the homepage: `_pages/about.md`
+takes `permalink: /` and `/about/` is a `redirect_from` alias for it.
 
 **A key with no scene fails silently.** `js/components/essay-motion.js` looks the key
 up and returns early when it misses, so the page loads both assets and renders
@@ -237,17 +238,32 @@ Three things about `record` generalise to any scene added later:
   follows the motive behind the work instead of repeating the CV chronology.
   Text inside a drawing is a label, never a claim the copy has not already made.
 
-A scene can opt into scroll-scrubbed choreography with `cinematic: true`. Only
-`record` does. The per-beat rules in `essay-motion.css` are time loops that idle
-while a beat is on screen; the cinematic branch in `render()` is the opposite, and
-every value it writes is a function of scroll position, so scrubbing backwards runs
-it backwards and stopping stops it exactly.
+A scene can opt into extra choreography with `cinematic: true`. Only `record` does.
+The per-beat rules in `essay-motion.css` are time loops that idle while a beat is on
+screen; the cinematic branch in `render()` adds the arrival, the draw-on and the act.
 
-The eases are anime.js's, solved rather than imported. The library animates against
-a clock and this scene animates against scroll position, so what it needs from
+**Scroll picks the beat. The beat plays itself.** Everything inside a beat used to be
+a function of scroll position, which meant a reader who stopped to read stopped the
+drawing with them, and a beat only performed while the wheel was turning. `BEAT_SECONDS`
+of wall clock now walks the beat shape, started when the beat arrives and reset every
+time it is arrived at again, so returning to a beat replays it. Scroll still chooses
+the stage, cross-fades the pair, and carries the copy out on the boundary.
+
+Two consequences to keep in mind:
+
+- **Acts are no longer scrubbable.** Dragging backwards inside a beat does not run its
+  act backwards, because the act is no longer a function of the scrollbar. Going back
+  to a beat restarts it instead. This was a deliberate trade for autoplay.
+- **The clock only runs on screen.** An `IntersectionObserver` on the host gates
+  `beatT`, or the sequence plays out to an empty room and is finished before anyone
+  reaches it. `tick()` keeps the rAF loop alive while either the scroll is still
+  settling or the beat is still performing, and lets it stop for the hold, so a
+  stationary read costs no frames.
+
+The eases are anime.js's, solved rather than imported. What the scene needs from
 anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
 oscillator the way `createSpring` does, finds its settling time numerically, and
-maps the beat's scroll distance onto it, which is why arrivals overshoot to about
+maps the beat onto it, which is why arrivals overshoot to about
 1.09 and decay rather than easing flatly to rest. `rippleFrom()` is anime.js's grid
 stagger with the grid assumption removed: it takes each element's real coordinates,
 measures distance to an origin, and normalises, so a cluster lands as a ring
@@ -265,13 +281,13 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   the rule would be silently dropped there and kept everywhere else.
 - **Stroke draw-on** for solid paths only. Dashed ones are skipped because
   overwriting `stroke-dasharray` to draw them deletes the dashes.
-- **Copy lines** arrive in reading order rather than as one block, and the opening
-  beat takes its cue from the lead-in so the column composes while the pin settles.
+- **Copy lines** arrive in reading order rather than as one block, on the beat's own
+  clock, so the column composes itself while the pin settles.
 - **An act per beat**, in `ACTS`. A beat that only assembles itself is a slide with
   a transition on it. Each act resolves its parts once and returns a function of
   that beat's own second half, so the drawing performs the sentence: the connection
   that reaches out and never completes, the forecast that crosses the room, the run
-  of confident answers that meets a barrier and stops. Scrubbing back reverses it.
+  of confident answers that meets a barrier and stops.
 
   **A beat has four parts, and the hold is the one that is easy to lose.** Arrive,
   act, hold, dissolve, set by `ARRIVE_END`, `ACT_START` and `ACT_END`. `XFADE` puts
