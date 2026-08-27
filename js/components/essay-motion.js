@@ -155,6 +155,7 @@
     */
     record: {
       narrative: true,
+      cinematic: true,
       kicker: 'Jakarta, 2020. Working from home',
       title: 'Everything I built stayed on my laptop.',
       copy: 'I had just graduated into a pandemic. The models I built were still private experiments. I wanted to know whether my work could help someone outside my room.',
@@ -399,6 +400,12 @@
   var count = scene.steps.length;
   pin.appendChild(copy);
 
+  // The three copy lines, animated individually on cinematic scenes and left alone
+  // everywhere else, where .em-copy still fades as one block.
+  var lines = scene.cinematic
+    ? [copy.querySelector('.em-kicker'), copy.querySelector('h2'), copy.querySelector('p')]
+    : null;
+
   var narrative = scene.narrative ? buildNarrativeCanvas() : null;
   var canvas = narrative ? narrative.canvas : el('div', 'em-canvas');
   var svg = narrative ? narrative.svg : svgEl('svg', { viewBox: '0 0 750 330', role: 'img', 'aria-label': scene.steps.join(' to ') });
@@ -448,6 +455,35 @@
   // story is long. Every height in the stylesheet is a multiple of this.
   host.style.setProperty('--em-beats', count);
 
+  /*
+    Cinematic scenes animate every part of a beat against the scroll rather than
+    letting the drawing cross-fade as one block. Each frame's direct children are
+    the things that stagger in, so they are collected once here instead of being
+    queried on every frame of the scrub.
+
+    Paths that carry no dash pattern can also be drawn on. The dashed ones are
+    skipped: overwriting stroke-dasharray to draw them would delete the dashes
+    that make them read as a connection rather than a solid edge.
+  */
+  var shots = [];
+  if (scene.cinematic && narrative) {
+    shots = narrative.frames.map(function (frame) {
+      var kids = Array.prototype.filter.call(frame.children, function (node) {
+        return node.nodeType === 1;
+      });
+      var strokes = [];
+      Array.prototype.forEach.call(frame.querySelectorAll('path.em-arrow, path.em-road, path.em-broken, path.em-open-gate'), function (path) {
+        if (getComputedStyle(path).strokeDasharray !== 'none') return;
+        var length = 0;
+        try { length = path.getTotalLength(); } catch (err) { length = 0; }
+        if (!length) return;
+        path.style.strokeDasharray = length.toFixed(1);
+        strokes.push({ node: path, length: length });
+      });
+      return { frame: frame, kids: kids, strokes: strokes };
+    });
+  }
+
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Scroll spent settling into the pin before the first beat, and holding the last
@@ -475,6 +511,18 @@
 
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function smooth(v) { return v * v * (3 - 2 * v); }
+  /*
+    Two eases the cinematic branch needs that smoothstep cannot give.
+
+    outCubic decelerates hard at the end, which is what makes a line of copy look
+    like it is arriving rather than sliding. outBack overshoots by about 6% before
+    settling, the small elastic landing that reads as weight. Both are the standard
+    curves; they are here rather than in a library because the scene has to stay
+    self-contained.
+  */
+  function outCubic(v) { var f = 1 - v; return 1 - f * f * f; }
+  function outBack(v) { var f = v - 1, c = 1.34; return 1 + (c + 1) * f * f * f + c * f * f; }
+  function span(v, from, to) { return clamp01((v - from) / (to - from)); }
 
   // The scene is 100vw and pulls itself back out to the left edge, so it has to
   // measure the column it actually sits in. That is .page-content on the writings
@@ -483,15 +531,24 @@
     var column = host.parentElement || root;
     host.style.setProperty('--em-gutter', column.getBoundingClientRect().left.toFixed(2) + 'px');
   }
+  // The lead-in holds p at 0 for most of a screen. The cinematic branch opens its
+  // first beat against this instead, so arriving at the pin is itself a move.
+  var entry = 0;
   function measure() {
     var rect = host.getBoundingClientRect();
-    var span = Math.max(1, host.offsetHeight - innerHeight);
-    var raw = reduced ? 1 : clamp01(-rect.top / span);
+    var reach = Math.max(1, host.offsetHeight - innerHeight);
+    var raw = reduced ? 1 : clamp01(-rect.top / reach);
+    entry = reduced ? 1 : clamp01(raw / LEAD);
     target = clamp01((raw - LEAD) / (1 - LEAD - TAIL));
   }
   function render(p) {
     host.style.setProperty('--em-p', p.toFixed(4));
     host.style.setProperty('--em-x', (20 + p * 55).toFixed(2) + '%');
+    // One slow push across the whole sequence, under the per-beat moves. Three
+    // percent over eight screens is not consciously visible; stopping it is.
+    if (scene.cinematic && !reduced) {
+      canvas.style.transform = 'scale(' + (1 + p * 0.03).toFixed(4) + ')';
+    }
 
     var scaled = p * count;
     var stage = Math.min(count - 1, Math.floor(scaled));
@@ -504,7 +561,47 @@
         // so those two hold at full instead of opening and closing on a half fade.
         var away = (index === 0 && scaled < centre) || (index === count - 1 && scaled > centre)
           ? 0 : Math.abs(scaled - centre);
-        frame.style.opacity = smooth(clamp01((reach - away) / XFADE)).toFixed(4);
+        var shown = smooth(clamp01((reach - away) / XFADE));
+        frame.style.opacity = shown.toFixed(4);
+
+        /*
+          Depth, for the cinematic scenes only.
+
+          A cross-fade alone reads as two pictures swapping. Giving the pair a
+          shared direction of travel reads as one story moving: the beat arriving
+          rises into place from slightly below and slightly small, the beat leaving
+          keeps rising and grows very slightly past full size as it dissolves. The
+          sign of `lead` is the whole trick, and it is a function of scroll, so
+          scrubbing backwards runs it backwards.
+        */
+        // Six of the eight beats are invisible at any moment. Their children do not
+        // need writing to sixty times a second, and the first frame on which one
+        // starts to show is early enough because it starts from nothing anyway.
+        if (shots.length && !reduced && shown > 0) {
+          var lead = clamp01(Math.abs(scaled - centre) / reach) * (scaled < centre ? -1 : 1);
+          var depth = 1 + (lead < 0 ? lead * 0.075 : lead * 0.045);
+          frame.style.transform = 'translate(0,' + (-lead * 26).toFixed(2) + 'px) scale(' + depth.toFixed(4) + ')';
+
+          /*
+            Then each part of that beat arrives on its own beat. The stagger runs
+            over the first half of the beat and the last child waits about a third
+            of it, which is slow enough to be read as a sequence and quick enough
+            that a fast scroll does not leave the drawing half-built.
+          */
+          var shot = shots[index];
+          var open = index === 0 ? Math.max(entry, span(scaled, 0, 0.5)) : span(scaled, index, index + 0.5);
+          shot.kids.forEach(function (kid, order) {
+            var delay = Math.min(0.34, order * 0.045);
+            var k = outBack(span(open, delay, 1));
+            kid.style.setProperty('--em-in', k < 0 ? '0' : k.toFixed(3));
+            kid.style.setProperty('--em-ty', ((1 - clamp01(k)) * 16).toFixed(2) + 'px');
+          });
+          // Solid strokes draw themselves rather than fading in.
+          shot.strokes.forEach(function (stroke, order) {
+            var k = outCubic(span(open, Math.min(0.4, 0.12 + order * 0.08), 1));
+            stroke.node.style.strokeDashoffset = (stroke.length * (1 - k)).toFixed(1);
+          });
+        }
         // Drawings may overlap through the handover; their captions may not. Two
         // sentences at half opacity on top of each other are unreadable, and since
         // this fade tracks scroll rather than time, stopping on a boundary used to
@@ -526,8 +623,27 @@
     var into = stage === 0 ? 1 : clamp01((scaled - stage) / WORDS);
     var out = stage === count - 1 ? 1 : clamp01((stage + 1 - scaled) / WORDS);
     var k = smooth(Math.min(into, out));
-    copy.style.opacity = k.toFixed(3);
-    copy.style.transform = 'translateY(' + ((1 - k) * 0.8).toFixed(3) + 'rem)';
+
+    if (lines && !reduced) {
+      /*
+        The three lines arrive in reading order rather than as one block. The
+        opening beat takes its cue from the lead-in, so the column is already
+        composing itself while the pin is still settling, and the exit fade stays
+        shared so the whole column leaves together on the boundary.
+      */
+      var enter = stage === 0 ? Math.max(entry, span(scaled, 0, WORDS)) : span(scaled, stage, stage + WORDS * 1.6);
+      var leaving = smooth(out);
+      lines.forEach(function (line, order) {
+        var k2 = outCubic(span(enter, order * 0.13, 1));
+        line.style.opacity = (k2 * leaving).toFixed(3);
+        line.style.transform = 'translateY(' + ((1 - k2) * 1.35).toFixed(3) + 'rem)';
+      });
+      copy.style.opacity = '';
+      copy.style.transform = '';
+    } else {
+      copy.style.opacity = k.toFixed(3);
+      copy.style.transform = 'translateY(' + ((1 - k) * 0.8).toFixed(3) + 'rem)';
+    }
 
     if (stage !== lastStage) {
       lastStage = stage;

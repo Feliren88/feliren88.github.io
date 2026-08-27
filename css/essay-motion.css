@@ -382,3 +382,49 @@ html[data-motion-scene="conversion"] .page-content .lc-hero-rule{max-width:38rem
 html[data-motion-scene="conversion"] .page-content .lc-quote{max-width:44rem;margin-inline:auto!important;padding:1.4rem 0!important;border:0!important;background:transparent!important;text-align:center;font-family:Georgia,serif}
 
 @media(max-width:560px){html[data-motion-scene="repair"] .page-content blockquote,html[data-motion-scene="agency"] .page-content .ha-quote,html[data-motion-scene="control"] .page-content .st-quote{padding-left:2.6rem!important}html[data-motion-scene="signal"] .page-content :is(blockquote,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict){border-radius:.8rem .8rem .8rem .2rem!important}}
+
+/*
+  Scroll-scrubbed choreography, /about/ only.
+
+  The per-beat rules above are time loops: they idle while a beat is on screen.
+  These are the opposite, and they are what makes the sequence feel authored
+  rather than merely animated. Every value here is written by render() as a
+  function of scroll position, so the whole thing runs backwards when the reader
+  scrubs backwards, and it stops precisely when they stop.
+
+  --em-in  is one element's own arrival, 0 to 1, staggered against its siblings.
+  --em-ty  is how far below its resting place that element still is.
+  --em-cap already existed for the per-beat caption, so the caption multiplies
+           the two rather than picking one.
+
+  .em-fig is deliberately left out of the transform: the per-beat keyframes above
+  animate its transform already, and an animation beats a normal declaration, so
+  writing one here would be silently dropped for the figures and kept for
+  everything else. Opacity still staggers on them.
+*/
+html[data-motion-scene="record"] .em-story-frame{
+  transform-box:view-box;transform-origin:375px 180px;
+  will-change:opacity,transform;backface-visibility:hidden
+}
+html[data-motion-scene="record"] .em-story-frame>*{opacity:var(--em-in,1)}
+html[data-motion-scene="record"] .em-story-frame>*:not(.em-fig){
+  transform:translateY(var(--em-ty,0));transform-box:view-box
+}
+html[data-motion-scene="record"] .em-story-frame>text{opacity:calc(var(--em-cap,1) * var(--em-in,1))}
+html[data-motion-scene="record"] .em-canvas{will-change:transform}
+html[data-motion-scene="record"] .em-copy>*{will-change:opacity,transform}
+
+/*
+  Reduced motion keeps the story and drops the movement. render() already skips
+  the cinematic branch, but the variables can survive a change of preference
+  mid-session, so the resting state is asserted rather than assumed.
+*/
+@media(prefers-reduced-motion:reduce){
+  html[data-motion-scene="record"] .em-story-frame,
+  html[data-motion-scene="record"] .em-story-frame>*,
+  html[data-motion-scene="record"] .em-canvas,
+  html[data-motion-scene="record"] .em-copy>*{
+    opacity:1!important;transform:none!important
+  }
+  html[data-motion-scene="record"] .em-story-frame>text{opacity:var(--em-cap,1)!important}
+}

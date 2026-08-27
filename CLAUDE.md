@@ -237,6 +237,32 @@ Three things about `record` generalise to any scene added later:
   follows the motive behind the work instead of repeating the CV chronology.
   Text inside a drawing is a label, never a claim the copy has not already made.
 
+A scene can opt into scroll-scrubbed choreography with `cinematic: true`. Only
+`record` does. The per-beat rules in `essay-motion.css` are time loops that idle
+while a beat is on screen; the cinematic branch in `render()` is the opposite, and
+every value it writes is a function of scroll position, so scrubbing backwards runs
+it backwards and stopping stops it exactly.
+
+It drives four things, all scoped to `html[data-motion-scene="record"]`:
+
+- **Frame depth.** The arriving beat rises from slightly below at 0.93 scale, the
+  leaving beat keeps rising past 1.05. A cross-fade alone reads as two pictures
+  swapping; a shared direction of travel reads as one story moving.
+- **Per-element stagger.** Each frame's direct children get `--em-in` (their own
+  arrival, eased with a small overshoot) and `--em-ty` (how far below rest they
+  still are). `.em-fig` is excluded from the transform on purpose: the per-beat
+  keyframes animate its transform, and an animation beats a normal declaration, so
+  the rule would be silently dropped there and kept everywhere else.
+- **Stroke draw-on** for solid paths only. Dashed ones are skipped because
+  overwriting `stroke-dasharray` to draw them deletes the dashes.
+- **Copy lines** arrive in reading order rather than as one block, and the opening
+  beat takes its cue from the lead-in so the column composes while the pin settles.
+
+Two things to preserve when editing it. Frames whose opacity is 0 are skipped, so
+six of the eight beats cost nothing per frame; and `prefers-reduced-motion` is
+asserted in CSS as well as branched on in JS, because the preference can change
+mid-session after the variables have been written.
+
 **Never write a hex literal into this file.** Every colour resolves through a token
 declared twice at the top, once under `html[data-motion-scene]` and once under
 `html[data-theme="light"][data-motion-scene]`. A raw hex is invisible in whichever
