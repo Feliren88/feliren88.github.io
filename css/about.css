@@ -12,21 +12,102 @@
 .cv-service article p{margin:0;color:var(--muted);font-size:.84rem;line-height:1.6;max-width:46rem}
 @media(max-width:800px){.cv-service article{grid-template-columns:1fr;gap:.35rem}}
 
-/* ── Mobile corrections ───────────────────────────────────
-   The page is 94vw wide, so the gutter is about 11px on a phone. Two
-   decorations were reaching past it and pushing the whole page sideways. */
-@media(max-width:640px){
-  /* The portrait's offset border sat 8% outside its own right edge. */
-  .about-portrait-frame:before{inset:6% 0 -4% 8%}
-  /* The direction panel pulled 1.2rem wider than the page on each side. */
-  .about-direction-panel{margin-inline:0}
-  /* Give the scrolling strips an edge that shows they move. */
-  .about-proof-strip{-webkit-overflow-scrolling:touch}
-  .about-story-nav{gap:1.1rem}
+/* ══ Mobile ══════════════════════════════════════════════════════════
+   The page sits in a 94vw column, so a phone gets an 11px gutter and no
+   slack at all.
+
+   The width bug. A grid item defaults to min-width:auto, so it can never
+   shrink below the widest thing inside it. The proof strip is a row of
+   three credentials whose min-content is 472px, and that number was
+   setting the width of the whole hero: at 390px the document scrolled to
+   485px and every line of body copy ran off the right edge. Two changes
+   are needed together. Let the track shrink, and give the strip a layout
+   that fits a phone rather than one that has to scroll sideways.
+
+   The rest is rhythm. Chapter padding, heading margins and the sticky
+   offset are all sized for a 1120px page, and at that size on a phone
+   they read as dead space between paragraphs.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Height of the shared topbar below 760px (css/styles.css). The sub-nav
+   sticks directly under it; any gap shows page content sliding through. */
+@media(max-width:760px){
+  .about-story{--topbar-h:56px}
+
+  /* Nothing in the hero may impose its own intrinsic width on the grid. */
+  .about-story-hero>*{min-width:0}
+  .about-story-hero{padding-bottom:3rem;gap:1.75rem}
+
+  /* profile.webp is a circular cut-out on a transparent square canvas, so a
+     landscape crop of it exposes bare corners and shows the offset frame
+     through them. Hold the portrait ratio and shrink the frame instead —
+     that keeps the desktop composition and leaves the headline near the top. */
+  .about-portrait{max-width:none}
+  .about-portrait-frame{max-width:min(56%,230px)}
+  .about-portrait-frame:before{inset:8% -10% -6% 16%}
+  /* height="880" is a presentational hint, and it beats aspect-ratio for as
+     long as the used height is not auto — without this the crop never happens
+     and the portrait renders 880px tall whatever the frame is. */
+  .about-portrait img{height:auto;aspect-ratio:4/5;object-position:center 20%}
+  .about-portrait figcaption{margin-top:1.2rem}
+
+  .about-story-copy h1{font-size:clamp(2.3rem,10vw,3.5rem);max-width:none;margin:.5rem 0 1.1rem}
+  .about-story-lead{font-size:1.02rem;line-height:1.65}
+  .about-story-actions{gap:.75rem;margin:1.6rem 0 1.9rem}
+
+  /* One credential per row: label left, gloss right. The horizontal rule
+     of columns needs 472px and cannot be made to fit. */
+  .about-proof-strip{display:block;overflow:visible;max-width:none;border-top:0}
+  .about-proof-strip li{display:flex;flex-direction:row;align-items:baseline;
+    justify-content:space-between;gap:1rem;min-width:0;
+    padding:.72rem 0;margin:0;border-right:0;border-top:1px solid var(--line)}
+  .about-proof-strip li:last-child{border-bottom:1px solid var(--line)}
+  .about-proof-strip strong{flex:0 0 auto}
+  .about-proof-strip span{margin-top:0;text-align:right}
+
+  /* Full bleed to the screen edge, matched exactly to the 3vw gutter so
+     the bar cannot become the widest thing on the page. */
+  .about-story-nav{top:var(--topbar-h);gap:1.1rem;
+    margin-inline:-3vw;padding:.35rem 3vw;
+    background:color-mix(in srgb,var(--bg) 94%,transparent);
+    scrollbar-width:none}
+  .about-story-nav::-webkit-scrollbar{display:none}
+  .about-story-nav a{display:inline-flex;align-items:center;min-height:40px}
+
+  /* 56px topbar + 48px sub-nav, so an anchor lands under both. */
+  .about-chapter{padding:2.75rem 0;gap:1.25rem;scroll-margin-top:6.5rem}
+  .about-chapter-body>h2{font-size:clamp(1.85rem,7vw,2.4rem);max-width:none;margin:.6rem 0 1.5rem}
+  .about-prose-columns{font-size:1rem;gap:1.1rem}
+
+  .about-equation{margin-top:2rem;padding:1.1rem 0;gap:.45rem}
+  .about-equation i{margin-left:.4rem}
+  .about-path article{padding-bottom:2rem}
+  .about-method-grid article{padding:1.5rem;min-height:0}
+  .about-method-grid h3{margin-top:1.1rem;font-size:1.14rem}
+
+  .about-direction-panel{margin-inline:0;gap:1.6rem;padding:1.4rem}
+  .about-direction-panel p{font-size:1rem}
+  .about-direction-panel dl div:last-child{border-bottom:0;padding-bottom:0}
+
+  .about-closing{margin-top:2.5rem;gap:1.25rem}
+  .about-closing>p{max-width:none}
+  .about-closing>div{width:100%;gap:.7rem}
+
+  /* Touch targets. The text links were 22px tall and the sub-nav 17px. */
+  .about-text-link,.about-inline-cta{display:inline-flex;align-items:center;min-height:44px}
+  .about-story-actions .btn,.about-closing .btn{min-height:46px;display:inline-flex;
+    align-items:center;justify-content:center}
 }
-@media(max-width:420px){
-  .about-story-copy h1{font-size:clamp(2.4rem,11vw,3.4rem)}
+
+/* Below 430px the two buttons no longer sit side by side without one of
+   them wrapping mid-word, so give each its own row. */
+@media(max-width:430px){
+  .about-story-actions,.about-closing>div{flex-direction:column;align-items:stretch}
+  .about-story-actions .btn,.about-closing .btn{width:100%}
+  .about-text-link{align-self:flex-start}
+  /* The 2.3rem floor above stops scaling below 368px, and "trusted." then
+     runs to the edge on a 320px screen. Carry on scaling with the viewport. */
+  .about-story-copy h1{font-size:clamp(1.95rem,9.5vw,2.9rem)}
   .about-equation{font-size:.8rem}
-  .about-method-grid article{padding:1.4rem}
-  .about-chapter-body>h2{font-size:1.9rem}
+  .about-method-grid article{padding:1.3rem}
 }

@@ -26,7 +26,7 @@ hide_title: true
     <figure class="about-portrait">
       <div class="about-portrait-frame">
         <picture>
-          <source type="image/webp" srcset="/assets/img/profile-450.webp 450w, /assets/img/profile.webp 880w" sizes="(max-width: 760px) 72vw, 390px">
+          <source type="image/webp" srcset="/assets/img/profile-450.webp 450w, /assets/img/profile.webp 880w" sizes="(max-width: 760px) 55vw, 390px">
           <img src="/assets/img/profile.webp" alt="Vicky Feliren" width="880" height="880" fetchpriority="high">
         </picture>
       </div>
