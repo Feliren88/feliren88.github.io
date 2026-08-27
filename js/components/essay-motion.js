@@ -158,10 +158,20 @@
       cinematic: true,
       kicker: 'Vicky Feliren',
       title: 'I build AI systems and lead research beyond the lab.',
-      copy: 'I have published 7 peer-reviewed papers, hold 1 patent, received 12 awards and scholarships, and spent 5+ years building AI for finance and public services.',
+      copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
       steps: ['Record', 'Banking systems', 'Built from zero', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership', 'AI safety'],
+      highlights: [
+        ['7 peer-reviewed papers', '1 patent', '12 awards and scholarships', '5+ years', 'finance, retail, public services, agriculture, and energy', 'Fortune 500 companies'],
+        ['more than 1M logins', '99.99%'],
+        ['forecasts and shared tools'],
+        ['top-ranked journal', '7 papers', '109 languages'],
+        ['11 languages', 'More than 50 researchers across 5 countries'],
+        ['12 awards and scholarships'],
+        ['review scientific papers', 'more than 50 technical projects'],
+        ['92%', 'design ways for AI']
+      ],
       frames: [
-        ['Vicky Feliren', 'I build AI systems and lead research beyond the lab.', 'I have published 7 peer-reviewed papers, hold 1 patent, received 12 awards and scholarships, and spent 5+ years building AI for finance and public services.'],
+        ['Vicky Feliren', 'I build AI systems and lead research beyond the lab.', 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.'],
         ['Banking systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
         ['Built from zero', 'I built the systems behind work in 6 Asia-Pacific markets.', 'I handled the technical work alone at first. I built the forecasts and shared tools that later hires could keep using.'],
         ['Published research', 'A flood model I designed beat 6 established systems.', 'I led the paper in a top-ranked journal. My 7 papers study floods, mining, how AI represents culture, and how computers identify 109 languages online.'],
@@ -181,6 +191,29 @@
     if (className) node.className = className;
     if (text) node.textContent = text;
     return node;
+  }
+  function setHighlightedText(node, value, terms) {
+    node.textContent = '';
+    var rest = value;
+    var matches = terms || [];
+    while (rest) {
+      var nextTerm = '';
+      var nextIndex = rest.length;
+      matches.forEach(function (term) {
+        var index = rest.indexOf(term);
+        if (index !== -1 && index < nextIndex) {
+          nextTerm = term;
+          nextIndex = index;
+        }
+      });
+      if (!nextTerm) {
+        node.appendChild(document.createTextNode(rest));
+        break;
+      }
+      if (nextIndex) node.appendChild(document.createTextNode(rest.slice(0, nextIndex)));
+      node.appendChild(el('span', 'em-highlight', nextTerm));
+      rest = rest.slice(nextIndex + nextTerm.length);
+    }
   }
   function svgEl(tag, attrs) {
     var node = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -337,7 +370,7 @@
       record: {
         label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, teaching, and AI safety',
         frames: [
-          '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="112">12</text><text x="466" y="140">AWARDS &amp;</text><text x="466" y="158">SCHOLARSHIPS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><text x="375" y="344">Vicky leads AI research and builds systems used in finance and public services.</text>',
+          '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="112">12</text><text x="466" y="140">AWARDS &amp;</text><text x="466" y="158">SCHOLARSHIPS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><text x="375" y="344">Vicky leads AI research across industry, public services, and international teams.</text>',
           '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">DECISIONS STAFF CAN CHECK</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">BUSY LOGIN PERIODS</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">SYSTEM AVAILABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><text x="375" y="344">More than 1M identity checks passed through on the busiest days.</text>',
           '<rect class="em-note" x="58" y="72" width="214" height="202" rx="10"/><text class="em-note-title" x="88" y="108">BUILT FROM ZERO</text><path class="em-note-rule" d="M88 136h154M88 172h126M88 208h144"/><text class="em-result-word" x="165" y="246">ENGINEERING BASE</text><path class="em-arrow" d="M300 172h70m-16-14 16 14-16 14"/><rect class="em-screen" x="398" y="72" width="290" height="202" rx="12"/><text class="em-screen-label" x="543" y="108">DELIVERY SCOPE</text><text class="em-screen-value" x="543" y="162">6</text><text class="em-result-word" x="543" y="194">ASIA-PACIFIC MARKETS</text><text x="375" y="344">Later hires inherited the systems and practices Vicky built.</text>',
           '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">MINING</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title" x="292" y="100">FIRST AUTHOR · TOP JOURNAL</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood model and led the paper.</text>',
@@ -394,6 +427,7 @@
   copy.appendChild(el('span', 'em-kicker', scene.kicker));
   copy.appendChild(el('h2', '', scene.title));
   copy.appendChild(el('p', '', scene.copy));
+  setHighlightedText(copy.querySelector('p'), scene.copy, scene.highlights && scene.highlights[0]);
   // scene.steps sets how many beats there are, and nothing on screen prints it.
   // A labelled four-up rail and then a bare "01 / 04" counter both used to sit
   // here, and each gave away the shape or the length of the story on arrival.
@@ -1097,7 +1131,7 @@
       if (scene.frames) {
         copy.querySelector('.em-kicker').textContent = scene.frames[stage][0];
         copy.querySelector('h2').textContent = scene.frames[stage][1];
-        copy.querySelector('p').textContent = scene.frames[stage][2];
+        setHighlightedText(copy.querySelector('p'), scene.frames[stage][2], scene.highlights && scene.highlights[stage]);
       }
       // The class no longer carries the fade, only which figure animations run.
       if (narrative) narrative.frames.forEach(function (frame, index) { frame.classList.toggle('is-active', index === stage); });
