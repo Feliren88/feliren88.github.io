@@ -243,7 +243,17 @@ while a beat is on screen; the cinematic branch in `render()` is the opposite, a
 every value it writes is a function of scroll position, so scrubbing backwards runs
 it backwards and stopping stops it exactly.
 
-It drives four things, all scoped to `html[data-motion-scene="record"]`:
+The eases are anime.js's, solved rather than imported. The library animates against
+a clock and this scene animates against scroll position, so what it needs from
+anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
+oscillator the way `createSpring` does, finds its settling time numerically, and
+maps the beat's scroll distance onto it, which is why arrivals overshoot to about
+1.09 and decay rather than easing flatly to rest. `rippleFrom()` is anime.js's grid
+stagger with the grid assumption removed: it takes each element's real coordinates,
+measures distance to an origin, and normalises, so a cluster lands as a ring
+spreading outward instead of in document order.
+
+It drives five things, all scoped to `html[data-motion-scene="record"]`:
 
 - **Frame depth.** The arriving beat rises from slightly below at 0.93 scale, the
   leaving beat keeps rising past 1.05. A cross-fade alone reads as two pictures
@@ -257,6 +267,17 @@ It drives four things, all scoped to `html[data-motion-scene="record"]`:
   overwriting `stroke-dasharray` to draw them deletes the dashes.
 - **Copy lines** arrive in reading order rather than as one block, and the opening
   beat takes its cue from the lead-in so the column composes while the pin settles.
+- **An act per beat**, in `ACTS`. A beat that only assembles itself is a slide with
+  a transition on it. Each act resolves its parts once and returns a function of
+  that beat's own second half, so the drawing performs the sentence: the connection
+  that reaches out and never completes, the forecast that crosses the room, the run
+  of confident answers that meets a barrier and stops. Scrubbing back reverses it.
+
+  Because an act writes inline styles, **no CSS animation may touch a property an
+  act writes**. A running animation beats an inline style, so the loop would
+  silently take the story back. The per-beat rules in the stylesheet were cut down
+  to ambience for exactly this reason; keep them off transform, opacity and
+  stroke-dashoffset for any acted element.
 
 Two things to preserve when editing it. Frames whose opacity is 0 are skipped, so
 six of the eight beats cost nothing per frame; and `prefers-reduced-motion` is

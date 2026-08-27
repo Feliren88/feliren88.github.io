@@ -455,35 +455,6 @@
   // story is long. Every height in the stylesheet is a multiple of this.
   host.style.setProperty('--em-beats', count);
 
-  /*
-    Cinematic scenes animate every part of a beat against the scroll rather than
-    letting the drawing cross-fade as one block. Each frame's direct children are
-    the things that stagger in, so they are collected once here instead of being
-    queried on every frame of the scrub.
-
-    Paths that carry no dash pattern can also be drawn on. The dashed ones are
-    skipped: overwriting stroke-dasharray to draw them would delete the dashes
-    that make them read as a connection rather than a solid edge.
-  */
-  var shots = [];
-  if (scene.cinematic && narrative) {
-    shots = narrative.frames.map(function (frame) {
-      var kids = Array.prototype.filter.call(frame.children, function (node) {
-        return node.nodeType === 1;
-      });
-      var strokes = [];
-      Array.prototype.forEach.call(frame.querySelectorAll('path.em-arrow, path.em-road, path.em-broken, path.em-open-gate'), function (path) {
-        if (getComputedStyle(path).strokeDasharray !== 'none') return;
-        var length = 0;
-        try { length = path.getTotalLength(); } catch (err) { length = 0; }
-        if (!length) return;
-        path.style.strokeDasharray = length.toFixed(1);
-        strokes.push({ node: path, length: length });
-      });
-      return { frame: frame, kids: kids, strokes: strokes };
-    });
-  }
-
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Scroll spent settling into the pin before the first beat, and holding the last
@@ -521,8 +492,309 @@
     self-contained.
   */
   function outCubic(v) { var f = 1 - v; return 1 - f * f * f; }
-  function outBack(v) { var f = v - 1, c = 1.34; return 1 + (c + 1) * f * f * f + c * f * f; }
   function span(v, from, to) { return clamp01((v - from) / (to - from)); }
+
+  /*
+    anime.js's spring, solved rather than approximated.
+
+    We cannot load the library: this scene is driven by scroll position, not by a
+    clock, so what we need from anime.js is its maths rather than its timeline. Its
+    createSpring integrates the damped harmonic oscillator, which is what gives the
+    library its recognisable landing: a real overshoot that decays over two or three
+    diminishing bounces, instead of the single fixed rebound a back ease produces.
+
+      underdamped (zeta < 1):  x(t) = 1 - e^(-t·zeta·w0) · (cos(wd·t) + b·sin(wd·t))
+      otherwise             :  x(t) = 1 - (1 + b·t) · e^(-t·w0)
+
+    with w0 = sqrt(stiffness/mass), zeta = damping / 2·sqrt(stiffness·mass) and
+    wd = w0·sqrt(1 - zeta²). anime.js then finds the settling time numerically and
+    uses it as the tween's duration; here that same time is what the input 0..1 is
+    scaled onto, so one full spring plays out across the scroll distance the beat
+    is given. Scrubbing back runs the bounce backwards, which a timed tween cannot.
+  */
+  function spring(mass, stiffness, damping, velocity) {
+    var w0 = Math.sqrt(stiffness / mass);
+    var zeta = damping / (2 * Math.sqrt(stiffness * mass));
+    var wd = zeta < 1 ? w0 * Math.sqrt(1 - zeta * zeta) : 0;
+    var b = zeta < 1 ? (zeta * w0 + -velocity) / wd : -velocity + w0;
+    function solve(t) {
+      if (zeta < 1) return 1 - Math.exp(-t * zeta * w0) * (Math.cos(wd * t) + b * Math.sin(wd * t));
+      return 1 - (1 + b * t) * Math.exp(-t * w0);
+    }
+    // anime.js walks the solver forward until the value stays inside a rest
+    // threshold, and calls that the duration. Same here, with a hard ceiling so a
+    // badly chosen stiffness cannot spin.
+    var rest = 0.0005, step = 1 / 60, settled = 0, t = 0;
+    while (t < 40) {
+      if (Math.abs(1 - solve(t)) < rest) { settled = t; break; }
+      t += step;
+    }
+    if (!settled) settled = t;
+    return function (u) { return u >= 1 ? 1 : solve(clamp01(u) * settled); };
+  }
+
+  /*
+    anime.js's stagger, in the one mode that matters here.
+
+    Its grid option turns a flat list into rows and columns, measures each cell's
+    distance from an origin cell, and scales the delay by that distance, which is
+    what makes an effect leave one point as a ring rather than sweeping in DOM
+    order. These drawings are not grids; their parts sit at arbitrary coordinates.
+    So the same rule is applied to the coordinates the elements actually have:
+    Euclidean distance from an origin, normalised across the group.
+  */
+  function rippleFrom(nodes, ox, oy) {
+    var far = 0;
+    var reach = nodes.map(function (node) {
+      var box;
+      try { box = node.getBBox(); } catch (err) { box = { x: 0, y: 0, width: 0, height: 0 }; }
+      var dx = (box.x + box.width / 2) - ox;
+      var dy = (box.y + box.height / 2) - oy;
+      var d = Math.sqrt(dx * dx + dy * dy);
+      if (d > far) far = d;
+      return d;
+    });
+    return reach.map(function (d) { return far ? d / far : 0; });
+  }
+
+  // Tuned to sit where anime.js's own demos sit: enough overshoot to read as
+  // weight, settled before the beat is halfway through.
+  var ARRIVE = spring(1, 118, 13, 0);
+  var SETTLE = spring(1, 90, 16, 0);
+
+  /*
+    The eight acts.
+
+    A beat that only assembles itself is a slide with a transition on it. These
+    make the drawing carry the sentence: the connection that never completes, the
+    forecast that travels, the run of confident answers that hits a barrier. Each
+    one resolves its parts once and returns a function of that beat's own progress,
+    so the action is scrubbed rather than played.
+
+    Everything below is a function of q, which runs 0 to 1 across the second half
+    of the beat. The first half belongs to the arrival.
+  */
+  function has(frame, sel) { return frame.querySelector(sel); }
+  function all(frame, sel) { return Array.prototype.slice.call(frame.querySelectorAll(sel)); }
+  function measurePath(node) {
+    var length = 0;
+    try { length = node.getTotalLength(); } catch (err) { length = 0; }
+    if (length) { node.style.strokeDasharray = length.toFixed(1); }
+    return length;
+  }
+  function drawTo(entry, k) {
+    if (!entry || !entry.length) return;
+    entry.node.style.strokeDashoffset = (entry.length * (1 - clamp01(k))).toFixed(1);
+  }
+  function slide(node, x, y) {
+    if (node) node.style.transform = 'translate(' + (x || 0).toFixed(2) + 'px,' + (y || 0).toFixed(2) + 'px)';
+  }
+  function landing(node, k) {
+    if (!node) return;
+    var e = ARRIVE(clamp01(k));
+    node.style.opacity = clamp01(k * 2.2).toFixed(3);
+    node.style.transform = 'scale(' + (0.72 + 0.28 * e).toFixed(4) + ')';
+  }
+  function reveal(node, k) { if (node) node.style.opacity = clamp01(k).toFixed(3); }
+
+  var ACTS = {
+    // The work never leaves the screen: the line to the person reaches out and
+    // is drawn back in, over and over, never completing.
+    0: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      var pull = { node: has(frame, '.em-pull'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      if (pull.node) pull.length = measurePath(pull.node);
+      var arm = has(frame, '.em-arm');
+      return function (q) {
+        drawTo(road, span(q, 0, 0.45));
+        // out to two thirds, then back. The reach is real; the delivery is not.
+        var reach = Math.sin(clamp01(span(q, 0.3, 1)) * Math.PI) * 0.66;
+        drawTo(pull, reach);
+        slide(arm, -reach * 7, 0);
+      };
+    },
+    // Three weekend builds arrive, converge on one node, and drop into public use.
+    1: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var hub = has(frame, '.em-attempt-next');
+      var arrow = has(frame, '.em-arrow');
+      var mark = has(frame, '.em-result-mark');
+      var word = has(frame, '.em-result-word');
+      return function (q) {
+        drawTo(road, span(q, 0, 0.4));
+        landing(hub, span(q, 0.3, 0.62));
+        slide(arrow, 0, SETTLE(span(q, 0.5, 0.8)) * 16);
+        reveal(arrow, span(q, 0.5, 0.62));
+        landing(mark, span(q, 0.68, 1));
+        reveal(word, span(q, 0.74, 0.92));
+      };
+    },
+    // The forecast crosses the room: it leaves the desk and lands on the city board.
+    2: function (frame) {
+      var arrow = has(frame, '.em-arrow');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var value = has(frame, '.em-screen-value');
+      var screen = has(frame, '.em-screen');
+      return function (q) {
+        var travel = SETTLE(span(q, 0, 0.5));
+        slide(arrow, -70 + travel * 70, 0);
+        reveal(arrow, span(q, 0, 0.2));
+        reveal(screen, 0.35 + span(q, 0.3, 0.6) * 0.65);
+        drawTo(road, span(q, 0.42, 0.82));
+        landing(value, span(q, 0.55, 0.95));
+      };
+    },
+    // Volume: the rules sweep through as checks clear, and the count lands.
+    3: function (frame) {
+      var rule = { node: has(frame, '.em-note-rule'), length: 0 };
+      if (rule.node) rule.length = measurePath(rule.node);
+      var value = has(frame, '.em-screen-value');
+      var arrow = has(frame, '.em-arrow');
+      var keep = { node: has(frame, '.em-keep'), length: 0 };
+      if (keep.node) keep.length = measurePath(keep.node);
+      return function (q) {
+        drawTo(rule, span(q, 0, 0.35));
+        landing(value, span(q, 0.25, 0.62));
+        slide(arrow, SETTLE(span(q, 0.45, 0.75)) * 14, 0);
+        reveal(arrow, span(q, 0.45, 0.6));
+        drawTo(keep, span(q, 0.6, 0.95));
+      };
+    },
+    // A sharper source is fed in, and the boundary the tool found still holds.
+    4: function (frame) {
+      var feeds = all(frame, '.em-load > *');
+      var pull = { node: has(frame, '.em-pull'), length: 0 };
+      if (pull.node) pull.length = measurePath(pull.node);
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var edge = has(frame, '.em-boundary');
+      return function (q) {
+        feeds.forEach(function (node, i) {
+          var k = SETTLE(span(q, i * 0.08, 0.42 + i * 0.08));
+          slide(node, -26 + k * 26, 0);
+          reveal(node, span(q, i * 0.08, 0.2 + i * 0.08));
+        });
+        drawTo(pull, span(q, 0.3, 0.6));
+        slide(edge, span(q, 0.45, 0.8) * 96, 0);
+        reveal(edge, span(q, 0.45, 0.55));
+        drawTo(road, span(q, 0.58, 0.95));
+      };
+    },
+    // Scattered contributions ripple in from across the region and gather.
+    5: function (frame) {
+      var dots = all(frame, '.em-clusters > *');
+      var delays = rippleFrom(dots, 375, 170);
+      var pull = { node: has(frame, '.em-pull'), length: 0 };
+      if (pull.node) pull.length = measurePath(pull.node);
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var mark = has(frame, '.em-result-mark');
+      var word = has(frame, '.em-result-word');
+      return function (q) {
+        dots.forEach(function (node, i) {
+          var from = delays[i] * 0.42;
+          landing(node, span(q, from, from + 0.42));
+        });
+        drawTo(pull, span(q, 0.4, 0.7));
+        drawTo(road, span(q, 0.5, 0.8));
+        landing(mark, span(q, 0.66, 1));
+        reveal(word, span(q, 0.74, 0.94));
+      };
+    },
+    // The image is read correctly, the link to the answer is cut, and the caption
+    // wins anyway. The severed route is the whole point of the beat.
+    6: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var broken = has(frame, '.em-broken');
+      var arrow = has(frame, '.em-arrow');
+      var note = has(frame, '.em-note');
+      var value = has(frame, '.em-screen-value');
+      var words = all(frame, '.em-note ~ .em-result-word, .em-result-word');
+      return function (q) {
+        drawTo(road, span(q, 0, 0.3));
+        landing(broken, span(q, 0.28, 0.5));
+        slide(arrow, -14 + SETTLE(span(q, 0.44, 0.72)) * 14, 0);
+        reveal(arrow, span(q, 0.44, 0.56));
+        reveal(note, 0.3 + span(q, 0.5, 0.75) * 0.7);
+        landing(value, span(q, 0.62, 0.95));
+        words.forEach(function (node, i) { reveal(node, span(q, 0.7 + i * 0.06, 0.86 + i * 0.06)); });
+      };
+    },
+    // A run of confident answers meets a barrier and stops, and the alternative
+    // opens underneath it.
+    7: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      if (road.node) road.length = measurePath(road.node);
+      var dots = all(frame, '.em-attempt-old');
+      var barrier = has(frame, '.em-broken');
+      var mark = has(frame, '.em-result-mark');
+      var word = has(frame, '.em-result-word');
+      var gate = { node: has(frame, '.em-open-gate'), length: 0 };
+      if (gate.node) gate.length = measurePath(gate.node);
+      return function (q) {
+        drawTo(road, span(q, 0, 0.32));
+        dots.forEach(function (node, i) {
+          var k = span(q, 0.1 + i * 0.07, 0.55 + i * 0.07);
+          // they advance, then stop dead where the barrier is
+          slide(node, SETTLE(k) * (62 - i * 6), 0);
+          reveal(node, span(q, 0.1 + i * 0.07, 0.26 + i * 0.07));
+        });
+        landing(barrier, span(q, 0.5, 0.72));
+        landing(mark, span(q, 0.62, 0.92));
+        reveal(word, span(q, 0.7, 0.9));
+        drawTo(gate, span(q, 0.74, 1));
+      };
+    }
+  };
+
+  /*
+    Cinematic scenes animate every part of a beat against the scroll rather than
+    letting the drawing cross-fade as one block. Each frame's direct children are
+    the things that stagger in, so they are collected once here instead of being
+    queried on every frame of the scrub.
+
+    Paths that carry no dash pattern can also be drawn on. The dashed ones are
+    skipped: overwriting stroke-dasharray to draw them would delete the dashes
+    that make them read as a connection rather than a solid edge.
+  */
+  var shots = [];
+  if (scene.cinematic && narrative) {
+    var frames = narrative.frames;
+    shots = frames.map(function (frame) {
+      var kids = Array.prototype.filter.call(frame.children, function (node) {
+        return node.nodeType === 1;
+      });
+      var strokes = [];
+      Array.prototype.forEach.call(frame.querySelectorAll('path.em-arrow, path.em-road, path.em-broken, path.em-open-gate'), function (path) {
+        if (getComputedStyle(path).strokeDasharray !== 'none') return;
+        var length = 0;
+        try { length = path.getTotalLength(); } catch (err) { length = 0; }
+        if (!length) return;
+        path.style.strokeDasharray = length.toFixed(1);
+        strokes.push({ node: path, length: length });
+      });
+      return {
+        frame: frame,
+        kids: kids,
+        strokes: strokes,
+        // Ripple members are animated individually so a cluster can arrive as a
+        // ring from its centre rather than in document order.
+        ripple: (function () {
+          var group = frame.querySelector('.em-clusters, .em-load');
+          if (!group) return null;
+          var parts = Array.prototype.slice.call(group.children);
+          if (parts.length < 3) return null;
+          return { parts: parts, delays: rippleFrom(parts, 375, 176) };
+        }()),
+        act: ACTS[frames.indexOf(frame)] ? ACTS[frames.indexOf(frame)](frame) : null
+      };
+    });
+  }
+
 
   // The scene is 100vw and pulls itself back out to the left edge, so it has to
   // measure the column it actually sits in. That is .page-content on the writings
@@ -592,15 +864,29 @@
           var open = index === 0 ? Math.max(entry, span(scaled, 0, 0.5)) : span(scaled, index, index + 0.5);
           shot.kids.forEach(function (kid, order) {
             var delay = Math.min(0.34, order * 0.045);
-            var k = outBack(span(open, delay, 1));
-            kid.style.setProperty('--em-in', k < 0 ? '0' : k.toFixed(3));
-            kid.style.setProperty('--em-ty', ((1 - clamp01(k)) * 16).toFixed(2) + 'px');
+            var k = ARRIVE(span(open, delay, 1));
+            kid.style.setProperty('--em-in', clamp01(k).toFixed(3));
+            kid.style.setProperty('--em-ty', ((1 - k) * 16).toFixed(2) + 'px');
           });
+          if (shot.ripple) {
+            shot.ripple.parts.forEach(function (part, order) {
+              var from = shot.ripple.delays[order] * 0.5;
+              var k = ARRIVE(span(open, from, from + 0.5));
+              part.style.setProperty('--em-in', clamp01(k).toFixed(3));
+              part.style.setProperty('--em-rs', k.toFixed(3));
+            });
+          }
           // Solid strokes draw themselves rather than fading in.
           shot.strokes.forEach(function (stroke, order) {
             var k = outCubic(span(open, Math.min(0.4, 0.12 + order * 0.08), 1));
             stroke.node.style.strokeDashoffset = (stroke.length * (1 - k)).toFixed(1);
           });
+          /*
+            Then the beat performs. The first half of a beat is its arrival; this
+            is the second half, and it is where the drawing does the thing the
+            sentence says. Scrubbing back runs the action backwards.
+          */
+          if (shot.act) shot.act(span(scaled, index + 0.42, index + 1));
         }
         // Drawings may overlap through the handover; their captions may not. Two
         // sentences at half opacity on top of each other are unreadable, and since

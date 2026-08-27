@@ -88,14 +88,22 @@ html[data-theme="light"][data-motion-scene]{
 
 /* /about/ — one route survives every dissolve, while each beat performs its action. */
 .em-record-thread-base,.em-record-thread-progress{fill:none;stroke-linecap:round;stroke-width:2}.em-record-thread-base{stroke:var(--em-hair)}.em-record-thread-progress{stroke:var(--em-accent);stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--em-accent) 42%,transparent))}.em-record-thread-stop{fill:var(--em-bg);stroke:var(--em-line-4);stroke-width:1.5;transition:fill .18s linear,stroke .18s linear,r .18s linear}.em-record-thread-stop.is-reached{fill:var(--em-accent);stroke:var(--em-accent)}.em-record-thread-runner{fill:var(--em-ink-hi);stroke:var(--em-accent);stroke-width:3;filter:drop-shadow(0 0 9px color-mix(in srgb,var(--em-accent) 70%,transparent));transform-box:fill-box;transform-origin:center;animation:em-record-runner 1.8s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-0.is-active .em-road{stroke-dasharray:240;animation:em-record-draw 1.4s cubic-bezier(.2,.7,.3,1) both}html[data-motion-scene="record"] .em-deep-record-0.is-active .em-fig{animation:em-record-lean 3.8s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-1.is-active .em-load rect{animation:em-record-card .7s cubic-bezier(.2,.75,.3,1) both}html[data-motion-scene="record"] .em-deep-record-1.is-active .em-load rect:nth-of-type(2){animation-delay:.12s}html[data-motion-scene="record"] .em-deep-record-1.is-active .em-load rect:nth-of-type(3){animation-delay:.24s}html[data-motion-scene="record"] .em-deep-record-1.is-active .em-road{stroke-dasharray:7 9;animation:em-record-flow 1.1s linear infinite}html[data-motion-scene="record"] .em-deep-record-1.is-active .em-arrow{animation:em-record-down 1.8s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-2.is-active .em-arrow{animation:em-record-handoff 2.4s cubic-bezier(.3,.65,.3,1) infinite}html[data-motion-scene="record"] .em-deep-record-2.is-active .em-road{stroke-dasharray:150;animation:em-record-draw 1.2s .18s cubic-bezier(.2,.7,.3,1) both}
-html[data-motion-scene="record"] .em-deep-record-3.is-active .em-note-rule{stroke-dasharray:254;animation:em-record-scan 2.6s ease-in-out infinite}html[data-motion-scene="record"] .em-deep-record-3.is-active .em-keep{animation:em-record-flow 1.25s linear infinite}html[data-motion-scene="record"] .em-deep-record-3.is-active .em-fig{animation:em-record-guard 4s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-4.is-active .em-load rect{animation:em-record-feed 1.25s cubic-bezier(.2,.72,.3,1) both}html[data-motion-scene="record"] .em-deep-record-4.is-active .em-load rect:nth-of-type(2){animation-delay:.14s}html[data-motion-scene="record"] .em-deep-record-4.is-active .em-load rect:nth-of-type(3){animation-delay:.28s}html[data-motion-scene="record"] .em-deep-record-4.is-active .em-boundary{animation:em-record-sweep 2.2s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-5.is-active .em-clusters circle{animation:em-record-ripple 2.8s ease-in-out infinite}html[data-motion-scene="record"] .em-deep-record-5.is-active .em-clusters circle:nth-child(2n){animation-delay:.22s}html[data-motion-scene="record"] .em-deep-record-5.is-active .em-clusters circle:nth-child(3n){animation-delay:.44s}html[data-motion-scene="record"] .em-deep-record-5.is-active .em-road{stroke-dasharray:8 10;animation:em-record-flow 1.3s linear infinite}
-html[data-motion-scene="record"] .em-deep-record-6.is-active .em-arrow{animation:em-record-handoff 2s ease-in-out infinite}html[data-motion-scene="record"] .em-deep-record-6.is-active .em-broken{animation:em-record-warning 1.6s ease-in-out infinite}html[data-motion-scene="record"] .em-deep-record-6.is-active .em-note{animation:em-record-answer 2.4s ease-in-out infinite}
-html[data-motion-scene="record"] .em-deep-record-7.is-active .em-result-mark{animation:em-record-stop .75s cubic-bezier(.18,.78,.3,1) both,em-deep-glow 2.8s .75s ease-in-out infinite}html[data-motion-scene="record"] .em-deep-record-7.is-active .em-road{stroke-dasharray:250;animation:em-record-draw .9s ease-out both}html[data-motion-scene="record"] .em-deep-record-7.is-active .em-fig{animation:em-record-settle 1.1s cubic-bezier(.2,.75,.3,1) both,em-deep-breathe 4s 1.1s ease-in-out infinite}
+/*
+  Ambience only, per beat.
+
+  These used to drive the story: strokes drew themselves on a timer, cards flew in
+  on a timer, clusters pulsed on a timer. All of that is now a function of scroll
+  position in ACTS, so the reader is the one moving it. What is left here is the
+  breathing that should continue while a beat is simply being read, and it is kept
+  off every property an act writes to, because a running animation beats an inline
+  style and would silently take the story back.
+*/
+html[data-motion-scene="record"] .em-deep-record-0.is-active .em-fig{animation:em-record-lean 3.8s ease-in-out infinite}
+html[data-motion-scene="record"] .em-deep-record-3.is-active .em-fig{animation:em-record-guard 4s ease-in-out infinite}
+html[data-motion-scene="record"] .em-deep-record-5.is-active .em-clusters{animation:em-record-lean 5.4s ease-in-out infinite}
+html[data-motion-scene="record"] .em-deep-record-6.is-active .em-broken{animation:em-record-warning 1.6s ease-in-out infinite}
+html[data-motion-scene="record"] .em-deep-record-7.is-active .em-result-mark{animation:em-deep-glow 2.8s ease-in-out infinite}
+html[data-motion-scene="record"] .em-deep-record-7.is-active .em-fig{animation:em-deep-breathe 4s ease-in-out infinite}
 @keyframes em-record-runner{50%{transform:scale(1.24)}}@keyframes em-record-draw{from{stroke-dashoffset:240}to{stroke-dashoffset:0}}@keyframes em-record-lean{50%{transform:translateX(-4px)}}@keyframes em-record-card{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}@keyframes em-record-flow{to{stroke-dashoffset:-34}}@keyframes em-record-down{50%{transform:translateY(7px)}}@keyframes em-record-handoff{0%,100%{transform:translateX(0)}48%{transform:translateX(18px)}58%{transform:translateX(18px)}}@keyframes em-record-scan{0%,100%{stroke-dashoffset:254;opacity:.45}45%,65%{stroke-dashoffset:0;opacity:1}}@keyframes em-record-guard{50%{transform:translateX(-5px)}}@keyframes em-record-feed{from{opacity:.2;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}@keyframes em-record-sweep{0%,100%{stroke-dashoffset:0}50%{stroke-dashoffset:26}}@keyframes em-record-ripple{0%,100%{transform:scale(.88);opacity:.45}50%{transform:scale(1.13);opacity:1}}@keyframes em-record-warning{0%,100%{opacity:.5}45%,60%{opacity:1}}@keyframes em-record-answer{0%,100%{transform:translateX(0)}50%{transform:translateX(-5px)}}@keyframes em-record-stop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}@keyframes em-record-settle{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
 /*
   Body language, per beat.
@@ -427,4 +435,27 @@ html[data-motion-scene="record"] .em-copy>*{will-change:opacity,transform}
     opacity:1!important;transform:none!important
   }
   html[data-motion-scene="record"] .em-story-frame>text{opacity:var(--em-cap,1)!important}
+}
+
+/*
+  Ripple members and acted parts.
+
+  --em-rs is a cluster member's own arrival scale, written by the spring with a
+  delay taken from its distance to the centre of the group, so the group lands as
+  a ring rather than in document order. Acted parts are scaled and slid from
+  inline styles, which need an origin to scale about; without fill-box they would
+  scale about the whole view box and fly off.
+*/
+html[data-motion-scene="record"] .em-clusters>*,
+html[data-motion-scene="record"] .em-load>*{
+  opacity:var(--em-in,1);
+  transform:scale(var(--em-rs,1));
+  transform-box:fill-box;transform-origin:center
+}
+html[data-motion-scene="record"] :is(.em-result-mark,.em-attempt-next,.em-attempt-old,.em-broken,.em-screen-value,.em-boundary,.em-arrow,.em-arm){
+  transform-box:fill-box;transform-origin:center
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-motion-scene="record"] .em-clusters>*,
+  html[data-motion-scene="record"] .em-load>*{opacity:1!important;transform:none!important}
 }
