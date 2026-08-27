@@ -216,7 +216,7 @@ that page silently renders no scene. Either add the scene or drop the key.
 
 Three things about `record` generalise to any scene added later:
 
-- **Beat count is not fixed at four.** `record` has five. `scene.steps.length` is the
+- **Beat count is not fixed at four.** `record` has six. `scene.steps.length` is the
   count, the JS writes it to `--em-beats` on the host, and every `.em-story` height in
   the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; the
   pin holds for one screen per beat and a wrong height desynchronises the scrub.
@@ -225,9 +225,9 @@ Three things about `record` generalise to any scene added later:
   marks the spot with an empty `<div data-scene-slot></div>` and the scene replaces
   that node. On `/about/` the slot sits between the hero and `.about-story-nav`,
   because a sticky nav placed above the scene stays pinned across the whole interlude.
-- **Every claim in `record` is traceable** to `_data/experience.yml`,
-  `_data/publications.yml` or `_data/awards.yml`. Beat five names the question the
-  hackathon entry asked rather than a result, because `awards.yml` does not report one.
+- **Every claim in `record` is traceable** to Vicky's published personal writing,
+  `_data/experience.yml`, `_data/publications.yml` or `_data/awards.yml`. The scene
+  follows the motive behind the work instead of repeating the CV chronology.
   Text inside a drawing is a label, never a claim the copy has not already made.
 
 **Never write a hex literal into this file.** Every colour resolves through a token
