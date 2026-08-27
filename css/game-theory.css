@@ -228,7 +228,14 @@ body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{d
 }
 @media (max-width: 760px) { .gt-game-wrap { grid-template-columns: 1fr; } }
 
-.gt-matrix-scroll { overflow-x: auto; }
+/*
+  min-width:0 is what makes the overflow-x actually work. The scroller is a grid
+  item, so it defaults to min-width:auto and cannot shrink below the table's
+  300px min-content. It sat wider than its own column and scrolled the document
+  instead of scrolling itself.
+*/
+.gt-matrix-scroll { overflow-x: auto; min-width: 0; }
+.gt-game-wrap > * { min-width: 0; }
 .gt-matrix {
   border-collapse: separate; border-spacing: 0;
   font-size: var(--fs-sm); min-width: 300px; width: 100%;
@@ -939,3 +946,13 @@ body:has(.game-theory) #pointcloud-bg,body:has(.game-theory) .shape-toggle-btn{d
   page's own rail, so adding a rail entry means adding it here too.
 */
 #games,#horizon,#levers,#risk,#dashboard{scroll-margin-top:9rem}
+
+/*
+  The dashboard's 1-to-10 scale is ten fixed 1.65rem buttons in a flex row, so its
+  min-content is 293px and it cannot shrink. That set a floor under the whole grid
+  row and pushed the document 52px sideways on a 320px screen. Letting the row wrap
+  drops the floor to one button.
+*/
+@media(max-width:400px){
+  .gt-scale{flex-wrap:wrap}
+}

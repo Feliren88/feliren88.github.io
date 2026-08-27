@@ -197,26 +197,33 @@ grows together and no other page moves.
 
 ### The scroll scene shared by the writings and `/about/` (`css/essay-motion.css`)
 
-Thirteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
+Fourteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
 front matter key:
 
 ```yaml
-motion_scene: repair    # one of the thirteen keys below
+motion_scene: repair    # one of the fourteen keys below
 ```
 
 `default.html` then sets `data-motion-scene` on `<html>` and loads
 `css/essay-motion.css` + `js/components/essay-motion.js`. The JS holds the copy and
 the SVG geometry; the CSS holds every colour. The keys are `repair` (/story/),
 `abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
-`uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/), and
-`record` (/about/).
+`uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/),
+`curiosity` (/curious/), and `record` (/about/).
 
-`/curious/` sets `motion_scene: curiosity`, which is **not** one of these keys, so
-that page silently renders no scene. Either add the scene or drop the key.
+**A key with no scene fails silently.** `js/components/essay-motion.js` looks the key
+up and returns early when it misses, so the page loads both assets and renders
+nothing. `/curious/` shipped that way. After adding a `motion_scene` to a page, load
+it and confirm `.em-story` exists.
+
+Two of the fourteen colour hooks are easy to forget, and both are per-key: an
+`--em-accent` under `html[data-motion-scene="…"]` **and** one under
+`html[data-theme="light"][data-motion-scene="…"]`. Without them the scene falls back
+to the placeholder accent declared at the top of the file.
 
 Three things about `record` generalise to any scene added later:
 
-- **Beat count is not fixed at four.** `record` has six. `scene.steps.length` is the
+- **Beat count is not fixed at four.** `record` has eight. `scene.steps.length` is the
   count, the JS writes it to `--em-beats` on the host, and every `.em-story` height in
   the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; the
   pin holds for one screen per beat and a wrong height desynchronises the scrub.

@@ -185,6 +185,16 @@ layout: default
   }
   .uc-metric-pill strong { font-size: 0.9rem; color: var(--text); font-weight: 600; white-space: nowrap; }
   .uc-metric-pill span { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
+  /*
+    Some pills carry a whole clause, not a figure: "Top 3 (out of hundreds of
+    international submissions)" is 366px of unbreakable text. nowrap keeps short
+    figures like "40%" on one line, and a pill wider than the screen scrolls the
+    whole page sideways, so below the phone breakpoint the text wraps instead.
+  */
+  @media (max-width: 520px) {
+    .uc-metric-pill { align-items: flex-start; }
+    .uc-metric-pill strong, .uc-metric-pill span { white-space: normal; }
+  }
 
   .uc-tech-strip { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
   .uc-tech-tag {

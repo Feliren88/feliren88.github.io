@@ -1748,3 +1748,13 @@ input[type="range"].ha-range {
   page's own rail, so adding a rail entry means adding it here too.
 */
 #see-it,#software,#tools{scroll-margin-top:9rem}
+
+/*
+  The coda pulls itself 0.75rem wider than the column on each side. The page gutter
+  is 3vw, which is only 9.6px on a 320px screen, so the bleed outgrew the gutter and
+  became document overflow. max() keeps the intended bleed wherever the gutter can
+  pay for it and stops exactly at the edge when it cannot.
+*/
+@media(max-width:420px){
+  .ha-coda{margin-inline:max(-.75rem,-3vw)}
+}

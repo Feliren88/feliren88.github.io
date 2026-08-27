@@ -291,3 +291,19 @@ html[data-theme="light"] .small-talk{--sm-warm:#9c5426;--sm-cool:#2f6b6c}
   come from this page's own rail, so adding a rail entry means adding it here.
 */
 #story,#calibration,#loop,#ladder,#topics,#variables,#atlas,#settings,#scripts,#repair,#manner{scroll-margin-top:9rem}
+
+/*
+  The duration table could not fit a phone. Its middle column is .sm-span, which
+  is white-space:nowrap, so "10 to 60 seconds" set a floor on the column and the
+  table's min-content width came out at 394px. A table cannot render narrower than
+  its min-content, so the whole document scrolled sideways below 430px.
+
+  The span wraps instead of scrolling. A two-line duration reads fine; a table you
+  have to drag does not, and it would have been the only one on the site.
+*/
+@media(max-width:430px){
+  .sm-span{white-space:normal}
+  .sm-table{font-size:.84rem}
+  .sm-table th,.sm-table td{padding-inline:.5rem}
+  .sm-table th:first-child,.sm-table td:first-child{padding-left:0}
+}

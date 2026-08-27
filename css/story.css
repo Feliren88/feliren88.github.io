@@ -63,3 +63,13 @@
   page's own rail, so adding a rail entry means adding it here too.
 */
 #boy,#proof,#question,#base,#public,#dismantling,#last{scroll-margin-top:9rem}
+
+/*
+  "Transmission" is one twelve-letter word set at 3.4rem, and a word cannot wrap.
+  Below about 340px its ink was wider than the column, so the page scrolled sideways
+  by a few pixels. Tie the size to the viewport at the narrow end; 3.4rem still wins
+  everywhere it fits.
+*/
+@media(max-width:400px){
+  .ms-act-head h2{font-size:clamp(2.4rem,14.5vw,3.4rem)}
+}

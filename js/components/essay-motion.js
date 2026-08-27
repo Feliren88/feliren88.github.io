@@ -129,7 +129,27 @@
       ]
     },
     /*
-      The only six-beat scene, and the only one on a page rather than a writing.
+      /curious/ has carried motion_scene: curiosity since it shipped, but the scene
+      was never written, so the page loaded the engine and rendered nothing. Four
+      beats, following the page's own loop: notice the thing that does not fit,
+      distrust the first tidy explanation, find a check the explanations disagree
+      about, and say what the result did to your own guess.
+    */
+    curiosity: {
+      narrative: true,
+      kicker: 'The number was three points off',
+      title: 'Everyone had already moved on.',
+      copy: 'The meeting closed the item in under a minute. She wrote the number down and kept looking at it.',
+      steps: ['Notice', 'Explain', 'Test', 'Update'],
+      frames: [
+        ['The number was three points off', 'Everyone had already moved on.', 'The meeting closed the item in under a minute. She wrote the number down and kept looking at it.'],
+        ['The first explanation arrived within a minute', 'It was tidy and probably wrong.', 'A neat story closes a question before anyone has opened it. She wrote down two more that fit the same number.'],
+        ['So she looked for something that would disagree', 'One check could separate them.', 'Each story predicted a different answer to the same small question. Finding out took an afternoon.'],
+        ['The result ruled out her own guess', 'She said so in the meeting.', 'Her favourite explanation was the one the evidence removed. She reported it that way, and the team stopped defending the tidy story.']
+      ]
+    },
+    /*
+      The only eight-beat scene, and the only one on a page rather than a writing.
       Every claim is traceable to Vicky's published personal writing,
       _data/experience.yml, publications.yml or awards.yml.
     */
@@ -181,7 +201,7 @@
     if (key === 'feedback') return buildFeedbackNarrativeCanvas(canvas, svg);
     if (key === 'consent') return buildConsentNarrativeCanvas(canvas, svg);
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
-    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport' || key === 'record') return buildEmotionalNarrativeCanvas(canvas, svg, key);
+    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport' || key === 'record' || key === 'curiosity') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
     night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><g class="em-fig em-fig-boy"><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49"/><path class="em-person em-arm" d="M405 220l-42 34"/></g><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
@@ -304,6 +324,15 @@
       },
       /* Eight drawings for /about/. A single signal line changes meaning across the
          story: route, model trace, missing boundary, and finally a deliberate stop. */
+      curiosity: {
+        label: 'A result that does not fit is explained away, then checked against three rival explanations until one survives',
+        frames: [
+          '<rect class="em-screen" x="140" y="52" width="470" height="212" rx="10"/><text class="em-screen-label" x="375" y="88">WEEKLY RESULT</text><path class="em-note-rule" d="M176 232h398"/><path class="em-road" d="M176 200h398"/><circle class="em-attempt-old" cx="232" cy="200" r="9"/><circle class="em-attempt-old" cx="310" cy="200" r="9"/><circle class="em-attempt-next" cx="388" cy="134" r="13"/><circle class="em-attempt-old" cx="466" cy="200" r="9"/><circle class="em-attempt-old" cx="544" cy="200" r="9"/><path class="em-thought-line" d="M388 149v40"/><text class="em-attempt-label" x="388" y="116">this one</text><g class="em-fig em-fig-notice"><circle class="em-head" cx="70" cy="152" r="21"/><path class="em-person" d="M70 173v58m-26 42 26-42 26 42M70 194l46 8"/></g><text x="375" y="344">She wrote it down instead of moving on.</text>',
+          '<circle class="em-attempt-next" cx="118" cy="176" r="32"/><text class="em-attempt-label" x="118" y="244">the number</text><path class="em-pull" d="M156 158c78-28 108-44 166-52M156 176h166M156 194c78 28 108 44 166 52"/><g class="em-load"><rect x="326" y="80" width="330" height="52" rx="7"/><text x="491" y="112">the tidy story</text><rect x="326" y="150" width="330" height="52" rx="7"/><text x="491" y="182">a second story</text><rect x="326" y="220" width="330" height="52" rx="7"/><text x="491" y="252">a third story</text></g><text x="375" y="344">Three explanations fitted the number equally well.</text>',
+          '<rect class="em-note" x="96" y="46" width="558" height="240" rx="9"/><text class="em-note-title" x="136" y="84">IF I CHECK LAST MONTH</text><path class="em-note-rule" d="M136 106h478M136 166h478M136 226h478"/><text class="em-note-key" x="150" y="142">the tidy story</text><text class="em-note-value" x="600" y="142">says higher</text><text class="em-note-key" x="150" y="202">a second story</text><text class="em-note-value" x="600" y="202">says flat</text><text class="em-note-key" x="150" y="262">a third story</text><text class="em-note-value" x="600" y="262">says lower</text><text x="375" y="344">One question the three could not agree on.</text>',
+          '<g class="em-fig em-fig-report"><circle class="em-head" cx="148" cy="158" r="23"/><path class="em-person" d="M148 181v70m-34 54 34-54 34 54M148 206l52 20"/></g><rect class="em-message" x="252" y="62" width="426" height="152" rx="12"/><text class="em-message-small" x="465" y="102">WHAT SHE SAID</text><rect class="em-result-mark" x="292" y="128" width="346" height="48" rx="20"/><text class="em-result-word" x="465" y="158">MY EXPLANATION WAS THE WRONG ONE</text><path class="em-thought-line" d="M252 146 202 174"/><g class="em-carry"><rect x="292" y="236" width="346" height="58" rx="8"/><text x="465" y="262">KEPT</text><text class="em-carry-word" x="465" y="284">the one that survived the check</text></g><text x="375" y="344">She reported the result that ruled out her guess.</text>'
+        ]
+      },
       record: {
         label: 'Vicky begins with experiments at home, builds systems that affect millions of people, and decides to work on AI that can admit uncertainty',
         frames: [

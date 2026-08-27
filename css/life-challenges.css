@@ -20,3 +20,33 @@ body:has(.life-challenges) #pointcloud-bg,body:has(.life-challenges) .shape-togg
   page's own rail, so adding a rail entry means adding it here too.
 */
 #conversion,#comfort,#diagnosis,#uncertainty,#pressure,#game,#architecture{scroll-margin-top:9rem}
+
+/*
+  The capacity orbit is a circle, but its box is a square, and lcSpin rotates that
+  square. A rotated square's axis-aligned box grows by up to 41%, so between about
+  560px and 1200px the empty corners of a decorative ring pushed the whole document
+  sideways by roughly 60px. Nothing visible was ever out there.
+
+  overflow-x:clip stops that box creating scrollable overflow. It does not make a
+  scroll container, so nothing sticky is affected, and overflow-y stays visible.
+
+  overflow-clip-margin is deliberately not used. With overflow-x:clip against an
+  overflow-y:visible, Chrome ignores it; set on both axes it works but then counts
+  toward scrollable overflow again, which is the thing being fixed. The cost is that
+  an orbiting label, which sits centred on the ring and so hangs about 33px past it,
+  is trimmed at the column edge below 1100px. Above that width the label already ran
+  off the window there, so it is now cut at a sensible boundary instead.
+*/
+@media(min-width:561px){
+  .lc-hero-machine{overflow-x:clip}
+}
+
+/*
+  Below 560px the hero machine is scaled to 0.82 and pulled 3rem wider on each side
+  to compensate. On a 320px screen that leaves the scaled box a few pixels wider than
+  the viewport. A smaller pull at the narrow end keeps the compensation without the
+  overflow.
+*/
+@media(max-width:360px){
+  .lc-hero-machine{margin-inline:-2.5rem}
+}
