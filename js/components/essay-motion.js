@@ -478,6 +478,21 @@
     it is already committed to rather than as a visible jump.
   */
   var XFADE = 0.34, WORDS = 0.17, CAPTION = 0.13;
+
+  /*
+    The shape of one beat, as fractions of it.
+
+      0            arrive   the parts stagger in on the spring
+      ARRIVE_END   act      the drawing performs its sentence
+      ACT_END      hold     finished, full opacity, nothing moving but ambience
+      0.83         dissolve handover to the next beat
+
+    The hold is the part that was missing. XFADE puts a frame at full opacity only
+    until 0.83 of its beat, so anything still animating after that completes while
+    already fading, and the reader never sees the finished drawing. Keep ACT_END
+    comfortably below 0.83 if these are ever retuned.
+  */
+  var ARRIVE_END = 0.34, ACT_START = 0.32, ACT_END = 0.66;
   var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
 
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -850,7 +865,12 @@
         // need writing to sixty times a second, and the first frame on which one
         // starts to show is early enough because it starts from nothing anyway.
         if (shots.length && !reduced && shown > 0) {
-          var lead = clamp01(Math.abs(scaled - centre) / reach) * (scaled < centre ? -1 : 1);
+          // Eased rather than linear: near the centre of its beat the drawing is
+          // almost still, which is when it is being read, and it does most of its
+          // travelling during the dissolve, when it is on its way out anyway. A
+          // linear ramp drifts the whole time and reads as restlessness.
+          var away2 = clamp01(Math.abs(scaled - centre) / reach);
+          var lead = smooth(away2) * (scaled < centre ? -1 : 1);
           var depth = 1 + (lead < 0 ? lead * 0.075 : lead * 0.045);
           frame.style.transform = 'translate(0,' + (-lead * 26).toFixed(2) + 'px) scale(' + depth.toFixed(4) + ')';
 
@@ -861,7 +881,9 @@
             that a fast scroll does not leave the drawing half-built.
           */
           var shot = shots[index];
-          var open = index === 0 ? Math.max(entry, span(scaled, 0, 0.5)) : span(scaled, index, index + 0.5);
+          var open = index === 0
+            ? Math.max(entry, span(scaled, 0, ARRIVE_END))
+            : span(scaled, index, index + ARRIVE_END);
           shot.kids.forEach(function (kid, order) {
             var delay = Math.min(0.34, order * 0.045);
             var k = ARRIVE(span(open, delay, 1));
@@ -882,11 +904,16 @@
             stroke.node.style.strokeDashoffset = (stroke.length * (1 - k)).toFixed(1);
           });
           /*
-            Then the beat performs. The first half of a beat is its arrival; this
-            is the second half, and it is where the drawing does the thing the
-            sentence says. Scrubbing back runs the action backwards.
+            Then the beat performs, and then it stops and lets you look at it.
+
+            The act used to run to the beat boundary, which put its final state at
+            the same moment as the dissolve: the drawing reached completion at half
+            opacity, on its way out, so the payoff was never once visible whole.
+            That is what made a beat feel like it finished and was snatched away.
+            It now ends at ACT_END, which leaves a hold of about a sixth of a beat
+            with the finished picture at full opacity and nothing moving on it.
           */
-          if (shot.act) shot.act(span(scaled, index + 0.42, index + 1));
+          if (shot.act) shot.act(span(scaled, index + ACT_START, index + ACT_END));
         }
         // Drawings may overlap through the handover; their captions may not. Two
         // sentences at half opacity on top of each other are unreadable, and since

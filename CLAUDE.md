@@ -273,6 +273,13 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   that reaches out and never completes, the forecast that crosses the room, the run
   of confident answers that meets a barrier and stops. Scrubbing back reverses it.
 
+  **A beat has four parts, and the hold is the one that is easy to lose.** Arrive,
+  act, hold, dissolve, set by `ARRIVE_END`, `ACT_START` and `ACT_END`. `XFADE` puts
+  a frame at full opacity only until 0.83 of its beat, so an act that runs past
+  that completes while already fading and the finished drawing is never once seen
+  whole. That reads as a beat being snatched away just as it pays off. Keep
+  `ACT_END` comfortably under 0.83.
+
   Because an act writes inline styles, **no CSS animation may touch a property an
   act writes**. A running animation beats an inline style, so the loop would
   silently take the story back. The per-beat rules in the stylesheet were cut down
