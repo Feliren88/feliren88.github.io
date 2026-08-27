@@ -88,6 +88,7 @@ html[data-theme="light"][data-motion-scene]{
 
 /* /about/ — one route survives every dissolve, while each beat performs its action. */
 .em-record-thread-base,.em-record-thread-progress{fill:none;stroke-linecap:round;stroke-width:2}.em-record-thread-base{stroke:var(--em-hair)}.em-record-thread-progress{stroke:var(--em-accent);stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--em-accent) 42%,transparent))}.em-record-thread-stop{fill:var(--em-bg);stroke:var(--em-line-4);stroke-width:1.5;transition:fill .18s linear,stroke .18s linear,r .18s linear}.em-record-thread-stop.is-reached{fill:var(--em-accent);stroke:var(--em-accent)}.em-record-thread-runner{fill:var(--em-ink-hi);stroke:var(--em-accent);stroke-width:3;filter:drop-shadow(0 0 9px color-mix(in srgb,var(--em-accent) 70%,transparent));transform-box:fill-box;transform-origin:center;animation:em-record-runner 1.8s ease-in-out infinite}
+.em-score rect,.em-podium rect{fill:var(--em-panel);stroke:var(--em-line-3);stroke-width:1.5}.em-score>text,.em-podium>text{fill:var(--em-ink-2);font:650 12px "Space Grotesk",sans-serif;letter-spacing:.08em}.em-papers .em-note{fill:var(--em-panel)}.em-review .em-screen{fill:var(--em-panel)}
 /*
   Ambience only, per beat.
 

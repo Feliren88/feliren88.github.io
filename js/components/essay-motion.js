@@ -156,19 +156,19 @@
     record: {
       narrative: true,
       cinematic: true,
-      kicker: 'Jakarta, 2020. Working from home',
-      title: 'Everything I built stayed on my laptop.',
-      copy: 'I had just graduated into a pandemic. The models I built were still private experiments. I wanted to know whether my work could help someone outside my room.',
-      steps: ['At home', 'Weekend builds', 'Public work', 'Higher stakes', 'A harder test', 'Closer to home', 'A troubling result', 'What I do now'],
+      kicker: 'The record',
+      title: '7 papers. 1 patent. 12 honours.',
+      copy: 'Across 5+ years, I have published research, shipped production systems, and built tools used in finance and public services.',
+      steps: ['Record', 'Production', 'Built from zero', 'Published research', 'Regional scale', 'Recognition', 'Leadership', 'Next standard'],
       frames: [
-        ['Jakarta, 2020. Working from home', 'Everything I built stayed on my laptop.', 'I knew how to make a model produce an answer. I did not yet know whether my model could help anyone. I wanted my work to leave the room.'],
-        ['I started building over weekends', 'Our small team had 48 hours to make something people could use.', 'Those weekends showed me how quickly an idea meets reality. We made a phone service for people with poor internet, remote health checks, and a tool that predicted where passengers would need rides.'],
-        ['A city planning team picked up one of my forecasts', 'The planners’ decisions affected more than 10M people.', 'My forecast helped the planners decide where to send public resources. For the first time, a number I produced shaped services for people I would never meet.'],
-        ['Later, I worked on identity systems', 'The identity systems handled more than 1M checks on busy days.', 'A wrong identity check could keep someone out of an account. I kept the systems running and made sure staff could see why each check had passed or failed. After 12 months, I was given greater responsibility.'],
-        ['I wanted to see where my work would fail', 'Could the flood-mapping tool handle unfamiliar images?', 'I had built the tool to find floods in satellite images. I tested the tool with images from another satellite that had 6× more detail. The tool found the flood water in those images too.'],
-        ['I began looking closer to home', 'Southeast Asia was hard to find in the data used to build AI.', 'I cleaned and sorted 1.28M images from the region. More than 50 researchers across 5 countries helped prepare the collection. Other researchers could then study Southeast Asian places and languages with better material.'],
-        ['Then I watched an AI model ignore the image', 'The model recognised the image but followed a false caption.', 'One model followed the false caption 81% of the time. The model recognised the image correctly but based its answer on the caption. The 81% failure rate changed the direction of my work.'],
-        ['I now study confident, wrong AI answers', 'AI needs a way to admit when an answer may be wrong.', 'I test whether safety training helps AI recognise uncertainty. When the evidence is poor, the AI system should say why it is unsure and leave the final decision to a person.']
+        ['The record', '7 papers. 1 patent. 12 honours.', 'Across 5+ years, I have published research, shipped production systems, and built tools used in finance and public services.'],
+        ['Production proof', '99.99% availability at 1M+ checks a day.', 'I owned the reliability of identity systems used by major banks. The systems stayed available during login surges, and every decision could be checked during an audit.'],
+        ['Built from zero', 'I built the technical foundation for work across 6 Asia-Pacific markets.', 'As the office’s first technical contributor, I built the forecasting systems, shared code, and engineering practices that later hires inherited.'],
+        ['Published research', 'My flood model beat 6 established systems.', 'I designed the model and led the paper in a top-ranked journal. Across 7 peer-reviewed papers, my research covers floods, mining, cultural AI, and web data in 109 languages.'],
+        ['Regional scale', '1.28M images across 11 Southeast Asian languages.', 'I built the image-cleaning pipeline behind the dataset. More than 50 researchers across 5 countries helped turn the collection into a peer-reviewed benchmark.'],
+        ['Recognition', '2 Asia-Pacific wins, a global top 3, and 12 honours.', 'The recognised work spans ride demand, remote health, climate research, community access, and AI safety in low-resource languages.'],
+        ['Leadership', '1 issued patent and 1,000+ students taught or judged.', 'I also review scientific papers and have evaluated more than 50 technical projects for technical depth, research merit, and defensible decisions.'],
+        ['The next standard', 'Award-winning research exposed an 81% failure.', 'The model followed a false caption even after recognising the image. A second test recovered the correct answer 92% of the time. I now test ways to make the model follow visual evidence or defer to a person.']
       ]
     }
   };
@@ -335,16 +335,16 @@
         ]
       },
       record: {
-        label: 'Vicky begins with experiments at home, builds systems used by millions of people, and decides to work on AI that can admit uncertainty',
+        label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, teaching, and AI safety',
         frames: [
-          '<rect class="em-screen" x="98" y="56" width="410" height="242" rx="14"/><text class="em-screen-label" x="303" y="92">MODEL OUTPUT</text><path class="em-note-rule" d="M136 116h334M136 154h260M136 192h304"/><path class="em-road" d="M136 260l52-42 44 22 56-74 58 38 62-56"/><g class="em-fig em-fig-edge"><circle class="em-head" cx="612" cy="176" r="23"/><path class="em-person" d="M612 199v68m-36 52 36-52 36 52"/><path class="em-person em-arm" d="M612 224l-62 12"/></g><path class="em-pull" d="M508 188C548 192 560 214 574 228"/><text x="375" y="344">At first, Vicky’s work never left the screen.</text>',
-          '<g class="em-load"><rect x="52" y="60" width="178" height="48" rx="7"/><text x="141" y="89">phone service</text><rect x="286" y="60" width="178" height="48" rx="7"/><text x="375" y="89">remote health</text><rect x="520" y="60" width="178" height="48" rx="7"/><text x="609" y="89">ride demand</text></g><path class="em-road" d="M141 108C188 204 278 216 375 108C472 216 562 204 609 108"/><circle class="em-attempt-next" cx="375" cy="194" r="18"/><path class="em-arrow" d="M375 212v72m-14-18 14 18 14-18"/><rect class="em-result-mark" x="264" y="284" width="222" height="38" rx="19"/><text class="em-result-word" x="375" y="308">PUBLIC PLANNING</text><text x="375" y="344">A weekend project reached a city planning team.</text>',
-          '<path class="em-door" d="M104 292V68h210v224M104 68h210"/><circle class="em-knob" cx="278" cy="184" r="5"/><g class="em-fig em-fig-stand"><circle class="em-head" cx="208" cy="170" r="22"/><path class="em-person" d="M208 192v66m-34 50 34-50 34 50M208 216l48 10"/></g><path class="em-arrow" d="M336 180h84m-18-14 18 14-18 14"/><rect class="em-screen" x="446" y="82" width="236" height="176" rx="10"/><text class="em-screen-label" x="564" y="116">CITY FORECAST</text><text class="em-screen-value" x="564" y="170">10M+</text><path class="em-road" d="M478 224l42-36 34 18 38-56 58 40"/><text x="375" y="344">The forecast guided planning for a city of more than 10M people.</text>',
-          '<rect class="em-note" x="70" y="58" width="330" height="232" rx="10"/><text class="em-note-title" x="108" y="94">IDENTITY CHECK</text><path class="em-note-rule" d="M108 120h254M108 174h254M108 228h254"/><text class="em-screen-value" x="235" y="212">1M+</text><path class="em-arrow" d="M420 170h74m-18-14 18 14-18 14"/><g class="em-fig em-fig-holder"><circle class="em-head" cx="608" cy="126" r="23"/><path class="em-person" d="M608 149v74m-38 56 38-56 38 56M608 176l-46 18"/></g><path class="em-keep" d="M494 194C530 210 558 210 584 194"/><text x="375" y="344">Busy days brought more than 1M identity checks.</text>',
-          '<g class="em-load"><rect x="56" y="70" width="158" height="44" rx="7"/><text x="135" y="98">familiar pictures</text><rect x="56" y="138" width="158" height="44" rx="7"/><text x="135" y="166">new satellite</text><rect x="56" y="206" width="158" height="44" rx="7"/><text x="135" y="234">6× sharper</text></g><path class="em-pull" d="M214 92C284 106 306 132 338 154M214 160h124M214 228C284 214 306 188 338 166"/><rect class="em-screen" x="356" y="76" width="330" height="202" rx="10"/><text class="em-screen-label" x="521" y="110">FLOOD MAP</text><path class="em-road" d="M386 240c48-48 80 12 126-28s86 24 144-34"/><path class="em-boundary" d="M564 130v128"/><text x="375" y="344">The flood-mapping tool worked on images from a new satellite.</text>',
-          '<g class="em-clusters"><circle cx="94" cy="104" r="14"/><circle cx="142" cy="82" r="14"/><circle cx="186" cy="120" r="14"/><circle cx="114" cy="166" r="14"/><circle cx="174" cy="188" r="14"/><circle cx="118" cy="236" r="14"/><circle cx="208" cy="248" r="14"/></g><path class="em-pull" d="M228 112C290 128 316 146 344 166M228 202C290 196 316 184 344 174"/><path class="em-road" d="M366 94c34 22 62-14 94 8s54-8 90 14 72-10 120 14M366 166c44-18 70 14 110-2s74 18 112 0 52 8 82 0M366 238c38-20 70 12 108-4s68 16 106-2 58 12 90-2"/><rect class="em-result-mark" x="276" y="282" width="284" height="40" rx="20"/><text class="em-result-word" x="418" y="307">1.28M IMAGES CHECKED</text><text x="375" y="344">Vicky worked through 1.28M images from the region.</text>',
-          '<rect class="em-screen" x="62" y="58" width="220" height="154" rx="9"/><text class="em-screen-label" x="172" y="90">IMAGE</text><path class="em-road" d="M86 184l46-44 34 28 38-54 52 70"/><rect class="em-message" x="62" y="232" width="220" height="64" rx="9"/><text class="em-result-word" x="172" y="270">FALSE CAPTION</text><path class="em-broken" d="M302 150l54 54m0-54-54 54"/><path class="em-arrow" d="M380 178h70m-18-14 18 14-18 14"/><rect class="em-note" x="472" y="96" width="226" height="158" rx="12"/><text class="em-screen-value" x="585" y="158">81%</text><text class="em-result-word" x="585" y="192">WRONG CAPTION</text><text class="em-result-word" x="585" y="216">CHOSEN</text><text x="375" y="344">The AI model recognised the image and repeated the false caption.</text>',
-          '<path class="em-road" d="M62 180h250"/><circle class="em-attempt-old" cx="112" cy="180" r="13"/><circle class="em-attempt-old" cx="182" cy="180" r="13"/><circle class="em-attempt-old" cx="252" cy="180" r="13"/><path class="em-broken" d="M336 112v136"/><rect class="em-result-mark" x="384" y="72" width="292" height="68" rx="18"/><text class="em-result-word" x="530" y="113">STOP · ASK · REVIEW</text><path class="em-open-gate" d="M384 166h292M530 166v116"/><g class="em-fig em-fig-stand"><circle class="em-head" cx="530" cy="224" r="20"/><path class="em-person" d="M530 244v52m-30 38 30-38 30 38"/></g><g class="em-clusters"><circle cx="420" cy="252" r="12"/><circle cx="640" cy="252" r="12"/></g><text x="375" y="344">If the AI answer is uncertain, a person makes the final decision.</text>'
+          '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="116">12</text><text x="466" y="148">HONOURS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><path class="em-road" d="M92 252h92l36-30 52 18 44-54 56 34 62-46 58 26 70-62"/><text x="375" y="344">Research, production, recognition, and leadership.</text>',
+          '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">AUDITABLE DECISIONS</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">LOGIN SURGES</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">PRODUCTION RELIABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><path class="em-road" d="M442 236h42l18-22 28 12 28-44 28 30 44-56"/><text x="375" y="344">The banking systems stayed available under real demand.</text>',
+          '<rect class="em-note" x="58" y="72" width="214" height="202" rx="10"/><text class="em-note-title" x="88" y="108">FIRST TECHNICAL CONTRIBUTOR</text><path class="em-note-rule" d="M88 136h154M88 172h126M88 208h144"/><text class="em-result-word" x="165" y="246">ENGINEERING BASE</text><path class="em-arrow" d="M300 172h70m-16-14 16 14-16 14"/><rect class="em-screen" x="398" y="72" width="290" height="202" rx="12"/><text class="em-screen-label" x="543" y="108">DELIVERY SCOPE</text><text class="em-screen-value" x="543" y="162">6</text><text class="em-result-word" x="543" y="194">ASIA-PACIFIC MARKETS</text><path class="em-road" d="M438 236h42l22-30 32 16 26-48 36 28 48-58"/><text x="375" y="344">Later hires inherited the systems and practices Vicky built.</text>',
+          '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">MINING</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title" x="292" y="100">FIRST AUTHOR · TOP JOURNAL</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood model and led the paper.</text>',
+          '<g class="em-clusters"><circle cx="96" cy="104" r="13"/><circle cx="142" cy="82" r="13"/><circle cx="184" cy="120" r="13"/><circle cx="112" cy="164" r="13"/><circle cx="168" cy="188" r="13"/><circle cx="118" cy="232" r="13"/><circle cx="204" cy="246" r="13"/></g><path class="em-pull" d="M228 112C286 126 312 144 340 164M228 202C286 194 312 182 340 172"/><rect class="em-screen" x="362" y="68" width="326" height="204" rx="12"/><text class="em-screen-label" x="525" y="104">SOUTHEAST ASIA</text><text class="em-screen-value" x="525" y="156">1.28M</text><text class="em-result-word" x="525" y="190">IMAGES · 11 LANGUAGES</text><text class="em-result-word" x="525" y="222">50+ RESEARCHERS · 5 COUNTRIES</text><text x="375" y="344">Vicky built the image-cleaning pipeline behind the benchmark.</text>',
+          '<path class="em-road" d="M76 258h598"/><g class="em-podium"><rect x="96" y="190" width="146" height="68" rx="8"/><text class="em-result-word" x="169" y="218">GLOBAL</text><text class="em-screen-value" x="169" y="250">TOP 3</text><rect x="276" y="104" width="198" height="154" rx="10"/><text class="em-result-word" x="375" y="138">REGIONAL</text><text class="em-screen-value" x="375" y="196">2× APAC</text><text class="em-result-word" x="375" y="226">WINNER</text><rect x="508" y="166" width="146" height="92" rx="8"/><text class="em-screen-value" x="581" y="216">12</text><text class="em-result-word" x="581" y="244">HONOURS</text></g><text x="375" y="344">Independent juries recognised work across 5 fields.</text>',
+          '<rect class="em-note" x="58" y="70" width="248" height="214" rx="10"/><text class="em-note-title" x="92" y="106">ISSUED PATENT</text><path class="em-note-rule" d="M92 132h180M92 168h146M92 204h170"/><rect class="em-result-mark" x="92" y="232" width="144" height="34" rx="17"/><text class="em-result-word" x="164" y="254">FORMALLY EXAMINED</text><path class="em-arrow" d="M330 174h64m-16-14 16 14-16 14"/><g class="em-review"><circle class="em-head" cx="516" cy="132" r="20"/><path class="em-person" d="M516 152v54m-30 42 30-42 30 42"/><rect class="em-screen" x="584" y="86" width="118" height="132" rx="8"/><text class="em-screen-value" x="643" y="140">1K+</text><text class="em-result-word" x="643" y="172">STUDENTS</text></g><text x="375" y="344">Vicky teaches, reviews research, and judges technical work.</text>',
+          '<rect class="em-screen" x="50" y="72" width="202" height="150" rx="10"/><text class="em-screen-label" x="151" y="106">IMAGE</text><path class="em-road" d="M76 194l42-40 32 24 34-50 42 66"/><rect class="em-message" x="50" y="240" width="202" height="48" rx="9"/><text class="em-result-word" x="151" y="269">FALSE CAPTION</text><path class="em-broken" d="M274 140l42 42m0-42-42 42"/><rect class="em-note" x="344" y="70" width="350" height="222" rx="12"/><text class="em-screen-value" x="438" y="138">81%</text><text class="em-result-word" x="438" y="170">IMAGE OVERRIDDEN</text><path class="em-note-rule" d="M522 102v112"/><text class="em-screen-value" x="606" y="138">92%</text><text class="em-result-word" x="606" y="170">ANSWER RECOVERED</text><rect class="em-result-mark" x="408" y="222" width="224" height="46" rx="20"/><text class="em-result-word" x="520" y="251">APAC REGIONAL WINNER</text><text x="375" y="344">Vicky found the failure and showed where the answer remained.</text>'
         ]
       },
       uncertainty: {
@@ -762,6 +762,140 @@
         landing(mark, span(q, 0.62, 0.92));
         reveal(word, span(q, 0.7, 0.9));
         drawTo(gate, span(q, 0.74, 1));
+      };
+    }
+  };
+
+  /* /about/ uses achievement-specific actions. Each transition completes the
+     evidence in the drawing instead of replaying the older chronological story. */
+  if (key === 'record') ACTS = {
+    0: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      var cards = all(frame, '.em-score rect');
+      var values = all(frame, '.em-score .em-screen-value');
+      return function (q) {
+        cards.forEach(function (node, i) { landing(node, span(q, i * .07, .38 + i * .07)); });
+        values.forEach(function (node, i) { reveal(node, span(q, .12 + i * .07, .34 + i * .07)); });
+        drawTo(road, span(q, .42, .95));
+      };
+    },
+    1: function (frame) {
+      var loads = all(frame, '.em-load > *');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      var arrow = has(frame, '.em-arrow');
+      var screen = has(frame, '.em-screen');
+      var value = has(frame, '.em-screen-value');
+      return function (q) {
+        loads.forEach(function (node, i) {
+          var k = SETTLE(span(q, i * .08, .38 + i * .08));
+          slide(node, -22 + k * 22, 0);
+          reveal(node, span(q, i * .08, .2 + i * .08));
+        });
+        slide(arrow, -18 + SETTLE(span(q, .3, .58)) * 18, 0);
+        reveal(arrow, span(q, .28, .42));
+        landing(screen, span(q, .38, .68));
+        landing(value, span(q, .54, .8));
+        drawTo(road, span(q, .62, .96));
+      };
+    },
+    2: function (frame) {
+      var note = has(frame, '.em-note');
+      var rules = all(frame, '.em-note-rule');
+      var arrow = has(frame, '.em-arrow');
+      var screen = has(frame, '.em-screen');
+      var value = has(frame, '.em-screen-value');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      return function (q) {
+        landing(note, span(q, 0, .3));
+        rules.forEach(function (node, i) { reveal(node, span(q, .14 + i * .06, .34 + i * .06)); });
+        slide(arrow, -24 + SETTLE(span(q, .3, .58)) * 24, 0);
+        reveal(arrow, span(q, .28, .42));
+        landing(screen, span(q, .4, .7));
+        landing(value, span(q, .56, .82));
+        drawTo(road, span(q, .64, .97));
+      };
+    },
+    3: function (frame) {
+      var papers = all(frame, '.em-papers .em-note');
+      var rules = all(frame, '.em-note-rule');
+      var value = has(frame, '.em-screen-value');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      var mark = has(frame, '.em-result-mark');
+      return function (q) {
+        papers.forEach(function (node, i) { landing(node, span(q, i * .08, .34 + i * .08)); });
+        rules.forEach(function (node, i) { reveal(node, span(q, .18 + i * .05, .38 + i * .05)); });
+        landing(value, span(q, .34, .6));
+        drawTo(road, span(q, .48, .74));
+        landing(mark, span(q, .66, .96));
+      };
+    },
+    4: function (frame) {
+      var dots = all(frame, '.em-clusters > *');
+      var delays = rippleFrom(dots, 150, 170);
+      var pull = { node: has(frame, '.em-pull'), length: 0 };
+      pull.length = measurePath(pull.node);
+      var screen = has(frame, '.em-screen');
+      var value = has(frame, '.em-screen-value');
+      var words = all(frame, '.em-result-word');
+      return function (q) {
+        dots.forEach(function (node, i) { landing(node, span(q, delays[i] * .22, .34 + delays[i] * .22)); });
+        drawTo(pull, span(q, .28, .56));
+        landing(screen, span(q, .42, .7));
+        landing(value, span(q, .56, .8));
+        words.forEach(function (node, i) { reveal(node, span(q, .68 + i * .07, .84 + i * .07)); });
+      };
+    },
+    5: function (frame) {
+      var blocks = all(frame, '.em-podium rect');
+      var values = all(frame, '.em-podium .em-screen-value');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      return function (q) {
+        drawTo(road, span(q, 0, .28));
+        [1, 0, 2].forEach(function (index, order) {
+          landing(blocks[index], span(q, .18 + order * .12, .5 + order * .12));
+          landing(values[index], span(q, .32 + order * .12, .62 + order * .12));
+        });
+      };
+    },
+    6: function (frame) {
+      var note = has(frame, '.em-note');
+      var rules = all(frame, '.em-note-rule');
+      var mark = has(frame, '.em-result-mark');
+      var arrow = has(frame, '.em-arrow');
+      var review = has(frame, '.em-review');
+      var value = has(frame, '.em-screen-value');
+      return function (q) {
+        landing(note, span(q, 0, .3));
+        rules.forEach(function (node, i) { reveal(node, span(q, .12 + i * .06, .32 + i * .06)); });
+        landing(mark, span(q, .3, .54));
+        slide(arrow, -20 + SETTLE(span(q, .42, .66)) * 20, 0);
+        reveal(arrow, span(q, .4, .52));
+        landing(review, span(q, .52, .8));
+        landing(value, span(q, .68, .94));
+      };
+    },
+    7: function (frame) {
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      var broken = has(frame, '.em-broken');
+      var note = has(frame, '.em-note');
+      var rule = { node: has(frame, '.em-note-rule'), length: 0 };
+      rule.length = measurePath(rule.node);
+      var values = all(frame, '.em-screen-value');
+      var mark = has(frame, '.em-result-mark');
+      return function (q) {
+        drawTo(road, span(q, 0, .28));
+        landing(broken, span(q, .24, .46));
+        landing(note, span(q, .38, .64));
+        landing(values[0], span(q, .52, .72));
+        drawTo(rule, span(q, .6, .78));
+        landing(values[1], span(q, .7, .88));
+        landing(mark, span(q, .82, 1));
       };
     }
   };
