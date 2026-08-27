@@ -4,7 +4,7 @@ title: How I Work
 subtitle: Research and Engineering Practice
 description: AI safety, conformal prediction, interpretability and activation steering, vision-language models, multilingual AI, earth observation, LLM evaluation, and production ML on GCP and AWS.
 permalink: /expertise/
-redirect_to: /about/
+redirect_to: /
 ---
 
 <p class="eyebrow">RESEARCH & ENGINEERING</p>

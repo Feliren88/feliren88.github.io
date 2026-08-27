@@ -11,7 +11,7 @@ hide_title: true
 <article class="cv-page">
   <header class="cv-hero">
     <div><p class="eyebrow">CURRICULUM VITAE</p><h1>Research in uncertainty.<br>Experience in consequence.</h1><p>A complete record of research, production ML, teaching, speaking, education, and service.</p></div>
-    <aside><span>Vicky Feliren</span><a href="mailto:vickyfeliren@gmail.com">vickyfeliren@gmail.com</a><span>Jakarta, Indonesia</span><a href="/about/">Read the personal narrative →</a></aside>
+    <aside><span>Vicky Feliren</span><a href="mailto:vickyfeliren@gmail.com">vickyfeliren@gmail.com</a><span>Jakarta, Indonesia</span><a href="/">Read the personal narrative →</a></aside>
   </header>
 
   <nav class="cv-nav" aria-label="CV sections"><a href="#experience">Experience</a><a href="#education">Education</a><a href="#research-service">Research & service</a><a href="#recognition">Recognition</a></nav>
@@ -34,5 +34,5 @@ hide_title: true
     {% for key in site.data.awards %}{% assign award = key[1] %}{% if award.category %}<article><span>{{ award.year }}</span><div><small>{{ award.category }}</small><h3>{% if award.url %}<a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>{% else %}{{ award.title }}{% endif %}</h3></div></article>{% endif %}{% endfor %}
   </div><div class="cv-service"><p class="column-title">PROFESSIONAL SERVICE</p>{% for item in site.data.awards.service %}<article><h3>{{ item.role }}</h3><p>{{ item.description }}</p></article>{% endfor %}</div></div></section>
 
-  <footer class="cv-footer"><p>Looking for the ideas behind the record?</p><a class="btn btn-primary" href="/about/">Return to About</a><a class="btn btn-secondary" href="/contact/">Contact me</a></footer>
+  <footer class="cv-footer"><p>Looking for the ideas behind the record?</p><a class="btn btn-primary" href="/">Return to About</a><a class="btn btn-secondary" href="/contact/">Contact me</a></footer>
 </article>

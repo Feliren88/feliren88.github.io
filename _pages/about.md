@@ -1,9 +1,11 @@
 ---
 layout: page
-title: About Vicky Feliren
+title: Vicky Feliren
 subtitle: AI Safety & Applied Scientist
-description: Vicky Feliren is an Applied Scientist studying AI safety, calibration, and reliable multimodal and multilingual systems.
-permalink: /about/
+description: Applied Scientist working on calibration under safety alignment. I measure where the safety-capability tradeoff falls hardest, outside English and outside text, and work on recovering it. Published in IEEE, ACL, and Remote Sensing of Environment.
+permalink: /
+redirect_from:
+  - /about/
 extra_css: /css/about.css
 hide_title: true
 motion_scene: record
@@ -18,11 +20,6 @@ motion_scene: record
         <a class="btn btn-primary" href="/research/">Explore the research</a>
         <a class="about-text-link" href="/cv/">View curriculum vitae <span aria-hidden="true">↗</span></a>
       </div>
-      <ul class="about-proof-strip" aria-label="Selected credentials">
-        <li><strong>7</strong><span>peer-reviewed papers</span></li>
-        <li><strong>5+ yrs</strong><span>production ML</span></li>
-        <li><strong>IEEE · ACL · RSE</strong><span>publication venues</span></li>
-      </ul>
     </div>
     <figure class="about-portrait">
       <div class="about-portrait-frame">
@@ -35,10 +32,28 @@ motion_scene: record
     </figure>
   </header>
 
-  <!-- essay-motion.js replaces this with the five-beat scene. It sits above the
-       sticky nav on purpose: the nav would otherwise stay pinned across the whole
+  {% if site.data.about.stats %}
+  <div id="stat-strip" class="stat-strip reveal-group" role="list" aria-label="Track record at a glance">
+    {% for stat in site.data.about.stats %}
+    <div class="stat-item reveal" role="listitem">
+      <span class="stat-value">{{ stat.value }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+      <span class="stat-detail">{{ stat.detail }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- essay-motion.js replaces this with the record scene. It sits above the sticky
+       nav on purpose: the nav would otherwise stay pinned across the whole
        interlude. See the [data-scene-slot] note in js/components/essay-motion.js. -->
   <div data-scene-slot></div>
+
+  <div id="about-hero" class="about-hero">
+    {% for paragraph in site.data.about.hero %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+  </div>
 
   <nav class="about-story-nav" aria-label="On this page">
     <span>Follow the thread</span>
@@ -116,3 +131,132 @@ motion_scene: record
     </div>
   </section>
 </article>
+
+<div class="home-tail">
+
+  {% if site.data.now %}
+  <div id="now-block" class="about-section now-block">
+    <h2>This Month <span class="now-updated">· updated {{ site.data.now.last_updated }}</span></h2>
+    <ul class="now-list">
+      {% for item in site.data.now.items %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div id="tech-stack" class="about-section">
+    <h2>Tech Stack</h2>
+    <div class="tech-tag-cloud">
+      {% for tag in site.data.about.tech_stack.primary %}
+      <span class="tech-tag tech-tag--primary">{{ tag }}</span>
+      {% endfor %}
+      {% for tag in site.data.about.tech_stack.framework %}
+      <span class="tech-tag tech-tag--framework">{{ tag }}</span>
+      {% endfor %}
+      {% for tag in site.data.about.tech_stack.tool %}
+      <span class="tech-tag tech-tag--tool">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="about-sections">
+    {% for section in site.data.about.sections %}
+    {% assign section_id = section.title | downcase | replace: ' ', '-' | replace: '"', '' %}
+    <div class="about-section" id="{{ section_id }}">
+      <h2>{{ section.title }}</h2>
+
+      {% if section.content %}
+      <p class="section-prose">{{ section.content }}</p>
+      {% endif %}
+
+      {% if section.cards %}
+      <div class="about-grid reveal-group">
+        {% for card in section.cards %}
+        <div class="about-card reveal">
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="about-section home-depth-routes">
+    <h2>Go deeper</h2>
+    <p class="section-prose">Review the complete professional record.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/cv/">Curriculum Vitae</a>
+      <a class="btn btn-secondary" href="/research/">Research</a>
+    </div>
+  </div>
+
+  <section class="section insights-section reveal">
+    <div class="insights-hd">
+      <h2>Insights</h2>
+      <a href="/writings/" class="insights-view-all">View all writings →</a>
+    </div>
+    <p class="section-note">Notes on calibration, alignment training, and evaluation. Reading notes, experiment logs, and the occasional essay. I post the results that went against me too.</p>
+
+    <a class="insight-essay reveal" href="/essays/knowing-when-you-dont-know/">
+      <span class="insight-essay-label">Essay</span>
+      <h3>Knowing when you don't know is the core safety property</h3>
+      <p>Why safe deployment depends on models knowing when to abstain.</p>
+      <span class="insight-read">Read the essay →</span>
+    </a>
+
+    {% if site.data.notes %}
+    <div class="insights-notes reveal-group">
+      {% for note in site.data.notes limit:2 %}
+      <a class="insight-note reveal" href="{{ note.link }}" target="_blank" rel="noreferrer">
+        <span class="insight-note-label">Research Note</span>
+        <h3>{{ note.title }}</h3>
+        <p class="insight-note-paper">on {{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}</p>
+        <span class="insight-read">Read the paper →</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% assign feature = site.data.features | first %}
+    {% if feature %}
+    {% assign feat_src = feature.sources | where: "publication", "The Business Times" | first | default: feature.sources.first %}
+    <a class="insight-feature reveal" href="{{ feat_src.url }}" target="_blank" rel="noreferrer">
+      {% if feature.image %}<img class="insight-feature-img" src="{{ feature.image }}" alt="" loading="lazy" width="640" height="360">{% endif %}
+      <div class="insight-feature-body">
+        <span class="insight-feature-badge">Featured in {{ feat_src.publication }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+        <span class="insight-read">Read in {{ feat_src.publication }} →</span>
+      </div>
+    </a>
+    {% endif %}
+    <div class="insights-grid reveal-group">
+      {% for thought in site.data.thoughts limit:3 %}
+      <a class="insight-card reveal{% if thought.image %} insight-card--has-img{% endif %}" href="{{ thought.url }}" target="_blank" rel="noreferrer">
+        {% if thought.image %}<img class="card-cover" src="{{ thought.image }}" alt="" loading="lazy" width="640" height="360">{% endif %}
+        <div class="insight-card-body">
+          <h3>{{ thought.title }}</h3>
+          <p>{{ thought.description }}</p>
+          <span class="insight-read">Read on Medium →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section collab-section reveal">
+    <p class="eyebrow">Open to</p>
+    <h2 class="collab-heading">Let's Collaborate</h2>
+    <p class="collab-sub">{{ site.data.contact.intro_sub }}</p>
+    <div class="collab-tags">
+      {% for eng in site.data.contact.engagements %}
+      <span class="collab-tag">{{ eng.type }}</span>
+      {% endfor %}
+    </div>
+    <a href="/contact/" class="btn btn-primary collab-cta">Work With Me →</a>
+  </section>
+
+</div>

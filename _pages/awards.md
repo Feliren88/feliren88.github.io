@@ -4,7 +4,7 @@ title: Awards & Recognition
 subtitle: Microsoft Azure APAC Champion, Cambridge, UC Berkeley
 description: Microsoft Azure Virtual Hackathon APAC Champion, University of Cambridge CamvsCovid Top 3, Cal Hacks UC Berkeley winner, Monash scholarship, and IEEE peer reviewer.
 permalink: /recognition/
-redirect_to: /about/
+redirect_to: /
 ---
 
 <p class="eyebrow">MILESTONES</p>

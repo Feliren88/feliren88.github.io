@@ -7,7 +7,7 @@ Vicky Feliren is an applied scientist specializing in AI safety and the developm
 ## Pages
 
 - [Home](https://vickyfeliren.com/): Hero, research identity and entry point
-- [About](https://vickyfeliren.com/about/): Bio, research agenda, expertise, work history, and awards
+- [Home / About](https://vickyfeliren.com/): Bio, research agenda, expertise, work history, awards, writing, and contact
 - [Research](https://vickyfeliren.com/research/): Publications, IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
 - [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across multimodal AI, multilingual and cultural NLP, earth observation, production fintech, and hackathon projects
 - [Writings](https://vickyfeliren.com/writings/): Research notes (short paper distillations with own take), press features, and Medium essays on AI, philosophy, and life. Defaults to the Research filter.

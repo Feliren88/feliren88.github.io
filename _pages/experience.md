@@ -3,7 +3,7 @@ layout: page
 title: Experience & Education
 subtitle: Work History and Background
 permalink: /work/
-redirect_to: /about/
+redirect_to: /
 ---
 
 <p class="eyebrow">TRACK RECORD</p>

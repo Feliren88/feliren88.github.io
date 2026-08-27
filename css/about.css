@@ -113,3 +113,9 @@
   .about-equation{font-size:.8rem}
   .about-method-grid article{padding:1.3rem}
 }
+
+/*
+  The former homepage sections now sit below the story on the same page. .about-story
+  is 1120px, main is 1220px, so without this the page steps outward at the join.
+*/
+.home-tail{max-width:1120px;margin-inline:auto}
