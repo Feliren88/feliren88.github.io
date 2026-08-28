@@ -185,15 +185,50 @@ BOX_W = w * sc
 BOX_X = 380.0 - BOX_W / 2          # centred on the viewBox, which spans 40..720
 
 def to_path(pts, close):
+    """Polyline -> smooth cubic Bezier, via Catmull-Rom.
+
+    This is the difference between a drawing and a machine trace. `find_contours`
+    walks the pixel grid and `approximate_polygon` then cuts corners off it, so the
+    raw output is a chain of short straight segments meeting at visible angles. At
+    2x on a retina screen every one of those kinks reads, and the portrait looks
+    plotted rather than drawn. Catmull-Rom passes through every original point, so
+    the likeness is untouched; it only replaces the corner between two segments with
+    the curve a pen would have made.
+
+    TENSION is the standard 1/6. Higher overshoots on tight features like the
+    nostrils and turns them into loops.
+    """
     o = [(BOX_X + x * sc, BOX_Y + y * sc) for x, y in pts]
-    return 'M' + ' '.join(f'{x:.1f} {y:.1f}' for x, y in o) + ('Z' if close else '')
+    if len(o) < 3:
+        return 'M' + ' '.join(f'{x:.1f} {y:.1f}' for x, y in o) + ('Z' if close else '')
+
+    TENSION = 1.0 / 6.0
+    n = len(o)
+
+    def at(i):
+        if close:
+            return o[i % n]
+        return o[min(max(i, 0), n - 1)]
+
+    d = [f'M{o[0][0]:.1f} {o[0][1]:.1f}']
+    last = n if close else n - 1
+    for i in range(last):
+        p0, p1, p2, p3 = at(i - 1), at(i), at(i + 1), at(i + 2)
+        c1 = (p1[0] + (p2[0] - p0[0]) * TENSION, p1[1] + (p2[1] - p0[1]) * TENSION)
+        c2 = (p2[0] - (p3[0] - p1[0]) * TENSION, p2[1] - (p3[1] - p1[1]) * TENSION)
+        d.append(f'C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}')
+    return ''.join(d) + ('Z' if close else '')
 
 CLASSES = [('silhouette', 'em-vf-body'), ('hair', 'em-vf-hair'), ('features', 'em-vf-face')]
-frag = ['<g class="em-vf-sketch">']
+# Two groups, not one. The outer is a direct child of the frame, so it picks up the
+# arrival opacity and translate the scene gives every child; the inner carries the
+# ambient breath. Animating the outer one instead would silently drop that translate,
+# because a running animation beats a normal declaration.
+frag = ['<g class="em-vf-sketch"><g class="em-vf-breathe">']
 for key, cls in CLASSES:
     for pts, close in layers.get(key, []):
         frag.append(f'<path class="em-vf-line {cls}" d="{to_path(pts, close)}"/>')
-frag.append('</g>')
+frag.append('</g></g>')
 CAPTION = 'Vicky leads AI research across industry, public services, and international teams.'
 markup = ''.join(frag) + f'<text x="375" y="344">{CAPTION}</text>'
 
