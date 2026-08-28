@@ -69,8 +69,8 @@ html[data-theme="light"][data-motion-scene]{
   colour inside the band while their page callouts below were correctly themed.
   The fallback lives with the other tokens at the top of this file instead.
 */
-.em-story{--em-p:0;--em-gutter:0px;--em-beats:4;position:relative;width:100vw;height:calc(var(--em-beats) * 115vh);margin:clamp(3rem,8vw,7rem) 0 clamp(3rem,8vw,7rem) calc(-1 * var(--em-gutter));color:var(--em-ink);background:var(--em-bg);isolation:isolate}
-.em-pin{position:sticky;top:0;display:grid;grid-template-columns:minmax(17rem,.72fr) minmax(0,1.28fr);grid-template-rows:1fr auto;gap:clamp(1.5rem,5vw,5rem);align-items:center;height:100vh;min-height:42rem;padding:clamp(5rem,9vh,8rem) max(1.25rem,calc(50vw - 38rem)) 2.5rem;overflow:hidden}
+.em-story{--em-p:0;--em-gutter:0px;--em-beats:4;--em-pad-x:max(1.25rem,calc(50vw - 38rem));position:relative;width:100vw;height:calc(var(--em-beats) * 115vh);margin:clamp(3rem,8vw,7rem) 0 clamp(3rem,8vw,7rem) calc(-1 * var(--em-gutter));color:var(--em-ink);background:var(--em-bg);isolation:isolate}
+.em-pin{position:sticky;top:0;display:grid;grid-template-columns:minmax(17rem,.72fr) minmax(0,1.28fr);grid-template-rows:1fr auto;gap:clamp(1.5rem,5vw,5rem);align-items:center;height:100vh;min-height:42rem;padding:clamp(5rem,9vh,8rem) var(--em-pad-x) 2.5rem;overflow:hidden}
 .em-pin:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--em-x,20%) 50%,color-mix(in srgb,var(--em-accent) 16%,transparent),transparent 36%);pointer-events:none}
 .em-copy,.em-canvas,.em-track{position:relative;z-index:1}.em-kicker{display:flex;align-items:center;gap:.65rem;color:var(--em-ink-soft);font:600 clamp(.94rem,1.2vw,1.08rem)/1.35 "Manrope",sans-serif;letter-spacing:-.018em;text-transform:none}.em-kicker:before{content:"";flex:0 0 auto;width:.42rem;height:.42rem;border-radius:50%;background:var(--em-accent);box-shadow:0 0 1.4rem color-mix(in srgb,var(--em-accent) 55%,transparent)}.em-copy h2{max-width:10ch;margin:.9rem 0 1.2rem;color:var(--em-ink);font:650 clamp(2.4rem,5.7vw,5.6rem)/.9 "Space Grotesk",sans-serif;letter-spacing:-.065em}.em-copy p{max-width:34rem;margin:0;color:var(--em-ink-soft);font:450 clamp(.95rem,1.5vw,1.1rem)/1.7 "Manrope",sans-serif}
 .em-copy .em-highlight{color:var(--em-ink);font-weight:750;background:linear-gradient(transparent 72%,color-mix(in srgb,var(--em-accent) 32%,transparent) 72%)}
@@ -307,7 +307,16 @@ html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em
   subtracted from top and right, so the glyph stays where it always sat while
   the tappable box reaches 44px. Every breakpoint below repeats that subtraction.
 */
-.em-skip{--em-skip-pad:1.05rem;position:absolute;right:calc(max(1.25rem,50vw - 38rem) - var(--em-skip-pad));top:calc(1.4rem - var(--em-skip-pad));z-index:3;padding:var(--em-skip-pad);border:0;background:none;color:var(--em-ink-dim);font:600 .66rem "Space Grotesk",sans-serif;cursor:pointer}.em-skip:hover{color:var(--em-ink-hi)}
+.em-skip{--em-skip-pad:1.05rem;position:absolute;right:calc(var(--em-pad-x) - var(--em-skip-pad));top:calc(1.4rem - var(--em-skip-pad));z-index:3;padding:var(--em-skip-pad);border:0;background:none;color:var(--em-ink-dim);font:600 .66rem "Space Grotesk",sans-serif;cursor:pointer}.em-skip:hover{color:var(--em-ink-hi)}
+/*
+  `record` runs its column wider than the other scenes. Its drawings are the widest
+  on the site and it lost its progress thread, so the canvas is given back the room
+  by narrowing the page gutter rather than by stealing from the copy, whose headline
+  is already capped at 10ch. Both the pin and the skip button read the same
+  variable, or the button drifts off the edge it is supposed to sit on.
+*/
+html[data-motion-scene="record"] .em-story{--em-pad-x:max(1.25rem,calc(50vw - 42rem))}
+
 /*
   Per-scene accent. Hoisted from .em-story to the root element so it also reaches
   the page callouts below, which sit beside the scene rather than inside it.

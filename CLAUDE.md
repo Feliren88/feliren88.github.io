@@ -269,10 +269,23 @@ position clean, since the neighbouring frames are fully faded out there.
 
 Five things this has to get right, each of which was a bug first:
 
-- **The lock outlives the step.** A trackpad flick keeps delivering wheel events for
-  about a second after the fingers lift. `QUIET_MS` of silence, not the end of the
-  glide, is what releases the lock; otherwise one flick still buys three beats.
-  Key repeat needs the same guard, or a held arrow walks straight through it.
+- **The lock outlives the step, but it must be bounded.** A trackpad flick keeps
+  delivering wheel events for about a second after the fingers lift, so `QUIET_MS`
+  of silence rather than the end of the glide is what releases it. Key repeat needs
+  the same guard. **Quiet alone is a trap**: a reader who simply keeps scrolling
+  keeps stamping `lastInput`, the silence never arrives, and every event is
+  swallowed forever. That shipped, and the scene ate 241 wheel events over twelve
+  seconds without moving. Three things end the lock now, and one of them is a hard
+  ceiling: quiet, `LOCK_MAX`, or a delta back near the peak of the burst, since
+  momentum only ever decays and a rising delta is the reader pushing again.
+  `LOCK_MAX` sits above the length of a flick and below anyone's patience; under it
+  and one flick buys two beats, over it and continuous scrolling stalls.
+- **No handler may swallow a gesture that would leave the scene.** Every one of them
+  asks `holds(dir)` first, including while locked. Touch got this wrong by calling
+  `preventDefault` before deciding, which made the ends of the scene a dead end on
+  mobile. This is the invariant that makes a trap impossible rather than unlikely.
+  Note that a bounded lock never causes *skipping*: `step()` only ever moves to the
+  adjacent beat, so continuous scrolling visits every beat in turn, just faster.
 - **`NEAR` is a tenth of a beat, not a float epsilon.** A beat is about a screen of
   scroll, the landing is rounded to whole pixels and `scrollY` can be fractional, so
   "on beat 1" reads back as 0.9994. With a rounding-sized epsilon the floor lands on
@@ -331,6 +344,15 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   frame below full opacity after 0.83 of it; an act running past that finished
   while already dissolving, so the payoff was never seen whole. On the clock the
   hold is however long the reader stays, so only the performance needs budgeting.
+
+  **`record` crops its own viewBox** to `40 54 680 322`, and only `record` may. The
+  `750 360` box is shared with nine other narrative scenes, four of which position
+  animations with `transform-box: view-box`, whose origin moves with it; `record`'s
+  one transform rule is `fill-box` and does not care. The crop is a camera move, not
+  a content move, so `getBBox()`, the acts and `rippleFrom()`'s origin all still
+  refer to the same points. It exists because the rendered width is fixed, so a
+  narrower box is the only way to make the drawings bigger — which is what the
+  removed progress thread and the dead margin around the frames paid for.
 
   Measured on the current values, a beat assembles in about a quarter of a second
   and stops moving about 1.25s after it starts. Lengthening `BEAT_SECONDS` does not

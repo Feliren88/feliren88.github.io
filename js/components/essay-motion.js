@@ -408,9 +408,20 @@
       drawing, competing with it for the eye. `.em-track` under the pin already
       reports how far through the scene the reader is.
 
-      The top of the viewBox is now headroom, which is why nothing else moved: the
-      frames start below it and none of their coordinates changed.
+      Cropping the camera to what is left is what gives the drawings their size
+      back. The eight frames occupy x 50..710 and y 64..364 of the shared 750x360
+      box, so most of the top band was the thread's and the rest is margin. The
+      rendered width does not change, which means a narrower viewBox is a bigger
+      picture rather than a smaller one.
+
+      Only `record` may do this. The box is shared with nine other narrative scenes,
+      and `control`, `agency`, `consent` and `rapport` all position animations with
+      `transform-box: view-box`, whose origin would move with it. Nothing in
+      `record` does: its one transform rule is `fill-box`, which is element-relative
+      and does not care. Content coordinates are untouched either way, so the acts,
+      `getBBox()` and rippleFrom's origin all still refer to the same points.
     */
+    if (sceneKey === 'record') svg.setAttribute('viewBox', '40 54 680 322');
     canvas.appendChild(svg);
     return { canvas: canvas, svg: svg, frames: frames, nodes: [], edges: [] };
   }
@@ -555,7 +566,7 @@
     hold runs until they scroll. It only makes the beat slower to say what it came
     to say.
   */
-  var BEAT_SECONDS = 2.6;
+  var BEAT_SECONDS = 1.9;
   var beatT = 0, clockStage = -1, onScreen = true;
   // A beat already passed holds its finished state; one not yet reached shows
   // nothing, so the frame fading in underneath the current one is not a spoiler.
@@ -1246,7 +1257,33 @@
     None of this runs under prefers-reduced-motion, where the stylesheet has
     already collapsed the pin and there is no sequence to step through.
   */
-  var STEP_MS = 620, QUIET_MS = 110, SWIPE_PX = 26;
+  /*
+    STEP_MS is the glide between beats. LOCK_MAX is the ceiling on how long one
+    gesture can hold the scene, and it is the difference between a scene and a pit.
+
+    The lock used to lift only after QUIET_MS of silence. That absorbs the tail of a
+    flick, but a reader who simply keeps scrolling keeps stamping lastInput, so the
+    silence never comes, the lock never lifts, and every wheel event is swallowed.
+    The scene ate 241 events over twelve seconds without moving. Quiet still ends a
+    burst early; LOCK_MAX ends it regardless.
+
+    LOCK_MAX has to sit above the length of a flick and below anyone's patience. A
+    hard flick keeps delivering for roughly three quarters of a second, so a ceiling
+    under that cuts the lock while the same flick is still arriving and buys two
+    beats from one gesture, which is the skipping this was built to stop. Continuous
+    scrolling costs a beat per ceiling, and nothing costs more than that.
+  */
+  var STEP_MS = 420, QUIET_MS = 90, LOCK_MAX = 1050, SWIPE_PX = 26;
+
+  /*
+    Quiet and the ceiling between them still cannot tell a flick's tail from a
+    reader who has not stopped scrolling, because both keep delivering events. What
+    separates them is shape: momentum only ever decays, so a delta back near the
+    peak of the burst is the reader pushing again rather than the flick still
+    ringing. That reads as a third way out of the lock, and it is the one that lets
+    a hard flick cost exactly one beat while a held scroll keeps moving.
+  */
+  var burstMax = 0, lastAbs = 0;
   var stepping = false, engaged = false, lastInput = 0, stepId = 0, lastY = -1, touchY = 0, touchUsed = false;
 
   function reachPx() { return Math.max(1, host.offsetHeight - innerHeight); }
@@ -1278,8 +1315,10 @@
   */
   function glideTo(y) {
     cancelAnimationFrame(stepId);
-    var from = scrollY, began = 0;
+    var from = scrollY, began = 0, openedAt = performance.now();
     stepping = true;
+    // Each step measures its own burst, starting from the event that bought it.
+    burstMax = lastAbs;
     document.documentElement.style.scrollBehavior = 'auto';
     stepId = requestAnimationFrame(function run(now) {
       if (!began) began = now;
@@ -1287,11 +1326,14 @@
       scrollTo(0, Math.round(from + (y - from) * easeStep(t)));
       if (t < 1) { stepId = requestAnimationFrame(run); return; }
       document.documentElement.style.scrollBehavior = '';
-      // Hold the lock until the burst that caused this step has gone quiet, or
-      // the tail of one flick immediately buys the next beat.
-      stepId = requestAnimationFrame(function wait() {
-        if (performance.now() - lastInput < QUIET_MS) { stepId = requestAnimationFrame(wait); return; }
-        stepping = false;
+      // Hold the lock until the burst that caused this step has gone quiet, so the
+      // tail of one flick does not immediately buy the next beat. LOCK_MAX lifts it
+      // regardless, because continuous scrolling never goes quiet.
+      stepId = requestAnimationFrame(function wait(at) {
+        var quiet = performance.now() - lastInput >= QUIET_MS;
+        var pushing = burstMax > 0 && lastAbs >= burstMax * 0.85;
+        if (quiet || pushing || at - openedAt >= LOCK_MAX) { stepping = false; return; }
+        stepId = requestAnimationFrame(wait);
       });
     });
   }
@@ -1308,11 +1350,16 @@
     started.
   */
   var NEAR = 0.1;
-  function step(dir) {
+  function nextBeat(dir) {
     var pos = beatPos();
-    var to = dir > 0 ? Math.floor(pos + NEAR) + 1 : Math.ceil(pos - NEAR) - 1;
-    if (to < 0 || to > count - 1) return false;
-    glideTo(beatScroll(to));
+    return dir > 0 ? Math.floor(pos + NEAR) + 1 : Math.ceil(pos - NEAR) - 1;
+  }
+  // The one question every handler asks before swallowing anything: would this
+  // gesture keep the reader inside the scene? If not it is theirs, lock or no lock.
+  function holds(dir) { var to = nextBeat(dir); return to >= 0 && to <= count - 1; }
+  function step(dir) {
+    if (!holds(dir)) return false;
+    glideTo(beatScroll(nextBeat(dir)));
     return true;
   }
 
@@ -1324,10 +1371,15 @@
       // know that an approach was driven by a real gesture rather than by the
       // browser restoring a scroll position.
       lastInput = performance.now();
+      lastAbs = Math.abs(e.deltaY);
+      // The peak of the burst currently being absorbed, which is what a later delta
+      // gets compared against to decide whether the reader is still pushing.
+      if (lastAbs > burstMax) burstMax = lastAbs;
       if (!pinned()) return;
-      if (stepping) { e.preventDefault(); return; }
       var dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
-      if (dir && step(dir)) e.preventDefault();
+      if (!dir) return;
+      if (stepping) { if (holds(dir)) e.preventDefault(); return; }
+      if (step(dir)) e.preventDefault();
     }, { passive: false });
 
     addEventListener('touchstart', function (e) {
@@ -1337,12 +1389,16 @@
     addEventListener('touchmove', function (e) {
       lastInput = performance.now();
       if (!pinned()) return;
+      var dy = touchY - e.touches[0].clientY;
+      var dir = dy > 0 ? 1 : -1;
+      // Checked before preventDefault, not after. Swallowing first and deciding
+      // later is what made the ends of the scene a dead end on touch.
+      if (!holds(dir)) return;
       e.preventDefault();
       if (stepping || touchUsed) return;
-      var dy = touchY - e.touches[0].clientY;
       if (Math.abs(dy) < SWIPE_PX) return;
       // One swipe is one beat, however far the thumb travelled.
-      if (step(dy > 0 ? 1 : -1)) touchUsed = true;
+      if (step(dir)) touchUsed = true;
     }, { passive: false });
 
     addEventListener('keydown', function (e) {
@@ -1355,9 +1411,12 @@
               : /^(ArrowUp|PageUp)$/.test(e.key) || (e.key === ' ' && e.shiftKey) ? -1 : 0;
       if (!dir) return;
       lastInput = performance.now();
+      // Keys carry no delta, so the push test must not read a stale wheel value and
+      // decide the reader is shoving. A held key falls back on quiet and the ceiling.
+      lastAbs = 0; burstMax = 0;
       // A held arrow key repeats, and without this the repeats walk straight
       // through the lock and spend the hold on three or four beats.
-      if (stepping) { e.preventDefault(); return; }
+      if (stepping) { if (holds(dir)) e.preventDefault(); return; }
       if (step(dir)) e.preventDefault();
     });
 
