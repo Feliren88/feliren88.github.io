@@ -260,6 +260,42 @@ Two consequences to keep in mind:
   settling or the beat is still performing, and lets it stop for the hold, so a
   stationary read costs no frames.
 
+**One gesture is one beat.** The scene is several screens tall, so the browser was
+free to spend a single hard flick on three of them and the reader never saw what
+those beats contained. While the pin holds, a wheel notch, a swipe and an arrow key
+each mean one beat rather than a distance: the gesture is swallowed and the page is
+glided to that beat's anchor. Landing on a beat's *centre* is what makes a rest
+position clean, since the neighbouring frames are fully faded out there.
+
+Five things this has to get right, each of which was a bug first:
+
+- **The lock outlives the step.** A trackpad flick keeps delivering wheel events for
+  about a second after the fingers lift. `QUIET_MS` of silence, not the end of the
+  glide, is what releases the lock; otherwise one flick still buys three beats.
+  Key repeat needs the same guard, or a held arrow walks straight through it.
+- **`NEAR` is a tenth of a beat, not a float epsilon.** A beat is about a screen of
+  scroll, the landing is rounded to whole pixels and `scrollY` can be fractional, so
+  "on beat 1" reads back as 0.9994. With a rounding-sized epsilon the floor lands on
+  the beat the reader is already on and every step after the second goes nowhere.
+- **`scroll-behavior: smooth` has to be suspended during a glide.** `styles.css` sets
+  it on the root, which turns each of the per-frame `scrollTo` calls into its own
+  animation. Left alone a step took twice `STEP_MS`, sat still for the first half of
+  it and arrived on the browser's curve. `glideTo()` clears the property and puts it
+  back, so anchor links elsewhere keep theirs.
+- **The entry guard only fires for a gesture.** A flick that began above the scene
+  can carry past several beats before the pin engages, so the first pinned frame
+  pulls back to the beat the reader was owed. But a reload restoring a scroll
+  position, the back button and find-in-page all land there too, and being dragged
+  to the first beat by one of those is worse than the skipping this fixes. Every
+  input path stamps `lastInput` *before* checking the pin, and `RECENT` tells them
+  apart.
+- **Both ends must release.** Stepping past the last beat or back before the first
+  returns false from `step()`, which is the signal not to swallow the gesture, so the
+  page scrolls away normally. `.em-skip` rides the same glide and is the escape hatch.
+
+None of it runs under `prefers-reduced-motion`, where the stylesheet has already
+collapsed the pin to a static block and there is no sequence to step through.
+
 The eases are anime.js's, solved rather than imported. What the scene needs from
 anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
 oscillator the way `createSpring` does, finds its settling time numerically, and

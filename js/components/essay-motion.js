@@ -1240,7 +1240,176 @@
     }, { threshold: 0 }).observe(host);
   }
 
-  skip.addEventListener('click', function () { host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' }); });
+  /*
+    One beat per gesture.
+
+    The scene is several screens tall and the browser was free to spend a single
+    flick on all of them, so a hard scroll crossed two or three beats and the
+    reader never saw what those beats contained. While the pin holds, a gesture
+    stops meaning a distance: a wheel notch, a swipe or an arrow key each mean one
+    beat, and the scroll is moved to that beat's anchor rather than by however far
+    the gesture asked for.
+
+    The lock deliberately outlives the step. A trackpad flick keeps delivering
+    wheel events for around a second after the fingers lift, and without waiting
+    for that burst to fall quiet one flick would still spend itself as three
+    beats, which is the whole problem this exists to solve.
+
+    Landing on a beat's centre rather than its start is also what makes a rest
+    position clean: at the centre the neighbouring frames are fully faded out, so
+    the reader is never parked on a half-dissolved pair of drawings.
+
+    None of this runs under prefers-reduced-motion, where the stylesheet has
+    already collapsed the pin and there is no sequence to step through.
+  */
+  var STEP_MS = 620, QUIET_MS = 110, SWIPE_PX = 26;
+  var stepping = false, engaged = false, lastInput = 0, stepId = 0, lastY = -1, touchY = 0, touchUsed = false;
+
+  function reachPx() { return Math.max(1, host.offsetHeight - innerHeight); }
+  function hostTop() { return host.getBoundingClientRect().top + scrollY; }
+  // Where the page has to sit for `scaled` to land on beat i's centre.
+  function beatScroll(i) {
+    var p = (i + 0.5) / count;
+    return hostTop() + reachPx() * (LEAD + p * (1 - LEAD - TAIL));
+  }
+  // The same coordinate read back: 0 is the centre of the first beat, and the
+  // lead-in sits at -0.5, which is why arriving steps to beat 0 rather than past it.
+  function beatPos() {
+    var raw = clamp01(-host.getBoundingClientRect().top / reachPx());
+    return clamp01((raw - LEAD) / (1 - LEAD - TAIL)) * count - 0.5;
+  }
+  function pinned() {
+    var r = host.getBoundingClientRect();
+    return r.top <= 1 && r.bottom >= innerHeight - 1;
+  }
+  function easeStep(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  /*
+    styles.css sets `scroll-behavior: smooth` on the root, which turns every one of
+    the per-frame scrollTo calls below into its own animation. Left alone the
+    browser's easing fights this one: a step took roughly twice STEP_MS, sat still
+    for the first half of it, and arrived on the browser's curve rather than ours.
+    The property is suspended for the length of the glide and put back afterwards,
+    so ordinary anchor links elsewhere keep their smooth scrolling.
+  */
+  function glideTo(y) {
+    cancelAnimationFrame(stepId);
+    var from = scrollY, began = 0;
+    stepping = true;
+    document.documentElement.style.scrollBehavior = 'auto';
+    stepId = requestAnimationFrame(function run(now) {
+      if (!began) began = now;
+      var t = clamp01((now - began) / STEP_MS);
+      scrollTo(0, Math.round(from + (y - from) * easeStep(t)));
+      if (t < 1) { stepId = requestAnimationFrame(run); return; }
+      document.documentElement.style.scrollBehavior = '';
+      // Hold the lock until the burst that caused this step has gone quiet, or
+      // the tail of one flick immediately buys the next beat.
+      stepId = requestAnimationFrame(function wait() {
+        if (performance.now() - lastInput < QUIET_MS) { stepId = requestAnimationFrame(wait); return; }
+        stepping = false;
+      });
+    });
+  }
+
+  /*
+    Returns false when the step would leave the scene, which is the signal to stop
+    swallowing the gesture and let the page scroll away normally.
+
+    NEAR has to be a real fraction of a beat rather than a rounding epsilon. A beat
+    is about a screen of scroll, the landing is rounded to whole pixels and scrollY
+    itself can be fractional, so "on beat 1" reads back as 0.9994 rather than 1. An
+    epsilon small enough to look like float slop left the floor below the beat the
+    reader was already on, and every step after the second landed back where it
+    started.
+  */
+  var NEAR = 0.1;
+  function step(dir) {
+    var pos = beatPos();
+    var to = dir > 0 ? Math.floor(pos + NEAR) + 1 : Math.ceil(pos - NEAR) - 1;
+    if (to < 0 || to > count - 1) return false;
+    glideTo(beatScroll(to));
+    return true;
+  }
+
+  if (!reduced) {
+    addEventListener('wheel', function (e) {
+      // Pinch-zoom and browser zoom are never ours to take.
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      // Stamped before the pin is checked, because the guard at the bottom needs to
+      // know that an approach was driven by a real gesture rather than by the
+      // browser restoring a scroll position.
+      lastInput = performance.now();
+      if (!pinned()) return;
+      if (stepping) { e.preventDefault(); return; }
+      var dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+      if (dir && step(dir)) e.preventDefault();
+    }, { passive: false });
+
+    addEventListener('touchstart', function (e) {
+      touchY = e.touches[0].clientY; touchUsed = false; lastInput = performance.now();
+    }, { passive: true });
+
+    addEventListener('touchmove', function (e) {
+      lastInput = performance.now();
+      if (!pinned()) return;
+      e.preventDefault();
+      if (stepping || touchUsed) return;
+      var dy = touchY - e.touches[0].clientY;
+      if (Math.abs(dy) < SWIPE_PX) return;
+      // One swipe is one beat, however far the thumb travelled.
+      if (step(dy > 0 ? 1 : -1)) touchUsed = true;
+    }, { passive: false });
+
+    addEventListener('keydown', function (e) {
+      if (!pinned() || e.ctrlKey || e.metaKey || e.altKey) return;
+      var el = document.activeElement;
+      // Never take a key from something that wants it: a field being typed into,
+      // or the skip button waiting on its own activation.
+      if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(el.tagName))) return;
+      var dir = /^(ArrowDown|PageDown)$/.test(e.key) || (e.key === ' ' && !e.shiftKey) ? 1
+              : /^(ArrowUp|PageUp)$/.test(e.key) || (e.key === ' ' && e.shiftKey) ? -1 : 0;
+      if (!dir) return;
+      lastInput = performance.now();
+      // A held arrow key repeats, and without this the repeats walk straight
+      // through the lock and spend the hold on three or four beats.
+      if (stepping) { e.preventDefault(); return; }
+      if (step(dir)) e.preventDefault();
+    });
+
+    /*
+      A flick that began above the scene is not covered by any of the above: the
+      page was still scrolling freely when it started, so it can carry the reader
+      past several beats before the pin engages. The first frame the pin holds,
+      the scene takes itself back to the beat the reader was owed.
+
+      Only for a gesture, though. A scroll the reader did not make with their hands
+      lands here too, and being dragged to the first beat by one would be worse than
+      the skipping this fixes: reloading the page restores a scroll position, and so
+      do the back button, an in-page anchor and find-in-page. RECENT is what tells
+      the two apart, since every input path stamps lastInput before it does anything
+      else.
+    */
+    var RECENT = 1200;
+    addEventListener('scroll', function () {
+      var down = scrollY >= lastY;
+      lastY = scrollY;
+      if (!pinned()) { if (!stepping) engaged = false; return; }
+      if (engaged || stepping) return;
+      engaged = true;
+      if (performance.now() - lastInput > RECENT) return;
+      var pos = beatPos();
+      if (down && pos > NEAR) glideTo(beatScroll(0));
+      else if (!down && pos < count - 1 - NEAR) glideTo(beatScroll(count - 1));
+    }, { passive: true });
+  }
+
+  // Skip rides the same glide, so it cannot be fought by the entry guard above.
+  skip.addEventListener('click', function () {
+    if (reduced) { host.scrollIntoView({ block: 'end' }); return; }
+    engaged = true;
+    glideTo(hostTop() + reachPx() + 2);
+  });
   function resize() { alignToViewport(); measure(); eased = target; last = 0; render(eased); }
   addEventListener('scroll', request, { passive: true });
   addEventListener('resize', resize);
