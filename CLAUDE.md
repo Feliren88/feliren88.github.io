@@ -109,6 +109,7 @@ feliren88.github.io/
 │   ├── solve_games.py          # Solves every 2x2 game on /game-theory/ and regenerates _data/game_theory.yml
 │   ├── games.json              # Source payoff matrices and copy for solve_games.py
 │   ├── verify_stoic_quotes.py  # Checks every quote in _data/stoic.yml is verbatim in its public-domain source
+│   ├── trace_portrait.py       # Traces assets/img/profile.webp into the line-art portrait on the record scene's opening beat; `--write` patches it into essay-motion.js
 │   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (WebP, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
 ├── _includes/
 │   ├── principles-icons.html  # SVG <symbol> sprite for /principles/ (83 icons) — see "Icon sprite" below
@@ -254,9 +255,14 @@ Two consequences to keep in mind:
 - **Acts are no longer scrubbable.** Dragging backwards inside a beat does not run its
   act backwards, because the act is no longer a function of the scrollbar. Going back
   to a beat restarts it instead. This was a deliberate trade for autoplay.
-- **The clock only runs on screen.** An `IntersectionObserver` on the host gates
-  `beatT`, or the sequence plays out to an empty room and is finished before anyone
-  reaches it. `tick()` keeps the rAF loop alive while either the scroll is still
+- **The clock only runs while the pin is holding.** An `IntersectionObserver` is a
+  coarse gate that stops the loop when the scene is nowhere near, but it is *not* the
+  test for whether a beat may advance: the host is a dozen screens tall and fires at
+  `threshold: 0`, so it turns true a full viewport before the pin engages. Gated on
+  that alone the opening beat played itself out while the reader was still scrolling
+  towards it and arrived already finished — the empty-room problem the observer was
+  meant to prevent. `tick()` therefore requires `top <= 0 && bottom >= innerHeight`,
+  and resets `beatT` when the pin takes hold. `tick()` keeps the rAF loop alive while either the scroll is still
   settling or the beat is still performing, and lets it stop for the hold, so a
   stationary read costs no frames.
 
@@ -323,6 +329,20 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   frame below full opacity after 0.83 of it; an act running past that finished
   while already dissolving, so the payoff was never seen whole. On the clock the
   hold is however long the reader stays, so only the performance needs budgeting.
+
+  **The opening beat is a traced portrait, not a stat card.** It used to show four
+  cards reading 7 papers, 1 patent, 12 awards and 5+ years, every one of which is in
+  the stat strip immediately above the scene, so the scene opened by repeating what
+  the reader had just read. `scripts/trace_portrait.py` traces
+  `assets/img/profile.webp` into line art and `--write` patches it in; re-run it and
+  look at the result if the photo is ever replaced, because the thresholds are tuned
+  to this image. Two things are load-bearing: the portrait is **strokes rather than
+  fills**, because the act draws it on with `stroke-dashoffset` and a filled
+  posterisation cannot be animated at all; and the tracer is **region-aware**, tracing
+  the face on local contrast and the shirt on strong edges only, because one global
+  threshold either loses the eyes or copies the batik. Nothing in the stylesheet may
+  set `stroke-dasharray` on `.em-vf-line`, or `measurePath()`'s length stops
+  describing the path.
 
   **`record` crops its own viewBox** to `40 54 680 322`, and only `record` may. The
   `750 360` box is shared with nine other narrative scenes, four of which position

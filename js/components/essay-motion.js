@@ -369,7 +369,7 @@
       record: {
         label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, and teaching',
         frames: [
-          '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="112">12</text><text x="466" y="140">AWARDS &amp;</text><text x="466" y="158">SCHOLARSHIPS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><text x="375" y="344">Vicky leads AI research across industry, public services, and international teams.</text>',
+          '<g class="em-vf-sketch"><path class="em-vf-line em-vf-body" d="M239.5 315.0 246.2 310.0 242.9 306.1 245.1 297.1 249.0 294.9 254.1 284.8 264.4 275.6 304.7 255.4 316.5 254.3 329.1 245.1 331.9 236.7 331.3 227.2 320.7 207.6 317.9 198.1 307.2 183.0 301.1 162.3 302.8 156.7 307.8 153.3 307.2 138.8 303.9 125.3 304.4 111.3 311.2 99.0 323.2 84.7 348.4 70.8 366.3 68.0 371.3 70.8 380.3 71.3 390.4 76.4 408.5 90.6 415.8 101.8 419.2 111.3 418.6 143.8 426.5 147.7 428.7 157.8 425.9 176.8 421.4 184.6 416.4 188.6 412.5 197.5 410.8 216.0 414.1 223.3 420.6 235.3 430.1 237.5 443.5 247.0 450.2 245.9 482.7 253.2 497.2 262.2 502.8 263.3 513.2 273.6 519.9 285.9 523.3 299.9 522.7 319.5"/><path class="em-vf-line em-vf-hair" d="M416.1 155.8 410.2 130.4 398.5 113.0 390.4 107.7 368.0 104.3 362.4 99.9 356.2 107.1 331.6 109.4 326.6 111.1 321.2 115.8 317.9 123.1 316.8 136.5"/><path class="em-vf-line em-vf-face" d="M366.3 244.8 357.9 243.1 351.7 243.7 340.0 238.1 331.3 227.7 322.4 211.5 317.9 198.1 312.3 191.4 313.4 188.0 311.7 185.8 312.3 184.1 310.0 176.3 309.5 161.1 307.8 157.8 307.2 152.2 307.2 137.6 304.4 127.0 304.4 114.1 306.7 107.4 310.9 100.4 311.7 100.7 306.1 111.3 305.6 117.5 305.6 126.4 308.4 138.8 308.4 152.7 309.5 158.3 310.9 159.7 312.8 156.7 312.8 147.7 316.8 136.5 316.8 130.4 318.7 121.1 318.4 136.0 314.0 147.1 313.4 165.6 314.0 170.7 317.3 175.1 316.8 177.9 319.0 188.6 323.8 193.9 325.7 194.2 327.4 205.4 330.2 208.7 330.2 210.4 329.4 210.7 324.9 205.1 322.9 206.5 323.5 208.2 326.6 212.3 331.6 214.6 332.7 214.0 334.1 215.4 331.3 218.8 337.7 228.0 340.0 229.1 343.3 227.5 352.3 233.1 354.0 232.5 359.0 234.7 367.4 235.3 380.3 232.5 389.8 226.9 392.6 226.9 404.6 216.0 407.4 211.0 411.3 199.2 411.3 193.6 412.5 191.4 411.3 184.6 415.3 170.1 415.3 163.4 410.2 137.6 401.8 124.8 400.1 116.4 405.2 124.8 410.2 130.4 413.0 138.8 414.1 148.8 416.1 151.3 418.1 148.8 418.1 120.3 416.9 116.9 418.1 110.2 413.3 100.4 415.3 101.8 418.1 106.9 418.1 118.0 419.2 122.5 418.6 143.8 419.7 146.6 418.1 155.0 418.6 160.0 423.1 166.7 423.7 170.1 418.6 176.3 416.9 188.0 414.7 194.7 412.5 197.5 413.0 200.9 410.8 211.5 406.3 219.3 388.1 236.4 382.0 239.2 375.8 240.3 366.3 244.8Z"/><path class="em-vf-line em-vf-face" d="M432.9 262.7 427.9 260.5 425.6 262.7 421.7 262.7 422.5 252.9 412.5 248.4 413.6 245.1 411.3 238.4 406.3 235.0 409.7 228.9 411.1 217.9 412.5 218.8 420.6 235.9 426.2 235.9 429.0 237.0 432.3 239.8 435.1 240.3 436.5 242.3 434.6 245.4 427.9 243.1 424.8 245.1 425.9 249.0 425.3 253.5 426.5 255.2 424.8 259.1 426.2 260.5 434.6 257.7 435.4 258.5 434.8 261.9 432.9 262.7Z"/><path class="em-vf-line em-vf-face" d="M497.8 262.7 477.7 262.7 470.9 257.1 464.8 257.7 460.9 262.7 459.2 262.7 458.4 261.3 461.1 258.5 458.6 256.6 455.8 258.8 453.0 258.8 447.4 262.7 440.7 262.7 441.6 260.2 440.4 259.1 442.4 256.6 446.3 257.1 450.8 253.8 452.8 251.8 452.2 247.9 454.7 247.0 458.1 248.7 463.1 248.7 482.7 253.2 497.8 262.7Z"/><path class="em-vf-line em-vf-face" d="M389.2 187.2 385.9 186.0 380.8 181.0 379.2 181.0 374.1 184.4 364.6 186.6 352.9 186.6 347.3 182.7 344.5 184.4 343.6 181.3 345.3 177.9 348.4 176.0 348.7 179.0 350.6 181.0 357.3 180.4 361.3 182.7 365.2 182.7 369.1 181.0 374.7 181.0 376.1 179.6 376.6 175.7 378.0 175.4 389.5 184.6 390.1 186.3 389.2 187.2Z"/><path class="em-vf-line em-vf-face" d="M361.8 215.7 357.3 212.3 352.3 211.2 344.5 202.3 340.8 200.3 340.8 196.4 348.9 196.7 354.5 193.9 363.5 194.4 366.8 192.8 373.6 192.8 378.6 194.4 381.4 193.9 386.7 195.8 387.3 198.1 382.5 200.0 376.4 207.3 368.5 211.2 365.7 214.6 361.8 215.7Z"/><path class="em-vf-line em-vf-face" d="M339.4 262.7 335.8 261.3 335.8 259.1 332.1 254.9 329.6 258.0 329.4 261.6 328.8 261.0 327.1 262.7 318.4 262.4 320.1 260.8 320.7 255.7 324.0 253.5 325.7 249.0 329.1 245.6 330.2 239.5 332.1 237.5 333.5 240.6 334.7 250.1 339.4 262.7Z"/><path class="em-vf-line em-vf-face" d="M354.5 158.1 351.7 156.9 346.7 151.3 342.2 149.7 329.9 148.5 327.1 151.3 322.6 152.5 321.8 148.8 328.8 141.8 333.3 141.8 336.6 143.5 345.6 144.6 352.3 150.2 356.5 152.2 357.1 153.9 354.5 158.1Z"/><path class="em-vf-line em-vf-face" d="M373.6 148.5 369.6 148.5 368.8 147.1 370.8 143.0 387.6 136.2 391.5 136.2 396.0 137.9 399.3 139.6 401.3 142.1 400.4 145.2 391.5 141.8 384.8 143.0 373.6 148.5Z"/><path class="em-vf-line em-vf-face" d="M398.2 113.9 391.5 108.8 383.1 108.8 376.9 106.6 366.3 105.5 365.4 102.4 370.2 104.9 392.0 108.3 396.0 110.5 398.2 113.9Z"/><path class="em-vf-line em-vf-face" d="M342.2 110.5 331.3 109.7 354.5 107.7 356.2 107.1 359.6 102.7 362.1 104.6 359.0 108.8 356.2 109.9 345.6 109.4 342.2 110.5Z"/><path class="em-vf-line em-vf-face" d="M371.6 208.2 374.1 207.3 376.1 204.8 375.0 201.4 376.6 199.2 373.6 196.7 369.1 195.6 365.7 196.7 361.3 196.1 355.1 198.4 352.6 200.9 352.0 203.1 357.9 207.9 367.4 207.3 371.6 208.2Z"/><path class="em-vf-line em-vf-face" d="M328.2 162.5 324.9 162.5 324.6 160.0 329.4 156.9 346.7 156.4 349.2 158.3 347.8 161.4 346.1 161.4 343.9 159.2 340.5 162.0 331.6 161.4 328.2 162.5Z"/><path class="em-vf-line em-vf-face" d="M380.3 159.2 374.7 159.2 373.3 157.8 373.3 155.0 377.5 152.5 385.3 151.3 394.8 151.9 397.3 153.9 395.4 156.4 390.4 156.4 389.2 155.3 386.4 158.1 384.2 158.6 382.0 157.5 380.3 159.2Z"/><path class="em-vf-line em-vf-face" d="M390.9 256.0 388.4 255.2 389.5 252.4 404.9 236.4 402.9 241.2 398.5 245.6 394.0 253.5 390.9 256.0Z"/></g><text x="375" y="344">Vicky leads AI research across industry, public services, and international teams.</text>',
           '<rect class="em-note" x="58" y="72" width="214" height="202" rx="10"/><text class="em-note-title" x="88" y="108">BUILT FROM ZERO</text><path class="em-note-rule" d="M88 136h154M88 172h126M88 208h144"/><text class="em-result-word" x="165" y="246">ENGINEERING BASE</text><path class="em-arrow" d="M300 172h70m-16-14 16 14-16 14"/><rect class="em-screen" x="398" y="72" width="290" height="202" rx="12"/><text class="em-screen-label" x="543" y="108">DELIVERY SCOPE</text><text class="em-screen-value" x="543" y="162">6</text><text class="em-result-word" x="543" y="194">ASIA-PACIFIC MARKETS</text><text x="375" y="344">Later hires inherited the AI systems and practices Vicky built.</text>',
           '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY AI SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">DECISIONS STAFF CAN CHECK</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">BUSY LOGIN PERIODS</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">AI SYSTEM AVAILABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><text x="375" y="344">More than 1M identity checks passed through on the busiest days.</text>',
           '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">COMPUTER VISION</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title em-note-mid" x="375" y="100">FIRST AUTHOR · TOP VENUE</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">AI SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood AI model and led the paper.</text>',
@@ -570,7 +570,7 @@
     to say.
   */
   var BEAT_SECONDS = 1.2;
-  var beatT = 0, clockStage = -1, onScreen = true;
+  var beatT = 0, clockStage = -1, onScreen = true, pinHeld = false;
   // A beat already passed holds its finished state; one not yet reached shows
   // nothing, so the frame fading in underneath the current one is not a spoiler.
   function beatLocal(index, stage, auto) { return index < stage ? 1 : index > stage ? 0 : auto; }
@@ -849,15 +849,41 @@
   /* /about/ uses achievement-specific actions. Each transition completes the
      evidence in the drawing instead of replaying the older chronological story. */
   if (key === 'record') ACTS = {
+    /*
+      The opening beat draws Vicky rather than restating the stat strip.
+
+      It used to show four cards reading 7 papers, 1 patent, 12 awards and 5+ years.
+      Every one of those numbers is already in the stat strip immediately above the
+      scene, so the beat opened by repeating what the reader had just read. The
+      portrait is traced from assets/img/profile.webp; see the note in
+      _includes/ for how it was produced.
+
+      The act is the sketch drawing itself, in the order a person would draw it:
+      the head and shoulders first, then the hairline, then the face, feature by
+      feature. Each path is a stroke with its own dash length, so drawTo() walks it
+      on exactly as it does the arrows elsewhere in the scene.
+    */
     0: function (frame) {
-      var road = { node: has(frame, '.em-road'), length: 0 };
-      road.length = measurePath(road.node);
-      var cards = all(frame, '.em-score rect');
-      var values = all(frame, '.em-score .em-screen-value');
+      function pen(node) { return { node: node, length: measurePath(node) }; }
+      var body = all(frame, '.em-vf-body').map(pen);
+      var hair = all(frame, '.em-vf-hair').map(pen);
+      // Features are drawn in reading order down the face rather than in the order
+      // the tracer happened to emit them, or the mouth can appear before the eyes.
+      var face = all(frame, '.em-vf-face').map(pen).sort(function (a, b) {
+        var ab = a.node.getBBox(), bb = b.node.getBBox();
+        return (ab.y + ab.height / 2) - (bb.y + bb.height / 2);
+      });
+      // A stagger that leaves each stroke enough of the beat to be seen being drawn.
+      function walk(list, from, to, q) {
+        var n = list.length || 1, hold = (to - from) / (n + 2);
+        list.forEach(function (entry, i) {
+          drawTo(entry, span(q, from + i * hold, from + i * hold + hold * 3));
+        });
+      }
       return function (q) {
-        cards.forEach(function (node, i) { landing(node, span(q, i * .07, .38 + i * .07)); });
-        values.forEach(function (node, i) { reveal(node, span(q, .12 + i * .07, .34 + i * .07)); });
-        drawTo(road, span(q, .42, .95));
+        walk(body, 0, .34, q);
+        walk(hair, .22, .46, q);
+        walk(face, .34, .96, q);
       };
     },
     1: function (frame) {
@@ -1191,31 +1217,47 @@
     if (reduced) { eased = target; render(eased); return; }
     var dt = last ? Math.min(0.064, (now - last) / 1000) : 0.016;
     last = now;
-    // The clock is the second reason to keep drawing, and it runs only where it
-    // can be seen. dt is already capped, so a tab returning to the foreground
-    // resumes the beat rather than jumping to the end of it.
-    if (onScreen) beatT += dt;
+    /*
+      The clock is the second reason to keep drawing, and it runs only while the
+      scene is actually held under the pin.
+
+      `onScreen` alone is not that test. The host is a dozen screens tall and the
+      observer fires at `threshold: 0`, so it turns true the moment the scene's top
+      edge appears — a whole viewport before the pin engages. The first beat then
+      played itself out while the reader was still scrolling towards it, and arrived
+      already finished, which is exactly the empty-room problem the observer exists
+      to prevent. Requiring the pin to be holding costs one rect read per frame and
+      makes the opening beat perform on arrival.
+
+      dt is capped, so a tab returning to the foreground resumes the beat rather
+      than jumping to the end of it.
+    */
+    var r = host.getBoundingClientRect();
+    var held = r.top <= 0 && r.bottom >= innerHeight;
+    if (held !== pinHeld) { pinHeld = held; if (held) beatT = 0; }
+    if (onScreen && held) beatT += dt;
     eased += (target - eased) * (1 - Math.pow(0.0016, dt));
     if (Math.abs(target - eased) < 0.00008) eased = target;
     render(eased);
     // Two things can still be moving: the scroll settling into its target, and the
     // beat performing. Keep the loop alive for either, and let it stop once the
     // beat has finished and is being held, so a read stays at zero frames.
-    if (eased !== target || (onScreen && beatT < BEAT_SECONDS)) { request(); return; }
+    if (eased !== target || (onScreen && held && beatT < BEAT_SECONDS)) { request(); return; }
     last = 0;
   }
   function request() { if (!queued) { queued = true; requestAnimationFrame(tick); } }
 
   /*
-    Beats are held off until the scene is actually on screen, and restarted when it
-    comes back, so the sequence is never already spent by the time it is reached.
-    The host is several screens tall, so this fires at its edges and nowhere else.
+    A coarse gate only: it stops the loop running at all when the scene is nowhere
+    near, and wakes it when the scene comes back. Whether a beat's clock advances is
+    decided in tick() by whether the pin is actually holding, because on a host this
+    tall `isIntersecting` turns true far too early to mean "the reader is here".
   */
   if ('IntersectionObserver' in window) {
     onScreen = false;
     new IntersectionObserver(function (entries) {
       onScreen = entries[0].isIntersecting;
-      if (onScreen) { beatT = 0; last = 0; request(); }
+      if (onScreen) { last = 0; request(); }
     }, { threshold: 0 }).observe(host);
   }
 
