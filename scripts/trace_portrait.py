@@ -143,41 +143,26 @@ for _, p in contours(hair, 200, 2.0)[:2]:
         if np.hypot(d[:, 0], d[:, 1]).sum() > 40:
             layers['hair'].append((run, False))
 
-# Texture inside the hair mass. The hairline alone leaves the head an empty outline,
-# which is the single biggest reason a traced portrait reads as a template: real hair
-# has direction. These are the darkest interior ridges, opened along the silhouette
-# like the hairline so they do not double the head's edge.
-tex = hair & (blur(L, 1.2) - blur(L, 9) < -6)
-tex = morphology.remove_small_objects(tex, 90)
-for _, p in contours(tex, 60, 1.5)[:8]:
-    for run in split_open(p):
-        d = np.diff(np.array(run), axis=0)
-        if np.hypot(d[:, 0], d[:, 1]).sum() > 34:
-            layers['hair'].append((run, False))
+# No interior hair texture. Those ridges are tonal too, and as outline they turned the
+# hair into a mass of separate lobes rather than hair.
 
 # Face features: local contrast inside the face box only.
 face = np.zeros_like(sub); face[FACE_T:FACE_B, FACE_L:FACE_R] = True
 face &= sub & ~hair
-"""
-Two contrast bands, not one, because one cannot get more detail out of this image.
-
-At a single band the face had the eyes, nose and mouth and little else, and read as a
-generic face rather than his. Lowering the threshold does not help: it merges adjacent
-features into larger blobs, so the contour count peaks around -11 and *falls* below it
-(measured: 22 contours at -11, 15 at -9, 12 at -7). What the face was missing was not
-darker detail but finer detail.
-
-So a second, tighter band runs alongside the first. The coarse one finds the features,
-the fine one finds the transitions the coarse one steps over: the crease beside the
-smile, the fold of the ear, the shadow along the jaw. Together they roughly halve the
-line spacing - 28 contours and 606 points against 15 and 408 - which is what makes it
-read as him. Pushing the fine band past about -3 starts drawing the skin's own grain.
-"""
-coarse = blur(L, 1.6) - blur(L, 14)
-fine = blur(L, 1.0) - blur(L, 6)
-feat = (face & (coarse < -11)) | (face & (fine < -4))
-feat = morphology.binary_closing(morphology.remove_small_objects(feat, 20), morphology.disk(1))
-layers['features'] = [(p, True) for _, p in contours(feat, 18, 1.15)[:34]]
+# One contrast band, at the level that reads as a face rather than a skull.
+#
+# A second finer band was tried, to bring in the crease beside the smile and the fold
+# of the ear, and it does roughly double the line count. But most of what it finds on
+# a lit face is shadow boundary, and drawn as outline every one of those becomes a
+# hollow: the eye sockets sank, the cheeks gained rims, and the portrait read as
+# gaunt. Outline drawing has no way to say "this is slightly darker" - a line is a
+# line - so tonal detail cannot be added to it without turning tone into anatomy.
+#
+# The threshold stays where only real edges survive. Fewer, truer lines.
+local = blur(L, 1.6) - blur(L, 14)
+feat = morphology.binary_closing(
+    morphology.remove_small_objects(face & (local < -13), 60), morphology.disk(2))
+layers['features'] = [(p, True) for _, p in contours(feat, 45, 1.3)[:14]]
 
 # Collar and shoulder structure: strong edges only, no fabric pattern. Also opened
 # where it hugs the silhouette, for the same doubling reason as the hair.
@@ -220,11 +205,19 @@ layers.pop('shirt', None)
 
 # The scene viewBox is "40 54 680 322" and the caption sits at y=344, so the portrait
 # gets y 66..324. Height is the binding constraint; the width follows the crop.
-# Height is the binding constraint, not width: the portrait is a 1.29 landscape in a
-# viewBox 2.11 times wider than it is tall, so it can never fill the canvas sideways.
-# It takes everything between the top of the viewBox and the caption baseline instead,
-# leaving only enough clearance for the caption's ascenders.
-BOX_Y, BOX_H = 50.0, 282.0
+# The portrait is allowed out of the top of the viewBox.
+#
+# The canvas sits in a grid row 706px tall but the SVG is width-constrained, so at the
+# viewBox's 680:322 it renders only 386px and the row carries about 320px of unused
+# slack, centred as 160px above and below. `.em-narrative-canvas svg` already sets
+# `overflow: visible`, so drawing above y=54 is not clipped - it simply uses space the
+# layout was wasting. Nothing lives up there: the copy is in the other grid column and
+# the pin's own padding is above that again.
+#
+# Down is not available in the same way, because the caption sits at y=344 and moving
+# it would desynchronise this beat's caption from the other six during the cross-fade.
+# So the drawing grows upward and keeps its feet where they were.
+BOX_Y, BOX_H = -34.0, 364.0
 sc = BOX_H / h
 BOX_W = w * sc
 BOX_X = 380.0 - BOX_W / 2          # centred on the viewBox, which spans 40..720

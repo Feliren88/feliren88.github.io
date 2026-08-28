@@ -332,16 +332,16 @@ html[data-motion-scene="record"] .em-note-mid{text-anchor:middle!important}
 */
 .em-vf-line{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .em-vf-body{stroke:var(--em-accent);stroke-width:1.55;opacity:.85}
-.em-vf-hair{stroke:var(--em-ink-2);stroke-width:1.2;opacity:.9}
+.em-vf-hair{stroke:var(--em-ink-2);stroke-width:1.5}
 .em-vf-face{stroke:var(--em-ink);stroke-width:1.1}
 /*
   Three weights, and the order is the reading order: the silhouette holds the figure,
   the face is what has to be recognised, the hair is context. Nothing is allowed to
   out-weigh the face except the outline that contains it.
 
-  The hair is lighter than it was, because there are now six strokes there where there
-  was one; at the old weight the head read as hatched. Detail and stroke weight trade
-  against each other, so adding one means taking the other back.
+  The hair is a single stroke, the hairline, so it can carry a normal weight. It was
+  thinned when an interior texture pass put six strokes there instead, and restored
+  when that pass was removed for turning the hair into lobes.
 */
 @media(max-width:1100px){
   /* Fine strokes need enough pixels to survive. Below this width the portrait is

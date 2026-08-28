@@ -344,14 +344,21 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   set `stroke-dasharray` on `.em-vf-line`, or `measurePath()`'s length stops
   describing the path.
 
-  **Detail density is set by two contrast bands, not by lowering one threshold.**
-  Lowering a single threshold *merges* adjacent features into larger blobs, so the
-  contour count peaks around -11 and falls below it (measured: 22 contours at -11, 15
-  at -9, 12 at -7). What the face was missing was finer detail, not darker detail, so
-  a tight band runs alongside the coarse one and picks up the transitions the coarse
-  one steps over. Together they roughly halve the line spacing — 28 contours against
-  15. Detail and stroke weight trade against each other: the hair went from one stroke
-  to six, so its weight came down, or the head reads as hatched.
+  **More lines is not a better likeness, and this was tried.** A second finer contrast
+  band and an interior hair-texture pass together took it from 16 strokes to 35, and
+  the result was worse: most of what a fine band finds on a lit face is shadow
+  boundary, and an outline has no way to say "slightly darker" — a line is a line — so
+  every soft shadow became a hard edge. The eye sockets sank, the cheeks gained rims,
+  and the portrait read as gaunt rather than as him. Tonal detail cannot be added to
+  line art without turning tone into anatomy. Keep the single band at -13 and the
+  hairline alone; if the likeness needs work, fix the crop or the size, not the count.
+
+  **It draws above its own viewBox on purpose.** The canvas sits in a 706px grid row
+  but the SVG is width-constrained, so at 680:322 it renders about 386px and the row
+  carries ~320px of unused slack. `.em-narrative-canvas svg` sets `overflow: visible`,
+  so `BOX_Y` is negative and the portrait grows up into space the layout was wasting.
+  It cannot grow *down*: the caption sits at y=344 and moving it would desynchronise
+  this beat's caption from the other six during the cross-fade.
 
   Two details carry the finish. The contours are emitted as **Catmull-Rom Bézier
   curves, not polylines**: `find_contours` walks the pixel grid and the result is a
