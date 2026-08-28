@@ -397,7 +397,7 @@
         if (oldSketch) oldSketch.remove();
         [
           ['/assets/img/vicky-zero-one-light.webp', 'em-vf-portrait em-vf-portrait-light'],
-          ['/assets/img/vicky-zero-one-dark.webp', 'em-vf-portrait em-vf-portrait-dark']
+          ['/assets/img/vicky-zero-one-dark-v2.webp', 'em-vf-portrait em-vf-portrait-dark']
         ].forEach(function (entry) {
           var portrait = svgEl('image', {
             href: entry[0], x: '215', y: '-65', width: '320', height: '481',
