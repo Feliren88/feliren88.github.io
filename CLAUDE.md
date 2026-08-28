@@ -344,6 +344,15 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   set `stroke-dasharray` on `.em-vf-line`, or `measurePath()`'s length stops
   describing the path.
 
+  Two details carry the finish. The contours are emitted as **Catmull-Rom Bézier
+  curves, not polylines**: `find_contours` walks the pixel grid and the result is a
+  chain of short straight segments whose corners are plainly visible at 2x, which
+  reads as plotted rather than drawn. The spline passes through every original point,
+  so the likeness is unchanged. And the ambient breath is on an **inner** group,
+  `.em-vf-breathe`, because `.em-vf-sketch` is a direct child of the frame and takes
+  `transform: translateY(var(--em-ty))` for its arrival; animating that element would
+  beat the declaration and silently delete the arrival.
+
   **`record` crops its own viewBox** to `40 54 680 322`, and only `record` may. The
   `750 360` box is shared with nine other narrative scenes, four of which position
   animations with `transform-box: view-box`, whose origin moves with it; `record`'s
