@@ -354,8 +354,15 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   aspect the photograph actually shows, and an iris ring is added, because a lens
   alone is a *closed* eye however wide it is drawn.
 
-  Only the silhouette and the hairline are still traced, because those are real edges
-  rather than shadows. Nothing in the stylesheet may set `stroke-dasharray` on
+  **Where tracing is still right: the silhouette, the hairline, and the hair's
+  interior.** Those are real edges. A shadow on a cheek is not one — outlining it
+  invents a rim that is not there — but a ridge in hair is a boundary between one mass
+  of hair and the next, and hair has direction a person sketching it would put down.
+  So the hair carries a few traced sweeps and the face carries none; that split is
+  what makes the drawing rich without making it frightening. Three filters keep the
+  hair to sweeps rather than scribble: long contours only, opened along the silhouette
+  so they do not double the head's edge, and a tortuosity cut, since a sweep is nearly
+  as long as the distance it covers while a scribble is several times longer. Nothing in the stylesheet may set `stroke-dasharray` on
   `.em-vf-line`, or `measurePath()`'s length stops describing the path.
 
   Two details carry the finish. Every path is emitted as a **Catmull-Rom Bézier, not a

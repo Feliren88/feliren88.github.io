@@ -154,8 +154,30 @@ for _, p in contours(hair, 200, 2.0)[:2]:
         if np.hypot(d[:, 0], d[:, 1]).sum() > 40:
             layers['hair'].append((run, False))
 
-# No interior hair texture. Those ridges are tonal too, and as outline they turned the
-# hair into a mass of separate lobes rather than hair.
+"""
+Hair texture: the interior ridges, as a few long sweeps.
+
+This is the one place tone-tracing is still the right tool, and it is worth being
+clear why, because the same technique wrecked the face. A shadow on a cheek is not an
+edge - outlining it invents a rim that is not there. A ridge in hair IS an edge,
+between one mass of hair and the next, and hair genuinely has direction that a person
+sketching it would put down. So it survives here and nowhere else on the head.
+
+Three filters keep it to sweeps rather than scribble. Long contours only; opened along
+the silhouette like the hairline so it does not double the head's edge; and a
+tortuosity cut, since a sweep of hair is nearly as long as the distance it covers
+while a scribble is several times longer. Without the last one the crown keeps a
+zigzag that reads as a mistake.
+"""
+tex = hair & (blur(L, 1.4) - blur(L, 10) < -7)
+tex = morphology.remove_small_objects(tex, 150)
+for _, p_ in contours(tex, 120, 3.4)[:5]:
+    for run in split_open(p_):
+        arr = np.array(run); d = np.diff(arr, axis=0)
+        length = np.hypot(d[:, 0], d[:, 1]).sum()
+        span = np.hypot(*(arr[-1] - arr[0]))
+        if length > 70 and span > 1 and length / span < 1.6:
+            layers['hair'].append((run, False))
 
 """
 The face, from a 68-point landmark fit rather than from tone.
