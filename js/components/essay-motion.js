@@ -485,8 +485,27 @@
     if (anchor && anchor.nextSibling) root.insertBefore(host, anchor.nextSibling); else root.appendChild(host);
   }
 
-  // The pin holds for one screen per beat, so the section has to be as tall as the
-  // story is long. Every height in the stylesheet is a multiple of this.
+  /*
+    The two edges of the interlude are made into scroll snap points, and this marks
+    the far one: whatever the scene was placed in front of. On the homepage that is
+    the intro copy under #about-hero.
+
+    A hard flick that leaves the last beat used to carry on for another screen or
+    two before it stopped, so the reader arrived somewhere in the middle of the next
+    block with the scene already behind them. `scroll-snap-stop: always` in the
+    stylesheet forbids passing either edge in a single gesture, which makes the exit
+    a deliberate step in both directions, and `proximity` leaves the rest of the page
+    scrolling normally. It is the browser's own snapping, so nothing is intercepted
+    and nothing can be trapped.
+
+    Marked from here rather than written into the page because every scene lands in
+    front of something different, and the two that follow a [data-scene-slot] are not
+    the same element as the ten that follow a hero.
+  */
+  if (host.nextElementSibling) host.nextElementSibling.classList.add('em-after');
+
+  // The section has to be as tall as the story is long, and then some: the scroll a
+  // beat is given is what stops a hard flick crossing more than one.
   host.style.setProperty('--em-beats', count);
 
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1230,6 +1249,75 @@
     the drawing performs as soon as its beat arrives rather than rationing itself
     across the scroll it was given.
   */
+
+  /*
+    Landing on the edges of the interlude.
+
+    The stylesheet asks the browser to snap at both edges, and for a gentle scroll it
+    does. But Chrome only snaps when the scroll comes to rest within roughly one
+    viewport of a snap position, and `scroll-snap-stop: always` did not hold a fling
+    in testing: a firm flick out of the last beat dies two or three screens into the
+    next block, with the scene already gone and the reader nowhere in particular.
+
+    So the overshoot is corrected afterwards. This waits for the scroll to stop, and
+    only then, if a single burst carried the reader across an edge, moves them onto
+    it. It listens passively and never calls preventDefault, so it cannot swallow a
+    gesture or hold anyone anywhere: the worst it can do is one unwanted glide, which
+    the next scroll immediately overrides.
+
+    Three conditions keep it from firing when it is not wanted. The burst has to have
+    *started* on the other side of the edge, so a reader already past it scrolls on
+    freely. It has to have finished within CATCH viewports, so dragging the scrollbar
+    to the far end of the page is left alone. And anything already within NEAR_EDGE
+    is left where it is, which is what stops it fighting the browser's own snap when
+    that has already done the job.
+  */
+  // CATCH is measured in viewports past an edge. It has to clear the hardest flick
+  // a reader can throw, which lands three or four screens beyond, while staying well
+  // short of dragging the scrollbar to the end of the page, which is eight or more
+  // and is unambiguously a request to be somewhere else.
+  var SETTLE_MS = 120, CATCH = 6, NEAR_EDGE = 40;
+  var restY = scrollY, burstFrom = null, settleTimer = 0, correcting = false;
+
+  // Not `edges`: that name is already an array of diagram edges in this scope, and a
+  // function declaration loses to the var assignment that follows it.
+  function landings() {
+    var after = document.querySelector('.em-after');
+    if (!after) return null;
+    // Matched to what the stylesheet would snap to, or the two disagree by the
+    // scroll-margin and every native snap is followed by a small correction.
+    var margin = parseFloat(getComputedStyle(after).scrollMarginTop) || 0;
+    return {
+      scene: host.getBoundingClientRect().top + scrollY + host.offsetHeight - innerHeight,
+      after: after.getBoundingClientRect().top + scrollY - margin
+    };
+  }
+
+  function settle() {
+    settleTimer = 0;
+    var from = burstFrom, to = scrollY;
+    burstFrom = null; restY = to;
+    var e = landings();
+    if (from === null || !e) return;
+    var reach = CATCH * innerHeight, target = null;
+    // Left the scene: land on the block below it rather than wherever the fling died.
+    if (from < e.after - NEAR_EDGE && to > e.after + NEAR_EDGE && to < e.after + reach) target = e.after;
+    // Came back up into it: land on the last beat rather than somewhere mid-scene.
+    else if (from > e.scene + NEAR_EDGE && to < e.scene - NEAR_EDGE && to > e.scene - reach) target = e.scene;
+    if (target === null) return;
+    correcting = true;
+    scrollTo({ top: Math.round(target), behavior: 'smooth' });
+    setTimeout(function () { correcting = false; restY = scrollY; }, 700);
+  }
+
+  if (!reduced) {
+    addEventListener('scroll', function () {
+      if (correcting) return;
+      if (burstFrom === null) burstFrom = restY;
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settle, SETTLE_MS);
+    }, { passive: true });
+  }
 
   skip.addEventListener('click', function () {
     host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' });

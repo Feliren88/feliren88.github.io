@@ -288,6 +288,32 @@ Two things follow, and both are worth keeping:
 
 `prefers-reduced-motion` collapses the pin to a static block, as it always did.
 
+**The interlude has two landing edges**, so a hard flick out of the last beat stops at
+the top of whatever follows instead of dying two or three screens into it, and a flick
+back stops on the last beat. `essay-motion.js` marks the element after the scene with
+`.em-after`, since it differs per page (`#about-hero` on the homepage), and the
+stylesheet asks for `scroll-snap-type: y proximity` with `scroll-snap-stop: always` on
+both edges.
+
+**That CSS is not enough on its own and the JS beside it is not decoration.** Chrome
+only snaps when the scroll comes to rest within about one viewport of a snap position,
+and `scroll-snap-stop: always` did not hold a fling in testing — an apparent stop turned
+out to be ordinary proximity snapping. So `settle()` corrects the overshoot after the
+fact: it waits for scrolling to stop and, if one burst carried the reader across an
+edge, glides them onto it. Three guards keep it quiet — the burst must have *started*
+on the far side, must end within `CATCH` viewports, and anything already within
+`NEAR_EDGE` is left alone so it never argues with the browser's own snap.
+
+It listens passively and never calls `preventDefault`, which is the whole point: the
+worst it can do is one unwanted glide that the next scroll overrides. Measured, a flick
+of 1500–5000px lands on the edge, a 8000px throw and a scrollbar drag to the page end
+are left alone, and repeated flicks still reach the bottom of the page.
+
+One trap to avoid when editing it: the helper is called `landings()`, not `edges()`,
+because `edges` is already an array of diagram edges in that scope and the `var`
+assignment silently beats the hoisted function declaration.
+
+
 The eases are anime.js's, solved rather than imported. What the scene needs from
 anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
 oscillator the way `createSpring` does, finds its settling time numerically, and
