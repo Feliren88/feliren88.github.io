@@ -1,39 +1,69 @@
-# Technical skills, rendered on /cv.
+# Skills, rendered on /cv.
 #
-# This mirrors the "Technical skills" section of the CV Vicky actually sends, group
-# for group and item for item. It is the single source for skills on the site: the
-# tiered `tech_stack` cloud that used to sit on the homepage was a second, shorter
-# and drifting list, and was removed rather than kept in sync by hand.
+# The technical groups mirror the "Technical skills" section of the CV Vicky
+# actually sends. This is the single source for skills on the site: the tiered
+# `tech_stack` cloud that used to sit on the homepage was a second, shorter and
+# drifting list, and was removed rather than kept in sync by hand.
 #
 # `items` is deliberately one plain string per group rather than a list. These are a
 # cluster to be read, not a set of chips to be scanned, and prose keeps the reading
 # order the CV chose. `id` is what the filter on /cv matches against.
 #
-# Every entry starts with a capital, which is the one place this departs from the CV:
-# the CV runs them as sentence-case prose, and on screen each cluster reads as a list
-# of named skills instead. `vLLM` and `dbt` are lowercase on purpose and must stay
-# that way when syncing from the CV.
+# Group labels are Title Case. Every entry starts with a capital, which is the one
+# place this departs from the CV: the CV runs them as sentence-case prose, and on
+# screen each cluster reads as a list of named skills instead. `vLLM`, `dbt` and
+# `rasterio` are lowercase on purpose and must stay that way when syncing.
+#
+# The CV's single "Computer vision & geospatial" line is split in two here, because
+# the page has room the CV does not and they are two toolchains. Both lists come from
+# work recorded elsewhere in the repo rather than from memory: the flood and mining
+# segmentation papers, the SEA-VL deduplication pipeline, and the face-biometric
+# stack. Grep the `tech_stack` blocks in _data/usecases.yml before adding to either.
+#
+# The last four groups are the non-technical half. Every line is a capability the CV
+# already evidences somewhere, so nothing here is a claim the record does not carry:
+# peer review and talks, teaching and judging, audit and governance work, languages.
 
 - id: safety
-  group: 'AI safety & reliability'
+  group: 'AI Safety & Reliability'
   items: 'Conformal prediction, Uncertainty quantification, Selective prediction / abstention, Calibration, Distribution-shift robustness, Linear probing, Activation steering, Red-teaming, LLM/VLM evaluation, SHAP'
 
 - id: deep-learning
-  group: 'Deep learning & multimodal AI'
-  items: 'PyTorch, TensorFlow, Vision-Language Models, Diffusion models (SDXL), Knowledge distillation, PEFT, DeepSpeed'
+  group: 'Deep Learning & Multimodal AI'
+  items: 'PyTorch, PyTorch Lightning, TensorFlow, Vision-Language Models, Diffusion models (SDXL), Knowledge distillation, PEFT, DeepSpeed'
 
 - id: generative
   group: 'Generative AI & LLMOps'
   items: 'LangChain, LangGraph, RAG, vLLM, Vector databases, Agentic workflows, LangSmith, MLflow, Weights & Biases'
 
-- id: vision
-  group: 'Computer vision & geospatial'
-  items: 'OpenCV, Semantic segmentation, Multispectral imaging, Geospatial foundation models (Prithvi), Google Earth Engine'
+- id: computer-vision
+  group: 'Computer Vision'
+  items: 'OpenCV, Semantic segmentation, U-Net architectures, ConvNeXt, MobileNet, CLIP-ViT, Nomic Embed Vision, Image deduplication, Intel OpenVINO'
+
+- id: geospatial
+  group: 'Geospatial'
+  items: 'Google Earth Engine, rasterio, GDAL, Sentinel-1 / Sentinel-2, PlanetScope, GeoTIFF, Multispectral imaging, Spectral indices (NDWI, MNDWI), Digital elevation models, Geospatial foundation models'
 
 - id: production
-  group: 'Production ML & data engineering'
+  group: 'Production ML & Data Engineering'
   items: 'GCP (Vertex AI, BigQuery), AWS (SageMaker, EC2, S3), Kubernetes, Docker, Distributed inference, Apache Spark, dbt, FastAPI'
 
 - id: foundations
-  group: 'Languages & foundations'
+  group: 'Languages & Foundations'
   items: 'Python, Scala, SQL, R, Git, Linux/Unix'
+
+- id: research
+  group: 'Research & Writing'
+  items: 'Peer review, Experiment design, Reproducibility practice, Scientific writing, Benchmark and dataset design, Conference presentation, Writing for non-specialist readers, Open science'
+
+- id: leadership
+  group: 'Leadership & Mentorship'
+  items: 'Capstone advising, Guest lecturing, Technical judging, Code review standards, Setting an engineering baseline, Working as the sole technical hire, Distributed research collaboration'
+
+- id: governance
+  group: 'Governance & Assurance'
+  items: 'AI governance frameworks, EU AI Act, Model auditability, Regulatory explainability, Responsible data management, Stakeholder briefing, Working under bank and government audit'
+
+- id: languages
+  group: 'Spoken Languages'
+  items: 'English, Indonesian'

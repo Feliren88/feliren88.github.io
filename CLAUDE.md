@@ -688,21 +688,30 @@ Use `.note-block` + `.note-badge` instead of one-off alert styles:
 .t-meta          /* 0.78rem muted — dates, venues, supplementary */
 ```
 
-### Technical skills (`_data/skills.yml`)
+### Skills (`_data/skills.yml`)
 There is **one** skills list on the site and it lives on `/cv`. The tiered
 `tech_stack` tag cloud that used to sit on the homepage was a second, shorter list
 that drifted from the real CV, so it and its `.tech-tag` styles were deleted rather
 than kept in sync by hand. Do not reintroduce a summary version somewhere else.
 
-`_data/skills.yml` mirrors the *Technical skills* section of the CV Vicky actually
-sends, group for group and item for item. Update it from that document, not from
-memory:
+`_data/skills.yml` holds eleven groups. The first seven are technical and follow the
+*Technical skills* section of the CV Vicky actually sends; update those from that
+document, not from memory. The CV's single "Computer vision & geospatial" line is
+split in two, because the page has room the CV does not and they are two toolchains;
+both lists are drawn from the `tech_stack` blocks in `_data/usecases.yml`, so grep
+there before adding to either. The last four are the non-technical half — research
+and writing, leadership and mentorship, governance and assurance, spoken languages —
+and every line is a capability the CV already evidences somewhere.
 
 ```yaml
 - id: safety                       # what the filter matches on
-  group: 'AI safety & reliability' # also the filter's own label
-  items: 'Conformal prediction, uncertainty quantification, …'
+  group: 'AI Safety & Reliability' # Title Case; also the filter's own label
+  items: 'Conformal prediction, Uncertainty quantification, …'
 ```
+
+Group labels are Title Case and every entry starts with a capital, which is the one
+place this departs from the CV's sentence-case prose. `vLLM`, `dbt` and `rasterio`
+are lowercase on purpose.
 
 `items` is one plain string per group, not a list. These are clusters to be read, so
 prose keeps the order the CV chose; chopping them into chips doubles the ink and

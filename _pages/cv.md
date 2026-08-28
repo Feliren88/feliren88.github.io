@@ -16,7 +16,7 @@ hide_title: true
 
   <nav class="cv-nav" aria-label="CV sections"><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#research-service">Research & service</a><a href="#recognition">Recognition</a></nav>
 
-  <section class="cv-section" id="skills"><header><span>01</span><h2>Technical skills</h2></header><div>
+  <section class="cv-section" id="skills"><header><span>01</span><h2>Skills</h2></header><div>
     <div class="filter-bar" role="group" aria-label="Filter skills by group">
       <button type="button" class="filter-pill is-active" data-filter="all">All</button>
       {% for group in site.data.skills %}<button type="button" class="filter-pill" data-filter="{{ group.id }}">{{ group.group }}</button>{% endfor %}
