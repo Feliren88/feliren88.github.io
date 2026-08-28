@@ -317,65 +317,23 @@ html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em
 html[data-motion-scene="record"] .em-note-mid{text-anchor:middle!important}
 
 /*
-  The traced portrait on `record`'s opening beat.
-
-  Every path is a stroke so the act can draw it on; `measurePath()` writes each one's
-  own `stroke-dasharray` and the act walks `stroke-dashoffset` down from it. Nothing
-  here may set `stroke-dasharray`, or the drawing would inherit a pattern and the
-  measured length would no longer describe it.
-
-  Three weights carry the reading order rather than three colours: the body is the
-  faintest and widest, the hairline sits between, and the face is the brightest and
-  finest, because the face is what has to be recognisable at 300px wide. All three
-  resolve through the scene's own tokens, so the sketch follows the light and dark
-  themes like everything else.
+  The opening portrait grows out from the copper origin beside Vicky's hands.
+  Light and dark themes use separate graphite renders; inverting the light portrait
+  made the face look like a photographic negative. The radial clip turns one mark
+  into a person and then into the surrounding field of ideas and systems.
 */
-.em-vf-line{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .em-vf-portrait{
-  opacity:0;clip-path:inset(0 0 100% 0);
-  filter:invert(.9) contrast(.86) brightness(1.18);
+  opacity:0;clip-path:circle(0 at 35% 84%);
   transform-origin:375px 220px
 }
-html[data-theme="light"] .em-vf-portrait{filter:contrast(.88) brightness(.76)}
-.em-vf-pencil{opacity:0;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.28))}
-.em-vf-pencil-body{fill:#d8a24f;stroke:var(--em-ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
-.em-vf-pencil-tip{fill:var(--em-ink);stroke:var(--em-ink);stroke-width:1;vector-effect:non-scaling-stroke}
-.em-vf-pencil-band{fill:none;stroke:var(--em-accent);stroke-width:3;vector-effect:non-scaling-stroke}
-.em-vf-body{stroke:var(--em-accent);stroke-width:1.55;opacity:.85}
-.em-vf-hair{stroke:var(--em-ink-2);stroke-width:1.5}
-.em-vf-face{stroke:var(--em-ink);stroke-width:1.1}
-/*
-  Three weights, and the order is the reading order: the silhouette holds the figure,
-  the face is what has to be recognised, the hair is context. Nothing is allowed to
-  out-weigh the face except the outline that contains it.
-
-  The hair is a single stroke, the hairline, so it can carry a normal weight. It was
-  thinned when an interior texture pass put six strokes there instead, and restored
-  when that pass was removed for turning the hair into lobes.
-*/
-@media(max-width:1100px){
-  /* Fine strokes need enough pixels to survive. Below this width the portrait is
-     roughly half the size, so every weight goes up rather than thinning away. */
-  .em-vf-body{stroke-width:1.75}.em-vf-face{stroke-width:1.25}
-  .em-vf-hair{stroke-width:1.35}
-}
-/*
-  A breath, once the sketch is drawn. Every other beat in this scene has some ambient
-  loop and without one the portrait sits dead on the page for as long as the reader
-  stays. It is deliberately below the threshold of being watched: two pixels over six
-  seconds, which registers as the drawing being alive rather than as movement.
-
-  It is on an inner group on purpose. `.em-vf-sketch` is a direct child of the frame
-  and the stylesheet gives every such child `transform: translateY(var(--em-ty))` for
-  its arrival; an animation on that element would beat the declaration and silently
-  delete the arrival. The act writes `stroke-dashoffset` and nothing else, so the
-  transform here cannot collide with it either.
-*/
-html[data-motion-scene="record"] .em-deep-record-0.is-active .em-vf-breathe{
-  transform-box:view-box;transform-origin:375px 200px;
-  animation:em-vf-breathe 6s ease-in-out infinite
-}
-@keyframes em-vf-breathe{50%{transform:translateY(-2px) scale(1.004)}}
+.em-vf-portrait-light{display:none}
+html[data-theme="light"] .em-vf-portrait-light{display:block}
+html[data-theme="light"] .em-vf-portrait-dark{display:none}
+.em-vf-origin{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}
+.em-vf-origin-aura{fill:color-mix(in srgb,var(--em-accent) 14%,transparent)}
+.em-vf-origin-ring{fill:none;stroke:var(--em-accent);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.em-vf-origin-core{fill:#f2a45e;filter:drop-shadow(0 0 5px color-mix(in srgb,#f2a45e 76%,transparent))}
+.em-vf-origin-rays{fill:none;stroke:#f2a45e;stroke-width:1;stroke-linecap:round;vector-effect:non-scaling-stroke}
 
 /*
   `record` runs its column wider than the other scenes. Its drawings are the widest
@@ -415,7 +373,7 @@ html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[da
   the fading calendar entry, which predate the figure work and were never covered.
 */
 @media(prefers-reduced-motion:reduce){html[data-motion-scene] .em-story-frame,html[data-motion-scene] .em-story-frame *{animation:none!important;transition:none!important}}
-@media(prefers-reduced-motion:reduce){.em-vf-portrait{opacity:.92!important;clip-path:none!important}.em-vf-sketch{opacity:.42!important}.em-vf-pencil{display:none!important}}
+@media(prefers-reduced-motion:reduce){.em-vf-portrait{opacity:.96!important;clip-path:none!important}.em-vf-origin{display:none!important}}
 @media(prefers-reduced-motion:reduce){.em-track{display:none}.em-story{height:auto}.em-pin{position:relative;height:auto;min-height:0}.em-story{--em-p:1!important}.em-skip{display:none}}
 
 /* Shared editorial eyebrow across the twelve featured writings. */

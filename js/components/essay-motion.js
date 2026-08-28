@@ -393,16 +393,21 @@
       var frame = svgEl('g', { class: 'em-story-frame em-deep-' + sceneKey + '-' + index });
       frame.innerHTML = markup;
       if (sceneKey === 'record' && index === 0) {
-        var portrait = svgEl('image', {
-          href: '/assets/img/vicky-pencil-portrait.webp',
-          x: '238', y: '22', width: '274', height: '412',
-          preserveAspectRatio: 'xMidYMid meet',
-          class: 'em-vf-portrait'
+        var oldSketch = frame.querySelector('.em-vf-sketch');
+        if (oldSketch) oldSketch.remove();
+        [
+          ['/assets/img/vicky-zero-one-light.webp', 'em-vf-portrait em-vf-portrait-light'],
+          ['/assets/img/vicky-zero-one-dark.webp', 'em-vf-portrait em-vf-portrait-dark']
+        ].forEach(function (entry) {
+          var portrait = svgEl('image', {
+            href: entry[0], x: '215', y: '-65', width: '320', height: '481',
+            preserveAspectRatio: 'xMidYMid meet', class: entry[1]
+          });
+          frame.insertBefore(portrait, frame.firstChild);
         });
-        var pencil = svgEl('g', { class: 'em-vf-pencil', 'aria-hidden': 'true' });
-        pencil.innerHTML = '<path class="em-vf-pencil-body" d="M-20-4h31l9 4-9 4h-31z"/><path class="em-vf-pencil-tip" d="M20 0l-9-4v8z"/><path class="em-vf-pencil-band" d="M-14-4v8"/>';
-        frame.insertBefore(portrait, frame.firstChild);
-        frame.appendChild(pencil);
+        var origin = svgEl('g', { class: 'em-vf-origin', 'aria-hidden': 'true' });
+        origin.innerHTML = '<circle class="em-vf-origin-aura" cx="326" cy="339" r="18"/><circle class="em-vf-origin-ring" cx="326" cy="339" r="8"/><circle class="em-vf-origin-core" cx="326" cy="339" r="3"/><path class="em-vf-origin-rays" d="M326 315v12M326 351v12M302 339h12M338 339h12M309 322l9 9M334 347l9 9M343 322l-9 9M318 347l-9 9"/>';
+        frame.appendChild(origin);
       }
       svg.appendChild(frame);
       return frame;
@@ -862,54 +867,25 @@
      evidence in the drawing instead of replaying the older chronological story. */
   if (key === 'record') ACTS = {
     /*
-      The opening beat draws Vicky rather than restating the stat strip.
-
-      It used to show four cards reading 7 papers, 1 patent, 12 awards and 5+ years.
-      Every one of those numbers is already in the stat strip immediately above the
-      scene, so the beat opened by repeating what the reader had just read. The
-      portrait is traced from assets/img/profile.webp; see the note in
-      _includes/ for how it was produced.
-
-      The act is the sketch drawing itself, in the order a person would draw it:
-      the head and shoulders first, then the hairline, then the face, feature by
-      feature. Each path is a stroke with its own dash length, so drawTo() walks it
-      on exactly as it does the arrows elsewhere in the scene.
-    */
+      The opening beat starts with one live mark beside Vicky's hands. A radial
+      reveal expands from that origin through the portrait and into the surrounding
+      field, so the drawing itself carries the zero-to-one idea. The old traced
+      silhouette is removed when the frame is built; leaving it behind the finished
+      portrait looked like a registration error and made the face harder to read.
+*/
     0: function (frame) {
-      function pen(node) { return { node: node, length: measurePath(node) }; }
-      var body = all(frame, '.em-vf-body').map(pen);
-      var hair = all(frame, '.em-vf-hair').map(pen);
-      var portrait = has(frame, '.em-vf-portrait');
-      var sketch = has(frame, '.em-vf-sketch');
-      var pencil = has(frame, '.em-vf-pencil');
-      // Features are drawn in reading order down the face rather than in the order
-      // the tracer happened to emit them, or the mouth can appear before the eyes.
-      var face = all(frame, '.em-vf-face').map(pen).sort(function (a, b) {
-        var ab = a.node.getBBox(), bb = b.node.getBBox();
-        return (ab.y + ab.height / 2) - (bb.y + bb.height / 2);
-      });
-      // A stagger that leaves each stroke enough of the beat to be seen being drawn.
-      function walk(list, from, to, q) {
-        var n = list.length || 1, hold = (to - from) / (n + 2);
-        list.forEach(function (entry, i) {
-          drawTo(entry, span(q, from + i * hold, from + i * hold + hold * 3));
-        });
-      }
+      var portraits = all(frame, '.em-vf-portrait');
+      var origin = has(frame, '.em-vf-origin');
       return function (q) {
-        walk(body, 0, .34, q);
-        walk(hair, .22, .46, q);
-        walk(face, .34, .96, q);
-        var finish = span(q, .12, .98);
-        if (portrait) {
-          portrait.style.opacity = (finish * .92).toFixed(3);
-          portrait.style.clipPath = 'inset(0 0 ' + ((1 - finish) * 100).toFixed(2) + '% 0)';
-        }
-        if (sketch) sketch.style.opacity = (1 - finish * .58).toFixed(3);
-        if (pencil) {
-          var x = 385 + Math.sin(finish * Math.PI * 7) * 112;
-          var y = 42 + finish * 348;
-          pencil.style.opacity = (Math.sin(finish * Math.PI) * 1.15).toFixed(3);
-          pencil.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(-18deg)';
+        var spark = span(q, 0, .2);
+        var finish = span(q, .1, .94);
+        portraits.forEach(function (portrait) {
+          portrait.style.opacity = (finish * .96).toFixed(3);
+          portrait.style.clipPath = 'circle(' + (finish * 138).toFixed(2) + '% at 35% 84%)';
+        });
+        if (origin) {
+          origin.style.opacity = (spark * (1 - span(q, .7, 1))).toFixed(3);
+          origin.style.transform = 'scale(' + (.65 + ARRIVE(spark) * .35).toFixed(3) + ')';
         }
       };
     },
