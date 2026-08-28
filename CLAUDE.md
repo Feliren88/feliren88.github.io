@@ -109,7 +109,7 @@ feliren88.github.io/
 │   ├── solve_games.py          # Solves every 2x2 game on /game-theory/ and regenerates _data/game_theory.yml
 │   ├── games.json              # Source payoff matrices and copy for solve_games.py
 │   ├── verify_stoic_quotes.py  # Checks every quote in _data/stoic.yml is verbatim in its public-domain source
-│   ├── trace_portrait.py       # Traces assets/img/profile.webp into the line-art portrait on the record scene's opening beat; `--write` patches it into essay-motion.js
+│   ├── trace_portrait.py       # Draws the line-art portrait on the record scene's opening beat from assets/img/profile.webp: silhouette traced, face from a 68-point landmark fit. `--write` patches it into essay-motion.js. Needs opencv-contrib-python; caches its model in scripts/.portrait-cache/
 │   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (WebP, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
 ├── _includes/
 │   ├── principles-icons.html  # SVG <symbol> sprite for /principles/ (83 icons) — see "Icon sprite" below
@@ -330,44 +330,51 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   while already dissolving, so the payoff was never seen whole. On the clock the
   hold is however long the reader stays, so only the performance needs budgeting.
 
-  **The opening beat is a traced portrait, not a stat card.** It used to show four
+  **The opening beat is a drawn portrait, not a stat card.** It used to show four
   cards reading 7 papers, 1 patent, 12 awards and 5+ years, every one of which is in
   the stat strip immediately above the scene, so the scene opened by repeating what
-  the reader had just read. `scripts/trace_portrait.py` traces
-  `assets/img/profile.webp` into line art and `--write` patches it in; re-run it and
-  look at the result if the photo is ever replaced, because the thresholds are tuned
-  to this image. Two things are load-bearing: the portrait is **strokes rather than
-  fills**, because the act draws it on with `stroke-dashoffset` and a filled
-  posterisation cannot be animated at all; and the tracer is **region-aware**, tracing
-  the face on local contrast and the shirt on strong edges only, because one global
-  threshold either loses the eyes or copies the batik. Nothing in the stylesheet may
-  set `stroke-dasharray` on `.em-vf-line`, or `measurePath()`'s length stops
-  describing the path.
+  the reader had just read. `scripts/trace_portrait.py` builds it from
+  `assets/img/profile.webp` and `--write` patches it in; it needs
+  `opencv-contrib-python` and downloads a landmark model into
+  `scripts/.portrait-cache/` on first run.
 
-  **More lines is not a better likeness, and this was tried.** A second finer contrast
-  band and an interior hair-texture pass together took it from 16 strokes to 35, and
-  the result was worse: most of what a fine band finds on a lit face is shadow
-  boundary, and an outline has no way to say "slightly darker" — a line is a line — so
-  every soft shadow became a hard edge. The eye sockets sank, the cheeks gained rims,
-  and the portrait read as gaunt rather than as him. Tonal detail cannot be added to
-  line art without turning tone into anatomy. Keep the single band at -13 and the
-  hairline alone; if the likeness needs work, fix the crop or the size, not the count.
+  **The face is drawn from landmarks. Do not go back to tracing it.** Contour tracing
+  finds the boundary of a dark region, so an eye becomes a closed loop around its
+  shadow — on screen that is a hollow socket, not an eye — a nose becomes a ring, and
+  a cheek shadow becomes a rim. Two rounds of threshold tuning produced faces that
+  were accurate and frightening, because outline drawing cannot say "slightly darker":
+  a line is a line, so every soft shadow becomes hard anatomy. Adding *more* lines
+  makes it worse, not better.
 
-  **It draws above its own viewBox on purpose.** The canvas sits in a 706px grid row
-  but the SVG is width-constrained, so at 680:322 it renders about 386px and the row
-  carries ~320px of unused slack. `.em-narrative-canvas svg` sets `overflow: visible`,
-  so `BOX_Y` is negative and the portrait grows up into space the layout was wasting.
-  It cannot grow *down*: the caption sits at y=344 and moving it would desynchronise
-  this beat's caption from the other six during the cross-fade.
+  A person sketching a face puts down one stroke per feature. So the features come
+  from a 68-point fit and each is emitted as the stroke a person would draw: the jaw
+  as one line, a brow as one arc, an eye as an almond, the nose base only, the lip
+  seam. Twelve strokes for the whole portrait. Two corrections are deliberate — the
+  fitter under-opens lids, so the eye lens is stretched about its centre line to the
+  aspect the photograph actually shows, and an iris ring is added, because a lens
+  alone is a *closed* eye however wide it is drawn.
 
-  Two details carry the finish. The contours are emitted as **Catmull-Rom Bézier
-  curves, not polylines**: `find_contours` walks the pixel grid and the result is a
-  chain of short straight segments whose corners are plainly visible at 2x, which
-  reads as plotted rather than drawn. The spline passes through every original point,
-  so the likeness is unchanged. And the ambient breath is on an **inner** group,
-  `.em-vf-breathe`, because `.em-vf-sketch` is a direct child of the frame and takes
-  `transform: translateY(var(--em-ty))` for its arrival; animating that element would
-  beat the declaration and silently delete the arrival.
+  Only the silhouette and the hairline are still traced, because those are real edges
+  rather than shadows. Nothing in the stylesheet may set `stroke-dasharray` on
+  `.em-vf-line`, or `measurePath()`'s length stops describing the path.
+
+  Two details carry the finish. Every path is emitted as a **Catmull-Rom Bézier, not a
+  polyline**: `find_contours` walks the pixel grid and the raw result is short straight
+  segments whose corners are plainly visible at 2x, which reads as plotted rather than
+  drawn. The spline passes through every original point, so nothing moves. And the
+  ambient breath is on an **inner** group, `.em-vf-breathe`, because `.em-vf-sketch` is
+  a direct child of the frame and takes `transform: translateY(var(--em-ty))` for its
+  arrival; animating that element would beat the declaration and delete the arrival.
+
+  **It draws outside its own viewBox on purpose, and its position is set by the copy.**
+  The canvas sits in a 706px grid row but the SVG is width-constrained, so at 680:322
+  it renders about 386px and the row carries ~320px of unused slack;
+  `.em-narrative-canvas svg` sets `overflow: visible`, so the portrait uses it. The
+  vertical placement lines the drawing's centre up with the centre of the headline
+  column beside it, because the two are read as a pair. That is also why this beat
+  alone sets `CAPTION_Y` instead of the 344 the other six use — checked that the two
+  captions never overlap through the handover, since `--em-cap` zeroes each before
+  the other appears.
 
   **`record` crops its own viewBox** to `40 54 680 322`, and only `record` may. The
   `750 360` box is shared with nine other narrative scenes, four of which position

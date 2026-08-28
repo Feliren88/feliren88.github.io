@@ -1,34 +1,45 @@
 #!/usr/bin/env python3
-"""Trace assets/img/profile.webp into the line-art portrait on the record scene.
+"""Draw the line-art portrait on the record scene from assets/img/profile.webp.
 
-    python3 scripts/trace_portrait.py          # print the markup
+    python3 scripts/trace_portrait.py           # print the markup
     python3 scripts/trace_portrait.py --write   # patch it into essay-motion.js
 
-Requires: pillow, numpy, scikit-image, scipy.
+Requires: pillow, numpy, scikit-image, scipy, opencv-contrib-python. The 68-point
+landmark model downloads on first run into scripts/.portrait-cache/ (gitignored).
 
 The opening beat of the `record` scene used to show four cards reading 7 papers,
 1 patent, 12 awards and 5+ years. Every one of those numbers already appears in the
 stat strip immediately above the scene, so the beat opened by repeating what the
 reader had just read. It draws Vicky instead.
 
-Two things about the output are deliberate and easy to undo by accident:
+THE FACE IS DRAWN FROM LANDMARKS, NOT TRACED FROM SHADOW.
 
-STROKES, NOT FILLS. The scene animates with stroke-dashoffset, so the portrait has
-to be strokes for the act to draw it on. A filled posterisation was tried first and
-could not be animated at all; worse, it turned the lit face into a dark void, because
-the shadowed side of the face crossed the tone threshold before the hair did.
+This is the whole point and it was learned the hard way. Contour tracing finds the
+boundary of a dark region, so an eye becomes a closed loop around its shadow, which
+on screen is not an eye but a hollow socket; a nose becomes a ring; a cheek shadow
+becomes a rim. Two rounds of tuning thresholds produced faces that were accurate and
+frightening, because outline drawing has no way to say "slightly darker" - a line is
+a line - so every soft shadow it finds becomes hard anatomy.
 
-REGION-AWARE THRESHOLDS. The face is traced on local contrast so the eyes, nostrils
-and mouth survive; the shirt is traced on strong edges only so the batik does not
-drown the drawing. One global threshold either loses the face or copies the fabric.
+A person sketching a face does not outline shadows. They put down one stroke per
+feature: an almond for an eye, a single arc for a brow, a couple of marks for the
+nose, a curve for the lip seam, one line for the jaw. So the features here come from
+a 68-point landmark fit, and each is emitted as the stroke a person would draw. That
+is ten strokes for the whole portrait, and it reads as a face because it is built
+like one.
 
-The result is checked by eye, not by assertion. Re-run it after replacing the photo
-and look at the preview before committing: the tuning here is specific to this image.
+Only the parts where a contour IS the right answer are still traced: the silhouette
+of the head and shoulders, and the hairline. Those are real edges, not shadows.
+
+The result is checked by eye. Re-run it after replacing the photo and look at the
+output before committing.
 """
 import json
+import urllib.request
 import numpy as np
+import cv2
 from PIL import Image, ImageFilter
-from skimage import measure, filters, morphology
+from skimage import measure, morphology
 
 SRC = 'assets/img/profile.webp'
 import sys, os
@@ -146,78 +157,111 @@ for _, p in contours(hair, 200, 2.0)[:2]:
 # No interior hair texture. Those ridges are tonal too, and as outline they turned the
 # hair into a mass of separate lobes rather than hair.
 
-# Face features: local contrast inside the face box only.
-face = np.zeros_like(sub); face[FACE_T:FACE_B, FACE_L:FACE_R] = True
-face &= sub & ~hair
-# One contrast band, at the level that reads as a face rather than a skull.
-#
-# A second finer band was tried, to bring in the crease beside the smile and the fold
-# of the ear, and it does roughly double the line count. But most of what it finds on
-# a lit face is shadow boundary, and drawn as outline every one of those becomes a
-# hollow: the eye sockets sank, the cheeks gained rims, and the portrait read as
-# gaunt. Outline drawing has no way to say "this is slightly darker" - a line is a
-# line - so tonal detail cannot be added to it without turning tone into anatomy.
-#
-# The threshold stays where only real edges survive. Fewer, truer lines.
-local = blur(L, 1.6) - blur(L, 14)
-feat = morphology.binary_closing(
-    morphology.remove_small_objects(face & (local < -13), 60), morphology.disk(2))
-layers['features'] = [(p, True) for _, p in contours(feat, 45, 1.3)[:14]]
+"""
+The face, from a 68-point landmark fit rather than from tone.
 
-# Collar and shoulder structure: strong edges only, no fabric pattern. Also opened
-# where it hugs the silhouette, for the same doubling reason as the hair.
-edge = filters.sobel(blur(L, 3.0))
-# Collar and shoulders only, not the whole shirt. Lower down, the strongest edges are
-# the batik itself, and those come out as short arcs detached from every other line in
-# the drawing: at this size they read as specks dropped beside the figure. The band
-# below the chin and above the crop holds the collar and the shoulder seam, which are
-# structure worth drawing.
-body = sub.copy(); body[:HAIR_BOT] = False
-body[HAIR_BOT + int((h - HAIR_BOT) * 0.58):] = False
-strong = body & (edge > np.percentile(edge[body], 86))
-strong = morphology.binary_closing(morphology.remove_small_objects(strong, 130), morphology.disk(3))
-layers['shirt'] = []
-for _, p in contours(strong, 90, 2.2)[:10]:
-    for run in split_open(p):
-        d = np.diff(np.array(run), axis=0)
-        # Long runs only. The collar and the shoulder seam are worth drawing; the
-        # short isolated arcs the same threshold finds in the batik are not, and at
-        # this size they read as specks floating beside the figure rather than cloth.
-        if np.hypot(d[:, 0], d[:, 1]).sum() > 60:
-            layers['shirt'].append((run, False))
+`face` is no longer a mask at all. Each entry below is one stroke a person drawing
+this face would actually make, in the iBUG-68 index order the fitter returns:
 
-# Batik, as texture rather than transcription. Kept only where it is large and well
-# inside the shirt, so motifs do not float against the silhouette edge, and thinned to
-# the few biggest so the shirt reads as patterned without being copied.
-inner = ndimage.distance_transform_edt(body) > 16
-motif = morphology.binary_opening(
-    morphology.remove_small_objects(body & inner & (blur(S, 2) > 92), 420), morphology.disk(3))
-layers['batik'] = [(p, True) for _, p in contours(motif, 120, 3.2)[:6]]
+    2..14    the jaw, from below one ear round the chin to the other. Without it the
+             lower face has no edge of its own and reads as an empty balloon inside
+             the hair silhouette.
+    17..21   one brow, 22..26 the other. One arc each, not an outline of the hair.
+    36..41   an eye as a closed almond, 42..47 the other. He is smiling broadly, so
+             these come out as thin lenses, which is what a smiling eye looks like.
+    31..35   the base of the nose only. Minimal portraits leave the bridge out; drawn,
+             it becomes a line down the middle of the face and reads as a seam.
+    48,60..64,54  the seam between the lips, which is the line that carries a smile.
+    48,59..55,54  the lower lip under it.
 
-# Only these two layers are used. The shirt band comes out empty at this crop and a
-# single batik motif reads as noise rather than texture, so both are dropped.
-# Neither cloth layer survives review. The batik yields one motif, and the collar band
-# yields two short arcs that sit detached from every other line in the drawing and read
-# as specks dropped beside the figure. What they were meant to convey - that there is a
-# collar and a shoulder - the silhouette and the jaw and neck lines already carry.
-layers.pop('batik', None)
-layers.pop('shirt', None)
+The eye rings are the only closed paths. Everything else is open, because a person
+lifts the pen at the end of a brow rather than drawing back along it.
+"""
+CASCADE = ('https://raw.githubusercontent.com/opencv/opencv/4.x/data/haarcascades/'
+           'haarcascade_frontalface_alt2.xml')
+LBF = ('https://raw.githubusercontent.com/kurnianggoro/GSOC2017/master/data/lbfmodel.yaml')
+CACHE = os.path.join(ROOT, 'scripts', '.portrait-cache')
+os.makedirs(CACHE, exist_ok=True)
+
+def cached(url, name):
+    path = os.path.join(CACHE, name)
+    if not os.path.exists(path):
+        print(f'  fetching {name}...', file=sys.stderr)
+        urllib.request.urlretrieve(url, path)
+    return path
+
+bgr = cv2.imread(SRC, cv2.IMREAD_COLOR)
+gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+boxes = cv2.CascadeClassifier(cached(CASCADE, 'haarcascade.xml')).detectMultiScale(
+    gray, 1.1, 5, minSize=(120, 120))
+if not len(boxes):
+    raise SystemExit('no face found in ' + SRC)
+fitter = cv2.face.createFacemarkLBF()
+fitter.loadModel(cached(LBF, 'lbfmodel.yaml'))
+ok, marks = fitter.fit(gray, np.array(boxes))
+if not ok:
+    raise SystemExit('landmark fit failed')
+P = np.asarray(marks[0]).reshape(-1, 2) - np.array([x0, y0])   # into crop coordinates
+
+def stroke(idx, close=False):
+    return ([(float(P[i][0]), float(P[i][1])) for i in idx], close)
+
+def eye(idx):
+    """An eye as a lens plus an iris, which is what makes it read as an eye.
+
+    Two corrections to the raw fit. It under-opens lids - these come back at an
+    aspect of 0.21 and 0.26 where an open eye is nearer 0.35 - so the lens is
+    stretched about its own centre line until it is, which matches the photograph.
+    And the iris is added, because a lens on its own is a closed eye however wide it
+    is drawn, and a face with two closed eyes is asleep rather than smiling.
+
+    The iris is a ring rather than a dot so the act can draw it on like every other
+    stroke; at this size, with the lid crossing it, it reads as a pupil.
+    """
+    pts = np.array([P[i] for i in idx], float)
+    cy = pts[:, 1].mean()
+    OPEN = 1.45
+    pts[:, 1] = cy + (pts[:, 1] - cy) * OPEN
+    lens = [(float(x), float(y)) for x, y in pts]
+    cx = pts[:, 0].mean()
+    r = min((pts[:, 1].max() - pts[:, 1].min()) * 0.46,
+            (pts[:, 0].max() - pts[:, 0].min()) * 0.17)
+    ring = [(float(cx + r * np.cos(t)), float(cy + r * np.sin(t)))
+            for t in np.linspace(0, 2 * np.pi, 10, endpoint=False)]
+    return [(lens, True), (ring, True)]
+
+layers['features'] = [
+    stroke(range(2, 15)),                       # jaw and chin
+    stroke(range(17, 22)),                      # brow
+    stroke(range(22, 27)),                      # brow
+    *eye(range(36, 42)),                        # eye: lens + iris
+    *eye(range(42, 48)),                        # eye: lens + iris
+    stroke(range(31, 36)),                      # nose base
+    stroke([48, 60, 61, 62, 63, 64, 54]),       # lip seam
+    stroke([48, 59, 58, 57, 56, 55, 54]),       # lower lip
+]
+
+# No cloth layer. Traced, the batik gave one motif and the collar gave two short arcs
+# detached from every other line, reading as specks dropped beside the figure. What
+# they were meant to convey - that there is a collar and a shoulder - the silhouette
+# and the jaw already carry.
 
 # The scene viewBox is "40 54 680 322" and the caption sits at y=344, so the portrait
 # gets y 66..324. Height is the binding constraint; the width follows the crop.
-# The portrait is allowed out of the top of the viewBox.
+# The portrait is allowed out of both ends of the viewBox.
 #
 # The canvas sits in a grid row 706px tall but the SVG is width-constrained, so at the
 # viewBox's 680:322 it renders only 386px and the row carries about 320px of unused
-# slack, centred as 160px above and below. `.em-narrative-canvas svg` already sets
-# `overflow: visible`, so drawing above y=54 is not clipped - it simply uses space the
-# layout was wasting. Nothing lives up there: the copy is in the other grid column and
-# the pin's own padding is above that again.
+# slack. `.em-narrative-canvas svg` already sets `overflow: visible`, so drawing past
+# either edge is not clipped - it simply uses space the layout was wasting.
 #
-# Down is not available in the same way, because the caption sits at y=344 and moving
-# it would desynchronise this beat's caption from the other six during the cross-fade.
-# So the drawing grows upward and keeps its feet where they were.
-BOX_Y, BOX_H = -34.0, 364.0
+# The vertical position is set by the copy beside it rather than by the viewBox: the
+# portrait's centre lines up with the centre of the headline column, because the two
+# are read as a pair and a drawing sitting higher than the words it belongs to looks
+# unmoored. That puts it low enough that the caption has to come down with it, which
+# is why CAPTION_Y is here and not the 344 the other six beats use.
+BOX_Y, BOX_H = 38.0, 364.0
+CAPTION_Y = 428.0
 sc = BOX_H / h
 BOX_W = w * sc
 BOX_X = 380.0 - BOX_W / 2          # centred on the viewBox, which spans 40..720
@@ -268,7 +312,7 @@ for key, cls in CLASSES:
         frag.append(f'<path class="em-vf-line {cls}" d="{to_path(pts, close)}"/>')
 frag.append('</g></g>')
 CAPTION = 'Vicky leads AI research across industry, public services, and international teams.'
-markup = ''.join(frag) + f'<text x="375" y="344">{CAPTION}</text>'
+markup = ''.join(frag) + f'<text x="375" y="{CAPTION_Y:.0f}">{CAPTION}</text>'
 
 for k, v in layers.items():
     print(f'  {k:11s} {len(v)} paths', file=sys.stderr)

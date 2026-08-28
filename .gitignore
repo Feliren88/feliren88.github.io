@@ -16,3 +16,4 @@ notes/
 scripts/.stoic-cache/
 
 __pycache__/
+scripts/.portrait-cache/
