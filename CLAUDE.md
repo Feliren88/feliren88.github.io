@@ -134,8 +134,8 @@ feliren88.github.io/
 │   └── essays/           # Long-form essays (layout: page) — e.g. knowing-when-you-dont-know.md; featured atop /writings/ and homepage
 ├── _data/          # YAML data files
 │   ├── index.yml
-│   ├── about.yml         # tech_stack is now tiered: primary / framework / tool
-│   ├── skills.yml
+│   ├── about.yml         # hero copy, stats, and the /about/ section blocks
+│   ├── skills.yml        # technical skills, grouped, mirrors the sent CV; rendered on /cv
 │   ├── experience.yml
 │   ├── publications.yml  # Each entry requires a `kind` field for filter routing
 │   ├── awards.yml
@@ -688,15 +688,29 @@ Use `.note-block` + `.note-badge` instead of one-off alert styles:
 .t-meta          /* 0.78rem muted — dates, venues, supplementary */
 ```
 
-### Tech Stack Tiers (`_data/about.yml`)
-`tech_stack` is structured as three YAML keys. Render all three in order — primary tags are visually larger:
+### Technical skills (`_data/skills.yml`)
+There is **one** skills list on the site and it lives on `/cv`. The tiered
+`tech_stack` tag cloud that used to sit on the homepage was a second, shorter list
+that drifted from the real CV, so it and its `.tech-tag` styles were deleted rather
+than kept in sync by hand. Do not reintroduce a summary version somewhere else.
+
+`_data/skills.yml` mirrors the *Technical skills* section of the CV Vicky actually
+sends, group for group and item for item. Update it from that document, not from
+memory:
 
 ```yaml
-tech_stack:
-  primary:   [...] # .tech-tag--primary — largest, bold
-  framework: [...] # .tech-tag--framework — standard
-  tool:      [...] # .tech-tag--tool — smallest, muted
+- id: safety                       # what the filter matches on
+  group: 'AI safety & reliability' # also the filter's own label
+  items: 'Conformal prediction, uncertainty quantification, …'
 ```
+
+`items` is one plain string per group, not a list. These are clusters to be read, so
+prose keeps the order the CV chose; chopping them into chips doubles the ink and
+loses that order. The group label doubles as the filter pill on `/cv`.
+
+The filter's visibility logic is inline in `_pages/cv.md`, because `main.js` routes
+`.filter-pill` clicks only to `.project-card` elements and that page has none. Both
+set `is-active` and agree on it.
 
 ### Reveal Group Stagger (Common Fate)
 Wrap card grids in `.reveal-group` so children animate together with 80ms stagger:

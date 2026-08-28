@@ -10,15 +10,10 @@ redirect_to: /
 <p class="eyebrow">RESEARCH & ENGINEERING</p>
 
 <div id="skills-grid" class="skill-grid">
-  {% for skill in site.data.skills %}
+  {% for group in site.data.skills %}
   <article class="skill-card reveal">
-    <h3>{{ skill.category }}</h3>
-    <p>{{ skill.description }}</p>
-    <ul>
-      {% for s in skill.skills %}
-      <li>{{ s }}</li>
-      {% endfor %}
-    </ul>
+    <h3>{{ group.group }}</h3>
+    <p>{{ group.items }}</p>
   </article>
   {% endfor %}
 </div>

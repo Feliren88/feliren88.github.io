@@ -1,75 +1,39 @@
-- category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'I study when models should defer and how to prove it, using distribution-free guarantees for deployed AI.'
-  skills:
-    - 'Conformal Prediction'
-    - 'Uncertainty Quantification'
-    - 'Vision-Language Models'
-    - 'Interpretability'
-    - 'Knowledge Distillation'
-    - 'Causal Inference'
-    - 'A/B Testing'
-    - 'Hypothesis Testing'
+# Technical skills, rendered on /cv.
+#
+# This mirrors the "Technical skills" section of the CV Vicky actually sends, group
+# for group and item for item. It is the single source for skills on the site: the
+# tiered `tech_stack` cloud that used to sit on the homepage was a second, shorter
+# and drifting list, and was removed rather than kept in sync by hand.
+#
+# `items` is deliberately one plain string per group rather than a list. These are a
+# cluster to be read, not a set of chips to be scanned, and prose keeps the reading
+# order the CV chose. `id` is what the filter on /cv matches against.
+#
+# Every entry starts with a capital, which is the one place this departs from the CV:
+# the CV runs them as sentence-case prose, and on screen each cluster reads as a list
+# of named skills instead. `vLLM` and `dbt` are lowercase on purpose and must stay
+# that way when syncing from the CV.
 
-- category: 'RESEARCH: MULTILINGUAL & MULTIMODAL AI'
-  description: 'I test reliability and safety across overlooked languages and settings. My work covers internal-state probes, steering, multilingual benchmarks, adaptation, and earth observation.'
-  skills:
-    - 'Activation Steering'
-    - 'Linear Probing'
-    - 'Cultural Benchmarking'
-    - 'Vision-Language Adaptation'
-    - 'Semantic Segmentation'
-    - 'Multispectral Imaging'
-    - 'Google Earth Engine'
+- id: safety
+  group: 'AI safety & reliability'
+  items: 'Conformal prediction, Uncertainty quantification, Selective prediction / abstention, Calibration, Distribution-shift robustness, Linear probing, Activation steering, Red-teaming, LLM/VLM evaluation, SHAP'
 
-- category: 'ENGINEERING: DEEP LEARNING & GENERATIVE AI'
-  description: 'I build multimodal, generative, and earth-observation models from architecture design through deployment.'
-  skills:
-    - 'PyTorch'
-    - 'TensorFlow'
-    - 'scikit-learn'
-    - 'LangChain / LangGraph'
-    - 'RAG & Agentic Workflows'
-    - 'OpenCV'
-    - 'Diffusion Models'
-    - 'Intel OpenVINO'
+- id: deep-learning
+  group: 'Deep learning & multimodal AI'
+  items: 'PyTorch, TensorFlow, Vision-Language Models, Diffusion models (SDXL), Knowledge distillation, PEFT, DeepSpeed'
 
-- category: 'ENGINEERING: LLM EVALUATION & OBSERVABILITY'
-  description: 'I design evaluations and production monitoring that make model reliability measurable.'
-  skills:
-    - 'LLM-as-a-Judge'
-    - 'Human-in-the-Loop Evaluation'
-    - 'LangSmith'
-    - 'MLflow'
-    - 'Weights & Biases'
-    - 'Calibration Drift Monitoring'
-    - 'Latency Benchmarking'
+- id: generative
+  group: 'Generative AI & LLMOps'
+  items: 'LangChain, LangGraph, RAG, vLLM, Vector databases, Agentic workflows, LangSmith, MLflow, Weights & Biases'
 
-- category: 'ENGINEERING: PRODUCTION ML & DATA'
-  description: 'I design and operate cloud-scale ML pipelines with distributed inference on GCP and AWS.'
-  skills:
-    - 'GCP (Vertex AI, BigQuery)'
-    - 'AWS (EC2, S3, SageMaker)'
-    - 'Kubernetes'
-    - 'Docker'
-    - 'Apache Spark'
-    - 'dbt'
-    - 'Vector Database'
+- id: vision
+  group: 'Computer vision & geospatial'
+  items: 'OpenCV, Semantic segmentation, Multispectral imaging, Geospatial foundation models (Prithvi), Google Earth Engine'
 
-- category: 'VISUALIZATION & ANALYTICS'
-  description: 'I turn model outputs and data findings into clear decisions for technical and non-technical audiences.'
-  skills:
-    - 'Tableau'
-    - 'Streamlit'
-    - 'Plotly'
-    - 'Matplotlib'
-    - 'd3'
+- id: production
+  group: 'Production ML & data engineering'
+  items: 'GCP (Vertex AI, BigQuery), AWS (SageMaker, EC2, S3), Kubernetes, Docker, Distributed inference, Apache Spark, dbt, FastAPI'
 
-- category: 'LANGUAGES & FOUNDATIONS'
-  description: 'Core tooling for research and systems engineering.'
-  skills:
-    - 'Python'
-    - 'Scala'
-    - 'SQL'
-    - 'R'
-    - 'Git'
-    - 'Linux/Unix'
+- id: foundations
+  group: 'Languages & foundations'
+  items: 'Python, Scala, SQL, R, Git, Linux/Unix'

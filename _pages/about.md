@@ -145,21 +145,6 @@ motion_scene: record
   </div>
   {% endif %}
 
-  <div id="tech-stack" class="about-section">
-    <h2>Tech Stack</h2>
-    <div class="tech-tag-cloud">
-      {% for tag in site.data.about.tech_stack.primary %}
-      <span class="tech-tag tech-tag--primary">{{ tag }}</span>
-      {% endfor %}
-      {% for tag in site.data.about.tech_stack.framework %}
-      <span class="tech-tag tech-tag--framework">{{ tag }}</span>
-      {% endfor %}
-      {% for tag in site.data.about.tech_stack.tool %}
-      <span class="tech-tag tech-tag--tool">{{ tag }}</span>
-      {% endfor %}
-    </div>
-  </div>
-
   <div id="about-sections">
     {% for section in site.data.about.sections %}
     {% assign section_id = section.title | downcase | replace: ' ', '-' | replace: '"', '' %}

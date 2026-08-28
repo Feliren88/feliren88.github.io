@@ -51,7 +51,7 @@ Each page is driven by one data file.
 | Writings | `_data/notes.yml`, `_data/features.yml`, `_data/thoughts.yml` |
 | Work With Me | `_data/contact.yml` |
 | Awards | `_data/awards.yml` |
-| Skills | `_data/skills.yml` |
+| Technical skills (shown on `/cv`) | `_data/skills.yml` |
 | Experience | `_data/experience.yml` |
 | Project timeline | `_data/timeline.yml` |
 
