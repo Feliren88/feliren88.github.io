@@ -307,30 +307,6 @@ html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em
 */
 .em-skip{--em-skip-pad:1.05rem;position:absolute;right:calc(var(--em-pad-x) - var(--em-skip-pad));top:calc(1.4rem - var(--em-skip-pad));z-index:3;padding:var(--em-skip-pad);border:0;background:none;color:var(--em-ink-dim);font:600 .66rem "Space Grotesk",sans-serif;cursor:pointer}.em-skip:hover{color:var(--em-ink-hi)}
 /*
-  Snapping at the two edges of the interlude, and nowhere else.
-
-  `proximity` rather than `mandatory`: the scene is many screens tall and a mandatory
-  container with no snap points inside it would yank the reader to one end or the
-  other from anywhere in the middle. What does the work is `scroll-snap-stop: always`,
-  which forbids passing a snap position in a single gesture, so a hard flick out of
-  the last beat stops at the start of whatever follows instead of carrying on into
-  it, and a flick back up stops at the end of the scene. Both are one deliberate
-  step, and ordinary scrolling resumes immediately after.
-
-  The scene snaps on its *end* because that edge is the last beat; snapping its start
-  would fight a reader entering the interlude. `.em-after` is marked by the JS, since
-  the element following the scene differs from page to page.
-
-  Nothing here intercepts an event, so neither edge can hold a reader who keeps going.
-*/
-html[data-motion-scene]{scroll-snap-type:y proximity}
-html[data-motion-scene] .em-story{scroll-snap-align:end;scroll-snap-stop:always}
-html[data-motion-scene] .em-after{scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:5rem}
-/* Reduced motion collapses the pin to a static block, so there is no interlude to
-   step out of, and an unrequested jump would be the only thing snapping added. */
-@media(prefers-reduced-motion:reduce){html[data-motion-scene]{scroll-snap-type:none}}
-
-/*
   `record` runs its column wider than the other scenes. Its drawings are the widest
   on the site and it lost its progress thread, so the canvas is given back the room
   by narrowing the page gutter rather than by stealing from the copy, whose headline
