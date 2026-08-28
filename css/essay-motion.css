@@ -307,6 +307,16 @@ html[data-motion-scene="consent"] .em-head,html[data-motion-scene="consent"] .em
 */
 .em-skip{--em-skip-pad:1.05rem;position:absolute;right:calc(var(--em-pad-x) - var(--em-skip-pad));top:calc(1.4rem - var(--em-skip-pad));z-index:3;padding:var(--em-skip-pad);border:0;background:none;color:var(--em-ink-dim);font:600 .66rem "Space Grotesk",sans-serif;cursor:pointer}.em-skip:hover{color:var(--em-ink-hi)}
 /*
+  The centre card's title is centred, not left-aligned like the two beside it, because
+  everything else inside that card is centred on 375. Left-anchored it sat 30px from
+  one edge and 4px from the other, which reads as a mistake rather than a margin.
+  `.em-note-title` sets `text-anchor: start !important` and is shared by seven labels
+  across the scene, so this overrides it for the one that needs it instead of moving
+  the rest.
+*/
+html[data-motion-scene="record"] .em-note-mid{text-anchor:middle!important}
+
+/*
   `record` runs its column wider than the other scenes. Its drawings are the widest
   on the site and it lost its progress thread, so the canvas is given back the room
   by narrowing the page gutter rather than by stealing from the copy, whose headline

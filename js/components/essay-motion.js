@@ -159,24 +159,24 @@
       kicker: 'Vicky Feliren',
       title: 'I build AI systems and lead research beyond the lab.',
       copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
-      steps: ['Record', 'Banking systems', 'Built from zero', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
+      steps: ['Record', 'Built from zero', 'Banking AI systems', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
       highlights: [
         // The four figures here are already stated in the stat strip directly above
         // the scene, and at six marks the emphasis stopped sorting the sentence.
         // What is left is the part the strip does not say.
         ['finance, retail, public services, agriculture, and energy', 'Fortune 500 companies'],
-        ['more than 1M logins', '99.99%'],
         ['forecasts and shared tools'],
+        ['more than 1M logins', '99.99%'],
         ['top-ranked journal', '7 papers', '109 languages'],
         ['11 languages', 'More than 50 researchers across 5 countries'],
         ['12 awards and scholarships'],
         ['review scientific papers', 'more than 50 technical projects']],
       frames: [
         ['Vicky Feliren', 'I build AI systems and lead research beyond the lab.', 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.'],
-        ['Banking systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
-        ['Built from zero', 'I built the systems behind work in 6 Asia-Pacific markets.', 'I handled the technical work alone at first. I built the forecasts and shared tools that later hires could keep using.'],
-        ['Published research', 'A flood model I designed beat 6 established systems.', 'I led the paper in a top-ranked journal. My 7 papers study floods, mining, how AI represents culture, and how computers identify 109 languages online.'],
-        ['Southeast Asian data', 'I built the system that cleaned 1.28M images for research.', 'The finished collection covers 11 languages. More than 50 researchers across 5 countries contributed images, and my system removed duplicates and unusable files.'],
+        ['Built from zero', 'I built the AI systems behind work in 6 Asia-Pacific markets.', 'I handled the technical work alone at first. I built the forecasts and shared tools that later hires could keep using.'],
+        ['Banking AI systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the AI systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
+        ['Published research', 'A flood AI model I designed beat 6 established AI systems.', 'I led the paper in a top-ranked journal. My 7 papers study floods, mining, how AI represents culture, and how computers identify 109 languages online.'],
+        ['Southeast Asian data', 'I built the AI system that cleaned 1.28M images for research.', 'The finished collection covers 11 languages. More than 50 researchers across 5 countries contributed images, and my AI system removed duplicates and unusable files.'],
         ['Recognition', 'My work has won twice in Asia-Pacific and placed in the global top 3.', 'Judges have recognised my work in ride demand, remote health, climate research, community access, and AI safety. These projects received 12 awards and scholarships.'],
         ['Leadership', 'I hold 1 patent and have taught or reviewed work from 1,000+ students.', 'I also review scientific papers and have evaluated more than 50 technical projects. I look for sound methods, clear evidence, and decisions the team can defend.']]
     }
@@ -370,10 +370,10 @@
         label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, and teaching',
         frames: [
           '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="112">12</text><text x="466" y="140">AWARDS &amp;</text><text x="466" y="158">SCHOLARSHIPS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><text x="375" y="344">Vicky leads AI research across industry, public services, and international teams.</text>',
-          '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">DECISIONS STAFF CAN CHECK</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">BUSY LOGIN PERIODS</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">SYSTEM AVAILABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><text x="375" y="344">More than 1M identity checks passed through on the busiest days.</text>',
-          '<rect class="em-note" x="58" y="72" width="214" height="202" rx="10"/><text class="em-note-title" x="88" y="108">BUILT FROM ZERO</text><path class="em-note-rule" d="M88 136h154M88 172h126M88 208h144"/><text class="em-result-word" x="165" y="246">ENGINEERING BASE</text><path class="em-arrow" d="M300 172h70m-16-14 16 14-16 14"/><rect class="em-screen" x="398" y="72" width="290" height="202" rx="12"/><text class="em-screen-label" x="543" y="108">DELIVERY SCOPE</text><text class="em-screen-value" x="543" y="162">6</text><text class="em-result-word" x="543" y="194">ASIA-PACIFIC MARKETS</text><text x="375" y="344">Later hires inherited the systems and practices Vicky built.</text>',
-          '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">MINING</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title" x="292" y="100">FIRST AUTHOR · TOP JOURNAL</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood model and led the paper.</text>',
-          '<g class="em-clusters"><circle cx="96" cy="104" r="13"/><circle cx="142" cy="82" r="13"/><circle cx="184" cy="120" r="13"/><circle cx="112" cy="164" r="13"/><circle cx="168" cy="188" r="13"/><circle cx="118" cy="232" r="13"/><circle cx="204" cy="246" r="13"/></g><path class="em-pull" d="M228 112C286 126 312 144 340 164M228 202C286 194 312 182 340 172"/><rect class="em-screen" x="362" y="68" width="326" height="204" rx="12"/><text class="em-screen-label" x="525" y="104">SOUTHEAST ASIA</text><text class="em-screen-value" x="525" y="156">1.28M</text><text class="em-result-word" x="525" y="190">IMAGES · 11 LANGUAGES</text><text class="em-result-word" x="525" y="222">50+ RESEARCHERS · 5 COUNTRIES</text><text x="375" y="344">Vicky built the system that cleaned 1.28M images for research.</text>',
+          '<rect class="em-note" x="58" y="72" width="214" height="202" rx="10"/><text class="em-note-title" x="88" y="108">BUILT FROM ZERO</text><path class="em-note-rule" d="M88 136h154M88 172h126M88 208h144"/><text class="em-result-word" x="165" y="246">ENGINEERING BASE</text><path class="em-arrow" d="M300 172h70m-16-14 16 14-16 14"/><rect class="em-screen" x="398" y="72" width="290" height="202" rx="12"/><text class="em-screen-label" x="543" y="108">DELIVERY SCOPE</text><text class="em-screen-value" x="543" y="162">6</text><text class="em-result-word" x="543" y="194">ASIA-PACIFIC MARKETS</text><text x="375" y="344">Later hires inherited the AI systems and practices Vicky built.</text>',
+          '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY AI SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">DECISIONS STAFF CAN CHECK</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">BUSY LOGIN PERIODS</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">AI SYSTEM AVAILABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><text x="375" y="344">More than 1M identity checks passed through on the busiest days.</text>',
+          '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">COMPUTER VISION</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title em-note-mid" x="375" y="100">FIRST AUTHOR · TOP VENUE</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">AI SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood AI model and led the paper.</text>',
+          '<g class="em-clusters"><circle cx="96" cy="104" r="13"/><circle cx="142" cy="82" r="13"/><circle cx="184" cy="120" r="13"/><circle cx="112" cy="164" r="13"/><circle cx="168" cy="188" r="13"/><circle cx="118" cy="232" r="13"/><circle cx="204" cy="246" r="13"/></g><path class="em-pull" d="M228 112C286 126 312 144 340 164M228 202C286 194 312 182 340 172"/><rect class="em-screen" x="362" y="68" width="326" height="204" rx="12"/><text class="em-screen-label" x="525" y="104">SOUTHEAST ASIA</text><text class="em-screen-value" x="525" y="156">1.28M</text><text class="em-result-word" x="525" y="190">IMAGES · 11 LANGUAGES</text><text class="em-result-word" x="525" y="222">50+ RESEARCHERS · 5 COUNTRIES</text><text x="375" y="344">Vicky built the AI system that cleaned 1.28M images for research.</text>',
           '<path class="em-road" d="M76 258h598"/><g class="em-podium"><rect x="96" y="190" width="146" height="68" rx="8"/><text class="em-result-word" x="169" y="204">GLOBAL</text><text class="em-screen-value" x="169" y="244">TOP 3</text><rect x="276" y="104" width="198" height="154" rx="10"/><text class="em-result-word" x="375" y="138">REGIONAL</text><text class="em-screen-value" x="375" y="196">2× APAC</text><text class="em-result-word" x="375" y="226">WINNER</text><rect x="508" y="166" width="146" height="92" rx="8"/><text class="em-screen-value" x="581" y="206">12</text><text class="em-result-word" x="581" y="232">AWARDS &amp;</text><text class="em-result-word" x="581" y="248">SCHOLARSHIPS</text></g><text x="375" y="344">Judges recognised Vicky’s work in 5 fields.</text>',
           '<rect class="em-note" x="58" y="70" width="248" height="214" rx="10"/><text class="em-note-title" x="92" y="106">ISSUED PATENT</text><path class="em-note-rule" d="M92 132h180M92 168h146M92 204h170"/><rect class="em-result-mark" x="92" y="232" width="144" height="34" rx="17"/><text class="em-result-word" x="164" y="254">FORMALLY EXAMINED</text><path class="em-arrow" d="M330 174h64m-16-14 16 14-16 14"/><g class="em-review"><circle class="em-head" cx="516" cy="132" r="20"/><path class="em-person" d="M516 152v54m-30 42 30-42 30 42"/><rect class="em-screen" x="576" y="86" width="134" height="132" rx="8"/><text class="em-screen-value" x="643" y="140">1,000+</text><text class="em-result-word" x="643" y="172">STUDENTS</text></g><text x="375" y="344">Vicky teaches, reviews research, and judges technical work.</text>']
       },
@@ -511,7 +511,16 @@
     which is the frame where the text is swapped, so the swap happens behind a fade
     it is already committed to rather than as a visible jump.
   */
-  var XFADE = 0.34, WORDS = 0.17, CAPTION = 0.13;
+  /*
+    These are fractions of a beat, so they are also distances: a beat is about 2300px
+    of scroll, and at 0.34 the handover took 660px of scrolling to bring a drawing up
+    to full. That is what made the icons feel slow to appear. It is not the clock,
+    which has them assembled in about a tenth of a second; it is that the fade they
+    arrive behind was sized when a beat was a single screen. Cut to roughly a third,
+    the drawing is up in ~300px and the beat still crosses at 0.5 opacity on the
+    boundary, so the canvas never blinks empty between beats.
+  */
+  var XFADE = 0.15, WORDS = 0.08, CAPTION = 0.07;
 
   /*
     The shape of one beat, as fractions of it.
@@ -531,7 +540,7 @@
     assembling reads as slow rather than considered, and the parts arriving is the
     least interesting thing a beat does; the act is the part worth watching.
   */
-  var ARRIVE_END = 0.26, ACT_START = 0.24, ACT_END = 0.66;
+  var ARRIVE_END = 0.22, ACT_START = 0.20, ACT_END = 0.66;
   var lastStage = -1, target = 0, eased = 0, queued = false, last = 0;
 
   /*
@@ -560,7 +569,7 @@
     hold runs until they scroll. It only makes the beat slower to say what it came
     to say.
   */
-  var BEAT_SECONDS = 1.5;
+  var BEAT_SECONDS = 1.2;
   var beatT = 0, clockStage = -1, onScreen = true;
   // A beat already passed holds its finished state; one not yet reached shows
   // nothing, so the frame fading in underneath the current one is not a spoiler.
@@ -852,6 +861,24 @@
       };
     },
     1: function (frame) {
+      var note = has(frame, '.em-note');
+      var rules = all(frame, '.em-note-rule');
+      var arrow = has(frame, '.em-arrow');
+      var screen = has(frame, '.em-screen');
+      var value = has(frame, '.em-screen-value');
+      var road = { node: has(frame, '.em-road'), length: 0 };
+      road.length = measurePath(road.node);
+      return function (q) {
+        landing(note, span(q, 0, .3));
+        rules.forEach(function (node, i) { reveal(node, span(q, .14 + i * .06, .34 + i * .06)); });
+        slide(arrow, -24 + SETTLE(span(q, .3, .58)) * 24, 0);
+        reveal(arrow, span(q, .28, .42));
+        landing(screen, span(q, .4, .7));
+        landing(value, span(q, .56, .82));
+        drawTo(road, span(q, .64, .97));
+      };
+    },
+    2: function (frame) {
       var loads = all(frame, '.em-load > *');
       var road = { node: has(frame, '.em-road'), length: 0 };
       road.length = measurePath(road.node);
@@ -869,24 +896,6 @@
         landing(screen, span(q, .38, .68));
         landing(value, span(q, .54, .8));
         drawTo(road, span(q, .62, .96));
-      };
-    },
-    2: function (frame) {
-      var note = has(frame, '.em-note');
-      var rules = all(frame, '.em-note-rule');
-      var arrow = has(frame, '.em-arrow');
-      var screen = has(frame, '.em-screen');
-      var value = has(frame, '.em-screen-value');
-      var road = { node: has(frame, '.em-road'), length: 0 };
-      road.length = measurePath(road.node);
-      return function (q) {
-        landing(note, span(q, 0, .3));
-        rules.forEach(function (node, i) { reveal(node, span(q, .14 + i * .06, .34 + i * .06)); });
-        slide(arrow, -24 + SETTLE(span(q, .3, .58)) * 24, 0);
-        reveal(arrow, span(q, .28, .42));
-        landing(screen, span(q, .4, .7));
-        landing(value, span(q, .56, .82));
-        drawTo(road, span(q, .64, .97));
       };
     },
     3: function (frame) {
