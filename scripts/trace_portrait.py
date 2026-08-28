@@ -143,25 +143,62 @@ for _, p in contours(hair, 200, 2.0)[:2]:
         if np.hypot(d[:, 0], d[:, 1]).sum() > 40:
             layers['hair'].append((run, False))
 
+# Texture inside the hair mass. The hairline alone leaves the head an empty outline,
+# which is the single biggest reason a traced portrait reads as a template: real hair
+# has direction. These are the darkest interior ridges, opened along the silhouette
+# like the hairline so they do not double the head's edge.
+tex = hair & (blur(L, 1.2) - blur(L, 9) < -6)
+tex = morphology.remove_small_objects(tex, 90)
+for _, p in contours(tex, 60, 1.5)[:8]:
+    for run in split_open(p):
+        d = np.diff(np.array(run), axis=0)
+        if np.hypot(d[:, 0], d[:, 1]).sum() > 34:
+            layers['hair'].append((run, False))
+
 # Face features: local contrast inside the face box only.
 face = np.zeros_like(sub); face[FACE_T:FACE_B, FACE_L:FACE_R] = True
 face &= sub & ~hair
-local = blur(L, 1.6) - blur(L, 14)
-feat = morphology.binary_closing(
-    morphology.remove_small_objects(face & (local < -13), 60), morphology.disk(2))
-layers['features'] = [(p, True) for _, p in contours(feat, 45, 1.3)[:14]]
+"""
+Two contrast bands, not one, because one cannot get more detail out of this image.
+
+At a single band the face had the eyes, nose and mouth and little else, and read as a
+generic face rather than his. Lowering the threshold does not help: it merges adjacent
+features into larger blobs, so the contour count peaks around -11 and *falls* below it
+(measured: 22 contours at -11, 15 at -9, 12 at -7). What the face was missing was not
+darker detail but finer detail.
+
+So a second, tighter band runs alongside the first. The coarse one finds the features,
+the fine one finds the transitions the coarse one steps over: the crease beside the
+smile, the fold of the ear, the shadow along the jaw. Together they roughly halve the
+line spacing - 28 contours and 606 points against 15 and 408 - which is what makes it
+read as him. Pushing the fine band past about -3 starts drawing the skin's own grain.
+"""
+coarse = blur(L, 1.6) - blur(L, 14)
+fine = blur(L, 1.0) - blur(L, 6)
+feat = (face & (coarse < -11)) | (face & (fine < -4))
+feat = morphology.binary_closing(morphology.remove_small_objects(feat, 20), morphology.disk(1))
+layers['features'] = [(p, True) for _, p in contours(feat, 18, 1.15)[:34]]
 
 # Collar and shoulder structure: strong edges only, no fabric pattern. Also opened
 # where it hugs the silhouette, for the same doubling reason as the hair.
 edge = filters.sobel(blur(L, 3.0))
+# Collar and shoulders only, not the whole shirt. Lower down, the strongest edges are
+# the batik itself, and those come out as short arcs detached from every other line in
+# the drawing: at this size they read as specks dropped beside the figure. The band
+# below the chin and above the crop holds the collar and the shoulder seam, which are
+# structure worth drawing.
 body = sub.copy(); body[:HAIR_BOT] = False
-strong = body & (edge > np.percentile(edge[body], 92))
-strong = morphology.binary_closing(morphology.remove_small_objects(strong, 240), morphology.disk(3))
+body[HAIR_BOT + int((h - HAIR_BOT) * 0.58):] = False
+strong = body & (edge > np.percentile(edge[body], 86))
+strong = morphology.binary_closing(morphology.remove_small_objects(strong, 130), morphology.disk(3))
 layers['shirt'] = []
-for _, p in contours(strong, 170, 3.0)[:8]:
+for _, p in contours(strong, 90, 2.2)[:10]:
     for run in split_open(p):
         d = np.diff(np.array(run), axis=0)
-        if np.hypot(d[:, 0], d[:, 1]).sum() > 55:
+        # Long runs only. The collar and the shoulder seam are worth drawing; the
+        # short isolated arcs the same threshold finds in the batik are not, and at
+        # this size they read as specks floating beside the figure rather than cloth.
+        if np.hypot(d[:, 0], d[:, 1]).sum() > 60:
             layers['shirt'].append((run, False))
 
 # Batik, as texture rather than transcription. Kept only where it is large and well
@@ -174,12 +211,20 @@ layers['batik'] = [(p, True) for _, p in contours(motif, 120, 3.2)[:6]]
 
 # Only these two layers are used. The shirt band comes out empty at this crop and a
 # single batik motif reads as noise rather than texture, so both are dropped.
-layers.pop('shirt', None)
+# Neither cloth layer survives review. The batik yields one motif, and the collar band
+# yields two short arcs that sit detached from every other line in the drawing and read
+# as specks dropped beside the figure. What they were meant to convey - that there is a
+# collar and a shoulder - the silhouette and the jaw and neck lines already carry.
 layers.pop('batik', None)
+layers.pop('shirt', None)
 
 # The scene viewBox is "40 54 680 322" and the caption sits at y=344, so the portrait
 # gets y 66..324. Height is the binding constraint; the width follows the crop.
-BOX_Y, BOX_H = 66.0, 258.0
+# Height is the binding constraint, not width: the portrait is a 1.29 landscape in a
+# viewBox 2.11 times wider than it is tall, so it can never fill the canvas sideways.
+# It takes everything between the top of the viewBox and the caption baseline instead,
+# leaving only enough clearance for the caption's ascenders.
+BOX_Y, BOX_H = 50.0, 282.0
 sc = BOX_H / h
 BOX_W = w * sc
 BOX_X = 380.0 - BOX_W / 2          # centred on the viewBox, which spans 40..720

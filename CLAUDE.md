@@ -344,6 +344,15 @@ It drives five things, all scoped to `html[data-motion-scene="record"]`:
   set `stroke-dasharray` on `.em-vf-line`, or `measurePath()`'s length stops
   describing the path.
 
+  **Detail density is set by two contrast bands, not by lowering one threshold.**
+  Lowering a single threshold *merges* adjacent features into larger blobs, so the
+  contour count peaks around -11 and falls below it (measured: 22 contours at -11, 15
+  at -9, 12 at -7). What the face was missing was finer detail, not darker detail, so
+  a tight band runs alongside the coarse one and picks up the transitions the coarse
+  one steps over. Together they roughly halve the line spacing — 28 contours against
+  15. Detail and stroke weight trade against each other: the hair went from one stroke
+  to six, so its weight came down, or the head reads as hatched.
+
   Two details carry the finish. The contours are emitted as **Catmull-Rom Bézier
   curves, not polylines**: `find_contours` walks the pixel grid and the result is a
   chain of short straight segments whose corners are plainly visible at 2x, which
