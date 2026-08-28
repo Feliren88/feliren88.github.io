@@ -401,26 +401,18 @@
       svg.appendChild(frame);
       return frame;
     });
-    var thread = null;
-    if (sceneKey === 'record') {
-      var threadGroup = svgEl('g', { class: 'em-record-thread', 'aria-hidden': 'true' });
-      var threadBase = svgEl('path', { class: 'em-record-thread-base', d: 'M54 30H696', pathLength: '1' });
-      var threadProgress = svgEl('path', { class: 'em-record-thread-progress', d: 'M54 30H696', pathLength: '1' });
-      threadGroup.appendChild(threadBase);
-      threadGroup.appendChild(threadProgress);
-      var threadStops = [];
-      for (var stopIndex = 0; stopIndex < 8; stopIndex += 1) {
-        var stop = svgEl('circle', { class: 'em-record-thread-stop', cx: 54 + stopIndex * (642 / 7), cy: 30, r: 4.5 });
-        threadStops.push(stop);
-        threadGroup.appendChild(stop);
-      }
-      var threadRunner = svgEl('circle', { class: 'em-record-thread-runner', cx: 54, cy: 30, r: 7 });
-      threadGroup.appendChild(threadRunner);
-      svg.appendChild(threadGroup);
-      thread = { progress: threadProgress, runner: threadRunner, stops: threadStops };
-    }
+    /*
+      `record` used to carry a progress thread here: a rule across the top of the
+      canvas at y=30, with a stop per beat and a runner sliding along it. It was
+      removed for being a second progress indicator sitting directly above the
+      drawing, competing with it for the eye. `.em-track` under the pin already
+      reports how far through the scene the reader is.
+
+      The top of the viewBox is now headroom, which is why nothing else moved: the
+      frames start below it and none of their coordinates changed.
+    */
     canvas.appendChild(svg);
-    return { canvas: canvas, svg: svg, frames: frames, nodes: [], edges: [], thread: thread };
+    return { canvas: canvas, svg: svg, frames: frames, nodes: [], edges: [] };
   }
 
   var host = el('section', 'em-story');
@@ -1131,14 +1123,6 @@
         // leave them stacked indefinitely. Text is gone by the boundary instead.
         frame.style.setProperty('--em-cap', smooth(clamp01((0.5 - away) / CAPTION)).toFixed(4));
       });
-      if (narrative.thread) {
-        narrative.thread.progress.style.strokeDashoffset = (1 - p).toFixed(4);
-        narrative.thread.runner.setAttribute('cx', (54 + p * 642).toFixed(2));
-        narrative.thread.stops.forEach(function (stop, index) {
-          var reached = p >= index / (narrative.thread.stops.length - 1);
-          stop.classList.toggle('is-reached', reached);
-        });
-      }
     }
 
     // Hold the opening beat's words in place instead of fading them up from nothing:
