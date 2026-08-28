@@ -159,7 +159,7 @@
       kicker: 'Vicky Feliren',
       title: 'I build AI systems and lead research beyond the lab.',
       copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
-      steps: ['Record', 'Banking systems', 'Built from zero', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership', 'AI safety'],
+      steps: ['Record', 'Banking systems', 'Built from zero', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
       highlights: [
         // The four figures here are already stated in the stat strip directly above
         // the scene, and at six marks the emphasis stopped sorting the sentence.
@@ -170,9 +170,7 @@
         ['top-ranked journal', '7 papers', '109 languages'],
         ['11 languages', 'More than 50 researchers across 5 countries'],
         ['12 awards and scholarships'],
-        ['review scientific papers', 'more than 50 technical projects'],
-        ['92%', 'design ways for AI']
-      ],
+        ['review scientific papers', 'more than 50 technical projects']],
       frames: [
         ['Vicky Feliren', 'I build AI systems and lead research beyond the lab.', 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.'],
         ['Banking systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
@@ -180,9 +178,7 @@
         ['Published research', 'A flood model I designed beat 6 established systems.', 'I led the paper in a top-ranked journal. My 7 papers study floods, mining, how AI represents culture, and how computers identify 109 languages online.'],
         ['Southeast Asian data', 'I built the system that cleaned 1.28M images for research.', 'The finished collection covers 11 languages. More than 50 researchers across 5 countries contributed images, and my system removed duplicates and unusable files.'],
         ['Recognition', 'My work has won twice in Asia-Pacific and placed in the global top 3.', 'Judges have recognised my work in ride demand, remote health, climate research, community access, and AI safety. These projects received 12 awards and scholarships.'],
-        ['Leadership', 'I hold 1 patent and have taught or reviewed work from 1,000+ students.', 'I also review scientific papers and have evaluated more than 50 technical projects. I look for sound methods, clear evidence, and decisions the team can defend.'],
-        ['What I work on now', 'I found an 81% failure hidden behind a strong AI score.', 'The model followed a false caption even after recognising the image. A second test recovered the correct answer 92% of the time. I now design ways for AI to follow the image or ask a person when the evidence is weak.']
-      ]
+        ['Leadership', 'I hold 1 patent and have taught or reviewed work from 1,000+ students.', 'I also review scientific papers and have evaluated more than 50 technical projects. I look for sound methods, clear evidence, and decisions the team can defend.']]
     }
   };
   var scene = scenes[key];
@@ -371,7 +367,7 @@
         ]
       },
       record: {
-        label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, teaching, and AI safety',
+        label: 'Vicky’s record across published research, production systems, regional collaboration, awards, patents, and teaching',
         frames: [
           '<g class="em-score"><rect x="62" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="134" y="116">7</text><text x="134" y="148">PAPERS</text><rect x="228" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="300" y="116">1</text><text x="300" y="148">PATENT</text><rect x="394" y="68" width="145" height="104" rx="10"/><text class="em-screen-value" x="466" y="112">12</text><text x="466" y="140">AWARDS &amp;</text><text x="466" y="158">SCHOLARSHIPS</text><rect x="560" y="68" width="128" height="104" rx="10"/><text class="em-screen-value" x="624" y="116">5+</text><text x="624" y="148">YEARS</text></g><text x="375" y="344">Vicky leads AI research across industry, public services, and international teams.</text>',
           '<g class="em-load"><rect x="62" y="74" width="214" height="52" rx="8"/><text x="169" y="106">BANK IDENTITY SYSTEMS</text><rect x="62" y="144" width="214" height="52" rx="8"/><text x="169" y="176">DECISIONS STAFF CAN CHECK</text><rect x="62" y="214" width="214" height="52" rx="8"/><text x="169" y="246">BUSY LOGIN PERIODS</text></g><path class="em-arrow" d="M304 170h72m-18-14 18 14-18 14"/><rect class="em-screen" x="406" y="72" width="282" height="194" rx="12"/><text class="em-screen-label" x="547" y="108">SYSTEM AVAILABILITY</text><text class="em-screen-value" x="547" y="168">99.99%</text><text class="em-result-word" x="547" y="205">1M+ CHECKS / DAY</text><text x="375" y="344">More than 1M identity checks passed through on the busiest days.</text>',
@@ -379,9 +375,7 @@
           '<g class="em-papers"><rect class="em-note" x="62" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="90" y="124">MINING</text><path class="em-note-rule" d="M90 148h118M90 178h92M90 208h108"/><rect class="em-note" x="262" y="64" width="226" height="198" rx="9"/><text class="em-note-title" x="292" y="100">FIRST AUTHOR · TOP JOURNAL</text><text class="em-screen-value" x="375" y="158">6</text><text class="em-result-word" x="375" y="190">SYSTEMS BEATEN</text><path class="em-road" d="M296 232c34-36 58 10 90-20s54 18 76-30"/><rect class="em-note" x="512" y="92" width="176" height="170" rx="8"/><text class="em-note-title" x="540" y="124">LANGUAGE</text><path class="em-note-rule" d="M540 148h118M540 178h92M540 208h108"/></g><rect class="em-result-mark" x="282" y="280" width="188" height="38" rx="19"/><text class="em-result-word" x="376" y="304">7 PEER-REVIEWED</text><text x="375" y="344">Vicky designed the flood model and led the paper.</text>',
           '<g class="em-clusters"><circle cx="96" cy="104" r="13"/><circle cx="142" cy="82" r="13"/><circle cx="184" cy="120" r="13"/><circle cx="112" cy="164" r="13"/><circle cx="168" cy="188" r="13"/><circle cx="118" cy="232" r="13"/><circle cx="204" cy="246" r="13"/></g><path class="em-pull" d="M228 112C286 126 312 144 340 164M228 202C286 194 312 182 340 172"/><rect class="em-screen" x="362" y="68" width="326" height="204" rx="12"/><text class="em-screen-label" x="525" y="104">SOUTHEAST ASIA</text><text class="em-screen-value" x="525" y="156">1.28M</text><text class="em-result-word" x="525" y="190">IMAGES · 11 LANGUAGES</text><text class="em-result-word" x="525" y="222">50+ RESEARCHERS · 5 COUNTRIES</text><text x="375" y="344">Vicky built the system that cleaned 1.28M images for research.</text>',
           '<path class="em-road" d="M76 258h598"/><g class="em-podium"><rect x="96" y="190" width="146" height="68" rx="8"/><text class="em-result-word" x="169" y="204">GLOBAL</text><text class="em-screen-value" x="169" y="244">TOP 3</text><rect x="276" y="104" width="198" height="154" rx="10"/><text class="em-result-word" x="375" y="138">REGIONAL</text><text class="em-screen-value" x="375" y="196">2× APAC</text><text class="em-result-word" x="375" y="226">WINNER</text><rect x="508" y="166" width="146" height="92" rx="8"/><text class="em-screen-value" x="581" y="206">12</text><text class="em-result-word" x="581" y="232">AWARDS &amp;</text><text class="em-result-word" x="581" y="248">SCHOLARSHIPS</text></g><text x="375" y="344">Judges recognised Vicky’s work in 5 fields.</text>',
-          '<rect class="em-note" x="58" y="70" width="248" height="214" rx="10"/><text class="em-note-title" x="92" y="106">ISSUED PATENT</text><path class="em-note-rule" d="M92 132h180M92 168h146M92 204h170"/><rect class="em-result-mark" x="92" y="232" width="144" height="34" rx="17"/><text class="em-result-word" x="164" y="254">FORMALLY EXAMINED</text><path class="em-arrow" d="M330 174h64m-16-14 16 14-16 14"/><g class="em-review"><circle class="em-head" cx="516" cy="132" r="20"/><path class="em-person" d="M516 152v54m-30 42 30-42 30 42"/><rect class="em-screen" x="576" y="86" width="134" height="132" rx="8"/><text class="em-screen-value" x="643" y="140">1,000+</text><text class="em-result-word" x="643" y="172">STUDENTS</text></g><text x="375" y="344">Vicky teaches, reviews research, and judges technical work.</text>',
-          '<rect class="em-screen" x="50" y="72" width="202" height="150" rx="10"/><text class="em-screen-label" x="151" y="106">IMAGE</text><path class="em-road" d="M76 194l42-40 32 24 34-50 42 66"/><rect class="em-message" x="50" y="240" width="202" height="48" rx="9"/><text class="em-result-word" x="151" y="269">FALSE CAPTION</text><path class="em-broken" d="M274 140l42 42m0-42-42 42"/><rect class="em-note" x="344" y="70" width="350" height="222" rx="12"/><text class="em-screen-value" x="438" y="138">81%</text><text class="em-result-word" x="438" y="170">IMAGE OVERRIDDEN</text><path class="em-note-rule" d="M522 102v112"/><text class="em-screen-value" x="606" y="138">92%</text><text class="em-result-word" x="606" y="170">ANSWER RECOVERED</text><rect class="em-result-mark" x="408" y="222" width="224" height="46" rx="20"/><text class="em-result-word" x="520" y="251">APAC REGIONAL WINNER</text><text x="375" y="344">Vicky found the failure, then showed that the model still held the right answer.</text>'
-        ]
+          '<rect class="em-note" x="58" y="70" width="248" height="214" rx="10"/><text class="em-note-title" x="92" y="106">ISSUED PATENT</text><path class="em-note-rule" d="M92 132h180M92 168h146M92 204h170"/><rect class="em-result-mark" x="92" y="232" width="144" height="34" rx="17"/><text class="em-result-word" x="164" y="254">FORMALLY EXAMINED</text><path class="em-arrow" d="M330 174h64m-16-14 16 14-16 14"/><g class="em-review"><circle class="em-head" cx="516" cy="132" r="20"/><path class="em-person" d="M516 152v54m-30 42 30-42 30 42"/><rect class="em-screen" x="576" y="86" width="134" height="132" rx="8"/><text class="em-screen-value" x="643" y="140">1,000+</text><text class="em-result-word" x="643" y="172">STUDENTS</text></g><text x="375" y="344">Vicky teaches, reviews research, and judges technical work.</text>']
       },
       uncertainty: {
         label: 'A woman checks the same message through the night, puts down her phone, and asks one useful question in the morning',
@@ -500,7 +494,7 @@
   // Scroll spent settling into the pin before the first beat, and holding the last
   // beat before the scene releases. Without these the sequence opened already in
   // motion and cut away mid-beat, which is most of why it read as hurried.
-  var LEAD = 0.09, TAIL = 0.09;
+  var LEAD = 0.05, TAIL = 0.05;
 
   /*
     Two numbers, both in beats rather than seconds, because everything here is a
@@ -566,7 +560,7 @@
     hold runs until they scroll. It only makes the beat slower to say what it came
     to say.
   */
-  var BEAT_SECONDS = 1.9;
+  var BEAT_SECONDS = 1.5;
   var beatT = 0, clockStage = -1, onScreen = true;
   // A beat already passed holds its finished state; one not yet reached shows
   // nothing, so the frame fading in underneath the current one is not a spoiler.
@@ -955,25 +949,6 @@
         landing(review, span(q, .52, .8));
         landing(value, span(q, .68, .94));
       };
-    },
-    7: function (frame) {
-      var road = { node: has(frame, '.em-road'), length: 0 };
-      road.length = measurePath(road.node);
-      var broken = has(frame, '.em-broken');
-      var note = has(frame, '.em-note');
-      var rule = { node: has(frame, '.em-note-rule'), length: 0 };
-      rule.length = measurePath(rule.node);
-      var values = all(frame, '.em-screen-value');
-      var mark = has(frame, '.em-result-mark');
-      return function (q) {
-        drawTo(road, span(q, 0, .28));
-        landing(broken, span(q, .24, .46));
-        landing(note, span(q, .38, .64));
-        landing(values[0], span(q, .52, .72));
-        drawTo(rule, span(q, .6, .78));
-        landing(values[1], span(q, .7, .88));
-        landing(mark, span(q, .82, 1));
-      };
     }
   };
 
@@ -1236,222 +1211,28 @@
   }
 
   /*
-    One beat per gesture.
+    Scroll is the reader's again.
 
-    The scene is several screens tall and the browser was free to spend a single
-    flick on all of them, so a hard scroll crossed two or three beats and the
-    reader never saw what those beats contained. While the pin holds, a gesture
-    stops meaning a distance: a wheel notch, a swipe or an arrow key each mean one
-    beat, and the scroll is moved to that beat's anchor rather than by however far
-    the gesture asked for.
+    This used to swallow every gesture while the pin held and glide the page to the
+    next beat's anchor, which stopped the skipping but turned the scene into a
+    slideshow: each beat arrived by teleport, and a reader who kept scrolling was
+    held out by a lock they had not asked for. Worse, the lock could outlast them
+    entirely, and the scene became a pit.
 
-    The lock deliberately outlives the step. A trackpad flick keeps delivering
-    wheel events for around a second after the fingers lift, and without waiting
-    for that burst to fall quiet one flick would still spend itself as three
-    beats, which is the whole problem this exists to solve.
+    A beat is simply given more scroll to cross instead. At `--em-beats` screens
+    each the browser could spend one flick on three beats; at the height the
+    stylesheet now uses a hard flick moves well under one, so nothing is skipped
+    and nothing is intercepted. Wheel, trackpad, touch, keyboard, scrollbar, find
+    in page and the back button all behave exactly as they do everywhere else,
+    because none of them is being listened to.
 
-    Landing on a beat's centre rather than its start is also what makes a rest
-    position clean: at the centre the neighbouring frames are fully faded out, so
-    the reader is never parked on a half-dissolved pair of drawings.
-
-    None of this runs under prefers-reduced-motion, where the stylesheet has
-    already collapsed the pin and there is no sequence to step through.
+    Distance is what paces the sequence now, and BEAT_SECONDS is free to be short:
+    the drawing performs as soon as its beat arrives rather than rationing itself
+    across the scroll it was given.
   */
-  /*
-    STEP_MS is the glide between beats. LOCK_MAX is the ceiling on how long one
-    gesture can hold the scene, and it is the difference between a scene and a pit.
 
-    The lock used to lift only after QUIET_MS of silence. That absorbs the tail of a
-    flick, but a reader who simply keeps scrolling keeps stamping lastInput, so the
-    silence never comes, the lock never lifts, and every wheel event is swallowed.
-    The scene ate 241 events over twelve seconds without moving. Quiet still ends a
-    burst early; LOCK_MAX ends it regardless.
-
-    LOCK_MAX has to sit above the length of a flick and below anyone's patience. A
-    hard flick keeps delivering for roughly three quarters of a second, so a ceiling
-    under that cuts the lock while the same flick is still arriving and buys two
-    beats from one gesture, which is the skipping this was built to stop. Continuous
-    scrolling costs a beat per ceiling, and nothing costs more than that.
-  */
-  var STEP_MS = 420, QUIET_MS = 90, LOCK_MAX = 1050, SWIPE_PX = 26;
-
-  /*
-    Quiet and the ceiling between them still cannot tell a flick's tail from a
-    reader who has not stopped scrolling, because both keep delivering events. What
-    separates them is shape: momentum only ever decays, so a delta back near the
-    peak of the burst is the reader pushing again rather than the flick still
-    ringing. That reads as a third way out of the lock, and it is the one that lets
-    a hard flick cost exactly one beat while a held scroll keeps moving.
-  */
-  var burstMax = 0, lastAbs = 0;
-  var stepping = false, engaged = false, lastInput = 0, stepId = 0, lastY = -1, touchY = 0, touchUsed = false;
-
-  function reachPx() { return Math.max(1, host.offsetHeight - innerHeight); }
-  function hostTop() { return host.getBoundingClientRect().top + scrollY; }
-  // Where the page has to sit for `scaled` to land on beat i's centre.
-  function beatScroll(i) {
-    var p = (i + 0.5) / count;
-    return hostTop() + reachPx() * (LEAD + p * (1 - LEAD - TAIL));
-  }
-  // The same coordinate read back: 0 is the centre of the first beat, and the
-  // lead-in sits at -0.5, which is why arriving steps to beat 0 rather than past it.
-  function beatPos() {
-    var raw = clamp01(-host.getBoundingClientRect().top / reachPx());
-    return clamp01((raw - LEAD) / (1 - LEAD - TAIL)) * count - 0.5;
-  }
-  function pinned() {
-    var r = host.getBoundingClientRect();
-    return r.top <= 1 && r.bottom >= innerHeight - 1;
-  }
-  function easeStep(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-
-  /*
-    styles.css sets `scroll-behavior: smooth` on the root, which turns every one of
-    the per-frame scrollTo calls below into its own animation. Left alone the
-    browser's easing fights this one: a step took roughly twice STEP_MS, sat still
-    for the first half of it, and arrived on the browser's curve rather than ours.
-    The property is suspended for the length of the glide and put back afterwards,
-    so ordinary anchor links elsewhere keep their smooth scrolling.
-  */
-  function glideTo(y) {
-    cancelAnimationFrame(stepId);
-    var from = scrollY, began = 0, openedAt = performance.now();
-    stepping = true;
-    // Each step measures its own burst, starting from the event that bought it.
-    burstMax = lastAbs;
-    document.documentElement.style.scrollBehavior = 'auto';
-    stepId = requestAnimationFrame(function run(now) {
-      if (!began) began = now;
-      var t = clamp01((now - began) / STEP_MS);
-      scrollTo(0, Math.round(from + (y - from) * easeStep(t)));
-      if (t < 1) { stepId = requestAnimationFrame(run); return; }
-      document.documentElement.style.scrollBehavior = '';
-      // Hold the lock until the burst that caused this step has gone quiet, so the
-      // tail of one flick does not immediately buy the next beat. LOCK_MAX lifts it
-      // regardless, because continuous scrolling never goes quiet.
-      stepId = requestAnimationFrame(function wait(at) {
-        var quiet = performance.now() - lastInput >= QUIET_MS;
-        var pushing = burstMax > 0 && lastAbs >= burstMax * 0.85;
-        if (quiet || pushing || at - openedAt >= LOCK_MAX) { stepping = false; return; }
-        stepId = requestAnimationFrame(wait);
-      });
-    });
-  }
-
-  /*
-    Returns false when the step would leave the scene, which is the signal to stop
-    swallowing the gesture and let the page scroll away normally.
-
-    NEAR has to be a real fraction of a beat rather than a rounding epsilon. A beat
-    is about a screen of scroll, the landing is rounded to whole pixels and scrollY
-    itself can be fractional, so "on beat 1" reads back as 0.9994 rather than 1. An
-    epsilon small enough to look like float slop left the floor below the beat the
-    reader was already on, and every step after the second landed back where it
-    started.
-  */
-  var NEAR = 0.1;
-  function nextBeat(dir) {
-    var pos = beatPos();
-    return dir > 0 ? Math.floor(pos + NEAR) + 1 : Math.ceil(pos - NEAR) - 1;
-  }
-  // The one question every handler asks before swallowing anything: would this
-  // gesture keep the reader inside the scene? If not it is theirs, lock or no lock.
-  function holds(dir) { var to = nextBeat(dir); return to >= 0 && to <= count - 1; }
-  function step(dir) {
-    if (!holds(dir)) return false;
-    glideTo(beatScroll(nextBeat(dir)));
-    return true;
-  }
-
-  if (!reduced) {
-    addEventListener('wheel', function (e) {
-      // Pinch-zoom and browser zoom are never ours to take.
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
-      // Stamped before the pin is checked, because the guard at the bottom needs to
-      // know that an approach was driven by a real gesture rather than by the
-      // browser restoring a scroll position.
-      lastInput = performance.now();
-      lastAbs = Math.abs(e.deltaY);
-      // The peak of the burst currently being absorbed, which is what a later delta
-      // gets compared against to decide whether the reader is still pushing.
-      if (lastAbs > burstMax) burstMax = lastAbs;
-      if (!pinned()) return;
-      var dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
-      if (!dir) return;
-      if (stepping) { if (holds(dir)) e.preventDefault(); return; }
-      if (step(dir)) e.preventDefault();
-    }, { passive: false });
-
-    addEventListener('touchstart', function (e) {
-      touchY = e.touches[0].clientY; touchUsed = false; lastInput = performance.now();
-    }, { passive: true });
-
-    addEventListener('touchmove', function (e) {
-      lastInput = performance.now();
-      if (!pinned()) return;
-      var dy = touchY - e.touches[0].clientY;
-      var dir = dy > 0 ? 1 : -1;
-      // Checked before preventDefault, not after. Swallowing first and deciding
-      // later is what made the ends of the scene a dead end on touch.
-      if (!holds(dir)) return;
-      e.preventDefault();
-      if (stepping || touchUsed) return;
-      if (Math.abs(dy) < SWIPE_PX) return;
-      // One swipe is one beat, however far the thumb travelled.
-      if (step(dir)) touchUsed = true;
-    }, { passive: false });
-
-    addEventListener('keydown', function (e) {
-      if (!pinned() || e.ctrlKey || e.metaKey || e.altKey) return;
-      var el = document.activeElement;
-      // Never take a key from something that wants it: a field being typed into,
-      // or the skip button waiting on its own activation.
-      if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(el.tagName))) return;
-      var dir = /^(ArrowDown|PageDown)$/.test(e.key) || (e.key === ' ' && !e.shiftKey) ? 1
-              : /^(ArrowUp|PageUp)$/.test(e.key) || (e.key === ' ' && e.shiftKey) ? -1 : 0;
-      if (!dir) return;
-      lastInput = performance.now();
-      // Keys carry no delta, so the push test must not read a stale wheel value and
-      // decide the reader is shoving. A held key falls back on quiet and the ceiling.
-      lastAbs = 0; burstMax = 0;
-      // A held arrow key repeats, and without this the repeats walk straight
-      // through the lock and spend the hold on three or four beats.
-      if (stepping) { if (holds(dir)) e.preventDefault(); return; }
-      if (step(dir)) e.preventDefault();
-    });
-
-    /*
-      A flick that began above the scene is not covered by any of the above: the
-      page was still scrolling freely when it started, so it can carry the reader
-      past several beats before the pin engages. The first frame the pin holds,
-      the scene takes itself back to the beat the reader was owed.
-
-      Only for a gesture, though. A scroll the reader did not make with their hands
-      lands here too, and being dragged to the first beat by one would be worse than
-      the skipping this fixes: reloading the page restores a scroll position, and so
-      do the back button, an in-page anchor and find-in-page. RECENT is what tells
-      the two apart, since every input path stamps lastInput before it does anything
-      else.
-    */
-    var RECENT = 1200;
-    addEventListener('scroll', function () {
-      var down = scrollY >= lastY;
-      lastY = scrollY;
-      if (!pinned()) { if (!stepping) engaged = false; return; }
-      if (engaged || stepping) return;
-      engaged = true;
-      if (performance.now() - lastInput > RECENT) return;
-      var pos = beatPos();
-      if (down && pos > NEAR) glideTo(beatScroll(0));
-      else if (!down && pos < count - 1 - NEAR) glideTo(beatScroll(count - 1));
-    }, { passive: true });
-  }
-
-  // Skip rides the same glide, so it cannot be fought by the entry guard above.
   skip.addEventListener('click', function () {
-    if (reduced) { host.scrollIntoView({ block: 'end' }); return; }
-    engaged = true;
-    glideTo(hostTop() + reachPx() + 2);
+    host.scrollIntoView({ block: 'end', behavior: reduced ? 'auto' : 'smooth' });
   });
   function resize() { alignToViewport(); measure(); eased = target; last = 0; render(eased); }
   addEventListener('scroll', request, { passive: true });

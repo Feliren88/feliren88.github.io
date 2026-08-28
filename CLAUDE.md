@@ -224,10 +224,10 @@ to the placeholder accent declared at the top of the file.
 
 Three things about `record` generalise to any scene added later:
 
-- **Beat count is not fixed at four.** `record` has eight. `scene.steps.length` is the
+- **Beat count is not fixed at four.** `record` has seven. `scene.steps.length` is the
   count, the JS writes it to `--em-beats` on the host, and every `.em-story` height in
-  the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; the
-  pin holds for one screen per beat and a wrong height desynchronises the scrub.
+  the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; a
+  wrong one desynchronises the scrub. N is well over 100 on purpose, see below.
 - **A page can choose where the scene lands.** The default is after the page's own
   hero, found by two lookups in the JS. `/about/` needs it deeper than that, so it
   marks the spot with an empty `<div data-scene-slot></div>` and the scene replaces
@@ -260,54 +260,33 @@ Two consequences to keep in mind:
   settling or the beat is still performing, and lets it stop for the hold, so a
   stationary read costs no frames.
 
-**One gesture is one beat.** The scene is several screens tall, so the browser was
-free to spend a single hard flick on three of them and the reader never saw what
-those beats contained. While the pin holds, a wheel notch, a swipe and an arrow key
-each mean one beat rather than a distance: the gesture is swallowed and the page is
-glided to that beat's anchor. Landing on a beat's *centre* is what makes a rest
-position clean, since the neighbouring frames are fully faded out there.
+**Distance paces the sequence, not interception.** The scene once swallowed every
+gesture while the pin held and glided the page to the next beat's anchor. It did stop
+the skipping, but it turned the interlude into a slideshow, each beat arriving by
+teleport, and the lock that made it work could outlast the reader and trap them: quiet
+was the only thing that released it, and a reader who keeps scrolling never gives you
+any. That shipped, and the scene ate 241 wheel events over twelve seconds without
+moving a pixel.
 
-Five things this has to get right, each of which was a bug first:
+Nothing is intercepted now. A beat is simply given more scroll to cross, which is why
+the `vh` multipliers in the stylesheet are all well over 100: at roughly one screen a
+beat the browser could spend a single flick on three of them, and at ~2300px a hard
+flick buys about one. Wheel, trackpad, touch, keyboard, scrollbar, find-in-page and the
+back button all behave as they do everywhere else on the site, because none of them is
+being listened to.
 
-- **The lock outlives the step, but it must be bounded.** A trackpad flick keeps
-  delivering wheel events for about a second after the fingers lift, so `QUIET_MS`
-  of silence rather than the end of the glide is what releases it. Key repeat needs
-  the same guard. **Quiet alone is a trap**: a reader who simply keeps scrolling
-  keeps stamping `lastInput`, the silence never arrives, and every event is
-  swallowed forever. That shipped, and the scene ate 241 wheel events over twelve
-  seconds without moving. Three things end the lock now, and one of them is a hard
-  ceiling: quiet, `LOCK_MAX`, or a delta back near the peak of the burst, since
-  momentum only ever decays and a rising delta is the reader pushing again.
-  `LOCK_MAX` sits above the length of a flick and below anyone's patience; under it
-  and one flick buys two beats, over it and continuous scrolling stalls.
-- **No handler may swallow a gesture that would leave the scene.** Every one of them
-  asks `holds(dir)` first, including while locked. Touch got this wrong by calling
-  `preventDefault` before deciding, which made the ends of the scene a dead end on
-  mobile. This is the invariant that makes a trap impossible rather than unlikely.
-  Note that a bounded lock never causes *skipping*: `step()` only ever moves to the
-  adjacent beat, so continuous scrolling visits every beat in turn, just faster.
-- **`NEAR` is a tenth of a beat, not a float epsilon.** A beat is about a screen of
-  scroll, the landing is rounded to whole pixels and `scrollY` can be fractional, so
-  "on beat 1" reads back as 0.9994. With a rounding-sized epsilon the floor lands on
-  the beat the reader is already on and every step after the second goes nowhere.
-- **`scroll-behavior: smooth` has to be suspended during a glide.** `styles.css` sets
-  it on the root, which turns each of the per-frame `scrollTo` calls into its own
-  animation. Left alone a step took twice `STEP_MS`, sat still for the first half of
-  it and arrived on the browser's curve. `glideTo()` clears the property and puts it
-  back, so anchor links elsewhere keep theirs.
-- **The entry guard only fires for a gesture.** A flick that began above the scene
-  can carry past several beats before the pin engages, so the first pinned frame
-  pulls back to the beat the reader was owed. But a reload restoring a scroll
-  position, the back button and find-in-page all land there too, and being dragged
-  to the first beat by one of those is worse than the skipping this fixes. Every
-  input path stamps `lastInput` *before* checking the pin, and `RECENT` tells them
-  apart.
-- **Both ends must release.** Stepping past the last beat or back before the first
-  returns false from `step()`, which is the signal not to swallow the gesture, so the
-  page scrolls away normally. `.em-skip` rides the same glide and is the escape hatch.
+Two things follow, and both are worth keeping:
 
-None of it runs under `prefers-reduced-motion`, where the stylesheet has already
-collapsed the pin to a static block and there is no sequence to step through.
+- **Raising the multipliers is the only lever on pacing.** If beats feel too easy to
+  cross, they need more distance, not a lock. Measure it rather than guessing: divide
+  the host's scroll reach by `--em-beats` and compare against how far a hard flick
+  actually travels, which is ~2000-3000px on a 900px viewport.
+- **The clock is what keeps it fast.** Because the drawing no longer rations itself
+  across the scroll it was given, `BEAT_SECONDS` can be short while the beat itself is
+  long: the icons finish in well under a second and then hold for as long as the reader
+  takes to cross the rest of the beat.
+
+`prefers-reduced-motion` collapses the pin to a static block, as it always did.
 
 The eases are anime.js's, solved rather than imported. What the scene needs from
 anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
