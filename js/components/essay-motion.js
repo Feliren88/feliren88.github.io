@@ -392,6 +392,18 @@
     var frames = story.frames.map(function (markup, index) {
       var frame = svgEl('g', { class: 'em-story-frame em-deep-' + sceneKey + '-' + index });
       frame.innerHTML = markup;
+      if (sceneKey === 'record' && index === 0) {
+        var portrait = svgEl('image', {
+          href: '/assets/img/vicky-pencil-portrait.webp',
+          x: '238', y: '22', width: '274', height: '412',
+          preserveAspectRatio: 'xMidYMid meet',
+          class: 'em-vf-portrait'
+        });
+        var pencil = svgEl('g', { class: 'em-vf-pencil', 'aria-hidden': 'true' });
+        pencil.innerHTML = '<path class="em-vf-pencil-body" d="M-20-4h31l9 4-9 4h-31z"/><path class="em-vf-pencil-tip" d="M20 0l-9-4v8z"/><path class="em-vf-pencil-band" d="M-14-4v8"/>';
+        frame.insertBefore(portrait, frame.firstChild);
+        frame.appendChild(pencil);
+      }
       svg.appendChild(frame);
       return frame;
     });
@@ -867,6 +879,9 @@
       function pen(node) { return { node: node, length: measurePath(node) }; }
       var body = all(frame, '.em-vf-body').map(pen);
       var hair = all(frame, '.em-vf-hair').map(pen);
+      var portrait = has(frame, '.em-vf-portrait');
+      var sketch = has(frame, '.em-vf-sketch');
+      var pencil = has(frame, '.em-vf-pencil');
       // Features are drawn in reading order down the face rather than in the order
       // the tracer happened to emit them, or the mouth can appear before the eyes.
       var face = all(frame, '.em-vf-face').map(pen).sort(function (a, b) {
@@ -884,6 +899,18 @@
         walk(body, 0, .34, q);
         walk(hair, .22, .46, q);
         walk(face, .34, .96, q);
+        var finish = span(q, .12, .98);
+        if (portrait) {
+          portrait.style.opacity = (finish * .92).toFixed(3);
+          portrait.style.clipPath = 'inset(0 0 ' + ((1 - finish) * 100).toFixed(2) + '% 0)';
+        }
+        if (sketch) sketch.style.opacity = (1 - finish * .58).toFixed(3);
+        if (pencil) {
+          var x = 385 + Math.sin(finish * Math.PI * 7) * 112;
+          var y = 42 + finish * 348;
+          pencil.style.opacity = (Math.sin(finish * Math.PI) * 1.15).toFixed(3);
+          pencil.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(-18deg)';
+        }
       };
     },
     1: function (frame) {

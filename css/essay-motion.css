@@ -331,6 +331,16 @@ html[data-motion-scene="record"] .em-note-mid{text-anchor:middle!important}
   themes like everything else.
 */
 .em-vf-line{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.em-vf-portrait{
+  opacity:0;clip-path:inset(0 0 100% 0);
+  filter:invert(.9) contrast(.86) brightness(1.18);
+  transform-origin:375px 220px
+}
+html[data-theme="light"] .em-vf-portrait{filter:contrast(.88) brightness(.76)}
+.em-vf-pencil{opacity:0;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.28))}
+.em-vf-pencil-body{fill:#d8a24f;stroke:var(--em-ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.em-vf-pencil-tip{fill:var(--em-ink);stroke:var(--em-ink);stroke-width:1;vector-effect:non-scaling-stroke}
+.em-vf-pencil-band{fill:none;stroke:var(--em-accent);stroke-width:3;vector-effect:non-scaling-stroke}
 .em-vf-body{stroke:var(--em-accent);stroke-width:1.55;opacity:.85}
 .em-vf-hair{stroke:var(--em-ink-2);stroke-width:1.5}
 .em-vf-face{stroke:var(--em-ink);stroke-width:1.1}
@@ -405,6 +415,7 @@ html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[da
   the fading calendar entry, which predate the figure work and were never covered.
 */
 @media(prefers-reduced-motion:reduce){html[data-motion-scene] .em-story-frame,html[data-motion-scene] .em-story-frame *{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.em-vf-portrait{opacity:.92!important;clip-path:none!important}.em-vf-sketch{opacity:.42!important}.em-vf-pencil{display:none!important}}
 @media(prefers-reduced-motion:reduce){.em-track{display:none}.em-story{height:auto}.em-pin{position:relative;height:auto;min-height:0}.em-story{--em-p:1!important}.em-skip{display:none}}
 
 /* Shared editorial eyebrow across the twelve featured writings. */
