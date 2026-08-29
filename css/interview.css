@@ -1,0 +1,925 @@
+/* ════════════════════════════════════════════════════════
+   Interview revision — hub (/interview/) and the eighteen
+   syllabus pages (/transformers/, /ai-safety/, …).
+   Loaded only on those pages via `extra_css` front matter.
+   Every colour comes from the tokens in styles.css, so both
+   themes work with no hard-coded hex.
+   ════════════════════════════════════════════════════════ */
+
+.interview-hub,
+.syl-page {
+  --fs-2xs: 0.76rem;
+  --fs-xs: 0.85rem;
+  --fs-sm: 0.94rem;
+  --fs-md: 1rem;
+  --fs-base: 1.05rem;
+  --ivz-pad: 1rem;
+}
+
+.interview-hub .page-header,
+.syl-page .page-header { display: none; }
+
+/* ── Progress ring, shared by the hub cards and the page header ── */
+.iv-ring {
+  position: relative;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: none;
+}
+.iv-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.iv-ring circle { fill: none; stroke-width: 3; }
+.iv-ring-track { stroke: var(--line-strong); }
+.iv-ring-fill {
+  stroke: var(--cta);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s ease;
+}
+.iv-ring b {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 600 0.62rem / 1 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+.iv-ring b span { color: var(--muted); }
+
+/* ════════════════════════════════════════════════════════
+   Hub
+   ════════════════════════════════════════════════════════ */
+
+.ivh-header { max-width: 46rem; margin-bottom: 2.5rem; }
+.ivh-eyebrow {
+  display: inline-block;
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+}
+.ivh-title {
+  font: 600 clamp(2.4rem, 5.5vw, 4rem) / 0.95 "Space Grotesk", sans-serif;
+  letter-spacing: -0.05em;
+  color: var(--text);
+  margin: 1.1rem 0 1rem;
+}
+.ivh-lede { font-size: var(--fs-base); line-height: 1.65; color: var(--muted); margin: 0; }
+.ivh-stats {
+  display: flex;
+  gap: 2.25rem;
+  list-style: none;
+  padding: 1.6rem 0 0;
+  margin: 1.6rem 0 0;
+  border-top: 1px solid var(--line);
+}
+.ivh-stats li { display: flex; flex-direction: column; gap: 0.2rem; }
+.ivh-stats strong { font: 600 1.6rem / 1 "Space Grotesk", sans-serif; color: var(--text); }
+.ivh-stats span {
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.ivh-maplede {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 42rem;
+  margin: 0 0 1.5rem;
+}
+
+/* The map is the whole card field. The SVG sits underneath and is drawn from
+   the boxes the browser produced, so it needs no layout of its own. */
+.ivh-map { position: relative; }
+.iv-map-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+.iv-map-svg path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.28;
+  transition: opacity 0.2s ease;
+}
+.ivh-map.is-focused .iv-map-svg path { opacity: 0.1; }
+
+.ivh-group { margin-bottom: 3.25rem; position: relative; z-index: 1; }
+.ivh-group-head { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 1.1rem; }
+.ivh-group-title {
+  font: 700 var(--fs-xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin: 0;
+}
+.ivh-group-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.ivh-group-count { font-size: var(--fs-2xs); color: var(--muted); order: 3; }
+
+.ivh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: var(--gap-2);
+}
+.ivh-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, opacity 0.2s ease;
+}
+.ivh-card:hover { border-color: var(--border-ui); transform: translateY(-2px); }
+.ivh-map.is-focused .ivh-card { opacity: 0.4; }
+.ivh-map.is-focused .ivh-card.is-lit {
+  opacity: 1;
+  border-color: var(--cta);
+}
+.ivh-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.ivh-card-title {
+  font: 600 var(--fs-title) / 1.25 "Space Grotesk", sans-serif;
+  color: var(--text);
+  margin: 0;
+}
+.ivh-card-blurb {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+.ivh-card-mods {
+  list-style: none;
+  padding: 0.9rem 0 0;
+  margin: 0 0 1rem;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.ivh-card-mods li {
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.45rem;
+  line-height: 1.3;
+}
+.ivh-card-meta {
+  margin-top: auto;
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+/* ════════════════════════════════════════════════════════
+   Syllabus page
+   ════════════════════════════════════════════════════════ */
+
+.syl-page { max-width: 62rem; }
+
+.syl-breadcrumb { margin-bottom: 1.6rem; }
+.syl-back-link { font-size: var(--fs-xs); color: var(--muted); text-decoration: none; }
+.syl-back-link:hover { color: var(--text); }
+
+.syl-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.8rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.syl-header-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+.syl-header-ring .iv-ring { width: 4rem; height: 4rem; }
+.syl-header-ring .iv-ring b { font-size: 0.8rem; }
+.syl-reset {
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+}
+.syl-reset:hover { color: var(--text); }
+
+.syl-group {
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.syl-title {
+  font: 600 clamp(2.1rem, 4.6vw, 3.2rem) / 1 "Space Grotesk", sans-serif;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin: 0.8rem 0 0.9rem;
+}
+.syl-blurb {
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 46rem;
+  margin: 0 0 0.6rem;
+}
+.syl-scope {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 46rem;
+  margin: 0;
+}
+.syl-stats { display: flex; gap: 1.5rem; list-style: none; padding: 1.3rem 0 0; margin: 1.3rem 0 0; }
+.syl-stats li { font-size: var(--fs-xs); color: var(--muted); }
+.syl-stats strong {
+  font: 600 var(--fs-md) "Space Grotesk", sans-serif;
+  color: var(--text);
+  margin-right: 0.3rem;
+}
+
+.syl-links { font-size: var(--fs-sm); color: var(--muted); margin: 0 0 2rem; }
+.syl-links a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* ── Module index ─────────────────────────────────────── */
+.syl-toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 3rem;
+}
+.syl-toc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.syl-toc-item:hover { border-color: var(--border-ui); background: var(--surface); }
+.syl-toc-num { font: 600 var(--fs-2xs) "Space Grotesk", sans-serif; color: var(--accent); min-width: 1.1rem; }
+.syl-toc-name { font-size: var(--fs-xs); color: var(--text); line-height: 1.35; }
+.syl-toc-tick { margin-left: auto; width: 0.6rem; height: 0.6rem; border-radius: 50%; flex: none; }
+.syl-toc-item.is-done .syl-toc-tick { background: var(--cta); }
+
+/* ── Modules ──────────────────────────────────────────── */
+.syl-modules {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.syl-module {
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  scroll-margin-top: 5rem;
+  transition: border-color 0.2s ease;
+}
+.syl-module.is-done { border-color: color-mix(in srgb, var(--cta) 45%, var(--line)); }
+.syl-module-head {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  gap: 0.9rem;
+  align-items: start;
+  margin-bottom: 1.1rem;
+}
+.syl-module-num {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 50%;
+  font: 600 var(--fs-sm) "Space Grotesk", sans-serif;
+  color: var(--accent);
+}
+.syl-module.is-done .syl-module-num { border-color: var(--cta); color: var(--cta); }
+.syl-module-name {
+  font: 600 var(--fs-title) / 1.3 "Space Grotesk", sans-serif;
+  color: var(--text);
+  margin: 0.25rem 0 0.35rem;
+}
+.syl-module-why { font-size: var(--fs-sm); line-height: 1.55; color: var(--muted); margin: 0; max-width: 48ch; }
+
+.syl-done {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.syl-done i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 50%;
+}
+.syl-done[aria-pressed="true"] { color: var(--cta); border-color: var(--cta); }
+.syl-done[aria-pressed="true"] i { background: var(--cta); border-color: var(--cta); }
+
+.syl-covers {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.35rem 1.2rem;
+}
+.syl-covers li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text);
+}
+.syl-covers li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.syl-check {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--stat-fill);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text);
+}
+.syl-check-label {
+  display: block;
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+/* ════════════════════════════════════════════════════════
+   Module diagrams
+
+   One block per archetype. Everything except `curve` is HTML,
+   so labels wrap and stay selectable at any width.
+   ════════════════════════════════════════════════════════ */
+
+.syl-viz:empty { display: none; }
+.syl-viz { margin: 0 0 1.3rem; }
+.ivz {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  padding: var(--ivz-pad);
+}
+.ivz ul, .ivz ol { list-style: none; padding: 0; margin: 0; }
+
+/* flow ─ ordered stages with connectors between them */
+.ivz-flow ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.ivz-step {
+  flex: 1 1 8rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+  color: var(--text);
+}
+.ivz-step b {
+  font: 600 0.65rem "Space Grotesk", sans-serif;
+  color: var(--accent);
+  flex: none;
+}
+.ivz-step + .ivz-step::before {
+  content: "";
+  position: absolute;
+  left: -0.44rem;
+  top: 50%;
+  width: 0.38rem;
+  height: 1px;
+  background: var(--accent);
+}
+.ivz-flow-loop {
+  display: block;
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--accent);
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* compare ─ columns side by side */
+.ivz-compare { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+.ivz-col {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.ivz-col-k {
+  display: block;
+  font: 700 var(--fs-2xs) / 1.2 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.ivz-col li {
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--text);
+  padding: 0.2rem 0;
+}
+.ivz-col li + li { border-top: 1px dashed var(--line); }
+
+/* stack ─ layers, base last */
+.ivz-stack { display: flex; flex-direction: column; gap: 0.3rem; }
+.ivz-stack li {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+  color: var(--text);
+  text-align: center;
+}
+.ivz-stack li.is-base {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* matrix ─ two by two with axis labels outside the cells */
+.ivz-matrix {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0.35rem 0.5rem;
+  align-items: center;
+}
+.ivz-mx {
+  font: 700 var(--fs-2xs) / 1.3 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-align: center;
+  grid-row: 1;
+}
+.ivz-mx-a { grid-column: 2; }
+.ivz-mx-b { grid-column: 3; }
+.ivz-my {
+  font: 700 var(--fs-2xs) / 1.3 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  grid-column: 1;
+  max-width: 6rem;
+}
+.ivz-my-a { grid-row: 2; }
+.ivz-my-b { grid-row: 3; }
+.ivz-cells {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.ivz-cell {
+  padding: 0.8rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--text);
+  text-align: center;
+}
+
+/* scale ─ a spectrum with labelled stops */
+.ivz-ends {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+.ivz-stops {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.4rem;
+  position: relative;
+}
+.ivz-stops::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 0.32rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+.ivz-stops li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+  color: var(--muted);
+  position: relative;
+}
+.ivz-stops li i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-ui);
+  background: var(--bg);
+}
+.ivz-stops li.is-on { color: var(--text); font-weight: 600; }
+.ivz-stops li.is-on i { background: var(--cta); border-color: var(--cta); }
+
+/* parts ─ a centre with its parts around it */
+.ivz-parts { display: grid; gap: 0.6rem; }
+.ivz-centre {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--stat-fill);
+  font: 600 var(--fs-sm) "Space Grotesk", sans-serif;
+  color: var(--text);
+  text-align: center;
+}
+.ivz-around {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.4rem;
+}
+.ivz-around li {
+  position: relative;
+  padding: 0.5rem 0.7rem 0.5rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--text);
+}
+.ivz-around li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+}
+
+/* tree ─ a root question and its branches */
+.ivz-root {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--stat-fill);
+  font: 600 var(--fs-sm) "Space Grotesk", sans-serif;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.ivz-root::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 0.6rem;
+  background: var(--accent);
+}
+.ivz-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.6rem;
+}
+.ivz-branch {
+  position: relative;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.ivz-branch::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 1px;
+  height: 0.6rem;
+  background: var(--line-strong);
+}
+.ivz-branch-k {
+  display: block;
+  font: 700 var(--fs-2xs) / 1.2 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.ivz-branch li { font-size: var(--fs-xs); line-height: 1.45; color: var(--text); padding: 0.15rem 0; }
+
+/* curve ─ the one archetype where the shape carries the meaning */
+/* Columns are shrink-to-fit and the whole grid is centred, so the axis label
+   stays beside the plot instead of being stranded at the far left. */
+.ivz-curve {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: "y plot" ". x" ". key";
+  justify-content: center;
+  gap: 0.4rem 0.6rem;
+  align-items: center;
+}
+/* Height drives the size and the aspect ratio is kept, so the curve shape is
+   the same at every column width. */
+.ivz-curve svg { grid-area: plot; height: 11.5rem; width: auto; max-width: 100%; }
+.ivz-axis { stroke: var(--line-strong); stroke-width: 1; }
+.ivz-line { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ivz-line-a { stroke: var(--accent); stroke-dasharray: 5 4; }
+.ivz-line-b { stroke: var(--cta); }
+.ivz-ax-y {
+  grid-area: y;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: 700 var(--fs-2xs) "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+}
+.ivz-ax-x {
+  grid-area: x;
+  font: 700 var(--fs-2xs) "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+}
+.ivz-key {
+  grid-area: key;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+.ivz-key li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--fs-xs);
+  color: var(--text);
+}
+.ivz-key li::before {
+  content: "";
+  width: 1.1rem;
+  height: 2px;
+  flex: none;
+}
+.ivz-key .is-a::before { background: var(--accent); }
+.ivz-key .is-b::before { background: var(--cta); }
+
+/* ════════════════════════════════════════════════════════
+   Flashcards
+   ════════════════════════════════════════════════════════ */
+
+.syl-cards {
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+  margin-bottom: 3rem;
+}
+.syl-cards-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.syl-cards-head .syl-panel-title { margin: 0; }
+.syl-cards-ctl { display: flex; gap: 0.4rem; }
+.syl-cards-ctl button {
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+.syl-cards-ctl button:hover { color: var(--text); }
+.ivc-card {
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.4rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  cursor: pointer;
+}
+.ivc-back { display: none; }
+.ivc-card.is-flipped .ivc-front { display: none; }
+.ivc-card.is-flipped .ivc-back { display: block; }
+.ivc-kicker {
+  display: block;
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+.ivc-q {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0 0 0.9rem;
+  max-width: 52ch;
+}
+.ivc-hint { font-size: var(--fs-2xs); color: var(--muted); }
+.ivc-covers {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.ivc-covers li {
+  font-size: var(--fs-2xs);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.45rem;
+}
+.ivc-jump { font-size: var(--fs-xs); color: var(--cta); text-decoration: none; }
+
+/* ════════════════════════════════════════════════════════
+   Traps, drills, pager
+   ════════════════════════════════════════════════════════ */
+
+.syl-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--gap-2);
+  margin-bottom: 3rem;
+}
+.syl-panel {
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+}
+.syl-panel-title {
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+.syl-panel ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.syl-panel li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text);
+}
+.syl-panel--traps li::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  top: -0.05em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.syl-panel--drills li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+
+.syl-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-2);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+}
+.syl-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  max-width: 20rem;
+  transition: border-color 0.15s ease;
+}
+.syl-pager-link:hover { border-color: var(--border-ui); }
+.syl-pager-link span {
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.syl-pager-next { text-align: right; margin-left: auto; }
+
+@media (max-width: 720px) {
+  .syl-header { flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem; }
+  .syl-header-ring { flex-direction: row; align-items: center; }
+  .syl-module-head { grid-template-columns: 2.4rem 1fr; }
+  .syl-done { grid-column: 1 / 3; justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  .ivh-stats { gap: 1.4rem; }
+  .iv-map-svg { display: none; }
+  .syl-covers { grid-template-columns: 1fr; }
+  .ivz-stops { grid-auto-flow: row; grid-auto-columns: auto; }
+  .ivz-stops::before { display: none; }
+  .ivz-stops li { flex-direction: row; gap: 0.6rem; text-align: left; }
+  .ivz-matrix { grid-template-columns: 1fr 1fr; }
+  .ivz-my { display: none; }
+  .ivz-mx-a { grid-column: 1; }
+  .ivz-mx-b { grid-column: 2; }
+  .ivz-cells { grid-column: 1 / 3; grid-row: 2; }
+  .ivz-curve svg { height: 8.5rem; }
+  .syl-pager { flex-direction: column; }
+  .syl-pager-next { text-align: left; margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ivh-card, .iv-ring-fill, .iv-map-svg path { transition: none; }
+}

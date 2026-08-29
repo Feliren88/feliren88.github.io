@@ -104,6 +104,7 @@ feliren88.github.io/
 ├── _layouts/
 │   ├── default.html   # Base layout with SEO, skip link, font preloads
 │   ├── page.html      # Generic page template (extends default)
+│   ├── syllabus.html  # Interview syllabus template (extends default); reads from _data/interview.yml via topic_id front matter; renders the module list, the "answer cold" question per module, the traps/drills panels, and prev/next paging across the 18 topics in file order
 │   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
 ├── scripts/
 │   ├── solve_games.py          # Solves every 2x2 game on /game-theory/ and regenerates _data/game_theory.yml
@@ -132,7 +133,9 @@ feliren88.github.io/
 │   ├── contact.md
 │   ├── usecases.md       # Use cases listing page — uses unified .filter-pill filter bar
 │   ├── usecases/         # Individual use case detail pages (20 files) — each sets layout: usecase and uc_id
-│   └── essays/           # Long-form essays (layout: page) — e.g. knowing-when-you-dont-know.md; featured atop /writings/ and homepage
+│   ├── essays/           # Long-form essays (layout: page) — e.g. knowing-when-you-dont-know.md; featured atop /writings/ and homepage
+│   ├── interview.md      # UNLISTED revision hub (/interview/) — see "Unlisted pages" below
+│   └── interview/        # UNLISTED syllabus pages (18 files) — each sets layout: syllabus, topic_id, and a top-level permalink (/transformers/, /ai-safety/, …). Content lives in _data/interview.yml; these files hold front matter only
 ├── _data/          # YAML data files
 │   ├── index.yml
 │   ├── about.yml         # hero copy, stats, and the /about/ section blocks
@@ -149,6 +152,7 @@ feliren88.github.io/
 │   ├── stoic.yml         # All /stoic/ passages — GENERATED, quotes are verbatim from the public-domain sources; verify with scripts/verify_stoic_quotes.py
 │   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
+│   ├── interview.yml     # All /interview/ syllabus content — 18 topics, hand-written; the field contract is documented in the file header
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
@@ -166,14 +170,16 @@ feliren88.github.io/
 │   ├── principles.css   # Page-scoped styles for /principles/ only
 │   ├── small-talk.css   # Page-scoped styles for /small-talk/ only
 │   ├── stoic.css        # Page-scoped styles for /stoic/ only
-│   └── game-theory.css  # Page-scoped styles for /game-theory/ only
+│   ├── game-theory.css  # Page-scoped styles for /game-theory/ only
+│   └── interview.css    # Page-scoped styles for /interview/ and the 18 syllabus pages
 └── js/
     ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal, reveal-group stagger)
     └── components/
         ├── nav.js          # Navigation — single source of truth (NAV_ITEMS array)
         ├── timeline.js     # Project timeline (loaded only on /project/ page)
         ├── high-agency.js  # Widgets for /high-agency/ (loaded only on that page)
-        └── principles.js   # Widgets for /principles/ (loaded only on that page)
+        ├── principles.js   # Widgets for /principles/ (loaded only on that page)
+        └── interview.js    # Module diagrams, revision progress and the hub map for /interview/ and the eighteen syllabus pages
 ```
 
 ### Page-scoped CSS and JS
@@ -648,6 +654,54 @@ obvious and each one caused a real gap on this site:
 Never pair a `robots.txt` `Disallow` with a `noindex` meta on the same URL. The disallow
 stops Google fetching the page, so it never reads the noindex, and the URL can stay in
 the index with no description. Let it be crawled and serve the noindex.
+
+### Module diagrams (`/interview/`)
+
+Every module in `_data/interview.yml` carries a `viz:` block, and `BUILD` in
+`js/components/interview.js` renders it into that module's card. Eight archetypes:
+
+| HTML | SVG |
+|---|---|
+| `flow` `compare` `stack` `matrix` `scale` `parts` `tree` | `curve` |
+
+**Labels are lifted, never invented.** Each label comes from that module's own `covers`,
+`why` or `check`. A diagram restates the module. It is not a place to add a claim, and
+there are no numbers in any of them.
+
+Only `curve` is SVG, because there the shape carries the meaning. Its labels all sit
+outside the plot box in HTML, so no geometry harness is needed to prove they do not
+collide, and it must not carry `preserveAspectRatio="none"` — stretching the box to the
+column width flattens every curve into the straight line the archetype exists to disprove.
+
+The page ships its topic as a JSON island (`#iv-data`), so the script never reads content
+back out of the DOM. Revision state lives in `localStorage` under `iv:done:<topic-id>`,
+and the same key feeds the ring on the syllabus page and the ring on its hub card.
+
+The hub map draws each topic's `links:` as curves between cards. Edges are measured from
+the boxes the browser actually laid out, after layout, so the map survives any reflow or
+column count. Adding a topic needs no map change.
+
+Check the result with a browser rather than by eye. The harness under the session
+scratchpad loads all eighteen pages and asserts every module got a diagram, no `.ivz`
+overflows its box, the page never scrolls sideways, and no page logs a console error.
+
+### Unlisted pages
+`/interview/` and its eighteen syllabus pages are reachable only by typing the URL.
+Four things keep them that way, and all four are required:
+
+1. `robots: noindex, nofollow` in front matter, emitted by `default.html`
+2. `sitemap: false`, so `jekyll-sitemap` skips them
+3. No entry in `NAV_ITEMS` in `js/components/nav.js`. Adding one would also publish
+   every unlisted URL inside a file any visitor can read
+4. No inbound link from `/writings/`, the homepage, or `llms.txt`
+
+`scripts/audit_seo.py` understands this: a page carrying a noindex meta is exempt from
+its NOT-IN-SITEMAP and NO-INBOUND-LINK checks, so the audit still reports zero flags.
+It does count them in `live indexable pages`, which is a naming quirk in the summary line.
+
+This hides the pages from search and from site navigation. It does not make them secret.
+The repository is public, so the Markdown and YAML are readable on GitHub by anyone who
+looks. Never put anything in here that could not be published.
 
 ### Structured Data (JSON-LD)
 Four sources, three hand-written and one from the plugin:

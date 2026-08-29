@@ -1,0 +1,120 @@
+---
+layout: default
+---
+
+{% assign topic = site.data.interview.topics | where: "id", page.topic_id | first %}
+{% if topic == nil %}
+<section class="section page reveal">
+  <p style="color:var(--muted)">Syllabus not found.</p>
+</section>
+{% else %}
+{% assign all = site.data.interview.topics %}
+{% assign idx = 0 %}
+{% for t in all %}{% if t.id == topic.id %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_i = idx | minus: 1 %}
+{% assign next_i = idx | plus: 1 %}
+{% assign covers_n = 0 %}
+{% for m in topic.modules %}{% assign covers_n = covers_n | plus: m.covers.size %}{% endfor %}
+
+<section class="section page reveal syl-page" data-topic="{{ topic.id }}">
+
+  <script type="application/json" id="iv-data">{{ topic | jsonify }}</script>
+
+  <nav class="syl-breadcrumb" aria-label="Breadcrumb">
+    <a href="/interview/" class="syl-back-link">← Interview</a>
+  </nav>
+
+  <header class="syl-header">
+    <div class="syl-header-copy">
+      <span class="syl-group">{{ topic.group }}</span>
+      <h1 class="syl-title">{{ topic.name }}</h1>
+      <p class="syl-blurb">{{ topic.blurb }}</p>
+      <p class="syl-scope">{{ topic.scope }}</p>
+      <ul class="syl-stats">
+        <li><strong>{{ topic.modules | size }}</strong> modules</li>
+        <li><strong>{{ covers_n }}</strong> items</li>
+        <li><strong>{{ topic.modules | size }}</strong> cold questions</li>
+      </ul>
+    </div>
+    <div class="syl-header-ring">
+      <div class="iv-ring" id="iv-ring" role="img"></div>
+      <button type="button" class="syl-reset" id="iv-reset">Reset</button>
+    </div>
+  </header>
+
+  {% if topic.links.size > 0 %}
+  <p class="syl-links">Hands work to
+    {% for l in topic.links %}{% assign lt = all | where: "id", l | first %}
+    <a href="/{{ lt.id }}/">{{ lt.name }}</a>{% unless forloop.last %} and {% endunless %}
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  <nav class="syl-toc" aria-label="Modules">
+    {% for m in topic.modules %}
+    <a class="syl-toc-item" href="#m{{ forloop.index }}">
+      <span class="syl-toc-num">{{ forloop.index }}</span>
+      <span class="syl-toc-name">{{ m.name }}</span>
+      <span class="syl-toc-tick" aria-hidden="true"></span>
+    </a>
+    {% endfor %}
+  </nav>
+
+  <ol class="syl-modules">
+    {% for m in topic.modules %}
+    <li class="syl-module" id="m{{ forloop.index }}" data-i="{{ forloop.index0 }}">
+      <div class="syl-module-head">
+        <span class="syl-module-num">{{ forloop.index }}</span>
+        <div>
+          <h2 class="syl-module-name">{{ m.name }}</h2>
+          <p class="syl-module-why">{{ m.why }}</p>
+        </div>
+        <button type="button" class="syl-done" aria-pressed="false">
+          <i aria-hidden="true"></i><span>Mark revised</span>
+        </button>
+      </div>
+
+      <div class="syl-viz"></div>
+
+      <ul class="syl-covers">
+        {% for c in m.covers %}<li>{{ c }}</li>{% endfor %}
+      </ul>
+      <p class="syl-check"><span class="syl-check-label">Answer cold</span>{{ m.check }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+
+  <div class="syl-cards" id="iv-cards-block">
+    <div class="syl-cards-head">
+      <h2 class="syl-panel-title">Cold questions</h2>
+      <div class="syl-cards-ctl">
+        <button type="button" id="iv-card-prev" aria-label="Previous question">←</button>
+        <button type="button" id="iv-card-shuffle">Shuffle</button>
+        <button type="button" id="iv-card-next" aria-label="Next question">→</button>
+      </div>
+    </div>
+    <div id="iv-cards"></div>
+  </div>
+
+  <div class="syl-split">
+    <div class="syl-panel syl-panel--traps">
+      <h2 class="syl-panel-title">Where points get lost</h2>
+      <ul>{% for t in topic.traps %}<li>{{ t }}</li>{% endfor %}</ul>
+    </div>
+    <div class="syl-panel syl-panel--drills">
+      <h2 class="syl-panel-title">Do these with your hands</h2>
+      <ul>{% for d in topic.drills %}<li>{{ d }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+
+  <nav class="syl-pager" aria-label="Other syllabi">
+    {% if idx > 0 %}{% assign p = all[prev_i] %}
+    <a class="syl-pager-link syl-pager-prev" href="/{{ p.id }}/"><span>Previous</span>{{ p.name }}</a>
+    {% else %}<span></span>{% endif %}
+    {% if next_i < all.size %}{% assign n = all[next_i] %}
+    <a class="syl-pager-link syl-pager-next" href="/{{ n.id }}/"><span>Next</span>{{ n.name }}</a>
+    {% endif %}
+  </nav>
+
+</section>
+{% endif %}

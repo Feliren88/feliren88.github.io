@@ -1,0 +1,2800 @@
+# Interview revision syllabi — /interview/ and one page per topic.
+# Hand-written. House style applies: British spelling, short sentences, no em dashes.
+#
+# Each topic renders twice:
+#   - as a card on the /interview/ hub (name, blurb, slug, modules count)
+#   - as its own page at /<slug>/ via _layouts/syllabus.html
+#
+# Field contract per topic:
+#   id       slug and permalink, must be unique across the whole site
+#   name     display title
+#   group    hub grouping key: foundations | models | systems | judgement
+#   blurb    one sentence, what an interview on this actually tests
+#   scope    what this track owns, and what it hands to a neighbouring track
+#   modules  ordered study units. Each has name, why, covers[], check
+#   links    other topic ids this one hands work to; the hub map draws these
+#   traps    mistakes that cost points in a live interview
+#   drills   things to do with your hands, never things to read
+#
+# `check` is the question you should be able to answer cold, no notes.
+#
+# Every module carries a `viz:` block that js/components/interview.js turns into
+# a diagram at the top of that module. Eight archetypes:
+#
+#   flow     ordered stages, `loop: true` closes the cycle
+#   compare  two or three columns of contrasting items
+#   stack    layers, last entry is the base
+#   matrix   two by two; `cells` reads top-left, top-right, bottom-left, bottom-right
+#   scale    a spectrum with labelled stops, `on` marks one
+#   parts    a centre with labelled parts around it
+#   tree     a root question with branches
+#   curve    SVG axes with two curves; `shape` is u, diverge, diag or rise
+#
+# Labels are lifted from that module's own covers, why or check. A diagram
+# restates the module. It never adds a claim, and it carries no numbers.
+
+topics:
+  # ── Foundations ──────────────────────────────────────────────────────────
+  - id: bayesian-statistics
+    name: Bayesian Statistics
+    group: foundations
+    blurb: "Whether you can reason about a parameter you never get to observe."
+    scope: "Owns priors, posteriors, and how you compute them. Hands calibration and coverage guarantees to uncertainty quantification."
+    links: [uncertainty-quantification]
+    modules:
+      - name: Probability as belief
+        why: "Every later answer rests on whether you can say what a probability refers to."
+        covers:
+          - Sample space, events, conditional probability
+          - "Bayes rule: prior, likelihood, evidence, posterior"
+          - Joint, marginal and conditional distributions
+          - Exchangeability and what de Finetti's theorem buys you
+          - The likelihood principle and where it bites
+          - Credible interval versus confidence interval
+        check: "A test is 99% accurate and the disease affects 1 in 10,000. Give the posterior and explain the number to a non-statistician."
+        viz:
+          type: flow
+          steps:
+          - Prior belief
+          - Observe data
+          - Posterior belief
+          loop: true
+      - name: Priors and what they encode
+        why: "Interviewers probe priors to find out if you understand assumptions or just run a library."
+        covers:
+          - "Conjugate families: Beta-Binomial, Normal-Normal, Dirichlet-Multinomial, Gamma-Poisson"
+          - Weakly informative priors and why they beat flat ones
+          - Jeffreys priors and invariance
+          - Improper priors and when the posterior still exists
+          - Prior predictive checks
+          - Prior sensitivity analysis
+        check: "Your prior is Beta(1,1) and you see 3 heads in 3 flips. Give the posterior mean and say why it is not 1."
+        viz:
+          type: scale
+          lo: Says little
+          hi: Says a lot
+          stops:
+          - Flat
+          - Weakly informative
+          - Strongly informative
+          'on': 1
+      - name: Computing the posterior
+        why: "The whole field is applied only because these algorithms work."
+        covers:
+          - Grid approximation and where it dies
+          - Laplace approximation
+          - "Metropolis-Hastings: proposal, acceptance ratio, tuning"
+          - Gibbs sampling and full conditionals
+          - "Hamiltonian Monte Carlo: leapfrog, step size, trajectory length"
+          - NUTS and why it removed a tuning parameter
+          - "Variational inference: ELBO, mean-field, reparameterisation trick"
+          - "Diagnostics: R-hat, effective sample size, divergent transitions, trace plots"
+        check: "Why does random-walk Metropolis scale badly with dimension, and what does HMC do differently?"
+        viz:
+          type: tree
+          root: Getting the posterior
+          branches:
+          - k: Exact
+            items:
+            - Conjugate update
+            - Grid over a small space
+          - k: Sampling
+            items:
+            - Metropolis
+            - Gibbs
+            - Hamiltonian Monte Carlo
+          - k: Approximate
+            items:
+            - Laplace
+            - Variational inference
+      - name: Hierarchical models
+        why: "Partial pooling is the single most useful Bayesian idea in applied work."
+        covers:
+          - Complete pooling, no pooling, partial pooling
+          - Shrinkage and borrowing strength
+          - Group-level and varying-slope models
+          - Neal's funnel and the non-centred parameterisation
+          - Hyperpriors on scale parameters
+          - When a hierarchy helps and when it hides structure
+        check: "Explain shrinkage in the eight-schools problem to a product manager in three sentences."
+        viz:
+          type: scale
+          lo: Every group alone
+          hi: All groups identical
+          stops:
+          - No pooling
+          - Partial pooling
+          - Complete pooling
+          'on': 1
+      - name: Checking and comparing models
+        why: "Anyone can fit a model. The interview is about whether you would trust it."
+        covers:
+          - Posterior predictive checks and test quantities
+          - "WAIC and LOO-CV, plus the Pareto-k diagnostic"
+          - Bayes factors, marginal likelihood, and their sensitivity to priors
+          - Model averaging and stacking
+          - Calibration of posterior intervals
+          - Prior-data conflict
+        check: "When would you refuse to report a Bayes factor, and what would you report instead?"
+        viz:
+          type: flow
+          steps:
+          - Fit
+          - Posterior predictive check
+          - Leave-one-out
+          - Compare
+          loop: true
+      - name: Bayesian methods inside machine learning
+        why: "This is where the track meets the rest of your CV."
+        covers:
+          - Bayesian linear and logistic regression
+          - "Gaussian processes: kernels, marginal likelihood, scaling limits"
+          - "Bayesian optimisation: EI, UCB, Thompson sampling"
+          - Bayesian neural networks and why they are hard
+          - Laplace approximation over weights, last-layer Bayes
+          - Deep ensembles as a cheap approximation
+        check: "Why does a deep ensemble often beat mean-field variational inference on calibration?"
+        viz:
+          type: compare
+          cols:
+          - k: Gaussian process
+            items:
+            - Kernel sets the shape
+            - Scales badly with data
+          - k: Bayesian neural net
+            items:
+            - Posterior over weights
+            - Hard to compute
+          - k: Deep ensemble
+            items:
+            - Several full fits
+            - Cheap approximation
+    traps:
+      - Describing a credible interval with confidence-interval language
+      - Reporting MCMC results with no convergence diagnostics
+      - Claiming Bayesian methods are automatically calibrated
+      - Choosing a conjugate prior for convenience and never saying so
+    drills:
+      - Derive the Beta-Binomial posterior on paper, no lookup
+      - Write Metropolis-Hastings in under 30 lines of NumPy
+      - Fit eight schools in both parameterisations and compare divergences
+      - Explain R-hat to a rubber duck in 60 seconds
+
+  - id: frequentist-statistics
+    name: Frequentist Statistics
+    group: foundations
+    blurb: "Whether your conclusions survive someone asking how you would be wrong."
+    scope: "Owns estimators, testing, experiment design and causal identification. Hands posterior belief to Bayesian statistics."
+    links: [bayesian-statistics, machine-learning]
+    modules:
+      - name: Estimators and their properties
+        why: "The vocabulary every other answer is built from."
+        covers:
+          - Bias, variance, mean squared error, consistency
+          - Efficiency and the Cramér-Rao bound
+          - Sufficiency and the factorisation theorem
+          - "Maximum likelihood: score, Fisher information, asymptotic normality"
+          - Method of moments
+          - Regularised estimators and the bias-variance trade
+        check: "Show the MLE of the variance is biased, then argue why people still use it."
+        viz:
+          type: matrix
+          x:
+          - Low variance
+          - High variance
+          "y":
+          - Low bias
+          - High bias
+          cells:
+          - Efficient estimate
+          - Noisy but centred
+          - Systematically off
+          - Off and unstable
+      - name: Sampling distributions and intervals
+        why: "Half of applied statistics is putting an honest error bar on a number."
+        covers:
+          - Law of large numbers, central limit theorem, and their conditions
+          - Delta method for functions of estimates
+          - "Standard errors: analytic, sandwich, clustered"
+          - t, chi-square and F distributions
+          - Confidence interval as a procedure with long-run coverage
+          - "Bootstrap: percentile, basic, BCa, and where it fails"
+        check: "Define a 95% confidence interval without saying anything about this particular interval."
+        viz:
+          type: flow
+          steps:
+          - Population
+          - Sample
+          - Estimate
+          - Sampling distribution
+          - Interval
+      - name: Hypothesis testing
+        why: "The most common place candidates say something technically false."
+        covers:
+          - Null and alternative, type I and type II error
+          - Power, minimum detectable effect, sample size
+          - "The p-value: definition, and the four things it is not"
+          - Neyman-Pearson framing versus Fisher framing
+          - Likelihood ratio, Wald and score tests
+          - Non-parametric tests and when to reach for them
+        check: "Define a p-value in one sentence, then say what a non-significant result does and does not license."
+        viz:
+          type: matrix
+          x:
+          - Null is true
+          - Null is false
+          "y":
+          - Reject
+          - Do not reject
+          cells:
+          - Type I error
+          - Correct rejection
+          - Correct
+          - Type II error
+      - name: Multiple comparisons and researcher freedom
+        why: "Anywhere you run many models, this decides whether the result is real."
+        covers:
+          - Family-wise error rate, Bonferroni, Holm, Šidák
+          - False discovery rate and Benjamini-Hochberg
+          - Garden of forking paths, p-hacking, HARKing
+          - Pre-registration and analysis plans
+          - Peeking, sequential testing, alpha spending
+          - Always-valid inference and confidence sequences
+        check: "You ran 40 metrics on one experiment and two are significant. What do you tell the product team?"
+        viz:
+          type: scale
+          lo: Every test stands alone
+          hi: Every test corrected
+          stops:
+          - No correction
+          - False discovery rate
+          - Family-wise error
+          'on': 1
+      - name: Experiment design and A/B testing
+        why: "The applied-scientist version of this track, asked at almost every company."
+        covers:
+          - Randomisation unit, SUTVA, interference and network effects
+          - Sample size, MDE, and duration planning
+          - "Variance reduction: CUPED, stratification, covariate adjustment"
+          - Ratio metrics and the delta method
+          - Novelty and primacy effects
+          - Switchback and cluster-randomised designs
+          - Guardrail metrics and overall evaluation criteria
+        check: "Your treatment lifts clicks and drops revenue per session. Walk through what you check before deciding."
+        viz:
+          type: flow
+          steps:
+          - Randomise
+          - Run
+          - Measure
+          - Decide
+          loop: true
+      - name: Causal inference
+        why: "The gap between correlation and a decision is where senior candidates separate."
+        covers:
+          - Potential outcomes, ATE, ATT, CATE
+          - DAGs, backdoor and frontdoor criteria, colliders
+          - Confounding, selection bias, Simpson's paradox
+          - Propensity scores, matching, weighting, overlap
+          - Instrumental variables and exclusion restriction
+          - Difference in differences and parallel trends
+          - Regression discontinuity
+          - Sensitivity analysis for unmeasured confounding
+        check: "You cannot randomise. Give three designs and state the assumption each one leans on."
+        viz:
+          type: tree
+          root: You cannot randomise
+          branches:
+          - k: Close the backdoor
+            items:
+            - Matching
+            - Propensity weighting
+          - k: Find an instrument
+            items:
+            - Exclusion restriction
+          - k: Use time or a cutoff
+            items:
+            - Difference in differences
+            - Regression discontinuity
+      - name: Regression in practice
+        why: "Still the default tool when someone needs an answer this afternoon."
+        covers:
+          - OLS assumptions and what breaks under each violation
+          - Heteroskedasticity, robust and clustered standard errors
+          - Multicollinearity and variance inflation
+          - "Generalised linear models: link functions, dispersion, offsets"
+          - Residual diagnostics and influence measures
+          - Interpreting coefficients under transformation
+        check: "Your standard errors halved after you switched from clustered to classical. Which do you trust and why?"
+        viz:
+          type: stack
+          layers:
+          - What you claim
+          - Standard errors
+          - Model form
+          - Assumptions
+    traps:
+      - "Saying a p-value is the probability the null is true"
+      - Treating a non-significant result as evidence of no effect
+      - Stopping an experiment the day it turns significant
+      - Reporting i.i.d. standard errors on clustered or repeated-measure data
+    drills:
+      - Simulate 10,000 experiments and confirm your interval covers 95% of the time
+      - Compute a required sample size from a stated MDE by hand
+      - Bootstrap a median and compare with the analytic approximation
+      - Draw the DAG for a confounded product metric before touching data
+
+  - id: machine-learning
+    name: Machine Learning
+    group: foundations
+    blurb: "Whether you can turn a vague business problem into a model somebody can ship."
+    scope: "Owns classical models, evaluation and the case-study round. Hands network training to deep learning."
+    links: [deep-learning]
+    modules:
+      - name: Framing the problem
+        why: "Most failed ML projects failed here, and interviewers know it."
+        covers:
+          - Supervised, unsupervised, self-supervised, reinforcement
+          - Choosing a target, and target leakage
+          - Loss function versus business metric
+          - Offline metric versus online outcome
+          - Baselines you must beat before modelling
+          - Deciding when machine learning is the wrong tool
+        check: "A team wants to predict churn. What do you ask before writing any code?"
+        viz:
+          type: flow
+          steps:
+          - Business question
+          - Target
+          - Loss
+          - Baseline
+          - Decision
+      - name: The core model families
+        why: "Boosted trees still win a lot of tabular problems, and you will be asked why."
+        covers:
+          - Linear and logistic regression, regularisation, elastic net
+          - Decision trees, splitting criteria, pruning
+          - Bagging, random forests, feature importance and its flaws
+          - "Gradient boosting: XGBoost, LightGBM, CatBoost, and the differences"
+          - Support vector machines and the kernel trick
+          - k-nearest neighbours, naive Bayes
+          - "Unsupervised: k-means, DBSCAN, hierarchical, GMM"
+          - "Dimensionality reduction: PCA, t-SNE, UMAP"
+        check: "Tabular data, 100k rows, mixed types, missing values. Pick a model and defend it in 90 seconds."
+        viz:
+          type: tree
+          root: Tabular problem
+          branches:
+          - k: Linear
+            items:
+            - Regression
+            - Regularisation
+          - k: Trees
+            items:
+            - Random forest
+            - Gradient boosting
+          - k: Distance
+            items:
+            - Nearest neighbours
+            - Support vector machine
+      - name: Evaluation you can defend
+        why: "The fastest way to fail an interview is a leaky validation split."
+        covers:
+          - Train, validation, test discipline
+          - "Cross-validation: k-fold, stratified, grouped, nested"
+          - Time-series splits and forward chaining
+          - Leakage sources, including preprocessing before the split
+          - "Metrics: precision, recall, F1, ROC-AUC, PR-AUC, log loss"
+          - Threshold selection under asymmetric costs
+          - Calibration and why AUC ignores it
+        check: "When is PR-AUC the right metric and ROC-AUC misleading?"
+        viz:
+          type: flow
+          steps:
+          - Split first
+          - Fit on train
+          - Tune on validation
+          - Report on test
+      - name: Features
+        why: "On tabular problems this moves the number more than the model choice."
+        covers:
+          - Categorical encoding, target encoding and its leakage
+          - Scaling, binning, transformations
+          - Missing-value strategies and missingness as a signal
+          - Interaction and ratio features
+          - Feature selection, permutation importance, SHAP
+          - Monotonic constraints for regulated settings
+        check: "Explain how target encoding leaks and how you would do it safely."
+        viz:
+          type: compare
+          cols:
+          - k: Fit inside the fold
+            items:
+            - Scalers
+            - Encoders
+            - Target encoding
+          - k: Fit on everything
+            items:
+            - Test set leaks in
+            - Score looks better than it is
+      - name: Imbalance and shift
+        why: "The two conditions almost every real dataset has."
+        covers:
+          - Class weights, resampling, SMOTE, focal loss
+          - Why resampling breaks calibration
+          - Covariate shift, label shift, concept drift
+          - Importance weighting
+          - Drift detection and monitoring
+          - Retraining triggers
+        check: "You have 0.1% positives. Give your approach and say what you would sacrifice."
+        viz:
+          type: tree
+          root: The score dropped
+          branches:
+          - k: Covariate shift
+            items:
+            - Inputs moved
+          - k: Label shift
+            items:
+            - Base rate moved
+          - k: Concept drift
+            items:
+            - The relationship moved
+      - name: Enough theory to hold a conversation
+        why: "Research-flavoured roles will probe one level below the API."
+        covers:
+          - Bias-variance decomposition
+          - Overfitting, underfitting, capacity, regularisation
+          - Generalisation bounds at an intuitive level
+          - Curse of dimensionality
+          - No free lunch
+          - Double descent and the overparameterised regime
+        check: "Why does a model with more parameters than data points sometimes generalise well?"
+        viz:
+          type: curve
+          shape: u
+          x: Model capacity
+          "y": Error
+          a: Training error
+          b: Test error
+      - name: The case study round
+        why: "An hour-long open question is standard for applied roles."
+        covers:
+          - Clarifying scope, users, constraints, and success criteria
+          - Data availability and labelling cost
+          - Baseline, v1, and what you would ship in a week
+          - Serving constraints, latency, cost
+          - Monitoring and the failure plan
+          - How you would know the model made things worse
+        check: "Design fraud detection for a payments company. Twenty minutes, whiteboard, no code."
+        viz:
+          type: flow
+          steps:
+          - Clarify
+          - Baseline
+          - Model
+          - Ship
+          - Monitor
+          loop: true
+    traps:
+      - Reaching for a neural network on 5,000 rows of tabular data
+      - Fitting the scaler before the split
+      - Optimising AUC when the product needs a calibrated probability
+      - Naming models without connecting any of them to the stated constraint
+    drills:
+      - Rebuild logistic regression with gradient descent from scratch
+      - Take one Kaggle tabular set and beat your own baseline three ways
+      - Write the leakage checklist you would run before every submission
+      - Practise a 20-minute case study out loud, timed
+
+  - id: deep-learning
+    name: Deep Learning
+    group: foundations
+    blurb: "Whether you can make a network train, and explain it when it does not."
+    scope: "Owns optimisation, architecture and scale. Hands the attention block to transformers and post-training to LLM training."
+    links: [transformers, llm-training]
+    modules:
+      - name: Optimisation
+        why: "Almost every training failure traces back to something in this module."
+        covers:
+          - Gradient descent, stochastic gradient descent, mini-batching
+          - Momentum, Nesterov, RMSProp
+          - "Adam and AdamW, and why decoupled weight decay matters"
+          - "Learning rate schedules: warmup, cosine, linear decay, restarts"
+          - Gradient clipping and loss scaling
+          - Batch size, learning rate scaling rules, critical batch size
+          - Sharpness, flat minima, and what the evidence actually shows
+        check: "Why does Adam with L2 penalty behave differently from AdamW?"
+        viz:
+          type: parts
+          centre: One update step
+          around:
+          - Gradient
+          - Learning rate
+          - Momentum
+          - Weight decay
+      - name: Initialisation and normalisation
+        why: "The parts people copy without understanding, then cannot debug."
+        covers:
+          - Xavier and He initialisation, and the variance argument
+          - Batch normalisation, train versus eval behaviour
+          - Layer norm, RMSNorm, group norm
+          - Why batch norm fails at small batch size and in distributed settings
+          - Residual connections and gradient flow
+          - Pre-norm versus post-norm placement
+        check: "You moved from batch size 256 to 8 and training collapsed. Name the likely cause."
+        viz:
+          type: compare
+          cols:
+          - k: Batch norm
+            items:
+            - Normalises across the batch
+            - Breaks at small batch
+          - k: Layer norm
+            items:
+            - Normalises across features
+            - Batch size does not matter
+          - k: RMSNorm
+            items:
+            - Drops the mean term
+            - Cheaper
+      - name: Regularisation and generalisation
+        why: "Interviewers use this to test whether you know the modern picture."
+        covers:
+          - Dropout, and why it is rarer in large models
+          - Weight decay, early stopping, label smoothing
+          - Data augmentation, mixup, cutmix
+          - Implicit regularisation from SGD
+          - Double descent
+          - Memorisation versus generalisation
+        check: "Your model hits zero training loss and validation is still improving. What is happening?"
+        viz:
+          type: scale
+          lo: Too little capacity used
+          hi: Too much capacity used
+          stops:
+          - Underfits
+          - Fits
+          - Memorises
+          'on': 1
+      - name: Backpropagation and memory
+        why: "Anyone touching large models is expected to reason about memory."
+        covers:
+          - Chain rule on a computational graph, reverse-mode autodiff
+          - What is stored for the backward pass
+          - Activation checkpointing, compute versus memory
+          - Vanishing and exploding gradients
+          - Straight-through estimators and non-differentiable ops
+          - Optimiser state memory cost
+        check: "Estimate the memory needed to train a 7B model in bf16 with Adam. Show the terms."
+        viz:
+          type: flow
+          steps:
+          - Forward pass
+          - Store activations
+          - Backward pass
+          - Free the memory
+          loop: true
+      - name: Architectures and when each fits
+        why: "You need a reason for the choice you made."
+        covers:
+          - MLPs, and what they cannot do cheaply
+          - "CNNs: locality, weight sharing, translation equivariance"
+          - "RNNs and LSTMs: sequence memory, gating, the long-range problem"
+          - Transformers as the general-purpose default
+          - Graph neural networks and message passing
+          - Autoencoders, VAEs, diffusion, GANs
+        check: "Give three tasks where a convolutional network still beats a transformer, with the reason."
+        viz:
+          type: tree
+          root: What shape is the input
+          branches:
+          - k: Grid
+            items:
+            - Convolutional network
+          - k: Sequence
+            items:
+            - Recurrent network
+            - Transformer
+          - k: Graph
+            items:
+            - Message passing
+      - name: Training at scale
+        why: "The line between a research engineer and a hobbyist."
+        covers:
+          - "Parallelism: data, tensor, pipeline, sequence, expert"
+          - ZeRO stages and FSDP
+          - "Mixed precision: fp16, bf16, fp8, and loss scaling"
+          - Gradient accumulation and effective batch size
+          - Communication overlap, NCCL, interconnect limits
+          - Model FLOPs utilisation and how to raise it
+        check: "Explain the difference between tensor parallelism and pipeline parallelism, and the cost of each."
+        viz:
+          type: stack
+          layers:
+          - Expert parallel
+          - Pipeline parallel
+          - Tensor parallel
+          - Data parallel
+      - name: Debugging
+        why: "A favourite question because it separates readers from practitioners."
+        covers:
+          - Overfit a single batch first
+          - Expected loss at initialisation
+          - Gradient and activation norm tracking
+          - Learning-rate range test
+          - Seed variance and how many runs you need
+          - Finding NaNs and where they come from
+          - Data pipeline bugs that look like model bugs
+        check: "Loss goes to NaN at step 3,000. Give your ordered debugging plan."
+        viz:
+          type: flow
+          steps:
+          - Overfit one batch
+          - Check the loss at init
+          - Watch gradient norms
+          - Vary the seed
+    traps:
+      - Blaming the architecture before checking the data loader
+      - Comparing runs that differ in more than one thing
+      - Quoting a single seed as a result
+      - Explaining batch norm as fixing internal covariate shift with no caveat
+    drills:
+      - Write backprop for a two-layer MLP by hand, then check against autograd
+      - Overfit 32 examples to zero loss on a fresh codebase before every project
+      - Profile one training step and find where the time goes
+      - Reproduce a paper's training curve at small scale
+
+  # ── Models ───────────────────────────────────────────────────────────────
+  - id: transformers
+    name: Transformers
+    group: models
+    blurb: "Whether you know the architecture at the level of shapes and memory."
+    scope: "Owns the architecture and its inference behaviour. Hands the training recipe to LLM training and internals to mechanistic interpretability."
+    links: [llm-training, mechanistic-interpretability]
+    modules:
+      - name: Attention mechanics
+        why: "You will be asked to write it, and shapes are where people stumble."
+        covers:
+          - Queries, keys, values, and what each one is for
+          - "Scaled dot product, and why the scale is 1/sqrt(d_k)"
+          - Softmax, temperature, attention entropy
+          - Multi-head attention, head dimension, concatenation and output projection
+          - Causal masking, padding masks, attention bias
+          - "Complexity: O(T^2 d) time, O(T^2) attention memory"
+          - The KV cache and its size formula
+        check: "Write every tensor shape in a multi-head attention forward pass for batch B, length T, heads H, model dim D."
+        viz:
+          type: flow
+          steps:
+          - Project to Q, K, V
+          - Score
+          - Mask
+          - Softmax
+          - Weighted sum
+      - name: Block anatomy
+        why: "Parameter counting and residual reasoning come up constantly."
+        covers:
+          - The residual stream as a shared communication channel
+          - Pre-LN versus post-LN, and why pre-LN trains more easily
+          - LayerNorm and RMSNorm
+          - "Feed-forward block: expansion ratio, GeLU, SwiGLU"
+          - Embedding and unembedding, weight tying
+          - Counting parameters for a given config
+        check: "Given d_model, n_layers and an FFN ratio of 4, derive the parameter count."
+        viz:
+          type: parts
+          centre: Residual stream
+          around:
+          - Embedding writes into it
+          - Attention reads and writes
+          - Feed-forward reads and writes
+          - Unembedding reads it
+      - name: Position
+        why: "Long-context questions all route through this."
+        covers:
+          - Sinusoidal and learned absolute positions
+          - Relative position bias
+          - "RoPE: rotation, frequency bands, why it composes with attention"
+          - ALiBi and linear biases
+          - Length extrapolation, position interpolation, NTK scaling, YaRN
+          - What happens with no positional encoding at all
+        check: "Explain RoPE well enough that someone could implement it, then say how you extend context fourfold."
+        viz:
+          type: compare
+          cols:
+          - k: RoPE
+            items:
+            - Rotates queries and keys
+            - Extends by interpolation
+          - k: ALiBi
+            items:
+            - Bias grows with distance
+            - Extrapolates
+          - k: Learned
+            items:
+            - One vector per slot
+            - Fixed length
+      - name: Efficient attention and long context
+        why: "The practical half of every serving conversation."
+        covers:
+          - "FlashAttention: tiling, online softmax, IO-awareness, exactness"
+          - "Multi-query and grouped-query attention: cache savings and quality cost"
+          - Sliding window and local attention
+          - Sparse and block-sparse patterns
+          - Linear attention and kernel approximations
+          - State-space models and Mamba as an alternative
+          - PagedAttention and memory fragmentation
+        check: "Why is FlashAttention faster when it does the same arithmetic?"
+        viz:
+          type: compare
+          cols:
+          - k: FlashAttention
+            items:
+            - Same arithmetic
+            - Fewer memory reads
+          - k: Grouped-query
+            items:
+            - Fewer key and value heads
+            - Smaller cache
+          - k: Sliding window
+            items:
+            - Local context only
+            - Linear in length
+      - name: The model family
+        why: "Choosing the right variant is a design decision you have to justify."
+        covers:
+          - "Encoder-only: BERT, masked language modelling, when it still wins"
+          - "Decoder-only: GPT family, causal language modelling"
+          - "Encoder-decoder: T5, BART, and cross-attention"
+          - "Mixture of experts: routing, top-k, load balancing loss, capacity factor"
+          - Vision transformers and patch embedding
+          - Hybrid and sparse designs
+        check: "For a classification task with 50k labelled examples, would you fine-tune an encoder or prompt a decoder?"
+        viz:
+          type: tree
+          root: Which variant
+          branches:
+          - k: Encoder-only
+            items:
+            - Classification
+            - BERT
+          - k: Decoder-only
+            items:
+            - Generation
+            - GPT
+          - k: Encoder-decoder
+            items:
+            - Translation
+            - T5
+      - name: Inference
+        why: "Deployment questions are now standard even in research interviews."
+        covers:
+          - Prefill versus decode, and why they have different bottlenecks
+          - Compute-bound versus memory-bandwidth-bound
+          - Continuous batching and scheduling
+          - "Sampling: greedy, temperature, top-k, top-p, min-p, beam search"
+          - Speculative decoding and draft models
+          - "Quantisation: int8, int4, GPTQ, AWQ, and quality loss"
+          - Throughput versus latency versus cost
+        check: "Decode is slow and the GPU is at 20% utilisation. Explain why and what you change."
+        viz:
+          type: compare
+          cols:
+          - k: Prefill
+            items:
+            - Whole prompt at once
+            - Compute bound
+          - k: Decode
+            items:
+            - One token at a time
+            - Memory bandwidth bound
+    traps:
+      - Saying attention is quadratic without saying in what
+      - Calling FlashAttention an approximation
+      - Confusing d_model with head dimension
+      - Forgetting the KV cache when estimating serving memory
+    drills:
+      - Implement attention from scratch in NumPy, then match PyTorch output
+      - Compute KV cache size for a real config at 32k context
+      - Read one production inference server's scheduler code
+      - Explain the full forward pass out loud in five minutes
+
+  - id: llm-training
+    name: LLM Training
+    group: models
+    blurb: "Whether you could take a base model to a useful assistant and know what each step buys."
+    scope: "Owns data, pretraining, and post-training. Hands the architecture to transformers and behaviour risk to AI safety."
+    links: [ai-safety, prompt-engineering]
+    modules:
+      - name: Data
+        why: "The part with the largest effect and the least glamour."
+        covers:
+          - Sources, licensing, and the web-crawl reality
+          - "Deduplication: exact, MinHash, suffix arrays, and its effect on loss"
+          - Quality filtering, classifier-based selection, perplexity filters
+          - Benchmark decontamination
+          - "Tokenizer training: BPE, WordPiece, SentencePiece, byte fallback"
+          - Vocabulary size trade-offs and multilingual fertility
+          - Mixture weights, upsampling, and data curricula
+        check: "Your model does well on a benchmark and badly in production. How do you test for contamination?"
+        viz:
+          type: flow
+          steps:
+          - Crawl
+          - Deduplicate
+          - Filter
+          - Decontaminate
+          - Tokenise
+      - name: Pretraining
+        why: "Even if you never run one, you must reason about the budget."
+        covers:
+          - Next-token prediction and the loss it optimises
+          - "Scaling laws: Kaplan, Chinchilla, and the token-to-parameter ratio"
+          - Compute budget arithmetic, 6ND, and hardware hours
+          - Batch size schedules and learning-rate transfer
+          - Loss spikes, divergence, and rollback strategy
+          - Checkpointing and fault tolerance at scale
+          - Data ordering and late-stage annealing
+        check: "You have a fixed compute budget. Derive the model size and token count you would choose."
+        viz:
+          type: curve
+          shape: diverge
+          x: Tokens seen
+          "y": Loss
+          a: Small model
+          b: Large model
+      - name: Supervised fine-tuning
+        why: "The cheapest lever, and the one you will most likely own."
+        covers:
+          - Instruction data, sources, and quality over quantity
+          - Chat templates and special tokens
+          - Loss masking on prompt tokens
+          - Packing versus padding
+          - "Parameter-efficient methods: LoRA, QLoRA, DoRA, adapters, prefix tuning"
+          - Catastrophic forgetting and replay
+          - Hyperparameters that actually matter here
+        check: "Why mask the loss on prompt tokens, and what changes if you do not?"
+        viz:
+          type: compare
+          cols:
+          - k: Full fine-tune
+            items:
+            - Every weight moves
+            - Most memory
+          - k: LoRA
+            items:
+            - Low-rank update
+            - Small adapter
+          - k: QLoRA
+            items:
+            - Quantised base model
+            - Least memory
+      - name: Learning from preferences
+        why: "The step that turns a capable model into a usable one."
+        covers:
+          - "Reward modelling: pairwise data, Bradley-Terry, reward model overfitting"
+          - "PPO for RLHF: policy, value head, advantage, KL penalty to the reference"
+          - Reward hacking and over-optimisation
+          - "DPO and the direct-alignment family: IPO, KTO, ORPO, SimPO"
+          - Rejection sampling and best-of-n
+          - RLAIF and constitutional feedback
+          - Alignment tax, and where it shows up
+        check: "Compare DPO and PPO on data needs, stability, and what each one gives up."
+        viz:
+          type: flow
+          steps:
+          - Collect pairs
+          - Train a reward model
+          - Optimise the policy
+          - Hold it near the reference
+          loop: true
+      - name: Reasoning and verifiable rewards
+        why: "The most active area, so expect a current-work question."
+        covers:
+          - Chain-of-thought supervision versus emergent reasoning
+          - Reinforcement learning from verifiable rewards
+          - "GRPO and group-relative advantages"
+          - Process reward models versus outcome reward models
+          - Test-time compute, self-consistency, search
+          - Distillation from a stronger teacher
+          - Reward design for tasks with no checker
+        check: "You can verify maths answers automatically. Describe the training loop and its failure modes."
+        viz:
+          type: flow
+          steps:
+          - Sample answers
+          - Verify
+          - Reward the correct ones
+          - Update
+      - name: Evaluation across a run
+        why: "Training is only as good as the signal you steer by."
+        covers:
+          - Held-out loss versus downstream benchmarks
+          - Benchmark saturation and contamination
+          - "LLM-as-judge: position bias, verbosity bias, self-preference"
+          - Pairwise human evaluation and arenas
+          - Regression suites and per-capability tracking
+          - Safety and refusal evaluations alongside capability
+        check: "Your new checkpoint wins on the judge and loses with humans. What do you check first?"
+        viz:
+          type: tree
+          root: Did it improve
+          branches:
+          - k: Automatic
+            items:
+            - Held-out loss
+            - Benchmarks
+          - k: Judge
+            items:
+            - Model as judge
+            - Rubrics
+          - k: Human
+            items:
+            - Pairwise preference
+            - Arena
+    traps:
+      - Quoting Chinchilla ratios with no mention of inference cost
+      - Treating DPO as strictly better than PPO
+      - Reporting benchmark gains with no contamination check
+      - Ignoring that safety training and capability training interact
+    drills:
+      - Fine-tune a small open model with LoRA end to end, including the chat template
+      - Train a reward model on a public preference set and inspect its errors
+      - Run DPO on the same data and compare behaviour, not just the score
+      - Build a 50-example private eval set you trust more than any benchmark
+
+  - id: nlp
+    name: Natural Language Processing
+    group: models
+    blurb: "Whether you understand language as data, including the languages that break your pipeline."
+    scope: "Owns text tasks, metrics, retrieval and multilingual work. Hands model internals to transformers."
+    links: [transformers, multimodality]
+    modules:
+      - name: Text as data
+        why: "Every unicode and tokenisation bug you will ever ship starts here."
+        covers:
+          - "Tokenisation: word, subword, byte, character"
+          - Normalisation, casing, unicode forms, whitespace
+          - Morphology, agglutination, and why fertility differs by language
+          - Segmentation for languages with no spaces
+          - Handling emoji, code, and mixed scripts
+          - Truncation and its silent damage
+        check: "Why does the same sentence cost three times more tokens in one language than another, and what does that break?"
+        viz:
+          type: flow
+          steps:
+          - Raw text
+          - Normalise
+          - Segment
+          - Tokenise
+          - Ids
+      - name: Representations
+        why: "Retrieval systems live or die on this."
+        covers:
+          - "Count-based: bag of words, TF-IDF, n-grams"
+          - "Static embeddings: word2vec, GloVe, fastText"
+          - Contextual embeddings and what changed
+          - Sentence embeddings and pooling strategies
+          - Similarity measures and normalisation
+          - Embedding dimensionality, quantisation, and index cost
+        check: "When is TF-IDF still the right answer over a neural embedding?"
+        viz:
+          type: scale
+          lo: Counts words
+          hi: Reads context
+          stops:
+          - TF-IDF
+          - Static embeddings
+          - Contextual embeddings
+          'on': 2
+      - name: Core tasks
+        why: "The shared vocabulary of the field."
+        covers:
+          - Classification, multi-label, and hierarchical labels
+          - "Sequence labelling: NER, POS, chunking, BIO tagging"
+          - Parsing, dependency and constituency
+          - Coreference resolution
+          - Question answering, extractive and generative
+          - Summarisation, abstractive and extractive
+          - Machine translation
+        check: "Design an NER system for a domain with no labelled data. Give three options ordered by cost."
+        viz:
+          type: tree
+          root: What shape is the output
+          branches:
+          - k: A label for the text
+            items:
+            - Classification
+          - k: A label per token
+            items:
+            - Named entities
+            - Part of speech
+          - k: New text
+            items:
+            - Summarisation
+            - Translation
+      - name: Measuring language output
+        why: "Bad metric choice is the most common NLP interview mistake."
+        covers:
+          - Accuracy, precision, recall, macro versus micro F1
+          - "Generation metrics: BLEU, ROUGE, METEOR, chrF"
+          - "Learned metrics: BERTScore, COMET, BLEURT"
+          - Perplexity and its limits across tokenizers
+          - Human evaluation design and agreement
+          - Task-specific evaluation over generic scores
+        check: "Why can BLEU rank a good translation below a bad one, and what would you use instead?"
+        viz:
+          type: compare
+          cols:
+          - k: Overlap
+            items:
+            - BLEU
+            - ROUGE
+            - chrF
+          - k: Learned
+            items:
+            - BERTScore
+            - COMET
+          - k: Human
+            items:
+            - Ratings
+            - Pairwise
+      - name: The retrieval pipeline
+        why: "Almost every applied NLP role now includes this."
+        covers:
+          - Chunking strategies and boundary effects
+          - Embedding model choice and domain fit
+          - "Vector search: HNSW, IVF, recall versus latency"
+          - Hybrid search with BM25
+          - Reranking with cross-encoders
+          - Query rewriting and expansion
+          - "Evaluating retrieval separately from generation"
+        check: "Your RAG answers are wrong. Describe how you decide whether retrieval or generation is at fault."
+        viz:
+          type: flow
+          steps:
+          - Chunk
+          - Embed
+          - Search
+          - Rerank
+          - Generate
+      - name: Multilingual and low-resource
+        why: "Your own research area, so expect depth questions."
+        covers:
+          - Cross-lingual transfer and shared subword space
+          - Tokenizer fairness and cost asymmetry
+          - Script, dialect, register, and code-switching
+          - Translation as augmentation, and translationese
+          - Benchmark coverage gaps and cultural grounding
+          - Evaluation when no native speaker is on the team
+        check: "How would you tell whether a model is worse in Indonesian because of data or because of tokenisation?"
+        viz:
+          type: parts
+          centre: Why it is worse in this language
+          around:
+          - Tokenizer cost
+          - Training data volume
+          - Script and code-switching
+          - Benchmark coverage
+      - name: Data and annotation
+        why: "The unglamorous work that decides project outcomes."
+        covers:
+          - Annotation guidelines and pilot rounds
+          - "Agreement: Cohen's kappa, Krippendorff's alpha"
+          - Label noise and adjudication
+          - Active learning and sampling strategy
+          - Synthetic data and its distribution gaps
+          - Dataset documentation and licence hygiene
+        check: "Two annotators agree 70% of the time. What do you do before collecting more data?"
+        viz:
+          type: flow
+          steps:
+          - Guidelines
+          - Pilot
+          - Measure agreement
+          - Adjudicate
+          - Scale
+          loop: true
+    traps:
+      - Reporting micro-F1 on an imbalanced multi-class problem with no macro figure
+      - Comparing perplexity across models with different tokenizers
+      - Treating English results as evidence for a multilingual claim
+      - Evaluating RAG end to end with no retrieval metric
+    drills:
+      - Tokenise the same paragraph in five languages and compare token counts
+      - Build a BM25 plus embedding hybrid retriever and measure recall at k
+      - Annotate 50 examples yourself before writing any guidelines
+      - Break one generation metric on purpose and explain the failure
+
+  - id: computer-vision
+    name: Computer Vision
+    group: models
+    blurb: "Whether you can move from pixels to a decision, and know where the evaluation lies to you."
+    scope: "Owns image and video tasks and their evaluation. Hands cross-modal alignment to multimodality."
+    links: [multimodality]
+    modules:
+      - name: Image fundamentals
+        why: "The arithmetic that every later architecture question assumes."
+        covers:
+          - Colour spaces, bit depth, channel order
+          - Filtering, edges, histograms
+          - "Convolution arithmetic: kernel, stride, padding, dilation"
+          - Output size formulas and receptive field growth
+          - Pooling, upsampling, transposed convolution, aliasing
+          - Resizing, interpolation, and the artefacts each introduces
+        check: "Given a stack of convolutions, compute the receptive field and the output resolution."
+        viz:
+          type: flow
+          steps:
+          - Pixels
+          - Convolve
+          - Stride and pad
+          - Pool
+          - Feature map
+      - name: Backbones
+        why: "You need to explain a design choice, not recite a leaderboard."
+        covers:
+          - LeNet, AlexNet, VGG, and what each one settled
+          - "ResNet: residuals, bottlenecks, and depth"
+          - Inception, DenseNet, MobileNet, depthwise separable convolutions
+          - EfficientNet and compound scaling
+          - "Vision transformers: patches, class token, inductive bias"
+          - ConvNeXt and the convergence of designs
+          - Choosing a backbone under a latency budget
+        check: "Why do residual connections let you train a 100-layer network?"
+        viz:
+          type: stack
+          layers:
+          - Task head
+          - Object parts
+          - Textures
+          - Edges
+      - name: Tasks and their metrics
+        why: "Detection and segmentation metrics are where candidates get vague."
+        covers:
+          - Classification, top-1, top-5, and label noise
+          - "Detection: anchors, anchor-free, NMS, IoU, mAP at thresholds"
+          - Two-stage versus one-stage detectors, DETR-style set prediction
+          - "Segmentation: semantic, instance, panoptic, mIoU, Dice, boundary F1"
+          - Keypoints, pose, and tracking metrics
+          - Depth and geometry tasks
+        check: "Explain mAP@[.5:.95] precisely, then say what it hides."
+        viz:
+          type: tree
+          root: What do you need back
+          branches:
+          - k: The whole image
+            items:
+            - Classification
+          - k: Boxes
+            items:
+            - Detection
+            - Mean average precision
+          - k: Pixels
+            items:
+            - Segmentation
+            - Intersection over union
+      - name: Training practice
+        why: "Vision has its own recipe knowledge."
+        covers:
+          - "Augmentation: geometric, photometric, mixup, cutmix, RandAugment"
+          - When augmentation hurts, especially in medical and remote sensing
+          - Transfer learning, freezing, and layer-wise learning rates
+          - Class imbalance in dense prediction
+          - "Losses: cross-entropy, focal, Dice, Tversky, IoU losses"
+          - Resolution versus batch size versus memory
+          - Test-time augmentation and ensembling
+        check: "Your segmentation model has high IoU and misses every thin structure. Name the likely cause."
+        viz:
+          type: compare
+          cols:
+          - k: Augmentation helps
+            items:
+            - More viewpoints
+            - Colour and lighting
+          - k: Augmentation hurts
+            items:
+            - Flipping medical laterality
+            - Rotating text
+      - name: Modern vision
+        why: "Expect at least one question about the last three years."
+        covers:
+          - "Self-supervised learning: SimCLR, MoCo, BYOL, DINO, MAE"
+          - "CLIP-style open-vocabulary recognition"
+          - Segment Anything and promptable segmentation
+          - Diffusion models for generation and editing
+          - NeRF and Gaussian splatting at a conceptual level
+          - Video understanding and temporal modelling
+        check: "Explain how DINO learns useful features with no labels."
+        viz:
+          type: tree
+          root: No labels at all
+          branches:
+          - k: Contrastive
+            items:
+            - SimCLR
+            - MoCo
+          - k: Self-distillation
+            items:
+            - DINO
+          - k: Masked
+            items:
+            - Masked autoencoder
+      - name: Deployment
+        why: "Vision is the area most often pushed to edge hardware."
+        covers:
+          - Inference cost, FLOPs versus latency
+          - ONNX, TensorRT, quantisation, pruning, distillation
+          - Edge constraints, memory, thermal limits
+          - Tiling large images and stitching predictions
+          - "Remote sensing specifics: multispectral bands, geo-referencing, tile edges, cloud masks"
+          - Batch versus stream processing
+        check: "You must run segmentation on 10,000 by 10,000 pixel scenes. Describe the pipeline."
+        viz:
+          type: flow
+          steps:
+          - Train
+          - Export
+          - Quantise
+          - Tile
+          - Serve
+      - name: Evaluation traps
+        why: "Where an honest candidate earns trust fast."
+        covers:
+          - Near-duplicate leakage across splits, especially video frames
+          - Spatial autocorrelation in geospatial splits
+          - Domain gaps between sensors, seasons, and regions
+          - Long-tail classes hidden by averaged metrics
+          - Annotation error dominating the reported gap
+          - Shortcut features, backgrounds, and watermarks
+        check: "Your geospatial model scores 0.9 IoU on a random split and 0.6 on a regional split. Explain."
+        viz:
+          type: parts
+          centre: The score looks too good
+          around:
+          - Near-duplicate frames
+          - Same scene in both splits
+          - Background shortcut
+          - Annotation error
+    traps:
+      - Random splits on tiles from the same scene
+      - Reporting mAP with no per-class breakdown
+      - Applying flip augmentation to text or medical laterality
+      - Quoting FLOPs as if it predicted latency
+    drills:
+      - Compute output shapes and receptive fields for a network by hand
+      - Implement IoU and non-maximum suppression from scratch
+      - Build a geographically blocked split and compare with a random one
+      - Profile a model on the actual target device, not your laptop
+
+  - id: multimodality
+    name: Multimodality
+    group: models
+    blurb: "Whether you can join two signals and notice when one of them is quietly ignored."
+    scope: "Owns cross-modal architecture and evaluation. Hands single-modality depth to computer vision and NLP."
+    links: [computer-vision, nlp]
+    modules:
+      - name: Fusion strategies
+        why: "The first design decision, and the one you must justify."
+        covers:
+          - Early, late and intermediate fusion
+          - Cross-attention between modality streams
+          - Projector and adapter designs
+          - Tokenising non-text signals, patches, frames, codebooks
+          - Interleaved sequences and position handling
+          - Freezing versus training each tower
+        check: "You have a strong vision encoder and a strong language model. Describe two ways to connect them and the cost of each."
+        viz:
+          type: compare
+          cols:
+          - k: Early fusion
+            items:
+            - Join before encoding
+          - k: Cross-attention
+            items:
+            - Each stream queries the other
+          - k: Late fusion
+            items:
+            - Join the outputs
+      - name: Contrastive alignment
+        why: "The backbone of retrieval and open-vocabulary systems."
+        covers:
+          - "The CLIP objective: InfoNCE, symmetric loss, temperature"
+          - Batch size effects and negatives
+          - SigLIP and the sigmoid alternative
+          - Hard negative mining
+          - Modality gap in the joint embedding space
+          - Zero-shot classification and retrieval evaluation
+        check: "Why does CLIP need very large batches, and what does SigLIP change?"
+        viz:
+          type: parts
+          centre: Shared embedding space
+          around:
+          - Image tower
+          - Text tower
+          - Matching pairs pulled close
+          - Everything else pushed apart
+      - name: Vision-language models
+        why: "The current default multimodal system."
+        covers:
+          - LLaVA-style connector training stages
+          - "Resolution handling: tiling, AnyRes, dynamic patching"
+          - Visual instruction tuning data
+          - OCR, charts, documents, and where models fail
+          - Grounding, referring expressions, bounding-box output
+          - Hallucination in captions and object presence
+        check: "The model describes objects that are not in the image. Give three causes and one fix each."
+        viz:
+          type: flow
+          steps:
+          - Image
+          - Vision encoder
+          - Projector
+          - Language model
+          - Text
+      - name: Generation across modalities
+        why: "Expect at least a conceptual question here."
+        covers:
+          - "Text to image: diffusion, latent diffusion, classifier-free guidance"
+          - Controllability, ControlNet, inpainting
+          - Text to video and temporal consistency
+          - Speech synthesis and voice cloning risk
+          - Any-to-any and unified token models
+          - Evaluation of generated media
+        check: "Explain classifier-free guidance and what happens as the scale rises."
+        viz:
+          type: flow
+          steps:
+          - Text prompt
+          - Encode
+          - Denoise
+          - Decode
+          - Image
+      - name: Audio and speech
+        why: "The modality most candidates skip, so knowing it stands out."
+        covers:
+          - Waveforms, spectrograms, mel scale
+          - "ASR: CTC, attention encoder-decoder, Whisper-style training"
+          - Speaker identification, diarisation, verification
+          - Audio tokenisation and neural codecs
+          - Audio language models
+          - Noise, accent and channel robustness
+        check: "Why does word error rate drop for accented speech, and what would you do about it?"
+        viz:
+          type: flow
+          steps:
+          - Waveform
+          - Spectrogram
+          - Encoder
+          - Tokens
+          - Text
+      - name: Evaluation
+        why: "Multimodal benchmarks are unusually easy to game."
+        covers:
+          - VQA, captioning, and retrieval benchmarks
+          - MMMU-style reasoning suites
+          - Grounding and localisation evaluation
+          - Cross-modal conflict tests
+          - Language and cultural coverage in multimodal benchmarks
+          - Blind baselines that score suspiciously well
+        check: "A benchmark can be half-solved with the text alone. How do you detect and correct for that?"
+        viz:
+          type: compare
+          cols:
+          - k: Full input
+            items:
+            - Image and text
+          - k: Blind baseline
+            items:
+            - Text only
+          - k: Vision only
+            items:
+            - Image only
+      - name: Failure modes
+        why: "Your research angle, and a strong differentiator."
+        covers:
+          - Modality dominance and text priors overriding the image
+          - Shortcut learning across modalities
+          - Missing or corrupted modality robustness
+          - Unequal safety and alignment coverage per modality
+          - Calibration differences between modalities
+          - Cross-lingual gaps in multimodal instruction data
+        check: "How would you measure whether a model trusts the caption over the picture?"
+        viz:
+          type: scale
+          lo: Trusts the picture
+          hi: Trusts the caption
+          stops:
+          - Follows the image
+          - Balanced
+          - Follows the text
+          'on': 2
+    traps:
+      - Reporting a multimodal score with no unimodal baseline
+      - Assuming a frozen vision encoder is neutral
+      - Ignoring resolution when comparing models on document tasks
+      - Testing only in English and calling it a general result
+    drills:
+      - Run a text-only baseline on any multimodal benchmark you cite
+      - Fine-tune a small connector between a vision encoder and an LLM
+      - Build a conflict set where image and text disagree, and measure which wins
+      - Compare the same VLM in two languages on identical images
+
+  # ── Judgement ────────────────────────────────────────────────────────────
+  - id: uncertainty-quantification
+    name: Uncertainty Quantification
+    group: judgement
+    blurb: "Whether a model's confidence means anything, and what you do when it does not."
+    scope: "Owns calibration, coverage and abstention. Hands posterior computation to Bayesian statistics and deployment gating to AI safety."
+    links: [bayesian-statistics, ai-safety]
+    modules:
+      - name: What kind of uncertainty
+        why: "The decomposition decides which fix is available to you."
+        covers:
+          - Aleatoric versus epistemic uncertainty
+          - Distributional shift and model misspecification
+          - Uncertainty from data, model, and optimisation
+          - Why the decomposition is not clean in practice
+          - What each type licenses you to do
+          - Predictive versus parameter uncertainty
+        check: "Give a real example where more data removes the uncertainty, and one where it does not."
+        viz:
+          type: tree
+          root: Uncertainty
+          branches:
+          - k: Aleatoric
+            items:
+            - Noise in the world
+            - More data will not remove it
+          - k: Epistemic
+            items:
+            - Gaps in the model
+            - More data helps
+      - name: Calibration
+        why: "The central measurement of the field, and easy to get subtly wrong."
+        covers:
+          - Reliability diagrams and confidence histograms
+          - "Expected calibration error, its bin dependence and estimator bias"
+          - Adaptive binning, class-wise and top-label ECE
+          - Brier score and its decomposition
+          - Proper scoring rules, log loss, sharpness under calibration
+          - Calibration versus accuracy versus discrimination
+        check: "Why can two models with identical accuracy and identical ECE behave very differently in deployment?"
+        viz:
+          type: curve
+          shape: diag
+          x: Stated confidence
+          "y": Observed accuracy
+          a: Perfectly calibrated
+          b: Overconfident
+      - name: Recalibration
+        why: "The cheap fix everyone should try first."
+        covers:
+          - Temperature scaling and why it preserves accuracy
+          - Vector and matrix scaling
+          - Platt scaling and isotonic regression
+          - Histogram binning and beta calibration
+          - Calibration sets, size requirements, and reuse
+          - Recalibration failing under distribution shift
+        check: "Temperature scaling fixed calibration on validation and failed in production. Explain."
+        viz:
+          type: flow
+          steps:
+          - Trained model
+          - Held-out set
+          - Fit a temperature
+          - Calibrated model
+      - name: Conformal prediction
+        why: "The one method with a finite-sample guarantee, and your own research tool."
+        covers:
+          - Exchangeability and what it demands
+          - "Split conformal: calibration set, quantile, coverage guarantee"
+          - Nonconformity scores and their effect on set size
+          - Marginal versus conditional coverage
+          - "Classification sets: APS, RAPS"
+          - "Regression: conformalised quantile regression"
+          - Weighted conformal under covariate shift
+          - Conformal risk control and beyond-coverage guarantees
+          - Adaptive and online conformal for drifting streams
+        check: "State the split conformal guarantee precisely, including what it does not promise per input."
+        viz:
+          type: flow
+          steps:
+          - Calibration set
+          - Score every point
+          - Take the quantile
+          - Build the set
+          - Coverage holds
+      - name: Bayesian and ensemble approximations
+        why: "The practical alternatives, with honest cost accounting."
+        covers:
+          - Monte Carlo dropout and its criticisms
+          - Deep ensembles, diversity, and cost
+          - Snapshot ensembles and SWAG
+          - Laplace approximation and last-layer Bayes
+          - Evidential deep learning and the objections to it
+          - Cheap approximations that hold up under shift
+        check: "You can afford one extra forward pass at serving time. What uncertainty method do you pick?"
+        viz:
+          type: compare
+          cols:
+          - k: Deep ensemble
+            items:
+            - Several full models
+            - Most compute
+          - k: Monte Carlo dropout
+            items:
+            - One model, many passes
+          - k: Laplace
+            items:
+            - Curvature at the optimum
+            - One extra pass
+      - name: Abstention and selective prediction
+        why: "The decision layer where uncertainty finally pays off."
+        covers:
+          - Selective risk, coverage, and the risk-coverage curve
+          - Area under the risk-coverage curve
+          - Threshold selection under a cost model
+          - Deferral to a human and cascade systems
+          - "Out-of-distribution detection: max softmax, energy, Mahalanobis, kNN"
+          - Open-set recognition and novelty
+          - Measuring the value of abstention to the product
+        check: "Design an abstention policy for a medical triage model and justify the threshold."
+        viz:
+          type: curve
+          shape: rise
+          x: Coverage
+          "y": Risk
+          a: Abstain on the hard cases
+          b: Answer everything
+      - name: Uncertainty for language models
+        why: "The frontier, and where your own work sits."
+        covers:
+          - Token probability, sequence likelihood, length normalisation
+          - Semantic entropy and meaning-level uncertainty
+          - Verbalised confidence and its unreliability
+          - Self-consistency and sampling-based signals
+          - Hallucination detection versus uncertainty
+          - Calibration change after instruction tuning and RLHF
+          - Conformal methods for open-ended generation
+        check: "How would you measure whether safety training changed a model's calibration?"
+        viz:
+          type: parts
+          centre: Can I trust this answer
+          around:
+          - Token probability
+          - Semantic entropy
+          - Self-consistency
+          - Stated confidence
+    traps:
+      - Reporting ECE with a fixed 15 bins and no sensitivity check
+      - Claiming conformal gives per-input coverage
+      - Using the calibration set twice
+      - Treating high softmax confidence as evidence of correctness
+    drills:
+      - Plot a reliability diagram for a model you trained
+      - Implement split conformal in 20 lines and verify empirical coverage
+      - Break exchangeability on purpose and watch coverage fail
+      - Build a risk-coverage curve and pick a threshold from a cost model
+
+  - id: mechanistic-interpretability
+    name: Mechanistic Interpretability
+    group: judgement
+    blurb: "Whether you can make a causal claim about a network's internals and defend it."
+    scope: "Owns internals and causal analysis. Hands the architecture to transformers and the safety case to AI safety."
+    links: [transformers, ai-safety]
+    modules:
+      - name: The framing
+        why: "The field has a specific standard of evidence, and interviews test whether you hold it."
+        covers:
+          - What counts as a mechanistic explanation
+          - Features versus neurons
+          - Superposition and polysemanticity
+          - Privileged bases and why they matter
+          - The residual stream as a channel that layers read and write
+          - Interpretability illusions and correlation traps
+        check: "Why can a neuron fire for two unrelated concepts, and what does that imply for interpretation?"
+        viz:
+          type: scale
+          lo: One neuron, one concept
+          hi: Concepts spread across neurons
+          stops:
+          - Monosemantic
+          - Polysemantic
+          - Superposition
+          'on': 2
+      - name: The toolkit
+        why: "You will be asked which tool answers which question."
+        covers:
+          - Logit lens and tuned lens
+          - "Activation patching and causal tracing"
+          - Path patching and attribution patching
+          - "Ablation: zero, mean, resample, and why the choice matters"
+          - Direct logit attribution
+          - Causal scrubbing and hypothesis testing
+          - Probing classifiers and their limits
+        check: "Compare zero ablation and resample ablation. When does zero ablation mislead you?"
+        viz:
+          type: flow
+          steps:
+          - Pick a behaviour
+          - Form a hypothesis
+          - Patch or ablate
+          - Measure the effect
+          loop: true
+      - name: Circuits found so far
+        why: "Concrete results are the shared reference points of the field."
+        covers:
+          - Induction heads and in-context learning
+          - Indirect object identification and name mover heads
+          - Copy suppression and backup heads
+          - Grokking and modular addition
+          - Docstring and greater-than circuits
+          - What evidence makes a circuit claim credible
+        check: "Describe the induction head mechanism and the evidence that it is causal."
+        viz:
+          type: parts
+          centre: Induction head
+          around:
+          - Reads the previous token
+          - Matches an earlier copy
+          - Copies what followed it
+          - Gives in-context learning
+      - name: Sparse dictionary learning
+        why: "The current main line of work, so expect depth."
+        covers:
+          - Sparse autoencoders and the reconstruction-sparsity trade
+          - "Variants: top-k, gated, JumpReLU"
+          - Dead features, shrinkage, and feature absorption
+          - Feature splitting across dictionary sizes
+          - Transcoders and crosscoders
+          - "Evaluating a dictionary: loss recovered, interpretability scores, downstream use"
+          - Known limitations and the recent critiques
+        check: "Your SAE reconstructs well and its features are uninterpretable. What went wrong?"
+        viz:
+          type: flow
+          steps:
+          - Activations
+          - Encode sparsely
+          - Decode
+          - Compare the reconstruction
+      - name: Steering and editing
+        why: "The applied edge of interpretability."
+        covers:
+          - Activation addition and steering vectors
+          - Refusal directions and single-direction findings
+          - "Model editing: ROME, MEMIT, and their generalisation failures"
+          - Representation engineering
+          - Fine-tuning versus steering as an intervention
+          - Side effects and how to measure them
+        check: "You found a direction that controls refusal. What experiments before you claim it is the refusal mechanism?"
+        viz:
+          type: compare
+          cols:
+          - k: Steering
+            items:
+            - Add a direction at runtime
+            - Reversible
+          - k: Editing
+            items:
+            - Change the weights
+            - Permanent
+          - k: Fine-tuning
+            items:
+            - Retrain
+            - Broadest side effects
+      - name: Interpretability for safety
+        why: "The reason labs fund this work, and the framing that connects to your agenda."
+        covers:
+          - What a safety case built on interpretability would need
+          - Deception and situational awareness detection
+          - Faithfulness of chain of thought
+          - Auditing games and blind evaluation
+          - Scaling interpretability to frontier models
+          - Honest accounting of what the field cannot yet do
+        check: "What would have to be true for interpretability to gate a deployment decision?"
+        viz:
+          type: stack
+          layers:
+          - Gate a deployment
+          - Explain a behaviour
+          - Locate a feature
+          - Read activations
+    traps:
+      - Presenting a correlational probe as a mechanism
+      - Reading feature labels without a causal check
+      - Cherry-picking one prompt as evidence of a circuit
+      - Overstating what SAEs currently deliver
+    drills:
+      - Run activation patching on a small model and locate a known head
+      - Train an SAE on one layer and manually label 20 features
+      - Reproduce the induction head result on a two-layer model
+      - Write one claim, then write the experiment that would refute it
+
+  - id: ai-safety
+    name: AI Safety
+    group: judgement
+    blurb: "Whether you have a position, and whether it survives the strongest objection."
+    scope: "Owns risk framing, alignment methods and evaluation. Draws on mechanistic interpretability and uncertainty quantification as tools."
+    links: [uncertainty-quantification, mechanistic-interpretability]
+    modules:
+      - name: The landscape
+        why: "A broad interview will open here, and vagueness reads badly."
+        covers:
+          - Misuse, misalignment, and systemic risk
+          - Near-term harms and long-horizon concerns as one agenda
+          - Who does what across labs, government, and academia
+          - Capability versus propensity
+          - Threat models worth taking seriously, and the weak arguments
+          - Where reasonable researchers disagree
+        check: "Give your one-minute answer to what AI safety means, then defend it against the strongest counterargument."
+        viz:
+          type: tree
+          root: Risk
+          branches:
+          - k: Misuse
+            items:
+            - People use it to cause harm
+          - k: Misalignment
+            items:
+            - The model pursues the wrong goal
+          - k: Systemic
+            items:
+            - Harm from scale and dependence
+      - name: Alignment methods
+        why: "You need to explain what current techniques do and where they stop."
+        covers:
+          - RLHF and its known limits
+          - Constitutional AI and rule-based feedback
+          - Debate and recursive reward modelling
+          - Weak-to-strong generalisation
+          - Scalable oversight and amplification
+          - Deliberative and specification-following approaches
+        check: "Why is human feedback insufficient once models exceed human performance on a task?"
+        viz:
+          type: scale
+          lo: A human can check the work
+          hi: A human cannot check the work
+          stops:
+          - Direct feedback
+          - Assisted oversight
+          - Scalable oversight
+          'on': 1
+      - name: Failure modes
+        why: "The vocabulary of the field, and where precision counts."
+        covers:
+          - Reward hacking and specification gaming
+          - Goal misgeneralisation versus capability misgeneralisation
+          - Sycophancy and preference gaming
+          - Deceptive alignment and the arguments for and against
+          - Situational awareness and evaluation awareness
+          - Sandbagging and strategic underperformance
+          - Emergent behaviour claims and how to test them
+        check: "Distinguish reward hacking from goal misgeneralisation with a concrete example of each."
+        viz:
+          type: compare
+          cols:
+          - k: Reward hacking
+            items:
+            - The goal was measured badly
+          - k: Goal misgeneralisation
+            items:
+            - The goal was learned narrowly
+          - k: Sycophancy
+            items:
+            - Agreement got rewarded
+      - name: Evaluation and red teaming
+        why: "The practical work most safety roles actually do."
+        covers:
+          - Dangerous capability evaluations
+          - Red teaming, manual and automated
+          - "Jailbreaks: many-shot, encoding, persona, multi-turn"
+          - Refusal training and the over-refusal cost
+          - Eval gaming, contamination, and eval awareness
+          - Responsible scaling policies and capability thresholds
+          - Building an eval that would change a decision
+        check: "Design an evaluation for a capability you believe is dangerous. State the threshold and the response."
+        viz:
+          type: flow
+          steps:
+          - Name the capability
+          - Build the eval
+          - Set a threshold
+          - Decide the response
+          loop: true
+      - name: Robustness and control
+        why: "The assumption that alignment might fail, handled engineering-first."
+        covers:
+          - Adversarial robustness and its limits
+          - Control evaluations and untrusted models
+          - Monitoring, tripwires, and anomaly detection
+          - Sandboxing and permission design for agents
+          - Defence in depth across the deployment stack
+          - Incident response and rollback
+        check: "Assume the model is misaligned but not superhuman. What deployment controls still work?"
+        viz:
+          type: stack
+          layers:
+          - Human approval
+          - Monitoring
+          - Sandboxing
+          - Least privilege
+      - name: Honesty, calibration and abstention
+        why: "Your own contribution, so this section must be the sharpest."
+        covers:
+          - Truthfulness versus helpfulness tension
+          - Knowing when to abstain as a safety property
+          - The alignment tax on calibration
+          - Where the cost concentrates, by language and modality
+          - Measuring the shape of the tax rather than its average
+          - Recovery methods and what they give up
+        check: "Argue that calibration is a safety property, not a nice-to-have, in three sentences."
+        viz:
+          type: parts
+          centre: The alignment tax on calibration
+          around:
+          - Reported as one average
+          - Really a spread over inputs
+          - Varies by language
+          - Varies by modality
+      - name: Policy and practice
+        why: "Even research roles expect awareness of the surrounding system."
+        covers:
+          - Model cards, system cards, transparency reporting
+          - Deployment gating and staged release
+          - Open weights debate, both sides stated fairly
+          - Evaluation standards and third-party audits
+          - Incident reporting and shared learning
+          - Regulation landscape at a high level
+        check: "State the strongest argument for open weights and the strongest against, then say where you land."
+        viz:
+          type: flow
+          steps:
+          - Evaluate
+          - Document
+          - Gate the release
+          - Monitor
+          - Report
+          loop: true
+    traps:
+      - Talking about risk with no threat model attached
+      - Framing gaps as other organisations' mistakes
+      - Claiming certainty on questions the field has not settled
+      - Treating safety and capability as strictly opposed
+    drills:
+      - Write your safety position in 200 words and cut it to 100
+      - Red team one open model for an afternoon and log what worked
+      - Reproduce one published eval and note where it is fragile
+      - Steelman the position you disagree with most, out loud
+
+  - id: machine-learning-research
+    name: Machine Learning Research
+    group: judgement
+    blurb: "Whether you pick questions worth answering and run experiments that could prove you wrong."
+    scope: "Owns research taste, method and communication. Applies to whichever technical track the role sits in."
+    links: [ai-safety, uncertainty-quantification]
+    modules:
+      - name: Choosing a question
+        why: "Taste is what a research interview is actually measuring."
+        covers:
+          - Mapping a literature quickly and honestly
+          - Gap versus novelty, and why a gap alone is weak
+          - Designing a claim where either result is publishable
+          - Writing your own kill criteria before you start
+          - Stating your credence and updating it
+          - Scope that fits the compute you actually have
+        check: "Describe a project where the negative result would still have been worth reporting."
+        viz:
+          type: matrix
+          x:
+          - The answer is known
+          - The answer is unknown
+          "y":
+          - Somebody acts on it
+          - Nobody acts on it
+          cells:
+          - Engineering task
+          - Worth doing
+          - Not worth writing
+          - Curiosity only
+      - name: Experiment design
+        why: "The difference between evidence and a demo."
+        covers:
+          - Hypothesis, prediction, and the observation that would refute it
+          - Baselines, and tuning them as hard as your method
+          - Ablations that isolate one variable
+          - Controls, seeds, and variance budgeting
+          - Compute planning and the smallest informative scale
+          - Deciding in advance what counts as success
+        check: "Your method beats the baseline by 1 point. What would you run before believing it?"
+        viz:
+          type: flow
+          steps:
+          - Hypothesis
+          - Prediction
+          - Baseline
+          - Ablation
+          - Verdict
+      - name: Statistics for papers
+        why: "Where reviewers and interviewers both push hardest."
+        covers:
+          - Seed variance and how many runs you need
+          - Error bars, confidence intervals, and honest plots
+          - Multiple comparisons across many benchmarks
+          - Effect size over significance theatre
+          - Cherry-picking, and how to notice your own
+          - Reporting compute and cost
+        check: "You have three seeds and overlapping error bars. What do you claim?"
+        viz:
+          type: scale
+          lo: One run
+          hi: Enough runs
+          stops:
+          - One seed
+          - Three seeds
+          - Enough to see the spread
+          'on': 2
+      - name: Reproducibility
+        why: "A cheap signal of seriousness."
+        covers:
+          - Code release, configs, and environment pinning
+          - Dataset cards and licence clarity
+          - Random seed and determinism handling
+          - Reporting failures and negative results
+          - Making a result reproducible by someone hostile to it
+          - Artefact evaluation norms
+        check: "What would a stranger need to reproduce your last result exactly?"
+        viz:
+          type: stack
+          layers:
+          - The reported result
+          - Configs and seeds
+          - Environment
+          - Data and code
+      - name: Writing
+        why: "The output of research is a paper somebody can act on."
+        covers:
+          - Abstract structure and the one-sentence claim
+          - Mapping every claim to its evidence
+          - Figures that carry the argument
+          - Related work as positioning, not a list
+          - Limitations written as the work, not as apology
+          - Titles, framing, and the reader you are writing for
+        check: "Compress your last project into one sentence a reviewer would remember."
+        viz:
+          type: flow
+          steps:
+          - Claim
+          - Evidence
+          - Figure
+          - Limitation
+      - name: Review and rebuttal
+        why: "Community membership, and interviewers often ask about it."
+        covers:
+          - Reviewing well and what a useful review contains
+          - Reading reviews without defensiveness
+          - Rebuttal strategy and choosing which points to fight
+          - Venue norms and timelines across NeurIPS, ICML, ICLR, ACL, CVPR
+          - Preprints, arXiv practice, and scooping
+          - Authorship and credit conversations
+        check: "A reviewer misunderstood your method. Draft the first two sentences of the rebuttal."
+        viz:
+          type: flow
+          steps:
+          - Read the reviews
+          - Sort by weight
+          - Answer the load-bearing ones
+          - Revise
+      - name: The research interview
+        why: "This is the round that decides research hires."
+        covers:
+          - A ten-minute talk on your own work, no slides needed
+          - Defending one design choice under pressure
+          - "The 'what would you do with ten times the compute' question"
+          - Naming the weakest part of your own paper
+          - Proposing what you would work on in the first six months
+          - Asking questions that show you read their work
+        check: "Present your strongest paper in ten minutes, then answer why the main baseline is fair."
+        viz:
+          type: flow
+          steps:
+          - Ten-minute talk
+          - Defend a choice
+          - Name the weakness
+          - Say what is next
+    traps:
+      - Under-tuning the baseline you are beating
+      - Reporting a single seed as a result
+      - Framing limitations as apologies rather than the next step
+      - Proposing work that ignores the team's actual agenda
+    drills:
+      - Write a one-page proposal with a stated kill criterion
+      - Re-run someone else's baseline until you match their number
+      - Give your ten-minute talk to a non-specialist and time it
+      - Review one paper properly and compare with the public reviews
+
+  - id: prompt-engineering
+    name: Prompt Engineering
+    group: judgement
+    blurb: "Whether you treat prompts as an engineering surface with tests, or as guesswork."
+    scope: "Owns instruction design and measurement. Hands the loop and tools to agentic AI, and weight updates to LLM training."
+    links: [agentic-ai, llm-training]
+    modules:
+      - name: The basics that still matter
+        why: "Most production gains come from doing these carefully."
+        covers:
+          - Clear instructions, task, audience, and output contract
+          - Role and context setting, and when it does nothing
+          - "Zero-shot, few-shot, and choosing examples"
+          - Delimiters and structure for long inputs
+          - Ordering effects, recency and primacy
+          - Negative instructions and why they underperform
+          - Model-specific behaviour and prompt portability
+        check: "Rewrite a vague instruction into a testable one, and say what you would measure."
+        viz:
+          type: flow
+          steps:
+          - Task
+          - Context
+          - Examples
+          - Output contract
+      - name: Reasoning
+        why: "The area with the most folklore, so precision stands out."
+        covers:
+          - Chain of thought, and when it helps
+          - Self-consistency and majority voting
+          - Decomposition, least-to-most, plan then solve
+          - Reasoning models and why they need different prompting
+          - Reasoning that hurts on simple tasks
+          - Faithfulness of stated reasoning
+        check: "Name a task where chain of thought lowers accuracy, and explain why."
+        viz:
+          type: compare
+          cols:
+          - k: Reasoning helps
+            items:
+            - Multi-step maths
+            - Planning
+          - k: Reasoning hurts
+            items:
+            - Simple lookup
+            - Tight latency budget
+      - name: Context construction
+        why: "Long context rewards careful budgeting of what you include."
+        covers:
+          - System prompt design and stable structure
+          - Where to place retrieved content and why
+          - Lost in the middle, and mitigation
+          - Context rot across long conversations
+          - Token budgeting and compaction
+          - Cache-friendly prompt layout, stable prefixes
+        check: "You have 100k tokens of documents and a 32k budget. Describe your selection strategy."
+        viz:
+          type: scale
+          lo: Nothing in context
+          hi: Everything in context
+          stops:
+          - Too little
+          - Selected
+          - Too much
+          'on': 1
+      - name: Structured output
+        why: "Every production integration needs this to be reliable."
+        covers:
+          - JSON schema and typed output contracts
+          - Constrained decoding and grammars
+          - Tool and function schemas as prompts
+          - Parsing, validation, and repair loops
+          - Partial output and streaming considerations
+          - Failure handling when the schema is violated
+        check: "Your JSON output breaks 2% of the time. Give three fixes ordered by cost."
+        viz:
+          type: flow
+          steps:
+          - Schema
+          - Generate
+          - Validate
+          - Repair
+          loop: true
+      - name: Measurement
+        why: "The line between prompt engineering and prompt guessing."
+        covers:
+          - Building the eval set before the prompt
+          - Pairwise comparison and rubric grading
+          - LLM-as-judge, its biases, and calibration against humans
+          - Regression suites and prompt versioning
+          - Automatic prompt optimisation, DSPy-style search
+          - Statistical significance on small eval sets
+        check: "How many examples do you need to tell two prompts apart, and how would you decide?"
+        viz:
+          type: flow
+          steps:
+          - Build the eval set
+          - Change one thing
+          - Compare
+          - Keep or revert
+          loop: true
+      - name: Robustness
+        why: "Where prompting meets security."
+        covers:
+          - Prompt injection through retrieved or tool content
+          - Delimiter hygiene and untrusted-content marking
+          - Instruction hierarchy and conflicting instructions
+          - Jailbreak resistance and refusal tuning
+          - Over-refusal and false positives
+          - Behaviour change after a model upgrade
+        check: "A retrieved document contains instructions. Describe your defence, and its limits."
+        viz:
+          type: parts
+          centre: Untrusted text arrives in the prompt
+          around:
+          - Mark where it starts
+          - Keep instructions above it
+          - Limit what the tools can do
+          - Test with an injection
+      - name: Choosing the right lever
+        why: "Senior candidates are judged on knowing when to stop prompting."
+        covers:
+          - Prompt versus few-shot versus retrieval versus fine-tune versus agent loop
+          - Cost, latency and maintenance of each
+          - When a prompt has hit its ceiling
+          - When the problem is the data, not the prompt
+          - Migration cost between models
+          - Documenting a prompt as a product artefact
+        check: "At what point do you stop iterating on a prompt and fine-tune instead?"
+        viz:
+          type: scale
+          lo: Cheapest to change
+          hi: Most expensive to change
+          stops:
+          - Prompt
+          - Few-shot
+          - Retrieval
+          - Fine-tune
+          'on': 0
+    traps:
+      - Claiming a prompt improvement with no eval set
+      - Stacking instructions that contradict each other
+      - Assuming a prompt transfers across model families
+      - Treating chain of thought as free accuracy
+    drills:
+      - Write 30 eval examples before touching the prompt
+      - Run the same prompt on three model families and diff the failures
+      - Build a regression suite that runs on every prompt edit
+      - Attack your own prompt with injected instructions
+
+  # ── Systems ──────────────────────────────────────────────────────────────
+  - id: agentic-ai
+    name: Agentic AI
+    group: systems
+    blurb: "Whether you can build a loop that finishes the task and stops when it should."
+    scope: "Owns the agent loop, tools and evaluation. Hands instruction design to prompt engineering and permissioning to network and security."
+    links: [prompt-engineering, network-and-security]
+    modules:
+      - name: The loop
+        why: "Every agent framework is a variation on this, so know the primitive."
+        covers:
+          - Observe, plan, act, observe again
+          - ReAct and interleaved reasoning
+          - Plan-and-execute versus reactive stepping
+          - Reflection and self-critique steps
+          - Termination conditions and step budgets
+          - Loop detection and progress checks
+        check: "Write the pseudocode for a minimal tool-using agent, including its stopping rule."
+        viz:
+          type: flow
+          steps:
+          - Observe
+          - Plan
+          - Act
+          - Observe the result
+          loop: true
+      - name: Tools
+        why: "Most agent failures are tool failures."
+        covers:
+          - Tool schema design and naming
+          - Descriptions as prompts, and their effect on selection
+          - Error messages the model can act on
+          - Idempotency, retries, and side effects
+          - Sandboxing and permission scopes
+          - Model Context Protocol and tool servers
+          - Tool count, overlap, and selection accuracy
+        check: "The agent calls the wrong tool half the time. Give four changes before touching the model."
+        viz:
+          type: parts
+          centre: One tool call
+          around:
+          - The schema it reads
+          - The arguments it fills
+          - The error it can act on
+          - The permission it needs
+      - name: Memory and context
+        why: "The binding constraint on long tasks."
+        covers:
+          - Short-term scratchpad versus persistent memory
+          - Retrieval over past steps and artefacts
+          - Summarisation and compaction strategies
+          - State serialisation and resumption
+          - Context budgeting across a long trajectory
+          - Deciding what to forget
+        check: "A task needs 300 steps and the context holds 30. Describe your memory design."
+        viz:
+          type: stack
+          layers:
+          - The current step
+          - Recent steps
+          - Summary of the run
+          - Stored artefacts
+      - name: Planning and control
+        why: "Where cost and reliability are decided."
+        covers:
+          - Task decomposition and subtask granularity
+          - Orchestrator and worker patterns
+          - Verifier loops and check steps
+          - Budget control, token and wall-clock
+          - Parallel versus sequential steps
+          - Escalation to a human
+        check: "How do you stop an agent that is confidently making no progress?"
+        viz:
+          type: tree
+          root: The task is long
+          branches:
+          - k: Decompose
+            items:
+            - Subtasks
+          - k: Verify
+            items:
+            - Check each step
+          - k: Budget
+            items:
+            - Stop at a limit
+      - name: Multi-agent systems
+        why: "Popular, often unnecessary, and you should be able to say when."
+        covers:
+          - Role specialisation and when it helps
+          - Message passing and shared state
+          - Debate and critic patterns
+          - Coordination cost and duplicated work
+          - Failure propagation across agents
+          - When one agent with better tools wins
+        check: "Give a task where multi-agent beats single-agent, and one where it clearly loses."
+        viz:
+          type: compare
+          cols:
+          - k: One agent
+            items:
+            - Simplest
+            - No coordination cost
+          - k: Many agents
+            items:
+            - Work in parallel
+            - Coordination cost
+            - Failures spread
+      - name: Evaluation
+        why: "Agent evaluation is harder than model evaluation and interviewers know it."
+        covers:
+          - End-to-end task success rate
+          - Trajectory analysis and partial credit
+          - "Benchmarks: SWE-bench, WebArena, tau-bench, and their limits"
+          - Rubric-based judging of process
+          - Cost per solved task
+          - Regression suites and flakiness
+        check: "Your agent solves 40% of tasks. How do you find out where the other 60% break?"
+        viz:
+          type: flow
+          steps:
+          - Run the task
+          - Read the trajectory
+          - Find the break
+          - Fix
+          - Run again
+          loop: true
+      - name: Reliability and safety
+        why: "Agents have privileges, which changes the risk profile."
+        covers:
+          - Prompt injection through tool output and web content
+          - Confused deputy and privilege escalation
+          - Least privilege and scoped credentials
+          - Human in the loop and approval gates
+          - Audit logs and reproducing a trajectory
+          - Rollback and irreversible actions
+        check: "Your agent can send email and read the web. Name the attack and design the defence."
+        viz:
+          type: stack
+          layers:
+          - Approval for irreversible steps
+          - Audit log
+          - Scoped credentials
+          - Sandbox
+    traps:
+      - Adding agents when the problem needed one better tool
+      - No step budget, so failures cost real money
+      - Evaluating on final answer only, with no trajectory view
+      - Giving broad credentials because scoping was inconvenient
+    drills:
+      - Build a three-tool agent with no framework, then read one framework's source
+      - Log every trajectory and read 20 failures by hand
+      - Inject an instruction into a tool result and watch what happens
+      - Measure cost per solved task, not just success rate
+
+  - id: mlops
+    name: MLOps
+    group: systems
+    blurb: "Whether the model still works in six months and someone other than you can fix it."
+    scope: "Owns lifecycle, serving and monitoring. Hands pipeline internals to data engineering."
+    links: [data-engineering, machine-learning]
+    modules:
+      - name: Lifecycle and reproducibility
+        why: "The base expectation for any production role."
+        covers:
+          - Problem framing to retirement, as one loop
+          - Experiment tracking and run metadata
+          - Versioning code, data, config, and model together
+          - Model registry, stages, and promotion
+          - Environment pinning and containers
+          - Reproducing a six-month-old prediction
+        check: "A regulator asks why the model made a decision last March. What do you need to answer?"
+        viz:
+          type: flow
+          steps:
+          - Frame
+          - Train
+          - Register
+          - Deploy
+          - Monitor
+          loop: true
+      - name: Data for ML systems
+        why: "Training-serving skew is the classic production bug."
+        covers:
+          - Feature stores, online and offline
+          - Point-in-time correctness and time travel
+          - Training-serving skew, causes and detection
+          - Backfills and reprocessing
+          - Data validation at the pipeline boundary
+          - Label delay and feedback loops
+        check: "Offline AUC is 0.85 and online performance is poor. List the skew sources you would check."
+        viz:
+          type: compare
+          cols:
+          - k: At training time
+            items:
+            - Features from history
+            - Whole table at once
+          - k: At serving time
+            items:
+            - Features as the request arrives
+            - One row
+      - name: Training infrastructure
+        why: "Cost control is a real part of the job."
+        covers:
+          - Containers and orchestration, Kubernetes basics
+          - "Workflow tools: Airflow, Kubeflow, Ray, Metaflow"
+          - GPU scheduling, queues, and sharing
+          - Spot instances and checkpoint recovery
+          - Distributed training operations
+          - Cost attribution and budgets
+        check: "Training costs tripled with no accuracy gain. Where do you look?"
+        viz:
+          type: flow
+          steps:
+          - Queue
+          - Schedule
+          - Train
+          - Checkpoint
+          - Recover
+          loop: true
+      - name: Serving
+        why: "Latency and cost questions appear in almost every system round."
+        covers:
+          - Batch, online, and streaming inference
+          - Latency budgets, p50 versus p99
+          - "Model servers: Triton, TorchServe, vLLM, TGI"
+          - Autoscaling, cold starts, and warm pools
+          - Quantisation, distillation, and caching for cost
+          - Load testing and capacity planning
+          - Multi-model serving and routing
+        check: "You must serve a 7B model at 200ms p99 on a fixed budget. Walk through the design."
+        viz:
+          type: scale
+          lo: Cheapest
+          hi: Fastest to answer
+          stops:
+          - Batch
+          - Micro-batch
+          - Online
+          'on': 2
+      - name: Deployment strategy
+        why: "How you ship without breaking things."
+        covers:
+          - Shadow deployment and offline replay
+          - Canary and progressive rollout
+          - Blue-green and instant rollback
+          - A/B testing a model change
+          - Feature flags and kill switches
+          - Rollback triggers defined in advance
+        check: "Design the rollout plan for a model that touches revenue."
+        viz:
+          type: flow
+          steps:
+          - Shadow
+          - Canary
+          - Full rollout
+          - Rollback ready
+      - name: Monitoring
+        why: "The part that decides whether you find out first or the customer does."
+        covers:
+          - Input drift, prediction drift, and performance decay
+          - Monitoring with delayed or missing labels
+          - Proxy metrics and guardrails
+          - Alert design and avoiding fatigue
+          - Service level objectives for ML systems
+          - Incident response and postmortems
+          - Automated retraining and its risks
+        check: "Labels arrive 30 days late. How do you know today whether the model is broken?"
+        viz:
+          type: tree
+          root: Something changed
+          branches:
+          - k: Inputs
+            items:
+            - Data drift
+          - k: Outputs
+            items:
+            - Prediction drift
+          - k: Outcome
+            items:
+            - Performance decay
+      - name: Governance
+        why: "Increasingly the difference between a demo and a deployment."
+        covers:
+          - Lineage from prediction to training data
+          - Model cards and documentation
+          - Access control and PII handling
+          - Audit trails and approval workflows
+          - Fairness monitoring in production
+          - Deprecation and model retirement
+        check: "What documentation would you require before a model touches customer money?"
+        viz:
+          type: stack
+          layers:
+          - Approval
+          - Documentation
+          - Access control
+          - Lineage
+    traps:
+      - Monitoring accuracy only, and only when labels arrive
+      - Retraining automatically with no gate
+      - Treating notebooks as a deployment artefact
+      - Ignoring cost until finance asks
+    drills:
+      - Deploy one small model end to end, including rollback
+      - Write the runbook for your own model failing at 2am
+      - Simulate drift and confirm your monitor fires
+      - Price your inference per thousand requests
+
+  - id: data-engineering
+    name: Data Engineering
+    group: systems
+    blurb: "Whether the numbers are right, arrive on time, and cost what you said they would."
+    scope: "Owns storage, pipelines and streaming. Hands model lifecycle to MLOps."
+    links: [mlops]
+    modules:
+      - name: Storage and file layout
+        why: "Most query cost problems are layout problems."
+        covers:
+          - OLTP versus OLAP workloads
+          - Row versus columnar storage
+          - "Formats: Parquet, ORC, Avro, and when each fits"
+          - Partitioning, clustering, and small-file problems
+          - Compression and encoding choices
+          - "Table formats: Iceberg, Delta Lake, Hudi, and what they add"
+          - Schema evolution
+        check: "A query scans 2TB to return 100 rows. Give three layout changes and the expected effect."
+        viz:
+          type: compare
+          cols:
+          - k: Row store
+            items:
+            - Reads whole records
+            - Suits writes
+          - k: Column store
+            items:
+            - Reads a few columns
+            - Suits scans
+      - name: Data modelling
+        why: "Where analytics teams either trust you or work around you."
+        covers:
+          - Normalisation and denormalisation trade-offs
+          - Star and snowflake schemas
+          - Fact and dimension design, grain
+          - Slowly changing dimensions, types 1 to 3
+          - Wide tables and the one-big-table pattern
+          - Semantic layers and metric definitions
+        check: "Model an events dataset for a team that asks unpredictable questions. Defend the grain."
+        viz:
+          type: parts
+          centre: Fact table
+          around:
+          - Grain
+          - Dimensions
+          - Measures
+          - Keys
+      - name: Batch processing
+        why: "SQL and Spark are the two most commonly tested skills."
+        covers:
+          - "SQL depth: window functions, CTEs, join strategies, anti-joins"
+          - Query plans and reading them
+          - "Spark: partitions, shuffle, broadcast joins, skew handling"
+          - Adaptive query execution and caching
+          - Incremental processing and idempotent writes
+          - Cost tuning and cluster sizing
+        check: "One Spark stage takes 90% of the runtime. Diagnose it."
+        viz:
+          type: flow
+          steps:
+          - Read
+          - Shuffle
+          - Join
+          - Aggregate
+          - Write
+      - name: Streaming
+        why: "The area where correctness gets subtle."
+        covers:
+          - "Kafka: topics, partitions, offsets, consumer groups, rebalancing"
+          - Delivery semantics, at-least-once versus exactly-once
+          - Event time versus processing time
+          - Watermarks and late data
+          - Windowing, tumbling, sliding, session
+          - Stateful processing and checkpointing
+          - Flink and Spark Structured Streaming differences
+        check: "Events arrive an hour late. Explain what a watermark does to your aggregates."
+        viz:
+          type: flow
+          steps:
+          - The event happens
+          - It arrives late
+          - The watermark passes
+          - The window closes
+      - name: Orchestration and quality
+        why: "Reliability is the product."
+        covers:
+          - DAG design, dependencies, and retries
+          - Idempotency and safe reruns
+          - Backfills without double counting
+          - "Data contracts and schema enforcement"
+          - "Testing: dbt tests, Great Expectations, assertions"
+          - Lineage and impact analysis
+          - Freshness and volume alerting
+        check: "A source changed a column type overnight. How does your pipeline behave, and how should it?"
+        viz:
+          type: flow
+          steps:
+          - Extract
+          - Validate
+          - Transform
+          - Test
+          - Publish
+          loop: true
+      - name: Architecture
+        why: "The system design round for data roles."
+        covers:
+          - Lakehouse and medallion layering
+          - ETL versus ELT
+          - Change data capture
+          - Batch and streaming in one architecture
+          - Warehouse selection and cost models
+          - Governance, cataloguing, and access control
+          - Build versus buy
+        check: "Design ingestion for 50 sources with mixed freshness needs. State your assumptions first."
+        viz:
+          type: stack
+          layers:
+          - Serving tables
+          - Curated tables
+          - Cleaned tables
+          - Raw landing
+      - name: The system design round
+        why: "It is a conversation about trade-offs."
+        covers:
+          - Clarifying volume, velocity, latency, and budget
+          - Stating assumptions out loud
+          - Sketching components before details
+          - Naming the bottleneck and the failure mode
+          - Cost estimates with real numbers
+          - What you would build first and what you would defer
+        check: "Design a pipeline for 10TB a day with a one-hour freshness target. Talk through it in 30 minutes."
+        viz:
+          type: flow
+          steps:
+          - Ask the volume
+          - Ask the latency
+          - Ask the budget
+          - Sketch it
+          - Name the bottleneck
+    traps:
+      - Designing before asking about volume and latency
+      - Ignoring small-file and skew problems
+      - Claiming exactly-once with no idempotency story
+      - Backfills that silently double count
+    drills:
+      - Write the same aggregation three ways and compare query plans
+      - Break a Spark job with skew on purpose, then fix it
+      - Run a Kafka consumer group and force a rebalance
+      - Design one pipeline on paper, then price it
+
+  - id: network-and-security
+    name: Network and Security
+    group: systems
+    blurb: "Whether you can reason about an attacker who wants your model, your data, or your credentials."
+    scope: "Owns networking, application security and ML-specific attacks. Hands agent permissioning to agentic AI."
+    links: [agentic-ai]
+    modules:
+      - name: Networking
+        why: "The base layer under every distributed system question."
+        covers:
+          - OSI and TCP/IP layers
+          - "TCP handshake, congestion control, and what a timeout means"
+          - UDP and when it wins
+          - DNS resolution and caching
+          - "HTTP/1.1, HTTP/2, HTTP/3, keep-alive, head-of-line blocking"
+          - "TLS handshake, certificates, chains, and pinning"
+          - NAT, firewalls, load balancers, reverse proxies, CDNs
+          - VPNs and private networking
+        check: "Trace what happens from typing a URL to the first byte, and name where it can fail."
+        viz:
+          type: stack
+          layers:
+          - Application
+          - Transport
+          - Network
+          - Link
+      - name: Security foundations
+        why: "The framing that makes the rest coherent."
+        covers:
+          - Confidentiality, integrity, availability
+          - "Threat modelling: STRIDE, attack trees, trust boundaries"
+          - Least privilege and defence in depth
+          - Authentication versus authorisation
+          - "OAuth 2.0, OIDC, and JWT pitfalls"
+          - Session management and token lifetimes
+          - Secrets management and rotation
+        check: "Draw the trust boundaries for an ML service that reads customer data."
+        viz:
+          type: parts
+          centre: Trust boundary
+          around:
+          - Who is asking
+          - What they may do
+          - What crosses the line
+          - What gets logged
+      - name: Cryptography in practice
+        why: "Not to invent it, but to avoid misusing it."
+        covers:
+          - Symmetric versus asymmetric encryption
+          - Hashing versus encryption versus encoding
+          - Password storage, salting, and key derivation functions
+          - Digital signatures and certificate chains
+          - Key management and PKI
+          - Common misuse, ECB mode, reused nonces, homemade schemes
+        check: "Explain why hashing a password with SHA-256 alone is not enough."
+        viz:
+          type: tree
+          root: What do you actually need
+          branches:
+          - k: Secrecy
+            items:
+            - Encryption
+          - k: Integrity
+            items:
+            - Hashing
+            - Signatures
+          - k: Identity
+            items:
+            - Certificates
+      - name: Application security
+        why: "The attacks you will actually meet."
+        covers:
+          - "OWASP Top 10, current edition"
+          - Injection, SQL and command
+          - Cross-site scripting and content security policy
+          - Cross-site request forgery
+          - Server-side request forgery, and why it hurts cloud systems
+          - Insecure deserialisation
+          - Dependency and supply chain risk, SBOMs
+        check: "Your service fetches a user-supplied URL. Name the risk and the mitigation."
+        viz:
+          type: flow
+          steps:
+          - Untrusted input
+          - Validate
+          - Encode on output
+          - Least privilege
+      - name: Infrastructure and cloud
+        why: "Where most real breaches happen now."
+        covers:
+          - IAM policies, roles, and privilege escalation paths
+          - Network segmentation and security groups
+          - Container isolation and escape risks
+          - Secrets in images, environment variables, and logs
+          - Logging, SIEM, and detection
+          - Incident response phases
+        check: "An access key leaked in a public repository. Walk through the first hour."
+        viz:
+          type: scale
+          lo: Narrow access
+          hi: Broad access
+          stops:
+          - One resource
+          - One service
+          - The whole account
+          'on': 0
+      - name: Machine learning security
+        why: "The intersection that makes you unusual as a candidate."
+        covers:
+          - Training data poisoning and backdoors
+          - Model extraction and stealing
+          - Membership inference and memorisation
+          - Adversarial examples and evasion
+          - Prompt injection, direct and indirect
+          - Tool abuse and confused deputy in agents
+          - Unsafe model artefacts, pickle files, arbitrary code on load
+        check: "Someone can query your model 100k times. What can they learn, and how do you limit it?"
+        viz:
+          type: parts
+          centre: The model is the target
+          around:
+          - Poisoned training data
+          - Stolen weights
+          - Extracted training examples
+          - Injected instructions
+      - name: Privacy
+        why: "The compliance layer that constrains model design."
+        covers:
+          - PII, sensitive categories, and data minimisation
+          - GDPR concepts, lawful basis, and the right to erasure
+          - Anonymisation versus pseudonymisation
+          - Differential privacy basics and the privacy budget
+          - Federated learning and its assumptions
+          - Data residency and cross-border transfer
+        check: "A user requests deletion and their data is in a trained model. What do you actually do?"
+        viz:
+          type: scale
+          lo: Identifiable
+          hi: Protected
+          stops:
+          - Raw personal data
+          - Pseudonymised
+          - Aggregated
+          - Differentially private
+          'on': 3
+    traps:
+      - Confusing authentication with authorisation
+      - Trusting client-side validation
+      - Loading a model checkpoint from an untrusted source
+      - Treating differential privacy as automatic anonymity
+    drills:
+      - Capture a TLS handshake in Wireshark and name each message
+      - Threat model one of your own services on paper
+      - Run a dependency audit on a real project and triage the findings
+      - Write the prompt injection that would break your own agent
