@@ -11,6 +11,8 @@ extra_js: /js/components/interview.js
 
 <section class="section page reveal interview-hub">
 
+  {% include interview-icons.html %}
+
   <header class="ivh-header">
     <span class="ivh-eyebrow">Private</span>
     <h1 class="ivh-title">Interview</h1>
@@ -46,6 +48,7 @@ extra_js: /js/components/interview.js
            data-modules="{{ t.modules | size }}"
            data-links="{{ t.links | join: ' ' }}">
           <div class="ivh-card-top">
+            <svg class="ivi ivh-card-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-{{ t.id }}"/></svg>
             <h3 class="ivh-card-title">{{ t.name }}</h3>
             <div class="iv-ring" role="img"></div>
           </div>

@@ -70,6 +70,11 @@ exclude:
   - backlog.md
   - scripts/audit_seo.py
   - scripts/generate_uc_banners.py
+  - scripts/generate_icons.py
+  # Icon source and its preview page. The site consumes the generated sprite at
+  # _includes/interview-icons.html, never these files. Left in, Jekyll would copy
+  # the directory into _site/ and jekyll-sitemap would list preview.html as a page.
+  - icons
   - scripts/solve_games.py
   - scripts/verify_stoic_quotes.py
   - scripts/games.json

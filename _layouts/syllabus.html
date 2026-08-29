@@ -18,16 +18,23 @@ layout: default
 
 <section class="section page reveal syl-page" data-topic="{{ topic.id }}">
 
+  {% include interview-icons.html %}
   <script type="application/json" id="iv-data">{{ topic | jsonify }}</script>
 
   <nav class="syl-breadcrumb" aria-label="Breadcrumb">
-    <a href="/interview/" class="syl-back-link">← Interview</a>
+    <a href="/interview/" class="syl-back-link">
+      <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
+      All tracks
+    </a>
   </nav>
 
   <header class="syl-header">
     <div class="syl-header-copy">
       <span class="syl-group">{{ topic.group }}</span>
-      <h1 class="syl-title">{{ topic.name }}</h1>
+      <h1 class="syl-title">
+        <svg class="ivi syl-title-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-{{ topic.id }}"/></svg>
+        {{ topic.name }}
+      </h1>
       <p class="syl-blurb">{{ topic.blurb }}</p>
       <p class="syl-scope">{{ topic.scope }}</p>
       <ul class="syl-stats">
@@ -38,7 +45,7 @@ layout: default
     </div>
     <div class="syl-header-ring">
       <div class="iv-ring" id="iv-ring" role="img"></div>
-      <button type="button" class="syl-reset" id="iv-reset">Reset</button>
+      <button type="button" class="syl-reset" id="iv-reset"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-rotate-ccw"/></svg>Reset</button>
     </div>
   </header>
 
@@ -70,7 +77,7 @@ layout: default
           <p class="syl-module-why">{{ m.why }}</p>
         </div>
         <button type="button" class="syl-done" aria-pressed="false">
-          <i aria-hidden="true"></i><span>Mark revised</span>
+          <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-check-circle"/></svg><span>Mark revised</span>
         </button>
       </div>
 
@@ -88,9 +95,9 @@ layout: default
     <div class="syl-cards-head">
       <h2 class="syl-panel-title">Cold questions</h2>
       <div class="syl-cards-ctl">
-        <button type="button" id="iv-card-prev" aria-label="Previous question">←</button>
-        <button type="button" id="iv-card-shuffle">Shuffle</button>
-        <button type="button" id="iv-card-next" aria-label="Next question">→</button>
+        <button type="button" id="iv-card-prev" aria-label="Previous question"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg></button>
+        <button type="button" id="iv-card-shuffle"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-shuffle"/></svg>Shuffle</button>
+        <button type="button" id="iv-card-next" aria-label="Next question"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></button>
       </div>
     </div>
     <div id="iv-cards"></div>
@@ -109,10 +116,10 @@ layout: default
 
   <nav class="syl-pager" aria-label="Other syllabi">
     {% if idx > 0 %}{% assign p = all[prev_i] %}
-    <a class="syl-pager-link syl-pager-prev" href="/{{ p.id }}/"><span>Previous</span>{{ p.name }}</a>
+    <a class="syl-pager-link syl-pager-prev" href="/{{ p.id }}/"><span><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg>Previous</span>{{ p.name }}</a>
     {% else %}<span></span>{% endif %}
     {% if next_i < all.size %}{% assign n = all[next_i] %}
-    <a class="syl-pager-link syl-pager-next" href="/{{ n.id }}/"><span>Next</span>{{ n.name }}</a>
+    <a class="syl-pager-link syl-pager-next" href="/{{ n.id }}/"><span>Next<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></span>{{ n.name }}</a>
     {% endif %}
   </nav>
 
