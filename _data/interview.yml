@@ -739,12 +739,16 @@ topics:
         why: "Serving conversations spend most of their time here."
         covers:
           - "FlashAttention: tiling, online softmax, IO-awareness, exactness"
+          - "Which FlashAttention: FA-2, FA-3 on Hopper, FA-4 on Blackwell"
           - "Multi-query and grouped-query attention: cache savings and quality cost"
+          - "Multi-head latent attention: low-rank KV compression, and how it compares to grouped-query"
           - Sliding window and local attention
           - Sparse and block-sparse patterns
+          - Natively trainable sparse attention, and why training it beats retrofitting it
           - Linear attention and kernel approximations
           - State-space models and Mamba as an alternative
           - PagedAttention and memory fragmentation
+          - vAttention, and the cost of a non-contiguous cache layout
         check: "Why is FlashAttention faster when it does the same arithmetic?"
         viz:
           type: compare
@@ -796,6 +800,7 @@ topics:
           - "Sampling: greedy, temperature, top-k, top-p, min-p, beam search"
           - Speculative decoding and draft models
           - "Quantisation: int8, int4, GPTQ, AWQ, and quality loss"
+          - "Four-bit float formats: MXFP4, NVFP4, and why integer methods do not carry over"
           - Throughput versus latency versus cost
         check: "Decode is slow and the GPU is at 20% utilisation. Explain why and what you change."
         viz:
@@ -812,6 +817,7 @@ topics:
     traps:
       - Saying attention is quadratic without saying in what
       - Calling FlashAttention an approximation
+      - Naming FlashAttention with no version, when the kernel is tied to the GPU generation
       - Confusing d_model with head dimension
       - Forgetting the KV cache when estimating serving memory
     drills:
@@ -1633,6 +1639,7 @@ topics:
           - "Ablation: zero, mean, resample, and why the choice matters"
           - Direct logit attribution
           - Causal scrubbing and hypothesis testing
+          - Attribution graphs, and what freezing attention costs you
           - Probing classifiers and their limits
         check: "Compare zero ablation and resample ablation. When does zero ablation mislead you?"
         viz:
@@ -1668,10 +1675,11 @@ topics:
           - "Variants: top-k, gated, JumpReLU"
           - Dead features, shrinkage, and feature absorption
           - Feature splitting across dictionary sizes
-          - Transcoders and crosscoders
+          - Transcoders and crosscoders, and why circuit work moved to them
+          - Weight-sparse models and parameter decomposition as a different route
           - "Evaluating a dictionary: loss recovered, interpretability scores, downstream use"
-          - Known limitations and the recent critiques
-        check: "Your SAE reconstructs well and its features are uninterpretable. What went wrong?"
+          - "Where SAEs lose to a plain baseline: probing and steering"
+        check: "A plain logistic probe beats your SAE at finding a concept. Explain why that is expected."
         viz:
           type: flow
           steps:
@@ -1726,9 +1734,11 @@ topics:
       - Reading feature labels without a causal check
       - Cherry-picking one prompt as evidence of a circuit
       - Overstating what SAEs currently deliver
+      - Comparing an interpretability method against no baseline at all
     drills:
       - Run activation patching on a small model and locate a known head
       - Train an SAE on one layer and manually label 20 features
+      - Run a logistic probe on the same concept and compare it with the SAE
       - Reproduce the induction head result on a two-layer model
       - Write one claim, then write the experiment that would refute it
 
