@@ -79,7 +79,7 @@ topics:
           - Strongly informative
           'on': 1
       - name: Computing the posterior
-        why: "The whole field is applied only because these algorithms work."
+        why: "Bayesian methods became practical when these algorithms did."
         covers:
           - Grid approximation and where it dies
           - Laplace approximation
@@ -108,7 +108,7 @@ topics:
             - Laplace
             - Variational inference
       - name: Hierarchical models
-        why: "Partial pooling is the single most useful Bayesian idea in applied work."
+        why: "Partial pooling is the idea I reach for most in applied work."
         covers:
           - Complete pooling, no pooling, partial pooling
           - Shrinkage and borrowing strength
@@ -127,7 +127,7 @@ topics:
           - Complete pooling
           'on': 1
       - name: Checking and comparing models
-        why: "Anyone can fit a model. The interview is about whether you would trust it."
+        why: "Fitting a model is the easy part, so interviewers ask what would make you distrust it."
         covers:
           - Posterior predictive checks and test quantities
           - "WAIC and LOO-CV, plus the Pareto-k diagnostic"
@@ -188,7 +188,7 @@ topics:
     links: [bayesian-statistics, machine-learning]
     modules:
       - name: Estimators and their properties
-        why: "The vocabulary every other answer is built from."
+        why: "Every other answer in this track is built from this vocabulary."
         covers:
           - Bias, variance, mean squared error, consistency
           - Efficiency and the Cramér-Rao bound
@@ -229,7 +229,7 @@ topics:
           - Sampling distribution
           - Interval
       - name: Hypothesis testing
-        why: "The most common place candidates say something technically false."
+        why: "People say something technically false here without noticing."
         covers:
           - Null and alternative, type I and type II error
           - Power, minimum detectable effect, sample size
@@ -271,7 +271,7 @@ topics:
           - Family-wise error
           'on': 1
       - name: Experiment design and A/B testing
-        why: "The applied-scientist version of this track, asked at almost every company."
+        why: "Almost every company asks about this, and it is the applied-scientist core of the track."
         covers:
           - Randomisation unit, SUTVA, interference and network effects
           - Sample size, MDE, and duration planning
@@ -290,7 +290,7 @@ topics:
           - Decide
           loop: true
       - name: Causal inference
-        why: "The gap between correlation and a decision is where senior candidates separate."
+        why: "Moving from a correlation to a decision is the hard part."
         covers:
           - Potential outcomes, ATE, ATT, CATE
           - DAGs, backdoor and frontdoor criteria, colliders
@@ -317,7 +317,7 @@ topics:
             - Difference in differences
             - Regression discontinuity
       - name: Regression in practice
-        why: "Still the default tool when someone needs an answer this afternoon."
+        why: "Regression is still the default when someone needs an answer this afternoon."
         covers:
           - OLS assumptions and what breaks under each violation
           - Heteroskedasticity, robust and clustered standard errors
@@ -352,7 +352,7 @@ topics:
     links: [deep-learning]
     modules:
       - name: Framing the problem
-        why: "Most failed ML projects failed here, and interviewers know it."
+        why: "Get this wrong and the modelling never matters, which is why interviewers open here."
         covers:
           - Supervised, unsupervised, self-supervised, reinforcement
           - Choosing a target, and target leakage
@@ -398,7 +398,7 @@ topics:
             - Nearest neighbours
             - Support vector machine
       - name: Evaluation you can defend
-        why: "The fastest way to fail an interview is a leaky validation split."
+        why: "A leaky validation split will sink an otherwise good answer."
         covers:
           - Train, validation, test discipline
           - "Cross-validation: k-fold, stratified, grouped, nested"
@@ -438,7 +438,7 @@ topics:
             - Test set leaks in
             - Score looks better than it is
       - name: Imbalance and shift
-        why: "The two conditions almost every real dataset has."
+        why: "Almost every real dataset arrives imbalanced, shifted, or both."
         covers:
           - Class weights, resampling, SMOTE, focal loss
           - Why resampling breaks calibration
@@ -534,7 +534,7 @@ topics:
           - Momentum
           - Weight decay
       - name: Initialisation and normalisation
-        why: "The parts people copy without understanding, then cannot debug."
+        why: "These get copied from a reference implementation and then cannot be debugged."
         covers:
           - Xavier and He initialisation, and the variance argument
           - Batch normalisation, train versus eval behaviour
@@ -620,7 +620,7 @@ topics:
             items:
             - Message passing
       - name: Training at scale
-        why: "The line between a research engineer and a hobbyist."
+        why: "Reasoning about scale is what the job actually asks for."
         covers:
           - "Parallelism: data, tensor, pipeline, sequence, expert"
           - ZeRO stages and FSDP
@@ -637,7 +637,7 @@ topics:
           - Tensor parallel
           - Data parallel
       - name: Debugging
-        why: "A favourite question because it separates readers from practitioners."
+        why: "Interviewers like this question because reading about training does not prepare you for it."
         covers:
           - Overfit a single batch first
           - Expected loss at initialisation
@@ -736,7 +736,7 @@ topics:
             - One vector per slot
             - Fixed length
       - name: Efficient attention and long context
-        why: "The practical half of every serving conversation."
+        why: "Serving conversations spend most of their time here."
         covers:
           - "FlashAttention: tiling, online softmax, IO-awareness, exactness"
           - "Multi-query and grouped-query attention: cache savings and quality cost"
@@ -828,7 +828,7 @@ topics:
     links: [ai-safety, prompt-engineering]
     modules:
       - name: Data
-        why: "The part with the largest effect and the least glamour."
+        why: "Data has the largest effect on the result and gets the least attention."
         covers:
           - Sources, licensing, and the web-crawl reality
           - "Deduplication: exact, MinHash, suffix arrays, and its effect on loss"
@@ -865,7 +865,7 @@ topics:
           a: Small model
           b: Large model
       - name: Supervised fine-tuning
-        why: "The cheapest lever, and the one you will most likely own."
+        why: "Fine-tuning is the cheapest lever, and probably the one you will own."
         covers:
           - Instruction data, sources, and quality over quantity
           - Chat templates and special tokens
@@ -891,7 +891,7 @@ topics:
             - Quantised base model
             - Least memory
       - name: Learning from preferences
-        why: "The step that turns a capable model into a usable one."
+        why: "Preference learning is what makes a capable model usable."
         covers:
           - "Reward modelling: pairwise data, Bradley-Terry, reward model overfitting"
           - "PPO for RLHF: policy, value head, advantage, KL penalty to the reference"
@@ -910,7 +910,7 @@ topics:
           - Hold it near the reference
           loop: true
       - name: Reasoning and verifiable rewards
-        why: "The most active area, so expect a current-work question."
+        why: "This area moves fastest, so expect a question about recent work."
         covers:
           - Chain-of-thought supervision versus emergent reasoning
           - Reinforcement learning from verifiable rewards
@@ -928,7 +928,7 @@ topics:
           - Reward the correct ones
           - Update
       - name: Evaluation across a run
-        why: "Training is only as good as the signal you steer by."
+        why: "Bad evaluation means you cannot tell whether the run improved anything."
         covers:
           - Held-out loss versus downstream benchmarks
           - Benchmark saturation and contamination
@@ -990,7 +990,7 @@ topics:
           - Tokenise
           - Ids
       - name: Representations
-        why: "Retrieval systems live or die on this."
+        why: "Retrieval quality depends almost entirely on this."
         covers:
           - "Count-based: bag of words, TF-IDF, n-grams"
           - "Static embeddings: word2vec, GloVe, fastText"
@@ -1009,7 +1009,7 @@ topics:
           - Contextual embeddings
           'on': 2
       - name: Core tasks
-        why: "The shared vocabulary of the field."
+        why: "These task names are the shared vocabulary of the field."
         covers:
           - Classification, multi-label, and hierarchical labels
           - "Sequence labelling: NER, POS, chunking, BIO tagging"
@@ -1035,7 +1035,7 @@ topics:
             - Summarisation
             - Translation
       - name: Measuring language output
-        why: "Bad metric choice is the most common NLP interview mistake."
+        why: "Choosing the wrong metric is the mistake I see most in this area."
         covers:
           - Accuracy, precision, recall, macro versus micro F1
           - "Generation metrics: BLEU, ROUGE, METEOR, chrF"
@@ -1098,7 +1098,7 @@ topics:
           - Script and code-switching
           - Benchmark coverage
       - name: Data and annotation
-        why: "The unglamorous work that decides project outcomes."
+        why: "Nobody enjoys annotation work, and it decides how the project turns out."
         covers:
           - Annotation guidelines and pilot rounds
           - "Agreement: Cohen's kappa, Krippendorff's alpha"
@@ -1135,7 +1135,7 @@ topics:
     links: [multimodality]
     modules:
       - name: Image fundamentals
-        why: "The arithmetic that every later architecture question assumes."
+        why: "Every later architecture question assumes this arithmetic."
         covers:
           - Colour spaces, bit depth, channel order
           - Filtering, edges, histograms
@@ -1153,7 +1153,7 @@ topics:
           - Pool
           - Feature map
       - name: Backbones
-        why: "You need to explain a design choice, not recite a leaderboard."
+        why: "Interviewers want the reasoning behind a design choice."
         covers:
           - LeNet, AlexNet, VGG, and what each one settled
           - "ResNet: residuals, bottlenecks, and depth"
@@ -1260,7 +1260,7 @@ topics:
           - Tile
           - Serve
       - name: Evaluation traps
-        why: "Where an honest candidate earns trust fast."
+        why: "Naming your own evaluation problems earns trust quickly."
         covers:
           - Near-duplicate leakage across splits, especially video frames
           - Spatial autocorrelation in geospatial splits
@@ -1296,7 +1296,7 @@ topics:
     links: [computer-vision, nlp]
     modules:
       - name: Fusion strategies
-        why: "The first design decision, and the one you must justify."
+        why: "Fusion is the first design decision, and you will have to justify it."
         covers:
           - Early, late and intermediate fusion
           - Cross-attention between modality streams
@@ -1318,7 +1318,7 @@ topics:
             items:
             - Join the outputs
       - name: Contrastive alignment
-        why: "The backbone of retrieval and open-vocabulary systems."
+        why: "Retrieval and open-vocabulary systems are built on this."
         covers:
           - "The CLIP objective: InfoNCE, symmetric loss, temperature"
           - Batch size effects and negatives
@@ -1336,7 +1336,7 @@ topics:
           - Matching pairs pulled close
           - Everything else pushed apart
       - name: Vision-language models
-        why: "The current default multimodal system."
+        why: "Vision-language models are the default multimodal system right now."
         covers:
           - LLaVA-style connector training stages
           - "Resolution handling: tiling, AnyRes, dynamic patching"
@@ -1372,7 +1372,7 @@ topics:
           - Decode
           - Image
       - name: Audio and speech
-        why: "The modality most candidates skip, so knowing it stands out."
+        why: "Audio gets skipped often enough that knowing it stands out."
         covers:
           - Waveforms, spectrograms, mel scale
           - "ASR: CTC, attention encoder-decoder, Whisper-style training"
@@ -1412,7 +1412,7 @@ topics:
             items:
             - Image only
       - name: Failure modes
-        why: "Your research angle, and a strong differentiator."
+        why: "Failure modes are your research angle, so answer them best."
         covers:
           - Modality dominance and text priors overriding the image
           - Shortcut learning across modalities
@@ -1472,7 +1472,7 @@ topics:
             - Gaps in the model
             - More data helps
       - name: Calibration
-        why: "The central measurement of the field, and easy to get subtly wrong."
+        why: "Calibration is the central measurement here, and easy to get subtly wrong."
         covers:
           - Reliability diagrams and confidence histograms
           - "Expected calibration error, its bin dependence and estimator bias"
@@ -1489,7 +1489,7 @@ topics:
           a: Perfectly calibrated
           b: Overconfident
       - name: Recalibration
-        why: "The cheap fix everyone should try first."
+        why: "Try this before anything more elaborate."
         covers:
           - Temperature scaling and why it preserves accuracy
           - Vector and matrix scaling
@@ -1506,7 +1506,7 @@ topics:
           - Fit a temperature
           - Calibrated model
       - name: Conformal prediction
-        why: "The one method with a finite-sample guarantee, and your own research tool."
+        why: "Conformal prediction gives a finite-sample guarantee, and it is your own tool."
         covers:
           - Exchangeability and what it demands
           - "Split conformal: calibration set, quantile, coverage guarantee"
@@ -1527,7 +1527,7 @@ topics:
           - Build the set
           - Coverage holds
       - name: Bayesian and ensemble approximations
-        why: "The practical alternatives, with honest cost accounting."
+        why: "These are the practical alternatives, priced honestly."
         covers:
           - Monte Carlo dropout and its criticisms
           - Deep ensembles, diversity, and cost
@@ -1551,7 +1551,7 @@ topics:
             - Curvature at the optimum
             - One extra pass
       - name: Abstention and selective prediction
-        why: "The decision layer where uncertainty finally pays off."
+        why: "This is where uncertainty turns into a decision."
         covers:
           - Selective risk, coverage, and the risk-coverage curve
           - Area under the risk-coverage curve
@@ -1569,7 +1569,7 @@ topics:
           a: Abstain on the hard cases
           b: Answer everything
       - name: Uncertainty for language models
-        why: "The frontier, and where your own work sits."
+        why: "Language models are the open frontier here, and where your own work sits."
         covers:
           - Token probability, sequence likelihood, length normalisation
           - Semantic entropy and meaning-level uncertainty
@@ -1662,7 +1662,7 @@ topics:
           - Copies what followed it
           - Gives in-context learning
       - name: Sparse dictionary learning
-        why: "The current main line of work, so expect depth."
+        why: "Sparse dictionaries are the main line of work right now, so expect depth."
         covers:
           - Sparse autoencoders and the reconstruction-sparsity trade
           - "Variants: top-k, gated, JumpReLU"
@@ -1680,7 +1680,7 @@ topics:
           - Decode
           - Compare the reconstruction
       - name: Steering and editing
-        why: "The applied edge of interpretability."
+        why: "Steering is where interpretability becomes something you can use."
         covers:
           - Activation addition and steering vectors
           - Refusal directions and single-direction findings
@@ -1705,7 +1705,7 @@ topics:
             - Retrain
             - Broadest side effects
       - name: Interpretability for safety
-        why: "The reason labs fund this work, and the framing that connects to your agenda."
+        why: "Labs fund this work for safety reasons, which is also how it meets your agenda."
         covers:
           - What a safety case built on interpretability would need
           - Deception and situational awareness detection
@@ -1782,7 +1782,7 @@ topics:
           - Scalable oversight
           'on': 1
       - name: Failure modes
-        why: "The vocabulary of the field, and where precision counts."
+        why: "These terms are the field's vocabulary, and precision counts."
         covers:
           - Reward hacking and specification gaming
           - Goal misgeneralisation versus capability misgeneralisation
@@ -1805,7 +1805,7 @@ topics:
             items:
             - Agreement got rewarded
       - name: Evaluation and red teaming
-        why: "The practical work most safety roles actually do."
+        why: "Most safety roles spend their time here."
         covers:
           - Dangerous capability evaluations
           - Red teaming, manual and automated
@@ -1824,7 +1824,7 @@ topics:
           - Decide the response
           loop: true
       - name: Robustness and control
-        why: "The assumption that alignment might fail, handled engineering-first."
+        why: "Assume alignment might fail, then engineer around it."
         covers:
           - Adversarial robustness and its limits
           - Control evaluations and untrusted models
@@ -1841,7 +1841,7 @@ topics:
           - Sandboxing
           - Least privilege
       - name: Honesty, calibration and abstention
-        why: "Your own contribution, so this section must be the sharpest."
+        why: "Calibration is your own contribution, so keep this section the sharpest."
         covers:
           - Truthfulness versus helpfulness tension
           - Knowing when to abstain as a safety property
@@ -1896,7 +1896,7 @@ topics:
     links: [ai-safety, uncertainty-quantification]
     modules:
       - name: Choosing a question
-        why: "Taste is what a research interview is actually measuring."
+        why: "Research interviews are measuring taste more than technique."
         covers:
           - Mapping a literature quickly and honestly
           - Gap versus novelty, and why a gap alone is weak
@@ -1919,7 +1919,7 @@ topics:
           - Not worth writing
           - Curiosity only
       - name: Experiment design
-        why: "The difference between evidence and a demo."
+        why: "Good design is what turns a demo into evidence."
         covers:
           - Hypothesis, prediction, and the observation that would refute it
           - Baselines, and tuning them as hard as your method
@@ -1937,7 +1937,7 @@ topics:
           - Ablation
           - Verdict
       - name: Statistics for papers
-        why: "Where reviewers and interviewers both push hardest."
+        why: "Reviewers and interviewers both push hardest here."
         covers:
           - Seed variance and how many runs you need
           - Error bars, confidence intervals, and honest plots
@@ -1956,7 +1956,7 @@ topics:
           - Enough to see the spread
           'on': 2
       - name: Reproducibility
-        why: "A cheap signal of seriousness."
+        why: "Reproducibility is cheap to provide and it signals seriousness."
         covers:
           - Code release, configs, and environment pinning
           - Dataset cards and licence clarity
@@ -1990,7 +1990,7 @@ topics:
           - Figure
           - Limitation
       - name: Review and rebuttal
-        why: "Community membership, and interviewers often ask about it."
+        why: "Interviewers often ask about reviewing, since it shows you are part of the community."
         covers:
           - Reviewing well and what a useful review contains
           - Reading reviews without defensiveness
@@ -2060,7 +2060,7 @@ topics:
           - Examples
           - Output contract
       - name: Reasoning
-        why: "The area with the most folklore, so precision stands out."
+        why: "Folklore is thick here, so precision stands out."
         covers:
           - Chain of thought, and when it helps
           - Self-consistency and majority voting
@@ -2118,7 +2118,7 @@ topics:
           - Repair
           loop: true
       - name: Measurement
-        why: "The line between prompt engineering and prompt guessing."
+        why: "Measurement is what makes this engineering."
         covers:
           - Building the eval set before the prompt
           - Pairwise comparison and rubric grading
@@ -2136,7 +2136,7 @@ topics:
           - Keep or revert
           loop: true
       - name: Robustness
-        why: "Where prompting meets security."
+        why: "Prompting meets security here."
         covers:
           - Prompt injection through retrieved or tool content
           - Delimiter hygiene and untrusted-content marking
@@ -2230,7 +2230,7 @@ topics:
           - The error it can act on
           - The permission it needs
       - name: Memory and context
-        why: "The binding constraint on long tasks."
+        why: "Context is the binding constraint on any long task."
         covers:
           - Short-term scratchpad versus persistent memory
           - Retrieval over past steps and artefacts
@@ -2247,7 +2247,7 @@ topics:
           - Summary of the run
           - Stored artefacts
       - name: Planning and control
-        why: "Where cost and reliability are decided."
+        why: "Cost and reliability are decided here."
         covers:
           - Task decomposition and subtask granularity
           - Orchestrator and worker patterns
@@ -2346,7 +2346,7 @@ topics:
     links: [data-engineering, machine-learning]
     modules:
       - name: Lifecycle and reproducibility
-        why: "The base expectation for any production role."
+        why: "Any production role assumes this."
         covers:
           - Problem framing to retirement, as one loop
           - Experiment tracking and run metadata
@@ -2425,7 +2425,7 @@ topics:
           - Online
           'on': 2
       - name: Deployment strategy
-        why: "How you ship without breaking things."
+        why: "Shipping without breaking things comes down to these five moves."
         covers:
           - Shadow deployment and offline replay
           - Canary and progressive rollout
@@ -2442,7 +2442,7 @@ topics:
           - Full rollout
           - Rollback ready
       - name: Monitoring
-        why: "The part that decides whether you find out first or the customer does."
+        why: "Monitoring decides whether you find out first or the customer does."
         covers:
           - Input drift, prediction drift, and performance decay
           - Monitoring with delayed or missing labels
@@ -2466,7 +2466,7 @@ topics:
             items:
             - Performance decay
       - name: Governance
-        why: "Increasingly the difference between a demo and a deployment."
+        why: "More and more, a deployment will not go ahead without this."
         covers:
           - Lineage from prediction to training data
           - Model cards and documentation
@@ -2523,7 +2523,7 @@ topics:
             - Reads a few columns
             - Suits scans
       - name: Data modelling
-        why: "Where analytics teams either trust you or work around you."
+        why: "Analytics teams either trust your model or work around it."
         covers:
           - Normalisation and denormalisation trade-offs
           - Star and snowflake schemas
@@ -2559,7 +2559,7 @@ topics:
           - Aggregate
           - Write
       - name: Streaming
-        why: "The area where correctness gets subtle."
+        why: "Correctness gets subtle once events arrive out of order."
         covers:
           - "Kafka: topics, partitions, offsets, consumer groups, rebalancing"
           - Delivery semantics, at-least-once versus exactly-once
@@ -2577,7 +2577,7 @@ topics:
           - The watermark passes
           - The window closes
       - name: Orchestration and quality
-        why: "Reliability is the product."
+        why: "Nobody notices the pipeline until it is wrong or late."
         covers:
           - DAG design, dependencies, and retries
           - Idempotency and safe reruns
@@ -2597,7 +2597,7 @@ topics:
           - Publish
           loop: true
       - name: Architecture
-        why: "The system design round for data roles."
+        why: "Data roles run their system design round on this."
         covers:
           - Lakehouse and medallion layering
           - ETL versus ELT
@@ -2651,7 +2651,7 @@ topics:
     links: [agentic-ai]
     modules:
       - name: Networking
-        why: "The base layer under every distributed system question."
+        why: "Every distributed system question sits on top of this."
         covers:
           - OSI and TCP/IP layers
           - "TCP handshake, congestion control, and what a timeout means"
@@ -2670,7 +2670,7 @@ topics:
           - Network
           - Link
       - name: Security foundations
-        why: "The framing that makes the rest coherent."
+        why: "Without this framing the rest of the track is just a list of attacks."
         covers:
           - Confidentiality, integrity, availability
           - "Threat modelling: STRIDE, attack trees, trust boundaries"
@@ -2689,7 +2689,7 @@ topics:
           - What crosses the line
           - What gets logged
       - name: Cryptography in practice
-        why: "Not to invent it, but to avoid misusing it."
+        why: "The goal is to avoid misusing it."
         covers:
           - Symmetric versus asymmetric encryption
           - Hashing versus encryption versus encoding
@@ -2713,7 +2713,7 @@ topics:
             items:
             - Certificates
       - name: Application security
-        why: "The attacks you will actually meet."
+        why: "These are the attacks you will meet."
         covers:
           - "OWASP Top 10, current edition"
           - Injection, SQL and command
@@ -2731,7 +2731,7 @@ topics:
           - Encode on output
           - Least privilege
       - name: Infrastructure and cloud
-        why: "Where most real breaches happen now."
+        why: "Most real breaches happen here now."
         covers:
           - IAM policies, roles, and privilege escalation paths
           - Network segmentation and security groups
@@ -2750,7 +2750,7 @@ topics:
           - The whole account
           'on': 0
       - name: Machine learning security
-        why: "The intersection that makes you unusual as a candidate."
+        why: "Few candidates can speak to both sides of this."
         covers:
           - Training data poisoning and backdoors
           - Model extraction and stealing
@@ -2769,7 +2769,7 @@ topics:
           - Extracted training examples
           - Injected instructions
       - name: Privacy
-        why: "The compliance layer that constrains model design."
+        why: "Compliance constrains what you are allowed to build."
         covers:
           - PII, sensitive categories, and data minimisation
           - GDPR concepts, lawful basis, and the right to erasure
