@@ -3423,12 +3423,12 @@ topics:
   - id: math
     name: Mathematics
     group: foundations
-    blurb: "Whether the notation in a paper is something you read or something you skip."
-    scope: "Owns counting, probability, information and how numbers behave on a machine. Hands vectors and matrices to linear algebra, rates of change to calculus, and inference to the two statistics tracks."
+    blurb: "Whether you can read the notation, and say what it commits you to."
+    scope: "Owns what the objects are, then counting, probability, information and how numbers behave on a machine. Hands vectors and matrices to linear algebra, rates of change to calculus, and inference to the two statistics tracks."
     links: [linear-algebra, calculus, math-proof]
     modules:
       - name: Reading the notation
-        why: "A paper you cannot read is a paper you cannot use."
+        why: "Notation is where a field stores its decisions, and reading it is how you get them back."
         beats:
           - >-
               A set is a collection. No order, no repeats, and membership is the only
@@ -3444,14 +3444,19 @@ topics:
           - >-
               Notation is compression. Three constructions carry most of it: a
               set, an arrow from one set to another, and a loop that adds
-              things up.
+              things up. Read the types first, and a line usually has only one
+              sensible reading left.
           - >-
-              Read the types first. Once you know what goes in and what comes
-              out, the rest of the line usually has only one sensible reading.
+              None of it was found lying around. Leibniz wanted a language in
+              which an argument could be settled by calculation, and Frege
+              built the quantifiers that made it work. Every symbol is somebody's
+              decision about what deserved a name, and a definition fixes what
+              counts as the same thing.
         math:
           - name: 'A set given by a rule'
             tex: 'S = \{\, x \in \mathcal{X} \;:\; P(x) \,\}'
             read: 'Take everything in X and keep the ones that pass the test P.'
+            note: 'The bar hides the hard part. Whether any rule at all picks out a set is the question that broke naive set theory. The modern version carves S out of a set you already have, never out of everything there is.'
             where:
               - sym: 'x \in \mathcal{X}'
                 is: 'x is a member of the space every input lives in'
@@ -3487,6 +3492,7 @@ topics:
           - Common number sets and what they exclude
           - Reading a signature before reading a formula
           - Where notation hides an assumption
+          - Definitions as decisions rather than discoveries
         check: "Take any line from a paper you know. Say the type of every object in it."
         viz:
           type: flow
@@ -3495,6 +3501,236 @@ topics:
           - Name what goes in
           - Name what comes out
           - Then read the formula
+      - name: What a number is
+        why: "Zero was resisted for centuries, and the reasons say what a number has to be."
+        beats:
+          - >-
+              Start with a tally. Numbers begin as answers to how many, and nobody
+              tallies an absence.
+          - >-
+              Place value forces the question. Without a mark holding the empty column,
+              two hundred and five and twenty five are the same string.
+          - >-
+              Then it becomes a number in its own right, with rules of its own and a
+              partner for every other number.
+          - >-
+              The modern definition goes further and builds it out of the empty set, so
+              counting starts from nothing at all.
+        plain:
+          - >-
+              Counting answers how many. An absence is not something anyone
+              counts, so zero arrives late in every tradition that gets there.
+              It appears first as a placeholder, a mark keeping a column open.
+              Treating it as a quantity came later, and was resisted.
+          - >-
+              The modern construction runs the other way. Set theory defines
+              zero as the empty set, then builds each number as the collection
+              of everything below it. Counting starts from nothing, and the
+              numbers you learned first are the last ones justified.
+        math:
+          - name: 'Zero is defined by what it leaves alone'
+            tex: 'a + 0 = a \quad \text{for every } a'
+            read: 'Zero is the number that changes nothing when you add it.'
+            note: 'This is how the subject settles existence questions. An object is pinned down by the rule it obeys, never by pointing at an example. Anything obeying the rule counts as the same object. Asking what zero really is, beyond that, has no further answer.'
+            where:
+              - sym: 'a'
+                is: 'any number at all'
+          - name: 'Counting built from the empty set'
+            tex: '0 \coloneqq \varnothing, \qquad n + 1 \coloneqq n \cup \{ n \}'
+            read: 'Zero is the set holding nothing, and every number after it collects the numbers below.'
+            note: 'Von Neumann''s construction. It puts the whole numbers inside set theory rather than assuming them beforehand. One foundation then carries the rest of mathematics.'
+            where:
+              - sym: '\coloneqq'
+                is: 'is defined to be'
+              - sym: '\varnothing'
+                is: 'the empty set, nothing at all'
+              - sym: 'n'
+                is: 'a count of things'
+          - name: 'Each extension answers a question the last one refused'
+            tex: 'a + (-a) = 0, \qquad b \times \tfrac{1}{b} = 1 \;\; (b \ne 0)'
+            read: 'Give every number something that cancels it, and subtraction and division always have somewhere to land.'
+            note: 'Subtraction was once only allowed where the answer stayed positive. Negative numbers were called fictitious for a long time. Every extension was resisted before it was adopted, and every one was made to close a gap rather than to describe anything new.'
+            where:
+              - sym: 'b'
+                is: 'any number other than zero'
+        covers:
+          - Counting numbers and what they answer
+          - Zero as a placeholder and zero as a quantity
+          - Identity elements, and definition by property
+          - The empty set and the von Neumann construction
+          - Negative numbers and closure under subtraction
+          - Number systems as successive extensions
+          - Invention against discovery in mathematics
+        check: "Say why zero is a number rather than only a mark for an empty column."
+        viz:
+          type: flow
+          steps:
+          - A tally of things
+          - A mark holding a column
+          - A number with its own rules
+          - Built from the empty set
+      - name: Dividing by zero
+        why: "The answer is a decision, and which decision was taken tells you what division is."
+        beats:
+          - >-
+              Division asks a multiplication question. What number times the divisor
+              gives the numerator.
+          - >-
+              With a numerator that is not zero, nothing works. Zero times anything is
+              zero, so there is no answer to give.
+          - >-
+              With zero over zero, everything works. Every number satisfies it, so there
+              is no single answer to give.
+          - >-
+              Hardware still has to return something, so the standard picks infinity and
+              NaN by convention.
+        plain:
+          - >-
+              Division is the inverse of multiplication. Asking for a divided by
+              b is asking what times b gives a. Zero times anything is zero. So
+              a numerator that is not zero has no answer, and a numerator that
+              is zero has every answer.
+          - >-
+              Neither case yields a value, and the two failures differ. One
+              has no candidates. The other has too many. Undefined covers
+              both, so the second gets its own name when it turns up inside a
+              limit.
+        math:
+          - name: 'Division, written as the question it asks'
+            tex: '\frac{a}{b} = c \;\Longleftrightarrow\; c \times b = a, \quad b \ne 0'
+            read: 'A quotient is the number that multiplies the divisor back into the numerator.'
+            note: 'The restriction sits inside the definition. Division by zero was never forbidden by a rule added afterwards. The definition simply never reached that far.'
+            where:
+              - sym: 'a'
+                is: 'the numerator, what you are dividing'
+              - sym: 'b'
+                is: 'the divisor, what you are dividing by'
+              - sym: 'c'
+                is: 'the quotient, the answer being sought'
+          - name: 'One fact, two different failures'
+            tex: 'c \times 0 = 0 \;\text{ for all } c \;\Longrightarrow\; \tfrac{a}{0} \text{ has no solution when } a \ne 0, \text{ and every solution when } a = 0'
+            read: 'The same fact leaves one case with nothing to choose and the other with no way to choose.'
+            note: 'Defining a value anyway collapses arithmetic. Suppose one over zero were a number. Multiply both sides by zero and one equals zero, and from there every number equals every other. The prohibition protects everything else.'
+            where:
+              - sym: 'a'
+                is: 'the numerator, what you are dividing'
+              - sym: 'c'
+                is: 'the quotient, the answer being sought'
+          - name: 'A limit asks a different question'
+            tex: '\lim_{u \to 0^{+}} \frac{1}{u} = \infty, \qquad \frac{1}{0} \;\text{ undefined}'
+            read: 'The quotient grows without bound as the divisor shrinks, and still has no value at zero itself.'
+            note: 'Infinity here describes the approach rather than a number arrived at. Reading a limit as the value at the point is the common slip. It is the same error as treating a trend as a fact about its endpoint.'
+            where:
+              - sym: 'u'
+                is: 'the divisor, shrinking towards zero'
+            play:
+              kind: curve
+              title: Shrink the divisor and watch the quotient leave the plot
+              alt: A hyperbola of one over the divisor, climbing off the top of the plot as the divisor approaches zero.
+              x:
+              - 0.02
+              - 2
+              y:
+              - 0
+              - 50
+              xlabel: divisor
+              ylabel: quotient
+              curves:
+              - fn: a/x
+                s: 0
+              readout: '"Halve the divisor and the quotient doubles. It settles on nothing, so there is no value waiting at zero."'
+              knobs:
+              - k: a
+                label: numerator
+                min: 0.5
+                max: 5
+                v: 1
+                step: 0.5
+                dp: 1
+                s: 0
+        covers:
+          - Division as the inverse of multiplication
+          - Why a non-zero numerator over zero has no solution
+          - Why zero over zero has every solution
+          - Undefined against indeterminate
+          - Limits, and why they ask a different question
+          - What breaks in arithmetic if a value is defined anyway
+          - IEEE 754 infinity and NaN as conventions
+        check: "Say why one over zero and zero over zero fail for different reasons."
+        viz:
+          type: tree
+          root: What is a divided by zero
+          branches:
+          - k: The numerator is not zero
+            items: ["No number works", "Undefined"]
+          - k: The numerator is zero
+            items: ["Every number works", "Indeterminate"]
+          - k: On a machine
+            items: ["A chosen convention", "Infinity and NaN"]
+      - name: Infinity
+        why: "Whether a collection can be listed decides what a machine can ever reach."
+        beats:
+          - >-
+              Some infinite collections can be put in a list, with a first, a second and
+              no end. The whole numbers manage it, and so do the fractions.
+          - >-
+              The reals do not. Any list of them misses a number you can build by
+              disagreeing with every entry in turn.
+        plain:
+          - >-
+              Aristotle allowed infinity as a process that never stops and
+              refused it as a finished thing. That position held for two
+              thousand years. Cantor broke it by asking whether a collection
+              can be listed, and the answer splits the infinite into sizes.
+          - >-
+              The fractions can be listed, so there are exactly as many of
+              them as whole numbers. The reals cannot. Only countably many
+              things can ever be written down. So almost every real number has
+              no description, no name, and no program that produces it.
+        math:
+          - name: 'Same size means a pairing exists'
+            tex: '|S| = |U| \;\Longleftrightarrow\; \text{a one-to-one pairing of } S \text{ with } U \text{ exists}'
+            read: 'Two collections match in size when their members pair off with none left over.'
+            note: 'On finite collections this agrees with counting. Extended to infinite ones it says the whole numbers pair with the even numbers, so a collection can match a part of itself. Cantor kept the definition and gave up the intuition.'
+            where:
+              - sym: 'S'
+                is: 'a set, a collection with no order and no repeats'
+              - sym: 'U'
+                is: 'a second set being compared against it'
+          - name: 'The diagonal argument'
+            tex: '\text{for any list } r_{1}, r_{2}, \dots \;\; r^{\ast} \text{ differs from } r_{i} \text{ in place } i'
+            read: 'Disagree with the first number in its first digit, the second in its second, and the result is on no list.'
+            note: 'The same move proves the halting problem undecidable. Anything defined by disagreeing with every entry is not an entry, and no amount of lengthening the list repairs it.'
+            where:
+              - sym: 'r_{i}'
+                is: 'the i-th number on the list'
+              - sym: 'r^{\ast}'
+                is: 'the number built to differ from all of them'
+          - name: 'Almost every number cannot be named'
+            tex: '|\{\text{finite descriptions}\}| = \aleph_{0} \;<\; |\mathbb{R}|'
+            read: 'There are only countably many things anyone could write down, and uncountably many reals.'
+            note: 'So the numbers a machine can store, name or compute are a vanishing fraction of the reals. Floating point is a small finite grid inside that fraction, which is where the last module of this track begins.'
+            where:
+              - sym: '\aleph_{0}'
+                is: 'the size of the whole numbers, the smallest infinity'
+              - sym: '\mathbb{R}'
+                is: 'the real numbers'
+        covers:
+          - Potential against actual infinity
+          - Size by pairing rather than by counting
+          - Countable sets, including the fractions
+          - Cantor's diagonal argument
+          - Uncountability of the reals
+          - Why almost every real has no finite description
+          - What that costs a machine
+        check: "Explain why the fractions can be listed and the reals cannot."
+        viz:
+          type: compare
+          cols:
+          - k: Countable
+            items: ["Can be put in a list", "Whole numbers, fractions"]
+          - k: Uncountable
+            items: ["No list is ever complete", "The reals"]
       - name: Counting
         why: "Half of probability is careful counting, and the other half is knowing when counting explodes."
         beats:
@@ -3513,9 +3749,11 @@ topics:
               n things gives n factorial. Choosing k of them without caring
               about order divides that by the orderings you no longer count.
           - >-
-              The reason this matters is growth. A search over subsets doubles
-              with every item added, so exhaustive search stops being an option
-              within a few dozen.
+              The growth is the part worth sitting with. Take sixty items.
+              Their subsets outnumber what a machine could list before the sun
+              burns out. Almost every possibility is one nothing will ever
+              visit. Search is permanently partial, and heuristics are how
+              that gets admitted.
         math:
           - name: 'Choosing, with and without order'
             tex: 'n! = \prod_{i=1}^{n} i, \qquad \binom{n}{r} = \frac{n!}{r!\,(n-r)!}'
@@ -3568,7 +3806,7 @@ topics:
           - name: 'The pigeonhole principle'
             tex: 'n \text{ items into } m < n \text{ slots} \;\Rightarrow\; \text{some slot holds at least two}'
             read: 'More things than places means something has to share.'
-            note: 'It sounds too obvious to be useful and it is not. It is the argument behind hash collisions, behind lossless compression having limits, and behind superposition in a network with fewer neurons than features.'
+            note: 'It sounds too obvious to be useful and it is not. It is the argument behind hash collisions, behind lossless compression having limits, and behind superposition in a network with fewer neurons than features. It also proves something exists without ever producing it, which is a stranger move than it first looks.'
             where:
               - sym: 'm'
                 is: 'how many slots there are'
@@ -3579,6 +3817,7 @@ topics:
           - Growth rates, polynomial against exponential against factorial
           - The pigeonhole principle
           - Inclusion and exclusion
+          - Why exhaustive search is impossible in principle, not merely slow
         check: "Explain why a search over subsets is hopeless past a few dozen items."
         viz:
           type: scale
@@ -3587,7 +3826,7 @@ topics:
           stops: ["Polynomial", "Exponential", "Factorial"]
           on: 1
       - name: Probability from first principles
-        why: "Both statistics tracks assume you already have this, and neither will stop to check."
+        why: "Both statistics tracks build on this, and they disagree about what a probability refers to."
         beats:
           - >-
               Every probability statement is assembled from the same few pieces, so it
@@ -3607,12 +3846,17 @@ topics:
         plain:
           - >-
               Probability starts with the set of things that could happen, and
-              assigns a number to each subset of it. The rules are short: never
-              negative, everything sums to one, and disjoint events add.
+              assigns a number to each subset. The rules are short: never
+              negative, everything sums to one, disjoint events add.
+              Conditioning throws away the outcomes that did not happen and
+              rescales the rest.
           - >-
-              Conditioning is the operation that does the work. You throw away
-              the outcomes that did not happen and rescale the rest so they add
-              to one again.
+              Kolmogorov's axioms say how probabilities combine and stay silent
+              on what one is. Two readings survive that silence. One counts how
+              often something happens in a long run. The other measures how
+              strongly you believe it. The arithmetic is identical, so the
+              split only surfaces when you ask what a single number about a
+              single event means.
         math:
           - name: 'The rules, in full'
             tex: 'p(E) \ge 0, \qquad p(\Omega) = 1, \qquad p(E \cup F) = p(E) + p(F) \text{ when } E \cap F = \varnothing'
@@ -3630,8 +3874,8 @@ topics:
                 is: 'the empty set, nothing at all'
           - name: 'Conditioning shrinks the world'
             tex: 'p(E \mid F) = \frac{p(E \cap F)}{p(F)}'
-            read: 'Restrict attention to the cases where B happened, then rescale so they add to one.'
-            note: 'Every confusion about Bayes theorem is really a confusion about which sample space you are standing in. Name it out loud before you write anything down.'
+            read: 'Restrict attention to the cases where F happened, then rescale so they add to one.'
+            note: 'Every confusion about Bayes theorem is really a confusion about which sample space you are standing in. Conditioning moves you to a smaller world and renormalises it, so the same event can carry two different probabilities without either being wrong. Name the world out loud before writing anything down.'
             where:
               - sym: 'p(E \mid F)'
                 is: 'the probability of E given that F happened'
@@ -3648,14 +3892,14 @@ topics:
               alt: Four bars showing the joint probabilities of two events, with the readout reporting the conditional probability as the base rate changes.
               labels:
               - both
-              - A only
-              - B only
+              - E only
+              - F only
               - neither
               height: 'k === 0 ? pa*pb : (k === 1 ? pa*(1-pb) : (k === 2 ? (1-pa)*pb : (1-pa)*(1-pb)))'
-              readout: '"P(A given B) = " + pa.toFixed(2) + ", the same as P(A), because these two are independent."'
+              readout: '"P(E given F) = " + pa.toFixed(2) + ", the same as P(E), because these two are independent."'
               knobs:
               - k: pa
-                label: probability of A
+                label: probability of E
                 min: 0.05
                 max: 0.95
                 v: 0.4
@@ -3663,7 +3907,7 @@ topics:
                 dp: 2
                 s: 0
               - k: pb
-                label: probability of B
+                label: probability of F
                 min: 0.05
                 max: 0.95
                 v: 0.5
@@ -3677,6 +3921,7 @@ topics:
           - Independence and conditional independence
           - Law of total probability
           - Discrete against continuous, and what a density is not
+          - Frequency and belief as two readings of one set of axioms
         check: "Say what a random variable actually is, without using the word random."
         viz:
           type: parts
@@ -3708,12 +3953,16 @@ topics:
         plain:
           - >-
               An expectation is a weighted average, weighted by how likely each
-              value is. A variance says how far values sit from it.
+              value is. A variance says how far values sit from it. The useful
+              part is what happens to an average: its spread shrinks like one
+              over the square root of the sample count.
           - >-
-              The useful part is what happens to an average. Its spread shrinks
-              like one over the square root of the sample count, and
-              concentration inequalities turn that into a promise you can
-              quote.
+              Hume asked why anything observed should tell you about anything
+              unobserved. Concentration inequalities are the narrow answer this
+              subject settled on. They do not justify induction. They assume
+              the sample was drawn like the rest, then bound how far the
+              average can stray. That assumption fails silently when the data
+              shifts.
         math:
           - name: 'Expectation is linear, whatever else is true'
             tex: '\mathbb{E}[a X + b Y] = a\, \mathbb{E}[X] + b\, \mathbb{E}[Y]'
@@ -3781,6 +4030,7 @@ topics:
           - Law of large numbers and the central limit theorem
           - Markov, Chebyshev and Hoeffding
           - Why evaluation sets can be small and still informative
+          - Induction, and what a concentration bound does not promise
         check: "Your test set has a thousand examples. Say how tight the accuracy estimate is, and why."
         viz:
           type: scale
@@ -3789,7 +4039,7 @@ topics:
           stops: ["One sample", "A few", "Many", "The limit"]
           on: 2
       - name: Information
-        why: "Cross entropy is the loss you actually train on, so knowing what it measures is not optional."
+        why: "Training minimises a quantity built to ignore meaning, so it is worth knowing what it does measure."
         beats:
           - >-
               Some of the surprise is in the data itself. No model removes it, and that
@@ -3801,11 +4051,15 @@ topics:
           - >-
               Entropy measures how surprising a distribution is on average. A
               coin that always lands heads has none. A fair coin has the most a
-              coin can have.
+              coin can have. Cross entropy is the cost of describing the truth
+              using your model, and the gap between the two is what training
+              closes.
           - >-
-              Cross entropy is the cost of describing the truth using your
-              model. It is the training loss. The gap between it and the true
-              entropy is the divergence, and that gap is what training closes.
+              Shannon set meaning aside to get here. His 1948 paper says the
+              semantic aspects are irrelevant to the engineering problem, and
+              the theory works because of that refusal. So a model trained on
+              cross entropy is scored on surprise alone. Nothing in the loss
+              knows whether a sentence is true, kind or useful.
         math:
           - name: 'Entropy, average surprise'
             tex: 'H(p) = -\sum_{k} p_{k} \log p_{k}'
@@ -3856,7 +4110,7 @@ topics:
           - name: 'Divergence is not a distance'
             tex: 'D_{\mathrm{KL}}(p \,\|\, q) \ne D_{\mathrm{KL}}(q \,\|\, p), \qquad D_{\mathrm{KL}} \ge 0'
             read: 'It is never negative and it is not symmetric, so the order of the arguments changes the answer.'
-            note: 'Which order you pick decides the failure mode. Fitting q to p spreads the model over everything the truth allows. The other order lets it collapse onto one mode and ignore the rest.'
+            note: 'Which order you pick decides the failure mode. Fitting q to p spreads the model over everything the truth allows. The other order lets it collapse onto one mode and ignore the rest. The asymmetry forces a choice about which way you are willing to be wrong, and no symmetric quantity would let you express it.'
         covers:
           - Surprise, entropy and units
           - Cross entropy as the training loss
@@ -3864,6 +4118,7 @@ topics:
           - Mutual information
           - Perplexity as exponentiated entropy
           - The source coding bound and why the loss has a floor
+          - Why the theory sets meaning aside
         check: "Explain why minimising cross entropy is the same as minimising a divergence."
         viz:
           type: compare
@@ -3892,9 +4147,12 @@ topics:
               is why probabilities are stored as log probabilities, and why
               likelihoods are summed rather than multiplied.
           - >-
-              It also changes what a plot shows. A curve that looks like a wall
-              on a linear axis is often a straight line on a log one, and a
-              straight line is something you can extrapolate.
+              It also changes what a plot shows, and the senses work the same
+              way. Loudness and brightness are judged closer to ratios than to
+              differences. A straight line on log axes invites extrapolation.
+              Fitted over three decades it is evidence about those decades, and
+              reading it two decades further out assumes the mechanism holds
+              there too.
         math:
           - name: 'Why probabilities live in log space'
             tex: '\log \prod_{i=1}^{n} p_{i} = \sum_{i=1}^{n} \log p_{i}'
@@ -3947,6 +4205,7 @@ topics:
           - Reading log and log-log axes
           - Power laws and scaling laws
           - Orders of magnitude and back-of-envelope estimates
+          - Extrapolation, and what a fitted line does not license
         check: "Explain why a language model sums log probabilities instead of multiplying probabilities."
         viz:
           type: flow
@@ -3976,9 +4235,11 @@ topics:
               step size. The gap between representable numbers grows with the
               magnitude, so precision is relative rather than absolute.
           - >-
-              Exponentiating a large number overflows. Subtracting two nearby
-              numbers destroys the digits you cared about. Both have standard
-              fixes, and both appear in every serious library.
+              The real numbers are not in the machine. A float stands for a
+              whole interval, and every result carries a quiet claim that the
+              substitution did not matter. Usually it holds. The failures below
+              are the cases where it does not, and they arrive without
+              announcing themselves.
         math:
           - name: 'Precision is relative, not absolute'
             tex: '\mathrm{fl}(x) = x (1 + \delta), \qquad |\delta| \le \varepsilon_{\mathrm{mach}}'
@@ -4043,6 +4304,7 @@ topics:
           - The logsumexp trick and fused softmax with cross entropy
           - Accumulation order, and why reductions are not associative
           - Half precision training, loss scaling and wide accumulators
+          - Floating point as a stand-in for the reals
         check: "Write softmax so it does not overflow, and say what you changed and why."
         viz:
           type: tree
@@ -4060,11 +4322,16 @@ topics:
       - Multiplying probabilities where the code should sum log probabilities
       - Quoting an accuracy from a small evaluation set with no interval
       - Computing a variance as the mean of squares minus the square of the mean
+      - Reading a limit as the value of the expression at that point
+      - Answering that one divided by zero is infinity
     drills:
       - Derive the variance of a sample mean from linearity alone
       - Write softmax and logsumexp from scratch, then break them with a large input
       - Compute the entropy of a biased coin by hand at three different biases
       - Fit a line to a scaling law on log-log axes and extrapolate one decade
+      - Build the numbers out of the empty set as far as three
+      - Say what breaks in arithmetic if one over zero is given a value
+      - Pair the whole numbers with the even numbers, then try it on the reals
 
   - id: math-proof
     name: Mathematical Proof
