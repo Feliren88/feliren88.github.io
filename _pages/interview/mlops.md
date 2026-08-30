@@ -10,4 +10,5 @@ extra_css: /css/interview.css
 extra_js:
   - /js/components/interview.js
   - /js/components/interview-anim.js
+  - /js/components/interview-math.js
 ---

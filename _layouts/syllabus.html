@@ -79,6 +79,24 @@ layout: default
     </div>
   </section>
 
+  <details class="ivm-legend">
+    <summary>
+      <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
+      Notation used on this page
+    </summary>
+    <p class="ivm-legend-lead">Every symbol below means the same thing on all twenty-five tracks. A module that needs a symbol of its own defines it under its own equation.</p>
+    {% for grp in site.data.interview_math.notation %}
+    <div class="ivm-legend-group">
+      <h3>{{ grp.group }}</h3>
+      <dl class="ivm-where">
+        {% for it in grp.items %}
+        <div class="ivm-term"><dt>{{ it.ml }}</dt><dd>{{ it.is }}</dd></div>
+        {% endfor %}
+      </dl>
+    </div>
+    {% endfor %}
+  </details>
+
   <nav class="syl-toc" aria-label="Modules">
     {% for m in topic.modules %}
     <a class="syl-toc-item" href="#m{{ forloop.index }}">
@@ -120,6 +138,39 @@ layout: default
       <p class="syl-phase">Understand it</p>
       <div class="syl-plain">
         {% for para in m.plain %}<p>{{ para }}</p>{% endfor %}
+      </div>
+      {% endif %}
+
+      {% if m.math %}
+      <p class="syl-phase">Read the maths</p>
+      <div class="ivm">
+        {% for eq in m.math %}
+        {% assign ekey = topic.id | append: '/' | append: forloop.parentloop.index0 | append: '/' | append: forloop.index0 %}
+        <figure class="ivm-eq">
+          <figcaption class="ivm-name">{{ eq.name }}</figcaption>
+          <div class="ivm-render">{{ site.data.interview_math.eq[ekey] }}</div>
+          {% assign lkey = ekey | append: '/live' %}
+          {% if site.data.interview_math.eq[lkey] %}
+          <div class="ivm-live" data-live-eq>
+            <span class="ivm-live-label">with your numbers</span>
+            {{ site.data.interview_math.eq[lkey] }}
+          </div>
+          {% endif %}
+          <p class="ivm-read">{{ eq.read }}</p>
+          {% if eq.where %}
+          <dl class="ivm-where">
+            {% for w in eq.where %}
+            {% assign skey = ekey | append: '/' | append: forloop.index0 %}
+            <div class="ivm-term">
+              <dt>{{ site.data.interview_math.sym[skey] }}</dt>
+              <dd>{{ w.is }}</dd>
+            </div>
+            {% endfor %}
+          </dl>
+          {% endif %}
+          {% if eq.note %}<p class="ivm-note">{{ eq.note }}</p>{% endif %}
+        </figure>
+        {% endfor %}
       </div>
       {% endif %}
 
