@@ -154,7 +154,7 @@ feliren88.github.io/
 │   ├── stoic.yml         # All /stoic/ passages — GENERATED, quotes are verbatim from the public-domain sources; verify with scripts/verify_stoic_quotes.py
 │   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
-│   ├── interview.yml     # All /interview/ syllabus content — 18 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
+│   ├── interview.yml     # All /interview/ syllabus content — 20 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
@@ -181,7 +181,8 @@ feliren88.github.io/
         ├── timeline.js     # Project timeline (loaded only on /project/ page)
         ├── high-agency.js  # Widgets for /high-agency/ (loaded only on that page)
         ├── principles.js   # Widgets for /principles/ (loaded only on that page)
-        └── interview.js    # Module diagrams, revision progress and the hub map for /interview/ and the eighteen syllabus pages
+        ├── interview.js    # Module diagrams, revision progress, reading controls and the hub map for /interview/
+        └── interview-anim.js # One staged animation per track: 3Blue1Brown visuals in a VisuAlgo shell, with live controls on the two maths tracks
 ```
 
 ### Page-scoped CSS and JS
@@ -717,6 +718,53 @@ so one number moves the whole layout together. Settings persist under `iv:read`.
 
 Do not add a second "dyslexia mode" stylesheet. Everything is a custom property
 precisely so there is only one set of rules to keep correct.
+
+### Staged animations (`/interview/`)
+
+`js/components/interview-anim.js` gives every track one animation. The format
+combines two references the site owner named: 3Blue1Brown's visual idiom and
+VisuAlgo's interactive shell.
+
+From 3Blue1Brown (via Manim, which the animations imitate rather than use):
+
+- **The easing.** Manim's default rate function is a quintic smoothstep,
+  `s(t) = t^3(10 - 15t + 6t^2)`. Both its first and second derivatives vanish at
+  each end, so motion starts and stops with no kick. `--an-smooth` is the closest
+  cubic-bezier. Standard CSS `ease` looks nothing like it.
+- **The timing.** One second per animation with an explicit pause between, so one
+  idea finishes before the next starts. `--an-run`.
+- **Write.** Curves are drawn along their own length, so the reader watches the
+  shape being made. `.an-write` plus a `--len` measured at mount.
+
+From VisuAlgo:
+
+- A numbered **step list** beside the stage, marking the line currently running.
+  Any line can be clicked to jump. It doubles as a table of contents.
+- A **status line** under the stage carrying the caption for the current beat.
+- **Speed control**, four settings. The gap is reading time for the caption, so
+  slow is genuinely slower.
+
+And the part neither reference has on its own: **live controls**. A scene may
+declare `live: { knobs, redraw }`, and the reader drags a number while the maths
+responds. `/linear-algebra/` lets you move where the basis vectors land and
+watch the determinant go negative when the grid turns inside out. `/calculus/`
+lets you shrink the gap between two points and watch the secant slope converge
+on the derivative. Touching a knob pauses playback, because the reader has taken
+over.
+
+Rendering with real Manim was considered and rejected, for the same reason the
+scenes are SVG rather than generated images: video cannot follow the light and
+dark themes or the reading tints, cannot resize with the reading controls, and
+cannot be read by a screen reader.
+
+Four rules the engine enforces. The reader can always take over. Every beat has
+a caption. The last beat is the finished picture, so someone who never presses
+play still sees the whole thing. Reduced motion means no timer, never no content.
+
+Adding a track's animation means one entry in `SCENES` and one line in
+`BY_TOPIC`. Verify with the harness in the session scratchpad: it loads all
+twenty pages and asserts each has an animation with a caption, at least four
+steps, and no overflow.
 
 ### Scenes: concrete illustrations (`/interview/`)
 

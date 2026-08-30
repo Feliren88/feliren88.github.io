@@ -428,7 +428,17 @@
     <script src="{% include asset.html path='/js/main.js' %}"></script>
     <script src="{% include asset.html path='/js/components/nav.js' %}"></script>
     {% if page.url == '/project/' %}<script src="{% include asset.html path='/js/components/timeline.js' %}" defer></script>{% endif %}
-    {% if page.extra_js %}<script src="{% include asset.html path=page.extra_js %}" defer></script>{% endif %}
+    {% comment %}
+      `extra_js` takes one path or a list of them, so a page heavy enough to
+      split across files does not need a bundler. Each still goes through
+      asset.html, so each keeps its own cache-busting stamp.
+    {% endcomment %}
+    {% if page.extra_js %}
+      {% assign extra_js_list = page.extra_js %}
+      {% if extra_js_list.first == nil %}{% assign extra_js_list = page.extra_js | split: ',' %}{% endif %}
+      {% for js_path in extra_js_list %}<script src="{% include asset.html path=js_path %}" defer></script>
+      {% endfor %}
+    {% endif %}
     {% if page.motion_scene %}<script>document.documentElement.dataset.motionScene={{ page.motion_scene | jsonify }};</script><script src="{% include asset.html path='/js/components/essay-motion.js' %}" defer></script>{% endif %}
     <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
     <script>

@@ -278,8 +278,7 @@ topics:
               Imagine repeating your study a thousand times. The estimates would form a
               spread. That spread is what a standard error measures.
           - >-
-              A confidence interval is a property of the recipe, not of the one interval
-              in front of you. Run it forever and 95% of the intervals cover the truth.
+              A confidence interval is a property of the recipe. Run it forever and 95% of the intervals cover the truth. Run it forever and 95% of the intervals cover the truth.
         covers:
           - Law of large numbers, central limit theorem, and their conditions
           - Delta method for functions of estimates
@@ -303,8 +302,7 @@ topics:
               A test asks one question. If nothing were going on, how surprising would
               this data be? The p-value is that surprise, as a number.
           - >-
-              It is not the chance the null is true. A large p-value means you did not
-              find an effect, which is different from showing there is none.
+              It is not the chance the null is true. A large p-value means you did not find an effect. Showing there is none is a different claim.
         covers:
           - Null and alternative, type I and type II error
           - Power, minimum detectable effect, sample size
@@ -358,8 +356,7 @@ topics:
               An A/B test is a randomised experiment wearing a product hat. Split users,
               ship two versions, compare. Randomising is what buys you the causal claim.
           - >-
-              Most of the skill is in the setup. What unit do you randomise, how long do
-              you run, and which metric would make you roll the change back.
+              Most of the skill is in the setup. What unit do you randomise. How long do you run it. Which metric would make you roll the change back.
         covers:
           - Randomisation unit, SUTVA, interference and network effects
           - Sample size, MDE, and duration planning
@@ -486,8 +483,7 @@ topics:
               On tables of rows and columns, gradient boosted trees still win most of
               the time. They handle mixed types and missing values without much fuss.
           - >-
-              Know why. Trees split on thresholds, so they do not care about scale and
-              they pick up interactions on their own. Neural networks need far more data
+              Know why. Trees split on thresholds. So they ignore scale, and they pick up interactions on their own. Neural networks need far more data
               to match that.
         covers:
           - Linear and logistic regression, regularisation, elastic net
@@ -523,8 +519,7 @@ topics:
           leak: "Fit a scaler before this cut and information walks backwards from test into train."
         plain:
           - >-
-              Split the data first. Fit on the training part, tune on the validation
-              part, and touch the test part once, at the end.
+              Split the data first. Fit on the training part. Tune on the validation part. Touch the test part once, at the end.
           - >-
               Leakage is the usual killer. Fit a scaler before the split and the test set has already influenced training. The score you report is then a fiction.
         covers:
@@ -576,8 +571,7 @@ topics:
         why: "Almost every real dataset arrives imbalanced, shifted, or both."
         plain:
           - >-
-              Real data is lopsided and it drifts. One class may be a tenth of a
-              percent, and last month's pattern may not hold this month.
+              Real data is lopsided and it drifts. One class may be a tenth of a percent. Last month's pattern may not hold this month.
           - >-
               Resampling fixes the balance and breaks the probabilities. If the product
               needs a calibrated number rather than a ranking, that trade matters.
@@ -705,9 +699,7 @@ topics:
               nothing or blow up. Initialisation sets the starting scale so they do
               neither.
           - >-
-              Normalisation keeps them in range as training goes on. Batch norm uses the
-              other examples in the batch, which is why it falls apart when the batch is
-              small.
+              Normalisation keeps them in range as training goes on. Batch norm uses the other examples in the batch. That is why it falls apart when the batch is small.
         covers:
           - Xavier and He initialisation, and the variance argument
           - Batch normalisation, train versus eval behaviour
@@ -823,8 +815,7 @@ topics:
               One GPU cannot hold a large model. So you split the work. Copy the model
               and split the data, or split the model itself across devices.
           - >-
-              Every split costs communication. The skill is arranging the work so the
-              machines talk while they compute, rather than sitting idle waiting.
+              Every split costs communication. The skill is arranging the work so the machines talk while they compute.
         covers:
           - "Parallelism: data, tensor, pipeline, sequence, expert"
           - ZeRO stages and FSDP
@@ -875,6 +866,388 @@ topics:
       - Overfit 32 examples to zero loss on a fresh codebase before every project
       - Profile one training step and find where the time goes
       - Reproduce a paper's training curve at small scale
+
+  - id: linear-algebra
+    name: Linear Algebra
+    group: foundations
+    blurb: "Whether you see a matrix as a thing that does something, rather than a box of numbers."
+    scope: "Owns vectors, transformations and decompositions. Hands rates of change to calculus and estimators to frequentist statistics."
+    links: [calculus, machine-learning]
+    modules:
+      - name: Vectors and spaces
+        why: "Every later idea is stated in this language."
+        plain:
+          - >-
+              A vector is an arrow with a length and a direction. A list of
+              numbers is just a way of writing that arrow down.
+          - >-
+              A space is everything you can reach by stretching and adding those
+              arrows. Span, basis and dimension are all ways of asking how much
+              of the space you can reach.
+        covers:
+          - Vectors, scalars, addition and scaling
+          - Span, linear independence, basis
+          - Dimension and subspaces
+          - Dot product, length, angle
+          - Orthogonality and orthonormal bases
+          - Coordinates depend on the basis you chose
+        check: "Explain what a basis is without using the word basis."
+        viz:
+          type: parts
+          centre: A vector space
+          around:
+          - Arrows you can add
+          - Arrows you can stretch
+          - Everything you can reach
+          - A basis names the directions
+      - name: Matrices as transformations
+        why: "This is the shift that makes the rest of the subject easy."
+        plain:
+          - >-
+              A matrix is not a table of numbers. It is an instruction for moving
+              every point in space at once.
+          - >-
+              To read one, look at its columns. Each column says where one of the
+              original axes lands. That is the whole picture.
+        covers:
+          - Matrix times vector as a transformation
+          - Columns are where the basis vectors land
+          - Composition as matrix multiplication
+          - Identity, rotation, scaling, shear, projection
+          - Why matrix multiplication is not commutative
+          - Shapes and when a product is legal
+        check: "Given a two by two matrix, say where the unit square lands, and what its area becomes."
+        viz:
+          type: flow
+          steps:
+          - Start with the grid
+          - Read the columns
+          - Move every point
+          - Read the new grid
+      - name: Determinant, rank and inverse
+        why: "Three questions about whether a transformation loses information."
+        plain:
+          - >-
+              The determinant is how much the transformation scales area, or
+              volume. A determinant of zero means space got flattened.
+          - >-
+              Once space is flattened you cannot undo it, because many points
+              landed on the same spot. That is exactly when the inverse does not
+              exist, and rank counts how many dimensions survived.
+        covers:
+          - Determinant as a scaling factor for area and volume
+          - Negative determinant and flipped orientation
+          - Singular matrices and what goes wrong
+          - Rank, column space, null space
+          - Inverse and when it exists
+          - Solving a linear system, and when there is no unique answer
+        check: "A matrix has determinant zero. Say what that means geometrically and what it means for solving Ax equals b."
+        viz:
+          type: tree
+          root: What did the transformation do to space
+          branches:
+          - k: Kept it full
+            items: ["Determinant not zero", "Inverse exists"]
+          - k: Flattened it
+            items: ["Determinant zero", "Information lost"]
+      - name: Eigenvectors and eigenvalues
+        why: "The directions a transformation leaves alone explain what it really does."
+        plain:
+          - >-
+              Most arrows get knocked off their line by a transformation. A few
+              stay on their own line and only get stretched or squashed.
+          - >-
+              Those special directions are the eigenvectors, and the amount of
+              stretch is the eigenvalue. They tell you what the transformation
+              does when you apply it many times.
+        covers:
+          - The eigenvalue equation and what it asks
+          - Characteristic polynomial
+          - Diagonalisation and repeated application
+          - Symmetric matrices and real eigenvalues
+          - Positive definite matrices
+          - Spectral radius and stability
+        check: "Why does raising a matrix to a large power become easy once you have its eigenvectors?"
+        viz:
+          type: compare
+          cols:
+          - k: Ordinary direction
+            items: ["Gets rotated off its line"]
+          - k: Eigenvector
+            items: ["Stays on its line", "Only the length changes"]
+      - name: Decompositions
+        why: "Factorising a matrix is how numerical linear algebra actually gets work done."
+        plain:
+          - >-
+              A decomposition splits one matrix into simpler pieces. Each piece
+              does one clean thing, like rotate, or stretch along axes.
+          - >-
+              The singular value decomposition works for every matrix. It says
+              any transformation is a rotation, then a stretch, then another
+              rotation.
+        covers:
+          - "Singular value decomposition: rotate, stretch, rotate"
+          - Singular values and low-rank approximation
+          - Eigendecomposition and where it applies
+          - QR and least squares
+          - Cholesky for positive definite systems
+          - "Principal component analysis as an SVD"
+        check: "Explain SVD in one sentence using only geometry, then say what the singular values mean."
+        viz:
+          type: flow
+          steps:
+          - Rotate
+          - Stretch along axes
+          - Rotate again
+      - name: Projections and least squares
+        why: "The geometry behind fitting a line to data."
+        plain:
+          - >-
+              You have a target that does not lie in the space you can reach. The
+              closest you can get is its shadow on that space.
+          - >-
+              That shadow is a projection, and the error points straight out from
+              the space. Least squares is exactly this picture.
+        covers:
+          - Projection onto a line and onto a subspace
+          - The normal equations
+          - Residual orthogonal to the column space
+          - Overdetermined and underdetermined systems
+          - Regularisation as a constraint on the solution
+          - Condition number and why it matters here
+        check: "Why is the least squares residual perpendicular to the column space?"
+        viz:
+          type: parts
+          centre: Least squares
+          around:
+          - The target you cannot reach
+          - The space you can reach
+          - The shadow, which is the fit
+          - The gap, which is the error
+      - name: Numerical behaviour
+        why: "Textbook linear algebra assumes exact arithmetic and computers do not have it."
+        plain:
+          - >-
+              On a computer, numbers are stored with limited precision. Small
+              errors creep in and some matrices magnify them badly.
+          - >-
+              The condition number measures that sensitivity. A high condition
+              number means a tiny change in the input can swing the answer.
+        covers:
+          - Floating point and rounding error
+          - Condition number and sensitivity
+          - Why you rarely invert a matrix explicitly
+          - Stable algorithms versus unstable ones
+          - Sparse matrices and iterative solvers
+          - Scaling features before solving
+        check: "Why does everyone say not to compute an inverse, and what do you do instead?"
+        viz:
+          type: scale
+          lo: Safe to solve
+          hi: Answer swings wildly
+          stops: ["Well conditioned", "Borderline", "Ill conditioned"]
+          on: 2
+    traps:
+      - Describing a matrix as a grid of numbers with no mention of what it does
+      - Saying a determinant of zero means the matrix is empty
+      - Treating eigenvectors as existing for every matrix over the reals
+      - Computing an explicit inverse to solve a linear system
+    drills:
+      - Draw where the unit square lands under four different two by two matrices
+      - Find the eigenvectors of a two by two matrix by hand
+      - Fit a line by least squares using the normal equations, no library
+      - Take one image, keep the largest singular values, and look at what survives
+
+  - id: calculus
+    name: Calculus
+    group: foundations
+    blurb: "Whether you can reason about change, and about what a gradient is actually telling you."
+    scope: "Owns derivatives, gradients and optimisation conditions. Hands the vector language to linear algebra and the training loop to deep learning."
+    links: [linear-algebra, deep-learning]
+    modules:
+      - name: Derivatives and rates
+        why: "Every training step is built on this one idea."
+        plain:
+          - >-
+              A derivative is a rate. Nudge the input a little and see how much
+              the output moves.
+          - >-
+              Draw a line through two nearby points on a curve, then slide them
+              together. The slope it settles on is the derivative at that point.
+        covers:
+          - Limits and continuity, informally
+          - Derivative as a limit of slopes
+          - Derivative as local linear approximation
+          - Rules for sums, products and quotients
+          - Higher derivatives and curvature
+          - Where a derivative fails to exist
+        check: "Define a derivative using a picture rather than a formula."
+        viz:
+          type: flow
+          steps:
+          - Two points on a curve
+          - Draw the line between
+          - Slide them together
+          - The slope that remains
+      - name: The chain rule
+        why: "Backpropagation is this rule applied to a graph."
+        plain:
+          - >-
+              One thing affects a second. The second affects a third. Multiply the two rates for the total effect.
+          - >-
+              A neural network is a long chain of those. Working backwards along
+              the chain, multiplying as you go, is exactly what backpropagation
+              does.
+        covers:
+          - Composition and the chain rule
+          - Computational graphs
+          - Forward mode versus reverse mode
+          - Why reverse mode suits many inputs and one output
+          - What gets stored during the forward pass
+          - Non-differentiable points and how they are handled
+        check: "Explain why backpropagation goes backwards, and what that saves."
+        viz:
+          type: flow
+          steps:
+          - Input
+          - Middle value
+          - Output
+          - Multiply the rates back
+          loop: true
+      - name: Gradients, Jacobians and Hessians
+        why: "Naming these correctly is a quick signal of comfort with the maths."
+        plain:
+          - >-
+              With several inputs, the derivative becomes a vector. It points in
+              the direction that increases the output fastest.
+          - >-
+              A Jacobian collects those for several outputs at once. A Hessian is
+              the second derivative, and it describes the curve rather than the
+              slope.
+        covers:
+          - Partial derivatives and the gradient vector
+          - Gradient points uphill, steepest ascent
+          - Directional derivatives
+          - Jacobian for vector valued functions
+          - Hessian, curvature and second order methods
+          - Shapes of each object, and why they matter
+        check: "Give the shape of the gradient, the Jacobian and the Hessian for a function from R^n to R^m."
+        viz:
+          type: stack
+          layers:
+          - Hessian, the curve
+          - Jacobian, many outputs
+          - Gradient, one output
+          - Partial derivative, one direction
+      - name: Optimisation conditions
+        why: "Knowing when you have found a minimum, and when you have not."
+        plain:
+          - >-
+              At a minimum the gradient is zero. But a zero gradient also happens
+              at a maximum and at a saddle point.
+          - >-
+              The second derivative tells them apart. In high dimensions most
+              zero-gradient points are saddles, not minima, which changes what
+              training is actually fighting.
+        covers:
+          - Critical points, minima, maxima, saddles
+          - Second derivative test
+          - Convexity and why it makes life easy
+          - Local versus global minima
+          - Constrained optimisation and Lagrange multipliers
+          - Why saddle points dominate in high dimensions
+        check: "The gradient is zero. Say how you would tell a minimum from a saddle."
+        viz:
+          type: tree
+          root: The gradient is zero
+          branches:
+          - k: Curves up everywhere
+            items: ["Minimum"]
+          - k: Curves down everywhere
+            items: ["Maximum"]
+          - k: Both, depending on direction
+            items: ["Saddle"]
+      - name: Integration and expectation
+        why: "Every loss you write down is an average, and an average is an integral."
+        plain:
+          - >-
+              An integral adds up infinitely many small pieces. Area under a curve
+              is the usual picture.
+          - >-
+              In machine learning it usually appears as an expected value. You
+              cannot compute it exactly, so you average over samples instead.
+        covers:
+          - Integral as accumulated area
+          - Fundamental theorem linking it to the derivative
+          - Expectation as an integral against a density
+          - Monte Carlo estimation of an expectation
+          - Change of variables
+          - Why the loss you minimise is an estimate
+        check: "Your loss is an expectation you cannot compute. What do you actually minimise?"
+        viz:
+          type: compare
+          cols:
+          - k: What you want
+            items: ["The true average over all data"]
+          - k: What you have
+            items: ["An average over your sample", "Which is noisy"]
+      - name: Approximation
+        why: "Most methods are secretly a local approximation of something harder."
+        plain:
+          - >-
+              Near a point, a smooth curve looks like a straight line. Look
+              closer and it looks like a parabola.
+          - >-
+              That is a Taylor expansion. Gradient descent uses the straight line
+              version. Second order methods use the parabola.
+        covers:
+          - Linear approximation and tangent lines
+          - Taylor series and the remainder
+          - First order versus second order methods
+          - Newton's method and its cost
+          - Where the approximation stops being valid
+          - Numerical differentiation and its error
+        check: "Explain gradient descent and Newton's method as two different local approximations."
+        viz:
+          type: scale
+          lo: Cheap, less accurate
+          hi: Costly, more accurate
+          stops: ["Constant", "Straight line", "Parabola"]
+          on: 1
+      - name: Matrix calculus
+        why: "Deriving a gradient on a whiteboard is a common interview task."
+        plain:
+          - >-
+              When the input is a vector or a matrix, the derivative rules still
+              hold but the shapes get fiddly.
+          - >-
+              The reliable trick is to check shapes at every step. If the shapes
+              do not line up, the derivation is wrong somewhere.
+        covers:
+          - Derivative of a linear map and a quadratic form
+          - Layout conventions and why they cause confusion
+          - Gradient of a loss with respect to weights
+          - Softmax and cross-entropy derivative
+          - Shape checking as a correctness test
+          - Common identities worth memorising
+        check: "Derive the gradient of squared error with respect to the weights, checking shapes as you go."
+        viz:
+          type: flow
+          steps:
+          - Write the loss
+          - Differentiate one layer
+          - Check the shapes
+          - Chain it back
+    traps:
+      - Saying the gradient points toward the minimum
+      - Treating every zero gradient as a minimum
+      - Deriving a gradient without checking that the shapes line up
+      - Confusing the Jacobian with the Hessian
+    drills:
+      - Derive backpropagation for a two layer network by hand
+      - Check one gradient numerically against your analytic version
+      - Draw a saddle point and say which directions curve which way
+      - Write the softmax and cross-entropy derivative from scratch
 
   # ── Models ───────────────────────────────────────────────────────────────
   - id: transformers
@@ -1657,8 +2030,7 @@ topics:
         why: "Vision is the area most often pushed to edge hardware."
         plain:
           - >-
-              Vision models often have to run on a phone, a camera or a drone. The
-              constraint is the device, not the accuracy table.
+              Vision models often have to run on a phone, a camera or a drone. The device sets the constraint, and the accuracy table comes second.
           - >-
               Operation counts are a poor guide to speed. Profile on the actual
               hardware, because memory layout and supported operations decide the real
@@ -3374,8 +3746,7 @@ topics:
               How data sits on disk decides what a query costs. Column storage reads
               only the fields you ask for, which is why analytics uses it.
           - >-
-              Most expensive queries are layout problems. If a query scans two terabytes
-              to return a hundred rows, partitioning is the fix, not a bigger cluster.
+              Most expensive queries are layout problems. If a query scans two terabytes to return a hundred rows, partitioning is the fix. A bigger cluster only pays to scan it faster.
         covers:
           - OLTP versus OLAP workloads
           - Row versus columnar storage
@@ -3527,8 +3898,7 @@ topics:
         why: "It is a conversation about trade-offs."
         plain:
           - >-
-              The system design round is a conversation about trade-offs, not a diagram
-              contest.
+              The system design round is a conversation about trade-offs.
           - >-
               Ask about volume, freshness and budget before drawing anything. Then name
               your bottleneck yourself, because the interviewer is going to look for it.

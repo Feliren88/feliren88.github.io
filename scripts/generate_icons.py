@@ -48,6 +48,18 @@ ICONS = [
         '<path d="M3 19C6.6 19 5.4 12 9 12C12.6 12 11.4 19 15 19"/>',
         '<path d="M9 19C12.6 19 11.4 6 15 6C18.6 6 17.4 19 21 19"/>',
     ]),
+    ("linear-algebra", "tracks", "A grid with one basis vector landing somewhere new", [
+        '<path d="M3.5 20.5V6M3.5 20.5H18"/>',
+        '<path d="M3.5 20.5L11 13"/>',
+        '<path d="M3.5 20.5L20 16.5"/>',
+        '<path d="M9 14.6L11 13L11.9 15.2" fill="currentColor" stroke="none"/>',
+        '<path d="M18.1 15.2L20 16.5L18.6 18.4" fill="currentColor" stroke="none"/>',
+    ]),
+    ("calculus", "tracks", "A curve with the tangent line touching it at one point", [
+        '<path d="M3.5 19.5C8 19.5 9.5 5 20.5 5"/>',
+        '<path d="M6 20.5L17 9.5"/>',
+        '<circle cx="11.5" cy="15" r="1.6" fill="currentColor"/>',
+    ]),
     ("frequentist-statistics", "tracks", "One sampling distribution with both tails marked off", [
         '<path d="M3 19h18"/>',
         '<path d="M3 19C8.4 19 6.6 7 12 7C17.4 7 15.6 19 21 19"/>',

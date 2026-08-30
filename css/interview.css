@@ -1380,3 +1380,466 @@
   color: var(--accent);
 }
 .ivs-out-a { border-color: var(--cta); }
+
+/* ════════════════════════════════════════════════════════
+   Manim conventions
+
+   Three things give 3Blue1Brown's animations their feel, and all
+   three are cheap to adopt without rendering video.
+
+   1. The easing. Manim's default rate function is a quintic
+      smoothstep, s(t) = t^3(10 - 15t + 6t^2). Both its first and
+      second derivatives are zero at each end, so motion starts and
+      stops with no visible kick. Standard CSS ease is nothing like
+      it. The bezier below is the closest cubic approximation.
+   2. The timing. Manim's default run_time is one second, with an
+      explicit wait between animations rather than a continuous
+      crossfade. One idea finishes before the next starts.
+   3. Write. Curves are drawn along their own length rather than
+      faded in, so the reader watches the shape being made.
+
+   Rendering with the real thing was considered and rejected. Manim
+   outputs video, and a video cannot follow the light and dark themes
+   or the reading tints, cannot resize with the reading controls, and
+   cannot be read by a screen reader. Those are the same reasons the
+   scenes are SVG rather than generated images.
+   ════════════════════════════════════════════════════════ */
+
+.an {
+  --an-smooth: cubic-bezier(0.45, 0, 0.55, 1);
+  --an-run: 1s;
+}
+
+/* Write: a path drawn along its own length. */
+.an-write {
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+}
+.an-write.is-on {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--an-run) var(--an-smooth);
+}
+
+/* Indicate: a brief swell to point at something without moving it. */
+@keyframes an-indicate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+.an-indicate {
+  animation: an-indicate 0.7s var(--an-smooth);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ════════════════════════════════════════════════════════
+   Staged animations
+
+   Built by js/components/interview-anim.js. The idiom is Manim's:
+   a scene built once, walked through beats, each beat saying one
+   sentence and changing the drawing to match.
+
+   Everything is a custom property, so both themes and both reading
+   tints work. Transitions are on the SVG parts rather than on a
+   container, so scrubbing backwards animates as smoothly as playing
+   forwards.
+   ════════════════════════════════════════════════════════ */
+
+.an-host {
+  margin: 0 0 2.5rem;
+  scroll-margin-top: 5rem;
+}
+.an-host:focus-visible { outline: 2px solid var(--cta); outline-offset: 6px; }
+
+.an {
+  margin: 0;
+  padding: var(--card-pad-lg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg-soft);
+}
+.an-head { margin-bottom: 1rem; }
+.an-kicker {
+  display: block;
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: var(--rd-caps);
+  letter-spacing: var(--rd-caps-track);
+  color: var(--cta);
+  margin-bottom: 0.5rem;
+}
+.an-title {
+  font: 600 var(--fs-title) / 1.4 "Space Grotesk", sans-serif;
+  color: var(--text);
+  margin: 0 0 0.35rem;
+}
+.an-lead {
+  font-size: var(--fs-sm);
+  line-height: var(--rd-lead);
+  color: var(--muted);
+  margin: 0;
+  max-width: var(--rd-measure);
+}
+
+.an-stage {
+  display: flex;
+  justify-content: center;
+  padding: 0.9rem 0 0.4rem;
+  overflow-x: auto;
+}
+.an-svg { width: 100%; max-width: 46rem; height: auto; }
+.an-svg.an-square { max-width: 20rem; }
+
+/* The caption is the other half of the explanation, so it is sized like
+   body prose rather than like a label, and it holds its height so the
+   layout never jumps between beats. */
+.an-say {
+  min-height: 3.2em;
+  margin: 0.5rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-left: 2px solid var(--cta);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface);
+  font-size: var(--fs-base);
+  line-height: var(--rd-lead);
+  color: var(--text);
+  max-width: var(--rd-measure);
+}
+
+.an-ctl {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.9rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.an-ctl button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 400 var(--fs-xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.an-ctl button:hover { color: var(--text); border-color: var(--cta); }
+.an-play { color: var(--cta) !important; border-color: var(--cta) !important; }
+.an-scrub { flex: 1 1 8rem; min-width: 6rem; accent-color: var(--cta); }
+.an-count { font-size: var(--fs-2xs); color: var(--muted); min-width: 3.2rem; text-align: center; }
+
+/* ── Scene parts ──────────────────────────────────────────────── */
+
+.an-svg text { font-family: "Manrope", sans-serif; }
+.an-t { font-size: 13px; fill: var(--text); }
+.an-tick { font-size: 11px; fill: var(--muted); }
+.an-lab {
+  font-size: 10.5px;
+  fill: var(--muted);
+  text-transform: var(--rd-caps);
+  letter-spacing: var(--rd-caps-track);
+}
+.an-box { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.an-axis { stroke: var(--line-strong); stroke-width: 1; }
+
+/* Anything gated on a beat fades and lifts in. */
+.an-fade { opacity: 0; transform: translateY(5px); transition: opacity var(--an-run) var(--an-smooth), transform var(--an-run) var(--an-smooth); }
+.an-fade.is-on { opacity: 1; transform: none; }
+
+/* Token vectors */
+.an-cellv { fill: color-mix(in srgb, var(--accent) 34%, transparent); }
+.an-cellout { fill: color-mix(in srgb, var(--cta) 42%, transparent); }
+
+/* Attention grid */
+.an-cell {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 0.8;
+  opacity: 0;
+  transition: opacity var(--an-run) var(--an-smooth), fill var(--an-run) var(--an-smooth), stroke var(--an-run) var(--an-smooth);
+}
+.an-cell.is-on { opacity: 1; }
+.an-cell.is-masked { fill: transparent; stroke-dasharray: 2 3; opacity: 0.4; }
+.an-cell.is-lit { fill: var(--stat-fill); stroke: var(--cta); stroke-width: 1.6; opacity: 1; }
+.an-dot {
+  fill: var(--cta);
+  opacity: 0;
+  transition: r var(--an-run) var(--an-smooth), opacity 0.4s var(--an-smooth);
+}
+.an-dot.is-on { opacity: 0.92; }
+
+/* Bayes */
+.an-prior { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; }
+.an-lik { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+.an-post { fill: none; stroke: var(--cta); stroke-width: 2.4; }
+.an-obs { fill: var(--cta); }
+.an-prior, .an-lik, .an-post { opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-prior.is-on, .an-lik.is-on, .an-post.is-on { opacity: 1; }
+
+/* Descent */
+.an-loss { fill: none; stroke: var(--line-strong); stroke-width: 2; }
+.an-ball { fill: var(--cta); opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-ball.is-on { opacity: 1; }
+
+/* Calibration */
+.an-diag { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-diag.is-on { opacity: 1; }
+.an-curve { fill: none; stroke: var(--muted); stroke-width: 2.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-curve.is-on { opacity: 1; }
+.an-curve.is-fixed { stroke: var(--cta); }
+
+/* Superposition */
+.an-feat { stroke: var(--cta); stroke-width: 2; }
+
+/* Agent loop */
+.an-arrow { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.an-ctx {
+  fill: color-mix(in srgb, var(--cta) 40%, transparent);
+  stroke: var(--cta);
+  stroke-width: 0.7;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.an-ctx.is-on { opacity: 1; }
+
+/* Lost in the middle */
+.an-doc {
+  fill: var(--surface);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  transition: fill var(--an-run) var(--an-smooth), stroke var(--an-run) var(--an-smooth), opacity var(--an-run) var(--an-smooth);
+}
+.an-doc.is-key { fill: var(--stat-fill); stroke: var(--cta); stroke-width: 2; }
+.an-doc.is-dim { opacity: 0.35; }
+.an-attnband {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity var(--an-run) var(--an-smooth);
+}
+.an-attnband.is-on { opacity: 0.75; }
+
+@media (prefers-reduced-motion: reduce) {
+  .an-fade, .an-cell, .an-dot, .an-prior, .an-lik, .an-post,
+  .an-ball, .an-diag, .an-curve, .an-ctx, .an-doc, .an-attnband { transition: none; }
+  .an-host.is-static .an-play { display: none; }
+}
+
+@media (max-width: 640px) {
+  .an-ctl { gap: 0.4rem; }
+  .an-count { min-width: 2.8rem; }
+}
+
+/* Linear algebra: the grid before and after */
+.an-grid0 { stroke: var(--line); stroke-width: 0.8; }
+.an-grid1 { stroke: color-mix(in srgb, var(--cta) 45%, transparent); stroke-width: 0.9; }
+.an-ihat { stroke: var(--cta); stroke-width: 2.6; stroke-linecap: round; }
+.an-jhat { stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; }
+.an-ihat.is-moved, .an-jhat.is-moved { stroke-dasharray: none; }
+.an-area {
+  fill: color-mix(in srgb, var(--accent) 20%, transparent);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  opacity: 0;
+  transition: opacity var(--an-run) var(--an-smooth);
+}
+.an-area.is-on { opacity: 1; }
+.an-area.is-after { fill: color-mix(in srgb, var(--cta) 24%, transparent); stroke: var(--cta); }
+
+/* Calculus: secants collapsing onto a tangent */
+.an-secant { stroke: var(--muted); stroke-width: 1.5; opacity: 0; transition: opacity 0.5s var(--an-smooth); }
+.an-secant.is-on { opacity: 1; }
+.an-tangent { stroke: var(--cta); stroke-width: 2.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-tangent.is-on { opacity: 1; }
+.an-pt1 { fill: var(--cta); opacity: 0; transition: opacity 0.5s var(--an-smooth); }
+.an-pt1.is-on { opacity: 1; }
+.an-pt2 { fill: var(--accent); opacity: 0; transition: opacity 0.5s var(--an-smooth); }
+.an-pt2.is-on { opacity: 1; }
+
+/* ════════════════════════════════════════════════════════
+   VisuAlgo-style shell
+
+   The stage sits beside a numbered step list. The list shows the whole
+   procedure at once, marks the line currently running, and any line can
+   be clicked to jump there. It doubles as a table of contents for a
+   reader who would rather read the steps than watch them.
+   ════════════════════════════════════════════════════════ */
+
+.an-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  gap: 1.1rem;
+  align-items: start;
+}
+.an-body .an-stage { padding-top: 0; }
+
+.an-steps {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 26rem;
+  overflow-y: auto;
+}
+.an-stepbtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font: 400 var(--fs-xs) / var(--rd-lead) "Manrope", sans-serif;
+  color: var(--muted);
+  transition: background 0.2s var(--an-smooth), color 0.2s var(--an-smooth);
+}
+.an-stepbtn:hover { color: var(--text); background: var(--surface); }
+.an-stepn {
+  flex: none;
+  min-width: 1.2rem;
+  font: 600 var(--fs-2xs) "Space Grotesk", sans-serif;
+  color: var(--accent);
+}
+.an-stepbtn.is-done { color: var(--muted); }
+.an-stepbtn.is-done .an-stepn { color: var(--cta); }
+.an-stepbtn.is-at {
+  background: var(--stat-fill);
+  border-color: var(--cta);
+  color: var(--text);
+  font-weight: 600;
+}
+.an-stepbtn.is-at .an-stepn { color: var(--cta); }
+
+.an-speed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+}
+.an-speed input { width: 4.5rem; accent-color: var(--cta); }
+
+@media (max-width: 800px) {
+  .an-body { grid-template-columns: 1fr; }
+  .an-steps { max-height: 14rem; }
+  .an-speed { order: 10; }
+}
+
+/* ── Scene parts for the remaining tracks ─────────────────────── */
+.an-truth { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-truth.is-on { opacity: 1; }
+.an-ci { stroke: var(--cta); stroke-width: 3; stroke-linecap: round; }
+.an-ci.is-miss { stroke: var(--accent); }
+.an-cidot { fill: var(--bg); stroke: var(--cta); stroke-width: 1.5; }
+.an-cidot.is-miss { stroke: var(--accent); }
+
+.an-fit { fill: none; stroke: var(--muted); stroke-width: 2; }
+.an-fit.is-good { stroke: var(--cta); stroke-width: 2.6; }
+.an-fit.is-over { stroke: var(--accent); stroke-width: 1.8; }
+.an-newpt { fill: none; stroke: var(--accent); stroke-width: 2.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-newpt.is-on { opacity: 1; }
+
+.an-box.is-target { stroke-dasharray: 4 4; }
+.an-prob { fill: color-mix(in srgb, var(--accent) 40%, transparent); }
+.an-prob.is-top { fill: color-mix(in srgb, var(--cta) 62%, transparent); }
+
+.an-chunk { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.an-chunk.is-right { fill: var(--stat-fill); stroke: var(--cta); stroke-width: 2; }
+.an-lab.is-warn { fill: var(--accent); }
+
+.an-win {
+  fill: color-mix(in srgb, var(--cta) 18%, transparent);
+  stroke: var(--cta); stroke-width: 1.8;
+  opacity: 0; transition: opacity 0.4s var(--an-smooth);
+}
+.an-win.is-on { opacity: 1; }
+.an-omap {
+  fill: color-mix(in srgb, var(--cta) 34%, transparent);
+  stroke: var(--cta); stroke-width: 0.7;
+  opacity: 0; transition: opacity var(--an-run) var(--an-smooth);
+}
+.an-omap.is-on { opacity: 1; }
+
+.an-img { fill: color-mix(in srgb, var(--accent) 50%, transparent); stroke: var(--accent); stroke-width: 1.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-txt { fill: color-mix(in srgb, var(--cta) 46%, transparent); stroke: var(--cta); stroke-width: 1.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-img.is-on, .an-txt.is-on { opacity: 1; }
+.an-pull { stroke: var(--cta); stroke-width: 1.2; stroke-dasharray: 4 4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-pull.is-on { opacity: 0.8; }
+
+.an-box.is-proxy { stroke: var(--accent); stroke-dasharray: 4 3; }
+.an-box.is-hack { stroke: var(--accent); background: none; }
+.an-route { fill: none; stroke: var(--cta); stroke-width: 2; }
+.an-route.is-hack { stroke: var(--accent); stroke-dasharray: 5 4; }
+
+.an-eb { stroke: var(--cta); stroke-width: 1.8; }
+.an-overlap { fill: color-mix(in srgb, var(--accent) 16%, transparent); stroke: var(--accent); stroke-width: 1; stroke-dasharray: 4 3; }
+
+.an-train { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; }
+.an-live { fill: none; stroke: var(--cta); stroke-width: 2.2; }
+.an-live.is-far { stroke: var(--cta); opacity: 0.75; }
+.an-alert { fill: var(--stat-fill); stroke: var(--accent); stroke-width: 1.2; }
+
+.an-window { fill: color-mix(in srgb, var(--cta) 12%, transparent); stroke: var(--cta); stroke-width: 1.4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-window.is-on { opacity: 1; }
+.an-ev { fill: var(--cta); opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-ev.is-on { opacity: 1; }
+.an-ev.is-late { fill: var(--accent); }
+.an-wm { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+
+/* ── Live controls ────────────────────────────────────────────────
+   The reader changes a number and the maths redraws. This is the
+   half a rendered video cannot have, and the reason the animations
+   are built in the browser rather than exported. */
+.an-live {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.1rem;
+  margin-top: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px dashed var(--border-ui);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+}
+.an-livek {
+  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
+  text-transform: var(--rd-caps);
+  letter-spacing: var(--rd-caps-track);
+  color: var(--cta);
+  flex-basis: 100%;
+}
+.an-knob {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+}
+.an-knob input { width: 5.5rem; accent-color: var(--cta); }
+.an-knob b {
+  font: 600 var(--fs-2xs) "Space Grotesk", sans-serif;
+  color: var(--text);
+  min-width: 2.2rem;
+}
+.an-livereset {
+  margin-left: auto;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--muted);
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.an-livereset:hover { color: var(--text); border-color: var(--cta); }

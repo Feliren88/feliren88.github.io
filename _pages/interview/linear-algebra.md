@@ -1,9 +1,9 @@
 ---
 layout: syllabus
-title: Transformers
-description: Whether you know the architecture at the level of shapes and memory.
-permalink: /transformers/
-topic_id: transformers
+title: Linear Algebra
+description: Whether you see a matrix as a thing that does something, rather than a box of numbers.
+permalink: /linear-algebra/
+topic_id: linear-algebra
 robots: noindex, nofollow
 sitemap: false
 extra_css: /css/interview.css
