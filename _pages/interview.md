@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Interview
-description: Private revision hub. Twenty-three visual syllabi for interview preparation.
+description: Private revision hub. Twenty-six visual syllabi for interview preparation.
 permalink: /interview/
 robots: noindex, nofollow
 sitemap: false

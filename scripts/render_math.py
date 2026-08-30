@@ -17,7 +17,7 @@ an equation. A pre-rendered image does none of those, and KaTeX would ship its
 own fonts that fight the page's.
 
 CANON is why the notation holds together. A symbol listed there means one thing
-on all twenty-five tracks. A module that re-glosses a canon symbol with
+on all twenty-six tracks. A module that re-glosses a canon symbol with
 different words fails the check, and so does an equation using a symbol nobody
 defined. Consistency is therefore a property the build enforces, not a habit
 the author has to remember across 160 modules.
@@ -168,6 +168,11 @@ STRUCTURE = {
     # relations and operators that are grammar, not names
     "cdot", "cdots", "dots", "ldots", "times", "div", "pm", "mp", "circ", "ast",
     "leq", "geq", "neq", "ll", "gg", "equiv", "cong", "simeq", "asymp",
+    # The short spellings of the same three relations, plus the logical
+    # connectives. `land`/`lor`/`lnot` were already here; `wedge`/`vee` are
+    # the same operators under their other names, and `not` only ever
+    # negates the relation after it.
+    "ge", "le", "ne", "not", "wedge", "vee", "varnothing",
     "subset", "supset", "supseteq", "cup", "cap", "setminus", "emptyset",
     "land", "lor", "lnot", "neg", "implies", "iff", "Rightarrow", "Leftrightarrow",
     "rightarrow", "leftarrow", "mapsto", "longrightarrow", "uparrow", "downarrow",

@@ -60,19 +60,27 @@
      Scenes
      ════════════════════════════════════════════════════════ */
 
-  var TOKENS = ['The', 'cat', 'sat', 'on', 'the', 'mat'];
+  /* The same sentence the architecture explorers on /transformers/ run, so
+     the page carries one example rather than two. The pronoun is the point:
+     "it" has to be resolved, and "the cat sat on the mat" gave nothing to
+     resolve. */
+  var TOKENS = ['the', 'cat', 'sat', 'on', 'it'];
 
   /* Attention weights used by the transformers scene. Row = the token doing
      the looking, column = the token being looked at. Lower triangle only,
-     because a token cannot see the future. These are illustrative and chosen
-     so the pattern is legible, not measured from a model. */
+     because a token cannot see the future.
+
+     These are not illustrative. They are head 1 of the masked self-attention
+     computed by js/components/transformer.js, which
+     scripts/verify_transformer.py checks against an independent NumPy
+     implementation. Change the weights there and these go stale, so re-read
+     them from the explorer rather than adjusting them by eye. */
   var ATTN = [
-    [1.00, 0, 0, 0, 0, 0],
-    [0.719, 0.281, 0, 0, 0, 0],
-    [0.104, 0.622, 0.274, 0, 0, 0],
-    [0.086, 0.203, 0.474, 0.237, 0, 0],
-    [0.070, 0.114, 0.180, 0.201, 0.435, 0],
-    [0.052, 0.397, 0.106, 0.093, 0.129, 0.223]
+    [1.000, 0, 0, 0, 0],
+    [0.494, 0.506, 0, 0, 0],
+    [0.333, 0.334, 0.333, 0, 0],
+    [0.250, 0.251, 0.250, 0.249, 0],
+    [0.026, 0.864, 0.050, 0.028, 0.032]
   ];
 
   var SCENES = {
@@ -84,12 +92,12 @@
        the values are mixed in those proportions. */
     attention: {
       title: 'One attention head, end to end',
-      lead: 'Six words go in. Watch what each one collects from the words before it.',
+      lead: 'Five words go in. Each one collects something from the words before it.',
       build: function () {
         /* Laid out top to bottom in bands, so nothing can overlap: words,
            then their vectors, then the grid, then the rewritten vectors.
            The grid is centred under the row rather than beside it. */
-        var W = 560, n = 6, cell = 38;
+        var W = 560, n = TOKENS.length, cell = 38;
         var colW = 78, rowX = 40;
         var gx = (W - n * cell) / 2 + 10, gy = 200;
         var H = gy + n * cell + 108;
@@ -157,11 +165,11 @@
 
         return el('svg', {
           viewBox: '0 0 ' + W + ' ' + H, 'class': 'an-svg',
-          role: 'img', 'aria-label': 'How one attention head mixes six words'
+          role: 'img', 'aria-label': 'How one attention head mixes five words'
         }, s);
       },
       beats: [
-        { step: 'Six words in', say: 'Six words. Right now each one knows nothing about the others.' },
+        { step: 'Five words in', say: 'Five words. Right now each one knows nothing about the others.' },
         { step: 'Each becomes a vector', say: 'Every word is really a list of numbers. That list is all the model has.' },
         {
           step: 'Compare every pair',
@@ -212,15 +220,15 @@
           step: 'Mix the values',
           say: 'Now mix. Each word pulls in the others in exactly those proportions.',
           apply: function (root) {
-            $$('.an-cell[data-r="5"]', root).forEach(function (c) { c.classList.add('is-lit'); });
+            $$('.an-cell[data-r="4"]', root).forEach(function (c) { c.classList.add('is-lit'); });
           }
         },
         {
           step: 'Read the result',
-          say: 'Read the bottom row. "mat" leaned mostly on "cat", which is how it knows what is sitting.',
+          say: 'Read the bottom row. "it" leaned almost entirely on "cat", which is how the model knows what is sitting.',
           apply: function (root) {
             $$('.an-cell', root).forEach(function (c) { c.classList.remove('is-lit'); });
-            $$('.an-cell[data-r="5"][data-c="1"]', root).forEach(function (c) { c.classList.add('is-lit'); });
+            $$('.an-cell[data-r="4"][data-c="1"]', root).forEach(function (c) { c.classList.add('is-lit'); });
           }
         }
       ]
@@ -288,7 +296,7 @@
     /* ── Uncertainty: calibration and temperature ──────────────── */
     calib: {
       title: 'Fixing an overconfident model',
-      lead: 'A calibrated model sits on the diagonal. Watch one get there.',
+      lead: 'A calibrated model sits on the diagonal. This one starts well above it.',
       build: function () {
         var P = 30, S = 170;
         var s = el('line', { x1: P, y1: P + S, x2: P + S, y2: P + S, 'class': 'an-axis' });
@@ -322,7 +330,7 @@
     /* ── Interpretability: superposition ───────────────────────── */
     superpose: {
       title: 'More ideas than neurons',
-      lead: 'Two directions, five things to store. Watch them share.',
+      lead: 'Two directions, five things to store. They will have to share.',
       build: function () {
         var cx = 130, cy = 118, R = 82;
         var s = el('line', { x1: cx - R - 14, y1: cy, x2: cx + R + 14, y2: cy, 'class': 'an-axis' });
@@ -359,7 +367,7 @@
     /* ── Agentic AI: the loop and where it breaks ──────────────── */
     agentloop: {
       title: 'The agent loop, and where it fails',
-      lead: 'Four steps repeating. Watch the context fill as it goes.',
+      lead: 'Four steps, repeating. The context fills a little more on every pass.',
       build: function () {
         var s = '';
         var nodes = [['Look', 90, 60], ['Decide', 250, 60], ['Act', 250, 150], ['See result', 90, 150]];
@@ -530,7 +538,7 @@
        them settles. The Essence of Calculus opening. */
     tangent: {
       title: 'Where a derivative comes from',
-      lead: 'Slide two points together and watch the line settle.',
+      lead: 'Slide two points together and the line settles on one slope.',
       build: function () {
         var s = '';
         function f(x) { return 200 - 0.0013 * (x - 40) * (x - 40); }
@@ -638,7 +646,7 @@
     /* ── Machine learning: capacity and overfitting ───────────── */
     overfit: {
       title: 'Fitting, and fitting too hard',
-      lead: 'Same points, three models. Watch which one you would trust.',
+      lead: 'Same points, three models. Only one of them you would trust.',
       build: function () {
         var pts = [[60,168],[110,140],[160,148],[210,110],[260,120],[310,80],[360,96],[410,58]];
         var s = el('line', { x1: 40, y1: 200, x2: 450, y2: 200, 'class': 'an-axis' });
@@ -828,7 +836,7 @@
     /* ── AI safety: reward hacking ────────────────────────────── */
     hack: {
       title: 'When scoring well stops meaning doing well',
-      lead: 'You measured the wrong thing. Watch what gets optimised.',
+      lead: 'You measured the wrong thing. The optimiser found that out first.',
       build: function () {
         var s = '';
         s += rect({ x: 24, y: 34, width: 108, height: 40, rx: 8, 'class': 'an-box' });
@@ -934,7 +942,7 @@
     /* ── Data engineering: watermarks and late events ─────────── */
     watermark: {
       title: 'Events that arrive late',
-      lead: 'The window has to close some time. Watch what gets missed.',
+      lead: 'The window has to close some time. Whatever arrives later is missed.',
       build: function () {
         var s = el('line', { x1: 30, y1: 150, x2: 450, y2: 150, 'class': 'an-axis' });
         s += text('time', { x: 430, y: 168, 'class': 'an-lab' });
@@ -1004,7 +1012,7 @@
     /* ── Embeddings: meaning becomes distance ──────────────────── */
     embedspace: {
       title: 'Turning meaning into distance',
-      lead: 'Watch four sentences become points, and similar ones land together.',
+      lead: 'Four sentences become four points, and the similar ones land together.',
       build: function () {
         var pts = [
           { t: 'how do I reset my password', x: 96, y: 78, g: 0 },
@@ -1046,7 +1054,7 @@
     /* ── Edge AI: what has to fit ───────────────────────────────── */
     ondevice: {
       title: 'Fitting a model on a phone',
-      lead: 'Watch the same model shrink, and see what each step costs.',
+      lead: 'The same model, shrunk three times, and what each step costs.',
       build: function () {
         var s = '';
         s += rect({ x: 300, y: 24, width: 116, height: 190, rx: 12, 'class': 'an-box' });
@@ -1124,7 +1132,7 @@
     /* ── Prompt engineering: the middle gets lost ──────────────── */
     lostmiddle: {
       title: 'Where the model actually looks',
-      lead: 'Put the answer in different places and watch what gets used.',
+      lead: 'Put the answer in different places and see which copies get used.',
       build: function () {
         var s = '';
         for (var i = 0; i < 14; i++) {
@@ -1163,6 +1171,148 @@
         },
         { say: 'So put what matters near the start or the end, and cut the rest.' }
       ]
+    },
+
+    /* ── Mathematics: a running average finding the truth ────────
+       The law of large numbers drawn rather than stated. Individual
+       draws stay as scattered as they ever were; only the average
+       moves, and the band around it closes like one over the square
+       root of the count. The dots are fixed values in this file, not
+       sampled at load, so every reader sees the same picture and the
+       captions can describe it. */
+    average: {
+      title: 'One draw against many',
+      lead: 'The samples never settle down. The average does. Watch which one moves.',
+      build: function () {
+        var TRUTH = 108;
+        /* Draws, as offsets from the truth. Chosen to wander early and
+           settle late, which is what the captions describe. */
+        var D = [-52, 46, -34, 58, -20, 40, -48, 24, 52, -30,
+                 36, -44, 18, 50, -26, 30, -40, 22, 44, -18];
+        var x = function (i) { return 44 + i * 20.5; };
+        var run = [], sum = 0;
+        D.forEach(function (d, i) { sum += d; run.push(sum / (i + 1)); });
+
+        var s = el('line', { x1: 30, y1: 190, x2: 460, y2: 190, 'class': 'an-axis' });
+        /* `.an-truth` is opacity 0 until `is-on`, and `is-on` is only ever
+           set by reveal(), so it needs a data-from even to be visible. */
+        s += el('line', { x1: 30, y1: TRUTH, x2: 460, y2: TRUTH,
+          'class': 'an-truth', 'data-from': 0 });
+
+        /* The band the average is expected to stay inside, closing like
+           one over the square root of the count. */
+        var band = function (sign) {
+          return D.map(function (_, i) {
+            var w = sign * 150 / Math.sqrt(i + 1);
+            return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + (TRUTH + w).toFixed(1);
+          }).join('');
+        };
+        /* Two open subpaths, the upper and lower edge. `.an-ci` sets a
+           stroke and no fill, and an unfilled path defaults to black,
+           so the fill is turned off here rather than in the stylesheet. */
+        s += el('path', { d: band(1) + band(-1), fill: 'none', 'stroke-width': 1.6,
+          'class': 'an-ci an-fade', 'data-from': 3 });
+
+        s += el('g', { 'data-from': 0 }, D.map(function (d, i) {
+          return el('circle', { cx: x(i), cy: TRUTH + d, r: 4, 'class': 'an-obs' });
+        }).join(''));
+
+        s += el('path', {
+          d: run.map(function (v, i) {
+            return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + (TRUTH + v).toFixed(1);
+          }).join(''),
+          'class': 'an-fit an-write', 'data-from': 1
+        });
+
+        s += el('text', { x: 30, y: 206, 'class': 'an-lab' }, 'draws');
+        s += el('text', { x: 466, y: TRUTH + 4, 'class': 'an-lab' }, 'truth');
+        return el('svg', { viewBox: '0 0 500 214', 'class': 'an-svg', role: 'img',
+          'aria-label': 'Scattered draws with a running average converging on the true value' }, s);
+      },
+      beats: [
+        { say: 'Each dot is one draw. On its own it tells you very little about the truth.' },
+        { say: 'Take the running average as they arrive. Early on it swings about badly.' },
+        { say: 'The draws never calm down. Only the average does, and it does it steadily.' },
+        { say: 'The band it should stay inside closes like one over the square root of the count.' },
+        { say: 'So a hundred times the data buys ten times less error. That is the whole bargain.' }
+      ]
+    },
+
+    /* ── Mathematical proof: induction as a row of dominoes ──────
+       The two obligations drawn side by side. Upright and fallen are
+       two elements per domino with data-from and data-to, so a scrub
+       backwards lands in the same state as stepping forwards. The
+       rotation sits on an outer group, never on the element carrying
+       the fade class, since a CSS transform would beat it. */
+    induction: {
+      title: 'Two proofs, every case',
+      lead: 'You cannot check infinitely many claims. You can knock them over.',
+      build: function () {
+        var N = 7;
+        /* When each domino goes down. Base first, then the step, then
+           the rest of the row as one consequence. */
+        var TIP = [1, 2, 3, 3, 3, 3, 3];
+        var s = el('line', { x1: 26, y1: 168, x2: 470, y2: 168, 'class': 'an-axis' });
+        for (var i = 0; i < N; i++) {
+          var cx = 56 + i * 62;
+          var up = el('rect', { x: cx - 9, y: 78, width: 18, height: 90, rx: 2,
+            'class': 'an-box an-fade', 'data-from': 0, 'data-to': TIP[i] - 1 });
+          var down = el('g', { transform: 'rotate(74 ' + (cx + 9) + ' 168)' },
+            el('rect', { x: cx - 9, y: 78, width: 18, height: 90, rx: 2,
+              'class': 'an-box an-fade', 'data-from': TIP[i] }));
+          s += up + down;
+          s += el('text', { x: cx, y: 186, 'class': 'an-lab', 'text-anchor': 'middle' },
+            i === 0 ? 'base' : 'n + ' + i);
+        }
+        return el('svg', { viewBox: '0 0 500 200', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A row of dominoes falling in turn from the base case onward' }, s);
+      },
+      beats: [
+        { say: 'One domino per size. There are infinitely many, so checking them is not an option.' },
+        { say: 'First obligation: prove the smallest case. That is the one you push over yourself.' },
+        { say: 'Second obligation: prove that any case falling knocks the next one down.' },
+        { say: 'Those two together take the whole row, however far along it you look.' },
+        { say: 'Skip the base case and nothing moves, however good the step is. That is the usual gap.' }
+      ]
+    },
+
+    /* ── Computer science: what a fetch actually costs ───────────
+       Bars are proportional to the ratios every architecture text
+       gives, drawn on a square root scale so main memory stays on the
+       canvas. The captions say "a few dozen" rather than a figure,
+       because the exact numbers are machine specific and the ordering
+       is the part that transfers. */
+    fetchcost: {
+      title: 'Arithmetic is free. Fetching is not.',
+      lead: 'Four places a value can be, and what it costs to go and get it.',
+      build: function () {
+        var ROWS = [
+          { k: 'register', c: 1 },
+          { k: 'L1 cache', c: 4 },
+          { k: 'L2 cache', c: 40 },
+          { k: 'main memory', c: 300 }
+        ];
+        var s = '';
+        ROWS.forEach(function (r, i) {
+          var y = 30 + i * 42;
+          /* Square root scale. A linear one makes the first three bars
+             invisible, which hides the comparison the scene is about. */
+          var w = 14 + Math.sqrt(r.c) * 22;
+          s += el('text', { x: 118, y: y + 15, 'class': 'an-lab', 'text-anchor': 'end' }, r.k);
+          s += el('rect', { x: 130, y: y, width: w.toFixed(1), height: 22, rx: 3,
+            'class': 'an-box an-fade', 'data-from': i });
+        });
+        s += el('text', { x: 130, y: 206, 'class': 'an-lab' }, 'time to reach the value');
+        return el('svg', { viewBox: '0 0 500 216', 'class': 'an-svg', role: 'img',
+          'aria-label': 'Four bars of increasing length for register, L1 cache, L2 cache and main memory' }, s);
+      },
+      beats: [
+        { say: 'A value already in a register costs about one operation to use. This is the free case.' },
+        { say: 'Reach into the nearest cache and you have spent a handful of those operations.' },
+        { say: 'Reach into the next one out and you have spent a few dozen of them.' },
+        { say: 'Miss every cache and go to main memory, and you have spent a few hundred.' },
+        { say: 'So the question is not how many operations you do. It is how many bytes you move.' }
+      ]
     }
   };
 
@@ -1190,7 +1340,10 @@
     'network-and-security': 'injection',
     'embedding': 'embedspace',
     'edge-ai': 'ondevice',
-    'image-generation': 'denoise'
+    'image-generation': 'denoise',
+    'math': 'average',
+    'math-proof': 'induction',
+    'computer-science': 'fetchcost'
   };
 
   /* ════════════════════════════════════════════════════════

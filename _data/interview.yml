@@ -59,7 +59,7 @@ topics:
         plain:
           - >-
               A probability here is a strength of belief. You start with a belief, you
-              see some data, and you end with a better belief. That is the whole loop.
+              see some data, and you end with a better belief that tomorrow you start from.
           - >-
               Bayes rule is the arithmetic for that update. The trap is the base rate.
               If a disease is rare, most positive tests are still wrong, even with an
@@ -68,7 +68,7 @@ topics:
           - name: 'Bayes rule'
             tex: 'p(\theta \mid D) \;=\; \frac{p(D \mid \theta)\, p(\theta)}{p(D)}'
             read: 'Belief after seeing the data equals belief before, reweighted by how well each parameter predicted what arrived.'
-            note: 'The denominator does not depend on the parameter, which is why the rule is often written as a proportionality and the constant recovered at the end.'
+            note: 'The denominator does not depend on the parameter. The rule is usually written as a proportionality and the constant recovered at the end.'
             where:
               - sym: '\theta'
                 is: 'the parameters, the numbers the model learns'
@@ -399,7 +399,7 @@ topics:
           - name: 'The Bayes factor'
             tex: '\mathrm{BF}_{12} \;=\; \frac{p(D \mid M_{1})}{p(D \mid M_{2})}'
             read: 'How much better one model predicted the data you actually got, before any preference between them.'
-            note: 'It depends on the prior far more strongly than the posterior does, which is why a Bayes factor computed under a vague prior should not be trusted.'
+            note: 'It depends on the prior far more strongly than the posterior does. Do not trust a Bayes factor computed under a vague prior.'
             where:
               - sym: '\mathrm{BF}'
                 is: 'the Bayes factor, the ratio of evidence for two models'
@@ -544,7 +544,7 @@ topics:
           - name: 'The bias variance decomposition of squared error'
             tex: '\mathbb{E}\big[(\hat{\theta} - \theta)^{2}\big] \;=\; \underbrace{\big(\mathbb{E}[\hat{\theta}] - \theta\big)^{2}}_{\text{bias}^{2}} \;+\; \underbrace{\mathrm{Var}(\hat{\theta})}_{\text{variance}}'
             read: 'How wrong an estimator is on average splits cleanly into being off centre and being unsteady.'
-            note: 'Unbiased is not the same as good. A biased estimator with much smaller variance wins on this criterion, which is the whole case for regularisation.'
+            note: 'Unbiased is not the same as good. A biased estimator with much smaller variance wins on this criterion, and regularisation is built on exactly that trade.'
             where:
               - sym: '\hat{\theta}'
                 is: 'an estimator, a rule turning data into a guess at the parameter'
@@ -630,7 +630,7 @@ topics:
                 is: 'the maximum likelihood estimate'
           - name: 'The two conditions that find the peak'
             tex: '\frac{\partial}{\partial \theta} \log \mathcal{L}(\theta) \Big|_{\hat{\theta}} = 0, \qquad \frac{\partial^{2}}{\partial \theta^{2}} \log \mathcal{L}(\theta) \Big|_{\hat{\theta}} < 0'
-            read: 'The slope vanishes at the estimate and the curve bends downwards there, which is what makes it a maximum rather than a minimum.'
+            read: 'The slope vanishes at the estimate and the curve bends downwards there. A downward bend makes it a maximum.'
             note: 'The first condition alone is the score equation. Skipping the second is how a candidate answer at a trough or a saddle survives to the interview.'
           - name: 'Bernoulli: the sample proportion'
             tex: '\log \mathcal{L} = s \log \theta + (N - s) \log(1 - \theta) \;\Longrightarrow\; \hat{\theta} = \frac{s}{N}'
@@ -773,7 +773,7 @@ topics:
           - name: 'The delta method'
             tex: '\mathrm{Var}\big(g(\hat{\theta})\big) \;\approx\; \big(g''(\theta)\big)^{2}\, \mathrm{Var}(\hat{\theta})'
             read: 'Push an estimate through a function and its wobble is scaled by the slope of that function.'
-            note: 'This is how a standard error is obtained for a ratio metric, which is why it turns up again in A/B testing.'
+            note: 'This is how a standard error is obtained for a ratio metric. It turns up again in A/B testing for the same reason.'
             where:
               - sym: 'g'
                 is: 'a smooth function of the estimate, such as a ratio'
@@ -1110,7 +1110,7 @@ topics:
           - name: 'Heteroskedasticity and the sandwich'
             tex: '\mathrm{Var}(\hat{w}) = (X^{\top}X)^{-1} \Big(\textstyle\sum_{i} \hat{u}_{i}^{2}\, x_{i} x_{i}^{\top}\Big) (X^{\top}X)^{-1}'
             read: 'When the noise size changes across the data, the coefficient is still fine but its stated error is not, so the middle is rebuilt from the residuals themselves.'
-            note: 'Clustered errors are the same idea with the sum taken over clusters, which is what you need when observations within a user or a region move together.'
+            note: 'Clustered errors are the same idea with the sum taken over clusters. Use them when observations within a user or a region move together.'
             where:
               - sym: '\hat{u}_{i}'
                 is: 'the residual on example i'
@@ -1159,7 +1159,7 @@ topics:
     links: [deep-learning]
     modules:
       - name: Framing the problem
-        why: "Get this wrong and the modelling never matters, which is why interviewers open here."
+        why: "Interviewers open here, because getting it wrong makes the modelling irrelevant."
         beats:
           - >-
               Someone asks for something vague. Churn prediction, say. Nobody has
@@ -1372,7 +1372,7 @@ topics:
           - name: 'Log loss, the metric that notices confidence'
             tex: '\mathcal{L} = -\frac{1}{N} \sum_{i=1}^{N} \Big[ y_{i} \log \hat{p}_{i} + (1 - y_{i}) \log (1 - \hat{p}_{i}) \Big]'
             read: 'Being confident and wrong is punished far more than being unsure and wrong.'
-            note: 'The penalty grows without bound as a confident prediction approaches certainty and turns out wrong, which is exactly the behaviour a calibrated system needs.'
+            note: 'The penalty grows without bound as a confident prediction approaches certainty and turns out wrong. A calibrated system needs exactly that.'
             where:
               - sym: '\mathcal{L}'
                 is: 'the loss, the number training pushes down'
@@ -1779,7 +1779,7 @@ topics:
               affect each other.
           - >-
               Layer norm normalises across features within one example. Batch size stops
-              mattering, which is why transformers use it.
+              mattering, and transformers took it for that.
           - >-
               RMSNorm drops the mean subtraction and keeps the scaling. Slightly cheaper
               and works about as well.
@@ -1794,7 +1794,7 @@ topics:
               nothing or blow up. Initialisation sets the starting scale so they do
               neither.
           - >-
-              Normalisation keeps them in range as training goes on. Batch norm uses the other examples in the batch. That is why it falls apart when the batch is small.
+              Normalisation keeps them in range as training goes on. Batch norm uses the other examples in the batch, so a small batch breaks it.
         math:
           - name: 'Why the initial scale is forced on you'
             tex: '\mathrm{Var}(z_{l}) = n_{l}\, \mathrm{Var}(w)\, \mathrm{Var}(z_{l-1})'
@@ -1844,7 +1844,7 @@ topics:
           - name: 'Normalisation, and where the statistics come from'
             tex: '\hat{z} = \frac{z - \mu_{S}}{\sqrt{\sigma_{S}^{2} + \epsilon}}, \qquad z'' = \varrho\, \hat{z} + \varsigma'
             read: 'Recentre and rescale the activations, then let the network learn its own scale and shift back.'
-            note: 'Batch norm takes the statistics across the batch, which is why it changes behaviour between training and evaluation and falls apart at small batch size. Layer norm takes them across the features of one example, so it does neither, which is why transformers use it.'
+            note: 'Batch norm takes the statistics across the batch, so it behaves differently between training and evaluation and falls apart at small batch size. Layer norm takes them across the features of one example, so it does neither, which is why transformers use it.'
             where:
               - sym: 'z'
                 is: 'a hidden representation, an input after some processing'
@@ -1989,8 +1989,8 @@ topics:
         math:
           - name: 'The chain rule on a chain of layers'
             tex: '\frac{\partial \mathcal{L}}{\partial \theta_{l}} \;=\; \frac{\partial \mathcal{L}}{\partial z_{L}} \prod_{r = l+1}^{L} \frac{\partial z_{r}}{\partial z_{r-1}} \cdot \frac{\partial z_{l}}{\partial \theta_{l}}'
-            read: 'A gradient deep in the network is a product of every Jacobian above it, which is why depth makes gradients unstable.'
-            note: 'Multiply many numbers below one and you get zero, above one and you get infinity. Residual connections add an identity path so the product has a one in it, which is the whole reason very deep networks train.'
+            read: 'A gradient deep in the network is a product of every Jacobian above it, so depth makes gradients unstable.'
+            note: 'Multiply many numbers below one and you get zero, above one and you get infinity. Residual connections add an identity path so the product always has a one in it. Without that, depth past a few dozen layers does not train.'
             where:
               - sym: 'l'
                 is: 'which layer, counted from the input'
@@ -2069,8 +2069,7 @@ topics:
               A grid of pixels has local structure, so convolutions and their weight
               sharing fit.
           - >-
-              A sequence has order and long-range links, which is what attention
-              handles.
+              A sequence has order and long-range links. Attention handles both.
           - >-
               A graph has arbitrary neighbours, so pass messages along the edges.
         scene:
@@ -2387,15 +2386,15 @@ topics:
               Apply it and every point moves at once. Straight lines stay straight and
               the origin stays put.
           - >-
-              Read the new grid and you can see the whole transformation. That is all a
-              matrix is.
+              Read the new grid and you have read the whole transformation. A matrix holds
+              nothing else.
         plain:
           - >-
               A matrix is not a table of numbers. It is an instruction for moving
               every point in space at once.
           - >-
               To read one, look at its columns. Each column says where one of the
-              original axes lands. That is the whole picture.
+              original axes lands. Four numbers, four destinations, nothing hidden.
         math:
           - name: 'A matrix is where the basis vectors land'
             tex: 'A = \begin{bmatrix} | & | \\ A e_{1} & A e_{2} \\ | & | \end{bmatrix}, \qquad A v = v_{1} (A e_{1}) + v_{2} (A e_{2})'
@@ -2452,7 +2451,7 @@ topics:
           - name: 'Composition is multiplication'
             tex: '(BA)v = B(Av), \qquad (BA)_{ij} = \sum_{r} B_{ir} A_{rj}'
             read: 'Doing one transformation then another is itself a transformation, and the product is how you write it down.'
-            note: 'Order matters because rotating then stretching is a different map from stretching then rotating. That is the whole content of non-commutativity.'
+            note: 'Rotating then stretching is a different map from stretching then rotating. Non-commutativity means nothing more complicated than that.'
             where:
               - sym: 'B'
                 is: 'the transformation applied second'
@@ -2474,7 +2473,7 @@ topics:
           - Move every point
           - Read the new grid
       - name: Determinant, rank and inverse
-        why: "Three questions about whether a transformation loses information."
+        why: "Whether a transformation loses information, and how you would tell."
         beats:
           - >-
               One question, asked three ways. Did the transformation lose any
@@ -2497,7 +2496,7 @@ topics:
           - name: 'The determinant as a scaling factor'
             tex: '\det \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} = a_{11}a_{22} - a_{12}a_{21}'
             read: 'How much the transformation multiplies area, and a minus sign means it turned the plane over.'
-            note: 'Zero determinant means the transformation squashed the space into something lower dimensional, and no such map can be undone. That is why singular means both.'
+            note: 'Zero determinant means the transformation squashed the space into something lower dimensional, and no such map can be undone. Singular means both things at once.'
             where:
               - sym: '\det'
                 is: 'the determinant, the factor by which area or volume scales'
@@ -2689,8 +2688,8 @@ topics:
           - >-
               The nearest reachable point is the shadow of the target. That is your fit.
           - >-
-              The gap points straight out from the space. That is why the residual is
-              perpendicular.
+              The gap points straight out from the space. Nothing left in it can be
+              reached.
         scene:
           kind: projection
           cap: "The closest reachable point is the target's shadow."
@@ -3049,7 +3048,7 @@ topics:
                 is: 'the number of components in a vector'
           - name: 'The directional derivative'
             tex: 'D_{u} f(x) = \langle \nabla f(x), u \rangle = \|\nabla f(x)\| \cos \vartheta'
-            read: 'The slope in any direction is the gradient projected onto it, which is why the gradient direction is the steepest of them all.'
+            read: 'The slope in any direction is the gradient projected onto it, so no direction is steeper than the gradient itself.'
             where:
               - sym: 'D_{u} f(x)'
                 is: 'the slope in the direction u'
@@ -3125,7 +3124,7 @@ topics:
           - name: 'Why high dimensions are full of saddles'
             tex: 'p(\text{all } d \text{ curvatures positive}) \approx 2^{-d} \; \text{for a random critical point}'
             read: 'Every direction has to curve upward at once, and that becomes vanishingly unlikely as dimensions grow.'
-            note: 'Training rarely gets stuck in a bad local minimum. It slows down on saddles and long flat valleys instead, which is what momentum and adaptive step sizes are for.'
+            note: 'Training rarely gets stuck in a bad local minimum. It slows down on saddles and long flat valleys instead. Momentum and adaptive step sizes exist for that.'
           - name: 'Constrained optimisation'
             tex: '\nabla f(x) = \varpi\, \nabla g(x), \qquad g(x) = 0'
             read: 'At the best point on a constraint the two gradients line up, so you cannot improve without leaving the constraint.'
@@ -3182,7 +3181,7 @@ topics:
           - name: 'Monte Carlo, and why the error falls slowly'
             tex: '\hat{g} = \frac{1}{n_{\mathrm{s}}} \sum_{i=1}^{n_{\mathrm{s}}} g(x_{i}), \qquad \mathrm{SE} = \frac{\sigma_{g}}{\sqrt{n_{\mathrm{s}}}}'
             read: 'Sample, average, and accept that a hundred times more samples buys ten times less error.'
-            note: 'The rate does not depend on the dimension, which is why sampling beats a grid in high dimensions even though it converges slowly.'
+            note: 'The rate does not depend on the dimension. Sampling beats a grid in high dimensions even though it converges slowly.'
             where:
               - sym: 'n_{\mathrm{s}}'
                 is: 'how many samples are drawn'
@@ -3302,7 +3301,7 @@ topics:
           - name: 'Newton''s method'
             tex: 'x_{t+1} = x_{t} - \frac{f''(x_{t})}{f''''(x_{t})}'
             read: 'Fit a parabola instead of a line and jump straight to its lowest point.'
-            note: 'It converges in far fewer steps and each step costs a Hessian solve, which is why deep learning uses first order methods and approximates curvature instead.'
+            note: 'It converges in far fewer steps and each step costs a Hessian solve. Deep learning takes first order methods and approximates the curvature instead.'
             where:
               - sym: 'x_{t}'
                 is: 'the point after t steps'
@@ -3420,6 +3419,1784 @@ topics:
       - Check one gradient numerically against your analytic version
       - Draw a saddle point and say which directions curve which way
       - Write the softmax and cross-entropy derivative from scratch
+
+  - id: math
+    name: Mathematics
+    group: foundations
+    blurb: "Whether the notation in a paper is something you read or something you skip."
+    scope: "Owns counting, probability, information and how numbers behave on a machine. Hands vectors and matrices to linear algebra, rates of change to calculus, and inference to the two statistics tracks."
+    links: [linear-algebra, calculus, math-proof]
+    modules:
+      - name: Reading the notation
+        why: "A paper you cannot read is a paper you cannot use."
+        beats:
+          - >-
+              A set is a collection. No order, no repeats, and membership is the only
+              question you can ask of it.
+          - >-
+              A function is an arrow between two sets. Naming both ends fixes what it
+              can possibly do.
+          - >-
+              A sum is a loop. The index says what moves, and the range says how far.
+          - >-
+              Almost every line in a paper is one of those three, dressed up.
+        plain:
+          - >-
+              Notation is compression. Three constructions carry most of it: a
+              set, an arrow from one set to another, and a loop that adds
+              things up.
+          - >-
+              Read the types first. Once you know what goes in and what comes
+              out, the rest of the line usually has only one sensible reading.
+        math:
+          - name: 'A set given by a rule'
+            tex: 'S = \{\, x \in \mathcal{X} \;:\; P(x) \,\}'
+            read: 'Take everything in X and keep the ones that pass the test P.'
+            where:
+              - sym: 'x \in \mathcal{X}'
+                is: 'x is a member of the space every input lives in'
+              - sym: 'P(x)'
+                is: 'a condition that x either passes or fails'
+              - sym: 'S'
+                is: 'the set of everything that passes'
+          - name: 'A function, with both ends named'
+            tex: 'f : \mathbb{R}^{d} \to \mathbb{R}^{m}'
+            read: 'f eats a vector of d numbers and returns a vector of m numbers.'
+            note: 'Reading the signature before the formula is the single fastest way into an unfamiliar paper. It tells you the shape of every object in the line, and a line whose shapes do not agree is a line you have misread.'
+            where:
+              - sym: '\mathbb{R}^{d}'
+                is: 'the space of vectors with d real components'
+              - sym: '\to'
+                is: 'goes to, or maps to'
+              - sym: 'm'
+                is: 'how many components come out'
+          - name: 'Sums and products are loops'
+            tex: '\sum_{i=1}^{n} a_{i} = a_{1} + \dots + a_{n}, \qquad \prod_{i=1}^{n} a_{i} = a_{1} \times \dots \times a_{n}'
+            read: 'One symbol for add them all up, one for multiply them all together.'
+            where:
+              - sym: 'i'
+                is: 'an index over examples'
+              - sym: 'n'
+                is: 'a count of things'
+              - sym: 'a_{i}'
+                is: 'the i-th item being combined'
+        covers:
+          - Sets, membership and set-builder notation
+          - Functions as arrows, domain and codomain
+          - Sum, product and index conventions
+          - Common number sets and what they exclude
+          - Reading a signature before reading a formula
+          - Where notation hides an assumption
+        check: "Take any line from a paper you know. Say the type of every object in it."
+        viz:
+          type: flow
+          steps:
+          - Read the signature
+          - Name what goes in
+          - Name what comes out
+          - Then read the formula
+      - name: Counting
+        why: "Half of probability is careful counting, and the other half is knowing when counting explodes."
+        beats:
+          - >-
+              Square the input size and the work grows, but a machine still copes with
+              it for a long while.
+          - >-
+              Double the work for every item you add and it is exponential. Machines
+              stop coping quickly.
+          - >-
+              Order everything instead and it is worse again. Factorial leaves
+              exponential behind.
+        plain:
+          - >-
+              Counting arrangements is a matter of multiplying choices. Ordering
+              n things gives n factorial. Choosing k of them without caring
+              about order divides that by the orderings you no longer count.
+          - >-
+              The reason this matters is growth. A search over subsets doubles
+              with every item added, so exhaustive search stops being an option
+              within a few dozen.
+        math:
+          - name: 'Choosing, with and without order'
+            tex: 'n! = \prod_{i=1}^{n} i, \qquad \binom{n}{r} = \frac{n!}{r!\,(n-r)!}'
+            read: 'Order them all, then divide out the orderings you decided not to count.'
+            where:
+              - sym: 'n!'
+                is: 'n factorial, the number of ways to order n things'
+              - sym: '\binom{n}{r}'
+                is: 'the number of ways to choose r things out of n'
+              - sym: 'r'
+                is: 'how many are chosen'
+          - name: 'Why exhaustive search stops working'
+            tex: '|\mathcal{P}(S)| = 2^{n} \quad \text{for } |S| = n'
+            read: 'Every item is either in or out, so one more item doubles the search.'
+            note: 'This is the whole argument for heuristics, relaxations and sampling. The alternative is not slow, it is impossible, and the difference shows up within a few dozen items.'
+            where:
+              - sym: 'S'
+                is: 'a set, a collection with no order and no repeats'
+              - sym: '\mathcal{P}(S)'
+                is: 'the set of all subsets of S'
+              - sym: '|S|'
+                is: 'how many elements S has'
+            play:
+              kind: curve
+              title: Add one item and watch the search double
+              alt: Two growth curves against the number of items, with the polynomial curve staying low while the exponential one climbs off the top of the plot.
+              x:
+              - 1
+              - 12
+              y:
+              - 0
+              - 4000
+              xlabel: items
+              ylabel: possibilities
+              curves:
+              - fn: pow(x, p)
+                s: 0
+              - fn: pow(2, x)
+                s: 1
+              readout: '"At twelve items there are 4096 subsets. At sixty there are more than there are grains of sand."'
+              knobs:
+              - k: p
+                label: polynomial power
+                min: 1
+                max: 4
+                v: 2
+                step: 1
+                dp: 0
+                s: 0
+          - name: 'The pigeonhole principle'
+            tex: 'n \text{ items into } m < n \text{ slots} \;\Rightarrow\; \text{some slot holds at least two}'
+            read: 'More things than places means something has to share.'
+            note: 'It sounds too obvious to be useful and it is not. It is the argument behind hash collisions, behind lossless compression having limits, and behind superposition in a network with fewer neurons than features.'
+            where:
+              - sym: 'm'
+                is: 'how many slots there are'
+        covers:
+          - The multiplication principle
+          - Permutations and combinations
+          - Binomial coefficients and Pascal's triangle
+          - Growth rates, polynomial against exponential against factorial
+          - The pigeonhole principle
+          - Inclusion and exclusion
+        check: "Explain why a search over subsets is hopeless past a few dozen items."
+        viz:
+          type: scale
+          lo: Still countable
+          hi: Hopeless
+          stops: ["Polynomial", "Exponential", "Factorial"]
+          on: 1
+      - name: Probability from first principles
+        why: "Both statistics tracks assume you already have this, and neither will stop to check."
+        beats:
+          - >-
+              Every probability statement is assembled from the same few pieces, so it
+              is worth naming them separately.
+          - >-
+              Start with every outcome that could happen. That collection is the sample
+              space.
+          - >-
+              An event is a subset of it, and events are the only things you get to ask
+              about.
+          - >-
+              Probability attaches a number to each of those subsets, obeying three
+              short rules.
+          - >-
+              A random variable is not a variable. It is a function from outcomes to
+              numbers.
+        plain:
+          - >-
+              Probability starts with the set of things that could happen, and
+              assigns a number to each subset of it. The rules are short: never
+              negative, everything sums to one, and disjoint events add.
+          - >-
+              Conditioning is the operation that does the work. You throw away
+              the outcomes that did not happen and rescale the rest so they add
+              to one again.
+        math:
+          - name: 'The rules, in full'
+            tex: 'p(E) \ge 0, \qquad p(\Omega) = 1, \qquad p(E \cup F) = p(E) + p(F) \text{ when } E \cap F = \varnothing'
+            read: 'Never negative, everything adds to one, and events that cannot both happen add.'
+            where:
+              - sym: '\Omega'
+                is: 'the sample space, everything that could happen'
+              - sym: 'E'
+                is: 'an event, a subset of the sample space'
+              - sym: 'F'
+                is: 'a second event'
+              - sym: '\cap'
+                is: 'and, the overlap of two events'
+              - sym: '\varnothing'
+                is: 'the empty set, nothing at all'
+          - name: 'Conditioning shrinks the world'
+            tex: 'p(E \mid F) = \frac{p(E \cap F)}{p(F)}'
+            read: 'Restrict attention to the cases where B happened, then rescale so they add to one.'
+            note: 'Every confusion about Bayes theorem is really a confusion about which sample space you are standing in. Name it out loud before you write anything down.'
+            where:
+              - sym: 'p(E \mid F)'
+                is: 'the probability of E given that F happened'
+          - name: 'Independence, and what it is not'
+            tex: 'p(E \cap F) = p(E)\, p(F) \;\Longleftrightarrow\; p(E \mid F) = p(E)'
+            read: 'Two events are independent when learning one tells you nothing about the other.'
+            note: 'Independent is not the same as mutually exclusive. Mutually exclusive events are maximally informative about each other, because one happening rules the other out entirely.'
+            where:
+              - sym: '\Longleftrightarrow'
+                is: 'each side implies the other'
+            play:
+              kind: bars
+              title: Split a population two ways and watch conditioning rescale it
+              alt: Four bars showing the joint probabilities of two events, with the readout reporting the conditional probability as the base rate changes.
+              labels:
+              - both
+              - A only
+              - B only
+              - neither
+              height: 'k === 0 ? pa*pb : (k === 1 ? pa*(1-pb) : (k === 2 ? (1-pa)*pb : (1-pa)*(1-pb)))'
+              readout: '"P(A given B) = " + pa.toFixed(2) + ", the same as P(A), because these two are independent."'
+              knobs:
+              - k: pa
+                label: probability of A
+                min: 0.05
+                max: 0.95
+                v: 0.4
+                step: 0.05
+                dp: 2
+                s: 0
+              - k: pb
+                label: probability of B
+                min: 0.05
+                max: 0.95
+                v: 0.5
+                step: 0.05
+                dp: 2
+                s: 1
+        covers:
+          - Sample space, events and the axioms
+          - Random variables as functions on outcomes
+          - Joint, marginal and conditional distributions
+          - Independence and conditional independence
+          - Law of total probability
+          - Discrete against continuous, and what a density is not
+        check: "Say what a random variable actually is, without using the word random."
+        viz:
+          type: parts
+          centre: A probability model
+          around:
+          - Sample space
+          - Events
+          - A number per event
+          - Random variables
+      - name: Expectation and concentration
+        why: "Every guarantee in machine learning is a concentration inequality wearing a hat."
+        beats:
+          - >-
+              One sample tells you very little. It is spread out over everything the
+              quantity could be.
+          - >-
+              Average a few and the spread starts to close.
+          - >-
+              Average many and it closes fast, like one over the square root of the
+              count.
+          - >-
+              Push it far enough and the average sits on the truth. That rate is what
+              makes a test set of a few thousand worth quoting.
+        scene:
+          kind: narrowing
+          before: "The spread of one sample"
+          after: "The spread of the average"
+          alt: "A wide bell shape with a narrow one inside it on the same baseline."
+        plain:
+          - >-
+              An expectation is a weighted average, weighted by how likely each
+              value is. A variance says how far values sit from it.
+          - >-
+              The useful part is what happens to an average. Its spread shrinks
+              like one over the square root of the sample count, and
+              concentration inequalities turn that into a promise you can
+              quote.
+        math:
+          - name: 'Expectation is linear, whatever else is true'
+            tex: '\mathbb{E}[a X + b Y] = a\, \mathbb{E}[X] + b\, \mathbb{E}[Y]'
+            read: 'Averages add and scale, even when the things being averaged depend on each other.'
+            note: 'No independence is needed here, which makes linearity the most reusable identity in the subject. Variance is not linear, and that is where independence has to be earned.'
+            where:
+              - sym: '\mathbb{E}[X]'
+                is: 'the expectation, the long-run average of X'
+              - sym: 'X'
+                is: 'a random quantity'
+              - sym: 'a'
+                is: 'a fixed number scaling the quantity'
+              - sym: 'b'
+                is: 'a second fixed number, scaling the other quantity'
+              - sym: 'Y'
+                is: 'a second random quantity'
+          - name: 'Why the average is so much tighter than one draw'
+            tex: '\mathrm{Var}(\bar{X}_{n}) = \frac{\sigma^{2}}{n}, \qquad \mathrm{sd}(\bar{X}_{n}) = \frac{\sigma}{\sqrt{n}}'
+            read: 'Averaging n independent draws divides the variance by n, so the spread falls by the square root.'
+            where:
+              - sym: '\bar{X}_{n}'
+                is: 'the average of n draws'
+              - sym: '\sigma'
+                is: 'a standard deviation, the usual size of a deviation'
+              - sym: 'n'
+                is: 'a count of things'
+          - name: 'Hoeffding, the bound behind most sample-size arguments'
+            tex: 'p\big( |\bar{X}_{n} - \mu| \ge \epsilon \big) \le 2 e^{-2 n \epsilon^{2} / (b-a)^{2}}'
+            read: 'The chance of the average missing the truth by more than the tolerance dies exponentially in the number of samples.'
+            note: 'It only needs the values to be bounded and independent, not normal. Real evaluation sets are never normal and always bounded between zero and one, so it survives contact with them.'
+            where:
+              - sym: '\mu'
+                is: 'a mean'
+              - sym: 'b-a'
+                is: 'the width of the range the values live in'
+            play:
+              kind: curve
+              title: How many samples buy how much certainty
+              alt: A curve of the Hoeffding failure probability against sample count, dropping sharply and then flattening near zero.
+              x:
+              - 10
+              - 3000
+              y:
+              - 0
+              - 1
+              xlabel: samples
+              ylabel: chance of missing the truth
+              curves:
+              - fn: min(1, 2*exp(-2*x*t*t))
+                s: 0
+              readout: '"Halving the tolerance costs four times the samples, because it enters squared."'
+              knobs:
+              - k: t
+                label: tolerance
+                min: 0.01
+                max: 0.1
+                v: 0.03
+                step: 0.005
+                dp: 3
+                s: 0
+        covers:
+          - Expectation, variance and their algebra
+          - Linearity of expectation without independence
+          - Variance of a sample mean
+          - Law of large numbers and the central limit theorem
+          - Markov, Chebyshev and Hoeffding
+          - Why evaluation sets can be small and still informative
+        check: "Your test set has a thousand examples. Say how tight the accuracy estimate is, and why."
+        viz:
+          type: scale
+          lo: Wide spread
+          hi: On the truth
+          stops: ["One sample", "A few", "Many", "The limit"]
+          on: 2
+      - name: Information
+        why: "Cross entropy is the loss you actually train on, so knowing what it measures is not optional."
+        beats:
+          - >-
+              Some of the surprise is in the data itself. No model removes it, and that
+              floor is the entropy.
+          - >-
+              What you actually pay is that floor plus whatever your model gets wrong.
+              The total is the cross entropy.
+        plain:
+          - >-
+              Entropy measures how surprising a distribution is on average. A
+              coin that always lands heads has none. A fair coin has the most a
+              coin can have.
+          - >-
+              Cross entropy is the cost of describing the truth using your
+              model. It is the training loss. The gap between it and the true
+              entropy is the divergence, and that gap is what training closes.
+        math:
+          - name: 'Entropy, average surprise'
+            tex: 'H(p) = -\sum_{k} p_{k} \log p_{k}'
+            read: 'Weight the surprise of each outcome by how often it happens, then add.'
+            where:
+              - sym: 'p_{k}'
+                is: 'how likely outcome k is under the truth'
+              - sym: 'H(p)'
+                is: 'the entropy, average surprise in bits or nats'
+              - sym: '\log'
+                is: 'the logarithm, base two for bits'
+            play:
+              kind: curve
+              title: Entropy is highest when you know least
+              alt: The binary entropy curve against the probability of heads, peaking at one bit when the coin is fair and falling to zero at both ends.
+              x:
+              - 0.01
+              - 0.99
+              y:
+              - 0
+              - 1.1
+              xlabel: probability of heads
+              ylabel: bits
+              curves:
+              - fn: -(x*log(x) + (1-x)*log(1-x))/log(2)
+                s: 0
+              - fn: h
+                s: 1
+              readout: '"A fair coin costs one bit. A coin that lands heads nine times in ten costs less than half of one."'
+              knobs:
+              - k: h
+                label: a level to compare against
+                min: 0
+                max: 1
+                v: 0.5
+                step: 0.05
+                dp: 2
+                s: 1
+          - name: 'Cross entropy, which is the training loss'
+            tex: 'H(p, q) = -\sum_{k} p_{k} \log q_{k} = H(p) + D_{\mathrm{KL}}(p \,\|\, q)'
+            read: 'What you pay to describe the truth using your model splits into what was unavoidable plus what your model got wrong.'
+            note: 'The first term does not depend on the model, so minimising cross entropy and minimising the divergence are the same job. The loss has a floor it can never go below.'
+            where:
+              - sym: 'q_{k}'
+                is: 'how likely outcome k is under your model'
+              - sym: 'D_{\mathrm{KL}}'
+                is: 'the divergence, the excess cost of using q instead of p'
+          - name: 'Divergence is not a distance'
+            tex: 'D_{\mathrm{KL}}(p \,\|\, q) \ne D_{\mathrm{KL}}(q \,\|\, p), \qquad D_{\mathrm{KL}} \ge 0'
+            read: 'It is never negative and it is not symmetric, so the order of the arguments changes the answer.'
+            note: 'Which order you pick decides the failure mode. Fitting q to p spreads the model over everything the truth allows. The other order lets it collapse onto one mode and ignore the rest.'
+        covers:
+          - Surprise, entropy and units
+          - Cross entropy as the training loss
+          - Kullback-Leibler divergence and its asymmetry
+          - Mutual information
+          - Perplexity as exponentiated entropy
+          - The source coding bound and why the loss has a floor
+        check: "Explain why minimising cross entropy is the same as minimising a divergence."
+        viz:
+          type: compare
+          cols:
+          - k: Entropy
+            items: ["The surprise that is unavoidable"]
+          - k: Cross entropy
+            items: ["What your model actually pays", "Unavoidable plus your error"]
+      - name: Logs, exponents and scale
+        why: "Nearly every plot in this field is read on a log axis, and nearly every stable implementation lives in log space."
+        beats:
+          - >-
+              Multiply a thousand probabilities together and the result underflows to
+              zero. The information is gone.
+          - >-
+              Take logs of each one first. Multiplication turns into addition.
+          - >-
+              Now it is a sum of ordinary numbers, and no term is anywhere near the
+              bottom of the range.
+          - >-
+              Nothing underflows, and the same trick makes a power law read as a
+              straight line.
+        plain:
+          - >-
+              A logarithm turns multiplication into addition. That single fact
+              is why probabilities are stored as log probabilities, and why
+              likelihoods are summed rather than multiplied.
+          - >-
+              It also changes what a plot shows. A curve that looks like a wall
+              on a linear axis is often a straight line on a log one, and a
+              straight line is something you can extrapolate.
+        math:
+          - name: 'Why probabilities live in log space'
+            tex: '\log \prod_{i=1}^{n} p_{i} = \sum_{i=1}^{n} \log p_{i}'
+            read: 'Products become sums, so a thousand small numbers stop collapsing to zero.'
+            note: 'Multiplying ten thousand token probabilities in float32 underflows long before the sequence ends. Every language model scores sequences by summing log probabilities for exactly this reason.'
+            where:
+              - sym: 'p_{i}'
+                is: 'the probability of the i-th item'
+          - name: 'A power law is a straight line in the right coordinates'
+            tex: 'y = c\, x^{-\kappa} \;\Longleftrightarrow\; \log y = \log c - \kappa \log x'
+            read: 'Take logs of both axes and a power law straightens out, with the exponent as the slope.'
+            note: 'This is what makes scaling laws usable. You fit a line over the compute you can afford and read off a prediction for compute you cannot.'
+            where:
+              - sym: '\kappa'
+                is: 'the exponent, the slope on a log-log plot'
+              - sym: 'c'
+                is: 'a constant setting the height of the curve'
+            play:
+              kind: curve
+              title: Change the exponent and watch the curve bend
+              alt: A power law curve of loss against compute, flattening as the exponent is lowered.
+              x:
+              - 1
+              - 40
+              y:
+              - 0
+              - 1.2
+              xlabel: compute
+              ylabel: loss above the floor
+              curves:
+              - fn: pow(x, -a)
+                s: 0
+              readout: '"Ten times the compute buys the same drop in loss, however far along the curve you already are."'
+              knobs:
+              - k: a
+                label: exponent
+                min: 0.1
+                max: 1
+                v: 0.4
+                step: 0.05
+                dp: 2
+                s: 0
+          - name: 'Growth rates, ranked'
+            tex: '\log n \;\ll\; n \;\ll\; n \log n \;\ll\; n^{2} \;\ll\; 2^{n}'
+            read: 'Read this ordering left to right and you can predict which method survives a bigger input.'
+        covers:
+          - Logarithm and exponential as inverses
+          - Log rules, and products becoming sums
+          - Log space for probabilities and likelihoods
+          - Reading log and log-log axes
+          - Power laws and scaling laws
+          - Orders of magnitude and back-of-envelope estimates
+        check: "Explain why a language model sums log probabilities instead of multiplying probabilities."
+        viz:
+          type: flow
+          steps:
+          - A product of small numbers
+          - Take logs
+          - A sum of ordinary numbers
+          - Nothing underflows
+      - name: Numbers on a machine
+        why: "Training diverges for numerical reasons far more often than for mathematical ones."
+        beats:
+          - >-
+              The loss came back as NaN. Three things cause almost all of these, and
+              each has its own repair.
+          - >-
+              Exponentiating a large score overflows. Shift by the maximum first and the
+              answer is unchanged.
+          - >-
+              Subtracting two nearby numbers cancels the digits you cared about.
+              Reformulate so the subtraction never happens.
+          - >-
+              Summing many small numbers loses the tail. Widen the accumulator and the
+              tail survives.
+        plain:
+          - >-
+              A float stores a fixed number of significant digits, not a fixed
+              step size. The gap between representable numbers grows with the
+              magnitude, so precision is relative rather than absolute.
+          - >-
+              Exponentiating a large number overflows. Subtracting two nearby
+              numbers destroys the digits you cared about. Both have standard
+              fixes, and both appear in every serious library.
+        math:
+          - name: 'Precision is relative, not absolute'
+            tex: '\mathrm{fl}(x) = x (1 + \delta), \qquad |\delta| \le \varepsilon_{\mathrm{mach}}'
+            read: 'Every stored number carries a small relative error, so the absolute gap grows as the number grows.'
+            note: 'Adding one to a large enough float changes nothing at all. This is why a running sum over a long sequence should be accumulated in higher precision than the values themselves.'
+            where:
+              - sym: '\mathrm{fl}(x)'
+                is: 'the nearest number the machine can actually store'
+              - sym: '\varepsilon_{\mathrm{mach}}'
+                is: 'machine epsilon, the relative spacing of the format'
+              - sym: '\delta'
+                is: 'the relative error introduced by rounding'
+            play:
+              kind: curve
+              title: The gap between neighbouring floats grows with the number
+              alt: A step-like curve of the spacing between representable floating point numbers, rising as the magnitude increases.
+              x:
+              - 1
+              - 1000
+              y:
+              - 0
+              - 0.0005
+              xlabel: magnitude
+              ylabel: gap to the next float
+              curves:
+              - fn: x * pow(2, -bits)
+                s: 0
+              readout: '"Near one the gaps are invisible. Near a thousand they are a thousand times wider."'
+              knobs:
+              - k: bits
+                label: bits of mantissa
+                min: 21
+                max: 24
+                v: 23
+                step: 1
+                dp: 0
+                s: 0
+          - name: 'The logsumexp trick'
+            tex: '\log \sum_{k} e^{o_{k}} = o_{\max} + \log \sum_{k} e^{\,o_{k} - o_{\max}}'
+            read: 'Subtract the largest score before exponentiating, so nothing ever overflows.'
+            note: 'The answer is mathematically identical and numerically survivable. Every softmax and every cross-entropy implementation you will ever read does this, and writes it as one fused operation rather than two.'
+            where:
+              - sym: 'o_{k}'
+                is: 'the logit for class k, the raw score before squashing'
+              - sym: 'o_{\max}'
+                is: 'the largest of the logits'
+          - name: 'Catastrophic cancellation'
+            tex: '\text{relative error of } (a - b) \;\approx\; \varepsilon_{\mathrm{mach}} \frac{|a| + |b|}{|a - b|}'
+            read: 'When two nearly equal numbers are subtracted, the error stays the same size while the answer shrinks.'
+            note: 'The textbook case is computing a variance as the mean of the squares minus the square of the mean. It is correct on paper and unusable in floating point. Libraries use a two-pass or streaming formulation instead.'
+            where:
+              - sym: 'a'
+                is: 'the first of the two nearly equal numbers'
+              - sym: 'b'
+                is: 'the second of them'
+              - sym: 'a - b'
+                is: 'the difference that loses its significant digits'
+        covers:
+          - Floating point layout, and relative rather than absolute precision
+          - Overflow, underflow and denormals
+          - Catastrophic cancellation
+          - The logsumexp trick and fused softmax with cross entropy
+          - Accumulation order, and why reductions are not associative
+          - Half precision training, loss scaling and wide accumulators
+        check: "Write softmax so it does not overflow, and say what you changed and why."
+        viz:
+          type: tree
+          root: The loss became NaN
+          branches:
+          - k: Exponentiated a large score
+            items: ["Overflow", "Shift by the maximum"]
+          - k: Subtracted two close numbers
+            items: ["Cancellation", "Reformulate"]
+          - k: Summed many small numbers
+            items: ["Lost the tail", "Widen the accumulator"]
+    traps:
+      - Calling independent events mutually exclusive, or the reverse
+      - Treating KL divergence as a distance and swapping its arguments
+      - Multiplying probabilities where the code should sum log probabilities
+      - Quoting an accuracy from a small evaluation set with no interval
+      - Computing a variance as the mean of squares minus the square of the mean
+    drills:
+      - Derive the variance of a sample mean from linearity alone
+      - Write softmax and logsumexp from scratch, then break them with a large input
+      - Compute the entropy of a biased coin by hand at three different biases
+      - Fit a line to a scaling law on log-log axes and extrapolate one decade
+
+  - id: math-proof
+    name: Mathematical Proof
+    group: foundations
+    blurb: "Whether you can build an argument that holds, and spot quickly the one that does not."
+    scope: "Owns what a claim asserts, what would refute it, and the standard shapes a proof takes. Hands the objects being argued about to mathematics, and running-time claims to computer science."
+    links: [math, computer-science]
+    modules:
+      - name: What a claim actually says
+        why: "Most failed proofs are correct proofs of a different statement."
+        beats:
+          - >-
+              Read the quantifier before anything else. It decides what would count as a
+              refutation.
+          - >-
+              For every input, something holds. To break it you need one input where it
+              does not.
+          - >-
+              There exists an input where something holds. To break that you have to
+              rule out every input.
+          - >-
+              Swap the order of the two and you have written a different claim, usually
+              a much stronger one.
+        plain:
+          - >-
+              A claim about all things and a claim about some thing are refuted
+              in opposite ways. One falls to a single example. The other needs
+              you to exhaust everything.
+          - >-
+              Order matters more than it looks. One bound that works for
+              everything is a far stronger promise than a separate bound for
+              each thing, and papers slide between the two.
+        math:
+          - name: 'The two quantifiers'
+            tex: '\forall x,\; P(x) \qquad \text{against} \qquad \exists x,\; P(x)'
+            read: 'Everything passes the test, against at least one thing passes it.'
+            where:
+              - sym: '\forall'
+                is: 'for every'
+              - sym: '\exists'
+                is: 'there is at least one'
+              - sym: 'P(x)'
+                is: 'a condition that x either passes or fails'
+          - name: 'Negation flips everything'
+            tex: '\neg \big( \forall x,\, P(x) \big) \;\equiv\; \exists x,\, \neg P(x)'
+            read: 'To deny that everything passes, produce one thing that fails.'
+            note: 'This is the rule that makes counterexamples work. It also tells you what you owe when you attack an existence claim, which is an argument covering every case rather than one example.'
+            where:
+              - sym: '\neg'
+                is: 'not'
+              - sym: '\equiv'
+                is: 'means the same thing as'
+          - name: 'Order changes the claim'
+            tex: '\forall \epsilon\, \exists n_{0} \;\ne\; \exists n_{0}\, \forall \epsilon'
+            read: 'A separate threshold for each tolerance is weaker than one threshold that works for all of them.'
+            note: 'This is exactly the gap between convergence and uniform convergence, and the same gap appears in generalisation bounds. A bound that holds for each hypothesis is not a bound that holds across the whole class at once.'
+            where:
+              - sym: '\epsilon'
+                is: 'a small allowance'
+              - sym: 'n_{0}'
+                is: 'the point past which the promise holds'
+        covers:
+          - Universal and existential quantifiers
+          - Negation, and how it flips quantifiers
+          - Quantifier order and dependence
+          - Vacuous truth
+          - Necessary against sufficient conditions
+          - Reading a theorem statement before its proof
+        check: "State what you would have to produce to refute a for-all claim, and to refute an exists claim."
+        viz:
+          type: tree
+          root: What does the claim assert
+          branches:
+          - k: For every
+            items: ["Broken by one example"]
+          - k: There exists
+            items: ["Broken only by covering everything"]
+          - k: Swap their order
+            items: ["A different claim"]
+      - name: Direct proof and the contrapositive
+        why: "Almost anything you are asked to prove yields to a direct proof or its contrapositive."
+        beats:
+          - >-
+              Assume what you are given. Work forwards to what you want. That is a direct
+              proof, and it is the first thing to try.
+          - >-
+              When the forward direction is awkward, flip it. Assume the conclusion
+              fails, and show the assumption could not have held.
+          - >-
+              That flip is the contrapositive, and it says exactly the same thing.
+          - >-
+              The converse does not. Swapping the two halves gives you a new claim that
+              needs its own proof.
+        plain:
+          - >-
+              A direct proof starts from the assumption and walks to the
+              conclusion. It is the default, and it usually works.
+          - >-
+              The contrapositive is the same statement read backwards and
+              negated. It is a free choice of direction. The converse is a
+              different statement, and mistaking one for the other is the most
+              common error on a whiteboard.
+        math:
+          - name: 'Contrapositive, which is free'
+            tex: '(P \Rightarrow Q) \;\equiv\; (\neg Q \Rightarrow \neg P)'
+            read: 'If A forces B, then B failing forces A to have failed too.'
+            where:
+              - sym: '\Rightarrow'
+                is: 'implies, or forces'
+              - sym: 'P'
+                is: 'the assumption you are given'
+              - sym: 'Q'
+                is: 'the conclusion you want'
+          - name: 'Converse, which is not'
+            tex: '(P \Rightarrow Q) \;\not\equiv\; (Q \Rightarrow P)'
+            read: 'Proving that Q follows from P says nothing about whether P follows from Q.'
+            note: 'Every claim of the form "the model is accurate, therefore it learned the concept" is a converse error. Learning the concept would produce accuracy. Accuracy has many other explanations.'
+          - name: 'When both directions hold'
+            tex: '(P \Leftrightarrow Q) \;\equiv\; (P \Rightarrow Q) \wedge (Q \Rightarrow P)'
+            read: 'An if-and-only-if is two proofs, and you owe both of them.'
+            where:
+              - sym: '\Leftrightarrow'
+                is: 'if and only if, each side forces the other'
+              - sym: '\wedge'
+                is: 'and, both hold'
+        covers:
+          - Implication and its truth table
+          - Direct proof from assumption to conclusion
+          - Contrapositive as a free change of direction
+          - Converse and inverse, and why they differ
+          - Proving an if-and-only-if in two halves
+          - Proof by cases, and covering the cases exhaustively
+        check: "Give a statement whose converse is false, and say what makes the two different."
+        viz:
+          type: matrix
+          x: ["Assume A", "Assume not B"]
+          y: ["Conclude B", "Conclude not A"]
+          cells:
+          - Direct proof
+          - Not a proof of anything
+          - Converse, a new claim
+          - Contrapositive, the same claim
+      - name: Proof by contradiction
+        why: "Some claims have no forward path, and this is the tool that opens them."
+        beats:
+          - >-
+              Assume the opposite of what you want to prove. Take it seriously.
+          - >-
+              Reason honestly from it, using only steps you would accept anywhere else.
+          - >-
+              Keep going until it collides with something already known to be true.
+          - >-
+              The collision is the proof. The assumption is the only thing that can go.
+        plain:
+          - >-
+              Assume the claim is false, reason carefully, and arrive at
+              something impossible. Since the reasoning was sound, the
+              assumption is what has to go.
+          - >-
+              It is the right tool when the claim asserts that something cannot
+              exist, because a direct proof would have to survey everything
+              while a contradiction only has to break one assumption.
+        math:
+          - name: 'The shape of the argument'
+            tex: '\neg Q \Rightarrow (C \wedge \neg C) \;\Longrightarrow\; Q'
+            read: 'If denying the claim forces an impossibility, the claim must hold.'
+            where:
+              - sym: 'Q'
+                is: 'the claim you are trying to prove'
+              - sym: 'C'
+                is: 'something already known to be true'
+              - sym: '\neg Q'
+                is: 'the assumption that the claim fails'
+          - name: 'The classical example'
+            tex: '\sqrt{2} = \frac{a}{b} \text{ in lowest terms} \;\Rightarrow\; a^{2} = 2 b^{2} \;\Rightarrow\; a, b \text{ both even}'
+            read: 'A fraction in lowest terms turns out to have a common factor, which cannot happen.'
+            note: 'Notice what did the work. The contradiction is not with arithmetic, it is with the phrase "in lowest terms", which is an assumption you made for free at the start.'
+            where:
+              - sym: 'a'
+                is: 'the numerator of the assumed fraction'
+              - sym: 'b'
+                is: 'the denominator of the assumed fraction'
+          - name: 'The diagonal argument, and where it reappears'
+            tex: 'f : S \to \mathcal{P}(S) \;\Rightarrow\; C = \{\, x : x \notin f(x) \,\} \text{ is missed by } f'
+            read: 'Build the one object that differs from everything on the list, and the list cannot have been complete.'
+            note: 'The same move proves the reals uncountable, proves the halting problem undecidable, and proves no single benchmark can certify general capability. Anything defined by disagreeing with every entry is not an entry.'
+            where:
+              - sym: 'S'
+                is: 'a set, a collection with no order and no repeats'
+              - sym: '\mathcal{P}(S)'
+                is: 'the set of all subsets of S'
+              - sym: 'C'
+                is: 'the object built to differ from every candidate'
+        covers:
+          - The structure of a contradiction proof
+          - Irrationality of the square root of two
+          - Infinitude of the primes
+          - Diagonalisation
+          - Contradiction against contrapositive, and when each is cleaner
+          - Constructive objections to the method
+        check: "Prove there is no largest prime, and say which assumption the contradiction breaks."
+        viz:
+          type: flow
+          steps:
+          - Assume the opposite
+          - Reason honestly
+          - Hit something impossible
+          - The assumption falls
+      - name: Induction and recursion
+        why: "The correctness argument for every recursive algorithm is an induction."
+        beats:
+          - >-
+              Show the claim holds in the smallest case. This is the step people skip
+              and the step that fails.
+          - >-
+              Then show that whenever it holds at one size, it holds at the next.
+          - >-
+              Those two together cover every size at once, without checking any of them.
+          - >-
+              A loop invariant is the same argument, written for a loop instead of a
+              recursion.
+        plain:
+          - >-
+              Induction proves infinitely many statements with two pieces of
+              work: the first case, and the step from any case to the next.
+          - >-
+              Strong induction lets the step assume every smaller case rather
+              than just the previous one. Recursive algorithms that split their
+              input need exactly that.
+        math:
+          - name: 'The two obligations'
+            tex: 'P(n_{0}) \;\wedge\; \big( \forall n \ge n_{0},\; P(n) \Rightarrow P(n+1) \big) \;\Longrightarrow\; \forall n \ge n_{0},\; P(n)'
+            read: 'Prove the first case and prove the step, and every case follows.'
+            where:
+              - sym: 'P(n)'
+                is: 'the claim, stated at size n'
+              - sym: 'n_{0}'
+                is: 'the smallest case, the base'
+              - sym: 'n'
+                is: 'a count of things'
+          - name: 'Strong induction, for algorithms that split'
+            tex: '\big( \forall m < n,\; P(m) \big) \Rightarrow P(n)'
+            read: 'Assume the claim for every smaller size, not only the one just below.'
+            note: 'Merge sort needs this. Its recursive calls run on halves, not on n minus one, so an induction that only assumes the previous case has nothing to lean on.'
+            where:
+              - sym: 'm'
+                is: 'any size smaller than n'
+            play:
+              kind: curve
+              title: Check a closed form against the sum it claims to equal
+              alt: A curve of the closed form for the sum of the first n integers plotted against a candidate quadratic, matching only when the candidate is correct.
+              x:
+              - 1
+              - 20
+              y:
+              - 0
+              - 220
+              xlabel: n
+              ylabel: value
+              curves:
+              - fn: x*(x+1)/2
+                s: 0
+              - fn: c*x*x
+                s: 1
+              readout: '"The closed form is n(n+1)/2. A pure quadratic gets the growth right and the constant wrong."'
+              knobs:
+              - k: c
+                label: candidate coefficient
+                min: 0.1
+                max: 1
+                v: 0.5
+                step: 0.05
+                dp: 2
+                s: 1
+          - name: 'A loop invariant is the same argument'
+            tex: '\text{true before the loop} \;\wedge\; \text{preserved by one pass} \;\Longrightarrow\; \text{true at exit}'
+            read: 'Establish it, show one iteration keeps it, and it survives however many iterations run.'
+            note: 'Pair it with a quantity that strictly decreases and cannot go below zero. The invariant gives correctness, the decreasing quantity gives termination, and a proof missing the second one has not shown the loop ever stops.'
+        covers:
+          - Base case and inductive step
+          - Weak against strong induction
+          - Structural induction over trees and lists
+          - Loop invariants
+          - Termination arguments and well-founded orderings
+          - Recurrences and the master theorem
+        check: "Prove that a recursive merge sort returns a sorted list, and say which form of induction you used."
+        viz:
+          type: flow
+          steps:
+          - Prove the base case
+          - Assume it at n
+          - Prove it at n plus one
+          - Every case is covered
+          loop: true
+      - name: Counterexamples
+        why: "Trying to break a claim before proving it is the habit that separates the two candidates."
+        beats:
+          - >-
+              To prove it you have to cover every case, and there is no shortcut through
+              that.
+          - >-
+              To break it you need one case, and then you stop. Reach for the edges
+              first.
+        scene:
+          kind: sets
+          alt: "Three confirming cases beside a single failing one, which is all it takes."
+          cases:
+          - k: Confirming cases
+            set: ["passes", "passes", "passes"]
+          - k: One failure
+            set: ["fails"]
+        plain:
+          - >-
+              A universal claim is refuted by one example and confirmed by
+              none. That asymmetry means the first move on any claim you are
+              unsure of is to attack it.
+          - >-
+              Edge cases are where they hide. Empty inputs, single elements,
+              ties, and the boundary of whatever range the claim mentions.
+        math:
+          - name: 'One example is enough, and only against a universal'
+            tex: '\exists x,\; \neg P(x) \;\Longrightarrow\; \neg \big( \forall x,\, P(x) \big)'
+            read: 'One failing case settles a for-all claim, permanently.'
+            where:
+              - sym: 'P(x)'
+                is: 'a condition that x either passes or fails'
+          - name: 'Confirmation never finishes'
+            tex: 'P(x_{1}), \dots, P(x_{n}) \text{ all hold} \;\not\Rightarrow\; \forall x,\, P(x)'
+            read: 'Any number of passing tests leaves the claim unproved.'
+            note: 'This is exactly the relationship between a test suite and a correctness proof, and between a benchmark score and a capability claim. Both are evidence, and neither is the thing.'
+          - name: 'A claim that is nearly true'
+            tex: 'n^{2} + n + 41 \text{ is prime for } n = 0, \dots, 39, \text{ and composite at } n = 40'
+            read: 'Forty consecutive confirmations, then it fails.'
+            note: 'Kept here as a warning about how far a pattern will run before breaking. Checking small cases builds intuition and settles nothing.'
+        covers:
+          - Refuting a universal claim with one case
+          - Edge cases as the first place to look
+          - Why confirming instances never suffice
+          - Minimal counterexamples
+          - Repairing a claim by adding the missing hypothesis
+          - Testing against proving
+        check: "Take a plausible claim about sorting and either break it or say why it holds."
+        viz:
+          type: compare
+          cols:
+          - k: To prove
+            items: ["Cover every case"]
+          - k: To disprove
+            items: ["Find one case", "Then stop"]
+      - name: Inequalities and bounds
+        why: "Nearly every theorem in learning theory is an inequality, and none of them are equalities."
+        beats:
+          - >-
+              Detours are never shorter. Going through a third point costs at least as
+              much as going direct.
+          - >-
+              A chord of a curved-up function lies above the curve. Averaging inside is
+              cheaper than averaging outside.
+          - >-
+              You use both the same way. Replace what you cannot bound with
+              something larger that you can.
+        plain:
+          - >-
+              Bounding is the working method of the field. You rarely compute
+              the quantity you care about. You replace it with something larger
+              and easier, and keep the chain of inequalities pointing the same
+              way.
+          - >-
+              The triangle inequality splits an error into pieces.
+              Cauchy-Schwarz bounds a dot product by lengths. Jensen moves a
+              function through an average.
+        math:
+          - name: 'The triangle inequality'
+            tex: '\| a + b \| \le \| a \| + \| b \|'
+            read: 'A detour is never shorter than going direct.'
+            note: 'The usual use is the reverse of how it reads. Insert a term you can handle, split the error into two pieces around it, and bound each piece separately.'
+            where:
+              - sym: 'a'
+                is: 'a vector, a list of numbers with a direction'
+              - sym: 'b'
+                is: 'a second vector'
+              - sym: '\| a \|'
+                is: 'the length of the vector a'
+          - name: 'Cauchy-Schwarz'
+            tex: '| \langle a, b \rangle | \le \| a \| \, \| b \|'
+            read: 'A dot product is at most the product of the lengths, with equality only when the two point the same way.'
+            where:
+              - sym: '\langle a, b \rangle'
+                is: 'the dot product of a and b'
+          - name: 'Jensen, and which way it points'
+            tex: '\varphi \big( \mathbb{E}[X] \big) \le \mathbb{E}\big[ \varphi(X) \big] \quad \text{for convex } \varphi'
+            read: 'For a curved-up function, applying it after averaging gives less than applying it before.'
+            note: 'The direction is the whole content, and it flips for concave functions. This inequality is what makes the evidence lower bound a lower bound, so getting the direction wrong inverts the argument.'
+            where:
+              - sym: '\varphi'
+                is: 'a convex function, one that curves upward'
+              - sym: 'X'
+                is: 'a random quantity'
+            play:
+              kind: curve
+              title: The chord sits above the curve, and the gap is Jensen
+              alt: A convex curve with a straight chord drawn above it between two points, the gap between them widening as the curvature increases.
+              x:
+              - -2
+              - 2
+              y:
+              - 0
+              - 8
+              xlabel: x
+              ylabel: value
+              curves:
+              - fn: pow(abs(x), q) + 1
+                s: 0
+              - fn: pow(2, q) + 1
+                s: 1
+              readout: '"The flat line is the average of the two endpoints. The curve below it is the function of the average."'
+              knobs:
+              - k: q
+                label: curvature
+                min: 1
+                max: 3
+                v: 2
+                step: 0.1
+                dp: 1
+                s: 0
+        covers:
+          - Triangle inequality and splitting an error
+          - Cauchy-Schwarz
+          - Jensen's inequality and convexity
+          - Arithmetic and geometric mean
+          - Union bound
+          - Chaining inequalities without reversing the direction
+        check: "Split a generalisation error into two terms using the triangle inequality, and name each."
+        viz:
+          type: stack
+          layers:
+          - The bound you can prove
+          - The bound you would like
+          - The quantity you actually want
+      - name: Existence arguments
+        why: "Showing something must exist without producing it is a move that surprises people, and it is everywhere."
+        beats:
+          - >-
+              Ask first whether you need the object itself, or only the fact that it is
+              somewhere.
+          - >-
+              Build it and you finish with an example in your hand. That is the
+              expensive route.
+          - >-
+              Or count the things and the places they go. More things than places means
+              something shares.
+          - >-
+              Or draw at random and show the chance of success is not zero. Then a
+              success is there to be found.
+        plain:
+          - >-
+              Some proofs produce the object. Others only show that assuming it
+              away leads nowhere. The second kind is often much shorter, and it
+              tells you nothing about how to find the thing.
+          - >-
+              Counting arguments and probabilistic arguments both work this
+              way. They are the standard route to lower bounds, which are
+              claims that no method can do better than some limit.
+        math:
+          - name: 'Pigeonhole, stated properly'
+            tex: 'n \text{ items into } m \text{ slots} \;\Rightarrow\; \text{some slot holds} \ge \lceil n/m \rceil'
+            read: 'Spread things as evenly as you like and one slot still takes at least the average, rounded up.'
+            note: 'The counting form is the useful one. It is how you show that no lossless compressor shortens every input, and how you argue that a layer with fewer neurons than features has to superpose them.'
+            where:
+              - sym: '\lceil \cdot \rceil'
+                is: 'round up to the next whole number'
+              - sym: 'm'
+                is: 'how many slots there are'
+          - name: 'The probabilistic method'
+            tex: 'p\big( \text{a random object has the property} \big) > 0 \;\Longrightarrow\; \text{such an object exists}'
+            read: 'If a random draw could work, then something that works is there to be found.'
+            note: 'It proves existence and hands you no example. Random projections are justified this way. The guarantee covers what almost every projection does, never a specific one.'
+          - name: 'Counting as a lower bound'
+            tex: '\text{a comparison sort has} \ge n! \text{ outcomes} \;\Rightarrow\; \text{depth} \ge \log_{2} n! = \Omega(n \log n)'
+            read: 'The tree has to have a leaf per answer, and that forces its depth.'
+            note: 'This is a claim about every possible comparison sort, including ones nobody has written. No argument that examines actual algorithms reaches that far, so lower bounds are stated by counting instead.'
+            where:
+              - sym: '\Omega'
+                is: 'grows at least this fast'
+              - sym: 'n!'
+                is: 'n factorial, the number of ways to order n things'
+        covers:
+          - Pigeonhole, simple and counting forms
+          - The probabilistic method
+          - Constructive against non-constructive existence
+          - Counting arguments for lower bounds
+          - The comparison sort bound
+          - Why a lower bound covers methods nobody has invented
+        check: "Show that no lossless compressor makes every input shorter."
+        viz:
+          type: tree
+          root: Does such a thing exist
+          branches:
+          - k: Build it
+            items: ["Constructive", "You get an example"]
+          - k: Count the possibilities
+            items: ["Pigeonhole", "No example"]
+          - k: Draw at random
+            items: ["Probabilistic method", "No example"]
+    traps:
+      - Proving the converse and presenting it as the claim
+      - Skipping the base case, or checking the wrong one
+      - Assuming what is to be proved, somewhere in the middle
+      - Reversing a chain of inequalities halfway through
+      - Treating passing test cases as a proof of correctness
+    drills:
+      - Prove the square root of two is irrational, then say which assumption broke
+      - Prove a loop invariant for binary search, including termination
+      - Take three plausible claims about sorting and break two of them
+      - Derive the comparison sort lower bound from counting alone
+
+  - id: computer-science
+    name: Computer Science
+    group: foundations
+    blurb: "Whether you can say what your code will cost before you run it."
+    scope: "Owns complexity, data structures, and what the machine actually does with memory and cores. Hands counting arguments to mathematics, correctness arguments to mathematical proof, and anything about a running service to mlops."
+    links: [math, math-proof, mlops]
+    modules:
+      - name: Complexity, and what it hides
+        why: "Naming the cost of your own code is the first thing an interviewer checks."
+        beats:
+          - >-
+              Constant cost ignores the input size entirely. Nothing else on this line
+              is this good.
+          - >-
+              Logarithmic barely moves. Doubling the input adds a single step to the
+              work.
+          - >-
+              Linear is the honest default. Twice the data costs you twice the time.
+          - >-
+              Quadratic is where a large input starts to hurt. Ten times the data is a
+              hundred times the work.
+          - >-
+              Exponential is where a large input becomes impossible rather than slow.
+        plain:
+          - >-
+              Complexity measures how cost grows with input size, with
+              constants deliberately discarded. That is what makes it portable
+              between machines, and it is also what makes it incomplete.
+          - >-
+              The discarded constant decides everything at small sizes. Two
+              curves with different growth cross at one point, and knowing
+              which side of it you are on matters more than the letter in front
+              of the n.
+        math:
+          - name: 'What the notation asserts'
+            tex: 'f(n) = O(g(n)) \iff \exists c, n_{0} : f(n) \le c\, g(n) \; \text{for all } n \ge n_{0}'
+            read: 'Past some size, f stays under a fixed multiple of g.'
+            note: 'Both the constant and the threshold are hidden inside the statement. Quoting a complexity without saying what n is in your setting leaves out the half that decides the runtime.'
+            where:
+              - sym: 'O(g(n))'
+                is: 'grows no faster than g'
+              - sym: 'g'
+                is: 'the function the cost is being compared against'
+              - sym: 'c'
+                is: 'the hidden constant factor'
+              - sym: 'n_{0}'
+                is: 'the size past which the bound holds'
+          - name: 'Upper, lower and tight'
+            tex: 'O \text{ is at most}, \qquad \Omega \text{ is at least}, \qquad \Theta \text{ is both}'
+            read: 'Papers state the weakest of these that holds, so the letter tells you what was actually proved.'
+            where:
+              - sym: '\Omega'
+                is: 'grows at least this fast'
+              - sym: '\Theta'
+                is: 'grows exactly this fast, up to constants'
+            play:
+              kind: curve
+              title: Move the constant and watch the crossover move
+              alt: A quadratic curve crossed by an n log n curve, with the crossing point sliding right as the constant factor on the n log n curve grows.
+              x:
+              - 1
+              - 50
+              y:
+              - 0
+              - 3000
+              xlabel: input size
+              ylabel: operations
+              curves:
+              - fn: x*x
+                s: 0
+              - fn: c * x * log(x) / log(2)
+                s: 1
+              readout: '"The better growth only wins past the crossing point. Below it the constant decides."'
+              knobs:
+              - k: c
+                label: constant on n log n
+                min: 1
+                max: 12
+                v: 8
+                step: 0.5
+                dp: 1
+                s: 1
+          - name: 'Amortised cost'
+            tex: '\text{amortised} = \frac{\text{total cost of } n \text{ operations}}{n}'
+            read: 'Average the expensive rare operation over the cheap common ones.'
+            note: 'A dynamic array doubles when it fills, so one insert occasionally costs n. Spread across the inserts that preceded it, every insert is constant. This is a worst-case claim about the sequence, not an average over random inputs.'
+        covers:
+          - Big O, Omega and Theta, and what each asserts
+          - Time against space complexity
+          - Worst, average and amortised cost
+          - Hidden constants and crossover points
+          - Complexity of the operations you use most
+          - Why a complexity claim needs the input size beside it
+        check: "Name a case where the algorithm with worse asymptotic complexity is the right choice."
+        viz:
+          type: scale
+          lo: Cheap
+          hi: Hopeless
+          stops: ["Constant", "Logarithmic", "Linear", "Quadratic", "Exponential"]
+          on: 2
+      - name: Data structures as trade-offs
+        why: "Every structure buys one operation and pays for it somewhere else, and the interview is about the payment."
+        beats:
+          - >-
+              An array gives you position instantly and makes you shift everything to
+              insert in the middle.
+          - >-
+              A hash table gives you lookup by key and gives up all ordering.
+          - >-
+              A balanced tree keeps the order and charges a logarithm for everything.
+          - >-
+              A heap answers only one question, the smallest, and answers it very fast.
+        plain:
+          - >-
+              There is no best structure. Each one makes some operations cheap
+              by making others expensive, and choosing well means knowing which
+              operation your code actually runs most.
+          - >-
+              The trade is usually ordering against speed. Hash tables are the
+              fastest lookup available and they destroy order. Trees keep order
+              and charge a logarithm for it.
+        math:
+          - name: 'Why a hash table degrades'
+            tex: '\mathbb{E}[\text{probes}] \approx \frac{1}{1 - \rho}, \qquad \rho = \frac{n}{m}'
+            read: 'As the table fills, the expected number of probes climbs, and near full it climbs without limit.'
+            note: 'This is why implementations resize at a load factor well below one, typically around two thirds. The constant lookup is a promise about a table kept deliberately sparse, not about a hash table in general.'
+            where:
+              - sym: '\rho'
+                is: 'the load factor, how full the table is'
+              - sym: 'n'
+                is: 'a count of things'
+              - sym: 'm'
+                is: 'how many slots there are'
+            play:
+              kind: curve
+              title: Fill the table and watch lookups stop being constant
+              alt: A curve of expected probes against load factor, flat while the table is sparse and rising steeply as it approaches full.
+              x:
+              - 0.05
+              - 0.95
+              y:
+              - 0
+              - 20
+              xlabel: load factor
+              ylabel: expected probes
+              curves:
+              - fn: 1/(1-x)
+                s: 0
+              - fn: lim
+                s: 1
+              readout: '"At two thirds full a lookup costs about three probes. At ninety five percent it costs twenty."'
+              knobs:
+              - k: lim
+                label: a budget to compare against
+                min: 1
+                max: 20
+                v: 3
+                step: 0.5
+                dp: 1
+                s: 1
+          - name: 'The logarithm you pay for keeping order'
+            tex: '\text{balanced tree height} = \Theta(\log_{2} n)'
+            read: 'Halving the search space each step means the depth grows like the logarithm.'
+            where:
+              - sym: '\Theta'
+                is: 'grows exactly this fast, up to constants'
+              - sym: '\log_{2}'
+                is: 'the logarithm base two, how many halvings'
+          - name: 'What each structure actually charges'
+            tex: '\text{array } O(1) \text{ index}, \; O(n) \text{ insert}; \quad \text{hash } O(1) \text{ lookup}, \; \text{no order}; \quad \text{tree } O(\log n) \text{ everything}'
+            read: 'Read across the row and pick the structure whose cheap operation is the one you run most.'
+        covers:
+          - Arrays, linked lists and what contiguity buys
+          - Hash tables, collisions and load factor
+          - Balanced trees and ordered operations
+          - Heaps and priority queues
+          - Sets, multisets and when order is not needed
+          - Choosing by the operation you run most
+        check: "Pick a structure for a top-k query over a stream, and say what it costs you."
+        viz:
+          type: matrix
+          x: ["Fast lookup", "Slow lookup"]
+          y: ["Keeps order", "Drops order"]
+          cells:
+          - Balanced tree
+          - Linked list
+          - Hash table
+          - Unsorted array
+      - name: Algorithm design
+        why: "Recognising which strategy a problem wants is the part being tested."
+        beats:
+          - >-
+              Ask what shape the problem has before reaching for a method.
+          - >-
+              If it splits into halves you can solve separately, divide and conquer.
+          - >-
+              If the same subproblem keeps coming back, store the answer instead of
+              recomputing it.
+          - >-
+              If the locally best move is provably safe, be greedy, and then prove that
+              it was.
+        plain:
+          - >-
+              Divide and conquer splits until the pieces are trivial. Greedy
+              commits to the best-looking move and never backtracks, which is
+              fast and often wrong. Dynamic programming spots repeated
+              subproblems and pays memory to stop recomputing them.
+          - >-
+              The question to ask first is whether the problem has overlapping
+              subproblems. If it does, memoising turns an exponential search
+              into a polynomial one.
+        math:
+          - name: 'The master theorem'
+            tex: 'T(n) = a\, T(n/b) + f(n)'
+            read: 'Split into a pieces of size n over b, and the total cost depends on whether splitting or combining dominates.'
+            note: 'Merge sort is a equals two, b equals two, and linear combining, which lands on n log n. Recognising the shape saves you from unrolling the recursion by hand.'
+            where:
+              - sym: 'a'
+                is: 'how many subproblems each split produces'
+              - sym: 'b'
+                is: 'the factor the input shrinks by'
+              - sym: 'f(n)'
+                is: 'the cost of splitting and combining'
+          - name: 'Why memoising collapses the cost'
+            tex: 'O(2^{n}) \;\longrightarrow\; O(\text{states} \times \text{work per state})'
+            read: 'Counting distinct subproblems instead of recursive calls is what turns exponential into polynomial.'
+            note: 'The design step is choosing the state. Get the state right and the recurrence and the complexity both fall out. Get it wrong and no amount of caching helps, because nothing repeats.'
+          - name: 'What a greedy proof owes you'
+            tex: '\text{exchange argument: any optimal solution} \to \text{greedy solution, no worse}'
+            read: 'Show you can rewrite any best answer into the greedy one without making it worse.'
+            note: 'Greedy is the strategy that most often looks right and is not. If you cannot give the exchange argument, treat the greedy answer as a guess and say so.'
+        covers:
+          - Divide and conquer, and the master theorem
+          - Greedy algorithms and exchange arguments
+          - Dynamic programming, states and transitions
+          - Memoisation against tabulation
+          - Recognising overlapping subproblems
+          - Backtracking and pruning
+        check: "Given a problem, say whether dynamic programming applies, and name the state."
+        viz:
+          type: tree
+          root: Which strategy
+          branches:
+          - k: Splits cleanly
+            items: ["Divide and conquer"]
+          - k: Subproblems repeat
+            items: ["Dynamic programming"]
+          - k: Local choice is provably safe
+            items: ["Greedy"]
+      - name: The memory hierarchy
+        why: "Machine learning code is almost never compute bound, and this module is why."
+        beats:
+          - >-
+              Registers are instant. Cache is close. Main memory is far, and the numbers
+              between them differ by orders of magnitude.
+          - >-
+              So the cost of an operation is mostly the cost of fetching what it needs.
+          - >-
+              Which means the question is not how many operations, but how many bytes
+              moved per operation.
+        scene:
+          kind: shrink
+          steps: ["Main memory", "Cache", "Registers"]
+          cap: "Closer to the compute, faster, and much smaller."
+          alt: "Three blocks of decreasing size approaching a fixed budget line."
+        plain:
+          - >-
+              Memory is a hierarchy. Each level up is faster and much smaller,
+              and the gaps are large enough that a cache miss can cost more
+              than a hundred arithmetic operations.
+          - >-
+              The consequence is that arithmetic is nearly free and moving data
+              is not. A kernel that reads a lot and computes a little is bound
+              by bandwidth, and adding compute will not speed it up.
+        math:
+          - name: 'Arithmetic intensity'
+            tex: '\iota = \frac{\text{operations performed}}{\text{bytes moved}}'
+            read: 'How much work you get out of each byte you fetch.'
+            where:
+              - sym: '\iota'
+                is: 'the arithmetic intensity, work per byte'
+          - name: 'The roofline'
+            tex: 'P = \min \big( P_{\max}, \; \iota \times B \big)'
+            read: 'You are limited either by how fast the machine computes or by how fast it can feed itself, whichever runs out first.'
+            note: 'Attention is bandwidth bound at long context. Flash attention does not reduce the arithmetic. It stops the intermediate matrix from making the trip to main memory.'
+            where:
+              - sym: 'P'
+                is: 'the performance you actually get'
+              - sym: 'P_{\max}'
+                is: 'the peak the hardware can compute at'
+              - sym: 'B'
+                is: 'the memory bandwidth'
+            play:
+              kind: curve
+              title: Find the point where a kernel stops being bandwidth bound
+              alt: A roofline curve rising linearly with arithmetic intensity and then flattening at the hardware peak.
+              x:
+              - 0
+              - 40
+              y:
+              - 0
+              - 120
+              xlabel: arithmetic intensity
+              ylabel: performance
+              curves:
+              - fn: min(peak, x * bw)
+                s: 0
+              readout: '"Left of the corner you are waiting on memory. Right of it you are finally using the compute."'
+              knobs:
+              - k: peak
+                label: hardware peak
+                min: 20
+                max: 110
+                v: 90
+                step: 5
+                dp: 0
+                s: 0
+              - k: bw
+                label: memory bandwidth
+                min: 1
+                max: 12
+                v: 5
+                step: 0.5
+                dp: 1
+                s: 0
+          - name: 'Locality is what a cache rewards'
+            tex: '\text{row-major stride } 1 \;\gg\; \text{column stride } n'
+            read: 'Walking memory in the order it is stored uses every byte of each cache line, and walking across it wastes most of them.'
+            note: 'This is why the same loop nest transposed can run an order of magnitude slower with identical arithmetic. It is also why contiguous tensors and the layout of a batch matter as much as the model does.'
+        covers:
+          - Registers, cache levels and main memory
+          - Cache lines, locality and stride
+          - Arithmetic intensity and the roofline model
+          - Compute bound against memory bound
+          - Why fusing kernels helps
+          - Contiguity, layout and transposes
+        check: "Say how you would tell whether a slow kernel is compute bound or memory bound."
+        viz:
+          type: stack
+          layers:
+          - Main memory, far and slow
+          - Cache, close and small
+          - Registers, instant and tiny
+      - name: Concurrency and parallelism
+        why: "More workers stop helping long before you run out of workers."
+        beats:
+          - >-
+              More workers shrink the part that splits, and that is the line you were
+              hoping for.
+          - >-
+              The part that cannot split never moves, so the serial fraction sets a
+              ceiling you never get past.
+        plain:
+          - >-
+              Concurrency is about structure, several things in progress at
+              once. Parallelism is about hardware, several things happening at
+              the same instant. A program can have one without the other.
+          - >-
+              Whatever cannot be split sets the ceiling. If a tenth of the work
+              is serial, no number of workers gets you past ten times faster,
+              and the returns flatten long before that.
+        math:
+          - name: 'Amdahl''s law'
+            tex: 'S(m) = \frac{1}{(1 - q) + \dfrac{q}{m}}'
+            read: 'The part you cannot parallelise stays put, and it decides the ceiling.'
+            where:
+              - sym: 'q'
+                is: 'the fraction of the work that can be parallelised'
+              - sym: 'm'
+                is: 'how many workers there are'
+              - sym: 'S(m)'
+                is: 'the speedup from using m workers'
+            play:
+              kind: curve
+              title: Add workers and watch the returns flatten
+              alt: A speedup curve against worker count, rising steeply and then flattening at a ceiling set by the serial fraction.
+              x:
+              - 1
+              - 64
+              y:
+              - 0
+              - 24
+              xlabel: workers
+              ylabel: speedup
+              curves:
+              - fn: 1/((1-p) + p/x)
+                s: 0
+              - fn: 1/(1-p)
+                s: 1
+              readout: '"The flat line is the ceiling. It depends only on the serial fraction, never on the worker count."'
+              knobs:
+              - k: p
+                label: fraction that parallelises
+                min: 0.5
+                max: 0.99
+                v: 0.95
+                step: 0.01
+                dp: 2
+                s: 0
+          - name: 'A data race, precisely'
+            tex: '\text{two accesses} \;\wedge\; \text{same location} \;\wedge\; \text{one is a write} \;\wedge\; \text{no ordering}'
+            read: 'All four conditions at once, and removing any one of them removes the race.'
+            note: 'The list is worth memorising because it tells you the four available fixes. Do not share the location, make both reads, or impose an ordering with a lock or a channel.'
+          - name: 'Throughput against latency'
+            tex: '\text{throughput} = \frac{n_{\mathrm{b}}}{o + n_{\mathrm{b}}\,\tau}'
+            read: 'Batching spreads a fixed overhead across more items, which raises throughput and raises the wait for the first answer.'
+            note: 'This is the trade every inference server makes. A larger batch serves more requests per second and makes each individual request wait longer, and the right size depends on which of the two you are being measured on.'
+            where:
+              - sym: 'n_{\mathrm{b}}'
+                is: 'how many items are in one batch'
+              - sym: 'o'
+                is: 'the fixed overhead paid once per batch'
+              - sym: '\tau'
+                is: 'the marginal cost of one more item'
+            play:
+              kind: curve
+              title: Grow the batch and watch throughput saturate
+              alt: A throughput curve against batch size, rising quickly and then levelling off once the fixed overhead has been amortised.
+              x:
+              - 1
+              - 128
+              y:
+              - 0
+              - 12
+              xlabel: batch size
+              ylabel: throughput
+              curves:
+              - fn: x/(o + x*0.1)
+                s: 0
+              readout: '"Most of the gain arrives early. Past that, a bigger batch mostly buys latency."'
+              knobs:
+              - k: o
+                label: fixed overhead per batch
+                min: 0.5
+                max: 20
+                v: 5
+                step: 0.5
+                dp: 1
+                s: 0
+        covers:
+          - Concurrency against parallelism
+          - Amdahl's law and the serial fraction
+          - Data races and the four conditions
+          - Locks, deadlock and lock-free approaches
+          - Batching, throughput and latency
+          - Why a parallel version can be slower
+        check: "A tenth of your job is serial. Say the best speedup a thousand workers can give you."
+        viz:
+          type: curve
+          shape: rise
+          x: workers
+          y: speedup
+          a: What you hope for
+          b: What Amdahl allows
+      - name: Randomised and approximate methods
+        why: "At data-pipeline scale the exact answer is often unaffordable, and an approximate one is not."
+        beats:
+          - >-
+              Keep every item and answer exactly. The memory grows with the data, with
+              no limit on it.
+          - >-
+              Keep a fixed sketch instead. The memory stops growing, and the error
+              becomes something you choose in advance.
+        plain:
+          - >-
+              Randomness buys you memory. A sketch of fixed size answers
+              questions about a stream of any length, with an error you set in
+              advance rather than discover afterwards.
+          - >-
+              The errors are one-sided by design. A Bloom filter never misses
+              something that is present and occasionally claims something
+              absent is present, which is the right way round for a
+              deduplication pass.
+        math:
+          - name: 'The birthday bound'
+            tex: 'p(\text{a collision among } n \text{ items in } m \text{ slots}) \approx 1 - e^{-n^{2}/(2m)}'
+            read: 'Collisions arrive around the square root of the number of slots, far sooner than intuition says.'
+            note: 'It is why a 64-bit hash is not enough to key a billion documents, and why content-addressed storage uses much wider digests than the item count seems to require.'
+            where:
+              - sym: 'n'
+                is: 'a count of things'
+              - sym: 'm'
+                is: 'how many slots there are'
+          - name: 'A Bloom filter''s false positive rate'
+            tex: 'p(\text{false positive}) \approx \Big( 1 - e^{-h n / m} \Big)^{h}'
+            read: 'More bits per item drives the error down fast, and there is a best number of hash functions for any budget.'
+            note: 'It never returns a false negative. That asymmetry is what makes it usable as a cheap pre-filter in front of an exact check, because anything it rejects is genuinely absent.'
+            where:
+              - sym: 'h'
+                is: 'how many hash functions are used'
+              - sym: 'm'
+                is: 'how many bits the filter has'
+            play:
+              kind: curve
+              title: Spend bits and watch the false positive rate collapse
+              alt: A false positive rate curve against bits per item, falling steeply and flattening near zero.
+              x:
+              - 1
+              - 24
+              y:
+              - 0
+              - 1
+              xlabel: bits per item
+              ylabel: false positive rate
+              curves:
+              - fn: pow(1 - exp(-nh/x), nh)
+                s: 0
+              readout: '"Around ten bits per item and seven hash functions the error is under one percent."'
+              knobs:
+              - k: nh
+                label: hash functions
+                min: 1
+                max: 12
+                v: 7
+                step: 1
+                dp: 0
+                s: 0
+          - name: 'Reservoir sampling'
+            tex: 'p(\text{item } i \text{ is kept}) = \frac{s}{n} \quad \text{for every } i'
+            read: 'One pass, fixed memory, and every item ends up equally likely to be in the sample.'
+            note: 'It works without knowing the length of the stream in advance, which is the property that makes it the standard way to sample a training shard you cannot fit in memory.'
+            where:
+              - sym: 's'
+                is: 'the size of the reservoir being kept'
+        covers:
+          - Hashing, collisions and the birthday bound
+          - Bloom filters and one-sided error
+          - Cardinality sketches
+          - Reservoir sampling over a stream
+          - MinHash and near-duplicate detection
+          - Choosing an error budget rather than discovering one
+        check: "Deduplicate a billion documents. Say what you would use and what error you accept."
+        viz:
+          type: compare
+          cols:
+          - k: Exact
+            items: ["Memory grows with the data"]
+          - k: Sketch
+            items: ["Memory fixed in advance", "Error you choose"]
+      - name: Making numerical code fast
+        why: "The gap between a working implementation and a usable one is usually this module."
+        beats:
+          - >-
+              A Python loop over elements pays interpreter overhead on every single one.
+          - >-
+              Push the loop into the array library and it runs once, over contiguous
+              memory, in compiled code.
+          - >-
+              Then fuse the operations that would otherwise write an intermediate to
+              memory and read it straight back.
+          - >-
+              At that point the bottleneck usually moves to somewhere you were not
+              looking, which is where you measure again.
+        plain:
+          - >-
+              The first rule is to stop looping in the interpreter. Expressing
+              the work as operations on whole arrays moves the loop into
+              compiled code and lets the hardware use its vector units.
+          - >-
+              The second is to stop moving data needlessly. Chains of small
+              operations each write a result and read it back, and fusing them
+              removes trips to memory that the arithmetic never needed.
+        math:
+          - name: 'Where the time actually goes'
+            tex: 't_{\text{total}} = t_{\text{compute}} + t_{\text{memory}} + t_{\text{overhead}}'
+            read: 'The term you optimise is almost never the one you assumed it was.'
+            note: 'Profile before changing anything. Optimising the compute term of a memory bound kernel is work that produces no measurable result, and it is the most common way an optimisation afternoon is wasted.'
+            where:
+              - sym: 't_{\text{overhead}}'
+                is: 'launch, dispatch and interpreter cost'
+          - name: 'Why fusion pays'
+            tex: '\text{unfused: } 2\mathrm{r} + 2\mathrm{w} \quad \longrightarrow \quad \text{fused: } \mathrm{r} + \mathrm{w}'
+            read: 'Two chained operations touch memory four times, and one fused operation touches it twice.'
+            note: 'The arithmetic is unchanged. The saving is entirely in traffic, so fusion helps most on the elementwise operations that look too cheap to bother with.'
+            where:
+              - sym: '\mathrm{r}'
+                is: 'a read of the array from memory'
+              - sym: '\mathrm{w}'
+                is: 'a write of the array back to memory'
+          - name: 'Amdahl again, applied to your own profile'
+            tex: 'S = \frac{1}{(1 - q) + \dfrac{q}{s}}'
+            read: 'Speeding up a part that is a tenth of the runtime cannot give you more than a tenth back.'
+            where:
+              - sym: 'S'
+                is: 'the speedup you end up with overall'
+              - sym: 'q'
+                is: 'the fraction of runtime the part accounts for'
+              - sym: 's'
+                is: 'how much faster you made that part'
+        covers:
+          - Vectorising instead of looping in the interpreter
+          - Contiguity, views and hidden copies
+          - Kernel fusion and intermediate tensors
+          - Profiling before optimising
+          - Data loading as the real bottleneck
+          - Mixed precision, and where it does not help
+        check: "Your training loop is slow. Say the order you would investigate it in, and why."
+        viz:
+          type: flow
+          steps:
+          - Measure first
+          - Remove interpreter loops
+          - Cut memory traffic
+          - Measure again
+          loop: true
+    traps:
+      - Quoting a complexity without saying what n is in your setting
+      - Choosing a hash table where the ordering was needed later
+      - Presenting a greedy solution with no exchange argument
+      - Optimising the compute in a kernel that is memory bound
+      - Expecting linear speedup from more workers
+    drills:
+      - Take a slow loop and vectorise it, then measure both versions
+      - Work out the arithmetic intensity of one attention layer
+      - Implement a dynamic programme twice, memoised and tabulated
+      - Profile a training step and name where the time actually goes
 
   # ── Models ───────────────────────────────────────────────────────────────
   - id: transformers
@@ -3570,7 +5347,7 @@ topics:
           - name: 'One block, pre-norm'
             tex: 'z'' = z + \mathrm{MHA}(\mathrm{LN}(z)), \qquad z'''' = z'' + \mathrm{FFN}(\mathrm{LN}(z''))'
             read: 'Each sub-layer reads a normalised copy, and its output is added to the stream rather than replacing it.'
-            note: 'Post-norm puts the normalisation after the addition, which trains worse at depth without warmup. Pre-norm keeps a clean additive path from input to loss, and that is why almost every modern model uses it.'
+            note: 'Post-norm puts the normalisation after the addition, which trains worse at depth without warmup. Pre-norm keeps a clean additive path from input to loss. Almost every modern model uses it.'
             where:
               - sym: '\mathrm{LN}'
                 is: 'layer normalisation'
@@ -3656,7 +5433,7 @@ topics:
           - name: 'Rotary position'
             tex: '\langle \mathcal{R}_{t} q, \; \mathcal{R}_{s} k \rangle = \langle q, \; \mathcal{R}_{s - t} k \rangle'
             read: 'Rotate queries and keys by an angle set by position, and the dot product then depends only on the distance between them.'
-            note: 'Relative position falls out of the algebra rather than being learned, which is why rotary embeddings extrapolate further and why interpolating their base frequency extends context so cheaply.'
+            note: 'Relative position falls out of the algebra rather than being learned. Rotary embeddings extrapolate further on that account, and interpolating their base frequency extends context very cheaply.'
             where:
               - sym: '\mathcal{R}_{t}'
                 is: 'the rotation applied at position t'
@@ -3712,7 +5489,7 @@ topics:
         math:
           - name: 'The cost that forces the whole field'
             tex: '\text{time } O(T^{2} d), \qquad \text{memory } O(T^{2}) \text{ naive}, \; O(T) \text{ with flash attention}'
-            read: 'Doubling the context quadruples the arithmetic, which is why long context is the expensive feature.'
+            read: 'Doubling the context quadruples the arithmetic, so long context is the expensive feature.'
             note: 'Flash attention does not change the arithmetic. It never writes the full score matrix to memory, computing it in tiles inside fast on-chip memory, which removes the quadratic memory term and most of the wall clock.'
             where:
               - sym: 'T'
@@ -3762,7 +5539,7 @@ topics:
         why: "Choosing the right variant is a design decision you have to justify."
         beats:
           - >-
-              Three shapes, and the task picks one.
+              The task decides the shape, so settle what the output has to be first.
           - >-
               Encoder-only sees the whole input at once. Best when you want to label the
               text you were given.
@@ -3834,7 +5611,7 @@ topics:
               the arithmetic units stay busy.
           - >-
               Decode makes one token at a time and re-reads the entire cache to do it.
-              The GPU sits waiting on memory, which is why utilisation looks low.
+              The GPU sits waiting on memory, so utilisation looks low.
         plain:
           - >-
               Serving has two halves with opposite problems. Reading the prompt is heavy
@@ -3956,9 +5733,9 @@ topics:
               The data decides most of what the model becomes. Everything else is
               downstream. It is also the least glamorous part of the job.
           - >-
-              Two jobs matter above the rest. Remove near-duplicate text, which
-              otherwise gets memorised. Remove the benchmarks, or your evaluation is
-              measuring recall.
+              Remove near-duplicate text, which otherwise gets memorised. Remove the
+              benchmarks, or your evaluation is measuring recall. Nothing else in the
+              pipeline matters as much as those two.
         math:
           - name: 'Deduplication, and why it matters more than it sounds'
             tex: '\mathrm{sim}(a, b) = \frac{|S_{a} \cap S_{b}|}{|S_{a} \cup S_{b}|} \;>\; \varsigma_{d}'
@@ -4027,7 +5804,7 @@ topics:
           - name: 'The next-token objective'
             tex: '\mathcal{L} = -\sum_{t=1}^{T} \log p_{\theta}\big(x_{t} \mid x_{<t}\big)'
             read: 'Predict the next token from everything before it, and add up the surprise.'
-            note: 'Every capability in a base model comes from this one loss. Nothing in it mentions helpfulness, truth or safety, which is the whole reason the later stages exist.'
+            note: 'Every capability in a base model comes from this one loss. Nothing in it mentions helpfulness, truth or safety. The later stages exist to supply those.'
             where:
               - sym: 'p_{\theta}'
                 is: 'the probability the model assigns'
@@ -4180,7 +5957,7 @@ topics:
               Some qualities are easier to compare than to write down. People cannot
               define a helpful answer, but they can pick the better of two.
           - >-
-              That is the whole idea. Learn what people prefer, then push the model that way. Keep it tied to where it started, so it does not drift into nonsense.
+              Learn what people prefer, then push the model that way. Keep it tied to where it started, so it does not drift into nonsense.
         math:
           - name: 'The preference model'
             tex: 'p(a \succ b \mid x) = \sigma\big(r(x, a) - r(x, b)\big)'
@@ -4527,7 +6304,7 @@ topics:
         why: "These task names are the shared vocabulary of the field."
         beats:
           - >-
-              Three shapes of answer, and the shape picks the method.
+              The shape of the answer picks the method, so settle that first.
           - >-
               One label for the whole text. Sentiment, topic, spam.
           - >-
@@ -5018,8 +6795,8 @@ topics:
               thin structures you care about.
         plain:
           - >-
-              Three tasks, three answers. Classification labels the picture. Detection
-              draws boxes. Segmentation labels every pixel.
+              Classification labels the picture. Detection draws boxes. Segmentation
+              labels every pixel.
           - >-
               Detection metrics trip people up. Average precision combines several
               overlap thresholds. Report each class too, since common classes can hide
@@ -5166,7 +6943,7 @@ topics:
           - name: 'Contrastive pretraining'
             tex: '\mathcal{L} = -\log \frac{\exp\big(\langle z^{I}_{i}, z^{T}_{i} \rangle / \tau\big)}{\sum_{j} \exp\big(\langle z^{I}_{i}, z^{T}_{j} \rangle / \tau\big)}'
             read: 'Pull each image towards its own caption and push it away from every other caption in the batch.'
-            note: 'The other captions in the batch are the negatives, so a larger batch means a harder and more informative task. That is why these models are trained at batch sizes in the tens of thousands.'
+            note: 'The other captions in the batch are the negatives, so a larger batch means a harder and more informative task. Hence the batch sizes in the tens of thousands.'
             where:
               - sym: 'z^{I}_{i}'
                 is: 'the embedding of image i'
@@ -5356,7 +7133,7 @@ topics:
           - name: 'Where the streams meet'
             tex: '\text{early: } f\big([z^{I}; z^{T}]\big); \qquad \text{late: } g\big(f_{I}(z^{I}), f_{T}(z^{T})\big)'
             read: 'Join the modalities before the reasoning or after it, and the choice decides what the model can notice.'
-            note: 'Late fusion lets each tower be trained and cached separately, which is why retrieval uses it. Early fusion can model interactions between a word and a region, which is why captioning and question answering need it.'
+            note: 'Late fusion lets each tower be trained and cached separately, so retrieval uses it. Early fusion can model interactions between a word and a region, so captioning and question answering need it.'
             where:
               - sym: 'z^{I}'
                 is: 'the image representation'
@@ -5423,13 +7200,13 @@ topics:
               Contrastive training puts images and captions in one shared space.
               Matching pairs get pulled together, everything else gets pushed apart.
           - >-
-              The pushing apart needs many examples at once, which is why batch size
-              matters so much here. Sigmoid variants relax that requirement.
+              The pushing apart needs many examples at once, so batch size matters
+              a great deal here. Sigmoid variants relax that requirement.
         math:
           - name: 'The InfoNCE loss'
             tex: '\mathcal{L} = -\frac{1}{n_{b}} \sum_{i=1}^{n_{b}} \log \frac{\exp\big(\langle z^{I}_{i}, z^{T}_{i}\rangle / \tau\big)}{\sum_{j=1}^{n_{b}} \exp\big(\langle z^{I}_{i}, z^{T}_{j}\rangle / \tau\big)}'
             read: 'Find your own caption among all the captions in the batch.'
-            note: 'The batch supplies the negatives, so the task gets harder as the batch grows. That is why these models are trained at batch sizes in the tens of thousands and why a small-batch reproduction underperforms.'
+            note: 'The batch supplies the negatives, so the task gets harder as the batch grows. Tens of thousands is the usual batch size, and a small-batch reproduction underperforms.'
             where:
               - sym: 'n_{b}'
                 is: 'the batch size'
@@ -5627,7 +7404,7 @@ topics:
           - name: 'The spectrogram'
             tex: 'S(t, \nu) = \big| \mathrm{STFT}\{x\}(t, \nu) \big|^{2}'
             read: 'Cut the waveform into overlapping windows and ask how much of each frequency is in each one.'
-            note: 'This turns audio into an image, which is why vision architectures work on it. The mel scale then compresses frequency the way hearing does.'
+            note: 'This turns audio into an image, so vision architectures work on it. The mel scale then compresses frequency the way hearing does.'
             where:
               - sym: 'S(t, \nu)'
                 is: 'the energy at time t and frequency nu'
@@ -5718,7 +7495,7 @@ topics:
           - >-
               The model reads the picture and answers from what it sees.
           - >-
-              Balanced. Both inputs contribute, which is what you hoped for.
+              Balanced. Both inputs contribute, as you hoped.
           - >-
               The text prior wins and the image is quietly ignored. Build a set where
               the two disagree and you can measure exactly where a model sits.
@@ -6162,7 +7939,7 @@ topics:
           - "It keeps working on a plane, underground, or in a clinic with bad signal."
           - "And there is no bill per request, which changes the economics entirely at scale."
       - name: Making a model smaller
-        why: "Three levers, and they compose differently."
+        why: "The levers compose differently, so the order you pull them changes the result."
         plain:
           - >-
               You can train a small model to copy a large one. You can also remove
@@ -6263,7 +8040,7 @@ topics:
           - name: 'Why outliers force per-channel scales'
             tex: '\varsigma_{q} = \frac{\max |v| - \min |v|}{2^{n_{\mathrm{bits}}} - 1}'
             read: 'One extreme value stretches the scale and wastes every level on a range nothing else uses.'
-            note: 'Large language models grow a few enormous activation channels, which is exactly this failure. Per-channel scales, or holding the outlier channels in higher precision, is what makes eight-bit inference work.'
+            note: 'Large language models grow a few enormous activation channels. Those channels are the outliers above. Per-channel scales, or holding the outlier channels in higher precision, is what makes eight-bit inference work.'
             where:
               - sym: 'n_{\mathrm{bits}}'
                 is: 'how many bits each number gets'
@@ -6587,7 +8364,7 @@ topics:
                 s: 0
               - fn: exp(-pow(x/10, 2) * spread)
                 s: 1
-              readout: '"Adherence saturates while diversity keeps falling, which is why very high guidance gives obedient, samey, over-saturated pictures."'
+              readout: '"Adherence saturates while diversity keeps falling, so very high guidance gives obedient, samey, over-saturated pictures."'
               knobs:
               - k: spread
                 label: how fast diversity collapses
@@ -7293,7 +9070,7 @@ topics:
           kind: "crowded"
           slots: 5
           labels: ["French", "legal text", "a full stop", "bird names", "sarcasm", "hex colours", "the year 1987"]
-          cap: "There are more things worth representing than there are neurons, so concepts share space. That is why one neuron fires for several unrelated things."
+          cap: "There are more things worth representing than there are neurons, so concepts share space, and one neuron ends up firing for several unrelated things."
         plain:
           - >-
               The goal is the actual mechanism inside the network. A story that happens to fit the outputs will not do. That standard of evidence is what defines the
@@ -7362,7 +9139,7 @@ topics:
           - name: 'Activation patching'
             tex: '\mathrm{effect}(c) = \mathcal{M}\big(x_{\mathrm{corrupt}} \;\text{with}\; z_{c} \leftarrow z_{c}^{\mathrm{clean}}\big) - \mathcal{M}\big(x_{\mathrm{corrupt}}\big)'
             read: 'Run a broken input, paste one component back from a working run, and measure how much of the answer returns.'
-            note: 'This is an intervention rather than a correlation, which is what separates this field from attribution heatmaps. It answers whether a component matters causally.'
+            note: 'This is an intervention rather than a correlation. Attribution heatmaps stop at correlation. It answers whether a component matters causally.'
             where:
               - sym: 'z_{c}'
                 is: 'the activation at the component being tested'
@@ -7507,7 +9284,7 @@ topics:
           - name: 'The objective, and the trade inside it'
             tex: '\mathcal{L} = \big\| z - \hat{z} \big\|^{2} \;+\; \lambda \, \|a\|_{1}'
             read: 'Reconstruct the activation while using as few features as possible, and the penalty decides which wins.'
-            note: 'Every reported sparse autoencoder sits somewhere on this trade, which is why two of them are not comparable unless both axes are quoted.'
+            note: 'Every reported sparse autoencoder sits somewhere on this trade. Two of them are not comparable unless both axes are quoted.'
             where:
               - sym: '\lambda'
                 is: 'a knob trading one term of an objective against another'
@@ -7691,8 +9468,8 @@ topics:
         why: "A broad interview will open here, and vagueness reads badly."
         beats:
           - >-
-              Three broad shapes of risk. Being able to name which one you mean is most
-              of a good answer.
+              Risk comes in broad shapes, and naming which one you mean is most of a
+              good answer.
           - >-
               Misuse. The system works exactly as built and somebody points it at harm.
           - >-
@@ -7860,7 +9637,7 @@ topics:
           - name: 'Goodhart, written down'
             tex: '\arg\max_{a} \; \hat{r}(a) \;\neq\; \arg\max_{a} \; r^{\star}(a) \quad \text{once } \hat{r} \text{ is optimised hard}'
             read: 'A proxy that tracks the goal over ordinary behaviour stops tracking it once something searches hard for the maximum.'
-            note: 'The correlation was only ever observed in the region where the two agreed. Optimisation walks straight out of that region, which is why a reward model needs retraining as the policy improves.'
+            note: 'The correlation was only ever observed in the region where the two agreed. Optimisation walks straight out of that region, so a reward model needs retraining as the policy improves.'
             where:
               - sym: '\hat{r}'
                 is: 'the measured proxy for what you want'
@@ -8050,7 +9827,7 @@ topics:
           - name: 'When abstention is the better bet'
             tex: '\text{abstain when } \; \hat{p}\, v_{\mathrm{right}} - (1 - \hat{p})\, c_{\mathrm{wrong}} \;<\; v_{\mathrm{abstain}}'
             read: 'Answer only when the expected value of answering beats the value of saying you do not know.'
-            note: 'The rule only works if the probability means something, which is why calibration is the prerequisite for honest abstention rather than a separate nicety.'
+            note: 'The rule only works if the probability means something. Calibration is the prerequisite for honest abstention, not a separate nicety.'
             where:
               - sym: '\hat{p}'
                 is: 'the probability the model gave'
@@ -8067,7 +9844,7 @@ topics:
           - Where the cost concentrates, by language and modality
           - Measuring the shape of the tax rather than its average
           - Recovery methods and what they give up
-        check: "Argue that calibration is a safety property, not a nice-to-have, in three sentences."
+        check: "Argue in three sentences that calibration is a safety property."
         viz:
           type: parts
           centre: The alignment tax on calibration
@@ -9067,7 +10844,7 @@ topics:
           kind: "growing"
           steps: 5
           tick: "step"
-          cap: "Each step adds to the context. Long tasks run out of room before they run out of steps, which is why compaction decides how far an agent gets."
+          cap: "Each step adds to the context. Long tasks run out of room before they run out of steps, so compaction decides how far an agent gets."
         plain:
           - >-
               Long tasks run out of context before they run out of steps. That is
@@ -9167,8 +10944,8 @@ topics:
         why: "Popular, often unnecessary, and you should be able to say when."
         beats:
           - >-
-              One agent with good tools. Simplest, cheapest, and the right answer more
-              often than people expect.
+              One agent with good tools. Simplest, cheapest, and the right answer most of
+              the time.
           - >-
               Several agents with roles. Genuine parallelism, and you pay in
               coordination, duplicated work and failures spreading between them.
@@ -9177,8 +10954,8 @@ topics:
               Several agents can work at once, each with a role. Sometimes that helps.
               Often it adds coordination cost and duplicated work.
           - >-
-              Be able to name a task where it wins and one where it loses. One agent
-              with better tools beats a committee more often than people expect.
+              Be able to name a task where it wins and one where it loses. On most tasks
+              one agent with better tools beats a committee.
         math:
           - name: 'When more agents help'
             tex: '\text{gain} \; \text{rises with independence of errors and falls with coordination cost}'
@@ -9711,11 +11488,11 @@ topics:
               one whole record.
           - >-
               A column store keeps each field together. It reads only the fields you
-              asked for, which is why analytics uses it.
+              asked for, so analytics uses it.
         plain:
           - >-
               How data sits on disk decides what a query costs. Column storage reads
-              only the fields you ask for, which is why analytics uses it.
+              only the fields you ask for, and analytics is built on that.
           - >-
               Most expensive queries are layout problems. If a query scans two terabytes to return a hundred rows, partitioning is the fix. A bigger cluster only pays to scan it faster.
         math:
@@ -10195,7 +11972,7 @@ topics:
           - name: 'Symmetric and asymmetric, and why both'
             tex: '\text{asymmetric to agree a key}, \qquad \text{symmetric to move the data}'
             read: 'Public key cryptography is slow, so it is used once to establish a fast shared key.'
-            note: 'That is the whole shape of TLS. Being able to say it in one sentence is worth more than reciting the handshake.'
+            note: 'That is the shape of TLS. Being able to say it in one sentence is worth more than reciting the handshake.'
           - name: 'Password storage'
             tex: 'h = \mathrm{KDF}\big(\text{password}, \; \text{salt}, \; \text{work factor}\big)'
             read: 'Use a function that is deliberately slow, with a unique salt per user.'
@@ -10259,7 +12036,7 @@ topics:
           - name: 'Injection, in one line'
             tex: '\text{code} \;\|\; \text{untrusted data} \;\Longrightarrow\; \text{the data becomes code}'
             read: 'Every injection bug is the same bug: instructions and input travelling in one channel.'
-            note: 'Parameterised queries fix SQL injection by separating the two channels. Prompt injection is this exact bug with no separation available yet, which is why it is unsolved rather than merely unfixed.'
+            note: 'Parameterised queries fix SQL injection by separating the two channels. Prompt injection is this exact bug with no separation available yet. It is unsolved rather than merely unfixed.'
             where:
               - sym: '\|'
                 is: 'concatenated with'
@@ -10356,7 +12133,7 @@ topics:
           - name: 'Data poisoning'
             tex: '\text{flip } \varrho_{p} \text{ of the training set to move } f \text{ on a chosen trigger}'
             read: 'A small share of corrupted training data can install a backdoor that is invisible on ordinary inputs.'
-            note: 'Fractions of a per cent can be enough. Web-scraped corpora make this practical, which is why provenance is a security control rather than a nicety.'
+            note: 'Fractions of a per cent can be enough. Web-scraped corpora make this practical. Provenance is a security control, not a nicety.'
             where:
               - sym: '\varrho_{p}'
                 is: 'the share of training data controlled by the attacker'
