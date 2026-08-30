@@ -466,8 +466,14 @@ topics:
               Measure the metric you named in advance, plus the guardrails you would not
               accept breaking.
           - >-
-              Decide. If you are still looking for a cut of the data that works, you
-              have already stopped experimenting.
+              Decide. If you keep searching for a slice that works, the experiment is
+              already over.
+        scene:
+          kind: split
+          parts:
+            - {k: Control, w: 1}
+            - {k: Treatment, w: 1, on: true}
+          alt: "A random user split into control and treatment groups."
         plain:
           - >-
               An A/B test is a randomised experiment wearing a product hat. Split users,
@@ -898,11 +904,15 @@ topics:
               The learning rate is the step size. Too big and you bounce out, too small
               and you never arrive.
           - >-
-              Momentum keeps some of the last step, which smooths out noise and helps
-              you roll through flat parts.
+              Momentum keeps part of the last step. This smooths noise and helps you
+              cross flat parts.
           - >-
               Weight decay pulls the weights toward zero, so nothing grows large without
               earning it.
+        scene:
+          kind: descent
+          cap: "The gradient gives a direction. The learning rate decides the distance."
+          alt: "Four positions of one ball moving downhill along a loss curve toward its minimum."
         plain:
           - >-
               Training is a walk downhill on a landscape you cannot see. The gradient
@@ -940,6 +950,11 @@ topics:
           - >-
               RMSNorm drops the mean subtraction and keeps the scaling. Slightly cheaper
               and works about as well.
+        scene:
+          kind: normaxis
+          batch: Batch norm
+          layer: Layer norm
+          alt: "Two activation tables. Batch norm marks one feature across examples; layer norm marks all features inside one example."
         plain:
           - >-
               Signals pass through many layers. Without care they either shrink to
@@ -981,6 +996,11 @@ topics:
           - >-
               Too much and it memorises. Perfect on the training set, lost on anything
               new.
+        scene:
+          kind: fitpaths
+          pattern: Learns the pattern
+          memory: Learns every point
+          alt: "The same observations with a smooth fitted path and a jagged path that follows every point."
         plain:
           - >-
               A model that memorises the training set has learnt the answers rather than
@@ -1019,6 +1039,12 @@ topics:
           - >-
               Then the memory frees. Checkpointing throws some away early and recomputes
               them, buying memory with time.
+        scene:
+          kind: checkpoint
+          blocks: [Input, Layer 1, Layer 2, Loss]
+          back: Backward pass
+          cap: Recompute discarded activations
+          alt: "A forward chain with two discarded activations that must be recomputed during the backward pass."
         plain:
           - >-
               Backpropagation is the chain rule run backwards through the network. To do
@@ -1056,6 +1082,12 @@ topics:
               handles.
           - >-
               A graph has arbitrary neighbours, so pass messages along the edges.
+        scene:
+          kind: inputshape
+          grid: Grid
+          sequence: Sequence
+          graph: Graph
+          alt: "Three input shapes shown as a pixel grid, an ordered sequence, and a connected graph."
         plain:
           - >-
               Each architecture bakes in an assumption. Convolutions assume nearby
@@ -1101,6 +1133,10 @@ topics:
           - >-
               Data parallel is the foundation. Copy the model everywhere, split the
               batch, average the gradients.
+        scene:
+          kind: replicas
+          cap: "One model copy per device. Each copy sees a different data shard."
+          alt: "Four devices holding the same model while each receives a different data shard."
         plain:
           - >-
               One GPU cannot hold a large model. So you split the work. Copy the model
@@ -1137,6 +1173,11 @@ topics:
           - >-
               Change only the seed and rerun. If the result moves more than your
               improvement did, you have not measured anything.
+        scene:
+          kind: trace
+          steps: [Batch, Loss, Gradients, Update]
+          bad: 1
+          alt: "A training pipeline inspected from batch to update, with the loss marked as the first bad state and later stages dimmed."
         plain:
           - >-
               When training breaks, resist changing the model. Start by proving the
@@ -1189,8 +1230,8 @@ topics:
               You can stretch any arrow by a number, including a negative one, which
               flips it.
           - >-
-              Do both, as much as you like, and the set of places you can land is the
-              span.
+              Add and stretch them in any combination. Every place you can reach belongs
+              to their span.
           - >-
               A basis is the smallest set of arrows that still reaches everywhere.
               Coordinates are always relative to one.
@@ -1368,6 +1409,10 @@ topics:
           - >-
               The gap points straight out from the space. That is why the residual is
               perpendicular.
+        scene:
+          kind: projection
+          cap: "The closest reachable point is the target's shadow."
+          alt: "A target projects onto a line, leaving a perpendicular error."
         plain:
           - >-
               You have a target that does not lie in the space you can reach. The
@@ -1543,7 +1588,7 @@ topics:
           - Jacobian for vector valued functions
           - Hessian, curvature and second order methods
           - Shapes of each object, and why they matter
-        check: "Give the shape of the gradient, the Jacobian and the Hessian for a function from R^n to R^m."
+        check: "Take a function from R^n to R^m. Give the shapes of its gradient, Jacobian and Hessian."
         viz:
           type: stack
           layers:
@@ -1564,6 +1609,10 @@ topics:
           - >-
               If it curves up one way and down another, a saddle. In high dimensions
               this is what most zero-gradient points turn out to be.
+        scene:
+          kind: descent
+          cap: "The slope changes as the point moves toward a low place."
+          alt: "A point moves down a curved surface toward a low place."
         plain:
           - >-
               At a minimum the gradient is zero. But a zero gradient also happens
@@ -1670,8 +1719,8 @@ topics:
               the mistake.
         plain:
           - >-
-              When the input is a vector or a matrix, the derivative rules still
-              hold but the shapes get fiddly.
+              The derivative rules still work for vectors and matrices. The hard part
+              is keeping every shape consistent.
           - >-
               The reliable trick is to check shapes at every step. If the shapes
               do not line up, the derivation is wrong somewhere.
@@ -1715,8 +1764,8 @@ topics:
           - >-
               Each token is projected three ways. A query, a key and a value.
           - >-
-              Every query is compared against every key. That comparison is the dot
-              product, and it is why cost grows with the square of the length.
+              Every query is compared against every key. Each comparison uses a dot
+              product. The number of comparisons grows with length squared.
           - >-
               Mask out anything a token should not see. In a decoder that means the
               whole future.
@@ -1747,7 +1796,7 @@ topics:
           - Causal masking, padding masks, attention bias
           - "Complexity: O(T^2 d) time, O(T^2) attention memory"
           - The KV cache and its size formula
-        check: "Write every tensor shape in a multi-head attention forward pass for batch B, length T, heads H, model dim D."
+        check: "Write every tensor shape in multi-head attention. Use batch B, length T, heads H and model size D."
         viz:
           type: flow
           steps:
@@ -1769,8 +1818,8 @@ topics:
           - >-
               Every feed-forward block does the same, working on one position at a time.
           - >-
-              At the end the unembedding reads the board and turns it into a guess at
-              the next token.
+              At the end, the unembedding reads the board. It turns that state into a
+              guess for the next token.
         plain:
           - >-
               The residual stream runs the length of the model like a shared
@@ -1797,8 +1846,8 @@ topics:
         why: "Long-context questions all route through this."
         beats:
           - >-
-              RoPE rotates queries and keys by an angle that depends on position, so
-              relative distance falls out of the dot product.
+              RoPE rotates queries and keys based on position. Their dot product then
+              carries the relative distance.
           - >-
               ALiBi adds a penalty that grows with distance. Simple, and it extrapolates
               past the trained length.
@@ -1810,9 +1859,8 @@ topics:
               Attention on its own has no idea what order the tokens came in. Shuffle
               the sentence and it computes the same thing. Position has to be added.
           - >-
-              RoPE adds it by rotating each query and key by an angle that depends on
-              where the token sits. Extending context means stretching those angles
-              carefully.
+              RoPE rotates each query and key. The angle depends on where the token
+              sits. Longer contexts need those angles to stretch carefully.
         covers:
           - Sinusoidal and learned absolute positions
           - Relative position bias
@@ -2045,9 +2093,8 @@ topics:
               Pretraining is one task repeated a very large number of times: predict the
               next token. Everything the model can do grows out of that.
           - >-
-              Scaling laws let you plan the spend before you commit. Given a compute
-              budget, they suggest how big the model should be and how many tokens it
-              should see.
+              Scaling laws help plan the spend before training. For a fixed budget, they
+              suggest a model size and amount of training data.
         covers:
           - Next-token prediction and the loss it optimises
           - "Scaling laws: Kaplan, Chinchilla, and the token-to-parameter ratio"
@@ -2074,17 +2121,16 @@ topics:
               LoRA trains a small low-rank update and leaves the base model frozen. Most
               of the benefit, a fraction of the memory.
           - >-
-              QLoRA quantises the frozen base as well, which is what lets a large model
-              fit on one card.
+              QLoRA also stores the frozen base with fewer bits. This can fit a larger
+              model on one card.
         plain:
           - >-
               A base model continues text. It does not answer questions. Fine-tuning on
               examples of instructions and good replies is what turns it into an
               assistant.
           - >-
-              Mask the loss on the prompt tokens. Otherwise the model spends capacity
-              learning to generate questions, which is not the job you are training it
-              for.
+              Mask the loss on the prompt tokens. Otherwise the model wastes effort
+              learning to write the questions too.
         covers:
           - Instruction data, sources, and quality over quantity
           - Chat templates and special tokens
@@ -2121,8 +2167,8 @@ topics:
           - >-
               Optimise the policy against that reward.
           - >-
-              And tie it to the model you started from, or it drifts off to whatever
-              scores highly and reads like nonsense.
+              Keep it close to the starting model. Otherwise it may chase a high score
+              and produce nonsense.
         plain:
           - >-
               Some qualities are easier to compare than to write down. People cannot
@@ -2161,9 +2207,8 @@ topics:
               model optimises the checker instead of the task.
         plain:
           - >-
-              For maths and code you can check the answer automatically. That checker
-              becomes the reward, and the model can practise against it without a human
-              in the loop.
+              For maths and code, software can check the answer. That checker becomes
+              the reward. The model can then practise without a person scoring it.
           - >-
               The catch is everything you cannot check. Design a reward for open-ended
               writing and the model will find the cheap way to score well.
@@ -2281,7 +2326,7 @@ topics:
           - Segmentation for languages with no spaces
           - Handling emoji, code, and mixed scripts
           - Truncation and its silent damage
-        check: "Why does the same sentence cost three times more tokens in one language than another, and what does that break?"
+        check: "Why might one language use more tokens for the same sentence? What does that extra cost break?"
         viz:
           type: flow
           steps:
@@ -2342,9 +2387,8 @@ topics:
               Most text tasks are one of three shapes. Label the whole text, label each
               token, or generate new text. Knowing the shape picks the method.
           - >-
-              With no labels at all, you still have options. Rules, a prompted model, or
-              a small labelled set with an active learning loop, in rising order of
-              cost.
+              With no labels, start with rules or a prompted model. A small labelled
+              set with active learning costs more.
         covers:
           - Classification, multi-label, and hierarchical labels
           - "Sequence labelling: NER, POS, chunking, BIO tagging"
@@ -2486,7 +2530,7 @@ topics:
           - Translation as augmentation, and translationese
           - Benchmark coverage gaps and cultural grounding
           - Evaluation when no native speaker is on the team
-        check: "How would you tell whether a model is worse in Indonesian because of data or because of tokenisation?"
+        check: "A model is worse in Indonesian. How would you separate a data problem from a token problem?"
         viz:
           type: parts
           centre: Why it is worse in this language
@@ -2654,9 +2698,9 @@ topics:
               Three tasks, three answers. Classification labels the picture. Detection
               draws boxes. Segmentation labels every pixel.
           - >-
-              Detection metrics trip people up. Average precision is averaged over
-              overlap thresholds, and one strong class can hide total failure on a rare
-              one.
+              Detection metrics trip people up. Average precision combines several
+              overlap thresholds. Report each class too, since common classes can hide
+              rare failures.
         covers:
           - Classification, top-1, top-5, and label noise
           - "Detection: anchors, anchor-free, NMS, IoU, mAP at thresholds"
@@ -2831,7 +2875,7 @@ topics:
           - Long-tail classes hidden by averaged metrics
           - Annotation error dominating the reported gap
           - Shortcut features, backgrounds, and watermarks
-        check: "Your geospatial model scores 0.9 IoU on a random split and 0.6 on a regional split. Explain."
+        check: "A geospatial model scores 0.9 IoU on a random split. It scores 0.6 on a regional split. Explain the gap."
         viz:
           type: parts
           centre: The score looks too good
@@ -2870,6 +2914,12 @@ topics:
           - >-
               Late fusion encodes each separately and joins the outputs. Cheapest, and
               it can never notice a fine-grained conflict.
+        scene:
+          kind: tokens
+          rows:
+            - {k: Image, parts: [Patch, Patch, Patch]}
+            - {k: Text, parts: [Word, Word, Word]}
+          alt: "Image patches and text words form two streams before fusion."
         plain:
           - >-
               Two kinds of input, one model. The design question is where they meet.
@@ -2911,8 +2961,8 @@ topics:
           - >-
               Real image and caption pairs get pulled together.
           - >-
-              Every other pairing in the batch gets pushed apart, which is why batch
-              size matters so much here.
+              Every non-matching pair in the batch gets pushed apart. A larger batch
+              supplies more pairs to learn from.
         plain:
           - >-
               Contrastive training puts images and captions in one shared space.
@@ -2952,8 +3002,8 @@ topics:
               The language model reads them alongside the text tokens, treating both as
               one sequence.
           - >-
-              Text comes out. If it describes objects that were never in the picture,
-              the fault is usually earlier in this chain.
+              Text comes out. It may describe objects that were never in the picture.
+              The fault often starts earlier in the chain.
         plain:
           - >-
               A vision-language model turns an image into tokens the language model can
@@ -3038,9 +3088,8 @@ topics:
               Audio is the modality most candidates skip. It is a wave, turned into a
               picture of frequencies over time, then treated much like vision.
           - >-
-              The failure modes are social. Accented speech, background noise and
-              phone-quality audio all raise error rates, and the training data rarely
-              represents them.
+              Accents, noise and phone audio all raise error rates. Training data often
+              has too few examples of them.
         covers:
           - Waveforms, spectrograms, mel scale
           - "ASR: CTC, attention encoder-decoder, Whisper-style training"
@@ -3180,8 +3229,8 @@ topics:
               Nobody labels which sentences are similar. So the training has to
               invent a signal from the data itself.
           - >-
-              Most methods show the model a pair that belongs together and a
-              batch that does not, then pull and push accordingly.
+              Most methods show the model matching and non-matching pairs. It pulls the
+              matches together and pushes the rest apart.
         covers:
           - Contrastive learning and in-batch negatives
           - Hard negative mining and why easy negatives stop teaching
@@ -3226,12 +3275,18 @@ topics:
         beats:
           - "Cosine looks only at direction. Two vectors pointing the same way score the same however long they are."
           - "Dot product rewards length too. If some items simply have larger vectors, they surface more often, whatever the query."
+        scene:
+          kind: points
+          query: Query
+          near: Close match
+          far: Weak match
+          alt: "A query point sits near one match and far from another."
       - name: Choosing a model
         why: "Most retrieval quality is decided here, before any tuning."
         plain:
           - >-
-              Embedding models differ in what they were trained on, how many
-              dimensions they output, and how much text they accept.
+              Embedding models learn from different data. They also vary in output size
+              and how much text they accept.
           - >-
               A leaderboard rank tells you little about your own domain. Test on
               your own queries before committing.
@@ -3394,8 +3449,8 @@ topics:
         why: "Three levers, and they compose differently."
         plain:
           - >-
-              You can train a small model to copy a large one, cut away parts of
-              a trained model, or store its numbers with less precision.
+              You can train a small model to copy a large one. You can also remove
+              parts or store its numbers with less detail.
           - >-
               Distillation usually gives the most for the effort. Quantisation
               gives the most for the least effort.
@@ -3415,6 +3470,11 @@ topics:
           - "Pruning removes weights that were doing little. Structured pruning removes whole channels, which hardware can actually exploit."
           - "Distillation trains a small model on the large model's outputs. Soft targets carry more information than the labels did."
           - "And underneath, picking an architecture that suits the hardware. No amount of compression rescues the wrong shape."
+        scene:
+          kind: shrink
+          steps: [Full model, Smaller model, Fits device]
+          cap: "Each step removes cost while trying to keep useful behaviour."
+          alt: "A large model shrinks until it fits on a small device."
       - name: Quantisation
         why: "The highest-value lever, and the one with the sharpest edges."
         plain:
@@ -3447,8 +3507,8 @@ topics:
         why: "The area moving fastest, and the one you will be asked about."
         plain:
           - >-
-              A small language model is a few billion parameters or fewer, built
-              to run on a phone or a laptop.
+              A small language model has a few billion parameters or fewer. It can run
+              on a phone or laptop.
           - >-
               They get much of their quality from training data rather than
               size. Careful curation buys more than extra parameters here.
@@ -3479,8 +3539,8 @@ topics:
               A phone has a processor, a graphics chip and often a dedicated
               neural unit. Each supports a different set of operations.
           - >-
-              An operation the accelerator does not support falls back to the
-              slow path, which can undo the whole optimisation.
+              Unsupported operations fall back to a slow path. One fallback can erase
+              the gain from the other changes.
         covers:
           - "CPU, GPU and neural accelerators on the same device"
           - Operator support and silent fallbacks
@@ -3525,7 +3585,7 @@ topics:
               items: ["Wait before the first word", "Heat and battery", "Whether it survives ten minutes"]
         beats:
           - "On a server you optimise throughput, because you are filling a machine with many users."
-          - "On a device there is one user, so you optimise their wait, the heat in their hand, and whether performance holds after ten minutes of use."
+          - "A device serves one user. Measure their wait, the heat in their hand, and performance after ten minutes."
       - name: What you give up
         why: "Being honest about the gap is what makes the pitch credible."
         plain:
@@ -3533,8 +3593,7 @@ topics:
               A small model knows less. It has weaker general knowledge, shorter
               usable context, and it breaks down on unusual requests.
           - >-
-              The useful question is whether it is good enough for the specific
-              job, measured on your own data rather than a benchmark.
+              Test whether the smaller model is good enough for your job. Use your own data, since a general benchmark answers a different question.
         covers:
           - Capability gaps that appear at the tail
           - Shorter usable context in practice
@@ -3558,7 +3617,7 @@ topics:
       - Designing an escalation path that fails silently when the device is offline
     drills:
       - Quantise one model to eight bits and measure the quality you lost on your own data
-      - Run the same model on a phone and time the first token, then time it again after ten minutes
+      - Run one model on a phone. Time the first token now and again after ten minutes
       - Find one operator that falls back to the CPU and remove it
       - Write the routing rule between local and remote, including the offline case
   - id: image-generation
@@ -3595,6 +3654,10 @@ topics:
           - "Remove a fraction of what it predicted. One small step toward something coherent."
           - "Repeat, tens of times. Each pass has an easier job than the one before."
           - "An image. The whole method is one small prediction, run many times."
+        scene:
+          kind: denoise
+          labels: [Noise, Less noise, Shape, Image]
+          alt: "Four frames change from random noise into a simple image."
       - name: Working in a smaller space
         why: "This is what made image generation affordable."
         plain:
@@ -3602,8 +3665,8 @@ topics:
               Denoising at full resolution is very expensive. So the work happens
               in a compressed space instead.
           - >-
-              An autoencoder squeezes the image down first, the denoising runs
-              there, and a decoder expands the result back up.
+              An autoencoder first squeezes the image into a smaller space. Denoising
+              happens there, then a decoder rebuilds the image.
         covers:
           - The autoencoder and its compression factor
           - Denoising in latent space rather than pixel space
@@ -3655,8 +3718,8 @@ topics:
               A prompt cannot say where things go. For that you give the model
               another image to follow.
           - >-
-              An edge map, a depth map or a pose skeleton constrains the layout
-              while leaving the style to the prompt.
+              An edge map, depth map or pose skeleton fixes the layout. The prompt can
+              still change the style.
         covers:
           - Image to image, and how much of the original survives
           - Inpainting and outpainting with a mask
@@ -3677,9 +3740,9 @@ topics:
               items: ["Reference image or a trained adapter"]
         beats:
           - "Decide what must stay the same. That choice picks the tool."
-          - "To keep the composition, give it an edge or depth map and let the prompt handle everything else."
+          - "Use an edge or depth map to keep the composition. Let the prompt control the remaining style."
           - "To change one region only, mask it and inpaint. The rest of the image is untouched."
-          - "To keep a specific person or object across images, you need a reference or a small trained adapter."
+          - "Use a reference image to keep a subject consistent. A small trained adapter can do the same."
       - name: Samplers and step count
         why: "The cheapest quality and speed lever in the whole stack."
         plain:
@@ -3706,7 +3769,7 @@ topics:
           b: A basic sampler
         beats:
           - "A basic sampler needs many steps before the image settles."
-          - "A better solver reaches the same quality much sooner, which is the same picture for a fraction of the compute."
+          - "A better solver reaches the same quality sooner. It makes the same picture with fewer steps."
       - name: Teaching it something new
         why: "Almost every production use needs a subject the base model never saw."
         plain:
@@ -3912,8 +3975,8 @@ topics:
         plain:
           - >-
               Conformal prediction gives a set of answers instead of one, with a promise
-              attached. Ask for ninety per cent and the true answer is in the set ninety
-              per cent of the time.
+              attached. Ask for ninety per cent coverage. Across many cases, the set
+              should contain the true answer nine times out of ten.
           - >-
               The promise is real but narrow. It holds on average across all inputs. It says nothing about any single input. It also needs new data to resemble the calibration data.
         covers:
@@ -3983,9 +4046,8 @@ topics:
           - >-
               Abstain on the least confident cases and accuracy on the rest climbs.
           - >-
-              Answer everything and you accept the errors that come with it. The curve
-              between those two is where you choose a threshold, and the cost of a
-              mistake decides where.
+              Answer everything and you accept more errors. The cost of a mistake tells
+              you where to set the confidence threshold.
         scene:
           kind: "defer"
           inflow: "Every case arrives"
@@ -4019,8 +4081,8 @@ topics:
         why: "Language models are the open frontier here, and where your own work sits."
         beats:
           - >-
-              For a language model there is no single number to read off, because the
-              same meaning has many phrasings.
+              A language model has no single uncertainty number. The same meaning can
+              have many phrasings.
           - >-
               Token probability is available and misleading. It measures wording as much
               as meaning.
@@ -4135,8 +4197,8 @@ topics:
               Looking at what lights up tells you what correlates. To claim a mechanism
               you have to intervene and watch the behaviour change.
           - >-
-              Patching does that. Run a clean input, run a corrupted one, then copy one
-              activation across and see if the answer moves. That is a causal test.
+              Patching does that. Run one clean input and one corrupted input. Copy an
+              activation between them, then see whether the answer changes.
         covers:
           - Logit lens and tuned lens
           - "Activation patching and causal tracing"
@@ -4205,16 +4267,16 @@ topics:
           - >-
               Decode back and try to reproduce the original activations.
           - >-
-              Compare. Good reconstruction with sparse activity is the goal, and recent
-              work found the resulting features often lose to a plain probe.
+              Compare the result. You want good reconstruction with few active units.
+              Recent features can still lose to a simple probe.
         plain:
           - >-
               Since concepts are packed into overlapping directions, the idea is to
               unpack them. Train a wide layer that reconstructs activations using only a
               few active units at a time.
           - >-
-              Recent results are humbling. On real tasks like finding a concept, a plain
-              probe on the raw activations often beats the unpacked features.
+              Recent results are humbling. A simple probe can search raw activations for
+              a concept. It often beats the unpacked features on this task.
         covers:
           - Sparse autoencoders and the reconstruction-sparsity trade
           - "Variants: top-k, gated, JumpReLU"
@@ -4343,8 +4405,8 @@ topics:
               dependence.
         plain:
           - >-
-              Three broad concerns. People misusing a capable system, a system pursuing
-              the wrong goal, and harms that come from scale and dependence.
+              Harm has several sources. People can misuse a system, or the system can
+              pursue the wrong goal. Scale can spread either harm.
           - >-
               Have a position and a threat model. Vagueness reads badly, and so does
               certainty about questions the field has genuinely not settled.
@@ -4463,8 +4525,8 @@ topics:
               attached is theatre.
         plain:
           - >-
-              Most safety work is evaluation. Decide what capability would be dangerous,
-              build a test for it, and set a threshold that changes a decision.
+              Most safety work is evaluation. Name the capability that would be
+              dangerous. Build a test, then set a threshold that changes a decision.
           - >-
               An evaluation nobody would act on is theatre. Write down in advance what
               happens if the model crosses the line.
@@ -4535,6 +4597,12 @@ topics:
           - >-
               And in modalities beyond text, for the same reason. Measuring the shape is
               the open work.
+        scene:
+          kind: defer
+          inflow: Model answers
+          answer: "Clear case: answer"
+          aside: "Unsure case: abstain"
+          alt: "A model answers clear cases and abstains when it is unsure."
         plain:
           - >-
               This is your own contribution, so it should be the sharpest section. A
@@ -4673,6 +4741,13 @@ topics:
               result.
           - >-
               Then judge, against what you wrote down at the start.
+        scene:
+          kind: split
+          parts:
+            - {k: Baseline, w: 1}
+            - {k: One change, w: 1, on: true}
+            - {k: Compare, w: 1}
+          alt: "A fair experiment changes one thing before comparing results."
         plain:
           - >-
               An experiment is a prediction plus a way of being wrong. Without the
@@ -4967,14 +5042,18 @@ topics:
               middle gets used least.
           - >-
               Too much and the useful material is buried. Treat a long context as a budget you spend.
+        scene:
+          kind: tokens
+          rows:
+            - {k: Context, parts: [Instructions, Examples, Evidence, Question]}
+          alt: "A context window holds instructions, examples, evidence, and a question."
         plain:
           - >-
               Treat a long context as a budget you spend. What you leave
               out matters as much as what you put in.
           - >-
-              Material in the middle of a long prompt gets used least. Put the important
-              things near the start or the end, and keep the prefix stable so caching
-              works.
+              Material in the middle of a long prompt gets used least. Put important
+              text near the start or end. Keep the opening stable for caching.
         covers:
           - System prompt design and stable structure
           - Where to place retrieved content and why
@@ -5039,8 +5118,8 @@ topics:
           - >-
               Compare on the whole set. The one example you happened to try proves nothing.
           - >-
-              Keep it or revert it, then leave the set in place as a regression suite
-              for the next model upgrade.
+              Keep or revert the change. Leave the test set in place for the next model
+              upgrade.
         plain:
           - >-
               Without an evaluation set you are guessing. You will believe your last change helped, because you want it to.
@@ -5075,8 +5154,8 @@ topics:
               Keep your instructions above it and assert they take priority. Also helps
               a little.
           - >-
-              The defence that holds is limiting what the tools can do, so a successful
-              injection cannot reach anything important.
+              Limit what each tool can do. Then a successful prompt injection still
+              cannot reach sensitive actions or data.
           - >-
               Then attack your own prompt. If you have not tried, you do not know.
         plain:
@@ -5121,8 +5200,8 @@ topics:
               Prompting is one lever among several. Few-shot examples, retrieval,
               fine-tuning and an agent loop all sit on the same shelf.
           - >-
-              Know when the prompt has hit its ceiling. If the failures are about
-              missing knowledge or a bad dataset, more prompt wording will not fix them.
+              Know when the prompt has hit its ceiling. A prompt cannot add missing
+              knowledge or repair bad training data.
         covers:
           - Prompt versus few-shot versus retrieval versus fine-tune versus agent loop
           - Cost, latency and maintenance of each
@@ -5218,8 +5297,8 @@ topics:
               Tools are how the agent touches the world. The schema and the description
               are read as part of the prompt, so they are prompt engineering.
           - >-
-              Most agent failures are tool failures. Before blaming the model, fix the
-              names, sharpen the descriptions, and make errors say what to do next.
+              Most agent failures are tool failures. Start with clear tool names and
+              descriptions. Error messages should say what to do next.
         covers:
           - Tool schema design and naming
           - Descriptions as prompts, and their effect on selection
@@ -5370,8 +5449,8 @@ topics:
               Run it again, and keep the case as a regression test.
         plain:
           - >-
-              Agent evaluation is harder than model evaluation, because the final answer
-              hides the path taken to reach it.
+              A final answer hides the path an agent took. Agent tests must inspect that
+              path too.
           - >-
               Benchmark scores can also be earned without doing the task. Read the
               trajectories, and ask how a score could be faked before trusting it.
@@ -5412,9 +5491,8 @@ topics:
               An agent has permissions, which changes the risk. Text that arrives from a
               web page or a tool can try to redirect it.
           - >-
-              The defence that holds is structural. Scope the credentials, separate the
-              plan from the untrusted data, and require approval for anything you cannot
-              undo.
+              The defence is structural. Limit each credential and keep untrusted data
+              away from the plan. Require approval before permanent actions.
         covers:
           - Prompt injection through tool output and web content
           - Capabilities and information-flow control as an out-of-band defence
@@ -5494,8 +5572,8 @@ topics:
         why: "Training-serving skew is the classic production bug."
         beats:
           - >-
-              At training time you have the whole history in one table and all the time
-              in the world.
+              Training uses a saved table of past data. Live predictions only know what
+              has arrived so far.
           - >-
               At serving time you have one row and a latency budget. Those two rarely
               produce identical features, and that gap is the classic production bug.
@@ -5612,6 +5690,12 @@ topics:
           - >-
               And have the rollback tested before you need it. Deciding under pressure
               goes badly.
+        scene:
+          kind: split
+          parts:
+            - {k: Old model, w: 9}
+            - {k: New model, w: 1, on: true}
+          alt: "Most traffic stays on the old model during a small canary release."
         plain:
           - >-
               Never swap a model straight into production. Run it alongside the old one
@@ -5821,8 +5905,8 @@ topics:
               Batch processing moves large amounts of data on a schedule. Spark spreads
               the work across machines and the slow part is usually the shuffle.
           - >-
-              Skew is the usual culprit. One key holds most of the rows, one machine
-              does most of the work, and everything waits for it.
+              Skew is the usual culprit. One key may hold most rows. Then one machine
+              works while the others wait.
         covers:
           - "SQL depth: window functions, CTEs, join strategies, anti-joins"
           - Query plans and reading them
@@ -5852,6 +5936,12 @@ topics:
           - >-
               The window closes and emits its answer. Wait too little and you drop real
               data. Too long and nothing finalises.
+        scene:
+          kind: growing
+          steps: 4
+          tick: event
+          cap: "State grows while late events arrive."
+          alt: "A stream adds four events to a growing state."
         plain:
           - >-
               Streaming is where correctness gets subtle. Events arrive late, out of
@@ -5924,8 +6014,8 @@ topics:
           - >-
               Below that, cleaned and typed data.
           - >-
-              At the base, the raw landing zone, kept exactly as it arrived so you can
-              always rebuild upward.
+              The base is the raw landing zone. Keep it unchanged so you can rebuild
+              every later layer.
         plain:
           - >-
               The architecture question is how raw data becomes trusted tables. Layers
@@ -6096,8 +6186,8 @@ topics:
               The goal is not to invent cryptography. It is to avoid misusing it, which
               is where real systems break.
           - >-
-              Hashing is not encryption. Passwords need a slow function with a salt,
-              because a fast hash is exactly what an attacker wants.
+              Hashing is not encryption. Passwords need a slow function and a unique
+              salt. Fast hashes let attackers test guesses too quickly.
         covers:
           - Symmetric versus asymmetric encryption
           - Hashing versus encryption versus encoding
@@ -6133,8 +6223,14 @@ topics:
               Encode on the way out, for the context it lands in. This is what stops
               cross-site scripting.
           - >-
-              And run with the least privilege that works, so a bug that gets through
-              reaches as little as possible.
+              Give the service only the access it needs. Then a bug can reach less of
+              the system.
+        scene:
+          kind: boundary
+          input: Untrusted input
+          gate: Validate
+          app: Small access area
+          alt: "Untrusted input crosses validation before reaching a limited service."
         plain:
           - >-
               These are the attacks you actually meet. Most come from trusting input
@@ -6213,9 +6309,8 @@ topics:
               Machine learning adds its own attack surface. The model, the training data
               and the weights are all targets.
           - >-
-              Enough queries can extract a copy of the model or reveal whether someone
-              was in the training set. Loading a checkpoint from an untrusted source can
-              run code.
+              Repeated queries can help steal a copy of the model. They may also expose
+              who was in the training data. An untrusted checkpoint can run code.
         covers:
           - Training data poisoning and backdoors
           - Model extraction and stealing

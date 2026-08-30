@@ -719,6 +719,26 @@ so one number moves the whole layout together. Settings persist under `iv:read`.
 Do not add a second "dyslexia mode" stylesheet. Everything is a custom property
 precisely so there is only one set of rules to keep correct.
 
+### Learning aids (`/interview/`)
+
+Each module carries four controls beyond its diagram, all built for a reader who
+learns by doing and may be dyslexic:
+
+| Control | What it does | State |
+|---|---|---|
+| **Focus** | Dims every other module so one idea is on screen at a time | none, per page |
+| **Listen** | Reads the module aloud via `speechSynthesis`; hides itself when the API is absent | none |
+| **Scratchpad** | A textarea per module, for writing the idea in your own words | `iv:note:<topic>:<index>` |
+| **Mark revised** | Feeds the progress ring on the page and the hub card | `iv:done:<topic>` |
+
+The page also carries a round timer (5/25 minute focus, 5 minute break). Spaced
+recall is the reason it exists, so the phase labels above each block — See it,
+Understand it, Build the chunk, Try without notes — name the stage rather than
+decorate it.
+
+`Listen` must stay guarded. `speechSynthesis` is absent in some browsers and in
+headless test runs, so the button hides rather than throwing.
+
 ### Module players (`/interview/`)
 
 Every module carries `beats:` — one caption per part of its own `viz`. The
@@ -812,6 +832,11 @@ needs to resize. Use the image skill to *specify* a picture, then codify it.
 
 The same rule as the diagrams applies: labels come from the module's own
 content, and no scene carries a number.
+
+Every scene needs an `alt:` line in its `scene:` block. It is the only
+description a screen reader gets, since the drawing itself is decorative markup.
+All 23 tracks carry at least one scene, so no track is left with abstract
+diagrams alone.
 
 ### Module diagrams (`/interview/`)
 

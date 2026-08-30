@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   Interview revision — hub (/interview/) and the eighteen
+   Interview revision — hub (/interview/) and the twenty-three
    syllabus pages (/transformers/, /ai-safety/, …).
    Loaded only on those pages via `extra_css` front matter.
    Every colour comes from the tokens in styles.css, so both
@@ -20,11 +20,11 @@
      spacing and measure on the page moves together from four numbers.
      The defaults below are what an unconfigured reader gets. */
   --rd-scale: 1;      /* multiplies every font size */
-  --rd-lead: 1.6;     /* body line height, never set below 1.5 */
-  --rd-track: 0em;    /* extra letter spacing */
+  --rd-lead: 1.65;    /* body line height, never set below 1.5 */
+  --rd-track: 0.01em; /* a light default; the reader can raise it */
   --rd-measure: 66ch; /* longest line of prose */
-  --rd-caps: uppercase;
-  --rd-caps-track: 0.12em;
+  --rd-caps: none;
+  --rd-caps-track: 0.02em;
 }
 
 .interview-hub .page-header,
@@ -370,6 +370,79 @@
   text-underline-offset: 3px;
 }
 
+/* ── Learning loop ──────────────────────────────────────── */
+.syl-method {
+  display: grid;
+  grid-template-columns: minmax(15rem, 1.1fr) minmax(18rem, 1fr);
+  gap: 1.2rem 2rem;
+  padding: var(--card-pad-lg);
+  margin: 0 0 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.syl-method-copy h2 {
+  margin: 0.35rem 0 0.55rem;
+  font: 600 var(--fs-title) / 1.35 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+.syl-method-copy p {
+  max-width: 46ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: var(--rd-lead);
+  color: var(--muted);
+}
+.syl-phase {
+  display: block;
+  margin: 0 0 0.55rem;
+  font: 600 var(--fs-2xs) / 1.35 "Space Grotesk", sans-serif;
+  color: var(--accent);
+  letter-spacing: var(--rd-caps-track);
+  text-transform: var(--rd-caps);
+}
+.syl-method-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.syl-method-steps li {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+.syl-method-steps b,
+.syl-method-steps span { display: block; }
+.syl-method-steps b { margin-bottom: 0.15rem; font-size: var(--fs-xs); color: var(--text); }
+.syl-method-steps span { font-size: var(--fs-2xs); line-height: 1.5; color: var(--muted); }
+.syl-timer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+.syl-timer-label { margin-right: 0.25rem; font-size: var(--fs-xs); color: var(--text); }
+.syl-timer button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.syl-timer button:hover,
+.syl-timer button[aria-pressed="true"] { border-color: var(--cta); color: var(--text); }
+.syl-timer output { flex-basis: 100%; font-size: var(--fs-xs); color: var(--muted); }
+
 /* ── Module index ─────────────────────────────────────── */
 .syl-toc {
   display: grid;
@@ -436,7 +509,17 @@
 }
 .syl-module-why { font-size: var(--fs-sm); line-height: 1.55; color: var(--muted); margin: 0; max-width: 48ch; }
 
-.syl-done {
+.syl-module-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  max-width: 19rem;
+}
+.syl-done,
+.syl-focus,
+.syl-listen {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -449,9 +532,16 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.syl-done .ivi { font-size: 0.95rem; opacity: 0.55; }
-.syl-done[aria-pressed="true"] { color: var(--cta); border-color: var(--cta); }
-.syl-done[aria-pressed="true"] .ivi { opacity: 1; }
+.syl-done .ivi,
+.syl-focus .ivi,
+.syl-listen .ivi { font-size: 0.95rem; opacity: 0.55; }
+.syl-done[aria-pressed="true"],
+.syl-focus[aria-pressed="true"],
+.syl-listen[aria-pressed="true"] { color: var(--cta); border-color: var(--cta); }
+.syl-done[aria-pressed="true"] .ivi,
+.syl-focus[aria-pressed="true"] .ivi,
+.syl-listen[aria-pressed="true"] .ivi { opacity: 1; }
+.syl-page.is-module-focus .syl-module:not(.is-focus-target) { display: none; }
 
 .syl-covers {
   list-style: none;
@@ -495,6 +585,19 @@
   color: var(--accent);
   margin-bottom: 0.4rem;
 }
+.syl-notes { margin-top: 0.9rem; border-top: 1px dashed var(--line); padding-top: 0.75rem; }
+.syl-notes summary { width: fit-content; cursor: pointer; font-size: var(--fs-xs); color: var(--muted); }
+.syl-notes label { display: block; margin: 0.65rem 0 0.45rem; font-size: var(--fs-xs); line-height: var(--rd-lead); color: var(--muted); }
+.syl-notes textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 0.7rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font: 400 var(--fs-sm) / var(--rd-lead) "Manrope", sans-serif;
+}
 
 /* ════════════════════════════════════════════════════════
    Module diagrams
@@ -503,8 +606,15 @@
    so labels wrap and stay selectable at any width.
    ════════════════════════════════════════════════════════ */
 
+.syl-scene:empty,
 .syl-viz:empty { display: none; }
+.syl-scene { margin: 0 0 1rem; }
 .syl-viz { margin: 0 0 1.3rem; }
+.syl-covers-title {
+  margin: 0 0 0.65rem;
+  font: 600 var(--fs-xs) / 1.4 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
 .ivz {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -990,8 +1100,10 @@
 @media (max-width: 720px) {
   .syl-header { flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem; }
   .syl-header-ring { flex-direction: row; align-items: center; }
+  .syl-method { grid-template-columns: 1fr; }
+  .syl-timer { grid-column: 1; }
   .syl-module-head { grid-template-columns: 2.4rem 1fr; }
-  .syl-done { grid-column: 1 / 3; justify-content: center; }
+  .syl-module-actions { grid-column: 1 / 3; max-width: none; justify-content: flex-start; }
 }
 
 @media (max-width: 640px) {
@@ -1237,6 +1349,46 @@
   line-height: 1.5;
 }
 
+/* Anime.js-inspired motion grammar, kept in CSS so the illustration is still
+   complete without a library: short stagger, one viewport play, draw-on paths. */
+.ivs.is-scene-anim [data-scene-step] {
+  opacity: 0;
+  transform: translateY(5px);
+}
+.ivs.is-scene-anim.is-scene-playing [data-scene-step] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.55s var(--an-smooth, ease) calc(var(--scene-step) * 90ms),
+    transform 0.55s var(--an-smooth, ease) calc(var(--scene-step) * 90ms);
+}
+.ivs.is-scene-anim .ivs-loss,
+.ivs.is-scene-anim .ivs-wide,
+.ivs.is-scene-anim .ivs-narrow {
+  stroke-dasharray: var(--scene-len);
+  stroke-dashoffset: var(--scene-len);
+  opacity: 1;
+  transform: none;
+}
+.ivs.is-scene-anim.is-scene-playing .ivs-loss,
+.ivs.is-scene-anim.is-scene-playing .ivs-wide,
+.ivs.is-scene-anim.is-scene-playing .ivs-narrow {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s var(--an-smooth, ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ivs.is-scene-anim [data-scene-step],
+  .ivs.is-scene-anim .ivs-loss,
+  .ivs.is-scene-anim .ivs-wide,
+  .ivs.is-scene-anim .ivs-narrow {
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
 /* tokens ─ one sentence cut two ways */
 .ivs-tokrow { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
 .ivs-tokrow + .ivs-tokrow { margin-top: 0.55rem; }
@@ -1380,6 +1532,159 @@
   color: var(--accent);
 }
 .ivs-out-a { border-color: var(--cta); }
+
+/* descent ─ four coherent positions on one loss curve */
+.ivs-descent svg { display: block; width: 100%; height: 7rem; }
+.ivs-loss { fill: none; stroke: var(--accent); stroke-width: 2; }
+.ivs-step { fill: none; stroke: var(--cta); stroke-width: 2; }
+.ivs-arrowhead { fill: var(--cta); }
+.ivs-ball { fill: var(--cta); stroke: var(--bg); stroke-width: 2; }
+.ivs-ball.is-past { opacity: 0.48; }
+
+/* normaxis ─ the same activation table, read along two axes */
+.ivs-normaxis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.ivs-normcase { display: grid; gap: 0.45rem; }
+.ivs-normcase > span { font-size: var(--fs-xs); color: var(--text); }
+.ivs-normgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.ivs-normgrid i {
+  aspect-ratio: 1.8;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--surface);
+}
+.ivs-normgrid i.is-on { border-color: var(--cta); background: var(--stat-fill); }
+
+/* fitpaths ─ smooth pattern beside memorised path */
+.ivs-fitpaths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.ivs-fitpaths svg { display: block; width: 100%; height: 5rem; }
+.ivs-fitpaths circle { fill: var(--accent); }
+.ivs-fitpaths path { fill: none; stroke-width: 2; }
+.ivs-fit-good { stroke: var(--cta); }
+.ivs-fit-hard { stroke: var(--accent); stroke-dasharray: 3 2; }
+.ivs-fitpaths span { display: block; font-size: var(--fs-2xs); color: var(--muted); text-align: center; }
+
+/* checkpoint ─ stored and discarded forward states */
+.ivs-checkrow { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+.ivs-checkrow span {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--cta);
+  border-radius: var(--radius-sm);
+  background: var(--stat-fill);
+  color: var(--text);
+  font-size: var(--fs-xs);
+}
+.ivs-checkrow span.is-drop { border-style: dashed; color: var(--muted); background: var(--surface); }
+.ivs-checkrow b { color: var(--accent); font-weight: 400; }
+.ivs-checkback { display: flex; justify-content: space-between; gap: 0.7rem; margin-top: 0.75rem; flex-wrap: wrap; }
+.ivs-checkback span { font-size: var(--fs-xs); color: var(--cta); }
+.ivs-checkback i { font-style: normal; font-size: var(--fs-2xs); color: var(--muted); }
+
+/* inputshape ─ one grid, one sequence, one graph */
+.ivs-inputshape { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+.ivs-inputshape > div { display: grid; place-items: center; gap: 0.5rem; min-width: 0; }
+.ivs-inputshape b { font: 500 var(--fs-2xs) "Manrope", sans-serif; color: var(--muted); }
+.ivs-pixelmini { width: 3.7rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.ivs-pixelmini i { aspect-ratio: 1; border: 1px solid var(--line-strong); background: var(--surface); }
+.ivs-seqmini { display: flex; gap: 4px; }
+.ivs-seqmini i { width: 0.8rem; height: 2.5rem; border: 1px solid var(--cta); border-radius: 2px; background: var(--stat-fill); }
+.ivs-inputshape svg { width: 4.2rem; height: 3rem; }
+.ivs-inputshape svg path { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.ivs-inputshape svg circle { fill: var(--surface); stroke: var(--cta); stroke-width: 1.5; }
+
+/* replicas ─ same model, different shards */
+.ivs-replicarow { display: grid; grid-template-columns: repeat(4, minmax(3rem, 1fr)); gap: 0.65rem; }
+.ivs-replicarow > div { display: grid; justify-items: center; gap: 0.35rem; }
+.ivs-shard { width: 70%; height: 0.5rem; border-radius: 999px; background: var(--accent); opacity: 0.55; }
+.ivs-device {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1.5px solid var(--cta);
+  border-radius: var(--radius-sm);
+  background: var(--stat-fill);
+  color: var(--text);
+  font: 600 var(--fs-xs) "Space Grotesk", sans-serif;
+}
+
+/* trace ─ inspect the pipeline until the first bad state */
+.ivs-trace { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+.ivs-trace > div { position: relative; display: grid; justify-items: center; gap: 0.4rem; }
+.ivs-trace > div:not(:last-child)::after {
+  content: "\2192";
+  position: absolute;
+  right: -0.45rem;
+  top: 0.15rem;
+  color: var(--accent);
+}
+.ivs-trace i { width: 0.9rem; height: 0.9rem; border-radius: 50%; border: 1.5px solid var(--cta); background: var(--stat-fill); }
+.ivs-trace span { font-size: var(--fs-2xs); color: var(--text); text-align: center; }
+.ivs-trace .is-bad i { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 28%, transparent); }
+.ivs-trace .is-after { opacity: 0.38; }
+
+/* projection ─ a perpendicular drop to the nearest point */
+.ivs-projection svg { display: block; width: 100%; height: 7rem; }
+.ivs-proj-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.ivs-proj-drop { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.ivs-proj-source { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.ivs-proj-result { fill: var(--cta); stroke: var(--bg); stroke-width: 2; }
+.ivs-proj-angle { fill: none; stroke: var(--muted); stroke-width: 1; }
+
+/* points ─ distance carries similarity */
+.ivs-points svg { display: block; width: 100%; height: 6.5rem; }
+.ivs-point { fill: var(--muted); opacity: 0.65; }
+.ivs-point.is-query { fill: var(--accent); opacity: 1; }
+.ivs-point.is-near { fill: var(--cta); opacity: 1; }
+.ivs-near-link { fill: none; stroke: var(--cta); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.ivs-pointkey { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+.ivs-pointkey span { font-size: var(--fs-2xs); color: var(--muted); }
+.ivs-pointkey span:first-child { color: var(--accent); }
+.ivs-pointkey span:last-child { color: var(--cta); }
+
+/* shrink ─ a model approaching a fixed device budget */
+.ivs-shrink { position: relative; display: grid; gap: 0.6rem; overflow: hidden; }
+.ivs-budget { position: absolute; top: 0.6rem; bottom: 2.4rem; left: 62%; width: 1px; border-left: 1px dashed var(--cta); }
+.ivs-shrinkstep { display: flex; align-items: center; gap: 0.65rem; width: var(--shrink); }
+.ivs-shrinkstep i { flex: 1; height: 1.2rem; border: 1px solid var(--accent); border-radius: 3px; background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.ivs-shrinkstep:last-of-type i { border-color: var(--cta); background: var(--stat-fill); }
+.ivs-shrinkstep span { min-width: 6.4rem; font-size: var(--fs-2xs); color: var(--muted); }
+
+/* denoise ─ static resolving into one shape */
+.ivs-denoise { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; }
+.ivs-denoise em { color: var(--accent); font-style: normal; }
+.ivs-denoisestep { display: grid; justify-items: center; gap: 0.35rem; }
+.ivs-denoisestep > span { width: 3.1rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.ivs-denoisestep i { aspect-ratio: 1; border: 1px solid var(--line-strong); background: var(--surface); }
+.ivs-denoisestep i.is-on { background: color-mix(in srgb, var(--cta) 55%, transparent); border-color: var(--cta); }
+.ivs-denoisestep i.is-noise { background: color-mix(in srgb, var(--accent) 48%, transparent); border-color: var(--accent); }
+.ivs-denoisestep b { font: 500 var(--fs-2xs) "Manrope", sans-serif; color: var(--muted); }
+
+/* boundary ─ all outside input passes through one gate */
+.ivs-boundary { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.75rem; }
+.ivs-zone,
+.ivs-gate { min-height: 4.2rem; display: grid; place-items: center; padding: 0.6rem; border-radius: var(--radius-sm); text-align: center; }
+.ivs-zone { border: 1px solid var(--line-strong); background: var(--surface); }
+.ivs-zone.is-untrusted { border-style: dashed; border-color: var(--accent); }
+.ivs-zone.is-trusted { border-color: var(--cta); }
+.ivs-zone span,
+.ivs-gate span { font-size: var(--fs-xs); color: var(--text); }
+.ivs-gate { position: relative; border-left: 2px solid var(--cta); border-right: 2px solid var(--cta); }
+.ivs-gate::before,
+.ivs-gate::after { content: "\2192"; position: absolute; top: 50%; transform: translateY(-50%); color: var(--accent); }
+.ivs-gate::before { left: -0.7rem; }
+.ivs-gate::after { right: -0.7rem; }
+
+@media (max-width: 34rem) {
+  .ivs-normaxis,
+  .ivs-fitpaths { grid-template-columns: 1fr; }
+  .ivs-inputshape { gap: 0.45rem; }
+  .ivs-trace { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1rem; }
+  .ivs-trace > div:nth-child(2)::after { content: none; }
+  .ivs-boundary { grid-template-columns: 1fr; }
+  .ivs-gate { width: 80%; justify-self: center; border: 2px solid var(--cta); }
+  .ivs-gate::before,
+  .ivs-gate::after { content: none; }
+}
 
 /* ════════════════════════════════════════════════════════
    Manim conventions

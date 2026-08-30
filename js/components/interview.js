@@ -1,5 +1,5 @@
 /**
- * Interview revision — /interview/ and the eighteen syllabus pages.
+ * Interview revision — /interview/ and the twenty-three syllabus pages.
  *
  * Three jobs:
  *   1. Turn each module's `viz` block into a diagram (BUILD, eight archetypes)
@@ -282,6 +282,198 @@
         '<li class="is-b">' + esc(v.after) + '</li></ul></div>';
     },
 
+    /* type: one ball taking four steps down one loss curve
+       subject: gradient descent as repeated local moves
+       environment: a wide valley, with positions ordered left to right
+       technical: every position lies on the same curve and moves downhill
+       constraints: no second optimiser, no formula, no local-minimum claim */
+    descent: function (v) {
+      return '<div class="ivs ivs-descent">' +
+        '<svg viewBox="0 0 320 126" role="img" aria-hidden="true">' +
+        '<path class="ivs-loss" d="M14 20C68 32 79 103 170 104C246 105 269 48 306 18"/>' +
+        '<path class="ivs-step" d="M56 50L91 78M104 85L137 99M151 102L178 104"/>' +
+        '<path class="ivs-arrowhead" d="M91 78l-9-2 5-7zM137 99l-9-1 4-8zM178 104l-8 3 1-9z"/>' +
+        '<circle class="ivs-ball is-past" cx="50" cy="46" r="6"/>' +
+        '<circle class="ivs-ball is-past" cx="98" cy="82" r="6"/>' +
+        '<circle class="ivs-ball is-past" cx="144" cy="101" r="6"/>' +
+        '<circle class="ivs-ball" cx="185" cy="104" r="7"/>' +
+        '</svg><span class="ivs-cap">' + esc(v.cap || '') + '</span></div>';
+    },
+
+    /* type: a batch-by-feature table with one row and one column marked
+       subject: the different axes used by batch norm and layer norm
+       environment: two copies of the same activation table
+       technical: batch norm marks one feature across examples; layer norm
+                  marks all features inside one example
+       constraints: no claim about which method is better */
+    normaxis: function (v) {
+      var grid = function (kind, label) {
+        var cells = '';
+        for (var y = 0; y < 4; y++) {
+          for (var x = 0; x < 5; x++) {
+            var on = kind === 'batch' ? x === 2 : y === 1;
+            cells += '<i' + (on ? ' class="is-on"' : '') + '></i>';
+          }
+        }
+        return '<div class="ivs-normcase"><span>' + esc(label) + '</span>' +
+          '<div class="ivs-normgrid">' + cells + '</div></div>';
+      };
+      return '<div class="ivs ivs-normaxis">' +
+        grid('batch', v.batch || 'Batch norm') +
+        grid('layer', v.layer || 'Layer norm') + '</div>';
+    },
+
+    /* type: the same observations with a smooth and a memorised path
+       subject: fitting the pattern versus fitting every training point
+       environment: two small plots sharing the same observations
+       technical: both paths touch the data; only one keeps a smooth shape
+       constraints: no accuracy values and no claim that smooth always wins */
+    fitpaths: function (v) {
+      var dots = '<circle cx="24" cy="54" r="3"/><circle cx="47" cy="39" r="3"/>' +
+        '<circle cx="72" cy="45" r="3"/><circle cx="96" cy="22" r="3"/>' +
+        '<circle cx="119" cy="29" r="3"/>';
+      return '<div class="ivs ivs-fitpaths">' +
+        '<div><svg viewBox="0 0 140 72" role="img" aria-hidden="true">' + dots +
+        '<path class="ivs-fit-good" d="M14 58C44 47 74 39 128 23"/></svg>' +
+        '<span>' + esc(v.pattern || 'Learns the pattern') + '</span></div>' +
+        '<div><svg viewBox="0 0 140 72" role="img" aria-hidden="true">' + dots +
+        '<path class="ivs-fit-hard" d="M14 61C26 49 29 58 47 39S61 53 72 45S84 23 96 22S108 38 119 29S127 25 132 20"/></svg>' +
+        '<span>' + esc(v.memory || 'Learns every point') + '</span></div></div>';
+    },
+
+    /* type: a forward chain whose middle states occupy memory
+       subject: activation checkpointing trading memory for recomputation
+       environment: forward blocks above, backward arrow below
+       technical: discarded states use dashed outlines and point back to the
+                  exact block that must be run again
+       constraints: no byte estimate, no hardware-specific claim */
+    checkpoint: function (v) {
+      var labels = v.blocks || ['Input', 'Layer 1', 'Layer 2', 'Loss'];
+      return '<div class="ivs ivs-checkpoint"><div class="ivs-checkrow">' +
+        labels.map(function (t, i) {
+          return '<span' + (i === 1 || i === 2 ? ' class="is-drop"' : '') + '>' + esc(t) + '</span>';
+        }).join('<b aria-hidden="true">&rarr;</b>') +
+        '</div><div class="ivs-checkback"><span>&larr; ' + esc(v.back || 'Backward pass') +
+        '</span><i>' + esc(v.cap || 'Recompute discarded activations') + '</i></div></div>';
+    },
+
+    /* type: three literal input shapes
+       subject: architecture choice following the structure of the input
+       environment: a grid, an ordered row and a connected graph
+       technical: each object exposes only the relation its model can reuse
+       constraints: no model ranking and no exhaustive taxonomy */
+    inputshape: function (v) {
+      var pixels = new Array(17).join('<i></i>');
+      return '<div class="ivs ivs-inputshape">' +
+        '<div><span class="ivs-pixelmini">' + pixels + '</span><b>' + esc(v.grid || 'Grid') + '</b></div>' +
+        '<div><span class="ivs-seqmini"><i></i><i></i><i></i><i></i></span><b>' + esc(v.sequence || 'Sequence') + '</b></div>' +
+        '<div><svg viewBox="0 0 72 52" role="img" aria-hidden="true"><path d="M12 38L31 13L58 21L51 43L12 38M31 13L51 43"/><circle cx="12" cy="38" r="5"/><circle cx="31" cy="13" r="5"/><circle cx="58" cy="21" r="5"/><circle cx="51" cy="43" r="5"/></svg><b>' + esc(v.graph || 'Graph') + '</b></div></div>';
+    },
+
+    /* type: identical model copies fed different data shards
+       subject: data parallel training
+       environment: one data row above four matching devices
+       technical: every device holds the same model mark; each gets one shard
+       constraints: no device count recommendation and no speed-up claim */
+    replicas: function (v) {
+      var devices = '';
+      for (var i = 0; i < 4; i++) {
+        devices += '<div><i class="ivs-shard"></i><span class="ivs-device">M</span></div>';
+      }
+      return '<div class="ivs ivs-replicas"><div class="ivs-replicarow">' + devices + '</div>' +
+        '<span class="ivs-cap">' + esc(v.cap || '') + '</span></div>';
+    },
+
+    /* type: a pipeline inspected from its first stage onward
+       subject: finding the earliest point where a training run becomes wrong
+       environment: four stages left to right, with one marked as the failure
+       technical: later stages are dimmed because their output is downstream
+       constraints: no claim that every failure starts in the data */
+    trace: function (v) {
+      var steps = v.steps || ['Batch', 'Loss', 'Gradients', 'Update'];
+      var bad = typeof v.bad === 'number' ? v.bad : 1;
+      return '<div class="ivs ivs-trace">' + steps.map(function (t, i) {
+        return '<div class="' + (i === bad ? 'is-bad' : i > bad ? 'is-after' : '') + '">' +
+          '<i aria-hidden="true"></i><span>' + esc(t) + '</span></div>';
+      }).join('') + '</div>';
+    },
+
+    /* type: one point dropped onto one line
+       subject: projection as the nearest point in a subspace
+       environment: source point above, dashed right-angle path, result on line
+       technical: the drop is perpendicular to the line
+       constraints: no second subspace and no normal-equation derivation */
+    projection: function (v) {
+      return '<div class="ivs ivs-projection"><svg viewBox="0 0 280 118" role="img" aria-hidden="true">' +
+        '<path class="ivs-proj-line" d="M20 96L260 34"/>' +
+        '<path class="ivs-proj-drop" d="M124 24L141 65"/>' +
+        '<circle class="ivs-proj-source" cx="124" cy="24" r="7"/>' +
+        '<circle class="ivs-proj-result" cx="141" cy="65" r="7"/>' +
+        '<path class="ivs-proj-angle" d="M136 55l10-4 4 10"/>' +
+        '</svg><span class="ivs-cap">' + esc(v.cap || '') + '</span></div>';
+    },
+
+    /* type: one query point among near and far neighbours
+       subject: similarity becoming distance in an embedding space
+       environment: a small two-dimensional field with one marked query
+       technical: the near pair is visibly closer than every far point
+       constraints: no axes, dimensions or numeric score */
+    points: function (v) {
+      return '<div class="ivs ivs-points"><svg viewBox="0 0 300 120" role="img" aria-hidden="true">' +
+        '<circle class="ivs-point is-query" cx="92" cy="60" r="8"/>' +
+        '<circle class="ivs-point is-near" cx="120" cy="48" r="6"/>' +
+        '<circle class="ivs-point" cx="226" cy="28" r="5"/>' +
+        '<circle class="ivs-point" cx="245" cy="86" r="5"/>' +
+        '<circle class="ivs-point" cx="188" cy="96" r="5"/>' +
+        '<path class="ivs-near-link" d="M100 57L114 51"/>' +
+        '</svg><div class="ivs-pointkey"><span>' + esc(v.query || 'Query') + '</span><span>' +
+        esc(v.near || 'Closest meaning') + '</span></div></div>';
+    },
+
+    /* type: one model shrinking until it fits a fixed device
+       subject: compression as a sequence of smaller representations
+       environment: three blocks approaching a dashed device budget
+       technical: each block is strictly smaller than the last
+       constraints: no compression ratio and no quality claim */
+    shrink: function (v) {
+      var labels = v.steps || ['Full model', 'Smaller model', 'Fits device'];
+      return '<div class="ivs ivs-shrink"><div class="ivs-budget" aria-hidden="true"></div>' +
+        labels.map(function (label, i) {
+          return '<div class="ivs-shrinkstep" style="--shrink:' + (100 - i * 24) + '%"><i></i><span>' + esc(label) + '</span></div>';
+        }).join('') + '<span class="ivs-cap">' + esc(v.cap || '') + '</span></div>';
+    },
+
+    /* type: four pixel grids moving from static to a simple shape
+       subject: diffusion sampling as repeated partial denoising
+       environment: grids ordered left to right
+       technical: random pixels decrease while one coherent shape emerges
+       constraints: no prompt, sampler or latent-space claim */
+    denoise: function (v) {
+      var patterns = [
+        [1,0,1,1,0,1,0,1,1,0,1,0,0,1,1,0],
+        [0,0,1,0,0,1,1,1,1,1,0,0,0,1,0,0],
+        [0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0],
+        [0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0]
+      ];
+      return '<div class="ivs ivs-denoise">' + patterns.map(function (pattern, i) {
+        return '<div class="ivs-denoisestep"><span>' + pattern.map(function (on, j) {
+          return '<i class="' + (on ? 'is-on' : '') + (i < 2 && j % 3 === 0 ? ' is-noise' : '') + '"></i>';
+        }).join('') + '</span><b>' + esc((v.labels || ['Noise', 'Less noise', 'Shape', 'Image'])[i]) + '</b></div>';
+      }).join('<em aria-hidden="true">&rarr;</em>') + '</div>';
+    },
+
+    /* type: untrusted input crossing one explicit validation boundary
+       subject: application security as validate, then encode
+       environment: hostile zone, gate, application zone
+       technical: all traffic passes through the gate
+       constraints: no list of attacks and no claim that validation is enough */
+    boundary: function (v) {
+      return '<div class="ivs ivs-boundary"><div class="ivs-zone is-untrusted"><span>' +
+        esc(v.input || 'Untrusted input') + '</span></div><div class="ivs-gate"><i aria-hidden="true"></i><span>' +
+        esc(v.gate || 'Validate and encode') + '</span></div><div class="ivs-zone is-trusted"><span>' +
+        esc(v.app || 'Application') + '</span></div></div>';
+    },
+
     /* type: grid of slots with more labels than slots
        subject: superposition, where concepts outnumber neurons
        environment: a row of slots, with labels stacked two deep on some
@@ -342,17 +534,25 @@
   /* A module may carry a scene alongside its diagram. The scene comes first,
      because a concrete picture is the easier way in. */
   function sceneFor(m) {
-    return m.scene ? diagram({ type: 'scene', kind: m.scene.kind, ...m.scene }) : '';
+    if (!m.scene) return '';
+    var picture = diagram({ type: 'scene', kind: m.scene.kind, ...m.scene });
+    if (!picture) return '';
+    var label = m.scene.alt || ('Illustration for ' + m.name);
+    return picture.replace('<div class="ivs ', '<div role="img" aria-label="' + esc(label) + '" class="ivs ');
   }
 
   /* Render one diagram into the slot each module already left for it. */
   function diagrams(d) {
     $$('.syl-module').forEach(function (el) {
       var slot = $('.syl-viz', el);
+      var sceneSlot = $('.syl-scene', el);
       var i = +el.getAttribute('data-i');
       if (!slot || !d.modules[i]) return;
-      slot.innerHTML = sceneFor(d.modules[i]) + diagram(d.modules[i].viz);
-      var viz = $('.syl-viz > .ivz:last-child', el) || $('.ivz', slot);
+      if (sceneSlot) sceneSlot.innerHTML = sceneFor(d.modules[i]);
+      slot.innerHTML = diagram(d.modules[i].viz);
+      var scene = sceneSlot ? $('.ivs', sceneSlot) : null;
+      if (scene) animateScene(scene);
+      var viz = $('.ivz', slot);
       if (viz) animate(viz, d.modules[i].beats);
     });
   }
@@ -397,6 +597,68 @@
   }
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Concrete scenes use the same four ideas as the track players: a timeline,
+     a draw-on path, a short stagger and one viewport trigger. The implementation
+     stays native so the pictures remain complete when a motion library or a CDN
+     is unavailable. */
+  var SCENE_PARTS = {
+    'ivs-tokens': '.ivs-tokrow',
+    'ivs-kernel': '.ivs-px, .ivs-win, .ivs-arrow, .ivs-out, .ivs-cap',
+    'ivs-growing': '.ivs-col, .ivs-cap',
+    'ivs-split': '.ivs-seg, .ivs-leak',
+    'ivs-narrowing': '.ivs-wide, .ivs-narrow, .ivs-key li',
+    'ivs-crowded': '.ivs-slot, .ivs-cap',
+    'ivs-sets': '.ivs-case',
+    'ivs-defer': '.ivs-in, .ivs-out-a, .ivs-out-b',
+    'ivs-descent': '.ivs-loss, .ivs-ball, .ivs-step, .ivs-arrowhead, .ivs-cap',
+    'ivs-normaxis': '.ivs-normcase',
+    'ivs-fitpaths': ':scope > div',
+    'ivs-checkpoint': '.ivs-checkrow span, .ivs-checkback',
+    'ivs-inputshape': ':scope > div',
+    'ivs-replicas': '.ivs-replicarow > div, .ivs-cap',
+    'ivs-trace': ':scope > div',
+    'ivs-projection': '.ivs-proj-line, .ivs-proj-source, .ivs-proj-drop, .ivs-proj-result, .ivs-cap',
+    'ivs-points': '.ivs-point, .ivs-near-link, .ivs-pointkey',
+    'ivs-shrink': '.ivs-shrinkstep, .ivs-cap',
+    'ivs-denoise': '.ivs-denoisestep',
+    'ivs-boundary': '.ivs-zone, .ivs-gate'
+  };
+
+  function animateScene(scene) {
+    var selector = '';
+    for (var cls in SCENE_PARTS) {
+      if (scene.classList.contains(cls)) { selector = SCENE_PARTS[cls]; break; }
+    }
+    if (!selector) return;
+    var parts = $$(selector, scene);
+    if (!parts.length || reduced) return;
+
+    parts.forEach(function (part, i) {
+      part.setAttribute('data-scene-step', i);
+      part.style.setProperty('--scene-step', i);
+    });
+
+    /* Draw the explanatory curve before the states on it appear. */
+    $$('.ivs-loss, .ivs-wide, .ivs-narrow', scene).forEach(function (path) {
+      try { path.style.setProperty('--scene-len', path.getTotalLength().toFixed(1)); }
+      catch (e) {}
+    });
+
+    scene.classList.add('is-scene-anim');
+    if (!('IntersectionObserver' in window)) {
+      scene.classList.add('is-scene-playing');
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-scene-playing');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
+    io.observe(scene);
+  }
 
   function animate(viz, beats) {
     var parts = partsOf(viz);
@@ -563,8 +825,8 @@
       btn.next.hidden = !on;
       btn.stop.hidden = !on;
       btn.prev.disabled = at <= 0;
+      btn.next.disabled = at >= parts.length - 1;
       at_label.textContent = on ? 'Part ' + (at + 1) + ' of ' + parts.length : '';
-      if (on && at === parts.length - 1) btn.next.textContent = '';
     }
 
     bar.addEventListener('click', function (e) {
@@ -591,7 +853,7 @@
      some readers. Saved under iv:read.
      ════════════════════════════════════════════════════════ */
 
-  var RD_DEFAULT = { scale: 1, lead: 1.6, track: 0, caps: 1, tint: 'none' };
+  var RD_DEFAULT = { scale: 1, lead: 1.65, track: 0.01, caps: 0, tint: 'none' };
 
   function readingControls() {
     var page = $('.syl-page') || $('.interview-hub');
@@ -705,6 +967,125 @@
   }
 
   /* ════════════════════════════════════════════════════════
+     Learning tools
+
+     These controls turn the page structure into a study loop. A short
+     timer lowers the cost of starting. Focus mode removes the other
+     modules. Read-aloud changes the input channel. The scratchpad keeps
+     working memory outside the reader's head. None is required to read
+     the page, and every note stays in this browser.
+     ════════════════════════════════════════════════════════ */
+
+  function learningTools(d) {
+    var page = $('.syl-page');
+    if (!page || !d) return;
+
+    var timer = $('#iv-timer');
+    if (timer) {
+      var timerId = null, endAt = 0, timerKind = 'focus';
+      var out = $('output', timer);
+      var stop = $('[data-timer-stop]', timer);
+      var choices = $$('[data-minutes]', timer);
+
+      function clearTimer(resetButtons) {
+        clearInterval(timerId);
+        timerId = null;
+        stop.hidden = true;
+        if (resetButtons) choices.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      }
+
+      function paintTimer() {
+        var left = Math.max(0, endAt - Date.now());
+        var seconds = Math.ceil(left / 1000);
+        var minutes = Math.floor(seconds / 60);
+        var rest = String(seconds % 60).padStart(2, '0');
+        out.textContent = (timerKind === 'break' ? 'Break' : 'Focus') + ' · ' + minutes + ':' + rest + ' left';
+        if (left > 0) return;
+        clearTimer(true);
+        out.textContent = timerKind === 'break'
+          ? 'Break finished. Pick a different module and recall one idea.'
+          : 'Round finished. Take a real break before you continue.';
+      }
+
+      choices.forEach(function (button) {
+        button.addEventListener('click', function () {
+          clearTimer(true);
+          timerKind = button.getAttribute('data-kind') || 'focus';
+          endAt = Date.now() + (+button.getAttribute('data-minutes') * 60000);
+          button.setAttribute('aria-pressed', 'true');
+          stop.hidden = false;
+          paintTimer();
+          timerId = setInterval(paintTimer, 250);
+        });
+      });
+      stop.addEventListener('click', function () {
+        clearTimer(true);
+        out.textContent = 'Timer stopped. Pick a round when you are ready.';
+      });
+    }
+
+    var modules = $$('.syl-module', page);
+    modules.forEach(function (module) {
+      var focus = $('.syl-focus', module);
+      if (focus) focus.addEventListener('click', function () {
+        var active = module.classList.contains('is-focus-target');
+        modules.forEach(function (item) {
+          item.classList.remove('is-focus-target');
+          var button = $('.syl-focus', item);
+          if (button) {
+            button.setAttribute('aria-pressed', 'false');
+            $('span', button).textContent = 'Focus';
+          }
+        });
+        page.classList.toggle('is-module-focus', !active);
+        if (!active) {
+          module.classList.add('is-focus-target');
+          focus.setAttribute('aria-pressed', 'true');
+          $('span', focus).textContent = 'Show all';
+          module.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+
+      var listen = $('.syl-listen', module);
+      if (listen) {
+        if (!('speechSynthesis' in window)) listen.hidden = true;
+        else listen.addEventListener('click', function () {
+          var speaking = listen.getAttribute('aria-pressed') === 'true';
+          window.speechSynthesis.cancel();
+          $$('.syl-listen', page).forEach(function (button) {
+            button.setAttribute('aria-pressed', 'false');
+            $('span', button).textContent = 'Listen';
+          });
+          if (speaking) return;
+          var pieces = [$('.syl-module-name', module)].concat($$('.syl-plain p', module), [$('.syl-check', module)]);
+          var words = pieces.filter(Boolean).map(function (node) { return node.textContent.trim(); }).join('. ');
+          var speech = new SpeechSynthesisUtterance(words);
+          speech.rate = 0.9;
+          speech.onend = speech.onerror = function () {
+            listen.setAttribute('aria-pressed', 'false');
+            $('span', listen).textContent = 'Listen';
+          };
+          listen.setAttribute('aria-pressed', 'true');
+          $('span', listen).textContent = 'Stop';
+          window.speechSynthesis.speak(speech);
+        });
+      }
+
+      var note = $('textarea', module);
+      if (note) {
+        var index = +module.getAttribute('data-i');
+        var key = 'note:' + d.id + ':' + index;
+        note.value = load(key, '');
+        var noteTimer;
+        note.addEventListener('input', function () {
+          clearTimeout(noteTimer);
+          noteTimer = setTimeout(function () { save(key, note.value); }, 180);
+        });
+      }
+    });
+  }
+
+  /* ════════════════════════════════════════════════════════
      Revision progress
 
      One key per topic holding the module indexes marked done.
@@ -796,7 +1177,7 @@
         '<div class="ivc-face ivc-front">' +
         '<span class="ivc-kicker">Question ' + (at + 1) + ' of ' + order.length + '</span>' +
         '<p class="ivc-q">' + esc(m.check) + '</p>' +
-        '<span class="ivc-hint">Click to see what it is testing</span>' +
+        '<span class="ivc-hint">Click to see the terms to use</span>' +
         '</div>' +
         '<div class="ivc-face ivc-back">' +
         '<span class="ivc-kicker">' + esc(m.name) + '</span>' +
@@ -913,7 +1294,7 @@
 
   function init() {
     var d = data();
-    if (d) { diagrams(d); progress(d); cards(d); }
+    if (d) { diagrams(d); progress(d); cards(d); learningTools(d); }
     hubMap();
     hubProgress();
     readingControls();

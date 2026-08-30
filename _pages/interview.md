@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Interview
-description: Private revision hub. Eighteen syllabi for interview preparation.
+description: Private revision hub. Twenty-three visual syllabi for interview preparation.
 permalink: /interview/
 robots: noindex, nofollow
 sitemap: false
@@ -18,7 +18,7 @@ extra_js:
   <header class="ivh-header">
     <span class="ivh-eyebrow">Private</span>
     <h1 class="ivh-title">Interview</h1>
-    <p class="ivh-lede">Every track is its own page. Each one opens with an animation you can step through, then a module list where each module explains itself in plain English, draws itself, and narrates its own diagram.</p>
+    <p class="ivh-lede">Pick a track. Watch one idea move, read the plain explanation, then step through each diagram at your own pace.</p>
     {% assign topics = site.data.interview.topics %}
     {% assign mod_n = 0 %}{% assign cov_n = 0 %}
     {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}
@@ -29,7 +29,7 @@ extra_js:
     </ul>
   </header>
 
-  <p class="ivh-maplede">The lines are handoffs. Where two tracks share a topic, one owns it and the other points here. Hover a card to see what it leans on.</p>
+  <p class="ivh-maplede">The lines connect related tracks. Hover a card to see which topics support each other.</p>
 
   <div class="ivh-map" id="iv-map">
     <svg class="iv-map-svg" aria-hidden="true" preserveAspectRatio="none"></svg>
