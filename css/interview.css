@@ -1843,3 +1843,110 @@
   cursor: pointer;
 }
 .an-livereset:hover { color: var(--text); border-color: var(--cta); }
+
+/* ════════════════════════════════════════════════════════
+   Module player
+
+   Every module diagram is a sequence of parts. Given one caption per
+   part it becomes a narrated walkthrough, in the same shell the track
+   animations use. The caption list sits under the drawing rather than
+   beside it, because a module diagram is already inside a card.
+   ════════════════════════════════════════════════════════ */
+
+.ivp {
+  margin-top: 0.9rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--line);
+}
+.ivp-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.ivp-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font: 400 var(--fs-sm) / var(--rd-lead) "Manrope", sans-serif;
+  color: var(--muted);
+  transition: background 0.2s var(--an-smooth, ease), color 0.2s var(--an-smooth, ease);
+}
+.ivp-step:hover { color: var(--text); background: var(--surface); }
+.ivp-n {
+  flex: none;
+  min-width: 1.1rem;
+  font: 600 var(--fs-2xs) "Space Grotesk", sans-serif;
+  color: var(--accent);
+}
+.ivp-step.is-done .ivp-n { color: var(--cta); }
+.ivp-step.is-at {
+  background: var(--stat-fill);
+  border-color: var(--cta);
+  color: var(--text);
+}
+.ivp-step.is-at .ivp-n { color: var(--cta); }
+
+.ivp-ctl { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.ivp-ctl button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.ivp-ctl button:hover { color: var(--text); border-color: var(--cta); }
+.ivp-play { color: var(--cta) !important; border-color: var(--cta) !important; }
+.ivp-scrub { flex: 1 1 6rem; min-width: 4rem; accent-color: var(--cta); }
+.ivp-count { font-size: var(--fs-2xs); color: var(--muted); min-width: 3rem; text-align: center; }
+.ivp-speed { display: inline-flex; align-items: center; gap: 0.35rem; font-size: var(--fs-2xs); color: var(--muted); }
+.ivp-speed input { width: 4rem; accent-color: var(--cta); }
+
+/* The part the player is currently narrating. `is-seen` marks the ones
+   already covered, so the reader can tell progress from the drawing alone
+   without reading the counter. */
+.ivz.is-walking [data-step].is-seen { opacity: 0.62; }
+.ivz.is-walking [data-step].is-at {
+  opacity: 1;
+  outline: 2px solid var(--cta);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 640px) {
+  .ivp-speed { order: 10; }
+}
+
+/* Embeddings, edge AI and image generation scene parts */
+.an-cluster { fill: color-mix(in srgb, var(--cta) 10%, transparent); stroke: var(--cta); stroke-width: 1; stroke-dasharray: 4 4; opacity: 0; transition: opacity var(--an-run) var(--an-smooth); }
+.an-cluster.is-on { opacity: 1; }
+.an-budget { fill: none; stroke: var(--cta); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.an-blob { fill: color-mix(in srgb, var(--accent) 34%, transparent); stroke: var(--accent); stroke-width: 1.2; }
+.an-blob.is-fits { fill: color-mix(in srgb, var(--cta) 40%, transparent); stroke: var(--cta); }
+.an-panel { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.an-noise { fill: var(--muted); opacity: 0.55; }
+.an-shape { fill: color-mix(in srgb, var(--cta) 55%, transparent); stroke: var(--cta); stroke-width: 1.2; }
+
+/* Several diagram archetypes are grid or flex containers, so a player appended
+   inside one becomes a layout item and lands in a column of its own. It has to
+   claim the full width whatever the parent's display is. */
+.ivz > .ivp {
+  grid-column: 1 / -1;
+  flex-basis: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}

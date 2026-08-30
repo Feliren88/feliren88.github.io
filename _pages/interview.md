@@ -6,7 +6,9 @@ permalink: /interview/
 robots: noindex, nofollow
 sitemap: false
 extra_css: /css/interview.css
-extra_js: /js/components/interview.js
+extra_js:
+  - /js/components/interview.js
+  - /js/components/interview-anim.js
 ---
 
 <section class="section page reveal interview-hub">
@@ -16,7 +18,7 @@ extra_js: /js/components/interview.js
   <header class="ivh-header">
     <span class="ivh-eyebrow">Private</span>
     <h1 class="ivh-title">Interview</h1>
-    <p class="ivh-lede">Eighteen tracks I revise from. Each one is a separate page with its own syllabus, a diagram for every module, the questions I should answer cold, and the drills that beat reading.</p>
+    <p class="ivh-lede">Every track is its own page. Each one opens with an animation you can step through, then a module list where each module explains itself in plain English, draws itself, and narrates its own diagram.</p>
     {% assign topics = site.data.interview.topics %}
     {% assign mod_n = 0 %}{% assign cov_n = 0 %}
     {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}

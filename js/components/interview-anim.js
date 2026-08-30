@@ -1001,6 +1001,126 @@
       ]
     },
 
+    /* ── Embeddings: meaning becomes distance ──────────────────── */
+    embedspace: {
+      title: 'Turning meaning into distance',
+      lead: 'Watch four sentences become points, and similar ones land together.',
+      build: function () {
+        var pts = [
+          { t: 'how do I reset my password', x: 96, y: 78, g: 0 },
+          { t: 'I forgot my login', x: 128, y: 104, g: 0 },
+          { t: 'what is your refund policy', x: 300, y: 168, g: 1 },
+          { t: 'can I get my money back', x: 268, y: 190, g: 1 }
+        ];
+        var s = '';
+        s += pts.map(function (p, i) {
+          return el('g', { 'data-from': 0, 'data-to': 0, 'class': 'an-fade' },
+            rect({ x: 24 + (i % 2) * 210, y: 30 + Math.floor(i / 2) * 44, width: 190, height: 30, rx: 6, 'class': 'an-box' }) +
+            text(p.t, { x: 32 + (i % 2) * 210, y: 50 + Math.floor(i / 2) * 44, 'class': 'an-t' }));
+        }).join('');
+        s += el('line', { x1: 30, y1: 220, x2: 420, y2: 220, 'class': 'an-axis', 'data-from': 1 });
+        s += el('line', { x1: 30, y1: 40, x2: 30, y2: 220, 'class': 'an-axis', 'data-from': 1 });
+        s += pts.map(function (p) {
+          return el('g', { 'data-from': 1, 'class': 'an-fade' },
+            el('circle', { cx: p.x, cy: p.y, r: 6, 'class': p.g ? 'an-txt' : 'an-img' }) +
+            text(p.t, { x: p.x + 12, y: p.y + 4, 'class': 'an-tick' }));
+        }).join('');
+        s += el('g', { 'data-from': 2, 'class': 'an-fade' },
+          el('line', { x1: 96, y1: 78, x2: 128, y2: 104, 'class': 'an-pull' }) +
+          el('line', { x1: 300, y1: 168, x2: 268, y2: 190, 'class': 'an-pull' }));
+        s += el('g', { 'data-from': 3, 'class': 'an-fade' },
+          el('circle', { cx: 112, cy: 91, r: 42, 'class': 'an-cluster' }) +
+          el('circle', { cx: 284, cy: 179, r: 42, 'class': 'an-cluster' }));
+        return el('svg', { viewBox: '0 0 440 236', 'class': 'an-svg', role: 'img',
+          'aria-label': 'Four sentences placed as points, clustering by meaning' }, s);
+      },
+      beats: [
+        { step: 'Four sentences', say: 'Four things somebody might ask. Two are about logging in, two are about money.' },
+        { step: 'Each becomes a point', say: 'The encoder turns each one into a list of numbers, which is a point on a map.' },
+        { step: 'Measure the distance', say: 'Now similarity is just distance. No understanding required, only arithmetic.' },
+        { step: 'They cluster', say: 'The two login questions land together, and so do the two about refunds. Nobody labelled that.' },
+        { step: 'Why it works', say: 'Search becomes finding the nearest points to your question. That is the whole trick behind retrieval.' }
+      ]
+    },
+
+    /* ── Edge AI: what has to fit ───────────────────────────────── */
+    ondevice: {
+      title: 'Fitting a model on a phone',
+      lead: 'Watch the same model shrink, and see what each step costs.',
+      build: function () {
+        var s = '';
+        s += rect({ x: 300, y: 24, width: 116, height: 190, rx: 12, 'class': 'an-box' });
+        s += text('the device', { x: 358, y: 232, 'text-anchor': 'middle', 'class': 'an-lab' });
+        s += rect({ x: 314, y: 40, width: 88, height: 158, rx: 6, 'class': 'an-budget' });
+        s += text('memory budget', { x: 358, y: 18, 'text-anchor': 'middle', 'class': 'an-lab' });
+        var sizes = [[150, 0], [96, 1], [58, 2], [34, 3]];
+        s += sizes.map(function (sz, i) {
+          return el('g', { 'data-from': i, 'data-to': i, 'class': 'an-fade' },
+            rect({ x: 40, y: 200 - sz[0], width: 130, height: sz[0], rx: 5, 'class': 'an-blob' }) +
+            text(['full size', 'distilled', 'pruned', 'quantised'][i],
+              { x: 105, y: 218, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        }).join('');
+        s += el('path', { d: 'M186 130 L292 130', 'class': 'an-arrow', 'data-from': 3 });
+        s += el('g', { 'data-from': 3, 'class': 'an-fade' },
+          rect({ x: 330, y: 130, width: 56, height: 62, rx: 4, 'class': 'an-blob is-fits' }));
+        return el('svg', { viewBox: '0 0 440 244', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A model shrinking through three steps until it fits a device budget' }, s);
+      },
+      beats: [
+        { step: 'Too big', say: 'The model you trained. Nowhere near fitting in the memory a phone will give you.' },
+        { step: 'Distil', say: 'Train a smaller model to copy the large one. The biggest single reduction, and the most work.' },
+        { step: 'Prune', say: 'Cut away weights that were contributing little. Structured pruning removes whole channels, which the hardware can exploit.' },
+        { step: 'Quantise', say: 'Store the numbers in eight bits instead of sixteen. Half the size again, for very little effort.' },
+        { step: 'It fits', say: 'Now it fits. Every step cost some quality, so measure on your own task rather than trusting the ratio.' }
+      ]
+    },
+
+    /* ── Image generation: denoising ───────────────────────────── */
+    denoise: {
+      title: 'From static to a picture',
+      lead: 'One small prediction, repeated. Watch the noise come off.',
+      build: function () {
+        var s = '';
+        /* Five panels, each less noisy than the last. Noise is drawn as a
+           deterministic scatter so the picture is the same on every visit. */
+        var seed = 7;
+        function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+        for (var p = 0; p < 5; p++) {
+          var dots = '';
+          var density = 150 - p * 34;
+          for (var i = 0; i < density; i++) {
+            dots += el('rect', {
+              x: (6 + rnd() * 68).toFixed(1), y: (6 + rnd() * 68).toFixed(1),
+              width: 3, height: 3, 'class': 'an-noise'
+            });
+          }
+          /* The shape underneath, revealed as the noise thins. */
+          var shape = el('path', {
+            d: 'M22 58 L40 26 L58 58 Z', 'class': 'an-shape',
+            opacity: (p * 0.25).toFixed(2)
+          }) + el('circle', { cx: 40, cy: 22, r: 6, 'class': 'an-shape', opacity: (p * 0.25).toFixed(2) });
+          /* The translate lives on an outer group with no `an-fade` class.
+             `.an-fade.is-on` sets `transform: none`, and a CSS transform beats
+             the SVG attribute, so combining them on one element silently
+             stacks every panel at the origin. */
+          s += el('g', { transform: 'translate(' + (10 + p * 88) + ' 30)' },
+            el('g', { 'data-from': p, 'class': 'an-fade' },
+              rect({ x: 4, y: 4, width: 72, height: 72, rx: 5, 'class': 'an-panel' }) + dots + shape +
+              text(p === 0 ? 'pure noise' : p === 4 ? 'done' : 'step ' + p,
+                { x: 40, y: 92, 'text-anchor': 'middle', 'class': 'an-lab' })));
+        }
+        return el('svg', { viewBox: '0 0 460 136', 'class': 'an-svg', role: 'img',
+          'aria-label': 'Noise being removed step by step until a shape appears' }, s);
+      },
+      beats: [
+        { step: 'Pure noise', say: 'Start from static. There is no image here, and no information about one.' },
+        { step: 'Predict the noise', say: 'The model looks at this and predicts which part of it is noise. That is all it was trained to do.' },
+        { step: 'Take some off', say: 'Remove a fraction of what it predicted. Something faint starts to show through.' },
+        { step: 'Again', say: 'Repeat. Each pass has an easier job than the one before it.' },
+        { step: 'An image', say: 'After enough steps, an image. Better samplers get here in fewer passes, which is the cheapest saving available.' }
+      ]
+    },
+
     /* ── Prompt engineering: the middle gets lost ──────────────── */
     lostmiddle: {
       title: 'Where the model actually looks',
@@ -1067,7 +1187,10 @@
     'machine-learning-research': 'seeds',
     'mlops': 'drift',
     'data-engineering': 'watermark',
-    'network-and-security': 'injection'
+    'network-and-security': 'injection',
+    'embedding': 'embedspace',
+    'edge-ai': 'ondevice',
+    'image-generation': 'denoise'
   };
 
   /* ════════════════════════════════════════════════════════

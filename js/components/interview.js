@@ -352,8 +352,8 @@
       var i = +el.getAttribute('data-i');
       if (!slot || !d.modules[i]) return;
       slot.innerHTML = sceneFor(d.modules[i]) + diagram(d.modules[i].viz);
-      var viz = $('.ivz', slot);
-      if (viz) animate(viz);
+      var viz = $('.syl-viz > .ivz:last-child', el) || $('.ivz', slot);
+      if (viz) animate(viz, d.modules[i].beats);
     });
   }
 
@@ -398,7 +398,7 @@
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function animate(viz) {
+  function animate(viz, beats) {
     var parts = partsOf(viz);
     if (!parts.length) return;
 
@@ -429,7 +429,109 @@
       io.observe(viz);
     }
 
-    if (parts.length >= 3) walkable(viz, parts);
+    /* With narration the diagram becomes a player. Without it, the reader
+       still gets the plainer step-through. */
+    if (beats && beats.length) player(viz, parts, beats);
+    else if (parts.length >= 3) walkable(viz, parts);
+  }
+
+  /* ════════════════════════════════════════════════════════
+     Module player
+
+     Every module's diagram is already a sequence of parts. Given one
+     caption per part, it becomes a narrated walkthrough in the same
+     shell the track animations use: a numbered step list marking the
+     current line, a status caption, play and speed.
+
+     The parts are revealed cumulatively, so beat n shows parts 0..n
+     with n highlighted. Scrubbing backwards lands in the same state
+     as stepping forwards.
+     ════════════════════════════════════════════════════════ */
+
+  var SPEEDS = [4200, 2600, 1700, 1100];
+
+  function player(viz, parts, beats) {
+    var n = Math.min(parts.length, beats.length);
+    if (n < 2) return;
+
+    var at = 0, timer = null, playing = false, speed = SPEEDS[1];
+    var last = n - 1;
+
+    var bar = document.createElement('div');
+    bar.className = 'ivp';
+    bar.innerHTML =
+      '<ol class="ivp-steps">' + beats.map(function (b, i) {
+        return '<li><button type="button" class="ivp-step" data-i="' + i + '">' +
+          '<span class="ivp-n">' + (i + 1) + '</span>' +
+          '<span class="ivp-t">' + esc(b) + '</span></button></li>';
+      }).slice(0, n).join('') + '</ol>' +
+      '<div class="ivp-ctl">' +
+      '<button type="button" class="ivp-play"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<use href="#ivi-arrow-right"/></svg><span>Play</span></button>' +
+      '<button type="button" class="ivp-prev" aria-label="Previous step">' +
+      '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg></button>' +
+      '<input class="ivp-scrub" type="range" min="0" max="' + last + '" value="0" aria-label="Step through">' +
+      '<button type="button" class="ivp-next" aria-label="Next step">' +
+      '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></button>' +
+      '<span class="ivp-count"></span>' +
+      '<label class="ivp-speed"><span>Speed</span>' +
+      '<input type="range" min="0" max="3" step="1" value="1" aria-label="Playback speed"></label>' +
+      '</div>';
+    viz.appendChild(bar);
+
+    var stepBtns = $$('.ivp-step', bar);
+    var scrub = $('.ivp-scrub', bar);
+    var count = $('.ivp-count', bar);
+    var playBtn = $('.ivp-play', bar);
+
+    function go(i) {
+      at = Math.max(0, Math.min(last, i));
+      viz.classList.add('is-walking');
+      parts.forEach(function (p, k) {
+        p.classList.toggle('is-at', k === at);
+        p.classList.toggle('is-seen', k < at);
+      });
+      stepBtns.forEach(function (b, k) {
+        b.classList.toggle('is-at', k === at);
+        b.classList.toggle('is-done', k < at);
+        b.setAttribute('aria-current', k === at ? 'step' : 'false');
+      });
+      scrub.value = at;
+      count.textContent = (at + 1) + ' / ' + n;
+    }
+
+    function stop() {
+      playing = false;
+      clearTimeout(timer);
+      playBtn.classList.remove('is-playing');
+      $('span', playBtn).textContent = at >= last ? 'Again' : 'Play';
+    }
+    function tick() {
+      if (at >= last) { stop(); return; }
+      go(at + 1);
+      timer = setTimeout(tick, speed);
+    }
+    function play() {
+      if (at >= last) go(0);
+      playing = true;
+      playBtn.classList.add('is-playing');
+      $('span', playBtn).textContent = 'Pause';
+      timer = setTimeout(tick, Math.min(600, speed));
+    }
+
+    playBtn.addEventListener('click', function () { playing ? stop() : play(); });
+    $('.ivp-next', bar).addEventListener('click', function () { stop(); go(at + 1); });
+    $('.ivp-prev', bar).addEventListener('click', function () { stop(); go(at - 1); });
+    scrub.addEventListener('input', function () { stop(); go(+this.value); });
+    $('.ivp-speed input', bar).addEventListener('input', function () { speed = SPEEDS[+this.value]; });
+    $('.ivp-steps', bar).addEventListener('click', function (e) {
+      var b = e.target.closest('.ivp-step');
+      if (!b) return;
+      stop();
+      go(+b.getAttribute('data-i'));
+    });
+
+    go(0);
   }
 
   /* Step through the parts one at a time, dimming the rest. */

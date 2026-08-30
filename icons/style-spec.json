@@ -8,7 +8,7 @@
   "cornerRadius": 2,
   "padding": 2,
   "opticalBalance": true,
-  "iconCount": 26,
+  "iconCount": 29,
   "icons": [
     "bayesian-statistics",
     "linear-algebra",
@@ -19,6 +19,9 @@
     "transformers",
     "llm-training",
     "nlp",
+    "embedding",
+    "edge-ai",
+    "image-generation",
     "computer-vision",
     "multimodality",
     "uncertainty-quantification",

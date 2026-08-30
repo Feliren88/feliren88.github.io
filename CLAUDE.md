@@ -154,7 +154,7 @@ feliren88.github.io/
 │   ├── stoic.yml         # All /stoic/ passages — GENERATED, quotes are verbatim from the public-domain sources; verify with scripts/verify_stoic_quotes.py
 │   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
-│   ├── interview.yml     # All /interview/ syllabus content — 20 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
+│   ├── interview.yml     # All /interview/ syllabus content — 23 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
@@ -718,6 +718,32 @@ so one number moves the whole layout together. Settings persist under `iv:read`.
 
 Do not add a second "dyslexia mode" stylesheet. Everything is a custom property
 precisely so there is only one set of rules to keep correct.
+
+### Module players (`/interview/`)
+
+Every module carries `beats:` — one caption per part of its own `viz`. The
+diagram then becomes a narrated walkthrough rather than a picture, using the
+same VisuAlgo shell as the track animations: a numbered caption list marking
+the line currently running, clickable to jump, plus play and speed.
+
+The key constraint is that **the caption count must equal the part count**. The
+inserter in the session scratchpad refuses to write a mismatch, because a player
+narrating a step the drawing does not have is worse than no player. Part counts
+per archetype: flow `steps`, compare `cols`, stack `layers`, matrix `cells`,
+scale `stops`, parts `1 + around`, tree `1 + branches`, curve `2`.
+
+Beats reveal cumulatively, so scrubbing backwards lands in the same state as
+stepping forwards. A caption should say why its part matters rather than repeat
+its label; the label is already on screen.
+
+Two layout traps, both found by rendering rather than by reading:
+
+- Several archetypes are grid or flex containers, so an appended player becomes
+  a layout item and lands in a column of its own. `.ivz > .ivp` claims the full
+  width whatever the parent's display is.
+- `.an-fade.is-on` sets `transform: none`, and a CSS transform beats the SVG
+  `transform` attribute. Putting both on one element silently stacks every
+  positioned group at the origin. Keep the translate on an outer group.
 
 ### Staged animations (`/interview/`)
 

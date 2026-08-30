@@ -44,6 +44,14 @@ topics:
     modules:
       - name: Probability as belief
         why: "Every later answer rests on whether you can say what a probability refers to."
+        beats:
+          - >-
+              Start with what you already believe. It is allowed to be vague.
+          - >-
+              Data arrives. It has an opinion of its own, and it does not care about
+              yours.
+          - >-
+              Combine the two. Tomorrow this becomes the prior you start from.
         scene:
           kind: "narrowing"
           before: "Before the data"
@@ -73,6 +81,16 @@ topics:
           loop: true
       - name: Priors and what they encode
         why: "Interviewers probe priors to find out if you understand assumptions or just run a library."
+        beats:
+          - >-
+              A flat prior says every value is equally plausible. That is rarely what
+              you think.
+          - >-
+              A weakly informative prior rules out the absurd and leaves the rest open.
+              Usually the right default.
+          - >-
+              A strong prior needs a reason. Say what the reason is, then show the
+              answer without it.
         plain:
           - >-
               The prior is what you believed before the data arrived. Everyone has one.
@@ -99,6 +117,18 @@ topics:
           'on': 1
       - name: Computing the posterior
         why: "Bayesian methods became practical when these algorithms did."
+        beats:
+          - >-
+              You want the posterior. Most of the time you cannot write it down.
+          - >-
+              Sometimes the maths works out exactly. Conjugate pairs give you a formula
+              and nothing to tune.
+          - >-
+              Otherwise, draw thousands of samples and let the pile of points stand in
+              for the shape.
+          - >-
+              Or fit a simpler shape close to the real one. Faster, and wrong in ways
+              you should name.
         plain:
           - >-
               The posterior is usually a shape you cannot write down. So you sample from
@@ -137,6 +167,16 @@ topics:
             - Variational inference
       - name: Hierarchical models
         why: "Partial pooling is the idea I reach for most in applied work."
+        beats:
+          - >-
+              Treat every group separately and small groups swing wildly on almost no
+              data.
+          - >-
+              Let them share. Each group is pulled toward the group average, and the
+              smallest get pulled hardest.
+          - >-
+              Force them all to be identical and you have erased the differences you
+              were measuring.
         plain:
           - >-
               You have twenty schools and a small sample from each. Treat them
@@ -165,6 +205,17 @@ topics:
           'on': 1
       - name: Checking and comparing models
         why: "Fitting a model is the easy part, so interviewers ask what would make you distrust it."
+        beats:
+          - >-
+              Fit the model. This is the easy part and it proves nothing.
+          - >-
+              Generate fake data from the fit. If it looks nothing like the real data,
+              stop here.
+          - >-
+              Leave points out one at a time and see how badly the model misses them.
+          - >-
+              Only now compare models, and check whether a few points are carrying the
+              score.
         plain:
           - >-
               Once you have a posterior, generate fake data from it. If the fake data
@@ -191,6 +242,16 @@ topics:
           loop: true
       - name: Bayesian methods inside machine learning
         why: "This is where the track meets the rest of your CV."
+        beats:
+          - >-
+              A Gaussian process puts a distribution over functions. The kernel says
+              what shapes are plausible.
+          - >-
+              A Bayesian neural network wants a distribution over every weight. Elegant,
+              and hard to compute.
+          - >-
+              Train several ordinary networks instead. It costs more forward passes and
+              beats the clever methods on calibration.
         plain:
           - >-
               This is where the track meets your CV. Gaussian processes, Bayesian
@@ -243,6 +304,17 @@ topics:
     modules:
       - name: Estimators and their properties
         why: "Every other answer in this track is built from this vocabulary."
+        beats:
+          - >-
+              Low bias and low variance. The estimate lands near the truth and stays
+              there.
+          - >-
+              Centred but jumpy. Right on average, and any single run could be well off.
+          - >-
+              Tight but wrong. Consistently missing in the same direction, which is the
+              harder failure to spot.
+          - >-
+              Both problems at once. Nothing here is worth reporting.
         plain:
           - >-
               An estimator is a recipe for turning data into a number. Run the recipe on
@@ -273,6 +345,18 @@ topics:
           - Off and unstable
       - name: Sampling distributions and intervals
         why: "Half of applied statistics is putting an honest error bar on a number."
+        beats:
+          - >-
+              Somewhere there is a population you will never fully see.
+          - >-
+              You take one sample from it. That sample is all you get.
+          - >-
+              From the sample you compute one number.
+          - >-
+              Imagine repeating that a thousand times. The spread of those numbers is
+              what you are really reasoning about.
+          - >-
+              The interval is built from that spread. It describes the method across many runs.
         plain:
           - >-
               Imagine repeating your study a thousand times. The estimates would form a
@@ -297,6 +381,18 @@ topics:
           - Interval
       - name: Hypothesis testing
         why: "People say something technically false here without noticing."
+        beats:
+          - >-
+              The null was true and you rejected it. You claimed an effect that is not
+              there.
+          - >-
+              The null was false and you rejected it. This is the outcome you were
+              hoping for.
+          - >-
+              The null was true and you kept it. Correct, and unpublishable.
+          - >-
+              The null was false and you missed it. Usually because the study was too
+              small.
         plain:
           - >-
               A test asks one question. If nothing were going on, how surprising would
@@ -326,6 +422,16 @@ topics:
           - Type II error
       - name: Multiple comparisons and researcher freedom
         why: "Anywhere you run many models, this decides whether the result is real."
+        beats:
+          - >-
+              Run forty tests, correct nothing, and a couple will look significant by
+              luck alone.
+          - >-
+              Controlling the false discovery rate accepts some false positives and
+              keeps more power.
+          - >-
+              Controlling family-wise error is stricter. You will miss real effects to
+              be sure of the ones you keep.
         plain:
           - >-
               Test forty things and a few will look significant by luck alone. Nothing
@@ -351,6 +457,17 @@ topics:
           'on': 1
       - name: Experiment design and A/B testing
         why: "Almost every company asks about this, and it is the applied-scientist core of the track."
+        beats:
+          - >-
+              Split users at random. That coin flip is what buys you the causal claim.
+          - >-
+              Run it long enough that novelty wears off and the weekly cycle completes.
+          - >-
+              Measure the metric you named in advance, plus the guardrails you would not
+              accept breaking.
+          - >-
+              Decide. If you are still looking for a cut of the data that works, you
+              have already stopped experimenting.
         plain:
           - >-
               An A/B test is a randomised experiment wearing a product hat. Split users,
@@ -376,6 +493,19 @@ topics:
           loop: true
       - name: Causal inference
         why: "Moving from a correlation to a decision is the hard part."
+        beats:
+          - >-
+              You cannot randomise. Every option below buys the causal answer with an
+              assumption.
+          - >-
+              Match or weight on the confounders. This assumes you measured all of them,
+              which you cannot check.
+          - >-
+              Find something that moves the treatment and nothing else. The hard part is
+              arguing it affects the outcome no other way.
+          - >-
+              Use a cutoff or a timing change as the shove. Assumes nothing else jumped
+              at the same moment.
         plain:
           - >-
               Two things move together. That tells you nothing about whether one caused
@@ -411,6 +541,18 @@ topics:
             - Regression discontinuity
       - name: Regression in practice
         why: "Regression is still the default when someone needs an answer this afternoon."
+        beats:
+          - >-
+              This is the claim you want to make.
+          - >-
+              It rests on the error bars, and grouped or repeated data breaks the
+              default ones.
+          - >-
+              Which rest on the model form. A missing interaction shows up as a pattern
+              in the residuals.
+          - >-
+              And all of it rests on assumptions you should state out loud before anyone
+              asks.
         plain:
           - >-
               Regression fits a line, or a surface, through the data. It is still the
@@ -454,6 +596,22 @@ topics:
     modules:
       - name: Framing the problem
         why: "Get this wrong and the modelling never matters, which is why interviewers open here."
+        beats:
+          - >-
+              Someone asks for something vague. Churn prediction, say. Nobody has
+              defined churn yet.
+          - >-
+              Pin down exactly what you are predicting and when you would know the
+              answer.
+          - >-
+              Choose what a mistake costs. A missed fraud and a false alarm are not the
+              same size.
+          - >-
+              Build the dumbest thing that could work. Last month's value, or the
+              majority class.
+          - >-
+              Then ask what decision changes because of the number. If nothing changes,
+              stop here.
         plain:
           - >-
               Before any model, decide what you are predicting and what a good answer is
@@ -478,6 +636,19 @@ topics:
           - Decision
       - name: The core model families
         why: "Boosted trees still win a lot of tabular problems, and you will be asked why."
+        beats:
+          - >-
+              Rows and columns, mixed types, some values missing. The most common shape
+              of real data.
+          - >-
+              A linear model is fast, easy to explain, and needs you to hand it the
+              interactions.
+          - >-
+              Boosted trees split on thresholds, so scale does not matter and
+              interactions come free. Usually the winner here.
+          - >-
+              Distance methods need scaling and struggle as columns pile up. Worth
+              knowing, rarely the answer.
         plain:
           - >-
               On tables of rows and columns, gradient boosted trees still win most of
@@ -513,6 +684,16 @@ topics:
             - Support vector machine
       - name: Evaluation you can defend
         why: "A leaky validation split will sink an otherwise good answer."
+        beats:
+          - >-
+              Split before you touch anything. This is the step people skip and regret.
+          - >-
+              Fit the model, and every transformer, on the training part alone.
+          - >-
+              Tune on validation. Every time you look at it you use a little of it up.
+          - >-
+              Touch the test set once. If you tune against it, it is just another
+              validation set.
         scene:
           kind: "split"
           parts: [{"k": "train", "w": 6}, {"k": "validation", "w": 2}, {"k": "test", "w": 2, "on": true}]
@@ -540,6 +721,13 @@ topics:
           - Report on test
       - name: Features
         why: "On tabular problems this moves the number more than the model choice."
+        beats:
+          - >-
+              Compute the encoding inside each fold, from that fold's training rows
+              only.
+          - >-
+              Compute it once over everything and the target leaks backwards. The score
+              looks wonderful and means nothing.
         plain:
           - >-
               Features are how you tell the model what matters. On tabular problems,
@@ -569,6 +757,19 @@ topics:
             - Score looks better than it is
       - name: Imbalance and shift
         why: "Almost every real dataset arrives imbalanced, shifted, or both."
+        beats:
+          - >-
+              Live performance dropped. Something moved, and which thing decides the
+              fix.
+          - >-
+              The inputs moved. Same relationship, new region of the space. Reweighting
+              may be enough.
+          - >-
+              The base rate moved. Fraud rose. The model is fine and the threshold is
+              wrong.
+          - >-
+              The relationship itself moved. What predicted the outcome last year no
+              longer does. Only retraining helps.
         plain:
           - >-
               Real data is lopsided and it drifts. One class may be a tenth of a percent. Last month's pattern may not hold this month.
@@ -598,6 +799,13 @@ topics:
             - The relationship moved
       - name: Enough theory to hold a conversation
         why: "Research-flavoured roles will probe one level below the API."
+        beats:
+          - >-
+              Training error falls as you add capacity, and keeps falling. It will
+              happily reach zero.
+          - >-
+              Test error falls, then turns and climbs. The gap between the two curves is
+              what overfitting looks like.
         plain:
           - >-
               A model with more capacity can fit more shapes, including the noise. Too
@@ -623,6 +831,20 @@ topics:
           b: Test error
       - name: The case study round
         why: "An hour-long open question is standard for applied roles."
+        beats:
+          - >-
+              Ask questions first. Volume, latency, what a mistake costs, who acts on
+              the output.
+          - >-
+              Name the baseline you have to beat, and be honest that it might be hard to
+              beat.
+          - >-
+              Now pick a model, and say why that one given what you just learned.
+          - >-
+              Say what you would ship this week. Six-month plans are easy to give and impossible to check.
+          - >-
+              Finish with how you would find out it had gone wrong. That is the part
+              interviewers wait for.
         plain:
           - >-
               The case study is an open question with no right answer. Design fraud
@@ -666,6 +888,21 @@ topics:
     modules:
       - name: Optimisation
         why: "Almost every training failure traces back to something in this module."
+        beats:
+          - >-
+              One step downhill. Four things decide where you land.
+          - >-
+              The gradient gives the direction. It is the only information about the
+              surface you have.
+          - >-
+              The learning rate is the step size. Too big and you bounce out, too small
+              and you never arrive.
+          - >-
+              Momentum keeps some of the last step, which smooths out noise and helps
+              you roll through flat parts.
+          - >-
+              Weight decay pulls the weights toward zero, so nothing grows large without
+              earning it.
         plain:
           - >-
               Training is a walk downhill on a landscape you cannot see. The gradient
@@ -693,6 +930,16 @@ topics:
           - Weight decay
       - name: Initialisation and normalisation
         why: "These get copied from a reference implementation and then cannot be debugged."
+        beats:
+          - >-
+              Batch norm normalises using the other examples in the batch, so examples
+              affect each other.
+          - >-
+              Layer norm normalises across features within one example. Batch size stops
+              mattering, which is why transformers use it.
+          - >-
+              RMSNorm drops the mean subtraction and keeps the scaling. Slightly cheaper
+              and works about as well.
         plain:
           - >-
               Signals pass through many layers. Without care they either shrink to
@@ -725,6 +972,15 @@ topics:
             - Cheaper
       - name: Regularisation and generalisation
         why: "Interviewers use this to test whether you know the modern picture."
+        beats:
+          - >-
+              Too little capacity and the model cannot represent the pattern. Errors
+              look the same everywhere.
+          - >-
+              Enough capacity and it learns the signal while leaving the noise alone.
+          - >-
+              Too much and it memorises. Perfect on the training set, lost on anything
+              new.
         plain:
           - >-
               A model that memorises the training set has learnt the answers rather than
@@ -751,6 +1007,18 @@ topics:
           'on': 1
       - name: Backpropagation and memory
         why: "Anyone touching large models is expected to reason about memory."
+        beats:
+          - >-
+              The forward pass computes the output layer by layer.
+          - >-
+              Along the way it keeps the intermediate values, because the backward pass
+              needs them. This is what fills the GPU.
+          - >-
+              The backward pass walks the chain rule back, consuming those stored
+              values.
+          - >-
+              Then the memory frees. Checkpointing throws some away early and recomputes
+              them, buying memory with time.
         plain:
           - >-
               Backpropagation is the chain rule run backwards through the network. To do
@@ -777,6 +1045,17 @@ topics:
           loop: true
       - name: Architectures and when each fits
         why: "You need a reason for the choice you made."
+        beats:
+          - >-
+              Pick by the shape of the input, since the shape is free information.
+          - >-
+              A grid of pixels has local structure, so convolutions and their weight
+              sharing fit.
+          - >-
+              A sequence has order and long-range links, which is what attention
+              handles.
+          - >-
+              A graph has arbitrary neighbours, so pass messages along the edges.
         plain:
           - >-
               Each architecture bakes in an assumption. Convolutions assume nearby
@@ -810,6 +1089,18 @@ topics:
             - Message passing
       - name: Training at scale
         why: "Reasoning about scale is what the job actually asks for."
+        beats:
+          - >-
+              Experts split across devices, so each machine holds only a few.
+          - >-
+              Pipeline parallel cuts the model into stages. Simple, and the stages wait
+              on each other.
+          - >-
+              Tensor parallel splits single matrices across devices. Heavy communication
+              inside every layer.
+          - >-
+              Data parallel is the foundation. Copy the model everywhere, split the
+              batch, average the gradients.
         plain:
           - >-
               One GPU cannot hold a large model. So you split the work. Copy the model
@@ -833,12 +1124,25 @@ topics:
           - Data parallel
       - name: Debugging
         why: "Interviewers like this question because reading about training does not prepare you for it."
+        beats:
+          - >-
+              Take thirty examples and drive the loss to zero. If that fails, the bug is
+              not the architecture.
+          - >-
+              Check the loss at step zero against what you can compute by hand. A wrong
+              start means a wrong loss.
+          - >-
+              Watch the gradient norms. A sudden spike or a slow decay to nothing both
+              name their own problem.
+          - >-
+              Change only the seed and rerun. If the result moves more than your
+              improvement did, you have not measured anything.
         plain:
           - >-
               When training breaks, resist changing the model. Start by proving the
               pipeline works: take thirty examples and drive the loss to zero.
           - >-
-              If that fails, the bug is in the data or the loss, not the architecture.
+              If that fails, the bug is in the data or the loss.
               Check the loss at step zero too, since you can predict what it should be.
         covers:
           - Overfit a single batch first
@@ -876,6 +1180,20 @@ topics:
     modules:
       - name: Vectors and spaces
         why: "Every later idea is stated in this language."
+        beats:
+          - >-
+              A space is everything you can reach by adding and stretching a few arrows.
+          - >-
+              You can add two arrows. Put them nose to tail and see where you end up.
+          - >-
+              You can stretch any arrow by a number, including a negative one, which
+              flips it.
+          - >-
+              Do both, as much as you like, and the set of places you can land is the
+              span.
+          - >-
+              A basis is the smallest set of arrows that still reaches everywhere.
+              Coordinates are always relative to one.
         plain:
           - >-
               A vector is an arrow with a length and a direction. A list of
@@ -902,6 +1220,17 @@ topics:
           - A basis names the directions
       - name: Matrices as transformations
         why: "This is the shift that makes the rest of the subject easy."
+        beats:
+          - >-
+              Here is the plain grid. Every point in the plane sits somewhere on it.
+          - >-
+              The matrix has two columns. Each one says where a starting arrow ends up.
+          - >-
+              Apply it and every point moves at once. Straight lines stay straight and
+              the origin stays put.
+          - >-
+              Read the new grid and you can see the whole transformation. That is all a
+              matrix is.
         plain:
           - >-
               A matrix is not a table of numbers. It is an instruction for moving
@@ -926,6 +1255,16 @@ topics:
           - Read the new grid
       - name: Determinant, rank and inverse
         why: "Three questions about whether a transformation loses information."
+        beats:
+          - >-
+              One question, asked three ways. Did the transformation lose any
+              dimensions?
+          - >-
+              If not, the determinant is non-zero, every direction survived, and you can
+              undo it.
+          - >-
+              If it did, space got squashed onto a line or a point. Many inputs now
+              share one output, so there is no way back.
         plain:
           - >-
               The determinant is how much the transformation scales area, or
@@ -952,6 +1291,13 @@ topics:
             items: ["Determinant zero", "Information lost"]
       - name: Eigenvectors and eigenvalues
         why: "The directions a transformation leaves alone explain what it really does."
+        beats:
+          - >-
+              Take almost any arrow. The transformation knocks it off the line it was
+              sitting on.
+          - >-
+              A few arrows stay on their own line and only get longer or shorter. Those
+              are the eigenvectors, and the stretch is the eigenvalue.
         plain:
           - >-
               Most arrows get knocked off their line by a transformation. A few
@@ -977,6 +1323,15 @@ topics:
             items: ["Stays on its line", "Only the length changes"]
       - name: Decompositions
         why: "Factorising a matrix is how numerical linear algebra actually gets work done."
+        beats:
+          - >-
+              Any matrix at all can be split into three simple moves. First, a rotation.
+          - >-
+              Then a stretch along the axes. The stretch factors are the singular
+              values, and dropping the small ones is how compression works.
+          - >-
+              Then one more rotation. Three simple things, and together they are the
+              whole transformation.
         plain:
           - >-
               A decomposition splits one matrix into simpler pieces. Each piece
@@ -1001,6 +1356,18 @@ topics:
           - Rotate again
       - name: Projections and least squares
         why: "The geometry behind fitting a line to data."
+        beats:
+          - >-
+              You want to hit a target with a model that cannot reach it.
+          - >-
+              Here is the target. No combination of your columns lands exactly on it.
+          - >-
+              Here is everything you can reach. A flat space inside a bigger one.
+          - >-
+              The nearest reachable point is the shadow of the target. That is your fit.
+          - >-
+              The gap points straight out from the space. That is why the residual is
+              perpendicular.
         plain:
           - >-
               You have a target that does not lie in the space you can reach. The
@@ -1026,6 +1393,16 @@ topics:
           - The gap, which is the error
       - name: Numerical behaviour
         why: "Textbook linear algebra assumes exact arithmetic and computers do not have it."
+        beats:
+          - >-
+              A well conditioned matrix is forgiving. Nudge the input and the answer
+              barely moves.
+          - >-
+              Borderline. Rounding error starts to show up in the last digits you care
+              about.
+          - >-
+              Ill conditioned. A change too small to see in the input swings the answer
+              completely. The maths is fine and the computer is not.
         plain:
           - >-
               On a computer, numbers are stored with limited precision. Small
@@ -1067,6 +1444,18 @@ topics:
     modules:
       - name: Derivatives and rates
         why: "Every training step is built on this one idea."
+        beats:
+          - >-
+              Pick a point on the curve, then a second one nearby.
+          - >-
+              Draw the straight line through both. Its slope is the average steepness
+              between them.
+          - >-
+              Now slide the second point toward the first. The line keeps tilting, by
+              less each time.
+          - >-
+              It settles on one line. That slope is the derivative, and it is the whole
+              idea.
         plain:
           - >-
               A derivative is a rate. Nudge the input a little and see how much
@@ -1091,6 +1480,16 @@ topics:
           - The slope that remains
       - name: The chain rule
         why: "Backpropagation is this rule applied to a graph."
+        beats:
+          - >-
+              Something goes in.
+          - >-
+              It passes through a middle step that depends on it.
+          - >-
+              And that produces an output. Each arrow has its own rate of change.
+          - >-
+              Multiply the rates along the chain and you have the total effect. Going
+              backwards is cheaper when there is one output and many inputs.
         plain:
           - >-
               One thing affects a second. The second affects a third. Multiply the two rates for the total effect.
@@ -1116,6 +1515,19 @@ topics:
           loop: true
       - name: Gradients, Jacobians and Hessians
         why: "Naming these correctly is a quick signal of comfort with the maths."
+        beats:
+          - >-
+              The Hessian is the second derivative. It describes the curve, and it tells
+              a minimum from a saddle.
+          - >-
+              A Jacobian stacks the gradients when there are several outputs. Its shape
+              is outputs by inputs.
+          - >-
+              The gradient is the vector of partials for one output. It points the way
+              that increases fastest.
+          - >-
+              Underneath everything, a partial derivative. One input nudged, everything
+              else held still.
         plain:
           - >-
               With several inputs, the derivative becomes a vector. It points in
@@ -1141,6 +1553,17 @@ topics:
           - Partial derivative, one direction
       - name: Optimisation conditions
         why: "Knowing when you have found a minimum, and when you have not."
+        beats:
+          - >-
+              The gradient is zero. That is necessary for a minimum and nowhere near
+              sufficient.
+          - >-
+              If the surface curves up in every direction, you have found a minimum.
+          - >-
+              If it curves down in every direction, a maximum.
+          - >-
+              If it curves up one way and down another, a saddle. In high dimensions
+              this is what most zero-gradient points turn out to be.
         plain:
           - >-
               At a minimum the gradient is zero. But a zero gradient also happens
@@ -1169,6 +1592,13 @@ topics:
             items: ["Saddle"]
       - name: Integration and expectation
         why: "Every loss you write down is an average, and an average is an integral."
+        beats:
+          - >-
+              What you actually want is the average loss over every input you will ever
+              see.
+          - >-
+              What you have is the average over the sample you collected. It is an
+              estimate, and it is noisy.
         plain:
           - >-
               An integral adds up infinitely many small pieces. Area under a curve
@@ -1193,6 +1623,16 @@ topics:
             items: ["An average over your sample", "Which is noisy"]
       - name: Approximation
         why: "Most methods are secretly a local approximation of something harder."
+        beats:
+          - >-
+              Approximate the function by a flat line and you learn nothing about
+              direction.
+          - >-
+              Approximate it by a sloped line and you get gradient descent. Cheap, and
+              it ignores curvature.
+          - >-
+              Approximate it by a parabola and you get Newton's method. Better steps,
+              and a much larger bill per step.
         plain:
           - >-
               Near a point, a smooth curve looks like a straight line. Look
@@ -1216,6 +1656,18 @@ topics:
           on: 1
       - name: Matrix calculus
         why: "Deriving a gradient on a whiteboard is a common interview task."
+        beats:
+          - >-
+              Write the loss down carefully, including the shapes of everything in it.
+          - >-
+              Differentiate one layer at a time. Do not try to do the whole network in
+              one line.
+          - >-
+              Check the shapes at every step. If they do not line up, something is wrong
+              already.
+          - >-
+              Then chain it backwards to the weights. The shape check is what catches
+              the mistake.
         plain:
           - >-
               When the input is a vector or a matrix, the derivative rules still
@@ -1259,6 +1711,20 @@ topics:
     modules:
       - name: Attention mechanics
         why: "You will be asked to write it, and shapes are where people stumble."
+        beats:
+          - >-
+              Each token is projected three ways. A query, a key and a value.
+          - >-
+              Every query is compared against every key. That comparison is the dot
+              product, and it is why cost grows with the square of the length.
+          - >-
+              Mask out anything a token should not see. In a decoder that means the
+              whole future.
+          - >-
+              Softmax turns each row of scores into weights that add to one.
+          - >-
+              Sum the values in those proportions. That mixture is what the token
+              carries forward.
         scene:
           kind: "growing"
           steps: 4
@@ -1292,6 +1758,19 @@ topics:
           - Weighted sum
       - name: Block anatomy
         why: "Parameter counting and residual reasoning come up constantly."
+        beats:
+          - >-
+              Think of the residual stream as a noticeboard running the whole depth of
+              the model.
+          - >-
+              The embedding writes the first thing onto it.
+          - >-
+              Every attention block reads it, adds what it found, and writes back.
+          - >-
+              Every feed-forward block does the same, working on one position at a time.
+          - >-
+              At the end the unembedding reads the board and turns it into a guess at
+              the next token.
         plain:
           - >-
               The residual stream runs the length of the model like a shared
@@ -1316,6 +1795,16 @@ topics:
           - Unembedding reads it
       - name: Position
         why: "Long-context questions all route through this."
+        beats:
+          - >-
+              RoPE rotates queries and keys by an angle that depends on position, so
+              relative distance falls out of the dot product.
+          - >-
+              ALiBi adds a penalty that grows with distance. Simple, and it extrapolates
+              past the trained length.
+          - >-
+              Learned positions store one vector per slot. Nothing to extrapolate with
+              once you run out of slots.
         plain:
           - >-
               Attention on its own has no idea what order the tokens came in. Shuffle
@@ -1349,6 +1838,16 @@ topics:
             - Fixed length
       - name: Efficient attention and long context
         why: "Serving conversations spend most of their time here."
+        beats:
+          - >-
+              FlashAttention computes exactly the same numbers. It just stops shuttling
+              them to slow memory and back.
+          - >-
+              Grouped-query shares keys and values across several heads. The cache
+              shrinks and a little quality goes with it.
+          - >-
+              Sliding window limits how far back each token can look, which makes cost
+              linear and forgetting real.
         plain:
           - >-
               Long sequences make the attention matrix enormous. Two different fixes
@@ -1387,6 +1886,18 @@ topics:
             - Linear in length
       - name: The model family
         why: "Choosing the right variant is a design decision you have to justify."
+        beats:
+          - >-
+              Three shapes, and the task picks one.
+          - >-
+              Encoder-only sees the whole input at once. Best when you want to label the
+              text you were given.
+          - >-
+              Decoder-only writes one token at a time and cannot see ahead. This is what
+              generates.
+          - >-
+              Encoder-decoder reads one thing and writes another, with cross-attention
+              linking the two.
         plain:
           - >-
               Encoder-only models read the whole input at once and are good at labelling
@@ -1420,6 +1931,13 @@ topics:
             - T5
       - name: Inference
         why: "Deployment questions are now standard even in research interviews."
+        beats:
+          - >-
+              Prefill processes the whole prompt in one go. Plenty of parallel work, so
+              the arithmetic units stay busy.
+          - >-
+              Decode makes one token at a time and re-reads the entire cache to do it.
+              The GPU sits waiting on memory, which is why utilisation looks low.
         plain:
           - >-
               Serving has two halves with opposite problems. Reading the prompt is heavy
@@ -1470,6 +1988,21 @@ topics:
     modules:
       - name: Data
         why: "Data has the largest effect on the result and gets the least attention."
+        beats:
+          - >-
+              Start with a very large amount of scraped text and low expectations of it.
+          - >-
+              Remove near-duplicates. Repeated passages get memorised, and memorised
+              text is not learning.
+          - >-
+              Filter for quality. Usually a classifier trained on pages someone was
+              willing to vouch for.
+          - >-
+              Remove the benchmarks, or your evaluation is measuring recall of the
+              answers.
+          - >-
+              Then cut it into tokens. That choice decides what every language costs you
+              from here on.
         scene:
           kind: "tokens"
           rows: [{"k": "Raw crawl", "parts": ["good", "page", "dup", "dup", "spam", "benchmark", "good"]}, {"k": "After cleaning", "parts": ["good", "page", "good"]}]
@@ -1500,6 +2033,13 @@ topics:
           - Tokenise
       - name: Pretraining
         why: "Even if you never run one, you must reason about the budget."
+        beats:
+          - >-
+              A small model improves quickly, then flattens. More tokens stop buying
+              much.
+          - >-
+              A larger model starts worse and keeps improving for longer. Choosing
+              between them is what a scaling law is for.
         plain:
           - >-
               Pretraining is one task repeated a very large number of times: predict the
@@ -1526,6 +2066,16 @@ topics:
           b: Large model
       - name: Supervised fine-tuning
         why: "Fine-tuning is the cheapest lever, and probably the one you will own."
+        beats:
+          - >-
+              A full fine-tune moves every weight. Best quality, and you need memory for
+              a second copy of everything.
+          - >-
+              LoRA trains a small low-rank update and leaves the base model frozen. Most
+              of the benefit, a fraction of the memory.
+          - >-
+              QLoRA quantises the frozen base as well, which is what lets a large model
+              fit on one card.
         plain:
           - >-
               A base model continues text. It does not answer questions. Fine-tuning on
@@ -1561,6 +2111,18 @@ topics:
             - Least memory
       - name: Learning from preferences
         why: "Preference learning is what makes a capable model usable."
+        beats:
+          - >-
+              Collect pairs of answers and ask people which one is better. Comparing is
+              easier than scoring.
+          - >-
+              Train a model to predict those preferences. It is now a stand-in for human
+              judgement, with all the gaps that implies.
+          - >-
+              Optimise the policy against that reward.
+          - >-
+              And tie it to the model you started from, or it drifts off to whatever
+              scores highly and reads like nonsense.
         plain:
           - >-
               Some qualities are easier to compare than to write down. People cannot
@@ -1586,6 +2148,17 @@ topics:
           loop: true
       - name: Reasoning and verifiable rewards
         why: "This area moves fastest, so expect a question about recent work."
+        beats:
+          - >-
+              Sample several attempts at the same problem.
+          - >-
+              Check them automatically. This only works where a checker exists, which is
+              mostly maths and code.
+          - >-
+              Reward the ones that got it right. No human in the loop, so it scales.
+          - >-
+              Update and repeat. The risk is everything you cannot check, where the
+              model optimises the checker instead of the task.
         plain:
           - >-
               For maths and code you can check the answer automatically. That checker
@@ -1613,6 +2186,19 @@ topics:
           - Update
       - name: Evaluation across a run
         why: "Bad evaluation means you cannot tell whether the run improved anything."
+        beats:
+          - >-
+              The checkpoint finished. Deciding whether it is better is harder than it
+              sounds.
+          - >-
+              Automatic scores are cheap and go stale. Benchmarks saturate and leak into
+              training data.
+          - >-
+              A model judge is cheaper than people and carries biases. It prefers longer
+              answers and its own style.
+          - >-
+              Humans are the ground truth and the bottleneck. Use them to calibrate the
+              judge, then use the judge.
         plain:
           - >-
               You cannot steer a training run without a signal you trust. Loss is smooth
@@ -1664,6 +2250,21 @@ topics:
     modules:
       - name: Text as data
         why: "Every unicode and tokenisation bug you will ever ship starts here."
+        beats:
+          - >-
+              Raw text, exactly as it arrived. Mixed scripts, stray whitespace, emoji,
+              half of it not what you expected.
+          - >-
+              Normalise it. Casing and unicode form, decided once and applied
+              everywhere.
+          - >-
+              Find the word boundaries. Some languages do not put spaces where you would
+              like them.
+          - >-
+              Cut into tokens. This is where languages start costing different amounts.
+          - >-
+              Each token becomes a number. From here the model has no idea any of this
+              was text.
         scene:
           kind: "tokens"
           rows: [{"k": "English", "parts": ["The", "model", "reads", "the", "sentence"]}, {"k": "Indonesian", "parts": ["Model", "itu", "mem", "baca", "kali", "mat", "ter", "sebut"]}]
@@ -1691,6 +2292,16 @@ topics:
           - Ids
       - name: Representations
         why: "Retrieval quality depends almost entirely on this."
+        beats:
+          - >-
+              TF-IDF counts words and weights the rare ones. No idea what anything
+              means, and still hard to beat on narrow domains.
+          - >-
+              Static embeddings give every word one fixed point. Bank by a river and
+              bank with money share it.
+          - >-
+              Contextual embeddings give a word a different point in every sentence.
+              That is what separated the two banks.
         plain:
           - >-
               A representation turns a word into a list of numbers. Similar meanings are placed close together.
@@ -1715,6 +2326,17 @@ topics:
           'on': 2
       - name: Core tasks
         why: "These task names are the shared vocabulary of the field."
+        beats:
+          - >-
+              Three shapes of answer, and the shape picks the method.
+          - >-
+              One label for the whole text. Sentiment, topic, spam.
+          - >-
+              One label per token. Named entities, parts of speech. The output is as
+              long as the input.
+          - >-
+              Entirely new text. Summarising, translating. Now you have the harder
+              evaluation problem too.
         plain:
           - >-
               Most text tasks are one of three shapes. Label the whole text, label each
@@ -1749,6 +2371,16 @@ topics:
             - Translation
       - name: Measuring language output
         why: "Choosing the wrong metric is the mistake I see most in this area."
+        beats:
+          - >-
+              Overlap scores count shared words with a reference. Cheap, and they punish
+              a good paraphrase.
+          - >-
+              Learned metrics score with a model trained on human judgements. Better
+              agreement, and now your metric can be wrong in its own ways.
+          - >-
+              Humans are the ground truth. Slow, expensive, and the only thing the
+              others are approximating.
         plain:
           - >-
               Judging generated text is genuinely hard. There are many good answers and
@@ -1782,6 +2414,21 @@ topics:
             - Pairwise
       - name: The retrieval pipeline
         why: "Almost every applied NLP role now includes this."
+        beats:
+          - >-
+              Cut the documents into chunks. Chunk boundaries decide what can ever be
+              retrieved together.
+          - >-
+              Embed each chunk. Whether the embedding model knows your domain matters
+              more than its leaderboard rank.
+          - >-
+              Search for the chunks nearest the question. Recall at this step caps
+              everything downstream.
+          - >-
+              Rerank the shortlist with something slower and more accurate.
+          - >-
+              Only now generate. If the answer is wrong, find out which of these five
+              steps failed.
         plain:
           - >-
               Retrieval-augmented generation is two systems. One finds relevant
@@ -1809,6 +2456,21 @@ topics:
           - Generate
       - name: Multilingual and low-resource
         why: "Your own research area, so expect depth questions."
+        beats:
+          - >-
+              The model is worse in this language. Four candidate reasons, and they look
+              identical from outside.
+          - >-
+              The tokenizer is more expensive here, so the same sentence eats more
+              context and costs more.
+          - >-
+              There was less training data. The plainest reason and the hardest to fix.
+          - >-
+              Script, dialect and code-switching. Real usage mixes languages in one
+              sentence and the training data rarely did.
+          - >-
+              The benchmarks do not cover it, so nobody noticed. Comparing token counts
+              separates the first cause from the rest.
         plain:
           - >-
               A model can be worse in a language for several reasons that look identical
@@ -1835,6 +2497,20 @@ topics:
           - Benchmark coverage
       - name: Data and annotation
         why: "Nobody enjoys annotation work, and it decides how the project turns out."
+        beats:
+          - >-
+              Write the guidelines. They will be wrong in ways you cannot predict.
+          - >-
+              Run a pilot on fifty examples, and annotate some yourself. This is where
+              you learn the task is ambiguous.
+          - >-
+              Measure agreement between annotators. Their ceiling is your model's
+              ceiling.
+          - >-
+              Adjudicate the disagreements and fix the guidelines. Do this before
+              collecting more.
+          - >-
+              Only now scale up. Scaling a bad guideline just buys more noise.
         plain:
           - >-
               Labels come from people, and people disagree. If two annotators agree only
@@ -1879,6 +2555,20 @@ topics:
     modules:
       - name: Image fundamentals
         why: "Every later architecture question assumes this arithmetic."
+        beats:
+          - >-
+              Start with a grid of pixel values. That is genuinely all there is.
+          - >-
+              Slide a small window across, looking for one pattern at every position.
+          - >-
+              Stride decides how far it jumps. Padding decides whether the edges get a
+              fair look.
+          - >-
+              Pooling shrinks the grid, so later layers cover more of the image for the
+              same cost.
+          - >-
+              What comes out is a map of where that pattern appears. Stack these and the
+              patterns get more abstract.
         scene:
           kind: "kernel"
           grid: 6
@@ -1910,6 +2600,17 @@ topics:
           - Feature map
       - name: Backbones
         why: "Interviewers want the reasoning behind a design choice."
+        beats:
+          - >-
+              At the top, the head that answers your actual question.
+          - >-
+              Below it, layers that respond to whole object parts. Wheels, eyes,
+              windows.
+          - >-
+              Below that, textures and repeated patterns.
+          - >-
+              At the bottom, edges and simple gradients. Every network learns these
+              first, whatever the task.
         plain:
           - >-
               The backbone is the part that turns pixels into features. Everything else
@@ -1935,6 +2636,19 @@ topics:
           - Edges
       - name: Tasks and their metrics
         why: "Detection and segmentation metrics are where candidates get vague."
+        beats:
+          - >-
+              The question decides the task, and the task decides which metric can lie
+              to you.
+          - >-
+              One answer for the whole image. Accuracy works, until the classes are
+              unbalanced.
+          - >-
+              Boxes around objects. Now you need mean average precision, and you need it
+              per class.
+          - >-
+              A label for every pixel. Intersection over union, and it will hide the
+              thin structures you care about.
         plain:
           - >-
               Three tasks, three answers. Classification labels the picture. Detection
@@ -1968,6 +2682,13 @@ topics:
             - Intersection over union
       - name: Training practice
         why: "Vision has its own recipe knowledge."
+        beats:
+          - >-
+              Augmentation shows the model the same object under conditions it will meet
+              later. Crops, lighting, small rotations.
+          - >-
+              The same operations destroy the label elsewhere. Flip a chest X-ray and
+              the heart is on the wrong side. Flip text and it is unreadable.
         plain:
           - >-
               Augmentation shows the model the same object under different conditions.
@@ -1997,6 +2718,19 @@ topics:
             - Rotating text
       - name: Modern vision
         why: "Expect at least one question about the last three years."
+        beats:
+          - >-
+              No labels at all, which is the usual situation before anyone pays for
+              annotation.
+          - >-
+              Contrastive methods take two crops of one photo and ask the model to
+              recognise they belong together.
+          - >-
+              Self-distillation has the model teach itself, with one copy learning to
+              match another.
+          - >-
+              Masked methods hide patches and ask it to fill them in. Then a small
+              labelled set finishes the job.
         plain:
           - >-
               Labels are expensive, so a lot of recent work learns from images alone.
@@ -2028,6 +2762,20 @@ topics:
             - Masked autoencoder
       - name: Deployment
         why: "Vision is the area most often pushed to edge hardware."
+        beats:
+          - >-
+              Train on whatever hardware you have.
+          - >-
+              Export to a format the target device can actually run.
+          - >-
+              Quantise. Most of the speed comes from here, and so does most of the
+              accuracy you lose.
+          - >-
+              Tile large images, then stitch the predictions back. The seams are where
+              the bugs live.
+          - >-
+              Serve it, and profile on the real device. Operation counts are a poor
+              guide to latency.
         plain:
           - >-
               Vision models often have to run on a phone, a camera or a drone. The device sets the constraint, and the accuracy table comes second.
@@ -2053,6 +2801,21 @@ topics:
           - Serve
       - name: Evaluation traps
         why: "Naming your own evaluation problems earns trust quickly."
+        beats:
+          - >-
+              The score is suspiciously high. Four usual causes, all of them about the
+              split.
+          - >-
+              Frames from one video are near-identical, so the test set is not new to
+              the model.
+          - >-
+              Tiles from one satellite scene have the same problem, spread across space
+              instead of time.
+          - >-
+              The model may have learnt the background. Snow on the ground came to mean wolf.
+          - >-
+              Or the remaining error is annotation noise, and you are now fitting
+              somebody's mistakes.
         plain:
           - >-
               Vision evaluation lies more often than most. The usual cause is that the
@@ -2097,6 +2860,16 @@ topics:
     modules:
       - name: Fusion strategies
         why: "Fusion is the first design decision, and you will have to justify it."
+        beats:
+          - >-
+              Early fusion mixes the raw signals before either has been understood. Most
+              flexible, most data-hungry.
+          - >-
+              Cross-attention keeps two streams and lets each look into the other. This
+              is the common middle ground.
+          - >-
+              Late fusion encodes each separately and joins the outputs. Cheapest, and
+              it can never notice a fine-grained conflict.
         plain:
           - >-
               Two kinds of input, one model. The design question is where they meet.
@@ -2128,6 +2901,18 @@ topics:
             - Join the outputs
       - name: Contrastive alignment
         why: "Retrieval and open-vocabulary systems are built on this."
+        beats:
+          - >-
+              One space that both pictures and words get written into.
+          - >-
+              The image tower turns a picture into a point.
+          - >-
+              The text tower turns a caption into a point in the same space.
+          - >-
+              Real image and caption pairs get pulled together.
+          - >-
+              Every other pairing in the batch gets pushed apart, which is why batch
+              size matters so much here.
         plain:
           - >-
               Contrastive training puts images and captions in one shared space.
@@ -2154,6 +2939,21 @@ topics:
           - Everything else pushed apart
       - name: Vision-language models
         why: "Vision-language models are the default multimodal system right now."
+        beats:
+          - >-
+              An image goes in.
+          - >-
+              A vision encoder turns it into a grid of features. Its resolution decides
+              whether a chart is readable.
+          - >-
+              A projector maps those features into the shape the language model expects.
+              This small piece is most of the training.
+          - >-
+              The language model reads them alongside the text tokens, treating both as
+              one sequence.
+          - >-
+              Text comes out. If it describes objects that were never in the picture,
+              the fault is usually earlier in this chain.
         plain:
           - >-
               A vision-language model turns an image into tokens the language model can
@@ -2180,6 +2980,19 @@ topics:
           - Text
       - name: Generation across modalities
         why: "Expect at least a conceptual question here."
+        beats:
+          - >-
+              Start with a prompt.
+          - >-
+              Encode it into a form the generator can be steered by.
+          - >-
+              Then denoise, step by step, from pure static toward something matching the
+              prompt.
+          - >-
+              Decode from the compressed space back up to full resolution.
+          - >-
+              An image. Push the guidance too hard and you get obedience with no
+              variety.
         plain:
           - >-
               Generation runs the other way. Text goes in, an image or a video comes
@@ -2207,6 +3020,19 @@ topics:
           - Image
       - name: Audio and speech
         why: "Audio gets skipped often enough that knowing it stands out."
+        beats:
+          - >-
+              Sound arrives as a wave. Air pressure over time, and nothing else.
+          - >-
+              Turn it into a spectrogram, which is a picture of frequency over time. Now
+              vision methods apply.
+          - >-
+              An encoder reads that picture.
+          - >-
+              It produces tokens, the same kind of thing a language model consumes.
+          - >-
+              Out comes text. Accent, noise and phone-quality audio all raise the error
+              rate, and the training data rarely represents them.
         plain:
           - >-
               Audio is the modality most candidates skip. It is a wave, turned into a
@@ -2233,6 +3059,16 @@ topics:
           - Text
       - name: Evaluation
         why: "Multimodal benchmarks are unusually easy to game."
+        beats:
+          - >-
+              Score the model with everything it is meant to have. This is the number
+              people report.
+          - >-
+              Now hide the image and ask again. If the score barely moves, the benchmark
+              was testing the language model.
+          - >-
+              Hide the text instead. Between the three you learn what the benchmark
+              actually measures.
         plain:
           - >-
               Multimodal benchmarks are unusually easy to game, because many questions
@@ -2262,6 +3098,14 @@ topics:
             - Image only
       - name: Failure modes
         why: "Failure modes are your research angle, so answer them best."
+        beats:
+          - >-
+              The model reads the picture and answers from what it sees.
+          - >-
+              Balanced. Both inputs contribute, which is what you hoped for.
+          - >-
+              The text prior wins and the image is quietly ignored. Build a set where
+              the two disagree and you can measure exactly where a model sits.
         plain:
           - >-
               When two inputs disagree, one usually wins. Models often trust the text
@@ -2297,6 +3141,641 @@ topics:
       - Build a conflict set where image and text disagree, and measure which wins
       - Compare the same VLM in two languages on identical images
 
+  - id: embedding
+    name: Embeddings
+    group: models
+    blurb: "Whether you can turn meaning into geometry, and know when the geometry lies."
+    scope: "Owns representation, similarity and vector search. Hands the encoder architecture to transformers and the pipeline around it to NLP."
+    links: [nlp, transformers]
+    modules:
+      - name: What an embedding is
+        why: "Every retrieval system and every recommendation rests on this one idea."
+        plain:
+          - >-
+              An embedding turns a thing into a list of numbers. Put those numbers
+              on a map and similar things land near each other.
+          - >-
+              Nothing about the numbers is meaningful on its own. Only the
+              distances between them carry information.
+        covers:
+          - A vector as a point in a high-dimensional space
+          - Why nearby means similar
+          - Dense versus sparse representations
+          - Dimensionality and what it costs
+          - The same space for images, text or users
+          - What the axes do not mean
+        check: "Someone asks what dimension 42 of your embedding represents. What do you tell them?"
+        viz:
+          type: flow
+          steps: ["A thing", "An encoder", "A vector", "A point on a map"]
+        beats:
+          - "Start with anything you want to compare. A sentence, a picture, a product."
+          - "Push it through an encoder trained to place similar things together."
+          - "Out comes a list of numbers. Hundreds or thousands of them."
+          - "Treat that list as a point in space. Now similarity is just distance, and distance is easy to compute."
+      - name: How embeddings get trained
+        why: "The training signal decides what similar ends up meaning."
+        plain:
+          - >-
+              Nobody labels which sentences are similar. So the training has to
+              invent a signal from the data itself.
+          - >-
+              Most methods show the model a pair that belongs together and a
+              batch that does not, then pull and push accordingly.
+        covers:
+          - Contrastive learning and in-batch negatives
+          - Hard negative mining and why easy negatives stop teaching
+          - Masked language modelling as a starting point
+          - Distillation from a larger encoder
+          - Instruction-tuned and task-prefixed embeddings
+          - Matryoshka training for truncatable vectors
+        check: "Why does an embedding model need hard negatives, and what happens without them?"
+        viz:
+          type: flow
+          steps: ["Take a pair that belongs", "Pull them together", "Push everything else apart", "Repeat"]
+          loop: true
+        beats:
+          - "Take two things you know belong together. A question and its answer, a caption and its image."
+          - "Pull their two points closer in the space."
+          - "Push every other pairing in the batch apart. This is where most of the learning happens."
+          - "Repeat across a very large number of pairs. What counts as similar is decided entirely by which pairs you chose."
+      - name: Similarity and distance
+        why: "Choosing the wrong measure quietly breaks retrieval."
+        plain:
+          - >-
+              Cosine similarity measures the angle between two vectors and
+              ignores their length. Dot product does not.
+          - >-
+              If your vectors are normalised the two agree. If they are not, dot
+              product will favour long vectors, which often means popular items.
+        covers:
+          - "Cosine similarity: angle only"
+          - "Dot product: angle and magnitude"
+          - Euclidean distance and when it matches cosine
+          - Normalising, and what it throws away
+          - Temperature and the sharpness of the comparison
+          - Matching the measure the model was trained with
+        check: "Your retrieval favours long documents. Name the likely cause."
+        viz:
+          type: compare
+          cols:
+            - k: "Cosine"
+              items: ["Angle only", "Length ignored"]
+            - k: "Dot product"
+              items: ["Angle and length", "Long vectors win"]
+        beats:
+          - "Cosine looks only at direction. Two vectors pointing the same way score the same however long they are."
+          - "Dot product rewards length too. If some items simply have larger vectors, they surface more often, whatever the query."
+      - name: Choosing a model
+        why: "Most retrieval quality is decided here, before any tuning."
+        plain:
+          - >-
+              Embedding models differ in what they were trained on, how many
+              dimensions they output, and how much text they accept.
+          - >-
+              A leaderboard rank tells you little about your own domain. Test on
+              your own queries before committing.
+        covers:
+          - Domain fit versus benchmark rank
+          - Sequence length and what gets truncated
+          - Dimension size, storage and index cost
+          - Multilingual coverage and cross-lingual retrieval
+          - Symmetric versus asymmetric search
+          - Cost of re-embedding everything when you switch
+        check: "You are choosing between two embedding models. Describe the test you would run."
+        viz:
+          type: parts
+          centre: Choosing an embedding model
+          around:
+            - Does it know your domain
+            - How much text fits
+            - What the vectors cost to store
+            - What switching later costs
+        beats:
+          - "Four things decide it, and benchmark rank is not among them."
+          - "Whether it has seen language like yours. Legal, clinical and code all behave differently."
+          - "How much text it accepts before truncating. Silent truncation is a common and invisible bug."
+          - "How many dimensions, since that sets your storage and index bill."
+          - "And what it costs to change your mind, because switching means re-embedding everything you have."
+      - name: Vector search at scale
+        why: "Exact search stops being possible quickly, and the approximations have knobs."
+        plain:
+          - >-
+              Comparing a query against every vector works until you have
+              millions of them. Then you need an index.
+          - >-
+              Every index trades recall for speed. It finds most of the nearest
+              neighbours, most of the time, much faster.
+        covers:
+          - Exact search and where it stops scaling
+          - "HNSW: a navigable graph, and its build cost"
+          - "IVF: cluster first, search a few clusters"
+          - Product quantisation and compressed vectors
+          - The recall and latency trade, measured rather than assumed
+          - Filtering by metadata alongside the vector search
+          - Rebuilding an index when the data moves
+        check: "Explain the trade an approximate index makes, and how you would measure whether it hurt you."
+        viz:
+          type: scale
+          lo: Exact and slow
+          hi: Fast and approximate
+          stops: ["Brute force", "Graph index", "Compressed vectors"]
+          on: 1
+        beats:
+          - "Brute force compares against everything. Perfect recall, and it stops being viable in the millions."
+          - "A graph index walks toward the answer instead of scanning. Usually the right default, and it costs memory to build."
+          - "Compress the vectors and you fit far more in memory, paying in precision. Always measure the recall you actually lost."
+      - name: Evaluating an embedding
+        why: "Retrieval is measurable, and most teams skip measuring it."
+        plain:
+          - >-
+              You can measure retrieval on its own, without the model that reads
+              the results. Most teams never do.
+          - >-
+              Build a small set of real queries with the documents that should
+              come back. Fifty is enough to catch a bad choice.
+        covers:
+          - "Recall at k, and choosing k from the downstream budget"
+          - "Mean reciprocal rank and normalised discounted cumulative gain"
+          - Building a golden set from real queries
+          - Benchmark rank versus your own data
+          - Measuring retrieval separately from generation
+          - Watching for drift as the corpus grows
+        check: "How would you tell whether a retrieval change helped, without asking a language model?"
+        viz:
+          type: flow
+          steps: ["Collect real queries", "Mark what should return", "Measure recall at k", "Change one thing"]
+          loop: true
+        beats:
+          - "Take queries people actually asked. Invented ones flatter the system."
+          - "For each, mark which documents should come back. This is the slow part and it only happens once."
+          - "Measure how often the right document is in the top k. That number is your ceiling for everything downstream."
+          - "Change one thing and measure again. Now you know whether it helped."
+      - name: Where the geometry lies
+        why: "Embedding spaces have known pathologies that look like model failure."
+        plain:
+          - >-
+              Embedding spaces are not evenly filled. Vectors often crowd into a
+              narrow cone, so everything looks fairly similar to everything else.
+          - >-
+              Some points are also near far more queries than they should be.
+              Those hubs turn up in results they have no business being in.
+        covers:
+          - Anisotropy and the narrow cone
+          - Hubness in high dimensions
+          - Popularity bias in learned spaces
+          - The modality gap in joint image and text spaces
+          - Drift as the corpus changes under a fixed model
+          - Near-duplicate documents crowding the results
+        check: "Every query returns the same three documents. Give two possible causes."
+        viz:
+          type: parts
+          centre: Why retrieval looks broken
+          around:
+            - Everything is similar to everything
+            - A few hubs dominate
+            - Near-duplicates fill the results
+            - The corpus moved and the model did not
+        beats:
+          - "Four pathologies that look like a broken model and are properties of the space."
+          - "Anisotropy. The vectors crowd into a narrow cone, so all the similarities sit in a tight band."
+          - "Hubness. A few points sit near an unreasonable number of queries and appear everywhere."
+          - "Near-duplicates. The top results are the same document five times over."
+          - "Drift. The corpus grew into topics the encoder never saw, and nobody re-embedded."
+    traps:
+      - Comparing vectors with a different measure from the one they were trained with
+      - Quoting a benchmark rank as evidence the model suits your domain
+      - Reporting end-to-end quality with no retrieval metric underneath it
+      - Assuming an approximate index returns the true nearest neighbours
+    drills:
+      - Embed fifty of your own queries and read the top result for each by hand
+      - Measure recall at ten before and after switching index type
+      - Plot the distribution of pairwise similarities and look for the narrow cone
+      - Truncate an input past the model's limit and watch the retrieval quietly degrade
+  - id: edge-ai
+    name: Edge AI
+    group: systems
+    blurb: "Whether you can make a model small enough to run where the data already is."
+    scope: "Owns small models, compression and on-device serving. Hands training recipes to LLM training and cloud serving to MLOps."
+    links: [mlops, llm-training]
+    modules:
+      - name: Why run it on the device
+        why: "The reasons are rarely about accuracy, and interviewers want the real ones."
+        plain:
+          - >-
+              Running on the device means the data never leaves it. That answers
+              a privacy question no amount of encryption in transit does.
+          - >-
+              It also removes the round trip. No network means no latency spike
+              and no outage when the connection drops.
+        covers:
+          - Privacy and data that cannot legally leave
+          - Latency without a network round trip
+          - Working with no connection at all
+          - Cost per request at scale
+          - Battery, heat and what the user notices
+          - When the cloud is simply the right answer
+        check: "Give three reasons to run on device that have nothing to do with accuracy."
+        viz:
+          type: parts
+          centre: Why on the device
+          around:
+            - The data never leaves
+            - No round trip
+            - Works offline
+            - No per-request bill
+        beats:
+          - "Four reasons, and none of them is that the small model is better."
+          - "The data stays put. For health and finance this is often the whole argument."
+          - "No network hop, so the slowest case is your own hardware rather than someone's wifi."
+          - "It keeps working on a plane, underground, or in a clinic with bad signal."
+          - "And there is no bill per request, which changes the economics entirely at scale."
+      - name: Making a model smaller
+        why: "Three levers, and they compose differently."
+        plain:
+          - >-
+              You can train a small model to copy a large one, cut away parts of
+              a trained model, or store its numbers with less precision.
+          - >-
+              Distillation usually gives the most for the effort. Quantisation
+              gives the most for the least effort.
+        covers:
+          - "Distillation: a small student copying a large teacher"
+          - Training on teacher outputs rather than hard labels
+          - "Pruning: structured and unstructured"
+          - The lottery ticket idea and what survived it
+          - Low-rank factorisation of weight matrices
+          - Combining methods, and the order to apply them
+        check: "You need a model four times smaller. Describe your order of attack."
+        viz:
+          type: stack
+          layers: ["Quantise last", "Prune the fat", "Distil into a smaller student", "Start from the right architecture"]
+        beats:
+          - "Quantisation goes last, because it applies to whatever you end up with."
+          - "Pruning removes weights that were doing little. Structured pruning removes whole channels, which hardware can actually exploit."
+          - "Distillation trains a small model on the large model's outputs. Soft targets carry more information than the labels did."
+          - "And underneath, picking an architecture that suits the hardware. No amount of compression rescues the wrong shape."
+      - name: Quantisation
+        why: "The highest-value lever, and the one with the sharpest edges."
+        plain:
+          - >-
+              Weights are usually stored as sixteen-bit numbers. Store them as
+              eight or four bits and the model shrinks by the same factor.
+          - >-
+              Most of the model tolerates this. A few outlier values do not, and
+              handling those is what separates the methods.
+        covers:
+          - "Post-training quantisation versus quantisation-aware training"
+          - Weight-only versus weight and activation quantisation
+          - Per-tensor, per-channel and group-wise scales
+          - Outliers, and why they break naive rounding
+          - "Integer formats and four-bit float formats"
+          - Calibration data and how little you need
+          - Measuring the quality you actually lost
+        check: "Explain why quantising to four bits hurts some layers far more than others."
+        viz:
+          type: scale
+          lo: Full size
+          hi: Smallest
+          stops: ["Sixteen bit", "Eight bit", "Four bit"]
+          on: 1
+        beats:
+          - "Sixteen-bit is the usual starting point. Nothing is lost and nothing is saved."
+          - "Eight-bit halves the size and, done carefully, costs almost no quality. This is the safe default."
+          - "Four-bit halves it again and starts to bite. Outlier weights are where the damage concentrates, so measure rather than assume."
+      - name: Small language models
+        why: "The area moving fastest, and the one you will be asked about."
+        plain:
+          - >-
+              A small language model is a few billion parameters or fewer, built
+              to run on a phone or a laptop.
+          - >-
+              They get much of their quality from training data rather than
+              size. Careful curation buys more than extra parameters here.
+        covers:
+          - What a small model can and cannot do
+          - Data quality as the main lever at small scale
+          - Distilling reasoning from a larger model
+          - Task-specific small models versus general ones
+          - Long context on a memory budget
+          - Routing between a small local model and a large remote one
+        check: "When would you ship a small local model instead of calling a large one?"
+        viz:
+          type: tree
+          root: Which model runs this request
+          branches:
+            - k: Small and local
+              items: ["Routine, private, offline"]
+            - k: Large and remote
+              items: ["Hard, rare, needs breadth"]
+        beats:
+          - "Most systems end up routing rather than choosing once."
+          - "The local model handles the routine, the private and the offline. Most requests, most of the time."
+          - "The remote model gets the hard and unusual ones. The interesting design question is who decides, and how it fails when the network is gone."
+      - name: Runtimes and hardware
+        why: "The model is only half of it. The runtime decides what actually happens."
+        plain:
+          - >-
+              A phone has a processor, a graphics chip and often a dedicated
+              neural unit. Each supports a different set of operations.
+          - >-
+              An operation the accelerator does not support falls back to the
+              slow path, which can undo the whole optimisation.
+        covers:
+          - "CPU, GPU and neural accelerators on the same device"
+          - Operator support and silent fallbacks
+          - "Export formats and their converters"
+          - Memory mapping and load time
+          - Batch size one, which is the normal case here
+          - Profiling on the target device rather than a simulator
+        check: "Your quantised model is slower than the original on device. Give the likely cause."
+        viz:
+          type: flow
+          steps: ["Train", "Export", "Convert", "Run on device", "Profile"]
+          loop: true
+        beats:
+          - "Train wherever you like. This part is unconstrained."
+          - "Export to an interchange format. The first place operators start disappearing."
+          - "Convert for the target runtime. The second place, and unsupported operations quietly fall back to the CPU."
+          - "Run it on the actual device. Simulators do not reproduce thermal limits or memory pressure."
+          - "Profile, find the fallback, and go round again. This loop is most of the work."
+      - name: Measuring on device
+        why: "Server metrics do not describe a phone."
+        plain:
+          - >-
+              On a server you measure throughput. On a device you measure how
+              long the user waits and how warm the phone gets.
+          - >-
+              A model that is fast for ten seconds and then throttles is not
+              fast. Sustained performance is the number that matters.
+        covers:
+          - Time to first token and time per token
+          - Peak memory, and what the operating system will kill
+          - Thermal throttling and sustained versus burst speed
+          - Battery cost per request
+          - Cold start and model load time
+          - Measuring on the oldest device you support
+        check: "Name three measurements that matter on device and not on a server."
+        viz:
+          type: compare
+          cols:
+            - k: On a server
+              items: ["Requests per second", "Cost per thousand calls"]
+            - k: On a device
+              items: ["Wait before the first word", "Heat and battery", "Whether it survives ten minutes"]
+        beats:
+          - "On a server you optimise throughput, because you are filling a machine with many users."
+          - "On a device there is one user, so you optimise their wait, the heat in their hand, and whether performance holds after ten minutes of use."
+      - name: What you give up
+        why: "Being honest about the gap is what makes the pitch credible."
+        plain:
+          - >-
+              A small model knows less. It has weaker general knowledge, shorter
+              usable context, and it breaks down on unusual requests.
+          - >-
+              The useful question is whether it is good enough for the specific
+              job, measured on your own data rather than a benchmark.
+        covers:
+          - Capability gaps that appear at the tail
+          - Shorter usable context in practice
+          - Evaluating on your own task rather than general benchmarks
+          - Falling back to a larger model, and how that fails offline
+          - Updating a model already on millions of devices
+          - Being honest about the gap in a design review
+        check: "Your on-device model handles 90% of requests. Describe what happens to the other 10%."
+        viz:
+          type: flow
+          steps: ["Request arrives", "Small model tries", "Is it confident", "Answer or escalate"]
+        beats:
+          - "A request arrives on the device."
+          - "The small model attempts it, because most requests are routine."
+          - "Something has to judge whether the answer is good enough. This is a calibration problem, and it is the hard part."
+          - "Answer locally, or escalate to the cloud. Then decide what happens when there is no cloud to escalate to."
+    traps:
+      - Quoting benchmark scores from a server for a model that will run on a phone
+      - Profiling on a simulator instead of the oldest supported device
+      - Assuming a smaller model is automatically faster on the target hardware
+      - Designing an escalation path that fails silently when the device is offline
+    drills:
+      - Quantise one model to eight bits and measure the quality you lost on your own data
+      - Run the same model on a phone and time the first token, then time it again after ten minutes
+      - Find one operator that falls back to the CPU and remove it
+      - Write the routing rule between local and remote, including the offline case
+  - id: image-generation
+    name: Image Generation
+    group: models
+    blurb: "Whether you understand denoising as a process, and what steering it costs."
+    scope: "Owns diffusion, conditioning and control. Hands the encoders to multimodality and the safety framing to AI safety."
+    links: [multimodality, ai-safety]
+    modules:
+      - name: Diffusion as a process
+        why: "Every later idea is a modification of this loop."
+        plain:
+          - >-
+              Take an image and add noise until nothing is left. That direction
+              is easy and needs no learning.
+          - >-
+              Now train a model to undo one step of it. Run that model many
+              times from pure noise and an image appears.
+        covers:
+          - The forward process that destroys an image
+          - Learning to predict the noise that was added
+          - Sampling as repeated partial denoising
+          - Why many small steps beat one large one
+          - Noise schedules and what they control
+          - The link to score matching, at a conceptual level
+        check: "Explain diffusion without using the word diffusion."
+        viz:
+          type: flow
+          steps: ["Pure noise", "Predict the noise", "Subtract a little", "Repeat", "An image"]
+          loop: true
+        beats:
+          - "Start from pure static. No information at all."
+          - "The model predicts which part of this is noise. That is the only thing it was ever trained to do."
+          - "Remove a fraction of what it predicted. One small step toward something coherent."
+          - "Repeat, tens of times. Each pass has an easier job than the one before."
+          - "An image. The whole method is one small prediction, run many times."
+      - name: Working in a smaller space
+        why: "This is what made image generation affordable."
+        plain:
+          - >-
+              Denoising at full resolution is very expensive. So the work happens
+              in a compressed space instead.
+          - >-
+              An autoencoder squeezes the image down first, the denoising runs
+              there, and a decoder expands the result back up.
+        covers:
+          - The autoencoder and its compression factor
+          - Denoising in latent space rather than pixel space
+          - What the decoder can and cannot recover
+          - Artefacts that come from the autoencoder rather than the model
+          - Resolution, aspect ratio and training distribution
+          - Why fine text and small faces suffer
+        check: "Your outputs have consistent small artefacts. How would you tell the autoencoder from the denoiser?"
+        viz:
+          type: flow
+          steps: ["Image", "Encode down", "Denoise here", "Decode up", "Image"]
+        beats:
+          - "Start with a full resolution image during training."
+          - "An encoder compresses it, often by a factor of eight in each direction."
+          - "All the expensive denoising happens in that small space. This is the entire cost saving."
+          - "A decoder expands the result back to full size, inventing the fine detail."
+          - "Which is why small text and distant faces come out wrong. That damage is the autoencoder's, not the denoiser's."
+      - name: Steering it with a prompt
+        why: "Guidance is the knob people turn without knowing what it does."
+        plain:
+          - >-
+              The model can predict noise with the prompt in mind, or without it.
+              Run both and you get two directions.
+          - >-
+              Guidance exaggerates the difference between them. It pushes the
+              image toward the prompt and away from a generic one.
+        covers:
+          - Text encoders and what the model actually reads
+          - Conditional and unconditional prediction
+          - "Classifier-free guidance and the guidance scale"
+          - What happens as guidance rises
+          - Negative prompts as a second unconditional direction
+          - Prompt adherence versus image diversity
+        check: "Explain what classifier-free guidance does, and what breaks when you turn it up."
+        viz:
+          type: scale
+          lo: Ignores the prompt
+          hi: Obeys and looks burnt
+          stops: ["No guidance", "Balanced", "Too much"]
+          on: 1
+        beats:
+          - "With no guidance the model produces something plausible that may ignore what you asked for."
+          - "Turn it up and the image moves toward the prompt. There is a range where this is simply better."
+          - "Push further and you get obedience with no variety, oversaturated colour and hard edges. The image is being pulled harder than the model can absorb."
+      - name: Control beyond the prompt
+        why: "Words run out quickly when you need a specific composition."
+        plain:
+          - >-
+              A prompt cannot say where things go. For that you give the model
+              another image to follow.
+          - >-
+              An edge map, a depth map or a pose skeleton constrains the layout
+              while leaving the style to the prompt.
+        covers:
+          - Image to image, and how much of the original survives
+          - Inpainting and outpainting with a mask
+          - "Structural control from edges, depth or pose"
+          - Reference images for style or identity
+          - Combining several controls and their conflicts
+          - Seeds and reproducing a result exactly
+        check: "You need the same composition in five different styles. Describe your setup."
+        viz:
+          type: tree
+          root: What do you need to hold fixed
+          branches:
+            - k: The layout
+              items: ["Edge or depth control"]
+            - k: A region
+              items: ["Inpainting with a mask"]
+            - k: A subject
+              items: ["Reference image or a trained adapter"]
+        beats:
+          - "Decide what must stay the same. That choice picks the tool."
+          - "To keep the composition, give it an edge or depth map and let the prompt handle everything else."
+          - "To change one region only, mask it and inpaint. The rest of the image is untouched."
+          - "To keep a specific person or object across images, you need a reference or a small trained adapter."
+      - name: Samplers and step count
+        why: "The cheapest quality and speed lever in the whole stack."
+        plain:
+          - >-
+              The sampler decides how big each denoising step is and how it uses
+              the model's prediction.
+          - >-
+              Better samplers reach the same quality in fewer steps. Fewer steps
+              means proportionally less compute.
+        covers:
+          - Deterministic and stochastic samplers
+          - Step count and where the returns flatten
+          - Solver order and why it lets you take fewer steps
+          - Distilled few-step models
+          - Reproducibility, seeds and sampler choice
+          - Measuring quality against cost rather than by eye
+        check: "You halve the step count and quality drops. Give two things you would try before adding steps back."
+        viz:
+          type: curve
+          shape: rise
+          x: Steps taken
+          y: Quality
+          a: A better sampler
+          b: A basic sampler
+        beats:
+          - "A basic sampler needs many steps before the image settles."
+          - "A better solver reaches the same quality much sooner, which is the same picture for a fraction of the compute."
+      - name: Teaching it something new
+        why: "Almost every production use needs a subject the base model never saw."
+        plain:
+          - >-
+              The base model does not know your product, your character or your
+              house style. You teach it with a handful of images.
+          - >-
+              A small adapter is usually enough. Training the whole model is
+              expensive and forgets things.
+        covers:
+          - "LoRA adapters for style and subject"
+          - Subject-driven fine-tuning from a few images
+          - Textual inversion and learning a new token
+          - Overfitting, and the same face in every output
+          - Combining adapters and their interference
+          - Rights and consent for the training images
+        check: "Every image now looks like your five training photos. Say what went wrong."
+        viz:
+          type: scale
+          lo: Cheapest
+          hi: Most invasive
+          stops: ["New token", "Small adapter", "Full fine-tune"]
+          on: 1
+        beats:
+          - "Learning one new word is the lightest option. It teaches a concept without touching the model."
+          - "A small adapter is the usual answer. Enough capacity for a style or a subject, small enough to swap in and out."
+          - "A full fine-tune moves everything. Most capable, most expensive, and it forgets things you wanted to keep."
+      - name: Evaluation and harm
+        why: "The metrics are weak and the harms are concrete."
+        plain:
+          - >-
+              Scores for generated images correlate loosely with what people
+              actually prefer. Human comparison is still the real measure.
+          - >-
+              The harms are not hypothetical. Likeness without consent, and
+              images presented as real, are the two that matter most.
+        covers:
+          - Automated scores and how loosely they track preference
+          - Pairwise human comparison as the real measure
+          - Prompt adherence measured separately from image quality
+          - Likeness, consent and named individuals
+          - Provenance, watermarking and their limits
+          - Training data rights and attribution
+        check: "How would you decide whether a new checkpoint is better than the one in production?"
+        viz:
+          type: parts
+          centre: Before it ships
+          around:
+            - Do people prefer it
+            - Does it follow the prompt
+            - Can it depict a real person
+            - Can anyone tell it was generated
+        beats:
+          - "Four questions, and the automated score answers none of them well."
+          - "Do people actually prefer the output. Pairwise comparison, on your own prompts."
+          - "Does it do what the prompt asked. Measure this separately from whether the picture is attractive."
+          - "Will it produce a recognisable real person on request. Test this deliberately rather than waiting to find out."
+          - "And is there any way to tell the image was generated. Watermarking helps and survives less handling than people assume."
+    traps:
+      - Turning guidance up until the image looks burnt and calling it prompt adherence
+      - Blaming the denoiser for artefacts the autoencoder introduced
+      - Judging a checkpoint by a handful of cherry-picked outputs
+      - Training on someone's likeness without asking whether you may
+    drills:
+      - Generate the same seed at five guidance values and line them up
+      - Halve the step count and compare against the sampler change instead
+      - Train one small adapter on ten images and find where it overfits
+      - Run a pairwise comparison on thirty prompts before trusting any score
+
   # ── Judgement ────────────────────────────────────────────────────────────
   - id: uncertainty-quantification
     name: Uncertainty Quantification
@@ -2307,6 +3786,16 @@ topics:
     modules:
       - name: What kind of uncertainty
         why: "The decomposition decides which fix is available to you."
+        beats:
+          - >-
+              Two very different things get called uncertainty, and the fix depends on
+              which one you have.
+          - >-
+              Aleatoric is noise in the world. A fair coin is genuinely unpredictable
+              and more data will never change that.
+          - >-
+              Epistemic is your own ignorance. More data, or a better model, removes it.
+              Only this kind is worth collecting for.
         plain:
           - >-
               Two different things get called uncertainty. One is noise in the world,
@@ -2336,6 +3825,13 @@ topics:
             - More data helps
       - name: Calibration
         why: "Calibration is the central measurement here, and easy to get subtly wrong."
+        beats:
+          - >-
+              A perfectly calibrated model sits on the diagonal. Say seventy per cent,
+              be right seventy per cent of the time.
+          - >-
+              Most models sit below it. They claim more confidence than they earn, and
+              the gap is widest where they are most certain.
         plain:
           - >-
               A calibrated model is one you can take at its word. Of everything it calls
@@ -2361,6 +3857,17 @@ topics:
           b: Overconfident
       - name: Recalibration
         why: "Try this before anything more elaborate."
+        beats:
+          - >-
+              You have a trained model. Its ranking is fine and its numbers are not.
+          - >-
+              Take a held-out set it never saw during training.
+          - >-
+              Fit a single number that divides all the scores. One parameter, nothing
+              else changes.
+          - >-
+              Now the probabilities mean something. Accuracy is untouched, because
+              dividing everything by one number cannot reorder it.
         plain:
           - >-
               Recalibration fixes the numbers without touching the ranking. Temperature
@@ -2386,6 +3893,19 @@ topics:
           - Calibrated model
       - name: Conformal prediction
         why: "Conformal prediction gives a finite-sample guarantee, and it is your own tool."
+        beats:
+          - >-
+              Set aside a calibration set. It must look like the data you will meet
+              later.
+          - >-
+              Score every point by how badly the model missed it.
+          - >-
+              Take the quantile of those scores at the level you asked for.
+          - >-
+              For a new input, keep every label scoring better than that threshold. That
+              set is your answer.
+          - >-
+              Coverage holds on average across inputs. The guarantee covers the procedure, and says nothing about any one prediction.
         scene:
           kind: "sets"
           cases: [{"k": "Easy input", "set": ["cat"]}, {"k": "Harder input", "set": ["cat", "lynx"]}, {"k": "Hardest input", "set": ["cat", "lynx", "fox", "dog"]}]
@@ -2417,6 +3937,16 @@ topics:
           - Coverage holds
       - name: Bayesian and ensemble approximations
         why: "These are the practical alternatives, priced honestly."
+        beats:
+          - >-
+              Train several models with different seeds and look at how much they
+              disagree. Best results, and you pay for every one.
+          - >-
+              Leave dropout on at prediction time and sample repeatedly. Cheap, and the
+              theory behind it is contested.
+          - >-
+              Look at the curvature around the solution. One extra pass, and it only
+              describes the neighbourhood you landed in.
         plain:
           - >-
               If you want the model's own uncertainty rather than a wrapper, you have to
@@ -2449,6 +3979,13 @@ topics:
             - One extra pass
       - name: Abstention and selective prediction
         why: "This is where uncertainty turns into a decision."
+        beats:
+          - >-
+              Abstain on the least confident cases and accuracy on the rest climbs.
+          - >-
+              Answer everything and you accept the errors that come with it. The curve
+              between those two is where you choose a threshold, and the cost of a
+              mistake decides where.
         scene:
           kind: "defer"
           inflow: "Every case arrives"
@@ -2480,6 +4017,22 @@ topics:
           b: Answer everything
       - name: Uncertainty for language models
         why: "Language models are the open frontier here, and where your own work sits."
+        beats:
+          - >-
+              For a language model there is no single number to read off, because the
+              same meaning has many phrasings.
+          - >-
+              Token probability is available and misleading. It measures wording as much
+              as meaning.
+          - >-
+              Semantic entropy groups the samples that mean the same thing, then
+              measures spread over meanings.
+          - >-
+              Sampling several times and checking whether the answers agree is a decent
+              signal for very little work.
+          - >-
+              Asking the model how sure it is gives the least reliable answer of the
+              four.
         plain:
           - >-
               Language models make this harder. There is no single probability to read
@@ -2525,6 +4078,15 @@ topics:
     modules:
       - name: The framing
         why: "The field has a specific standard of evidence, and interviews test whether you hold it."
+        beats:
+          - >-
+              In the tidy case one neuron means one thing and you can read it directly.
+          - >-
+              In practice a neuron fires for several unrelated concepts. That is
+              polysemanticity.
+          - >-
+              The reason is superposition. There are more concepts worth storing than
+              there are neurons, so they share directions.
         scene:
           kind: "crowded"
           slots: 5
@@ -2532,8 +4094,7 @@ topics:
           cap: "There are more things worth representing than there are neurons, so concepts share space. That is why one neuron fires for several unrelated things."
         plain:
           - >-
-              The goal is to find the actual mechanism inside the network, not a story
-              that fits the outputs. That standard of evidence is what defines the
+              The goal is the actual mechanism inside the network. A story that happens to fit the outputs will not do. That standard of evidence is what defines the
               field.
           - >-
               One neuron often fires for several unrelated things. The network has more
@@ -2557,6 +4118,18 @@ topics:
           'on': 2
       - name: The toolkit
         why: "You will be asked which tool answers which question."
+        beats:
+          - >-
+              Pick a specific behaviour, narrow enough to test. Not intelligence.
+              Something like copying a repeated name.
+          - >-
+              Form a hypothesis about which component does it.
+          - >-
+              Intervene. Patch that activation from another run, or ablate it, and see
+              whether the behaviour changes.
+          - >-
+              Measure the effect. Watching what lights up is correlation. Changing it
+              and watching the output move is the causal claim.
         plain:
           - >-
               Looking at what lights up tells you what correlates. To claim a mechanism
@@ -2584,6 +4157,18 @@ topics:
           loop: true
       - name: Circuits found so far
         why: "Concrete results are the shared reference points of the field."
+        beats:
+          - >-
+              The clearest circuit anyone has found, and the standard reference point.
+          - >-
+              One head looks at the token before the current one.
+          - >-
+              Another finds where that same token appeared earlier in the context.
+          - >-
+              It copies whatever followed it last time.
+          - >-
+              That simple move accounts for a surprising amount of learning from
+              examples in the prompt.
         plain:
           - >-
               A few circuits are understood well enough to be shared reference points.
@@ -2610,6 +4195,18 @@ topics:
           - Gives in-context learning
       - name: Sparse dictionary learning
         why: "Sparse dictionaries are the main line of work right now, so expect depth."
+        beats:
+          - >-
+              Start from the activations at one layer. Concepts are packed into
+              overlapping directions.
+          - >-
+              Encode into a much wider layer, with only a few units allowed to be active
+              at once.
+          - >-
+              Decode back and try to reproduce the original activations.
+          - >-
+              Compare. Good reconstruction with sparse activity is the goal, and recent
+              work found the resulting features often lose to a plain probe.
         plain:
           - >-
               Since concepts are packed into overlapping directions, the idea is to
@@ -2637,6 +4234,16 @@ topics:
           - Compare the reconstruction
       - name: Steering and editing
         why: "Steering is where interpretability becomes something you can use."
+        beats:
+          - >-
+              Steering adds a direction during the forward pass. Nothing is retrained
+              and you can switch it off.
+          - >-
+              Editing rewrites weights to change a specific fact. Permanent, and it
+              generalises worse than it looks.
+          - >-
+              Fine-tuning changes everything a little. Most effective, and the hardest
+              to attribute or undo.
         plain:
           - >-
               Find a direction that means something and you can add it back mid-forward-pass. Behaviour changes with no retraining.
@@ -2668,6 +4275,17 @@ topics:
             - Broadest side effects
       - name: Interpretability for safety
         why: "Labs fund this work for safety reasons, which is also how it meets your agenda."
+        beats:
+          - >-
+              The goal at the top: interpretability evidence strong enough to hold up a
+              deployment decision.
+          - >-
+              Below that, explaining a whole behaviour rather than one component.
+          - >-
+              Below that, locating a feature and showing it is causal.
+          - >-
+              At the bottom, reading activations. The field is solid here and gets
+              shakier with every step up.
         plain:
           - >-
               Labs fund this work for one reason. They want to check what a model is
@@ -2711,6 +4329,18 @@ topics:
     modules:
       - name: The landscape
         why: "A broad interview will open here, and vagueness reads badly."
+        beats:
+          - >-
+              Three broad shapes of risk. Being able to name which one you mean is most
+              of a good answer.
+          - >-
+              Misuse. The system works exactly as built and somebody points it at harm.
+          - >-
+              Misalignment. The system pursues something other than what you meant, and
+              does it competently.
+          - >-
+              Systemic. No single failure, just harm that emerges from scale, speed and
+              dependence.
         plain:
           - >-
               Three broad concerns. People misusing a capable system, a system pursuing
@@ -2741,6 +4371,16 @@ topics:
             - Harm from scale and dependence
       - name: Alignment methods
         why: "You need to explain what current techniques do and where they stop."
+        beats:
+          - >-
+              When a person can judge the answer directly, ordinary human feedback
+              works.
+          - >-
+              When it takes effort, give the rater tools. Let a model draft the critique
+              and a human check it.
+          - >-
+              When the model is better than any rater, feedback stops carrying
+              information. Everything past this line is unsolved.
         plain:
           - >-
               Current alignment mostly means learning from human feedback. Show people
@@ -2768,6 +4408,16 @@ topics:
           'on': 1
       - name: Failure modes
         why: "These terms are the field's vocabulary, and precision counts."
+        beats:
+          - >-
+              Reward hacking. The measurement was wrong, so scoring well and doing well
+              came apart.
+          - >-
+              Goal misgeneralisation. The goal was learnt from a narrow setting and does
+              not transfer. Same bad behaviour, different cause.
+          - >-
+              Sycophancy. Agreement got rewarded, so the model tells you what you seem
+              to want.
         plain:
           - >-
               These terms get used loosely and precision counts. Reward hacking means
@@ -2799,6 +4449,18 @@ topics:
             - Agreement got rewarded
       - name: Evaluation and red teaming
         why: "Most safety roles spend their time here."
+        beats:
+          - >-
+              Name a capability you would genuinely worry about. Vague risk gives you an
+              eval nobody acts on.
+          - >-
+              Build a test that would detect it, and check it can fail.
+          - >-
+              Set the threshold before you see the result, or you will negotiate with
+              yourself afterwards.
+          - >-
+              Write down what happens when it is crossed. An eval with no consequence
+              attached is theatre.
         plain:
           - >-
               Most safety work is evaluation. Decide what capability would be dangerous,
@@ -2825,6 +4487,16 @@ topics:
           loop: true
       - name: Robustness and control
         why: "Assume alignment might fail, then engineer around it."
+        beats:
+          - >-
+              At the top, a person approving anything you cannot undo.
+          - >-
+              Below that, monitoring that would notice the pattern you fear.
+          - >-
+              Below that, a sandbox limiting what any single action can reach.
+          - >-
+              At the base, least privilege. All of this assumes alignment might fail,
+              which is the point of it.
         plain:
           - >-
               Control asks a different question. Suppose the model is misaligned but not
@@ -2850,6 +4522,19 @@ topics:
           - Least privilege
       - name: Honesty, calibration and abstention
         why: "Calibration is your own contribution, so keep this section the sharpest."
+        beats:
+          - >-
+              Safety training seems to cost a model some of its sense of what it knows.
+          - >-
+              That cost is reported as one averaged number.
+          - >-
+              It is really a distribution over inputs, and averages hide where the
+              damage falls.
+          - >-
+              It is likely larger in languages where the safety data was thin.
+          - >-
+              And in modalities beyond text, for the same reason. Measuring the shape is
+              the open work.
         plain:
           - >-
               This is your own contribution, so it should be the sharpest section. A
@@ -2877,6 +4562,18 @@ topics:
           - Varies by modality
       - name: Policy and practice
         why: "Even research roles expect awareness of the surrounding system."
+        beats:
+          - >-
+              Evaluate against the capabilities you named in advance.
+          - >-
+              Document what you found, including what you could not test.
+          - >-
+              Gate the release on it. This is the step that makes the earlier ones real.
+          - >-
+              Monitor after launch, because deployment finds things evaluation missed.
+          - >-
+              Report what goes wrong. A field that hides incidents learns nothing from
+              them.
         plain:
           - >-
               Research does not end at the paper. Model cards, staged release and
@@ -2921,6 +4618,18 @@ topics:
     modules:
       - name: Choosing a question
         why: "Research interviews are measuring taste more than technique."
+        beats:
+          - >-
+              The answer is known and somebody acts on it. That is engineering, and it
+              is useful work.
+          - >-
+              The answer is unknown and somebody acts on it. This is the quadrant worth
+              writing about.
+          - >-
+              The answer is known and nobody acts on it. Nothing to add here.
+          - >-
+              Unknown and nobody cares. Interesting to you, and hard to justify as a
+              project.
         plain:
           - >-
               Taste is picking a question worth answering. That is what a research
@@ -2951,6 +4660,19 @@ topics:
           - Curiosity only
       - name: Experiment design
         why: "Good design is what turns a demo into evidence."
+        beats:
+          - >-
+              Start with a hypothesis specific enough to be wrong.
+          - >-
+              Write down what you expect to see, before running anything.
+          - >-
+              Tune the baseline as hard as your own method. This is the step people
+              quietly skip.
+          - >-
+              Ablate. Remove one piece at a time so you learn which part carried the
+              result.
+          - >-
+              Then judge, against what you wrote down at the start.
         plain:
           - >-
               An experiment is a prediction plus a way of being wrong. Without the
@@ -2976,6 +4698,14 @@ topics:
           - Verdict
       - name: Statistics for papers
         why: "Reviewers and interviewers both push hardest here."
+        beats:
+          - >-
+              One run per method. The difference you see could be entirely the seed.
+          - >-
+              Three runs. You can see a spread now, and it is probably wider than your
+              improvement.
+          - >-
+              Enough runs that the spread settles. Report the spread. The best run you got is not the result.
         plain:
           - >-
               Different random seeds give different results. If your gain is smaller
@@ -3002,6 +4732,16 @@ topics:
           'on': 2
       - name: Reproducibility
         why: "Reproducibility is cheap to provide and it signals seriousness."
+        beats:
+          - >-
+              At the top, the number in the paper.
+          - >-
+              It rests on the exact configs and seeds that produced it.
+          - >-
+              Which rest on an environment that has to be pinned, or the numbers move.
+          - >-
+              And under all of it, the data and code. The test is whether someone who
+              wants you wrong could reproduce it.
         plain:
           - >-
               Reproducibility is cheap and it signals seriousness. Pin the environment,
@@ -3026,6 +4766,17 @@ topics:
           - Data and code
       - name: Writing
         why: "The output of research is a paper somebody can act on."
+        beats:
+          - >-
+              State the claim. One sentence, and a reviewer should be able to repeat it
+              back.
+          - >-
+              Attach the evidence that supports it. Every claim needs one.
+          - >-
+              Make a figure that carries the argument, rather than decorating it.
+          - >-
+              Then the limitation, written as the next piece of work rather than as an
+              apology.
         plain:
           - >-
               The output of research is a paper someone can act on. Every claim needs a
@@ -3050,6 +4801,16 @@ topics:
           - Limitation
       - name: Review and rebuttal
         why: "Interviewers often ask about reviewing, since it shows you are part of the community."
+        beats:
+          - >-
+              Read the reviews once, then leave them alone for a day.
+          - >-
+              Sort by weight. Some points would change the decision and most would not.
+          - >-
+              Answer the load-bearing ones properly. Space spent on small complaints is
+              space taken from real ones.
+          - >-
+              Revise, and say plainly what you changed.
         plain:
           - >-
               Reviewing is part of being in the field, and interviewers ask about it. It
@@ -3074,6 +4835,17 @@ topics:
           - Revise
       - name: The research interview
         why: "This is the round that decides research hires."
+        beats:
+          - >-
+              Ten minutes on your own work. No slides needed if you know it.
+          - >-
+              Then defend one design choice under pressure. They are testing whether you know why you did it.
+          - >-
+              Name the weakest part yourself. Doing it first is worth more than being
+              caught out.
+          - >-
+              Finish with what you would do next, and make it something their team would
+              care about.
         plain:
           - >-
               The research round is a conversation about your own work. Ten minutes, no
@@ -3115,6 +4887,17 @@ topics:
     modules:
       - name: The basics that still matter
         why: "Most production gains come from doing these carefully."
+        beats:
+          - >-
+              Say what the task is. Most weak prompts fail here, long before the clever part.
+          - >-
+              Give the context needed and no more. Extra material dilutes what matters.
+          - >-
+              Add examples if the format is hard to describe. Two good ones beat ten
+              mediocre.
+          - >-
+              State the output contract. Shape, length, and what to do when it cannot
+              comply.
         plain:
           - >-
               Be specific about three things. The task, the reader, and the shape of the answer you want.
@@ -3140,6 +4923,13 @@ topics:
           - Output contract
       - name: Reasoning
         why: "Folklore is thick here, so precision stands out."
+        beats:
+          - >-
+              On problems with real steps, thinking through them first genuinely helps.
+              Maths, planning, multi-hop questions.
+          - >-
+              On simple lookups it can hurt, and it always costs tokens and latency.
+              Reasoning models already do this internally.
         plain:
           - >-
               Asking a model to work step by step helps on problems with real steps. It
@@ -3169,9 +4959,17 @@ topics:
             - Tight latency budget
       - name: Context construction
         why: "Long context rewards careful budgeting of what you include."
+        beats:
+          - >-
+              Too little context and the model fills the gaps by guessing.
+          - >-
+              Select carefully. Put what matters near the start or the end, since the
+              middle gets used least.
+          - >-
+              Too much and the useful material is buried. Treat a long context as a budget you spend.
         plain:
           - >-
-              A long context is a budget you spend, not a shelf you fill. What you leave
+              Treat a long context as a budget you spend. What you leave
               out matters as much as what you put in.
           - >-
               Material in the middle of a long prompt gets used least. Put the important
@@ -3196,6 +4994,17 @@ topics:
           'on': 1
       - name: Structured output
         why: "Every production integration needs this to be reliable."
+        beats:
+          - >-
+              Define a schema. Now the output is something code can rely on.
+          - >-
+              Generate against it, ideally with constrained decoding so the shape cannot
+              break.
+          - >-
+              Validate every response. Assume some fraction will be malformed.
+          - >-
+              Repair what you can and fail loudly on the rest. A silent parse failure is
+              the worst outcome.
         plain:
           - >-
               Any prompt feeding a real system needs to return a predictable shape. A
@@ -3221,6 +5030,17 @@ topics:
           loop: true
       - name: Measurement
         why: "Measurement is what makes this engineering."
+        beats:
+          - >-
+              Write thirty examples before touching the prompt. This is the step that
+              separates engineering from guessing.
+          - >-
+              Change one thing. Two changes and you learn nothing about either.
+          - >-
+              Compare on the whole set. The one example you happened to try proves nothing.
+          - >-
+              Keep it or revert it, then leave the set in place as a regression suite
+              for the next model upgrade.
         plain:
           - >-
               Without an evaluation set you are guessing. You will believe your last change helped, because you want it to.
@@ -3245,6 +5065,20 @@ topics:
           loop: true
       - name: Robustness
         why: "Prompting meets security here."
+        beats:
+          - >-
+              Text you did not write ends up in the prompt. Retrieved documents, tool
+              results, web pages.
+          - >-
+              Mark clearly where it begins. This helps a little and is not a defence.
+          - >-
+              Keep your instructions above it and assert they take priority. Also helps
+              a little.
+          - >-
+              The defence that holds is limiting what the tools can do, so a successful
+              injection cannot reach anything important.
+          - >-
+              Then attack your own prompt. If you have not tried, you do not know.
         plain:
           - >-
               If your prompt includes text you did not write, that text can carry
@@ -3272,6 +5106,16 @@ topics:
           - Test with an injection
       - name: Choosing the right lever
         why: "Senior candidates are judged on knowing when to stop prompting."
+        beats:
+          - >-
+              Prompting is the cheapest lever and the first to try.
+          - >-
+              Few-shot examples cost tokens on every call, forever.
+          - >-
+              Retrieval adds a system to maintain and fixes problems prompting cannot.
+          - >-
+              Fine-tuning changes the weights. Most expensive, most durable, and
+              pointless if the real problem is your data.
         plain:
           - >-
               Prompting is one lever among several. Few-shot examples, retrieval,
@@ -3319,6 +5163,16 @@ topics:
     modules:
       - name: The loop
         why: "Every agent framework is a variation on this, so know the primitive."
+        beats:
+          - >-
+              Observe the current state. Whatever the agent can actually see.
+          - >-
+              Plan one action. Just one, because the world may not match the plan.
+          - >-
+              Act, against a real tool with real consequences.
+          - >-
+              Observe what came back, and go round again. The stopping rule matters as
+              much as any of this.
         plain:
           - >-
               An agent is a loop. Look at the state, decide an action, take it, look
@@ -3345,6 +5199,20 @@ topics:
           loop: true
       - name: Tools
         why: "Most agent failures are tool failures."
+        beats:
+          - >-
+              One tool call, and four things decide whether it works.
+          - >-
+              The schema, which the model reads as part of its prompt. Names and
+              descriptions are prompt engineering.
+          - >-
+              The arguments it fills in. Ambiguous parameter names produce confidently
+              wrong calls.
+          - >-
+              The error message when it fails. It must say what to do differently, or
+              the agent repeats the mistake.
+          - >-
+              And the permission it needs, which should be the narrowest one that works.
         plain:
           - >-
               Tools are how the agent touches the world. The schema and the description
@@ -3371,6 +5239,16 @@ topics:
           - The permission it needs
       - name: Memory and context
         why: "Context is the binding constraint on any long task."
+        beats:
+          - >-
+              The current step, always in full.
+          - >-
+              The last few steps, so it does not repeat itself.
+          - >-
+              A summary of everything before that, compressed and lossy.
+          - >-
+              And artefacts stored outside the context, fetched only when needed. Long
+              tasks run out of room before they run out of steps.
         scene:
           kind: "growing"
           steps: 5
@@ -3403,6 +5281,17 @@ topics:
           - Stored artefacts
       - name: Planning and control
         why: "Cost and reliability are decided here."
+        beats:
+          - >-
+              The task is too long to hold in one pass. Three tools for that.
+          - >-
+              Decompose into pieces small enough to check individually.
+          - >-
+              Verify each piece before building on it, or an early error propagates the
+              whole way.
+          - >-
+              Budget the run in tokens and wall-clock. Without a limit, a confused agent
+              spends real money.
         plain:
           - >-
               Planning splits a large task into pieces small enough to check. Control
@@ -3432,6 +5321,13 @@ topics:
             - Stop at a limit
       - name: Multi-agent systems
         why: "Popular, often unnecessary, and you should be able to say when."
+        beats:
+          - >-
+              One agent with good tools. Simplest, cheapest, and the right answer more
+              often than people expect.
+          - >-
+              Several agents with roles. Genuine parallelism, and you pay in
+              coordination, duplicated work and failures spreading between them.
         plain:
           - >-
               Several agents can work at once, each with a role. Sometimes that helps.
@@ -3461,6 +5357,17 @@ topics:
             - Failures spread
       - name: Evaluation
         why: "Agent evaluation is harder than model evaluation and interviewers know it."
+        beats:
+          - >-
+              Run the task and record the final score.
+          - >-
+              Then read the trajectory, because the final answer hides how it got there.
+          - >-
+              Find where it actually broke. Usually earlier than the step that failed.
+          - >-
+              Fix the cause.
+          - >-
+              Run it again, and keep the case as a regression test.
         plain:
           - >-
               Agent evaluation is harder than model evaluation, because the final answer
@@ -3489,6 +5396,17 @@ topics:
           loop: true
       - name: Reliability and safety
         why: "Agents have privileges, which changes the risk profile."
+        beats:
+          - >-
+              At the top, a person approving anything irreversible. Sending, paying,
+              deleting.
+          - >-
+              Below that, an audit log good enough to replay what happened.
+          - >-
+              Below that, credentials scoped to the task rather than to you.
+          - >-
+              At the base, a sandbox. Injected instructions are only as dangerous as the
+              permissions they inherit.
         plain:
           - >-
               An agent has permissions, which changes the risk. Text that arrives from a
@@ -3537,6 +5455,17 @@ topics:
     modules:
       - name: Lifecycle and reproducibility
         why: "Any production role assumes this."
+        beats:
+          - >-
+              Frame the problem, and write down what would make you retire the model.
+          - >-
+              Train it, recording enough to rebuild this exact run later.
+          - >-
+              Register the artefact with its data, config and metrics attached.
+          - >-
+              Deploy behind something you can turn off.
+          - >-
+              Monitor, and expect this loop to run many times.
         plain:
           - >-
               A model in production is not an artefact, it is a process. Someone has to
@@ -3563,6 +5492,13 @@ topics:
           loop: true
       - name: Data for ML systems
         why: "Training-serving skew is the classic production bug."
+        beats:
+          - >-
+              At training time you have the whole history in one table and all the time
+              in the world.
+          - >-
+              At serving time you have one row and a latency budget. Those two rarely
+              produce identical features, and that gap is the classic production bug.
         plain:
           - >-
               Training sees a whole table at once. Serving sees one row as the request
@@ -3591,6 +5527,18 @@ topics:
             - One row
       - name: Training infrastructure
         why: "Cost control is a real part of the job."
+        beats:
+          - >-
+              Jobs queue, because GPUs are scarce and everyone wants them.
+          - >-
+              The scheduler places yours, possibly on a machine that can be taken back.
+          - >-
+              Training runs.
+          - >-
+              Checkpoint often enough to survive losing the machine.
+          - >-
+              Recover and continue. Without this, cheap instances cost more than they
+              save.
         plain:
           - >-
               Training infrastructure is mostly about not wasting money. GPUs are
@@ -3617,6 +5565,14 @@ topics:
           loop: true
       - name: Serving
         why: "Latency and cost questions appear in almost every system round."
+        beats:
+          - >-
+              Batch scoring is cheapest per prediction and the answer is hours old.
+          - >-
+              Micro-batching trades a little latency for much better hardware use.
+          - >-
+              Online scoring answers now and costs the most. Pick from what the product
+              actually needs.
         plain:
           - >-
               Serving turns a model into a service with a latency budget. The tail
@@ -3645,6 +5601,17 @@ topics:
           'on': 2
       - name: Deployment strategy
         why: "Shipping without breaking things comes down to these five moves."
+        beats:
+          - >-
+              Shadow first. Run the new model on live traffic and act on none of it.
+          - >-
+              Canary to a small slice, watching the guardrails as much as the target
+              metric.
+          - >-
+              Roll out gradually.
+          - >-
+              And have the rollback tested before you need it. Deciding under pressure
+              goes badly.
         plain:
           - >-
               Never swap a model straight into production. Run it alongside the old one
@@ -3669,6 +5636,17 @@ topics:
           - Rollback ready
       - name: Monitoring
         why: "Monitoring decides whether you find out first or the customer does."
+        beats:
+          - >-
+              Something changed, and where you look decides how fast you find it.
+          - >-
+              The inputs moved. This you can see today, with no labels needed.
+          - >-
+              The predictions moved. Also visible immediately, and often the first real
+              signal.
+          - >-
+              The outcomes moved. The truth, and it arrives weeks late. So watch the
+              first two.
         plain:
           - >-
               Monitoring decides whether you find the problem or the customer does.
@@ -3700,6 +5678,16 @@ topics:
             - Performance decay
       - name: Governance
         why: "More and more, a deployment will not go ahead without this."
+        beats:
+          - >-
+              At the top, whoever signs off before this touches money or health.
+          - >-
+              Below that, documentation of what the model does and where it should not
+              be used.
+          - >-
+              Below that, access control over the data and the artefact.
+          - >-
+              At the base, lineage from any prediction back to the data it learnt from.
         plain:
           - >-
               Governance is the paperwork that lets a model touch something that
@@ -3741,6 +5729,13 @@ topics:
     modules:
       - name: Storage and file layout
         why: "Most query cost problems are layout problems."
+        beats:
+          - >-
+              A row store keeps each record together. Good for writing and for fetching
+              one whole record.
+          - >-
+              A column store keeps each field together. It reads only the fields you
+              asked for, which is why analytics uses it.
         plain:
           - >-
               How data sits on disk decides what a query costs. Column storage reads
@@ -3769,6 +5764,20 @@ topics:
             - Suits scans
       - name: Data modelling
         why: "Analytics teams either trust your model or work around it."
+        beats:
+          - >-
+              A fact table holds the events. Every design decision here follows from one
+              choice.
+          - >-
+              The grain. What exactly does one row mean? Get this wrong and everything
+              downstream works around you.
+          - >-
+              Dimensions give the context. Who, what, where.
+          - >-
+              Measures are the numbers you add up.
+          - >-
+              Keys join it all together, and they need to survive a source system
+              renaming things.
         plain:
           - >-
               Modelling is deciding what one row means before anyone writes a query.
@@ -3794,6 +5803,19 @@ topics:
           - Keys
       - name: Batch processing
         why: "SQL and Spark are the two most commonly tested skills."
+        beats:
+          - >-
+              Read the input, ideally only the columns and partitions you need.
+          - >-
+              Shuffle moves data between machines so matching keys meet. This is usually
+              the expensive step.
+          - >-
+              Join. Broadcast the small side if you can, and watch for one key holding
+              most of the rows.
+          - >-
+              Aggregate.
+          - >-
+              Write, in a way that is safe to run twice.
         plain:
           - >-
               Batch processing moves large amounts of data on a schedule. Spark spreads
@@ -3819,6 +5841,17 @@ topics:
           - Write
       - name: Streaming
         why: "Correctness gets subtle once events arrive out of order."
+        beats:
+          - >-
+              The event happens at a real moment. That is its event time.
+          - >-
+              It arrives at your system later, sometimes much later, and out of order.
+          - >-
+              The watermark passes. That is you declaring how long you were willing to
+              wait.
+          - >-
+              The window closes and emits its answer. Wait too little and you drop real
+              data. Too long and nothing finalises.
         plain:
           - >-
               Streaming is where correctness gets subtle. Events arrive late, out of
@@ -3844,6 +5877,18 @@ topics:
           - The window closes
       - name: Orchestration and quality
         why: "Nobody notices the pipeline until it is wrong or late."
+        beats:
+          - >-
+              Extract from the source, expecting it to change without telling you.
+          - >-
+              Validate at the boundary. Catching a bad schema here is far cheaper than
+              three steps later.
+          - >-
+              Transform.
+          - >-
+              Test the output as well as the code. Row counts, nulls, ranges, freshness.
+          - >-
+              Publish. Everything downstream now assumes this was correct.
         plain:
           - >-
               Nobody notices a pipeline until it is wrong or late. Reliability is the
@@ -3871,6 +5916,16 @@ topics:
           loop: true
       - name: Architecture
         why: "Data roles run their system design round on this."
+        beats:
+          - >-
+              At the top, tables shaped for how people actually query them.
+          - >-
+              Below that, curated tables with business logic applied once, in one place.
+          - >-
+              Below that, cleaned and typed data.
+          - >-
+              At the base, the raw landing zone, kept exactly as it arrived so you can
+              always rebuild upward.
         plain:
           - >-
               The architecture question is how raw data becomes trusted tables. Layers
@@ -3896,6 +5951,18 @@ topics:
           - Raw landing
       - name: The system design round
         why: "It is a conversation about trade-offs."
+        beats:
+          - >-
+              Ask the volume before drawing anything.
+          - >-
+              Ask how fresh it needs to be. Hourly and sub-second are different systems.
+          - >-
+              Ask the budget, because it rules out half the options.
+          - >-
+              Only now sketch the components.
+          - >-
+              Then name your own bottleneck, because the interviewer is going to look
+              for it anyway.
         plain:
           - >-
               The system design round is a conversation about trade-offs.
@@ -3938,6 +6005,17 @@ topics:
     modules:
       - name: Networking
         why: "Every distributed system question sits on top of this."
+        beats:
+          - >-
+              At the top, the application. HTTP, your API, the thing you wrote.
+          - >-
+              Below it, transport. TCP guarantees delivery and order, and pays in round
+              trips.
+          - >-
+              Below that, the network layer moving packets between hosts.
+          - >-
+              At the base, the physical link. Most outages you will debug live somewhere
+              in this stack.
         plain:
           - >-
               Every distributed system question sits on top of this. A request crosses
@@ -3963,6 +6041,20 @@ topics:
           - Link
       - name: Security foundations
         why: "Without this framing the rest of the track is just a list of attacks."
+        beats:
+          - >-
+              A trust boundary is any line where data or requests change hands. Four
+              questions at every one.
+          - >-
+              Who is asking. That is authentication.
+          - >-
+              What they are allowed to do. That is authorisation, and conflating the two
+              is the classic mistake.
+          - >-
+              What crosses the line, and whether you validated it.
+          - >-
+              And what gets logged, because you cannot investigate what you did not
+              record.
         plain:
           - >-
               Security starts with a threat model. Who might attack, what do they want,
@@ -3989,6 +6081,16 @@ topics:
           - What gets logged
       - name: Cryptography in practice
         why: "The goal is to avoid misusing it."
+        beats:
+          - >-
+              Start from what you actually need. The tool follows from that.
+          - >-
+              Keeping content secret means encryption.
+          - >-
+              Knowing it was not altered means hashing and signatures. Hashing is not
+              encryption.
+          - >-
+              Knowing who sent it means certificates and a chain you trust.
         plain:
           - >-
               The goal is not to invent cryptography. It is to avoid misusing it, which
@@ -4020,6 +6122,19 @@ topics:
             - Certificates
       - name: Application security
         why: "These are the attacks you will meet."
+        beats:
+          - >-
+              Input arrives from outside. Treat all of it as hostile, including from
+              your own front end.
+          - >-
+              Validate it against what you expect, rather than against a list of bad
+              things.
+          - >-
+              Encode on the way out, for the context it lands in. This is what stops
+              cross-site scripting.
+          - >-
+              And run with the least privilege that works, so a bug that gets through
+              reaches as little as possible.
         plain:
           - >-
               These are the attacks you actually meet. Most come from trusting input
@@ -4045,6 +6160,14 @@ topics:
           - Least privilege
       - name: Infrastructure and cloud
         why: "Most real breaches happen here now."
+        beats:
+          - >-
+              A credential scoped to one resource. If it leaks, the damage is bounded.
+          - >-
+              Scoped to one service. Broader, and still recoverable.
+          - >-
+              Scoped to the whole account. This is how most real cloud breaches actually
+              go.
         plain:
           - >-
               Most real breaches now come from configuration rather than clever
@@ -4071,6 +6194,20 @@ topics:
           'on': 0
       - name: Machine learning security
         why: "Few candidates can speak to both sides of this."
+        beats:
+          - >-
+              In machine learning the model itself is a target, in four distinct ways.
+          - >-
+              Poisoned training data, which plants behaviour you never asked for.
+          - >-
+              Stolen weights, either copied directly or reconstructed from enough
+              queries.
+          - >-
+              Extracted training examples, which is a privacy breach hiding inside a
+              model.
+          - >-
+              And injected instructions at inference time, which is the one you will
+              meet most often.
         plain:
           - >-
               Machine learning adds its own attack surface. The model, the training data
@@ -4098,6 +6235,17 @@ topics:
           - Injected instructions
       - name: Privacy
         why: "Compliance constrains what you are allowed to build."
+        beats:
+          - >-
+              Raw personal data. Maximum utility, maximum obligation.
+          - >-
+              Pseudonymised. Identifiers replaced, and re-identification is often easier
+              than people assume.
+          - >-
+              Aggregated. Safer, and individuals can still be exposed by small groups.
+          - >-
+              Differentially private, which gives a real mathematical guarantee and
+              costs accuracy to get it.
         plain:
           - >-
               Privacy constrains what you are allowed to build, before any question of
