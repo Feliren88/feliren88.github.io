@@ -10,7 +10,18 @@
     {% if page.url == '/project/' %}<link rel="preload" as="script" href="{% include asset.html path='/js/components/timeline.js' %}">{% endif %}
     <script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
     <link rel="stylesheet" href="{% include asset.html path='/css/styles.css' %}">
-    {% if page.extra_css %}<link rel="stylesheet" href="{% include asset.html path=page.extra_css %}">{% endif %}
+    {% comment %}
+      `extra_css` takes one path or a list of them, matching `extra_js` below,
+      so a page carrying a component nobody else loads can keep that component's
+      stylesheet off every other page. Each still goes through asset.html and
+      keeps its own cache-busting stamp.
+    {% endcomment %}
+    {% if page.extra_css %}
+      {% assign extra_css_list = page.extra_css %}
+      {% if extra_css_list.first == nil %}{% assign extra_css_list = page.extra_css | split: ',' %}{% endif %}
+      {% for css_path in extra_css_list %}<link rel="stylesheet" href="{% include asset.html path=css_path %}">
+      {% endfor %}
+    {% endif %}
     {% if page.motion_scene %}<link rel="stylesheet" href="{% include asset.html path='/css/essay-motion.css' %}">{% endif %}
 
     <!-- Google Tag Manager -->

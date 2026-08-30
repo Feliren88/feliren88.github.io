@@ -277,8 +277,16 @@ AS_OPERATOR = [
     "&#x000AC;",                            # \lnot
     "&#x02200;", "&#x02203;",              # \forall, \exists
     "&#x022A2;", "&#x022A8;",              # \vdash, \models
+    "&#x000D7;", "&#x000B7;",              # \times, \cdot
 ]
 SIM_FIX = {"&#x0007E;": "&#x0223C;"}
+
+# A circumflex over a symbol is an accent, so MathML should say so. Without
+# `accent="true"` the browser sets it at full size and leaves operator spacing
+# around it, which reads as a caret sitting beside the letter rather than a hat
+# on top of it, and `stretchy` on an accent widens it to the base.
+ACCENT = re.compile(r'<mover>((?:(?!<mover\b).)*?)'
+                    r'<mo stretchy="false">&#x0005E;</mo></mover>')
 
 
 def mathml(tex, display=False):
@@ -296,6 +304,7 @@ def mathml(tex, display=False):
                  r"\1\2", out)
     out = re.sub(r"(<munder[^>]*>)<mrow>(<m[in][^>]*>[^<]*</m[in]>)</mrow>",
                  r"\1\2", out)
+    out = ACCENT.sub(r'<mover accent="true">\1<mo>&#x0005E;</mo></mover>', out)
     if display:
         out = out.replace('display="inline"', 'display="block"', 1)
     return out

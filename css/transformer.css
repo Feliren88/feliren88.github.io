@@ -1,0 +1,485 @@
+/* ════════════════════════════════════════════════════════
+   The architecture explorers on /transformers/
+   Loaded only on that page, via the `extra_css` list.
+
+   The panel is built as a trace. A practitioner reads the
+   shape signature before anything else, and most bugs in this
+   architecture are shape bugs, so the shape transition heads
+   every step and everything else stays quiet around it.
+
+   Three rules hold the design together.
+
+   Colour means magnitude, and nothing else. `--tf-up` and
+   `--tf-down` tint a cell by the sign and size of its value.
+   `--accent` is rationed to what the reader controls: the
+   step they are on, the head they picked, the focus ring. No
+   decorative accent anywhere.
+
+   The utility face is monospace and carries data only:
+   shapes, formulas, cell values, row and column labels. Prose
+   stays in the page's own faces. That split is what makes the
+   panel read as instrumentation attached to the page.
+
+   There are exactly two rules in the panel: one under the
+   title, and the spine down the step list. Everything else is
+   separated by space.
+
+   Every size is a token from interview.css, so the reading
+   controls move this with the rest of the page, and every
+   colour resolves through a token declared once per theme.
+   ════════════════════════════════════════════════════════ */
+
+.syl-tf[hidden] { display: none; }
+
+.tf {
+  /* magnitude, the only thing colour is allowed to mean here */
+  --tf-up: #4d8fd6;
+  --tf-down: #cf7748;
+  --tf-cell: 2.9rem;
+  --tf-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  margin: 1.4rem 0 0.4rem;
+}
+
+html[data-theme="light"] .tf {
+  --tf-up: #1b5aa8;
+  --tf-down: #9c4a20;
+}
+
+/* ── title row ─────────────────────────────────────────── */
+
+.tf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem 1.4rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.tf-kicker {
+  display: block;
+  font: 500 var(--fs-2xs) / 1.3 var(--tf-mono);
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: var(--rd-caps);
+}
+
+.tf-title {
+  margin: 0.15rem 0 0;
+  font: 600 var(--fs-md) / 1.25 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+
+.tf-source {
+  margin: 1rem 0 0;
+  max-width: var(--rd-measure);
+  font-size: var(--fs-2xs);
+  line-height: var(--rd-lead);
+  color: var(--muted);
+}
+
+/* ── controls ──────────────────────────────────────────── */
+
+.tf-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.1rem;
+}
+
+.tf-chips { display: flex; gap: 0.3rem; }
+
+.tf-chip,
+.tf-nav button {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 var(--fs-2xs) / 1.4 var(--tf-mono);
+  cursor: pointer;
+}
+
+.tf-chip.is-on {
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
+.tf-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font: 500 var(--fs-2xs) / 1.4 var(--tf-mono);
+  color: var(--muted);
+  cursor: pointer;
+}
+.tf-toggle input { accent-color: var(--accent); cursor: pointer; }
+
+.tf-slider {
+  display: grid;
+  grid-template-columns: auto minmax(5rem, 9rem) auto;
+  align-items: center;
+  gap: 0.45rem;
+  font: 500 var(--fs-2xs) / 1.4 var(--tf-mono);
+  color: var(--muted);
+}
+.tf-slider input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.tf-slider-val { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* ── the step spine ────────────────────────────────────── */
+
+.tf-split {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 13rem) minmax(0, 1fr);
+  gap: 0 1.8rem;
+  align-items: start;
+}
+
+.tf-rail { position: sticky; top: 1rem; }
+
+/* The spine is the residual stream made literal: one hairline the
+   whole computation hangs off, with a filled marker at the step the
+   reader is on. A program counter, not a selected tab. */
+.tf-steps {
+  margin: 0;
+  padding: 0 0 0 1.1rem;
+  border-left: 1px solid var(--line);
+  list-style: none;
+  counter-reset: tfstep;
+}
+
+/* The marker sits on the spine, the number sits just inside it, and the
+   label follows. Keeping all three inside the rail means a long label
+   has the whole column to wrap into. */
+.tf-step {
+  counter-increment: tfstep;
+  position: relative;
+  padding: 0.2rem 0 0.2rem 1.5rem;
+  font: 400 var(--fs-2xs) / 1.5 var(--tf-mono);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tf-step::before {
+  content: counter(tfstep);
+  position: absolute;
+  left: 0;
+  width: 1rem;
+  text-align: right;
+  color: var(--muted);
+  opacity: 0.65;
+}
+
+.tf-step::after {
+  content: "";
+  position: absolute;
+  left: calc(-1.1rem - 3px);
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.tf-step:hover { color: var(--text); }
+.tf-step.is-done::after { background: var(--muted); border-color: var(--muted); }
+
+.tf-step.is-on {
+  color: var(--text);
+  font-weight: 600;
+}
+.tf-step.is-on::before { color: var(--accent); opacity: 1; }
+.tf-step.is-on::after {
+  background: var(--accent);
+  border-color: var(--accent);
+  width: 7px;
+  height: 7px;
+  left: calc(-1.1rem - 4px);
+  top: 0.55em;
+}
+
+.tf-step:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.tf-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0 0 1.1rem;
+}
+
+.tf-count {
+  font: 400 var(--fs-2xs) / 1.4 var(--tf-mono);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tf-nav button:disabled { opacity: 0.35; cursor: default; }
+
+.tf-out { min-width: 0; }
+
+@media (max-width: 760px) {
+  .tf-split { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .tf-rail { position: static; }
+  .tf { --tf-cell: 2.5rem; }
+}
+
+/* ── the signature: what shape went in, what shape came out ──
+   Set larger than anything else in the panel, because it is the
+   question the reader arrived with. The paper's own shape sits
+   under it, so nobody learns a size that is not real. */
+
+.tf-trans {
+  margin: 0 0 0.9rem;
+  font-family: var(--tf-mono);
+}
+
+.tf-trans-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: calc(1.18rem * var(--rd-scale));
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.tf-trans-arrow { color: var(--accent); font-weight: 400; }
+
+.tf-trans-paper {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+/* ── operation and prose ───────────────────────────────── */
+
+.tf-formula {
+  display: block;
+  margin: 0 0 0.4rem;
+  font: 500 var(--fs-xs) / 1.5 var(--tf-mono);
+  color: var(--text);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tf-op { margin: 0 0 0.7rem; }
+
+.tf-op-said,
+.tf-note {
+  margin: 0.35rem 0 0;
+  max-width: var(--rd-measure);
+  font-size: var(--fs-xs);
+  line-height: var(--rd-lead);
+  color: var(--muted);
+}
+
+.tf-note {
+  margin-top: 0.8rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid color-mix(in oklab, var(--accent) 45%, transparent);
+  color: var(--text);
+}
+
+.tf-stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem 1.5rem;
+  margin: 0.8rem 0 0;
+}
+
+/* ── a tensor ──────────────────────────────────────────── */
+
+.tf-gridwrap { min-width: 0; max-width: 100%; }
+
+.tf-grid {
+  display: grid;
+  grid-template-columns: auto repeat(var(--tf-cols), minmax(var(--tf-cell), auto));
+  gap: 2px;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+}
+
+/* Wide tensors, such as the feed-forward hidden layer, drop the
+   numbers and keep the shape. Each value stays available on hover
+   and to a screen reader through the cell's title. */
+.tf-grid.is-dense { --tf-cell: 0.6rem; gap: 1px; }
+
+.tf-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.55rem;
+  padding: 0.12rem 0.2rem;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--tf-up) calc(var(--a, 0) * 58%), transparent);
+  color: var(--text);
+  font: 400 var(--fs-2xs) / 1.1 var(--tf-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tf-cell.is-neg {
+  background: color-mix(in oklab, var(--tf-down) calc(var(--a, 0) * 58%), transparent);
+}
+
+.tf-grid.is-dense .tf-cell { min-height: 0.6rem; padding: 0; border-radius: 1px; }
+
+.tf-cell.is-row,
+.tf-cell.is-col { box-shadow: inset 0 0 0 1px var(--accent); }
+
+.tf-rowhead,
+.tf-colhead,
+.tf-corner {
+  display: flex;
+  align-items: center;
+  font: 400 var(--fs-2xs) / 1.15 var(--tf-mono);
+  color: var(--muted);
+}
+
+.tf-rowhead {
+  justify-content: flex-end;
+  padding-right: 0.45rem;
+  white-space: nowrap;
+}
+.tf-rowhead.is-on { color: var(--accent); }
+
+.tf-colhead {
+  justify-content: center;
+  text-align: center;
+  font-size: calc(0.66rem * var(--rd-scale));
+  overflow-wrap: anywhere;
+}
+
+/* ── a number, where the answer is a number ────────────── */
+
+.tf-readout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 1rem;
+  margin: 0.7rem 0 0;
+  max-width: 32rem;
+  font: 400 var(--fs-2xs) / 1.6 var(--tf-mono);
+}
+
+.tf-readout dt { color: var(--muted); }
+.tf-readout dd {
+  margin: 0;
+  text-align: right;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.tf-readout dt + dd { border-bottom: 1px solid var(--line); }
+.tf-readout dt { border-bottom: 1px solid var(--line); }
+
+/* ── figure 1 ──────────────────────────────────────────
+   Box shape carries the one distinction worth drawing: a
+   solid box is a sub-layer with learned weights, a dashed
+   box is the residual bookkeeping around it, and the three
+   endpoints have no box because they are not operations.
+   No new colour, because colour already means magnitude. */
+
+.tf-figsplit {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .tf-figsplit { grid-template-columns: minmax(0, 1fr); }
+}
+
+.tf-svg { display: block; width: 100%; height: auto; }
+
+.tf-node rect {
+  fill: var(--surface);
+  stroke: var(--border-ui);
+  stroke-width: 1;
+}
+
+.tf-node text {
+  fill: var(--text);
+  font: 500 12px / 1 "Space Grotesk", sans-serif;
+  pointer-events: none;
+}
+
+.tf-node { cursor: pointer; }
+.tf-node:hover rect { stroke: var(--text); }
+
+.tf-node.is-on rect {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: color-mix(in oklab, var(--accent) 14%, var(--surface));
+}
+.tf-node.is-on text { fill: var(--text); }
+
+.tf-node:focus-visible rect { stroke: var(--accent); stroke-width: 2; }
+.tf-node:focus { outline: none; }
+
+/* Add & Norm is glue rather than a learned sub-layer. */
+.tf-node[aria-label="Add & Norm"] rect { stroke-dasharray: 3 2.5; }
+
+.tf-node.is-soft rect { fill: none; stroke: none; }
+.tf-node.is-soft text { fill: var(--muted); font-style: italic; }
+
+.tf-node.is-off { opacity: 0.22; pointer-events: none; }
+
+.tf-frame {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.tf-frame.is-off { opacity: 0.2; }
+
+.tf-frame-k {
+  fill: var(--muted);
+  font: 500 13px / 1 var(--tf-mono);
+}
+.tf-frame-k.is-off { opacity: 0.2; }
+
+.tf-wire {
+  fill: none;
+  stroke: var(--border-ui);
+  stroke-width: 1.2;
+}
+.tf-wire-cross { stroke: var(--accent); }
+.tf-arrowhead { fill: var(--border-ui); }
+.tf-wire-k {
+  fill: var(--accent);
+  font: 500 12px / 1 var(--tf-mono);
+}
+
+.tf-detail { min-width: 0; }
+
+.tf-detail-k {
+  margin: 0 0 0.5rem;
+  font: 600 var(--fs-sm) / 1.3 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+
+.tf-hint {
+  margin: 0.7rem 0 0;
+  font: 400 var(--fs-2xs) / 1.5 var(--tf-mono);
+  color: var(--muted);
+}
+
+.tf-gridcap {
+  margin: 0.4rem 0 0;
+  max-width: 24rem;
+  font-size: var(--fs-2xs);
+  line-height: var(--rd-lead);
+  color: var(--muted);
+}
