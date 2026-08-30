@@ -81,6 +81,12 @@ layout: default
         </button>
       </div>
 
+      {% if m.plain %}
+      <div class="syl-plain">
+        {% for para in m.plain %}<p>{{ para }}</p>{% endfor %}
+      </div>
+      {% endif %}
+
       <div class="syl-viz"></div>
 
       <ul class="syl-covers">

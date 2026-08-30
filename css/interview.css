@@ -8,16 +8,84 @@
 
 .interview-hub,
 .syl-page {
-  --fs-2xs: 0.76rem;
-  --fs-xs: 0.85rem;
-  --fs-sm: 0.94rem;
-  --fs-md: 1rem;
-  --fs-base: 1.05rem;
+  --fs-2xs: calc(0.78rem * var(--rd-scale));
+  --fs-xs: calc(0.88rem * var(--rd-scale));
+  --fs-sm: calc(0.97rem * var(--rd-scale));
+  --fs-md: calc(1.04rem * var(--rd-scale));
+  --fs-base: calc(1.09rem * var(--rd-scale));
   --ivz-pad: 1rem;
+
+  /* Reading controls. js/components/interview.js writes these onto the
+     section element from the reader's saved settings, so every size,
+     spacing and measure on the page moves together from four numbers.
+     The defaults below are what an unconfigured reader gets. */
+  --rd-scale: 1;      /* multiplies every font size */
+  --rd-lead: 1.6;     /* body line height, never set below 1.5 */
+  --rd-track: 0em;    /* extra letter spacing */
+  --rd-measure: 66ch; /* longest line of prose */
+  --rd-caps: uppercase;
+  --rd-caps-track: 0.12em;
 }
 
 .interview-hub .page-header,
 .syl-page .page-header { display: none; }
+
+/* ── Reading for dyslexia ─────────────────────────────────────────
+   Four things carry most of the benefit, and all four are defaults
+   here rather than options: line height at least 1.5, a measure that
+   stops around 66 characters, left aligned text that is never
+   justified, and no all-caps in anything longer than a short label.
+
+   Capitals are the subtle one. They flatten every word into the same
+   rectangle, and word shape is a large part of how a dyslexic reader
+   recognises a word without decoding it letter by letter. The labels
+   on this page are styled with a custom property rather than a literal
+   `uppercase`, so the reader can switch the whole page back to
+   sentence case in one click. */
+.interview-hub,
+.syl-page {
+  text-align: left;
+  hyphens: none;         /* a broken word costs a dyslexic reader more than a ragged edge */
+  text-wrap: pretty;
+}
+.interview-hub p,
+.syl-page p,
+.syl-page li,
+.interview-hub li {
+  line-height: var(--rd-lead);
+  letter-spacing: var(--rd-track);
+}
+/* Prose caps out at the reader's measure. Grid and chip text is exempt:
+   it is already short, and a max-width there would fight the layout. */
+.ivh-lede,
+.ivh-maplede,
+.syl-blurb,
+.syl-scope,
+.syl-plain p,
+.syl-module-why { max-width: var(--rd-measure); }
+
+/* Every label that was `text-transform: uppercase` now reads from the
+   token, so one setting reaches all of them. */
+.ivh-eyebrow,
+.ivh-group-title,
+.ivh-card-meta,
+.ivh-stats span,
+.syl-group,
+.syl-panel-title,
+.syl-check-label,
+.ivc-kicker,
+.ivz-col-k,
+.ivz-branch-k,
+.ivz-ends,
+.ivz-mx,
+.ivz-my,
+.ivz-ax-x,
+.ivz-ax-y,
+.ivz-flow-loop,
+.syl-pager-link span {
+  text-transform: var(--rd-caps);
+  letter-spacing: var(--rd-caps-track);
+}
 
 /* ── Icons ────────────────────────────────────────────────────────
    The sprite in _includes/interview-icons.html holds geometry only. A
@@ -71,8 +139,7 @@
 .ivh-eyebrow {
   display: inline-block;
   font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   border: 1px solid var(--border-ui);
   border-radius: 999px;
@@ -97,8 +164,7 @@
 .ivh-stats strong { font: 600 1.6rem / 1 "Space Grotesk", sans-serif; color: var(--text); }
 .ivh-stats span {
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--muted);
 }
 
@@ -135,8 +201,7 @@
 .ivh-group-head { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 1.1rem; }
 .ivh-group-title {
   font: 700 var(--fs-xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   margin: 0;
 }
@@ -174,7 +239,7 @@
 .ivh-card:hover .ivh-card-icon { color: var(--cta); }
 .ivh-card-top .iv-ring { margin-left: auto; }
 .ivh-card-title {
-  font: 600 var(--fs-title) / 1.25 "Space Grotesk", sans-serif;
+  font: 600 var(--fs-title) / 1.4 "Space Grotesk", sans-serif;
   color: var(--text);
   margin: 0;
 }
@@ -199,12 +264,11 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   padding: 0.2rem 0.45rem;
-  line-height: 1.3;
+  line-height: 1.5;
 }
 .ivh-card-meta {
   margin-top: auto;
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
 }
@@ -261,8 +325,7 @@
 
 .syl-group {
   font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
 }
 .syl-title {
@@ -326,7 +389,7 @@
 }
 .syl-toc-item:hover { border-color: var(--border-ui); background: var(--surface); }
 .syl-toc-num { font: 600 var(--fs-2xs) "Space Grotesk", sans-serif; color: var(--accent); min-width: 1.1rem; }
-.syl-toc-name { font-size: var(--fs-xs); color: var(--text); line-height: 1.35; }
+.syl-toc-name { font-size: var(--fs-xs); color: var(--text); line-height: 1.5; }
 .syl-toc-tick { margin-left: auto; width: 0.6rem; height: 0.6rem; border-radius: 50%; flex: none; }
 .syl-toc-item.is-done .syl-toc-tick { background: var(--cta); }
 
@@ -367,7 +430,7 @@
 }
 .syl-module.is-done .syl-module-num { border-color: var(--cta); color: var(--cta); }
 .syl-module-name {
-  font: 600 var(--fs-title) / 1.3 "Space Grotesk", sans-serif;
+  font: 600 var(--fs-title) / 1.4 "Space Grotesk", sans-serif;
   color: var(--text);
   margin: 0.25rem 0 0.35rem;
 }
@@ -428,8 +491,7 @@
 .syl-check-label {
   display: block;
   font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   margin-bottom: 0.4rem;
 }
@@ -469,7 +531,7 @@
   border-radius: var(--radius-sm);
   background: var(--surface);
   font-size: var(--fs-xs);
-  line-height: 1.35;
+  line-height: 1.5;
   color: var(--text);
 }
 .ivz-step b {
@@ -492,8 +554,7 @@
   padding-top: 0.55rem;
   border-top: 1px dashed var(--accent);
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   text-align: center;
 }
@@ -509,14 +570,13 @@
 .ivz-col-k {
   display: block;
   font: 700 var(--fs-2xs) / 1.2 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
 .ivz-col li {
   font-size: var(--fs-xs);
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--text);
   padding: 0.2rem 0;
 }
@@ -548,8 +608,7 @@
   align-items: center;
 }
 .ivz-mx {
-  font: 700 var(--fs-2xs) / 1.3 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
+  font: 700 var(--fs-2xs) / 1.4 "Space Grotesk", sans-serif;
   letter-spacing: 0.08em;
   color: var(--accent);
   text-align: center;
@@ -558,8 +617,7 @@
 .ivz-mx-a { grid-column: 2; }
 .ivz-mx-b { grid-column: 3; }
 .ivz-my {
-  font: 700 var(--fs-2xs) / 1.3 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
+  font: 700 var(--fs-2xs) / 1.4 "Space Grotesk", sans-serif;
   letter-spacing: 0.08em;
   color: var(--accent);
   grid-column: 1;
@@ -580,7 +638,7 @@
   border-radius: var(--radius-sm);
   background: var(--surface);
   font-size: var(--fs-xs);
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text);
   text-align: center;
 }
@@ -591,7 +649,6 @@
   justify-content: space-between;
   gap: 1rem;
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--muted);
   margin-bottom: 0.7rem;
@@ -619,7 +676,7 @@
   gap: 0.45rem;
   text-align: center;
   font-size: var(--fs-xs);
-  line-height: 1.35;
+  line-height: 1.5;
   color: var(--muted);
   position: relative;
 }
@@ -656,7 +713,7 @@
   border-radius: var(--radius-sm);
   background: var(--surface);
   font-size: var(--fs-xs);
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text);
 }
 .ivz-around li::before {
@@ -715,12 +772,11 @@
 .ivz-branch-k {
   display: block;
   font: 700 var(--fs-2xs) / 1.2 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
   margin-bottom: 0.4rem;
 }
-.ivz-branch li { font-size: var(--fs-xs); line-height: 1.45; color: var(--text); padding: 0.15rem 0; }
+.ivz-branch li { font-size: var(--fs-xs); line-height: 1.5; color: var(--text); padding: 0.15rem 0; }
 
 /* curve ─ the one archetype where the shape carries the meaning */
 /* Columns are shrink-to-fit and the whole grid is centred, so the axis label
@@ -745,7 +801,6 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font: 700 var(--fs-2xs) "Space Grotesk", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
   text-align: center;
@@ -753,7 +808,6 @@
 .ivz-ax-x {
   grid-area: x;
   font: 700 var(--fs-2xs) "Space Grotesk", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
   text-align: center;
@@ -832,8 +886,7 @@
 .ivc-kicker {
   display: block;
   font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   margin-bottom: 0.7rem;
 }
@@ -880,8 +933,7 @@
 }
 .syl-panel-title {
   font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--accent);
   margin: 0 0 1rem;
 }
@@ -929,8 +981,7 @@
   align-items: center;
   gap: 0.35rem;
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--rd-caps-track);
   color: var(--muted);
 }
 .syl-pager-next span { justify-content: flex-end; }
@@ -963,3 +1014,369 @@
 @media (prefers-reduced-motion: reduce) {
   .ivh-card, .iv-ring-fill, .iv-map-svg path { transition: none; }
 }
+
+/* ════════════════════════════════════════════════════════
+   Reading controls
+
+   A small panel that writes the --rd-* tokens. Everything it
+   changes is a custom property, so no rule is duplicated for
+   a "dyslexia mode" and there is no second stylesheet to keep
+   in sync. Settings persist under iv:read.
+   ════════════════════════════════════════════════════════ */
+
+.rd-open {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: 500 var(--fs-xs) "Manrope", sans-serif;
+  cursor: pointer;
+  box-shadow: var(--shadow-hover);
+}
+.rd-open:hover { border-color: var(--cta); }
+.rd-open .ivi { font-size: 1.1rem; }
+
+.rd-panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 4.5rem;
+  z-index: 71;
+  width: min(21rem, calc(100vw - 2rem));
+  padding: 1.2rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-lg);
+  background: var(--bg-soft);
+  box-shadow: var(--shadow);
+}
+.rd-panel[hidden] { display: none; }
+.rd-panel h2 {
+  font: 600 var(--fs-md) "Space Grotesk", sans-serif;
+  color: var(--text);
+  margin: 0 0 0.3rem;
+}
+.rd-panel > p {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin: 0 0 1rem;
+  line-height: var(--rd-lead);
+}
+.rd-row { margin-bottom: 0.9rem; }
+.rd-row > label {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.rd-row input[type="range"] { width: 100%; accent-color: var(--cta); }
+.rd-seg { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.rd-seg button {
+  flex: 1 1 auto;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--muted);
+  font: 400 var(--fs-xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.rd-seg button[aria-pressed="true"] {
+  border-color: var(--cta);
+  color: var(--cta);
+  background: var(--stat-fill);
+}
+.rd-actions { display: flex; gap: 0.5rem; margin-top: 1.1rem; }
+.rd-actions button {
+  flex: 1;
+  padding: 0.45rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  font: 400 var(--fs-xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.rd-actions button:hover { border-color: var(--cta); }
+
+/* A tinted page for readers who find full contrast harsh. Applied to the
+   whole document so the header and footer match the article. */
+:root[data-reading-tint="warm"] { --bg: #f7f1e4; --bg-soft: #efe7d7; --surface: rgba(255,252,246,0.7); }
+:root[data-reading-tint="cool"] { --bg: #e9f0f4; --bg-soft: #dde8ee; --surface: rgba(255,255,255,0.6); }
+:root[data-theme="dark"][data-reading-tint="warm"] { --bg: #17140f; --bg-soft: #1e1a14; --surface: rgba(32,27,20,0.6); }
+:root[data-theme="dark"][data-reading-tint="cool"] { --bg: #0c1418; --bg-soft: #111b21; --surface: rgba(17,27,33,0.6); }
+
+/* ── Plain-English explanation ────────────────────────────────────
+   Sits between the module heading and its diagram, so the reader meets
+   the idea in sentences before meeting it as a picture. */
+.syl-plain {
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1.05rem;
+  border-left: 2px solid var(--cta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--surface-soft);
+}
+.syl-plain p {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: var(--rd-lead);
+  color: var(--text);
+}
+.syl-plain p + p { margin-top: 0.7rem; }
+.syl-plain b { font-weight: 600; color: var(--text); }
+
+/* ── Diagram animation ────────────────────────────────────────────
+   Parts start hidden and are revealed in reading order once the
+   diagram scrolls into view, so the reader sees the sequence build
+   rather than a finished picture. Anything not animated stays put:
+   the diagram is fully readable with JavaScript off, and the reveal
+   is an enhancement rather than a requirement. */
+.ivz [data-step] { opacity: 1; }
+.ivz.is-anim [data-step] {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.ivz.is-anim.is-playing [data-step] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.42s ease, transform 0.42s ease;
+  transition-delay: calc(var(--step) * 0.14s);
+}
+/* Flow connectors draw after the box they follow. */
+.ivz.is-anim .ivz-step + .ivz-step::before { transform: scaleX(0); transform-origin: left; }
+.ivz.is-anim.is-playing .ivz-step + .ivz-step::before {
+  transform: scaleX(1);
+  transition: transform 0.3s ease;
+  transition-delay: calc(var(--step) * 0.14s);
+}
+/* Curves draw themselves along their own length. */
+.ivz-curve .ivz-line { stroke-dasharray: var(--len); stroke-dashoffset: 0; }
+.ivz-curve.is-anim .ivz-line { stroke-dashoffset: var(--len); }
+.ivz-curve.is-anim.is-playing .ivz-line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.05s ease;
+}
+.ivz-curve.is-anim.is-playing .ivz-line-b { transition-delay: 0.3s; }
+
+/* ── Walk it ──────────────────────────────────────────────────────
+   Learning by doing rather than reading. The reader advances one part
+   at a time and the rest dims, which turns a diagram into a sequence
+   they drive. */
+.ivz-walk {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--line);
+}
+.ivz-walk button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 400 var(--fs-2xs) "Manrope", sans-serif;
+  cursor: pointer;
+}
+.ivz-walk button:hover { color: var(--text); border-color: var(--cta); }
+.ivz-walk-at { font-size: var(--fs-2xs); color: var(--muted); margin-left: auto; }
+.ivz.is-walking [data-step] { opacity: 0.28; transition: opacity 0.25s ease; }
+.ivz.is-walking [data-step].is-at {
+  opacity: 1;
+  outline: 2px solid var(--cta);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ivz.is-anim [data-step],
+  .ivz.is-anim.is-playing [data-step] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ivz-curve.is-anim .ivz-line { stroke-dashoffset: 0; }
+  .ivz.is-anim .ivz-step + .ivz-step::before { transform: scaleX(1); }
+}
+
+/* A reliability diagram is square by convention, so its diagonal reads at
+   forty-five degrees. Any other aspect makes the picture argue with the words. */
+.ivz-curve.is-square svg { height: 13rem; }
+
+/* ════════════════════════════════════════════════════════
+   Scenes: concrete illustrations
+
+   Built by the SCENE registry in js/components/interview.js.
+   Where a diagram shows the shape of an idea, a scene shows the
+   thing: tokens being cut, a kernel on a grid, a cache growing.
+   Colour is always a token, so both themes and both tints work.
+   ════════════════════════════════════════════════════════ */
+
+.ivs {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  padding: var(--ivz-pad);
+  margin-bottom: 0.7rem;
+}
+.ivs-cap {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* tokens ─ one sentence cut two ways */
+.ivs-tokrow { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+.ivs-tokrow + .ivs-tokrow { margin-top: 0.55rem; }
+.ivs-tokk {
+  flex: none;
+  min-width: 5.5rem;
+  font-size: var(--fs-2xs);
+  color: var(--accent);
+}
+.ivs-toks { display: flex; flex-wrap: wrap; gap: 3px; }
+.ivs-toks i {
+  font-style: normal;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 0.12rem 0.32rem;
+  background: var(--surface);
+}
+
+/* kernel ─ a window sliding over pixels */
+.ivs-kernel { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.ivs-kernel svg { height: 6.5rem; width: auto; }
+.ivs-kernel .ivs-out { height: 2.2rem; }
+.ivs-px { fill: var(--surface); stroke: var(--line-strong); stroke-width: 0.7; }
+.ivs-px.is-on { fill: var(--stat-fill); stroke: var(--cta); stroke-width: 1.2; }
+.ivs-win { fill: color-mix(in srgb, var(--cta) 16%, transparent); stroke: var(--cta); stroke-width: 1.4; }
+.ivs-arrow { color: var(--accent); font-size: 1.1rem; }
+.ivs-kernel .ivs-cap { flex-basis: 100%; margin-top: 0.4rem; }
+
+/* growing ─ the cache adding a row per token */
+.ivs-growing { display: flex; align-items: flex-end; gap: 0.9rem; flex-wrap: wrap; }
+.ivs-col { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+.ivs-stackcol { display: flex; flex-direction: column-reverse; gap: 2px; }
+.ivs-cell {
+  width: 2.1rem;
+  height: 0.62rem;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--cta) 38%, transparent);
+  border: 1px solid var(--cta);
+}
+.ivs-tick { font-size: var(--fs-2xs); color: var(--muted); }
+.ivs-growing .ivs-cap { flex-basis: 100%; }
+
+/* split ─ one bar cut into parts, with the leak crossing a boundary */
+.ivs-bar { display: flex; gap: 3px; }
+.ivs-seg {
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+  font-size: var(--fs-2xs);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.ivs-seg.is-on { border-color: var(--cta); color: var(--cta); background: var(--stat-fill); }
+.ivs-leak {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: var(--fs-2xs);
+  color: var(--accent);
+}
+
+/* narrowing ─ belief getting tighter */
+.ivs-narrowing svg { width: 100%; height: 6rem; }
+.ivs-axis { stroke: var(--line-strong); stroke-width: 1; }
+.ivs-wide { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.ivs-narrow { fill: none; stroke: var(--cta); stroke-width: 2; }
+.ivs-key { list-style: none; padding: 0; margin: 0.4rem 0 0; display: flex; gap: 1.1rem; flex-wrap: wrap; }
+.ivs-key li { display: flex; align-items: center; gap: 0.4rem; font-size: var(--fs-xs); color: var(--text); }
+.ivs-key li::before { content: ""; width: 1.1rem; height: 2px; flex: none; }
+.ivs-key .is-a::before { background: var(--accent); }
+.ivs-key .is-b::before { background: var(--cta); }
+
+/* crowded ─ more concepts than slots */
+.ivs-crowded { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start; }
+.ivs-slot {
+  flex: 1 1 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.ivs-neuron {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  background: var(--surface);
+}
+.ivs-slot i {
+  font-style: normal;
+  font-size: var(--fs-2xs);
+  color: var(--text);
+  border: 1px dashed var(--line-strong);
+  border-radius: 3px;
+  padding: 0.1rem 0.3rem;
+  text-align: center;
+}
+.ivs-crowded .ivs-cap { flex-basis: 100%; }
+
+/* sets ─ the answer set widening as certainty drops */
+.ivs-sets { display: grid; gap: 0.55rem; }
+.ivs-case { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+.ivs-casek { flex: none; min-width: 6rem; font-size: var(--fs-2xs); color: var(--accent); }
+.ivs-chips { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.ivs-chips i {
+  font-style: normal;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  border: 1px solid var(--cta);
+  border-radius: 999px;
+  padding: 0.12rem 0.5rem;
+  background: var(--stat-fill);
+}
+
+/* defer ─ answers out one way, hard cases out another */
+.ivs-defer { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.ivs-in {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: var(--stat-fill);
+}
+.ivs-fork { display: grid; gap: 0.35rem; }
+.ivs-out-a, .ivs-out-b {
+  position: relative;
+  padding: 0.4rem 0.7rem 0.4rem 1.4rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: var(--surface);
+}
+.ivs-out-a::before, .ivs-out-b::before {
+  content: "\2192";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--accent);
+}
+.ivs-out-a { border-color: var(--cta); }

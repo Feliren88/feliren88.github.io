@@ -154,7 +154,7 @@ feliren88.github.io/
 │   ├── stoic.yml         # All /stoic/ passages — GENERATED, quotes are verbatim from the public-domain sources; verify with scripts/verify_stoic_quotes.py
 │   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
 │   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
-│   ├── interview.yml     # All /interview/ syllabus content — 18 topics, hand-written; the field contract is documented in the file header
+│   ├── interview.yml     # All /interview/ syllabus content — 18 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
 │   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
 ├── assets/
 │   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
@@ -691,6 +691,53 @@ be redrawn after looking at `preview.html`: `nlp` had ticks through text lines a
 as slider controls, `mechanistic-interpretability` had three dots in a triangle inside a
 circle and read as a face, and `agentic-ai` had an arrowhead that was not on its arc's
 tangent and read as a stray tick. Always open the preview.
+
+### Reading for dyslexia (`/interview/`)
+
+These pages are built for a reader who learns by picture and by doing, and who
+may be dyslexic. Four things are defaults rather than options, because they
+carry most of the benefit:
+
+- line height at least 1.5 on every body element
+- a measure that stops around 66 characters
+- left aligned, never justified, and `hyphens: none`
+- no all-caps in anything longer than a short label
+
+Capitals are the subtle one. They flatten every word into the same rectangle,
+and word shape is a large part of how a dyslexic reader recognises a word
+without decoding it letter by letter. No label carries a literal
+`text-transform: uppercase`. They all read `var(--rd-caps)` so the reader can
+switch the page to sentence case in one click, and the wide tracking that makes
+caps legible switches off with it.
+
+On top of that, `readingControls()` in `js/components/interview.js` writes five
+custom properties onto the page section: text scale, line height, letter
+spacing, caps, and a page tint. Every size on the page is `calc(… * var(--rd-scale))`,
+so one number moves the whole layout together. Settings persist under `iv:read`.
+
+Do not add a second "dyslexia mode" stylesheet. Everything is a custom property
+precisely so there is only one set of rules to keep correct.
+
+### Scenes: concrete illustrations (`/interview/`)
+
+`SCENE` in `js/components/interview.js` draws small concrete pictures: real
+tokens being cut, a kernel on a pixel grid, a cache growing a row per token.
+The eight diagram archetypes show the *shape* of an idea; a scene shows the
+thing. A module opts in with a `scene:` block and gets it above its diagram.
+
+Each scene is specified before it is drawn, using the five-part discipline from
+the `ai-image-generator` skill (type, subject, environment, technical,
+constraints). Those notes live in the comment above each builder. The output is
+SVG built from the spec, never a generated raster.
+
+That distinction is deliberate and should hold. A raster image cannot resize
+with the reading controls, cannot follow the light/dark themes or the page
+tints, cannot be read by a screen reader, and cannot be corrected when one
+detail is wrong. Text baked into pixels is the one thing a dyslexic reader most
+needs to resize. Use the image skill to *specify* a picture, then codify it.
+
+The same rule as the diagrams applies: labels come from the module's own
+content, and no scene carries a number.
 
 ### Module diagrams (`/interview/`)
 
