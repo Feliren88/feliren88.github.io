@@ -921,6 +921,7 @@ topics:
           - Chain-of-thought supervision versus emergent reasoning
           - Reinforcement learning from verifiable rewards
           - "GRPO and group-relative advantages"
+          - "Sequence-level policy optimisation, and the instability GRPO shows on long generations"
           - Process reward models versus outcome reward models
           - Test-time compute, self-consistency, search
           - Distillation from a stronger teacher
@@ -1310,6 +1311,7 @@ topics:
           - Tokenising non-text signals, patches, frames, codebooks
           - Interleaved sequences and position handling
           - Freezing versus training each tower
+          - Native multimodal training with no separate vision encoder
         check: "You have a strong vision encoder and a strong language model. Describe two ways to connect them and the cost of each."
         viz:
           type: compare
@@ -1329,6 +1331,7 @@ topics:
           - "The CLIP objective: InfoNCE, symmetric loss, temperature"
           - Batch size effects and negatives
           - SigLIP and the sigmoid alternative
+          - Recipes that add captioning, self-distillation and masked prediction to the contrastive loss
           - Hard negative mining
           - Modality gap in the joint embedding space
           - Zero-shot classification and retrieval evaluation
@@ -1367,6 +1370,7 @@ topics:
           - Text to video and temporal consistency
           - Speech synthesis and voice cloning risk
           - Any-to-any and unified token models
+          - One tokenizer for understanding and generation, and why two is the harder design
           - Evaluation of generated media
         check: "Explain classifier-free guidance and what happens as the scale rises."
         viz:
@@ -1399,7 +1403,7 @@ topics:
         why: "Multimodal benchmarks are unusually easy to game."
         covers:
           - VQA, captioning, and retrieval benchmarks
-          - MMMU-style reasoning suites
+          - MMMU-style reasoning suites, and the hardened versions that strip text-only answerable items
           - Grounding and localisation evaluation
           - Cross-modal conflict tests
           - Language and cultural coverage in multimodal benchmarks
@@ -2057,6 +2061,7 @@ topics:
           - Clear instructions, task, audience, and output contract
           - Role and context setting, and when it does nothing
           - "Zero-shot, few-shot, and choosing examples"
+          - "Where few-shot examples only fix the output format"
           - Delimiters and structure for long inputs
           - Ordering effects, recency and primacy
           - Negative instructions and why they underperform
@@ -2134,7 +2139,7 @@ topics:
           - Pairwise comparison and rubric grading
           - LLM-as-judge, its biases, and calibration against humans
           - Regression suites and prompt versioning
-          - Automatic prompt optimisation, DSPy-style search
+          - "Automatic prompt optimisation: Bayesian search, and reflective evolution over traces"
           - Statistical significance on small eval sets
         check: "How many examples do you need to tell two prompts apart, and how would you decide?"
         viz:
@@ -2150,11 +2155,13 @@ topics:
         covers:
           - Prompt injection through retrieved or tool content
           - Delimiter hygiene and untrusted-content marking
+          - Why prompting defences lose to an adaptive attacker
+          - Control flow and data flow kept apart outside the model
           - Instruction hierarchy and conflicting instructions
           - Jailbreak resistance and refusal tuning
           - Over-refusal and false positives
           - Behaviour change after a model upgrade
-        check: "A retrieved document contains instructions. Describe your defence, and its limits."
+        check: "A retrieved document contains instructions. Give a defence that does not rely on the model refusing."
         viz:
           type: parts
           centre: Untrusted text arrives in the prompt
@@ -2187,6 +2194,7 @@ topics:
       - Claiming a prompt improvement with no eval set
       - Stacking instructions that contradict each other
       - Assuming a prompt transfers across model families
+      - Calling a prompt injection defence robust after testing it on a fixed benchmark
       - Treating chain of thought as free accuracy
     drills:
       - Write 30 eval examples before touching the prompt
@@ -2208,6 +2216,7 @@ topics:
           - Observe, plan, act, observe again
           - ReAct and interleaved reasoning
           - Plan-and-execute versus reactive stepping
+          - Committing to a plan before reading untrusted content
           - Reflection and self-critique steps
           - Termination conditions and step budgets
           - Loop detection and progress checks
@@ -2245,6 +2254,8 @@ topics:
           - Short-term scratchpad versus persistent memory
           - Retrieval over past steps and artefacts
           - Summarisation and compaction strategies
+          - Compaction trained with the task rather than bolted on
+          - Running out of context before the task ends
           - State serialisation and resumption
           - Context budgeting across a long trajectory
           - Deciding what to forget
@@ -2307,10 +2318,12 @@ topics:
           - End-to-end task success rate
           - Trajectory analysis and partial credit
           - "Benchmarks: SWE-bench, WebArena, tau-bench, and their limits"
+          - "Long-horizon computer-use evaluation, and how far agents get"
+          - "Benchmarks an agent can score on without doing the task"
           - Rubric-based judging of process
           - Cost per solved task
           - Regression suites and flakiness
-        check: "Your agent solves 40% of tasks. How do you find out where the other 60% break?"
+        check: "Your agent scores well on a public benchmark. How would you check it earned the score?"
         viz:
           type: flow
           steps:
@@ -2324,6 +2337,8 @@ topics:
         why: "Agents have privileges, which changes the risk profile."
         covers:
           - Prompt injection through tool output and web content
+          - Capabilities and information-flow control as an out-of-band defence
+          - Attacks that hide the compromise from the final answer
           - Confused deputy and privilege escalation
           - Least privilege and scoped credentials
           - Human in the loop and approval gates
@@ -2341,11 +2356,14 @@ topics:
       - Adding agents when the problem needed one better tool
       - No step budget, so failures cost real money
       - Evaluating on final answer only, with no trajectory view
+      - Trusting an agent benchmark score without asking how it could be gamed
       - Giving broad credentials because scoping was inconvenient
+      - Reading capability scores as evidence that an agent is safe to deploy
     drills:
       - Build a three-tool agent with no framework, then read one framework's source
       - Log every trajectory and read 20 failures by hand
       - Inject an instruction into a tool result and watch what happens
+      - Try to score on one agent benchmark without solving its task
       - Measure cost per solved task, not just success rate
 
   - id: mlops
