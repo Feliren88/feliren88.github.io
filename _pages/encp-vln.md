@@ -16,10 +16,15 @@ extra_css: /css/encp-vln.css
     <div class="encp-meta">
       <div class="encp-authors" aria-label="Authors">
         <a href="/">Vicky Feliren<sup>1,2</sup></a>
+        <span aria-hidden="true">,</span>
         <a href="https://research.monash.edu/en/persons/taufiq-asyhari/" target="_blank" rel="noreferrer">A. Taufiq Asyhari<sup>1</sup></a>
+        <span aria-hidden="true">,</span>
         <a href="https://research.monash.edu/en/persons/risqi-saputra/" target="_blank" rel="noreferrer">Muhamad Risqi U. Saputra<sup>1</sup></a>
       </div>
-      <p class="encp-affiliations"><sup>1</sup>Monash University, Indonesia<br><sup>2</sup>SEACrowd</p>
+      <p class="encp-affiliations">
+        <span><sup>1</sup>Monash University, Indonesia</span>
+        <span><sup>2</sup>SEACrowd</span>
+      </p>
 
       <div class="encp-resources" aria-label="Project resources">
         <span class="encp-resource" aria-disabled="true">
@@ -72,7 +77,6 @@ extra_css: /css/encp-vln.css
   </section>
 
   <aside class="encp-status" aria-label="Project status">
-    <span class="encp-status-dot" aria-hidden="true"></span>
     <p><strong>Project in progress.</strong> Paper, arXiv preprint, and code will be linked here when available.</p>
   </aside>
 </article>
