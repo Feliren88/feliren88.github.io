@@ -1,0 +1,316 @@
+.encp-page {
+  --encp-ink: var(--text);
+  --encp-muted: var(--muted);
+  --encp-teal: #47bca3;
+  --encp-orange: #dd8a32;
+  --encp-paper: #f8fafc;
+  --encp-paper-ink: #16202c;
+  --encp-rule: var(--line);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(2.8rem, 7vw, 6.5rem) 0 clamp(1rem, 3vw, 2.5rem);
+}
+
+.encp-hero {
+  max-width: 1020px;
+  margin: 0 auto clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.encp-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0 0 1.2rem;
+  color: var(--encp-teal);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.encp-hero h1 {
+  max-width: 20ch;
+  margin: 0 auto;
+  color: var(--encp-ink);
+  font-size: clamp(2.2rem, 5.7vw, 4.85rem);
+  line-height: 0.99;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.encp-hero h1 span {
+  color: var(--encp-teal);
+}
+
+.encp-authors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.72rem;
+  margin-top: 2rem;
+  color: var(--encp-muted);
+  font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+}
+
+.encp-authors a {
+  color: var(--encp-ink);
+  text-decoration-color: color-mix(in srgb, var(--encp-teal) 65%, transparent);
+  text-underline-offset: 0.24em;
+  transition: color 0.18s ease;
+}
+
+.encp-authors a:hover {
+  color: var(--encp-teal);
+}
+
+.encp-authors sup,
+.encp-affiliations sup {
+  color: var(--encp-teal);
+  font-size: 0.7em;
+}
+
+.encp-affiliations {
+  margin: 0.65rem 0 0;
+  color: var(--encp-muted);
+  font-size: 0.84rem;
+}
+
+.encp-resources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.75rem;
+}
+
+.encp-resource {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 8.6rem;
+  padding: 0.58rem 0.78rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--encp-ink);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+.encp-resource svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--encp-teal);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.encp-resource small {
+  margin-left: auto;
+  padding: 0.13rem 0.38rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--encp-orange) 17%, transparent);
+  color: var(--encp-orange);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+.encp-figure {
+  margin: 0;
+}
+
+.encp-figure-frame {
+  overflow: hidden;
+  padding: clamp(0.35rem, 1vw, 0.7rem);
+  border: 1px solid var(--encp-rule);
+  border-radius: clamp(0.75rem, 2vw, 1.25rem);
+  background: var(--encp-paper);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.18);
+}
+
+.encp-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.55rem;
+}
+
+.encp-figure-link {
+  display: block;
+  border-radius: 0.55rem;
+  cursor: zoom-in;
+}
+
+.encp-figure-link:focus-visible {
+  outline-color: var(--encp-teal);
+  outline-offset: 0.25rem;
+}
+
+.encp-figure figcaption {
+  max-width: 78ch;
+  margin: 0.85rem auto 0;
+  color: var(--encp-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.encp-figure figcaption strong {
+  color: var(--encp-ink);
+  font-family: inherit;
+}
+
+.encp-teaser {
+  margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.encp-section {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.4rem);
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--encp-rule);
+}
+
+.encp-section > div {
+  min-width: 0;
+}
+
+.encp-section-index {
+  margin: 0.35rem 0 0;
+  color: var(--encp-teal);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.encp-section h2 {
+  margin: 0 0 1.4rem;
+  color: var(--encp-ink);
+  font-size: clamp(1.65rem, 3vw, 2.55rem);
+  letter-spacing: -0.035em;
+}
+
+.encp-section > div > p {
+  max-width: 76ch;
+  margin: 0 0 1.1rem;
+  color: var(--encp-muted);
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  line-height: 1.82;
+}
+
+.encp-abstract > div {
+  max-width: 830px;
+}
+
+.encp-method > div > p {
+  max-width: 71ch;
+}
+
+.encp-pipeline {
+  margin-top: clamp(2rem, 4vw, 3.2rem);
+}
+
+.encp-status {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 760px;
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--encp-rule);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-soft) 85%, transparent);
+}
+
+.encp-status-dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--encp-orange);
+  box-shadow: 0 0 0 0.28rem color-mix(in srgb, var(--encp-orange) 18%, transparent);
+}
+
+.encp-status p {
+  margin: 0;
+  color: var(--encp-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.encp-status strong {
+  color: var(--encp-ink);
+  font-family: inherit;
+}
+
+@media (max-width: 680px) {
+  .encp-page {
+    padding-top: 2.7rem;
+  }
+
+  .encp-hero h1 {
+    font-size: clamp(2.05rem, 10.3vw, 3.4rem);
+    line-height: 1.02;
+  }
+
+  .encp-authors {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .encp-authors > span {
+    display: none;
+  }
+
+  .encp-resource {
+    min-width: 7.2rem;
+    padding-inline: 0.66rem;
+  }
+
+  .encp-section {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .encp-section-index {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .encp-section-index::after {
+    width: 2.5rem;
+    height: 1px;
+    background: var(--encp-rule);
+    content: "";
+  }
+
+  .encp-section > div > p {
+    line-height: 1.72;
+  }
+
+  .encp-status {
+    align-items: flex-start;
+    border-radius: 1rem;
+  }
+
+  .encp-status-dot {
+    margin-top: 0.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .encp-authors a {
+    transition: none;
+  }
+}
