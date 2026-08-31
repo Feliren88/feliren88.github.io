@@ -9,7 +9,6 @@ extra_css: /css/encp-vln.css
 
 <article class="encp-page">
   <header class="encp-hero" aria-labelledby="encp-title">
-    <p class="encp-kicker">Research preview <span aria-hidden="true">·</span> Vision-and-Language Navigation</p>
     <h1 id="encp-title"><span>ENCP:</span> Episode-Normalized Conformal Prediction for Vision-and-Language Navigation</h1>
 
     <div class="encp-authors" aria-label="Authors">
@@ -40,10 +39,10 @@ extra_css: /css/encp-vln.css
   <figure class="encp-figure encp-teaser">
     <div class="encp-figure-frame">
       <a class="encp-figure-link" href="/assets/img/encp-vln/fig-teaser.png" target="_blank" aria-label="Open the teaser figure at full resolution">
-        <img src="/assets/img/encp-vln/fig-teaser.png" width="2036" height="759" alt="A navigation episode showing the agent's confident first step, a later uncertain decision with a widened prediction set, and both planned and executed routes on the navigation graph.">
+        <img src="/assets/img/encp-vln/fig-teaser.png" width="2367" height="827" alt="Three-panel ENCP overview: a wrong action changes observations; episode calibration provides route-level coverage; prediction-set size triggers acting or asking for help.">
       </a>
     </div>
-    <figcaption><strong>ENCP identifies when a navigation agent should ask for help before an error compounds.</strong> It calibrates complete episodes and triggers a query when the action set exceeds a chosen size budget.</figcaption>
+    <figcaption>ENCP identifies when a navigation agent should ask for help before an error compounds. It calibrates complete episodes and triggers a query when the action set exceeds a chosen size budget.</figcaption>
   </figure>
 
   <section class="encp-section encp-abstract" aria-labelledby="encp-abstract-title">
@@ -64,10 +63,10 @@ extra_css: /css/encp-vln.css
       <figure class="encp-figure encp-pipeline">
         <div class="encp-figure-frame">
           <a class="encp-figure-link" href="/assets/img/encp-vln/fig-pipeline.png" target="_blank" aria-label="Open the ENCP pipeline figure at full resolution">
-            <img src="/assets/img/encp-vln/fig-pipeline.png" width="2308" height="776" loading="lazy" alt="ENCP pipeline: offline calibration normalizes scores and computes an episode-level quantile; at deployment, prediction-set size determines whether the agent acts or asks a human.">
+            <img src="/assets/img/encp-vln/fig-pipeline.png" width="2356" height="1261" loading="lazy" alt="Detailed ENCP pipeline showing offline calibration records, parameter-free and learning-based weights, shared episode-level calibration, and deployment with act-or-ask decisions.">
           </a>
         </div>
-        <figcaption><strong>ENCP calibrates one worst-step score per episode,</strong> then asks for help when the deployed set exceeds the operator's chosen size budget.</figcaption>
+        <figcaption>ENCP calibrates one worst-step score per episode, then asks for help when the deployed set exceeds τ.</figcaption>
       </figure>
     </div>
   </section>

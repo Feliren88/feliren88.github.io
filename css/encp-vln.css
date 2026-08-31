@@ -17,20 +17,6 @@
   text-align: center;
 }
 
-.encp-kicker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  margin: 0 0 1.2rem;
-  color: var(--encp-teal);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
 .encp-hero h1 {
   max-width: 20ch;
   margin: 0 auto;
@@ -161,11 +147,6 @@
   font-size: 0.86rem;
   line-height: 1.6;
   text-align: center;
-}
-
-.encp-figure figcaption strong {
-  color: var(--encp-ink);
-  font-family: inherit;
 }
 
 .encp-teaser {
