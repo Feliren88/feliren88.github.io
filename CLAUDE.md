@@ -1006,6 +1006,20 @@ The site follows Gestalt perceptual principles to minimise cognitive load. Key p
 - Before shipping page-scoped CSS, review every new `border-left` declaration. If
   removing it would not change the meaning or interaction, remove it.
 
+### No decorative kickers
+
+- Do **not** add an eyebrow or kicker above a page or section heading merely to set
+  a mood, announce the page type, or fill space. Avoid invented labels such as
+  "Research preview", "Featured work", "Selected insight", or category pairs joined
+  with a centred dot.
+- Do not style generic pre-title text as small uppercase, widely letter-spaced accent
+  copy. This pattern reads as template decoration and weakens the real heading.
+- Keep genuine metadata only when it helps the reader, for example a publication
+  venue, date, or document state. Place it in the normal metadata line near the title;
+  do not turn it into a decorative pre-heading.
+- Existing `.t-eyebrow` uses are not a reason to add new kickers. Use that token only
+  where the text has an established navigational or structural role.
+
 ### Spacing Scale
 ```css
 --gap-1: 0.5rem    /* tight — tag clusters */
