@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Natural Language Processing
-description: Whether you understand language as data, including the languages that break your pipeline.
+description: Represent and evaluate language data, including languages that expose pipeline failures.
 permalink: /nlp/
 topic_id: nlp
 robots: noindex, nofollow

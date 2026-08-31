@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Interview
-description: Private revision hub. Twenty-six visual syllabi for interview preparation.
+description: Twenty-six technical interview tracks with diagrams, plain explanations, equations, and recall questions.
 permalink: /interview/
 robots: noindex, nofollow
 sitemap: false
@@ -18,18 +18,32 @@ extra_js:
   <header class="ivh-header">
     <span class="ivh-eyebrow">Private</span>
     <h1 class="ivh-title">Interview</h1>
-    <p class="ivh-lede">Pick a track. Watch one idea move, read the plain explanation, then step through each diagram at your own pace.</p>
+    <p class="ivh-lede">Choose a track. Each module explains one technical idea with a diagram, plain English, the required maths, and a question to answer without notes.</p>
     {% assign topics = site.data.interview.topics %}
     {% assign mod_n = 0 %}{% assign cov_n = 0 %}
     {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}
     <ul class="ivh-stats">
       <li><strong>{{ topics | size }}</strong><span>tracks</span></li>
       <li><strong>{{ mod_n }}</strong><span>modules</span></li>
-      <li><strong>{{ cov_n }}</strong><span>items</span></li>
+      <li><strong>{{ cov_n }}</strong><span>terms</span></li>
     </ul>
   </header>
 
-  <p class="ivh-maplede">The lines connect related tracks. Hover a card to see which topics support each other.</p>
+  <section class="ivh-contract" aria-labelledby="ivh-contract-title">
+    <div>
+      <span class="ivh-contract-kicker">Mission</span>
+      <h2 id="ivh-contract-title">Practise for an answer you can defend</h2>
+      <p>{{ site.data.interview_learning.mission.outcome }}</p>
+    </div>
+    <ol>
+      <li><strong>Learn</strong><span>Follow one module's grounded beats.</span></li>
+      <li><strong>Retrieve</strong><span>Answer its question without notes.</span></li>
+      <li><strong>Check</strong><span>Name the mechanism, evidence, and limit.</span></li>
+      <li><strong>Return</strong><span>Schedule it, then mix in another track.</span></li>
+    </ol>
+  </section>
+
+  <p class="ivh-maplede">Lines show related tracks. Hover over a card to see what to study next.</p>
 
   <div class="ivh-map" id="iv-map">
     <svg class="iv-map-svg" aria-hidden="true" preserveAspectRatio="none"></svg>
@@ -58,7 +72,7 @@ extra_js:
           <ul class="ivh-card-mods">
             {% for m in t.modules %}<li>{{ m.name }}</li>{% endfor %}
           </ul>
-          <span class="ivh-card-meta">{{ t.modules | size }} modules · {{ tc }} items</span>
+          <span class="ivh-card-meta">{{ t.modules | size }} modules · {{ tc }} terms</span>
         </a>
         {% endfor %}
       </div>

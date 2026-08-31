@@ -1,0 +1,219 @@
+# Learning contract shared by /interview/ and every syllabus page.
+#
+# The interview syllabus remains the concise study surface. These entries add
+# the pieces that make it a course: a concrete mission, explicit prerequisites,
+# an observable success condition, and one high-trust starting source per track.
+
+mission:
+  outcome: "Answer technical interview questions from first principles, without notes, and defend the assumptions behind the answer."
+  method: "Study one idea, explain it in your own words, retrieve it after a gap, then mix it with a neighbouring track."
+  evidence: "You are ready when you can answer the cold question, name a limitation, and adapt the answer when the interviewer changes one condition."
+
+tracks:
+  - id: bayesian-statistics
+    prerequisites: ["Algebra", "Conditional probability"]
+    source:
+      title: "Bayes Rules! An Introduction to Applied Bayesian Modeling"
+      author: "Johnson, Ott, and Dogucu"
+      url: "https://www.bayesrulesbook.com/"
+      use: "Use for priors, posterior inference, model checking, and hierarchical models."
+
+  - id: frequentist-statistics
+    prerequisites: ["Algebra", "Probability and random variables"]
+    source:
+      title: "NIST/SEMATECH e-Handbook of Statistical Methods"
+      author: "NIST"
+      url: "https://www.itl.nist.gov/div898/handbook/"
+      use: "Use for estimators, tests, experimental design, and diagnostic practice."
+
+  - id: machine-learning
+    prerequisites: ["Probability", "Linear algebra", "Basic calculus"]
+    source:
+      title: "The Elements of Statistical Learning"
+      author: "Hastie, Tibshirani, and Friedman"
+      url: "https://doi.org/10.1007/978-0-387-84858-7"
+      use: "Use for classical models, regularisation, evaluation, and statistical learning theory."
+
+  - id: deep-learning
+    prerequisites: ["Machine learning", "Linear algebra", "Calculus"]
+    source:
+      title: "Deep Learning"
+      author: "Goodfellow, Bengio, and Courville"
+      url: "https://www.deeplearningbook.org/"
+      use: "Use for optimisation, regularisation, architectures, and training fundamentals."
+
+  - id: linear-algebra
+    prerequisites: ["Algebra", "Functions and graphs"]
+    source:
+      title: "Introduction to Linear Algebra"
+      author: "Gilbert Strang"
+      url: "https://math.mit.edu/~gs/linearalgebra/"
+      use: "Use for vector spaces, matrix factorisation, eigenvalues, and geometric intuition."
+
+  - id: calculus
+    prerequisites: ["Algebra", "Functions and graphs"]
+    source:
+      title: "Calculus, Volume 1"
+      author: "OpenStax"
+      url: "https://openstax.org/details/books/calculus-volume-1"
+      use: "Use for limits, derivatives, integrals, and multivariable foundations."
+
+  - id: math
+    prerequisites: ["Basic algebra"]
+    source:
+      title: "The Open Logic Text"
+      author: "Open Logic Project"
+      url: "https://builds.openlogicproject.org/"
+      use: "Use for notation, sets, functions, logic, and formal mathematical language."
+
+  - id: math-proof
+    prerequisites: ["Sets and functions", "Propositional logic"]
+    source:
+      title: "Book of Proof"
+      author: "Richard Hammack"
+      url: "https://richardhammack.github.io/BookOfProof/"
+      use: "Use for quantifiers, direct proof, contradiction, induction, and counterexamples."
+
+  - id: computer-science
+    prerequisites: ["Comfort reading code", "Basic algebra"]
+    source:
+      title: "Algorithms, 4th Edition"
+      author: "Sedgewick and Wayne"
+      url: "https://algs4.cs.princeton.edu/home/"
+      use: "Use for algorithms, data structures, graphs, and complexity."
+
+  - id: transformers
+    prerequisites: ["Deep learning", "Linear algebra", "Probability"]
+    source:
+      title: "Attention Is All You Need"
+      author: "Vaswani et al."
+      url: "https://arxiv.org/abs/1706.03762"
+      use: "Use for the original attention architecture, masking, and positional encoding."
+
+  - id: llm-training
+    prerequisites: ["Transformers", "Optimisation", "Distributed systems basics"]
+    source:
+      title: "Training Compute-Optimal Large Language Models"
+      author: "Hoffmann et al."
+      url: "https://arxiv.org/abs/2203.15556"
+      use: "Use for data-compute trade-offs and evidence behind compute-optimal scaling."
+
+  - id: nlp
+    prerequisites: ["Probability", "Linear algebra", "Basic machine learning"]
+    source:
+      title: "Speech and Language Processing"
+      author: "Jurafsky and Martin"
+      url: "https://web.stanford.edu/~jurafsky/slp3/"
+      use: "Use for tokenisation, language modelling, sequence labelling, parsing, and evaluation."
+
+  - id: computer-vision
+    prerequisites: ["Linear algebra", "Calculus", "Deep learning basics"]
+    source:
+      title: "Computer Vision: Algorithms and Applications"
+      author: "Richard Szeliski"
+      url: "https://doi.org/10.1007/978-3-030-34372-9"
+      use: "Use for image formation, features, geometry, recognition, and dense prediction."
+
+  - id: multimodality
+    prerequisites: ["Embeddings", "Transformers", "Representation learning"]
+    source:
+      title: "Learning Transferable Visual Models From Natural Language Supervision"
+      author: "Radford et al."
+      url: "https://arxiv.org/abs/2103.00020"
+      use: "Use for contrastive image-text learning and cross-modal evaluation."
+
+  - id: embedding
+    prerequisites: ["Linear algebra", "Basic probability"]
+    source:
+      title: "Efficient Estimation of Word Representations in Vector Space"
+      author: "Mikolov et al."
+      url: "https://arxiv.org/abs/1301.3781"
+      use: "Use for the original word2vec objectives and the evidence behind distributed representations."
+
+  - id: edge-ai
+    prerequisites: ["Deep learning", "Computer systems basics"]
+    source:
+      title: "TinyML: Current Progress, Research Challenges, and Future Roadmap"
+      author: "Dutta and Bharali"
+      url: "https://arxiv.org/abs/2103.13569"
+      use: "Use for the constraints, deployment patterns, and open problems of on-device inference."
+
+  - id: image-generation
+    prerequisites: ["Deep learning", "Probability", "Computer vision basics"]
+    source:
+      title: "Denoising Diffusion Probabilistic Models"
+      author: "Ho, Jain, and Abbeel"
+      url: "https://arxiv.org/abs/2006.11239"
+      use: "Use for the diffusion objective, forward process, and reverse sampling process."
+
+  - id: uncertainty-quantification
+    prerequisites: ["Probability", "Statistics", "Model evaluation"]
+    source:
+      title: "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"
+      author: "Angelopoulos and Bates"
+      url: "https://arxiv.org/abs/2107.07511"
+      use: "Use for coverage guarantees, calibration sets, and the limits of distribution-free prediction."
+
+  - id: mechanistic-interpretability
+    prerequisites: ["Transformers", "Linear algebra", "Neural network internals"]
+    source:
+      title: "A Mathematical Framework for Transformer Circuits"
+      author: "Elhage et al."
+      url: "https://transformer-circuits.pub/2021/framework/index.html"
+      use: "Use for residual streams, attention heads, and circuit-level analysis."
+
+  - id: ai-safety
+    prerequisites: ["Machine learning systems", "Basic probability", "Model evaluation"]
+    source:
+      title: "Concrete Problems in AI Safety"
+      author: "Amodei et al."
+      url: "https://arxiv.org/abs/1606.06565"
+      use: "Use for accident risks, reward misspecification, oversight, and distribution shift."
+
+  - id: machine-learning-research
+    prerequisites: ["Machine learning", "Statistics", "Experimental design"]
+    source:
+      title: "The ML Reproducibility Checklist"
+      author: "Pineau et al."
+      url: "https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf"
+      use: "Use for claims, experimental evidence, reporting, and reproducibility checks."
+
+  - id: prompt-engineering
+    prerequisites: ["LLM fundamentals", "Clear task specification"]
+    source:
+      title: "Pre-train, Prompt, and Predict"
+      author: "Liu et al."
+      url: "https://arxiv.org/abs/2107.13586"
+      use: "Use for a research taxonomy of prompting methods and prompt-based learning."
+
+  - id: agentic-ai
+    prerequisites: ["Prompt engineering", "APIs and tools", "Basic system design"]
+    source:
+      title: "ReAct: Synergizing Reasoning and Acting in Language Models"
+      author: "Yao et al."
+      url: "https://arxiv.org/abs/2210.03629"
+      use: "Use for the observation, reasoning, and action loop behind tool-using agents."
+
+  - id: mlops
+    prerequisites: ["Machine learning", "Software delivery", "Monitoring basics"]
+    source:
+      title: "Rules of Machine Learning"
+      author: "Google"
+      url: "https://developers.google.com/machine-learning/guides/rules-of-ml"
+      use: "Use for production sequencing, metrics, pipelines, and operational failure modes."
+
+  - id: data-engineering
+    prerequisites: ["Databases", "Distributed systems basics", "SQL"]
+    source:
+      title: "The Dataflow Model"
+      author: "Akidau et al."
+      url: "https://research.google/pubs/the-dataflow-model-a-practical-approach-to-balancing-correctness-latency-and-cost-in-massive-scale-unbounded-out-of-order-data-processing/"
+      use: "Use for event time, watermarks, triggers, and stream-processing correctness."
+
+  - id: network-and-security
+    prerequisites: ["Operating systems basics", "Client-server requests"]
+    source:
+      title: "Zero Trust Architecture, SP 800-207"
+      author: "NIST"
+      url: "https://csrc.nist.gov/pubs/sp/800/207/final"
+      use: "Use for trust boundaries, identity, policy enforcement, and modern network security architecture."

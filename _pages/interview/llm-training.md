@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: LLM Training
-description: Whether you could take a base model to a useful assistant and know what each step buys.
+description: Take a base language model through pretraining, post-training, and evaluation.
 permalink: /llm-training/
 topic_id: llm-training
 robots: noindex, nofollow

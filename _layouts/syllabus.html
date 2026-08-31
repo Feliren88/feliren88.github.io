@@ -3,6 +3,7 @@ layout: default
 ---
 
 {% assign topic = site.data.interview.topics | where: "id", page.topic_id | first %}
+{% assign learning = site.data.interview_learning.tracks | where: "id", page.topic_id | first %}
 {% if topic == nil %}
 <section class="section page reveal">
   <p style="color:var(--muted)">Syllabus not found.</p>
@@ -39,8 +40,8 @@ layout: default
       <p class="syl-scope">{{ topic.scope }}</p>
       <ul class="syl-stats">
         <li><strong>{{ topic.modules | size }}</strong> modules</li>
-        <li><strong>{{ covers_n }}</strong> items</li>
-        <li><strong>{{ topic.modules | size }}</strong> cold questions</li>
+        <li><strong>{{ covers_n }}</strong> terms</li>
+        <li><strong>{{ topic.modules | size }}</strong> recall questions</li>
       </ul>
     </div>
     <div class="syl-header-ring">
@@ -48,6 +49,22 @@ layout: default
       <button type="button" class="syl-reset" id="iv-reset"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-rotate-ccw"/></svg>Reset</button>
     </div>
   </header>
+
+  <section class="syl-orientation" aria-labelledby="syl-orientation-title">
+    <div class="syl-orientation-main">
+      <span class="syl-phase">Track mission</span>
+      <h2 id="syl-orientation-title">What this track prepares you to do</h2>
+      <p>{{ site.data.interview_learning.mission.outcome }}</p>
+      <p class="syl-orientation-evidence"><strong>Evidence of mastery:</strong> {{ site.data.interview_learning.mission.evidence }}</p>
+    </div>
+    {% if learning %}
+    <div class="syl-prereqs">
+      <h3>Bring these foundations</h3>
+      <ul>{% for prerequisite in learning.prerequisites %}<li>{{ prerequisite }}</li>{% endfor %}</ul>
+      <p>If one is unfamiliar, open the closest foundation track first. Otherwise, begin at module 1.</p>
+    </div>
+    {% endif %}
+  </section>
 
   {% if topic.links.size > 0 %}
   <p class="syl-links">Continue with
@@ -59,15 +76,15 @@ layout: default
 
   <section class="syl-method" aria-labelledby="syl-method-title">
     <div class="syl-method-copy">
-      <span class="syl-phase">How to learn this track</span>
-      <h2 id="syl-method-title">One idea at a time</h2>
-      <p>See the idea move. Explain it without looking. Check the terms, then return after a break and try again.</p>
+      <span class="syl-phase">How to use this track</span>
+      <h2 id="syl-method-title">Start with one module</h2>
+      <p>New to the topic? Start at module 1 and use Focus to hide the rest. Use Reading to change the text and Listen when audio is easier.</p>
     </div>
     <ol class="syl-method-steps">
-      <li><b>See</b><span>Start with the picture.</span></li>
-      <li><b>Understand</b><span>Read the short explanation.</span></li>
-      <li><b>Recall</b><span>Answer without notes.</span></li>
-      <li><b>Return</b><span>Come back after a gap.</span></li>
+      <li><b>Goal</b><span>Read why the module matters.</span></li>
+      <li><b>Picture</b><span>Follow the diagram one step at a time.</span></li>
+      <li><b>Words</b><span>Read the plain explanation before the equations.</span></li>
+      <li><b>Recall</b><span>Answer without notes, then return later.</span></li>
     </ol>
     <div class="syl-timer" id="iv-timer">
       <span class="syl-timer-label">Choose a round</span>
@@ -75,7 +92,7 @@ layout: default
       <button type="button" data-minutes="25" data-kind="focus">25 min focus</button>
       <button type="button" data-minutes="5" data-kind="break">5 min break</button>
       <button type="button" data-timer-stop hidden>Stop</button>
-      <output aria-live="polite">Pick a timer that feels easy to start.</output>
+      <output aria-live="polite">Choose a timer when you are ready.</output>
     </div>
   </section>
 
@@ -84,7 +101,7 @@ layout: default
       <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
       Notation used on this page
     </summary>
-    <p class="ivm-legend-lead">Every symbol below means the same thing on all twenty-five tracks. A module that needs a symbol of its own defines it under its own equation.</p>
+    <p class="ivm-legend-lead">These symbols keep the same meaning across all twenty-six tracks. A symbol used only once is defined below its equation.</p>
     {% for grp in site.data.interview_math.notation %}
     <div class="ivm-legend-group">
       <h3>{{ grp.group }}</h3>
@@ -97,6 +114,7 @@ layout: default
     {% endfor %}
   </details>
 
+  <h2 class="syl-phase syl-toc-label">Choose a module</h2>
   <nav class="syl-toc" aria-label="Modules">
     {% for m in topic.modules %}
     <a class="syl-toc-item" href="#m{{ forloop.index }}">
@@ -114,6 +132,7 @@ layout: default
         <span class="syl-module-num">{{ forloop.index }}</span>
         <div>
           <h2 class="syl-module-name">{{ m.name }}</h2>
+          <span class="syl-module-why-label">Why it matters</span>
           <p class="syl-module-why">{{ m.why }}</p>
         </div>
         <div class="syl-module-actions">
@@ -129,20 +148,31 @@ layout: default
         </div>
       </div>
 
-      <p class="syl-phase">See it</p>
+      <div class="syl-grounding">
+        <span class="syl-phase">Grounding</span>
+        {% if forloop.first %}
+        <p>This is the entry point for the track. It assumes only the foundations listed above.</p>
+        {% else %}
+        {% assign previous_index = forloop.index0 | minus: 1 %}
+        <p>Builds on module {{ forloop.index | minus: 1 }}, <a href="#m{{ forloop.index | minus: 1 }}">{{ topic.modules[previous_index].name }}</a>.</p>
+        {% endif %}
+        <p>This module introduces the ideas in the vocabulary list below. Follow the numbered beats in order before using the terms in your own answer.</p>
+      </div>
+
+      <p class="syl-phase">Start with the diagram</p>
       <div class="syl-scene"></div>
 
       <div class="syl-viz"></div>
 
       {% if m.plain %}
-      <p class="syl-phase">Understand it</p>
+      <p class="syl-phase">Plain explanation</p>
       <div class="syl-plain">
         {% for para in m.plain %}<p>{{ para }}</p>{% endfor %}
       </div>
       {% endif %}
 
       {% if m.math %}
-      <p class="syl-phase">Read the maths</p>
+      <p class="syl-phase">Read the equations</p>
       <div class="ivm">
         {% for eq in m.math %}
         {% assign ekey = topic.id | append: '/' | append: forloop.parentloop.index0 | append: '/' | append: forloop.index0 %}
@@ -181,11 +211,30 @@ layout: default
       {% endcomment %}
       <div class="syl-tf" data-tf hidden></div>
 
-      <h3 class="syl-covers-title"><span class="syl-phase">Build the chunk</span>Terms to know</h3>
+      <h3 class="syl-covers-title"><span class="syl-phase">Review the vocabulary</span>Terms to know</h3>
       <ul class="syl-covers">
         {% for c in m.covers %}<li>{{ c }}</li>{% endfor %}
       </ul>
-      <p class="syl-check"><span class="syl-check-label">Try without notes</span>{{ m.check }}</p>
+      <p class="syl-check"><span class="syl-check-label">Answer without notes</span>{{ m.check }}</p>
+      <details class="syl-feedback">
+        <summary>Check the strength of your answer</summary>
+        <div class="syl-feedback-body">
+          <p>A defensible answer does four things:</p>
+          <ol>
+            <li>Answers the question directly before adding detail.</li>
+            <li>Explains the mechanism with the module's terms.</li>
+            <li>States an assumption, trade-off, or failure mode.</li>
+            <li>Uses a concrete example, equation, or test when the prompt asks for one.</li>
+          </ol>
+          <p class="syl-feedback-note">These are criteria, not a model answer. Compare them with what you wrote, then choose when this question should return.</p>
+          <div class="syl-review" role="group" aria-label="Schedule the next review">
+            <button type="button" data-review="again">Again tomorrow</button>
+            <button type="button" data-review="hard">Hard, in 3 days</button>
+            <button type="button" data-review="ready">Ready, in 7 days</button>
+          </div>
+          <output class="syl-review-status" aria-live="polite"></output>
+        </div>
+      </details>
       <details class="syl-notes">
         <summary>Scratchpad</summary>
         <label for="iv-note-{{ forloop.index }}">Write the idea in your own words. This stays in this browser.</label>
@@ -195,11 +244,27 @@ layout: default
     {% endfor %}
   </ol>
 
+  {% if learning and learning.source %}
+  <section class="syl-source" aria-labelledby="syl-source-title">
+    <div>
+      <span class="syl-phase">Foundational source</span>
+      <h2 id="syl-source-title">Check the compressed notes against the source</h2>
+      <p>Use the syllabus for retrieval. Use the reference to verify claims, inspect assumptions, and read the evidence in context.</p>
+    </div>
+    <a href="{{ learning.source.url }}" rel="noopener noreferrer">
+      <strong>{{ learning.source.title }}</strong>
+      <span>{{ learning.source.author }}</span>
+      <small>{{ learning.source.use }}</small>
+    </a>
+  </section>
+  {% endif %}
+
   <div class="syl-cards" id="iv-cards-block">
     <div class="syl-cards-head">
       <h2 class="syl-panel-title">Practise without notes</h2>
       <div class="syl-cards-ctl">
         <button type="button" id="iv-card-prev" aria-label="Previous question"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg></button>
+        <button type="button" id="iv-card-due">Due today</button>
         <button type="button" id="iv-card-shuffle"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-shuffle"/></svg>Shuffle</button>
         <button type="button" id="iv-card-next" aria-label="Next question"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></button>
       </div>

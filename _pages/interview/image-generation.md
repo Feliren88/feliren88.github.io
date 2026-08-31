@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Image Generation
-description: Whether you understand denoising as a process, and what steering it costs.
+description: Explain diffusion as repeated denoising and measure the cost of controlling it.
 permalink: /image-generation/
 topic_id: image-generation
 robots: noindex, nofollow

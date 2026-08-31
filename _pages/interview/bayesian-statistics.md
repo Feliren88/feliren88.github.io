@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Bayesian Statistics
-description: Whether you can reason about a parameter you never get to observe.
+description: Update beliefs with data and explain what the resulting probability means.
 permalink: /bayesian-statistics/
 topic_id: bayesian-statistics
 robots: noindex, nofollow

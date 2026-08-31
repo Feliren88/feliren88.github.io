@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Embeddings
-description: Whether you can turn meaning into geometry, and know when the geometry lies.
+description: Represent items as vectors, search them efficiently, and test what distance means.
 permalink: /embedding/
 topic_id: embedding
 robots: noindex, nofollow

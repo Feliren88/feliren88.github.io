@@ -1,5 +1,5 @@
 /**
- * Interview revision — /interview/ and the twenty-three syllabus pages.
+ * Interview revision: /interview/ and the twenty-six syllabus pages.
  *
  * Three jobs:
  *   1. Turn each module's `viz` block into a diagram (BUILD, eight archetypes)
@@ -19,6 +19,7 @@
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
   function save(k, v) { try { localStorage.setItem(STORE + k, JSON.stringify(v)); } catch (e) {} }
+  function drop(k) { try { localStorage.removeItem(STORE + k); } catch (e) {} }
   function load(k, d) {
     try { var v = localStorage.getItem(STORE + k); return v === null ? d : JSON.parse(v); }
     catch (e) { return d; }
@@ -907,7 +908,9 @@
       '<div class="rd-actions"><button type="button" data-act="reset">Reset</button>' +
       '<button type="button" data-act="close">Done</button></div>';
 
-    document.body.appendChild(open);
+    var readingAnchor = $('.syl-method', page) || $('.ivh-header', page);
+    if (readingAnchor) readingAnchor.insertAdjacentElement('afterend', open);
+    else page.appendChild(open);
     document.body.appendChild(panel);
 
     var slider = {
@@ -1086,6 +1089,67 @@
   }
 
   /* ════════════════════════════════════════════════════════
+     Retrieval schedule
+
+     Reading a fluent answer is not evidence that it will be available later.
+     After each cold question, the reader judges the attempt against explicit
+     criteria and schedules another retrieval. The three intervals are modest
+     on purpose: this is interview preparation, not a permanent flashcard deck.
+     ════════════════════════════════════════════════════════ */
+
+  var REVIEW_DAYS = { again: 1, hard: 3, ready: 7 };
+
+  function reviewRecord(topic, index) {
+    var value = load('review:' + topic + ':' + index, null);
+    return value && typeof value.due === 'number' ? value : null;
+  }
+
+  function reviewSchedule(d) {
+    var modules = $$('.syl-module');
+    if (!modules.length) return;
+
+    modules.forEach(function (module) {
+      var index = +module.getAttribute('data-i');
+      var status = $('.syl-review-status', module);
+      var buttons = $$('.syl-review button', module);
+      if (!status || !buttons.length) return;
+
+      function paint() {
+        var record = reviewRecord(d.id, index);
+        buttons.forEach(function (button) {
+          button.setAttribute('aria-pressed', record && record.level === button.getAttribute('data-review') ? 'true' : 'false');
+        });
+        if (!record) {
+          status.textContent = 'No next review scheduled.';
+          return;
+        }
+        if (record.due <= Date.now()) {
+          status.textContent = 'Review due now. Answer once before reopening the notes.';
+          return;
+        }
+        var date = new Date(record.due).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+        status.textContent = 'Next review: ' + date + '.';
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var level = button.getAttribute('data-review');
+          var days = REVIEW_DAYS[level];
+          if (!days) return;
+          save('review:' + d.id + ':' + index, {
+            level: level,
+            due: Date.now() + days * 86400000,
+            updated: Date.now()
+          });
+          paint();
+        });
+      });
+
+      paint();
+    });
+  }
+
+  /* ════════════════════════════════════════════════════════
      Revision progress
 
      One key per topic holding the module indexes marked done.
@@ -1167,7 +1231,8 @@
   function cards(d) {
     var mount = $('#iv-cards');
     if (!mount || !d.modules.length) return;
-    var order = d.modules.map(function (_, i) { return i; });
+    var all = d.modules.map(function (_, i) { return i; });
+    var order = all.slice();
     var at = 0, flipped = false;
 
     function paint() {
@@ -1194,7 +1259,7 @@
       paint();
     });
 
-    var prev = $('#iv-card-prev'), next = $('#iv-card-next'), shuf = $('#iv-card-shuffle');
+    var prev = $('#iv-card-prev'), next = $('#iv-card-next'), shuf = $('#iv-card-shuffle'), due = $('#iv-card-due');
     if (prev) prev.addEventListener('click', function () {
       at = (at - 1 + order.length) % order.length; flipped = false; paint();
     });
@@ -1202,10 +1267,25 @@
       at = (at + 1) % order.length; flipped = false; paint();
     });
     if (shuf) shuf.addEventListener('click', function () {
+      order = all.slice();
       for (var i = order.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var t = order[i]; order[i] = order[j]; order[j] = t;
       }
+      at = 0; flipped = false; paint();
+    });
+    if (due) due.addEventListener('click', function () {
+      var now = Date.now();
+      var dueOrder = all.filter(function (index) {
+        var record = reviewRecord(d.id, index);
+        return record && record.due <= now;
+      });
+      if (!dueOrder.length) {
+        due.textContent = 'Nothing due';
+        setTimeout(function () { due.textContent = 'Due today'; }, 1600);
+        return;
+      }
+      order = dueOrder;
       at = 0; flipped = false; paint();
     });
 
@@ -1289,12 +1369,24 @@
       if (!el) return;
       var total = +c.getAttribute('data-modules') || 0;
       ring(el, Math.min(doneSet(c.getAttribute('data-topic')).length, total), total);
+      var topic = c.getAttribute('data-topic');
+      var due = 0;
+      for (var i = 0; i < total; i++) {
+        var record = reviewRecord(topic, i);
+        if (record && record.due <= Date.now()) due++;
+      }
+      if (due) {
+        var badge = document.createElement('span');
+        badge.className = 'ivh-card-due';
+        badge.textContent = due + (due === 1 ? ' review due' : ' reviews due');
+        c.appendChild(badge);
+      }
     });
   }
 
   function init() {
     var d = data();
-    if (d) { diagrams(d); progress(d); cards(d); learningTools(d); }
+    if (d) { diagrams(d); progress(d); cards(d); learningTools(d); reviewSchedule(d); }
     hubMap();
     hubProgress();
     readingControls();

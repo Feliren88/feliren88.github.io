@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Mathematical Proof
-description: Whether you can build an argument that holds, and spot quickly the one that does not.
+description: Build a valid argument and find the exact step where a bad one fails.
 permalink: /math-proof/
 topic_id: math-proof
 robots: noindex, nofollow

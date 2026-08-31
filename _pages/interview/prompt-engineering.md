@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Prompt Engineering
-description: Whether you treat prompts as an engineering surface with tests, or as guesswork.
+description: Design prompts as tested interfaces with clear inputs, outputs, and failure cases.
 permalink: /prompt-engineering/
 topic_id: prompt-engineering
 robots: noindex, nofollow

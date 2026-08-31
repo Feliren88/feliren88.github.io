@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Data Engineering
-description: Whether the numbers are right, arrive on time, and cost what you said they would.
+description: Deliver correct data on time and within the storage and compute budget.
 permalink: /data-engineering/
 topic_id: data-engineering
 robots: noindex, nofollow

@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: MLOps
-description: Whether the model still works in six months and someone other than you can fix it.
+description: Keep a deployed model reproducible, observable, and repairable after it ships.
 permalink: /mlops/
 topic_id: mlops
 robots: noindex, nofollow

@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Computer Vision
-description: Whether you can move from pixels to a decision, and know where the evaluation lies to you.
+description: Turn pixels into predictions and find the cases where vision metrics mislead you.
 permalink: /computer-vision/
 topic_id: computer-vision
 robots: noindex, nofollow

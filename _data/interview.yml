@@ -1,4 +1,4 @@
-# Interview revision syllabi — /interview/ and one page per topic.
+# Interview revision syllabi: /interview/ and one page per topic.
 # Hand-written. House style applies: British spelling, short sentences, no em dashes.
 #
 # Each topic renders twice:
@@ -38,12 +38,12 @@ topics:
   - id: bayesian-statistics
     name: Bayesian Statistics
     group: foundations
-    blurb: "Whether you can reason about a parameter you never get to observe."
-    scope: "Owns priors, posteriors, and how you compute them. Hands calibration and coverage guarantees to uncertainty quantification."
+    blurb: "Update beliefs with data and explain what the resulting probability means."
+    scope: "Study priors, posteriors, and posterior computation here. Continue with uncertainty quantification for calibration and coverage guarantees."
     links: [uncertainty-quantification]
     modules:
       - name: Probability as belief
-        why: "Every later answer rests on whether you can say what a probability refers to."
+        why: "Bayesian probability measures uncertainty about a claim or parameter."
         beats:
           - >-
               Start with what you already believe. It is allowed to be vague.
@@ -148,7 +148,7 @@ topics:
           - Posterior belief
           loop: true
       - name: Priors and what they encode
-        why: "Interviewers probe priors to find out if you understand assumptions or just run a library."
+        why: "Priors expose the assumptions that a library call can hide."
         beats:
           - >-
               A flat prior says every value is equally plausible. That is rarely what
@@ -218,7 +218,7 @@ topics:
           - Strongly informative
           'on': 1
       - name: Computing the posterior
-        why: "Bayesian methods became practical when these algorithms did."
+        why: "Exact posteriors are rare, so practical Bayesian work depends on approximation and sampling."
         beats:
           - >-
               You want the posterior. Most of the time you cannot write it down.
@@ -368,7 +368,7 @@ topics:
           - Complete pooling
           'on': 1
       - name: Checking and comparing models
-        why: "Fitting a model is the easy part, so interviewers ask what would make you distrust it."
+        why: "A fitted model is useful only after you know what would make you distrust it."
         beats:
           - >-
               Fit the model. This is the easy part and it proves nothing.
@@ -438,7 +438,7 @@ topics:
           - Compare
           loop: true
       - name: Bayesian methods inside machine learning
-        why: "This is where the track meets the rest of your CV."
+        why: "Bayesian ideas also appear in regularisation, Gaussian processes, ensembles, and active learning."
         beats:
           - >-
               A Gaussian process puts a distribution over functions. The kernel says
@@ -451,9 +451,8 @@ topics:
               beats the clever methods on calibration.
         plain:
           - >-
-              This is where the track meets your CV. Gaussian processes, Bayesian
-              optimisation and Bayesian neural networks all put uncertainty on a
-              prediction.
+              Gaussian processes, Bayesian optimisation, and Bayesian neural networks
+              all attach uncertainty to a prediction.
           - >-
               The honest finding is that a plain ensemble of networks often beats the
               clever approximations on calibration. Say so. It signals you read results
@@ -516,12 +515,12 @@ topics:
   - id: frequentist-statistics
     name: Frequentist Statistics
     group: foundations
-    blurb: "Whether your conclusions survive someone asking how you would be wrong."
-    scope: "Owns estimators, testing, experiment design and causal identification. Hands posterior belief to Bayesian statistics."
+    blurb: "Estimate effects, test claims, and state how the conclusion could be wrong."
+    scope: "Study estimators, tests, experiment design, and causal identification here. Continue with Bayesian statistics for posterior beliefs."
     links: [bayesian-statistics, machine-learning]
     modules:
       - name: Estimators and their properties
-        why: "Every other answer in this track is built from this vocabulary."
+        why: "Bias, variance, consistency, and efficiency describe how an estimator behaves across samples."
         beats:
           - >-
               Low bias and low variance. The estimate lands near the truth and stays
@@ -589,7 +588,7 @@ topics:
           - Systematically off
           - Off and unstable
       - name: Maximum likelihood, worked for each distribution
-        why: "One recipe derives nearly every estimator you will be asked to write down, so it is worth doing by hand rather than recalling."
+        why: "This one recipe derives many common estimators. Work through it by hand instead of memorising the results."
         beats:
           - >-
               Write the probability of the data you actually saw, as a function of the unknown parameter.
@@ -794,7 +793,7 @@ topics:
           - Sampling distribution
           - Interval
       - name: Hypothesis testing
-        why: "People say something technically false here without noticing."
+        why: "A p-value measures compatibility with a null model, not the probability that the null is true."
         beats:
           - >-
               The null was true and you rejected it. You claimed an effect that is not
@@ -866,7 +865,7 @@ topics:
           - Correct
           - Type II error
       - name: Multiple comparisons and researcher freedom
-        why: "Anywhere you run many models, this decides whether the result is real."
+        why: "Testing many hypotheses increases the chance of reporting a false positive."
         beats:
           - >-
               Run forty tests, correct nothing, and a couple will look significant by
@@ -928,7 +927,7 @@ topics:
           - Family-wise error
           'on': 1
       - name: Experiment design and A/B testing
-        why: "Almost every company asks about this, and it is the applied-scientist core of the track."
+        why: "A controlled experiment links a product change to a measured outcome."
         beats:
           - >-
               Split users at random. That coin flip is what buys you the causal claim.
@@ -996,7 +995,7 @@ topics:
           - Decide
           loop: true
       - name: Causal inference
-        why: "Moving from a correlation to a decision is the hard part."
+        why: "Causal inference asks what would happen under a different action, not only what variables move together."
         beats:
           - >-
               You cannot randomise. Every option below buys the causal answer with an
@@ -1154,12 +1153,12 @@ topics:
   - id: machine-learning
     name: Machine Learning
     group: foundations
-    blurb: "Whether you can turn a vague business problem into a model somebody can ship."
-    scope: "Owns classical models, evaluation and the case-study round. Hands network training to deep learning."
+    blurb: "Turn a vague product problem into a model that can be evaluated and shipped."
+    scope: "Study classical models, evaluation, and case studies here. Continue with deep learning for neural network training."
     links: [deep-learning]
     modules:
       - name: Framing the problem
-        why: "Interviewers open here, because getting it wrong makes the modelling irrelevant."
+        why: "A precise problem statement keeps the modelling tied to a real decision."
         beats:
           - >-
               Someone asks for something vague. Churn prediction, say. Nobody has
@@ -1233,7 +1232,7 @@ topics:
           - Baseline
           - Decision
       - name: The core model families
-        why: "Boosted trees still win a lot of tabular problems, and you will be asked why."
+        why: "Boosted trees remain a strong choice for tabular data. Know when and why they work."
         beats:
           - >-
               Rows and columns, mixed types, some values missing. The most common shape
@@ -1325,7 +1324,7 @@ topics:
             - Nearest neighbours
             - Support vector machine
       - name: Evaluation you can defend
-        why: "A leaky validation split will sink an otherwise good answer."
+        why: "A leaky validation split reports performance the deployed model cannot reproduce."
         beats:
           - >-
               Split before you touch anything. This is the step people skip and regret.
@@ -1395,7 +1394,7 @@ topics:
           - Tune on validation
           - Report on test
       - name: Features
-        why: "On tabular problems this moves the number more than the model choice."
+        why: "For tabular data, useful features often improve performance more than a different model family."
         beats:
           - >-
               Compute the encoding inside each fold, from that fold's training rows
@@ -1463,7 +1462,7 @@ topics:
             - Test set leaks in
             - Score looks better than it is
       - name: Imbalance and shift
-        why: "Almost every real dataset arrives imbalanced, shifted, or both."
+        why: "Class imbalance changes the useful metrics, while distribution shift changes what the evaluation predicts."
         beats:
           - >-
               Live performance dropped. Something moved, and which thing decides the
@@ -1531,7 +1530,7 @@ topics:
             items:
             - The relationship moved
       - name: Enough theory to hold a conversation
-        why: "Research-flavoured roles will probe one level below the API."
+        why: "Learning theory explains when training error can predict error on unseen data."
         beats:
           - >-
               Training error falls as you add capacity, and keeps falling. It will
@@ -1586,7 +1585,7 @@ topics:
           a: Training error
           b: Test error
       - name: The case study round
-        why: "An hour-long open question is standard for applied roles."
+        why: "A case study tests the full path from product goal to monitoring plan."
         beats:
           - >-
               Ask questions first. Volume, latency, what a mistake costs, who acts on
@@ -1599,8 +1598,7 @@ topics:
           - >-
               Say what you would ship this week. Six-month plans are easy to give and impossible to check.
           - >-
-              Finish with how you would find out it had gone wrong. That is the part
-              interviewers wait for.
+              Finish with how you would detect failure after deployment.
         plain:
           - >-
               The case study is an open question with no right answer. Design fraud
@@ -1659,12 +1657,12 @@ topics:
   - id: deep-learning
     name: Deep Learning
     group: foundations
-    blurb: "Whether you can make a network train, and explain it when it does not."
-    scope: "Owns optimisation, architecture and scale. Hands the attention block to transformers and post-training to LLM training."
+    blurb: "Train a neural network and diagnose it when the loss or metrics go wrong."
+    scope: "Study optimisation, architectures, and distributed training here. Continue with transformers for attention and LLM training for post-training."
     links: [transformers, llm-training]
     modules:
       - name: Optimisation
-        why: "Almost every training failure traces back to something in this module."
+        why: "The optimiser, learning rate, and loss surface control whether training converges."
         beats:
           - >-
               One step downhill. Four things decide where you land.
@@ -1721,7 +1719,7 @@ topics:
               - 12
               xlabel: parameter
               ylabel: loss
-              readout: '"loss " + val.toFixed(3) + ", gradient " + grad.toFixed(3) + (eta >= 2 ? " — diverging" : "")'
+              readout: '"loss " + val.toFixed(3) + ", gradient " + grad.toFixed(3) + (eta >= 2 ? ": diverging" : "")'
               knobs:
               - k: eta
                 label: learning rate
@@ -1772,7 +1770,7 @@ topics:
           - Momentum
           - Weight decay
       - name: Initialisation and normalisation
-        why: "These get copied from a reference implementation and then cannot be debugged."
+        why: "Initialisation and normalisation keep activations and gradients in a usable range."
         beats:
           - >-
               Batch norm normalises using the other examples in the batch, so examples
@@ -1886,7 +1884,7 @@ topics:
             - Drops the mean term
             - Cheaper
       - name: Regularisation and generalisation
-        why: "Interviewers use this to test whether you know the modern picture."
+        why: "Modern networks can generalise even when they have enough capacity to memorise the training set."
         beats:
           - >-
               Too little capacity and the model cannot represent the pattern. Errors
@@ -1959,7 +1957,7 @@ topics:
           - Memorises
           'on': 1
       - name: Backpropagation and memory
-        why: "Anyone touching large models is expected to reason about memory."
+        why: "Backpropagation stores intermediate activations, which often dominate training memory."
         beats:
           - >-
               The forward pass computes the output layer by layer.
@@ -2061,7 +2059,7 @@ topics:
           - Free the memory
           loop: true
       - name: Architectures and when each fits
-        why: "You need a reason for the choice you made."
+        why: "Each architecture encodes assumptions about space, sequence, or connectivity."
         beats:
           - >-
               Pick by the shape of the input, since the shape is free information.
@@ -2141,7 +2139,7 @@ topics:
             items:
             - Message passing
       - name: Training at scale
-        why: "Reasoning about scale is what the job actually asks for."
+        why: "Large-model training divides parameters, gradients, and activations across devices."
         beats:
           - >-
               Experts split across devices, so each machine holds only a few.
@@ -2208,7 +2206,7 @@ topics:
           - Tensor parallel
           - Data parallel
       - name: Debugging
-        why: "Interviewers like this question because reading about training does not prepare you for it."
+        why: "Debugging a training run requires a fixed order of checks, not another hyperparameter sweep."
         beats:
           - >-
               Take thirty examples and drive the loss to zero. If that fails, the bug is
@@ -2301,12 +2299,12 @@ topics:
   - id: linear-algebra
     name: Linear Algebra
     group: foundations
-    blurb: "Whether you see a matrix as a thing that does something, rather than a box of numbers."
-    scope: "Owns vectors, transformations and decompositions. Hands rates of change to calculus and estimators to frequentist statistics."
+    blurb: "Use vectors and matrices as geometric transformations, not only as arrays of numbers."
+    scope: "Study vectors, transformations, and decompositions here. Continue with calculus for rates of change and frequentist statistics for estimators."
     links: [calculus, machine-learning]
     modules:
       - name: Vectors and spaces
-        why: "Every later idea is stated in this language."
+        why: "Vectors, subspaces, bases, and norms provide the language for the rest of linear algebra."
         beats:
           - >-
               A space is everything you can reach by adding and stretching a few arrows.
@@ -2376,7 +2374,7 @@ topics:
           - Everything you can reach
           - A basis names the directions
       - name: Matrices as transformations
-        why: "This is the shift that makes the rest of the subject easy."
+        why: "A matrix describes how a linear transformation moves every vector in a space."
         beats:
           - >-
               Here is the plain grid. Every point in the plane sits somewhere on it.
@@ -2418,7 +2416,7 @@ topics:
               y:
               - -3
               - 3
-              readout: '"determinant " + (a*d-b*c).toFixed(2) + ((a*d-b*c) < 0 ? " — the plane has been flipped over" : ((a*d-b*c)===0 ? " — the plane has been squashed onto a line" : ""))'
+              readout: '"determinant " + (a*d-b*c).toFixed(2) + ((a*d-b*c) < 0 ? ": the plane has been flipped over" : ((a*d-b*c)===0 ? ": the plane has been squashed onto a line" : ""))'
               knobs:
               - k: a
                 label: first column, across
@@ -2473,7 +2471,7 @@ topics:
           - Move every point
           - Read the new grid
       - name: Determinant, rank and inverse
-        why: "Whether a transformation loses information, and how you would tell."
+        why: "Rank and determinant show whether a transformation loses information; the inverse exists only when it does not."
         beats:
           - >-
               One question, asked three ways. Did the transformation lose any
@@ -2600,7 +2598,7 @@ topics:
           - k: Eigenvector
             items: ["Stays on its line", "Only the length changes"]
       - name: Decompositions
-        why: "Factorising a matrix is how numerical linear algebra actually gets work done."
+        why: "Matrix decompositions turn difficult operations into stable, reusable steps."
         beats:
           - >-
               Any matrix at all can be split into three simple moves. First, a rotation.
@@ -2677,7 +2675,7 @@ topics:
           - Stretch along axes
           - Rotate again
       - name: Projections and least squares
-        why: "The geometry behind fitting a line to data."
+        why: "Least squares projects a target onto the space reachable by the model."
         beats:
           - >-
               You want to hit a target with a model that cannot reach it.
@@ -2755,7 +2753,7 @@ topics:
                 - 9.4
               - - 9
                 - 9.1
-              readout: '"mean squared error " + loss.toFixed(3) + (loss < 0.32 ? " — close to the least squares fit" : "")'
+              readout: '"mean squared error " + loss.toFixed(3) + (loss < 0.32 ? ": close to the least squares fit" : "")'
               knobs:
               - k: w
                 label: slope
@@ -2867,12 +2865,12 @@ topics:
   - id: calculus
     name: Calculus
     group: foundations
-    blurb: "Whether you can reason about change, and about what a gradient is actually telling you."
-    scope: "Owns derivatives, gradients and optimisation conditions. Hands the vector language to linear algebra and the training loop to deep learning."
+    blurb: "Reason about change and explain what a gradient says about a function."
+    scope: "Study derivatives, gradients, and optimisation conditions here. Use linear algebra for vector notation and deep learning for training loops."
     links: [linear-algebra, deep-learning]
     modules:
       - name: Derivatives and rates
-        why: "Every training step is built on this one idea."
+        why: "A derivative gives the local rate of change used in each optimisation step."
         beats:
           - >-
               Pick a point on the curve, then a second one nearby.
@@ -3013,7 +3011,7 @@ topics:
           - Multiply the rates back
           loop: true
       - name: Gradients, Jacobians and Hessians
-        why: "Naming these correctly is a quick signal of comfort with the maths."
+        why: "Gradients, Jacobians, and Hessians organise first and second derivatives for multivariable functions."
         beats:
           - >-
               The Hessian is the second derivative. It describes the curve, and it tells
@@ -3085,7 +3083,7 @@ topics:
           - Gradient, one output
           - Partial derivative, one direction
       - name: Optimisation conditions
-        why: "Knowing when you have found a minimum, and when you have not."
+        why: "A zero gradient is necessary at an interior minimum but does not prove that the point is a minimum."
         beats:
           - >-
               The gradient is zero. That is necessary for a minimum and nowhere near
@@ -3152,7 +3150,7 @@ topics:
           - k: Both, depending on direction
             items: ["Saddle"]
       - name: Integration and expectation
-        why: "Every loss you write down is an average, and an average is an integral."
+        why: "Expected loss is an integral over possible data, usually estimated with a sample average."
         beats:
           - >-
               What you actually want is the average loss over every input you will ever
@@ -3240,7 +3238,7 @@ topics:
           - k: What you have
             items: ["An average over your sample", "Which is noisy"]
       - name: Approximation
-        why: "Most methods are secretly a local approximation of something harder."
+        why: "Taylor expansions replace a difficult function with a local polynomial."
         beats:
           - >-
               Approximate the function by a flat line and you learn nothing about
@@ -3320,7 +3318,7 @@ topics:
           stops: ["Constant", "Straight line", "Parabola"]
           on: 1
       - name: Matrix calculus
-        why: "Deriving a gradient on a whiteboard is a common interview task."
+        why: "Matrix calculus keeps gradient shapes correct for vector and matrix parameters."
         beats:
           - >-
               Write the loss down carefully, including the shapes of everything in it.
@@ -3423,12 +3421,12 @@ topics:
   - id: math
     name: Mathematics
     group: foundations
-    blurb: "Whether you can read the notation, and say what it commits you to."
-    scope: "Owns what the objects are, then counting, probability, information and how numbers behave on a machine. Hands vectors and matrices to linear algebra, rates of change to calculus, and inference to the two statistics tracks."
+    blurb: "Read mathematical notation and explain the assumptions behind it."
+    scope: "Start with mathematical objects, then study counting, probability, information, and machine numbers. The specialised tracks cover linear algebra, calculus, and statistical inference."
     links: [linear-algebra, calculus, math-proof]
     modules:
       - name: Reading the notation
-        why: "Notation is where a field stores its decisions, and reading it is how you get them back."
+        why: "Notation states the objects, operations, and assumptions in a mathematical claim."
         beats:
           - >-
               A set is a collection. No order, no repeats, and membership is the only
@@ -3570,7 +3568,7 @@ topics:
           - A number with its own rules
           - Built from the empty set
       - name: Dividing by zero
-        why: "The answer is a decision, and which decision was taken tells you what division is."
+        why: "Division by zero is undefined because no number can reverse that multiplication."
         beats:
           - >-
               Division asks a multiplication question. What number times the divisor
@@ -3668,7 +3666,7 @@ topics:
           - k: On a machine
             items: ["A chosen convention", "Infinity and NaN"]
       - name: Infinity
-        why: "Whether a collection can be listed decides what a machine can ever reach."
+        why: "Countability separates infinite sets that can be listed from those that cannot."
         beats:
           - >-
               Some infinite collections can be put in a list, with a first, a second and
@@ -3732,7 +3730,7 @@ topics:
           - k: Uncountable
             items: ["No list is ever complete", "The reals"]
       - name: Counting
-        why: "Half of probability is careful counting, and the other half is knowing when counting explodes."
+        why: "Counting gives exact probabilities in finite spaces and reveals when exact search becomes impractical."
         beats:
           - >-
               Square the input size and the work grows, but a machine still copes with
@@ -3768,7 +3766,7 @@ topics:
           - name: 'Why exhaustive search stops working'
             tex: '|\mathcal{P}(S)| = 2^{n} \quad \text{for } |S| = n'
             read: 'Every item is either in or out, so one more item doubles the search.'
-            note: 'This is the whole argument for heuristics, relaxations and sampling. The alternative is not slow, it is impossible, and the difference shows up within a few dozen items.'
+            note: 'This is why we use heuristics, relaxations, and sampling. Exact search becomes impossible within a few dozen items.'
             where:
               - sym: 'S'
                 is: 'a set, a collection with no order and no repeats'
@@ -3932,7 +3930,7 @@ topics:
           - A number per event
           - Random variables
       - name: Expectation and concentration
-        why: "Every guarantee in machine learning is a concentration inequality wearing a hat."
+        why: "Concentration inequalities bound how far a sample average can move from its expectation."
         beats:
           - >-
               One sample tells you very little. It is spread out over everything the
@@ -4039,7 +4037,7 @@ topics:
           stops: ["One sample", "A few", "Many", "The limit"]
           on: 2
       - name: Information
-        why: "Training minimises a quantity built to ignore meaning, so it is worth knowing what it does measure."
+        why: "Entropy and divergence measure uncertainty and distribution mismatch without using semantic meaning."
         beats:
           - >-
               Some of the surprise is in the data itself. No model removes it, and that
@@ -4128,7 +4126,7 @@ topics:
           - k: Cross entropy
             items: ["What your model actually pays", "Unavoidable plus your error"]
       - name: Logs, exponents and scale
-        why: "Nearly every plot in this field is read on a log axis, and nearly every stable implementation lives in log space."
+        why: "Logs expose multiplicative scale and prevent numerical underflow in probability calculations."
         beats:
           - >-
               Multiply a thousand probabilities together and the result underflows to
@@ -4215,7 +4213,7 @@ topics:
           - A sum of ordinary numbers
           - Nothing underflows
       - name: Numbers on a machine
-        why: "Training diverges for numerical reasons far more often than for mathematical ones."
+        why: "Finite precision can overflow, underflow, or erase small updates during training."
         beats:
           - >-
               The loss came back as NaN. Three things cause almost all of these, and
@@ -4336,12 +4334,12 @@ topics:
   - id: math-proof
     name: Mathematical Proof
     group: foundations
-    blurb: "Whether you can build an argument that holds, and spot quickly the one that does not."
-    scope: "Owns what a claim asserts, what would refute it, and the standard shapes a proof takes. Hands the objects being argued about to mathematics, and running-time claims to computer science."
+    blurb: "Build a valid argument and find the exact step where a bad one fails."
+    scope: "Study claims, counterexamples, and standard proof methods here. Use mathematics for the objects in the claim and computer science for running-time proofs."
     links: [math, computer-science]
     modules:
       - name: What a claim actually says
-        why: "Most failed proofs are correct proofs of a different statement."
+        why: "Quantifiers and implications determine exactly what a claim asserts."
         beats:
           - >-
               Read the quantifier before anything else. It decides what would count as a
@@ -4412,7 +4410,7 @@ topics:
           - k: Swap their order
             items: ["A different claim"]
       - name: Direct proof and the contrapositive
-        why: "Almost anything you are asked to prove yields to a direct proof or its contrapositive."
+        why: "Direct proof and contrapositive proof handle many implications with a clear forward argument."
         beats:
           - >-
               Assume what you are given. Work forwards to what you want. That is a direct
@@ -4475,7 +4473,7 @@ topics:
           - Converse, a new claim
           - Contrapositive, the same claim
       - name: Proof by contradiction
-        why: "Some claims have no forward path, and this is the tool that opens them."
+        why: "A contradiction can prove a claim when assuming its negation creates an impossibility."
         beats:
           - >-
               Assume the opposite of what you want to prove. Take it seriously.
@@ -4508,7 +4506,7 @@ topics:
           - name: 'The classical example'
             tex: '\sqrt{2} = \frac{a}{b} \text{ in lowest terms} \;\Rightarrow\; a^{2} = 2 b^{2} \;\Rightarrow\; a, b \text{ both even}'
             read: 'A fraction in lowest terms turns out to have a common factor, which cannot happen.'
-            note: 'Notice what did the work. The contradiction is not with arithmetic, it is with the phrase "in lowest terms", which is an assumption you made for free at the start.'
+            note: 'The contradiction comes from the phrase "in lowest terms", an assumption made at the start. The arithmetic itself remains consistent.'
             where:
               - sym: 'a'
                 is: 'the numerator of the assumed fraction'
@@ -4541,7 +4539,7 @@ topics:
           - Hit something impossible
           - The assumption falls
       - name: Induction and recursion
-        why: "The correctness argument for every recursive algorithm is an induction."
+        why: "Induction matches the base case and recursive step used by a recursive algorithm."
         beats:
           - >-
               Show the claim holds in the smallest case. This is the step people skip
@@ -4627,7 +4625,7 @@ topics:
           - Every case is covered
           loop: true
       - name: Counterexamples
-        why: "Trying to break a claim before proving it is the habit that separates the two candidates."
+        why: "A single counterexample disproves a universal claim and exposes missing assumptions."
         beats:
           - >-
               To prove it you have to cover every case, and there is no shortcut through
@@ -4682,7 +4680,7 @@ topics:
           - k: To disprove
             items: ["Find one case", "Then stop"]
       - name: Inequalities and bounds
-        why: "Nearly every theorem in learning theory is an inequality, and none of them are equalities."
+        why: "Inequalities provide upper and lower bounds when an exact value is unavailable."
         beats:
           - >-
               Detours are never shorter. Going through a third point costs at least as
@@ -4772,7 +4770,7 @@ topics:
           - The bound you would like
           - The quantity you actually want
       - name: Existence arguments
-        why: "Showing something must exist without producing it is a move that surprises people, and it is everywhere."
+        why: "An existence proof can guarantee an object without giving an algorithm that constructs it."
         beats:
           - >-
               Ask first whether you need the object itself, or only the fact that it is
@@ -4851,12 +4849,12 @@ topics:
   - id: computer-science
     name: Computer Science
     group: foundations
-    blurb: "Whether you can say what your code will cost before you run it."
-    scope: "Owns complexity, data structures, and what the machine actually does with memory and cores. Hands counting arguments to mathematics, correctness arguments to mathematical proof, and anything about a running service to mlops."
+    blurb: "Estimate what code will cost in time, memory, communication, and storage."
+    scope: "Study complexity, data structures, memory, and parallel execution here. Use mathematics for counting, mathematical proof for correctness, and MLOps for running services."
     links: [math, math-proof, mlops]
     modules:
       - name: Complexity, and what it hides
-        why: "Naming the cost of your own code is the first thing an interviewer checks."
+        why: "Time and space complexity predict how an algorithm changes as its input grows."
         beats:
           - >-
               Constant cost ignores the input size entirely. Nothing else on this line
@@ -4949,7 +4947,7 @@ topics:
           stops: ["Constant", "Logarithmic", "Linear", "Quadratic", "Exponential"]
           on: 2
       - name: Data structures as trade-offs
-        why: "Every structure buys one operation and pays for it somewhere else, and the interview is about the payment."
+        why: "A data structure speeds up some operations by spending memory or making other operations slower."
         beats:
           - >-
               An array gives you position instantly and makes you shift everything to
@@ -5037,7 +5035,7 @@ topics:
           - Hash table
           - Unsorted array
       - name: Algorithm design
-        why: "Recognising which strategy a problem wants is the part being tested."
+        why: "Greedy methods, dynamic programming, and divide and conquer rely on different problem structure."
         beats:
           - >-
               Ask what shape the problem has before reaching for a method.
@@ -5098,7 +5096,7 @@ topics:
           - k: Local choice is provably safe
             items: ["Greedy"]
       - name: The memory hierarchy
-        why: "Machine learning code is almost never compute bound, and this module is why."
+        why: "Data movement through caches and memory can limit performance before arithmetic does."
         beats:
           - >-
               Registers are instant. Cache is close. Main memory is far, and the numbers
@@ -5303,7 +5301,7 @@ topics:
           a: What you hope for
           b: What Amdahl allows
       - name: Randomised and approximate methods
-        why: "At data-pipeline scale the exact answer is often unaffordable, and an approximate one is not."
+        why: "Randomised and approximate methods trade a bounded amount of error for lower cost."
         beats:
           - >-
               Keep every item and answer exactly. The memory grows with the data, with
@@ -5388,7 +5386,7 @@ topics:
           - k: Sketch
             items: ["Memory fixed in advance", "Error you choose"]
       - name: Making numerical code fast
-        why: "The gap between a working implementation and a usable one is usually this module."
+        why: "Vectorisation, locality, batching, and profiling turn correct numerical code into fast code."
         beats:
           - >-
               A Python loop over elements pays interpreter overhead on every single one.
@@ -5469,12 +5467,12 @@ topics:
   - id: transformers
     name: Transformers
     group: models
-    blurb: "Whether you know the architecture at the level of shapes and memory."
-    scope: "Owns the architecture and its inference behaviour. Hands the training recipe to LLM training and internals to mechanistic interpretability."
+    blurb: "Trace a transformer through tensor shapes, parameters, memory, and inference."
+    scope: "Study transformer architecture and inference here. Continue with LLM training for the training recipe and mechanistic interpretability for model internals."
     links: [llm-training, mechanistic-interpretability]
     modules:
       - name: Attention mechanics
-        why: "You will be asked to write it, and shapes are where people stumble."
+        why: "Write attention from memory and track the shape of every tensor."
         beats:
           - >-
               Each token is projected three ways. A query, a key and a value.
@@ -5590,7 +5588,7 @@ topics:
           - Softmax
           - Weighted sum
       - name: Block anatomy
-        why: "Parameter counting and residual reasoning come up constantly."
+        why: "Block structure determines parameter count, memory use, and how information moves through residual paths."
         beats:
           - >-
               Think of the residual stream as a noticeboard running the whole depth of
@@ -5667,7 +5665,7 @@ topics:
           - Feed-forward reads and writes
           - Unembedding reads it
       - name: Position
-        why: "Long-context questions all route through this."
+        why: "A transformer needs position information because attention alone does not encode token order."
         beats:
           - >-
               RoPE rotates queries and keys based on position. Their dot product then
@@ -5734,7 +5732,7 @@ topics:
             - One vector per slot
             - Fixed length
       - name: Efficient attention and long context
-        why: "Serving conversations spend most of their time here."
+        why: "Standard attention grows quadratically with sequence length, so long contexts require different memory and compute trade-offs."
         beats:
           - >-
               FlashAttention computes exactly the same numbers. It just stops shuttling
@@ -5754,7 +5752,7 @@ topics:
               trips to slow memory. Sparse and windowed methods change the answer by
               looking at fewer tokens.
         math:
-          - name: 'The cost that forces the whole field'
+          - name: 'Why long contexts need efficient attention'
             tex: '\text{time } O(T^{2} d), \qquad \text{memory } O(T^{2}) \text{ naive}, \; O(T) \text{ with flash attention}'
             read: 'Doubling the context quadruples the arithmetic, so long context is the expensive feature.'
             note: 'Flash attention does not change the arithmetic. It never writes the full score matrix to memory, computing it in tiles inside fast on-chip memory, which removes the quadratic memory term and most of the wall clock.'
@@ -5803,7 +5801,7 @@ topics:
             - Local context only
             - Linear in length
       - name: The model family
-        why: "Choosing the right variant is a design decision you have to justify."
+        why: "Encoder, decoder, and encoder-decoder models suit different input and output patterns."
         beats:
           - >-
               The task decides the shape, so settle what the output has to be first.
@@ -5871,7 +5869,7 @@ topics:
             - Translation
             - T5
       - name: Inference
-        why: "Deployment questions are now standard even in research interviews."
+        why: "Autoregressive inference has separate prefill and decode phases with different bottlenecks."
         beats:
           - >-
               Prefill processes the whole prompt in one go. Plenty of parallel work, so
@@ -5971,12 +5969,12 @@ topics:
   - id: llm-training
     name: LLM Training
     group: models
-    blurb: "Whether you could take a base model to a useful assistant and know what each step buys."
-    scope: "Owns data, pretraining, and post-training. Hands the architecture to transformers and behaviour risk to AI safety."
+    blurb: "Take a base language model through pretraining, post-training, and evaluation."
+    scope: "Study data, pretraining, and post-training here. Use transformers for the architecture and AI safety for behavioural risks."
     links: [ai-safety, prompt-engineering]
     modules:
       - name: Data
-        why: "Data has the largest effect on the result and gets the least attention."
+        why: "Data quality, mixture, duplication, and contamination shape what a language model learns."
         beats:
           - >-
               Start with a very large amount of scraped text and low expectations of it.
@@ -6052,7 +6050,7 @@ topics:
           - Decontaminate
           - Tokenise
       - name: Pretraining
-        why: "Even if you never run one, you must reason about the budget."
+        why: "Pretraining couples the model size, token count, hardware budget, and optimisation schedule."
         beats:
           - >-
               A small model improves quickly, then flattens. More tokens stop buying
@@ -6139,7 +6137,7 @@ topics:
           a: Small model
           b: Large model
       - name: Supervised fine-tuning
-        why: "Fine-tuning is the cheapest lever, and probably the one you will own."
+        why: "Supervised fine-tuning teaches response format and task behaviour with curated examples."
         beats:
           - >-
               A full fine-tune moves every weight. Best quality, and you need memory for
@@ -6206,7 +6204,7 @@ topics:
             - Quantised base model
             - Least memory
       - name: Learning from preferences
-        why: "Preference learning is what makes a capable model usable."
+        why: "Preference learning moves model behaviour towards outputs people or evaluators choose."
         beats:
           - >-
               Collect pairs of answers and ask people which one is better. Comparing is
@@ -6279,7 +6277,7 @@ topics:
           - Hold it near the reference
           loop: true
       - name: Reasoning and verifiable rewards
-        why: "This area moves fastest, so expect a question about recent work."
+        why: "Verifiable rewards now drive much of the progress in model reasoning."
         beats:
           - >-
               Sample several attempts at the same problem.
@@ -6364,7 +6362,7 @@ topics:
           - Reward the correct ones
           - Update
       - name: Evaluation across a run
-        why: "Bad evaluation means you cannot tell whether the run improved anything."
+        why: "Evaluation across checkpoints separates real improvement from noise, contamination, and regression."
         beats:
           - >-
               The checkpoint finished. Deciding whether it is better is harder than it
@@ -6439,12 +6437,12 @@ topics:
   - id: nlp
     name: Natural Language Processing
     group: models
-    blurb: "Whether you understand language as data, including the languages that break your pipeline."
-    scope: "Owns text tasks, metrics, retrieval and multilingual work. Hands model internals to transformers."
+    blurb: "Represent and evaluate language data, including languages that expose pipeline failures."
+    scope: "Study text tasks, metrics, retrieval, and multilingual systems here. Continue with transformers for model internals."
     links: [transformers, multimodality]
     modules:
       - name: Text as data
-        why: "Every unicode and tokenisation bug you will ever ship starts here."
+        why: "Unicode, normalisation, and tokenisation determine the text the model receives."
         beats:
           - >-
               Raw text, exactly as it arrived. Mixed scripts, stray whitespace, emoji,
@@ -6509,7 +6507,7 @@ topics:
           - Tokenise
           - Ids
       - name: Representations
-        why: "Retrieval quality depends almost entirely on this."
+        why: "A text representation decides which distinctions a retrieval model can preserve."
         beats:
           - >-
               TF-IDF counts words and weights the rare ones. No idea what anything
@@ -6568,7 +6566,7 @@ topics:
           - Contextual embeddings
           'on': 2
       - name: Core tasks
-        why: "These task names are the shared vocabulary of the field."
+        why: "Classification, sequence labelling, extraction, and generation require different outputs and metrics."
         beats:
           - >-
               The shape of the answer picks the method, so settle that first.
@@ -6696,7 +6694,7 @@ topics:
             - Ratings
             - Pairwise
       - name: The retrieval pipeline
-        why: "Almost every applied NLP role now includes this."
+        why: "Retrieval combines indexing, candidate search, reranking, and evaluation."
         beats:
           - >-
               Cut the documents into chunks. Chunk boundaries decide what can ever be
@@ -6784,7 +6782,7 @@ topics:
           - Rerank
           - Generate
       - name: Multilingual and low-resource
-        why: "Your own research area, so expect depth questions."
+        why: "Tokenisation, data scarcity, and evaluation behave differently across languages."
         beats:
           - >-
               The model is worse in this language. Four candidate reasons, and they look
@@ -6842,7 +6840,7 @@ topics:
           - Script and code-switching
           - Benchmark coverage
       - name: Data and annotation
-        why: "Nobody enjoys annotation work, and it decides how the project turns out."
+        why: "Annotation guidelines and agreement determine what the labels mean."
         beats:
           - >-
               Write the guidelines. They will be wrong in ways you cannot predict.
@@ -6907,12 +6905,12 @@ topics:
   - id: computer-vision
     name: Computer Vision
     group: models
-    blurb: "Whether you can move from pixels to a decision, and know where the evaluation lies to you."
-    scope: "Owns image and video tasks and their evaluation. Hands cross-modal alignment to multimodality."
+    blurb: "Turn pixels into predictions and find the cases where vision metrics mislead you."
+    scope: "Study image and video tasks, models, and evaluation here. Continue with multimodality for cross-modal alignment."
     links: [multimodality]
     modules:
       - name: Image fundamentals
-        why: "Every later architecture question assumes this arithmetic."
+        why: "Image shape, convolution arithmetic, and receptive fields determine what later layers can see."
         beats:
           - >-
               Start with a grid of pixel values. That is genuinely all there is.
@@ -6983,7 +6981,7 @@ topics:
           - Pool
           - Feature map
       - name: Backbones
-        why: "Interviewers want the reasoning behind a design choice."
+        why: "Choose a backbone from the data, compute budget, and output the task needs."
         beats:
           - >-
               At the top, the head that answers your actual question.
@@ -7006,7 +7004,7 @@ topics:
           - name: 'The residual block'
             tex: 'z'' = \varphi\big(z + \mathcal{F}(z)\big)'
             read: 'Learn the change rather than the whole signal, so a layer that has nothing to add can pass the input through untouched.'
-            note: 'This is what made hundreds of layers trainable, and the same trick appears in every transformer block.'
+            note: 'Residual connections made hundreds of layers trainable. The same connection appears in every transformer block.'
             where:
               - sym: '\mathcal{F}'
                 is: 'the residual branch, what the block adds'
@@ -7046,7 +7044,7 @@ topics:
           - Textures
           - Edges
       - name: Tasks and their metrics
-        why: "Detection and segmentation metrics are where candidates get vague."
+        why: "Classification, detection, and segmentation produce different outputs and need different metrics."
         beats:
           - >-
               The question decides the task, and the task decides which metric can lie
@@ -7114,7 +7112,7 @@ topics:
             - Segmentation
             - Intersection over union
       - name: Training practice
-        why: "Vision has its own recipe knowledge."
+        why: "Vision training depends on augmentation, transfer learning, resolution, and class balance."
         beats:
           - >-
               Augmentation shows the model the same object under conditions it will meet
@@ -7174,7 +7172,7 @@ topics:
             - Flipping medical laterality
             - Rotating text
       - name: Modern vision
-        why: "Expect at least one question about the last three years."
+        why: "Current vision systems often use transformers, self-supervision, and vision-language pretraining."
         beats:
           - >-
               No labels at all, which is the usual situation before anyone pays for
@@ -7241,7 +7239,7 @@ topics:
             items:
             - Masked autoencoder
       - name: Deployment
-        why: "Vision is the area most often pushed to edge hardware."
+        why: "Vision deployment must balance input resolution, latency, memory, and accuracy."
         beats:
           - >-
               Train on whatever hardware you have.
@@ -7298,7 +7296,7 @@ topics:
           - Tile
           - Serve
       - name: Evaluation traps
-        why: "Naming your own evaluation problems earns trust quickly."
+        why: "Slice metrics can reveal leakage, duplicates, subgroup failures, and temporal drift hidden by one score."
         beats:
           - >-
               The score is suspiciously high. Four usual causes, all of them about the
@@ -7366,12 +7364,12 @@ topics:
   - id: multimodality
     name: Multimodality
     group: models
-    blurb: "Whether you can join two signals and notice when one of them is quietly ignored."
-    scope: "Owns cross-modal architecture and evaluation. Hands single-modality depth to computer vision and NLP."
+    blurb: "Combine two or more data types and test whether the model uses each one."
+    scope: "Study cross-modal architectures and evaluation here. Use computer vision and NLP for single-modality depth."
     links: [computer-vision, nlp]
     modules:
       - name: Fusion strategies
-        why: "Fusion is the first design decision, and you will have to justify it."
+        why: "Early, late, and cross-attention fusion combine modalities at different stages and costs."
         beats:
           - >-
               Early fusion mixes the raw signals before either has been understood. Most
@@ -7537,7 +7535,7 @@ topics:
           - Matching pairs pulled close
           - Everything else pushed apart
       - name: Vision-language models
-        why: "Vision-language models are the default multimodal system right now."
+        why: "Vision-language models connect an image encoder to a language model through shared tokens or a learned projection."
         beats:
           - >-
               An image goes in.
@@ -7556,7 +7554,7 @@ topics:
         plain:
           - >-
               A vision-language model turns an image into tokens the language model can
-              read alongside the text. The connector between them is the whole trick.
+              read alongside the text. A learned projection connects the two representations.
           - >-
               Resolution decides whether it can read a chart or a document. Comparing
               two models on document tasks without matching resolution compares the
@@ -7592,7 +7590,7 @@ topics:
           - Language model
           - Text
       - name: Generation across modalities
-        why: "Expect at least a conceptual question here."
+        why: "Cross-modal generation reuses the same conditioning ideas across images, audio, and text."
         beats:
           - >-
               Start with a prompt.
@@ -7646,7 +7644,7 @@ topics:
           - Decode
           - Image
       - name: Audio and speech
-        why: "Audio gets skipped often enough that knowing it stands out."
+        why: "Audio adds time, sampling rate, and alignment problems that image-text systems do not have."
         beats:
           - >-
               Sound arrives as a wave. Air pressure over time, and nothing else.
@@ -7757,7 +7755,7 @@ topics:
             items:
             - Image only
       - name: Failure modes
-        why: "Failure modes are your research angle, so answer them best."
+        why: "A multimodal model may ignore one modality, follow a text prior, or fail when inputs conflict."
         beats:
           - >-
               The model reads the picture and answers from what it sees.
@@ -7812,12 +7810,12 @@ topics:
   - id: embedding
     name: Embeddings
     group: models
-    blurb: "Whether you can turn meaning into geometry, and know when the geometry lies."
-    scope: "Owns representation, similarity and vector search. Hands the encoder architecture to transformers and the pipeline around it to NLP."
+    blurb: "Represent items as vectors, search them efficiently, and test what distance means."
+    scope: "Study representation, similarity, and vector search here. Use transformers for encoder architecture and NLP for the retrieval pipeline."
     links: [nlp, transformers]
     modules:
       - name: What an embedding is
-        why: "Every retrieval system and every recommendation rests on this one idea."
+        why: "An embedding maps an item to a vector so distance can stand in for a chosen notion of similarity."
         plain:
           - >-
               An embedding turns a thing into a list of numbers. Put those numbers
@@ -7894,7 +7892,7 @@ topics:
           - "Push every other pairing in the batch apart. This is where most of the learning happens."
           - "Repeat across a very large number of pairs. What counts as similar is decided entirely by which pairs you chose."
       - name: Similarity and distance
-        why: "Choosing the wrong measure quietly breaks retrieval."
+        why: "Cosine similarity, dot product, and Euclidean distance rank the same vectors differently unless their norms are controlled."
         plain:
           - >-
               Cosine similarity measures the angle between two vectors and
@@ -7966,7 +7964,7 @@ topics:
           far: Weak match
           alt: "A query point sits near one match and far from another."
       - name: Choosing a model
-        why: "Most retrieval quality is decided here, before any tuning."
+        why: "The training domain, input limit, language coverage, and embedding size must match the retrieval task."
         plain:
           - >-
               Embedding models learn from different data. They also vary in output size
@@ -8060,7 +8058,7 @@ topics:
           - "A graph index walks toward the answer instead of scanning. Usually the right default, and it costs memory to build."
           - "Compress the vectors and you fit far more in memory, paying in precision. Always measure the recall you actually lost."
       - name: Evaluating an embedding
-        why: "Retrieval is measurable, and most teams skip measuring it."
+        why: "Recall, ranking metrics, and hand-checked queries show whether useful items return near the top."
         plain:
           - >-
               You can measure retrieval on its own, without the model that reads
@@ -8156,12 +8154,12 @@ topics:
   - id: edge-ai
     name: Edge AI
     group: systems
-    blurb: "Whether you can make a model small enough to run where the data already is."
-    scope: "Owns small models, compression and on-device serving. Hands training recipes to LLM training and cloud serving to MLOps."
+    blurb: "Fit a useful model within a device's memory, latency, power, and privacy limits."
+    scope: "Study small models, compression, and on-device serving here. Use LLM training for training recipes and MLOps for cloud serving."
     links: [mlops, llm-training]
     modules:
       - name: Why run it on the device
-        why: "The reasons are rarely about accuracy, and interviewers want the real ones."
+        why: "Latency, privacy, connectivity, and cost often matter more than raw accuracy on a device."
         plain:
           - >-
               Running on the device means the data never leaves it. That answers
@@ -8201,7 +8199,7 @@ topics:
             - No per-request bill
         beats:
           - "Four reasons, and none of them is that the small model is better."
-          - "The data stays put. For health and finance this is often the whole argument."
+          - "The data stays on the device, which can satisfy privacy rules in health and finance."
           - "No network hop, so the slowest case is your own hardware rather than someone's wifi."
           - "It keeps working on a plane, underground, or in a clinic with bad signal."
           - "And there is no bill per request, which changes the economics entirely at scale."
@@ -8256,7 +8254,7 @@ topics:
           cap: "Each step removes cost while trying to keep useful behaviour."
           alt: "A large model shrinks until it fits on a small device."
       - name: Quantisation
-        why: "The highest-value lever, and the one with the sharpest edges."
+        why: "Quantisation cuts memory and compute by using fewer bits, but outliers and unsupported operations can erase the gain."
         plain:
           - >-
               Weights are usually stored as sixteen-bit numbers. Store them as
@@ -8331,7 +8329,7 @@ topics:
           - "Eight-bit halves the size and, done carefully, costs almost no quality. This is the safe default."
           - "Four-bit halves it again and starts to bite. Outlier weights are where the damage concentrates, so measure rather than assume."
       - name: Small language models
-        why: "The area moving fastest, and the one you will be asked about."
+        why: "Small language models trade broad capability for lower memory use and faster local inference."
         plain:
           - >-
               A small language model has a few billion parameters or fewer. It can run
@@ -8372,7 +8370,7 @@ topics:
           - "The local model handles the routine, the private and the offline. Most requests, most of the time."
           - "The remote model gets the hard and unusual ones. The interesting design question is who decides, and how it fails when the network is gone."
       - name: Runtimes and hardware
-        why: "The model is only half of it. The runtime decides what actually happens."
+        why: "The runtime maps model operations to the accelerators available on the target device."
         plain:
           - >-
               A phone has a processor, a graphics chip and often a dedicated
@@ -8446,7 +8444,7 @@ topics:
           - "On a server you optimise throughput, because you are filling a machine with many users."
           - "A device serves one user. Measure their wait, the heat in their hand, and performance after ten minutes."
       - name: What you give up
-        why: "Being honest about the gap is what makes the pitch credible."
+        why: "Compression can reduce accuracy and capability, so measure the loss on the target task."
         plain:
           - >-
               A small model knows less. It has weaker general knowledge, shorter
@@ -8494,12 +8492,12 @@ topics:
   - id: image-generation
     name: Image Generation
     group: models
-    blurb: "Whether you understand denoising as a process, and what steering it costs."
-    scope: "Owns diffusion, conditioning and control. Hands the encoders to multimodality and the safety framing to AI safety."
+    blurb: "Explain diffusion as repeated denoising and measure the cost of controlling it."
+    scope: "Study diffusion, conditioning, and image control here. Use multimodality for encoders and AI safety for misuse and harm."
     links: [multimodality, ai-safety]
     modules:
       - name: Diffusion as a process
-        why: "Every later idea is a modification of this loop."
+        why: "Diffusion training adds noise, and sampling repeatedly predicts and removes it."
         plain:
           - >-
               Take an image and add noise until nothing is left. That direction
@@ -8551,7 +8549,7 @@ topics:
           labels: [Noise, Less noise, Shape, Image]
           alt: "Four frames change from random noise into a simple image."
       - name: Working in a smaller space
-        why: "This is what made image generation affordable."
+        why: "Latent diffusion runs the denoising process in a compressed space to cut compute."
         plain:
           - >-
               Denoising at full resolution is very expensive. So the work happens
@@ -8593,7 +8591,7 @@ topics:
           - "A decoder expands the result back to full size, inventing the fine detail."
           - "Which is why small text and distant faces come out wrong. That damage is the autoencoder's, not the denoiser's."
       - name: Steering it with a prompt
-        why: "Guidance is the knob people turn without knowing what it does."
+        why: "Classifier-free guidance trades prompt adherence against diversity and image quality."
         plain:
           - >-
               The model can predict noise with the prompt in mind, or without it.
@@ -8705,7 +8703,7 @@ topics:
           - "To change one region only, mask it and inpaint. The rest of the image is untouched."
           - "Use a reference image to keep a subject consistent. A small trained adapter can do the same."
       - name: Samplers and step count
-        why: "The cheapest quality and speed lever in the whole stack."
+        why: "The sampler and step count trade generation time against approximation error."
         plain:
           - >-
               The sampler decides how big each denoising step is and how it uses
@@ -8746,7 +8744,7 @@ topics:
           - "A basic sampler needs many steps before the image settles."
           - "A better solver reaches the same quality sooner. It makes the same picture with fewer steps."
       - name: Teaching it something new
-        why: "Almost every production use needs a subject the base model never saw."
+        why: "Adapters and fine-tuning can teach a generator a new subject, style, or domain."
         plain:
           - >-
               The base model does not know your product, your character or your
@@ -8846,8 +8844,8 @@ topics:
   - id: uncertainty-quantification
     name: Uncertainty Quantification
     group: judgement
-    blurb: "Whether a model's confidence means anything, and what you do when it does not."
-    scope: "Owns calibration, coverage and abstention. Hands posterior computation to Bayesian statistics and deployment gating to AI safety."
+    blurb: "Test whether model confidence is useful and decide when the model should abstain."
+    scope: "Study calibration, coverage, and abstention here. Use Bayesian statistics for posterior computation and AI safety for deployment gates."
     links: [bayesian-statistics, ai-safety]
     modules:
       - name: What kind of uncertainty
@@ -8873,7 +8871,7 @@ topics:
           - name: 'Splitting the uncertainty in two'
             tex: '\underbrace{\mathrm{Var}\big[y\big]}_{\text{total}} = \underbrace{\mathbb{E}_{\theta}\big[\mathrm{Var}(y \mid \theta)\big]}_{\text{aleatoric}} + \underbrace{\mathrm{Var}_{\theta}\big[\mathbb{E}(y \mid \theta)\big]}_{\text{epistemic}}'
             read: 'Some of the doubt is noise in the world and some is the model not knowing which model it is, and only the second can be reduced by more data.'
-            note: 'The split decides the action. Aleatoric uncertainty means abstain or widen the interval, epistemic uncertainty means collect data or defer. Answering which kind you are looking at is the whole module.'
+            note: 'The split decides the action. Aleatoric uncertainty means abstain or widen the interval. Epistemic uncertainty means collect data or defer.'
             where:
               - sym: '\theta'
                 is: 'the parameters, the numbers the model learns'
@@ -8988,7 +8986,7 @@ topics:
           a: Perfectly calibrated
           b: Overconfident
       - name: Recalibration
-        why: "Try this before anything more elaborate."
+        why: "A held-out calibration map can repair confidence scores without retraining the model."
         beats:
           - >-
               You have a trained model. Its ranking is fine and its numbers are not.
@@ -9038,7 +9036,7 @@ topics:
           - Fit a temperature
           - Calibrated model
       - name: Conformal prediction
-        why: "Conformal prediction gives a finite-sample guarantee, and it is your own tool."
+        why: "Conformal prediction turns residuals on held-out data into a finite-sample coverage guarantee."
         beats:
           - >-
               Set aside a calibration set. It must look like the data you will meet
@@ -9132,7 +9130,7 @@ topics:
           - Build the set
           - Coverage holds
       - name: Bayesian and ensemble approximations
-        why: "These are the practical alternatives, priced honestly."
+        why: "Ensembles, dropout, and approximate Bayesian methods trade compute for estimates of model uncertainty."
         beats:
           - >-
               Train several models with different seeds and look at how much they
@@ -9186,7 +9184,7 @@ topics:
             - Curvature at the optimum
             - One extra pass
       - name: Abstention and selective prediction
-        why: "This is where uncertainty turns into a decision."
+        why: "Selective prediction uses uncertainty to defer cases that are too risky to answer."
         beats:
           - >-
               Abstain on the least confident cases and accuracy on the rest climbs.
@@ -9237,7 +9235,7 @@ topics:
           a: Abstain on the hard cases
           b: Answer everything
       - name: Uncertainty for language models
-        why: "Language models are the open frontier here, and where your own work sits."
+        why: "Language models need uncertainty estimates for sequences whose many plausible answers make confidence difficult to define."
         beats:
           - >-
               A language model has no single uncertainty number. The same meaning can
@@ -9318,12 +9316,12 @@ topics:
   - id: mechanistic-interpretability
     name: Mechanistic Interpretability
     group: judgement
-    blurb: "Whether you can make a causal claim about a network's internals and defend it."
-    scope: "Owns internals and causal analysis. Hands the architecture to transformers and the safety case to AI safety."
+    blurb: "Make and test causal claims about what happens inside a neural network."
+    scope: "Study model internals and causal analysis here. Use transformers for the architecture and AI safety for the safety case."
     links: [transformers, ai-safety]
     modules:
       - name: The framing
-        why: "The field has a specific standard of evidence, and interviews test whether you hold it."
+        why: "A causal claim about a model needs an intervention, not only a correlated activation."
         beats:
           - >-
               In the tidy case one neuron means one thing and you can read it directly.
@@ -9382,7 +9380,7 @@ topics:
           - Superposition
           'on': 2
       - name: The toolkit
-        why: "You will be asked which tool answers which question."
+        why: "Each interpretability tool supports a different kind of claim."
         beats:
           - >-
               Pick a specific behaviour, narrow enough to test. Not intelligence.
@@ -9509,7 +9507,7 @@ topics:
           - Copies what followed it
           - Gives in-context learning
       - name: Sparse dictionary learning
-        why: "Sparse dictionaries are the main line of work right now, so expect depth."
+        why: "Sparse dictionaries split dense activations into features that may be easier to inspect and test."
         beats:
           - >-
               Start from the activations at one layer. Concepts are packed into
@@ -9602,7 +9600,7 @@ topics:
           - Decode
           - Compare the reconstruction
       - name: Steering and editing
-        why: "Steering is where interpretability becomes something you can use."
+        why: "Steering and editing test whether an interpreted feature can change model behaviour."
         beats:
           - >-
               Steering adds a direction during the forward pass. Nothing is retrained
@@ -9666,7 +9664,7 @@ topics:
             - Retrain
             - Broadest side effects
       - name: Interpretability for safety
-        why: "Labs fund this work for safety reasons, which is also how it meets your agenda."
+        why: "Safety applications need interpretability methods that detect or change a risky mechanism before deployment."
         beats:
           - >-
               The goal at the top: interpretability evidence strong enough to hold up a
@@ -9727,12 +9725,12 @@ topics:
   - id: ai-safety
     name: AI Safety
     group: judgement
-    blurb: "Whether you have a position, and whether it survives the strongest objection."
-    scope: "Owns risk framing, alignment methods and evaluation. Draws on mechanistic interpretability and uncertainty quantification as tools."
+    blurb: "State a position on AI risk, support it with evidence, and answer a strong objection."
+    scope: "Study risk framing, alignment methods, and safety evaluation here. Mechanistic interpretability and uncertainty quantification provide supporting tools."
     links: [uncertainty-quantification, mechanistic-interpretability]
     modules:
       - name: The landscape
-        why: "A broad interview will open here, and vagueness reads badly."
+        why: "A useful safety argument names the threat, the affected system, and the evidence for the risk."
         beats:
           - >-
               Risk comes in broad shapes, and naming which one you mean is most of a
@@ -9750,8 +9748,8 @@ topics:
               Harm has several sources. People can misuse a system, or the system can
               pursue the wrong goal. Scale can spread either harm.
           - >-
-              Have a position and a threat model. Vagueness reads badly, and so does
-              certainty about questions the field has genuinely not settled.
+              State a position and a threat model. Separate supported claims from
+              questions the field has not settled.
         math:
           - name: 'Risk, decomposed the way a decision needs it'
             tex: '\mathbb{E}[\text{harm}] = \sum_{h} p(h) \cdot \mathrm{severity}(h) \cdot \mathrm{exposure}(h)'
@@ -9788,7 +9786,7 @@ topics:
             items:
             - Harm from scale and dependence
       - name: Alignment methods
-        why: "You need to explain what current techniques do and where they stop."
+        why: "Current alignment methods shape behaviour from examples, preferences, critiques, or rules, but none gives a complete guarantee."
         beats:
           - >-
               When a person can judge the answer directly, ordinary human feedback
@@ -9881,7 +9879,7 @@ topics:
           - Scalable oversight
           'on': 1
       - name: Failure modes
-        why: "These terms are the field's vocabulary, and precision counts."
+        why: "Specification gaming, deception, misuse, and distribution shift describe different failures and need different controls."
         beats:
           - >-
               Reward hacking. The measurement was wrong, so scoring well and doing well
@@ -9940,7 +9938,7 @@ topics:
             items:
             - Agreement got rewarded
       - name: Evaluation and red teaming
-        why: "Most safety roles spend their time here."
+        why: "Red teams and safety evaluations search for failures before users or attackers do."
         beats:
           - >-
               Name a capability you would genuinely worry about. Vague risk gives you an
@@ -10057,7 +10055,7 @@ topics:
           - Sandboxing
           - Least privilege
       - name: Honesty, calibration and abstention
-        why: "Calibration is your own contribution, so keep this section the sharpest."
+        why: "Honesty, calibration, and abstention separate what a model says from how much its answer should be trusted."
         beats:
           - >-
               Safety training seems to cost a model some of its sense of what it knows.
@@ -10079,9 +10077,9 @@ topics:
           alt: "A model answers clear cases and abstains when it is unsure."
         plain:
           - >-
-              This is your own contribution, so it should be the sharpest section. A
-              model that knows when to stay quiet is safer than one that is confident
-              and wrong.
+              A model that knows when to stay quiet is safer than one that is confident
+              and wrong. Calibration determines whether its confidence can support that
+              decision.
           - >-
               Safety training seems to cost some of that self-knowledge. The cost is
               reported as one average number, and averages hide where the damage
@@ -10121,7 +10119,7 @@ topics:
           - Varies by language
           - Varies by modality
       - name: Policy and practice
-        why: "Even research roles expect awareness of the surrounding system."
+        why: "Policy, incident response, access control, and release decisions shape how research affects people."
         beats:
           - >-
               Evaluate against the capabilities you named in advance.
@@ -10188,12 +10186,12 @@ topics:
   - id: machine-learning-research
     name: Machine Learning Research
     group: judgement
-    blurb: "Whether you pick questions worth answering and run experiments that could prove you wrong."
-    scope: "Owns research taste, method and communication. Applies to whichever technical track the role sits in."
+    blurb: "Choose a useful research question and design an experiment that could disprove the claim."
+    scope: "Study research questions, experiments, evidence, and communication here. Apply the method to the technical track for your role."
     links: [ai-safety, uncertainty-quantification]
     modules:
       - name: Choosing a question
-        why: "Research interviews are measuring taste more than technique."
+        why: "A useful research question is important, unanswered, testable, and feasible with the available resources."
         beats:
           - >-
               The answer is known and somebody acts on it. That is engineering, and it
@@ -10251,7 +10249,7 @@ topics:
           - Not worth writing
           - Curiosity only
       - name: Experiment design
-        why: "Good design is what turns a demo into evidence."
+        why: "Controls, baselines, ablations, and stopping rules turn a result into evidence."
         beats:
           - >-
               Start with a hypothesis specific enough to be wrong.
@@ -10313,7 +10311,7 @@ topics:
           - Ablation
           - Verdict
       - name: Statistics for papers
-        why: "Reviewers and interviewers both push hardest here."
+        why: "Confidence intervals, effect sizes, and repeated runs show whether a reported gain is stable."
         beats:
           - >-
               One run per method. The difference you see could be entirely the seed.
@@ -10369,7 +10367,7 @@ topics:
           - Enough to see the spread
           'on': 2
       - name: Reproducibility
-        why: "Reproducibility is cheap to provide and it signals seriousness."
+        why: "Pinned code, data, environments, and seeds let another person rerun the experiment."
         beats:
           - >-
               At the top, the number in the paper.
@@ -10382,8 +10380,8 @@ topics:
               wants you wrong could reproduce it.
         plain:
           - >-
-              Reproducibility is cheap and it signals seriousness. Pin the environment,
-              save the configs, record the seeds.
+              Pin the environment, save the configs, record the seeds, and version the
+              data so another person can rerun the experiment.
           - >-
               The test is whether a stranger who wants you to be wrong could get your
               number. Write for that reader.
@@ -10451,7 +10449,7 @@ topics:
           - Figure
           - Limitation
       - name: Review and rebuttal
-        why: "Interviewers often ask about reviewing, since it shows you are part of the community."
+        why: "Reviewing shows how you judge evidence when the work is not your own."
         beats:
           - >-
               Read the reviews once, then leave them alone for a day.
@@ -10464,8 +10462,8 @@ topics:
               Revise, and say plainly what you changed.
         plain:
           - >-
-              Reviewing is part of being in the field, and interviewers ask about it. It
-              also teaches you what a weak paper looks like from outside.
+              Reviewing is part of research work. It also teaches you what a weak paper
+              looks like from outside.
           - >-
               In a rebuttal, pick the points that carry the decision. Answering every
               complaint equally wastes the space you have.
@@ -10490,7 +10488,7 @@ topics:
           - Answer the load-bearing ones
           - Revise
       - name: The research interview
-        why: "This is the round that decides research hires."
+        why: "The research discussion tests the claim, evidence, limitations, and next experiment behind your own work."
         beats:
           - >-
               Ten minutes on your own work. No slides needed if you know it.
@@ -10542,12 +10540,12 @@ topics:
   - id: prompt-engineering
     name: Prompt Engineering
     group: judgement
-    blurb: "Whether you treat prompts as an engineering surface with tests, or as guesswork."
-    scope: "Owns instruction design and measurement. Hands the loop and tools to agentic AI, and weight updates to LLM training."
+    blurb: "Design prompts as tested interfaces with clear inputs, outputs, and failure cases."
+    scope: "Study instruction design and prompt evaluation here. Use agentic AI for tool loops and LLM training when the weights must change."
     links: [agentic-ai, llm-training]
     modules:
       - name: The basics that still matter
-        why: "Most production gains come from doing these carefully."
+        why: "A clear task, relevant context, constraints, and an explicit output shape make prompts easier to test."
         beats:
           - >-
               Say what the task is. Most weak prompts fail here, long before the clever part.
@@ -10631,7 +10629,7 @@ topics:
           - Examples
           - Output contract
       - name: Reasoning
-        why: "Folklore is thick here, so precision stands out."
+        why: "Reasoning prompts help some tasks, but their effect depends on the model, task, and evaluation."
         beats:
           - >-
               On problems with real steps, thinking through them first genuinely helps.
@@ -10739,7 +10737,7 @@ topics:
           - Too much
           'on': 1
       - name: Structured output
-        why: "Every production integration needs this to be reliable."
+        why: "Schemas and validation turn model text into data that software can safely consume."
         beats:
           - >-
               Define a schema. Now the output is something code can rely on.
@@ -10789,7 +10787,7 @@ topics:
           - Repair
           loop: true
       - name: Measurement
-        why: "Measurement is what makes this engineering."
+        why: "A fixed evaluation set shows whether a prompt change improves the task or only one example."
         beats:
           - >-
               Write thirty examples before touching the prompt. This is the step that
@@ -10891,7 +10889,7 @@ topics:
           - Limit what the tools can do
           - Test with an injection
       - name: Choosing the right lever
-        why: "Senior candidates are judged on knowing when to stop prompting."
+        why: "Some failures need retrieval, tools, fine-tuning, or a smaller task instead of another prompt edit."
         beats:
           - >-
               Prompting is the cheapest lever and the first to try.
@@ -10948,12 +10946,12 @@ topics:
   - id: agentic-ai
     name: Agentic AI
     group: systems
-    blurb: "Whether you can build a loop that finishes the task and stops when it should."
-    scope: "Owns the agent loop, tools and evaluation. Hands instruction design to prompt engineering and permissioning to network and security."
+    blurb: "Build an agent loop that completes a task, handles failure, and stops safely."
+    scope: "Study agent loops, tools, memory, and evaluation here. Use prompt engineering for instructions and network and security for permissions."
     links: [prompt-engineering, network-and-security]
     modules:
       - name: The loop
-        why: "Every agent framework is a variation on this, so know the primitive."
+        why: "An agent observes state, chooses an action, checks the result, and stops when the task is done."
         beats:
           - >-
               Observe the current state. Whatever the agent can actually see.
@@ -11042,7 +11040,7 @@ topics:
           - Observe the result
           loop: true
       - name: Tools
-        why: "Most agent failures are tool failures."
+        why: "Tool schemas, permissions, errors, and retries determine whether an agent can act reliably."
         beats:
           - >-
               One tool call, and four things decide whether it works.
@@ -11096,7 +11094,7 @@ topics:
           - The error it can act on
           - The permission it needs
       - name: Memory and context
-        why: "Context is the binding constraint on any long task."
+        why: "Long tasks require explicit rules for what to keep, retrieve, summarise, or discard."
         beats:
           - >-
               The current step, always in full.
@@ -11154,7 +11152,7 @@ topics:
           - Summary of the run
           - Stored artefacts
       - name: Planning and control
-        why: "Cost and reliability are decided here."
+        why: "Planning controls the order of work, while budgets and stop rules bound cost and failure."
         beats:
           - >-
               The task is too long to hold in one pass. Three tools for that.
@@ -11208,7 +11206,7 @@ topics:
             items:
             - Stop at a limit
       - name: Multi-agent systems
-        why: "Popular, often unnecessary, and you should be able to say when."
+        why: "Multiple agents help when independent work can run in parallel or needs separate context; coordination adds cost."
         beats:
           - >-
               One agent with good tools. Simplest, cheapest, and the right answer most of
@@ -11249,7 +11247,7 @@ topics:
             - Coordination cost
             - Failures spread
       - name: Evaluation
-        why: "Agent evaluation is harder than model evaluation and interviewers know it."
+        why: "Agent evaluation must score the final result, the path taken, tool failures, cost, and variance across runs."
         beats:
           - >-
               Run the task and record the final score.
@@ -11364,12 +11362,12 @@ topics:
   - id: mlops
     name: MLOps
     group: systems
-    blurb: "Whether the model still works in six months and someone other than you can fix it."
-    scope: "Owns lifecycle, serving and monitoring. Hands pipeline internals to data engineering."
+    blurb: "Keep a deployed model reproducible, observable, and repairable after it ships."
+    scope: "Study model lifecycle, serving, deployment, and monitoring here. Continue with data engineering for pipeline internals."
     links: [data-engineering, machine-learning]
     modules:
       - name: Lifecycle and reproducibility
-        why: "Any production role assumes this."
+        why: "Versioned code, data, configuration, and environments make a model run reproducible."
         beats:
           - >-
               Frame the problem, and write down what would make you retire the model.
@@ -11383,8 +11381,8 @@ topics:
               Monitor, and expect this loop to run many times.
         plain:
           - >-
-              A model in production is not an artefact, it is a process. Someone has to
-              be able to rebuild any prediction months later.
+              A production model changes with its code, data, and dependencies. Someone
+              must be able to rebuild any prediction months later.
           - >-
               That needs code, data, config and weights versioned together. A regulator
               asking about a decision from March is the test of whether you did.
@@ -11456,7 +11454,7 @@ topics:
             - Features as the request arrives
             - One row
       - name: Training infrastructure
-        why: "Cost control is a real part of the job."
+        why: "Training infrastructure must schedule scarce accelerators, recover from failure, and track cost."
         beats:
           - >-
               Jobs queue, because GPUs are scarce and everyone wants them.
@@ -11506,7 +11504,7 @@ topics:
           - Recover
           loop: true
       - name: Serving
-        why: "Latency and cost questions appear in almost every system round."
+        why: "Serving must meet latency and throughput targets within a compute budget."
         beats:
           - >-
               Batch scoring is cheapest per prediction and the answer is hours old.
@@ -11589,7 +11587,7 @@ topics:
           - Online
           'on': 2
       - name: Deployment strategy
-        why: "Shipping without breaking things comes down to these five moves."
+        why: "Shadow, canary, blue-green, rollback, and feature-flag strategies limit deployment risk."
         beats:
           - >-
               Shadow first. Run the new model on live traffic and act on none of it.
@@ -11692,7 +11690,7 @@ topics:
             items:
             - Performance decay
       - name: Governance
-        why: "More and more, a deployment will not go ahead without this."
+        why: "Governance records ownership, approval, lineage, access, and the evidence needed for an audit."
         beats:
           - >-
               At the top, whoever signs off before this touches money or health.
@@ -11743,12 +11741,12 @@ topics:
   - id: data-engineering
     name: Data Engineering
     group: systems
-    blurb: "Whether the numbers are right, arrive on time, and cost what you said they would."
-    scope: "Owns storage, pipelines and streaming. Hands model lifecycle to MLOps."
+    blurb: "Deliver correct data on time and within the storage and compute budget."
+    scope: "Study storage, batch pipelines, streaming, and orchestration here. Continue with MLOps for the model lifecycle."
     links: [mlops]
     modules:
       - name: Storage and file layout
-        why: "Most query cost problems are layout problems."
+        why: "File format, partitioning, and clustering determine how much data a query must read."
         beats:
           - >-
               A row store keeps each record together. Good for writing and for fetching
@@ -11853,7 +11851,7 @@ topics:
           - Measures
           - Keys
       - name: Batch processing
-        why: "SQL and Spark are the two most commonly tested skills."
+        why: "Batch systems use SQL or distributed dataframes to transform bounded datasets."
         beats:
           - >-
               Read the input, ideally only the columns and partitions you need.
@@ -11959,7 +11957,7 @@ topics:
           - The watermark passes
           - The window closes
       - name: Orchestration and quality
-        why: "Nobody notices the pipeline until it is wrong or late."
+        why: "Orchestration and data-quality checks keep pipelines timely, repeatable, and safe to rerun."
         beats:
           - >-
               Extract from the source, expecting it to change without telling you.
@@ -12010,7 +12008,7 @@ topics:
           - Publish
           loop: true
       - name: Architecture
-        why: "Data roles run their system design round on this."
+        why: "A data architecture connects sources, storage, processing, serving, and governance."
         beats:
           - >-
               At the top, tables shaped for how people actually query them.
@@ -12050,7 +12048,7 @@ topics:
           - Cleaned tables
           - Raw landing
       - name: The system design round
-        why: "It is a conversation about trade-offs."
+        why: "A system design answer should quantify scale, state assumptions, and defend each storage and processing choice."
         beats:
           - >-
               Ask the volume before drawing anything.
@@ -12104,12 +12102,12 @@ topics:
   - id: network-and-security
     name: Network and Security
     group: systems
-    blurb: "Whether you can reason about an attacker who wants your model, your data, or your credentials."
-    scope: "Owns networking, application security and ML-specific attacks. Hands agent permissioning to agentic AI."
+    blurb: "Reason about attackers targeting a model, its data, its service, or its credentials."
+    scope: "Study networking, application security, cloud security, and ML attacks here. Continue with agentic AI for agent permissions."
     links: [agentic-ai]
     modules:
       - name: Networking
-        why: "Every distributed system question sits on top of this."
+        why: "IP, DNS, TCP, TLS, and HTTP carry requests between components in a distributed system."
         beats:
           - >-
               At the top, the application. HTTP, your API, the thing you wrote.
@@ -12162,7 +12160,7 @@ topics:
           - Network
           - Link
       - name: Security foundations
-        why: "Without this framing the rest of the track is just a list of attacks."
+        why: "Threat models connect assets, attackers, entry points, controls, and residual risk."
         beats:
           - >-
               A trust boundary is any line where data or requests change hands. Four
@@ -12272,7 +12270,7 @@ topics:
             items:
             - Certificates
       - name: Application security
-        why: "These are the attacks you will meet."
+        why: "Injection, cross-site scripting, request forgery, and broken access control target application boundaries."
         beats:
           - >-
               Input arrives from outside. Treat all of it as hostile, including from
@@ -12324,7 +12322,7 @@ topics:
           - Encode on output
           - Least privilege
       - name: Infrastructure and cloud
-        why: "Most real breaches happen here now."
+        why: "Cloud security depends on identity, network boundaries, secrets, logging, and least privilege."
         beats:
           - >-
               A credential scoped to one resource. If it leaks, the damage is bounded.
@@ -12363,7 +12361,7 @@ topics:
           - The whole account
           'on': 0
       - name: Machine learning security
-        why: "Few candidates can speak to both sides of this."
+        why: "Machine learning systems add poisoning, extraction, evasion, and prompt injection to standard security risks."
         beats:
           - >-
               In machine learning the model itself is a target, in four distinct ways.

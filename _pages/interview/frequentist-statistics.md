@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Frequentist Statistics
-description: Whether your conclusions survive someone asking how you would be wrong.
+description: Estimate effects, test claims, and state how the conclusion could be wrong.
 permalink: /frequentist-statistics/
 topic_id: frequentist-statistics
 robots: noindex, nofollow

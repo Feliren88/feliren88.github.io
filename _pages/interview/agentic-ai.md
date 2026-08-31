@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Agentic AI
-description: Whether you can build a loop that finishes the task and stops when it should.
+description: Build an agent loop that completes a task, handles failure, and stops safely.
 permalink: /agentic-ai/
 topic_id: agentic-ai
 robots: noindex, nofollow

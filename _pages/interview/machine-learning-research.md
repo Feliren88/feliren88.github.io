@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Machine Learning Research
-description: Whether you pick questions worth answering and run experiments that could prove you wrong.
+description: Choose a useful research question and design an experiment that could disprove the claim.
 permalink: /machine-learning-research/
 topic_id: machine-learning-research
 robots: noindex, nofollow

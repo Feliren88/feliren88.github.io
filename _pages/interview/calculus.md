@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Calculus
-description: Whether you can reason about change, and about what a gradient is actually telling you.
+description: Reason about change and explain what a gradient says about a function.
 permalink: /calculus/
 topic_id: calculus
 robots: noindex, nofollow

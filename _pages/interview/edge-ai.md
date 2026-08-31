@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Edge AI
-description: Whether you can make a model small enough to run where the data already is.
+description: Fit a useful model within a device's memory, latency, power, and privacy limits.
 permalink: /edge-ai/
 topic_id: edge-ai
 robots: noindex, nofollow

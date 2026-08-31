@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Uncertainty Quantification
-description: Whether a model's confidence means anything, and what you do when it does not.
+description: Test whether model confidence is useful and decide when the model should abstain.
 permalink: /uncertainty-quantification/
 topic_id: uncertainty-quantification
 robots: noindex, nofollow

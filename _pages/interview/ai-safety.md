@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: AI Safety
-description: Whether you have a position, and whether it survives the strongest objection.
+description: State a position on AI risk, support it with evidence, and answer a strong objection.
 permalink: /ai-safety/
 topic_id: ai-safety
 robots: noindex, nofollow

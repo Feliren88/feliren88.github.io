@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Machine Learning
-description: Whether you can turn a vague business problem into a model somebody can ship.
+description: Turn a vague product problem into a model that can be evaluated and shipped.
 permalink: /machine-learning/
 topic_id: machine-learning
 robots: noindex, nofollow

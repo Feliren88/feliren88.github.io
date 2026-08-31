@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Transformers
-description: Whether you know the architecture at the level of shapes and memory.
+description: Trace a transformer through tensor shapes, parameters, memory, and inference.
 permalink: /transformers/
 topic_id: transformers
 robots: noindex, nofollow

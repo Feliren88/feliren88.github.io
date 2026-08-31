@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Computer Science
-description: Whether you can say what your code will cost before you run it.
+description: Estimate what code will cost in time, memory, communication, and storage.
 permalink: /computer-science/
 topic_id: computer-science
 robots: noindex, nofollow

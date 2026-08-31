@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Deep Learning
-description: Whether you can make a network train, and explain it when it does not.
+description: Train a neural network and diagnose it when the loss or metrics go wrong.
 permalink: /deep-learning/
 topic_id: deep-learning
 robots: noindex, nofollow

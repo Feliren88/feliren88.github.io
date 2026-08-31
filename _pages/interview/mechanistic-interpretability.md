@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Mechanistic Interpretability
-description: Whether you can make a causal claim about a network's internals and defend it.
+description: Make and test causal claims about what happens inside a neural network.
 permalink: /mechanistic-interpretability/
 topic_id: mechanistic-interpretability
 robots: noindex, nofollow

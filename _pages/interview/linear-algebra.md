@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Linear Algebra
-description: Whether you see a matrix as a thing that does something, rather than a box of numbers.
+description: Use vectors and matrices as geometric transformations, not only as arrays of numbers.
 permalink: /linear-algebra/
 topic_id: linear-algebra
 robots: noindex, nofollow

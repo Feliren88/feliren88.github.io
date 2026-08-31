@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Mathematics
-description: Whether the notation in a paper is something you read or something you skip.
+description: Read mathematical notation and explain the assumptions behind it.
 permalink: /math/
 topic_id: math
 robots: noindex, nofollow
