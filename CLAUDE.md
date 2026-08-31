@@ -989,6 +989,23 @@ All navigation is defined in `js/components/nav.js` via the `NAV_ITEMS` array. T
 
 The site follows Gestalt perceptual principles to minimise cognitive load. Key patterns:
 
+### Visual restraint: no ornamental left rails
+
+- Do **not** add a vertical accent line at the left of headings, metadata, cards,
+  callouts, status messages, or ordinary prose merely for decoration. This includes
+  `border-left`, a narrow coloured pseudo-element, and a dot stretched into a bar.
+- A vertical line is allowed only when it carries established meaning, such as a
+  blockquote edge, a timeline axis, or an active/focus state. Use an existing shared
+  component for that meaning and do not rely on colour alone.
+- Research and project mastheads should follow document hierarchy. Keep the title,
+  authors, affiliations, and paper/arXiv/code links together and centred when the
+  page is modelled on a research paper. Never place that metadata beside a coloured
+  rail or turn the resource links into a decorative dashboard stack.
+- Keep project-status copy as plain prose or use the shared `.note-block` component.
+  Do not mark it with a one-off coloured vertical bar.
+- Before shipping page-scoped CSS, review every new `border-left` declaration. If
+  removing it would not change the meaning or interaction, remove it.
+
 ### Spacing Scale
 ```css
 --gap-1: 0.5rem    /* tight — tag clusters */
