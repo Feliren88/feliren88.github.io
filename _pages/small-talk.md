@@ -23,7 +23,6 @@ motion_scene: rapport
 
 <header class="sm-hero" aria-labelledby="sm-hero-title">
   <div>
-    <p class="sm-kicker">Interactive manual</p>
     <h1 id="sm-hero-title">Small talk helps two people find their footing.</h1>
     <p class="sm-lead">Long stretches of socialising drain me. A few good relationships suit me better than a wide network. I wrote this manual to make ordinary conversation feel less costly and more worthwhile.</p>
     <p class="sm-lead sm-lead-2">I want the other person to feel seen, comfortable, respected and slightly known.</p>
@@ -36,7 +35,6 @@ motion_scene: rapport
 <section class="sm-part sm-story" id="story" aria-labelledby="sm-story-title">
   <div class="sm-story-head">
     <div>
-      <p class="sm-kicker">One evening, six decisions</p>
       <h2 id="sm-story-title">Watch the conversation change</h2>
     </div>
     <p>Arun does not become the loudest person in the room. He notices, responds and gives the conversation somewhere to go. Choose a scene to see what he is reading beneath the words.</p>
@@ -66,7 +64,6 @@ motion_scene: rapport
 
     <div class="sm-story-panel" id="smw-story-panel" role="tabpanel" aria-live="polite">
       <div class="sm-story-copy">
-        <p class="sm-story-beat">Before the first word</p>
         <h3>Three good conversations are enough.</h3>
         <p>Arun enters a room full of people and feels the familiar pressure to perform. He changes the assignment: find one easy person, have two conversations worth continuing, take a break, then decide whether he wants one more.</p>
       </div>
@@ -393,7 +390,6 @@ motion_scene: rapport
 </section>
 
 <footer class="sm-coda">
-  <p class="sm-coda-kicker">Keep this in mind</p>
   <h2>Make the interaction easy for the other person.</h2>
   <p>Recognise them. Give them an easy opening. Listen. Follow something they care about. Reveal a little. Respect the boundary. Leave cleanly.</p>
   <p class="sm-coda-last">During small talk, I try to be interested instead of interesting. If there is room for depth, it can come later.</p>

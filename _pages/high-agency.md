@@ -26,7 +26,6 @@ motion_scene: agency
 
 <div class="ha-story-hero" aria-labelledby="ha-story-title">
   <div class="ha-story-copy">
-    <p class="ha-story-kicker">A field guide for unclear situations</p>
     <div class="ha-story-title" id="ha-story-title" role="heading" aria-level="1">Ask what can<br><i>still be moved.</i></div>
     <p>A rule, price, route, person, or skill may change the situation.</p>
   </div>
@@ -51,7 +50,6 @@ motion_scene: agency
 </div>
 
 <div class="ha-toc">
-  <p class="t-eyebrow" style="margin:0">On this page</p>
   <div class="ha-toc-grid">
     <a href="#see-it"><span class="k">00</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><span>See it first</span></a>
     <a href="#spectrum"><span class="k">01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-wheel"></use></svg><span>The spectrum</span></a>
@@ -83,7 +81,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">The question</p>
         <h5>You wake up in a foreign jail cell</h5>
       </div>
       <span class="ha-lab-hint">One name. First instinct.</span>
@@ -116,7 +113,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Checklist</p>
         <h5>Ten signals</h5>
       </div>
       <span class="ha-lab-hint">Tap any card to read why it counts</span>
@@ -185,7 +181,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>Two dates</h5>
       </div>
       <span class="ha-lab-hint">One year apart</span>
@@ -224,7 +219,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>Three readings of one glass</h5>
       </div>
       <span class="ha-lab-hint">Turn the tap</span>
@@ -274,7 +268,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>Deflate a wheel</h5>
       </div>
       <span class="ha-lab-hint">Click any wheel</span>
@@ -360,7 +353,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Self-diagnostic</p>
         <h5>Twelve questions, three wheels</h5>
       </div>
       <span class="ha-lab-hint" id="ha-quiz-progress">0 of 12 answered</span>
@@ -468,7 +460,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Panel</p>
         <h5>Five lines, one install</h5>
       </div>
       <span class="ha-lab-hint" id="ha-os-hint">0 of 5 installed</span>
@@ -519,7 +510,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Tool</p>
         <h5>The physics gate</h5>
       </div>
       <span class="ha-lab-hint">Four questions, no advice</span>
@@ -561,7 +551,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>An asteroid, one year out</h5>
       </div>
       <span class="ha-lab-hint">Illustrative figures only</span>
@@ -602,7 +591,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Comparison</p>
         <h5>Time to write one great song</h5>
       </div>
       <span class="ha-lab-hint">Log scale, or Dylan would be invisible</span>
@@ -632,7 +620,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Exhibit</p>
         <h5>Kill your gurus</h5>
       </div>
       <span class="ha-lab-hint">Tap to see the human underneath</span>
@@ -699,7 +686,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>What people remember</h5>
       </div>
       <span class="ha-lab-hint">Drag through time</span>
@@ -754,7 +740,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Counter</p>
         <h5>Your life in months</h5>
       </div>
       <span class="ha-lab-hint">One square is one month</span>
@@ -901,7 +886,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Map</p>
         <h5>Five traps, five questions</h5>
       </div>
       <span class="ha-lab-hint">Every card jumps to its escape route</span>
@@ -972,7 +956,7 @@ motion_scene: agency
 
     <div class="ha-lab">
       <div class="ha-lab-head">
-        <div><p class="t-eyebrow">Diagram</p><h5>The curve</h5></div>
+        <div><h5>The curve</h5></div>
         <span class="ha-lab-hint">Hover or tap a point</span>
       </div>
       <svg class="ha-midwit" id="ha-midwit" viewBox="0 0 520 220" role="img" aria-label="A bell curve with three points marked: left tail, midwit, right tail.">
@@ -1071,7 +1055,7 @@ motion_scene: agency
 
     <div class="ha-lab">
       <div class="ha-lab-head">
-        <div><p class="t-eyebrow">Diagram</p><h5>The loop</h5></div>
+        <div><h5>The loop</h5></div>
         <span class="ha-lab-hint">It only ends one way</span>
       </div>
       <svg class="ha-loop" id="ha-loop" viewBox="0 0 340 240" role="img" aria-label="A circular loop of ruminating thoughts, with an exit marked take one action.">
@@ -1118,7 +1102,7 @@ motion_scene: agency
 
     <div class="ha-lab">
       <div class="ha-lab-head">
-        <div><p class="t-eyebrow">Tool</p><h5>Build the first five levels</h5></div>
+        <div><h5>Build the first five levels</h5></div>
         <span class="ha-lab-hint">Level 100 goes in the box</span>
       </div>
       <div class="ha-field">
@@ -1152,7 +1136,7 @@ motion_scene: agency
 
   <div class="ha-lab">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Game</p><h5>Six situations</h5></div>
+      <div><h5>Six situations</h5></div>
       <span class="ha-lab-hint">No right answer is announced until you pick</span>
     </div>
     <div class="ha-game-stage" id="ha-game-stage"></div>
@@ -1182,7 +1166,7 @@ motion_scene: agency
 
   <div class="ha-lab">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Tool</p><h5>Walk the chart</h5></div>
+      <div><h5>Walk the chart</h5></div>
       <span class="ha-lab-hint">Click a lit node to jump back</span>
     </div>
     <div class="ha-flow-wrap">
@@ -1259,7 +1243,7 @@ motion_scene: agency
 
   <div class="ha-lab">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Tool</p><h5>Apply the razor</h5></div>
+      <div><h5>Apply the razor</h5></div>
       <span class="ha-lab-hint">Two live options</span>
     </div>
     <svg class="ha-scale" id="ha-scale" viewBox="0 0 520 176" role="img" aria-label="A balance scale with a pan for option A and a pan for option B. Choosing an option tips the beam towards it.">
@@ -1310,7 +1294,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>The draft that answers itself</h5>
       </div>
       <span class="ha-lab-hint">Four passes, nothing sent</span>
@@ -1361,7 +1344,6 @@ motion_scene: agency
   <div class="ha-lab">
     <div class="ha-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>One transaction, two frames</h5>
       </div>
       <span class="ha-lab-hint">Nothing about the facts changed</span>
@@ -1400,7 +1382,7 @@ motion_scene: agency
 
   <div class="ha-lab" id="ha-worksheet">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Worksheet</p><h5>Your sheet</h5></div>
+      <div><h5>Your sheet</h5></div>
       <span class="ha-lab-hint" id="ha-ws-status">Stays in this browser</span>
     </div>
 
@@ -1455,7 +1437,6 @@ motion_scene: agency
 
   <div class="ha-lib">
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-film"></use></svg>Case 01</span>
       <h5>A truck driver and a photocopier</h5>
       <p>A twenty year old lorry driver wanted to make films and could not pay for film school.
       Between shifts he sat in the USC library, pulled the staples out of film students' theses,
@@ -1464,7 +1445,6 @@ motion_scene: agency
       <p class="lesson">Film-school tuition was closed to him. The theses in its library were available.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-seedling"></use></svg>Case 02</span>
       <h5>A six year old and a YouTube search</h5>
       <p>Cole Summers asked his father how people get rich. His father, recovering from a long run
       of surgeries, told him to go and watch videos about Warren Buffett. He set up a company at
@@ -1473,14 +1453,12 @@ motion_scene: agency
       <p class="lesson">Nobody checked whether he was old enough to begin. He did not check either.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-flame"></use></svg>Case 03</span>
       <h5>Burn the boats</h5>
       <p>Good intentions do not guarantee action. A public commitment can add a real social cost
       to quitting. The added cost can help, although it does not guarantee follow-through.</p>
       <p class="lesson">Design the consequence before you need the motivation.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-hourglass"></use></svg>Case 04</span>
       <h5>The ticking clock</h5>
       <p>The essay's example is an offer structured so the payment falls every month it goes
       undelivered. You do not need to feel motivated when the cost of a slow week is written on
@@ -1488,14 +1466,12 @@ motion_scene: agency
       <p class="lesson">Put urgency into the terms of the commitment.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-coins"></use></svg>Case 05</span>
       <h5>The trillion dollar test</h5>
       <p>If solving this paid a trillion dollars, and failing carried a death sentence, would you
       find a way? If the answer is yes, the problem was never capability. It was price.</p>
       <p class="lesson">“Impossible” may mean that the current cost exceeds your commitment.</p>
     </div>
     <div class="ha-lib-card">
-      <span class="cat"><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-suitcase"></use></svg>Case 06</span>
       <h5>The suitcase</h5>
       <p>People walked on the moon before wheeled luggage became a commercial product. Bernard
       Sadow filed his <a href="https://patents.google.com/patent/US3653474A/en" target="_blank" rel="noreferrer">rolling-luggage patent in 1970</a>.</p>
@@ -1505,7 +1481,7 @@ motion_scene: agency
 
   <div class="ha-lab" id="hafig-gate">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Figure</p><h5>What stood in the way</h5></div>
+      <div><h5>What stood in the way</h5></div>
       <span class="ha-lab-hint">Pick a case</span>
     </div>
     <div class="hg-pick" id="hg-pick" role="group" aria-label="Choose a case"></div>
@@ -1518,7 +1494,7 @@ motion_scene: agency
 
   <div class="ha-lab" id="hafig-test">
     <div class="ha-lab-head">
-      <div><p class="t-eyebrow">Figure</p><h5>Test the gate</h5></div>
+      <div><h5>Test the gate</h5></div>
       <span class="ha-lab-hint">Drag how many you push on</span>
     </div>
     <div class="hg-row" id="hgt-row"><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Film school tuition</em><em class="open">the theses sat in an open library</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Being six years old</em><em class="open">nobody asked his age</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Unreliable motivation</em><em class="open">a public commitment supplied the cost</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not feeling urgent</em><em class="open">the terms could carry a clock</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Not capable enough</em><em class="open">the price was the obstacle</em></span><span class="hgt-cell"><i aria-hidden="true"></i><em class="shut">Luggage must be carried</em><em class="open">nothing held the wheels off</em></span></div>
@@ -1556,7 +1532,6 @@ motion_scene: agency
   yet do the thing, that is a finding, and findings are useful in both directions.</p>
 
   <div class="ha-coda" aria-label="The high-agency loop: see the situation, locate the movable constraint, act, and let reality answer">
-    <p class="ha-coda-kicker">The whole method</p>
     <div class="ha-coda-path">
       <div><span>01</span><svg class="ha-i" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-eye"></use></svg><b>See what is true</b><small>not what is customary</small></div>
       <i aria-hidden="true">→</i>
@@ -1572,7 +1547,6 @@ motion_scene: agency
   <div class="ha-badges" id="badges">
     <div class="ha-badges-head">
       <div>
-        <p class="t-eyebrow">Your progress</p>
         <h5>Twelve things this page asks you to do</h5>
       </div>
       <span class="ha-badges-count"><b id="ha-badge-n">0</b> of 12</span>

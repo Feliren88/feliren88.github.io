@@ -1017,8 +1017,11 @@ The site follows Gestalt perceptual principles to minimise cognitive load. Key p
 - Keep genuine metadata only when it helps the reader, for example a publication
   venue, date, or document state. Place it in the normal metadata line near the title;
   do not turn it into a decorative pre-heading.
-- Existing `.t-eyebrow` uses are not a reason to add new kickers. Use that token only
-  where the text has an established navigational or structural role.
+- Do not revive legacy `kicker`, `eyebrow`, or equivalent pre-title classes. If text
+  is real metadata, keep it in the ordinary metadata flow instead of above a heading.
+- Avoid decorative, zero-padded counters such as `01`, especially as faint oversized
+  card backgrounds or ornaments beside headings. Use an ordered list with ordinary
+  numbers only when the sequence itself helps the reader.
 
 ### Spacing Scale
 ```css
@@ -1068,7 +1071,6 @@ Use `.note-block` + `.note-badge` instead of one-off alert styles:
 
 ### Typography Tokens
 ```css
-.t-eyebrow       /* 0.76rem uppercase, letter-spaced, accent colour */
 .t-section-title /* 1.08rem bold, accent colour — section sub-heading */
 .t-display       /* clamp(1.6rem, 4vw, 2.4rem) — page display title */
 .t-meta          /* 0.78rem muted — dates, venues, supplementary */

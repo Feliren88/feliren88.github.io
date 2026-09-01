@@ -67,8 +67,7 @@
         b.setAttribute('aria-selected', n === i ? 'true' : 'false');
       });
       panel.innerHTML =
-        '<div class="sm-story-copy"><p class="sm-story-beat">' + esc(s.beat) + '</p>' +
-        '<h3>' + esc(s.title) + '</h3><p>' + esc(s.body) + '</p></div>' +
+        '<div class="sm-story-copy"><h3>' + esc(s.title) + '</h3><p>' + esc(s.body) + '</p></div>' +
         '<dl class="sm-story-read">' +
         '<div><dt>He notices</dt><dd>' + esc(s.notice) + '</dd></div>' +
         '<div><dt>He does</dt><dd>' + esc(s.do) + '</dd></div>' +

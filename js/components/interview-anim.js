@@ -1406,7 +1406,6 @@
     host.innerHTML =
       '<figure class="an">' +
       '<figcaption class="an-head">' +
-      '<span class="an-kicker">Watch it happen</span>' +
       '<h3 class="an-title">' + esc(scene.title) + '</h3>' +
       '<p class="an-lead">' + esc(scene.lead) + '</p>' +
       '</figcaption>' +

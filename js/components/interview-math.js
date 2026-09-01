@@ -466,10 +466,10 @@
 
     var head = document.createElement('div');
     head.className = 'ivmp-head-row';
-    var kicker = document.createElement('span');
-    kicker.className = 'ivmp-kicker';
-    kicker.textContent = spec.title || 'Try it yourself';
-    head.appendChild(kicker);
+    var title = document.createElement('span');
+    title.className = 'ivmp-title';
+    title.textContent = spec.title || 'Try it yourself';
+    head.appendChild(title);
     host.appendChild(head);
 
     var svg = el('svg', {

@@ -1240,12 +1240,12 @@
       mount.innerHTML =
         '<div class="ivc-card' + (flipped ? ' is-flipped' : '') + '">' +
         '<div class="ivc-face ivc-front">' +
-        '<span class="ivc-kicker">Question ' + (at + 1) + ' of ' + order.length + '</span>' +
+        '<span class="ivc-context">Question ' + (at + 1) + ' of ' + order.length + '</span>' +
         '<p class="ivc-q">' + esc(m.check) + '</p>' +
         '<span class="ivc-hint">Click to see the terms to use</span>' +
         '</div>' +
         '<div class="ivc-face ivc-back">' +
-        '<span class="ivc-kicker">' + esc(m.name) + '</span>' +
+        '<span class="ivc-context">' + esc(m.name) + '</span>' +
         '<ul class="ivc-covers">' + (m.covers || []).map(function (c) {
           return '<li>' + esc(c) + '</li>';
         }).join('') + '</ul>' +

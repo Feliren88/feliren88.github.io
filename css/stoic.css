@@ -21,9 +21,6 @@
 body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!important}
 .stoic .page-content{max-width:62rem!important}.stoic .st-part{margin-bottom:2.25rem!important}.stoic .st-part+.st-part{padding-top:2.25rem!important}
 .stoic .page-content { max-width: 52rem; }
-
-/* Narrative opening and spine */
-.st-kicker { margin: 0 0 0.6rem !important; color: var(--accent) !important; font: 700 var(--fs-xs)/1.2 "Space Grotesk",sans-serif !important; letter-spacing: .11em; text-transform: uppercase; }
 .st-lead { max-width: 17ch; margin: 0 0 1.4rem !important; color: var(--text) !important; font: 650 clamp(2rem,5.8vw,4rem)/1.02 "Space Grotesk",sans-serif !important; letter-spacing: -.04em; }
 .st-story-map { display: grid; grid-template-columns: repeat(9,auto); align-items: center; justify-content: space-between; gap: .45rem; margin: 1.8rem 0 1.1rem; padding: 1.2rem; border: 1px solid var(--border-ui); border-radius: var(--radius-lg); background: linear-gradient(110deg,color-mix(in srgb,var(--accent) 5%,var(--surface)),var(--surface),color-mix(in srgb,var(--cta) 7%,var(--surface))); }
 .st-story-node { display: grid; place-items: center; gap: .35rem; min-width: 5.4rem; color: var(--muted); font: 650 var(--fs-xs)/1.15 "Space Grotesk",sans-serif; text-align: center; }
@@ -121,7 +118,6 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   display: flex; align-items: baseline; justify-content: space-between;
   gap: var(--gap-2); flex-wrap: wrap; margin-bottom: 0.9rem;
 }
-.st-lab-head .t-eyebrow { margin: 0; }
 .st-lab-head h5 { font-family: "Space Grotesk", sans-serif; font-size: var(--fs-title); color: var(--text); margin: 0.15rem 0 0; }
 .st-hint { font-size: var(--fs-xs); color: var(--muted); }
 
@@ -307,7 +303,7 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
 
 .st-cards { display: grid; gap: var(--gap-2); }
 .st-card {
-  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md); background: var(--surface);
   overflow: hidden; scroll-margin-top: 92px;
 }
@@ -488,7 +484,7 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
 .st-day-node text{font:700 11px "Space Grotesk",sans-serif;fill:var(--muted)}
 .st-day-node:hover circle,.st-day-node.is-on circle{fill:var(--accent);stroke:var(--accent)}
 .st-day-node:hover text,.st-day-node.is-on text{fill:var(--text)}
-.st-day-read{margin-top:var(--gap-2);padding:.85rem 1rem;border-left:3px solid var(--accent);background:var(--surface-soft);min-height:4.5rem}
+.st-day-read{margin-top:var(--gap-2);padding:.85rem 1rem;background:var(--surface-soft);min-height:4.5rem}
 .st-day-read .t{margin:0 0 .3rem!important;font:700 .95rem "Space Grotesk",sans-serif;color:var(--text)!important}
 .st-day-read p{margin:0;font-size:.9rem;line-height:1.6}
 
@@ -582,7 +578,7 @@ body:has(.stoic) #pointcloud-bg,body:has(.stoic) .shape-toggle-btn{display:none!
   .sv-gate .pause i{height:1rem}
   .sv-scale .fulcrum{justify-self:center}
 }
-.st-verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.st-verdict-grid button{padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--muted);text-align:left;cursor:pointer}.st-verdict-grid button b{display:block;margin-bottom:.25rem;color:var(--text);font:700 .86rem "Space Grotesk",sans-serif}.st-verdict-grid button span{font-size:.78rem;line-height:1.5}.st-verdict-grid button.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.st-verdict-read{min-height:2.8rem;margin:.7rem 0 0!important;padding:.65rem;border-left:3px solid var(--accent);color:var(--muted)!important;font-size:.8rem!important}@media(max-width:560px){.st-verdict-grid{grid-template-columns:1fr}}
+.st-verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.st-verdict-grid button{padding:.8rem;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--muted);text-align:left;cursor:pointer}.st-verdict-grid button b{display:block;margin-bottom:.25rem;color:var(--text);font:700 .86rem "Space Grotesk",sans-serif}.st-verdict-grid button span{font-size:.78rem;line-height:1.5}.st-verdict-grid button.is-on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}.st-verdict-read{min-height:2.8rem;margin:.7rem 0 0!important;padding:.65rem;color:var(--muted)!important;font-size:.8rem!important}@media(max-width:560px){.st-verdict-grid{grid-template-columns:1fr}}
 
 /* ── What your peace is resting on ────────────────────────
    The split is the doctrine, so it is movable. Shift the footing onto things

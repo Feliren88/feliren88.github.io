@@ -20,7 +20,6 @@ motion_scene: feedback
 {% include success-failure-icons.html %}
 
 <section class="sf-part sf-prose sf-opening" id="outcome">
-  <p class="sf-kicker">What to do after the plan meets reality</p>
 
   <figure class="sf-fig" id="sfig-luck">
     <figcaption><span class="n">Figure 1</span><b>One result tells you less than you think</b><em>Drag how much of this game is luck.</em></figcaption>
@@ -219,7 +218,7 @@ motion_scene: feedback
 
   <div class="sf-lanes">
     <article class="sf-lane success">
-      <header><span><svg class="sf-i" aria-hidden="true"><use href="#sf-win"/></svg>After a win</span><h3>Validate, then scale</h3></header>
+      <header><h3>After a win, validate before you scale.</h3></header>
       <ol>
         <li><b>Attribute.</b><span>Separate skill, process, timing, network, environment, and luck.</span></li>
         <li><b>Repeat.</b><span>One win is interesting. Independent repetition suggests a mechanism.</span></li>
@@ -229,7 +228,7 @@ motion_scene: feedback
       </ol>
     </article>
     <article class="sf-lane failure">
-      <header><span><svg class="sf-i" aria-hidden="true"><use href="#sf-loss"/></svg>After a loss</span><h3>Stabilise, then choose</h3></header>
+      <header><h3>After a loss, stabilise before you choose.</h3></header>
       <ol>
         <li><b>Stabilise.</b><span>Protect money, health, confidence, relationships, attention, and reputation.</span></li>
         <li><b>Locate.</b><span>Find where reality first diverged from the model.</span></li>
@@ -317,7 +316,6 @@ motion_scene: feedback
   <div class="sf-scorecard" id="sf-scorecard">
     <div class="sf-scorecard-head">
       <div>
-        <p class="sf-card-k"><svg class="sf-i" aria-hidden="true"><use href="#sf-trajectory"/></svg>Whole-system read</p>
         <h3>Your eighteen, at a glance</h3>
       </div>
       <span class="sf-scorecard-count"><b id="sf-rated-n">0</b> of 18 rated</span>

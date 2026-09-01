@@ -7,14 +7,12 @@ permalink: /recognition/
 redirect_to: /
 ---
 
-<p class="eyebrow">MILESTONES</p>
 
 <div id="awards-grid" class="awards-grid">
   {% for key in site.data.awards %}
   {% assign award = key[1] %}
   {% if award.category %}
   <article class="award-card{% if award.featured %} featured{% endif %}{% if award.category == 'CHAMPION' %} highlight{% endif %}">
-    <p class="tag">{{ award.category }}</p>
     <h3>
       {% if award.url %}
       <a href="{{ award.url }}" target="_blank" rel="noreferrer">{{ award.title }}</a>
@@ -22,6 +20,7 @@ redirect_to: /
       {{ award.title }}
       {% endif %}
     </h3>
+    <p class="award-category">{{ award.category }}</p>
     <p class="time-inline">{{ award.year }}</p>
     <p class="desc">{{ award.description }}</p>
   </article>

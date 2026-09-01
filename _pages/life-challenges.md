@@ -19,7 +19,6 @@ motion_scene: conversion
 </nav>
 <section class="lc-hero lc-section" id="silver-lining">
   <div class="lc-hero-copy">
-    <p class="lc-kicker">The silver lining of a difficult life</p>
     <h1>A hard period can hurt now and still enlarge your life later.</h1>
     <p>Difficulty can force capacities that permanent ease never asks for: judgment, boundaries, independence, courage, self-knowledge, better methods, and the ability to choose what deserves your effort.</p>
   </div>
@@ -35,7 +34,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="conversion">
-  <header class="lc-section-head"><span>01 · The conversion model</span><h2>Growth needs more than pain.</h2><p>Challenge supplies raw material. What happens next depends on how you meet it.</p></header>
+  <header class="lc-section-head"><h2>Growth needs more than pain.</h2><p>Challenge supplies raw material. What happens next depends on how you meet it.</p></header>
   <figure class="lc-panel lc-conversion-lab">
     <figcaption><b>Difficulty metabolism</b><span>Adjust the conditions around a hard event.</span></figcaption>
     <div class="lc-equation" aria-live="polite">
@@ -56,7 +55,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section lc-comfort" id="comfort">
-  <header class="lc-section-head"><span>02 · Before the lesson</span><h2>You are allowed to hurt before you learn from it.</h2><p>Pain can remain painful. Growth, if it comes, often arrives after enough safety, support, and distance to think clearly.</p></header>
+  <header class="lc-section-head"><h2>You are allowed to hurt before you learn from it.</h2><p>Pain can remain painful. Growth, if it comes, often arrives after enough safety, support, and distance to think clearly.</p></header>
   <div class="lc-comfort-stage" id="lc-comfort-stage">
     <div class="lc-comfort-controls">
       <div class="lc-comfort-picker" id="lc-comfort-picker" role="listbox" aria-label="Choose what feels difficult"></div>
@@ -85,7 +84,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="diagnosis">
-  <header class="lc-section-head"><span>03 · Read the resistance</span><h2>An obstacle is data before it is a verdict.</h2><p>The same friction can ask you to strengthen, change strategy, wait, or leave. Diagnose it before you obey it.</p></header>
+  <header class="lc-section-head"><h2>An obstacle is data before it is a verdict.</h2><p>The same friction can ask you to strengthen, change strategy, wait, or leave. Diagnose it before you obey it.</p></header>
   <div class="lc-diagnosis">
     <div class="lc-obstacle-picker" id="lc-obstacle-picker" role="listbox" aria-label="Choose what the obstacle may reveal"></div>
     <div class="lc-scan">
@@ -99,7 +98,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="uncertainty">
-  <header class="lc-section-head"><span>04 · Keep the future open</span><h2>Demanding certainty closes doors before evidence arrives.</h2><p>Fear counts the bad futures first. Use the field to inspect the possibilities it omitted.</p></header>
+  <header class="lc-section-head"><h2>Demanding certainty closes doors before evidence arrives.</h2><p>Fear counts the bad futures first. Use the field to inspect the possibilities it omitted.</p></header>
   <figure class="lc-panel lc-future-map">
     <figcaption><b>Possibility field</b><span>Move the certainty dial.</span></figcaption>
     <svg id="lc-future-svg" viewBox="0 0 800 430" role="img" aria-label="A branching map with more possible futures when certainty is lower">
@@ -112,7 +111,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="pressure">
-  <header class="lc-section-head"><span>05 · Regulate the load</span><h2>Maximum difficulty is a bad target.</h2><p>Pressure can build capacity until recovery disappears. Past that point, it damages the system it was supposed to train.</p></header>
+  <header class="lc-section-head"><h2>Maximum difficulty is a bad target.</h2><p>Pressure can build capacity until recovery disappears. Past that point, it damages the system it was supposed to train.</p></header>
   <figure class="lc-panel lc-pressure-chart">
     <figcaption><b>Development under pressure</b><span>Find the useful zone without treating overload as virtue.</span></figcaption>
     <svg viewBox="0 0 760 330" role="img" aria-label="Development rises with challenge, peaks in a stretch zone, then falls under destructive overload">
@@ -128,7 +127,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="game">
-  <header class="lc-section-head"><span>06 · The obstacle game</span><h2>Read what the difficulty requires.</h2><p>Courage may mean persisting, negotiating, running a smaller test, or leaving. The situation decides which response fits.</p></header>
+  <header class="lc-section-head"><h2>Read what the difficulty requires.</h2><p>Courage may mean persisting, negotiating, running a smaller test, or leaving. The situation decides which response fits.</p></header>
   <div class="lc-game">
     <div class="lc-game-top"><span id="lc-game-round">scenario 1 of 5</span><b id="lc-game-score">0 agency</b></div>
     <div class="lc-game-card" id="lc-game-card"><small id="lc-game-tag"></small><h3 id="lc-game-title"></h3><p id="lc-game-copy"></p></div>
@@ -139,7 +138,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section" id="architecture">
-  <header class="lc-section-head"><span>07 · Build from it</span><h2>Stop becoming better at the same rescue.</h2><p>A recurring problem should eventually become a boundary, a method, or a system that no longer needs your heroics.</p></header>
+  <header class="lc-section-head"><h2>Stop becoming better at the same rescue.</h2><p>A recurring problem should eventually become a boundary, a method, or a system that no longer needs your heroics.</p></header>
   <div class="lc-architecture">
     <div class="lc-arch-track" id="lc-arch-track">
       <button type="button" data-stage="0"><span>01</span><b>Fix</b><small>Can I handle this?</small></button>
@@ -153,7 +152,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section lc-field-guide" id="field-guide">
-  <header class="lc-section-head"><span>Field guide</span><h2>Ask better questions while the answer is still unclear.</h2></header>
+  <header class="lc-section-head"><h2>Ask better questions while the answer is still unclear.</h2></header>
   <div class="lc-question-grid">
     <article><span>reveal</span><p>What is this showing me that comfort concealed?</p></article>
     <article><span>diagnose</span><p>Did my strategy fail, or is the environment wrong?</p></article>
@@ -169,7 +168,7 @@ motion_scene: conversion
 </section>
 
 <section class="lc-section lc-poem" id="poem">
-  <header class="lc-poem-head"><span>Closing poem</span><h2>The Road Was Never Clear</h2></header>
+  <header class="lc-poem-head"><h2>The Road Was Never Clear</h2></header>
   <div class="lc-poem-body">
     <p>I would not call the wound a teacher<br>while it is still open.<br>Some days ask for no wisdom,<br>only water, sleep,<br>and someone who does not leave.</p>
 

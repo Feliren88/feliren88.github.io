@@ -20,7 +20,7 @@ html[data-motion-scene]{
   --em-ink-hi:#fff;        /* the one step brighter than body ink */
   --em-ink:#f4f5f7;        /* headings, node labels, active steps */
   --em-ink-2:#d5dae1;      /* secondary label text inside diagrams */
-  --em-ink-soft:#98a3b2;   /* body copy, kickers */
+  --em-ink-soft:#98a3b2;
   --em-ink-dim:#7f8b9b;    /* captions, inactive steps, small caps */
   --em-ink-faint:#556171;  /* deliberately receded text */
   --em-hair:#25303e;       /* grid, step rules, orbits */
@@ -72,7 +72,7 @@ html[data-theme="light"][data-motion-scene]{
 .em-story{--em-p:0;--em-gutter:0px;--em-beats:4;--em-pad-x:max(1.25rem,calc(50vw - 38rem));position:relative;width:100vw;height:calc(var(--em-beats) * 270vh);margin:clamp(3rem,8vw,7rem) 0 clamp(3rem,8vw,7rem) calc(-1 * var(--em-gutter));color:var(--em-ink);background:var(--em-bg);isolation:isolate}
 .em-pin{position:sticky;top:0;display:grid;grid-template-columns:minmax(17rem,.72fr) minmax(0,1.28fr);grid-template-rows:1fr auto;gap:clamp(1.5rem,5vw,5rem);align-items:center;height:100vh;min-height:42rem;padding:clamp(5rem,9vh,8rem) var(--em-pad-x) 2.5rem;overflow:hidden}
 .em-pin:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--em-x,20%) 50%,color-mix(in srgb,var(--em-accent) 16%,transparent),transparent 36%);pointer-events:none}
-.em-copy,.em-canvas,.em-track{position:relative;z-index:1}.em-kicker{display:flex;align-items:center;gap:.65rem;color:var(--em-ink-soft);font:600 clamp(.94rem,1.2vw,1.08rem)/1.35 "Manrope",sans-serif;letter-spacing:-.018em;text-transform:none}.em-kicker:before{content:"";flex:0 0 auto;width:.42rem;height:.42rem;border-radius:50%;background:var(--em-accent);box-shadow:0 0 1.4rem color-mix(in srgb,var(--em-accent) 55%,transparent)}.em-copy h2{max-width:10ch;margin:.9rem 0 1.2rem;color:var(--em-ink);font:650 clamp(2.4rem,5.7vw,5.6rem)/.9 "Space Grotesk",sans-serif;letter-spacing:-.065em}.em-copy p{max-width:34rem;margin:0;color:var(--em-ink-soft);font:450 clamp(.95rem,1.5vw,1.1rem)/1.7 "Manrope",sans-serif}
+.em-copy,.em-canvas,.em-track{position:relative;z-index:1}.em-copy h2{max-width:10ch;margin:.9rem 0 1.2rem;color:var(--em-ink);font:650 clamp(2.4rem,5.7vw,5.6rem)/.9 "Space Grotesk",sans-serif;letter-spacing:-.065em}.em-copy p{max-width:34rem;margin:0;color:var(--em-ink-soft);font:450 clamp(.95rem,1.5vw,1.1rem)/1.7 "Manrope",sans-serif}
 .em-copy .em-highlight{color:var(--em-ink);font-weight:750;background:linear-gradient(transparent 72%,color-mix(in srgb,var(--em-accent) 32%,transparent) 72%)}
 /*
   One beat handing over to the next. Both the copy and the frames below are faded
@@ -365,7 +365,7 @@ html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[da
 @media(max-width:560px){.em-story{height:calc(var(--em-beats) * 190vh)}.em-pin{padding-inline:1.25rem}.em-copy h2{max-width:12ch;font-size:clamp(2rem,10vw,3.25rem)}.em-copy p{font-size:.86rem}.em-canvas svg{max-height:38vh}}
 @media(max-width:560px){html[data-motion-scene="record"] .em-copy h2{max-width:13ch;font-size:clamp(1.9rem,8.7vw,2.7rem)}html[data-motion-scene="record"] .em-copy p{font-size:.82rem;line-height:1.4}}
 @media(max-width:560px){.em-skip{--em-skip-pad:1.1rem;top:0;right:calc(1.25rem - var(--em-skip-pad));font-size:.6rem}}
-@media(orientation:landscape) and (max-height:600px) and (min-width:600px){.em-story{height:calc(var(--em-beats) * 215vh)}.em-pin{grid-template-columns:minmax(16rem,.9fr) minmax(0,1.1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:clamp(1.25rem,4vw,3rem);row-gap:.35rem;align-items:center;padding:4.25rem clamp(2rem,5vw,4rem) .65rem}.em-copy{align-self:center;min-width:0}.em-kicker{font-size:.76rem}.em-copy h2{max-width:13ch;margin:.4rem 0 .55rem;font-size:clamp(1.8rem,4.4vw,2.65rem);line-height:.92;letter-spacing:-.05em}.em-copy p{max-width:38rem;font-size:.76rem;line-height:1.35}.em-canvas{min-height:0}.em-canvas svg{width:100%;max-height:45vh}.em-skip{font-size:.6rem}}
+@media(orientation:landscape) and (max-height:600px) and (min-width:600px){.em-story{height:calc(var(--em-beats) * 215vh)}.em-pin{grid-template-columns:minmax(16rem,.9fr) minmax(0,1.1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:clamp(1.25rem,4vw,3rem);row-gap:.35rem;align-items:center;padding:4.25rem clamp(2rem,5vw,4rem) .65rem}.em-copy{align-self:center;min-width:0}.em-copy h2{max-width:13ch;margin:.4rem 0 .55rem;font-size:clamp(1.8rem,4.4vw,2.65rem);line-height:.92;letter-spacing:-.05em}.em-copy p{max-width:38rem;font-size:.76rem;line-height:1.35}.em-canvas{min-height:0}.em-canvas svg{width:100%;max-height:45vh}.em-skip{font-size:.6rem}}
 @media(max-height:620px) and (min-width:1101px){.em-pin{min-height:0;padding-top:3.5rem}.em-copy h2{font-size:clamp(2rem,4.6vw,4rem)}.em-canvas{min-height:0}.em-canvas svg{max-height:55vh}}
 /*
   Every animation inside a frame is an unattended loop, so all of them go, not only
@@ -375,10 +375,6 @@ html[data-theme="light"][data-motion-scene="repair"]{--em-accent:#8e6111}html[da
 @media(prefers-reduced-motion:reduce){html[data-motion-scene] .em-story-frame,html[data-motion-scene] .em-story-frame *{animation:none!important;transition:none!important}}
 @media(prefers-reduced-motion:reduce){.em-vf-portrait{opacity:.96!important;clip-path:none!important}.em-vf-origin{display:none!important}}
 @media(prefers-reduced-motion:reduce){.em-track{display:none}.em-story{height:auto}.em-pin{position:relative;height:auto;min-height:0}.em-story{--em-p:1!important}.em-skip{display:none}}
-
-/* Shared editorial eyebrow across the twelve featured writings. */
-html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span){display:flex!important;align-items:center;gap:.65rem;color:var(--em-ink-soft)!important;font:600 clamp(.94rem,1.2vw,1.08rem)/1.35 "Manrope",sans-serif!important;letter-spacing:-.018em!important;text-transform:none!important}
-html[data-motion-scene] .page-content :is(.ms-kicker,.ms-act-head>span,.ce-kicker,.ha-story-kicker,.ha-coda-kicker,.st-kicker,.gt-kicker,.sf-kicker,.ue-kicker,.cm-kicker,.cm-manual-head>span,.sl-kicker,.sl-section-head>span,.lc-kicker,.lc-section-head>span):before{content:"";flex:0 0 auto;width:.42rem;height:.42rem;border-radius:50%;background:var(--em-accent);box-shadow:0 0 1.4rem color-mix(in srgb,var(--em-accent) 50%,transparent)}
 
 /* Page-specific callouts. No repeated left-stripe template. */
 html[data-motion-scene] .page-content :is(blockquote,.ce-force,.ce-split button,.ha-quote,.ha-trapcard,.ha-trap,.sounds,.ha-mafia-read,.ha-lib-read,.ha-ws-step,.pr-card,.st-quote,.st-card,.st-day-read,.st-verdict-read,.gt-eq,.gt-domain,.gt-law,.gt-loop,.sf-explore-read,.sf-rule,.sf-domain-body .sig,.sf-review-read,.sf-explore-item,.ue-note,.ue-loop-read,.ue-direct-read,.ue-primer,.ue-primer-note,.ue-oern-read,.ue-band-read,.ue-warning,.ue-budget-read,.ue-rung,.ue-plan-out,.ue-compassion,.cm-objective-out,.cm-support-out,.cm-script-row article,.cm-doors p,.cm-tradeoffs article,.cm-resets article,.cf-verdict,.sl-control-outcomes div,.sl-strength-result,.sl-compass-answer,.lc-hero-rule,.lc-quote){box-sizing:border-box;border-left:0!important}

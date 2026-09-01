@@ -13,7 +13,6 @@ motion_scene: record
 <article class="about-story">
   <header class="about-story-hero">
     <div class="about-story-copy">
-      <p class="eyebrow">ABOUT VICKY FELIREN</p>
       <h1>I look for what breaks <em>before</em> a system is trusted.</h1>
       <p class="about-story-lead">I’m Vicky Feliren, an applied scientist working where AI safety, uncertainty, and underrepresented data meet. My work asks a practical question: when a model becomes safer, does it remain useful for the people and inputs its training represented least?</p>
       <div class="about-story-actions">
@@ -66,8 +65,7 @@ motion_scene: record
   <section class="about-chapter" id="question">
     <div class="about-chapter-index"><span>01</span><p>The question</p></div>
     <div class="about-chapter-body">
-      <p class="about-kicker">Safety is not only about changing an answer.</p>
-      <h2>It is also about knowing when that answer should be trusted.</h2>
+      <h2>A safe model should know when its answer can be trusted.</h2>
       <div class="about-prose-columns">
         <p>Safety training can change how well a model’s confidence matches its accuracy. Once that calibration slips, the model may continue when it should defer—or abstain so often that it is no longer useful. Average benchmark scores can hide where that trade-off is being paid.</p>
         <p>I study the distribution beneath the average: which languages, input types, and communities absorb the largest cost. I am especially interested in Southeast Asia, where the world’s linguistic and visual variety is still poorly represented in mainstream datasets and evaluations.</p>
@@ -81,14 +79,13 @@ motion_scene: record
   <section class="about-chapter" id="path">
     <div class="about-chapter-index"><span>02</span><p>The path</p></div>
     <div class="about-chapter-body">
-      <p class="about-kicker">Research shaped by systems that had consequences.</p>
-      <h2>From production constraints to research guarantees.</h2>
+      <h2>Production systems taught me what a research guarantee must survive.</h2>
       <div class="about-path" role="list">
-        <article role="listitem"><time>2021</time><div><small>Public systems</small><h3>Jakarta Smart City</h3><p>Forecasting municipal waste taught me that model quality matters only when it changes a real allocation decision.</p></div></article>
-        <article role="listitem"><time>2021—23</time><div><small>Production ML</small><h3>Finance and identity</h3><p>Biometrics, credit, and fraud systems made calibration, auditability, and failure costs operational—not theoretical.</p></div></article>
-        <article role="listitem"><time>2022—25</time><div><small>Multimodal research</small><h3>Earth observation</h3><p>Satellite systems across sensors and regions made distribution shift visible in every map.</p></div></article>
-        <article role="listitem"><time>2024—now</time><div><small>Open science</small><h3>Southeast Asian AI</h3><p>SEACrowd connected the technical problem to the missing languages, cultures, and visual worlds behind it.</p></div></article>
-        <article role="listitem" class="is-current"><time>Now</time><div><small>AI safety</small><h3>Calibration under alignment</h3><p>I bring those threads together: measure the hidden cost, then recover useful deference with guarantees.</p></div></article>
+        <article role="listitem"><time>2021</time><div><h3>Jakarta Smart City</h3><p>Forecasting municipal waste taught me that model quality matters only when it changes a real allocation decision.</p></div></article>
+        <article role="listitem"><time>2021—23</time><div><h3>Finance and identity</h3><p>Biometrics, credit, and fraud systems made calibration, auditability, and failure costs operational—not theoretical.</p></div></article>
+        <article role="listitem"><time>2022—25</time><div><h3>Earth observation</h3><p>Satellite systems across sensors and regions made distribution shift visible in every map.</p></div></article>
+        <article role="listitem"><time>2024—now</time><div><h3>Southeast Asian AI</h3><p>SEACrowd connected the technical problem to the missing languages, cultures, and visual worlds behind it.</p></div></article>
+        <article role="listitem" class="is-current"><time>Now</time><div><h3>Calibration under alignment</h3><p>I bring those threads together: measure the hidden cost, then recover useful deference with guarantees.</p></div></article>
       </div>
       <a class="about-inline-cta" href="/cv/">The complete chronology lives in the CV <span>→</span></a>
     </div>
@@ -97,7 +94,6 @@ motion_scene: record
   <section class="about-chapter" id="method">
     <div class="about-chapter-index"><span>03</span><p>The method</p></div>
     <div class="about-chapter-body">
-      <p class="about-kicker">How I decide what deserves attention.</p>
       <h2>Start with the failure boundary, then build back toward use.</h2>
       <div class="about-method-grid">
         <article><span>01</span><h3>Find the hidden average</h3><p>Disaggregate the result until the users and inputs carrying the cost become visible.</p></article>
@@ -111,7 +107,6 @@ motion_scene: record
   <section class="about-chapter" id="direction">
     <div class="about-chapter-index"><span>04</span><p>The direction</p></div>
     <div class="about-chapter-body">
-      <p class="about-kicker">The next question is already in motion.</p>
       <h2>Can aligned models keep calibrated judgment beyond English and beyond text?</h2>
       <div class="about-direction-panel">
         <div>
@@ -186,7 +181,6 @@ motion_scene: record
     <p class="section-note">Notes on calibration, alignment training, and evaluation. Reading notes, experiment logs, and the occasional essay. I post the results that went against me too.</p>
 
     <a class="insight-essay reveal" href="/essays/knowing-when-you-dont-know/">
-      <span class="insight-essay-label">Essay</span>
       <h3>Knowing when you don't know is the core safety property</h3>
       <p>Why safe deployment depends on models knowing when to abstain.</p>
       <span class="insight-read">Read the essay →</span>
@@ -196,7 +190,6 @@ motion_scene: record
     <div class="insights-notes reveal-group">
       {% for note in site.data.notes limit:2 %}
       <a class="insight-note reveal" href="{{ note.link }}" target="_blank" rel="noreferrer">
-        <span class="insight-note-label">Research Note</span>
         <h3>{{ note.title }}</h3>
         <p class="insight-note-paper">on {{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}</p>
         <span class="insight-read">Read the paper →</span>
@@ -233,7 +226,6 @@ motion_scene: record
   </section>
 
   <section class="section collab-section reveal">
-    <p class="eyebrow">Open to</p>
     <h2 class="collab-heading">Let's Collaborate</h2>
     <p class="collab-sub">{{ site.data.contact.intro_sub }}</p>
     <div class="collab-tags">

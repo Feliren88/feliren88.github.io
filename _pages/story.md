@@ -33,7 +33,6 @@ motion_scene: repair
       <path class="road" d="M-20 420C210 310 540 310 920 405"/>
     </svg>
   </div>
-  <p class="ms-kicker">A life in twenty-one parts</p>
   <div class="ms-title" id="ms-title" role="heading" aria-level="1">A Method<br>for What <i>Breaks</i></div>
   <p class="ms-lede">He learned people as he learned machines: by what happened when pressure was applied.</p>
   <a class="ms-enter" href="#boy"><span>Begin at night</span><i aria-hidden="true">↓</i></a>
@@ -41,7 +40,7 @@ motion_scene: repair
 
 <div class="ms-story">
   <section class="ms-act is-night" id="boy" data-act="1">
-    <header class="ms-act-head"><span>Act I</span><h2>Attention</h2><p>Before he understood systems, he noticed arrangements.</p></header>
+    <header class="ms-act-head"><h2>Attention</h2><p>Before he understood systems, he noticed arrangements.</p></header>
 
     <article class="ms-scene" data-chapter="I">
       <div class="ms-chapter"><span>I</span><h3>The Boy Who Looked Underneath</h3></div>
@@ -76,7 +75,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act" id="proof" data-act="2">
-    <header class="ms-act-head"><span>Act II</span><h2>Usefulness</h2><p>The problems became real. So did the reward for carrying them.</p></header>
+    <header class="ms-act-head"><h2>Usefulness</h2><p>The problems became real. So did the reward for carrying them.</p></header>
     <article class="ms-scene" data-chapter="III"><div class="ms-chapter"><span>III</span><h3>The First Proof</h3></div><div class="ms-prose">
       <p>In his early twenties, the world became harder. He liked that more than he expected.</p>
       <p>The problems stopped being academic. Mistakes now had consequences. There were deadlines, money, clients, managers, systems that could fail, people who depended on decisions being correct.</p>
@@ -102,7 +101,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act is-turn" id="question" data-act="3">
-    <header class="ms-act-head"><span>Act III</span><h2>The trap</h2><p>Success was narrowing the life it was supposed to improve.</p></header>
+    <header class="ms-act-head"><h2>The trap</h2><p>Success was narrowing the life it was supposed to improve.</p></header>
     <article class="ms-scene" data-chapter="V"><div class="ms-chapter"><span>V</span><h3>The Question at Twenty-Nine</h3></div><div class="ms-prose">
       <p>The crisis did not arrive dramatically. There was no cinematic resignation. No spectacular betrayal. No collapse. That would have been easier.</p>
       <p>Instead, the structure simply stopped convincing him.</p>
@@ -128,7 +127,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act is-base" id="base" data-act="4">
-    <header class="ms-act-head"><span>Act IV</span><h2>Ownership</h2><p>He stopped asking for fewer constraints and began choosing them.</p></header>
+    <header class="ms-act-head"><h2>Ownership</h2><p>He stopped asking for fewer constraints and began choosing them.</p></header>
     <article class="ms-scene" data-chapter="VII"><div class="ms-chapter"><span>VII</span><h3>The Base</h3></div><div class="ms-prose">
       <p>In his early thirties he made several decisions that seemed unrelated to colleagues but were, to him, one decision. He established a permanent base.</p>
       <p>Not extravagant. Not designed to impress. His. A place where books could remain where he left them. Where he could work for six uninterrupted hours. Where the outside world did not determine the atmosphere.</p>
@@ -163,7 +162,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act" id="public" data-act="5">
-    <header class="ms-act-head"><span>Act V</span><h2>Transmission</h2><p>The work could travel farther than the person who made it.</p></header>
+    <header class="ms-act-head"><h2>Transmission</h2><p>The work could travel farther than the person who made it.</p></header>
     <article class="ms-scene" data-chapter="X"><div class="ms-chapter"><span>X</span><h3>The Public Work</h3></div><div class="ms-prose">
       <p>For most of his life he had resisted publication. The framework was incomplete. The data needed another pass. The edge cases were unresolved.</p>
       <p>His private standards were brutal because private knowledge could remain infinitely refined. Public knowledge could be criticised.</p>
@@ -199,7 +198,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act" id="dismantling" data-act="6">
-    <header class="ms-act-head"><span>Act VI</span><h2>Selection</h2><p>Mastery did not prevent rebuilding. It changed what he kept.</p></header>
+    <header class="ms-act-head"><h2>Selection</h2><p>Mastery did not prevent rebuilding. It changed what he kept.</p></header>
     <article class="ms-scene" data-chapter="XIII"><div class="ms-chapter"><span>XIII</span><h3>The Dismantling</h3></div><div class="ms-prose">
       <p>His fifties also brought disruption. Some partnerships ended. One major venture required reorganisation. Work became more international.</p>
       <p>For a period he spent substantial time away from the base he had protected so carefully. Structures he had built no longer fit perfectly.</p>
@@ -235,7 +234,7 @@ motion_scene: repair
   </section>
 
   <section class="ms-act is-home" id="last" data-act="7">
-    <header class="ms-act-head"><span>Act VII</span><h2>What remains</h2><p>The measure changed from being needed to building what could continue.</p></header>
+    <header class="ms-act-head"><h2>What remains</h2><p>The measure changed from being needed to building what could continue.</p></header>
     <article class="ms-scene" data-chapter="XVI"><div class="ms-chapter"><span>XVI</span><h3>The House</h3></div><div class="ms-prose">
       <p>The house changed over the decades. Books multiplied first. Then tools. Then objects he had made badly and kept because making them had mattered.</p>
       <p>A carefully designed chair. A mechanical instrument. Pieces of prototypes. Printed drafts filled with corrections. A workshop that surprised people who knew only his professional work.</p>

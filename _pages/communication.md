@@ -29,7 +29,6 @@ motion_scene: signal
 
 <header class="cm-hero" id="transfer">
   <div class="cm-hero-copy">
-    <p class="cm-kicker">A field guide for high-context minds</p>
     <h1>Your listener cannot see your whole map.</h1>
     <p>You may see the history, incentives, contradictions, risks, and long-term effects at once. The other person usually sees only the sentence you give them.</p>
   </div>
@@ -104,7 +103,7 @@ motion_scene: signal
   </div>
 
   <div class="cm-tool" id="cm-objective-tool">
-    <div class="cm-tool-head"><span>Interactive</span><h3>What must this conversation do?</h3><p>Choose one primary objective. The page will give you a starting move.</p></div>
+    <div class="cm-tool-head"><h3>What must this conversation do?</h3><p>Choose one primary objective. The page will give you a starting move.</p></div>
     <div class="cm-objective-grid" role="group" aria-label="Choose a communication objective">
       <button data-objective="inform"><b>Inform</b><small>share knowledge</small></button>
       <button data-objective="understand"><b>Understand</b><small>learn their view</small></button>
@@ -187,7 +186,7 @@ motion_scene: signal
   </div>
 
   <div class="cm-compress cm-tool">
-    <div class="cm-tool-head"><span>Practice</span><h3>Compress before you explain</h3><p>Paste a long explanation. Find the one sentence that must survive.</p></div>
+    <div class="cm-tool-head"><h3>Compress before you explain</h3><p>Paste a long explanation. Find the one sentence that must survive.</p></div>
     <label for="cm-long">Your full thought</label>
     <textarea id="cm-long" rows="5" placeholder="Write the detailed version here…"></textarea>
     <div class="cm-meter"><span><b id="cm-word-count">0</b> words</span><i><em id="cm-meter-fill"></em></i><span id="cm-time">0 sec</span></div>
@@ -295,7 +294,7 @@ motion_scene: signal
   </div>
 
   <div class="cm-support-tool cm-tool" id="cm-support-tool">
-    <div class="cm-tool-head"><span>One question</span><h3>What kind of help do you want?</h3></div>
+    <div class="cm-tool-head"><h3>What kind of help do you want?</h3></div>
     <div class="cm-support-buttons">
       <button data-support="listen"><b>Listen</b><small>Stay with me</small></button>
       <button data-support="think"><b>Think together</b><small>Help me understand</small></button>

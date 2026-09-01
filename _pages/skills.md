@@ -7,7 +7,6 @@ permalink: /expertise/
 redirect_to: /
 ---
 
-<p class="eyebrow">RESEARCH & ENGINEERING</p>
 
 <div id="skills-grid" class="skill-grid">
   {% for group in site.data.skills %}

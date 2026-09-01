@@ -130,7 +130,6 @@ def text_w(s, fs, title=False):
 SPECS = [
   dict(
     id="procaenet-flood-segmentation",
-    eyebrow="FLOOD SEGMENTATION — MULTISPECTRAL EO PIPELINE",
     chip="IEEE GRSL",
     lanes=["SATELLITE INPUT", "DUAL ENCODERS", "FUSION", "OUTPUT"],
     cols=[
@@ -145,7 +144,6 @@ SPECS = [
   ),
   dict(
     id="mining-footprint-segmentation",
-    eyebrow="MINING FOOTPRINTS — MULTI-MODAL EO FUSION",
     chip="REMOTE SENSING OF ENV",
     lanes=["INPUT STREAMS", "ENCODERS", "FUSION", "OUTPUT"],
     cols=[
@@ -162,7 +160,6 @@ SPECS = [
   ),
   dict(
     id="aquaculture-pond-detection",
-    eyebrow="AQUACULTURE EXPANSION — CHANGE DETECTION",
     chip="PATENT FILED",
     lanes=["INPUT", "SPECTRAL SCREEN", "SHAPE FILTER", "OUTPUT"],
     cols=[
@@ -176,7 +173,6 @@ SPECS = [
   ),
   dict(
     id="flood-urban-resilience",
-    eyebrow="FLOOD POLICY EVALUATION — EO × MIXED METHODS",
     chip="AQUA JOURNAL",
     lanes=["EVIDENCE STREAMS", "TRIANGULATION", "OUTPUT"],
     cols=[
@@ -191,7 +187,6 @@ SPECS = [
   ),
   dict(
     id="multilingual-vlm-crossmodal-conflict",
-    eyebrow="VLM SAFETY — CONFLICT, PROBING & STEERING",
     chip="APART RESEARCH",
     lanes=["BENCHMARK", "EVALUATION", "MECHANISTIC", "INTERVENTION"],
     cols=[
@@ -205,7 +200,6 @@ SPECS = [
   ),
   dict(
     id="heron-hijack-self-probe",
-    eyebrow="IN-CONTEXT HIJACK DETECTION — READ-ONLY SELF-PROBE",
     chip="AI SECURITY",
     lanes=["DATASET", "HIDDEN-STATE CAPTURE", "CONTROL-AWARE PROBE", "CONFORMAL GATE"],
     cols=[
@@ -222,7 +216,6 @@ SPECS = [
   ),
   dict(
     id="sea-vl-benchmark",
-    eyebrow="SEA-VL — MULTICULTURAL BENCHMARK PIPELINE",
     chip="ACL · MAIN CONFERENCE",
     lanes=["CROWDSOURCING", "QUALITY PIPELINE", "DATASET", "AUDIT"],
     cols=[
@@ -236,7 +229,6 @@ SPECS = [
   ),
   dict(
     id="gg-ez-regional-adaptation",
-    eyebrow="REGIONAL ADAPTATION — MERGE WITHOUT FORGETTING",
     chip="UNDER REVIEW · ARXIV",
     lanes=["INPUTS", "ADAPTATION", "MERGE", "OUTPUT"],
     cols=[
@@ -251,7 +243,6 @@ SPECS = [
   ),
   dict(
     id="commonlid-language-identification",
-    eyebrow="LANGUAGE ID — STRESS TEST ON REAL WEB DATA",
     chip="ACL CONFERENCE",
     lanes=["INPUT", "SYSTEMS", "RE-BENCHMARK", "OUTPUT"],
     cols=[
@@ -265,7 +256,6 @@ SPECS = [
   ),
   dict(
     id="share-of-voice-forecasting",
-    eyebrow="SOV FORECASTING — CALIBRATED UNCERTAINTY",
     chip="ARTEFACT",
     lanes=["DATA", "MODEL", "UNCERTAINTY", "DELIVERY"],
     cols=[
@@ -280,7 +270,6 @@ SPECS = [
   ),
   dict(
     id="biometric-authentication-credit-scoring",
-    eyebrow="BIOMETRIC AUTH & ALT-CREDIT — PRODUCTION ML",
     chip="GDP LABS",
     lanes=["TRAFFIC", "INFERENCE", "SERVICE", "CREDIT"],
     cols=[
@@ -294,7 +283,6 @@ SPECS = [
   ),
   dict(
     id="fraud-detection-pipeline",
-    eyebrow="FRAUD DETECTION — STREAMING MULTI-STAGE",
     chip="GDP LABS",
     lanes=["INGESTION", "PRE-FILTER", "DETECTION", "DECISIONS"],
     cols=[
@@ -309,7 +297,6 @@ SPECS = [
   ),
   dict(
     id="municipal-waste-forecasting",
-    eyebrow="WASTE LOGISTICS — FORECAST × POLICY IMPACT",
     chip="JAKARTA SMART CITY",
     lanes=["CITIZEN DATA", "FORECASTING", "CAUSAL CHECK", "OPERATIONS"],
     cols=[
@@ -323,7 +310,6 @@ SPECS = [
   ),
   dict(
     id="demand-forecasting-consulting",
-    eyebrow="DEMAND FORECASTING — CONSULTING CADENCE",
     chip="ARTEFACT",
     lanes=["TRIAGE", "MODELLING", "VALIDATION", "HANDOFF"],
     cols=[
@@ -337,7 +323,6 @@ SPECS = [
   ),
   dict(
     id="hakktaxi-ride-share",
-    eyebrow="RIDE-SHARE DEMAND — HACKATHON SPRINT",
     chip="AZURE APAC CHAMPION",
     lanes=["INPUT SIGNALS", "FEATURES", "MODEL", "OUTPUT"],
     cols=[
@@ -354,7 +339,6 @@ SPECS = [
   ),
   dict(
     id="telehealthmonitor-edge-ai",
-    eyebrow="EDGE VITALS MONITORING — PRIVACY BY DESIGN",
     chip="CAMBRIDGE · CAMVSCOVID",
     lanes=["SENSOR", "ON-DEVICE CV", "OPTIMISATION", "UPLINK"],
     cols=[
@@ -368,7 +352,6 @@ SPECS = [
   ),
   dict(
     id="community-ivr-voice-ai",
-    eyebrow="VOICE AI — OFFLINE-FIRST IVR",
     chip="CAL HACKS · UC BERKELEY",
     lanes=["CALL", "SPEECH", "REASONING", "RESPONSE"],
     cols=[
@@ -382,7 +365,6 @@ SPECS = [
   ),
   dict(
     id="plastic-bag-ban-causal-analysis",
-    eyebrow="PLASTIC-BAG BAN — CAUSAL POLICY ANALYSIS",
     chip="IEEE ICISS",
     lanes=["CITIZEN DATA", "NLP", "CAUSAL INFERENCE", "FINDING"],
     cols=[
@@ -396,7 +378,6 @@ SPECS = [
   ),
   dict(
     id="aicity-qwen-vl",
-    eyebrow="VLM FINE-TUNING — CONSTRAINED GPU MEMORY",
     chip="AI CITY CHALLENGE",
     lanes=["DATASET", "MEMORY FIT", "PEFT", "TRAINING"],
     cols=[
@@ -410,7 +391,6 @@ SPECS = [
   ),
   dict(
     id="vln-conformal-prediction",
-    eyebrow="VLN UNCERTAINTY — CALIBRATED HELP-SEEKING",
     chip="THESIS RESEARCH",
     lanes=["NAVIGATION BACKBONES", "CONFIDENCE RESCALING", "TRAJECTORY CALIBRATION", "HELP-SEEKING"],
     cols=[
@@ -427,7 +407,6 @@ SPECS = [
   ),
   dict(
     id="llm-d-inference-scheduler",
-    eyebrow="LLM INFERENCE — KUBERNETES SCHEDULING",
     chip="OPEN SOURCE · llm-d",
     lanes=["INGRESS", "SCHEDULER", "ROUTING", "BACKENDS"],
     cols=[
@@ -441,7 +420,6 @@ SPECS = [
   ),
   dict(
     id="spark-kafka-energy-forecasting",
-    eyebrow="ENERGY FORECASTING — BATCH-TO-STREAMING SPARK/KAFKA",
     chip="PERSONAL PROJECT",
     lanes=["BATCH TRAINING", "LIVE FEED", "STREAM SCORING", "OUTPUTS"],
     cols=[
@@ -555,11 +533,7 @@ def render_svg(spec, T):
     parts.append(f'<rect width="{W}" height="{H}" fill="{T["BG"]}"/>')
     parts.append(f'<rect width="{W}" height="{H}" fill="url(#dots)"/>')
 
-    # header
-    parts.append(
-        f'<text x="{MARGIN}" y="19" font-size="7" font-weight="700" '
-        f'letter-spacing="0.9" fill="{T["FAINT"]}">{esc(spec["eyebrow"])}</text>'
-    )
+    # Publication venue remains as compact diagram metadata.
     chip = spec["chip"]
     chip_w = text_w(chip, 6.3) + 0.5 * len(chip) + 14  # + letter-spacing
     parts.append(

@@ -27,7 +27,6 @@ image: /assets/img/read-people-hero.webp
 
 <header class="rp-hero" id="observe">
   <div class="rp-hero-copy">
-    <p class="rp-kicker">Observation before interpretation</p>
     <h1>See patterns quickly. Believe them slowly.</h1>
     <p>Reading people means making your best guess without pretending to know for sure. Notice what changed, consider several explanations, and test what each one predicts.</p>
     <div class="rp-hero-rule"><span>First rule</span><strong>Your best guess is not mind-reading</strong></div>
@@ -76,7 +75,7 @@ image: /assets/img/read-people-hero.webp
   <div class="rp-heading"><span>02</span><div><h2>Ask what could cause the behaviour</h2><p>Different motives can lead to the same action. Keep those explanations separate.</p></div></div>
 
   <div class="rp-hypothesis-tool">
-    <header><span>Three-explanation rule</span><h3>Why did they cancel?</h3><p>Choose the next piece of evidence. Watch which explanation becomes more likely.</p></header>
+    <header><h3>Why did they cancel?</h3><p>Choose the next piece of evidence. Watch which explanation becomes more likely.</p></header>
     <div class="rp-hypotheses">
       <article><span>A</span><b>Low interest</b><em id="rp-ha">34%</em><i><u id="rp-ba"></u></i></article>
       <article><span>B</span><b>Overloaded</b><em id="rp-hb">33%</em><i><u id="rp-bb"></u></i></article>

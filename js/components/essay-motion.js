@@ -10,7 +10,6 @@
   var scenes = {
     repair: {
       narrative: true,
-      kicker: 'As a boy, he fixed what he could',
       title: 'Being useful made him feel safe.',
       copy: 'A stuck drawer, a missed detail, a problem nobody else saw. Each repair made the room feel steadier.',
       steps: ['Notice', 'Needed', 'Trapped', 'Choose'],
@@ -21,10 +20,9 @@
         ['At twenty-nine, he opened a blank page', 'What is my ability for?', 'He wrote down what he wanted to protect, what he wanted to build, and which burdens were never his.']
       ]
     },
-    abstain: { kicker: 'Capability needs a stopping rule', title: 'Build the boundary.', copy: 'Measure the evidence. When support weakens, stop predicting and send the decision for review.', steps: ['Evidence', 'Measure', 'Abstain', 'Review'], nodes: [[95,110,'evidence','circle'],[275,220,'support','square'],[465,110,'stop','diamond'],[650,220,'review','circle']] },
+    abstain: { title: 'Build the boundary.', copy: 'Measure the evidence. When support weakens, stop predicting and send the decision for review.', steps: ['Evidence', 'Measure', 'Abstain', 'Review'], nodes: [[95,110,'evidence','circle'],[275,220,'support','square'],[465,110,'stop','diamond'],[650,220,'review','circle']] },
     agency: {
       narrative: true,
-      kicker: 'The application sat open for eleven days',
       title: 'She kept waiting to feel ready.',
       copy: 'Each night she changed one sentence, closed the laptop, and promised herself she would send it tomorrow.',
       steps: ['Wait', 'Send', 'Learn', 'Move'],
@@ -37,7 +35,6 @@
     },
     decision: {
       narrative: true,
-      kicker: 'The call came while he was still at dinner',
       title: 'They needed an answer tonight.',
       copy: 'The room went quiet. Urgency made every option feel final.',
       steps: ['Pressure', 'Protect', 'Test', 'Decide'],
@@ -50,7 +47,6 @@
     },
     control: {
       narrative: true,
-      kicker: 'At 6:40, the hospital called',
       title: 'There was nothing he could fix from the hallway.',
       copy: 'He refreshed the same message, paced between two chairs, and tried to think his way into a different outcome.',
       steps: ['Receive', 'Separate', 'Choose', 'Stay'],
@@ -61,10 +57,9 @@
         ['When the doctor came out, he was still afraid', 'He listened to every word.', 'Then he went inside, pulled the chair closer, and held his father’s hand.']
       ]
     },
-    strategy: { kicker: 'Every move changes what comes next', title: 'Watch the response.', copy: 'Your move changes the other person’s choices. Their response changes what makes sense for you to do next.', steps: ['Choose', 'Respond', 'Update', 'Repeat'], nodes: [[95,105,'you','circle'],[275,220,'them','circle'],[465,105,'payoff','square'],[650,220,'next round','diamond']] },
+    strategy: { title: 'Watch the response.', copy: 'Your move changes the other person’s choices. Their response changes what makes sense for you to do next.', steps: ['Choose', 'Respond', 'Update', 'Repeat'], nodes: [[95,105,'you','circle'],[275,220,'them','circle'],[465,105,'payoff','square'],[650,220,'next round','diamond']] },
     feedback: {
       narrative: true,
-      kicker: 'The message arrived at 4:17',
       title: 'His stomach dropped before he finished reading.',
       copy: 'Three words on a screen turned months of work into a judgment about who he was.',
       steps: ['Result', 'Feeling', 'Look Back', 'Continue'],
@@ -77,7 +72,6 @@
     },
     uncertainty: {
       narrative: true,
-      kicker: 'At 2:13 a.m., she checked again',
       title: 'The answer had not changed.',
       copy: 'She reread the message, searched the same question, and felt relief for less than a minute.',
       steps: ['Check', 'Loop', 'Stop', 'Live'],
@@ -88,10 +82,9 @@
         ['At nine, she made the call', 'Her voice shook on the first word.', 'She asked the one question that could change her decision, wrote down the answer, and went to work.']
       ]
     },
-    signal: { kicker: 'The other person needs a clear path', title: 'Make it easy to follow.', copy: 'Give the listener a clear point, enough context, and a next step they can question or use.', steps: ['Intent', 'Structure', 'Signal', 'Received'], nodes: [[95,220,'intent','circle'],[275,105,'structure','square'],[465,220,'signal','diamond'],[650,105,'received','circle']] },
+    signal: { title: 'Make it easy to follow.', copy: 'Give the listener a clear point, enough context, and a next step they can question or use.', steps: ['Intent', 'Structure', 'Signal', 'Received'], nodes: [[95,220,'intent','circle'],[275,105,'structure','square'],[465,220,'signal','diamond'],[650,105,'received','circle']] },
     consent: {
       narrative: true,
-      kicker: 'They always answered',
       title: 'Soon, nobody asked if they could.',
       copy: 'The messages came late. They fixed the missed details, calmed the worried people, and went to bed carrying tomorrow.',
       steps: ['Carry', 'Disappear', 'Ask', 'Return'],
@@ -104,7 +97,6 @@
     },
     rapport: {
       narrative: true,
-      kicker: 'He stood at the edge of the room',
       title: 'The room was already mid-conversation.',
       copy: 'He had rehearsed something clever on the way over. Standing there, none of it seemed worth saying out loud.',
       steps: ['Edge', 'Open', 'Land', 'Leave'],
@@ -117,7 +109,6 @@
     },
     conversion: {
       narrative: true,
-      kicker: 'That night, there was no lesson',
       title: 'There was only hurt.',
       copy: 'They drank water, closed the door, and sat beside someone who did not ask them to explain.',
       steps: ['Hurt', 'Shelter', 'Name', 'Build'],
@@ -137,7 +128,6 @@
     */
     curiosity: {
       narrative: true,
-      kicker: 'The number was three points off',
       title: 'Everyone had already moved on.',
       copy: 'The meeting closed the item in under a minute. She wrote the number down and kept looking at it.',
       steps: ['Notice', 'Explain', 'Test', 'Update'],
@@ -156,7 +146,6 @@
     record: {
       narrative: true,
       cinematic: true,
-      kicker: 'Vicky Feliren',
       title: 'I build AI systems and lead research beyond the lab.',
       copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
       steps: ['Record', 'Built from zero', 'Banking AI systems', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
@@ -438,10 +427,9 @@
   }
 
   var host = el('section', 'em-story');
-  host.setAttribute('aria-label', scene.kicker);
+  host.setAttribute('aria-label', scene.title);
   var pin = el('div', 'em-pin');
   var copy = el('div', 'em-copy');
-  copy.appendChild(el('span', 'em-kicker', scene.kicker));
   copy.appendChild(el('h2', '', scene.title));
   copy.appendChild(el('p', '', scene.copy));
   setHighlightedText(copy.querySelector('p'), scene.copy, scene.highlights && scene.highlights[0]);
@@ -451,10 +439,10 @@
   var count = scene.steps.length;
   pin.appendChild(copy);
 
-  // The three copy lines, animated individually on cinematic scenes and left alone
+  // The heading and copy animate individually on cinematic scenes and stay together
   // everywhere else, where .em-copy still fades as one block.
   var lines = scene.cinematic
-    ? [copy.querySelector('.em-kicker'), copy.querySelector('h2'), copy.querySelector('p')]
+    ? [copy.querySelector('h2'), copy.querySelector('p')]
     : null;
 
   var narrative = scene.narrative ? buildNarrativeCanvas() : null;
@@ -1157,7 +1145,7 @@
 
     if (lines && !reduced) {
       /*
-        The three lines arrive in reading order rather than as one block, on the
+        The two lines arrive in reading order rather than as one block, on the
         beat's own clock, so the column composes itself while the pin is still
         settling. The exit fade stays on the scroll and stays shared, so the whole
         column leaves together on the boundary the reader is driving towards.
@@ -1179,7 +1167,6 @@
     if (stage !== lastStage) {
       lastStage = stage;
       if (scene.frames) {
-        copy.querySelector('.em-kicker').textContent = scene.frames[stage][0];
         copy.querySelector('h2').textContent = scene.frames[stage][1];
         setHighlightedText(copy.querySelector('p'), scene.frames[stage][2], scene.highlights && scene.highlights[stage]);
       }

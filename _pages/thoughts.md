@@ -8,85 +8,71 @@ layout-class: page writings-page
 
 <div class="essay-feature-block">
 <a class="essay-feature" href="/story/">
-<span class="essay-feature-label">Visual story</span>
 <span class="essay-feature-title">A Method for What Breaks</span>
 <span class="essay-feature-desc">A life built through difficult systems, the trap of becoming useful, and the long work of deciding what deserves carrying.</span>
 <span class="read-more">Enter the story →</span>
 </a>
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
-<span class="essay-feature-label">Essay</span>
 <span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
 <span class="essay-feature-desc">Why safe deployment depends on models knowing when to abstain.</span>
 <span class="read-more">Read the essay →</span>
 </a>
 <a class="essay-feature" href="/high-agency/">
-<span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">High Agency</span>
 <span class="essay-feature-desc">My notes on George Mack's essay, rebuilt as diagrams you can poke at. Diagnose your own three wheels, walk the flow chart, play the trap game.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/principles/">
-<span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">The Life Operating Principle</span>
 <span class="essay-feature-desc">A personal operating manual for decisions under pressure. Search by how you feel, set the reversibility dial, run the six questions.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/curious/">
-<span class="essay-feature-label">Interactive field guide</span>
 <span class="essay-feature-title">Stay Curious</span>
 <span class="essay-feature-desc">Notice what does not fit, test the explanation, and update when the evidence earns it. Keep one live question without turning research into avoidance.</span>
 <span class="read-more">Open the field guide →</span>
 </a>
 <a class="essay-feature" href="/stoic/">
-<span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Stoic</span>
 <span class="essay-feature-desc">Marcus Aurelius and Epictetus as a working manual. Sort what is actually up to you, and search the passages by the state you are in.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/game-theory/">
-<span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Game Theory of Life</span>
 <span class="essay-feature-desc">Most decisions are not solo problems. Solve eight payoff matrices, watch cooperation become rational as the horizon lengthens, and run a ruin simulation.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/read-people/">
-<span class="essay-feature-label">Interactive field manual</span>
 <span class="essay-feature-title">How to Read People</span>
 <span class="essay-feature-desc">Observe change, build three plausible explanations, and test what each one predicts. Read behaviour without pretending you can read minds.</span>
 <span class="read-more">Open the field manual →</span>
 </a>
 <a class="essay-feature" href="/success-failure/">
-<span class="essay-feature-label">Interactive note</span>
 <span class="essay-feature-title">Success &amp; Failure</span>
 <span class="essay-feature-desc">How to diagnose a result, scale what repeats, recover without escalating, and choose the next move without turning the outcome into identity.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/uncertainty-and-emotions/">
-<span class="essay-feature-label">Interactive manual</span>
 <span class="essay-feature-title">The Uncertainty Operating System</span>
 <span class="essay-feature-desc">How to spot the certainty trap, manage an intense state, decide under doubt, and keep moving while an answer remains unavailable.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/life-challenges/">
-<span class="essay-feature-label">Interactive visual essay</span>
 <span class="essay-feature-title">The Silver Lining of a Difficult Life</span>
 <span class="essay-feature-desc">Difficulty supplies raw material. Growth depends on what surrounds it. Test the conditions that turn pressure into capacity, map the futures that certainty erases, and decide whether an obstacle asks you to strengthen, redesign, wait, or leave.</span>
 <span class="read-more">Enter the field guide →</span>
 </a>
 <a class="essay-feature" href="/small-talk/">
-<span class="essay-feature-label">Interactive manual</span>
 <span class="essay-feature-title">Small Talk as Calibration</span>
 <span class="essay-feature-desc">A field manual for people who prefer depth. A seven-move loop, the ladder from weather to meaning, seven cultural variables to read instead of memorising countries, twenty rooms with their openings and exits, and the repair line for every way it goes wrong.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/communication/">
-<span class="essay-feature-label">Interactive manual</span>
 <span class="essay-feature-title">Communication 101</span>
 <span class="essay-feature-desc">Your understanding is more developed than your explanation. Nine working figures: watch what lands fall as you say more, find where two people are doing different jobs, and see what a week of silence costs.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/self-love/">
-<span class="essay-feature-label">Interactive visual essay</span>
 <span class="essay-feature-title">Self-Love as Risk Control</span>
 <span class="essay-feature-desc">Capacity is not consent. Test the achievement treadmill, open the golden cage, govern the shadow side of strength, and decide as trustee for the person who inherits the life.</span>
 <span class="read-more">Open the visual essay →</span>
@@ -97,7 +83,7 @@ layout-class: page writings-page
 
 {% if site.data.notes %}
 <div class="notes-section">
-  <h2 class="t-eyebrow" style="margin:0 0 0.5rem;font-weight:inherit;line-height:inherit">Research Notes</h2>
+  <h2>Research Notes</h2>
   <p class="section-note" style="margin-top:0">Short notes on what research papers show, where their limits lie, and why those limits matter.</p>
   <div class="notes-list">
     {% for note in site.data.notes %}
@@ -118,7 +104,7 @@ layout-class: page writings-page
 
 {% if site.data.features %}
 <div class="features-section">
-  <h2 class="t-eyebrow" style="margin:0 0 0.75rem;font-weight:inherit;line-height:inherit">Featured In</h2>
+  <h2>Featured In</h2>
   <div class="features-grid">
     {% for feature in site.data.features %}
     <div class="feature-card{% if feature.image %} feature-card--has-img{% endif %}">
@@ -325,7 +311,6 @@ layout-class: page writings-page
 
   /* ── Featured Essay ──────────────────────────────────── */
   .essay-feature-block {
-    counter-reset: feature;
     position: relative;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -338,7 +323,6 @@ layout-class: page writings-page
     padding: clamp(0.4rem, 1.5vw, 1.1rem);
   }
   .essay-feature {
-    counter-increment: feature;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -356,17 +340,6 @@ layout-class: page writings-page
     isolation: isolate;
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
-  .essay-feature::before {
-    content: counter(feature, decimal-leading-zero);
-    position: absolute;
-    z-index: -1;
-    top: -0.12em;
-    right: 0.08em;
-    color: color-mix(in srgb, var(--accent) 9%, transparent);
-    font: 600 clamp(5rem, 10vw, 10rem)/1 "Space Grotesk", sans-serif;
-    letter-spacing: -0.08em;
-    pointer-events: none;
-  }
   .essay-feature::after {
     content: "";
     position: absolute;
@@ -383,7 +356,7 @@ layout-class: page writings-page
   .essay-feature:nth-child(1) { grid-column: span 8; grid-row: span 2; min-height: 30rem; background: linear-gradient(145deg, #101723, #182637 58%, #2c2928); }
   .essay-feature:nth-child(1) .essay-feature-title { max-width: 10ch; color: #f2eee6; font-size: clamp(2.4rem, 5vw, 5.2rem); line-height: 0.94; letter-spacing: -0.055em; }
   .essay-feature:nth-child(1) .essay-feature-desc { max-width: 42rem; color: #b9c0c8; font-size: 1rem; }
-  .essay-feature:nth-child(1) .essay-feature-label,.essay-feature:nth-child(1) .read-more { color: #d6a642; }
+  .essay-feature:nth-child(1) .read-more { color: #d6a642; }
   .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
   .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
   /* High Agency, Life Operating Principle, and Curious share one row. */
@@ -398,11 +371,6 @@ layout-class: page writings-page
   .essay-feature:nth-child(12) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
   .essay-feature:nth-child(13) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
   .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
-  .essay-feature-label {
-    display: block;
-    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
-  }
   .essay-feature-title { display: block; max-width: 18ch; font-family: "Space Grotesk", var(--font-display, sans-serif); font-size: clamp(1.35rem, 2.3vw, 2.15rem); font-weight: 650; line-height: 1.08; letter-spacing: -0.035em; color: var(--text); margin-bottom: 0.65rem; }
   .essay-feature-desc { display: block; max-width: 58ch; color: var(--muted); font-size: 0.92rem; line-height: 1.62; }
   .essay-feature .read-more { display: inline-block; width: max-content; margin-top: 1rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }

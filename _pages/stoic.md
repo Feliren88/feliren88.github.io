@@ -25,7 +25,6 @@ motion_scene: control
      00 · THE TWO MEN
      ═══════════════════════════════════════════════════════ -->
 <section class="st-part st-prose" id="two">
-  <p class="st-kicker">Event, judgment, response</p>
 
   <figure class="st-fig" id="stfig-rest">
     <figcaption><span class="n">Figure</span><b>What your peace is resting on</b><em>Move the slider, then break the news.</em></figcaption>
@@ -111,7 +110,6 @@ motion_scene: control
   <div class="st-lab" id="st-sorter">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Exercise</p>
         <h5>Draw the line</h5>
       </div>
       <span class="st-hint">Ten items. Answer fast.</span>
@@ -169,7 +167,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Machine</p>
         <h5>Same event, different judgement</h5>
       </div>
       <span class="st-hint">Only one row is a lever</span>
@@ -222,7 +219,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Diagram</p>
         <h5>Judge, act, want</h5>
       </div>
       <span class="st-hint">Hover a corner</span>
@@ -266,7 +262,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Start here</p>
         <h5>What is happening?</h5>
       </div>
       <span class="st-hint">Plain words. No Greek required.</span>
@@ -362,7 +357,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Exercise</p>
         <h5>Pull back</h5>
       </div>
       <span class="st-hint">Drag to zoom out</span>
@@ -405,7 +399,7 @@ motion_scene: control
 
   <div class="st-lab">
     <div class="st-lab-head">
-      <div><p class="t-eyebrow">Diagram</p><h5>The shape of a day</h5></div>
+      <div><h5>The shape of a day</h5></div>
       <span class="st-hint">Select a point on the arc</span>
     </div>
     <svg class="st-day" id="st-day" viewBox="0 0 520 190" role="img"
@@ -470,7 +464,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Exercise</p>
         <h5><svg class="st-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;vertical-align:-0.15em;margin-right:0.35rem"><use href="#si-premeditate"/></svg>Name it now, so it cannot ambush you</h5>
       </div>
       <span class="st-hint">Nothing leaves your browser</span>
@@ -518,7 +511,6 @@ motion_scene: control
   <div class="st-lab">
     <div class="st-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>How long a name lasts</h5>
       </div>
       <span class="st-hint">Illustrative shape, not a measurement</span>
@@ -572,7 +564,7 @@ motion_scene: control
   that help and leave this one unresolved.</p>
 
   <div class="st-lab st-verdict-lab" id="st-verdict-lab">
-    <div class="st-lab-head"><div><p class="t-eyebrow">Reading test</p><h5>Keep the tool without forcing a tidy conclusion</h5></div><span class="st-lab-hint">Select both sides</span></div>
+    <div class="st-lab-head"><div><h5>Keep the tool without forcing a tidy conclusion</h5></div><span class="st-lab-hint">Select both sides</span></div>
     <div class="st-verdict-grid"><button type="button" data-st-verdict="keep"><b>Keep</b><span>Examine the judgment added to an event.</span></button><button type="button" data-st-verdict="open"><b>Leave unresolved</b><span>Whether distance from loss can coexist with loving fully.</span></button></div>
     <p class="st-verdict-read" id="st-verdict-read" role="status">Keep the useful claim and leave the unresolved one open.</p>
   </div>

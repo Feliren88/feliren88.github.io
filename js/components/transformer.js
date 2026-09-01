@@ -521,7 +521,6 @@
     var controls = h('div', { 'class': 'tf-controls' });
     host.appendChild(h('header', { 'class': 'tf-head' }, [
       h('div', {}, [
-        h('span', { 'class': 'tf-kicker', text: 'watch it run' }),
         h('h3', { 'class': 'tf-title', text: cfg.title })
       ]),
       controls

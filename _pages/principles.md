@@ -26,7 +26,6 @@ motion_scene: decision
      ═══════════════════════════════════════════════════════ -->
 <section class="pr-part pr-prose" id="rule">
   <div class="pr-central">
-    <p class="t-eyebrow" style="margin:0 0 0.5rem">The central rule</p>
     <p class="lead-rule">Protect your future ability to choose.</p>
     <div class="pr-story-path" aria-label="Decision path from pressure to deliberate scale">
       {% assign pr_story_labels = "Pressure,Stop,Test,Protect,Scale" | split: "," %}
@@ -81,7 +80,6 @@ motion_scene: decision
   <div class="pr-console">
     <div class="pr-console-head">
       <div>
-        <p class="t-eyebrow">Start here</p>
         <h5>What is happening right now?</h5>
       </div>
       <span class="pr-hint">Plain words. No categories to learn.</span>
@@ -104,7 +102,6 @@ motion_scene: decision
   <div class="pr-console">
     <div class="pr-console-head">
       <div>
-        <p class="t-eyebrow">Checklist</p>
         <h5>Can you answer all six?</h5>
       </div>
       <span class="pr-hint">Mark each one honestly</span>
@@ -182,7 +179,6 @@ motion_scene: decision
   <div class="pr-console">
     <div class="pr-console-head">
       <div>
-        <p class="t-eyebrow">Tool</p>
         <h5>How hard is this to undo?</h5>
       </div>
       <span class="pr-hint">The dial sets your speed</span>
@@ -330,7 +326,6 @@ motion_scene: decision
   <div class="pr-console">
     <div class="pr-console-head">
       <div>
-        <p class="t-eyebrow">Sequence</p>
         <h5>Eight steps, in order</h5>
       </div>
       <span class="pr-hint">Tap any step</span>

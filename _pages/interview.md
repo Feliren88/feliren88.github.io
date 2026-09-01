@@ -16,7 +16,6 @@ extra_js:
   {% include interview-icons.html %}
 
   <header class="ivh-header">
-    <span class="ivh-eyebrow">Private</span>
     <h1 class="ivh-title">Interview</h1>
     <p class="ivh-lede">Choose a track. Each module explains one technical idea with a diagram, plain English, the required maths, and a question to answer without notes.</p>
     {% assign topics = site.data.interview.topics %}
@@ -31,7 +30,6 @@ extra_js:
 
   <section class="ivh-contract" aria-labelledby="ivh-contract-title">
     <div>
-      <span class="ivh-contract-kicker">Mission</span>
       <h2 id="ivh-contract-title">Practise for an answer you can defend</h2>
       <p>{{ site.data.interview_learning.mission.outcome }}</p>
     </div>

@@ -32,7 +32,6 @@ extra_js: /js/components/contact.js
 
 <section class="ct-fit" id="contact-engagements" aria-labelledby="ct-fit-title">
   <div class="ct-section-head">
-    <p class="ct-eyebrow">Good reasons to reach out</p>
     <h2 id="ct-fit-title">Start with the kind of conversation.</h2>
     <p>A useful first message does not need to be long. It should make the problem and the next decision visible.</p>
   </div>
@@ -50,7 +49,6 @@ extra_js: /js/components/contact.js
 
 <section class="ct-reach" aria-labelledby="ct-reach-title">
   <div class="ct-section-head compact">
-    <p class="ct-eyebrow">Reach me</p>
     <h2 id="ct-reach-title">Choose the shortest route.</h2>
   </div>
   <div id="contact-grid" class="ct-directory">

@@ -25,7 +25,6 @@ motion_scene: strategy
      00 · THE SHIFT
      ═══════════════════════════════════════════════════════ -->
 <section class="gt-part gt-prose" id="shift">
-  <p class="gt-kicker">Move, response, position</p>
   <p class="gt-lead">Your move changes their options. Their response changes yours.</p>
   <div class="gt-story-board" aria-label="A strategic move creates a response and a new position">
     <div class="gt-story-player you"><svg class="gt-i" viewBox="0 0 24 24"><use href="#gt-sequence"/></svg><span>Your move</span><small>a</small></div>
@@ -92,7 +91,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Solver</p>
         <h5>Pick a game, then click a cell</h5>
       </div>
       <span class="gt-hint">NE marked by the solver, not by hand</span>
@@ -130,7 +128,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Layers</p>
         <h5>Same decision, five boards</h5>
       </div>
       <span class="gt-hint">Depth increases downward</span>
@@ -191,7 +188,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>Move the horizon</h5>
       </div>
       <span class="gt-hint">Values read from the matrix above</span>
@@ -259,7 +255,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Diagnostic</p>
         <h5>Seven things you can change</h5>
       </div>
       <span class="gt-hint">Tap one</span>
@@ -314,7 +309,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Sorter</p>
         <h5>Reversibility against downside</h5>
       </div>
       <span class="gt-hint">Hover a quadrant</span>
@@ -389,7 +383,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Simulation</p>
         <h5>Sixty paths through the same favourable bet</h5>
       </div>
       <span class="gt-hint">Red paths hit the floor</span>
@@ -461,7 +454,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Checklist</p>
         <h5>Name the game first</h5>
       </div>
       <span class="gt-hint">Answer before committing</span>
@@ -562,7 +554,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>Three options, one exploration dial</h5>
       </div>
       <span class="gt-hint">Grey is evidence, blue is uncertainty</span>
@@ -612,7 +603,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Model</p>
         <h5>Forty rounds of reliability, then one defection</h5>
       </div>
       <span class="gt-hint">Move the asymmetry</span>
@@ -670,7 +660,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Dashboard</p>
         <h5>Score at least five domains</h5>
       </div>
       <span class="gt-hint">Stays in this browser</span>
@@ -704,7 +693,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Periods</p>
         <h5>Six regimes with different priorities</h5>
       </div>
       <span class="gt-hint">Tap one</span>
@@ -732,7 +720,6 @@ motion_scene: strategy
   <div class="gt-lab">
     <div class="gt-lab-head">
       <div>
-        <p class="t-eyebrow">Sorter</p>
         <h5>Where you are this year</h5>
       </div>
       <span class="gt-hint">Hover a quadrant</span>

@@ -66,14 +66,12 @@
 
 /* Every label that was `text-transform: uppercase` now reads from the
    token, so one setting reaches all of them. */
-.ivh-eyebrow,
 .ivh-group-title,
 .ivh-card-meta,
 .ivh-stats span,
 .syl-group,
 .syl-panel-title,
 .syl-check-label,
-.ivc-kicker,
 .ivz-col-k,
 .ivz-branch-k,
 .ivz-ends,
@@ -136,15 +134,6 @@
    ════════════════════════════════════════════════════════ */
 
 .ivh-header { max-width: 46rem; margin-bottom: 2.5rem; }
-.ivh-eyebrow {
-  display: inline-block;
-  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  letter-spacing: var(--rd-caps-track);
-  color: var(--accent);
-  border: 1px solid var(--border-ui);
-  border-radius: 999px;
-  padding: 0.35rem 0.7rem;
-}
 .ivh-title {
   font: 600 clamp(2.4rem, 5.5vw, 4rem) / 0.95 "Space Grotesk", sans-serif;
   letter-spacing: -0.05em;
@@ -185,13 +174,6 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface);
-}
-.ivh-contract-kicker {
-  display: block;
-  font: 600 var(--fs-2xs) / 1.35 "Space Grotesk", sans-serif;
-  color: var(--accent);
-  letter-spacing: var(--rd-caps-track);
-  text-transform: var(--rd-caps);
 }
 .ivh-contract h2 {
   margin: 0.35rem 0 0.55rem;
@@ -448,7 +430,6 @@
 }
 .syl-prereqs {
   padding-left: 1.2rem;
-  border-left: 1px solid var(--line);
 }
 .syl-prereqs h3 { margin: 0 0 0.55rem; font-size: var(--fs-xs); color: var(--text); }
 .syl-prereqs ul { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; padding: 0; margin: 0 0 0.65rem; }
@@ -684,7 +665,6 @@
 .syl-check {
   margin: 0;
   padding: 0.85rem 1rem;
-  border-left: 2px solid var(--accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: var(--stat-fill);
   font-size: var(--fs-sm);
@@ -1132,11 +1112,10 @@
 .ivc-back { display: none; }
 .ivc-card.is-flipped .ivc-front { display: none; }
 .ivc-card.is-flipped .ivc-back { display: block; }
-.ivc-kicker {
+.ivc-context {
   display: block;
-  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  letter-spacing: var(--rd-caps-track);
-  color: var(--accent);
+  font: 500 var(--fs-sm) / 1.35 "Manrope", sans-serif;
+  color: var(--muted);
   margin-bottom: 0.7rem;
 }
 .ivc-q {
@@ -1268,7 +1247,7 @@
   .ivh-contract,
   .syl-orientation,
   .syl-source { grid-template-columns: 1fr; }
-  .syl-prereqs { padding: 1rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .syl-prereqs { padding: 1rem 0 0; border-top: 1px solid var(--line); }
   .syl-header { flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem; }
   .syl-header-ring { flex-direction: row; align-items: center; }
   .syl-method { grid-template-columns: 1fr; }
@@ -1409,7 +1388,6 @@
 .syl-plain {
   margin: 0 0 1.1rem;
   padding: 0.9rem 1.05rem;
-  border-left: 2px solid var(--cta);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: var(--surface-soft);
 }
@@ -1942,14 +1920,6 @@
   background: var(--bg-soft);
 }
 .an-head { margin-bottom: 1rem; }
-.an-kicker {
-  display: block;
-  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: var(--rd-caps);
-  letter-spacing: var(--rd-caps-track);
-  color: var(--cta);
-  margin-bottom: 0.5rem;
-}
 .an-title {
   font: 600 var(--fs-title) / 1.4 "Space Grotesk", sans-serif;
   color: var(--text);
@@ -1979,7 +1949,6 @@
   min-height: 3.2em;
   margin: 0.5rem 0 0;
   padding: 0.75rem 0.9rem;
-  border-left: 2px solid var(--cta);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: var(--surface);
   font-size: var(--fs-base);
@@ -2545,7 +2514,6 @@
   margin: 0.7rem 0 0;
   max-width: var(--rd-measure);
   padding-left: 0.7rem;
-  border-left: 2px solid var(--cta);
   font-size: var(--fs-xs);
   line-height: var(--rd-lead);
   color: var(--muted);
@@ -2700,11 +2668,9 @@ html[data-theme="light"] .ivm {
 
 .ivmp-head-row { margin-bottom: 0.5rem; }
 
-.ivmp-kicker {
-  font: 600 var(--fs-2xs) / 1.35 "Space Grotesk", sans-serif;
-  color: var(--accent);
-  letter-spacing: var(--rd-caps-track);
-  text-transform: var(--rd-caps);
+.ivmp-title {
+  font: 600 var(--fs-sm) / 1.35 "Space Grotesk", sans-serif;
+  color: var(--text);
 }
 
 .ivmp-svg {
@@ -2817,7 +2783,6 @@ html[data-theme="light"] .ivm {
 .ivm-live {
   margin: 0.15rem 0 0.55rem;
   padding: 0.5rem 0.7rem;
-  border-left: 2px solid var(--accent);
   border-radius: 0 var(--radius-sm, 6px) var(--radius-sm, 6px) 0;
   background: var(--surface);
   overflow-x: auto;

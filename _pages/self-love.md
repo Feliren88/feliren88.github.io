@@ -18,7 +18,6 @@ motion_scene: consent
   <a href="#consent"><span>01</span>Consent</a><a href="#trial"><span>02</span>Worth</a><a href="#cage"><span>03</span>Freedom</a><a href="#strengths"><span>04</span>Governor</a><a href="#timing"><span>05</span>Speak</a><a href="#trustee"><span>06</span>Choose</a>
 </nav>
 <section class="sl-section sl-hero" id="control-system">
-  <p class="sl-kicker">The person you must not abandon</p>
   <h1>Your strengths need a governor.</h1>
   <p class="sl-hero-deck">Self-love keeps intelligence, discipline, ambition, and resilience from building a life that rewards everyone except you.</p>
 
@@ -41,7 +40,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="consent">
-  <header class="sl-section-head"><span>01 · Set the load by consent</span><h2>Let consent decide your obligations.</h2></header>
+  <header class="sl-section-head"><h2>Let consent decide your obligations.</h2></header>
   <figure class="sl-figure sl-load-figure">
     <figcaption><b>Capacity / consent control</b><span>Move the load and the protection threshold.</span></figcaption>
     <div class="sl-load-stage" aria-hidden="true">
@@ -59,7 +58,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="trial">
-  <header class="sl-section-head"><span>02 · End the trial</span><h2>Let achievement express the worth you already have.</h2></header>
+  <header class="sl-section-head"><h2>Let achievement express the worth you already have.</h2></header>
   <figure class="sl-figure sl-trial-figure">
     <figcaption><b>The moving standard</b><span>Add achievements and watch the finish line move.</span></figcaption>
     <div class="sl-trial-stage">
@@ -78,7 +77,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="cage">
-  <header class="sl-section-head"><span>03 · The golden cage</span><h2>A life can become more impressive while becoming less inhabitable.</h2></header>
+  <header class="sl-section-head"><h2>A life can become more impressive while becoming less inhabitable.</h2></header>
   <figure class="sl-figure sl-cage-figure">
     <figcaption><b>External reward / internal freedom</b><span>Increase the visible success. Then protect freedom.</span></figcaption>
     <div class="sl-cage-stage">
@@ -97,7 +96,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="strengths">
-  <header class="sl-section-head"><span>04 · Govern the strengths</span><h2>Every strength carries a failure mode.</h2></header>
+  <header class="sl-section-head"><h2>Every strength carries a failure mode.</h2></header>
   <div class="sl-strength-system">
     <div class="sl-strength-list" id="sl-strength-list" role="listbox" aria-label="Choose a strength"></div>
     <div class="sl-strength-viz" aria-live="polite">
@@ -110,7 +109,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="timing">
-  <header class="sl-section-head"><span>05 · Speak earlier</span><h2>Speak while you can still describe what happened.</h2></header>
+  <header class="sl-section-head"><h2>Speak while you can still describe what happened.</h2></header>
   <figure class="sl-figure sl-timing-figure">
     <figcaption><b>The cost of delayed communication</b><span>Move the moment when the issue is spoken.</span></figcaption>
     <div class="sl-timing-stage">
@@ -129,7 +128,7 @@ motion_scene: consent
 </section>
 
 <section class="sl-section" id="trustee">
-  <header class="sl-section-head"><span>06 · Lead the future self</span><h2>Every decision has a stakeholder who cannot vote yet.</h2></header>
+  <header class="sl-section-head"><h2>Every decision has a stakeholder who cannot vote yet.</h2></header>
   <div class="sl-trustee-map">
     <div class="sl-now"><span>present self</span><b>chooses</b></div>
     <div class="sl-inheritance" aria-hidden="true"><i></i><small>inherits</small></div>

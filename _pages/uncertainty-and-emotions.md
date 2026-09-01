@@ -27,7 +27,6 @@ motion_scene: uncertainty
 
 <header class="ue-hero" aria-labelledby="ue-hero-title">
   <div>
-    <p class="ue-kicker">A field manual for unresolved questions</p>
     <h1 id="ue-hero-title">You can proceed without certainty.</h1>
     <p>Separate what the situation requires from what discomfort demands. Doubt can remain while you move.</p>
   </div>
