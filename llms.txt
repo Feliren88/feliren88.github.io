@@ -27,7 +27,7 @@ Vicky Feliren is an applied scientist specializing in AI safety and the developm
 
 ### Cultural & Multilingual AI
 - [SEA-VL Benchmark](https://vickyfeliren.com/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
-- [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/): (Under Review). SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness 1.569 vs 1.491 baseline; 98%+ global benchmark retention.
+- [GG-EZ Regional Adaptation](https://vickyfeliren.com/usecases/gg-ez-regional-adaptation/) — Findings of AACL-IJCNLP 2026. SDXL fine-tuning for Southeast Asian cultural adaptation with linear weight-merging. Cultural correctness reached 1.569 compared with the 1.491 baseline, while global benchmark retention exceeded 98%.
 - [CommonLID Language Identification](https://vickyfeliren.com/usecases/commonlid-language-identification/): ACL 2026. Re-benchmarking LID systems on realistic SEA web data, exposing accuracy gaps on code-switched, romanized, and dialect-heavy text.
 
 ### Production ML, Industry
@@ -45,7 +45,7 @@ Vicky Feliren is an applied scientist specializing in AI safety and the developm
 - [Qwen VL Fine-tuning for AI City Challenge 2026](https://vickyfeliren.com/usecases/aicity-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 
 ### Ongoing Projects
-- [Conformal Prediction for VLN](https://vickyfeliren.com/usecases/vln-conformal-prediction/): Thesis research. Parameter-free confidence-rescaled conformal score restores calibrated coverage across VLN-DUET, VLN-HAMT, and Recurrent VLN-BERT on R2R and REVERIE; closed-loop help-seeking lifts success from 71% to 91%.
+- [ENCP for Vision-and-Language Navigation](https://vickyfeliren.com/usecases/vln-conformal-prediction/) — First-author arXiv preprint. Episode-normalized conformal prediction restores calibrated coverage across four VLN policies on R2R and REVERIE. The paper is available at https://arxiv.org/abs/2609.17499
 - [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
 ## Key Research
@@ -54,7 +54,8 @@ Vicky Feliren is an applied scientist specializing in AI safety and the developm
 - **ProCANet** (IEEE GRSL 2025, First Author): Progressive cross-attention network for flood segmentation using multispectral satellite imagery, IoU 0.815, F1 0.898 on Sen1Floods11. https://ieeexplore.ieee.org/document/10750225
 - **Mining Segmentation** (Remote Sensing of Environment, IF 11.4, 2025, Co-Author): Multi-modal deep learning for global mining footprint delineation, first use of a geospatial foundation model on this task. https://doi.org/10.1016/j.rse.2024.114584
 - **CommonLID** (ACL 2026, Contributor): Language identification benchmark for noisy web data across 109 languages. https://arxiv.org/abs/2601.18026
-- **GG-EZ** (Under review, Diffusion Arm): Regional adaptation of VLMs for Southeast Asia; 98%+ global benchmark retention. https://arxiv.org/abs/2604.11490
+- **GG-EZ** (Findings of AACL-IJCNLP 2026, Diffusion Arm) — Regional adaptation of VLMs for Southeast Asia with more than 98% global benchmark retention. https://arxiv.org/abs/2604.11490
+- **ENCP** (arXiv 2026, First Author) — Episode-normalized conformal prediction for whole-route coverage across four vision-and-language navigation policies on R2R and REVERIE. https://arxiv.org/abs/2609.17499
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
 - **Plastic Bag Ban** (IEEE ICISS 2021, First Author): Causal policy analysis of Jakarta's plastic bag ban using citizen complaint data. https://ieeexplore.ieee.org/document/9533236/
 

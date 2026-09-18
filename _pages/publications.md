@@ -49,13 +49,14 @@ extra_css: /css/portfolio-modern.css
   </section>
 
   <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Research that defines the direction</h2></div><p>Two projects that connect representation, real-world variation, and measurable reliability.</p></header>
+    <header class="mp-section-head"><div><h2>Research that defines the direction</h2></div><p>ENCP leads this portfolio because it turns uncertainty estimation into a practical guarantee for sequential multimodal systems.</p></header>
     <div class="research-feature-grid">
-      {% assign featured_keys = 'flood-procanet,sea-vl' | split: ',' %}
+      {% assign featured_keys = 'encp-vln,sea-vl' | split: ',' %}
       {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}
-      <article class="research-feature" data-kind="{{ pub.kind }}">
+      <article class="research-feature{% if pub.key == 'encp-vln' %} is-primary{% endif %}" data-kind="{{ pub.kind }}">
+        {% if pub.key == 'encp-vln' %}<span class="research-feature-kicker">Flagship research direction</span>{% endif %}
         <h3>{{ pub.title }}</h3><p class="research-feature-meta"><span>{{ pub.tag }}</span><span>{{ pub.venue }}</span></p><p class="research-contribution">{{ pub.description }}</p>
-        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'flood-procanet' %}Designed progressive cross-attention fusion and led the paper.{% else %}Built regional data infrastructure and benchmark quality controls.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'flood-procanet' %}0.815 IoU on Sen1Floods11.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
+        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}Developed episode-normalized calibration and led the paper.{% else %}Built regional data infrastructure and benchmark quality controls.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Met every reported coverage target across four policies, three scores, and two benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
         <div class="research-feature-actions"><a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a><details><summary>Abstract</summary><p>{{ pub.abstract }}</p></details></div>
       </article>{% endfor %}
     </div>

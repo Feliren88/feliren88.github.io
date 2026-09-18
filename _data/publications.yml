@@ -69,6 +69,21 @@
   authors: ["Eka Permanasari", "Marco Wijaya", "Vicky Feliren", "Fithrotul Khikmah", "Alex M. Lechner", "Altaf Virani", "Muhamad Risqi U. Saputra"]
   abstract: 'This study examines how retention ponds in South Bandung can support long-term urban flood management.'
 
+- key: encp-vln
+  kind: applied
+  tag: 'FIRST AUTHOR · PREPRINT'
+  title: 'ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation'
+  description: 'Episode-level calibration provides whole-route coverage guarantees across four navigation policies on R2R and REVERIE.'
+  venue: 'arXiv preprint, 2026'
+  year: "2026"
+  publisher: 'arXiv'
+  url: 'https://arxiv.org/abs/2609.17499'
+  doi: '10.48550/arXiv.2609.17499'
+  date: "2026-09-15T00:00:00Z"
+  keywords: ['conformal prediction', 'vision-and-language navigation', 'uncertainty estimation', 'episode-level calibration', 'whole-route coverage', 'R2R', 'REVERIE', 'robotics', 'ENCP']
+  authors: ["Vicky Feliren", "A. Taufiq Asyhari", "Muhamad Risqi U. Saputra"]
+  abstract: 'Vision-and-language navigation requires uncertainty estimates that remain valid across dependent, variable-length routes. ENCP rescales a nonconformity score using a policy’s residual confidence and calibrates one maximum score per episode. Under exchangeable calibration and test episodes, the method covers the ground-truth action at every step with probability of at least one minus the chosen risk level, while allowing dependence among steps. Tests across four navigation policies and three nonconformity scores on R2R and REVERIE met every reported empirical step-coverage target in seen-to-unseen evaluation.'
+
 - key: commonlid
   kind: nlp
   tag: 'ACL 2026'
@@ -88,11 +103,12 @@
 
 - key: anthropogenic
   kind: cultural
-  tag: 'UNDER REVIEW'
+  tag: 'FINDINGS · AACL-IJCNLP 2026'
   title: 'Anthropogenic Regional Adaptation in Multimodal Vision-Language Model'
   description: 'GG-EZ improved cultural relevance for Southeast Asia by 5–15% while retaining more than 98% of global benchmark performance.'
-  venue: 'Under Review'
+  venue: 'Findings of AACL-IJCNLP 2026'
   year: "2026"
+  publisher: 'Association for Computational Linguistics'
   url: 'https://arxiv.org/abs/2604.11490'
   doi: '10.48550/arXiv.2604.11490'
   date: "2026-04-13T13:56:00Z"

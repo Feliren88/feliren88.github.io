@@ -694,8 +694,8 @@ usecases:
       - Regional Adaptation
       - Diffusion Models
       - Knowledge Distillation
-      - Under Review
-    venue: "Under Review + arXiv preprint 2026"
+      - Findings of AACL-IJCNLP 2026
+    venue: "Findings of AACL-IJCNLP 2026"
     role: "Lead, Diffusion Model Arm"
     arxiv: "https://arxiv.org/abs/2604.11490"
     keywords:
@@ -1561,7 +1561,7 @@ usecases:
   # ──────────────────────────────────────────
 
   - id: vln-conformal-prediction
-    title: "Conformal Prediction for Vision-and-Language Navigation in Discrete Graphs"
+    title: "ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation"
     category: safety
     tags:
       - Conformal Prediction
@@ -1571,8 +1571,9 @@ usecases:
       - VLN-HAMT
       - Human-in-the-Loop
 
-    venue: "Thesis Research, VLN-DUET Uncertainty Propagation (2026)"
-    role: Lead Researcher
+    venue: "arXiv preprint (2026)"
+    role: First Author
+    arxiv: "https://arxiv.org/abs/2609.17499"
     keywords:
       - Conformal prediction
       - Vision-and-language navigation
@@ -1973,6 +1974,14 @@ publications:
       role: Contributor
       venue_tier: "ACL (top-tier NLP venue)"
 
+    - id: aacl-ijcnlp-2026-gg-ez
+      citation: >
+        V. Feliren et al., "GG-EZ: Regional Adaptation in Vision-Language
+        Models," Findings of AACL-IJCNLP 2026.
+      arxiv: "https://arxiv.org/abs/2604.11490"
+      role: Lead Author, Diffusion Arm
+      venue_tier: "Findings of AACL-IJCNLP"
+
     - id: iciss-2021
       citation: >
         V. Feliren, Y. Nugraha, B. I. Nasution, C. Febria Finola,
@@ -1982,14 +1991,6 @@ publications:
       doi: "10.1109/ICISS53185.2021.9533236"
       link: "https://ieeexplore.ieee.org/document/9533236/"
       role: First Author
-
-  preprints:
-    - id: gg-ez-2026
-      citation: >
-        V. Feliren et al., "GG-EZ: Regional Adaptation in Vision-Language
-        Models," arXiv preprint, 2026.
-      arxiv: "https://arxiv.org/abs/2604.11490"
-      role: Lead Author, Diffusion Arm
 
 # ============================================================
 # PATENTS
