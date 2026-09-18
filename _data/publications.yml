@@ -103,7 +103,7 @@
 
 - key: anthropogenic
   kind: cultural
-  tag: 'FINDINGS · AACL-IJCNLP 2026'
+  tag: 'FINDINGS OF AACL-IJCNLP 2026'
   title: 'Anthropogenic Regional Adaptation in Multimodal Vision-Language Model'
   description: 'GG-EZ improved cultural relevance for Southeast Asia by 5–15% while retaining more than 98% of global benchmark performance.'
   venue: 'Findings of AACL-IJCNLP 2026'
