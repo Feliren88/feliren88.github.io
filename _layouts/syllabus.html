@@ -244,18 +244,24 @@ layout: default
     {% endfor %}
   </ol>
 
-  {% if learning and learning.source %}
+  {% if learning and learning.sources.size > 0 %}
   <section class="syl-source" aria-labelledby="syl-source-title">
     <div>
-      <span class="syl-phase">Foundational source</span>
+      <span class="syl-phase">{% if learning.sources.size > 1 %}Foundational sources{% else %}Foundational source{% endif %}</span>
       <h2 id="syl-source-title">Check the compressed notes against the source</h2>
-      <p>Use the syllabus for retrieval. Use the reference to verify claims, inspect assumptions, and read the evidence in context.</p>
+      <p>Use the syllabus for retrieval. Use the reference to verify claims, inspect assumptions, and read the evidence in context.{% if learning.sources.size > 1 %} Start with the first.{% endif %}</p>
     </div>
-    <a href="{{ learning.source.url }}" rel="noopener noreferrer">
-      <strong>{{ learning.source.title }}</strong>
-      <span>{{ learning.source.author }}</span>
-      <small>{{ learning.source.use }}</small>
-    </a>
+    <ul class="syl-source-list">
+      {% for src in learning.sources %}
+      <li>
+        <a href="{{ src.url }}" rel="noopener noreferrer">
+          <strong>{{ src.title }}</strong>
+          <span>{{ src.author }}</span>
+          <small>{{ src.use }}</small>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </section>
   {% endif %}
 

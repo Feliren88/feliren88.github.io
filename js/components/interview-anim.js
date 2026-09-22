@@ -1321,7 +1321,7 @@
     'transformers': 'attention',
     'bayesian-statistics': 'bayes',
     'deep-learning': 'descent',
-    'uncertainty-quantification': 'calib',
+    'uncertainty-estimation': 'calib',
     'mechanistic-interpretability': 'superpose',
     'agentic-ai': 'agentloop',
     'prompt-engineering': 'lostmiddle',
@@ -1517,12 +1517,24 @@
     $('.an-prev', host).addEventListener('click', function () { stop(); go(at - 1); });
     $('.an-replay', host).addEventListener('click', function () { stop(); go(0); });
     scrub.addEventListener('input', function () { stop(); go(+this.value); });
-    $('.an-steps', host).addEventListener('click', function (e) {
+    var stepList = $('.an-steps', host);
+    stepList.addEventListener('click', function (e) {
       var b = e.target.closest('.an-stepbtn');
       if (!b) return;
       stop();
       go(+b.getAttribute('data-i'));
     });
+
+    /* The list is taller than its box on most tracks, and CSS fades the last
+       few pixels so the cut reads as "more below". At the bottom there is
+       nothing left to reveal, and the fade would just dim the final caption,
+       so it is dropped there. Also dropped when the list does not scroll. */
+    function markEnd() {
+      var slack = stepList.scrollHeight - stepList.clientHeight;
+      stepList.classList.toggle('is-end', slack <= 1 || stepList.scrollTop >= slack - 1);
+    }
+    stepList.addEventListener('scroll', markEnd);
+    markEnd();
 
     /* Arrow keys work once the animation has focus. */
     host.addEventListener('keydown', function (e) {

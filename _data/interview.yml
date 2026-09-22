@@ -39,8 +39,8 @@ topics:
     name: Bayesian Statistics
     group: foundations
     blurb: "Update beliefs with data and explain what the resulting probability means."
-    scope: "Study priors, posteriors, and posterior computation here. Continue with uncertainty quantification for calibration and coverage guarantees."
-    links: [uncertainty-quantification]
+    scope: "Study priors, posteriors, and posterior computation here. Continue with uncertainty estimation for calibration and coverage guarantees."
+    links: [uncertainty-estimation]
     modules:
       - name: Probability as belief
         why: "Bayesian probability measures uncertainty about a claim or parameter."
@@ -8264,14 +8264,14 @@ topics:
               handling those is what separates the methods.
         math:
           - name: 'The affine mapping'
-            tex: 'q = \mathrm{round}\!\left(\frac{v}{\varsigma_{q}}\right) + \varzeta, \qquad \hat{v} = \varsigma_{q}\,(q - \varzeta)'
+            tex: 'q = \mathrm{round}\!\left(\frac{v}{\varsigma_{q}}\right) + \zeta, \qquad \hat{v} = \varsigma_{q}\,(q - \zeta)'
             read: 'Choose a scale and a zero point, round to an integer, and accept the rounding error.'
             where:
               - sym: 'q'
                 is: 'the stored integer'
               - sym: '\varsigma_{q}'
                 is: 'the scale, how much one integer step is worth'
-              - sym: '\varzeta'
+              - sym: '\zeta'
                 is: 'the zero point, which integer represents zero'
               - sym: '\hat{v}'
                 is: 'the value recovered from the integer'
@@ -8841,13 +8841,67 @@ topics:
       - Run a pairwise comparison on thirty prompts before trusting any score
 
   # ── Judgement ────────────────────────────────────────────────────────────
-  - id: uncertainty-quantification
-    name: Uncertainty Quantification
+  - id: uncertainty-estimation
+    name: Uncertainty Estimation
     group: judgement
     blurb: "Test whether model confidence is useful and decide when the model should abstain."
-    scope: "Study calibration, coverage, and abstention here. Use Bayesian statistics for posterior computation and AI safety for deployment gates."
+    scope: "Study how doubt is measured, calibrated, bounded, and acted on here. Use Bayesian statistics for posterior computation and AI safety for deployment gates."
     links: [bayesian-statistics, ai-safety]
     modules:
+      - name: Putting a number on uncertainty
+        why: "Entropy is the number that says how uncertain a distribution is, before any model is involved."
+        beats:
+          - >-
+              A certain outcome carries no surprise. Its information content is
+              zero, and so is the entropy.
+          - >-
+              Tilt the odds and the average surprise falls. A likely outcome
+              tells you little when it arrives.
+          - >-
+              Spread the probability evenly and entropy peaks. That is the most
+              uncertain the variable can be.
+        plain:
+          - >-
+              Uncertainty needs a number before anyone can argue about it. Count
+              the surprise in an outcome, in bits, then average over outcomes.
+          - >-
+              That average is the entropy. It is zero when one outcome is
+              certain, and largest when every outcome is equally likely.
+        math:
+          - name: 'The surprise in one outcome'
+            tex: 'h(x) = \log_{2} \frac{1}{p(x)}'
+            read: 'A rare outcome carries more bits than a common one.'
+            note: 'MacKay writes this as equation 2.34 and measures it in bits. An outcome with probability one half carries one bit, and a certain outcome carries none.'
+            where:
+              - sym: 'h(x)'
+                is: 'the surprise in outcome x, measured in bits'
+          - name: 'Entropy, the average surprise'
+            tex: 'H(X) = \sum_{x} p(x) \log_{2} \frac{1}{p(x)}'
+            read: 'Average the surprise over every outcome the variable can take.'
+            note: 'MacKay equation 2.35. He adds that another name for the entropy of X is the uncertainty of X. It answers how much, and stays silent on which kind.'
+            where:
+              - sym: 'H(X)'
+                is: 'the entropy of X, the average surprise in bits'
+              - sym: 'X'
+                is: 'the variable whose outcomes are being counted'
+        covers:
+          - Shannon information content, the surprise in one outcome
+          - Entropy as average surprise, measured in bits
+          - Why entropy is zero at certainty and peaks at the uniform distribution
+          - Relative entropy and the Gibbs inequality
+          - Cross entropy as the training loss already in use
+          - Predictive entropy as a confidence score
+          - What a single entropy number leaves out
+        check: "A model spreads its probability evenly over ten classes. Give two very different reasons that could happen."
+        viz:
+          type: scale
+          lo: Certain
+          hi: Anyone's guess
+          stops:
+          - One outcome holds all the probability
+          - The odds tilt one way
+          - Every outcome is equally likely
+          on: 2
       - name: What kind of uncertainty
         why: "The decomposition decides which fix is available to you."
         beats:
@@ -8884,6 +8938,10 @@ topics:
           - Why the decomposition is not clean in practice
           - What each type licenses you to do
           - Predictive versus parameter uncertainty
+          - Entropy-based versus variance-based decompositions
+          - Axioms a decomposition of predictive uncertainty should satisfy
+          - Label-wise and per-class epistemic contributions
+          - Kernel scores as one frame for regression uncertainty
         check: "Give a real example where more data removes the uncertainty, and one where it does not."
         viz:
           type: tree
@@ -8897,6 +8955,70 @@ topics:
             items:
             - Gaps in the model
             - More data helps
+      - name: Uncertainty beyond one distribution
+        why: "A single distribution assumes the odds are known, which hides the case where they are not."
+        beats:
+          - >-
+              The widest frame sits here. A whole set of distributions stands in
+              for the one nobody can pin down.
+          - >-
+              A belief function puts mass on sets of answers. Evidence for two
+              answers at once then stays honest.
+          - >-
+              Probability intervals give each event a floor and a ceiling
+              instead of a single number.
+          - >-
+              Classical probability sits at the base. Every layer above holds it
+              as the case where floor meets ceiling.
+        plain:
+          - >-
+              Knight separated risk from uncertainty. Risk is a quantity you can
+              measure. Uncertainty is the case where the odds are unknown.
+          - >-
+              These frameworks carry a set of distributions instead of one. A
+              prediction arrives as a range, and a decision is safe when every
+              member of the set agrees.
+        math:
+          - name: 'A floor and a ceiling on an event'
+            tex: '\underline{p}(S) \leq p(S) \leq \overline{p}(S), \qquad \overline{p}(S) = 1 - \underline{p}(\neg S)'
+            read: 'Report the least and the most you will give an event, in place of one number.'
+            note: 'Cuzzolin (2021) sorts these frameworks into what he calls a hierarchy of encapsulated formalisms. Classical probability is the case where the floor and the ceiling meet.'
+            where:
+              - sym: '\underline{p}(S)'
+                is: 'the lower probability, the least given to event S'
+              - sym: '\overline{p}(S)'
+                is: 'the upper probability, the most given to event S'
+              - sym: 'S'
+                is: 'an event, a set of outcomes'
+              - sym: '\neg S'
+                is: 'everything outside S'
+          - name: 'The set of distributions still allowed'
+            tex: '\mathcal{P} = \left\{ p \; : \; p(S) \geq \underline{p}(S) \quad \forall S \subseteq \Theta \right\}'
+            read: 'Keep every distribution that respects the floor on every event.'
+            note: 'This is the credal set, and it is convex and closed. You now carry a set where a vector used to do, and plenty of decisions only ever needed the vector.'
+            where:
+              - sym: '\mathcal{P}'
+                is: 'the credal set, every distribution still allowed'
+              - sym: '\Theta'
+                is: 'the space of outcomes under consideration'
+        covers:
+          - "Knightian uncertainty: risk against unmeasurable uncertainty"
+          - Lower and upper probability and their duality
+          - Credal sets as convex sets of distributions
+          - Belief and plausibility from a basic probability assignment
+          - Possibility measures and probability intervals
+          - Coherence and avoiding sure loss
+          - Distance-based measures of credal uncertainty
+          - Set-based against distribution-based representations of epistemic uncertainty
+          - Where the extra generality costs more than it returns
+        check: "When does a set of distributions earn its cost over a single one?"
+        viz:
+          type: stack
+          layers:
+          - Imprecise probability
+          - Random sets and belief functions
+          - Probability intervals
+          - One probability distribution
       - name: Calibration
         why: "Calibration is the central measurement here, and easy to get subtly wrong."
         beats:
@@ -8977,6 +9099,9 @@ topics:
           - Brier score and its decomposition
           - Proper scoring rules, log loss, sharpness under calibration
           - Calibration versus accuracy versus discrimination
+          - Kernel scores as one view of proper scoring rules
+          - Group-wise and subgroup calibration
+          - Calibrating the geometry of an embedding space
         check: "Why can two models with identical accuracy and identical ECE behave very differently in deployment?"
         viz:
           type: curve
@@ -9027,6 +9152,9 @@ topics:
           - Histogram binning and beta calibration
           - Calibration sets, size requirements, and reuse
           - Recalibration failing under distribution shift
+          - Kernel density estimation and the bandwidth it needs
+          - Online recalibration under label shift
+          - Certificate-driven recalibration for a drifting forecast
         check: "Temperature scaling fixed calibration on validation and failed in production. Explain."
         viz:
           type: flow
@@ -9120,6 +9248,12 @@ topics:
           - Weighted conformal under covariate shift
           - Conformal risk control and beyond-coverage guarantees
           - Adaptive and online conformal for drifting streams
+          - Conformal prediction under epistemic uncertainty
+          - Online aggregation of several conformal predictors
+          - Kernel mean matching for covariate shift
+          - Group-conditional and federated coverage
+          - Conformal risk minimisation and variance reduction
+          - Ordinal labels and the ranked probability score
         check: "State the split conformal guarantee precisely, including what it does not promise per input."
         viz:
           type: flow
@@ -9161,6 +9295,13 @@ topics:
                 is: 'the parameters of the e-th model'
               - sym: 'e'
                 is: 'which member of the ensemble is meant'
+          - name: 'Error bars from the curvature'
+            tex: 'A = -\nabla \nabla \ln p(w \mid D) \big|_{w_{\mathrm{MP}}}, \qquad p(w \mid D) \approx \mathcal{N}\big(w_{\mathrm{MP}}, A^{-1}\big)'
+            read: 'Measure how sharply the posterior falls away from its peak, and read the width off that.'
+            note: 'MacKay equation 28.5. Here A is the curvature at the peak, so a sharp peak gives tight error bars. It describes one basin and knows nothing about the rest of the landscape.'
+            where:
+              - sym: 'w_{\mathrm{MP}}'
+                is: 'the most probable parameters, the peak of the posterior'
         covers:
           - Monte Carlo dropout and its criticisms
           - Deep ensembles, diversity, and cost
@@ -9168,6 +9309,9 @@ topics:
           - Laplace approximation and last-layer Bayes
           - Evidential deep learning and the objections to it
           - Cheap approximations that hold up under shift
+          - The evidence and the Occam factor
+          - Random network distillation and its link to ensembles
+          - Gaussian process limits and exact uncertainty propagation
         check: "You can afford one extra forward pass at serving time. What uncertainty method do you pick?"
         viz:
           type: compare
@@ -9226,6 +9370,7 @@ topics:
           - "Out-of-distribution detection: max softmax, energy, Mahalanobis, kNN"
           - Open-set recognition and novelty
           - Measuring the value of abstention to the product
+          - Selective conformal inference and valid post-selection coverage
         check: "Design an abstention policy for a medical triage model and justify the threshold."
         viz:
           type: curve
@@ -9293,6 +9438,9 @@ topics:
           - Hallucination detection versus uncertainty
           - Calibration change after instruction tuning and RLHF
           - Conformal methods for open-ended generation
+          - Stated confidence as an imprecise probability
+          - Semantic self-distillation for sequence uncertainty
+          - Structural information theory for black-box scoring
         check: "How would you measure whether safety training changed a model's calibration?"
         viz:
           type: parts
@@ -9307,11 +9455,15 @@ topics:
       - Claiming conformal gives per-input coverage
       - Using the calibration set twice
       - Treating high softmax confidence as evidence of correctness
+      - Reading one entropy number as evidence of which kind of uncertainty it is
+      - Reaching for a credal set when one distribution already answers the question
     drills:
       - Plot a reliability diagram for a model you trained
       - Implement split conformal in 20 lines and verify empirical coverage
       - Break exchangeability on purpose and watch coverage fail
       - Build a risk-coverage curve and pick a threshold from a cost model
+      - Compute predictive entropy on a test set and check it against the errors
+      - Widen one prediction into an interval and see which decisions change
 
   - id: mechanistic-interpretability
     name: Mechanistic Interpretability
@@ -9726,8 +9878,8 @@ topics:
     name: AI Safety
     group: judgement
     blurb: "State a position on AI risk, support it with evidence, and answer a strong objection."
-    scope: "Study risk framing, alignment methods, and safety evaluation here. Mechanistic interpretability and uncertainty quantification provide supporting tools."
-    links: [uncertainty-quantification, mechanistic-interpretability]
+    scope: "Study risk framing, alignment methods, and safety evaluation here. Mechanistic interpretability and uncertainty estimation provide supporting tools."
+    links: [uncertainty-estimation, mechanistic-interpretability]
     modules:
       - name: The landscape
         why: "A useful safety argument names the threat, the affected system, and the evidence for the risk."
@@ -10088,7 +10240,7 @@ topics:
           - name: 'The three ways to be wrong'
             tex: '\text{confidently wrong} \gg \text{unsure and wrong} > \text{abstained}'
             read: 'Ordering the failures by how much damage they do is what makes abstention a feature rather than a cop-out.'
-            note: 'Any system allowed to say it does not know needs the risk-coverage curve rather than a single accuracy number, which is where this track meets uncertainty quantification.'
+            note: 'Any system allowed to say it does not know needs the risk-coverage curve rather than a single accuracy number, which is where this track meets uncertainty estimation.'
           - name: 'When abstention is the better bet'
             tex: '\text{abstain when } \; \hat{p}\, v_{\mathrm{right}} - (1 - \hat{p})\, c_{\mathrm{wrong}} \;<\; v_{\mathrm{abstain}}'
             read: 'Answer only when the expected value of answering beats the value of saying you do not know.'
@@ -10188,7 +10340,7 @@ topics:
     group: judgement
     blurb: "Choose a useful research question and design an experiment that could disprove the claim."
     scope: "Study research questions, experiments, evidence, and communication here. Apply the method to the technical track for your role."
-    links: [ai-safety, uncertainty-quantification]
+    links: [ai-safety, uncertainty-estimation]
     modules:
       - name: Choosing a question
         why: "A useful research question is important, unanswered, testable, and feasible with the available resources."

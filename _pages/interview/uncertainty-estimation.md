@@ -1,9 +1,11 @@
 ---
 layout: syllabus
-title: Uncertainty Quantification
+title: Uncertainty Estimation
 description: Test whether model confidence is useful and decide when the model should abstain.
-permalink: /uncertainty-quantification/
-topic_id: uncertainty-quantification
+permalink: /uncertainty-estimation/
+redirect_from:
+  - /uncertainty-quantification/
+topic_id: uncertainty-estimation
 robots: noindex, nofollow
 sitemap: false
 extra_css: /css/interview.css

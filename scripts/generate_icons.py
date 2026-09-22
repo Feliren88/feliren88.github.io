@@ -149,7 +149,7 @@ ICONS = [
         '<rect x="3.5" y="6.5" width="11" height="11" rx="2"/>',
         '<circle cx="15.5" cy="12" r="5.5"/>',
     ]),
-    ("uncertainty-quantification", "tracks", "Two estimates, one held much less tightly", [
+    ("uncertainty-estimation", "tracks", "Two estimates, one held much less tightly", [
         '<path d="M8 5v14M5.5 5h5M5.5 19h5M17 9v6M14.5 9h5M14.5 15h5"/>',
         '<circle cx="8" cy="12" r="1.8" fill="currentColor"/>',
         '<circle cx="17" cy="12" r="1.8" fill="currentColor"/>',

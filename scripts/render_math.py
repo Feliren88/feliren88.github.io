@@ -294,7 +294,40 @@ ACCENT = re.compile(r'<mover>((?:(?!<mover\b).)*?)'
                     r'<mo stretchy="false">&#x0005E;</mo></mover>')
 
 
+# latex2mathml passes a command it does not know straight through, so the
+# reader gets the source printed at them. Two constructs hit that path often
+# enough to be worth normalising before conversion rather than banning in the
+# source, and both were reaching the published pages:
+#
+#   \big\{  \Big\|  and friends. The size prefix is dropped rather than turned
+#   into \left...\right, because a lone \left with no matching \right is a hard
+#   error, and an opening and a closing \big\| are the same string, so nothing
+#   here can tell them apart. The delimiter renders at its natural size.
+#
+#   \arg\max and \arg\min. These are two commands, and \arg is the unknown one,
+#   so the pair printed as a literal \argmax. The canon lists both, so the
+#   notation legend was showing it too.
+#   \text{is kept}. Newer latex2mathml drops the ASCII spaces inside \text{},
+#   which silently welds the words together: `O(1) index` rendered as
+#   `O(1)index`, and `item i is kept` as `item iiskept`. A literal non-breaking
+#   space survives every version, so TEXT_SPACE below pins them rather than
+#   leaving the spacing to whichever library version is installed.
+PRE_FIX = [
+    (re.compile(r"\\(?:bigg?|Bigg?)([lrm]?)(?=\\[{}|])"), ""),
+    # Not \b for the tail: these are nearly always subscripted, and `_` counts
+    # as a word character, so \b would never fire where it matters.
+    (re.compile(r"\\arg\\(max|min)(?![A-Za-z])"), r"\\operatorname{arg\\,\1}"),
+]
+
+
+TEXT_SPACE = re.compile(r"\\text\s*\{([^{}]*)\}")
+
+
 def mathml(tex, display=False):
+    tex = TEXT_SPACE.sub(
+        lambda m: "\\text{%s}" % m.group(1).replace(" ", "\u00a0"), tex)
+    for pat, rep in PRE_FIX:
+        tex = pat.sub(rep, tex)
     out = tex_to_mathml(tex)
     for ch in AS_OPERATOR:
         out = out.replace("<mi>%s</mi>" % ch,
@@ -310,6 +343,9 @@ def mathml(tex, display=False):
     out = re.sub(r"(<munder[^>]*>)<mrow>(<m[in][^>]*>[^<]*</m[in]>)</mrow>",
                  r"\1\2", out)
     out = ACCENT.sub(r'<mover accent="true">\1<mo>&#x0005E;</mo></mover>', out)
+    # The converter escapes the characters it emits itself, so the spaces
+    # TEXT_SPACE injected are the only raw ones. Escape them to match.
+    out = out.replace(" ", "&#x000A0;")
     if display:
         out = out.replace('display="inline"', 'display="block"', 1)
     return out
