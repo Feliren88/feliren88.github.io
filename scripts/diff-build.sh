@@ -25,7 +25,14 @@ ROOT="$(git rev-parse --show-toplevel)"
 # so an unresolved mktemp path makes every {% include %} look like it sits
 # outside the site.
 WORK="$(cd "$(mktemp -d)" && pwd -P)"
-trap 'rm -rf "$WORK"' EXIT
+# Clean up on any exit, including an interrupt part-way through. Removing the
+# directory alone would leave the worktree registered in .git, so prune too.
+cleanup() {
+  git worktree remove --force "$WORK/src" 2>/dev/null || true
+  rm -rf "$WORK"
+  git worktree prune
+}
+trap cleanup EXIT
 
 cd "$ROOT"
 
@@ -47,10 +54,9 @@ git worktree add --detach --quiet "$WORK/src" "$REF"
 # The shim and the vendored gems live outside the worktree's checkout.
 build "$WORK/src" "$WORK/before"
 
+
 echo "Building working tree ..."
 build "$ROOT" "$WORK/after"
-
-git worktree remove --force "$WORK/src"
 
 normalise "$WORK/before"
 normalise "$WORK/after"

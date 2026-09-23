@@ -174,7 +174,7 @@ primary:
 
 Which item is highlighted is worked out during the build, not in the browser, so
 it is correct with JavaScript off and never flickers on load. An item is active
-on its own href, on anything beneath it, and on any prefix under `owns:` — that
+on its own href, on anything beneath it, and on any prefix under `owns:`. That
 last one is how a long-form note at its own top-level URL still highlights
 Writings.
 
@@ -256,7 +256,7 @@ git push origin main
 ```
 
 GitHub Pages builds from `main` itself. There is no workflow file, which is why
-the `github-pages` pin in the `Gemfile` is what production actually runs.
+the `github-pages` pin in the `Gemfile` is what production runs.
 
 ## Things worth knowing before you edit
 
