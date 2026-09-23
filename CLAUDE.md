@@ -6,6 +6,51 @@ Personal portfolio website for Vicky Feliren - Applied Scientist working on **ca
 
 **Narrative spine (apply to all copy):** identity = **AI safety · calibration & alignment**. The claim: the alignment tax is reported as one averaged number but is better understood as a distribution over inputs whose shape nobody has measured, largest where the safety training data was thinnest (non-English, non-text). Multilingual and multimodal are the *method*, not the mission — they are where the cost is measurable, never an inclusion argument. Remote sensing / geospatial / production ML are *evidence* the agenda survives messy data, never top-level identity labels. Conformal prediction is the recovery *tool*, not a topic to lead with. Landing and agenda surfaces lead with *why a problem matters* (taste), not metrics; numbers live on evidence/detail pages. Long-form essays live in `_pages/essays/`, featured atop `/writings/` and on the homepage.
 
+## Where to read further
+
+This file holds what applies everywhere. Detail about one subsystem lives in
+`docs/`, because most of it is irrelevant to most changes. Open the row that
+matches what you are about to touch.
+
+| Working on | Read first |
+|---|---|
+| A pinned scroll scene, or a page with `motion_scene:` | `docs/essay-motion.md` |
+| `/interview/`, any syllabus page, `/transformers/` | `docs/interview.md` |
+| `_data/game_theory.yml`, `_data/stoic.yml`, any generated file | `docs/generated-data.md` |
+| Icons on `/principles/` or `/high-agency/`, situation diagrams | `docs/icon-sprites.md` |
+| Meta tags, JSON-LD, the sitemap, robots, permalinks | `docs/seo.md` |
+| Headings, focus, contrast, screen-reader behaviour | `docs/accessibility.md` |
+
+`CONTRIBUTING.md` covers the review checklist and the audits to run before
+committing. `README.md` is the reader-facing description of the site.
+
+## Build and verify
+
+`make` on its own lists every target.
+
+```bash
+make install   # bundle install
+make build     # build into _site/
+make serve     # http://localhost:4000, live reload
+make diff      # prove a refactor changed no output
+make check     # build, then run the SEO and link audit
+```
+
+Run everything through `make`. A bare `bundle exec jekyll build` fails on any
+current Ruby: liquid 4.0.3, pinned exactly by the `github-pages` gem, calls the
+taint API that Ruby 3.2 deleted. `_dev/ruby-compat.rb` restores it as a no-op and
+the Makefile loads it via `RUBYOPT`. GitHub Pages builds with the same gem pin on
+its own Ruby, so the shim is local-only and cannot affect what ships.
+
+**`make diff` is the tool for any structural change.** It builds the committed
+tree and the working tree and compares the two `_site/` directories, ignoring
+only what is derived from file timestamps. Moving markup into an include or
+replacing a hardcoded list with a data file should report no output changes. Use
+it before committing anything described as a refactor.
+
+`make check` currently reports one flag, `/encp-vln/ NO-INBOUND-LINK`, which is
+pre-existing. Treat any second flag as yours.
+
 ## Writing Rules (apply to ALL site copy)
 
 The voice is set by `_pages/essays/knowing-when-you-dont-know.md` and `_data/notes.yml`.
@@ -93,99 +138,128 @@ holds credences, kill criteria, and career motives — never link it, never comm
 
 ```
 feliren88.github.io/
-├── README.md       # Project documentation
-├── CLAUDE.md       # This file
-├── llms.txt        # LLM-readable site summary (pages, use cases, research, writings)
-├── robots.txt      # Crawler directives + sitemap pointer (Sitemap: https://vickyfeliren.com/sitemap.xml)
-├── _config.yml     # Jekyll configuration
-├── Gemfile         # Ruby dependencies
-├── index.html      # Homepage (Jekyll template)
-├── sw.js           # Service worker (Jekyll-processed Liquid template)
+├── CLAUDE.md          # This file: site-wide rules, and where to read further
+├── docs/              # Per-subsystem detail, read on demand (see the table above)
+├── Makefile           # Every local task. `make` lists them
+├── _config.yml        # Jekyll configuration
+├── _dev/              # Local build shim, not part of the site
 ├── _layouts/
-│   ├── default.html   # Base layout with SEO, skip link, font preloads
-│   ├── page.html      # Generic page template (extends default)
-│   ├── syllabus.html  # Interview syllabus template (extends default); reads from _data/interview.yml via topic_id front matter; renders the module list, the "answer cold" question per module, the traps/drills panels, and prev/next paging across the 18 topics in file order
-│   └── usecase.html   # Use case detail template (extends default); reads from _data/usecases.yml via uc_id front matter; auto-generates sticky TOC from .uc-section-label elements (≥3 sections). Optional reflective fields why_this / surprise / next render a "Research Note" block (taste framing: why I chose this, what surprised me, what I'd do next)
-├── scripts/
-│   ├── solve_games.py          # Solves every 2x2 game on /game-theory/ and regenerates _data/game_theory.yml
-│   ├── games.json              # Source payoff matrices and copy for solve_games.py
-│   ├── verify_stoic_quotes.py  # Checks every quote in _data/stoic.yml is verbatim in its public-domain source
-│   ├── trace_portrait.py       # Draws the line-art portrait on the record scene's opening beat from assets/img/profile.webp: silhouette traced, face from a 68-point landmark fit. `--write` patches it into essay-motion.js. Needs opencv-contrib-python; caches its model in scripts/.portrait-cache/
-│   ├── generate_icons.py       # Single source of truth for the /interview/ icon set; one ICONS list emits icons/*.svg, icons/preview.html, icons/style-spec.json and _includes/interview-icons.html
-│   ├── render_math.py          # Converts the `math:` blocks in _data/interview.yml to MathML in _data/interview_math.yml, and enforces one notation across every track. `--check` fails on stale output or a notation clash
-│   ├── verify_transformer.py   # Independent NumPy implementation of the toy model drawn by js/components/transformer.js; loads the component under Node and compares every tensor. Needs numpy and node
-│   └── generate_uc_banners.py  # Renders the consulting-style pipeline diagrams (WebP, 1320x600) for /usecases/ cards into assets/img/usecases/; run after editing its SPECS
+│   ├── default.html   # Page skeleton; every part of it is an include
+│   ├── page.html      # Generic page (extends default)
+│   ├── syllabus.html  # One /interview/ syllabus page, driven by topic_id
+│   └── usecase.html   # One use case detail page, driven by uc_id
 ├── _includes/
-│   ├── principles-icons.html  # SVG <symbol> sprite for /principles/ (83 icons) — see "Icon sprite" below
-│   ├── small-talk-icons.html  # SVG <symbol> sprite for /small-talk/ (53 icons, `sm-` prefixed ids)
-│   ├── stoic-icons.html       # SVG <symbol> sprite for /stoic/ (23 icons)
-│   ├── game-theory-icons.html # SVG <symbol> sprite for /game-theory/ (18 icons)
-│   ├── high-agency-icons.html # SVG <symbol> sprite for /high-agency/ (63 icons, `hai-` prefixed ids) — see "Icon sprite" below
-│   └── interview-icons.html   # SVG <symbol> sprite for /interview/ (32 icons, `ivi-` prefixed ids) — GENERATED by scripts/generate_icons.py, never hand-edited; see "Icon set (/interview/)" below
-├── _pages/         # Jekyll pages (Markdown)
-│   ├── high-agency.md    # Interactive personal note on George Mack's High Agency essay (/high-agency/) — loads css/high-agency.css + js/components/high-agency.js via the `extra_css` / `extra_js` front matter hooks; ~20 self-contained widgets (quiz, trap game, flow chart, worksheet) that persist to localStorage under the `ha:` prefix; icons come from `_includes/high-agency-icons.html`, and a twelve-badge progress board (`#badges`, floating `.ha-hud` pill) unlocks as the reader uses each widget, stored under `ha:badges`
-│   ├── game-theory.md    # Interactive personal note on strategic decision-making (/game-theory/) — content in `_data/game_theory.yml`, icons in `_includes/game-theory-icons.html`, localStorage prefix `gt:`
-│   ├── small-talk.md     # Interactive manual on small talk as calibration (/small-talk/) — content in `_data/small_talk.yml`, icons in `_includes/small-talk-icons.html`; widget element ids use the `smw-` prefix because the sprite owns `sm-`
-│   ├── stoic.md          # Interactive personal note on Stoicism (/stoic/) — Marcus Aurelius and Epictetus; content in `_data/stoic.yml`, icons in `_includes/stoic-icons.html`, localStorage prefix `st:`
-│   ├── principles.md     # Interactive personal note, The Life Operating Principle (/principles/) — content lives in `_data/principles.yml`, rendered by Liquid AND emitted as a JSON island (`#pr-data`) that js/components/principles.js searches; localStorage prefix `pr:`; every situation also carries a `viz:` block that principles.js turns into a diagram inside its card (see "Situation diagrams" below), and opening a card records it under `pr:seen` for the explored counter
-│   ├── about.md
-│   ├── skills.md
-│   ├── experience.md
-│   ├── publications.md   # Research page — includes filter bar (Earth Observation/Cultural AI/Language/Applied)
-│   ├── awards.md
-│   ├── thoughts.md       # Writings page — uses unified .filter-pill filter bar
-│   ├── contact.md
-│   ├── usecases.md       # Use cases listing page — uses unified .filter-pill filter bar
-│   ├── usecases/         # Individual use case detail pages (20 files) — each sets layout: usecase and uc_id
-│   ├── essays/           # Long-form essays (layout: page) — e.g. knowing-when-you-dont-know.md; featured atop /writings/ and homepage
-│   ├── interview.md      # UNLISTED revision hub (/interview/) — see "Unlisted pages" below
-│   └── interview/        # UNLISTED syllabus pages (26 files) — each sets layout: syllabus, topic_id, and a top-level permalink (/transformers/, /ai-safety/, …). Content lives in _data/interview.yml; these files hold front matter only
-├── _data/          # YAML data files
-│   ├── index.yml
-│   ├── about.yml         # hero copy, stats, and the /about/ section blocks
-│   ├── skills.yml        # technical skills, grouped, mirrors the sent CV; rendered on /cv
-│   ├── experience.yml
-│   ├── publications.yml  # Each entry requires a `kind` field for filter routing
-│   ├── awards.yml
-│   ├── features.yml      # Press features / media coverage — rendered at top of /writings/ above Medium articles
-│   ├── notes.yml         # Research notes — short paper distillations with own take; rendered at top of /writings/ (newest first)
-│   ├── thoughts.yml      # Medium articles — ORDERED for homepage "Insights" strip (first 3 surface there); /writings/ defaults to the All filter
-│   ├── contact.yml
-│   ├── game_theory.yml   # All /game-theory/ content — GENERATED by scripts/solve_games.py; the `solved:` blocks are computed equilibria, never hand-written
-│   ├── small_talk.yml    # All /small-talk/ content — hand-written, not generated; note the underscore, since Liquid parses a hyphen as subtraction
-│   ├── stoic.yml         # All /stoic/ passages — GENERATED, quotes are verbatim from the public-domain sources; verify with scripts/verify_stoic_quotes.py
-│   ├── principles.yml    # All /principles/ content — situations, 8-step sequence, what to protect, the trades
-│   ├── usecases.yml      # All use case content (88 KB) — keyed by id, consumed by usecase.html
-│   ├── interview.yml     # All /interview/ syllabus content — 26 topics, hand-written; every module carries `plain:` (two short paragraphs in plain English), `viz:` (a diagram) and optionally `scene:` (a concrete illustration); field contract in the file header
-│   └── timeline.yml      # Project timeline entries (loaded by timeline.js on /project/)
-├── assets/
-│   ├── fonts/      # Manrope + Space Grotesk — latin and latin-ext subsets only
-│   └── img/
-│       ├── profile.webp          # Full-size WebP (109KB) — hero + OG image
-│       ├── profile-450.webp      # 450px WebP (34KB) — served to most devices
-│       ├── profile_2_bg.webp     # About page background (82KB, white-on-transparent silhouette)
-│       ├── profile_3_bg.webp     # Contact page background (220KB, white-on-transparent silhouette)
-│       ├── favicon.webp / favicon_black.webp
-│       ├── github-color-svgrepo-com.webp / gmail-svgrepo-com.webp / google-scholar-svgrepo-com.webp / linkedin-svgrepo-com.webp / medium-svgrepo-com.webp
-│       └── usecases/            # Generated pipeline diagrams (20 WebP, 1320x600) — one per use case card; regenerate via scripts/generate_uc_banners.py, do not hand-edit
-├── css/
-│   ├── styles.css       # @font-face, custom properties, all component styles
-│   ├── high-agency.css  # Page-scoped styles for /high-agency/ only
-│   ├── principles.css   # Page-scoped styles for /principles/ only
-│   ├── small-talk.css   # Page-scoped styles for /small-talk/ only
-│   ├── stoic.css        # Page-scoped styles for /stoic/ only
-│   ├── game-theory.css  # Page-scoped styles for /game-theory/ only
-│   └── interview.css    # Page-scoped styles for /interview/ and the 18 syllabus pages
-└── js/
-    ├── main.js          # Core JavaScript (point cloud, filters, tilt, reveal, reveal-group stagger)
-    └── components/
-        ├── nav.js          # Navigation — single source of truth (NAV_ITEMS array)
-        ├── timeline.js     # Project timeline (loaded only on /project/ page)
-        ├── high-agency.js  # Widgets for /high-agency/ (loaded only on that page)
-        ├── principles.js   # Widgets for /principles/ (loaded only on that page)
-        ├── interview.js    # Module diagrams, revision progress, reading controls and the hub map for /interview/
-        └── interview-anim.js # One staged animation per track: 3Blue1Brown visuals in a VisuAlgo shell, with live controls on the two maths tracks
+│   ├── site-head.html          # <head>: resource hints, stylesheets, analytics, meta
+│   ├── site-header.html        # Top bar: nav, theme toggle, shape picker
+│   ├── site-nav.html           # Nav links + active state, used by header and footer
+│   ├── site-footer.html        # Footer: brand, social links, nav
+│   ├── site-scripts.html       # Script loading at the end of <body>
+│   ├── asset.html              # Cache-busted asset URL; read its header before use
+│   ├── seo/                    # One file per schema; all driven by _data
+│   └── *-icons.html            # SVG <symbol> sprites, one per page that uses icons
+├── _data/             # All site content. See "The data layer" below
+├── _pages/            # Pages (Markdown). Content lives in _data; these are mostly front matter
+├── assets/            # Fonts and WebP images
+├── css/               # styles.css is global; every other file is page-scoped
+├── js/
+│   ├── main.js        # Point cloud, filters, tilt, reveal, reveal-group stagger
+│   └── components/    # One file per page that needs behaviour
+└── scripts/           # Generators, verifiers and audits. Not published
 ```
+
+### The data layer
+
+Every piece of content on the site is in `_data/`. A page template should read
+from it, never hold copy of its own.
+
+| File | Holds | Notes |
+|---|---|---|
+| `identity.yml` | Who the site says its author is | Drives the Person JSON-LD |
+| `navigation.yml` | The nav, for header and footer | Single source of truth |
+| `media.yml` | Press coverage of the author | Coverage *of*; `thoughts.yml` is *by* |
+| `events.yml` | Talks and panels | |
+| `index.yml`, `about.yml`, `contact.yml` | Landing, /about/, /contact/ copy | |
+| `publications.yml` | Papers | Each entry needs a `kind` for filter routing |
+| `experience.yml`, `awards.yml`, `skills.yml` | CV surfaces | `skills.yml` renders on /cv only |
+| `features.yml`, `notes.yml`, `thoughts.yml` | The three strips on /writings/ | `thoughts.yml` order drives the homepage |
+| `usecases.yml` | All use case content (88 KB) | Keyed by id, consumed by `usecase.html` |
+| `uc_banners.yml` | Use case banner alt text | GENERATED by `scripts/generate_uc_banners.py` |
+| `interview.yml` | All 26 syllabus topics | Field contract in the file header |
+| `interview_math.yml` | MathML for the syllabus | GENERATED by `scripts/render_math.py` |
+| `game_theory.yml` | All /game-theory/ content | GENERATED by `scripts/solve_games.py` |
+| `stoic.yml` | All /stoic/ passages | GENERATED; quotes are verbatim |
+| `principles.yml`, `small_talk.yml`, `success_failure.yml` | Long-form note content | Hand-written |
+| `timeline.yml` | Project timeline | Loaded by `timeline.js` on /project/ |
+| `emotion_wheel.yml` | Emotion wheel data | |
+
+Four of these are generated and a hand edit to any of them is lost on the next
+run: `game_theory.yml`, `stoic.yml`, `interview_math.yml`, `uc_banners.yml`.
+See `docs/generated-data.md`.
+
+Note the **underscores** in `game_theory.yml` and `small_talk.yml`. Liquid parses
+`site.data.game-theory` as a subtraction, so a hyphenated data file is read
+unpredictably. Data files consumed by Liquid need underscores.
+
+### The long-form interactive notes
+
+Sixteen pages follow the same shape: front matter only in `_pages/`, content in
+a data file or an include, icons in a sprite, behaviour in one component, styles
+in one page-scoped stylesheet, and reader state under a short `localStorage`
+prefix. Changing one means changing its content source, not its template. Each
+loads its own CSS and JS through the `extra_css` / `extra_js` front matter keys.
+
+| Page | Content | Sprite | Component | State |
+|---|---|---|---|---|
+| `/high-agency/` | in the page | `high-agency-icons.html` (`hai-`) | `high-agency.js` | `ha:` |
+| `/principles/` | `principles.yml` | `principles-icons.html` (`pi-`) | `principles.js` | `pr:` |
+| `/game-theory/` | `game_theory.yml` | `game-theory-icons.html` (`gt-`) | `game-theory.js` | `gt:` |
+| `/stoic/` | `stoic.yml` | `stoic-icons.html` (`si-`) | `stoic.js` | `st:` |
+| `/small-talk/` | `small_talk.yml` | `small-talk-icons.html` (`sm-`) | `small-talk.js` | — |
+| `/success-failure/` | `success_failure.yml` | `success-failure-icons.html` (`sf-`) | `success-failure.js` | `sf:` |
+| `/uncertainty-and-emotions/` | `emotion_wheel.yml` | `uncertainty-icons.html` (`ue-`) | `uncertainty-and-emotions.js` | `ue:` |
+| `/communication/` | `communication-manual.html` | `communication-icons.html` (`cmi-`) | `communication.js` | — |
+| `/read-people/` | `read-people-reference.html` | — | `read-people.js` | `rp:` |
+| `/curious/`, `/life-challenges/`, `/self-love/`, `/story/` | in the page | — | one each, same name | — |
+| `/interview/` + 26 syllabus pages | `interview.yml` | `interview-icons.html` (`ivi-`) | `interview.js`, `interview-anim.js`, `interview-math.js` | `iv:` |
+
+Icon counts are deliberately not listed here; they drift and the sprite file is
+the answer. `grep -c '<symbol id=' _includes/<name>-icons.html`.
+
+Two sprites use a different prefix from their page's element ids: `/high-agency/`
+widgets use `ha-` against the `hai-` sprite, and `/small-talk/` uses `smw-`
+against `sm-`. A `<symbol>` sits above the page in document order, so a shared id
+makes `querySelector` return the symbol and silently kill the widget. See
+`docs/icon-sprites.md`.
+
+`_includes/interview-icons.html` is generated by `scripts/generate_icons.py` and
+must never be hand-edited.
+
+### Scripts
+
+None of these are published; `_config.yml` excludes them. Several own a data
+file outright, and a hand edit to a generated file is lost on the next run.
+
+| Script | Does | Owns |
+|---|---|---|
+| `diff-build.sh` | Diffs this build against a git ref's; the refactor proof | — |
+| `audit_seo.py` | Checks sitemap coverage, inbound links, noindex conflicts | — |
+| `solve_games.py` | Solves every 2x2 game on `/game-theory/`; `--check` fails if stale | `_data/game_theory.yml` |
+| `verify_stoic_quotes.py` | Asserts every quote is verbatim in its public-domain source | — |
+| `render_math.py` | Converts `math:` blocks to MathML; `--check` fails on a notation clash | `_data/interview_math.yml` |
+| `generate_icons.py` | One `ICONS` list emits the svgs, the preview, the spec and the sprite | `_includes/interview-icons.html` |
+| `generate_uc_banners.py` | Renders the use case pipeline diagrams | `assets/img/usecases/`, `_data/uc_banners.yml` |
+| `verify_transformer.py` | Independent NumPy check of `transformer.js`, tensor by tensor | — |
+| `trace_portrait.py` | Draws the line-art portrait for the `record` scene's opening beat | — |
+| `normalise_interview_numbers.rb`, `audit_interview_prose.rb` | Prose and number consistency across the syllabus | — |
+
+### Other root files
+
+`llms.txt` is an LLM-readable summary of the site's pages and must be updated
+when a page is added or removed. `robots.txt` carries the crawler directives and
+the sitemap pointer. `sw.js` is the service worker, a Liquid template despite the
+extension, and needs `layout: null` or the page layout wraps it and it stops
+parsing. `index.html` is the homepage template; `_pages/about.md` takes
+`permalink: /` and `/about/` is a `redirect_from` alias for it.
 
 ### Page-scoped CSS and JS
 
@@ -201,8 +275,9 @@ loads can keep that component's stylesheet and script off every other page.
 `/transformers/` uses the list form for `css/transformer.css`, which would otherwise be
 downloaded by all twenty-six syllabus pages to be used by one.
 
-`default.html` emits a `<link>` after `styles.css` and a deferred `<script>` after `nav.js`
-when those keys are present. Use this for one-off pages heavy enough that their CSS would
+`_includes/site-head.html` emits a `<link>` after `styles.css`, and
+`_includes/site-scripts.html` a deferred `<script>` after `site-header.js`, when
+those keys are present. Use this for one-off pages heavy enough that their CSS would
 bloat the global stylesheet. Cache-busting is automatic: every asset URL is emitted through
 `{% include asset.html path='...' %}`, which appends the file's own modified time. There is no
 version number to bump, and no way to bust one file by editing another.
@@ -212,778 +287,19 @@ Page-scoped CSS should shadow the global type-scale tokens rather than hard-code
 `.high-agency` (set via `layout-class` front matter). Every token-driven size on that page
 grows together and no other page moves.
 
-### The scroll scene shared by the writings and `/about/` (`css/essay-motion.css`)
-
-Fourteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
-front matter key:
-
-```yaml
-motion_scene: repair    # one of the fourteen keys below
-```
-
-`default.html` then sets `data-motion-scene` on `<html>` and loads
-`css/essay-motion.css` + `js/components/essay-motion.js`. The JS holds the copy and
-the SVG geometry; the CSS holds every colour. The keys are `repair` (/story/),
-`abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
-`uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/),
-`curiosity` (/curious/), and `record`, which is on the homepage: `_pages/about.md`
-takes `permalink: /` and `/about/` is a `redirect_from` alias for it.
-
-**A key with no scene fails silently.** `js/components/essay-motion.js` looks the key
-up and returns early when it misses, so the page loads both assets and renders
-nothing. `/curious/` shipped that way. After adding a `motion_scene` to a page, load
-it and confirm `.em-story` exists.
-
-Two of the fourteen colour hooks are easy to forget, and both are per-key: an
-`--em-accent` under `html[data-motion-scene="…"]` **and** one under
-`html[data-theme="light"][data-motion-scene="…"]`. Without them the scene falls back
-to the placeholder accent declared at the top of the file.
-
-Three things about `record` generalise to any scene added later:
-
-- **Beat count is not fixed at four.** `record` has seven. `scene.steps.length` is the
-  count, the JS writes it to `--em-beats` on the host, and every `.em-story` height in
-  the stylesheet is `calc(var(--em-beats) * Nvh)`. Do not hard-code a `vh` height; a
-  wrong one desynchronises the scrub. N is well over 100 on purpose, see below.
-- **A page can choose where the scene lands.** The default is after the page's own
-  hero, found by two lookups in the JS. `/about/` needs it deeper than that, so it
-  marks the spot with an empty `<div data-scene-slot></div>` and the scene replaces
-  that node. On `/about/` the slot sits between the hero and `.about-story-nav`,
-  because a sticky nav placed above the scene stays pinned across the whole interlude.
-- **Every claim in `record` is traceable** to Vicky's published personal writing,
-  `_data/experience.yml`, `_data/publications.yml` or `_data/awards.yml`. The scene
-  follows the motive behind the work instead of repeating the CV chronology.
-  Text inside a drawing is a label, never a claim the copy has not already made.
-
-A scene can opt into extra choreography with `cinematic: true`. Only `record` does.
-The per-beat rules in `essay-motion.css` are time loops that idle while a beat is on
-screen; the cinematic branch in `render()` adds the arrival, the draw-on and the act.
-
-**Scroll picks the beat. The beat plays itself.** Everything inside a beat used to be
-a function of scroll position, which meant a reader who stopped to read stopped the
-drawing with them, and a beat only performed while the wheel was turning. `BEAT_SECONDS`
-of wall clock now walks the beat shape, started when the beat arrives and reset every
-time it is arrived at again, so returning to a beat replays it. Scroll still chooses
-the stage, cross-fades the pair, and carries the copy out on the boundary.
-
-Two consequences to keep in mind:
-
-- **Acts are no longer scrubbable.** Dragging backwards inside a beat does not run its
-  act backwards, because the act is no longer a function of the scrollbar. Going back
-  to a beat restarts it instead. This was a deliberate trade for autoplay.
-- **The clock only runs while the pin is holding.** An `IntersectionObserver` is a
-  coarse gate that stops the loop when the scene is nowhere near, but it is *not* the
-  test for whether a beat may advance: the host is a dozen screens tall and fires at
-  `threshold: 0`, so it turns true a full viewport before the pin engages. Gated on
-  that alone the opening beat played itself out while the reader was still scrolling
-  towards it and arrived already finished — the empty-room problem the observer was
-  meant to prevent. `tick()` therefore requires `top <= 0 && bottom >= innerHeight`,
-  and resets `beatT` when the pin takes hold. `tick()` keeps the rAF loop alive while either the scroll is still
-  settling or the beat is still performing, and lets it stop for the hold, so a
-  stationary read costs no frames.
-
-**Distance paces the sequence, not interception.** The scene once swallowed every
-gesture while the pin held and glided the page to the next beat's anchor. It did stop
-the skipping, but it turned the interlude into a slideshow, each beat arriving by
-teleport, and the lock that made it work could outlast the reader and trap them: quiet
-was the only thing that released it, and a reader who keeps scrolling never gives you
-any. That shipped, and the scene ate 241 wheel events over twelve seconds without
-moving a pixel.
-
-Nothing is intercepted now. A beat is simply given more scroll to cross, which is why
-the `vh` multipliers in the stylesheet are all well over 100: at roughly one screen a
-beat the browser could spend a single flick on three of them, and at ~2300px a hard
-flick buys about one. Wheel, trackpad, touch, keyboard, scrollbar, find-in-page and the
-back button all behave as they do everywhere else on the site, because none of them is
-being listened to.
-
-Two things follow, and both are worth keeping:
-
-- **Raising the multipliers is the only lever on pacing.** If beats feel too easy to
-  cross, they need more distance, not a lock. Measure it rather than guessing: divide
-  the host's scroll reach by `--em-beats` and compare against how far a hard flick
-  actually travels, which is ~2000-3000px on a 900px viewport.
-- **The clock is what keeps it fast.** Because the drawing no longer rations itself
-  across the scroll it was given, `BEAT_SECONDS` can be short while the beat itself is
-  long: the icons finish in well under a second and then hold for as long as the reader
-  takes to cross the rest of the beat.
-
-`prefers-reduced-motion` collapses the pin to a static block, as it always did.
-
-The eases are anime.js's, solved rather than imported. What the scene needs from
-anime.js is the maths, not the timeline. `spring()` integrates the damped harmonic
-oscillator the way `createSpring` does, finds its settling time numerically, and
-maps the beat onto it, which is why arrivals overshoot to about
-1.09 and decay rather than easing flatly to rest. `rippleFrom()` is anime.js's grid
-stagger with the grid assumption removed: it takes each element's real coordinates,
-measures distance to an origin, and normalises, so a cluster lands as a ring
-spreading outward instead of in document order.
-
-It drives five things, all scoped to `html[data-motion-scene="record"]`:
-
-- **Frame depth.** The arriving beat rises from slightly below at 0.93 scale, the
-  leaving beat keeps rising past 1.05. A cross-fade alone reads as two pictures
-  swapping; a shared direction of travel reads as one story moving.
-- **Per-element stagger.** Each frame's direct children get `--em-in` (their own
-  arrival, eased with a small overshoot) and `--em-ty` (how far below rest they
-  still are). `.em-fig` is excluded from the transform on purpose: the per-beat
-  keyframes animate its transform, and an animation beats a normal declaration, so
-  the rule would be silently dropped there and kept everywhere else.
-- **Stroke draw-on** for solid paths only. Dashed ones are skipped because
-  overwriting `stroke-dasharray` to draw them deletes the dashes.
-- **Copy lines** arrive in reading order rather than as one block, on the beat's own
-  clock, so the column composes itself while the pin settles.
-- **An act per beat**, in `ACTS`. A beat that only assembles itself is a slide with
-  a transition on it. Each act resolves its parts once and returns a function of
-  that beat's own second half, so the drawing performs the sentence: the connection
-  that reaches out and never completes, the forecast that crosses the room, the run
-  of confident answers that meets a barrier and stops.
-
-  **A beat is arrive, act, then hold**, set by `ARRIVE_END`, `ACT_START` and
-  `ACT_END` as fractions of `BEAT_SECONDS`. The hold used to be the part that was
-  easy to lose, because it was the tail of a scroll distance and `XFADE` dropped a
-  frame below full opacity after 0.83 of it; an act running past that finished
-  while already dissolving, so the payoff was never seen whole. On the clock the
-  hold is however long the reader stays, so only the performance needs budgeting.
-
-  **The opening beat is a drawn portrait, not a stat card.** It used to show four
-  cards reading 7 papers, 1 patent, 12 awards and 5+ years, every one of which is in
-  the stat strip immediately above the scene, so the scene opened by repeating what
-  the reader had just read. `scripts/trace_portrait.py` builds it from
-  `assets/img/profile.webp` and `--write` patches it in; it needs
-  `opencv-contrib-python` and downloads a landmark model into
-  `scripts/.portrait-cache/` on first run.
-
-  **The face is drawn from landmarks. Do not go back to tracing it.** Contour tracing
-  finds the boundary of a dark region, so an eye becomes a closed loop around its
-  shadow — on screen that is a hollow socket, not an eye — a nose becomes a ring, and
-  a cheek shadow becomes a rim. Two rounds of threshold tuning produced faces that
-  were accurate and frightening, because outline drawing cannot say "slightly darker":
-  a line is a line, so every soft shadow becomes hard anatomy. Adding *more* lines
-  makes it worse, not better.
-
-  A person sketching a face puts down one stroke per feature. So the features come
-  from a 68-point fit and each is emitted as the stroke a person would draw: the jaw
-  as one line, a brow as one arc, an eye as an almond, the nose base only, the lip
-  seam. Twelve strokes for the whole portrait. Two corrections are deliberate — the
-  fitter under-opens lids, so the eye lens is stretched about its centre line to the
-  aspect the photograph actually shows, and an iris ring is added, because a lens
-  alone is a *closed* eye however wide it is drawn.
-
-  **Where tracing is still right: the silhouette, the hairline, and the hair's
-  interior.** Those are real edges. A shadow on a cheek is not one — outlining it
-  invents a rim that is not there — but a ridge in hair is a boundary between one mass
-  of hair and the next, and hair has direction a person sketching it would put down.
-  So the hair carries a few traced sweeps and the face carries none; that split is
-  what makes the drawing rich without making it frightening. Three filters keep the
-  hair to sweeps rather than scribble: long contours only, opened along the silhouette
-  so they do not double the head's edge, and a tortuosity cut, since a sweep is nearly
-  as long as the distance it covers while a scribble is several times longer. Nothing in the stylesheet may set `stroke-dasharray` on
-  `.em-vf-line`, or `measurePath()`'s length stops describing the path.
-
-  Two details carry the finish. Every path is emitted as a **Catmull-Rom Bézier, not a
-  polyline**: `find_contours` walks the pixel grid and the raw result is short straight
-  segments whose corners are plainly visible at 2x, which reads as plotted rather than
-  drawn. The spline passes through every original point, so nothing moves. And the
-  ambient breath is on an **inner** group, `.em-vf-breathe`, because `.em-vf-sketch` is
-  a direct child of the frame and takes `transform: translateY(var(--em-ty))` for its
-  arrival; animating that element would beat the declaration and delete the arrival.
-
-  **It draws outside its own viewBox on purpose, and its position is set by the copy.**
-  The canvas sits in a 706px grid row but the SVG is width-constrained, so at 680:322
-  it renders about 386px and the row carries ~320px of unused slack;
-  `.em-narrative-canvas svg` sets `overflow: visible`, so the portrait uses it. The
-  vertical placement lines the drawing's centre up with the centre of the headline
-  column beside it, because the two are read as a pair. That is also why this beat
-  alone sets `CAPTION_Y` instead of the 344 the other six use — checked that the two
-  captions never overlap through the handover, since `--em-cap` zeroes each before
-  the other appears.
-
-  **`record` crops its own viewBox** to `40 54 680 322`, and only `record` may. The
-  `750 360` box is shared with nine other narrative scenes, four of which position
-  animations with `transform-box: view-box`, whose origin moves with it; `record`'s
-  one transform rule is `fill-box` and does not care. The crop is a camera move, not
-  a content move, so `getBBox()`, the acts and `rippleFrom()`'s origin all still
-  refer to the same points. It exists because the rendered width is fixed, so a
-  narrower box is the only way to make the drawings bigger — which is what the
-  removed progress thread and the dead margin around the frames paid for.
-
-  Measured on the current values, a beat assembles in about a quarter of a second
-  and stops moving about 1.25s after it starts. Lengthening `BEAT_SECONDS` does not
-  buy the reader more time to look, since the hold runs until they scroll; it only
-  makes the beat slower to say what it came to say. Arrival gets the smallest share
-  on purpose — parts sliding into place is the least interesting thing a beat does.
-
-  Because an act writes inline styles, **no CSS animation may touch a property an
-  act writes**. A running animation beats an inline style, so the loop would
-  silently take the story back. The per-beat rules in the stylesheet were cut down
-  to ambience for exactly this reason; keep them off transform, opacity and
-  stroke-dashoffset for any acted element.
-
-Two things to preserve when editing it. Frames whose opacity is 0 are skipped, so
-six of the eight beats cost nothing per frame; and `prefers-reduced-motion` is
-asserted in CSS as well as branched on in JS, because the preference can change
-mid-session after the variables have been written.
-
-**Never write a hex literal into this file.** Every colour resolves through a token
-declared twice at the top, once under `html[data-motion-scene]` and once under
-`html[data-theme="light"][data-motion-scene]`. A raw hex is invisible in whichever
-theme it was not chosen for, which is exactly the bug this structure exists to stop.
-Tokens are tiered, and the tier is the meaning: `--em-ink` through `--em-ink-faint`
-for text, `--em-hair` through `--em-line-4` for strokes, plus `--em-bg`, `--em-panel`,
-`--em-warm` (the human figure) and `--em-helper` (a second person).
-
-Light values were **solved, not chosen**: each one lands on the same contrast ratio
-against `--em-bg` that its dark counterpart has, holding hue and saturation constant.
-If you add a token, solve it the same way rather than eyeballing it, or that stroke
-will read at a different weight in one theme than the other.
-
-`--em-accent` is per-scene and is declared on the **root element, not `.em-story`**.
-The page-callout rules in the lower half of the file style elements that sit beside
-the scene rather than inside it. Scoped to `.em-story` the variable never reached
-them and those declarations silently dropped out of the cascade.
-
-### Computing a claim rather than asserting it (`/game-theory/`)
-
-`_data/game_theory.yml` is **generated**. Do not hand-edit the `solved:` blocks.
-
-Every Nash equilibrium, dominant strategy and Pareto-efficient cell shown on
-that page is computed by `scripts/solve_games.py` from the payoff matrix
-displayed next to it. Edit `scripts/games.json`, then:
-
-```bash
-python3 scripts/solve_games.py           # regenerate the data file
-python3 scripts/solve_games.py --check   # fail if the data file is stale
-```
-
-The reason is the same as the Stoic page. Recalling that Chicken has two pure
-equilibria off the diagonal, or that Stag Hunt has none off it, is easy to get
-backwards, and a wrong equilibrium is a wrong claim about how a real situation
-resolves. Deriving it from the numbers on screen makes the two impossible to
-disagree.
-
-Everything in the data file comes from `games.json`, not only the games:
-`levers`, `laws`, `dashboard`, `classifier`, `five`, `domains`, `regimes` and
-`readiness` are all emitted by the same script. **A hand edit to
-`_data/game_theory.yml` is lost on the next run.** To add a field, add it to
-`games.json` *and* to the matching `L.append(...)` in `solve_games.py`, then
-re-run. Every section now carries a distinct `icon:` per row on that route.
-
-`/game-theory/` also draws each game as a 2x2 shape map (`shapes()` in
-`js/components/game-theory.js`). It reads only the computed `solved` block, so
-the picture cannot disagree with the matrix beside it. Check it against the
-solver's own summary table after changing a payoff:
-
-```bash
-python3 scripts/solve_games.py --check
-```
-
-Note the **underscore** in the filename. Liquid parses `site.data.game-theory`
-as a subtraction, so a hyphenated data file is read unpredictably. Data files
-consumed by Liquid need underscores.
-
-Maths on the page is hand-marked-up HTML rather than a rendering library:
-`.gt-eq` for display equations, `.m` for inline symbols, `.frac` for stacked
-fractions. Keep variables italic and operators upright, which is what
-`.m .op` handles.
-
-### Quoting a primary source (`/stoic/`)
-
-`_data/stoic.yml` is **generated**. Do not hand-write or hand-edit a `quote`.
-
-Every quotation is a contiguous verbatim span lifted programmatically from a
-public-domain source text:
-
-| Work | Translation | Source |
-|---|---|---|
-| Meditations | George Long | `classics.mit.edu/Antoninus/meditations.mb.txt` |
-| Enchiridion | Elizabeth Carter | `classics.mit.edu/Epictetus/epicench.1b.txt` |
-
-This matters because the best-known Stoic lines in circulation are usually a
-different translator's wording, a paraphrase, or an invention. Writing them from
-memory produces confident misattribution. Two examples caught during the build:
-"the impediment to action advances action" is Hays and appears nowhere in Long,
-and the closing passage of Meditations book 12 is absent from the MIT edition
-entirely, so the entry citing it was dropped rather than sourced elsewhere.
-
-`situation`, `take` and `search` are original commentary or derived keywords and
-are safe to edit. After any change to the data file, run:
-
-```bash
-python3 scripts/verify_stoic_quotes.py
-```
-
-It fetches both sources, rebuilds the index, and fails on any quote that is not
-a verbatim span of the stated book or chapter. It allows exactly two
-normalisations, neither of which changes a word: translator apparatus removed
-(bracketed Greek, footnote markers, editorial parentheses), and truncation
-punctuation, where a span cut at a clause boundary may end in a full stop and
-capitalise its first letter. Source texts cache to `scripts/.stoic-cache/`,
-which is gitignored.
-
-Refs are `book.section` for the Meditations and a bare chapter number for the
-Enchiridion.
-
-### Icon sprite (`/principles/`)
-
-`_includes/principles-icons.html` holds one `<symbol id="pi-…" viewBox="0 0 24 24">` per icon,
-pulled in with `{% include principles-icons.html %}` and referenced as
-`<svg class="pr-i"><use href="#pi-angry"/></svg>`.
-
-- **Ids are derived, not stored.** A situation uses `pi-{{ s.id }}` and a sequence step uses
-  `pi-{{ step.key | downcase }}`, so adding an entry to `_data/principles.yml` only needs a
-  matching symbol. `protect` entries carry an explicit `icon:` (plus a short `short:` label
-  used by the orbit diagram, which has no room for the full name).
-- **Symbols carry geometry only.** Stroke width, caps, joins and `fill: none` are set once on
-  `.pr-i` in `principles.css`; colour is always `currentColor`. Shapes that need a solid fill
-  use `class="pr-i-fill"`. Never put presentation attributes on a symbol.
-- **Diagram labels are placed by measurement, not by hand.** The orbit and the reversibility
-  axis position their text by reading `getBBox()` and pushing outward until nothing collides
-  with a node, the hub, an axis caption or another label. Renaming an entry cannot reintroduce
-  an overlap, so do not replace this with fixed coordinates.
-
-Check every reference resolves before committing:
-
-```bash
-python3 - <<'EOF'
-import re
-s=open('_includes/principles-icons.html').read()
-syms=set(re.findall(r'<symbol id="pi-([\w-]+)"',s))
-y=open('_data/principles.yml').read()
-need=set(re.findall(r'^  - id: (\S+)',y,re.M)) | set(re.findall(r'^    icon: (\S+)',y,re.M))
-need|={k.lower() for k in re.findall(r'^  - key: ([A-Z]+)$',y,re.M)}
-print('missing symbols:', sorted(need-syms) or 'none')
-EOF
-```
-
-### Icon sprite (`/high-agency/`)
-
-Same rules as `/principles/` above: `_includes/high-agency-icons.html` holds one
-`<symbol id="hai-..." viewBox="0 0 24 24">` per icon, presentation lives once on `.ha-i` in
-`high-agency.css`, and symbols carry geometry only.
-
-Ids are prefixed **`hai-`**, not `ha-`. The page already owns element ids in the `ha-`
-namespace, and two of them (`#ha-flow`, `#ha-loop`) collide with the obvious symbol names.
-A sprite `<symbol>` sits above the page in document order, so a collision makes
-`document.querySelector('#ha-flow')` return the symbol and silently kills the widget.
-
-Every referencing `<svg>` carries its own `viewBox="0 0 24 24"`.
-
-Check every reference resolves, and that nothing collides, before committing:
-
-```bash
-python3 - <<'PYEOF'
-import re
-sprite = open('_includes/high-agency-icons.html').read()
-page   = open('_pages/high-agency.md').read()
-js     = open('js/components/high-agency.js').read()
-syms = set(re.findall(r'<symbol id="([\w-]+)"', sprite))
-refs = set(re.findall(r'href="#(hai-[\w-]+)"', page + js))
-refs |= set(re.findall(r"icon: '([\w-]+)'", js)) | {'hai-lock'}
-ids  = re.findall(r'\sid="([^"]+)"', page) + list(syms)
-print('unresolved:', sorted(refs - syms) or 'none')
-print('unused    :', sorted(syms - refs) or 'none')
-print('id clashes:', sorted(i for i in set(ids) if ids.count(i) > 1) or 'none')
-PYEOF
-```
-
-### Progress badges (`/high-agency/`)
-
-`badges()` in `js/components/high-agency.js` runs **first** in `init()`, before any widget can
-call `award()`. It loads `ha:badges` from local storage, and a widget that awarded into an
-empty object first would overwrite the reader's record.
-
-It also wires itself to the existing widgets from the outside, using delegated listeners and
-two `MutationObserver`s, rather than editing each widget to report in. Adding a badge means
-adding one entry to `BADGES` and one listener, and leaves the twenty existing widgets alone.
-
-### Situation diagrams (`/principles/`)
-
-Every situation in `_data/principles.yml` carries a `viz:` block, and `situationViz()` in
-`js/components/principles.js` renders it into the top of that situation's card body.
-
-**Labels are quoted, never invented.** Each label must be lifted from that situation's own
-`trigger`, `ask`, `rule`, `steps` or `body`. A diagram restates what the card already says.
-It is not a place to add a claim, and there are no numbers in any of them.
-
-Fifteen archetypes. Label-heavy ones are HTML so the text wraps and stays selectable;
-geometric ones are SVG:
-
-| HTML | SVG |
-|---|---|
-| `split` `order` `stack` `chips` `test` `bands` | `gate` `threshold` `trend` `rings` `scale` `loop` `funnel` `hub` `pattern` |
-
-`bands` started as SVG and had to move. At six categories the names are wider than the
-bands are, and only real text flow keeps them off each other.
-
-Two rules the SVG builders exist to enforce, both of which produced visible bugs first:
-
-- **Size the box from the labels, not from a guess.** `label()` returns the box it actually
-  occupied; builders add up `bottom` and pass the result to `svg()`. A fixed height clips
-  any label that wraps to three lines.
-- **A label above a node grows upward.** `label(..., grow)` takes `up`, `mid` or `down`.
-  Without it the second line of a top label lands on the node it belongs to. `shift()` then
-  drops the whole drawing if a top label still overshoots `y=0`.
-
-There is no browser in this environment, so check the geometry by script. The three
-harnesses under the session scratchpad build all 51 diagrams, assert every label and shape
-sits inside its viewBox, and assert no two labels overlap each other or a node:
-
-```bash
-# extract the builders, dump the data, then run the three checks
-python3 -c "s=open('js/components/principles.js').read();\
-a=s.index('  var VZ = 320;');b=s.index('  function situationViz()');\
-open('/tmp/builders.js','w').write(s[a:b])"
-```
-
-The checkers stub `esc` and `clamp`, `eval` that slice, and run every `viz` block through
-`BUILD`. Re-create them if they are gone; a diagram that overflows or overlaps is invisible
-to every other test in the repo.
-
-## Jekyll Configuration
-
-### SEO
-Uses `jekyll-seo-tag` for meta tags via `{% seo %}`. Four of its behaviours are not
-obvious and each one caused a real gap on this site:
-
-- **`site.image` is ignored.** The plugin reads `og:image` from `page.image` only. A
-  `defaults` entry in `_config.yml` supplies it site-wide; page front matter overrides
-  it, which is how each use case gets its own banner. Without a resolved image the card
-  also degrades from `summary_large_image` to plain `summary`.
-- **`page.date` is the switch for article markup.** Setting it emits `og:type=article`,
-  `article:published_time`, *and* a full `BlogPosting` JSON-LD block. That is why the
-  twelve writings carry `date` and `last_modified_at`, and why nothing else does. Do not
-  hand-write a second `BlogPosting`; it will duplicate the one the plugin already emits.
-- **A `robots:` front matter key does nothing on its own.** `default.html` emits it
-  explicitly. An absent robots meta means indexable, which is what every page but
-  `/project/` wants.
-- **`sitemap: false` also emits noindex.** Use it to withhold a page. `_config.yml` uses
-  it via `defaults` to keep the two search-console ownership tokens out of the sitemap,
-  which works because Jekyll's StaticFile does read front matter defaults.
-
-Never pair a `robots.txt` `Disallow` with a `noindex` meta on the same URL. The disallow
-stops Google fetching the page, so it never reads the noindex, and the URL can stay in
-the index with no description. Let it be crawled and serve the noindex.
-
-### Icon set (`/interview/`)
-
-32 icons, all generated by `scripts/generate_icons.py` from one `ICONS` list. That list
-is the only place to edit. Running the script rewrites four outputs at once:
-
-| Output | Consumed by |
-|---|---|
-| `icons/*.svg` | nothing on the site; portable copies for reuse elsewhere |
-| `icons/preview.html` | you, at 1x, 2x and on dark, before shipping a change |
-| `icons/style-spec.json` | the style contract |
-| `_includes/interview-icons.html` | the site |
-
-`icons/` is in the `_config.yml` exclude list. Left in, Jekyll would copy it into `_site/`
-and `jekyll-sitemap` would list `preview.html` as if it were a page.
-
-Style is the Clean preset: 24px grid, 1.5px stroke, round caps and joins, 2px padding,
-so every path lives inside coordinates 2–22. The standalone files carry those three
-stroke attributes on each root `<svg>`. The sprite cannot: a `<symbol>` has no root, so
-`.ivi` in `css/interview.css` declares them once instead. Both routes must agree.
-
-The twenty-six track icons are named after the topic ids in `_data/interview.yml`, not
-after their shapes. That breaks the usual "name it for what it depicts" rule on purpose,
-because it lets a template resolve one with `#ivi-{{ topic.id }}` and no lookup table.
-
-`check()` in the script is a tripwire, not a proof. It catches coordinates outside the
-box, precision past two decimals, hard-coded colour, transforms, and stray ids. Note
-that SVG lets numbers run together with no separator, so `4.38.94` is two numbers: the
-regex has a leading-dot alternative or it reads that as `4.38` and `94` and false-flags.
-
-What the script cannot check is whether an icon reads. Three from the first pass had to
-be redrawn after looking at `preview.html`: `nlp` had ticks through text lines and read
-as slider controls, `mechanistic-interpretability` had three dots in a triangle inside a
-circle and read as a face, and `agentic-ai` had an arrowhead that was not on its arc's
-tangent and read as a stray tick. Always open the preview.
-
-### Reading for dyslexia (`/interview/`)
-
-These pages are built for a reader who learns by picture and by doing, and who
-may be dyslexic. Four things are defaults rather than options, because they
-carry most of the benefit:
-
-- line height at least 1.5 on every body element
-- a measure that stops around 66 characters
-- left aligned, never justified, and `hyphens: none`
-- no all-caps in anything longer than a short label
-
-Capitals are the subtle one. They flatten every word into the same rectangle,
-and word shape is a large part of how a dyslexic reader recognises a word
-without decoding it letter by letter. No label carries a literal
-`text-transform: uppercase`. They all read `var(--rd-caps)` so the reader can
-switch the page to sentence case in one click, and the wide tracking that makes
-caps legible switches off with it.
-
-On top of that, `readingControls()` in `js/components/interview.js` writes five
-custom properties onto the page section: text scale, line height, letter
-spacing, caps, and a page tint. Every size on the page is `calc(… * var(--rd-scale))`,
-so one number moves the whole layout together. Settings persist under `iv:read`.
-
-Do not add a second "dyslexia mode" stylesheet. Everything is a custom property
-precisely so there is only one set of rules to keep correct.
-
-### Learning aids (`/interview/`)
-
-Each module carries four controls beyond its diagram, all built for a reader who
-learns by doing and may be dyslexic:
-
-| Control | What it does | State |
-|---|---|---|
-| **Focus** | Dims every other module so one idea is on screen at a time | none, per page |
-| **Listen** | Reads the module aloud via `speechSynthesis`; hides itself when the API is absent | none |
-| **Scratchpad** | A textarea per module, for writing the idea in your own words | `iv:note:<topic>:<index>` |
-| **Mark revised** | Feeds the progress ring on the page and the hub card | `iv:done:<topic>` |
-
-The page also carries a round timer (5/25 minute focus, 5 minute break). Spaced
-recall is the reason it exists, so the phase labels above each block — See it,
-Understand it, Build the chunk, Try without notes — name the stage rather than
-decorate it.
-
-`Listen` must stay guarded. `speechSynthesis` is absent in some browsers and in
-headless test runs, so the button hides rather than throwing.
-
-### Module players (`/interview/`)
-
-Every module carries `beats:` — one caption per part of its own `viz`. The
-diagram then becomes a narrated walkthrough rather than a picture, using the
-same VisuAlgo shell as the track animations: a numbered caption list marking
-the line currently running, clickable to jump, plus play and speed.
-
-The key constraint is that **the caption count must equal the part count**. The
-inserter in the session scratchpad refuses to write a mismatch, because a player
-narrating a step the drawing does not have is worse than no player. Part counts
-per archetype: flow `steps`, compare `cols`, stack `layers`, matrix `cells`,
-scale `stops`, parts `1 + around`, tree `1 + branches`, curve `2`.
-
-Beats reveal cumulatively, so scrubbing backwards lands in the same state as
-stepping forwards. A caption should say why its part matters rather than repeat
-its label; the label is already on screen.
-
-Two layout traps, both found by rendering rather than by reading:
-
-- Several archetypes are grid or flex containers, so an appended player becomes
-  a layout item and lands in a column of its own. `.ivz > .ivp` claims the full
-  width whatever the parent's display is.
-- `.an-fade.is-on` sets `transform: none`, and a CSS transform beats the SVG
-  `transform` attribute. Putting both on one element silently stacks every
-  positioned group at the origin. Keep the translate on an outer group.
-
-### The architecture explorers (`/transformers/`)
-
-`js/components/transformer.js` puts one explorer inside each of the six modules of the
-transformers track, mounting into the `[data-tf]` slot `syllabus.html` leaves in every
-module and staying silent on the other twenty-five pages. It is the only page-specific
-component inside `/interview/`, which is why it and `css/transformer.css` load through
-the list form of `extra_css` and `extra_js` rather than being folded into
-`interview.css`.
-
-**The arithmetic is real, and it is checked.** Every matrix on screen is computed in
-that file, from the weights in that file, using the operations of Vaswani et al. (2017)
-in the order the paper runs them. `scripts/verify_transformer.py` is an independent
-NumPy implementation written from the paper, and it loads the component under Node and
-compares fifteen tensors element by element, plus two properties that must hold whatever
-the weights are: every softmax row adds to one, and the causal mask never leaks into the
-future. Run it after touching either side:
-
-```bash
-python3 scripts/verify_transformer.py      # needs numpy and node on PATH
-```
-
-**The weights are chosen, not trained, and the page says so in every panel's source
-line.** Random weights give an attention map flat to three decimals, so the reader sees
-a grey square and takes the explanation on faith. These are picked so head 1 resolves
-`it` to `cat` and head 2 finds the verb, which are both real head types. Two details are
-load-bearing: the projections carry a `1/sqrt(d_model)` factor undoing the paper's
-embedding scaling, without which every softmax row goes one-hot at this size; and the
-feed-forward weights are generated by an LCG that `verify_transformer.py` mirrors
-exactly, including the order the four blocks are drawn in.
-
-The sizes are `d_model 8, h 2, d_k 4, d_ff 32` against the paper's `512, 8, 64, 2048`.
-**Every shape shown is paired with the paper's own shape**, so nobody learns a size that
-is not real. That pairing is also the design: the shape transition heads every step,
-set larger than anything else in the panel, because a practitioner reads the shape
-signature first and most bugs in this architecture are shape bugs.
-
-Three rules hold the styling together, and breaking one makes the panel unreadable
-rather than merely different:
-
-- **Colour means magnitude, and nothing else.** `--tf-up` and `--tf-down` tint a cell by
-  the sign and size of its value. `--accent` is rationed to what the reader controls.
-- **The monospace face carries data only** — shapes, formulas, cell values, row and
-  column labels. Prose stays in the page's own faces.
-- **Two rules in the whole panel**: one under the title, and the spine down the step
-  list. The spine is the residual stream made literal, with a filled marker at the step
-  the reader is on.
-
-The Figure 1 explorer draws the paper's own figure with every box clickable, and its
-three variants are one diagram with parts switched off rather than three diagrams. Wires
-are drawn between consecutive *visible* boxes, so decoder-only reconnects Add & Norm
-straight to Feed Forward after cross-attention drops out, instead of leaving a gap.
-
-### Staged animations (`/interview/`)
-
-`js/components/interview-anim.js` gives every track one animation. The format
-combines two references the site owner named: 3Blue1Brown's visual idiom and
-VisuAlgo's interactive shell.
-
-From 3Blue1Brown (via Manim, which the animations imitate rather than use):
-
-- **The easing.** Manim's default rate function is a quintic smoothstep,
-  `s(t) = t^3(10 - 15t + 6t^2)`. Both its first and second derivatives vanish at
-  each end, so motion starts and stops with no kick. `--an-smooth` is the closest
-  cubic-bezier. Standard CSS `ease` looks nothing like it.
-- **The timing.** One second per animation with an explicit pause between, so one
-  idea finishes before the next starts. `--an-run`.
-- **Write.** Curves are drawn along their own length, so the reader watches the
-  shape being made. `.an-write` plus a `--len` measured at mount.
-
-From VisuAlgo:
-
-- A numbered **step list** beside the stage, marking the line currently running.
-  Any line can be clicked to jump. It doubles as a table of contents.
-- A **status line** under the stage carrying the caption for the current beat.
-- **Speed control**, four settings. The gap is reading time for the caption, so
-  slow is genuinely slower.
-
-And the part neither reference has on its own: **live controls**. A scene may
-declare `live: { knobs, redraw }`, and the reader drags a number while the maths
-responds. `/linear-algebra/` lets you move where the basis vectors land and
-watch the determinant go negative when the grid turns inside out. `/calculus/`
-lets you shrink the gap between two points and watch the secant slope converge
-on the derivative. Touching a knob pauses playback, because the reader has taken
-over.
-
-Rendering with real Manim was considered and rejected, for the same reason the
-scenes are SVG rather than generated images: video cannot follow the light and
-dark themes or the reading tints, cannot resize with the reading controls, and
-cannot be read by a screen reader.
-
-Four rules the engine enforces. The reader can always take over. Every beat has
-a caption. The last beat is the finished picture, so someone who never presses
-play still sees the whole thing. Reduced motion means no timer, never no content.
-
-Adding a track's animation means one entry in `SCENES` and one line in
-`BY_TOPIC`. Verify with the harness in the session scratchpad: it loads all
-twenty-six pages and asserts each has an animation with a caption, at least four
-steps, and no overflow.
-
-### Scenes: concrete illustrations (`/interview/`)
-
-`SCENE` in `js/components/interview.js` draws small concrete pictures: real
-tokens being cut, a kernel on a pixel grid, a cache growing a row per token.
-The eight diagram archetypes show the *shape* of an idea; a scene shows the
-thing. A module opts in with a `scene:` block and gets it above its diagram.
-
-Each scene is specified before it is drawn, using the five-part discipline from
-the `ai-image-generator` skill (type, subject, environment, technical,
-constraints). Those notes live in the comment above each builder. The output is
-SVG built from the spec, never a generated raster.
-
-That distinction is deliberate and should hold. A raster image cannot resize
-with the reading controls, cannot follow the light/dark themes or the page
-tints, cannot be read by a screen reader, and cannot be corrected when one
-detail is wrong. Text baked into pixels is the one thing a dyslexic reader most
-needs to resize. Use the image skill to *specify* a picture, then codify it.
-
-The same rule as the diagrams applies: labels come from the module's own
-content, and no scene carries a number.
-
-Every scene needs an `alt:` line in its `scene:` block. It is the only
-description a screen reader gets, since the drawing itself is decorative markup.
-All 26 tracks carry at least one scene, so no track is left with abstract
-diagrams alone.
-
-### Module diagrams (`/interview/`)
-
-Every module in `_data/interview.yml` carries a `viz:` block, and `BUILD` in
-`js/components/interview.js` renders it into that module's card. Eight archetypes:
-
-| HTML | SVG |
-|---|---|
-| `flow` `compare` `stack` `matrix` `scale` `parts` `tree` | `curve` |
-
-**Labels are lifted, never invented.** Each label comes from that module's own `covers`,
-`why` or `check`. A diagram restates the module. It is not a place to add a claim, and
-there are no numbers in any of them.
-
-Only `curve` is SVG, because there the shape carries the meaning. Its labels all sit
-outside the plot box in HTML, so no geometry harness is needed to prove they do not
-collide, and it must not carry `preserveAspectRatio="none"` — stretching the box to the
-column width flattens every curve into the straight line the archetype exists to disprove.
-
-The page ships its topic as a JSON island (`#iv-data`), so the script never reads content
-back out of the DOM. Revision state lives in `localStorage` under `iv:done:<topic-id>`,
-and the same key feeds the ring on the syllabus page and the ring on its hub card.
-
-The hub map draws each topic's `links:` as curves between cards. Edges are measured from
-the boxes the browser actually laid out, after layout, so the map survives any reflow or
-column count. Adding a topic needs no map change.
-
-Check the result with a browser rather than by eye. The harness under the session
-scratchpad loads all twenty-six pages and asserts every module got a diagram, no `.ivz`
-overflows its box, the page never scrolls sideways, and no page logs a console error.
-
-### Unlisted pages
-`/interview/` and its twenty-six syllabus pages are reachable only by typing the URL.
-Four things keep them that way, and all four are required:
-
-1. `robots: noindex, nofollow` in front matter, emitted by `default.html`
-2. `sitemap: false`, so `jekyll-sitemap` skips them
-3. No entry in `NAV_ITEMS` in `js/components/nav.js`. Adding one would also publish
-   every unlisted URL inside a file any visitor can read
-4. No inbound link from `/writings/`, the homepage, or `llms.txt`
-
-`scripts/audit_seo.py` understands this: a page carrying a noindex meta is exempt from
-its NOT-IN-SITEMAP and NO-INBOUND-LINK checks, so the audit still reports zero flags.
-It does count them in `live indexable pages`, which is a naming quirk in the summary line.
-
-This hides the pages from search and from site navigation. It does not make them secret.
-The repository is public, so the Markdown and YAML are readable on GitHub by anyone who
-looks. Never put anything in here that could not be published.
-
-### Structured Data (JSON-LD)
-Four sources, three hand-written and one from the plugin:
-
-**1. Person schema** — in `_layouts/default.html` (appears on every page). Properties:
-- Identity: `name`, `alternateName`, `gender`, `description` (includes he/him), `disambiguatingDescription`, `image`
-- Role: `jobTitle`, `alumniOf`, `worksFor` (both Monash University)
-- Knowledge: `knowsAbout` (8 domains, led by Trustworthy AI / Multimodal AI / AI Safety / Interpretability / Multilingual AI; Earth Observation last), `knowsLanguage` (English, Indonesian)
-- Recognition: `award` (11 entries), `memberOf` (SEACrowd, ACL, IEEE)
-- Network: `colleague` (Risqi Saputra, Taufiq Asyhari), `sameAs` (12 profiles)
-- Works: `author` array — **auto-generated from `_data/publications.yml`** via Liquid
-
-**2. CollectionPage + ScholarlyArticle schema** — in `_pages/publications.md` (research page only). Also auto-generated from `_data/publications.yml`.
-
-When adding new publications, **only update `_data/publications.yml`** — both JSON-LD blocks update automatically. Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year` (string), `url`, `abstract`, `keywords` (array), `authors` (array). Optional: `publisher`, `doi`, `date` (ISO, from the bibtex/Crossref record — used as `datePublished`, falls back to `year`), `pages`, `volume`, `issue`, `issn`, `isbn`.
-
-Valid `kind` values: `geospatial`, `cultural`, `nlp`, `applied`.
-
-**3. BreadcrumbList** — in `_layouts/default.html`, emitted for any page with a `date`,
-which in practice is the twelve writings. Home → Writings → this page.
-
-**4. BlogPosting** — emitted by `jekyll-seo-tag` itself, also keyed on `page.date`. It is
-not in the layout and must not be added there.
-
-### Sitemap
-Auto-generated by `jekyll-sitemap` into `/sitemap.xml`. It lists every `.html` static
-file, not only pages, so anything dropped into the repo root shows up as if it were a
-page. Withhold one with a scoped `sitemap: false` in `_config.yml` `defaults`.
-
-After changing anything in this section, re-run the audit in `CONTRIBUTING.md` and
-confirm it still reports zero flags.
-
-### Permalinks
-Clean URLs without `.html`:
-- `/about/` instead of `/pages/about.html`
-- `/research/` instead of `/pages/publications.html`
-
 ## Shared Navigation
 
-All navigation is defined in `js/components/nav.js` via the `NAV_ITEMS` array. This is the **single source of truth** — modification here updates all pages automatically. The hardcoded `<nav>` in `default.html` is a no-JS fallback.
+All navigation is defined in `_data/navigation.yml`. `_includes/site-nav.html`
+renders it, and both the header and the footer call that include, so adding an
+entry puts the link in both places. There is no second list.
+
+Active state is resolved at build time by the same include. An item owns its own
+href exactly, anything beneath it (so `/usecases/some-project/` lights up Use
+Cases), and any extra prefix listed under `owns:`. That last one is how a
+long-form note at its own top-level URL still lights up Writings.
+
+`js/components/site-header.js` holds no navigation content. It handles the
+mobile drawer, the theme toggle and the shape popover, and nothing else.
 
 ## Design System (Gestalt-based)
 
@@ -1151,44 +467,21 @@ Content stored in `_data/*.yml` — accessed via `site.data.<filename>.<key>`
 
 ### JavaScript
 - ES6+ syntax
-- IIFE wrapper in nav.js
+- One IIFE per component file, so nothing leaks onto `window`
+- A component guards on its own elements and returns early when they are absent,
+  because every file in `js/components/` is loaded by some pages and not others
 - Asset URLs are cache-busted automatically; see `_includes/asset.html`
 
-## Accessibility (WCAG 2.1 AA)
 
-The site targets WCAG 2.1 AA compliance. Key implementations:
+## Accessibility
 
-- **Skip link**: `.skip-link` in `default.html` — first focusable element, links to `#main-content` on `<main>`
-- **Focus indicator**: Global `:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }` in `styles.css`
-- **Button borders**: All interactive element borders use `--border-ui` (≥ 3:1 contrast ratio) not `--line`
-- **Text contrast**: `--text` = 13.6:1, `--muted` = 6.75:1, `--accent` = 5.81:1 against `--bg`
-- **Status messages**: `#project-count` uses `role="status" aria-live="polite"` in `publications.md`
-- **Decorative images**: `aria-hidden="true"` on SVG backgrounds and canvas
-- **Alt text**: All meaningful images have descriptive alt text
-- **Filter groups**: All filter bars use `role="group"` + `aria-label`
-- **Note blocks**: Use `role="note"` on `.note-block`
+Full detail, and the one known outstanding defect, in `docs/accessibility.md`.
+The rules that apply to every change:
 
-### Known: the document outline skips ranks on five pages
-
-`/game-theory/`, `/high-agency/`, `/principles/`, `/stoic/` and `/small-talk/` jump
-from h2 straight to h5 (h4 on small-talk), 53 headings in total. Screen-reader users
-navigating by heading lose the nesting. It is a best-practice failure rather than a
-2.1 AA one, which is why it is recorded rather than patched.
-
-It is not a one-line fix, and a retag was attempted and reverted. Three things bite:
-
-- `styles.css` resets `h1, h2, h3, strong` but not h4 to h6, so a heading promoted
-  into that list silently gains `margin: 0`, Space Grotesk and `line-height: 1.1`.
-- each page has a section-wide prose rule (`.gt-part h3`, `.ha-part h3`, `.sm-part h3`,
-  `.ha-part h4`) that captures every component heading once the ranks move. Scoping
-  those to `> h3` fixes it, and is a prerequisite for any retag.
-- the stylesheets select these headings by element inside a class scope, roughly 15
-  selectors, and `high-agency.js`, `small-talk.js` and `communication.js` emit some
-  of them, so tag, rule and template have to move together.
-
-Doing it properly means scoping the prose rules first, then renaming, then pinning
-`line-height` and `font-family` per component, checking each against a baseline build
-rather than by eye. A partial attempt left 226 headings rendering differently.
+- Interactive borders use `--border-ui`, never `--line`. That token is the 3:1 minimum.
+- Every filter bar carries `role="group"` and an `aria-label`; every `.note-block` carries `role="note"`.
+- Decorative images get `alt=""` plus `aria-hidden="true"`; everything else gets real alt text.
+- Never remove the skip link or the global `:focus-visible` outline.
 
 ## Performance
 
@@ -1203,7 +496,7 @@ rather than by eye. A partial attempt left 226 headings rendering differently.
 ## Common Tasks
 
 ### Change Navigation
-Edit the `NAV_ITEMS` array in `js/components/nav.js`.
+Edit `_data/navigation.yml`. The header and the footer both render from it.
 
 ### Add New Content
 Edit the appropriate file in `_data/`. For publications, only edit `_data/publications.yml` — the JSON-LD on both the research page and the global Person schema auto-update.
@@ -1215,7 +508,7 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 
 ### Add New Page
 1. Create `_pages/newpage.md` with front matter
-2. Add to `NAV_ITEMS` in `js/components/nav.js`
+2. Add it to `_data/navigation.yml` if it belongs in the nav
 
 ### Add a Filterable List Page
 1. Add `.filter-bar` / `.filter-pill` markup (see Design System above)
@@ -1247,23 +540,6 @@ Pick the correct semantic role: `.card--feature` (1.5rem pad, for primary conten
 - Add `width` and `height` attributes to prevent layout shift
 - Decorative images: `alt=""` + `aria-hidden="true"`
 
-## Local Development
-
-```bash
-bundle install
-bundle exec jekyll serve --livereload
-```
-
-Site available at `http://localhost:4000`
-
-## Building
-
-```bash
-bundle exec jekyll build
-```
-
-Output goes to `_site/` directory.
-
 ## Deploying
 
 ```bash
@@ -1272,7 +548,11 @@ git commit -m "description"
 git push origin main
 ```
 
-GitHub Actions handles Jekyll build automatically.
+GitHub Pages builds the site itself from `main`. There is no workflow file, which
+is why the `github-pages` gem pin in the `Gemfile` is what production runs:
+changing it changes the deploy.
+
+For local commands see "Build and verify" at the top of this file.
 
 ## Contact
 
