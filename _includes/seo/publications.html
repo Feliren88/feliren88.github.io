@@ -1,0 +1,26 @@
+{%- comment -%}
+One ScholarlyArticle block per entry in _data/publications.yml.
+
+Separate blocks, each pointing at the author by @id, rather than one Person
+carrying a nested author array. Nesting the full author list inside the Person
+object made Search Console's parse results hard to read.
+
+Adding a paper means editing _data/publications.yml and nothing else: this block
+and the `subjectOf` list in _includes/seo/person.html both follow from it.
+{%- endcomment -%}
+{%- for pub in site.data.publications %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  {% if pub.doi %}"@id": "https://doi.org/{{ pub.doi }}",{% endif %}
+  "headline": {{ pub.title | jsonify }},
+  {% if pub.url %}"url": {{ pub.url | jsonify }},{% endif %}
+  {% if pub.abstract %}"description": {{ pub.abstract | jsonify }},{% endif %}
+  "datePublished": "{{ pub.date | default: pub.year }}",
+  "author": { "@id": "{{ site.url }}/#person" }{% if pub.publisher %},
+  "publisher": { "@type": "Organization", "name": {{ pub.publisher | jsonify }} }{% endif %}{% if pub.keywords %},
+  "keywords": {{ pub.keywords | jsonify }}{% endif %}
+}
+</script>
+{% endfor -%}

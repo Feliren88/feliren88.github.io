@@ -1,0 +1,25 @@
+# Press coverage quoting or profiling the site author.
+#
+# Consumed by _includes/seo/media.html, which emits one Article JSON-LD block
+# per entry. Separate blocks rather than a nested array, so each appears as its
+# own entity in search results.
+#
+# This is coverage *of* the author by someone else. Articles *by* the author
+# live in _data/thoughts.yml and are rendered on /writings/.
+#
+# date is ISO 8601 with an offset, and becomes `datePublished`.
+
+- headline: "SEA's AI law trap: who really pays?"
+  url: https://www.techinasia.com/seas-ai-law-trap-pays
+  publisher: Tech in Asia
+  date: '2026-06-02T00:00:00+08:00'
+
+- headline: 'AI rules in SEA: the risks, the fines, what you need to know'
+  url: https://www.techinasia.com/ai-rules-sea-risks-fines
+  publisher: Tech in Asia
+  date: '2026-06-01T00:00:00+08:00'
+
+- headline: 'AI rules in South-East Asia: Risks, fines, and everything else you need to know'
+  url: https://www.businesstimes.com.sg/international/asean/ai-rules-south-east-asia-risks-fines-and-everything-else-you-need-know
+  publisher: The Business Times
+  date: '2026-06-01T00:00:00+08:00'

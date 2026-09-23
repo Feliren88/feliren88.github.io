@@ -1,0 +1,39 @@
+{%- comment -%}
+Press coverage from _data/media.yml and talks from _data/events.yml.
+
+One block per entry rather than a nested array, so each appears as its own
+entity in rich results. Both lists attribute to the author by @id.
+
+An event is either online or in a place. `online: true` gives it a
+VirtualLocation at its own url; otherwise `place:` gives it a Place. An entry
+with neither renders no location, which is valid but weaker.
+{%- endcomment -%}
+{%- for article in site.data.media %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.headline | jsonify }},
+  "url": {{ article.url | jsonify }},
+  "publisher": { "@type": "Organization", "name": {{ article.publisher | jsonify }} },
+  "datePublished": {{ article.date | jsonify }},
+  "author": { "@id": "{{ site.url }}/#person" }
+}
+</script>
+{% endfor -%}
+
+{%- for event in site.data.events %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": {{ event.name | strip | jsonify }},
+  {% if event.url %}"url": {{ event.url | jsonify }},{% endif %}
+  "startDate": {{ event.start_date | jsonify }},
+  {% if event.online %}"eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "location": { "@type": "VirtualLocation", "url": {{ event.url | jsonify }} },{% elsif event.place %}"location": { "@type": "Place", "name": {{ event.place | jsonify }} },{% endif %}
+  {% if event.organizer %}"organizer": { "@type": "Organization", "name": {{ event.organizer.name | jsonify }}{% if event.organizer.same_as %}, "sameAs": {{ event.organizer.same_as | jsonify }}{% endif %} },{% endif %}
+  "description": {{ event.description | strip | jsonify }}
+}
+</script>
+{% endfor -%}

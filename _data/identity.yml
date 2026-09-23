@@ -1,0 +1,169 @@
+# Who the site says its author is.
+#
+# Consumed by _includes/seo/person.html, which turns it into the Person
+# JSON-LD block on every page. Nothing else reads it. Before this file existed
+# the same content sat inline in _layouts/default.html, which meant editing an
+# award or adding a profile link required opening a layout.
+#
+# The counterpart files are _data/media.yml (press coverage) and
+# _data/events.yml (talks). Publications stay in _data/publications.yml and are
+# referenced here by @id rather than duplicated.
+
+name: Vicky Feliren
+job_title: Applied Scientist
+email: vickyfeliren@gmail.com
+gender: Male
+pronouns: he/him
+nationality: Indonesia
+
+description: >-
+  Applied Scientist focusing on AI safety and trustworthy multimodal and
+  multilingual systems; published in IEEE, ACL, and Remote Sensing of Environment.
+
+# The WebSite node's description, which is a third wording again.
+#
+# DRIFT, preserved deliberately: this, `description` above, and `description` in
+# _config.yml are three different sentences about the same person. _config.yml
+# leads with calibration under safety alignment, matching the current narrative
+# spine; these two still lead with trustworthy multimodal systems. Reconciling
+# them is a copy decision, so this refactor kept each string exactly where it
+# was rather than quietly picking a winner.
+website_description: >-
+  Applied Scientist working on AI safety for trustworthy, multimodal, and
+  multilingual systems, published in IEEE, ACL, and Remote Sensing of Environment.
+
+# Long-form variant. Search engines show this in knowledge panels, so it repeats
+# facts from the short description on purpose.
+disambiguating_description: >-
+  Vicky Feliren is an applied scientist specializing in AI safety and the
+  development of trustworthy multimodal and multilingual systems. He conducts
+  applied research that bridges vision–language models, uncertainty
+  quantification, and interpretability, and has published in venues including
+  IEEE, ACL, and Remote Sensing of Environment. Vicky holds a Master of Data
+  Science and a Bachelor of Computer Science from Monash University, and
+  contributes to initiatives around responsible AI and regionally relevant
+  multimodal research. He has been recognized with awards such as the Global
+  South AI Safety Hackathon (Asia Pacific Regional Winner, 2026) and the
+  Microsoft Azure Virtual Hackathon APAC (Regional Champion, 2020). Vicky is
+  available for research collaborations, speaking engagements, and consulting on
+  trustworthy AI.
+
+occupation:
+  name: Applied Scientist
+  description: >-
+    Applied research on AI safety, trustworthy multimodal AI, and vision-language models
+  skills: >-
+    Conformal Prediction, Vision-Language Models, Multimodal AI, Multilingual AI,
+    AI Safety, Interpretability, Uncertainty Quantification
+  location: Australia
+
+seeks: >-
+  Applied Scientist and Research Scientist roles, AI research collaboration,
+  speaking engagements, and consulting on trustworthy AI
+
+employer:
+  id: https://vickyfeliren.com/#monash
+  name: Monash University
+  same_as: https://www.monash.edu
+
+alumni_of:
+  name: Monash University
+  same_as: https://en.wikipedia.org/wiki/Monash_University
+
+portrait:
+  url: https://vickyfeliren.com/assets/img/feliren_large.png
+  caption: Vicky Feliren
+  width: 2863
+  height: 2863
+  copyright_year: 2026
+  license: All rights reserved
+
+# Ordered most to least central. `knowsAbout` in the Person schema.
+knows_about:
+  - Trustworthy AI
+  - AI Safety
+  - Multimodal AI
+  - Vision-Language Models
+  - Conformal Prediction
+  - Interpretability
+  - Multilingual AI
+  - Remote Sensing
+
+languages:
+  - English
+  - Indonesian
+
+credentials:
+  - name: Master of Data Science
+    level: Master's degree
+    awarded_by: Monash University
+    awarded_by_same_as: https://www.monash.edu
+  - name: Bachelor of Computer Science
+    level: Bachelor's degree
+    awarded_by: Monash University
+    awarded_by_same_as: https://www.monash.edu
+
+affiliations:
+  - type: CollegeOrUniversity
+    name: Monash University
+    same_as: https://www.monash.edu
+  - type: Organization
+    name: SEACrowd
+    url: https://seacrowd.github.io/
+  - type: Organization
+    name: Association for Computational Linguistics
+    same_as: https://www.aclweb.org/
+  - type: Organization
+    name: IEEE
+    same_as: https://www.ieee.org/
+
+# Subset of `affiliations` that the schema reports as memberships.
+member_of:
+  - name: SEACrowd
+    url: https://seacrowd.github.io/
+  - name: Association for Computational Linguistics
+    same_as: https://www.aclweb.org/
+  - name: IEEE
+    same_as: https://www.ieee.org/
+
+colleagues:
+  - https://research.monash.edu/en/persons/risqi-saputra/
+  - https://research.monash.edu/en/persons/taufiq-asyhari/
+
+awards:
+  - Global South AI Safety Hackathon, Apart Research, Asia Pacific Regional Winner (2026)
+  - Microsoft Azure Virtual Hackathon APAC, Regional Champion (2020)
+  - Monash Indonesia Inaugural Welcome Scholarship (2024)
+  - Monash Travel Grant (2018)
+  - Jeffrey Cheah Entrance Scholarship, Sunway Education Group (2015)
+  - Deep Learning Nanodegree, Facebook & Udacity, Scholarship (2018)
+  - Monash Hackathon, Top 3 (2019)
+  - Reboot the Earth, UN Technology Innovation Labs, Top 10 (2019)
+  - Monash University Coding Competition, Honorable Mention (2018)
+  - CamvsCovid, University of Cambridge, Top 3 Globally (2020)
+  - 'hack:now, Cal Hacks, UC Berkeley, Best Community Track (2020)'
+
+# Every profile that should resolve to the same person. Search engines use this
+# to merge otherwise separate identities, so a wrong URL here costs more than a
+# missing one.
+same_as:
+  - https://feliren88.github.io
+  - https://www.linkedin.com/in/feliren/
+  - https://github.com/feliren88
+  - https://scholar.google.com/citations?user=R2LVQ7AAAAAJ
+  - https://medium.com/@feliren
+  - https://orcid.org/0000-0003-3306-8426
+  - https://devpost.com/Feliren
+  - https://www.crunchbase.com/person/vicky-feliren
+  - https://aclanthology.org/people/vicky-feliren/
+  - https://huggingface.co/feliren
+  - https://dblp.org/pid/392/6206.html
+  - https://www.semanticscholar.org/author/Vicky-Feliren/2330264544
+
+identifiers:
+  - property_id: ORCID
+    value: '0000-0003-3306-8426'
+    same_as: https://orcid.org/0000-0003-3306-8426
+  - property_id: Scopus Author ID
+    value: '57280781100'
+    same_as: https://www.scopus.com/authid/detail.uri?authorId=57280781100

@@ -68,6 +68,9 @@ exclude:
   - CLAUDE.md
   - CONTRIBUTING.md
   - backlog.md
+  - docs
+  - Makefile
+  - scripts/diff-build.sh
   - scripts/audit_seo.py
   - scripts/generate_uc_banners.py
   - scripts/generate_icons.py

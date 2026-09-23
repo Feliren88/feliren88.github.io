@@ -1,0 +1,42 @@
+# The site's navigation. One source of truth for the header and the footer.
+#
+# Rendered by _includes/site-nav.html, which both _includes/site-header.html and
+# _includes/site-footer.html call. Adding an entry here puts the link in both
+# places and marks it active on its own pages. There is no second list to update.
+#
+# `owns` lists URL prefixes that belong to an item without being under its href.
+# A long-form note lives at its own top-level URL but reads as part of Writings,
+# so /stoic/ should light up the Writings link. Matching is by prefix, and the
+# href itself is always matched exactly, so `/` does not claim every page.
+#
+# KNOWN GAP: five long-form pages are not listed under Writings -- /communication/,
+# /self-love/, /small-talk/, /story/ and /uncertainty-and-emotions/. They render
+# with no nav item marked active. This mirrors the list that was previously
+# hardcoded in js/components/nav.js and is preserved deliberately: adding them is
+# a content decision, not a refactor. Add the prefix here to fix one.
+
+primary:
+  - label: About
+    href: /
+
+  - label: Research
+    href: /research/
+
+  - label: Use Cases
+    href: /usecases/
+
+  - label: Writings
+    href: /writings/
+    owns:
+      - /essays/
+      - /high-agency
+      - /principles
+      - /curious
+      - /stoic
+      - /game-theory
+      - /success-failure
+      - /life-challenges
+      - /read-people
+
+  - label: Work With Me
+    href: /contact/

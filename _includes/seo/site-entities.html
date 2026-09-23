@@ -1,0 +1,63 @@
+{%- comment -%}
+The fixed nodes of the schema graph: the site itself, how to make contact, the
+profile page, and the employer.
+
+They are grouped in one file because none of them changes without the others.
+All four are referenced by @id from _includes/seo/person.html, so the ids here
+and the ids there have to agree.
+{%- endcomment -%}
+{%- assign id = site.data.identity -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "{{ site.url }}/#website",
+  "url": {{ site.url | jsonify }},
+  "name": {{ id.name | jsonify }},
+  "description": {{ id.website_description | strip | jsonify }},
+  "inLanguage": "en",
+  "author": { "@id": "{{ site.url }}/#person" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.google.com/search?q=site:vickyfeliren.com+{search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPoint",
+  "@id": "{{ site.url }}/#contact",
+  "contactType": "General",
+  "email": "mailto:{{ id.email }}",
+  "availableLanguage": {{ id.languages | jsonify }}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "{{ site.url }}/#profilepage",
+  "url": {{ site.url | jsonify }},
+  "name": "{{ id.name }}, {{ id.job_title }}",
+  "inLanguage": "en",
+  "isPartOf": { "@id": "{{ site.url }}/#website" },
+  "about": { "@id": "{{ site.url }}/#person" },
+  "mainEntity": { "@id": "{{ site.url }}/#person" },
+  "image": { "@id": "{{ site.url }}/#image" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollegeOrUniversity",
+  "@id": {{ id.employer.id | jsonify }},
+  "name": {{ id.employer.name | jsonify }},
+  "sameAs": {{ id.employer.same_as | jsonify }},
+  "image": { "@id": "{{ site.url }}/#image" }
+}
+</script>

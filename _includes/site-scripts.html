@@ -1,0 +1,23 @@
+{%- comment -%}
+Script loading, at the end of <body>.
+
+`extra_js` mirrors `extra_css` in site-head.html: one path or a list, each
+deferred and cache-busted through asset.html. A page heavy enough to split
+across several files does not need a bundler.
+
+`motion_scene` sets the scene key on <html> before essay-motion.js loads,
+because the script reads it at startup. A key with no matching scene makes the
+script return early and render nothing -- so after adding one, load the page and
+confirm `.em-story` exists.
+{%- endcomment -%}
+<script src="{% include asset.html path='/js/main.js' %}"></script>
+<script src="{% include asset.html path='/js/components/site-header.js' %}"></script>
+{% if page.url == '/project/' %}<script src="{% include asset.html path='/js/components/timeline.js' %}" defer></script>{% endif %}
+{% if page.extra_js %}
+  {% assign extra_js_list = page.extra_js %}
+  {% if extra_js_list.first == nil %}{% assign extra_js_list = page.extra_js | split: ',' %}{% endif %}
+  {% for js_path in extra_js_list %}<script src="{% include asset.html path=js_path %}" defer></script>
+  {% endfor %}
+{% endif %}
+{% if page.motion_scene %}<script>document.documentElement.dataset.motionScene={{ page.motion_scene | jsonify }};</script><script src="{% include asset.html path='/js/components/essay-motion.js' %}" defer></script>{% endif %}
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>

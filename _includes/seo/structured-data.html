@@ -1,0 +1,29 @@
+{%- comment -%}
+Every hand-written JSON-LD block on the site, in one call.
+
+    {% include seo/structured-data.html %}
+
+jekyll-seo-tag emits its own BlogPosting for any page carrying a `date`. Do not
+add a second one here; it would duplicate the plugin's.
+
+The breadcrumb below is keyed on the same `page.date`, so the plugin and this
+file can never disagree about what counts as an article. In practice that is the
+long-form writings.
+{%- endcomment -%}
+{% include seo/person.html %}
+{% include seo/site-entities.html %}
+{% include seo/publications.html %}
+{% include seo/media-and-events.html %}
+{%- if page.date %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ '/' | absolute_url }}" },
+    { "@type": "ListItem", "position": 2, "name": "Writings", "item": "{{ '/writings/' | absolute_url }}" },
+    { "@type": "ListItem", "position": 3, "name": {{ page.title | strip_html | jsonify }}, "item": "{{ page.url | absolute_url }}" }
+  ]
+}
+</script>
+{%- endif -%}

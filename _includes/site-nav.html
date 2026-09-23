@@ -1,0 +1,37 @@
+{%- comment -%}
+Renders the navigation links from _data/navigation.yml.
+
+    {% include site-nav.html %}
+
+Marks the item matching the current page with `is-active`. An item owns:
+
+  * its own href, exactly -- so `/` matches the homepage;
+  * anything beneath its own href -- so /usecases/some-project/ lights up
+    Use Cases. `/` is excluded from this test, or it would claim every page;
+  * any prefix listed under `owns:` in the data file -- so a long-form note at
+    its own top-level URL still lights up Writings.
+
+Later items win, which only matters if two hrefs nest.
+
+Active state is resolved here, at build time, rather than in JavaScript. A reader
+with JavaScript disabled still sees where they are, and there is no frame where
+the wrong item is highlighted.
+{%- endcomment -%}
+{%- assign nav_active = '' -%}
+{%- for item in site.data.navigation.primary -%}
+  {%- if page.url == item.href -%}
+    {%- assign nav_active = item.href -%}
+  {%- else -%}
+    {%- unless item.href == '/' -%}
+      {%- assign head = page.url | slice: 0, item.href.size -%}
+      {%- if head == item.href -%}{%- assign nav_active = item.href -%}{%- endif -%}
+    {%- endunless -%}
+    {%- for prefix in item.owns -%}
+      {%- assign head = page.url | slice: 0, prefix.size -%}
+      {%- if head == prefix -%}{%- assign nav_active = item.href -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- for item in site.data.navigation.primary -%}
+{% if item.href == nav_active %}<a href="{{ item.href }}" class="is-active">{{ item.label }}</a>{% else %}<a href="{{ item.href }}">{{ item.label }}</a>{% endif %}
+{% endfor -%}

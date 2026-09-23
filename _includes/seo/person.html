@@ -1,0 +1,109 @@
+{%- comment -%}
+Person JSON-LD, built from _data/identity.yml. Appears on every page.
+
+This is the schema graph's anchor: every other block on the site points at
+`#person` by @id rather than repeating the author. Publications are referenced
+the same way, from _data/publications.yml, so adding a paper updates this block
+without anyone editing it.
+
+Edit _data/identity.yml, never this file. The only reason to open this one is to
+add a new schema.org property.
+{%- endcomment -%}
+{%- assign id = site.data.identity -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "{{ site.url }}/#person",
+  "name": {{ id.name | jsonify }},
+  "gender": {{ id.gender | jsonify }},
+  "additionalProperty": {
+    "@type": "PropertyValue",
+    "name": "pronouns",
+    "value": {{ id.pronouns | jsonify }}
+  },
+  "description": {{ id.description | strip | jsonify }},
+  "disambiguatingDescription": {{ id.disambiguating_description | strip | jsonify }},
+  "jobTitle": {{ id.job_title | jsonify }},
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": {{ id.alumni_of.name | jsonify }},
+    "sameAs": {{ id.alumni_of.same_as | jsonify }}
+  },
+  "worksFor": { "@id": {{ id.employer.id | jsonify }} },
+  "affiliation": [
+    {%- for org in id.affiliations %}
+    { "@type": {{ org.type | jsonify }}, "name": {{ org.name | jsonify }}{% if org.same_as %}, "sameAs": {{ org.same_as | jsonify }}{% endif %}{% if org.url %}, "url": {{ org.url | jsonify }}{% endif %} }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "nationality": { "@type": "Country", "name": {{ id.nationality | jsonify }} },
+  "hasCredential": [
+    {%- for c in id.credentials %}
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "degree",
+      "name": {{ c.name | jsonify }},
+      "educationalLevel": {{ c.level | jsonify }},
+      "recognizedBy": { "@type": "CollegeOrUniversity", "name": {{ c.awarded_by | jsonify }}, "sameAs": {{ c.awarded_by_same_as | jsonify }} }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": {{ id.occupation.name | jsonify }},
+    "description": {{ id.occupation.description | strip | jsonify }},
+    "skills": {{ id.occupation.skills | strip | jsonify }},
+    "occupationLocation": { "@type": "Country", "name": {{ id.occupation.location | jsonify }} }
+  },
+  "seeks": {
+    "@type": "Demand",
+    "name": {{ id.seeks | strip | jsonify }}
+  },
+  "url": {{ site.url | jsonify }},
+  "contactPoint": { "@id": "{{ site.url }}/#contact" },
+  "image": {
+    "@type": "ImageObject",
+    "@id": "{{ site.url }}/#image",
+    "url": {{ id.portrait.url | jsonify }},
+    "contentUrl": {{ id.portrait.url | jsonify }},
+    "caption": {{ id.portrait.caption | jsonify }},
+    "width": {{ id.portrait.width }},
+    "height": {{ id.portrait.height }},
+    "author": { "@id": "{{ site.url }}/#person" },
+    "copyrightHolder": { "@type": "Person", "name": {{ id.name | jsonify }}, "@id": "{{ site.url }}/#person" },
+    "copyrightYear": {{ id.portrait.copyright_year }},
+    "license": {{ id.portrait.license | jsonify }},
+    "primaryImageOfPage": { "@id": "{{ site.url }}/#profilepage" }
+  },
+  "email": {{ id.email | jsonify }},
+  "colleague": {{ id.colleagues | jsonify }},
+  "knowsAbout": {{ id.knows_about | jsonify }},
+  "knowsLanguage": [
+    {%- for lang in id.languages %}
+    { "@type": "Language", "name": {{ lang | jsonify }} }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "award": {{ id.awards | jsonify }},
+  "memberOf": [
+    {%- for org in id.member_of %}
+    { "@type": "Organization", "name": {{ org.name | jsonify }}{% if org.same_as %}, "sameAs": {{ org.same_as | jsonify }}{% endif %}{% if org.url %}, "url": {{ org.url | jsonify }}{% endif %} }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "sameAs": {{ id.same_as | jsonify }},
+  "subjectOf": [
+    {%- for pub in site.data.publications %}
+    {%- if pub.doi %}{ "@id": "https://doi.org/{{ pub.doi }}" }{% elsif pub.url %}{ "@id": {{ pub.url | jsonify }} }{% endif %}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "identifier": [
+    {%- for ident in id.identifiers %}
+    {
+      "@type": "PropertyValue",
+      "propertyID": {{ ident.property_id | jsonify }},
+      "value": {{ ident.value | jsonify }},
+      "sameAs": {{ ident.same_as | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>

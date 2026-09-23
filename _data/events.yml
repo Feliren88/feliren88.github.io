@@ -1,0 +1,48 @@
+# Talks, panels and presentations.
+#
+# Consumed by _includes/seo/events.html, which emits one Event JSON-LD block per
+# entry so each appears as its own entity in search results.
+#
+# start_date is whatever precision is actually known: a year, a year-month, or a
+# full ISO date. schema.org accepts all three, so do not pad one out to look
+# more precise than it is.
+#
+# A talk is either online or in a place, never both:
+#   online: true + url   -> VirtualLocation
+#   place: '<city>'      -> Place
+
+- name: >-
+    Do Multilingual Vision-Language Models Abstain under Cross-Modal Conflict in
+    Low-Resource Languages?
+  url: https://luma.com/oh51jw9e
+  start_date: '2026-07'
+  online: true
+  organizer:
+    name: AI Safety India Community Events
+  description: >-
+    Presented the Asia-Pacific winning submission from Apart Research's Global
+    South AI Safety Hackathon: a benchmark testing 9 vision-language models
+    across English, Hindi, and Telugu on image-caption conflicts under
+    low-resource languages.
+
+- name: 'MUSE: How Data Science Differs in Each Sector'
+  url: https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector
+  start_date: '2025'
+  place: Tangerang Selatan, Indonesia
+  organizer:
+    name: Monash University Indonesia
+    same_as: https://www.monash.edu/indonesia
+  description: Panel speaker on how data science practice differs across industry sectors.
+
+- name: PyPalu, Python for Localized Context
+  start_date: '2026-05'
+  place: Sulawesi Tengah, Indonesia
+  description: Python community meetup talk on Python for localized context.
+
+- name: Bank of Indonesia, Data Synthesis, Privacy & Responsible Data Management
+  start_date: '2024-10'
+  place: Bandung, Indonesia
+  organizer:
+    name: Bank of Indonesia
+    same_as: https://www.bi.go.id
+  description: Invited talk on data synthesis, data privacy, and responsible data management.

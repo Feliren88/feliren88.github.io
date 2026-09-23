@@ -1,0 +1,52 @@
+{%- comment -%}
+Everything inside <head>: resource hints, stylesheets, analytics, meta tags.
+
+Two front matter keys control per-page assets, and both take either a single
+path or a list:
+
+    extra_css: /css/high-agency.css
+    extra_js:  [/js/components/transformer.js, /js/components/interview.js]
+
+A page heavy enough to need its own stylesheet keeps that stylesheet off every
+other page. Every URL goes through asset.html, so each carries its own
+cache-busting stamp and there is no version number to bump by hand.
+{%- endcomment -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="{{ '/assets/img/favicon_black.webp' | relative_url }}" type="image/webp">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/manrope-latin.woff2' | relative_url }}">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/spacegrotesk-latin.woff2' | relative_url }}">
+{% if page.preload_image %}<link rel="preload" as="image" href="{{ page.preload_image | relative_url }}" type="image/webp">{% endif %}
+{% if page.url == '/project/' %}<link rel="preload" as="script" href="{% include asset.html path='/js/components/timeline.js' %}">{% endif %}
+{%- comment -%}
+Inline and first, on purpose. The theme has to be on <html> before the first
+paint or the page flashes dark before switching to light. Everything else about
+theming lives in js/components/site-header.js.
+{%- endcomment -%}
+<script>try{var _t=localStorage.getItem('theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<link rel="stylesheet" href="{% include asset.html path='/css/styles.css' %}">
+{% if page.extra_css %}
+  {% assign extra_css_list = page.extra_css %}
+  {% if extra_css_list.first == nil %}{% assign extra_css_list = page.extra_css | split: ',' %}{% endif %}
+  {% for css_path in extra_css_list %}<link rel="stylesheet" href="{% include asset.html path=css_path %}">
+  {% endfor %}
+{% endif %}
+{% if page.motion_scene %}<link rel="stylesheet" href="{% include asset.html path='/css/essay-motion.css' %}">{% endif %}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4R769D6');</script>
+<!-- End Google Tag Manager -->
+
+{% seo %}
+
+{%- comment -%}
+jekyll-seo-tag ignores a `robots:` front matter key, so emit it here. An absent
+robots tag means indexable, which is what every page except /project/ wants.
+{%- endcomment -%}
+{% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% endif %}
+
+{% include seo/structured-data.html %}

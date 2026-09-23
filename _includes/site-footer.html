@@ -1,0 +1,29 @@
+{%- comment -%}
+The site footer: brand block, social links, navigation, copyright.
+
+Social links come from _data/contact.yml and the nav from
+_data/navigation.yml, so the footer nav can no longer drift from the header's.
+The copyright year is filled in by js/main.js.
+{%- endcomment -%}
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-name">{{ site.data.identity.name }}</span>
+      <span class="footer-role">Applied Scientist · Multimodal AI · Trustworthy AI</span>
+      <p class="footer-desc">Building trustworthy AI for the cultures and geographies it was never designed for.</p>
+      <div class="footer-social">
+        {% for link in site.data.contact.links %}
+        <a href="{{ link.url }}" aria-label="{{ link.label }}" class="footer-social-link"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>
+          <img src="{{ '/assets/img/' | append: link.icon | relative_url }}" alt="" width="16" height="16" loading="lazy">
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      {%- include site-nav.html -%}
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> {{ site.data.identity.name }}</p>
+  </div>
+</footer>

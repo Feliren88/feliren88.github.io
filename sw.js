@@ -14,7 +14,7 @@ const PRECACHE = [
   // the page actually requests. A near-miss is silently fetched and stored twice.
   '{% include asset.html path="/css/styles.css" %}',
   '{% include asset.html path="/js/main.js" %}',
-  '{% include asset.html path="/js/components/nav.js" %}',
+  '{% include asset.html path="/js/components/site-header.js" %}',
   '{% include asset.html path="/js/components/timeline.js" %}',
   '/assets/fonts/manrope-latin.woff2',
   '/assets/fonts/manrope-latin-ext.woff2',
