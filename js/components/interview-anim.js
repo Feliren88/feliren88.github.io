@@ -8,14 +8,11 @@
  *
  * Four rules the engine enforces so every animation stays usable:
  *
- *   1. The reader drives. Play runs the beats on a timer, but the scrubber,
- *      the arrows and the arrow keys all work at any point, and touching them
- *      pauses. An animation you cannot stop is a video, not an explanation.
+ *   1. The reader drives with the step list, scrubber, or arrow keys.
  *   2. Every beat has a caption. The picture and the sentence advance together,
  *      which is the whole reason the format teaches.
- *   3. It ends readable. The final beat is the complete picture, so a reader
- *      who never presses play still sees the finished diagram.
- *   4. Reduced motion means no timer and no transitions, never no content.
+ *   3. The final beat is the complete picture, shown on arrival.
+ *   4. Reduced motion removes transitions without hiding content.
  *
  * Scenes are data plus a small apply() per beat. Colour is always a custom
  * property, so both themes and both reading tints work with no second copy.
@@ -30,9 +27,6 @@
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
-
-  var reduced = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── Small SVG helpers ─────────────────────────────────────────── */
 
@@ -1390,7 +1384,7 @@
   }
 
   function mount(host, scene) {
-    var at = 0, timer = null, playing = false;
+    var at = 0;
     var last = scene.beats.length - 1;
 
     /* The step list beside the stage is the VisuAlgo move: the reader can
@@ -1415,9 +1409,6 @@
       '</div>' +
       '<p class="an-say" role="status" aria-live="polite"></p>' +
       '<div class="an-ctl">' +
-      '<button type="button" class="an-play" aria-label="Play">' +
-      '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg>' +
-      '<span>Play</span></button>' +
       '<button type="button" class="an-prev" aria-label="Previous step">' +
       '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg></button>' +
       '<input class="an-scrub" type="range" min="0" max="' + last + '" value="0" ' +
@@ -1425,8 +1416,6 @@
       '<button type="button" class="an-next" aria-label="Next step">' +
       '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></button>' +
       '<span class="an-count"></span>' +
-      '<label class="an-speed"><span>Speed</span>' +
-      '<input type="range" min="0" max="3" step="1" value="1" aria-label="Playback speed"></label>' +
       '<button type="button" class="an-replay" aria-label="Start again">' +
       '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-rotate-ccw"/></svg></button>' +
       '</div></figure>';
@@ -1436,7 +1425,6 @@
     /* Live knobs, if the scene has them. Redraw runs on every input, so it
        has to be cheap: it only rewrites the parts the knobs govern. */
     var live = liveControls(host, scene, function (state) {
-      stop();
       scene.live.redraw(root, state);
     });
     if (live) {
@@ -1454,19 +1442,7 @@
     var say = $('.an-say', host);
     var scrub = $('.an-scrub', host);
     var count = $('.an-count', host);
-    var playBtn = $('.an-play', host);
     var stepBtns = $$('.an-stepbtn', host);
-
-    /* Four speeds. The gap between beats is the reading time for the
-       caption, so slow is genuinely slower rather than just smoother. */
-    var SPEEDS = [4200, 2600, 1700, 1100];
-    var speed = SPEEDS[1];
-    var speedInput = $('.an-speed input', host);
-    speedInput.addEventListener('input', function () {
-      speed = SPEEDS[+this.value];
-      host.querySelector('.an').style.setProperty('--an-run',
-        (Math.min(1, speed / 2600)).toFixed(2) + 's');
-    });
 
     /* Beats are cumulative: replay every apply() up to n so scrubbing
        backwards lands in the same state as stepping forwards. */
@@ -1491,37 +1467,14 @@
       });
     }
 
-    function stop() {
-      playing = false;
-      clearTimeout(timer);
-      playBtn.classList.remove('is-playing');
-      $('span', playBtn).textContent = at >= last ? 'Replay' : 'Play';
-    }
-
-    function tick() {
-      if (at >= last) { stop(); return; }
-      go(at + 1);
-      timer = setTimeout(tick, speed);
-    }
-
-    function play() {
-      if (at >= last) go(0);
-      playing = true;
-      playBtn.classList.add('is-playing');
-      $('span', playBtn).textContent = 'Pause';
-      timer = setTimeout(tick, Math.min(700, speed));
-    }
-
-    playBtn.addEventListener('click', function () { playing ? stop() : play(); });
-    $('.an-next', host).addEventListener('click', function () { stop(); go(at + 1); });
-    $('.an-prev', host).addEventListener('click', function () { stop(); go(at - 1); });
-    $('.an-replay', host).addEventListener('click', function () { stop(); go(0); });
-    scrub.addEventListener('input', function () { stop(); go(+this.value); });
+    $('.an-next', host).addEventListener('click', function () { go(at + 1); });
+    $('.an-prev', host).addEventListener('click', function () { go(at - 1); });
+    $('.an-replay', host).addEventListener('click', function () { go(0); });
+    scrub.addEventListener('input', function () { go(+this.value); });
     var stepList = $('.an-steps', host);
     stepList.addEventListener('click', function (e) {
       var b = e.target.closest('.an-stepbtn');
       if (!b) return;
-      stop();
       go(+b.getAttribute('data-i'));
     });
 
@@ -1538,29 +1491,11 @@
 
     /* Arrow keys work once the animation has focus. */
     host.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { stop(); go(at + 1); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { stop(); go(at - 1); e.preventDefault(); }
-      if (e.key === ' ' && e.target === playBtn) { e.preventDefault(); playing ? stop() : play(); }
+      if (e.key === 'ArrowRight') { go(at + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { go(at - 1); e.preventDefault(); }
     });
 
-    /* Reduced motion lands on the finished picture and never runs a timer. */
-    if (reduced) {
-      go(last);
-      host.classList.add('is-static');
-    } else {
-      go(0);
-      /* Autoplay once, when it first scrolls into view. */
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (es) {
-          es.forEach(function (e) {
-            if (!e.isIntersecting) return;
-            io.unobserve(e.target);
-            play();
-          });
-        }, { threshold: 0.4 });
-        io.observe(host);
-      }
-    }
+    go(last);
   }
 
   function init() {

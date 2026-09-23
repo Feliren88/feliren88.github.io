@@ -704,20 +704,18 @@
      Every module's diagram is already a sequence of parts. Given one
      caption per part, it becomes a narrated walkthrough in the same
      shell the track animations use: a numbered step list marking the
-     current line, a status caption, play and speed.
+     current line and a status caption.
 
      The parts are revealed cumulatively, so beat n shows parts 0..n
      with n highlighted. Scrubbing backwards lands in the same state
      as stepping forwards.
      ════════════════════════════════════════════════════════ */
 
-  var SPEEDS = [4200, 2600, 1700, 1100];
-
   function player(viz, parts, beats) {
     var n = Math.min(parts.length, beats.length);
     if (n < 2) return;
 
-    var at = 0, timer = null, playing = false, speed = SPEEDS[1];
+    var at = 0;
     var last = n - 1;
 
     var bar = document.createElement('div');
@@ -729,23 +727,18 @@
           '<span class="ivp-t">' + esc(b) + '</span></button></li>';
       }).slice(0, n).join('') + '</ol>' +
       '<div class="ivp-ctl">' +
-      '<button type="button" class="ivp-play"><svg class="ivi" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<use href="#ivi-arrow-right"/></svg><span>Play</span></button>' +
       '<button type="button" class="ivp-prev" aria-label="Previous step">' +
       '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-left"/></svg></button>' +
       '<input class="ivp-scrub" type="range" min="0" max="' + last + '" value="0" aria-label="Step through">' +
       '<button type="button" class="ivp-next" aria-label="Next step">' +
       '<svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-arrow-right"/></svg></button>' +
       '<span class="ivp-count"></span>' +
-      '<label class="ivp-speed"><span>Speed</span>' +
-      '<input type="range" min="0" max="3" step="1" value="1" aria-label="Playback speed"></label>' +
       '</div>';
     viz.appendChild(bar);
 
     var stepBtns = $$('.ivp-step', bar);
     var scrub = $('.ivp-scrub', bar);
     var count = $('.ivp-count', bar);
-    var playBtn = $('.ivp-play', bar);
 
     function go(i) {
       at = Math.max(0, Math.min(last, i));
@@ -763,38 +756,16 @@
       count.textContent = (at + 1) + ' / ' + n;
     }
 
-    function stop() {
-      playing = false;
-      clearTimeout(timer);
-      playBtn.classList.remove('is-playing');
-      $('span', playBtn).textContent = at >= last ? 'Again' : 'Play';
-    }
-    function tick() {
-      if (at >= last) { stop(); return; }
-      go(at + 1);
-      timer = setTimeout(tick, speed);
-    }
-    function play() {
-      if (at >= last) go(0);
-      playing = true;
-      playBtn.classList.add('is-playing');
-      $('span', playBtn).textContent = 'Pause';
-      timer = setTimeout(tick, Math.min(600, speed));
-    }
-
-    playBtn.addEventListener('click', function () { playing ? stop() : play(); });
-    $('.ivp-next', bar).addEventListener('click', function () { stop(); go(at + 1); });
-    $('.ivp-prev', bar).addEventListener('click', function () { stop(); go(at - 1); });
-    scrub.addEventListener('input', function () { stop(); go(+this.value); });
-    $('.ivp-speed input', bar).addEventListener('input', function () { speed = SPEEDS[+this.value]; });
+    $('.ivp-next', bar).addEventListener('click', function () { go(at + 1); });
+    $('.ivp-prev', bar).addEventListener('click', function () { go(at - 1); });
+    scrub.addEventListener('input', function () { go(+this.value); });
     $('.ivp-steps', bar).addEventListener('click', function (e) {
       var b = e.target.closest('.ivp-step');
       if (!b) return;
-      stop();
       go(+b.getAttribute('data-i'));
     });
 
-    go(0);
+    go(last);
   }
 
   /* Step through the parts one at a time, dimming the rest. */

@@ -55,13 +55,13 @@ layout: default
       <span class="syl-phase">Track mission</span>
       <h2 id="syl-orientation-title">What this track prepares you to do</h2>
       <p>{{ site.data.interview_learning.mission.outcome }}</p>
-      <p class="syl-orientation-evidence"><strong>Evidence of mastery:</strong> {{ site.data.interview_learning.mission.evidence }}</p>
+      <p class="syl-orientation-evidence"><strong>Readiness check.</strong> {{ site.data.interview_learning.mission.evidence }}</p>
     </div>
     {% if learning %}
     <div class="syl-prereqs">
       <h3>Bring these foundations</h3>
       <ul>{% for prerequisite in learning.prerequisites %}<li>{{ prerequisite }}</li>{% endfor %}</ul>
-      <p>If one is unfamiliar, open the closest foundation track first. Otherwise, begin at module 1.</p>
+      <p>If any foundation is unfamiliar, open its track first. Otherwise, begin at module 1.</p>
     </div>
     {% endif %}
   </section>
@@ -77,12 +77,12 @@ layout: default
   <section class="syl-method" aria-labelledby="syl-method-title">
     <div class="syl-method-copy">
       <span class="syl-phase">How to use this track</span>
-      <h2 id="syl-method-title">Start with one module</h2>
+      <h2 id="syl-method-title">Start with module 1</h2>
       <p>New to the topic? Start at module 1 and use Focus to hide the rest. Use Reading to change the text and Listen when audio is easier.</p>
     </div>
     <ol class="syl-method-steps">
       <li><b>Goal</b><span>Read why the module matters.</span></li>
-      <li><b>Picture</b><span>Follow the diagram one step at a time.</span></li>
+      <li><b>Picture</b><span>Use the diagram's numbered steps.</span></li>
       <li><b>Words</b><span>Read the plain explanation before the equations.</span></li>
       <li><b>Recall</b><span>Answer without notes, then return later.</span></li>
     </ol>
@@ -101,7 +101,7 @@ layout: default
       <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
       Notation used on this page
     </summary>
-    <p class="ivm-legend-lead">These symbols keep the same meaning across all twenty-six tracks. A symbol used only once is defined below its equation.</p>
+    <p class="ivm-legend-lead">These symbols keep the same meaning across all 26 tracks. Symbols used only in a module are defined below its equations.</p>
     {% for grp in site.data.interview_math.notation %}
     <div class="ivm-legend-group">
       <h3>{{ grp.group }}</h3>
@@ -149,14 +149,14 @@ layout: default
       </div>
 
       <div class="syl-grounding">
-        <span class="syl-phase">Grounding</span>
+        <span class="syl-phase">Before you begin</span>
         {% if forloop.first %}
         <p>This is the entry point for the track. It assumes only the foundations listed above.</p>
         {% else %}
         {% assign previous_index = forloop.index0 | minus: 1 %}
         <p>Builds on module {{ forloop.index | minus: 1 }}, <a href="#m{{ forloop.index | minus: 1 }}">{{ topic.modules[previous_index].name }}</a>.</p>
         {% endif %}
-        <p>This module introduces the ideas in the vocabulary list below. Follow the numbered beats in order before using the terms in your own answer.</p>
+        <p>The terms below are explained in this module. Read its steps in order, then use the terms in your own answer.</p>
       </div>
 
       <p class="syl-phase">Start with the diagram</p>
@@ -219,12 +219,12 @@ layout: default
       <details class="syl-feedback">
         <summary>Check the strength of your answer</summary>
         <div class="syl-feedback-body">
-          <p>A defensible answer does four things:</p>
+          <p>Check your answer against 4 points.</p>
           <ol>
             <li>Answers the question directly before adding detail.</li>
-            <li>Explains the mechanism with the module's terms.</li>
-            <li>States an assumption, trade-off, or failure mode.</li>
-            <li>Uses a concrete example, equation, or test when the prompt asks for one.</li>
+            <li>Explains how the result arises, using the module's terms.</li>
+            <li>States an assumption, a trade-off, or a way the answer could fail.</li>
+            <li>Uses a concrete example, equation, or test when the question calls for it.</li>
           </ol>
           <p class="syl-feedback-note">These are criteria, not a model answer. Compare them with what you wrote, then choose when this question should return.</p>
           <div class="syl-review" role="group" aria-label="Schedule the next review">

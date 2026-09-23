@@ -27,6 +27,8 @@
   --rd-caps-track: 0.02em;
 }
 
+body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
+
 .interview-hub .page-header,
 .syl-page .page-header { display: none; }
 
@@ -199,6 +201,33 @@
 .ivh-contract span { display: block; }
 .ivh-contract strong { margin-bottom: 0.15rem; font-size: var(--fs-xs); color: var(--text); }
 .ivh-contract span { font-size: var(--fs-2xs); color: var(--muted); }
+
+.ivh-start { margin: 0 0 2.2rem; }
+.ivh-start h2 {
+  margin: 0 0 0.35rem;
+  font: 600 var(--fs-title) / 1.35 "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+.ivh-start > p { margin: 0 0 1rem; color: var(--muted); font-size: var(--fs-sm); }
+.ivh-start > p a { color: var(--cta); text-underline-offset: 0.15em; }
+.ivh-start-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+.ivh-start-grid a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-soft);
+  color: var(--text);
+  text-decoration: none;
+}
+.ivh-start-grid a:hover,
+.ivh-start-grid a:focus-visible { border-color: var(--cta); }
+.ivh-start-grid strong { font: 600 var(--fs-md) / 1.35 "Space Grotesk", sans-serif; }
+.ivh-start-grid span { font-size: var(--fs-xs); line-height: 1.5; color: var(--muted); }
+.ivh-start-grid .ivh-start-question { color: var(--text); }
+.ivh-start-grid .ivh-start-track { margin-top: auto; padding-top: 0.4rem; color: var(--cta); }
 
 /* The map is the whole card field. The SVG sits underneath and is drawn from
    the boxes the browser produced, so it needs no layout of its own. */
@@ -1274,6 +1303,7 @@
 }
 
 @media (max-width: 640px) {
+  .ivh-start-grid { grid-template-columns: 1fr; }
   .ivh-stats { gap: 1.4rem; }
   .iv-map-svg { display: none; }
   .syl-covers { grid-template-columns: 1fr; }
@@ -2001,19 +2031,16 @@
 }
 .an-ctl button:hover { color: var(--text); border-color: var(--cta); }
 
-/* Transport controls carry an icon and no label, so the padding meant for text
-   stretched them into wide pills. Square them off instead. Sized in em so they
-   follow the reading scale, and 2.1em keeps them past the 24px target minimum
-   at every step of it. */
+/* Transport controls carry an icon and no label. Square buttons keep the
+   controls compact and follow the reading scale. */
 .an-prev, .an-next, .an-replay,
-.ivp-prev, .ivp-next, .ivp-replay {
+.ivp-prev, .ivp-next {
   width: 2.1em;
   height: 2.1em;
   padding: 0;
   justify-content: center;
   flex: 0 0 auto;
 }
-.an-play { color: var(--cta) !important; border-color: var(--cta) !important; }
 .an-scrub { flex: 1 1 8rem; min-width: 6rem; accent-color: var(--cta); }
 .an-count { font-size: var(--fs-2xs); color: var(--muted); min-width: 3.2rem; text-align: center; }
 
@@ -2112,7 +2139,6 @@
 @media (prefers-reduced-motion: reduce) {
   .an-fade, .an-cell, .an-dot, .an-prior, .an-lik, .an-post,
   .an-ball, .an-diag, .an-curve, .an-ctx, .an-doc, .an-attnband { transition: none; }
-  .an-host.is-static .an-play { display: none; }
 }
 
 @media (max-width: 640px) {
@@ -2220,19 +2246,9 @@
 }
 .an-stepbtn.is-at .an-stepn { color: var(--cta); }
 
-.an-speed {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: var(--fs-2xs);
-  color: var(--muted);
-}
-.an-speed input { width: 4.5rem; accent-color: var(--cta); }
-
 @media (max-width: 800px) {
   .an-body { grid-template-columns: 1fr; }
   .an-steps { max-height: 14rem; }
-  .an-speed { order: 10; }
 }
 
 /* ── Scene parts for the remaining tracks ─────────────────────── */
@@ -2409,11 +2425,8 @@
   cursor: pointer;
 }
 .ivp-ctl button:hover { color: var(--text); border-color: var(--cta); }
-.ivp-play { color: var(--cta) !important; border-color: var(--cta) !important; }
 .ivp-scrub { flex: 1 1 6rem; min-width: 4rem; accent-color: var(--cta); }
 .ivp-count { font-size: var(--fs-2xs); color: var(--muted); min-width: 3rem; text-align: center; }
-.ivp-speed { display: inline-flex; align-items: center; gap: 0.35rem; font-size: var(--fs-2xs); color: var(--muted); }
-.ivp-speed input { width: 4rem; accent-color: var(--cta); }
 
 /* The part the player is currently narrating. `is-seen` marks the ones
    already covered, so the reader can tell progress from the drawing alone
@@ -2424,10 +2437,6 @@
   outline: 2px solid var(--cta);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
-}
-
-@media (max-width: 640px) {
-  .ivp-speed { order: 10; }
 }
 
 /* Embeddings, edge AI and image generation scene parts */

@@ -9,9 +9,9 @@
 # more than one text, which the module notes then cite by equation number.
 
 mission:
-  outcome: "Answer technical interview questions from first principles, without notes, and defend the assumptions behind the answer."
-  method: "Study one idea, explain it in your own words, retrieve it after a gap, then mix it with a neighbouring track."
-  evidence: "You are ready when you can answer the cold question, name a limitation, and adapt the answer when the interviewer changes one condition."
+  outcome: "Explain a technical idea from its basic assumptions, answer without notes, and say when the answer may fail."
+  method: "Study a module, explain it in your own words, answer its question after a break, then connect it to a related track."
+  evidence: "You are ready when you can answer the question without notes, name a limitation, and adapt when the interviewer changes an assumption."
 
 tracks:
   - id: bayesian-statistics

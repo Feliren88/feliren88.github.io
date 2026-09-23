@@ -29,6 +29,7 @@ STOCK_PATTERNS = {
 }.freeze
 
 LONG_SENTENCE_WORDS = 38
+NUMERIC_WORDS = /\b(?:zero|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand)\b/i
 
 def visible_strings(topic)
   rows = []
@@ -43,6 +44,22 @@ def visible_strings(topic)
         rows << ["#{prefix}.#{field}[#{item_index + 1}]", value]
       end
     end
+    scene = mod["scene"]
+    if scene
+      %w[alt cap leak before after inflow answer aside].each do |field|
+        rows << ["#{prefix}.scene.#{field}", scene[field]] if scene[field]
+      end
+    end
+    viz = mod["viz"]
+    if viz
+      viz.each do |field, value|
+        next if %w[type shape loop on].include?(field.to_s)
+
+        Array(value).each_with_index do |item, item_index|
+          rows << ["#{prefix}.viz.#{field}[#{item_index + 1}]", item] if item.is_a?(String)
+        end
+      end
+    end
     Array(mod["math"]).each_with_index do |equation, equation_index|
       %w[name read note].each do |field|
         rows << ["#{prefix}.math[#{equation_index + 1}].#{field}", equation[field]] if equation[field]
@@ -53,7 +70,7 @@ def visible_strings(topic)
       play = equation["play"]
       next unless play
 
-      %w[title alt].each do |field|
+      %w[title alt xlabel ylabel readout].each do |field|
         rows << ["#{prefix}.math[#{equation_index + 1}].play.#{field}", play[field]] if play[field]
       end
     end
@@ -69,6 +86,10 @@ end
 
 def sentences(text)
   text.split(/(?<=[.!?])\s+/)
+end
+
+def narrative_path?(path)
+  path.match?(/\.(?:blurb|scope|why|check|read|note)\z|\.(?:beats|plain)\[\d+\]\z|\.scene\.(?:alt|cap|leak)\z/)
 end
 
 data = YAML.load_file(DATA_PATH, aliases: true)
@@ -95,12 +116,16 @@ data.fetch("topics").each do |topic|
     findings << [topic_id, "missing learning entry", ""]
   else
     findings << [topic_id, "needs at least one prerequisite", ""] if Array(learning["prerequisites"]).empty?
-    source = learning.fetch("source", {})
-    %w[title author url use].each do |field|
-      findings << ["#{topic_id}.source.#{field}", "missing source field", ""] if source[field].to_s.strip.empty?
-    end
-    if source["url"] && !source["url"].start_with?("https://")
-      findings << ["#{topic_id}.source.url", "source must use HTTPS", source["url"]]
+    sources = Array(learning["sources"])
+    findings << ["#{topic_id}.sources", "needs at least one source", ""] if sources.empty?
+    sources.each_with_index do |source, source_index|
+      prefix = "#{topic_id}.sources[#{source_index + 1}]"
+      %w[title author url use].each do |field|
+        findings << ["#{prefix}.#{field}", "missing source field", ""] if source[field].to_s.strip.empty?
+      end
+      if source["url"] && !source["url"].start_with?("https://")
+        findings << ["#{prefix}.url", "source must use HTTPS", source["url"]]
+      end
     end
   end
   page_path = File.join(ROOT, "_pages", "interview", "#{topic_id}.md")
@@ -120,17 +145,43 @@ data.fetch("topics").each do |topic|
       findings << ["#{prefix}.#{field}", "missing required copy", ""] if mod[field].to_s.strip.empty?
     end
     findings << ["#{prefix}.plain", "needs at least two plain-English paragraphs", ""] if Array(mod["plain"]).size < 2
-    findings << ["#{prefix}.math", "needs at least one explained equation", ""] if Array(mod["math"]).empty?
+    if Array(mod["math"]).empty? && mod["math_optional"] != true
+      findings << ["#{prefix}.math", "needs an explained equation or math_optional", ""]
+    end
     findings << ["#{prefix}.beats", "needs at least two grounded beats", ""] if Array(mod["beats"]).size < 2
+    findings << ["#{prefix}.viz", "missing diagram", ""] unless mod["viz"].is_a?(Hash)
+    if mod["scene"] && mod["scene"]["alt"].to_s.strip.empty?
+      findings << ["#{prefix}.scene.alt", "diagram needs a specific text description", ""]
+    end
+    viz = mod["viz"]
+    if viz && viz["type"] == "scale"
+      selected = viz["on"]
+      if !selected.is_a?(Integer) || selected.negative? || selected >= Array(viz["stops"]).size
+        findings << ["#{prefix}.viz.on", "scale needs a valid selected stop", selected.to_s]
+      end
+    end
   end
 
   visible_strings(topic).each do |path, text|
     normalised = text.downcase.tr("_", "-")
+    text.scan(NUMERIC_WORDS).each do |word|
+      next if word == "ZeRO"
+
+      findings << [path, "spell numeric quantity as a digit", text]
+    end
     BANNED_WORDS.each do |word|
       findings << [path, "banned word '#{word}'", text] if normalised.match?(/\b#{Regexp.escape(word)}\b/)
     end
     STOCK_PATTERNS.each do |label, pattern|
       findings << [path, label, text] if text.match?(pattern)
+    end
+    if !path.end_with?(".readout") && text.match?(/:(?![\d.])/)
+      findings << [path, "colon in prose needs an explicit definition", text]
+    end
+    if narrative_path?(path)
+      sentences(text).each do |sentence|
+        findings << [path, "lowercase or numeric sentence opening", sentence.strip] if sentence.match?(/\A\s*[a-z0-9]/)
+      end
     end
     sentences(text).each do |sentence|
       count = sentence.scan(/[[:alnum:]][[:alnum:]'’-]*/).size

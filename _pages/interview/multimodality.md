@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Multimodality
-description: Combine two or more data types and test whether the model uses each one.
+description: Combine 2 or more data types and test whether the model uses each one.
 permalink: /multimodality/
 topic_id: multimodality
 robots: noindex, nofollow

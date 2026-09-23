@@ -53,14 +53,14 @@ OUT = os.path.join(ROOT, "_data", "interview_math.yml")
 
 CANON = [
     ("Objects you feed in and get out", [
-        (r"x", "one input, a single example"),
+        (r"x", "1 input, a single example"),
         (r"y", "the true answer for that input"),
         (r"\hat{y}", "the answer the model gives"),
         (r"z", "a hidden representation, an input after some processing"),
         (r"t", "a step, in time or in a sequence"),
         (r"k", "an index over classes or over neighbours"),
         (r"i", "an index over examples"),
-        (r"j", "a second index, used when two run at once"),
+        (r"j", "a second index, used when 2 run at once"),
         (r"n", "a count of things"),
         (r"N", "the number of examples in a set"),
         (r"d", "the number of components in a vector"),
@@ -96,12 +96,12 @@ CANON = [
         (r"f", "the model, the function turning an input into an answer"),
         (r"f_{\theta}", "the model with its parameters written in"),
         (r"\mathcal{L}", "the loss, the number training pushes down"),
-        (r"\ell", "the loss on one example"),
+        (r"\ell", "the loss on 1 example"),
         (r"R", "the risk, the loss averaged over the distribution"),
         (r"\hat{R}", "the empirical risk, the loss averaged over the data you have"),
         (r"\eta", "the learning rate, the size of a step"),
         (r"\nabla", "the gradient, the direction of steepest increase"),
-        (r"\lambda", "a knob trading one term of an objective against another"),
+        (r"\lambda", "a knob trading 1 term of an objective against another"),
         (r"\alpha", "an error rate you choose in advance"),
         (r"\epsilon", "a small allowance"),
         (r"w", "a weight vector, the coefficients a linear model learns"),
@@ -137,7 +137,7 @@ CANON = [
         (r"\approx", "approximately equal"),
         (r"\to", "goes to, or maps to"),
         (r"\forall", "for every"),
-        (r"\exists", "there is at least one"),
+        (r"\exists", "at least 1 exists"),
         (r"\coloneqq", "is defined to be"),
     ]),
 ]
@@ -434,7 +434,8 @@ def build(data, errors):
             where = "%s / %s" % (tid, mod["name"])
             blocks = mod.get("math")
             if not blocks:
-                errors.append("NO MATH: %s" % where)
+                if not mod.get("math_optional"):
+                    errors.append("NO MATH: %s" % where)
                 continue
             # A gloss holds for the rest of its module. The reader meets the
             # equations in order, so redefining a symbol under each one would
