@@ -15,28 +15,48 @@ flowchart LR
     A["_data/*.yml<br/>content"] --> C
     B["_pages/*.md<br/>page shells"] --> C
     C["Jekyll build"] --> D["_site/<br/>plain HTML"]
-    D --> E["GitHub Actions"]
-    E --> F["GitHub Pages<br/>vickyfeliren.com"]
+    D --> F["GitHub Pages<br/>vickyfeliren.com"]
 ```
 
 To change what a page says, edit the YAML file. To change how it looks, edit the layout or the CSS.
 
 ## Page structure
 
-Every page uses the same base layout. Two templates extend it.
+Every page uses the same base layout. Three templates extend it.
 
 ```mermaid
 flowchart TD
-    D["_layouts/default.html<br/>head, SEO, nav, footer"]
+    D["_layouts/default.html<br/>page skeleton"]
     D --> P["page.html<br/>most pages"]
     D --> U["usecase.html<br/>use case detail pages"]
+    D --> S["syllabus.html<br/>revision pages"]
     D --> I["index.html<br/>homepage"]
 
     P --> P1["/about/ /research/<br/>/writings/ /contact/<br/>essays"]
     U --> U1["22 use case pages<br/>read from _data/usecases.yml"]
+    S --> S1["26 syllabus pages<br/>read from _data/interview.yml"]
 ```
 
-`usecase.html` is the only template that does real work. It looks up a use case by the `uc_id` in the page front matter, pulls the content from `_data/usecases.yml`, and builds the page. It also generates a sticky table of contents when a page has three or more sections.
+`default.html` holds no markup of its own. It is a list of includes, one per
+concern:
+
+```mermaid
+flowchart TD
+    D["_layouts/default.html"]
+    D --> H["site-head.html<br/>stylesheets, analytics, meta"]
+    D --> HD["site-header.html<br/>nav, theme toggle"]
+    D --> M["page content"]
+    D --> F["site-footer.html<br/>brand, social, nav"]
+    D --> SC["site-scripts.html<br/>script loading"]
+    H --> SEO["seo/structured-data.html<br/>JSON-LD, driven by _data"]
+    HD --> N["site-nav.html"]
+    F --> N
+```
+
+`usecase.html` and `syllabus.html` do the real work. Each looks up an entry by an
+id in the page front matter (`uc_id`, `topic_id`), pulls the content from its
+data file, and builds the page. `usecase.html` also generates a sticky table of
+contents when a page has three or more sections.
 
 ## Where content comes from
 
@@ -54,13 +74,23 @@ Each page is driven by one data file.
 | Skills, technical and not (shown on `/cv`) | `_data/skills.yml` |
 | Experience | `_data/experience.yml` |
 | Project timeline | `_data/timeline.yml` |
+| Navigation, header and footer | `_data/navigation.yml` |
+| Author identity, used by the Person schema | `_data/identity.yml` |
+| Press coverage and talks | `_data/media.yml`, `_data/events.yml` |
 
-Two files are generated, not written by hand:
+Several files are generated, not written by hand. A hand edit to any of them is
+lost the next time its script runs.
 
-- `_data/uc_banners.yml` — alt text for the use case diagrams
-- `assets/img/usecases/*.webp` — the diagrams themselves
+| Generated | Produced by |
+|---|---|
+| `_data/uc_banners.yml`, `assets/img/usecases/*.webp` | `scripts/generate_uc_banners.py` |
+| `_data/game_theory.yml` | `scripts/solve_games.py` |
+| `_data/stoic.yml` | verified against public-domain sources |
+| `_data/interview_math.yml` | `scripts/render_math.py` |
+| `_includes/interview-icons.html` | `scripts/generate_icons.py` |
 
-Both come from `scripts/generate_uc_banners.py`. Edit the `SPECS` list in that script, run it, and commit what it produces.
+For the use case diagrams, edit the `SPECS` list in `generate_uc_banners.py`, run
+it, and commit what it produces.
 
 ## Publications update three things at once
 
@@ -83,6 +113,8 @@ The `kind` field decides which filter button shows the entry. Valid values are `
 feliren88.github.io/
 ├── README.md          # This file
 ├── CLAUDE.md          # Development guidelines and writing rules
+├── docs/              # Detail on one subsystem each, read on demand
+├── Makefile           # Every local task. `make` lists them
 ├── llms.txt           # Site summary for language models
 ├── robots.txt         # Crawler rules, points to the sitemap
 ├── _config.yml        # Jekyll configuration
@@ -91,47 +123,60 @@ feliren88.github.io/
 ├── sw.js              # Service worker
 ├── 404.html
 ├── CNAME              # Custom domain
+├── _dev/              # Local build shim. Not part of the site
 ├── _layouts/
-│   ├── default.html   # Base layout
+│   ├── default.html   # Page skeleton, assembled from includes
 │   ├── page.html      # Standard page
-│   └── usecase.html   # Use case detail page
+│   ├── usecase.html   # Use case detail page
+│   └── syllabus.html  # Revision syllabus page
+├── _includes/
+│   ├── site-head.html    site-header.html    site-nav.html
+│   ├── site-footer.html  site-scripts.html   asset.html
+│   ├── seo/           # One file per schema, all driven by _data
+│   └── *-icons.html   # SVG symbol sprites
 ├── _pages/
 │   ├── about.md  skills.md  experience.md  publications.md
 │   ├── awards.md  thoughts.md  contact.md  project.md  heron.md
 │   ├── usecases.md    # Listing page
 │   ├── usecases/      # 22 detail pages
+│   ├── interview/     # 26 syllabus pages, unlisted
 │   └── essays/        # Long-form essays
 ├── _data/             # All page content, as YAML
-├── scripts/
-│   └── generate_uc_banners.py   # Renders the use case diagrams
+├── scripts/           # Generators, verifiers, audits. Not published
 ├── assets/
 │   ├── fonts/         # Manrope + Space Grotesk, latin subsets only
 │   └── img/           # All WebP, including generated use case diagrams
 ├── css/
-│   └── styles.css     # Everything, currently served as ?v=40
+│   ├── styles.css     # Global: tokens, type, every shared component
+│   └── *.css          # One per page heavy enough to need its own
 ├── js/
 │   ├── main.js        # Point cloud, filters, tilt, reveal animations
-│   └── components/
-│       ├── nav.js     # Navigation, single source of truth
-│       └── timeline.js
+│   └── components/    # One per page that needs behaviour
 └── notes/             # Private. Gitignored and excluded from the build.
 ```
 
 ## Navigation
 
-All nav links live in the `NAV_ITEMS` array in `js/components/nav.js`. Change that array and every page updates.
+All nav links live in `_data/navigation.yml`. The header and the footer both
+render from it through `_includes/site-nav.html`, so adding an entry puts the
+link in both places.
 
-```js
-var NAV_ITEMS = [
-  { href: '/',          label: 'About',        page: '/' },
-  { href: '/research/', label: 'Research',     page: '/research' },
-  { href: '/usecases/', label: 'Use Cases',    page: '/usecases' },
-  { href: '/writings/', label: 'Writings',     page: '/writings' },
-  { href: '/contact/',  label: 'Work With Me', page: '/contact' },
-];
+```yaml
+primary:
+  - label: About
+    href: /
+  - label: Writings
+    href: /writings/
+    owns:          # extra URL prefixes that should mark this item active
+      - /stoic
+      - /game-theory
 ```
 
-The `<nav>` block hardcoded in `default.html` is the fallback for visitors with JavaScript off.
+Which item is highlighted is worked out during the build, not in the browser, so
+it is correct with JavaScript off and never flickers on load. An item is active
+on its own href, on anything beneath it, and on any prefix under `owns:` — that
+last one is how a long-form note at its own top-level URL still highlights
+Writings.
 
 ## Technology
 
@@ -166,39 +211,41 @@ The site targets **WCAG 2.1 AA**.
 
 ## Structured data
 
-`_layouts/default.html` carries a Person schema on every page.
+Every page carries a schema graph. It is built from data files, so adding an
+award or a talk needs no template change.
 
-| Property | Value |
-|---|---|
-| `@type` | Person |
-| `@id` | `https://vickyfeliren.com/` |
-| `jobTitle`, `alumniOf`, `worksFor` | Applied Scientist, Monash University |
-| `knowsAbout` | 8 domains, led by Trustworthy AI, Multimodal AI, and AI Safety |
-| `knowsLanguage` | English, Indonesian |
-| `award` | 12 entries |
-| `memberOf` | SEACrowd, ACL, IEEE |
-| `colleague` | Risqi Saputra, Taufiq Asyhari |
-| `author` | Generated from `_data/publications.yml` |
-| `sameAs` | 12 profiles |
+| Block | Built from | By |
+|---|---|---|
+| `Person` | `_data/identity.yml` | `_includes/seo/person.html` |
+| `WebSite`, `ContactPoint`, `ProfilePage`, employer | `_data/identity.yml` | `_includes/seo/site-entities.html` |
+| One `ScholarlyArticle` per paper | `_data/publications.yml` | `_includes/seo/publications.html` |
+| One `Article` per press mention, one `Event` per talk | `_data/media.yml`, `_data/events.yml` | `_includes/seo/media-and-events.html` |
+| `BreadcrumbList` on dated pages | the page | `_includes/seo/structured-data.html` |
+| `BlogPosting` on dated pages | the page | `jekyll-seo-tag` |
 
-The research page carries a second block: CollectionPage plus ScholarlyArticle, also generated from `publications.yml`.
+Everything refers to the author by `@id` rather than repeating them, so the
+Person block is written once and pointed at from everywhere else.
+
+The research page carries a second block of its own: CollectionPage plus
+ScholarlyArticle, also generated from `publications.yml`.
 
 ## Running it locally
 
 ```bash
-bundle install
-bundle exec jekyll serve --livereload
+make install   # bundle install
+make serve     # http://localhost:4000, live reload
+make build     # build into _site/
+make check     # build, then audit SEO and internal links
+make diff      # prove a change altered no built output
 ```
 
-The site runs at `http://localhost:4000`.
+`make` on its own lists them.
 
-To build without serving:
-
-```bash
-bundle exec jekyll build
-```
-
-Output lands in `_site/`.
+Use `make`, not `bundle exec jekyll` directly. The `github-pages` gem pins
+liquid 4.0.3, which calls a Ruby API removed in 3.2, so a bare build fails on any
+current Ruby. `_dev/ruby-compat.rb` restores the missing methods as no-ops and
+the Makefile loads it. GitHub Pages builds on its own Ruby with the same gem pin,
+so the shim is local-only and cannot change what ships.
 
 ## Deploying
 
@@ -208,14 +255,24 @@ git commit -m "description"
 git push origin main
 ```
 
-GitHub Actions builds and publishes from there.
+GitHub Pages builds from `main` itself. There is no workflow file, which is why
+the `github-pages` pin in the `Gemfile` is what production actually runs.
 
 ## Things worth knowing before you edit
 
-- **Bump the CSS version.** After editing `css/styles.css`, change the `?v=` number in `_layouts/default.html` and update the matching entry in the `sw.js` precache list. Skip this and visitors keep the old stylesheet.
-- **Read `CLAUDE.md` before writing any copy.** It sets the voice: short sentences, no em dashes, British spelling, no invented numbers.
-- **Do not hand-edit the use case diagrams.** They are generated. Edit `scripts/generate_uc_banners.py` instead.
-- **`notes/` stays private.** It is in `.gitignore` and in the `_config.yml` exclude list. Both are needed, because Jekyll copies unrecognised files into `_site/` and would otherwise publish them.
+- **Never hand-write a `?v=` cache-busting number.** Asset URLs are emitted
+  through `_includes/asset.html`, which stamps each one with that file's own
+  modified time. A literal version in a URL will not match what the service
+  worker precaches, and the browser ends up holding two copies of the same file.
+- **Read `CLAUDE.md` before writing any copy.** It sets the voice: short
+  sentences, no em dashes, British spelling, no invented numbers.
+- **Do not hand-edit anything listed as generated above.** Edit the script.
+- **`notes/` stays private.** It is in `.gitignore` and in the `_config.yml`
+  exclude list. Both are needed, because Jekyll copies unrecognised files into
+  `_site/` and would otherwise publish them.
+- **Run `make diff` after a structural change.** It builds the committed tree and
+  the working tree and compares the output, so a refactor can be shown to have
+  changed nothing.
 
 ## Contact
 

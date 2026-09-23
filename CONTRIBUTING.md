@@ -31,27 +31,38 @@ specifically because a plausible-looking edit shipped broken.
 ## Build
 
 ```bash
-bundle install
-bundle exec jekyll build      # output lands in _site/
-bundle exec jekyll serve      # http://localhost:4000
+make install   # bundle install
+make build     # output lands in _site/
+make serve     # http://localhost:4000
+make check     # build, then run the indexability audit
+make diff      # prove a change altered no built output
 ```
 
-### If the build fails on a modern Ruby
+`make` on its own lists every target.
+
+### Why everything goes through make
 
 `github-pages` pins Jekyll 3.9 / Liquid 4.0.3, which predate two Ruby removals: `csv`
-left the default gems in 3.4, and `Object#tainted?` was removed in 3.2. On Ruby 3.4+ the
-build dies with `cannot load such file -- csv` or `undefined method 'tainted?'`.
+left the default gems in 3.4, and the `Object#tainted?` taint API was removed in 3.2.
+A bare `bundle exec jekyll build` dies on a current Ruby with `cannot load such file --
+csv` or `undefined method 'tainted?'`.
 
-**Do not fix this by editing the committed `Gemfile`.** GitHub Pages builds this site
-with its own native builder and there is no workflow file in the repo, so the `Gemfile`
-exists only for local development. Widening it to satisfy one machine's Ruby is churn
-that helps nobody else. Work around it outside the repo instead:
+The `csv` half is handled by the `Gemfile`. The taint half is handled by
+`_dev/ruby-compat.rb`, which restores the removed methods as no-ops, and which the
+Makefile loads through `RUBYOPT`. Taint tracking had already been a no-op since Ruby
+2.7, so nothing is weakened.
 
-```bash
-# a scratch Gemfile: github-pages, plus csv base64 bigdecimal logger ostruct
-# a scratch shim.rb: class Object; def tainted?; false; end; def untaint; self; end; end
-RUBYOPT="-r/tmp/shim.rb" BUNDLE_GEMFILE=/tmp/Gemfile bundle exec jekyll build
-```
+**Do not fix this by changing the `github-pages` pin.** GitHub Pages builds this site
+with its own native builder and there is no workflow file in the repo, so that pin is
+what production runs. Moving it changes the deploy, not just your machine. The shim sits
+outside the gem graph and outside the site, and GitHub Pages never loads it.
+
+### Proving a refactor changed nothing
+
+`make diff` builds the committed tree and the working tree and compares the two `_site/`
+directories, ignoring only what derives from file timestamps. Moving markup into an
+include, or replacing a hardcoded list with a data file, should report no output changes.
+Run it before committing anything you describe as a refactor.
 
 ---
 
@@ -158,8 +169,11 @@ career motives.
 ### Add a page
 
 1. Create `_pages/<slug>.md` with `layout`, `title`, `description`, `permalink`.
-2. Add it to `NAV_ITEMS` in `js/components/nav.js` if it belongs in the nav, and to the
-   hardcoded `<nav>` fallback in `_layouts/default.html` if so.
+2. Add it to `_data/navigation.yml` if it belongs in the nav. That one file feeds the
+   header and the footer; there is no second list and no fallback markup to keep in sync.
+   A page that sits under an existing nav item needs nothing: an item is active on
+   anything beneath its own href. A page at its own top-level URL that belongs to a
+   section needs its prefix under that item's `owns:`.
 3. Link to it from somewhere. A sitemap entry alone is a weak crawl signal, and
    `audit_seo.py` will flag the orphan.
 4. Build, audit, look at it in both themes.
