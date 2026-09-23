@@ -9,11 +9,17 @@
 # so /stoic/ should light up the Writings link. Matching is by prefix, and the
 # href itself is always matched exactly, so `/` does not claim every page.
 #
-# KNOWN GAP: five long-form pages are not listed under Writings -- /communication/,
-# /self-love/, /small-talk/, /story/ and /uncertainty-and-emotions/. They render
-# with no nav item marked active. This mirrors the list that was previously
-# hardcoded in js/components/nav.js and is preserved deliberately: adding them is
-# a content decision, not a refactor. Add the prefix here to fix one.
+# A page matching no item falls back to the FIRST item below, so About is lit.
+# That is what the old JavaScript did, and it is why the order here matters
+# beyond display order. See the header of _includes/site-nav.html.
+#
+# KNOWN GAP: five long-form pages read as Writings but are not listed under it --
+# /communication/, /self-love/, /small-talk/, /story/ and
+# /uncertainty-and-emotions/. They fall back to About, which is wrong for a
+# long-form note. The same `owns` list was previously hardcoded in
+# js/components/nav.js and had the same five missing, so this is preserved
+# rather than fixed: adding them is a content decision, not a refactor. Add the
+# prefix to Writings below to fix one.
 
 primary:
   - label: About

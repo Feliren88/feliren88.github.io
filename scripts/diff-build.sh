@@ -16,6 +16,11 @@
 # which is why the baseline build's timestamps never match the working tree's.)
 #
 # Usage: scripts/diff-build.sh [git-ref]      (default: HEAD)
+#        make diff REF=<ref>
+#
+# After committing, compare against the ref you started from, not HEAD. HEAD is
+# then your own work and the comparison is vacuous; the check below refuses that
+# case rather than reporting a green it has not earned.
 set -euo pipefail
 
 REF="${1:-HEAD}"
@@ -25,12 +30,13 @@ ROOT="$(git rev-parse --show-toplevel)"
 # so an unresolved mktemp path makes every {% include %} look like it sits
 # outside the site.
 WORK="$(cd "$(mktemp -d)" && pwd -P)"
-# Clean up on any exit, including an interrupt part-way through. Removing the
-# directory alone would leave the worktree registered in .git, so prune too.
+# Clean up on any exit, including an interrupt part-way through. Scoped to the
+# one worktree this script creates. Deliberately not `git worktree prune`, which
+# is repository-wide: it would also unregister somebody else's worktree that
+# happens to sit on an unmounted volume.
 cleanup() {
   git worktree remove --force "$WORK/src" 2>/dev/null || true
   rm -rf "$WORK"
-  git worktree prune
 }
 trap cleanup EXIT
 
@@ -48,6 +54,19 @@ normalise() {
                             s/feliren88-\d+/feliren88-STAMP/g;
                             s|<lastmod>[^<]+</lastmod>|<lastmod>STAMP</lastmod>|g"
 }
+
+if git diff --quiet "$REF" -- . 2>/dev/null &&
+   [ -z "$(git ls-files --others --exclude-standard)" ]; then
+  cat >&2 <<MSG
+nothing to compare: the working tree is identical to $REF.
+
+Both sides of the diff would be the same source, so a pass here would mean
+nothing. If the change is already committed, name the ref you started from:
+
+    make diff REF=$REF~1
+MSG
+  exit 2
+fi
 
 echo "Building $REF ..."
 git worktree add --detach --quiet "$WORK/src" "$REF"

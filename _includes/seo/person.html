@@ -90,9 +90,24 @@ add a new schema.org property.
     {%- endfor %}
   ],
   "sameAs": {{ id.same_as | jsonify }},
+  {%- comment -%}
+  A publication with neither a doi nor a url has nothing to point at and is
+  skipped. The comma is therefore written before each entry except the first,
+  rather than after each except `forloop.last`: the last entry of the data file
+  and the last entry actually printed are not necessarily the same one, and a
+  separator emitted for a skipped publication puts a stray comma in this array,
+  which makes the Person block invalid JSON on every page of the site.
+
+  `where_exp` cannot express this. Its parser takes a single comparison, so
+  `'p.doi or p.url'` is a syntax error, though `or` is fine in an `if` tag.
+  {%- endcomment -%}
   "subjectOf": [
-    {%- for pub in site.data.publications %}
-    {%- if pub.doi %}{ "@id": "https://doi.org/{{ pub.doi }}" }{% elsif pub.url %}{ "@id": {{ pub.url | jsonify }} }{% endif %}{% unless forloop.last %},{% endunless %}
+    {%- assign printed = false -%}
+    {%- for pub in site.data.publications -%}
+      {%- if pub.doi or pub.url %}
+    {% if printed %},{% endif %}{% if pub.doi %}{ "@id": "https://doi.org/{{ pub.doi }}" }{% else %}{ "@id": {{ pub.url | jsonify }} }{% endif %}
+        {%- assign printed = true -%}
+      {%- endif -%}
     {%- endfor %}
   ],
   "identifier": [

@@ -1,6 +1,6 @@
 # Talks, panels and presentations.
 #
-# Consumed by _includes/seo/events.html, which emits one Event JSON-LD block per
+# Consumed by _includes/seo/media-and-events.html, which emits one Event JSON-LD block per
 # entry so each appears as its own entity in search results.
 #
 # start_date is whatever precision is actually known: a year, a year-month, or a

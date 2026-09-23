@@ -27,8 +27,8 @@ serve:  ## Serve the site at http://localhost:4000 with live reload
 	$(JEKYLL) serve --livereload
 
 .PHONY: diff
-diff:  ## Prove a refactor changed no output: diff this build against git HEAD's
-	@scripts/diff-build.sh
+diff:  ## Prove a refactor changed no output. Committed already? make diff REF=<base>
+	@scripts/diff-build.sh $(REF)
 
 .PHONY: check
 check: build  ## Build, then run the SEO/link audit over _site/

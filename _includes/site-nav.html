@@ -13,9 +13,23 @@ Marks the item matching the current page with `is-active`. An item owns:
 
 Later items win, which only matters if two hrefs nest.
 
+A page that matches nothing falls back to the first item. That covers the
+unlisted syllabus pages, /project/, /cv/ and 404, and it reproduces what the
+JavaScript did before this was resolved at build time: its lookup ended in
+`return item ? item.page : '/'`, and `/` is About. Removing the fallback would
+leave those pages with no current-page indicator at all, which is a visible
+change rather than a refactor.
+
 Active state is resolved here, at build time, rather than in JavaScript. A reader
 with JavaScript disabled still sees where they are, and there is no frame where
 the wrong item is highlighted.
+
+Because the footer renders through this same file, its current-page link now
+carries `is-active` too, which it did not before: the old JavaScript scoped that
+class to `nav.nav`. Nothing styles it, since the only rule is `.nav a.is-active`
+and the footer's class is `footer-nav`. Worth knowing before adding any rule
+that selects `a.is-active` without a parent scope, because it would start
+styling the footer as well.
 {%- endcomment -%}
 {%- assign nav_active = '' -%}
 {%- for item in site.data.navigation.primary -%}
@@ -32,6 +46,9 @@ the wrong item is highlighted.
     {%- endfor -%}
   {%- endif -%}
 {%- endfor -%}
+{%- if nav_active == '' -%}
+  {%- assign nav_active = site.data.navigation.primary.first.href -%}
+{%- endif -%}
 {%- for item in site.data.navigation.primary -%}
 {% if item.href == nav_active %}<a href="{{ item.href }}" class="is-active">{{ item.label }}</a>{% else %}<a href="{{ item.href }}">{{ item.label }}</a>{% endif %}
 {% endfor -%}

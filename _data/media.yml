@@ -1,6 +1,6 @@
 # Press coverage quoting or profiling the site author.
 #
-# Consumed by _includes/seo/media.html, which emits one Article JSON-LD block
+# Consumed by _includes/seo/media-and-events.html, which emits one Article JSON-LD block
 # per entry. Separate blocks rather than a nested array, so each appears as its
 # own entity in search results.
 #

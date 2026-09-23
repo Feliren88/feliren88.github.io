@@ -35,7 +35,7 @@ make install   # bundle install
 make build     # output lands in _site/
 make serve     # http://localhost:4000
 make check     # build, then run the indexability audit
-make diff      # prove a change altered no built output
+make diff      # prove a change altered no built output (REF=<base> once committed)
 ```
 
 `make` on its own lists every target.
@@ -62,7 +62,10 @@ outside the gem graph and outside the site, and GitHub Pages never loads it.
 `make diff` builds the committed tree and the working tree and compares the two `_site/`
 directories, ignoring only what derives from file timestamps. Moving markup into an
 include, or replacing a hardcoded list with a data file, should report no output changes.
-Run it before committing anything you describe as a refactor.
+
+Run it before committing. Afterwards `HEAD` is your own work, so pass the ref you started
+from: `make diff REF=<base>`. It refuses to run when the two sides would be the same
+source, rather than reporting a pass it has not earned.
 
 ---
 

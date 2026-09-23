@@ -176,7 +176,8 @@ Which item is highlighted is worked out during the build, not in the browser, so
 it is correct with JavaScript off and never flickers on load. An item is active
 on its own href, on anything beneath it, and on any prefix under `owns:`. That
 last one is how a long-form note at its own top-level URL still highlights
-Writings.
+Writings. A page matching nothing falls back to the first item in the list, so
+the order there matters beyond display order.
 
 ## Technology
 
@@ -236,7 +237,7 @@ make install   # bundle install
 make serve     # http://localhost:4000, live reload
 make build     # build into _site/
 make check     # build, then audit SEO and internal links
-make diff      # prove a change altered no built output
+make diff      # prove a change altered no built output (REF=<base> once committed)
 ```
 
 `make` on its own lists them.
@@ -270,9 +271,10 @@ the `github-pages` pin in the `Gemfile` is what production runs.
 - **`notes/` stays private.** It is in `.gitignore` and in the `_config.yml`
   exclude list. Both are needed, because Jekyll copies unrecognised files into
   `_site/` and would otherwise publish them.
-- **Run `make diff` after a structural change.** It builds the committed tree and
-  the working tree and compares the output, so a refactor can be shown to have
-  changed nothing.
+- **Run `make diff` before committing a structural change.** It builds the
+  committed tree and the working tree and compares the output, so a refactor can
+  be shown to have changed nothing. Once the change is committed, pass the base
+  you started from: `make diff REF=<base>`.
 
 ## Contact
 

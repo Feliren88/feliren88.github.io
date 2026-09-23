@@ -32,7 +32,7 @@ committing. `README.md` is the reader-facing description of the site.
 make install   # bundle install
 make build     # build into _site/
 make serve     # http://localhost:4000, live reload
-make diff      # prove a refactor changed no output
+make diff      # prove a refactor changed no output (REF=<base> once committed)
 make check     # build, then run the SEO and link audit
 ```
 
@@ -45,8 +45,12 @@ its own Ruby, so the shim is local-only and cannot affect what ships.
 **`make diff` is the tool for any structural change.** It builds the committed
 tree and the working tree and compares the two `_site/` directories, ignoring
 only what is derived from file timestamps. Moving markup into an include or
-replacing a hardcoded list with a data file should report no output changes. Use
-it before committing anything described as a refactor.
+replacing a hardcoded list with a data file should report no output changes.
+
+It compares against `HEAD` by default, so run it before committing. Afterwards
+`HEAD` is your own work and the comparison would be vacuous, so name the ref you
+started from instead: `make diff REF=<base>`. The script refuses to run rather
+than report a pass it has not earned.
 
 `make check` currently reports one flag, `/encp-vln/ NO-INBOUND-LINK`, which is
 pre-existing. Treat any second flag as yours.
