@@ -34,10 +34,14 @@ driven by a data file, so in almost every case the include is not what you edit:
 | Include | Emits | Edit instead |
 |---|---|---|
 | `seo/person.html` | `Person` | `_data/identity.yml` |
-| `seo/site-entities.html` | `WebSite`, `ContactPoint`, `ProfilePage`, employer | `_data/identity.yml` |
+| `seo/site-entities.html` | `WebSite`, `ContactPoint`, `ProfilePage`, employer | `_data/identity.yml`; the `WebSite` description is `description` in `_config.yml` |
 | `seo/publications.html` | one `ScholarlyArticle` per paper | `_data/publications.yml` |
 | `seo/media-and-events.html` | one `Article` per press item, one `Event` per talk | `_data/media.yml`, `_data/events.yml` |
 | `seo/structured-data.html` | `BreadcrumbList` on dated pages | — |
+
+The homepage carries a second `WebSite` block, emitted by `jekyll-seo-tag` from the
+homepage's own front matter `description` in `_pages/about.md`. That one is the
+homepage's search snippet, so it is edited there and may word things differently.
 
 Everything points at the author by `@id` (`#person`) rather than repeating them.
 The ids are shared across files, so `#person`, `#website`, `#image`, `#contact`
@@ -53,7 +57,7 @@ and `#profilepage` have to agree between `person.html` and `site-entities.html`.
 
 **2. CollectionPage + ScholarlyArticle schema** — in `_pages/publications.md` (research page only). Also auto-generated from `_data/publications.yml`.
 
-When adding new publications, **only update `_data/publications.yml`** — both JSON-LD blocks update automatically. Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year` (string), `url`, `abstract`, `keywords` (array), `authors` (array). Optional: `publisher`, `doi`, `date` (ISO, from the bibtex/Crossref record — used as `datePublished`, falls back to `year`), `pages`, `volume`, `issue`, `issn`, `isbn`.
+When adding new publications, **only update `_data/publications.yml`** — both JSON-LD blocks update automatically. Required fields: `key`, `kind`, `tag`, `title`, `description`, `venue`, `year` (string), `url`, `abstract`, `keywords` (array), `authors` (array). Optional: `publisher`, `doi`, `date` (ISO, from the bibtex/Crossref record — used as `datePublished`, falls back to `year`), `pages`, `volume`, `issue`, `issn`, `isbn`, `project_page` (a site path such as `/encp-vln/`; `/research/` then links to it from the paper's card and archive row).
 
 Valid `kind` values: `geospatial`, `cultural`, `nlp`, `applied`.
 

@@ -218,7 +218,7 @@ award or a talk needs no template change.
 | Block | Built from | By |
 |---|---|---|
 | `Person` | `_data/identity.yml` | `_includes/seo/person.html` |
-| `WebSite`, `ContactPoint`, `ProfilePage`, employer | `_data/identity.yml` | `_includes/seo/site-entities.html` |
+| `WebSite`, `ContactPoint`, `ProfilePage`, employer | `_data/identity.yml`, `description` in `_config.yml` | `_includes/seo/site-entities.html` |
 | One `ScholarlyArticle` per paper | `_data/publications.yml` | `_includes/seo/publications.html` |
 | One `Article` per press mention, one `Event` per talk | `_data/media.yml`, `_data/events.yml` | `_includes/seo/media-and-events.html` |
 | `BreadcrumbList` on dated pages | the page | `_includes/seo/structured-data.html` |

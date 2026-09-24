@@ -13,13 +13,8 @@
 # That is what the old JavaScript did, and it is why the order here matters
 # beyond display order. See the header of _includes/site-nav.html.
 #
-# KNOWN GAP: five long-form pages read as Writings but are not listed under it --
-# /communication/, /self-love/, /small-talk/, /story/ and
-# /uncertainty-and-emotions/. They fall back to About, which is wrong for a
-# long-form note. The same `owns` list was previously hardcoded in
-# js/components/nav.js and had the same five missing, so this is preserved
-# rather than fixed: adding them is a content decision, not a refactor. Add the
-# prefix to Writings below to fix one.
+# Every long-form note linked from /writings/ belongs under `owns`. When a new
+# note goes up there, add its prefix below too, or its page falls back to About.
 
 primary:
   - label: About
@@ -43,6 +38,11 @@ primary:
       - /success-failure
       - /life-challenges
       - /read-people
+      - /communication
+      - /self-love
+      - /small-talk
+      - /story
+      - /uncertainty-and-emotions
 
   - label: Work With Me
     href: /contact/

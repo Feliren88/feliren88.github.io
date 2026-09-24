@@ -14,7 +14,7 @@ and the ids there have to agree.
   "@id": "{{ site.url }}/#website",
   "url": {{ site.url | jsonify }},
   "name": {{ id.name | jsonify }},
-  "description": {{ id.website_description | strip | jsonify }},
+  "description": {{ site.description | strip | jsonify }},
   "inLanguage": "en",
   "author": { "@id": "{{ site.url }}/#person" },
   "potentialAction": {

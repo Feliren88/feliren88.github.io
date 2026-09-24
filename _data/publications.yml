@@ -78,6 +78,7 @@
   year: "2026"
   publisher: 'arXiv'
   url: 'https://arxiv.org/abs/2609.17499'
+  project_page: /encp-vln/
   doi: '10.48550/arXiv.2609.17499'
   date: "2026-09-15T00:00:00Z"
   keywords: ['conformal prediction', 'vision-and-language navigation', 'uncertainty estimation', 'episode-level calibration', 'whole-route coverage', 'R2R', 'REVERIE', 'robotics', 'ENCP']

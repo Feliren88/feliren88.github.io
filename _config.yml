@@ -65,6 +65,7 @@ sitemap:
 exclude:
   - node_modules
   - vendor
+  - README.md
   - CLAUDE.md
   - CONTRIBUTING.md
   - backlog.md

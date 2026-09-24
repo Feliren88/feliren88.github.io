@@ -16,21 +16,16 @@ gender: Male
 pronouns: he/him
 nationality: Indonesia
 
+# The Person node's description: `description` in _config.yml put into the
+# third person, plus the venues. _config.yml holds the canonical one-line
+# summary and follows the narrative spine in CLAUDE.md. Change that first, then
+# this.
+# The WebSite node reads _config.yml directly, so it has no copy here.
 description: >-
-  Applied Scientist focusing on AI safety and trustworthy multimodal and
-  multilingual systems; published in IEEE, ACL, and Remote Sensing of Environment.
-
-# The WebSite node's description, which is a third wording again.
-#
-# DRIFT, preserved deliberately: this, `description` above, and `description` in
-# _config.yml are three different sentences about the same person. _config.yml
-# leads with calibration under safety alignment, matching the current narrative
-# spine; these two still lead with trustworthy multimodal systems. Reconciling
-# them is a copy decision, so this refactor kept each string exactly where it
-# was rather than quietly picking a winner.
-website_description: >-
-  Applied Scientist working on AI safety for trustworthy, multimodal, and
-  multilingual systems, published in IEEE, ACL, and Remote Sensing of Environment.
+  Applied Scientist studying calibration under safety alignment. He measures
+  where safety training weakens a model's calibration across languages and input
+  types. Then he develops ways to recover it. Published in IEEE, ACL, and Remote
+  Sensing of Environment.
 
 # Long-form variant. Search engines show this in knowledge panels, so it repeats
 # facts from the short description on purpose.

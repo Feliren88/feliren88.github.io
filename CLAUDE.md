@@ -52,8 +52,8 @@ It compares against `HEAD` by default, so run it before committing. Afterwards
 started from instead: `make diff REF=<base>`. The script refuses to run rather
 than report a pass it has not earned.
 
-`make check` currently reports one flag, `/encp-vln/ NO-INBOUND-LINK`, which is
-pre-existing. Treat any second flag as yours.
+`make check` reports zero flags. Any flag it raises is a real problem to fix
+before committing.
 
 ## Writing Rules (apply to ALL site copy)
 
@@ -509,10 +509,14 @@ Edit the appropriate file in `_data/`. For publications, only edit `_data/public
 1. Add entry to `_data/publications.yml`
 2. Required fields: `key`, `kind` (geospatial/cultural/nlp/applied), `tag`, `title`, `description`, `venue`, `year`, `url`, `abstract`, `keywords`
 3. The filter bar on `/research/` and both JSON-LD blocks update automatically
+4. If the paper has its own page on this site, set `project_page: /<slug>/`. `/research/` links to it from the paper's card, which is also what keeps that page from being an orphan
 
 ### Add New Page
 1. Create `_pages/newpage.md` with front matter
-2. Add it to `_data/navigation.yml` if it belongs in the nav
+2. Add it to `_data/navigation.yml` if it belongs in the nav. A long-form note
+   linked from `/writings/` goes under the Writings item's `owns:` list, or its
+   page falls back to highlighting About
+3. Link to it from at least one other page, or `make check` flags it as an orphan
 
 ### Add a Filterable List Page
 1. Add `.filter-bar` / `.filter-pill` markup (see Design System above)
