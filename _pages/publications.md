@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Research & Publications
-description: Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection.
+title: Research and publications
+description: Vicky Feliren's research includes a preprint on conformal prediction for vision-language navigation and peer-reviewed work on Southeast Asian benchmarks, flood mapping, and mining detection.
 permalink: /research/
 hide_title: true
 extra_css: /css/portfolio-modern.css
@@ -14,8 +14,8 @@ extra_css: /css/portfolio-modern.css
     {
       "@type": "CollectionPage",
       "@id": "https://vickyfeliren.com/research/",
-      "name": "Research & Publications, Vicky Feliren",
-      "description": "Peer-reviewed work on conformal prediction for vision-language models, cultural AI benchmarks for Southeast Asia, and geospatial deep learning for flood and mining detection. Published in IEEE, ACL, and Remote Sensing of Environment.",
+      "name": "Research and publications, Vicky Feliren",
+      "description": "A preprint on conformal prediction for vision-language navigation and peer-reviewed work on Southeast Asian benchmarks, flood mapping, and mining detection.",
       "url": "https://vickyfeliren.com/research/",
       "author": { "@id": "https://vickyfeliren.com/#person" },
       "hasPart": [
@@ -32,24 +32,24 @@ extra_css: /css/portfolio-modern.css
 <article class="modern-portfolio research-modern">
   <header class="mp-hero research-hero">
     <div>
-      <h1>When a model becomes safer, does it still know what it knows?</h1>
-      <p class="mp-lead">I study calibration under safety alignment: where confidence stops matching accuracy, who absorbs that cost, and how reliable deference can be recovered.</p>
+      <h1>Can a safer model still recognise when it may be wrong?</h1>
+      <p class="mp-lead">I study whether safety training changes calibration, the match between a model’s confidence and its accuracy. The deeper question is whether that change is shared across users and tasks, or concentrated where existing evaluations see least.</p>
       <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected research</a><a class="mp-text-link" href="#research-archive">Browse all publications →</a></div>
     </div>
-    <aside class="research-thesis" aria-label="Research thesis">
-      <strong>My research question</strong>
-      <ol><li><b>Measure</b><p>Calibration shifts after alignment.</p></li><li><b>Disaggregate</b><p>Across languages and modalities.</p></li><li><b>Recover</b><p>Deference with a stated guarantee.</p></li></ol>
+    <aside class="research-thesis" aria-label="Research position">
+      <strong>Research position</strong>
+      <p>A model’s safety depends partly on whether its uncertainty gives people a sound reason to trust an answer or request review. That property should hold beyond the languages and inputs used most often to evaluate it.</p>
     </aside>
   </header>
 
-  <section class="research-pillars" aria-label="Research areas">
-    <article><h2>Calibration under alignment</h2><p>Measuring whether safety training makes confidence less reliable—and where the loss concentrates.</p></article>
-    <article><h2>Multilingual and cultural evaluation</h2><p>Testing claims beyond English with data grounded in Southeast Asian languages and lived context.</p></article>
-    <article><h2>Reliable multimodal systems</h2><p>Building uncertainty-aware systems across vision, language, navigation, and earth observation.</p></article>
+  <section class="research-pillars" aria-label="Research agenda">
+    <article><h2>Safety and uncertainty</h2><p><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">Published evidence</a> links safety-related training to expressed overconfidence. The open question is how that change affects decisions to answer or defer.</p></article>
+    <article><h2>Whose uncertainty?</h2><p>SEA-VL and CommonLID expose gaps in standard language and vision evaluation. I suspect calibration costs may also vary across the inputs these benchmarks bring into view.</p></article>
+    <article><h2>Reliability across decisions</h2><p>My navigation preprint studies coverage across an entire route under stated assumptions. It motivates a broader question about when uncertainty estimates remain useful as a system keeps acting.</p></article>
   </section>
 
   <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Research that defines the direction</h2></div><p>ENCP leads this portfolio because it turns uncertainty estimation into a practical guarantee for sequential multimodal systems.</p></header>
+    <header class="mp-section-head"><div><h2>Selected research</h2></div><p>ENCP studies coverage across whole navigation routes. SEA-VL builds a regional vision-language dataset.</p></header>
     <div class="research-feature-grid">
       {% assign featured_keys = 'encp-vln,sea-vl' | split: ',' %}
       {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}

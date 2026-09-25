@@ -123,8 +123,7 @@
   .about-story-actions,.about-closing>div{flex-direction:column;align-items:stretch}
   .about-story-actions .btn,.about-closing .btn{width:100%}
   .about-text-link{align-self:flex-start}
-  /* The 2.3rem floor above stops scaling below 368px, and "trusted." then
-     runs to the edge on a 320px screen. Carry on scaling with the viewport. */
+  /* Keep long research questions within a 320px screen. */
   .about-story-copy h1{font-size:clamp(1.95rem,9.5vw,2.9rem)}
   .about-equation{font-size:.8rem}
   .about-method-grid article{padding:1.3rem}
@@ -135,3 +134,4 @@
   is 1120px, main is 1220px, so without this the page steps outward at the join.
 */
 .home-tail{max-width:1120px;margin-inline:auto}
+.about-prose-columns a{color:var(--text);text-decoration-color:var(--about-blue);text-underline-offset:3px}

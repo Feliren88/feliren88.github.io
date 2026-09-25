@@ -18,3 +18,5 @@ body:has(.modern-portfolio) .section.reveal{opacity:1;transform:none}
 .uc-feature-signal b{color:var(--text)}
 @media(max-width:520px){.mp-filter-rail{margin-inline:0;padding-inline:0;max-width:100%}}
 .research-thesis li{grid-template-columns:100px 1fr}
+.research-thesis>p{margin:.85rem 0 0;font-size:1rem;line-height:1.7}
+.research-pillars a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}

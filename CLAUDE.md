@@ -118,19 +118,8 @@ tax. It reports the opposite — no significant tax from those prompting interve
 
 ### Inline link styling
 
-Prose links use text colour with an accent underline, never browser-default blue:
-
-```css
-.about-hero a, .section-prose a, .about-card a {
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-underline-offset: 3px;
-}
-```
-
-Any new prose container needs adding to that selector list, or its links fall through to
-default blue and ignore the light/dark theme.
+Prose links use text colour with an accent underline. Add that styling to the
+relevant page stylesheet when adding inline links to new prose containers.
 
 ### Private notes
 
@@ -173,8 +162,8 @@ feliren88.github.io/
 
 ### The data layer
 
-Every piece of content on the site is in `_data/`. A page template should read
-from it, never hold copy of its own.
+Reusable records live in `_data/`. The About narrative lives in `_pages/about.md`,
+while `_data/about.yml` holds the record strip.
 
 | File | Holds | Notes |
 |---|---|---|
@@ -182,7 +171,7 @@ from it, never hold copy of its own.
 | `navigation.yml` | The nav, for header and footer | Single source of truth |
 | `media.yml` | Press coverage of the author | Coverage *of*; `thoughts.yml` is *by* |
 | `events.yml` | Talks and panels | |
-| `index.yml`, `about.yml`, `contact.yml` | Landing, /about/, /contact/ copy | |
+| `about.yml`, `now.yml`, `contact.yml` | Homepage record, recent work, and contact copy | |
 | `publications.yml` | Papers | Each entry needs a `kind` for filter routing |
 | `experience.yml`, `awards.yml`, `skills.yml` | CV surfaces | `skills.yml` renders on /cv only |
 | `features.yml`, `notes.yml`, `thoughts.yml` | The three strips on /writings/ | `thoughts.yml` order drives the homepage |
@@ -433,9 +422,9 @@ set `is-active` and agree on it.
 Wrap card grids in `.reveal-group` so children animate together with 80ms stagger:
 
 ```html
-<div class="about-grid reveal-group">
-  <div class="about-card reveal">…</div>
-  <div class="about-card reveal">…</div>
+<div class="insights-grid reveal-group">
+  <div class="insight-card reveal">…</div>
+  <div class="insight-card reveal">…</div>
 </div>
 ```
 

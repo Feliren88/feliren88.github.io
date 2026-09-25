@@ -25,9 +25,9 @@ work_experience:
     description: "I used probabilistic time-series models to forecast municipal waste and guide city-wide resource planning. I also used citizen complaint data to study the effect of Jakarta's plastic bag ban. I presented the findings at an IEEE-sponsored conference."
 
 education:
-  - dates: 'EXPECTED SEPT 2026'
-    title: 'Monash University'
-    location: 'Master of Data Science · GPA: 4.0/4.0'
+  - dates: '2026'
+    title: 'Master of Data Science (awaiting conferral)'
+    location: 'Monash University · GPA 4.0/4.0 · Weighted average mark 84.769'
     description: 'Thesis: Conformal prediction approach to vision-language navigation (VLN)'
 
   - dates: 'JUN 2026'

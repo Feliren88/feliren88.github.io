@@ -1,10 +1,9 @@
 {%- comment -%}
-The fixed nodes of the schema graph: the site itself, how to make contact, the
-profile page, and the employer.
+The fixed nodes of the schema graph: the site itself, how to make contact, and
+the profile page.
 
-They are grouped in one file because none of them changes without the others.
-All four are referenced by @id from _includes/seo/person.html, so the ids here
-and the ids there have to agree.
+They are grouped in one file because the page references them together.
+Their ids agree with the references in _includes/seo/person.html.
 {%- endcomment -%}
 {%- assign id = site.data.identity -%}
 <script type="application/ld+json">
@@ -47,17 +46,6 @@ and the ids there have to agree.
   "isPartOf": { "@id": "{{ site.url }}/#website" },
   "about": { "@id": "{{ site.url }}/#person" },
   "mainEntity": { "@id": "{{ site.url }}/#person" },
-  "image": { "@id": "{{ site.url }}/#image" }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollegeOrUniversity",
-  "@id": {{ id.employer.id | jsonify }},
-  "name": {{ id.employer.name | jsonify }},
-  "sameAs": {{ id.employer.same_as | jsonify }},
   "image": { "@id": "{{ site.url }}/#image" }
 }
 </script>

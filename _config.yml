@@ -1,7 +1,7 @@
 # Site settings
 title: Vicky Feliren
 description:
-  Applied Scientist studying calibration under safety alignment. I measure where safety training weakens calibration across languages and input types, then develop ways to recover it.
+  Vicky Feliren studies how safety training changes model calibration across languages and image-based tasks. His research includes vision-language navigation and Southeast Asian AI benchmarks.
 baseurl: ""
 url: "https://vickyfeliren.com"
 

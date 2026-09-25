@@ -22,44 +22,33 @@ nationality: Indonesia
 # this.
 # The WebSite node reads _config.yml directly, so it has no copy here.
 description: >-
-  Applied Scientist studying calibration under safety alignment. He measures
-  where safety training weakens a model's calibration across languages and input
-  types. Then he develops ways to recover it. Published in IEEE, ACL, and Remote
-  Sensing of Environment.
+  Vicky Feliren is an applied scientist studying how safety training changes
+  model calibration across languages and image-based tasks. His published work
+  includes vision-language benchmarks, flood mapping, and language identification.
 
 # Long-form variant. Search engines show this in knowledge panels, so it repeats
 # facts from the short description on purpose.
 disambiguating_description: >-
-  Vicky Feliren is an applied scientist specializing in AI safety and the
-  development of trustworthy multimodal and multilingual systems. He conducts
-  applied research that bridges vision–language models, uncertainty
-  quantification, and interpretability, and has published in venues including
-  IEEE, ACL, and Remote Sensing of Environment. Vicky holds a Master of Data
-  Science and a Bachelor of Computer Science from Monash University, and
-  contributes to initiatives around responsible AI and regionally relevant
-  multimodal research. He has been recognized with awards such as the Global
-  South AI Safety Hackathon (Asia Pacific Regional Winner, 2026) and the
-  Microsoft Azure Virtual Hackathon APAC (Regional Champion, 2020). Vicky is
-  available for research collaborations, speaking engagements, and consulting on
-  trustworthy AI.
+  Vicky Feliren studies calibration under safety alignment. His Monash research
+  includes conformal prediction for vision-language navigation and satellite
+  image models for flood mapping. With SEACrowd, he has contributed to
+  Southeast Asian vision-language data and language benchmarks. His papers
+  appear in ACL, IEEE Geoscience and Remote Sensing Letters, and Remote Sensing
+  of Environment. He earned a Bachelor of Computer Science at Monash University
+  and wrote his Master of Data Science thesis there.
 
 occupation:
   name: Applied Scientist
   description: >-
-    Applied research on AI safety, trustworthy multimodal AI, and vision-language models
+    Research on AI safety, calibration, and vision-language models
   skills: >-
     Conformal Prediction, Vision-Language Models, Multimodal AI, Multilingual AI,
     AI Safety, Interpretability, Uncertainty Quantification
-  location: Australia
+  location: Indonesia
 
 seeks: >-
-  Applied Scientist and Research Scientist roles, AI research collaboration,
-  speaking engagements, and consulting on trustworthy AI
-
-employer:
-  id: https://vickyfeliren.com/#monash
-  name: Monash University
-  same_as: https://www.monash.edu
+  Applied Scientist and Research Scientist roles, research collaboration,
+  and speaking engagements
 
 alumni_of:
   name: Monash University
@@ -89,10 +78,6 @@ languages:
   - Indonesian
 
 credentials:
-  - name: Master of Data Science
-    level: Master's degree
-    awarded_by: Monash University
-    awarded_by_same_as: https://www.monash.edu
   - name: Bachelor of Computer Science
     level: Bachelor's degree
     awarded_by: Monash University

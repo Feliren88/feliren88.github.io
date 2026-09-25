@@ -1,37 +1,10 @@
 stats:
   - value: '7'
     label: 'Peer-reviewed papers'
-    detail: 'Published across language and vision venues, with methods and results reviewed by other researchers.'
+    detail: 'Research in language, vision, and earth observation.'
+  - value: '4.0/4.0'
+    label: 'Master’s GPA'
+    detail: 'Monash University · Weighted average mark 84.769.'
   - value: '5+ years'
-    label: 'Industry ML in production'
-    detail: 'Models used for finance, safety, and city services, where mistakes had real costs.'
-  - value: '1'
-    label: 'Issued patent'
-    detail: 'A method that passed formal examination and became an issued patent.'
-  - value: '12'
-    label: 'Awards & scholarships'
-    detail: 'Including the Asia-Pacific regional award at the Global South AI Safety Hackathon.'
-  - value: '100+'
-    label: 'Researchers co-led with'
-    detail: 'Experience coordinating research across a large international group.'
-  - value: '1000+'
-    label: 'Students taught & judged'
-    detail: 'Experience explaining difficult ideas to people seeing them for the first time.'
-
-hero:
-  - "I'm an applied scientist studying <strong>calibration under safety alignment</strong>. Safety training can change how well a model's confidence matches its accuracy. Poorly calibrated models also defer poorly, which limits the tasks we can trust them with. I want safe models to stay useful. My starting position is that the current trade-off can be improved."
-  - "At Monash University, I study <a href='/research/'>conformal prediction for vision-language navigation</a>. I work with <a href='https://research.monash.edu/en/persons/risqi-saputra/' target='_blank' rel='noreferrer'>Associate Professor Risqi Saputra</a> and <a href='https://research.monash.edu/en/persons/taufiq-asyhari/' target='_blank' rel='noreferrer'>Professor Taufiq Asyhari</a>. The work taught me to ask what each guarantee depends on and what might break first. I now want to apply that tool here. Even when a model's calibration slips, its decision to defer should have a clear bound."
-  - "I also bring experience from Southeast Asia, one of the world's most varied regions in language and visual data. The region is still largely missing from the datasets and benchmarks used to judge modern AI. I have spent years building local datasets with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a>. My <a href='/research/'>research</a> also develops regional adaptation methods. Most safety training data is English text. If its costs vary across languages and inputs, Southeast Asia is a good place to look. Measuring them requires data and native fluency. I have both."
-
-sections:
-  - title: 'Research Agenda'
-    content: "Making a model safer has a cost. Researchers call it the <a href='https://aclanthology.org/2024.emnlp-main.35/' target='_blank' rel='noreferrer'>alignment tax</a>. Studies usually report one average across a test set. I think the cost varies across inputs, and we have not measured that pattern. It may be highest where safety data is scarce. If so, a model can appear safely aligned while working unevenly across languages and input types. Our current tests may miss that gap because they focus on well-represented data."
-    cards:
-      - title: 'Calibration is where the safety tax gets paid'
-        description: "Safety training changes a model's answers, including its confidence in them. Its effect on capability is well studied. Examples include <a href='https://aclanthology.org/2024.emnlp-main.35/' target='_blank' rel='noreferrer'>Lin et al. (EMNLP 2024)</a> on the alignment tax and <a href='https://arxiv.org/abs/2503.00555' target='_blank' rel='noreferrer'>Huang et al.</a> on reasoning. Its effect on calibration has received less attention. <a href='https://proceedings.iclr.cc/paper_files/paper/2025/file/29fb6e1456b3d8b57ede5c45aa2c6537-Paper-Conference.pdf' target='_blank' rel='noreferrer'>Leng et al. (ICLR 2025)</a> find that RLHF makes models express too much confidence. <a href='https://arxiv.org/abs/2510.17426' target='_blank' rel='noreferrer'>Hu et al. (ACL 2026 Findings)</a> describe a severe loss of calibration. I care about this cost because calibration shapes how much work we can safely delegate."
-      - title: 'The cost is probably not spread evenly'
-        description: "Most safety training data is English text. Its costs may vary across inputs that appear in the data at very different rates. I therefore measure calibration changes by language and input type. One average cannot describe a distribution that the test barely sampled. I am running this experiment now, and either result will help. A uniform cost would make the problem simpler. An uneven cost would show that some users receive a less calibrated model than standard benchmarks suggest."
-      - title: 'Getting the deference back, with something you can bound'
-        description: "Measuring the problem is only part of the work. We also need a way to recover. <a href='https://arxiv.org/abs/2510.17426' target='_blank' rel='noreferrer'>Hu et al. (ACL 2026 Findings)</a> recover some calibration by merging model weights from before and after alignment. I want to test an abstention layer after calibration has already declined. The layer would use <a href='https://proceedings.mlr.press/v235/mohri24a.html' target='_blank' rel='noreferrer'>distribution-free coverage (ICML 2024)</a>. I also want to measure the cost to usefulness. Here, uncertainty quantification is a practical tool for a specific failure."
-      - title: 'Where it gets tested'
-        description: "These ideas must also work on systems that were never designed for the test. I begin by reproducing a published result in a setup I can run from start to finish. That gives me a sound result to build on. I then use inputs from work I know well. They include agent paths from my navigation thesis and earth observation models published with IEEE and Remote Sensing of Environment. I also use open Southeast Asian language models built with <a href='https://seacrowd.github.io/' target='_blank' rel='noreferrer'>SEACrowd</a> and SEA-VL. English-first benchmarks rarely cover these inputs."
+    label: 'Production ML'
+    detail: 'Work in banking, city services, and consulting.'

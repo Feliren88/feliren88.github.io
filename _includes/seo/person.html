@@ -30,7 +30,6 @@ add a new schema.org property.
     "name": {{ id.alumni_of.name | jsonify }},
     "sameAs": {{ id.alumni_of.same_as | jsonify }}
   },
-  "worksFor": { "@id": {{ id.employer.id | jsonify }} },
   "affiliation": [
     {%- for org in id.affiliations %}
     { "@type": {{ org.type | jsonify }}, "name": {{ org.name | jsonify }}{% if org.same_as %}, "sameAs": {{ org.same_as | jsonify }}{% endif %}{% if org.url %}, "url": {{ org.url | jsonify }}{% endif %} }{% unless forloop.last %},{% endunless %}

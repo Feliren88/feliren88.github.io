@@ -33,3 +33,7 @@ diff:  ## Prove a refactor changed no output. Committed already? make diff REF=<
 .PHONY: check
 check: build  ## Build, then run the SEO/link audit over _site/
 	python3 scripts/audit_seo.py
+
+.PHONY: test
+test:  ## Run the unit tests for the scripts/ tooling
+	python3 -m unittest discover -s scripts

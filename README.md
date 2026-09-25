@@ -64,8 +64,7 @@ Each page is driven by one data file.
 
 | Page | Data file |
 |---|---|
-| Homepage | `_data/index.yml`, `_data/about.yml`, `_data/now.yml` |
-| About | `_data/about.yml` |
+| Homepage and About | `_pages/about.md`, `_data/about.yml`, `_data/now.yml` |
 | Research | `_data/publications.yml` |
 | Use Cases | `_data/usecases.yml` |
 | Writings | `_data/notes.yml`, `_data/features.yml`, `_data/thoughts.yml` |

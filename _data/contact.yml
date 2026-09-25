@@ -1,5 +1,4 @@
-intro: 'Every system I have built raises the same questions. When can we trust the model? When should it hold back? Who was it built to serve?'
-intro_sub: 'I study calibration under safety alignment and ways to keep safe models useful. If your work overlaps with the areas below, I would be glad to hear from you.'
+intro_sub: 'I welcome research conversations about calibration and safety training. I am also open to applied scientist roles and speaking invitations.'
 
 engagements:
   - type: 'Research Collaboration'
@@ -19,10 +18,10 @@ engagements:
     include: 'Your current stage, the decision you face, what you have tried, and the specific feedback you need.'
     response: 'When capacity allows, I will offer a focused reply, resource, or short conversation.'
 
-availability_headline: "Currently open for: research collaboration on calibration and safety alignment, conference talks, and mentorship."
+availability_headline: "I am open to research collaboration on calibration and safety alignment, conference talks, and mentorship."
 email_scope: "I respond to research collaboration (calibration and safety alignment, evaluation, multimodal and multilingual AI), conference talks, and career mentorship."
 calendly_url: ""
-calendly_slots_label: "Two slots per month · Currently open: June 2026"
+calendly_slots_label: "Two slots per month"
 calendly_open: false
 
 links:

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Work with Vicky Feliren
+title: Contact Vicky Feliren
 description: Contact Vicky Feliren about research, applied scientist roles, speaking, or mentorship in AI safety and reliable AI.
 permalink: /contact/
 preload_image: /assets/img/profile_2_color.webp
@@ -12,8 +12,8 @@ extra_js: /js/components/contact.js
 
 <header class="ct-hero" aria-labelledby="ct-title">
   <div class="ct-hero-copy">
-    <p class="ct-status"><i aria-hidden="true"></i> Open to thoughtful work</p>
-    <h1 id="ct-title">Let’s make reliable AI more useful.</h1>
+    <p class="ct-status"><i aria-hidden="true"></i> Open to research conversations</p>
+    <h1 id="ct-title">Contact me about AI safety research.</h1>
     <p class="ct-lead">{{ site.data.contact.intro_sub }}</p>
     <p class="ct-location">Jakarta <span aria-hidden="true">·</span> working internationally</p>
     <div class="ct-actions">
@@ -32,8 +32,8 @@ extra_js: /js/components/contact.js
 
 <section class="ct-fit" id="contact-engagements" aria-labelledby="ct-fit-title">
   <div class="ct-section-head">
-    <h2 id="ct-fit-title">Start with the kind of conversation.</h2>
-    <p>A useful first message does not need to be long. It should make the problem and the next decision visible.</p>
+    <h2 id="ct-fit-title">What you can contact me about</h2>
+    <p>Tell me what you are working on and what you would like me to contribute.</p>
   </div>
   <div class="ct-fit-list">
     {% for item in site.data.contact.engagements %}
@@ -49,7 +49,7 @@ extra_js: /js/components/contact.js
 
 <section class="ct-reach" aria-labelledby="ct-reach-title">
   <div class="ct-section-head compact">
-    <h2 id="ct-reach-title">Choose the shortest route.</h2>
+    <h2 id="ct-reach-title">Other ways to reach me</h2>
   </div>
   <div id="contact-grid" class="ct-directory">
     {% for link in site.data.contact.links %}

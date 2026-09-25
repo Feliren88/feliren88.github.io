@@ -43,6 +43,13 @@ self.addEventListener('activate', event => {
   );
 });
 
+function cacheResponse(event, request, response) {
+  if (!response.ok) return;
+  const copy = response.clone();
+  const write = caches.open(CACHE).then(cache => cache.put(request, copy));
+  event.waitUntil(write.catch(() => {}));
+}
+
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
@@ -52,7 +59,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(request)
         .then(response => {
-          caches.open(CACHE).then(cache => cache.put(request, response.clone()));
+          cacheResponse(event, request, response);
           return response;
         })
         .catch(() => caches.match(request))
@@ -63,7 +70,7 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(request).then(cached => cached ||
       fetch(request).then(response => {
-        caches.open(CACHE).then(cache => cache.put(request, response.clone()));
+        cacheResponse(event, request, response);
         return response;
       })
     )

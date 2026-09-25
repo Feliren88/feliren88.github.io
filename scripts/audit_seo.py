@@ -24,6 +24,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 SITE = "_site"
 
@@ -47,22 +48,23 @@ def main():
     sitemap_path = os.path.join(SITE, "sitemap.xml")
     sitemap = {
         u.replace("https://vickyfeliren.com", "")
-        for u in re.findall(r"<loc>([^<]+)</loc>", open(sitemap_path, encoding="utf-8").read())
+        for u in re.findall(r"<loc>([^<]+)</loc>", Path(sitemap_path).read_text(encoding="utf-8"))
     }
 
     pages = sorted(glob.glob(f"{SITE}/**/*.html", recursive=True))
 
-    # Every internal href anywhere in the site, used to spot orphans.
+    # Every internal href anywhere in the site, used to spot orphans. A page's
+    # link to itself (nav highlight, "back to top") gives a crawler no way in.
     linked = set()
     for f in pages:
-        body = open(f, encoding="utf-8", errors="ignore").read()
-        linked.update(re.findall(r'href="(/[^"#?]*)"', body))
+        body = Path(f).read_text(encoding="utf-8", errors="ignore")
+        linked.update(set(re.findall(r'href="(/[^"#?]*)"', body)) - {url_for(f)})
 
     flagged = live = redirects = 0
 
     for f in pages:
         url = url_for(f)
-        html = open(f, encoding="utf-8", errors="ignore").read()
+        html = Path(f).read_text(encoding="utf-8", errors="ignore")
 
         # jekyll-redirect-from stubs are meant to be noindex and unlisted.
         if 'http-equiv="refresh"' in html:

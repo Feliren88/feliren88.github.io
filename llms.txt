@@ -2,7 +2,7 @@
 
 > Applied Scientist working on AI safety for trustworthy, multimodal, and multilingual systems
 
-Vicky Feliren is an applied scientist specializing in AI safety and the development of trustworthy multimodal and multilingual systems. He conducts applied research that bridges vision–language models, uncertainty quantification, and interpretability, and has published in venues including IEEE, ACL, and Remote Sensing of Environment. Vicky holds a Master of Data Science and a Bachelor of Computer Science from Monash University, and contributes to initiatives around responsible AI and regionally relevant multimodal research. He has been recognized with awards such as the Global South AI Safety Hackathon (Asia Pacific Regional Winner, 2026) and the Microsoft Azure Virtual Hackathon APAC (Regional Champion, 2020). Vicky is available for research collaborations, speaking engagements, and consulting on trustworthy AI.
+Vicky Feliren is an applied scientist studying how safety training changes model calibration across languages and visual inputs. His published work includes Southeast Asian language and vision benchmarks and earth observation models. His first-author preprint studies uncertainty across whole navigation routes. He earned a Bachelor of Computer Science at Monash University. His Master of Data Science at Monash University is awaiting conferral; his final GPA is 4.0/4.0 and weighted average mark is 84.769. He is open to research collaboration, speaking, and applied scientist roles.
 
 ## Pages
 
@@ -97,7 +97,7 @@ Short distillations of papers, with own take (what the work shows and what it mi
 
 ## Education
 
-- Monash University, Master of Data Science (Expected Sept 2026, GPA 4.0/4.0). Thesis: conformal prediction for vision-language navigation.
+- Monash University, Master of Data Science (awaiting conferral). Final GPA 4.0/4.0 and weighted average mark 84.769. The thesis studies conformal prediction for vision-language navigation.
 - BlueDot Impact, Technical AI Safety (Jun 2026): Cohort intensive covering alignment, interpretability, red-teaming, AI control.
 - Monash University, Bachelor of Computer Science (Dec 2019).
 - Nanyang Technological University, Computer Science Exchange Programme, Singapore (Jun–Dec 2018).
