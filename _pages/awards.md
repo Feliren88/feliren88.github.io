@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Awards & Recognition
-subtitle: Microsoft Azure APAC Champion, Cambridge, UC Berkeley
-description: Microsoft Azure Virtual Hackathon APAC Champion, University of Cambridge CamvsCovid Top 3, Cal Hacks UC Berkeley winner, Monash scholarship, and IEEE peer reviewer.
+subtitle: Apart Research regional winner, Microsoft Azure APAC champion
+description: Apart Research Global South AI Safety Hackathon Asia Pacific Regional Winner, Microsoft Azure APAC champion, and other research and technology awards.
 permalink: /recognition/
 redirect_to: /
 ---

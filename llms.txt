@@ -83,12 +83,12 @@ Short distillations of papers, with own take (what the work shows and what it mi
 
 ## Awards & Recognition
 
+- Asia Pacific Regional Winner, Global South AI Safety Hackathon (Apart Research, 2026): Multilingual VLM abstention study; presented at AI Safety India's Hackathon Winners event, Jul 2026.
 - Microsoft Azure Virtual Hackathon APAC, Regional Champion (2020): APAC-wide, Microsoft-featured.
 - CamvsCovid, University of Cambridge, Top 3 Globally (2020): Built TeleHealthMonitor for COVID-19 remote patient monitoring.
 - Cal Hacks 8.0, UC Berkeley, Best Community Track (2020): Built community IVR voice AI for offline Indonesian communities.
 - Reboot the Earth, UN Technology Innovation Labs, Top 10 (2019): Global climate and sustainability solutions challenge.
 - IISF 2024, Most Visionary Research: AI and remote sensing for biodiversity impact from energy transition mining.
-- Asia Pacific Regional Winner, Global South AI Safety Hackathon (Apart Research, 2026): Multilingual VLM abstention study; presented at AI Safety India's Hackathon Winners event, Jul 2026.
 - Monash Indonesia Inaugural Welcome Scholarship (2024): Awarded for research potential in regional AI.
 - Deep Learning Nanodegree, Facebook & Udacity, Scholarship (2018).
 - Jeffrey Cheah Entrance Scholarship, Sunway Education Group (2015).

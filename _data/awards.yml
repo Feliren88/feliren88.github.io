@@ -1,17 +1,17 @@
-microsoft-azure-hackathon:
-  category: 'CHAMPION'
-  featured: true
-  title: 'Microsoft Azure Virtual Hackathon APAC'
-  year: '2020'
-  description: 'Won the APAC regional championship with HakkTaxi, a ride-sharing demand predictor built with Azure Spatial data in 48 hours. Microsoft featured the project in its official APAC innovation announcement.'
-  url: 'https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/'
-
 apart-global-south-ai-safety-hackathon:
   category: 'REGIONAL WINNER'
+  featured: true
   title: 'Asia Pacific Regional Winner, Global South AI Safety Hackathon (Apart Research)'
   year: '2026'
   description: 'Won the regional award for studying image-caption conflicts in low-resource languages. We tested whether vision-language models detect the conflict and abstain before giving a confident wrong answer. Presented at AI Safety India''s Hackathon Winners event in July 2026.'
   url: 'https://apartresearch.com/sprints/global-south-ais-hackathon-2026-06-19-to-2026-06-21'
+
+microsoft-azure-hackathon:
+  category: 'CHAMPION'
+  title: 'Microsoft Azure Virtual Hackathon APAC'
+  year: '2020'
+  description: 'Won the APAC regional championship with HakkTaxi, a ride-sharing demand predictor built with Azure Spatial data in 48 hours. Microsoft featured the project in its official APAC innovation announcement.'
+  url: 'https://news.microsoft.com/source/asia/2020/08/20/drones-data-science-and-innovation-at-the-microsoft-azure-virtual-hackathon-in-asia-pacific/'
 
 camvscovid:
   category: 'TOP 3'
