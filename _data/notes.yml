@@ -1,35 +1,36 @@
-# Research notes — short distillations of papers I have an opinion about.
-# Each note: my framing as `title`, the paper, and `take` (what it shows + what I think it misses).
+# Research notes distinguish the paper's result from my question.
 # Newest first.
 
-- title: "Conformal guarantees are only as honest as the exchangeability they assume"
+- title: "What does a factuality guarantee assume about the next question?"
   paper: "Language Models with Conformal Factuality Guarantees"
   authors: "Christopher Mohri, Tatsunori Hashimoto"
   venue: "ICML"
   year: "2024"
   link: "https://arxiv.org/abs/2402.10978"
   date: "Jun 2026"
-  take: >
-    This is the clearest demonstration I know of a distribution-free correctness
-    guarantee for language model outputs. The key limit is exchangeability. That
-    assumption often fails in the settings I care about: agents acting over time,
-    multimodal inputs, free-form generation, and low-resource languages. I see this
-    paper as the strongest foundation we have for building non-exchangeable,
-    multimodal methods. The remaining gap is why guaranteed abstention is still an
-    open research problem.
+  finding: >
+    Mohri and Hashimoto make language model answers less specific until a test
+    against held-out examples meets a chosen factuality target. Their guarantee
+    requires the held-out and future cases to be exchangeable, meaning their
+    order does not change the joint distribution. It also requires a sound rule
+    for backing off to a less specific answer.
+  question: >
+    What happens when an agent's later questions depend on its earlier actions,
+    or when deployment inputs differ from the calibration cases? A useful
+    stopping rule needs a clear account of where its guarantee still applies.
 
-- title: "We can steer a model toward honesty. We have only checked that in English"
+- title: "Do honesty probes carry across languages?"
   paper: "Representation Engineering: A Top-Down Approach to AI Transparency"
   authors: "Andy Zou et al."
   venue: "arXiv"
   year: "2023"
   link: "https://arxiv.org/abs/2310.01405"
   date: "Jun 2026"
-  take: >
-    Representation engineering shows that we can identify and steer model properties
-    such as honesty and harmlessness. It is quickly becoming a standard safety tool.
-    Yet almost every result has been tested in English. We still treat probes and
-    steering vectors as language-independent without enough evidence. Clean transfer
-    to a low-resource language would be a strong and useful result. Silent failure
-    would leave monitoring weakest where human oversight is already limited. This
-    needs direct testing, and it is central to the work I want to do.
+  finding: >
+    Zou and colleagues identify patterns in a model's internal states that can
+    help monitor and change behaviours including honesty and harmlessness.
+  question: >
+    Their paper does not establish whether a pattern found in one language
+    works in another. That transfer needs direct testing on Indonesian and
+    other underrepresented languages before the pattern can be trusted as a
+    general monitor.

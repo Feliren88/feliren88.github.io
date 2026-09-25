@@ -1,30 +1,69 @@
 ---
 layout: page
 title: Writings
-description: Articles on trustworthy AI, conformal prediction, multimodal systems, Southeast Asian AI, and personal reflections, published on Medium.
+description: Essays, paper notes, field guides, press coverage, and Medium articles on AI, research, engineering, and personal life.
 permalink: /writings/
 layout-class: page writings-page
 ---
 
-<div class="essay-feature-block">
-<a class="essay-feature" href="/story/">
-<span class="essay-feature-title">A Method for What Breaks</span>
-<span class="essay-feature-desc">A life built through difficult systems, the trap of becoming useful, and the long work of deciding what deserves carrying.</span>
-<span class="read-more">Enter the story →</span>
-</a>
+<nav class="writings-index" aria-label="On this page">
+  <a href="#essays">Essays</a>
+  <a href="#paper-notes">Paper notes</a>
+  <a href="#field-guides">Field guides</a>
+  <a href="#press-coverage">Coverage</a>
+  <a href="#medium-articles">Medium articles</a>
+</nav>
+
+<section class="writings-lead" id="essays" aria-labelledby="writings-essays-title">
+  <h2 id="writings-essays-title">Essays</h2>
+  <div class="essay-feature-block">
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
 <span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
-<span class="essay-feature-desc">Why safe deployment depends on models knowing when to abstain.</span>
+<span class="essay-feature-desc">When uncertainty warrants declining an answer or handing a decision back to a person.</span>
 <span class="read-more">Read the essay →</span>
 </a>
+<a class="essay-feature" href="/story/">
+<span class="essay-feature-title">A Method for What Breaks</span>
+<span class="essay-feature-desc">On becoming useful to others, and learning where that responsibility should end.</span>
+<span class="read-more">Enter the story →</span>
+</a>
+  </div>
+</section>
+
+{% if site.data.notes %}
+<section class="notes-section" id="paper-notes">
+  <h2>Paper notes</h2>
+  <p class="section-note" style="margin-top:0">Each note separates the authors’ result from the question I would take forward.</p>
+  <div class="notes-list">
+    {% for note in site.data.notes %}
+    <div class="note-item">
+      <div class="note-item-top">
+        <span class="note-item-paper">{{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}{% if note.venue %} · {{ note.venue }} {{ note.year }}{% endif %}</span>
+        {% if note.date %}<span class="note-item-date">{{ note.date }}</span>{% endif %}
+      </div>
+      <h3 class="note-item-title">{{ note.title }}</h3>
+      <p class="note-item-take"><strong>In the paper.</strong> {{ note.finding }}</p>
+      <p class="note-item-take"><strong>My question.</strong> {{ note.question }}</p>
+      {% if note.link %}<a class="note-item-link" href="{{ note.link }}" target="_blank" rel="noreferrer">Read the paper →</a>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<div class="writings-divider"></div>
+{% endif %}
+
+<section class="writings-guides" id="field-guides" aria-labelledby="writings-guides-title">
+  <h2 id="writings-guides-title">Field guides and personal notes</h2>
+  <p class="section-note">Longer pieces on decisions, relationships, and the habits I keep testing in my own life.</p>
+  <div class="writings-guides-grid">
 <a class="essay-feature" href="/high-agency/">
 <span class="essay-feature-title">High Agency</span>
-<span class="essay-feature-desc">My notes on George Mack's essay, rebuilt as diagrams you can poke at. Diagnose your own three wheels, walk the flow chart, play the trap game.</span>
+<span class="essay-feature-desc">A visual reading of George Mack’s essay, with exercises for examining agency in your own decisions.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/principles/">
 <span class="essay-feature-title">The Life Operating Principle</span>
-<span class="essay-feature-desc">A personal operating manual for decisions under pressure. Search by how you feel, set the reversibility dial, run the six questions.</span>
+<span class="essay-feature-desc">A personal manual for decisions under pressure, including a test of whether the choice can be reversed.</span>
 <span class="read-more">Open the note →</span>
 </a>
 <a class="essay-feature" href="/curious/">
@@ -59,52 +98,32 @@ layout-class: page writings-page
 </a>
 <a class="essay-feature" href="/life-challenges/">
 <span class="essay-feature-title">The Silver Lining of a Difficult Life</span>
-<span class="essay-feature-desc">Difficulty supplies raw material. Growth depends on what surrounds it. Test the conditions that turn pressure into capacity, map the futures that certainty erases, and decide whether an obstacle asks you to strengthen, redesign, wait, or leave.</span>
+<span class="essay-feature-desc">An examination of when difficulty develops capacity, when it only causes harm, and how to tell the difference.</span>
 <span class="read-more">Enter the field guide →</span>
 </a>
 <a class="essay-feature" href="/small-talk/">
 <span class="essay-feature-title">Small Talk as Calibration</span>
-<span class="essay-feature-desc">A field manual for people who prefer depth. A seven-move loop, the ladder from weather to meaning, seven cultural variables to read instead of memorising countries, twenty rooms with their openings and exits, and the repair line for every way it goes wrong.</span>
+<span class="essay-feature-desc">A practical guide to beginning conversations, reading the room, and moving toward depth without forcing it.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/communication/">
 <span class="essay-feature-title">Communication 101</span>
-<span class="essay-feature-desc">Your understanding is more developed than your explanation. Nine working figures: watch what lands fall as you say more, find where two people are doing different jobs, and see what a week of silence costs.</span>
+<span class="essay-feature-desc">Nine visual exercises on making an explanation clear and noticing where a conversation has gone astray.</span>
 <span class="read-more">Open the manual →</span>
 </a>
 <a class="essay-feature" href="/self-love/">
 <span class="essay-feature-title">Self-Love as Risk Control</span>
-<span class="essay-feature-desc">Capacity is not consent. Test the achievement treadmill, open the golden cage, govern the shadow side of strength, and decide as trustee for the person who inherits the life.</span>
+<span class="essay-feature-desc">On the costs of being capable, and the choices that protect a life beyond achievement.</span>
 <span class="read-more">Open the visual essay →</span>
 </a>
-</div>
-
-<div class="writings-divider"></div>
-
-{% if site.data.notes %}
-<div class="notes-section">
-  <h2>Research Notes</h2>
-  <p class="section-note" style="margin-top:0">Short notes on what research papers show, where their limits lie, and why those limits matter.</p>
-  <div class="notes-list">
-    {% for note in site.data.notes %}
-    <div class="note-item">
-      <div class="note-item-top">
-        <span class="note-item-paper">{{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}{% if note.venue %} · {{ note.venue }} {{ note.year }}{% endif %}</span>
-        {% if note.date %}<span class="note-item-date">{{ note.date }}</span>{% endif %}
-      </div>
-      <h3 class="note-item-title">{{ note.title }}</h3>
-      <p class="note-item-take">{{ note.take }}</p>
-      {% if note.link %}<a class="note-item-link" href="{{ note.link }}" target="_blank" rel="noreferrer">Read the paper →</a>{% endif %}
-    </div>
-    {% endfor %}
   </div>
-</div>
+</section>
+
 <div class="writings-divider"></div>
-{% endif %}
 
 {% if site.data.features %}
-<div class="features-section">
-  <h2>Featured In</h2>
+<section class="features-section" id="press-coverage">
+  <h2>Press coverage</h2>
   <div class="features-grid">
     {% for feature in site.data.features %}
     <div class="feature-card{% if feature.image %} feature-card--has-img{% endif %}">
@@ -135,18 +154,18 @@ layout-class: page writings-page
     </div>
     {% endfor %}
   </div>
-</div>
+</section>
 {% endif %}
 
 <div class="writings-divider"></div>
 
-<h2 class="section-title">
+<h2 class="section-title" id="medium-articles">Medium articles
   <a href="https://medium.com/@feliren" target="_blank" rel="noreferrer" style="text-decoration:none">
     <img src="/assets/img/medium-svgrepo-com.webp" alt="Medium" style="width:24px;height:24px;vertical-align:middle;margin-right:0.3rem" loading="lazy">
     <span class="medium-badge" style="margin-left:0">@feliren</span>
   </a>
 </h2>
-<p class="section-note">Thoughts on life, philosophy, AI, research, and engineering from my Medium articles.</p>
+<p class="section-note">Published pieces on research, engineering, and personal experience.</p>
 
 <div class="filter-bar" role="group" aria-label="Filter writings by category">
   <button class="filter-pill is-active" data-filter="all">All</button>
@@ -202,6 +221,23 @@ layout-class: page writings-page
 </script>
 
 <style>
+  .writings-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 0;
+    border-block: 1px solid var(--line);
+  }
+  .writings-index a { color: var(--muted); font-size: 0.82rem; text-decoration: none; }
+  .writings-index a:hover, .writings-index a:focus-visible { color: var(--accent); text-decoration: underline; }
+  .writings-page section[id], .writings-page h2[id] { scroll-margin-top: 6rem; }
+  .writings-lead { margin-bottom: 2rem; }
+  .writings-guides-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .writings-guides-grid .essay-feature { min-height: 16rem; padding: 1.4rem; }
+  .writings-guides-grid .essay-feature-title { font-size: clamp(1.3rem, 1.8vw, 1.65rem); }
+  .writings-guides-grid .essay-feature:nth-child(3n+2) { background: linear-gradient(150deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface)); }
+  .writings-guides-grid .essay-feature:nth-child(3n+3) { background: linear-gradient(150deg, color-mix(in srgb, var(--cta) 6%, var(--surface)), var(--surface)); }
   /* ── Featured In ─────────────────────────────────────── */
   .features-section { margin-bottom: 0.5rem; }
   .features-grid { display: grid; gap: 1rem; }
@@ -353,38 +389,29 @@ layout-class: page writings-page
   }
   .essay-feature:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 14px 32px color-mix(in srgb, #000 22%, transparent); }
   .essay-feature:hover::after { width: 4.5rem; }
-  .essay-feature:nth-child(1) { grid-column: span 8; grid-row: span 2; min-height: 30rem; background: linear-gradient(145deg, #101723, #182637 58%, #2c2928); }
-  .essay-feature:nth-child(1) .essay-feature-title { max-width: 10ch; color: #f2eee6; font-size: clamp(2.4rem, 5vw, 5.2rem); line-height: 0.94; letter-spacing: -0.055em; }
-  .essay-feature:nth-child(1) .essay-feature-desc { max-width: 42rem; color: #b9c0c8; font-size: 1rem; }
-  .essay-feature:nth-child(1) .read-more { color: #d6a642; }
-  .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
-  .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
-  /* High Agency, Life Operating Principle, and Curious share one row. */
-  .essay-feature:nth-child(n+3):nth-child(-n+5) { grid-column:span 4;min-height:19rem }
-  /* Stoic, Game Theory, and Read People share one even row. */
-  .essay-feature:nth-child(n+6):nth-child(-n+8) { grid-column:span 4;min-height:22rem }
-  .essay-feature:nth-child(7) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(8) { background:linear-gradient(145deg,color-mix(in srgb,#c86f58 11%,var(--surface)),var(--surface) 62%) }
-  /* The remaining manuals keep the same three-card rhythm. */
-  .essay-feature:nth-child(n+9):nth-child(-n+14) { grid-column:span 4;min-height:21rem }
-  .essay-feature:nth-child(11) { background:linear-gradient(145deg,color-mix(in srgb,#d39b38 12%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(12) { background:linear-gradient(145deg,color-mix(in srgb,var(--cta) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(13) { background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface) 62%) }
-  .essay-feature:nth-child(3n+4) { background: linear-gradient(155deg, color-mix(in srgb, var(--cta) 8%, var(--surface)), var(--surface)); }
+  .essay-feature-block > .essay-feature:nth-child(1) { grid-column: span 8; grid-row: span 2; min-height: 30rem; background: linear-gradient(145deg, #101723, #182637 58%, #2c2928); }
+  .essay-feature-block > .essay-feature:nth-child(1) .essay-feature-title { max-width: 10ch; color: #f2eee6; font-size: clamp(2.4rem, 5vw, 5.2rem); line-height: 0.94; letter-spacing: -0.055em; }
+  .essay-feature-block > .essay-feature:nth-child(1) .essay-feature-desc { max-width: 42rem; color: #b9c0c8; font-size: 1rem; }
+  .essay-feature-block > .essay-feature:nth-child(1) .read-more { color: #d6a642; }
+  .essay-feature-block > .essay-feature:nth-child(2) { grid-column: span 4; grid-row: span 2; min-height: 30rem; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); }
+  .essay-feature-block > .essay-feature:nth-child(2) .essay-feature-title { font-size: clamp(1.65rem, 2.8vw, 2.7rem); }
   .essay-feature-title { display: block; max-width: 18ch; font-family: "Space Grotesk", var(--font-display, sans-serif); font-size: clamp(1.35rem, 2.3vw, 2.15rem); font-weight: 650; line-height: 1.08; letter-spacing: -0.035em; color: var(--text); margin-bottom: 0.65rem; }
   .essay-feature-desc { display: block; max-width: 58ch; color: var(--muted); font-size: 0.92rem; line-height: 1.62; }
   .essay-feature .read-more { display: inline-block; width: max-content; margin-top: 1rem; color: var(--accent); font-size: 0.76rem; font-weight: 700; }
 
   @media (max-width: 900px) {
     .essay-feature-block { grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100%, calc(100vw - 1.5rem)); padding: 0; }
-    .essay-feature:nth-child(n) { grid-column: span 1; grid-row: span 1; min-height: 18rem; }
-    .essay-feature:nth-child(1) { grid-column: 1 / -1; min-height: 25rem; }
-    .essay-feature:nth-child(1) .essay-feature-title { font-size: clamp(2.6rem, 8vw, 4.4rem); }
+    .essay-feature-block > .essay-feature:nth-child(n) { grid-column: span 1; grid-row: span 1; min-height: 18rem; }
+    .essay-feature-block > .essay-feature:nth-child(1) { grid-column: 1 / -1; min-height: 25rem; }
+    .essay-feature-block > .essay-feature:nth-child(1) .essay-feature-title { font-size: clamp(2.6rem, 8vw, 4.4rem); }
+    .writings-guides-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 580px) {
     .essay-feature-block { grid-template-columns: 1fr; width: 100%; transform: none; margin-inline: 0; }
-    .essay-feature:nth-child(n) { grid-column: 1; min-height: 15rem; }
-    .essay-feature:nth-child(1) { min-height: 23rem; }
+    .essay-feature-block > .essay-feature:nth-child(n) { grid-column: 1; min-height: 15rem; }
+    .essay-feature-block > .essay-feature:nth-child(1) { min-height: 23rem; }
+    .writings-guides-grid { grid-template-columns: 1fr; }
+    .writings-guides-grid .essay-feature { min-height: 13rem; }
   }
 
   /* ── Research Notes ──────────────────────────────────── */
@@ -423,12 +450,13 @@ layout-class: page writings-page
     color: var(--text);
   }
   .note-item-take {
-    margin: 0;
+    margin: 0.45rem 0 0;
     color: var(--muted);
     font-size: 0.88rem;
     line-height: 1.6;
     max-width: 75ch;
   }
+  .note-item-take strong { color: var(--text); font-weight: 650; }
   .note-item-link {
     display: inline-block;
     margin-top: 0.6rem;

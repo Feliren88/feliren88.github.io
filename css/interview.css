@@ -210,7 +210,7 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 }
 .ivh-start > p { margin: 0 0 1rem; color: var(--muted); font-size: var(--fs-sm); }
 .ivh-start > p a { color: var(--cta); text-underline-offset: 0.15em; }
-.ivh-start-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+.ivh-start-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
 .ivh-start-grid a {
   display: flex;
   flex-direction: column;
