@@ -199,7 +199,7 @@ SPECS = [
     metrics=[("Transferable", "EN-fit steering direction")],
   ),
   dict(
-    id="heron-hijack-self-probe",
+    id="goal-hijack-probe",
     chip="AI SECURITY",
     lanes=["DATASET", "HIDDEN-STATE CAPTURE", "CONTROL-AWARE PROBE", "CONFORMAL GATE"],
     cols=[

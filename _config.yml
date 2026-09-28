@@ -1,7 +1,7 @@
 # Site settings
 title: Vicky Feliren
 description:
-  Vicky Feliren studies how safety training changes model calibration across languages and image-based tasks. His research includes vision-language navigation and Southeast Asian AI benchmarks.
+  Vicky Feliren studies when uncertainty estimates remain valid after AI models or their operating conditions change, and how they can support decisions.
 baseurl: ""
 url: "https://vickyfeliren.com"
 
@@ -61,7 +61,7 @@ sitemap:
 # Exclude from processing.
 # Repo documentation and build tooling. Jekyll copies anything it does not
 # recognise straight into _site/, so maintenance scripts are published unless
-# named here. scripts/heron is re-included below; it holds a real linked page.
+# named here. scripts/goal-hijack-probe is re-included below; it holds a real linked page.
 exclude:
   - node_modules
   - vendor
@@ -90,7 +90,7 @@ permalink: pretty
 # Include for additional directories
 include:
   - _pages
-  - scripts/heron
+  - scripts/goal-hijack-probe
 
 # Front Matter Defaults
 defaults:

@@ -22,15 +22,15 @@ nationality: Indonesia
 # this.
 # The WebSite node reads _config.yml directly, so it has no copy here.
 description: >-
-  Vicky Feliren is an applied scientist studying how safety training changes
-  model calibration across languages and image-based tasks. His published work
-  includes vision-language benchmarks, flood mapping, and language identification.
+  Vicky Feliren is an applied scientist studying when AI systems should act,
+  abstain, or ask for help under changing conditions. His work includes
+  vision-language navigation, multilingual evaluation, and flood mapping.
 
 # Long-form variant. Search engines show this in knowledge panels, so it repeats
 # facts from the short description on purpose.
 disambiguating_description: >-
-  Vicky Feliren studies calibration under safety alignment. His Monash research
-  includes conformal prediction for vision-language navigation and satellite
+  Vicky Feliren studies reliability across changes in environment, language, and
+  input type. His Monash research includes conformal prediction for vision-language navigation and satellite
   image models for flood mapping. With SEACrowd, he has contributed to
   Southeast Asian vision-language data and language benchmarks. His papers
   appear in ACL, IEEE Geoscience and Remote Sensing Letters, and Remote Sensing
@@ -40,7 +40,7 @@ disambiguating_description: >-
 occupation:
   name: Applied Scientist
   description: >-
-    Research on AI safety, calibration, and vision-language models
+    Research on reliable decisions, calibration, and vision-language models
   skills: >-
     Conformal Prediction, Vision-Language Models, Multimodal AI, Multilingual AI,
     AI Safety, Interpretability, Uncertainty Quantification

@@ -1,8 +1,8 @@
 # Vicky Feliren
 
-> Applied Scientist working on AI safety for trustworthy, multimodal, and multilingual systems
+> Applied scientist studying reliable decisions under changing conditions
 
-Vicky Feliren is an applied scientist studying how safety training changes model calibration across languages and visual inputs. His published work includes Southeast Asian language and vision benchmarks and earth observation models. His first-author preprint studies uncertainty across whole navigation routes. He earned a Bachelor of Computer Science at Monash University. His Master of Data Science at Monash University is awaiting conferral; his final GPA is 4.0/4.0 and weighted average mark is 84.769. He is open to research collaboration, speaking, and applied scientist roles.
+Vicky Feliren studies when a model should act, abstain, or ask for help, and how to make that decision reliable when the conditions of use differ from those used for calibration. His work includes a first-author preprint on whole-route navigation coverage, Southeast Asian language and vision benchmarks, and first-author flood mapping research. He earned a Bachelor of Computer Science at Monash University. His Master of Data Science at Monash University is awaiting conferral; his final GPA is 4.0/4.0 and weighted average mark is 84.769. He is open to research collaboration, speaking, and applied scientist roles.
 
 ## Pages
 
@@ -23,7 +23,7 @@ Vicky Feliren is an applied scientist studying how safety training changes model
 
 ### AI Safety & Reliability
 - [Multilingual VLMs Under Cross-Modal Conflict](https://vickyfeliren.com/usecases/multilingual-vlm-crossmodal-conflict/): Apart Research Global South AI Safety Hackathon 2026 (Co-First Author). Multilingual (English, Hindi, Telugu) cross-modal conflict benchmark for 9 open VLMs with a paired perception-control override-gap design. The conflict signal stays linearly decodable at 0.92 in Telugu; cross-lingual contrastive steering transfers an English-fit direction that drives text-override to zero for abstention-amenable models.
-- [Hidden-State Detection of In-Context Goal Hijacking](https://vickyfeliren.com/heron/): Heron AI Security Research Fellowship, work-test prototype (2026). Read-only linear probe on Qwen2.5-Instruct (0.5B-7B) hidden states detects in-context goal-hijack attempts with deconfounded AUC 0.998 and a split-conformal false-positive guarantee (0.029 vs. target 0.05). A benign-prefix confound control caught a naive detector flagging 100% of harmless prefixed prompts before it shipped, and an input-text baseline bounds what hidden states add here (held-out-family TPR 0.988 vs 0.880 for the text-only detector). Structured summary: https://vickyfeliren.com/usecases/heron-hijack-self-probe/
+- [Goal Hijack Probe](https://vickyfeliren.com/goal-hijack-probe/) — Personal experiment (2026). A read-only linear probe on Qwen2.5-Instruct hidden states reaches deconfounded AUC 0.998 on goal-hijack attempts. Its measured benign-pool false-positive rate is 0.029 against a 0.05 target under representative calibration. A harmless-prefix control exposed a naive detector that flagged every harmless prefixed control. An input-text baseline nearly matched the probe, while the probe caught more attacks in an unseen phrasing family at the fixed threshold (TPR 0.988 versus 0.880). [Structured summary](https://vickyfeliren.com/usecases/goal-hijack-probe/).
 
 ### Cultural & Multilingual AI
 - [SEA-VL Benchmark](https://vickyfeliren.com/usecases/sea-vl-benchmark/): ACL 2025 (Main Conference). Co-led 100+ annotator crowdsourcing across 11 countries. First rigorous culturally-grounded VLM benchmark for Southeast Asia. 10,000+ image-question pairs, 11 languages.
@@ -58,13 +58,6 @@ Vicky Feliren is an applied scientist studying how safety training changes model
 - **ENCP** (arXiv 2026, First Author) — Episode-normalized conformal prediction for whole-route coverage across four vision-and-language navigation policies on R2R and REVERIE. https://arxiv.org/abs/2609.17499
 - **Retention Ponds Study** (AQUA Q2, 2025, Co-Author): Mixed-methods urban resilience evaluation through flood policy in South Bandung. https://doi.org/10.2166/aqua.2025.292
 - **Plastic Bag Ban** (IEEE ICISS 2021, First Author): Causal policy analysis of Jakarta's plastic bag ban using citizen complaint data. https://ieeexplore.ieee.org/document/9533236/
-
-## Research Notes
-
-Short distillations of papers, with own take (what the work shows and what it misses). Published at the top of the Writings page.
-
-- **Conformal guarantees are only as honest as the exchangeability they assume** (Jun 2026), on "Language Models with Conformal Factuality Guarantees" (Mohri & Hashimoto, ICML 2024): The cleanest demonstration that you can wrap an LM output in a distribution-free correctness guarantee, but the guarantee rides on exchangeability, which fails in the agentic, multimodal, free-form, low-resource settings that matter. https://arxiv.org/abs/2402.10978
-- **We can steer a model toward honesty. We have only checked that in English** (Jun 2026), on "Representation Engineering: A Top-Down Approach to AI Transparency" (Zou et al., 2023): Honesty and harmlessness live in readable, steerable directions, and this is becoming default safety tooling. Validation remains concentrated in English, leaving cross-language transfer and silent failure unresolved. https://arxiv.org/abs/2310.01405
 
 ## Press Features
 

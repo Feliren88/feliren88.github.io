@@ -2,7 +2,7 @@ work_experience:
   - dates: 'OCT 2024 – PRESENT'
     title: 'SEACrowd - Researcher, Multimodal & Vision-Language'
     location: 'Open-science research collective · seacrowd.github.io'
-    description: "I build open AI resources for Southeast Asia, a region still underrepresented in mainstream training data. My work covers datasets, benchmarks, and adaptation methods. It has produced two peer-reviewed studies with more than 50 researchers across five countries, including SEA-VL at ACL 2025 and a study of diffusion model adaptation."
+    description: "I build open AI resources for Southeast Asia, a region still underrepresented in mainstream training data. My work covers datasets, benchmarks, and adaptation methods. It has produced 2 peer-reviewed studies with more than 50 researchers across 5 countries, including SEA-VL at ACL 2025 and a study of diffusion model adaptation."
 
   - dates: 'FEB 2025 – NOV 2025'
     title: 'Artefact - Senior Data Scientist'
@@ -65,11 +65,11 @@ teaching:
   - dates: 'MAY 2026 – JUN 2026'
     title: 'IBM SkillsBuild'
     location: 'Capstone Project Advisor'
-    description: "I supervised three AI capstone projects for university students in Indonesia."
+    description: "I supervised 3 AI capstone projects for university students in Indonesia."
   - dates: 'MAY 2026 – JUN 2026'
     title: 'Coding Camp powered by DBS Foundation'
     location: 'Capstone Project Advisor'
-    description: "I supervised two AI capstone projects for university students in Indonesia."
+    description: "I supervised 2 AI capstone projects for university students in Indonesia."
 
   - dates: 'JAN 2024 – JAN 2025'
     title: 'Bangkit Academy (Google, Gojek, Traveloka)'

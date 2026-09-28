@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Vicky Feliren
-subtitle: Applied Scientist · AI safety and calibration
-description: Vicky Feliren studies how safety training changes model calibration across languages and image-based tasks. His work includes vision-language navigation and Southeast Asian AI research.
+subtitle: Applied Scientist · Uncertainty under model and distribution change
+description: Vicky Feliren studies when uncertainty estimates remain valid after AI models or their operating conditions change, and how they can support decisions.
 permalink: /
 redirect_from:
   - /about/
@@ -13,8 +13,8 @@ motion_scene: record
 <article class="about-story">
   <header class="about-story-hero">
     <div class="about-story-copy">
-      <h1>What happens to uncertainty when we make a model <em>safer?</em></h1>
-      <p class="about-story-lead">I’m Vicky Feliren, an applied scientist studying whether safety training changes how well a model recognises its own limits. My work on uncertainty in vision-language navigation and Southeast Asian benchmarks gives me a way to examine that question beyond familiar English text.</p>
+      <h1>When does a model’s uncertainty <em>remain valid?</em></h1>
+      <p class="about-story-lead">I’m Vicky Feliren. I study when uncertainty estimates remain valid after AI models or their operating conditions change. My aim is to establish the assumptions behind those estimates and determine when they can support a decision to act or defer. Navigation, multilingual evaluation, and production ML provide settings for this question.</p>
       <div class="about-story-actions">
         <a class="btn btn-primary" href="/research/">Read the research</a>
         <a class="about-text-link" href="/cv/">View the CV <span aria-hidden="true">↗</span></a>
@@ -59,13 +59,13 @@ motion_scene: record
   <section class="about-chapter" id="question">
     <div class="about-chapter-index"><span>01</span><p>The question</p></div>
     <div class="about-chapter-body">
-      <h2>A safer answer is useful only if we can still judge when to trust it.</h2>
+      <h2>A reliability claim has to name the conditions it covers.</h2>
       <div class="about-prose-columns">
-        <p>Calibration describes how closely a model’s confidence matches its accuracy. In reinforcement learning from human feedback, people’s preferences help shape a model’s answers. <a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">A study of this training method</a> finds that it can increase expressed confidence even when the answer is wrong. Such overconfidence weakens the signal people use to decide when a model should answer, defer, or seek review.</p>
-        <p>My research question is how that change is distributed. An overall score may conceal a larger cost in languages or visual tasks poorly represented in safety data. This is a hypothesis to test, with consequences for whose interactions a safety evaluation actually describes.</p>
+        <p>In navigation, a threshold calibrated on single steps cannot promise coverage for a whole route. My ENCP work calibrates complete episodes and states the assumption its guarantee needs. When the test environment differs from calibration, that assumption needs to be examined again.</p>
+        <p>I have seen the same problem in multilingual image tasks and prompt-injection detection. A probe can identify whether a model followed an image or a conflicting caption, while a detector can miss its false-alarm target on a harmless input format absent from calibration. These findings motivate a general question about which uncertainty claims survive changes in models and data.</p>
       </div>
-      <div class="about-equation" role="img" aria-label="Research question connecting safety training, reliable confidence, and the decision to defer">
-        <span>Safety training</span><i>→</i><span>Reliable confidence?</span><i>→</i><strong>When to defer</strong>
+      <div class="about-equation" role="img" aria-label="Research question connecting an uncertainty estimate, its validity conditions, and a decision">
+        <span>Uncertainty estimate</span><i>→</i><span>Validity conditions</span><i>→</i><strong>Decision</strong>
       </div>
     </div>
   </section>
@@ -76,10 +76,10 @@ motion_scene: record
       <h2>Work on consequential decisions brought me to this question.</h2>
       <div class="about-path" role="list">
         <article role="listitem"><time>2021</time><div><h3>Jakarta Smart City</h3><p>I forecast municipal waste to help plan city resources. A useful model had to inform an actual decision.</p></div></article>
-        <article role="listitem"><time>2021–23</time><div><h3>Banking systems</h3><p>I built biometric, credit, and fraud models for Indonesian banks. Their errors carried costs that a test score alone could not explain.</p></div></article>
+        <article role="listitem"><time>2021–23</time><div><h3>Banking systems</h3><p>I built biometric, credit, and fraud models for Indonesian banks. Their errors carried costs that an evaluation score alone could not explain.</p></div></article>
         <article role="listitem"><time>2022–25</time><div><h3>Earth observation</h3><p>At Monash, I studied flood and mining maps from satellite images. Different sensors and regions made each model’s limits visible.</p></div></article>
         <article role="listitem"><time>2024–present</time><div><h3>SEACrowd</h3><p>I help build datasets and benchmarks for Southeast Asian languages and images. SEA-VL was published at ACL 2025.</p></div></article>
-        <article role="listitem" class="is-current"><time>2026</time><div><h3>Navigation and uncertainty</h3><p>My Monash thesis asks how an agent can carry a reliability guarantee across an entire route. The resulting preprint gives a coverage guarantee for proposed actions under stated assumptions about the routes used for calibration and testing.</p></div></article>
+        <article role="listitem" class="is-current"><time>2026</time><div><h3>Navigation and uncertainty</h3><p>I proposed my Monash thesis to study how an agent can carry a reliability guarantee across an entire route. The resulting preprint gives a coverage guarantee for proposed actions under stated assumptions about the routes used for calibration and testing.</p></div></article>
       </div>
       <a class="about-inline-cta" href="/cv/">Read the full CV <span aria-hidden="true">→</span></a>
     </div>
@@ -88,12 +88,12 @@ motion_scene: record
   <section class="about-chapter" id="method">
     <div class="about-chapter-index"><span>03</span><p>The agenda</p></div>
     <div class="about-chapter-body">
-      <h2>The question links safety, representation, and reliable deferral.</h2>
+      <h2>I investigate the validity of uncertainty under change.</h2>
       <div class="about-method-grid">
-        <article><span>01</span><h3>What does alignment cost?</h3><p>Safety training can affect capability and confidence in different ways. The first question is whether a model’s expressed uncertainty still tracks its errors after training.</p></article>
-        <article><span>02</span><h3>Where does the cost fall?</h3><p>Languages and visual inputs do not appear equally in training or evaluation. A group-level view can show whether one aggregate score conceals uneven changes.</p></article>
-        <article><span>03</span><h3>When should a model defer?</h3><p>Abstention means withholding an answer when evidence is weak. A useful rule must reduce consequential errors while preserving answers the model can support.</p></article>
-        <article><span>04</span><h3>What can a guarantee cover?</h3><p>My navigation work studies reliability across a whole sequence of actions. It also makes the assumptions behind that guarantee explicit, which matters before carrying it into a different setting.</p></article>
+        <article><span>01</span><h3>What can a guarantee cover?</h3><p>My navigation work calibrates whole routes. The guarantee allows dependence between steps when calibration and evaluation episodes are exchangeable.</p></article>
+        <article><span>02</span><h3>Which guarantees survive change?</h3><p>A threshold can meet its target overall and fail on a new language, visual task, or harmless input format. I want to identify the assumptions that separate those cases.</p></article>
+        <article><span>03</span><h3>Can internal evidence help?</h3><p>In multilingual image evaluations, a probe classified whether a model followed the image or a false caption with 0.92 accuracy in Telugu. I want to examine when such a signal estimates error after a model changes.</p></article>
+        <article><span>04</span><h3>When should a model defer?</h3><p>A useful uncertainty estimate should inform action, abstention, or review under explicit error and review costs.</p></article>
       </div>
     </div>
   </section>
@@ -101,14 +101,14 @@ motion_scene: record
   <section class="about-chapter" id="direction">
     <div class="about-chapter-index"><span>04</span><p>The open question</p></div>
     <div class="about-chapter-body">
-      <h2>The distribution of the cost determines the next research question.</h2>
+      <h2>I want to investigate how model adaptation changes uncertainty.</h2>
       <div class="about-direction-panel">
         <div>
           <span class="about-status"><i></i> An open hypothesis</span>
-          <p>If safety training changes calibration unevenly, the field needs evaluations that reveal which inputs and users face the greater loss of reliable confidence. If the change is broadly shared, a general account of the mechanism becomes more plausible. Either finding would shape how abstention should be studied.</p>
+          <p>I want to compare a model before and after safety fine-tuning, then measure error and abstention separately by language and input type. If the change is uneven, each group may need its own threshold. If it is broadly shared, I would evaluate whether a common rule covers the groups studied.</p>
         </div>
         <dl>
-          <div><dt>Evidence so far</dt><dd>Safety-related training can increase expressed overconfidence.</dd></div>
+          <div><dt>Evidence so far</dt><dd><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">An ICLR 2025 study</a> found verbalized overconfidence after reinforcement learning from human feedback.</dd></div>
           <div><dt>Working hypothesis</dt><dd>The effect may vary by language and input type.</dd></div>
           <div><dt>What would change the view</dt><dd>A similar effect across groups would favour a more general explanation.</dd></div>
         </dl>
@@ -139,25 +139,13 @@ motion_scene: record
       <h2>Insights</h2>
       <a href="/writings/" class="insights-view-all">View all writings →</a>
     </div>
-    <p class="section-note">I write about calibration, safety training, and evaluation. The notes below include papers I am thinking through and an essay on abstention.</p>
+    <p class="section-note">I write about calibration, safety training, and evaluation. The selection below begins with an essay on when a model should abstain.</p>
 
     <a class="insight-essay reveal" href="/essays/knowing-when-you-dont-know/">
       <h3>Knowing when you don't know is the core safety property</h3>
       <p>Why safe deployment depends on models knowing when to abstain.</p>
       <span class="insight-read">Read the essay →</span>
     </a>
-
-    {% if site.data.notes %}
-    <div class="insights-notes reveal-group">
-      {% for note in site.data.notes limit:2 %}
-      <a class="insight-note reveal" href="{{ note.link }}" target="_blank" rel="noreferrer">
-        <h3>{{ note.title }}</h3>
-        <p class="insight-note-paper">On {{ note.paper }}{% if note.authors %} · {{ note.authors }}{% endif %}</p>
-        <span class="insight-read">Read the paper →</span>
-      </a>
-      {% endfor %}
-    </div>
-    {% endif %}
 
     {% assign feature = site.data.features | first %}
     {% if feature %}

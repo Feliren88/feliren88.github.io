@@ -1,0 +1,29 @@
+{%- comment -%}
+The research landscape map on /research/. All content comes from
+_data/research_landscape.yml; paper titles, venues and links come from
+_data/publications.yml. Node positions are percentages of a 1000 x 640 stage,
+so the SVG lines and the HTML pills stay aligned at every width.
+{%- endcomment -%}
+{%- assign rl = site.data.research_landscape -%}
+<div class="rl-scroll">
+  <div class="rl-stage">
+    <svg class="rl-svg" viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      {%- for c in rl.clusters %}
+      <path class="rl-region rl--{{ c.id }}" d="{{ c.path }}"/>
+      {%- endfor %}
+      {%- for p in rl.papers %}{% for t_id in p.topics %}{% assign t = rl.topics | where: 'id', t_id | first %}
+      <line class="rl-edge" data-paper="{{ p.key }}" data-topic="{{ t.id }}" x1="{{ p.x }}" y1="{{ p.y }}" x2="{{ t.x }}" y2="{{ t.y }}"/>
+      {%- endfor %}{% endfor %}
+    </svg>
+    {%- for t in rl.topics %}
+    <span class="rl-node rl-topic rl--{{ t.cluster }}" data-topic="{{ t.id }}" style="left:{{ t.x | divided_by: 10.0 }}%;top:{{ t.y | divided_by: 6.4 }}%">{{ t.label }}</span>
+    {%- endfor %}
+    {%- for p in rl.papers %}{% assign pub = site.data.publications | where: 'key', p.key | first %}
+    <a class="rl-node rl-paper rl--{{ p.cluster }}" style="left:{{ p.x | divided_by: 10.0 }}%;top:{{ p.y | divided_by: 6.4 }}%"
+       href="{{ pub.project_page | default: pub.url }}"{% unless pub.project_page %} target="_blank" rel="noreferrer"{% endunless %}
+       data-paper="{{ p.key }}" data-title="{{ pub.title | escape }}" data-venue="{{ pub.venue | escape }}" data-desc="{{ pub.description | escape }}"
+       aria-label="{{ pub.title | escape }}, {{ pub.venue | escape }}">{{ p.label }}</a>
+    {%- endfor %}
+    <div class="rl-preview" role="tooltip" hidden><p class="rl-preview-venue"></p><p class="rl-preview-title"></p><p class="rl-preview-desc"></p></div>
+  </div>
+</div>

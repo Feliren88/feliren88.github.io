@@ -4,7 +4,10 @@ title: Research and publications
 description: Vicky Feliren's research includes a preprint on conformal prediction for vision-language navigation and peer-reviewed work on Southeast Asian benchmarks, flood mapping, and mining detection.
 permalink: /research/
 hide_title: true
-extra_css: /css/portfolio-modern.css
+extra_css:
+  - /css/portfolio-modern.css
+  - /css/research-landscape.css
+extra_js: /js/components/research-landscape.js
 ---
 
 <script type="application/ld+json">
@@ -32,20 +35,25 @@ extra_css: /css/portfolio-modern.css
 <article class="modern-portfolio research-modern">
   <header class="mp-hero research-hero">
     <div>
-      <h1>Can a safer model still recognise when it may be wrong?</h1>
-      <p class="mp-lead">I study whether safety training changes calibration, the match between a model’s confidence and its accuracy. The deeper question is whether that change is shared across users and tasks, or concentrated where existing evaluations see least.</p>
+      <h1>When does a model's uncertainty remain valid?</h1>
+      <p class="mp-lead">I study which uncertainty estimates survive changes in models and operating conditions. My navigation preprint establishes coverage across complete routes under stated assumptions; my multilingual work measures how conflicting text changes model responses. These settings motivate methods for knowing when a reliability claim supports action.</p>
       <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected research</a><a class="mp-text-link" href="#research-archive">Browse all publications →</a></div>
     </div>
     <aside class="research-thesis" aria-label="Research position">
       <strong>Research position</strong>
-      <p>A model’s safety depends partly on whether its uncertainty gives people a sound reason to trust an answer or request review. That property should hold beyond the languages and inputs used most often to evaluate it.</p>
+      <p>An uncertainty claim should name the event, population, and model conditions it covers. I want to establish when such claims remain valid after adaptation or distribution change, and when they should prompt review.</p>
     </aside>
   </header>
 
   <section class="research-pillars" aria-label="Research agenda">
-    <article><h2>Safety and uncertainty</h2><p><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">Published evidence</a> links safety-related training to expressed overconfidence. The open question is how that change affects decisions to answer or defer.</p></article>
-    <article><h2>Whose uncertainty?</h2><p>SEA-VL and CommonLID expose gaps in standard language and vision evaluation. I suspect calibration costs may also vary across the inputs these benchmarks bring into view.</p></article>
-    <article><h2>Reliability across decisions</h2><p>My navigation preprint studies coverage across an entire route under stated assumptions. It motivates a broader question about when uncertainty estimates remain useful as a system keeps acting.</p></article>
+    <article><h2>Model adaptation</h2><p><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">Published evidence</a> links safety-related training to expressed overconfidence. I want to identify which uncertainty signals remain informative after a model changes.</p></article>
+    <article><h2>Distribution change</h2><p>SEA-VL and CommonLID expose gaps in standard language and vision evaluation. They motivate my interest in when a calibration claim survives changes in inputs and populations.</p></article>
+    <article><h2>Sequential risk</h2><p>My navigation preprint studies coverage across an entire route under stated assumptions. It motivates a broader question about how uncertainty should be evaluated across dependent decisions.</p></article>
+  </section>
+
+  <section class="mp-section research-landscape" id="research-landscape">
+    <header class="mp-section-head"><div><h2>Research landscape</h2></div><p>How my papers connect across topics. Hover over a paper to preview it, and select it to open its page.</p></header>
+    {% include research-landscape.html %}
   </section>
 
   <section class="mp-section" id="featured-research">
@@ -55,7 +63,7 @@ extra_css: /css/portfolio-modern.css
       {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}
       <article class="research-feature{% if pub.key == 'encp-vln' %} is-primary{% endif %}" data-kind="{{ pub.kind }}">
         <h3>{{ pub.title }}</h3><p class="research-feature-meta"><span>{{ pub.tag }}</span><span>{{ pub.venue }}</span></p><p class="research-contribution">{{ pub.description }}</p>
-        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}Developed episode-normalized calibration and led the paper.{% else %}Built regional data infrastructure and benchmark quality controls.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Met every reported coverage target across four policies, three scores, and two benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
+        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}Developed episode-normalized calibration and led the paper.{% else %}Built regional data infrastructure and benchmark quality controls.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Met reported empirical step-coverage targets across 4 policies, 3 scores, and 2 benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
         <div class="research-feature-actions">{% if pub.project_page %}<a href="{{ pub.project_page }}" class="mp-text-link">Project page</a>{% endif %}<a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a><details><summary>Abstract</summary><p>{{ pub.abstract }}</p></details></div>
       </article>{% endfor %}
     </div>

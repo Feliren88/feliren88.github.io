@@ -93,7 +93,20 @@
   font-family: "Space Grotesk", sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
+  text-decoration: none;
+}
+
+.encp-resource[aria-disabled="true"] {
   cursor: not-allowed;
+}
+
+a.encp-resource {
+  cursor: pointer;
+}
+
+a.encp-resource:hover,
+a.encp-resource:focus-visible {
+  border-color: var(--encp-teal);
 }
 
 .encp-resource svg {

@@ -6,7 +6,7 @@ permalink: /work/
 redirect_to: /
 ---
 
-<p class="section-note">Five years across academic research, AI consulting, and production ML. My work appears in IEEE, ACL, and Remote Sensing of Environment, with deployed systems across Southeast Asia and APAC.</p>
+<p class="section-note">5 years across academic research, AI consulting, and production ML. My work appears in IEEE, ACL, and Remote Sensing of Environment, with deployed systems across Southeast Asia and APAC.</p>
 
 <div class="split-grid">
   <div>

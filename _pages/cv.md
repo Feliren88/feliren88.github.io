@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Vicky Feliren | Curriculum Vitae
-subtitle: Applied Scientist · AI Safety · Multimodal AI
+subtitle: Applied Scientist · Uncertainty under model and distribution change
 description: "The curriculum vitae of Vicky Feliren covers research, industry experience, education, teaching, speaking, patents, and recognition."
 permalink: /cv/
 extra_css: /css/about.css
@@ -10,7 +10,7 @@ hide_title: true
 
 <article class="cv-page">
   <header class="cv-hero">
-    <div><h1>Vicky Feliren</h1><p>Applied scientist studying uncertainty and safety in vision-language systems. My research spans reliable navigation, Southeast Asian language and vision evaluation, and earth observation.</p></div>
+    <div><h1>Vicky Feliren</h1><p>I study when uncertainty estimates remain valid after AI models or their operating conditions change. My work in navigation, multilingual evaluation, and production systems motivates methods for decisions under stated assumptions.</p></div>
     <aside><span>Vicky Feliren</span><a href="mailto:vickyfeliren@gmail.com">vickyfeliren@gmail.com</a><span>Jakarta, Indonesia</span><a href="/">Read the personal narrative →</a></aside>
   </header>
 

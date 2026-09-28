@@ -474,8 +474,8 @@ usecases:
 
   # ──────────────────────────────────────────
 
-  - id: heron-hijack-self-probe
-    title: "Hidden-State Detection of In-Context Goal Hijacking with a Conformal False-Positive Guarantee"
+  - id: goal-hijack-probe
+    title: "Goal Hijack Probe"
     category: safety
     tags:
       - Mechanistic Interpretability
@@ -483,10 +483,10 @@ usecases:
       - Activation Probing
       - Conformal Prediction
       - AI Security
-      - Heron Fellowship
-    venue: "Heron AI Security Research Fellowship, Work-Test Prototype (2026)"
+      - AI Security Research
+    venue: "Personal experiment (2026)"
     role: "Sole Researcher"
-    link: "/heron/"
+    link: "/goal-hijack-probe/"
     keywords:
       - In-context goal hijacking
       - Prompt injection detection
@@ -496,24 +496,22 @@ usecases:
       - Confound controls
       - Qwen2.5-0.5B-Instruct
 
-    hook: "Output monitoring misses failed hijack attempts. The model's residual stream detects almost all of them."
+    hook: "A hidden-state probe catches goal-hijack attempts that leave the model's answer unchanged."
 
     situation: >
-      Most deployed LLM security tools monitor inputs and outputs. A goal-hijack
-      attack hides an instruction in the prompt to override the user's task. It
-      changes the model's internal computation even when the final answer remains
-      safe. In that case, output monitoring can miss the attempt. For the Heron
-      Fellowship work test, I asked two precise questions. Do hidden states contain
-      a linearly readable signal of the attack? Can we bound the detector's false
-      positive rate before deployment?
+      A goal-hijack attack places a competing instruction in a prompt and tries
+      to replace the user's task. If the model still answers the original task,
+      output monitoring cannot see the attempt. In this research prototype, I
+      tested whether a linear probe can read an attack signal from hidden states.
+      I also tested whether calibration can bound the average false-alarm rate
+      when future benign prompts resemble the calibration sample.
 
     complication: >
-      Accuracy and AUC alone hide two important failures. First, a detector may
-      learn only that extra text appears before the task. It can then score
-      perfectly while flagging harmless prefixes and missing the goal hijacking itself.
-      The benchmark needs controls that expose this shortcut. Second, a raw probe
-      score does not let an operator set an acceptable false-alarm rate in advance.
-      The benchmark and calibration method must address both problems directly.
+      A detector can score perfectly against clean prompts by learning that extra
+      text appears before the task. Harmless prefixes expose that shortcut. A raw
+      score also leaves the alarm threshold unspecified. The benchmark therefore
+      includes harmless prompts that resemble attacks and uses benign calibration
+      scores to set a threshold for a chosen false-alarm target.
 
     resolution:
       pipeline: >
@@ -527,18 +525,19 @@ usecases:
       confound_control: >
         The harmless-prefix control exposed the shortcut. Across all ten seeds,
         a naive clean-versus-attack probe flagged every harmless prefixed prompt,
-        despite perfect headline AUC. Control-aware training separated goal
-        overrides from harmless prefixes. It removed those false alarms, raised
+        despite perfect headline AUC. Control-aware training improved separation
+        between goal overrides and harmless prefixes. It lowered false alarms, raised
         deconfounded AUC from 0.937 to 0.998, and increased true-positive rate on
         the held-out attack family from 0.710 to 0.988.
       generalization: >
         I kept the original model and threshold for transfer tests. These tests
         covered unseen attacks, new wording without training command words, and
         attacks moved from the start to the end of the prompt. True-positive rate remained 1.000
-        in both transfer tests. This rules out simple keyword and position matching.
+        in both transfer tests. These results weaken simple keyword and fixed-position
+        explanations, although the template benchmark may contain other shortcuts.
         I then repeated the benchmark on 1.5B, 3B, and 7B models in the same family.
-        Detection improved with size and false alarms stayed near budget. Larger
-        models followed the attack more often: about 27–49% at 0.5B and 1.5B,
+        Detection improved with size and false alarms stayed near the target. Larger
+        models followed the attack more often. The rates were about 27–49% at 0.5B and 1.5B,
         compared with 73–85% at 3B and 7B.
       calibration_validity: >
         Across 200 random calibration and test splits, the mean false-positive
@@ -548,16 +547,16 @@ usecases:
         benign traffic to calibration restored the mixed-group bound at 0.045,
         without changing detector weights. The suffix subgroup remained at 0.087,
         which motivates group-conditional calibration. Twelve ablations, one
-        behavioural check, and five unit tests ruled out layer choice, pipeline
-        leakage, and label noise.
+        behavioural check, and five unit tests tested sensitivity to layer choice
+        and found no evidence of label leakage in the checked pipeline.
       input_text_baseline: >
         I compared the probe with a bag-of-words classifier on the raw prompt,
         using the same training and calibration protocol. Because these attacks
         are visible in the input, this is the correct baseline. It nearly matched
         the probe, with deconfounded AUC of 1.000. At the fixed threshold, it caught
         0.880 of attacks in the unseen phrasing family versus 0.988 for the probe.
-        These results do not show that hidden states are necessary for this attack
-        class. They show that hidden-state scores transfer better to unseen wording.
+        These results leave the need for hidden states unproven on this attack
+        class. They show better threshold transfer to unseen wording in this benchmark.
         A stronger comparison needs attacks that cannot be read directly from input.
 
     tech_stack:
@@ -577,29 +576,28 @@ usecases:
 
     impact: >
       On one model family and attack style, a clean-versus-attack benchmark gave
-      perfect AUC to a detector that flagged every harmless prefix. Calibration
-      on one benign format also promised a 5% alarm rate while another format
-      measured five times higher. Security benchmarks should therefore include
-      confound controls, coverage audits, and simple input-only baselines by
-      default. The behavioural results also show the limit of output monitoring.
+      perfect AUC to a detector that flagged every harmless prefix. A threshold
+      calibrated on one benign format then flagged 25.8% of harmless prompts in
+      another format. These tests make a case for confound controls, coverage
+      audits, and input-only baselines in security benchmarks. The behavioural
+      results also show the limit of output monitoring.
       The 0.5B model followed 36–49% of injections, the 7B model followed about
       80%, and the probe detected almost every attempt at each size. Greater
-      capability helped the attacker while output monitoring missed attempts.
+      model size coincided with more successful injections in this benchmark while
+      output monitoring missed attempts that did not change the answer.
 
     why_this: >
-      Most LLM security tools watch inputs and outputs while treating the model
-      itself as a black box. They miss an attempt when the output remains safe,
-      which happened often here. I tested the narrower claim that internal states
-      retain an attack signal even when the answer looks clean. I also required
-      a guaranteed false-positive rate, applying the same standard I use in my
-      conformal prediction work.
+      Output monitoring misses an attempt when the model answers the original task.
+      I tested whether hidden states retain a readable attack signal in those cases.
+      I also calibrated an alarm threshold to a stated false-positive target,
+      applying the same statistical standard I use in my conformal prediction work.
 
     surprise: >
       The naive probe's failure was the most useful result. Its AUC was perfect,
       yet it flagged every harmless prefix. Only the benign-prefix control exposed
-      the problem. Changing the negative training class fixed it; a larger model
-      or more data was unnecessary. The result is a simple benchmark-design lesson
-      that applies beyond this detector.
+      the problem. Adding harmless prefixes to the negative training class improved
+      the ranking and the held-out detection rate. This result shows why a benchmark
+      needs controls that resemble the attacks it is meant to detect.
 
     next: >
       With hard negatives, the 0.5B layer sweep rises from chance at the embeddings,

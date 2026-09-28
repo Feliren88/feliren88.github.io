@@ -1,0 +1,42 @@
+# Research landscape on /research/.
+#
+# Coordinates are in the map's 1000 x 640 viewBox. Nodes are centred on (x, y).
+# `clusters` are the tinted regions; each `path` is a hand-placed organic shape.
+# `topics` are outlined pills. `papers` are filled pills keyed to
+# `_data/publications.yml` by `key`; each links to the paper's project page when
+# it has one and to the paper otherwise. A paper draws a dashed line to every
+# topic in its `topics` list. Colours live in css/research-landscape.css.
+
+clusters:
+  - id: reliability
+    path: 'M377 175C376 209 369 262 341 287C312 313 245 319 207 329C169 339 145 362 114 350C84 337 39 292 23 252C7 212 6 146 21 112C36 77 77 57 111 47C144 36 184 44 224 50C264 57 325 66 351 87C376 107 379 142 377 175Z'
+  - id: navigation
+    path: 'M309 414C304 436 290 466 271 483C253 500 223 513 198 518C173 524 147 524 123 516C98 508 62 489 49 470C36 451 38 426 45 402C52 378 69 338 92 325C114 312 145 320 180 324C216 328 283 336 305 351C326 366 315 392 309 414Z'
+  - id: language
+    path: 'M954 187C941 223 902 286 869 314C836 343 797 353 756 358C715 363 668 362 621 343C574 324 495 274 474 243C453 212 482 190 496 158C510 126 513 68 558 50C603 31 701 39 765 46C829 54 910 74 942 97C973 121 966 151 954 187Z'
+  - id: earth
+    path: 'M983 461C989 496 956 540 922 565C888 589 820 603 780 606C741 609 727 603 688 583C648 562 561 513 546 482C530 451 573 419 592 396C611 373 625 357 659 344C694 331 763 316 801 318C838 320 856 333 886 357C916 381 977 427 983 461Z'
+  - id: society
+    path: 'M601 550C597 564 569 561 532 573C496 586 428 618 382 623C336 628 295 612 259 601C223 591 176 577 164 561C153 545 174 523 191 507C207 491 223 476 263 466C303 455 381 440 430 445C478 449 525 474 553 492C582 510 604 537 601 550Z'
+
+topics:
+  - { id: uq,           cluster: reliability, x: 215, y: 100, label: 'Uncertainty Quantification' }
+  - { id: conformal,    cluster: reliability, x: 110, y: 250, label: 'Conformal Prediction' }
+  - { id: vln,          cluster: navigation,  x: 150, y: 450, label: 'Vision-and-Language<br>Navigation' }
+  - { id: vlm,          cluster: hub,         x: 455, y: 390, label: 'Vision-Language Models' }
+  - { id: multilingual, cluster: language,    x: 700, y: 85,  label: 'Multilingual NLP' }
+  - { id: benchmarks,   cluster: language,    x: 575, y: 160, label: 'Benchmarks &amp; Datasets' }
+  - { id: cultural,     cluster: language,    x: 845, y: 225, label: 'Cultural &amp; Regional AI' }
+  - { id: remote,       cluster: earth,       x: 860, y: 385, label: 'Remote Sensing' }
+  - { id: segmentation, cluster: earth,       x: 760, y: 570, label: 'Semantic Segmentation' }
+  - { id: urban,        cluster: society,     x: 395, y: 585, label: 'Urban Policy' }
+
+papers:
+  - { key: encp-vln,             cluster: reliability, x: 260, y: 285, label: 'ENCP',                            topics: [uq, conformal, vln, vlm] }
+  - { key: sea-vl,               cluster: language,    x: 640, y: 245, label: 'SEA-VL',                          topics: [benchmarks, cultural, vlm, multilingual] }
+  - { key: commonlid,            cluster: language,    x: 845, y: 130, label: 'CommonLID',                       topics: [multilingual, benchmarks] }
+  - { key: anthropogenic,        cluster: language,    x: 760, y: 310, label: 'Anthropogenic<br>Regional Adaptation', topics: [cultural, vlm] }
+  - { key: flood-procanet,       cluster: earth,       x: 640, y: 445, label: 'ProCANet',                        topics: [remote, segmentation] }
+  - { key: mining-multispectral, cluster: earth,       x: 875, y: 490, label: 'Mining<br>Footprints',              topics: [remote, segmentation] }
+  - { key: retention-ponds,      cluster: society,     x: 480, y: 520, label: 'Retention Ponds',                 topics: [urban, remote] }
+  - { key: plastic-bag-ban,      cluster: society,     x: 250, y: 530, label: 'Plastic Bag Ban',                 topics: [urban] }

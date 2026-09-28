@@ -73,7 +73,7 @@
   kind: applied
   tag: 'FIRST AUTHOR · PREPRINT'
   title: 'ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation'
-  description: 'Episode-level calibration provides whole-route coverage guarantees across four navigation policies on R2R and REVERIE.'
+  description: 'Episode-level calibration provides whole-route coverage guarantees across 4 navigation policies on R2R and REVERIE under exchangeable episodes.'
   venue: 'arXiv preprint, 2026'
   year: "2026"
   publisher: 'arXiv'
@@ -83,7 +83,7 @@
   date: "2026-09-15T00:00:00Z"
   keywords: ['conformal prediction', 'vision-and-language navigation', 'uncertainty estimation', 'episode-level calibration', 'whole-route coverage', 'R2R', 'REVERIE', 'robotics', 'ENCP']
   authors: ["Vicky Feliren", "A. Taufiq Asyhari", "Muhamad Risqi U. Saputra"]
-  abstract: 'Vision-and-language navigation requires uncertainty estimates that remain valid across dependent, variable-length routes. ENCP rescales a nonconformity score using a policy’s residual confidence and calibrates one maximum score per episode. Under exchangeable calibration and test episodes, the method covers the ground-truth action at every step with probability of at least one minus the chosen risk level, while allowing dependence among steps. Tests across four navigation policies and three nonconformity scores on R2R and REVERIE met every reported empirical step-coverage target in seen-to-unseen evaluation.'
+  abstract: 'Vision-and-language navigation requires uncertainty estimates for dependent, variable-length routes. ENCP rescales a nonconformity score using a policy’s residual confidence and calibrates the maximum score per episode. Under exchangeable calibration and evaluation episodes, the method covers the correct action throughout a route with probability at least the chosen coverage level. It allows dependence between steps. Evaluations across 4 navigation policies and 3 scores on R2R and REVERIE met the reported empirical step-coverage targets, including on unseen buildings. That empirical result does not extend the formal guarantee to a changed distribution of buildings.'
 
 - key: commonlid
   kind: nlp

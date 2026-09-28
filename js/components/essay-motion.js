@@ -140,14 +140,15 @@
     },
     /*
       The only eight-beat scene, and the only one on a page rather than a writing.
-      Every claim is traceable to Vicky's published personal writing,
-      _data/experience.yml, publications.yml or awards.yml.
+      Research and service claims are traceable to Vicky's published personal
+      writing, _data/experience.yml, publications.yml or awards.yml. The 5+
+      years total includes freelance ML work reported by Vicky.
     */
     record: {
       narrative: true,
       cinematic: true,
-      title: 'I build AI systems and lead research beyond the lab.',
-      copy: 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.',
+      title: 'I study when uncertainty estimates remain valid.',
+      copy: 'My first-author navigation preprint studies coverage across a route. My ML work spans 5+ years of employed and freelance projects, and I have helped create public benchmarks for Southeast Asian languages and images.',
       steps: ['Record', 'Built from zero', 'Banking AI systems', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
       highlights: [
         // The four figures here are already stated in the stat strip directly above
@@ -156,15 +157,15 @@
         ['finance, retail, public services, agriculture, and energy', 'Fortune 500 companies'],
         ['forecasts and shared tools'],
         ['more than 1M logins', '99.99%'],
-        ['top-ranked journal', '7 papers', '109 languages'],
+        ['IEEE GRSL', 'navigation preprint', '109 languages'],
         ['11 languages', 'More than 50 researchers across 5 countries'],
         ['12 awards and scholarships'],
         ['review scientific papers', 'more than 50 technical projects']],
       frames: [
-        ['Vicky Feliren', 'I build AI systems and lead research beyond the lab.', 'I have published 7 peer-reviewed papers, hold 1 patent, and received 12 awards and scholarships. For 5+ years, I have built AI across finance, retail, public services, agriculture, and energy, including work for Fortune 500 companies and international research teams.'],
+        ['Vicky Feliren', 'I study when uncertainty estimates remain valid.', 'My first-author navigation preprint studies coverage across a route. My ML work spans 5+ years of employed and freelance projects, and I have helped create public benchmarks for Southeast Asian languages and images.'],
         ['Built from zero', 'I built the AI systems behind work in 6 Asia-Pacific markets.', 'I handled the technical work alone at first. I built the forecasts and shared tools that later hires could keep using.'],
         ['Banking AI systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the AI systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
-        ['Published research', 'A flood AI model I designed beat 6 established AI systems.', 'I led the paper in a top-ranked journal. My 7 papers study floods, mining, how AI represents culture, and how computers identify 109 languages online.'],
+        ['Published research', 'I have led a reviewed paper and a navigation preprint.', 'My flood-mapping paper appeared in IEEE GRSL. The navigation preprint develops coverage across a whole route, while collaborative papers study Southeast Asian images and 109 languages online.'],
         ['Southeast Asian data', 'I built the AI system that cleaned 1.28M images for research.', 'The finished collection covers 11 languages. More than 50 researchers across 5 countries contributed images, and my AI system removed duplicates and unusable files.'],
         ['Recognition', 'My work has won twice in Asia-Pacific and placed in the global top 3.', 'Judges have recognised my work in ride demand, remote health, climate research, community access, and AI safety. These projects received 12 awards and scholarships.'],
         ['Leadership', 'I hold 1 patent and have taught or reviewed work from 1,000+ students.', 'I also review scientific papers and have evaluated more than 50 technical projects. I look for sound methods, clear evidence, and decisions the team can defend.']]

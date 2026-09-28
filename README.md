@@ -1,8 +1,8 @@
 # Vicky Feliren — Personal Website
 
-The personal site of Vicky Feliren, an Applied Scientist working on **calibration under safety alignment**.
+The personal site of Vicky Feliren, an applied scientist studying reliable decisions under changing conditions.
 
-The short version of the research: safety training costs a model some of its sense of what it knows. That cost is usually reported as one averaged number. It is probably not one number at all, and measuring its real shape is the work.
+Vicky studies when a model should act, abstain, or ask for help, and how a reliability claim changes across environments, languages, and inputs. Safety training is 1 condition he plans to investigate.
 
 The site is a static Jekyll build. It deploys to GitHub Pages at [vickyfeliren.com](https://vickyfeliren.com).
 
@@ -135,7 +135,7 @@ feliren88.github.io/
 │   └── *-icons.html   # SVG symbol sprites
 ├── _pages/
 │   ├── about.md  skills.md  experience.md  publications.md
-│   ├── awards.md  thoughts.md  contact.md  project.md  heron.md
+│   ├── awards.md  thoughts.md  contact.md  project.md  goal-hijack-probe.md
 │   ├── usecases.md    # Listing page
 │   ├── usecases/      # 22 detail pages
 │   ├── interview/     # 26 syllabus pages, unlisted

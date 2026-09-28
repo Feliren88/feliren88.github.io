@@ -37,7 +37,7 @@ nodes:
     end_year: 2026.4
     track: community
     duration_months: 19
-    impact: "Built SEA-VL with more than 50 researchers across five countries; published at ACL 2025."
+    impact: "Built SEA-VL with more than 50 researchers across 5 countries; published at ACL 2025."
 
   - id: artefact
     label: Artefact
@@ -92,7 +92,7 @@ beats:
   - id: beat3
     start_ms: 5000
     end_ms: 8000
-    title: "Three years. First-author IEEE. Most Visionary Research."
+    title: "First-author IEEE. Most Visionary Research."
     caption: "Monash · ProCANet · IISF 2024"
     enters: []
     highlight_mark: iisf_2024

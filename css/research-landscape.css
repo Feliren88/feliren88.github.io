@@ -1,0 +1,101 @@
+/* Research landscape map on /research/. Markup: _includes/research-landscape.html.
+   Each cluster sets --c (outline and tint) and --c-fill (paper pill, carries white text). */
+
+.rl--reliability { --c: #5a7fc6; --c-fill: #4468ad; }
+.rl--navigation  { --c: #4f9a98; --c-fill: #2f7573; }
+.rl--language    { --c: #b9606e; --c-fill: #a04b5a; }
+.rl--earth       { --c: #6b9a6e; --c-fill: #47784b; }
+.rl--society     { --c: #c29a52; --c-fill: #85631f; }
+.rl--hub         { --c: var(--muted); }
+
+.rl-scroll { overflow-x: auto; margin-inline: -0.5rem; padding: 0.5rem; }
+
+.rl-stage {
+  position: relative;
+  container-type: inline-size;
+  min-width: 720px;
+  aspect-ratio: 1000 / 640;
+}
+
+.rl-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.rl-region {
+  fill: color-mix(in srgb, var(--c) 9%, transparent);
+  stroke: color-mix(in srgb, var(--c) 60%, transparent);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.rl-edge {
+  stroke: var(--muted);
+  stroke-opacity: 0.4;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+  transition: stroke-opacity 0.2s ease, stroke 0.2s ease;
+}
+
+.rl-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0.45em 1.1em;
+  border-radius: 999px;
+  text-align: center;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rl-topic {
+  font-size: clamp(0.72rem, 1.7cqw, 1.2rem);
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--c);
+}
+
+.rl-paper {
+  z-index: 1;
+  font-size: clamp(0.66rem, 1.4cqw, 0.98rem);
+  font-weight: 600;
+  color: #fff;
+  background: var(--c-fill);
+  border: 1.5px solid var(--c-fill);
+  text-decoration: none;
+}
+
+.rl-paper:hover,
+.rl-paper:focus-visible {
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.06);
+  box-shadow: var(--shadow-hover);
+}
+
+/* While a paper is previewed, fade the rest so its links read clearly.
+   Pills stay opaque so the lines behind them never show through. */
+.rl-stage.is-focused .rl-topic:not(.is-active) { color: var(--muted); border-color: color-mix(in srgb, var(--c) 40%, var(--bg)); }
+.rl-stage.is-focused .rl-paper:not(.is-active) { background: color-mix(in srgb, var(--c-fill) 45%, var(--bg)); border-color: transparent; }
+.rl-stage.is-focused .rl-edge { stroke-opacity: 0.12; }
+.rl-stage.is-focused .rl-edge.is-active { stroke: var(--text); stroke-opacity: 0.75; stroke-dasharray: none; }
+
+.rl-preview {
+  position: absolute;
+  z-index: 3;
+  width: min(340px, 70%);
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+
+.rl-preview p { margin: 0; }
+.rl-preview-venue { font-size: var(--fs-2xs); color: var(--muted); }
+.rl-preview-title { margin-top: 0.35rem !important; font: 650 0.92rem/1.35 "Space Grotesk", sans-serif; color: var(--text); }
+.rl-preview-desc { margin-top: 0.5rem !important; font-size: var(--fs-xs); line-height: 1.55; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rl-node, .rl-edge { transition: none; }
+  .rl-paper:hover, .rl-paper:focus-visible { transform: translate(-50%, -50%); }
+}
