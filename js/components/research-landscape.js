@@ -1,6 +1,7 @@
-/* Research landscape on /research/: preview a paper on hover or focus and
-   highlight the lines to its topics. The map itself is static markup from
-   _includes/research-landscape.html, so this file only adds the preview. */
+/* Research landscape on /research/: preview a paper, project or direction on
+   hover or focus, and highlight the lines to everything it connects to. The
+   map itself is static markup from _includes/research-landscape.html, so this
+   file only adds the preview. */
 (function () {
   var stage = document.querySelector('.rl-stage');
   if (!stage) return;
@@ -10,22 +11,23 @@
   var title = preview.querySelector('.rl-preview-title');
   var desc = preview.querySelector('.rl-preview-desc');
   var edges = stage.querySelectorAll('.rl-edge');
-  var topics = stage.querySelectorAll('.rl-topic');
+  var nodes = stage.querySelectorAll('.rl-node');
 
   function show(node) {
-    var key = node.dataset.paper;
+    var id = node.dataset.id;
     venue.textContent = node.dataset.venue;
     title.textContent = node.dataset.title;
     desc.textContent = node.dataset.desc;
-    stage.classList.add('is-focused');
-    node.classList.add('is-active');
+
     var linked = {};
+    linked[id] = true;
     edges.forEach(function (e) {
-      var on = e.dataset.paper === key;
+      var on = e.dataset.a === id || e.dataset.b === id;
       e.classList.toggle('is-active', on);
-      if (on) linked[e.dataset.topic] = true;
+      if (on) { linked[e.dataset.a] = true; linked[e.dataset.b] = true; }
     });
-    topics.forEach(function (t) { t.classList.toggle('is-active', !!linked[t.dataset.topic]); });
+    nodes.forEach(function (n) { n.classList.toggle('is-active', !!linked[n.dataset.id]); });
+    stage.classList.add('is-focused');
 
     // Place the card beside the node, flipping above it in the lower half
     // and clamping it inside the stage horizontally.
@@ -42,18 +44,17 @@
     }
   }
 
-  function hide(node) {
+  function hide() {
     preview.hidden = true;
     stage.classList.remove('is-focused');
-    node.classList.remove('is-active');
     edges.forEach(function (e) { e.classList.remove('is-active'); });
-    topics.forEach(function (t) { t.classList.remove('is-active'); });
+    nodes.forEach(function (n) { n.classList.remove('is-active'); });
   }
 
-  stage.querySelectorAll('.rl-paper').forEach(function (node) {
+  stage.querySelectorAll('.rl-work, .rl-dir').forEach(function (node) {
     node.addEventListener('mouseenter', function () { show(node); });
-    node.addEventListener('mouseleave', function () { hide(node); });
+    node.addEventListener('mouseleave', hide);
     node.addEventListener('focus', function () { show(node); });
-    node.addEventListener('blur', function () { hide(node); });
+    node.addEventListener('blur', hide);
   });
 })();

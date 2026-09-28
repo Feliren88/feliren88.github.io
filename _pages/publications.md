@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Research and publications
-description: Vicky Feliren's research includes a preprint on conformal prediction for vision-language navigation and peer-reviewed work on Southeast Asian benchmarks, flood mapping, and mining detection.
+description: Vicky Feliren's research direction is sequential decision making under uncertainty, building on work in conformal navigation, multilingual benchmarks, and Earth observation.
 permalink: /research/
 hide_title: true
 extra_css:
@@ -18,7 +18,7 @@ extra_js: /js/components/research-landscape.js
       "@type": "CollectionPage",
       "@id": "https://vickyfeliren.com/research/",
       "name": "Research and publications, Vicky Feliren",
-      "description": "A preprint on conformal prediction for vision-language navigation and peer-reviewed work on Southeast Asian benchmarks, flood mapping, and mining detection.",
+      "description": "Research direction in sequential decision making under uncertainty, with past work on conformal prediction for vision-language navigation, Southeast Asian benchmarks, flood mapping, and mining detection.",
       "url": "https://vickyfeliren.com/research/",
       "author": { "@id": "https://vickyfeliren.com/#person" },
       "hasPart": [
@@ -35,29 +35,38 @@ extra_js: /js/components/research-landscape.js
 <article class="modern-portfolio research-modern">
   <header class="mp-hero research-hero">
     <div>
-      <h1>When does a model's uncertainty remain valid?</h1>
-      <p class="mp-lead">I study which uncertainty estimates survive changes in models and operating conditions. My navigation preprint establishes coverage across complete routes under stated assumptions; my multilingual work measures how conflicting text changes model responses. These settings motivate methods for knowing when a reliability claim supports action.</p>
-      <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected research</a><a class="mp-text-link" href="#research-archive">Browse all publications →</a></div>
+      <h1>When should an agent act, defer, or ask for help?</h1>
+      <p class="mp-lead">My research direction is sequential decision making under uncertainty. Each choice an agent makes changes what it meets next. I want uncertainty estimates that stay reliable across that sequence and in deployed systems. My past work in navigation, multilingual evaluation, and applied machine learning supplies the starting points.</p>
+      <div class="mp-actions"><a class="btn btn-primary" href="#research-direction">Research direction</a><a class="mp-text-link" href="#research-landscape">How past work connects →</a></div>
     </div>
     <aside class="research-thesis" aria-label="Research position">
       <strong>Research position</strong>
-      <p>An uncertainty claim should name the event, population, and model conditions it covers. I want to establish when such claims remain valid after adaptation or distribution change, and when they should prompt review.</p>
+      <p>An uncertainty claim should name the decision it supports and the conditions it holds under. I want to find when such claims survive a change in policy, data, or costs.</p>
     </aside>
   </header>
 
-  <section class="research-pillars" aria-label="Research agenda">
-    <article><h2>Model adaptation</h2><p><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">Published evidence</a> links safety-related training to expressed overconfidence. I want to identify which uncertainty signals remain informative after a model changes.</p></article>
-    <article><h2>Distribution change</h2><p>SEA-VL and CommonLID expose gaps in standard language and vision evaluation. They motivate my interest in when a calibration claim survives changes in inputs and populations.</p></article>
-    <article><h2>Sequential risk</h2><p>My navigation preprint studies coverage across an entire route under stated assumptions. It motivates a broader question about how uncertainty should be evaluated across dependent decisions.</p></article>
+  {%- assign rl = site.data.research_landscape %}
+  {%- assign rl_from = rl.work | concat: rl.topics %}
+  <section class="mp-section research-direction" id="research-direction">
+    <header class="mp-section-head"><div><h2>Research direction</h2></div><p>An agent's choice to act, defer, or ask changes what it sees next. Confidence in one answer is then a weak guide to the whole task. These questions come from a survey I am writing on how uncertainty estimates support decisions.</p></header>
+    <div class="rd-grid">
+      {%- for d in rl.directions %}
+      <article class="rd-card" id="{{ d.id }}">
+        <h3>{{ d.title }}</h3>
+        <p>{{ d.desc }}</p>
+        <p class="rd-builds"><span>Builds on</span> {% for f_id in d.from %}{% assign f = rl_from | where: 'id', f_id | first %}{% assign f_name = f.label | replace: '<br>', ' ' %}{% if f.pub %}{% assign f_pub = site.data.publications | where: 'key', f.pub | first %}{% assign f_url = f_pub.project_page | default: f_pub.url %}{% else %}{% assign f_url = f.url %}{% endif %}{% if f_url %}<a href="{{ f_url }}"{% if f_url contains '://' %} target="_blank" rel="noreferrer"{% endif %}>{{ f_name }}</a>{% else %}{{ f_name }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+      </article>
+      {%- endfor %}
+    </div>
   </section>
 
   <section class="mp-section research-landscape" id="research-landscape">
-    <header class="mp-section-head"><div><h2>Research landscape</h2></div><p>How my papers connect across topics. Hover over a paper to preview it, and select it to open its page.</p></header>
+    <header class="mp-section-head"><div><h2>From past work to research direction</h2></div><p>Filled pills are papers and projects I have completed. The dashed centre holds the questions I want to pursue. Hover over a pill to preview it, and select it to open its page.</p></header>
     {% include research-landscape.html %}
   </section>
 
   <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Selected research</h2></div><p>ENCP studies coverage across whole navigation routes. SEA-VL builds a regional vision-language dataset.</p></header>
+    <header class="mp-section-head"><div><h2>Selected past work</h2></div><p>ENCP studies coverage across whole navigation routes. SEA-VL builds a regional vision-language dataset.</p></header>
     <div class="research-feature-grid">
       {% assign featured_keys = 'encp-vln,sea-vl' | split: ',' %}
       {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}
