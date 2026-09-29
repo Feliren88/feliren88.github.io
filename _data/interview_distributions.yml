@@ -1,0 +1,30 @@
+# Distribution examples attached to modules that discuss probability models.
+# Keys are zero-based module indexes. Each explorer can switch among its options.
+bayesian-statistics:
+  '0': { default: bernoulli, options: [bernoulli, binomial, beta] }
+  '1': { default: beta, options: [beta, binomial, bernoulli, gamma, poisson, normal, categorical] }
+  '2': { default: beta, options: [beta, normal] }
+  '3': { default: normal, options: [normal, student-t] }
+  '4': { default: normal, options: [normal, beta] }
+frequentist-statistics:
+  '0': { default: normal, options: [normal, student-t] }
+  '1': { default: bernoulli, options: [bernoulli, binomial, geometric, negative-binomial, hypergeometric, categorical, discrete-uniform, poisson, uniform, normal, student-t, exponential, gamma, chi-square, beta, lognormal, weibull, logistic, laplace, cauchy, rayleigh, pareto, triangular, f] }
+  '2': { default: normal, options: [normal, student-t, chi-square, f, binomial] }
+  '3': { default: normal, options: [normal, student-t, chi-square, f, binomial] }
+  '5': { default: binomial, options: [binomial, bernoulli, normal] }
+math:
+  '5': { default: bernoulli, options: [bernoulli, binomial, geometric, negative-binomial, hypergeometric, categorical, discrete-uniform, poisson, uniform, normal, student-t, exponential, gamma, chi-square, beta, lognormal, weibull, logistic, laplace, cauchy, rayleigh, pareto, triangular, f] }
+  '6': { default: binomial, options: [binomial, normal, student-t] }
+  '7': { default: bernoulli, options: [bernoulli, categorical] }
+calculus:
+  '4': { default: normal, options: [normal, uniform, exponential, beta, student-t] }
+uncertainty-estimation:
+  '0': { default: categorical, options: [categorical, bernoulli, beta] }
+  '1': { default: normal, options: [normal, student-t] }
+  '2': { default: beta, options: [beta, normal] }
+  '3': { default: bernoulli, options: [bernoulli, binomial] }
+  '4': { default: categorical, options: [categorical, bernoulli] }
+  '6': { default: normal, options: [normal, student-t] }
+machine-learning:
+  '2': { default: bernoulli, options: [bernoulli, categorical, normal] }
+  '4': { default: normal, options: [normal, student-t] }

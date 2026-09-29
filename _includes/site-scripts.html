@@ -19,5 +19,7 @@ confirm `.em-story` exists.
   {% for js_path in extra_js_list %}<script src="{% include asset.html path=js_path %}" defer></script>
   {% endfor %}
 {% endif %}
+{% if page.topic_id and site.data.interview_distributions[page.topic_id] %}<script src="{% include asset.html path='/js/components/interview-distributions.js' %}" defer></script>{% endif %}
+{% if page.topic_id == 'calculus' %}<script src="{% include asset.html path='/js/components/interview-area.js' %}" defer></script>{% endif %}
 {% if page.motion_scene %}<script>document.documentElement.dataset.motionScene={{ page.motion_scene | jsonify }};</script><script src="{% include asset.html path='/js/components/essay-motion.js' %}" defer></script>{% endif %}
 <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>

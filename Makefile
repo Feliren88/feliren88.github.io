@@ -35,5 +35,6 @@ check: build  ## Build, then run the SEO/link audit over _site/
 	python3 scripts/audit_seo.py
 
 .PHONY: test
-test:  ## Run the unit tests for the scripts/ tooling
+test:  ## Run tooling and distribution checks
 	python3 -m unittest discover -s scripts
+	node scripts/test_interview_distributions.js

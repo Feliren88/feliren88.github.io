@@ -73,6 +73,7 @@ extra_js:
   </nav>
 
   <p class="ivh-maplede">Each card opens a track with modules, practice questions, and related topics. On wider screens, the lines show how tracks connect.</p>
+  <p class="ivh-maplede">For interactive practice, explore the <a href="/math/#m6">probability distributions</a> or <a href="/calculus/#m5">area under a curve</a>.</p>
 
   <div class="ivh-map" id="iv-map">
     <svg class="iv-map-svg" aria-hidden="true" preserveAspectRatio="none"></svg>

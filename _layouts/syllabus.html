@@ -164,6 +164,16 @@ layout: default
 
       <div class="syl-viz"></div>
 
+      {% assign lab_track = site.data.interview_distributions[topic.id] %}
+      {% assign module_key = forloop.index0 | append: '' %}
+      {% assign lab = lab_track[module_key] %}
+      {% if lab %}
+      <div class="ivd-lab" data-distributions="{{ lab.options | join: ',' }}" data-default="{{ lab.default }}"></div>
+      {% endif %}
+      {% if topic.id == 'calculus' and forloop.index0 == 4 %}
+      <div class="iva-lab" data-integral-playground></div>
+      {% endif %}
+
       {% if m.plain %}
       <p class="syl-phase">Plain explanation</p>
       <div class="syl-plain">
