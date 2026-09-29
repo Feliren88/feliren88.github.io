@@ -5,6 +5,7 @@ Both come from Polo Club of Data Science projects released under the MIT licence
 
   Transformer Explainer  https://github.com/poloclub/transformer-explainer
   Diffusion Explainer    https://github.com/poloclub/diffusion-explainer
+  CNN Explainer          https://github.com/poloclub/cnn-explainer
 
 Clone them anywhere and pass their paths:
 
@@ -18,6 +19,8 @@ Outputs, all owned by this script (a hand edit is lost on the next run):
   assets/img/diffusion/<p>-<g>.webp     one sprite of refining frames per prompt and guidance
   assets/img/diffusion/<p>-<g>-z.webp   the matching latent sprite
   assets/data/diffusion-frames.json     prompts, guidance values, timesteps, sprite geometry
+  assets/data/tiny-vgg.bin              CNN Explainer's trained Tiny VGG weights, unchanged
+  assets/data/tiny-vgg.json             layer shapes, byte offsets, class names, sample pixels
 
 Needs node on PATH for the traces and Pillow for the sprites.
 """
@@ -156,18 +159,59 @@ def build_diffusion(repo):
     print('diffusion sprites written to', os.path.relpath(IMG, ROOT))
 
 
+CNN_SAMPLES = ['boat_1', 'bug_1', 'pizza_1', 'pepper_1', 'bus_1',
+               'koala_1', 'espresso_1', 'panda_1', 'orange_1', 'car_1']
+
+
+def build_cnn(repo):
+    """Tiny VGG from CNN Explainer: copy the weights byte for byte and record
+    where each tensor starts, plus the 64x64 sample images as raw RGB bytes so
+    the page and the verifier read exactly the same pixels."""
+    import base64
+    import shutil
+    from PIL import Image
+    data = os.path.join(repo, 'public', 'assets', 'data')
+    model = json.load(open(os.path.join(data, 'model.json')))
+    shutil.copyfile(os.path.join(data, 'group1-shard1of1.bin'), os.path.join(DATA, 'tiny-vgg.bin'))
+    layers, offset = [], 0
+    for w in model['weightsManifest'][0]['weights']:
+        size = 1
+        for d in w['shape']:
+            size *= d
+        layers.append({'name': w['name'], 'shape': w['shape'], 'offset': offset, 'size': size})
+        offset += size
+    assert offset * 4 == os.path.getsize(os.path.join(DATA, 'tiny-vgg.bin')), 'weight manifest does not cover the file'
+    config = open(os.path.join(repo, 'src', 'config.js')).read()
+    classes = json.loads('[' + config.split('classLists: [')[1].split(']')[0].replace("'", '"') + ']')
+    samples = []
+    for name in CNN_SAMPLES:
+        im = Image.open(os.path.join(repo, 'public', 'assets', 'img', name + '.jpeg')).convert('RGB')
+        assert im.size == (64, 64)
+        samples.append({'name': name, 'rgb': base64.b64encode(im.tobytes()).decode('ascii')})
+    doc = {
+        'source': 'Tiny VGG trained by CNN Explainer, Polo Club of Data Science, MIT licence',
+        'input': [64, 64, 3], 'classes': classes, 'weights': layers, 'samples': samples,
+    }
+    with open(os.path.join(DATA, 'tiny-vgg.json'), 'w') as f:
+        json.dump(doc, f, separators=(',', ':'))
+    print(f'tiny vgg: {len(layers)} tensors, {offset} weights, {len(samples)} samples')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--transformer-explainer')
     ap.add_argument('--diffusion-explainer')
+    ap.add_argument('--cnn-explainer')
     a = ap.parse_args()
-    if not (a.transformer_explainer or a.diffusion_explainer):
+    if not (a.transformer_explainer or a.diffusion_explainer or a.cnn_explainer):
         ap.error('pass at least one repository path')
     os.makedirs(DATA, exist_ok=True)
     if a.transformer_explainer:
         build_traces(a.transformer_explainer)
     if a.diffusion_explainer:
         build_diffusion(a.diffusion_explainer)
+    if a.cnn_explainer:
+        build_cnn(a.cnn_explainer)
 
 
 if __name__ == '__main__':

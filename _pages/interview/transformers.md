@@ -10,7 +10,6 @@ explainers: [gpt2, attention-scratch]
 extra_css:
   - /css/interview.css
   - /css/transformer.css
-  - /css/explainer.css
 extra_js:
   - /js/components/interview.js
   - /js/components/interview-anim.js

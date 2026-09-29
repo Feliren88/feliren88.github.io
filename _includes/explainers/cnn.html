@@ -1,0 +1,9 @@
+<section class="xp is-canvas" id="xp-cnn" aria-labelledby="xp-cnn-title">
+  <header class="xp-head">
+    <span class="syl-phase">Explore it first</span>
+    <h2 id="xp-cnn-title">Watch a trained CNN classify an image</h2>
+    <p>Every square is a real feature map of a small trained network, computed in your browser. Follow the guide card, hover over a map to trace what feeds it, and select a map to see how it is made.</p>
+  </header>
+  <div class="xp-body tf" data-xp="cnn" data-model="{% include asset.html path='/assets/data/tiny-vgg.json' %}" data-weights="{% include asset.html path='/assets/data/tiny-vgg.bin' %}"></div>
+  <p class="xp-source">The network, its trained weights and the sample images are Tiny VGG from <a href="https://poloclub.github.io/cnn-explainer/" rel="noopener noreferrer">CNN Explainer</a> (<a href="https://github.com/poloclub/cnn-explainer" rel="noopener noreferrer">code</a>, MIT licence) by the Polo Club of Data Science, described in Wang et al., <a href="https://arxiv.org/abs/2004.15004" rel="noopener noreferrer">CNN Explainer: Learning Convolutional Neural Networks with Interactive Visualization</a> (IEEE TVCG 2020). The layout follows theirs. Every layer here is checked against NumPy by <code>scripts/verify_explainers.py</code>.</p>
+</section>

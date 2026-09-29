@@ -13,12 +13,8 @@
   var toyHost = document.querySelector('[data-xp="toy"]');
   if (!sdHost && !toyHost) return;
 
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-    });
-  }
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc = XP.esc;
+  var reduced = XP.reduced;
 
   /* ════════════════════════════════════════════════════════
      Stable Diffusion, frame by frame
@@ -57,11 +53,7 @@
         data.prompts.map(function (p, i) {
           return '<button type="button" data-p="' + i + '" aria-pressed="' + (i === S.p) + '">' + promptHtml(i) + '</button>';
         }).join('') + '</div></div>' +
-        '<div class="xp-tour" role="group" aria-label="Guided tour">' +
-        '<button type="button" data-tour="-1" aria-label="Previous step"' + (S.step === 0 ? ' disabled' : '') + '>←</button>' +
-        '<span class="xp-tour-n">' + (S.step + 1) + ' / ' + TOUR.length + '</span>' +
-        '<button type="button" data-tour="1" aria-label="Next step"' + (S.step === TOUR.length - 1 ? ' disabled' : '') + '>→</button></div></div>' +
-        '<p class="xp-caption" aria-live="polite"><strong>' + esc(tour.t) + '.</strong> ' + esc(tour.say) + '</p>';
+        XP.tourBar(TOUR, S.step) + '</div>' + XP.caption(TOUR, S.step);
 
       html += '<div class="xp-flow xp-sd">';
 
@@ -205,18 +197,7 @@
     return [f * gx, f * gy];
   }
 
-  function rng(seed) {
-    return function () {
-      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
-    };
-  }
-  function gauss(r) {
-    var u = Math.max(r(), 1e-12), v = r();
-    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
-  }
+  var rng = XP.rng, gauss = XP.gauss;
 
   function toy(host) {
     var N = 500, ALL = COMP.map(function (_, k) { return k; });
