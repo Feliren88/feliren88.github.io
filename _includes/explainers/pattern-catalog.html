@@ -1,0 +1,50 @@
+{%- assign dp = site.data.design_patterns -%}
+<section class="xp" id="xp-patterns" aria-labelledby="xp-patterns-title">
+  <header class="xp-head">
+    <span class="syl-phase">Explore it first</span>
+    <h2 id="xp-patterns-title">The pattern catalogue</h2>
+    <p>22 patterns in 3 groups. Each card gives the intent in one line. Open one for the problem it solves, when to reach for it, when to leave it alone, and a short Python example from machine learning work.</p>
+  </header>
+  <div class="xp-body" data-xp="patterns">
+    <div class="xp-bar">
+      <div class="xp-pills" role="group" aria-label="Filter patterns by group">
+        <button type="button" data-group="all" aria-pressed="true">All <span>{{ dp.patterns | size }}</span></button>
+        {%- for g in dp.groups %}{% assign n = dp.patterns | where: 'group', g.id | size %}
+        <button type="button" data-group="{{ g.id }}" aria-pressed="false">{{ g.name }} <span>{{ n }}</span></button>
+        {%- endfor %}
+      </div>
+      <label class="xp-field"><span>Search</span><input type="search" data-search placeholder="e.g. retry, undo, tree" aria-label="Search patterns"></label>
+    </div>
+    {%- for g in dp.groups %}
+    <div class="xp-pgroup" data-group="{{ g.id }}">
+      <h3 class="xp-pgroup-t"><span class="xp-glyph is-{{ g.id }}" aria-hidden="true"></span>{{ g.name }} patterns</h3>
+      <p class="xp-note">{{ g.about }}</p>
+      <ul class="xp-pgrid">
+        {%- assign ps = dp.patterns | where: 'group', g.id %}{% for p in ps %}
+        <li data-id="{{ p.id }}" data-text="{{ p.name | downcase }} {{ p.intent | downcase | escape }} {{ p.when | downcase | escape }}">
+          <button type="button" class="xp-pcard" aria-expanded="false" aria-controls="pat-{{ p.id }}">
+            <b>{{ p.name }}</b><span>{{ p.intent }}</span>
+          </button>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- for p in ps %}
+      <article class="xp-pdetail" id="pat-{{ p.id }}" hidden tabindex="-1" aria-label="{{ p.name }}">
+        <header><h4>{{ p.name }}</h4><button type="button" class="xp-close" data-close aria-label="Close {{ p.name }}">×</button></header>
+        <p class="xp-pintent">{{ p.intent }}</p>
+        <dl class="xp-pdl">
+          <div><dt>Problem</dt><dd>{{ p.problem }}</dd></div>
+          <div><dt>Solution</dt><dd>{{ p.solution }}</dd></div>
+          <div><dt>Reach for it when</dt><dd>{{ p.when }}</dd></div>
+          <div><dt>Leave it alone when</dt><dd>{{ p.avoid }}</dd></div>
+        </dl>
+        <pre class="xp-pre"><code>{{ p.example | escape }}</code></pre>
+        <p class="xp-prel"><span>Related</span>{% for r in p.related %}{% assign rp = dp.patterns | where: 'id', r | first %}<button type="button" data-open="{{ r }}">{{ rp.name }}</button>{% endfor %}</p>
+      </article>
+      {%- endfor %}
+    </div>
+    {%- endfor %}
+    <p class="xp-note xp-empty" hidden>No pattern matches that search.</p>
+  </div>
+  <p class="xp-source">The grouping and the set of 22 patterns follow the <a href="https://refactoring.guru/design-patterns/catalog" rel="noopener noreferrer">Refactoring.Guru catalogue</a>, which in turn follows Gamma, Helm, Johnson and Vlissides, <em>Design Patterns</em> (1994). Intents, advice and examples here are my own; the catalogue's illustrated pages are the place to go deeper.</p>
+</section>

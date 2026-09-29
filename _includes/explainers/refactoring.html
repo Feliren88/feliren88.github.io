@@ -1,0 +1,41 @@
+{%- assign dp = site.data.design_patterns -%}
+<section class="xp" id="xp-refactor" aria-labelledby="xp-refactor-title">
+  <header class="xp-head">
+    <span class="syl-phase">Build it by hand</span>
+    <h2 id="xp-refactor-title">From smell to refactoring</h2>
+    <p>Pick a smell you recognise. The panel names the refactorings that remove it and the patterns that often appear once it is gone. Four smells carry a worked example: flip between the code before and after.</p>
+  </header>
+  <div class="xp-body" data-xp="smells">
+    <div class="xp-smells" role="group" aria-label="Code smells">
+      {%- assign families = dp.smells | map: 'family' | uniq %}
+      {%- for fam in families %}
+      <div class="xp-smell-fam"><span>{{ fam }}</span>
+        {%- assign ss = dp.smells | where: 'family', fam %}{% for s in ss %}
+        <button type="button" data-smell="{{ s.id }}" aria-pressed="{% if forloop.parentloop.first and forloop.first %}true{% else %}false{% endif %}">{{ s.name }}{% if s.refactoring %} <i title="worked example" aria-label="has a worked example">●</i>{% endif %}</button>
+        {%- endfor %}
+      </div>
+      {%- endfor %}
+    </div>
+    {%- for s in dp.smells %}
+    <article class="xp-smell" data-for="{{ s.id }}"{% unless forloop.first %} hidden{% endunless %}>
+      <h3>{{ s.name }}</h3>
+      <p><b>How you notice it.</b> {{ s.sign }}</p>
+      <p><b>Refactorings that remove it.</b> {{ s.fixes | join: ', ' }}.</p>
+      <p><b>Patterns that often follow.</b> {% for pid in s.patterns %}{% assign pp = dp.patterns | where: 'id', pid | first %}<a href="#pat-{{ pid }}" data-open="{{ pid }}">{{ pp.name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.</p>
+      {%- if s.refactoring %}{% assign r = dp.refactorings | where: 'id', s.refactoring | first %}
+      <div class="xp-rf">
+        <div class="xp-rf-h"><b>Worked example: {{ r.name }}</b>
+          <div class="xp-seg" role="group" aria-label="Show code"><button type="button" data-view="before" aria-pressed="false">Before</button><button type="button" data-view="after" aria-pressed="false">After</button><button type="button" data-view="both" aria-pressed="true">Both</button></div>
+        </div>
+        <p class="xp-note">{{ r.why }}</p>
+        <div class="xp-rf-code" data-show="both">
+          <figure data-side="before"><figcaption>Before</figcaption><pre class="xp-pre"><code>{{ r.before | escape }}</code></pre></figure>
+          <figure data-side="after"><figcaption>After</figcaption><pre class="xp-pre"><code>{{ r.after | escape }}</code></pre></figure>
+        </div>
+      </div>
+      {%- endif %}
+    </article>
+    {%- endfor %}
+  </div>
+  <p class="xp-source">Smell and refactoring names follow Martin Fowler, <a href="https://martinfowler.com/books/refactoring.html" rel="noopener noreferrer">Refactoring: Improving the Design of Existing Code</a>, and the families follow <a href="https://refactoring.guru/refactoring/smells" rel="noopener noreferrer">Refactoring.Guru</a>. The examples are my own.</p>
+</section>

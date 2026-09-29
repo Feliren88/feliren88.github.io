@@ -1,0 +1,597 @@
+# Content for the design patterns and refactoring explainers on /design-patterns/.
+# Hand-written. House style applies: British spelling, short sentences, no em dashes.
+#
+# The catalogue follows the grouping of the 22 classic patterns used by
+# Refactoring.Guru (https://refactoring.guru/design-patterns/catalog) and the
+# smells and refactorings follow Fowler's Refactoring. Every intent, example
+# and piece of advice here is written for this site; nothing is copied.
+#
+# patterns: id, name, group (creational | structural | behavioural), intent,
+#           problem, solution, when, avoid, example (Python), related (ids)
+# smells:   id, name, family, sign, fixes (refactoring names), patterns (ids)
+# refactorings: worked before-and-after examples, each tied to a smell
+
+groups:
+  - id: creational
+    name: Creational
+    about: "How objects get made, kept apart from the code that uses them."
+  - id: structural
+    name: Structural
+    about: "How objects are combined into larger parts that stay flexible."
+  - id: behavioural
+    name: Behavioural
+    about: "Which object is responsible for what, and how objects talk."
+
+patterns:
+  # ── Creational ─────────────────────────────────────────────
+  - id: factory-method
+    name: Factory Method
+    group: creational
+    intent: "Let a method decide which class to create, so callers depend only on what they get back."
+    problem: "Your code calls a constructor directly, so adding a new variant means editing every caller."
+    solution: "Move construction into one method. Subclasses, or a lookup, choose the concrete class."
+    when: "You know new variants will arrive and callers should not care which one they get."
+    avoid: "There is only one class and no second one is planned."
+    example: |
+      def make_optimiser(name, params, lr):
+          if name == "adam":
+              return torch.optim.Adam(params, lr=lr)
+          if name == "sgd":
+              return torch.optim.SGD(params, lr=lr, momentum=0.9)
+          raise ValueError(name)
+
+      opt = make_optimiser(cfg.optimiser, model.parameters(), cfg.lr)
+    related: [abstract-factory, prototype, template-method]
+
+  - id: abstract-factory
+    name: Abstract Factory
+    group: creational
+    intent: "Create whole families of related objects that must be used together, without naming their classes."
+    problem: "Objects come in matched sets, and mixing one set's parts with another's breaks things."
+    solution: "Define one factory per family. Each factory makes every part of its set."
+    when: "You switch between complete families, such as a local stack and a cloud stack."
+    avoid: "The parts vary independently; then separate factories are simpler."
+    example: |
+      class LocalStack:
+          def storage(self): return LocalDisk("/data")
+          def queue(self):   return InMemoryQueue()
+
+      class CloudStack:
+          def storage(self): return S3Bucket("runs")
+          def queue(self):   return SqsQueue("jobs")
+
+      stack = CloudStack() if cfg.cloud else LocalStack()
+      pipeline = Pipeline(stack.storage(), stack.queue())
+    related: [factory-method, builder]
+
+  - id: builder
+    name: Builder
+    group: creational
+    intent: "Assemble a complex object step by step, and check it is valid before anyone uses it."
+    problem: "A constructor has a dozen optional arguments, and some combinations make no sense."
+    solution: "A builder collects the parts through named steps, then builds and validates once."
+    when: "An object has many optional parts, or must be built in a particular order."
+    avoid: "The object has 3 fields; a dataclass with defaults is clearer."
+    example: |
+      prompt = (PromptBuilder()
+                .system("You are a careful analyst.")
+                .examples(few_shot, k=3)
+                .user(question)
+                .max_tokens(512)
+                .build())   # raises if the context window is exceeded
+    related: [abstract-factory, composite]
+
+  - id: prototype
+    name: Prototype
+    group: creational
+    intent: "Make new objects by copying a configured one instead of building from scratch."
+    problem: "Building an object is expensive, or its configuration is hard to reproduce."
+    solution: "Keep a fully configured instance and clone it, changing only what differs."
+    when: "Many objects share a costly setup and differ in a few fields."
+    avoid: "Objects hold resources, such as open files, that cannot be copied safely."
+    example: |
+      import copy
+
+      base = ExperimentConfig.load("baseline.yaml")   # slow, validated once
+      sweep = []
+      for lr in (1e-4, 3e-4, 1e-3):
+          cfg = copy.deepcopy(base)
+          cfg.lr = lr
+          sweep.append(cfg)
+    related: [factory-method, memento]
+
+  - id: singleton
+    name: Singleton
+    group: creational
+    intent: "Guarantee one instance of a class and give everyone access to it."
+    problem: "Some resource, such as a connection pool, must exist exactly once."
+    solution: "The class controls its own creation and hands back the same instance every time."
+    when: "There truly must be one, and passing it around is impossible."
+    avoid: "Almost always. It is a global variable, it hides dependencies, and it makes tests share state. Prefer creating one instance at start-up and passing it in."
+    example: |
+      # Prefer this: one instance, created once, passed where needed.
+      def main():
+          pool = ConnectionPool(size=8)
+          app = App(pool=pool)
+          app.run()
+    related: [facade, flyweight]
+
+  # ── Structural ─────────────────────────────────────────────
+  - id: adapter
+    name: Adapter
+    group: structural
+    intent: "Make an existing class usable through the interface your code expects."
+    problem: "A library does what you need but its interface does not match the rest of your code."
+    solution: "Write a thin class that implements your interface by calling the library."
+    when: "You integrate a third-party client, or want to swap providers later."
+    avoid: "You control both sides; change one of them instead."
+    example: |
+      class Retriever(Protocol):
+          def search(self, query: str, k: int) -> list[Doc]: ...
+
+      class PineconeRetriever:            # adapts one vendor to our interface
+          def __init__(self, index): self.index = index
+          def search(self, query, k):
+              hits = self.index.query(vector=embed(query), top_k=k)
+              return [Doc(h.id, h.metadata["text"]) for h in hits.matches]
+    related: [facade, decorator, bridge]
+
+  - id: bridge
+    name: Bridge
+    group: structural
+    intent: "Split a class that varies in 2 ways into 2 hierarchies that vary independently."
+    problem: "Every combination of 2 dimensions needs its own subclass, and the count multiplies."
+    solution: "Keep one dimension in the class and hold the other as a component it delegates to."
+    when: "You see class names like CsvLocalExporter, CsvS3Exporter, JsonLocalExporter."
+    avoid: "Only one dimension actually varies."
+    example: |
+      class Exporter:
+          def __init__(self, fmt: Format, sink: Sink):
+              self.fmt, self.sink = fmt, sink
+          def export(self, rows):
+              self.sink.write(self.fmt.encode(rows))
+
+      Exporter(JsonFormat(), S3Sink("reports")).export(rows)
+    related: [adapter, strategy, abstract-factory]
+
+  - id: composite
+    name: Composite
+    group: structural
+    intent: "Treat a tree of objects and a single object through the same interface."
+    problem: "Code keeps checking whether it has one item or a group of items."
+    solution: "Give leaves and groups the same methods. A group forwards each call to its children."
+    when: "The data is a tree, such as nested model layers or a pipeline of pipelines."
+    avoid: "The structure is flat; a list is enough."
+    example: |
+      class Step:
+          def run(self, x): ...
+
+      class Pipeline(Step):              # a pipeline is itself a step
+          def __init__(self, *steps): self.steps = steps
+          def run(self, x):
+              for s in self.steps:
+                  x = s.run(x)
+              return x
+
+      clean = Pipeline(Lowercase(), StripHtml())
+      full = Pipeline(clean, Tokenise(), Pipeline(Embed(), Normalise()))
+    related: [decorator, iterator, visitor]
+
+  - id: decorator
+    name: Decorator
+    group: structural
+    intent: "Add behaviour to an object by wrapping it in another with the same interface."
+    problem: "You want caching, retries or logging on some calls without editing the class or subclassing every variant."
+    solution: "Wrap the object. The wrapper does its extra work and forwards the call."
+    when: "Features combine freely, such as retry plus cache plus rate limit."
+    avoid: "The order of wrappers matters and nobody will remember it; make it explicit."
+    example: |
+      class Retrying:
+          def __init__(self, client, tries=3): self.client, self.tries = client, tries
+          def complete(self, prompt):
+              for i in range(self.tries):
+                  try:
+                      return self.client.complete(prompt)
+                  except RateLimited:
+                      time.sleep(2 ** i)
+              raise
+
+      llm = Retrying(Cached(OpenAIClient()))
+    related: [proxy, adapter, composite, chain-of-responsibility]
+
+  - id: facade
+    name: Facade
+    group: structural
+    intent: "Put one simple interface in front of a complicated subsystem."
+    problem: "Using a subsystem needs many objects called in the right order."
+    solution: "Write one class whose methods do the common tasks, hiding the steps."
+    when: "Most callers need a few common operations, not the full power underneath."
+    avoid: "The facade starts growing every option of the subsystem; it has become the subsystem."
+    example: |
+      class Trainer:
+          def fit(self, model, data):
+              loader = DataLoader(data, batch_size=32, shuffle=True)
+              opt = make_optimiser("adam", model.parameters(), 3e-4)
+              for batch in loader:
+                  loss = model.loss(batch)
+                  loss.backward(); opt.step(); opt.zero_grad()
+              return model
+    related: [adapter, mediator, singleton]
+
+  - id: flyweight
+    name: Flyweight
+    group: structural
+    intent: "Share the common part of many small objects instead of storing it in each."
+    problem: "Millions of objects each carry the same heavy data and memory runs out."
+    solution: "Store shared state once and keep only what differs in each object."
+    when: "You have very many similar objects, such as tokens pointing at one vocabulary entry."
+    avoid: "There are few objects; the saving is not worth the indirection."
+    example: |
+      vocab = {}                      # one shared entry per distinct string
+
+      def intern(text):
+          return vocab.setdefault(text, TokenInfo(text))
+
+      tokens = [(intern(t), position) for position, t in enumerate(stream)]
+    related: [composite, singleton]
+
+  - id: proxy
+    name: Proxy
+    group: structural
+    intent: "Stand in for another object to control when and how it is used."
+    problem: "The real object is expensive to create, remote, or needs access checks."
+    solution: "A proxy has the same interface. It creates, checks or logs, then passes the call on."
+    when: "You want lazy loading, access control or a local stand-in for a remote service."
+    avoid: "The indirection hides costs, such as a network call that looks like a local one."
+    example: |
+      class LazyModel:
+          def __init__(self, path): self.path, self._model = path, None
+          def predict(self, x):
+              if self._model is None:           # load weights on first use
+                  self._model = load_weights(self.path)
+              return self._model.predict(x)
+    related: [decorator, adapter, facade]
+
+  # ── Behavioural ────────────────────────────────────────────
+  - id: chain-of-responsibility
+    name: Chain of Responsibility
+    group: behavioural
+    intent: "Pass a request along a chain of handlers until one of them deals with it."
+    problem: "Several checks may apply to a request, and the caller should not know them all."
+    solution: "Link handlers in order. Each handles the request or passes it on."
+    when: "You have ordered checks, such as a safety filter before a cache before the model."
+    avoid: "A request could fall off the end silently; always end with a default handler."
+    example: |
+      def respond(request, handlers):
+          for handle in handlers:
+              answer = handle(request)
+              if answer is not None:
+                  return answer
+          return "I can't help with that."
+
+      respond(req, [block_unsafe, answer_from_cache, call_model])
+    related: [decorator, command, mediator]
+
+  - id: command
+    name: Command
+    group: behavioural
+    intent: "Turn a request into an object, so it can be queued, logged, retried or undone."
+    problem: "You need to delay, record or reverse actions, but they are plain function calls."
+    solution: "Wrap each action in an object that knows how to run itself and, if needed, undo itself."
+    when: "You build job queues, undo, audit logs or retryable tasks."
+    avoid: "Actions are never stored or replayed; a function is enough."
+    example: |
+      @dataclass
+      class TrainJob:
+          config: dict
+          def run(self):  return train(self.config)
+
+      queue.put(TrainJob({"lr": 3e-4}))     # a worker calls job.run() later
+    related: [memento, chain-of-responsibility, strategy]
+
+  - id: iterator
+    name: Iterator
+    group: behavioural
+    intent: "Walk through a collection without exposing how it is stored."
+    problem: "Callers need every element but should not depend on the underlying structure."
+    solution: "Provide an object, or a generator, that yields one element at a time."
+    when: "Data is large, lazy, or stored in an awkward shape, such as sharded files."
+    avoid: "Python's built-in iteration already covers the case."
+    example: |
+      def batches(shards, size):
+          buffer = []
+          for shard in shards:
+              for row in read_shard(shard):     # never loads a whole shard
+                  buffer.append(row)
+                  if len(buffer) == size:
+                      yield buffer
+                      buffer = []
+          if buffer:
+              yield buffer
+    related: [composite, visitor]
+
+  - id: mediator
+    name: Mediator
+    group: behavioural
+    intent: "Stop objects talking to each other directly by routing their messages through one coordinator."
+    problem: "Every component knows every other, so one change ripples everywhere."
+    solution: "Components talk only to a mediator, which decides who needs to act."
+    when: "Several components react to each other, such as agents sharing a plan."
+    avoid: "The mediator becomes a god object that knows everything."
+    example: |
+      class Orchestrator:
+          def __init__(self, planner, coder, reviewer):
+              self.planner, self.coder, self.reviewer = planner, coder, reviewer
+          def solve(self, task):
+              plan = self.planner.plan(task)
+              code = self.coder.write(plan)
+              return self.reviewer.review(code, plan)
+    related: [observer, facade, chain-of-responsibility]
+
+  - id: memento
+    name: Memento
+    group: behavioural
+    intent: "Save and restore an object's state without exposing its internals."
+    problem: "You need to roll back, but reaching into the object's fields breaks encapsulation."
+    solution: "The object produces a snapshot of itself and can restore from one."
+    when: "You checkpoint training, or offer undo."
+    avoid: "Snapshots are huge and frequent; save differences instead."
+    example: |
+      ckpt = {"model": model.state_dict(), "opt": opt.state_dict(), "step": step}
+      torch.save(ckpt, "step_1000.pt")
+
+      state = torch.load("step_1000.pt")
+      model.load_state_dict(state["model"]); opt.load_state_dict(state["opt"])
+    related: [command, prototype]
+
+  - id: observer
+    name: Observer
+    group: behavioural
+    intent: "Let objects subscribe to events and be told when they happen."
+    problem: "Many parts need to react to a change, and the source should not know them all."
+    solution: "The source keeps a list of subscribers and calls each one when something happens."
+    when: "You add logging, early stopping or checkpointing to a training loop."
+    avoid: "Order of notification matters, or a subscriber can fail silently."
+    example: |
+      class Trainer:
+          def __init__(self, callbacks): self.callbacks = callbacks
+          def fit(self, epochs):
+              for epoch in range(epochs):
+                  metrics = self.train_one_epoch()
+                  for cb in self.callbacks:
+                      cb.on_epoch_end(epoch, metrics)
+
+      Trainer([Logger(), EarlyStopping(patience=3), Checkpoint()]).fit(20)
+    related: [mediator, command]
+
+  - id: state
+    name: State
+    group: behavioural
+    intent: "Let an object change its behaviour when its internal state changes, as if it changed class."
+    problem: "Methods are full of checks on a status field, and each new status adds more."
+    solution: "Put each state's behaviour in its own class. The object delegates to its current state."
+    when: "An object has clear modes with different rules, such as a job that is queued, running or done."
+    avoid: "There are 2 states and they rarely change; an if is clearer."
+    example: |
+      class Queued:
+          def advance(self, job): job.state = Running()
+      class Running:
+          def advance(self, job): job.state = Done()
+      class Done:
+          def advance(self, job): raise RuntimeError("already finished")
+
+      job.state.advance(job)
+    related: [strategy, command]
+
+  - id: strategy
+    name: Strategy
+    group: behavioural
+    intent: "Make a family of interchangeable algorithms and choose one at run time."
+    problem: "A function branches on which algorithm to use, and grows with each new one."
+    solution: "Give each algorithm its own class or function with the same signature, and pass one in."
+    when: "You swap decoding methods, loss functions or retrieval scorers."
+    avoid: "There is one algorithm and no plan for a second."
+    example: |
+      DECODERS = {"greedy": greedy, "top_k": top_k, "nucleus": nucleus}
+
+      def generate(model, prompt, decoder="nucleus"):
+          return DECODERS[decoder](model, prompt)
+    related: [state, template-method, bridge]
+
+  - id: template-method
+    name: Template Method
+    group: behavioural
+    intent: "Fix the order of steps in a base class and let subclasses fill in some steps."
+    problem: "Several classes repeat the same outline and differ only in a few steps."
+    solution: "The base class runs the outline and calls hooks that subclasses override."
+    when: "Every variant must follow the same sequence, such as load, clean, train, evaluate."
+    avoid: "Subclasses need to change the order; use composition and strategies instead."
+    example: |
+      class Experiment:
+          def run(self):
+              data = self.load()
+              model = self.train(self.preprocess(data))
+              return self.evaluate(model, data)
+          def preprocess(self, data): return data   # optional hook
+
+      class SentimentExperiment(Experiment):
+          def load(self): ...
+          def train(self, data): ...
+          def evaluate(self, model, data): ...
+    related: [strategy, factory-method]
+
+  - id: visitor
+    name: Visitor
+    group: behavioural
+    intent: "Add a new operation over a structure of objects without changing their classes."
+    problem: "You keep adding operations, such as counting or printing, to every node class."
+    solution: "Put each operation in a visitor class with one method per node type."
+    when: "The node types are stable but the operations keep growing, as in a compiler or a model graph."
+    avoid: "Node types change often; every new type touches every visitor."
+    example: |
+      class ParamCounter:
+          def visit(self, node):
+              method = getattr(self, "visit_" + type(node).__name__, self.generic)
+              return method(node)
+          def visit_Linear(self, n): return n.in_f * n.out_f + n.out_f
+          def generic(self, n): return sum(self.visit(c) for c in n.children)
+    related: [composite, iterator]
+
+smells:
+  - id: long-function
+    name: Long function
+    family: Bloaters
+    sign: "You scroll to read it, and comments separate its sections."
+    fixes: [Extract function, Replace temp with query, Decompose conditional]
+    patterns: [template-method]
+    refactoring: extract-function
+  - id: large-class
+    name: Large class
+    family: Bloaters
+    sign: "Many fields, many methods, and a name like Manager or Utils."
+    fixes: [Extract class, Extract superclass]
+    patterns: [facade, strategy]
+  - id: long-params
+    name: Long parameter list
+    family: Bloaters
+    sign: "Calls pass 6 or more arguments, often the same few together."
+    fixes: [Introduce parameter object, Preserve whole object]
+    patterns: [builder]
+    refactoring: parameter-object
+  - id: duplicated
+    name: Duplicated code
+    family: Dispensables
+    sign: "The same few lines appear in 2 places, with small differences."
+    fixes: [Extract function, Pull up method, Form template method]
+    patterns: [template-method]
+  - id: switch
+    name: Repeated switch on type
+    family: Object-orientation abusers
+    sign: "The same if-elif chain on a type or name appears in several functions."
+    fixes: [Replace conditional with polymorphism, Replace type code with subclasses]
+    patterns: [strategy, state]
+    refactoring: polymorphism
+  - id: feature-envy
+    name: Feature envy
+    family: Couplers
+    sign: "A function uses another object's fields more than its own."
+    fixes: [Move function, Extract function]
+    patterns: [visitor]
+    refactoring: move-function
+  - id: message-chains
+    name: Message chains
+    family: Couplers
+    sign: "Code like run.config.model.encoder.layers[0].size."
+    fixes: [Hide delegate, Extract function]
+    patterns: [facade]
+  - id: shotgun
+    name: Shotgun surgery
+    family: Change preventers
+    sign: "One small change forces edits in many files."
+    fixes: [Move function, Move field, Combine functions into class]
+    patterns: [factory-method, abstract-factory]
+  - id: divergent
+    name: Divergent change
+    family: Change preventers
+    sign: "One class changes for several unrelated reasons."
+    fixes: [Split phase, Extract class]
+    patterns: [bridge, strategy]
+
+refactorings:
+  - id: extract-function
+    name: Extract function
+    smell: Long function
+    why: "Give a block of code a name, so the long function reads as a list of steps."
+    before: |
+      def evaluate(model, loader):
+          model.eval()
+          correct, total = 0, 0
+          for x, y in loader:
+              pred = model(x).argmax(dim=1)
+              correct += (pred == y).sum().item()
+              total += len(y)
+          acc = correct / total
+          print(f"accuracy {acc:.3f}")
+          wandb.log({"acc": acc})
+          return acc
+    after: |
+      def evaluate(model, loader):
+          acc = accuracy(model, loader)
+          report(acc)
+          return acc
+
+      def accuracy(model, loader):
+          model.eval()
+          correct = total = 0
+          for x, y in loader:
+              correct += (model(x).argmax(dim=1) == y).sum().item()
+              total += len(y)
+          return correct / total
+
+      def report(acc):
+          print(f"accuracy {acc:.3f}")
+          wandb.log({"acc": acc})
+  - id: polymorphism
+    name: Replace conditional with polymorphism
+    smell: Repeated switch on type
+    why: "Each branch becomes a strategy, so a new case is a new class instead of an edit to every chain."
+    before: |
+      def loss(kind, pred, target):
+          if kind == "mse":
+              return ((pred - target) ** 2).mean()
+          elif kind == "mae":
+              return (pred - target).abs().mean()
+          elif kind == "huber":
+              return F.huber_loss(pred, target)
+          raise ValueError(kind)
+    after: |
+      LOSSES = {
+          "mse":   lambda p, t: ((p - t) ** 2).mean(),
+          "mae":   lambda p, t: (p - t).abs().mean(),
+          "huber": F.huber_loss,
+      }
+
+      def loss(kind, pred, target):
+          return LOSSES[kind](pred, target)
+  - id: parameter-object
+    name: Introduce parameter object
+    smell: Long parameter list
+    why: "Arguments that travel together become one object, with one place to validate them."
+    before: |
+      def train(model, data, lr, batch_size, epochs,
+                weight_decay, warmup, grad_clip, seed):
+          ...
+
+      train(model, data, 3e-4, 32, 10, 0.01, 500, 1.0, 42)
+    after: |
+      @dataclass(frozen=True)
+      class TrainConfig:
+          lr: float = 3e-4
+          batch_size: int = 32
+          epochs: int = 10
+          weight_decay: float = 0.01
+          warmup: int = 500
+          grad_clip: float = 1.0
+          seed: int = 42
+
+      def train(model, data, cfg: TrainConfig): ...
+
+      train(model, data, TrainConfig(epochs=10))
+  - id: move-function
+    name: Move function
+    smell: Feature envy
+    why: "Put the function next to the data it reads, so a change to that data happens in one place."
+    before: |
+      def is_long_enough(example, tokenizer):
+          ids = tokenizer.encode(example.text)
+          return len(ids) >= example.min_tokens and len(ids) <= example.max_tokens
+    after: |
+      @dataclass
+      class Example:
+          text: str
+          min_tokens: int
+          max_tokens: int
+
+          def fits(self, tokenizer):
+              n = len(tokenizer.encode(self.text))
+              return self.min_tokens <= n <= self.max_tokens

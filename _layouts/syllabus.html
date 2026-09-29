@@ -96,12 +96,19 @@ layout: default
     </div>
   </section>
 
+  {% comment %}
+    Interactive explainers, one include per entry in the page's `explainers:`
+    front matter. Each include brings its own heading and attribution line; its
+    behaviour lives in the component the page loads through `extra_js`.
+  {% endcomment %}
+  {% for xp in page.explainers %}{% capture xp_file %}explainers/{{ xp }}.html{% endcapture %}{% include {{ xp_file }} %}{% endfor %}
+
   <details class="ivm-legend">
     <summary>
       <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
       Notation used on this page
     </summary>
-    <p class="ivm-legend-lead">These symbols keep the same meaning across all 26 tracks. Symbols used only in a module are defined below its equations.</p>
+    <p class="ivm-legend-lead">These symbols keep the same meaning across all {{ site.data.interview.topics | size }} tracks. Symbols used only in a module are defined below its equations.</p>
     {% for grp in site.data.interview_math.notation %}
     <div class="ivm-legend-group">
       <h3>{{ grp.group }}</h3>

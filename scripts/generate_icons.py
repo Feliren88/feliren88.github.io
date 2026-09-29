@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the interview icon set.
 
-Single source of truth for 32 icons. Emits four things from the one ICONS list,
+Single source of truth for 34 icons. Emits four things from the one ICONS list,
 so the standalone files and the sprite can never drift apart:
 
     icons/<name>.svg          standalone, self-contained, currentColor
@@ -38,7 +38,7 @@ SPRITE = os.path.join(HERE, "_includes", "interview-icons.html")
 
 # (name, group, one-line note on what it depicts, [elements])
 #
-# Names for the twenty-six track icons match the topic ids in _data/interview.yml
+# Names for the twenty-eight track icons match the topic ids in _data/interview.yml
 # on purpose. That lets the templates resolve an icon with {{ topic.id }} and no
 # lookup table, which is worth more than naming each one after its shape.
 ICONS = [
@@ -77,6 +77,15 @@ ICONS = [
         '<rect x="6.5" y="6.5" width="11" height="11" rx="2"/>',
         '<path d="M9.5 6.5V3.5M14.5 6.5V3.5M9.5 20.5V17.5M14.5 20.5V17.5"/>',
         '<path d="M6.5 9.5H3.5M6.5 14.5H3.5M20.5 9.5H17.5M20.5 14.5H17.5"/>',
+    ]),
+    ("design-patterns", "tracks", "One class above two implementations, joined through a shared interface", [
+        '<rect x="8" y="3" width="8" height="6" rx="1.5"/>',
+        '<rect x="3" y="15" width="7" height="6" rx="1.5"/>',
+        '<rect x="14" y="15" width="7" height="6" rx="1.5"/>',
+        '<path d="M12 9v3M6.5 12h11M6.5 12v3M17.5 12v3"/>',
+    ]),
+    ("north-star-metrics", "tracks", "A four-pointed star, the one fixed point to steer by", [
+        '<path d="M12 3L14 10L21 12L14 14L12 21L10 14L3 12L10 10Z"/>',
     ]),
     ("frequentist-statistics", "tracks", "One sampling distribution with both tails marked off", [
         '<path d="M3 19h18"/>',

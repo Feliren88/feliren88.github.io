@@ -1,0 +1,66 @@
+{%- assign ns = site.data.north_star -%}
+<section class="xp" id="xp-nsm" aria-labelledby="xp-nsm-title">
+  <header class="xp-head">
+    <span class="syl-phase">Explore it first</span>
+    <h2 id="xp-nsm-title">Choose a north star for a business</h2>
+    <p>Pick how a business makes money. The panel shows the kind of north star that usually fits, the metric real companies chose, the inputs teams would own, and the guardrail that keeps the number honest. Then test a metric of your own against 6 questions.</p>
+  </header>
+  <div class="xp-body tf" data-xp="nsm">
+    <div class="xp-pills" role="group" aria-label="Business model">
+      {%- for m in ns.models %}
+      <button type="button" data-model="{{ m.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ m.name }}</button>
+      {%- endfor %}
+    </div>
+    {%- for m in ns.models %}{% assign cat = ns.categories | where: 'id', m.category | first %}
+    <article class="xp-nsm" data-for="{{ m.id }}"{% unless forloop.first %} hidden{% endunless %}>
+      <div class="xp-nsm-main">
+        <p class="xp-nsm-earns">{{ m.earns }}</p>
+        <p class="xp-nsm-cat">Usual kind of north star: <b>{{ cat.name }}</b></p>
+        <p>{{ m.why }}</p>
+        <table class="xp-table is-compact">
+          <caption>What companies with this model chose</caption>
+          <thead><tr><th scope="col">Company</th><th scope="col">North star</th></tr></thead>
+          <tbody>{% for c in m.companies %}<tr><th scope="row">{{ c[0] }}</th><td>{{ c[1] }}</td></tr>{% endfor %}</tbody>
+        </table>
+      </div>
+      <figure class="xp-tree">
+        <figcaption>A metric tree for {{ m.companies[0][1] | downcase }}</figcaption>
+        <div class="xp-tree-root">{{ m.companies[0][1] }}</div>
+        <ul class="xp-tree-kids">{% for t in m.tree %}<li>{{ t }}</li>{% endfor %}</ul>
+        <p class="xp-tree-guard"><b>Guardrail</b> {{ m.guard }}</p>
+      </figure>
+    </article>
+    {%- endfor %}
+
+    <div class="xp-nsm-grid">
+      <figure class="xp-cats">
+        <figcaption>How often each kind was named, as a share of companies surveyed</figcaption>
+        <ol>
+          {%- for c in ns.categories %}
+          <li><span>{{ c.name }}</span><span class="xp-bar-track"><i style="width:{{ c.share | times: 2 }}%"></i></span><b>about {{ c.share }}%</b><small>{{ c.examples }}</small></li>
+          {%- endfor %}
+        </ol>
+        <p class="xp-note">A company could name more than one kind, so the shares add up to more than 100%.</p>
+      </figure>
+
+      <form class="xp-check" data-check aria-labelledby="xp-check-title">
+        <h3 id="xp-check-title">Test your own metric</h3>
+        <label class="xp-field is-stack"><span>Your metric</span><input type="text" data-metric placeholder="e.g. weekly active teams" autocomplete="off"></label>
+        <fieldset>
+          <legend>Tick what is true of it</legend>
+          {%- for q in ns.checklist %}
+          <label><input type="checkbox" value="{{ q.id }}"> {{ q.q }}</label>
+          {%- endfor %}
+        </fieldset>
+        <output class="xp-verdict" aria-live="polite"></output>
+      </form>
+    </div>
+
+    <div class="xp-history">
+      <h3>North stars change</h3>
+      <p class="xp-note">About a quarter of the companies surveyed had recently changed theirs. A new business model usually means a new metric.</p>
+      <ul>{% for h in ns.history %}<li><b>{{ h[0] }}</b> {{ h[1] }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  <p class="xp-source">Company examples, category shares and history are as reported by Lenny Rachitsky, <a href="https://future.com/north-star-metrics/" rel="noopener noreferrer">Choosing Your North Star Metric</a>, Future (a16z), 2021, from a survey of companies. The metric trees, guardrails and checklist are my own, written as examples rather than as those companies' internal metrics.</p>
+</section>

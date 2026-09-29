@@ -1,5 +1,5 @@
 /**
- * Interview revision: /interview/ and the twenty-six syllabus pages.
+ * Interview revision: /interview/ and one syllabus page per track.
  *
  * Three jobs:
  *   1. Turn each module's `viz` block into a diagram (BUILD, eight archetypes)

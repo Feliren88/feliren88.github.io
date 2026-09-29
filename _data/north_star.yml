@@ -1,0 +1,146 @@
+# Content for the north star explainer on /north-star-metrics/.
+# Hand-written. House style applies: British spelling, short sentences, no em dashes.
+#
+# Company examples, category shares and history are as reported by Lenny
+# Rachitsky, "Choosing Your North Star Metric", Future (a16z), 15 June 2021:
+# https://future.com/north-star-metrics/. The survey let a company name more
+# than one category, so the shares add up to more than 100. The advice, the
+# checklist and the input trees are written for this site.
+
+categories:
+  - id: revenue
+    name: Revenue
+    share: 50
+    examples: "Recurring revenue, gross merchandise value"
+    inputs: [Price, Customers paying, Spend per customer]
+  - id: customers
+    name: Customer growth
+    share: 35
+    examples: "Paying users, market share"
+    inputs: [Activation, Conversion to paid, Churn]
+  - id: consumption
+    name: Consumption
+    share: 30
+    examples: "Messages sent, nights booked"
+    inputs: [Traffic, Conversion, Supply, Repeat use]
+  - id: engagement
+    name: Engagement
+    share: 30
+    examples: "Daily, weekly or monthly active users"
+    inputs: [New users, Onboarding, Friction in the core action, Retention]
+  - id: efficiency
+    name: Growth efficiency
+    share: 10
+    examples: "Unit margin, lifetime value over acquisition cost"
+    inputs: [Acquisition cost, Lifetime value, Churn]
+  - id: experience
+    name: User experience
+    share: 10
+    examples: "Net promoter score"
+    inputs: [Usability, Feature quality, Speed of the core workflow]
+
+models:
+  - id: marketplace
+    name: Marketplace or platform
+    earns: "Takes a cut of each transaction."
+    category: consumption
+    why: "Money arrives with each transaction, so count the transactions. They also show both sides of the market are healthy."
+    companies:
+      - [Airbnb, Nights booked]
+      - [Uber, Rides taken]
+      - [Cameo, Orders placed]
+      - [Twilio, Messages sent]
+      - [Plaid, Bank accounts linked]
+    tree: [Visitors, Search to booking, Supply available, Repeat bookings]
+    guard: "Cancellations and the share of listings that never sell"
+  - id: paid-growth
+    name: Brand that buys its growth
+    earns: "Sells products and pays heavily for customers."
+    category: efficiency
+    why: "If each customer costs more than they return, faster growth loses money faster. Efficiency comes first."
+    companies:
+      - [Blue Apron, Per-unit margin]
+      - [Casper, Per-unit margin]
+      - [Hims, Per-unit margin]
+      - [Calm, Lifetime value over acquisition cost]
+    tree: [Cost to acquire, First purchase margin, Repeat purchases, Churn]
+    guard: "New customer growth, so efficiency is not bought by stopping growth"
+  - id: team-saas
+    name: Freemium software for teams
+    earns: "Free to start, paid seats for teams."
+    category: customers
+    why: "Value shows up when a team uses the product together, and money when it pays. Count active or paying teams."
+    companies:
+      - [Slack, Paid teams]
+      - [Airtable, Weekly paid seats]
+      - [Asana, Weekly active paid users]
+      - [HubSpot, Weekly active users]
+      - [Dropbox, Teams on its business product]
+    tree: [Sign-ups, Teammates invited, Weekly active teams, Upgrades to paid]
+    guard: "Seat churn and support tickets per team"
+  - id: ugc
+    name: Subscription built on user content
+    earns: "Viewers subscribe to what creators make."
+    category: consumption
+    why: "The product works when content is made and watched. Count both sides of that exchange."
+    companies:
+      - [Twitch, Five-minute plays]
+      - [Loom, Videos created and viewed]
+    tree: [Creators publishing, Content discovered, Minutes watched, Viewers returning]
+    guard: "Creator retention and reports of harmful content"
+  - id: ads
+    name: Ad-funded product
+    earns: "Sells attention to advertisers."
+    category: engagement
+    why: "Revenue follows the attention users give, so count how often they come back."
+    companies:
+      - [Facebook, Daily active users]
+      - [Snap, Daily active users]
+      - [Pinterest, Weekly active users]
+      - [Spotify podcasts, Monthly active users]
+    tree: [New users, Activation, Sessions per user, Retention]
+    guard: "Time well spent, ad load and user reports"
+  - id: consumer-sub
+    name: Consumer subscription
+    earns: "Individuals pay a monthly or yearly plan."
+    category: engagement
+    why: "People keep paying while they keep using it. Engagement predicts renewal; some count paying customers directly."
+    companies:
+      - [Duolingo, Daily active users]
+      - [Strava, Monthly active users]
+      - [Tinder, Share of paid accounts]
+      - [Patreon, Creators earning above a threshold]
+    tree: [Trials started, Habit formed, Weekly use, Renewals]
+    guard: "Refunds and cancellation reasons"
+  - id: experience
+    name: Product that wins on experience
+    earns: "Charges a premium for being better to use."
+    category: experience
+    why: "The product's edge is how it feels. Measure satisfaction and protect it from growth tactics."
+    companies:
+      - [Robinhood, Net promoter score]
+      - [Superhuman, Net promoter score]
+      - [Duolingo, Learning progress on a language scale]
+    tree: [Speed of the core task, Errors per session, Feature quality, Support contacts]
+    guard: "Growth, so the product is not polished for a shrinking group"
+
+checklist:
+  - id: value
+    q: "It counts value customers receive, not effort the company spends."
+  - id: leading
+    q: "It tends to rise before revenue does."
+  - id: movable
+    q: "Teams can move it through their inputs within a quarter."
+  - id: frequent
+    q: "It can be measured at least every week."
+  - id: guarded
+    q: "Raising it while hurting users would show up in a guardrail."
+  - id: simple
+    q: "Anyone in the company can say it and explain why it matters."
+
+history:
+  - [Netflix, "DVD delivery rates, then 15 minutes of viewing, then median view hours per month"]
+  - [Dropbox, "Monthly active users, then paying customers, as it moved to businesses"]
+  - [Figma, "Revenue, then market share"]
+  - [Uber, "Revenue, then market share"]
+  - [Spotify, "Added consumption when podcasts launched"]

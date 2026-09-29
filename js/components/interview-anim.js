@@ -745,6 +745,86 @@
       ]
     },
 
+    /* ── Design patterns: an if-chain becoming strategies ──────── */
+    refactor: {
+      title: 'Same behaviour, better shape',
+      lead: 'Refactor a branching function into strategies without breaking a test.',
+      build: function () {
+        var s = '';
+        /* The tangled function: one box, three branches inside it. */
+        s += el('g', { 'data-from': 0, 'class': 'an-fade' },
+          rect({ x: 24, y: 28, width: 150, height: 150, rx: 8, 'class': 'an-box' }) +
+          text('train(model_type)', { x: 99, y: 50, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          ['if "cnn": …', 'elif "rnn": …', 'elif "vit": …'].map(function (t, i) {
+            return text(t, { x: 40, y: 84 + i * 30, 'class': 'an-lab' });
+          }).join(''));
+        s += el('g', { 'data-from': 1, 'class': 'an-fade' },
+          rect({ x: 24, y: 190, width: 150, height: 22, rx: 5, 'class': 'an-panel' }) +
+          text('tests pass', { x: 99, y: 205, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        /* Each branch moves into its own class. */
+        s += el('g', { 'data-from': 2, 'class': 'an-fade' },
+          ['CnnTrainer', 'RnnTrainer', 'VitTrainer'].map(function (t, i) {
+            return rect({ x: 320, y: 28 + i * 52, width: 130, height: 36, rx: 7, 'class': 'an-box' }) +
+              text(t, { x: 385, y: 51 + i * 52, 'text-anchor': 'middle', 'class': 'an-t' });
+          }).join('') +
+          el('path', { d: 'M180 98 L312 98', 'class': 'an-arrow' }));
+        /* The caller looks one up instead of branching. */
+        s += el('g', { 'data-from': 3, 'class': 'an-fade' },
+          rect({ x: 196, y: 150, width: 90, height: 36, rx: 7, 'class': 'an-box' }) +
+          text('registry', { x: 241, y: 173, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          el('path', { d: 'M286 158 L316 50M286 166 L316 102M286 174 L316 154', 'class': 'an-arrow' }));
+        s += el('g', { 'data-from': 4, 'class': 'an-fade' },
+          rect({ x: 320, y: 190, width: 130, height: 22, rx: 5, 'class': 'an-panel' }) +
+          text('tests still pass', { x: 385, y: 205, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        return el('svg', { viewBox: '0 0 470 220', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A branching function split into three strategy classes chosen by a registry' }, s);
+      },
+      beats: [
+        { step: 'One function, three branches', say: 'A training function branches on the model type. Every new model means editing it again.' },
+        { step: 'Pin the behaviour', say: 'Before moving anything, make sure tests cover each branch. They are the safety net.' },
+        { step: 'Extract each branch', say: 'Move each branch into its own class with the same method. This is the Strategy pattern.' },
+        { step: 'Look it up', say: 'The caller asks a registry for the right strategy instead of branching. A new model is a new class, not an edit.' },
+        { step: 'Behaviour unchanged', say: 'The tests still pass. The shape changed and the behaviour did not. That is what makes it a refactoring.' }
+      ]
+    },
+
+    /* ── North star metrics: a metric tree ────────────────────── */
+    metrictree: {
+      title: 'One number, many levers',
+      lead: 'Break a north star into inputs a team can move, then guard it.',
+      build: function () {
+        var s = '';
+        s += el('g', { 'data-from': 0, 'class': 'an-fade' },
+          rect({ x: 165, y: 16, width: 140, height: 36, rx: 7, 'class': 'an-box' }) +
+          text('Rides taken', { x: 235, y: 39, 'text-anchor': 'middle', 'class': 'an-t' }));
+        var inputs = [['New riders', 30], ['Rides per rider', 175], ['Drivers online', 320]];
+        s += el('g', { 'data-from': 1, 'class': 'an-fade' },
+          inputs.map(function (n) {
+            return el('path', { d: 'M235 52 L' + (n[1] + 60) + ' 92', 'class': 'an-arrow' }) +
+              rect({ x: n[1], y: 92, width: 120, height: 32, rx: 7, 'class': 'an-box' }) +
+              text(n[0], { x: n[1] + 60, y: 113, 'text-anchor': 'middle', 'class': 'an-t' });
+          }).join(''));
+        s += el('g', { 'data-from': 2, 'class': 'an-fade' },
+          [['Growth team', 30], ['Product team', 175], ['Supply team', 320]].map(function (n) {
+            return text(n[0], { x: n[1] + 60, y: 144, 'text-anchor': 'middle', 'class': 'an-lab' });
+          }).join(''));
+        s += el('g', { 'data-from': 3, 'class': 'an-fade' },
+          rect({ x: 30, y: 164, width: 410, height: 22, rx: 5, 'class': 'an-panel' }) +
+          text('guardrails: cancellations, wait time, driver earnings', { x: 235, y: 179, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        s += el('g', { 'data-from': 4, 'class': 'an-fade' },
+          text('a rise that breaks a guardrail is not a win', { x: 235, y: 208, 'text-anchor': 'middle', 'class': 'an-lab is-warn' }));
+        return el('svg', { viewBox: '0 0 470 220', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A north star metric broken into three input metrics, each owned by a team, with guardrails below' }, s);
+      },
+      beats: [
+        { step: 'The north star', say: 'A ride-hailing company steers by rides taken. It counts the job customers hire the product for.' },
+        { step: 'Break it into inputs', say: 'Rides come from new riders, from existing riders riding more, and from enough drivers online to serve them.' },
+        { step: 'Give each an owner', say: 'Each input belongs to one team. The team can ship a change and see its input move within weeks.' },
+        { step: 'Add guardrails', say: 'Some things must not get worse while rides rise: cancellations, wait times, what drivers earn.' },
+        { step: 'Read the result', say: 'If rides rise and a guardrail breaks, the metric was gamed. Report the two together.' }
+      ]
+    },
+
     /* ── Computer vision: a feature map being built ───────────── */
     convmap: {
       title: 'How a feature map gets made',
@@ -1337,7 +1417,9 @@
     'image-generation': 'denoise',
     'math': 'average',
     'math-proof': 'induction',
-    'computer-science': 'fetchcost'
+    'computer-science': 'fetchcost',
+    'design-patterns': 'refactor',
+    'north-star-metrics': 'metrictree'
   };
 
   /* ════════════════════════════════════════════════════════

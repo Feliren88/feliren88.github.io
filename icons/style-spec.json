@@ -8,7 +8,7 @@
   "cornerRadius": 2,
   "padding": 2,
   "opticalBalance": true,
-  "iconCount": 32,
+  "iconCount": 34,
   "icons": [
     "bayesian-statistics",
     "linear-algebra",
@@ -16,6 +16,8 @@
     "math",
     "math-proof",
     "computer-science",
+    "design-patterns",
+    "north-star-metrics",
     "frequentist-statistics",
     "machine-learning",
     "deep-learning",

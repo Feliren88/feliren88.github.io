@@ -34,7 +34,7 @@ flowchart TD
 
     P --> P1["/about/ /research/<br/>/writings/ /contact/<br/>essays"]
     U --> U1["22 use case pages<br/>read from _data/usecases.yml"]
-    S --> S1["26 syllabus pages<br/>read from _data/interview.yml"]
+    S --> S1["28 syllabus pages<br/>read from _data/interview.yml"]
 ```
 
 `default.html` holds no markup of its own. It is a list of includes, one per
@@ -139,7 +139,7 @@ feliren88.github.io/
 │   ├── awards.md  thoughts.md  contact.md  project.md  goal-hijack-probe.md
 │   ├── usecases.md    # Listing page
 │   ├── usecases/      # 22 detail pages
-│   ├── interview/     # 26 syllabus pages, unlisted
+│   ├── interview/     # 28 syllabus pages, unlisted
 │   └── essays/        # Long-form essays
 ├── _data/             # All page content, as YAML
 ├── scripts/           # Generators, verifiers, audits. Not published

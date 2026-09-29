@@ -5464,6 +5464,209 @@ topics:
       - Profile a training step and name where the time actually goes
 
   # ── Models ───────────────────────────────────────────────────────────────
+  - id: design-patterns
+    name: Design Patterns and Refactoring
+    group: systems
+    blurb: "Name the structure in a codebase, say which change it makes cheap, and reshape it without breaking behaviour."
+    scope: "Study the classic object-oriented patterns and the refactoring moves that lead to them. Use computer science for algorithms and MLOps for how code reaches production."
+    links: [computer-science, mlops]
+    modules:
+      - name: Why patterns exist
+        why: "A pattern is a named answer to a recurring design problem, so a team can discuss structure in one word."
+        plain:
+          - >-
+              The same design problems keep returning. You need to swap an algorithm,
+              wrap a library, or tell several objects that something changed.
+          - >-
+              A pattern names the problem, the usual solution and its cost. Naming it
+              lets you say "use a strategy here" instead of drawing the classes again.
+        covers:
+          - A pattern as problem, solution and consequences
+          - The catalogue of 22 classic patterns in 3 groups
+          - Coupling and cohesion
+          - Program to an interface, not an implementation
+          - Prefer composition to inheritance
+          - When a pattern costs more than it saves
+        check: "Name a pattern you have used and the change it made cheaper."
+        viz:
+          type: parts
+          centre: A pattern
+          around: [A recurring problem, A known solution, Its consequences, A shared name]
+        beats:
+          - "Every pattern has the same 4 parts around it. Learn the parts and any new pattern is quick to read."
+          - "It starts from a problem that keeps coming back, in many codebases and languages."
+          - "The solution is a shape of classes and calls. It is a template, not code to paste."
+          - "Every solution has a price, usually more indirection. A pattern you cannot justify is just extra classes."
+          - "The name is what makes it useful in conversation. One word replaces a whiteboard of boxes."
+      - name: Creational patterns
+        why: "Creational patterns separate how an object is built from the code that uses it."
+        plain:
+          - >-
+              Code that builds objects and code that uses them change for different
+              reasons. Mixing them means every new variant touches the caller.
+          - >-
+              Creational patterns move construction behind one seam. A factory picks
+              the class, a builder assembles it in steps, and a prototype copies it.
+        covers:
+          - Factory Method
+          - Abstract Factory
+          - Builder
+          - Prototype
+          - Singleton, and why it is often a global in disguise
+          - Dependency injection as the everyday form of these ideas
+        check: "Your training script builds a different optimiser for each config file. Which pattern keeps that choice out of the training loop?"
+        viz:
+          type: compare
+          cols:
+          - k: Choose which class
+            items: [Factory Method, Abstract Factory]
+          - k: Assemble in steps
+            items: [Builder]
+          - k: Copy or share one
+            items: [Prototype, Singleton]
+        beats:
+          - "When the caller should not know the concrete class, a factory decides. An abstract factory decides a whole matching family at once."
+          - "When an object needs many optional parts, a builder assembles it step by step and checks it before handing it over."
+          - "When building is expensive, copy a configured prototype. When exactly one must exist, a singleton guards it, and hides a global."
+      - name: Structural patterns
+        why: "Structural patterns connect objects so each part stays small and replaceable."
+        plain:
+          - >-
+              Systems grow by combining parts that were not designed together. Their
+              interfaces rarely match, and the combinations multiply.
+          - >-
+              Structural patterns put a thin layer between parts. The layer translates,
+              adds behaviour or hides detail, and the parts stay unchanged.
+        covers:
+          - Adapter
+          - Facade
+          - Decorator
+          - Proxy
+          - Composite
+          - Bridge and Flyweight
+        check: "You must support 3 vector databases behind one retrieval call. Which pattern, and what does the rest of the code depend on?"
+        viz:
+          type: tree
+          root: Put a layer between parts
+          branches:
+          - k: Change the interface
+            items: [Adapter, Facade]
+          - k: Add behaviour
+            items: [Decorator, Proxy]
+          - k: Organise many objects
+            items: [Composite, Bridge, Flyweight]
+        beats:
+          - "Every structural pattern adds a layer between parts that were not built to fit. The question is what the layer is for."
+          - "An adapter makes one interface look like another. A facade makes a whole subsystem look like one simple call."
+          - "A decorator adds behaviour, such as caching or retries, with the same interface. A proxy controls access to the real object."
+          - "A composite treats a tree of objects like one. A bridge splits 2 dimensions of variation, and a flyweight shares repeated state."
+      - name: Behavioural patterns
+        why: "Behavioural patterns decide which object does what, and how objects communicate."
+        plain:
+          - >-
+              Most bugs in large systems come from unclear responsibility. Nobody knows
+              which object decides, or who needs to hear about a change.
+          - >-
+              Behavioural patterns assign that responsibility. A strategy owns an
+              algorithm, an observer is told about changes, a command is an action held as an object.
+        covers:
+          - Strategy and State
+          - Observer
+          - Command
+          - Template Method
+          - Chain of Responsibility and Mediator
+          - Iterator, Memento and Visitor
+        check: "Explain the difference between Strategy and State with one example of each."
+        viz:
+          type: matrix
+          x: [One object decides, Many objects take part]
+          "y": [Vary how it works, Coordinate who acts]
+          cells: [Strategy and State, Chain of Responsibility, Command and Template Method, Observer and Mediator]
+        beats:
+          - "One object, swapping how it works: a strategy is chosen from outside, a state changes itself as it goes."
+          - "Many objects, varying the handling: a request passes along a chain until one handler takes it."
+          - "One object, coordinating the steps: a command wraps an action so it can be queued or undone, and a template method fixes the order of steps."
+          - "Many objects, coordinating who acts: observers subscribe to changes, and a mediator stops everyone talking to everyone."
+      - name: Code smells
+        why: "A smell is a surface sign that the design is making change expensive."
+        plain:
+          - >-
+              A smell is not a bug. The code works. It is a hint that the next change
+              will be harder than it should be.
+          - >-
+              Smells are useful because they are easy to spot. Each one points to
+              a small set of refactorings that remove it.
+        covers:
+          - Long function and large class
+          - Duplicated code
+          - Long parameter list and data clumps
+          - Feature envy and message chains
+          - A switch on type repeated in many places
+          - Shotgun surgery and divergent change
+        check: "Adding a new model type means editing 7 files. Name the smell and the refactoring you would try first."
+        viz:
+          type: scale
+          lo: Inside one function
+          hi: Across the codebase
+          stops: [Long function, Duplicated code, Feature envy, Shotgun surgery]
+          'on': 3
+        beats:
+          - "Some smells sit inside one function. A long function is the easiest to see and the easiest to fix."
+          - "Duplicated code spreads the same logic around, so a fix in one copy leaves the others wrong."
+          - "Feature envy is a function that uses another object's data more than its own. It probably belongs over there."
+          - "Shotgun surgery is the worst: one change forces edits in many places. The design has scattered one idea."
+        scene:
+          kind: sets
+          cases:
+          - k: Bloaters
+            set: [Long function, Large class, Long parameter list]
+          - k: Couplers
+            set: [Feature envy, Message chains]
+          - k: Change preventers
+            set: [Shotgun surgery, Divergent change]
+          alt: "3 groups of code smells: bloaters, couplers and change preventers, each with its members listed."
+      - name: Refactoring safely
+        why: "Refactoring changes structure without changing behaviour, in steps small enough to verify."
+        plain:
+          - >-
+              A refactoring keeps what the code does and changes how it is arranged.
+              Tests are how you know behaviour stayed the same.
+          - >-
+              Work in small steps: one move, run the tests, commit. A step that
+              breaks something is easy to undo.
+        covers:
+          - Tests before you touch anything
+          - Extract function and extract class
+          - Move function to where its data lives
+          - Replace conditional with polymorphism
+          - Introduce parameter object
+          - Keep refactoring and behaviour changes in separate commits
+        check: "You inherit a 400-line training function with no tests. What are your first 3 steps?"
+        viz:
+          type: flow
+          steps: [Tests pass, Make one small change, Run the tests, Commit, Repeat]
+          loop: true
+        beats:
+          - "Start green. If there are no tests, write a few that pin today's behaviour, even if it looks wrong."
+          - "Make one small, named move, such as extracting a function or renaming a variable."
+          - "Run the tests. If they fail, undo the step rather than debugging a large diff."
+          - "Commit. Each commit is a safe point, and a reviewer can read it in a minute."
+          - "Repeat. Many boring steps add up to a large change that never broke anything."
+        scene:
+          kind: trace
+          steps: [Tests pass, Extract function, Tests pass, Commit]
+          bad: 9
+          alt: "4 steps of a refactoring loop, each ending with the tests still passing."
+    traps:
+      - "Adding a pattern before a second use case exists"
+      - "Using Singleton as a global variable with a nicer name"
+      - "Refactoring and changing behaviour in the same commit"
+      - "Naming a pattern without naming the change it makes cheaper"
+    drills:
+      - "Take a long function you wrote and extract 3 functions, running the tests after each step"
+      - "Replace an if-else chain over model names with a registry of strategies"
+      - "Wrap a third-party client in an adapter, then swap in a fake for a test"
+      - "Explain Observer and Mediator to a colleague with one example each"
   - id: transformers
     name: Transformers
     group: models
@@ -10682,6 +10885,206 @@ topics:
       - Give your 10-minute talk to a non-specialist and time it
       - Review 1 paper properly and compare with the public reviews
 
+  - id: north-star-metrics
+    name: North Star Metrics
+    group: judgement
+    blurb: "Choose the one number a product team steers by, break it into inputs teams can move, and defend it against the ways it misleads."
+    scope: "Study how a product metric is chosen, decomposed and guarded. Use frequentist statistics for experiments and MLOps for monitoring models in production."
+    links: [frequentist-statistics, mlops]
+    modules:
+      - name: What a north star metric is
+        why: "One shared top-line metric lines up every team's priorities behind the value customers get."
+        plain:
+          - >-
+              A north star metric is the number a company aligns its priorities around.
+              It measures the value customers get, not activity for its own sake.
+          - >-
+              It is an output. No team moves it directly. Teams move inputs, and the
+              north star is how you know whether those inputs mattered.
+        covers:
+          - The top-line metric priorities align around
+          - Value delivered to customers
+          - An output, driven by inputs
+          - A leading signal for revenue
+          - One metric, not a dashboard
+          - Your north star is your strategy
+        check: "Why might a company choose nights booked as its north star instead of revenue?"
+        viz:
+          type: stack
+          layers: [North star metric, Input metrics, Team projects, Daily decisions]
+        beats:
+          - "At the top, one number everyone can name. It says whether customers are getting value."
+          - "Below it, the inputs that drive it. These are what teams can actually move."
+          - "Each team picks projects aimed at its input, and can explain the link upward."
+          - "At the base, daily decisions. When 2 good ideas compete, the north star breaks the tie."
+      - name: Six kinds of north star
+        why: "Most north stars fall into 6 categories, and each suits a different way of making money."
+        plain:
+          - >-
+              In a survey of companies by Lenny Rachitsky, north stars fell into 6
+              groups. Revenue was the most common, used by about half.
+          - >-
+              The others measure customers, how much they consume, how engaged they
+              are, how efficiently growth is bought, or how good the experience is.
+        covers:
+          - Revenue, such as recurring revenue or gross merchandise value
+          - Customer growth, such as paid users or market share
+          - Consumption, such as messages sent or nights booked
+          - Engagement, such as daily or monthly active users
+          - Growth efficiency, such as margin or lifetime value over acquisition cost
+          - User experience, such as net promoter score
+        check: "Pick a product you use. Which of the 6 kinds fits it, and what exactly would you count?"
+        viz:
+          type: parts
+          centre: North star
+          around: [Revenue, Customer growth, Consumption, Engagement, Growth efficiency, User experience]
+        beats:
+          - "6 kinds cover most companies. Some use 2, but they rarely use more."
+          - "Revenue is the most common. It is also spiky and hard for any one team to move."
+          - "Customer growth counts paying users or market share."
+          - "Consumption counts the core action: rides, nights booked, messages sent."
+          - "Engagement counts how often people come back, as daily or monthly actives."
+          - "Growth efficiency matters when growth is bought, so margins and payback lead."
+          - "User experience leads when the product wins on quality, measured by satisfaction."
+        scene:
+          kind: sets
+          cases:
+          - k: Money
+            set: [Revenue, Growth efficiency]
+          - k: People
+            set: [Customer growth, Engagement]
+          - k: Use and quality
+            set: [Consumption, User experience]
+          alt: "The 6 kinds of north star metric in 3 groups: money, people, and use and quality."
+      - name: Matching the metric to the business
+        why: "The right kind of north star follows how the business creates and captures value."
+        plain:
+          - >-
+              A marketplace earns when a transaction happens, so it counts transactions.
+              An ad-funded app earns from attention, so it counts engagement.
+          - >-
+              Start from the job customers hire the product for. The north star should
+              count that job being done.
+        covers:
+          - Marketplaces count transactions, such as nights booked
+          - Paid-growth brands count unit margins or payback
+          - Team software counts active or paying teams
+          - User-generated content counts content made and watched
+          - Ad-funded products count daily or weekly actives
+          - Quality-led products count satisfaction
+        check: "A dating app earns from subscriptions. Would you choose daily actives or the share of paid accounts, and why?"
+        viz:
+          type: compare
+          cols:
+          - k: Earns per transaction
+            items: [Marketplaces, Payment and messaging APIs]
+          - k: Earns from attention
+            items: [Social apps, Streaming and video]
+          - k: Earns per seat or plan
+            items: [Team software, Consumer subscriptions]
+        beats:
+          - "If money arrives with each transaction, count transactions. Airbnb counts nights booked and Uber counts rides."
+          - "If money comes from attention, count attention. Ad-funded social apps count daily actives."
+          - "If money comes from seats or plans, count the accounts getting value, such as weekly active paid users."
+      - name: Inputs teams can move
+        why: "No team can move the north star directly, so each team owns an input that drives it."
+        plain:
+          - >-
+              Break the north star into the few quantities that multiply or add up to it.
+              This is a metric tree.
+          - >-
+              Give each input an owner. A team can then ship a change, watch its input
+              move, and check whether the north star followed.
+        covers:
+          - Output metrics and input metrics
+          - Metric trees
+          - Traffic, conversion and supply
+          - Activation, retention and churn
+          - Frequency and depth of use
+          - One owner for each input
+        check: "Break rides taken into 3 inputs, and name the team that owns each."
+        viz:
+          type: tree
+          root: Rides taken
+          branches:
+          - k: Riders
+            items: [New riders, Rides per rider]
+          - k: Drivers
+            items: [Active drivers, Time to pickup]
+          - k: Conversion
+            items: [Search to request]
+        beats:
+          - "Put the north star at the root. Every branch below should add to it or multiply into it."
+          - "Rider inputs: bring in new riders and get existing riders to ride more often."
+          - "Driver inputs: more drivers online and shorter pickups make each request more likely to succeed."
+          - "Conversion links the 2 sides: the share of searches that become booked rides."
+      - name: When the metric misleads
+        why: "Any single number can be gamed, or can crowd out the value it was meant to track."
+        plain:
+          - >-
+              When a measure becomes a target, people find ways to raise it without
+              raising what it stood for. This is Goodhart's law.
+          - >-
+              Pair the north star with guardrails: quality, retention, cost or complaints
+              that must not get worse while it rises.
+        covers:
+          - Goodhart's law
+          - Over-rotation and short-term thinking
+          - Guardrail metrics
+          - Quality metrics beside engagement
+          - Revenue as a spiky, hard-to-steer target
+          - Cohort retention before product-market fit
+        check: "Engagement rose 10% after a change. What would you check before celebrating?"
+        viz:
+          type: scale
+          lo: Tracks value
+          hi: Gamed
+          stops: [Measures real value, Proxy starts to drift, Target is gamed]
+          'on': 1
+        beats:
+          - "At first the metric and the value move together. That is why it was chosen."
+          - "Under pressure, cheap ways to raise the number appear, such as notifications that bring people back without helping them."
+          - "Push far enough and the number rises while the value falls. Guardrails are how you notice."
+        scene:
+          kind: trace
+          steps: [Choose a metric, Optimise it, Number rises, Users leave]
+          bad: 3
+          alt: "4 steps where optimising a metric raises the number while users leave."
+      - name: North stars for machine learning products
+        why: "A model metric like accuracy matters only through the product metric it moves."
+        plain:
+          - >-
+              Offline scores such as accuracy or ranking quality are cheap to compute
+              and easy to overfit. Customers never see them.
+          - >-
+              Link the model to an online proxy, the proxy to an input, and the input
+              to the north star. Test each link with an experiment.
+        covers:
+          - Offline metrics and online metrics
+          - Proxy metrics for slow outcomes
+          - A/B tests measured against inputs and the north star
+          - Guardrails for latency, cost and safety
+          - When a model changes what the metric means
+          - Revisiting the north star as the business changes
+        check: "Your recommender's offline ranking score improved but the north star did not move. Give 3 explanations."
+        viz:
+          type: flow
+          steps: [Offline model metric, Online proxy, Input metric, North star]
+        beats:
+          - "Start with the offline score. It tells you the model is better at the task you trained it on."
+          - "An online proxy, such as clicks, checks that users behave differently in production."
+          - "The proxy should move an input metric that a team owns, such as rides per rider."
+          - "Only then does the north star move. Any link in this chain can break, and an experiment is how you find which."
+    traps:
+      - "Choosing revenue by default and then finding no team can move it"
+      - "Choosing a metric teams cannot influence within a quarter"
+      - "Reporting a north star with no guardrails beside it"
+      - "Treating a model's offline score as the product outcome"
+    drills:
+      - "Write the north star and 3 input metrics for a product you have built"
+      - "Draw a metric tree from daily actives down to changes one team could ship"
+      - "Describe how a team could raise your chosen metric while hurting users"
+      - "Design an A/B test whose primary metric is an input and whose guardrail is the north star"
   - id: prompt-engineering
     name: Prompt Engineering
     group: judgement
