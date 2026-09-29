@@ -1,7 +1,7 @@
 stats:
-  - value: '1'
-    label: 'First-author journal paper'
-    detail: 'Published in IEEE Geoscience and Remote Sensing Letters, alongside a first-author navigation preprint.'
+  - count: publications   # value is the number of entries in _data/publications.yml
+    label: 'Publications'
+    detail: '3 journal articles, 4 conference papers, and 1 preprint, including 3 as first author.'
   - value: '5+ years'
     label: 'Industry and freelance ML'
     detail: 'Work across employed roles and freelance projects, including models for finance and city services.'

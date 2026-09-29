@@ -35,7 +35,7 @@ motion_scene: record
   <div id="stat-strip" class="stat-strip reveal-group" role="list" aria-label="Research and work record">
     {% for stat in site.data.about.stats %}
     <div class="stat-item reveal" role="listitem">
-      <span class="stat-value">{{ stat.value }}</span>
+      <span class="stat-value">{% if stat.count == 'publications' %}{{ site.data.publications | size }}{% else %}{{ stat.value }}{% endif %}</span>
       <span class="stat-label">{{ stat.label }}</span>
       <span class="stat-detail">{{ stat.detail }}</span>
     </div>
