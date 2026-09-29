@@ -125,7 +125,7 @@
       function () { return [0, 2]; },
       function (k, s) { return probs(s)[k] || 0; },
       function (x, s) { var p = probs(s); return x < 0 ? 0 : x < 1 ? p[0] : x < 2 ? p[0] + p[1] : 1; },
-      'A, B and C are ordered only for this CDF. Category order has no inherent meaning.'),
+      'The chart codes A as 0, B as 1, and C as 2. This order is only for the CDF; categories have no inherent order.'),
     'discrete-uniform': discrete('Discrete uniform', [knob('a', 'First integer', -5, 5, 1, 0), knob('n', 'Number of values', 2, 16, 1, 6)],
       function (s) { return [s.a, s.a + s.n - 1]; },
       function (k, s) { return k >= s.a && k < s.a + s.n ? 1 / s.n : 0; },
@@ -215,32 +215,9 @@
       function (x, s) { return x <= 0 ? 0 : betaI(s.d1 * x / (s.d1 * x + s.d2), s.d1 / 2, s.d2 / 2); })
   };
 
-  var FORMULAS = {
-    bernoulli: ['P(X=0)=1−p, P(X=1)=p', 'F(x)=0 below 0, 1−p from 0 to 1, and 1 from 1 onward'],
-    binomial: ['P(X=k)=C(n,k)p^k(1−p)^(n−k)', 'F(x)=Σ P(X=j), for j=0 to ⌊x⌋'],
-    geometric: ['P(X=k)=p(1−p)^(k−1), k≥1', 'F(x)=1−(1−p)^⌊x⌋, x≥1'],
-    'negative-binomial': ['P(X=k)=C(k+r−1,k)p^r(1−p)^k, k≥0', 'F(x)=Σ P(X=j), for j=0 to ⌊x⌋'],
-    hypergeometric: ['P(X=k)=C(K,k)C(50−K,n−k)/C(50,n)', 'F(x)=Σ P(X=j), over allowed j≤x'],
-    categorical: ['P(A)=a, P(B)=(1−a)b, P(C)=(1−a)(1−b)', 'F(A)=P(A), F(B)=P(A)+P(B), F(C)=1'],
-    'discrete-uniform': ['P(X=k)=1/n for k=a,…,a+n−1', 'F(x)=clamp((⌊x⌋−a+1)/n, 0, 1)'],
-    poisson: ['P(X=k)=e^(−λ)λ^k/k!', 'F(x)=Σ P(X=j), for j=0 to ⌊x⌋'],
-    uniform: ['f(x)=1/(b−a) for a≤x≤b', 'F(x)=clamp((x−a)/(b−a), 0, 1)'],
-    normal: ['f(x)=exp(−(x−μ)²/(2σ²))/(σ√(2π))', 'F(x)=Φ((x−μ)/σ), where Φ is the standard normal CDF'],
-    'student-t': ['f(x)=Γ((ν+1)/2)[1+(x/s)²/ν]^(-(ν+1)/2)/(s√(νπ)Γ(ν/2))', 'F(x)=∫ from −∞ to x of f(t)dt'],
-    exponential: ['f(x)=λe^(−λx) for x≥0', 'F(x)=1−e^(−λx) for x≥0'],
-    gamma: ['f(x)=x^(k−1)e^(−x/θ)/(Γ(k)θ^k) for x>0', 'F(x)=∫ from 0 to x of f(t)dt'],
-    'chi-square': ['f(x)=x^(ν/2−1)e^(−x/2)/(2^(ν/2)Γ(ν/2)) for x>0', 'F(x)=∫ from 0 to x of f(t)dt'],
-    beta: ['f(x)=x^(α−1)(1−x)^(β−1)/B(α,β) for 0<x<1', 'F(x)=∫ from 0 to x of f(t)dt'],
-    lognormal: ['f(x)=exp(−(ln x−μ)²/(2σ²))/(xσ√(2π)) for x>0', 'F(x)=Φ((ln x−μ)/σ) for x>0'],
-    weibull: ['f(x)=(k/λ)(x/λ)^(k−1)e^(−(x/λ)^k) for x>0', 'F(x)=1−e^(−(x/λ)^k) for x≥0'],
-    logistic: ['f(x)=e^(−(x−μ)/s)/(s(1+e^(−(x−μ)/s))²)', 'F(x)=1/(1+e^(−(x−μ)/s))'],
-    laplace: ['f(x)=e^(−|x−μ|/b)/(2b)', 'F(x)=½e^((x−μ)/b) below μ; 1−½e^(−(x−μ)/b) from μ onward'],
-    cauchy: ['f(x)=1/(πγ(1+((x−x₀)/γ)²))', 'F(x)=½+arctan((x−x₀)/γ)/π'],
-    rayleigh: ['f(x)=xe^(−x²/(2σ²))/σ² for x≥0', 'F(x)=1−e^(−x²/(2σ²)) for x≥0'],
-    pareto: ['f(x)=α/x^(α+1) for x≥1', 'F(x)=1−x^(−α) for x≥1'],
-    triangular: ['f(x)=x/(5c) for 0≤x≤c; (10−x)/(5(10−c)) for c<x≤10', 'F(x)=x²/(10c) for x≤c; 1−(10−x)²/(10(10−c)) for x>c'],
-    f: ['f(x)=(d₁/d₂)^(d₁/2)x^(d₁/2−1)/[B(d₁/2,d₂/2)(1+d₁x/d₂)^((d₁+d₂)/2)]', 'F(x)=∫ from 0 to x of f(t)dt']
-  };
+  var FORMULAS = typeof module !== 'undefined' && module.exports
+    ? require('./interview-distribution-math.js')
+    : window.INTERVIEW_DISTRIBUTION_FORMULAS;
 
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = { distributions: D, formulas: FORMULAS, betaI: betaI, gammaP: gammaP, normalCdf: normalCdf };
@@ -378,9 +355,10 @@
       '<div class="ivd-controls"><div class="ivd-params"></div><label class="ivd-cut-label"><span>Selected value <output></output></span><input type="range"></label></div>' +
       '<output class="ivd-result" aria-live="polite"></output><p class="ivd-note"></p>' +
       '<details class="ivd-formulas"><summary>Show the probability formulas</summary><dl>' +
-      '<div><dt class="ivd-formula-density-label"></dt><dd><code class="ivd-formula-density"></code></dd></div>' +
-      '<div><dt>CDF</dt><dd><code class="ivd-formula-cdf"></code></dd></div></dl>' +
-      '<p>Here C(n,k) counts combinations, Γ is the gamma function, B is the beta function, and Φ is the standard normal CDF. The brackets ⌊x⌋ mean round down, and clamp limits a value to the stated interval.</p></details></section>';
+      '<div><dt class="ivd-formula-density-label"></dt><dd class="ivd-formula-density"></dd></div>' +
+      '<div><dt>CDF</dt><dd class="ivd-formula-cdf"></dd></div></dl>' +
+      '<p class="ivd-formula-scroll-hint">Swipe sideways to read a long equation.</p>' +
+      '<p>The notation uses Γ for the gamma function, B for the beta function, I for the regularized incomplete beta function, P for the regularized lower incomplete gamma function, and Φ for the standard normal CDF. The sign function, sgn, returns −1, 0, or 1. Densities vanish beyond their support, while a density at a boundary may have a finite or infinite one-sided limit. The hypergeometric model draws from 50 items.</p></details></section>';
     var select = host.querySelector('select');
     var paramsHost = host.querySelector('.ivd-params');
     var cut = host.querySelector('.ivd-cut-label input');
@@ -429,8 +407,8 @@
     function setup(name) {
       id = name; state = {};
       densityFormulaLabel.textContent = D[id].type === 'discrete' ? 'PMF' : 'PDF';
-      densityFormula.textContent = FORMULAS[id][0];
-      cdfFormula.textContent = FORMULAS[id][1];
+      densityFormula.innerHTML = FORMULAS[id].density;
+      cdfFormula.innerHTML = FORMULAS[id].cdf;
       D[id].params.forEach(function (p) { state[p.key] = p.value; });
       paramsHost.textContent = '';
       D[id].params.forEach(function (p) {

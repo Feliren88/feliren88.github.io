@@ -64,6 +64,9 @@
 */
 #boy,#proof,#question,#base,#public,#dismantling,#last{scroll-margin-top:9rem}
 
+/* Keep each act's introduction below its heading at every viewport width. */
+.ms-act-head{display:block}
+
 /*
   "Transmission" is one twelve-letter word set at 3.4rem, and a word cannot wrap.
   Below about 340px its ink was wider than the column, so the page scrolled sideways

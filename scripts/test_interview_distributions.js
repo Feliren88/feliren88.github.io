@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { distributions: D, betaI, gammaP, normalCdf } = require('../js/components/interview-distributions.js');
+const { distributions: D, formulas, betaI, gammaP, normalCdf } = require('../js/components/interview-distributions.js');
 
 function near(actual, expected, tolerance = 1e-5) {
   assert.ok(Math.abs(actual - expected) < tolerance, `${actual} differs from ${expected}`);
@@ -23,6 +23,13 @@ assert.equal(D.weibull.density(0, { shape: 0.6, scale: 2 }), Infinity);
 near(D.weibull.density(0, { shape: 1, scale: 2 }), 0.5);
 assert.equal(D.f.density(0, { d1: 1, d2: 12 }), Infinity);
 near(D.f.density(0, { d1: 2, d2: 12 }), 1);
+assert.deepEqual(Object.keys(formulas).sort(), Object.keys(D).sort());
+for (const [name, pair] of Object.entries(formulas)) {
+  for (const kind of ['density', 'cdf']) {
+    assert.ok(pair[kind].startsWith('<math ') && pair[kind].includes('</math>'),
+      `${name} ${kind} is not rendered MathML`);
+  }
+}
 assert.ok(D['negative-binomial'].cdf(D['negative-binomial'].range({ r: 10, p: 0.15 })[1],
   { r: 10, p: 0.15 }) > 0.999);
 

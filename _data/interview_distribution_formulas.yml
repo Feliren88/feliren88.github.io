@@ -1,0 +1,74 @@
+# Source formulas for the interactive distribution explorer.
+# The generator converts these LaTeX expressions to accessible MathML.
+bernoulli:
+  density: 'p_X(k)=p^k(1-p)^{1-k},\quad k\in\{0,1\}'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\1-p,&0\le x<1\\1,&x\ge1\end{cases}'
+binomial:
+  density: 'p_X(k)=\binom{n}{k}p^k(1-p)^{n-k},\quad k=0,\ldots,n'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\\displaystyle\sum_{j=0}^{\min(n,\lfloor x\rfloor)}\binom{n}{j}p^j(1-p)^{n-j},&x\ge0\end{cases}'
+geometric:
+  density: 'p_X(k)=p(1-p)^{k-1},\quad k=1,2,\ldots'
+  cdf: 'F_X(x)=\begin{cases}0,&x<1\\1-(1-p)^{\lfloor x\rfloor},&x\ge1\end{cases}'
+negative-binomial:
+  density: 'p_X(k)=\binom{k+r-1}{k}p^r(1-p)^k,\quad k=0,1,\ldots'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\\displaystyle\sum_{j=0}^{\lfloor x\rfloor}\binom{j+r-1}{j}p^r(1-p)^j,&x\ge0\end{cases}'
+hypergeometric:
+  density: 'p_X(k)=\dfrac{\binom{K}{k}\binom{50-K}{n-k}}{\binom{50}{n}},\quad \max(0,n+K-50)\le k\le\min(n,K)'
+  cdf: 'F_X(x)=\sum_{j=\max(0,n+K-50)}^{\lfloor x\rfloor}\dfrac{\binom{K}{j}\binom{50-K}{n-j}}{\binom{50}{n}}'
+categorical:
+  density: '\Pr(X=A)=a,\quad\Pr(X=B)=(1-a)b,\quad\Pr(X=C)=(1-a)(1-b)'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\a,&0\le x<1\\a+(1-a)b,&1\le x<2\\1,&x\ge2\end{cases}'
+discrete-uniform:
+  density: 'p_X(k)=\dfrac{1}{n},\quad k=a,a+1,\ldots,a+n-1'
+  cdf: 'F_X(x)=\min\!\left(1,\max\!\left(0,\dfrac{\lfloor x\rfloor-a+1}{n}\right)\right)'
+poisson:
+  density: 'p_X(k)=e^{-\lambda}\dfrac{\lambda^k}{k!},\quad k=0,1,\ldots'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\\displaystyle e^{-\lambda}\sum_{j=0}^{\lfloor x\rfloor}\dfrac{\lambda^j}{j!},&x\ge0\end{cases}'
+uniform:
+  density: 'f_X(x)=\dfrac{1}{b-a},\quad a\le x\le b'
+  cdf: 'F_X(x)=\begin{cases}0,&x<a\\\dfrac{x-a}{b-a},&a\le x<b\\1,&x\ge b\end{cases}'
+normal:
+  density: 'f_X(x)=\dfrac{1}{\sigma\sqrt{2\pi}}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)'
+  cdf: 'F_X(x)=\Phi\!\left(\dfrac{x-\mu}{\sigma}\right)'
+student-t:
+  density: 'f_X(x)=\dfrac{\Gamma\!\left(\frac{\nu+1}{2}\right)}{s\sqrt{\nu\pi}\,\Gamma\!\left(\frac{\nu}{2}\right)}\left(1+\dfrac{x^2}{\nu s^2}\right)^{-(\nu+1)/2}'
+  cdf: 'F_X(x)=\dfrac{1}{2}+\dfrac{\operatorname{sgn}(x)}{2}\!\left[1-I_{\nu/(\nu+x^2/s^2)}\!\left(\dfrac{\nu}{2},\dfrac{1}{2}\right)\right]'
+exponential:
+  density: 'f_X(x)=\lambda e^{-\lambda x},\quad x\ge0'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\1-e^{-\lambda x},&x\ge0\end{cases}'
+gamma:
+  density: 'f_X(x)=\dfrac{x^{k-1}e^{-x/\theta}}{\Gamma(k)\theta^k},\quad x>0'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\P\!\left(k,\dfrac{x}{\theta}\right),&x>0\end{cases}'
+chi-square:
+  density: 'f_X(x)=\dfrac{x^{\nu/2-1}e^{-x/2}}{2^{\nu/2}\Gamma(\nu/2)},\quad x>0'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\P\!\left(\dfrac{\nu}{2},\dfrac{x}{2}\right),&x>0\end{cases}'
+beta:
+  density: 'f_X(x)=\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)},\quad 0<x<1'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\I_x(\alpha,\beta),&0<x<1\\1,&x\ge1\end{cases}'
+lognormal:
+  density: 'f_X(x)=\dfrac{1}{x\sigma\sqrt{2\pi}}\exp\!\left(-\dfrac{(\ln x-\mu)^2}{2\sigma^2}\right),\quad x>0'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\\Phi\!\left(\dfrac{\ln x-\mu}{\sigma}\right),&x>0\end{cases}'
+weibull:
+  density: 'f_X(x)=\dfrac{k}{\lambda}\!\left(\dfrac{x}{\lambda}\right)^{k-1}\!\exp\!\left[-\left(\dfrac{x}{\lambda}\right)^k\right],\quad x>0'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\1-\exp\!\left[-\left(\dfrac{x}{\lambda}\right)^k\right],&x\ge0\end{cases}'
+logistic:
+  density: 'f_X(x)=\dfrac{e^{-(x-\mu)/s}}{s\left(1+e^{-(x-\mu)/s}\right)^2}'
+  cdf: 'F_X(x)=\dfrac{1}{1+e^{-(x-\mu)/s}}'
+laplace:
+  density: 'f_X(x)=\dfrac{1}{2b}e^{-|x-\mu|/b}'
+  cdf: 'F_X(x)=\begin{cases}\frac12e^{(x-\mu)/b},&x<\mu\\1-\frac12e^{-(x-\mu)/b},&x\ge\mu\end{cases}'
+cauchy:
+  density: 'f_X(x)=\dfrac{1}{\pi\gamma\left[1+\left(\frac{x-x_0}{\gamma}\right)^2\right]}'
+  cdf: 'F_X(x)=\dfrac12+\dfrac{1}{\pi}\arctan\!\left(\dfrac{x-x_0}{\gamma}\right)'
+rayleigh:
+  density: 'f_X(x)=\dfrac{x}{\sigma^2}\exp\!\left(-\dfrac{x^2}{2\sigma^2}\right),\quad x\ge0'
+  cdf: 'F_X(x)=\begin{cases}0,&x<0\\1-\exp\!\left(-\dfrac{x^2}{2\sigma^2}\right),&x\ge0\end{cases}'
+pareto:
+  density: 'f_X(x)=\dfrac{\alpha}{x^{\alpha+1}},\quad x\ge1'
+  cdf: 'F_X(x)=\begin{cases}0,&x<1\\1-x^{-\alpha},&x\ge1\end{cases}'
+triangular:
+  density: 'f_X(x)=\begin{cases}\dfrac{x}{5c},&0\le x\le c\\\dfrac{10-x}{5(10-c)},&c<x\le10\\0,&\text{otherwise}\end{cases}'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\\dfrac{x^2}{10c},&0<x\le c\\1-\dfrac{(10-x)^2}{10(10-c)},&c<x<10\\1,&x\ge10\end{cases}'
+f:
+  density: 'f_X(x)=\dfrac{(d_1/d_2)^{d_1/2}x^{d_1/2-1}}{B(d_1/2,d_2/2)\left(1+d_1x/d_2\right)^{(d_1+d_2)/2}},\quad x>0'
+  cdf: 'F_X(x)=\begin{cases}0,&x\le0\\I_{d_1x/(d_1x+d_2)}\!\left(\dfrac{d_1}{2},\dfrac{d_2}{2}\right),&x>0\end{cases}'

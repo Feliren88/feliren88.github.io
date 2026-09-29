@@ -1334,13 +1334,11 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
    ════════════════════════════════════════════════════════ */
 
 .rd-open {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 70;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.45rem;
+  width: max-content;
+  margin: 1rem 0 1.5rem auto;
   padding: 0.6rem 0.9rem;
   border: 1px solid var(--border-ui);
   border-radius: 999px;
@@ -1355,8 +1353,6 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 
 @media (max-width: 480px) {
   .rd-open {
-    position: static;
-    width: fit-content;
     margin: -1rem 0 1rem auto;
   }
 }
@@ -1364,9 +1360,11 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 .rd-panel {
   position: fixed;
   right: 1rem;
-  bottom: 4.5rem;
+  top: 5rem;
   z-index: 71;
   width: min(21rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
   padding: 1.2rem;
   border: 1px solid var(--border-ui);
   border-radius: var(--radius-lg);
@@ -2883,13 +2881,16 @@ html[data-theme="light"] .ivm {
 .ivd-formulas dl { display: grid; gap: .55rem; margin: .8rem 0 .5rem; }
 .ivd-formulas dl>div { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: .55rem; }
 .ivd-formulas dt { color: var(--muted); font: 700 .72rem / 1.5 "Space Grotesk", sans-serif; }
-.ivd-formulas dd { min-width: 0; margin: 0; overflow-x: auto; color: var(--text); }
-.ivd-formulas code { font-size: .78rem; white-space: nowrap; }
+.ivd-formulas dd { min-width: 0; margin: 0; padding: .15rem 0 .55rem; overflow-x: auto; color: var(--text); }
+.ivd-formulas math { display: block; width: max-content; max-width: none; font-size: 1.04rem; }
+.ivd-formula-scroll-hint { display: none; }
 .ivd-formulas p { margin: .5rem 0 0; color: var(--muted); font-size: .75rem; line-height: 1.5; }
 @media (max-width: 760px) {
   .ivd-head { align-items: stretch; flex-direction: column; }
   .ivd-select { max-width: 18rem; }
   .ivd-charts, .ivd-controls { grid-template-columns: 1fr; }
+  .ivd-formulas dl>div { grid-template-columns: 1fr; gap: .2rem; }
+  .ivd-formula-scroll-hint { display: block; }
 }
 
 /* The calculus plot keeps both signed areas visible while its equation morphs. */

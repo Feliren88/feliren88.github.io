@@ -86,6 +86,7 @@ lost the next time its script runs.
 | `_data/game_theory.yml` | `scripts/solve_games.py` |
 | `_data/stoic.yml` | verified against public-domain sources |
 | `_data/interview_math.yml` | `scripts/render_math.py` |
+| `js/components/interview-distribution-math.js` | `scripts/render_distribution_math.py` from `_data/interview_distribution_formulas.yml` |
 | `_includes/interview-icons.html` | `scripts/generate_icons.py` |
 
 For the use case diagrams, edit the `SPECS` list in `generate_uc_banners.py`, run
