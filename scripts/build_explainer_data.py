@@ -6,6 +6,7 @@ Both come from Polo Club of Data Science projects released under the MIT licence
   Transformer Explainer  https://github.com/poloclub/transformer-explainer
   Diffusion Explainer    https://github.com/poloclub/diffusion-explainer
   CNN Explainer          https://github.com/poloclub/cnn-explainer
+  WizMap                 https://github.com/poloclub/wizmap
 
 Clone them anywhere and pass their paths:
 
@@ -21,6 +22,7 @@ Outputs, all owned by this script (a hand edit is lost on the next run):
   assets/data/diffusion-frames.json     prompts, guidance values, timesteps, sprite geometry
   assets/data/tiny-vgg.bin              CNN Explainer's trained Tiny VGG weights, unchanged
   assets/data/tiny-vgg.json             layer shapes, byte offsets, class names, sample pixels
+  assets/data/acl-map.json              a sample of WizMap's ACL abstracts map: points, density, topics
 
 Needs node on PATH for the traces and Pillow for the sprites.
 """
@@ -197,13 +199,44 @@ def build_cnn(repo):
     print(f'tiny vgg: {len(layers)} tensors, {offset} weights, {len(samples)} samples')
 
 
+MAP_SAMPLE = 6000
+
+
+def build_wizmap(repo):
+    """WizMap's ACL abstracts map. Keep a seeded sample of the points with their
+    title and year, the full density grid pooled to 100 x 100, and the topic
+    labels of the 2 coarsest zoom levels WizMap computed."""
+    import random
+    base = os.path.join(repo, 'public', 'data', 'acl-abstracts')
+    rows = [json.loads(line) for line in open(os.path.join(base, 'umap.ndjson'))]
+    random.Random(7).shuffle(rows)
+    pts = []
+    for x, y, text, year in rows[:MAP_SAMPLE]:
+        title = text[1:text.index(']')] if text.startswith('[') and ']' in text else text[:90]
+        pts.append([round(x, 3), round(y, 3), int(year), title.replace('{', '').replace('}', '').strip()])
+    grid = json.load(open(os.path.join(base, 'grid.json')))
+    g = grid['grid']
+    pooled = [[round(g[2 * i][2 * j] + g[2 * i + 1][2 * j] + g[2 * i][2 * j + 1] + g[2 * i + 1][2 * j + 1], 5)
+               for j in range(len(g[0]) // 2)] for i in range(len(g) // 2)]
+    topics = {lvl: [[round(t[0], 2), round(t[1], 2), t[2]] for t in grid['topic']['data'][lvl]] for lvl in ('6', '7')}
+    doc = {
+        'source': "WizMap's ACL Abstracts map, Polo Club of Data Science, MIT licence; abstracts from the ACL Anthology",
+        'total': grid['totalPointSize'], 'xRange': grid['xRange'], 'yRange': grid['yRange'],
+        'density': pooled, 'topics': topics, 'points': pts,
+    }
+    with open(os.path.join(DATA, 'acl-map.json'), 'w') as f:
+        json.dump(doc, f, separators=(',', ':'), ensure_ascii=False)
+    print(f"wizmap: {len(pts)} of {grid['totalPointSize']} papers, topics {', '.join(k + ':' + str(len(v)) for k, v in topics.items())}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--transformer-explainer')
     ap.add_argument('--diffusion-explainer')
     ap.add_argument('--cnn-explainer')
+    ap.add_argument('--wizmap')
     a = ap.parse_args()
-    if not (a.transformer_explainer or a.diffusion_explainer or a.cnn_explainer):
+    if not (a.transformer_explainer or a.diffusion_explainer or a.cnn_explainer or a.wizmap):
         ap.error('pass at least one repository path')
     os.makedirs(DATA, exist_ok=True)
     if a.transformer_explainer:
@@ -212,6 +245,8 @@ def main():
         build_diffusion(a.diffusion_explainer)
     if a.cnn_explainer:
         build_cnn(a.cnn_explainer)
+    if a.wizmap:
+        build_wizmap(a.wizmap)
 
 
 if __name__ == '__main__':

@@ -508,6 +508,15 @@ html[data-theme="light"] .xp { --tf-up: #1b5aa8; --tf-down: #9c4a20; --xp-q: #2f
 .xp-gan-lossv { display: grid; gap: 0.2rem; margin: 0.5rem 0 0; font: var(--fs-2xs) var(--xp-mono); }
 .xp-gan .is-dim { opacity: 0.35; }
 
+/* ── embedding map ─────────────────────────────────────── */
+
+.xp-map { display: block; width: 100%; height: min(72vh, 44rem); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--bg); cursor: grab; touch-action: none; }
+.xp-map:active { cursor: grabbing; }
+.xp-map-zoom { display: inline-flex; gap: 0.25rem; }
+.xp-map-zoom button { width: 2rem; height: 2rem; padding: 0; font-size: 1rem; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: 6px; cursor: pointer; }
+.xp-toolbar .is-dim { opacity: 0.35; }
+.xp-toolbar .is-hl { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+
 @media (max-width: 1100px) {
   .xp-flow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .xp-flow .is-wide { grid-column: 1 / -1; order: 2; }
