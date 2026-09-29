@@ -825,6 +825,96 @@
       ]
     },
 
+    /* ── Operating systems: a round robin schedule ─────────────── */
+    gantt: {
+      title: 'Taking turns on one CPU',
+      lead: 'Round robin gives each process a short slice, in turn.',
+      build: function () {
+        var s = el('line', { x1: 30, y1: 150, x2: 440, y2: 150, 'class': 'an-axis' });
+        var slices = [['P1', 0, 2], ['P2', 2, 4], ['P3', 4, 5], ['P1', 5, 7], ['P4', 7, 9], ['P2', 9, 11], ['P1', 11, 13]];
+        slices.forEach(function (g, i) {
+          var x = 30 + g[1] * 31, w = (g[2] - g[1]) * 31 - 2;
+          s += el('g', { 'data-from': Math.min(4, 1 + Math.floor(i / 2)), 'class': 'an-fade' },
+            rect({ x: x, y: 96, width: w, height: 40, rx: 5, 'class': 'an-box' + (g[0] === 'P1' ? ' is-accent' : '') }) +
+            text(g[0], { x: x + w / 2, y: 121, 'text-anchor': 'middle', 'class': 'an-t' }));
+        });
+        s += el('g', { 'data-from': 0, 'class': 'an-fade' },
+          ['P1', 'P2', 'P3', 'P4'].map(function (p, i) {
+            return rect({ x: 30 + i * 60, y: 30, width: 50, height: 30, rx: 5, 'class': 'an-panel' }) +
+              text(p, { x: 55 + i * 60, y: 50, 'text-anchor': 'middle', 'class': 'an-lab' });
+          }).join('') + text('ready queue', { x: 280, y: 50, 'class': 'an-lab' }));
+        s += el('g', { 'data-from': 5, 'class': 'an-fade' },
+          text('every process waits at most a few slices', { x: 235, y: 185, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        return el('svg', { viewBox: '0 0 470 210', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A round robin Gantt chart where 4 processes take turns on one CPU' }, s);
+      },
+      beats: [
+        { step: 'A ready queue', say: '4 processes are ready, and there is one CPU.' },
+        { step: 'A short slice each', say: 'P1 runs for its time slice, then goes to the back of the queue.' },
+        { step: 'The next in line', say: 'P2 and P3 get their turns. P3 is short, so it finishes inside its slice.' },
+        { step: 'Around again', say: 'P1 returns for another slice, then P4 gets its first.' },
+        { step: 'Until all finish', say: 'The cycle repeats until every process is done.' },
+        { step: 'The trade-off', say: 'Nobody waits long for a first turn. The price is extra switching, and longer total time for long jobs.' }
+      ]
+    },
+
+    /* ── Databases: a B+ tree leaf split ──────────────────────── */
+    bsplit: {
+      title: 'How a B+ tree stays balanced',
+      lead: 'A full leaf splits in two and pushes a key up.',
+      build: function () {
+        var s = '';
+        s += el('g', { 'data-from': 0, 'class': 'an-fade' },
+          rect({ x: 150, y: 110, width: 170, height: 34, rx: 6, 'class': 'an-box' }) +
+          text('10  20  30', { x: 235, y: 132, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          text('a full leaf', { x: 235, y: 162, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        s += el('g', { 'data-from': 1, 'class': 'an-fade' },
+          text('insert 25', { x: 360, y: 132, 'class': 'an-lab is-warn' }));
+        s += el('g', { 'data-from': 2, 'class': 'an-fade' },
+          rect({ x: 60, y: 176, width: 130, height: 30, rx: 6, 'class': 'an-box' }) + text('10  20', { x: 125, y: 196, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          rect({ x: 280, y: 176, width: 130, height: 30, rx: 6, 'class': 'an-box' }) + text('25  30', { x: 345, y: 196, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          el('path', { d: 'M190 191 L280 191', 'class': 'an-arrow' }));
+        s += el('g', { 'data-from': 3, 'class': 'an-fade' },
+          rect({ x: 195, y: 30, width: 80, height: 32, rx: 6, 'class': 'an-box is-accent' }) + text('25', { x: 235, y: 51, 'text-anchor': 'middle', 'class': 'an-t' }) +
+          el('path', { d: 'M215 62 L125 176M255 62 L345 176', 'class': 'an-arrow' }));
+        return el('svg', { viewBox: '0 0 470 215', 'class': 'an-svg', role: 'img',
+          'aria-label': 'A full B+ tree leaf splits into 2 leaves and copies its middle key up into a new parent' }, s);
+      },
+      beats: [
+        { step: 'A full leaf', say: 'This leaf holds as many keys as a node allows.' },
+        { step: 'One more key', say: 'Inserting 25 would overflow it.' },
+        { step: 'Split in two', say: 'The leaf splits into 2 half-full leaves, still linked in order.' },
+        { step: 'Push a key up', say: 'The first key of the right leaf is copied up as a separator. The tree grows at the root, so every leaf stays at the same depth.' }
+      ]
+    },
+
+    /* ── Networks: encapsulation down the stack ───────────────── */
+    encap: {
+      title: 'What travels on the wire',
+      lead: 'Each layer wraps the data with its own header.',
+      build: function () {
+        var s = '', layers = [['HTTP request', 'data'], ['TCP header', 'segment'], ['IP header', 'packet'], ['Ethernet header', 'frame']];
+        layers.forEach(function (l, i) {
+          var x = 150 - i * 36, w = 170 + i * 72;
+          s += el('g', { 'data-from': i, 'class': 'an-fade' },
+            rect({ x: x, y: 30 + i * 40, width: w, height: 30, rx: 5, 'class': 'an-box' + (i === 0 ? ' is-accent' : '') }) +
+            text(l[0], { x: x + 10, y: 50 + i * 40, 'class': 'an-t' }) +
+            text(l[1], { x: x + w + 8, y: 50 + i * 40, 'class': 'an-lab' }));
+        });
+        s += el('g', { 'data-from': 4, 'class': 'an-fade' },
+          text('the router reads only up to the IP header', { x: 235, y: 206, 'text-anchor': 'middle', 'class': 'an-lab' }));
+        return el('svg', { viewBox: '0 0 470 215', 'class': 'an-svg', role: 'img',
+          'aria-label': 'An HTTP request wrapped by TCP, IP and Ethernet headers in turn' }, s);
+      },
+      beats: [
+        { step: 'The request', say: 'The browser writes an HTTP request. That is all the application knows about.' },
+        { step: 'Add ports', say: 'TCP wraps it with ports and sequence numbers: a segment.' },
+        { step: 'Add addresses', say: 'IP wraps that with source and destination addresses: a packet.' },
+        { step: 'Add the next hop', say: 'Ethernet wraps it for the next device on the local network: a frame.' },
+        { step: 'Unwrap on the way', say: 'Each router strips and replaces only the outer frame. The request inside arrives untouched.' }
+      ]
+    },
+
     /* ── Computer vision: a feature map being built ───────────── */
     convmap: {
       title: 'How a feature map gets made',
@@ -1419,7 +1509,10 @@
     'math-proof': 'induction',
     'computer-science': 'fetchcost',
     'design-patterns': 'refactor',
-    'north-star-metrics': 'metrictree'
+    'north-star-metrics': 'metrictree',
+    'operating-systems': 'gantt',
+    'databases': 'bsplit',
+    'computer-networks': 'encap'
   };
 
   /* ════════════════════════════════════════════════════════

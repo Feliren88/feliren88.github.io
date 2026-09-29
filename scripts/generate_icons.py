@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the interview icon set.
 
-Single source of truth for 34 icons. Emits four things from the one ICONS list,
+Single source of truth for 37 icons. Emits four things from the one ICONS list,
 so the standalone files and the sprite can never drift apart:
 
     icons/<name>.svg          standalone, self-contained, currentColor
@@ -38,7 +38,7 @@ SPRITE = os.path.join(HERE, "_includes", "interview-icons.html")
 
 # (name, group, one-line note on what it depicts, [elements])
 #
-# Names for the twenty-eight track icons match the topic ids in _data/interview.yml
+# Names for the thirty-one track icons match the topic ids in _data/interview.yml
 # on purpose. That lets the templates resolve an icon with {{ topic.id }} and no
 # lookup table, which is worth more than naming each one after its shape.
 ICONS = [
@@ -86,6 +86,22 @@ ICONS = [
     ]),
     ("north-star-metrics", "tracks", "A four-pointed star, the one fixed point to steer by", [
         '<path d="M12 3L14 10L21 12L14 14L12 21L10 14L3 12L10 10Z"/>',
+    ]),
+    ("operating-systems", "tracks", "A window over a stack of layers, the system under every program", [
+        '<rect x="3" y="4" width="18" height="16" rx="2"/>',
+        '<path d="M3 8h18"/>',
+        '<path d="M6.5 12h6M6.5 15.5h9"/>',
+    ]),
+    ("databases", "tracks", "A cylinder of stacked records", [
+        '<ellipse cx="12" cy="6" rx="7" ry="2.5"/>',
+        '<path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"/>',
+        '<path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
+    ]),
+    ("computer-networks", "tracks", "Three nodes joined by links", [
+        '<circle cx="12" cy="5" r="2.2"/>',
+        '<circle cx="5" cy="18" r="2.2"/>',
+        '<circle cx="19" cy="18" r="2.2"/>',
+        '<path d="M10.9 6.9L6.1 16.1M13.1 6.9l4.8 9.2M7.2 18h9.6"/>',
     ]),
     ("frequentist-statistics", "tracks", "One sampling distribution with both tails marked off", [
         '<path d="M3 19h18"/>',

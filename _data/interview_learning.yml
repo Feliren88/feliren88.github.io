@@ -86,6 +86,46 @@ tracks:
         url: "https://algs4.cs.princeton.edu/home/"
         use: "Use for algorithms, data structures, graphs, and complexity."
 
+  - id: operating-systems
+    prerequisites: ["Programming in C or Python", "Basic computer architecture"]
+    sources:
+      - title: "Operating Systems: Three Easy Pieces"
+        author: "Arpaci-Dusseau and Arpaci-Dusseau"
+        url: "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+        use: "Use for processes, scheduling, virtual memory, concurrency and file systems, free online."
+      - title: "OS & DBMS Foundation, visual diagrams"
+        author: "100NikhilBro"
+        url: "https://github.com/100NikhilBro/os_dbms"
+        use: "Use for a one-page diagram per topic when revising."
+
+  - id: databases
+    prerequisites: ["Basic set notation", "Some SQL"]
+    sources:
+      - title: "CMU 15-445/645 Database Systems"
+        author: "Pavlo"
+        url: "https://15445.courses.cs.cmu.edu/"
+        use: "Use for storage, indexing, query execution, concurrency control and recovery, with recorded lectures."
+      - title: "Database System Concepts"
+        author: "Silberschatz, Korth and Sudarshan"
+        url: "https://db-book.com/"
+        use: "Use for the relational model, normalisation and transactions."
+      - title: "OS & DBMS Foundation, visual diagrams"
+        author: "100NikhilBro"
+        url: "https://github.com/100NikhilBro/os_dbms"
+        use: "Use for a one-page diagram per topic when revising."
+
+  - id: computer-networks
+    prerequisites: ["Binary numbers", "Basic programming"]
+    sources:
+      - title: "Computer Networking: A Top-Down Approach"
+        author: "Kurose and Ross"
+        url: "https://gaia.cs.umass.edu/kurose_ross/index.php"
+        use: "Use for application, transport, network and link layers, with interactive exercises."
+      - title: "Networks Foundation, visual diagrams"
+        author: "100NikhilBro"
+        url: "https://github.com/100NikhilBro/networks-foundation"
+        use: "Use for a one-page diagram per topic when revising."
+
   - id: design-patterns
     prerequisites: ["Programming in one object-oriented language", "Writing unit tests"]
     sources:

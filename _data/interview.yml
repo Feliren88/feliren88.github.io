@@ -5464,6 +5464,557 @@ topics:
       - Profile a training step and name where the time actually goes
 
   # ── Models ───────────────────────────────────────────────────────────────
+  - id: operating-systems
+    name: Operating Systems
+    group: foundations
+    blurb: "Explain how one machine runs many programs at once, and what it costs when they compete."
+    scope: "Study processes, scheduling, memory, synchronisation and storage. Use computer science for algorithms and data structures, and databases for durable data."
+    links: [computer-science, databases]
+    modules:
+      - name: The kernel and its boundary
+        why: "The kernel is the only code with full control of the hardware, and every program reaches it through system calls."
+        plain:
+          - >-
+              Programs run in user mode and cannot touch devices or other programs'
+              memory. The kernel runs in a privileged mode and can.
+          - >-
+              A system call is the controlled door between them. Crossing it costs
+              time, which is why fast programs make fewer of them.
+        covers:
+          - User mode and kernel mode
+          - System calls and traps
+          - Interrupts and the boot sequence
+          - Monolithic kernels and microkernels
+          - What a context switch saves and restores
+          - Why crossing the boundary is slow
+        check: "What happens, step by step, when a program calls read on a file?"
+        viz:
+          type: stack
+          layers: [Applications, System call interface, Kernel, Hardware]
+        beats:
+          - "Applications live at the top, each in its own protected space."
+          - "They ask for anything privileged through system calls, a narrow and checked interface."
+          - "The kernel does the work: it schedules, allocates memory and drives devices."
+          - "At the base is the hardware, which only the kernel may touch directly."
+      - name: Processes, threads and scheduling
+        why: "A scheduler decides which ready process runs next, trading throughput against responsiveness."
+        plain:
+          - >-
+              A process is a running program with its own memory. Threads share
+              one process's memory and run within it.
+          - >-
+              Only one thread runs per core at a time. The scheduler picks it,
+              and each policy favours a different goal.
+        covers:
+          - Process states and the process control block
+          - Threads, and what they share
+          - First come first served and the convoy effect
+          - Shortest job first and starvation
+          - Round robin and the time quantum
+          - Turnaround, waiting and response time
+        check: "Why can round robin give a worse average waiting time than shortest job first, and why use it anyway?"
+        viz:
+          type: flow
+          steps: [New, Ready, Running, Waiting, Terminated]
+        beats:
+          - "A process is created and admitted."
+          - "It waits in the ready queue until the scheduler picks it."
+          - "It runs on a core until it finishes, blocks, or its time slice ends."
+          - "If it asks for I/O, it waits and lets another process run."
+          - "When it finishes, the kernel frees what it held."
+        scene:
+          kind: trace
+          steps: [Arrive, Wait in queue, Run a slice, Finish]
+          bad: 9
+          alt: "4 steps of a process's life: arrive, wait, run, finish."
+      - name: Synchronisation and deadlock
+        why: "Threads that share data need locks, and locks acquired in the wrong order can freeze a system."
+        plain:
+          - >-
+              A race condition happens when the result depends on the order threads
+              happen to run. Locks make a critical section run one thread at a time.
+          - >-
+              Deadlock needs 4 conditions at once. Break any one and it cannot
+              happen, which is what lock ordering and the Banker's algorithm do.
+        covers:
+          - Race conditions and critical sections
+          - Mutexes, semaphores and monitors
+          - Producer and consumer, readers and writers
+          - The 4 conditions for deadlock
+          - Prevention, avoidance and detection
+          - The Banker's algorithm and safe states
+        check: "Name the 4 conditions for deadlock and a practical way to break each."
+        viz:
+          type: parts
+          centre: Deadlock
+          around: [Mutual exclusion, Hold and wait, No preemption, Circular wait]
+        beats:
+          - "Deadlock needs all 4 conditions at the same time. Remove any one and it cannot happen."
+          - "Mutual exclusion: some resource can be held by one thread only."
+          - "Hold and wait: a thread keeps what it has while asking for more."
+          - "No preemption: nothing can be taken away from a thread."
+          - "Circular wait: a cycle of threads, each waiting for the next. Ordering locks globally breaks it."
+      - name: Memory and paging
+        why: "Virtual memory gives each process a private address space and lets programs exceed physical memory."
+        plain:
+          - >-
+              Every address a program uses is virtual. The hardware translates it
+              through a page table into a physical frame.
+          - >-
+              When a page is not in memory, a page fault loads it from disk and
+              another page must be evicted. The policy decides which.
+        covers:
+          - Logical and physical addresses
+          - Paging, page tables and the TLB
+          - Segmentation and fragmentation
+          - Page faults and demand paging
+          - FIFO, LRU and optimal replacement
+          - Thrashing and Belady's anomaly
+        check: "Why can adding a frame increase page faults under FIFO but never under LRU?"
+        viz:
+          type: flow
+          steps: [Virtual address, TLB lookup, Page table, Physical frame]
+        beats:
+          - "A program uses a virtual address, split into a page number and an offset."
+          - "The TLB caches recent translations, so most lookups end here."
+          - "On a miss, the page table gives the frame, or signals a page fault."
+          - "The frame plus the offset is the physical address the memory sees."
+      - name: Files and storage
+        why: "A file system turns a block device into named, durable files, and its design decides what survives a crash."
+        plain:
+          - >-
+              A disk only stores numbered blocks. The file system keeps the map from
+              names to blocks, plus which blocks are free.
+          - >-
+              Disks are slow and crashes happen mid-write. Journaling and RAID trade
+              space and time for safety.
+        covers:
+          - Directories, inodes and allocation
+          - Free-space management
+          - Disk scheduling
+          - Buffering, caching and spooling
+          - Journaling and crash consistency
+          - RAID levels and what each survives
+        check: "A machine loses power mid-write. How does a journaling file system recover?"
+        viz:
+          type: stack
+          layers: [File names, Inodes and directories, Blocks, Disk]
+        beats:
+          - "Users see names, arranged in directories."
+          - "Each name points to an inode, which records where the file's data lives."
+          - "The data sits in fixed-size blocks, tracked as used or free."
+          - "The disk only understands block numbers. Everything above is the file system's bookkeeping."
+      - name: Virtualisation and protection
+        why: "Virtual machines and containers isolate workloads on shared hardware at different costs."
+        plain:
+          - >-
+              A virtual machine runs a whole operating system on a hypervisor. A
+              container shares the host kernel and isolates only processes.
+          - >-
+              The lighter the isolation, the faster it starts, and the more a kernel
+              bug can cross between tenants.
+        covers:
+          - Hypervisors, type 1 and type 2
+          - Containers, namespaces and control groups
+          - Isolation and its cost
+          - Zombie and orphan processes
+          - Access control and privilege
+          - The principle of least privilege
+        check: "When would you choose a virtual machine over a container for running untrusted code?"
+        viz:
+          type: compare
+          cols:
+          - k: Virtual machine
+            items: [Own kernel, Strong isolation, Slow to start]
+          - k: Container
+            items: [Shared kernel, Lighter isolation, Fast to start]
+        beats:
+          - "A virtual machine brings its own kernel. A bug inside it rarely reaches the host."
+          - "A container shares the host's kernel. It starts in moments, but a kernel flaw is shared by every container."
+    traps:
+      - "Saying threads have their own memory"
+      - "Confusing deadlock avoidance with prevention"
+      - "Claiming more RAM always means fewer page faults"
+      - "Treating a container as a lightweight virtual machine with the same isolation"
+    drills:
+      - "Schedule 4 processes by hand with FCFS and round robin, then check your averages in the simulator"
+      - "Write a program with a race condition, then fix it with a mutex"
+      - "Find a reference string where FIFO shows Belady's anomaly"
+      - "Run the Banker's algorithm on paper for a small state, then change one number to make it unsafe"
+  - id: databases
+    name: Databases
+    group: foundations
+    blurb: "Model data, query it correctly, and explain what the database guarantees when many users write at once."
+    scope: "Study data modelling, SQL, indexing, transactions and distribution. Use data engineering for pipelines and operating systems for storage below the database."
+    links: [data-engineering, operating-systems]
+    modules:
+      - name: Modelling data
+        why: "An entity-relationship model fixes what the data means before any table exists."
+        plain:
+          - >-
+              Entities are things, attributes describe them and relationships link
+              them. Cardinality says how many of each can relate.
+          - >-
+              Keys identify rows. Integrity constraints stop the database from ever
+              holding data that breaks the model.
+        covers:
+          - Entities, attributes and relationships
+          - Cardinality and participation
+          - Weak entities
+          - Primary, candidate and foreign keys
+          - Integrity constraints
+          - Generalisation and specialisation
+        check: "Model students, courses and enrolments. Where does the grade live, and why?"
+        viz:
+          type: parts
+          centre: A data model
+          around: [Entities, Attributes, Relationships, Keys, Constraints]
+        beats:
+          - "A model has 5 kinds of piece. Get them right and the tables follow."
+          - "Entities are the things you store, such as students and courses."
+          - "Attributes describe an entity, such as a name or a start date."
+          - "Relationships link entities. Some carry attributes of their own, such as a grade."
+          - "Keys pick out exactly one row, and foreign keys point from one table to another."
+          - "Constraints refuse data that breaks the rules, before it is ever written."
+      - name: Normalisation
+        why: "Normal forms remove redundancy so that each fact is stored once and updates cannot contradict each other."
+        plain:
+          - >-
+              If the same fact is stored twice, one copy can be changed and the other
+              not. That is an update anomaly.
+          - >-
+              Functional dependencies show which columns decide which. Normal forms
+              split tables until every dependency follows a key.
+        covers:
+          - Functional dependencies
+          - Insert, update and delete anomalies
+          - First, second and third normal form
+          - Boyce-Codd normal form
+          - Lossless decomposition
+          - When to denormalise for reads
+        check: "A table stores each order with the customer's address. What goes wrong, and how do you fix it?"
+        viz:
+          type: scale
+          lo: Redundant
+          hi: Every fact once
+          stops: [Unnormalised, First normal form, Third normal form, Boyce-Codd]
+          'on': 2
+        beats:
+          - "Unnormalised data repeats facts and nests lists inside cells."
+          - "First normal form: every cell holds one value."
+          - "Third normal form: every column depends on the key, the whole key, and nothing but the key."
+          - "Boyce-Codd tightens it further: every column that decides another must be a key."
+      - name: SQL and joins
+        why: "Joins combine tables by matching rows, and each join type decides what happens to rows without a match."
+        plain:
+          - >-
+              A join pairs rows from 2 tables where a condition holds. An inner join
+              keeps only the pairs that match.
+          - >-
+              Outer joins also keep unmatched rows and fill the gaps with null.
+              The engine chooses how to find the matches.
+        covers:
+          - Selection, projection and joins
+          - Inner, left, right and full outer joins
+          - Grouping and aggregation
+          - Nested loop, hash and merge joins
+          - Nulls and three-valued logic
+          - Reading a query plan
+        check: "A left join returns more rows than the left table has. How is that possible?"
+        viz:
+          type: compare
+          cols:
+          - k: Inner join
+            items: [Matched pairs only]
+          - k: Left join
+            items: [All left rows, Nulls where no match]
+          - k: Full join
+            items: [All rows of both, Nulls on either side]
+        beats:
+          - "An inner join keeps only pairs that satisfy the condition."
+          - "A left join keeps every left row, adding nulls when nothing matches on the right."
+          - "A full join keeps everything from both sides, matched where it can."
+      - name: Indexes and B+ trees
+        why: "An index trades write cost and space for fast lookups, and the B+ tree is the default structure behind most of them."
+        plain:
+          - >-
+              Without an index, finding a row means scanning the table. A B+ tree
+              keeps keys sorted in wide, shallow nodes, so a lookup reads only a few.
+          - >-
+              Its leaves are linked, so range queries walk sideways. Every insert
+              keeps the tree balanced by splitting full nodes.
+        covers:
+          - Primary and secondary indexes
+          - B trees and B+ trees
+          - Node splits and tree height
+          - Range scans along the leaves
+          - Hash indexes and their limits
+          - The write cost of every index
+        check: "Why is a B+ tree better than a binary search tree for a disk-based index?"
+        viz:
+          type: tree
+          root: B+ tree
+          branches:
+          - k: Internal nodes
+            items: [Separator keys, Child pointers]
+          - k: Leaves
+            items: [All keys in order, Links to the next leaf]
+        beats:
+          - "A B+ tree keeps every key in its leaves and only guides the search above them."
+          - "Internal nodes hold separator keys: go left if smaller, right if not. Each node fills a disk page."
+          - "The leaves hold all keys in sorted order, linked in a chain, so a range query walks along them."
+      - name: Transactions and isolation
+        why: "Transactions make a group of changes all-or-nothing, and isolation levels decide which anomalies concurrent users can see."
+        plain:
+          - >-
+              ACID promises that a transaction happens completely or not at all, and
+              that concurrent transactions behave as if they ran in some order.
+          - >-
+              Full isolation is expensive, so databases offer weaker levels. Each
+              level allows specific anomalies, such as reading a row that later changes.
+        covers:
+          - Atomicity, consistency, isolation, durability
+          - Conflict serializability and precedence graphs
+          - Dirty reads, non-repeatable reads and phantoms
+          - Two-phase locking
+          - Multiversion concurrency control
+          - Two-phase commit across machines
+        check: "Draw the precedence graph for a schedule and say whether it is conflict serializable."
+        viz:
+          type: scale
+          lo: Fast
+          hi: Safe
+          stops: [Read uncommitted, Read committed, Repeatable read, Serializable]
+          'on': 1
+        beats:
+          - "Read uncommitted lets you see other transactions' unfinished changes."
+          - "Read committed hides unfinished changes, but a row can change between 2 reads."
+          - "Repeatable read keeps rows stable, but new rows can still appear."
+          - "Serializable behaves as if transactions ran one at a time. It is the safest and the slowest."
+        scene:
+          kind: sets
+          cases:
+          - k: Read committed allows
+            set: [Non-repeatable read, Phantom]
+          - k: Repeatable read allows
+            set: [Phantom]
+          - k: Serializable allows
+            set: []
+          alt: "Which anomalies each isolation level still allows."
+      - name: Scaling out
+        why: "Replication and sharding spread data across machines, and the CAP theorem limits what they can promise during a partition."
+        plain:
+          - >-
+              Replication copies data for safety and read speed. Sharding splits data
+              so each machine holds only part of it.
+          - >-
+              When the network splits, a system must choose between answering and
+              staying consistent. Most choose per operation.
+        covers:
+          - Replication, leader and follower
+          - Sharding and choosing a shard key
+          - The CAP theorem
+          - SQL and NoSQL trade-offs
+          - OLTP and OLAP workloads
+          - Eventual consistency
+        check: "Your shard key is the user's country. What goes wrong as you grow?"
+        viz:
+          type: compare
+          cols:
+          - k: Replication
+            items: [Copies of all data, Faster reads, Survives a failure]
+          - k: Sharding
+            items: [Each part on one machine, Scales writes, Cross-shard queries cost more]
+        beats:
+          - "Replication keeps copies of the same data on several machines."
+          - "Sharding splits the data so no single machine holds all of it."
+    traps:
+      - "Saying a left join can never return more rows than the left table"
+      - "Adding an index to every column"
+      - "Assuming the default isolation level is serializable"
+      - "Quoting CAP as pick any 2 of 3"
+    drills:
+      - "Normalise a spreadsheet of orders into third normal form"
+      - "Insert 20 keys into a B+ tree in the simulator and predict each split first"
+      - "Write a schedule that is not conflict serializable, then fix it"
+      - "Explain a query plan for a join on your own data"
+  - id: computer-networks
+    name: Computer Networks
+    group: foundations
+    blurb: "Trace a message from one machine to another, and explain what each layer adds and what it can lose."
+    scope: "Study layers, addressing, routing, transport and application protocols. Use network and security for attacks on AI systems and operating systems for the host side."
+    links: [network-and-security, operating-systems]
+    modules:
+      - name: Layers
+        why: "Layering lets each protocol solve one problem and rely on the layer below for the rest."
+        plain:
+          - >-
+              Each layer adds a header on the way down and removes it on the way up.
+              The application never sees routers or cables.
+          - >-
+              The OSI model has 7 layers; the internet in practice runs on 4 or 5.
+              The names matter less than knowing what each adds.
+        covers:
+          - The OSI model and the TCP/IP model
+          - Encapsulation and headers
+          - Physical media and topologies
+          - Switches, routers and hubs
+          - Frames, packets and segments
+          - Which layer a device works at
+        check: "What headers does a web request carry by the time it leaves your laptop?"
+        viz:
+          type: stack
+          layers: [Application, Transport, Network, Link, Physical]
+        beats:
+          - "The application speaks HTTP, DNS or another protocol about the task itself."
+          - "Transport adds ports, and with TCP, ordering and retransmission."
+          - "Network adds IP addresses so routers can forward the packet across networks."
+          - "Link adds MAC addresses for the next hop on the local network."
+          - "Physical turns bits into signals on a wire or radio."
+      - name: Addressing and subnets
+        why: "An IP address and prefix say which network a host is on, which decides whether traffic goes direct or to a router."
+        plain:
+          - >-
+              A prefix length, such as /24, says how many leading bits name the
+              network. The rest name the host.
+          - >-
+              2 hosts on the same network talk directly. Anything else goes to the
+              gateway, and NAT lets many private hosts share one public address.
+        covers:
+          - IPv4 and IPv6 addresses
+          - Prefixes, masks and subnetting
+          - Network and broadcast addresses
+          - Private ranges and NAT
+          - DHCP and ARP
+          - DNS resolution
+        check: "How many usable hosts are in 10.0.0.0/22, and what is its broadcast address?"
+        viz:
+          type: compare
+          cols:
+          - k: Network bits
+            items: [Shared by the subnet, Set by the prefix]
+          - k: Host bits
+            items: [Unique per device, All zeros or all ones are reserved]
+        beats:
+          - "The first bits, as many as the prefix says, are the same for every host on the subnet."
+          - "The remaining bits pick one host. All zeros names the network and all ones is the broadcast."
+      - name: Routing
+        why: "Routers build forwarding tables from shortest paths, so each makes a local choice that adds up to a route."
+        plain:
+          - >-
+              A router only chooses the next hop. Link-state routing gives every router
+              the whole map and runs Dijkstra's algorithm on it.
+          - >-
+              Between organisations, BGP picks routes by policy rather than shortest
+              distance.
+        covers:
+          - Forwarding tables and next hops
+          - Link-state routing and Dijkstra's algorithm
+          - Distance-vector routing
+          - OSPF inside a network
+          - BGP between networks
+          - Why routes change and loops form
+        check: "Run Dijkstra by hand on a 5-router network and write router A's forwarding table."
+        viz:
+          type: flow
+          steps: [Learn the links, Build the map, Shortest paths, Next hops]
+        beats:
+          - "Each router learns the cost of its own links and floods them to every other router."
+          - "Every router ends up with the same map of the network."
+          - "Each runs Dijkstra's algorithm from itself to find the shortest path to everyone."
+          - "Only the first hop of each path goes in the forwarding table."
+      - name: Transport, TCP and UDP
+        why: "TCP turns an unreliable network into a reliable, ordered stream, and controls how fast it sends."
+        plain:
+          - >-
+              TCP opens with a 3-way handshake, numbers every byte, and resends what
+              is not acknowledged. UDP does none of this and is faster.
+          - >-
+              Congestion control grows the sending window until loss appears, then
+              cuts it. That sawtooth is how the internet shares bandwidth.
+        covers:
+          - Ports and sockets
+          - The 3-way handshake and teardown
+          - Sequence numbers and acknowledgements
+          - Flow control and the receive window
+          - Slow start and congestion avoidance
+          - UDP, WebSockets and WebRTC
+        check: "Why does a new TCP connection start slowly even on a fast link?"
+        viz:
+          type: flow
+          steps: [SYN, SYN-ACK, ACK, Data]
+        beats:
+          - "The client sends SYN with its starting sequence number."
+          - "The server replies SYN-ACK, acknowledging it and sending its own."
+          - "The client acknowledges. Both sides now agree on sequence numbers."
+          - "Data flows, each byte numbered and acknowledged."
+        scene:
+          kind: trace
+          steps: [Slow start, Congestion avoidance, Loss, Cut the window]
+          bad: 2
+          alt: "TCP congestion control: grow quickly, then slowly, until a loss cuts the window."
+      - name: Switching and local networks
+        why: "Switches learn which port reaches which device, and VLANs split one physical network into several logical ones."
+        plain:
+          - >-
+              A switch reads the destination MAC address and sends the frame only
+              out of the right port. It learns ports by watching source addresses.
+          - >-
+              VLANs separate traffic on shared switches, and the spanning tree
+              protocol stops loops from flooding the network.
+        covers:
+          - Ethernet frames and MAC addresses
+          - How a switch learns its table
+          - VLANs and trunks
+          - Spanning tree and loops
+          - Collision and broadcast domains
+          - Network access control
+        check: "Why can a loop between 2 switches take a network down, and what stops it?"
+        viz:
+          type: flow
+          steps: [Frame arrives, Learn the source, Look up the destination, Forward or flood]
+        beats:
+          - "A frame arrives on a port."
+          - "The switch notes that its source address lives on that port."
+          - "It looks up the destination address in its table."
+          - "If it knows the port, it forwards there; if not, it floods every other port."
+      - name: Applications and quality of service
+        why: "Application protocols sit on transport, and the network's latency, loss and jitter decide what they can do."
+        plain:
+          - >-
+              HTTP, DNS and email each define a conversation on top of TCP or UDP.
+              Real-time audio and video prefer UDP because a late packet is useless.
+          - >-
+              Latency, jitter and loss are measured, and quality of service marks
+              traffic so routers can prioritise it.
+        covers:
+          - HTTP and HTTPS
+          - DNS and caching
+          - Latency, throughput, jitter and loss
+          - Quality of service and traffic classes
+          - Firewalls and TLS
+          - Choosing TCP or UDP for an application
+        check: "A video call stutters but downloads are fine. Which metrics do you check, and why?"
+        viz:
+          type: compare
+          cols:
+          - k: TCP suits
+            items: [Web pages, File transfer, Email]
+          - k: UDP suits
+            items: [Voice and video, Games, DNS queries]
+        beats:
+          - "TCP suits anything that must arrive complete and in order, even if late."
+          - "UDP suits anything where late is as bad as lost, such as live audio."
+    traps:
+      - "Saying a switch works at the network layer"
+      - "Forgetting that the network and broadcast addresses are not usable hosts"
+      - "Claiming UDP is unreliable so nobody uses it"
+      - "Thinking TCP sends at full speed from the first packet"
+    drills:
+      - "Subnet 192.168.10.0/24 into 4 equal subnets and list each range"
+      - "Run Dijkstra by hand, then check it in the simulator"
+      - "Capture a TCP handshake with a packet sniffer and label each field"
+      - "Plot a congestion window over 20 rounds with 2 losses"
   - id: design-patterns
     name: Design Patterns and Refactoring
     group: systems
