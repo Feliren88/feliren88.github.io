@@ -9530,11 +9530,11 @@ topics:
             - Most compute
           - k: Monte Carlo dropout
             items:
-          - 1 model, many passes
+            - 1 model, many passes
           - k: Laplace
             items:
             - Curvature at the optimum
-          - 1 extra pass
+            - 1 extra pass
       - name: Abstention and selective prediction
         why: "Selective prediction uses uncertainty to defer cases that are too risky to answer."
         beats:
