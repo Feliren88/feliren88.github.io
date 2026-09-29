@@ -510,7 +510,36 @@ html[data-motion-scene="record"] .em-pin{
   row-gap:1.5rem;
   padding-block:clamp(3.5rem,6vw,5rem) 2.5rem
 }
-html[data-motion-scene="record"] .em-story-frame{transition:opacity .35s ease}
+html[data-motion-scene="record"] .em-story-frame{transition:opacity .4s ease}
+html[data-motion-scene="record"] .em-story-frame.is-active{
+  animation:em-slide-build .8s cubic-bezier(.2,.72,.25,1) both
+}
+@keyframes em-slide-build{
+  from{opacity:0;transform:translateY(24px);clip-path:inset(100% 0 0 0)}
+  to{opacity:1;transform:translateY(0);clip-path:inset(0)}
+}
+html[data-motion-scene="record"] .em-copy{position:relative}
+html[data-motion-scene="record"] .em-copy.is-entering>h2{
+  animation:em-slide-rise .55s cubic-bezier(.2,.72,.25,1) .13s both
+}
+html[data-motion-scene="record"] .em-copy.is-entering>p{
+  animation:em-slide-rise .65s cubic-bezier(.2,.72,.25,1) .24s both
+}
+@keyframes em-slide-rise{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+html[data-motion-scene="record"] .em-slide-outgoing{
+  position:absolute;inset:0;pointer-events:none;
+  animation:em-slide-leave .17s ease-out both
+}
+@keyframes em-slide-leave{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-12px)}
+}
+html[data-motion-scene="record"] .em-slide-measure{
+  position:absolute;top:0;left:0;width:100%;visibility:hidden;pointer-events:none
+}
 html[data-motion-scene="record"] .em-vf-portrait{opacity:.96;clip-path:none}
 html[data-motion-scene="record"] .em-slide-controls{
   grid-column:1/-1;display:flex;align-items:center;gap:.9rem;
@@ -528,10 +557,6 @@ html[data-motion-scene="record"] .em-slide-position{
   min-width:3rem;text-align:center;color:var(--em-ink);
   font:700 .78rem "Space Grotesk",sans-serif
 }
-html[data-motion-scene="record"] .em-slide-hint{
-  margin-left:auto;color:var(--em-ink-dim);
-  font:600 .72rem "Space Grotesk",sans-serif
-}
 @media(max-width:1100px){
   html[data-motion-scene="record"] .em-pin{
     min-height:0;grid-template-rows:auto auto auto auto;
@@ -541,10 +566,12 @@ html[data-motion-scene="record"] .em-slide-hint{
 }
 @media(max-width:560px){
   html[data-motion-scene="record"] .em-pin{padding-inline:1.25rem;row-gap:1.25rem}
-  html[data-motion-scene="record"] .em-slide-hint{font-size:.65rem}
   html[data-motion-scene="record"] .em-frame-caption{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   html[data-motion-scene="record"] .em-story-frame{opacity:0!important;transition:none!important}
   html[data-motion-scene="record"] .em-story-frame.is-active{opacity:1!important}
+  html[data-motion-scene="record"] .em-copy.is-entering>h2,
+  html[data-motion-scene="record"] .em-copy.is-entering>p{animation:none!important}
+  html[data-motion-scene="record"] .em-slide-outgoing{display:none}
 }

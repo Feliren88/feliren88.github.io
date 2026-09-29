@@ -511,14 +511,18 @@
     var visible = false;
     var paused = false;
     var reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    var delay = 7000;
+    var delay = 3000;
     var heading = copy.querySelector('h2');
     var description = copy.querySelector('p');
     var controls = el('div', 'em-slide-controls');
     var previous = el('button', 'em-slide-arrow', '←');
     var next = el('button', 'em-slide-arrow', '→');
     var position = el('span', 'em-slide-position');
-    var hint = el('span', 'em-slide-hint', 'Changes every 7 seconds');
+    var initialized = false;
+    var outgoing = null;
+    var measure = el('div', 'em-slide-measure');
+    var measureHeading = el('h2');
+    var measureDescription = el('p');
 
     host.setAttribute('aria-label', 'About Vicky Feliren slideshow');
     host.setAttribute('aria-roledescription', 'slideshow');
@@ -528,8 +532,20 @@
     controls.appendChild(previous);
     controls.appendChild(position);
     controls.appendChild(next);
-    controls.appendChild(hint);
     pin.insertBefore(controls, track);
+    measure.appendChild(measureHeading);
+    measure.appendChild(measureDescription);
+    copy.appendChild(measure);
+
+    function measureHeight() {
+      var height = 0;
+      scene.frames.forEach(function (frame, index) {
+        measureHeading.textContent = frame[1];
+        setHighlightedText(measureDescription, frame[2], scene.highlights[index]);
+        height = Math.max(height, Math.ceil(measure.getBoundingClientRect().height));
+      });
+      copy.style.minHeight = height + 'px';
+    }
 
     function stop() {
       clearTimeout(timer);
@@ -537,14 +553,30 @@
     }
     function start() {
       stop();
-      hint.textContent = reducedMotion.matches ? 'Use arrows to change slides' : 'Changes every 7 seconds';
       if (!visible || paused || document.hidden || reducedMotion.matches) return;
       timer = setTimeout(function () { show((current + 1) % count); }, delay);
     }
     function show(index) {
       current = (index + count) % count;
+      if (outgoing) outgoing.remove();
+      if (initialized && !reducedMotion.matches) {
+        outgoing = el('div', 'em-slide-outgoing');
+        outgoing.appendChild(heading.cloneNode(true));
+        outgoing.appendChild(description.cloneNode(true));
+        copy.appendChild(outgoing);
+        var departing = outgoing;
+        setTimeout(function () {
+          departing.remove();
+          if (outgoing === departing) outgoing = null;
+        }, 300);
+      }
+      copy.classList.remove('is-entering');
       heading.textContent = scene.frames[current][1];
       setHighlightedText(description, scene.frames[current][2], scene.highlights[current]);
+      if (!reducedMotion.matches) {
+        void copy.offsetWidth;
+        copy.classList.add('is-entering');
+      }
       narrative.frames.forEach(function (frame, frameIndex) {
         frame.classList.toggle('is-active', frameIndex === current);
         frame.setAttribute('aria-hidden', frameIndex === current ? 'false' : 'true');
@@ -552,6 +584,7 @@
       narrative.svg.setAttribute('aria-label', scene.steps[current] + '. ' + scene.frames[current][2]);
       position.textContent = (current + 1) + ' / ' + count;
       host.style.setProperty('--em-p', ((current + 1) / count).toFixed(4));
+      initialized = true;
       start();
     }
 
@@ -563,13 +596,15 @@
         show(current + (event.key === 'ArrowRight' ? 1 : -1));
       }
     });
-    host.addEventListener('mouseenter', function () { paused = true; stop(); });
-    host.addEventListener('mouseleave', function () { paused = false; start(); });
-    host.addEventListener('focusin', function () { paused = true; stop(); });
+    host.addEventListener('focusin', function (event) {
+      if (event.target.matches(':focus-visible')) { paused = true; stop(); }
+    });
     host.addEventListener('focusout', function (event) {
       if (!host.contains(event.relatedTarget)) { paused = false; start(); }
     });
+    host.addEventListener('pointerdown', function () { paused = false; start(); });
     document.addEventListener('visibilitychange', start);
+    addEventListener('resize', measureHeight);
     if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', start);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
@@ -580,6 +615,8 @@
       visible = true;
     }
     show(0);
+    measureHeight();
+    if (document.fonts) document.fonts.ready.then(measureHeight);
   }
 
   // The pin holds for one screen per beat, so the section has to be as tall as the
