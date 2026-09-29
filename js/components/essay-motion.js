@@ -382,6 +382,10 @@
     var frames = story.frames.map(function (markup, index) {
       var frame = svgEl('g', { class: 'em-story-frame em-deep-' + sceneKey + '-' + index });
       frame.innerHTML = markup;
+      if (sceneKey === 'record') {
+        var caption = frame.querySelector(':scope > text:last-of-type');
+        if (caption) caption.classList.add('em-frame-caption');
+      }
       if (sceneKey === 'record' && index === 0) {
         var oldSketch = frame.querySelector('.em-vf-sketch');
         if (oldSketch) oldSketch.remove();
@@ -472,7 +476,10 @@
   // An unlabelled scrubber replaces that rail. The reader still needs to know how
   // much of a four-screen pinned section is left; they do not need it spoiled.
   var track = el('div', 'em-track'); track.appendChild(el('i')); pin.appendChild(track);
-  var skip = el('button', 'em-skip', 'Skip scene ↓'); skip.type = 'button'; pin.appendChild(skip);
+  var skip = null;
+  if (key !== 'record') {
+    skip = el('button', 'em-skip', 'Skip scene ↓'); skip.type = 'button'; pin.appendChild(skip);
+  }
   host.appendChild(pin);
 
   /*
@@ -489,6 +496,90 @@
   } else {
     var anchor = root.querySelector(':scope > [class*="-hero"]') || Array.prototype.find.call(root.children, function (child) { return child.matches && child.matches('header, section'); });
     if (anchor && anchor.nextSibling) root.insertBefore(host, anchor.nextSibling); else root.appendChild(host);
+  }
+
+  if (key === 'record') {
+    alignToViewport();
+    addEventListener('resize', alignToViewport);
+    initRecordSlideshow();
+    return;
+  }
+
+  function initRecordSlideshow() {
+    var current = 0;
+    var timer = null;
+    var visible = false;
+    var paused = false;
+    var reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    var delay = 7000;
+    var heading = copy.querySelector('h2');
+    var description = copy.querySelector('p');
+    var controls = el('div', 'em-slide-controls');
+    var previous = el('button', 'em-slide-arrow', '←');
+    var next = el('button', 'em-slide-arrow', '→');
+    var position = el('span', 'em-slide-position');
+    var hint = el('span', 'em-slide-hint', 'Changes every 7 seconds');
+
+    host.setAttribute('aria-label', 'About Vicky Feliren slideshow');
+    host.setAttribute('aria-roledescription', 'slideshow');
+    previous.type = next.type = 'button';
+    previous.setAttribute('aria-label', 'Previous slide');
+    next.setAttribute('aria-label', 'Next slide');
+    controls.appendChild(previous);
+    controls.appendChild(position);
+    controls.appendChild(next);
+    controls.appendChild(hint);
+    pin.insertBefore(controls, track);
+
+    function stop() {
+      clearTimeout(timer);
+      timer = null;
+    }
+    function start() {
+      stop();
+      hint.textContent = reducedMotion.matches ? 'Use arrows to change slides' : 'Changes every 7 seconds';
+      if (!visible || paused || document.hidden || reducedMotion.matches) return;
+      timer = setTimeout(function () { show((current + 1) % count); }, delay);
+    }
+    function show(index) {
+      current = (index + count) % count;
+      heading.textContent = scene.frames[current][1];
+      setHighlightedText(description, scene.frames[current][2], scene.highlights[current]);
+      narrative.frames.forEach(function (frame, frameIndex) {
+        frame.classList.toggle('is-active', frameIndex === current);
+        frame.setAttribute('aria-hidden', frameIndex === current ? 'false' : 'true');
+      });
+      narrative.svg.setAttribute('aria-label', scene.steps[current] + '. ' + scene.frames[current][2]);
+      position.textContent = (current + 1) + ' / ' + count;
+      host.style.setProperty('--em-p', ((current + 1) / count).toFixed(4));
+      start();
+    }
+
+    previous.addEventListener('click', function () { show(current - 1); });
+    next.addEventListener('click', function () { show(current + 1); });
+    controls.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(current + (event.key === 'ArrowRight' ? 1 : -1));
+      }
+    });
+    host.addEventListener('mouseenter', function () { paused = true; stop(); });
+    host.addEventListener('mouseleave', function () { paused = false; start(); });
+    host.addEventListener('focusin', function () { paused = true; stop(); });
+    host.addEventListener('focusout', function (event) {
+      if (!host.contains(event.relatedTarget)) { paused = false; start(); }
+    });
+    document.addEventListener('visibilitychange', start);
+    if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', start);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        start();
+      }, { threshold: 0.25 }).observe(host);
+    } else {
+      visible = true;
+    }
+    show(0);
   }
 
   // The pin holds for one screen per beat, so the section has to be as tall as the

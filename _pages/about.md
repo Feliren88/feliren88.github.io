@@ -43,9 +43,7 @@ motion_scene: record
   </div>
   {% endif %}
 
-  <!-- essay-motion.js replaces this with the record scene. It sits above the sticky
-       nav on purpose: the nav would otherwise stay pinned across the whole
-       interlude. See the [data-scene-slot] note in js/components/essay-motion.js. -->
+  <!-- The record slideshow sits above the sticky section navigation. -->
   <div data-scene-slot></div>
 
   <nav class="about-story-nav" aria-label="On this page">
