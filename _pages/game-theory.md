@@ -5,7 +5,7 @@ subtitle: Other people respond to your choices. Include what they do next
 description: Working notes on strategic decisions, computed payoff matrices, repeated cooperation, bargaining, and ruin risk.
 permalink: /game-theory/
 date: 2026-08-23
-last_modified_at: 2026-08-26
+last_modified_at: 2026-09-29
 layout-class: page game-theory
 extra_css: /css/game-theory.css
 extra_js: /js/components/game-theory.js
@@ -860,10 +860,10 @@ motion_scene: strategy
 <section class="gt-part gt-prose" id="why">
   <h2><span class="n">12</span> Why I keep this <svg class="gt-i" viewBox="0 0 24 24" aria-hidden="true" style="display:inline-block;width:1em;height:1em;color:var(--accent);vertical-align:-0.1em"><use href="#gt-medal"/></svg></h2>
 
-  <p>I work on calibration: the gap between what a system believes and what is true. Game theory
-  adds an environment that watches the system and responds.</p>
+  <p>My research direction is sequential decision making under uncertainty.
+  Game theory adds other players who respond to the agent's choices.</p>
 
-  <p>The same logic applies to safety work. A model may optimise its stated objective and ignore
+  <p>Those responses affect later decisions. A model may optimise its stated objective and ignore
   how people respond. The error is equivalent to evaluating a decision without the
   <span class="m">BR</span> term. More intelligence does not repair a badly specified game.</p>
 

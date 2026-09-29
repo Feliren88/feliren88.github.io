@@ -1,7 +1,7 @@
 # Site settings
 title: Vicky Feliren
 description:
-  Vicky Feliren studies when uncertainty estimates remain valid after AI models or their operating conditions change, and how they can support decisions.
+  Vicky Feliren's research direction is sequential decision making under uncertainty. He studies when agents should act, defer, or gather more evidence as conditions change.
 baseurl: ""
 url: "https://vickyfeliren.com"
 
@@ -25,6 +25,11 @@ image: /assets/img/profile.webp
 keywords:
   - Vicky Feliren
   - Applied Scientist
+  - Sequential Decision Making under Uncertainty
+  - Uncertainty Quantification
+  - Calibration
+  - Selective Prediction
+  - Conformal Prediction
   - AI Researcher
   - Machine Learning Engineer
   - Data Scientist
@@ -33,10 +38,7 @@ keywords:
   - Vision-Language Models
   - Multimodal AI
   - Multilingual AI
-  - Trustworthy AI
-  - AI Safety
   - Interpretability
-  - Conformal Prediction
   - Earth Observation
 
 social:

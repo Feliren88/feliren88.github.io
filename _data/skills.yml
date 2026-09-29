@@ -24,8 +24,8 @@
 # already evidences somewhere, so nothing here is a claim the record does not carry:
 # peer review and talks, teaching and judging, audit and governance work, languages.
 
-- id: safety
-  group: 'AI Safety & Reliability'
+- id: uncertainty
+  group: 'Uncertainty & Decision Rules'
   items: 'Conformal prediction, Uncertainty quantification, Selective prediction / abstention, Calibration, Distribution-shift robustness, Linear probing, Activation steering, Red-teaming, LLM/VLM evaluation, SHAP'
 
 - id: deep-learning

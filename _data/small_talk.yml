@@ -514,7 +514,7 @@ scripts:
     name: "“What do you do?”"
     formula: Domain, then function, then why it matters
     body: Give one sentence and stop. If they are interested they will ask, and then you have permission for the second layer.
-    example: I work on AI safety. I measure how well a model knows its own limits, because a model that sounds too sure can be hard to trust.
+    example: I study how AI systems decide when they are uncertain. Each choice changes what happens next, so I study when they should ask for help.
     fail: A five-minute account of your whole field answers a question nobody asked.
   - key: tellmeabout
     name: "“Tell me about yourself”"

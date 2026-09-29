@@ -50,7 +50,7 @@ and `#profilepage` have to agree between `person.html` and `site-entities.html`.
 **1. Person schema** — `_includes/seo/person.html`, built from `_data/identity.yml`; appears on every page. Edit the data file, not the include. Properties:
 - Identity: `name`, `alternateName`, `gender`, `description` (includes he/him), `disambiguatingDescription`, `image`
 - Role: `jobTitle`, `alumniOf`, `worksFor` (both Monash University)
-- Knowledge: `knowsAbout` (8 domains, led by Trustworthy AI / Multimodal AI / AI Safety / Interpretability / Multilingual AI; Earth Observation last), `knowsLanguage` (English, Indonesian)
+- The `knowsAbout` field leads with sequential decision making under uncertainty, uncertainty quantification, calibration, and selective prediction. The remaining entries cover methods and settings from past work. The `knowsLanguage` field lists English and Indonesian.
 - Recognition: `award` (11 entries), `memberOf` (SEACrowd, ACL, IEEE)
 - Network: `colleague` (Risqi Saputra, Taufiq Asyhari), `sameAs` (12 profiles)
 - Works: `author` array — **auto-generated from `_data/publications.yml`** via Liquid

@@ -8,13 +8,13 @@ wip_notice: >
 # ============================================================
 
 categories:
-  - id: safety
-    label: AI Safety & Reliability
+  - id: uncertainty
+    label: Uncertainty & Decisions
     color: accent
     description: >
-      Work on helping models use what they know and abstain when evidence is weak.
-      This includes multilingual image-text conflicts, interpretability, activation
-      steering, and conformal coverage for multimodal and sequential systems.
+      Work on uncertainty estimates that can support a decision to act or defer.
+      ENCP studies coverage across whole navigation routes. Multilingual abstention
+      and detection studies test decision rules when the evidence or input changes.
 
   - id: ongoing
     label: Ongoing Projects
@@ -353,11 +353,11 @@ usecases:
 
   - id: multilingual-vlm-crossmodal-conflict
     title: "Do Multilingual VLMs Abstain Under Cross-Modal Conflict in Low-Resource Languages?"
-    category: safety
+    category: uncertainty
     tags:
       - Vision-Language Models
       - Multilingual AI
-      - AI Safety
+      - Selective Prediction
       - Activation Steering
       - Cross-Modal Conflict
       - Apart Research
@@ -476,7 +476,7 @@ usecases:
 
   - id: goal-hijack-probe
     title: "Goal Hijack Probe"
-    category: safety
+    category: uncertainty
     tags:
       - Mechanistic Interpretability
       - Prompt Injection
@@ -1560,7 +1560,7 @@ usecases:
 
   - id: vln-conformal-prediction
     title: "ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation"
-    category: safety
+    category: uncertainty
     tags:
       - Conformal Prediction
       - Vision-Language Navigation

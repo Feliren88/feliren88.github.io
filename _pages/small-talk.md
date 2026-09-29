@@ -5,7 +5,7 @@ subtitle: A practical way into better conversations
 description: A guide for people who prefer deeper conversations but still need an easy place to start.
 permalink: /small-talk/
 date: 2026-08-26
-last_modified_at: 2026-08-26
+last_modified_at: 2026-09-29
 layout-class: page small-talk
 extra_css: /css/small-talk.css
 extra_js: /js/components/small-talk.js

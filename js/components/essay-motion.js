@@ -147,7 +147,7 @@
     record: {
       narrative: true,
       cinematic: true,
-      title: 'I study when uncertainty estimates remain valid.',
+      title: 'My research direction is sequential decision making under uncertainty.',
       copy: 'My first-author navigation preprint studies coverage across a route. My ML work spans 5+ years of employed and freelance projects, and I have helped create public benchmarks for Southeast Asian languages and images.',
       steps: ['Record', 'Built from zero', 'Banking AI systems', 'Published research', 'Southeast Asian data', 'Recognition', 'Leadership'],
       highlights: [
@@ -162,7 +162,7 @@
         ['12 awards and scholarships'],
         ['review scientific papers', 'more than 50 technical projects']],
       frames: [
-        ['Vicky Feliren', 'I study when uncertainty estimates remain valid.', 'My first-author navigation preprint studies coverage across a route. My ML work spans 5+ years of employed and freelance projects, and I have helped create public benchmarks for Southeast Asian languages and images.'],
+        ['Vicky Feliren', 'My research direction is sequential decision making under uncertainty.', 'My first-author navigation preprint studies coverage across a route. My ML work spans 5+ years of employed and freelance projects, and I have helped create public benchmarks for Southeast Asian languages and images.'],
         ['Built from zero', 'I built the AI systems behind work in 6 Asia-Pacific markets.', 'I handled the technical work alone at first. I built the forecasts and shared tools that later hires could keep using.'],
         ['Banking AI systems', 'I led engineering for banking AI handling 1M+ checks a day.', 'On the busiest days, the AI systems checked more than 1M logins. I kept them available 99.99% of the time and made sure staff could trace every decision during an audit.'],
         ['Published research', 'I have led a reviewed paper and a navigation preprint.', 'My flood-mapping paper appeared in IEEE GRSL. The navigation preprint develops coverage across a whole route, while collaborative papers study Southeast Asian images and 109 languages online.'],

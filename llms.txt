@@ -1,17 +1,17 @@
 # Vicky Feliren
 
-> Applied scientist studying reliable decisions under changing conditions
+> Applied scientist whose research direction is sequential decision making under uncertainty
 
-Vicky Feliren studies when a model should act, abstain, or ask for help, and how to make that decision reliable when the conditions of use differ from those used for calibration. His work includes a first-author preprint on whole-route navigation coverage, Southeast Asian language and vision benchmarks, and first-author flood mapping research. He earned a Bachelor of Computer Science at Monash University. His Master of Data Science at Monash University is awaiting conferral; his final GPA is 4.0/4.0 and weighted average mark is 84.769. He is open to research collaboration, speaking, and applied scientist roles.
+Vicky Feliren's research direction is sequential decision making under uncertainty. Each choice an agent makes changes what it encounters next. He studies when uncertainty estimates support acting, deferring, or gathering evidence across that sequence and under changing conditions. His work includes a first-author preprint on whole-route navigation coverage, Southeast Asian language and vision benchmarks, and first-author flood mapping research. He earned a Bachelor of Computer Science at Monash University. His Master of Data Science at Monash University is awaiting conferral; his final GPA is 4.0/4.0 and weighted average mark is 84.769. He is open to research collaboration, speaking, and applied scientist roles.
 
 ## Pages
 
 - [Home](https://vickyfeliren.com/): Hero, research identity and entry point
 - [Home / About](https://vickyfeliren.com/): Bio, research agenda, expertise, work history, awards, writing, and contact
-- [Research](https://vickyfeliren.com/research/): Publications, IEEE Q1, ACL 2025, Remote Sensing of Environment Q1, AQUA Q2, arXiv preprints
+- [Research](https://vickyfeliren.com/research/): Sequential decision making under uncertainty, open questions, and the past work behind them. Publication archive with navigation, language benchmarks, Earth observation, and policy studies.
 - [Use Cases](https://vickyfeliren.com/usecases/): Applied ML project write-ups with full SCR (Situation–Complication–Resolution) narratives across multimodal AI, multilingual and cultural NLP, earth observation, production fintech, and hackathon projects
 - [Writings](https://vickyfeliren.com/writings/): Research notes (short paper distillations with own take), press features, and Medium essays on AI, philosophy, and life. Defaults to the Research filter.
-- [Work With Me](https://vickyfeliren.com/contact/): Available for applied scientist roles, research collaboration, speaking, and mentorship
+- [Work With Me](https://vickyfeliren.com/contact/): Research collaboration on sequential decision making under uncertainty, applied scientist roles, speaking, and mentorship
 
 ## Use Cases (individual pages)
 
@@ -21,7 +21,8 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
 - [Aquaculture Pond Detection](https://vickyfeliren.com/usecases/aquaculture-pond-detection/): Filed patent IDS000010594 (June 2025). Multi-temporal Sentinel-2 pipeline for illegal aquaculture pond expansion detection across Indonesia and Vietnam coastlines.
 - [Flood Policy Evaluation](https://vickyfeliren.com/usecases/flood-urban-resilience/): AQUA Q2 2025. Mixed-methods evaluation of retention pond effectiveness in South Bandung, bridging ProCANet satellite segmentation with evidence-based urban policy.
 
-### AI Safety & Reliability
+### Uncertainty & Decisions
+- [ENCP for Vision-and-Language Navigation](https://vickyfeliren.com/usecases/vln-conformal-prediction/). First-author arXiv preprint on calibration across whole navigation routes. ENCP states the assumptions behind its coverage guarantee and evaluates 4 policies on R2R and REVERIE. The paper is available at https://arxiv.org/abs/2609.17499
 - [Multilingual VLMs Under Cross-Modal Conflict](https://vickyfeliren.com/usecases/multilingual-vlm-crossmodal-conflict/): Apart Research Global South AI Safety Hackathon 2026 (Co-First Author). Multilingual (English, Hindi, Telugu) cross-modal conflict benchmark for 9 open VLMs with a paired perception-control override-gap design. The conflict signal stays linearly decodable at 0.92 in Telugu; cross-lingual contrastive steering transfers an English-fit direction that drives text-override to zero for abstention-amenable models.
 - [Goal Hijack Probe](https://vickyfeliren.com/goal-hijack-probe/) — Personal experiment (2026). A read-only linear probe on Qwen2.5-Instruct hidden states reaches deconfounded AUC 0.998 on goal-hijack attempts. Its measured benign-pool false-positive rate is 0.029 against a 0.05 target under representative calibration. A harmless-prefix control exposed a naive detector that flagged every harmless prefixed control. An input-text baseline nearly matched the probe, while the probe caught more attacks in an unseen phrasing family at the fixed threshold (TPR 0.988 versus 0.880). [Structured summary](https://vickyfeliren.com/usecases/goal-hijack-probe/).
 
@@ -45,7 +46,6 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
 - [Qwen VL Fine-tuning for AI City Challenge 2026](https://vickyfeliren.com/usecases/aicity-qwen-vl/): LoRA fine-tuning Qwen2.5-VL-3B under 14GB GPU constraints for AI City Challenge 2026 Track 2 using LLaMA-Factory + DeepSpeed ZeRO-2.
 
 ### Ongoing Projects
-- [ENCP for Vision-and-Language Navigation](https://vickyfeliren.com/usecases/vln-conformal-prediction/) — First-author arXiv preprint. Episode-normalized conformal prediction restores calibrated coverage across four VLN policies on R2R and REVERIE. The paper is available at https://arxiv.org/abs/2609.17499
 - [llm-d/inference-scheduler](https://vickyfeliren.com/usecases/llm-d-inference-scheduler/): Open-source contribution. Kubernetes-native LLM inference scheduling with Gateway API, Envoy ext-proc, and KV cache-aware routing for vLLM backends.
 
 ## Key Research
@@ -72,7 +72,7 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
 - [MUSE, How Data Science Differs in Each Sector](https://www.monash.edu/indonesia/students/muse/how-data-science-differs-in-each-sector) (Monash University Indonesia, 2025): Panel speaker on how data science practice differs across industry sectors.
 - Bank of Indonesia (Oct 2024): Invited talk on data synthesis, data privacy, and responsible data management.
 - Bina Nusantara University (Nov 2024): Guest lecture on computer vision, from CNNs to Transformers through semantic segmentation.
-- Available Q3 2026 for conference talks, podcasts, and panels on trustworthy AI, conformal prediction, and AI for Southeast Asia.
+- Open to conference talks, podcasts, and panels on decisions under uncertainty, conformal prediction, and Southeast Asian model evaluation.
 
 ## Awards & Recognition
 
@@ -99,7 +99,7 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
 
 ## Writings
 
-- [Knowing when you don't know is the core safety property](https://vickyfeliren.com/essays/knowing-when-you-dont-know/) (Jun 2026, Essay): Why calibrated abstention is the core safety property of a deployed model; ties first-principles philosophy to conformal prediction, eliciting latent knowledge, and multilingual safety.
+- [Knowing when you don't know is the core safety property](https://vickyfeliren.com/essays/knowing-when-you-dont-know/) (Jun 2026, Essay): When an agent should abstain or ask for review, and why a stopping rule needs to account for changing conditions.
 - [My Life Principles](https://vickyfeliren.com/principles/) (Aug 2026, Interactive note): A personal decision manual built around one rule, protect your future ability to choose. Heavily diagrammatic. Includes a searchable index of 51 situations (angry, afraid, overwhelmed, career decisions, money up and down, relationships, betrayal, success, failure) each with its own icon and a glyph map for scanning, a six-question pre-decision checklist with a progress ring, a reversibility dial with common decisions plotted on the same axis, an eight-step fallback sequence (STOP, SEE, SEPARATE, SECURE, SPEAK, SAMPLE, SELECT, SCALE) shown as a progress track, a radial diagram of the five things to protect, and a closing fork showing how the two possible questions widen or narrow your future options.
 - [Game Theory of Life](https://vickyfeliren.com/game-theory/) (Aug 2026, Interactive note): A practical guide to decisions involving other players. It includes a solver for eight 2x2 games, a repeated-game cooperation model, seven ways to change a game, a risk-and-ruin simulator, 17 life domains, six strategic regimes, and a bottleneck dashboard. The solver computes each equilibrium and Pareto-efficient outcome from the displayed payoffs.
 - [Success & Failure](https://vickyfeliren.com/success-failure/) (Aug 2026, Interactive note): A visual operating manual for treating outcomes as evidence rather than identity. It distinguishes real and false success from productive and destructive failure, maps causal diagnosis across eight variables, presents parallel success and failure protocols, and includes a decision router for choosing whether to scale, maintain, adapt, pause, hedge, or exit.
@@ -141,8 +141,8 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
 
 ## Skills
 
-- category: 'RESEARCH: TRUSTWORTHY AI'
-  description: 'Knowing when a model should defer, and proving it. Distribution-free guarantees and reliability for deployed AI, beyond calibration scores.'
+- category: 'Uncertainty & Decision Rules'
+  description: 'Methods behind a research direction in sequential decision making under uncertainty. Calibration and conformal prediction support decisions under stated assumptions about the data.'
   skills:
     - 'Conformal Prediction'
     - 'Uncertainty Quantification'
@@ -153,8 +153,8 @@ Vicky Feliren studies when a model should act, abstain, or ask for help, and how
     - 'A/B Testing'
     - 'Hypothesis Testing'
 
-- category: 'RESEARCH: MULTILINGUAL & MULTIMODAL AI'
-  description: 'Making reliability and safety hold for the languages and contexts AI was never built for. Probing and steering internal states, multilingual benchmarks, adaptation methods, and earth-observation models that pressure-test the work against messy data.'
+- category: 'Multilingual & Multimodal AI'
+  description: 'Past work on multilingual benchmarks, internal model signals, adaptation, and Earth observation. These settings motivate questions about uncertainty when languages, inputs, or models change.'
   skills:
     - 'Activation Steering'
     - 'Linear Probing'

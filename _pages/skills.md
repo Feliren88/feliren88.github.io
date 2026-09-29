@@ -2,7 +2,7 @@
 layout: page
 title: How I Work
 subtitle: Research and Engineering Practice
-description: AI safety, conformal prediction, interpretability and activation steering, vision-language models, multilingual AI, earth observation, LLM evaluation, and production ML on GCP and AWS.
+description: Methods behind Vicky Feliren's research direction in sequential decision making under uncertainty, including conformal prediction, calibration, model evaluation, and production ML.
 permalink: /expertise/
 redirect_to: /
 ---

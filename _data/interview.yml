@@ -6820,7 +6820,7 @@ topics:
           - name: 'Transfer, and what it depends on'
             tex: '\text{gain}(\mathrm{src} \to \mathrm{tgt}) \; \text{rises with script sharing, typology and vocabulary overlap}'
             read: 'A related high-resource language lifts a low-resource one, and an unrelated one does much less.'
-            note: 'This is where the alignment tax becomes measurable. Safety training data is overwhelmingly English, so whatever it costs a model shows up unevenly across languages, and nobody has mapped that shape.'
+            note: 'Test transfer separately by language. A signal that supports decisions in 1 language may need new calibration in another.'
             where:
               - sym: '\mathrm{src}'
                 is: 'the language transferred from'
@@ -7328,7 +7328,7 @@ topics:
           - name: 'Where the accuracy actually went'
             tex: '\mathrm{acc}_{\mathrm{overall}} = \sum_{g} \varrho_{g}\, \mathrm{acc}_{g}'
             read: 'A weighted average across groups can hide poor performance in a small group.'
-            note: 'Report the worst group as well as the average. This is the same argument as the alignment tax being a distribution rather than a single number, applied to a vision benchmark.'
+            note: 'Report the worst group as well as the average. Then check whether the decision rule meets its target within each group.'
             where:
               - sym: 'g'
                 is: 'which group of the data is meant'
@@ -8459,7 +8459,7 @@ topics:
           - name: 'The quality cost, stated honestly'
             tex: '\Delta_{q} = \mathrm{acc}_{\mathrm{full}} - \mathrm{acc}_{\mathrm{compressed}}, \qquad \text{measure } \Delta_{q} \text{ per group, not overall}'
             read: 'Compression does not cost every input the same amount.'
-            note: 'Rare classes, long inputs and non-English text usually lose most, and an averaged number hides it. That is the same distributional argument as the alignment tax, applied to quantisation.'
+            note: 'Measure changes by class, input length, and language. Then test whether thresholds fitted before compression still support the intended decisions.'
             where:
               - sym: '\Delta_{q}'
                 is: 'the accuracy lost to compression'
@@ -9984,8 +9984,8 @@ topics:
                 is: 'the answer being scored'
           - name: 'The alignment tax'
             tex: '\Delta(x) = \mathrm{cap}_{\mathrm{base}}(x) - \mathrm{cap}_{\mathrm{aligned}}(x)'
-            read: 'What safety training costs is a function of the input, and reporting its average hides where it is worst.'
-            note: 'Askell and colleagues in 2021 are often cited as establishing this tax and they report the opposite, finding no significant cost from the prompting interventions they tried. The shape of the distribution, rather than its mean, is what nobody has measured.'
+            read: 'This difference measures how capability changes after safety training. Check gains and losses by input group.'
+            note: 'Compare the model before and after an intervention on matched inputs. Then test whether the change affects calibration and decisions. A capability loss is a hypothesis to test.'
             where:
               - sym: '\Delta(x)'
                 is: 'the capability lost on input x'
@@ -10217,17 +10217,15 @@ topics:
         why: "Honesty, calibration, and abstention separate what a model says from how much its answer should be trusted."
         beats:
           - >-
-              Safety training seems to cost a model some of its sense of what it knows.
+              A confidence estimate should help decide whether to answer, defer, or gather more evidence.
           - >-
-              That cost is reported as 1 averaged number.
+              First, check whether confidence matches observed accuracy across repeated predictions.
           - >-
-              It is really a distribution over inputs, and averages hide where the
-              damage falls.
+              Then compare the costs of a wrong answer and of asking for help.
           - >-
-              It is likely larger in languages where the safety data was thin.
+              Each choice changes what an agent encounters next, so evaluate the whole sequence.
           - >-
-              And in modalities beyond text, for the same reason. Measuring the shape is
-              the open work.
+              A new language, input type, or model may require a different threshold. Test that directly.
         scene:
           kind: defer
           inflow: Model answers
@@ -10240,9 +10238,7 @@ topics:
               and wrong. Calibration determines whether its confidence can support that
               decision.
           - >-
-              Safety training seems to cost some of that self-knowledge. The cost is
-              reported as 1 average number, and averages hide where the damage
-              actually falls.
+              A model update may change how confidence relates to errors. Test that relationship again before reusing the decision rule.
         math:
           - name: 'The 3 ways to be wrong'
             tex: '\text{confidently wrong} \gg \text{unsure and wrong} > \text{abstained}'
@@ -10264,19 +10260,19 @@ topics:
         covers:
           - Truthfulness versus helpfulness tension
           - Knowing when to abstain as a safety property
-          - The alignment tax on calibration
-          - Where the cost concentrates, by language and modality
-          - Measuring the shape of the tax rather than its average
-          - Recovery methods and what they give up
-        check: "Argue in 3 sentences that calibration is a safety property."
+          - Error costs and the cost of asking for help
+          - Calibration after a model or input change
+          - Decisions across a sequence of actions
+          - Checking thresholds by language and modality
+        check: "Explain when confidence supports acting, deferring, or gathering evidence, then describe what changes across an action sequence."
         viz:
           type: parts
-          centre: The alignment tax on calibration
+          centre: Decisions under uncertainty
           around:
-          - Reported as 1 average
-          - Really a spread over inputs
-          - Varies by language
-          - Varies by modality
+          - Reliability of confidence
+          - Error and review costs
+          - Changes in inputs or models
+          - Effects on later decisions
       - name: Policy and practice
         why: "Policy, incident response, access control, and release decisions shape how research affects people."
         beats:

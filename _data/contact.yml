@@ -1,25 +1,25 @@
-intro_sub: 'I welcome research conversations about calibration and safety training. I am also open to applied scientist roles and speaking invitations.'
+intro_sub: 'My research direction is sequential decision making under uncertainty. I welcome collaborations on how agents act, defer, or gather evidence as conditions change. I am also open to applied scientist roles and speaking invitations.'
 
 engagements:
   - type: 'Research Collaboration'
-    description: "I welcome work on the alignment tax, calibration, honesty, abstention, and evaluation beyond English. I am especially interested in measuring the costs of safety training and where they fall."
+    description: "I want to study decisions that change what an agent encounters next. In particular, I am interested in guarantees across action sequences and the costs of deferring. My navigation and multilingual evaluation work provides starting points."
     include: 'The research question, available evidence or data, and the contribution you have in mind.'
     response: 'If it overlaps, I will suggest a concrete question or next working conversation.'
   - type: 'Research & Applied Roles'
-    description: 'I am open to research and applied scientist roles worldwide, especially in alignment finetuning, calibration, evaluation, and reliable multimodal or multilingual systems.'
+    description: 'I am open to research and applied scientist roles worldwide. I am especially interested in uncertainty estimation, agent evaluation, and decisions in deployed systems.'
     include: 'The problem the team owns, the expected scope, location or working model, and likely timeline.'
     response: 'I will reply with fit, availability, and any questions needed before a formal process.'
   - type: 'Speaking'
-    description: 'I speak at conferences, universities, and panels about AI safety, trustworthy and multimodal AI, uncertainty quantification, and AI for underrepresented languages.'
+    description: 'I speak about uncertainty in model decisions, navigation, and evaluation across languages. My talks draw on research and production work across Southeast Asia.'
     include: 'The audience, format, proposed topic, date, location, and whether travel or remote participation is expected.'
     response: 'I will confirm topic fit, availability, and the format I can contribute most usefully.'
   - type: 'Mentorship'
-    description: "I mentor early-career researchers and engineers entering AI safety and trustworthy AI. This includes graduate applications and applied science careers, especially across Southeast Asia."
+    description: "I mentor early-career researchers and engineers working in machine learning. This includes research direction, graduate applications, and applied science careers, especially across Southeast Asia."
     include: 'Your current stage, the decision you face, what you have tried, and the specific feedback you need.'
     response: 'When capacity allows, I will offer a focused reply, resource, or short conversation.'
 
-availability_headline: "I am open to research collaboration on calibration and safety alignment, conference talks, and mentorship."
-email_scope: "I respond to research collaboration (calibration and safety alignment, evaluation, multimodal and multilingual AI), conference talks, and career mentorship."
+availability_headline: "I welcome research collaboration on sequential decision making under uncertainty, speaking invitations, and mentorship requests."
+email_scope: "I respond to research enquiries about sequential decision making under uncertainty and applied scientist roles. I also welcome speaking invitations and career mentorship requests."
 calendly_url: ""
 calendly_slots_label: "Two slots per month"
 calendly_open: false

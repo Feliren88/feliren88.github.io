@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Personal portfolio website for Vicky Feliren, an applied scientist studying when models should act, abstain, or ask for help under changing conditions. His evidence comes from sequential navigation, multilingual model evaluation, security detection, and production systems. Safety training is a planned condition to investigate. Earth observation provides additional evidence of work across changing sensors and regions. The site uses Jekyll.
+Personal portfolio website for Vicky Feliren, an applied scientist whose research direction is sequential decision making under uncertainty. He studies when agents should act, defer, or gather evidence as each choice changes what follows. His evidence comes from sequential navigation, multilingual model evaluation, security detection, and production systems. Earth observation provides additional evidence of work across changing sensors and regions. The site uses Jekyll.
 
-**Narrative spine (apply to all copy):** Vicky investigates whether a model's rule for acting or deferring remains reliable when the conditions of use differ from calibration. Navigation, languages, input formats, and safety training are conditions within this agenda. State assumptions next to guarantees. Present safety training as a question for future research, since the current record does not measure its effect on calibration. Use numerals for quantities in new prose. Long-form essays live in `_pages/essays/`, featured atop `/writings/` and on the homepage.
+**Narrative spine (apply to all copy).** Vicky's research direction is sequential decision making under uncertainty. Each choice an agent makes changes the states and evidence it encounters next. Therefore, he investigates when uncertainty estimates can support acting, deferring, or gathering evidence across that sequence. State the decision, its costs, and the assumptions behind a guarantee. Navigation, languages, input formats, and model adaptation are settings within this agenda. Present safety training as 1 possible adaptation to investigate, since the current record does not measure its effect on calibration. Preserve the names of historical papers, awards, courses, and events. Distinguish completed work from the direction it motivates. Use numerals for quantities in new prose. Long-form essays live in `_pages/essays/`, featured atop `/writings/` and on the homepage.
 
 ## Where to read further
 
@@ -401,8 +401,8 @@ and writing, leadership and mentorship, governance and assurance, spoken languag
 and every line is a capability the CV already evidences somewhere.
 
 ```yaml
-- id: safety                       # what the filter matches on
-  group: 'AI Safety & Reliability' # Title Case; also the filter's own label
+- id: uncertainty                   # what the filter matches on
+  group: 'Uncertainty & Decision Rules' # Title Case; also the filter's own label
   items: 'Conformal prediction, Uncertainty quantification, …'
 ```
 

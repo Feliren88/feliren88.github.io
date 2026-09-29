@@ -9,8 +9,8 @@ The copyright year is filled in by js/main.js.
   <div class="footer-top">
     <div class="footer-brand">
       <span class="footer-name">{{ site.data.identity.name }}</span>
-      <span class="footer-role">Applied Scientist · Multimodal AI · Trustworthy AI</span>
-      <p class="footer-desc">Building trustworthy AI for the cultures and geographies it was never designed for.</p>
+      <span class="footer-role">{{ site.data.identity.job_title }}</span>
+      <p class="footer-desc">My research direction is sequential decision making under uncertainty.</p>
       <div class="footer-social">
         {% for link in site.data.contact.links %}
         <a href="{{ link.url }}" aria-label="{{ link.label }}" class="footer-social-link"{% unless link.url contains 'mailto' %} target="_blank" rel="noreferrer"{% endunless %}>

@@ -32,4 +32,5 @@
     steering vectors as language-independent without enough evidence. Clean transfer
     to a low-resource language would be a strong and useful result. Silent failure
     would leave monitoring weakest where human oversight is already limited. This
-    needs direct testing, and it is central to the work I want to do.
+    needs direct testing. I want to know when these signals can guide decisions
+    after the language or model changes.

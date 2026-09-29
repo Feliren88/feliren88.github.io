@@ -2,7 +2,7 @@
 # Lead with research / judgment pieces, then keep the rest roughly chronological.
 
 - title: "Your model just killed someone's grandmother: Why every production ML needs conformal prediction"
-  description: "How conformal prediction measures uncertainty with mathematical guarantees that hold in production."
+  description: "How conformal prediction can support model decisions, and which assumptions its guarantees require in production."
   url: "https://medium.com/technology-hits/your-model-just-killed-someones-grandmother-why-production-ml-system-needs-conformal-prediction-b05245e34ca4"
   date: "Jan 2026"
   tag: Engineering

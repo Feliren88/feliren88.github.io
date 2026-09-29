@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Vicky Feliren
-subtitle: Applied Scientist · Uncertainty under model and distribution change
-description: Vicky Feliren studies when uncertainty estimates remain valid after AI models or their operating conditions change, and how they can support decisions.
+subtitle: Applied Scientist · Sequential decision making under uncertainty
+description: Vicky Feliren's research direction is sequential decision making under uncertainty. He studies when agents should act, defer, or gather more evidence as conditions change.
 permalink: /
 redirect_from:
   - /about/
@@ -14,7 +14,7 @@ motion_scene: record
   <header class="about-story-hero">
     <div class="about-story-copy">
       <h1>When does a model’s uncertainty <em>remain valid?</em></h1>
-      <p class="about-story-lead">I’m Vicky Feliren. I study when uncertainty estimates remain valid after AI models or their operating conditions change. My aim is to establish the assumptions behind those estimates and determine when they can support a decision to act or defer. Navigation, multilingual evaluation, and production ML provide settings for this question.</p>
+      <p class="about-story-lead">I’m Vicky Feliren. My research direction is sequential decision making under uncertainty. Each choice an agent makes changes what it encounters next. So I study when uncertainty estimates support decisions across that sequence and under changing conditions. My work in navigation, multilingual evaluation, and production ML provides starting points.</p>
       <div class="about-story-actions">
         <a class="btn btn-primary" href="/research/">Read the research</a>
         <a class="about-text-link" href="/cv/">View the CV <span aria-hidden="true">↗</span></a>
@@ -101,16 +101,16 @@ motion_scene: record
   <section class="about-chapter" id="direction">
     <div class="about-chapter-index"><span>04</span><p>The open question</p></div>
     <div class="about-chapter-body">
-      <h2>I want to investigate how model adaptation changes uncertainty.</h2>
+      <h2>Can a decision rule stay reliable after the agent changes its course?</h2>
       <div class="about-direction-panel">
         <div>
           <span class="about-status"><i></i> An open hypothesis</span>
-          <p>I want to compare a model before and after safety fine-tuning, then measure error and abstention separately by language and input type. If the change is uneven, each group may need its own threshold. If it is broadly shared, I would evaluate whether a common rule covers the groups studied.</p>
+          <p>An agent changes what it sees next when it acts or asks for help. So I want to test whether its decision rule stays reliable across that sequence. Model adaptation, including safety fine-tuning, offers another way to test how the rule responds to change.</p>
         </div>
         <dl>
-          <div><dt>Evidence so far</dt><dd><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/29fb6e1456b3d8b57ede5c45aa2c6537-Abstract-Conference.html" target="_blank" rel="noreferrer">An ICLR 2025 study</a> found verbalized overconfidence after reinforcement learning from human feedback.</dd></div>
-          <div><dt>Working hypothesis</dt><dd>The effect may vary by language and input type.</dd></div>
-          <div><dt>What would change the view</dt><dd>A similar effect across groups would favour a more general explanation.</dd></div>
+          <div><dt>Evidence so far</dt><dd><a href="/encp-vln/">ENCP</a> calibrates complete routes under stated assumptions about calibration and evaluation episodes.</dd></div>
+          <div><dt>Working hypothesis</dt><dd>A change in when the agent asks for help may require a new calibration rule.</dd></div>
+          <div><dt>What would change the view</dt><dd>Evidence that the existing rule still meets its target across the changed routes.</dd></div>
         </dl>
       </div>
       <div class="about-closing">
@@ -139,11 +139,11 @@ motion_scene: record
       <h2>Insights</h2>
       <a href="/writings/" class="insights-view-all">View all writings →</a>
     </div>
-    <p class="section-note">I write about calibration, safety training, and evaluation. The selection below begins with an essay on when a model should abstain.</p>
+    <p class="section-note">I write about how uncertainty estimates support decisions and when their assumptions fail. The selection below begins with an essay on when a model should abstain.</p>
 
     <a class="insight-essay reveal" href="/essays/knowing-when-you-dont-know/">
       <h3>Knowing when you don't know is the core safety property</h3>
-      <p>Why safe deployment depends on models knowing when to abstain.</p>
+      <p>When an agent should stop, gather evidence, or hand a decision back to a person.</p>
       <span class="insight-read">Read the essay →</span>
     </a>
 

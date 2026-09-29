@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Contact Vicky Feliren
-description: Contact Vicky Feliren about research, applied scientist roles, speaking, or mentorship in AI safety and reliable AI.
+description: Contact Vicky Feliren about sequential decision making under uncertainty, research collaboration, applied scientist roles, speaking, or mentorship.
 permalink: /contact/
 preload_image: /assets/img/profile_2_color.webp
 layout-class: page contact-page
@@ -13,7 +13,7 @@ extra_js: /js/components/contact.js
 <header class="ct-hero" aria-labelledby="ct-title">
   <div class="ct-hero-copy">
     <p class="ct-status"><i aria-hidden="true"></i> Open to research conversations</p>
-    <h1 id="ct-title">Contact me about AI safety research.</h1>
+    <h1 id="ct-title">Work with me on decisions under uncertainty.</h1>
     <p class="ct-lead">{{ site.data.contact.intro_sub }}</p>
     <p class="ct-location">Jakarta <span aria-hidden="true">·</span> working internationally</p>
     <div class="ct-actions">
@@ -26,7 +26,7 @@ extra_js: /js/components/contact.js
   <figure class="ct-portrait">
     <div class="ct-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
     <img src="/assets/img/profile_2_color.webp" alt="Vicky Feliren, AI researcher and applied scientist" draggable="false" fetchpriority="high" width="650" height="650">
-    <figcaption>Calibration · safety alignment · multilingual and multimodal AI</figcaption>
+    <figcaption>Sequential decision making under uncertainty</figcaption>
   </figure>
 </header>
 

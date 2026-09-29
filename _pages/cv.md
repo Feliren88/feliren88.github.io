@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Vicky Feliren | Curriculum Vitae
-subtitle: Applied Scientist · Uncertainty under model and distribution change
-description: "The curriculum vitae of Vicky Feliren covers research, industry experience, education, teaching, speaking, patents, and recognition."
+subtitle: Applied Scientist · Sequential decision making under uncertainty
+description: "Vicky Feliren's CV covers the research and production work behind his direction in sequential decision making under uncertainty. It also includes education, teaching, patents, and recognition."
 permalink: /cv/
 extra_css: /css/about.css
 hide_title: true
@@ -10,7 +10,7 @@ hide_title: true
 
 <article class="cv-page">
   <header class="cv-hero">
-    <div><h1>Vicky Feliren</h1><p>I study when uncertainty estimates remain valid after AI models or their operating conditions change. My work in navigation, multilingual evaluation, and production systems motivates methods for decisions under stated assumptions.</p></div>
+    <div><h1>Vicky Feliren</h1><p>My research direction is sequential decision making under uncertainty. Each choice an agent makes changes what it encounters next. So I study when uncertainty estimates can support decisions across that sequence. My past work spans navigation, multilingual evaluation, and production systems.</p></div>
     <aside><span>Vicky Feliren</span><a href="mailto:vickyfeliren@gmail.com">vickyfeliren@gmail.com</a><span>Jakarta, Indonesia</span><a href="/">Read the personal narrative →</a></aside>
   </header>
 

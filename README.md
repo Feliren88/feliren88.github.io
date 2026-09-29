@@ -1,8 +1,8 @@
 # Vicky Feliren — Personal Website
 
-The personal site of Vicky Feliren, an applied scientist studying reliable decisions under changing conditions.
+The personal site of Vicky Feliren, an applied scientist whose research direction is sequential decision making under uncertainty.
 
-Vicky studies when a model should act, abstain, or ask for help, and how a reliability claim changes across environments, languages, and inputs. Safety training is 1 condition he plans to investigate.
+Vicky studies when an agent should act, defer, or gather more evidence. Each choice changes what the agent encounters next. Therefore, his agenda asks when uncertainty estimates support decisions across a sequence and under changing conditions. His past work in navigation, multilingual evaluation, and production systems supplies the starting points.
 
 The site is a static Jekyll build. It deploys to GitHub Pages at [vickyfeliren.com](https://vickyfeliren.com).
 

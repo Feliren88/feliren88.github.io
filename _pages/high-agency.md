@@ -5,7 +5,7 @@ subtitle: My notes on George Mack's essay, turned into exercises
 description: Test how you respond to unclear problems, weak answers, untested limits, rumination, and goals that feel too large to begin.
 permalink: /high-agency/
 date: 2026-08-22
-last_modified_at: 2026-09-26
+last_modified_at: 2026-09-29
 layout-class: page high-agency
 extra_css: /css/high-agency.css
 extra_js: /js/components/high-agency.js
@@ -1514,9 +1514,9 @@ motion_scene: agency
 <section class="ha-part ha-prose" id="why">
   <h2><span class="n">10</span><svg class="ha-i ha-i-h2" viewBox="0 0 24 24" aria-hidden="true"><use href="#hai-compass"></use></svg> Why I keep this page</h2>
 
-  <p>My research asks when an AI system's uncertainty estimates remain valid after the model
-  changes. I plan to examine safety alignment as 1 such change, which connects this question
-  to the essay.</p>
+  <p>My research direction is sequential decision making under uncertainty.
+  Each choice changes what an agent encounters next. So I want to know when
+  uncertainty estimates can still support its next decision.</p>
 
   <p>In my work, vague questions often hide behind “more thinking,” while over-scoping hides
   behind “being thorough.” I make progress when I can state a claim plainly enough to test and

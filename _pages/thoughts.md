@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Writings
-description: Essays, field guides, press coverage, and Medium articles on AI, research, engineering, and personal life.
+description: Vicky Feliren writes about decisions under uncertainty, model evaluation, and production ML. This page also collects field guides, press coverage, and personal essays.
 permalink: /writings/
 layout-class: page writings-page
 ---
@@ -15,6 +15,7 @@ layout-class: page writings-page
 
 <section class="writings-lead" id="essays" aria-labelledby="writings-essays-title">
   <h2 id="writings-essays-title">Essays</h2>
+  <p class="section-note">My research direction is sequential decision making under uncertainty. I write about when models should act or ask for help. Then I examine how those choices affect what follows.</p>
   <div class="essay-feature-block">
 <a class="essay-feature" href="/essays/knowing-when-you-dont-know/">
 <span class="essay-feature-title">Knowing when you don't know is the core safety property</span>
