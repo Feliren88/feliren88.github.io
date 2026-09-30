@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Natural Language Processing
-description: Represent and evaluate language data, including languages that expose pipeline failures.
+description: Represent language data and evaluate performance across tasks and languages.
 permalink: /nlp/
 topic_id: nlp
 robots: noindex, nofollow

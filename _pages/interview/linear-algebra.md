@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Linear Algebra
-description: Use vectors and matrices as geometric transformations, not only as arrays of numbers.
+description: Explain vectors, matrices and the transformations they describe.
 permalink: /linear-algebra/
 topic_id: linear-algebra
 robots: noindex, nofollow

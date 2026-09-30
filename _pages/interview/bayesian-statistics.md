@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Bayesian Statistics
-description: Update beliefs with data and explain what the resulting probability means.
+description: Update uncertainty with data and explain the resulting probabilities.
 permalink: /bayesian-statistics/
 topic_id: bayesian-statistics
 robots: noindex, nofollow

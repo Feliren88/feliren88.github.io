@@ -979,7 +979,7 @@
         clearTimer(true);
         out.textContent = timerKind === 'break'
           ? 'Break finished. Pick a different module and recall one idea.'
-          : 'Round finished. Take a real break before you continue.';
+          : 'Round finished. Take a break before continuing.';
       }
 
       choices.forEach(function (button) {
@@ -1100,7 +1100,7 @@
           return;
         }
         var date = new Date(record.due).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
-        status.textContent = 'Next review: ' + date + '.';
+        status.textContent = 'Next review on ' + date + '.';
       }
 
       buttons.forEach(function (button) {

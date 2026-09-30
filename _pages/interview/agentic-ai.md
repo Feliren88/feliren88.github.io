@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Agentic AI
-description: Build an agent loop that completes a task, handles failure, and stops safely.
+description: Build an agent that completes tasks, handles failures, and stops safely.
 permalink: /agentic-ai/
 topic_id: agentic-ai
 robots: noindex, nofollow

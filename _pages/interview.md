@@ -17,7 +17,7 @@ extra_js:
 
   <header class="ivh-header">
     <h1 class="ivh-title">Research interview notebook</h1>
-    <p class="ivh-lede">I use this notebook to prepare for PhD and research interviews. Its tracks ask me to defend a claim, examine the evidence, and identify where an assumption may fail. Begin with a question below; each track names the foundations it needs. Basic algebra and coding are enough to enter.</p>
+    <p class="ivh-lede">I use this notebook to prepare for PhD and research interviews. Each track helps me explain an idea, support it with evidence, and recognise its limits. To begin, choose a question below. Each track lists what you need to know first. Start with basic algebra and programming, then follow the related tracks as you need them.</p>
     {% assign topics = site.data.interview.topics %}
     {% assign mod_n = 0 %}{% assign cov_n = 0 %}
     {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}
@@ -30,43 +30,43 @@ extra_js:
 
   <section class="ivh-contract" aria-labelledby="ivh-contract-title">
     <div>
-      <h2 id="ivh-contract-title">What makes an answer defensible</h2>
-      <p>A claim about a model needs a comparison and a boundary. Calibration asks whether a model's stated confidence matches how often it is right. If I say a method improves calibration, I need to name the comparison model, the data used to test both models, and a setting where the result may not carry over.</p>
+      <h2 id="ivh-contract-title">How to support your answer</h2>
+      <p>Explain what you compared and what the evidence shows. For example, calibration measures whether a model's confidence matches how often it is correct. To claim that a method improves calibration, name the other method and the data used to test both. Then explain when that result might change.</p>
     </div>
     <ol>
       <li><strong>Explain</strong><span>State the idea and its assumptions in your own words.</span></li>
       <li><strong>Support</strong><span>Name the comparison and the evidence behind the claim.</span></li>
-      <li><strong>Challenge</strong><span>Change one assumption and see what survives.</span></li>
+      <li><strong>Challenge</strong><span>Change one assumption and explain how your answer changes.</span></li>
       <li><strong>Recall</strong><span>Answer later without notes, then check the source.</span></li>
     </ol>
   </section>
 
   <nav class="ivh-start" aria-labelledby="ivh-start-title">
     <h2 id="ivh-start-title">Choose a question you cannot yet answer well</h2>
-    <p>The starting tracks lead into the larger map. Begin where your explanation is weakest, then move to a related track when you find a gap.</p>
+    <p>Choose a question you find difficult to explain. Then use the related tracks to study any ideas you need.</p>
     <div class="ivh-start-grid">
       <a href="/machine-learning-research/">
         <span class="ivh-start-question">What result would change your mind?</span>
         <strong>Design a study</strong>
-        <span>Turn a research question into a comparison that could challenge your explanation.</span>
+        <span>Design an experiment whose result could support or challenge your explanation.</span>
         <span class="ivh-start-track">Start with Machine Learning Research</span>
       </a>
       <a href="/deep-learning/">
         <span class="ivh-start-question">How does the model produce an answer?</span>
         <strong>Explain a model</strong>
-        <span>Trace the computation, the training signal, and a failure the architecture makes possible.</span>
+        <span>Explain how the model calculates an answer, how it learns, and where it can fail.</span>
         <span class="ivh-start-track">Start with Deep Learning</span>
       </a>
       <a href="/frequentist-statistics/">
         <span class="ivh-start-question">Does the result support the claim?</span>
         <strong>Evaluate a result</strong>
-        <span>Examine the estimate, its uncertainty, and what else could explain it.</span>
+        <span>Check the result, how uncertain it is, and whether another explanation fits.</span>
         <span class="ivh-start-track">Start with Frequentist Statistics</span>
       </a>
       <a href="/uncertainty-estimation/">
         <span class="ivh-start-question">When should a model defer?</span>
         <strong>Judge uncertainty</strong>
-        <span>Ask whether confidence tracks errors and when the model should stop or seek review.</span>
+        <span>Compare confidence with errors. Then decide when the model should ask for human review.</span>
         <span class="ivh-start-track">Start with Uncertainty Estimation</span>
       </a>
     </div>

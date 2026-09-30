@@ -158,9 +158,9 @@
   var WV2 = put(zeros(8, 4), [[2, 0, 1], [5, 1, 1], [3, 2, 1], [7, 3, 1]]);
 
   var HEADS = [
-    { name: 'head 1', asks: 'what does this word refer to',
+    { name: 'Head 1', asks: 'a pronoun referring to a noun',
       wq: WQ1, wk: WK1, wv: WV1 },
-    { name: 'head 2', asks: 'where is the action',
+    { name: 'Head 2', asks: 'tokens attending to a verb',
       wq: WQ2, wk: WK2, wv: WV2 }
   ];
 
@@ -544,11 +544,11 @@
 
     var count = h('span', { 'class': 'tf-count', role: 'status' });
     var back = h('button', {
-      type: 'button', text: 'back',
+      type: 'button', text: 'Back',
       on: { click: function () { go(at - 1); } }
     });
     var next = h('button', {
-      type: 'button', text: 'next',
+      type: 'button', text: 'Next',
       on: { click: function () { go(at + 1); } }
     });
 
@@ -561,7 +561,7 @@
       });
       out.textContent = '';
       render(at, out);
-      count.textContent = 'step ' + (at + 1) + ' of ' + steps.length;
+      count.textContent = 'Step ' + (at + 1) + ' of ' + steps.length;
       back.disabled = at === 0;
       next.disabled = at === steps.length - 1;
     }
@@ -610,10 +610,8 @@
      from what the step actually draws. */
   PANEL.attention = function () {
     var p = panel({
-      title: 'One attention layer, every number',
-      source: 'Operations and formulas from Vaswani et al. (2017), section 3.2. ' +
-        'The weights here were chosen so the pattern is visible. They are not ' +
-        'trained, and the column names are this page’s own.'
+      title: 'Calculate one attention layer',
+      source: 'The operations follow section 3.2 of Vaswani et al. (2017). These example weights were chosen to make the pattern visible, rather than learnt through training. This page supplies the column names.'
     });
 
     var st = { head: 0, masked: false };
@@ -630,7 +628,7 @@
     }
 
     p.controls.appendChild(headChips());
-    p.controls.appendChild(toggle('mask the future', st.masked, function (v) {
+    p.controls.appendChild(toggle('Mask later positions', st.masked, function (v) {
       st.masked = v;
       api.redraw();
     }));
@@ -648,12 +646,10 @@
         draw: function (out) {
           out.appendChild(op(
             'X = Embedding(tokens) × √d_model + PE',
-            'Section 3.4 multiplies the embedding by the square root of the ' +
-            'model width before the position is added, so the position stays ' +
-            'a nudge.'));
+            'Each token starts as an embedding, a vector of numbers. Section 3.4 scales it by the square root of the model width. Then the model adds a vector that represents position.'));
           out.appendChild(stage(grid(M.x0, {
             rows: TOKENS, cols: AXES,
-            caption: 'One row a token, one column a dimension.'
+            caption: 'Each row represents a token. Each column is one vector component.'
           })));
         }
       },
@@ -664,13 +660,12 @@
         draw: function (out, c) {
           out.appendChild(op(
             'head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V)',
-            c.hd.name + ' asks ' + c.hd.asks + '. Each projection reads all ' +
-            d + ' dimensions and writes ' + dk + ', so a head sees a narrow ' +
-            'slice of the same tokens.'));
+            c.hd.name + ' illustrates ' + c.hd.asks + '. Each projection uses all ' +
+            d + ' input dimensions to calculate ' + dk + ' output dimensions.'));
           out.appendChild(stage([
-            grid(c.per.q, { rows: TOKENS, caption: 'Q, what each token is looking for' }),
-            grid(c.per.k, { rows: TOKENS, caption: 'K, what each token offers' }),
-            grid(c.per.v, { rows: TOKENS, caption: 'V, what each token passes on' })
+            grid(c.per.q, { rows: TOKENS, caption: 'Q, vectors used to compare with keys' }),
+            grid(c.per.k, { rows: TOKENS, caption: 'K, vectors compared with queries' }),
+            grid(c.per.v, { rows: TOKENS, caption: 'V, vectors combined using attention weights' })
           ]));
         }
       },
@@ -680,16 +675,13 @@
         pfrom: '2 × (B, h, T, 64)', pto: '(B, h, T, T)',
         draw: function (out, c) {
           out.appendChild(op('Q K^T',
-            'Every query meets every key. Row i column j is how much token i ' +
-            'wants what token j is offering.'));
+            'Multiply each query by each key to obtain a score. Entry i, j measures the match between the query at position i and the key at position j.'));
           out.appendChild(stage(grid(c.per.raw, {
             rows: TOKENS, cols: TOKENS,
-            caption: 'Rows do the attending, columns get attended to.'
+            caption: 'Rows are query positions. Columns are key positions.'
           })));
           out.appendChild(note(
-            'This is the matrix that costs T². Nothing else in the layer grows ' +
-            'with the square of the length. Sliding windows, sparse patterns ' +
-            'and linear attention all attack this grid.'));
+            'The score matrix has T² entries, where T is the sequence length. Thus, doubling T quadruples its size. Windowed, sparse, and linear attention reduce or replace these pairwise calculations.'));
         }
       },
       {
@@ -699,8 +691,7 @@
         draw: function (out, c) {
           out.appendChild(op('Q K^T / √d_k',
             'With d_k = ' + dk + ' the divisor is ' + Math.sqrt(dk).toFixed(0) +
-            '. Without it, large d_k makes the dot products large, and the ' +
-            'softmax lands where its gradients are tiny.'));
+            '. Dividing by this value controls the score scale. Otherwise, larger vectors can produce extreme probabilities with very small gradients.'));
           out.appendChild(stage([
             grid(c.per.raw, { rows: TOKENS, cols: TOKENS, caption: 'before' }),
             grid(c.per.scaled, { rows: TOKENS, cols: TOKENS, caption: 'after' })
@@ -716,18 +707,15 @@
         draw: function (out, c) {
           out.appendChild(op('score_ij ← −∞  for j > i',
             st.masked
-              ? 'Every position after the current one goes to minus infinity, ' +
-                'so the softmax gives it no weight.'
-              : 'The encoder does not mask. Turn on “mask the future” above to ' +
-                'see what the decoder does here instead.'));
+              ? 'The model sets scores for later positions to minus infinity. The softmax operation then gives those positions zero weight.'
+              : 'The encoder can use the whole input sequence. Turn on Mask later positions to see causal attention, which blocks later tokens.'));
           out.appendChild(stage(grid(c.per.masked, {
             rows: TOKENS, cols: TOKENS,
-            caption: st.masked ? 'The upper triangle is gone.'
-              : 'Every token sees every other one.'
+            caption: st.masked ? 'Later positions have zero attention weight.'
+              : 'Every token can attend to every input position.'
           })));
           out.appendChild(note(
-            'The encoder attends over the whole sentence. The decoder masks, so ' +
-            'a prediction for one position can depend only on positions before it.'));
+            'Encoder attention uses the whole input sentence. Decoder self-attention blocks later input positions. With shifted training targets, this prevents access to the token being predicted.'));
         }
       },
       {
@@ -736,17 +724,14 @@
         pfrom: '(B, h, T, T)', pto: '(B, h, T, T)',
         draw: function (out, c) {
           out.appendChild(op('A = softmax(Q K^T / √d_k)',
-            'Each row becomes weights that add to one.'));
+            'Softmax converts each score row into non-negative weights that add up to one.'));
           out.appendChild(stage(grid(c.per.attn, {
             rows: TOKENS, cols: TOKENS, max: 1,
             caption: 'Every row adds to 1.00'
           })));
           out.appendChild(note(st.head === 0
-            ? 'Read the bottom row. “it” puts most of its weight on “cat”. The ' +
-              'other rows sit near flat, because this head has nothing to say ' +
-              'about them.'
-            : 'Read down the “sat” column. Every row leans on the verb. That is ' +
-              'a different job from head 1.'));
+            ? 'Read the bottom row. The chosen weights make the representation of “it” depend mostly on “cat”. Other rows distribute their weights more evenly.'
+            : 'Read down the “sat” column. This example head gives the verb a high weight in each row, illustrating a different pattern from head 1.'));
         }
       },
       {
@@ -755,7 +740,7 @@
         pfrom: '(B, h, T, T)', pto: '(B, h, T, 64)',
         draw: function (out, c) {
           out.appendChild(op('A V',
-            'Each token’s output is the mix of values its own row selected.'));
+            'For each token, multiply the value vectors by its attention weights and add the results.'));
           out.appendChild(stage([
             grid(c.per.attn, { rows: TOKENS, cols: TOKENS, max: 1, caption: 'A' }),
             grid(c.per.v, { rows: TOKENS, caption: 'V' }),
@@ -769,8 +754,7 @@
         pfrom: '8 × (B, T, 64)', pto: '(B, T, 512)',
         draw: function (out, c) {
           out.appendChild(op('Concat(head_1, …, head_h)',
-            'The heads are laid side by side, so h × d_v has to land back on ' +
-            'd_model.'));
+            'Join the head outputs along their feature dimension. In this example, h × d_v equals the model width d_model.'));
           out.appendChild(stage(grid(c.res.cat, {
             rows: TOKENS,
             caption: 'Columns 1 to ' + TOY.dk + ' are head 1. Columns ' +
@@ -778,8 +762,7 @@
           })));
           out.appendChild(note('In the paper h = ' + PAPER.h + ' and d_v = ' +
             PAPER.dv + ', and ' + PAPER.h + ' × ' + PAPER.dv + ' is ' +
-            PAPER.h * PAPER.dv + ', which is d_model. That is why multi-head ' +
-            'attention costs about the same as single-head attention.'));
+            PAPER.h * PAPER.dv + ', which is d_model. That is why multi-head attention costs about the same as single-head attention.'));
         }
       },
       {
@@ -789,12 +772,11 @@
         draw: function (out, c) {
           out.appendChild(op(
             'MultiHead(Q, K, V) = Concat(head_1, …, head_h) W^O',
-            'One projection mixes what the heads found back together.'));
+            'The output matrix combines the head outputs into one vector for each token.'));
           out.appendChild(stage(grid(c.res.out, {
             rows: TOKENS, cols: AXES, caption: 'The layer’s output'
           })));
-          out.appendChild(note('The same shape it started with, so the block can ' +
-            'stack ' + PAPER.N + ' deep with nothing changing size.'));
+          out.appendChild(note('The output has the same shape as the input. Therefore, the block can stack ' + PAPER.N + ' layers deep without changing the vector width.'));
         }
       }
     ];
@@ -816,10 +798,8 @@
      pre-norm is what almost everything since has used. */
   PANEL.block = function () {
     var p = panel({
-      title: 'One block, and where its parameters live',
-      source: 'Sub-layer order and the residual rule from section 3.1, the ' +
-        'feed-forward network from section 3.3, and the base model sizes from ' +
-        'table 3 of Vaswani et al. (2017).'
+      title: 'The operations and parameters in one block',
+      source: 'Sub-layer order and the residual rule from section 3.1, the feed-forward network from section 3.3, and the base model sizes from table 3 of Vaswani et al. (2017).'
     });
 
     var st = { pre: false };
@@ -830,7 +810,7 @@
         st.pre = i === 1;
         p.controls.replaceChild(normChips(), p.controls.firstChild);
         api.redraw();
-      }, 'Where LayerNorm sits');
+      }, 'Position of layer normalisation');
     }
     p.controls.appendChild(normChips());
 
@@ -846,15 +826,14 @@
 
     var STEPS = [
       {
-        label: 'Start from the stream',
+        label: 'Start with the input vectors',
         from: '(5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op('x',
-            'Every sub-layer reads this and writes back into it. The width ' +
-            'never changes, which is what lets the same block repeat.'));
+            'These vectors form the residual stream, the representation passed between sub-layers. Each sub-layer adds an update of the same width. Therefore, the blocks can be repeated.'));
           out.appendChild(stage(grid(M.x0, {
-            rows: TOKENS, cols: AXES, caption: 'the residual stream on the way in'
+            rows: TOKENS, cols: AXES, caption: 'The input residual stream'
           })));
         }
       },
@@ -866,12 +845,10 @@
           out.appendChild(op(
             st.pre ? 'MultiHead(LayerNorm(x))' : 'MultiHead(x)',
             st.pre
-              ? 'Pre-norm normalises before the sub-layer reads the stream, so ' +
-                'the stream itself passes through untouched.'
-              : 'The paper feeds the sub-layer the raw stream. Normalising ' +
-                'comes after.'));
+              ? 'Pre-norm normalises the input before attention. The residual connection also keeps a direct copy of the input.'
+              : 'In the original paper, attention uses the input directly. Layer normalisation follows the residual addition.'));
           out.appendChild(stage(grid(st.pre ? M.pre.mh.out : M.mh.out, {
-            rows: TOKENS, cols: AXES, caption: 'what attention wants to add'
+            rows: TOKENS, cols: AXES, caption: 'The attention output added to the input'
           })));
         }
       },
@@ -884,16 +861,13 @@
             st.pre ? 'x + MultiHead(LayerNorm(x))'
               : 'LayerNorm(x + MultiHead(x))',
             st.pre
-              ? 'The residual is added with nothing in its way, which is why ' +
-                'pre-norm trains at depth without a warmup schedule.'
-              : 'Section 3.1: the output of each sub-layer is ' +
-                'LayerNorm(x + Sublayer(x)).'));
+              ? 'Pre-norm adds the attention output directly to the residual input. This arrangement can improve gradient behaviour. Whether training needs a warm-up schedule depends on the setup.'
+              : 'Section 3.1 adds the sub-layer output to its input, then applies layer normalisation.'));
           out.appendChild(stage(grid(st.pre ? M.pre.res1 : M.res1, {
-            rows: TOKENS, cols: AXES, caption: 'the stream after attention'
+            rows: TOKENS, cols: AXES, caption: 'The residual stream after attention'
           })));
           if (!st.pre) {
-            out.appendChild(note('Every row now has mean 0 and variance 1 ' +
-              'across its ' + TOY.d + ' dimensions. Check any row by hand.'));
+            out.appendChild(note('With the example normalisation settings, each row has mean approximately 0 and variance approximately 1 across its ' + TOY.d + ' dimensions. Check any row by hand.'));
           }
         }
       },
@@ -903,18 +877,17 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 2048)',
         draw: function (out) {
           out.appendChild(op('max(0, x W_1 + b_1)',
-            'The same two layers run on every position separately, which is ' +
-            'what “position-wise” means. Four times wider in the middle.'));
+            'The same feed-forward network processes each token separately. This is called position-wise processing. Its hidden layer is four times wider than its input here.'));
           out.appendChild(stage(grid(st.pre ? M.pre.ff.act : M.ff.act, {
             rows: TOKENS, dense: true,
-            caption: 'the hidden layer, one column a unit. Hover for a value.'
+            caption: 'Each hidden-layer column is one unit. Hover over a cell to read its value.'
           })));
           var dead = 0, tot = 0;
           (st.pre ? M.pre.ff.act : M.ff.act).forEach(function (r) {
             r.forEach(function (v) { tot++; if (v === 0) dead++; });
           });
           out.appendChild(note('ReLU has zeroed ' + dead + ' of ' + tot +
-            ' units here. The blank cells are that.'));
+            ' activations here. Blank cells show those zero values.'));
         }
       },
       {
@@ -923,10 +896,9 @@
         pfrom: '(B, T, 2048)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op('FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
-            'The second matrix brings the width back so the result can be ' +
-            'added to the stream.'));
+            'The second matrix restores the original width. This lets the model add the result to the residual stream.'));
           out.appendChild(stage(grid(st.pre ? M.pre.ff.out : M.ff.out, {
-            rows: TOKENS, cols: AXES, caption: 'what the feed-forward network adds'
+            rows: TOKENS, cols: AXES, caption: 'The feed-forward output added to the input'
           })));
         }
       },
@@ -937,9 +909,9 @@
         draw: function (out) {
           out.appendChild(op(
             st.pre ? 'x + FFN(LayerNorm(x))' : 'LayerNorm(x + FFN(x))',
-            'One block done. This is the input to the next one.'));
+            'This completes one block. Its output becomes the input to the next block.'));
           out.appendChild(stage(grid(st.pre ? M.pre.res2 : M.res2, {
-            rows: TOKENS, cols: AXES, caption: 'the block’s output'
+            rows: TOKENS, cols: AXES, caption: 'The block output'
           })));
         }
       },
@@ -949,8 +921,7 @@
         pfrom: null, pto: null,
         draw: function (out) {
           out.appendChild(op('4 d² per attention sub-layer,  2 d d_ff per FFN',
-            'Attention has four square projections: W^Q, W^K, W^V and W^O. ' +
-            'The feed-forward network has two rectangles.'));
+            'Attention uses four square weight matrices, W^Q, W^K, W^V, and W^O. The feed-forward network uses two rectangular weight matrices.'));
           out.appendChild(readout([
             ['one attention sub-layer', commas(attnP)],
             ['one feed-forward sub-layer', commas(ffP)],
@@ -959,10 +930,7 @@
               commas(decP)],
             ['both stacks', commas(encP + decP)]
           ]));
-          out.appendChild(note('The paper reports 65 million for the base ' +
-            'model. The gap is the embedding matrix, which section 3.4 shares ' +
-            'between both embedding layers and the output projection. Biases ' +
-            'and the norm scales are left out here.'));
+          out.appendChild(note('The paper reports 65 million parameters for the base model. This count omits the shared embedding matrix, biases, and normalisation parameters. Therefore, it is smaller than the reported total.'));
         }
       }
     ];
@@ -982,9 +950,8 @@
      property the paper picked it for. */
   PANEL.position = function () {
     var p = panel({
-      title: 'Where the order comes from',
-      source: 'Formulas and the reasoning for choosing sinusoids from ' +
-        'Vaswani et al. (2017), section 3.5.'
+      title: 'Adding token position information',
+      source: 'Formulas and the reasoning for choosing sinusoids from Vaswani et al. (2017), section 3.5.'
     });
 
     var LEN = 16;
@@ -993,7 +960,7 @@
     var api = null;
 
     p.controls.appendChild(slider({
-      label: 'position', min: 0, max: LEN - 1, value: st.pos, step: 1,
+      label: 'Position', min: 0, max: LEN - 1, value: st.pos, step: 1,
       format: function (v) { return String(v); }
     }, function (v) { st.pos = v; api.redraw(); }));
 
@@ -1004,9 +971,7 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op('softmax(Q K^T / √d_k) V',
-            'Nothing in that line refers to where a token sits. Shuffle the ' +
-            'rows of the input and the same rows come out, shuffled the same ' +
-            'way. So the order has to be put into the vectors themselves.'));
+            'Without a mask or position information, attention alone does not represent order. Rearranging the input rows rearranges its output rows in the same way. Therefore, this model adds position information to the input vectors.'));
           out.appendChild(stage(grid(M.emb, {
             rows: TOKENS, cols: AXES,
             caption: 'embeddings alone, scaled by √d_model'
@@ -1019,10 +984,8 @@
         pfrom: 'pos', pto: '(1, 512)',
         draw: function (out) {
           out.appendChild(op(
-            'PE(pos, 2i) = sin(pos / 10000^(2i/d_model))\n' +
-            'PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))',
-            'Even dimensions take the sine, odd ones the cosine, and i is the ' +
-            'index of the pair.'));
+            'PE(pos, 2i) = sin(pos / 10000^(2i/d_model))\nPE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))',
+            'Even dimensions take the sine, odd ones the cosine, and i is the index of the pair.'));
           out.appendChild(stage(grid([PE16[st.pos]], {
             rows: ['pos ' + st.pos], max: 1,
             caption: 'the encoding for position ' + st.pos
@@ -1035,12 +998,11 @@
         pfrom: null, pto: null,
         draw: function (out) {
           out.appendChild(op('wavelength = 2π · 10000^(2i/d_model)',
-            'The first pair turns fast, the last pair barely moves. Together ' +
-            'they give every position a signature no other position has.'));
+            'The first sine and cosine pair changes rapidly with position. Later pairs change more slowly. Together, these values distinguish positions in the displayed range.'));
           out.appendChild(stage(grid(PE16, {
             rows: PE16.map(function (_, i) { return String(i); }),
             max: 1, markRow: st.pos,
-            caption: 'sixteen positions down, eight dimensions across'
+            caption: 'Rows show sixteen positions. Columns show eight dimensions.'
           })));
           var w = [0, 2, 4, 6].map(function (i) {
             return ['dims ' + i + ' and ' + (i + 1),
@@ -1048,8 +1010,7 @@
           });
           out.appendChild(readout(w));
           out.appendChild(note('At d_model = ' + PAPER.d + ' the paper has ' +
-            PAPER.d / 2 + ' pairs, and the wavelengths run from 2π up to ' +
-            '10000 · 2π.'));
+            PAPER.d / 2 + ' pairs, and the wavelengths run from 2π up to 10000 · 2π.'));
         }
       },
       {
@@ -1058,12 +1019,11 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op('X = Embedding(tokens) × √d_model + PE',
-            'The embedding is scaled up first, so the position shifts a token ' +
-            'without overwriting what the token is.'));
+            'First, scale the token embedding. Then add its position vector. The result contains information about both token identity and position.'));
           out.appendChild(stage([
             grid(M.emb, { rows: TOKENS, caption: 'embedding × √8' }),
             grid(M.pe, { rows: TOKENS, max: 1, caption: 'position' }),
-            grid(M.x0, { rows: TOKENS, caption: 'the sum, which is what attention reads' })
+            grid(M.x0, { rows: TOKENS, caption: 'The sum passed into attention' })
           ]));
         }
       },
@@ -1073,19 +1033,13 @@
         pfrom: null, pto: null,
         draw: function (out) {
           out.appendChild(op('PE(pos + k) = M_k · PE(pos)',
-            'The paper chose this because for any fixed offset k, the encoding ' +
-            'at pos + k is a linear function of the encoding at pos. A head ' +
-            'can learn to attend by relative position without being told what ' +
-            'absolute position means.'));
+            'For a fixed offset k, a linear transformation maps the encoding at pos to the encoding at pos + k. This property can help attention learn relationships between relative positions.'));
           var k = 2, a = st.pos, b = Math.min(LEN - 1, st.pos + k);
           out.appendChild(stage([
             grid([PE16[a]], { rows: ['pos ' + a], max: 1 }),
             grid([PE16[b]], { rows: ['pos ' + b], max: 1 })
           ]));
-          out.appendChild(note('The paper also tried learned position ' +
-            'embeddings and reports nearly identical results. It kept the ' +
-            'sinusoid because it may let the model handle sequences longer ' +
-            'than any it saw in training.'));
+          out.appendChild(note('The paper also tried learned position embeddings and reports nearly identical results. It kept the sinusoid because it may let the model handle sequences longer than any it saw in training.'));
         }
       }
     ];
@@ -1106,16 +1060,14 @@
   PANEL.cost = function () {
     var p = panel({
       title: 'What it costs, at a length you choose',
-      source: 'Complexity, sequential operations and maximum path length are ' +
-        'table 1 of Vaswani et al. (2017). The restricted row uses the ' +
-        'neighbourhood size r the paper defines.'
+      source: 'Complexity, sequential operations and maximum path length are table 1 of Vaswani et al. (2017). The restricted row uses the neighbourhood size r the paper defines.'
     });
 
     var st = { n: 1024, d: 512, r: 64, k: 3 };
     var api = null;
 
     p.controls.appendChild(slider({
-      label: 'sequence length', min: 6, max: 17, value: 10, step: 1,
+      label: 'Sequence length', min: 6, max: 17, value: 10, step: 1,
       format: function (v) { return commas(Math.pow(2, v)); }
     }, function (v) { st.n = Math.pow(2, v); api.redraw(); }));
 
@@ -1127,8 +1079,7 @@
         draw: function (out) {
           var n = st.n, d = st.d, r = st.r, k = st.k;
           out.appendChild(op('self-attention  n² · d      recurrent  n · d²',
-            'The paper compares four ways to connect every position to every ' +
-            'other. Move the slider and watch which one wins change.'));
+            'Compare the approximate operation counts for four types of layer. Move the slider to see how sequence length affects each count.'));
           out.appendChild(readout([
             ['self-attention, per layer', commas(n * n * d)],
             ['recurrent, per layer', commas(n * d * d)],
@@ -1137,22 +1088,18 @@
           ]));
           out.appendChild(note(n < d
             ? 'At n = ' + commas(n) + ', shorter than d = ' + d +
-              ', self-attention is the cheaper layer. The paper notes this is ' +
-              'the case for most sentence representations used in translation.'
-            : 'At n = ' + commas(n) + ', longer than d = ' + d +
-              ', self-attention has become the more expensive layer. The ' +
-              'crossover is exactly n = d.'));
+              ', self-attention is the cheaper layer. The paper notes this is the case for most sentence representations used in translation.'
+            : 'At n = ' + commas(n) + ', at least as large as d = ' + d +
+              ', the displayed self-attention count is at least as large as the recurrent count. These formulas are equal at n = d.'));
         }
       },
       {
-        label: 'Why depth is not the problem',
+        label: 'Compare paths between positions',
         from: 'n positions', to: 'path length',
         pfrom: null, pto: null,
         draw: function (out) {
           out.appendChild(op('maximum path length between any two positions',
-            'How many steps a signal takes to travel from one position to ' +
-            'another. Short paths are what make long-range dependencies ' +
-            'learnable, which is the argument the paper is making.'));
+            'Path length counts the processing steps connecting two positions. The paper argues that shorter paths can make relationships between distant tokens easier to learn.'));
           out.appendChild(readout([
             ['self-attention', 'O(1)'],
             ['recurrent', 'O(n)  =  ' + commas(st.n)],
@@ -1161,9 +1108,7 @@
             ['restricted self-attention', 'O(n / r)  =  ' +
               Math.ceil(st.n / st.r)]
           ]));
-          out.appendChild(note('Sequential operations tell the same story. ' +
-            'Self-attention needs O(1) of them, a recurrent layer needs O(n), ' +
-            'and that is the part a GPU cannot parallelise away.'));
+          out.appendChild(note('Sequential operations must wait for earlier steps. A self-attention layer has O(1) sequential steps across positions, while a recurrent layer has O(n). Thus, recurrence limits parallel processing.'));
         }
       },
       {
@@ -1174,17 +1119,13 @@
           var N = PAPER.N, hh = PAPER.h, dh = PAPER.dk, B = 2;
           var per = 2 * N * hh * dh * B;
           out.appendChild(op('2 × layers × heads × d_head × bytes  per token',
-            'Two because keys and values are both kept. Generation reuses ' +
-            'every earlier key and value, so this grows one row per token and ' +
-            'nothing ever removes a row.'));
+            'The factor two counts both keys and values. A full-context cache stores another row for each generated token, so its memory use grows with sequence length.'));
           out.appendChild(readout([
             ['per token, base model, 16-bit', bytes(per)],
             ['at ' + commas(st.n) + ' tokens', bytes(per * st.n)],
             ['at ' + commas(st.n) + ' tokens, batch of 32', bytes(per * st.n * 32)]
           ]));
-          out.appendChild(note('Grouped-query attention shrinks this by ' +
-            'sharing one set of keys and values across several query heads. ' +
-            'It is a cut to the number of heads in this line, nothing else.'));
+          out.appendChild(note('Grouped-query attention shares keys and values across several query heads. In this calculation, use the number of key-value heads instead of the number of query heads.'));
         }
       },
       {
@@ -1193,21 +1134,17 @@
         pfrom: null, pto: null,
         draw: function (out) {
           out.appendChild(op('softmax(Q K^T / √d_k) V,  computed in tiles',
-            'The arithmetic is the same and the answer is exact. What changes ' +
-            'is that the n by n score matrix is never written to memory: it is ' +
-            'built one tile at a time, used, and thrown away.'));
+            'FlashAttention computes the same attention operation in small blocks. It avoids storing the full n by n score matrix in main GPU memory. Each block is used as part of the calculation, then discarded.'));
           out.appendChild(stage(grid(M.mh.per[0].attn, {
             rows: TOKENS, cols: TOKENS, max: 1,
-            caption: 'the matrix a naive kernel stores in full'
+            caption: 'The full matrix stored by a basic implementation'
           })));
           out.appendChild(readout([
             ['scores held, naive, at ' + commas(st.n) + ' tokens, 16-bit',
               bytes(st.n * st.n * 2)],
             ['scores held, tiled', 'one tile at a time']
           ]));
-          out.appendChild(note('So it is a memory-movement win, not an ' +
-            'approximation. Calling it approximate is the fastest way to lose ' +
-            'the point in an interview.'));
+          out.appendChild(note('FlashAttention reduces data transfers between GPU memory levels. It preserves the attention operation, subject to normal floating-point differences.'));
         }
       }
     ];
@@ -1230,17 +1167,15 @@
      first. */
   PANEL.decode = function () {
     var p = panel({
-      title: 'Reading one token out',
-      source: 'Weight tying between the embedding and the output projection ' +
-        'is section 3.4 of Vaswani et al. (2017). The vocabulary here is the ' +
-        'five words on this page.'
+      title: 'Calculating the next-token probabilities',
+      source: 'Weight tying between the embedding and the output projection is section 3.4 of Vaswani et al. (2017). The vocabulary here is the five words on this page.'
     });
 
     var st = { temp: 1 };
     var api = null;
 
     p.controls.appendChild(slider({
-      label: 'temperature', min: 0.1, max: 2, value: 1, step: 0.05,
+      label: 'Temperature', min: 0.1, max: 2, value: 1, step: 0.05,
       format: function (v) { return v.toFixed(2); }
     }, function (v) { st.temp = v; api.redraw(); }));
 
@@ -1261,11 +1196,9 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op('one forward pass over all T positions',
-            'The whole prompt goes through at once. Every position is ' +
-            'computed in parallel, so this stage saturates the arithmetic ' +
-            'units and is compute-bound.'));
+            'Prefill processes the prompt positions together. For sufficiently large prompts or batches, the main limit is often computation rather than moving weights from memory.'));
           out.appendChild(stage(grid(M.res2, {
-            rows: TOKENS, cols: AXES, caption: 'the stack’s output, all positions'
+            rows: TOKENS, cols: AXES, caption: 'The model output for all prompt positions'
           })));
         }
       },
@@ -1275,17 +1208,12 @@
         pfrom: '(B, 1, 512)', pto: '(B, 1, 512)',
         draw: function (out) {
           out.appendChild(op('one forward pass over a single position',
-            'After the prompt, each step computes one row. The weights still ' +
-            'have to be read from memory in full to produce it, so this stage ' +
-            'is bound by memory bandwidth and leaves the arithmetic units ' +
-            'mostly idle.'));
+            'After prefill, each decoding step computes the next position. At small batch sizes, reading model weights and cached values often limits speed more than computation.'));
           out.appendChild(stage(grid(last, {
             rows: [TOKENS[T - 1]], cols: AXES,
-            caption: 'the only row this step computes'
+            caption: 'The new row computed during this step'
           })));
-          out.appendChild(note('That difference is why a decode step can run ' +
-            'at low utilisation while prefill runs hot, and why batching more ' +
-            'requests together is the standard fix.'));
+          out.appendChild(note('Processing several requests together can reuse weights across more calculations. This can improve decoding throughput, although it also affects latency and memory use.'));
         }
       },
       {
@@ -1294,12 +1222,10 @@
         pfrom: '(B, 1, 512)', pto: '(B, 1, 37000)',
         draw: function (out) {
           out.appendChild(op('logits = h · E^T',
-            'Section 3.4 shares one matrix between the two embedding layers ' +
-            'and this projection, so a token scores high when the final ' +
-            'hidden state points the same way as its embedding.'));
+            'Section 3.4 shares the embedding weights with the output projection. The dot product between the final hidden vector and each token embedding gives that token a score, called a logit.'));
           out.appendChild(stage(grid([logits], {
             rows: ['logit'], cols: TOKENS,
-            caption: 'one score per word in the vocabulary'
+            caption: 'One score per token in the vocabulary'
           })));
         }
       },
@@ -1311,8 +1237,7 @@
           var pr = probs(st.temp);
           var top = pr.indexOf(Math.max.apply(null, pr));
           out.appendChild(op('p = softmax(logits / temperature)',
-            'Temperature below one sharpens the distribution towards the ' +
-            'top score. Above one flattens it, so unlikely words get a turn.'));
+            'A temperature below one increases the probability of higher-scoring tokens. A temperature above one spreads probability more evenly, making lower-scoring tokens more likely to be sampled.'));
           out.appendChild(stage(grid([pr], {
             rows: ['p'], cols: TOKENS, max: 1,
             caption: 'at temperature ' + st.temp.toFixed(2)
@@ -1323,9 +1248,7 @@
             ['probability of the least likely word',
               (100 * Math.min.apply(null, pr)).toFixed(1) + '%']
           ]));
-          out.appendChild(note('These weights were chosen to show attention, ' +
-            'not to predict text, so treat the winner as arithmetic rather ' +
-            'than as a sensible next word.'));
+          out.appendChild(note('The example weights were chosen to illustrate attention. They were not trained for text prediction, so the highest-scoring token need not be a sensible continuation.'));
         }
       }
     ];
@@ -1351,9 +1274,8 @@
      the module is making: one block, used three ways. */
   PANEL.figure1 = function () {
     var p = panel({
-      title: 'The whole architecture, box by box',
-      source: 'Redrawn from figure 1 of Vaswani et al. (2017). The three ways ' +
-        'attention is used are section 3.2.3.'
+      title: 'Explore the complete architecture',
+      source: 'Redrawn from figure 1 of Vaswani et al. (2017). The three ways attention is used are section 3.2.3.'
     });
 
     /* The viewBox is cropped to what the drawing actually occupies. The
@@ -1387,71 +1309,62 @@
       { id: 'in-tokens', x: EX, y: 618, w: 150, h: 26, label: 'Inputs', soft: true,
         from: 'text', to: '(5 tokens)', pfrom: 'text', pto: '(B, T)',
         formula: 'the source sentence',
-        said: 'The five words on this page, already split into tokens.' },
+        said: 'The input sentence contains the five example tokens shown on this page.' },
       { id: 'in-embed', x: EX, y: 566, w: 150, h: 30, label: 'Input Embedding',
         from: '(5 tokens)', to: '(5, 8)', pfrom: '(B, T)', pto: '(B, T, 512)',
         formula: 'lookup, then × √d_model',
-        said: 'One learned vector per token, scaled up so the position added ' +
-          'next stays a nudge.',
+        said: 'Each token has an embedding vector. Scale that vector before adding its position encoding.',
         tensor: function () { return { m: M.emb, cols: AXES }; } },
       { id: 'in-pe', x: EX, y: 514, w: 150, h: 30, label: '⊕  Positional Encoding',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'PE(pos, 2i) = sin(pos / 10000^(2i/d_model))',
-        said: 'Order is added rather than built in, because attention has no ' +
-          'sense of position on its own.',
+        said: 'Add a position vector to each token embedding. This supplies order information that unmasked attention alone does not contain.',
         tensor: function () { return { m: M.x0, cols: AXES }; } },
       { id: 'enc-mha', x: EX, y: 440, w: 150, h: 34, label: 'Multi-Head Attention',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'Concat(head_1, …, head_h) W^O,  no mask',
-        said: 'Encoder self-attention. Queries, keys and values all come from ' +
-          'the same place, and every position may look at every other.',
+        said: 'Encoder self-attention computes queries, keys, and values from the same input. Each position can use information from every input position.',
         tensor: function () { return { m: M.mh.out, cols: AXES }; } },
       { id: 'enc-an1', x: EX, y: 392, w: 150, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'LayerNorm(x + Sublayer(x))',
-        said: 'The residual carries the input past the sub-layer, then the sum ' +
-          'is normalised.',
+        said: 'Add the sub-layer output to its input. Then normalise the sum.',
         tensor: function () { return { m: M.res1, cols: AXES }; } },
       { id: 'enc-ff', x: EX, y: 330, w: 150, h: 34, label: 'Feed Forward',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
-        said: 'Widens to d_ff, applies ReLU, narrows back. The same two ' +
-          'matrices run on every position separately.',
+        said: 'The first matrix increases the width to d_ff. ReLU sets negative activations to zero. The second matrix restores the input width. Apply these operations separately at every position.',
         tensor: function () { return { m: M.ff.out, cols: AXES }; } },
       { id: 'enc-an2', x: EX, y: 282, w: 150, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'LayerNorm(x + FFN(x))',
-        said: 'The encoder layer is done. In the paper this repeats six times, ' +
-          'and the last one is what the decoder reads.',
+        said: 'This completes an encoder layer. The paper uses six such layers, and the decoder uses the final encoder output.',
         tensor: function () { return { m: M.res2, cols: AXES }; } },
 
       { id: 'out-tokens', x: DX, y: 618, w: 186, h: 26,
         label: 'Outputs (shifted right)', soft: true,
         from: 'text', to: '(5 tokens)', pfrom: 'text', pto: '(B, T)',
         formula: 'the answer so far, moved one place right',
-        said: 'Shifting right means position i is asked to predict token i ' +
-          'while only ever having seen the tokens before it.' },
+        said: 'Shift the target sequence one position to the right before giving it to the decoder. Together with the causal mask, this hides the token each position must predict.' },
       { id: 'out-embed', x: DX, y: 566, w: 186, h: 30, label: 'Output Embedding',
         from: '(5 tokens)', to: '(5, 8)', pfrom: '(B, T)', pto: '(B, T, 512)',
         formula: 'the same matrix as the input embedding',
-        said: 'Section 3.4 shares one matrix between both embedding layers and ' +
-          'the projection before the softmax.',
+        said: 'Section 3.4 shares one matrix between both embedding layers and the projection before the softmax.',
         tensor: function () { return { m: M.emb, cols: AXES }; } },
       { id: 'out-pe', x: DX, y: 514, w: 186, h: 30, label: '⊕  Positional Encoding',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'the same sinusoid as the encoder side',
-        said: 'Same formula, same wavelengths.',
+        said: 'The decoder uses the same position-encoding formula and wavelengths as the encoder.',
         tensor: function () { return { m: M.x0, cols: AXES }; } },
       { id: 'dec-mmha', x: DX, y: 440, w: 186, h: 34,
         label: 'Masked Multi-Head Attention',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'score_ij ← −∞ for j > i, then softmax',
-        said: 'Decoder self-attention. The mask stops a position attending to ' +
-          'anything after it, which is what keeps the prediction honest.',
+        said: 'Decoder self-attention blocks later positions. With shifted targets, this prevents the model from reading the answer during training.',
         tensor: function () {
           return { m: M.mhMasked.per[0].attn, rows: TOKENS, cols: TOKENS, max: 1 };
         } },
@@ -1459,51 +1372,47 @@
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'LayerNorm(x + MaskedMultiHead(x))',
-        said: 'The decoder stream, ready to go and ask the encoder something.',
+        said: 'The updated decoder vectors now provide the queries for attention over the encoder output.',
         tensor: function () { return { m: M.dec.self, cols: AXES }; } },
       { id: 'dec-cross', x: DX, y: 330, w: 186, h: 34, label: 'Multi-Head Attention',
         from: 'Q (5, 8), K V (5, 8)', to: '(5, 8)',
         pfrom: 'Q (B, T, 512), K V (B, S, 512)', pto: '(B, T, 512)',
         formula: 'Attention(Q from decoder, K and V from encoder)',
-        said: 'The join. Queries come from the previous decoder layer, and the ' +
-          'keys and values come from the encoder output, so every decoder ' +
-          'position can read the whole source.',
+        said: 'Cross-attention connects the decoder to the encoder. Queries come from the decoder representation, while keys and values come from the encoder output. Thus, each decoder position can use the whole source sequence.',
         tensor: function () {
           return { m: M.dec.cross.per[0].attn, rows: TOKENS, cols: TOKENS, max: 1,
-                   cap: 'rows are decoder positions, columns are source positions' };
+                   cap: 'Rows are decoder positions. Columns are source positions.' };
         } },
       { id: 'dec-an2', x: DX, y: 282, w: 186, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'LayerNorm(x + MultiHead(x, encoder))',
-        said: 'What the decoder learned from the source is now in the stream.',
+        said: 'Add the cross-attention output to the decoder input, then normalise the sum.',
         tensor: function () { return { m: M.dec.res2, cols: AXES }; } },
       { id: 'dec-ff', x: DX, y: 222, w: 186, h: 34, label: 'Feed Forward',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
-        said: 'The same shape of sub-layer as the encoder has.',
+        said: 'The decoder feed-forward network has the same input and output widths as the encoder feed-forward network.',
         tensor: function () { return { m: M.dec.ff.out, cols: AXES }; } },
       { id: 'dec-an3', x: DX, y: 174, w: 186, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         formula: 'LayerNorm(x + FFN(x))',
-        said: 'One decoder layer done, out of six.',
+        said: 'This completes one decoder layer. The paper uses six layers.',
         tensor: function () { return { m: M.dec.res3, cols: AXES }; } },
       { id: 'head-linear', x: DX, y: 118, w: 186, h: 30, label: 'Linear',
         from: '(5, 8)', to: '(5, 5)', pfrom: '(B, T, 512)', pto: '(B, T, 37000)',
         formula: 'logits = h · E^T',
-        said: 'One score per word in the vocabulary, using the shared ' +
-          'embedding matrix turned on its side.' },
+        said: 'Multiply by the transpose of the shared embedding matrix to obtain one score per vocabulary token.' },
       { id: 'head-softmax', x: DX, y: 70, w: 186, h: 30, label: 'Softmax',
         from: '(5, 5)', to: '(5, 5)', pfrom: '(B, T, 37000)', pto: '(B, T, 37000)',
         formula: 'p = softmax(logits)',
-        said: 'Scores become a distribution over the vocabulary.' },
+        said: 'Softmax converts the token scores into probabilities that add up to one.' },
       { id: 'head-probs', x: DX, y: 24, w: 186, h: 26,
         label: 'Output Probabilities', soft: true,
         from: '(5, 5)', to: 'one token', pfrom: '(B, T, 37000)', pto: '(B, T)',
         formula: 'pick, or sample',
-        said: 'Training reads the probability of the correct token. Generation ' +
-          'picks one and feeds it back in at the bottom right.' }
+        said: 'During training, the loss uses the probability of the observed target token. During generation, the model selects a token and appends it to the decoder input.' }
     ];
 
     var byId = {};

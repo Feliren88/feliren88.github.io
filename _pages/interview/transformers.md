@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Transformers
-description: Trace a transformer through tensor shapes, parameters, memory, and inference.
+description: Follow a transformer calculation and estimate its vector sizes, parameters, memory, and generation cost.
 permalink: /transformers/
 topic_id: transformers
 robots: noindex, nofollow

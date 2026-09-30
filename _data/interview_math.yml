@@ -394,238 +394,238 @@ eq:
 notation:
 - group: Objects you feed in and get out
   items:
-  - is: 1 input, a single example
+  - is: One input example
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>x</mi></mrow></math>
     tex: x
-  - is: the true answer for that input
+  - is: The true answer for this input
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>y</mi></mrow></math>
     tex: y
-  - is: the answer the model gives
+  - is: The answer predicted by the model
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mover accent="true"><mi>y</mi><mo>&#x0005E;</mo></mover></mrow></math>
     tex: \hat{y}
-  - is: a hidden representation, an input after some processing
+  - is: A hidden representation, the numbers produced by an intermediate model step
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>z</mi></mrow></math>
     tex: z
-  - is: a step, in time or in a sequence
+  - is: A time step or a position in a sequence
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>t</mi></mrow></math>
     tex: t
-  - is: an index over classes or over neighbours
+  - is: An index identifying a class or a neighbour
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>k</mi></mrow></math>
     tex: k
-  - is: an index over examples
+  - is: An index identifying an example
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>i</mi></mrow></math>
     tex: i
-  - is: a second index, used when 2 run at once
+  - is: A second index used alongside another index
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>j</mi></mrow></math>
     tex: j
-  - is: a count of things
+  - is: The number of items being counted
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math>
     tex: n
-  - is: the number of examples in a set
+  - is: The number of examples in a dataset
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi></mrow></math>
     tex: N
-  - is: the number of components in a vector
+  - is: The number of components in a vector
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>d</mi></mrow></math>
     tex: d
-  - is: the number of classes
+  - is: The number of classes
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>K</mi></mrow></math>
     tex: K
 - group: Sets and data
   items:
-  - is: a dataset, the pairs of input and answer you hold
+  - is: A dataset containing input and answer pairs
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>D</mi></mrow></math>
     tex: D
-  - is: the space every input lives in
+  - is: The set of possible inputs
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x1D4B3;</mi></mrow></math>
     tex: \mathcal{X}
-  - is: the space every answer lives in
+  - is: The set of possible answers
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x1D4B4;</mi></mrow></math>
     tex: \mathcal{Y}
-  - is: the distribution the data is drawn from
+  - is: The probability distribution that generates the data
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x1D49F;</mi></mrow></math>
     tex: \mathcal{D}
-  - is: the real numbers
+  - is: The real numbers
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x0211D;</mi></mrow></math>
     tex: \mathbb{R}
-  - is: the space of vectors with d real components
+  - is: The set of vectors with d real-number components
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>&#x0211D;</mi><mrow><mi>d</mi></mrow></msup></mrow></math>
     tex: \mathbb{R}^{d}
-  - is: is a member of
+  - is: Is a member of
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02208;</mo></mrow></math>
     tex: \in
-  - is: is contained in
+  - is: Is a subset of
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02286;</mo></mrow></math>
     tex: \subseteq
-  - is: is drawn from
+  - is: Is sampled from
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0223C;</mo></mrow></math>
     tex: \sim
-  - is: how many items D holds
+  - is: The number of items in D
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x0007C;</mo><mi>D</mi><mo stretchy="false">&#x0007C;</mo></mrow></math>
     tex: '|D|'
 - group: Probability
   items:
-  - is: a probability, or a density
+  - is: A probability or probability density
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>p</mi></mrow></math>
     tex: p
-  - is: how likely input x is
+  - is: The probability or density assigned to input x
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>p</mi><mo stretchy="false">&#x00028;</mo><mi>x</mi><mo stretchy="false">&#x00029;</mo></mrow></math>
     tex: p(x)
-  - is: how likely answer y is once you know x
+  - is: The probability or density of answer y given input x
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>p</mi><mo stretchy="false">&#x00028;</mo><mi>y</mi><mo>&#x02223;</mo><mi>x</mi><mo stretchy="false">&#x00029;</mo></mrow></math>
     tex: p(y \mid x)
-  - is: given, read the right side as already known
+  - is: Given the information on the right of the symbol
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02223;</mo></mrow></math>
     tex: \mid
-  - is: the parameters, the numbers the model learns
+  - is: The model parameters, the numbers fitted or assigned to the model
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B8;</mi></mrow></math>
     tex: \theta
-  - is: a policy, what an agent does in a state
+  - is: A policy, the rule an agent uses to choose actions in a state
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003C0;</mi></mrow></math>
     tex: \pi
-  - is: the average over everything the distribution can produce
+  - is: The expected value, an average weighted by the probability distribution
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x1D53C;</mi></mrow></math>
     tex: \mathbb{E}
-  - is: how spread out a quantity is
+  - is: The variance, a measure of spread around the mean
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mrow><mi mathvariant="normal">V</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">r</mi></mrow></mrow></math>
     tex: \mathrm{Var}
-  - is: the normal distribution
+  - is: The normal distribution
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x1D4A9;</mi></mrow></math>
     tex: \mathcal{N}
-  - is: a mean
+  - is: A mean
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003BC;</mi></mrow></math>
     tex: \mu
-  - is: a standard deviation, the usual size of a deviation
+  - is: A standard deviation, a measure of spread in the original units
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003C3;</mi></mrow></math>
     tex: \sigma
-  - is: a variance, the square of the standard deviation
+  - is: A variance, equal to the square of the standard deviation
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>&#x003C3;</mi><mrow><mn>2</mn></mrow></msup></mrow></math>
     tex: \sigma^{2}
 - group: Learning
   items:
-  - is: the model, the function turning an input into an answer
+  - is: The model, a function that maps an input to an answer
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>f</mi></mrow></math>
     tex: f
-  - is: the model with its parameters written in
+  - is: The model with its parameters shown explicitly
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>f</mi><mrow><mi>&#x003B8;</mi></mrow></msub></mrow></math>
     tex: f_{\theta}
-  - is: the loss, the number training pushes down
+  - is: The loss, a measure of error that training aims to reduce
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x02112;</mi></mrow></math>
     tex: \mathcal{L}
-  - is: the loss on 1 example
+  - is: The loss for one example
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x02113;</mi></mrow></math>
     tex: \ell
-  - is: the risk, the loss averaged over the distribution
+  - is: The risk, the average loss under the data distribution
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>R</mi></mrow></math>
     tex: R
-  - is: the empirical risk, the loss averaged over the data you have
+  - is: The empirical risk, the average loss on the observed data
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mover accent="true"><mi>R</mi><mo>&#x0005E;</mo></mover></mrow></math>
     tex: \hat{R}
-  - is: the learning rate, the size of a step
+  - is: The learning rate, which controls the size of a parameter update
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B7;</mi></mrow></math>
     tex: \eta
-  - is: the gradient, the direction of steepest increase
+  - is: The gradient, whose components are partial derivatives
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02207;</mo></mrow></math>
     tex: \nabla
-  - is: a knob trading 1 term of an objective against another
+  - is: A coefficient controlling the balance between terms in an objective
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003BB;</mi></mrow></math>
     tex: \lambda
-  - is: an error rate you choose in advance
+  - is: An error-rate threshold chosen before the test
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B1;</mi></mrow></math>
     tex: \alpha
-  - is: a small allowance
+  - is: A small tolerance
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003F5;</mi></mrow></math>
     tex: \epsilon
-  - is: a weight vector, the coefficients a linear model learns
+  - is: A weight vector, the coefficients of a linear model
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>w</mi></mrow></math>
     tex: w
-  - is: a discount, how much a reward later is worth now
+  - is: A discount factor controlling the weight given to future rewards
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B3;</mi></mrow></math>
     tex: \gamma
-  - is: the number of layers
+  - is: The number of layers
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>L</mi></mrow></math>
     tex: L
-  - is: the length of a sequence
+  - is: The sequence length
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>T</mi></mrow></math>
     tex: T
 - group: Testing a claim
   items:
-  - is: the null hypothesis, the claim on trial
+  - is: The null hypothesis, the claim evaluated by a statistical test
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>H</mi><mrow><mn>0</mn></mrow></msub></mrow></math>
     tex: H_{0}
-  - is: the alternative, what you would conclude instead
+  - is: The alternative hypothesis, the claim compared with the null hypothesis
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>H</mi><mrow><mn>1</mn></mrow></msub></mrow></math>
     tex: H_{1}
-  - is: the chance of missing a real effect
+  - is: The probability of failing to detect an effect under the specified alternative
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B2;</mi></mrow></math>
     tex: \beta
-  - is: a statistic in units of its own standard error
+  - is: A test statistic expressed in standard-error units
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>Z</mi></mrow></math>
     tex: Z
-  - is: the standard error, how much an estimate moves between samples
+  - is: The standard error, the standard deviation of an estimate across repeated samples
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow></mrow></math>
     tex: \mathrm{SE}
 - group: Vectors and matrices
   items:
-  - is: a vector, a list of numbers with a direction
+  - is: A vector, an ordered list of numbers
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>v</mi></mrow></math>
     tex: v
-  - is: a matrix, a table of numbers acting on vectors
+  - is: A matrix, a rectangular array of numbers that can transform vectors
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>A</mi></mrow></math>
     tex: A
-  - is: the transpose, rows and columns swapped
+  - is: The transpose of A, obtained by swapping its rows and columns
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>A</mi><mrow><mo>&#x022A4;</mo></mrow></msup></mrow></math>
     tex: A^{\top}
-  - is: the inverse, the matrix undoing A
+  - is: The inverse of A, which reverses its transformation when an inverse exists
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>A</mi><mrow><mo>&#x02212;</mo><mn>1</mn></mrow></msup></mrow></math>
     tex: A^{-1}
-  - is: the determinant, the factor by which area or volume scales
+  - is: The determinant, which gives signed area or volume scaling
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo movablelimits="true">det</mo></mrow></math>
     tex: \det
-  - is: the length of v
+  - is: The length of v
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo fence="false" stretchy="false">&#x02016;</mo><mi>v</mi><mo fence="false" stretchy="false">&#x02016;</mo></mrow></math>
     tex: \|v\|
-  - is: the inner product of u and v
+  - is: The inner product of u and v
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x027E8;</mi><mi>u</mi><mo>&#x0002C;</mo><mi>v</mi><mi>&#x027E9;</mi></mrow></math>
     tex: \langle u, v \rangle
-  - is: the identity matrix, the one that changes nothing
+  - is: The identity matrix, which leaves a vector unchanged
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>I</mi></mrow></math>
     tex: I
-  - is: an outer product
+  - is: An outer product, a matrix formed from pairwise products of two vectors
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02297;</mo></mrow></math>
     tex: \otimes
 - group: Reading the symbols
   items:
-  - is: add up every term
+  - is: Add the indicated terms
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02211;</mo></mrow></math>
     tex: \sum
-  - is: multiply every term
+  - is: Multiply the indicated terms
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0220F;</mo></mrow></math>
     tex: \prod
-  - is: add up over a continuum
+  - is: Integrate, accumulating values across a continuous range
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0222B;</mo></mrow></math>
     tex: \int
-  - is: the input achieving the largest value
+  - is: The input that achieves the largest value
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo /><mrow><mi>a</mi><mi>r</mi><mi>g</mi><mspace width="0.167em" /><mi>m</mi><mi>a</mi><mi>x</mi></mrow></mrow></math>
     tex: \arg\max
-  - is: the input achieving the smallest value
+  - is: The input that achieves the smallest value
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo /><mrow><mi>a</mi><mi>r</mi><mi>g</mi><mspace width="0.167em" /><mi>m</mi><mi>i</mi><mi>n</mi></mrow></mrow></math>
     tex: \arg\min
-  - is: equal up to a constant factor
+  - is: Proportional to, or equal up to a constant factor
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0221D;</mo></mrow></math>
     tex: \propto
-  - is: approximately equal
+  - is: Approximately equal to
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02248;</mo></mrow></math>
     tex: \approx
-  - is: goes to, or maps to
+  - is: Approaches, or maps to, depending on the expression
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02192;</mo></mrow></math>
     tex: \to
-  - is: for every
+  - is: For every
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02200;</mo></mrow></math>
     tex: \forall
-  - is: at least 1 exists
+  - is: There exists at least one
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02203;</mo></mrow></math>
     tex: \exists
-  - is: is defined to be
+  - is: Is defined as
     ml: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02254;</mo></mrow></math>
     tex: \coloneqq
 sym:

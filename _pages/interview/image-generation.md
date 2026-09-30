@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Image Generation
-description: Explain diffusion as repeated denoising and measure the cost of controlling it.
+description: Explain how repeated denoising generates images and how controls affect cost.
 permalink: /image-generation/
 topic_id: image-generation
 robots: noindex, nofollow

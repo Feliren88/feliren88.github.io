@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: AI Safety
-description: State a position on AI risk, support it with evidence, and answer a strong objection.
+description: State a position on AI risk, support it with evidence, and address a strong objection.
 permalink: /ai-safety/
 topic_id: ai-safety
 robots: noindex, nofollow

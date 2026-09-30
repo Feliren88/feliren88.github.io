@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Mathematics
-description: Read mathematical notation and explain the assumptions behind it.
+description: Read mathematical symbols and explain the assumptions behind a mathematical claim.
 permalink: /math/
 topic_id: math
 robots: noindex, nofollow

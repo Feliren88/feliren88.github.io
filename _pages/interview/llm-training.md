@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: LLM Training
-description: Take a base language model through pretraining, post-training, and evaluation.
+description: Train a base language model, adapt its behaviour and evaluate the changes.
 permalink: /llm-training/
 topic_id: llm-training
 robots: noindex, nofollow

@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Embeddings
-description: Represent items as vectors, search them efficiently, and test what distance means.
+description: Represent items with numerical vectors, search for similar items, and test the meaning of distance.
 permalink: /embedding/
 topic_id: embedding
 robots: noindex, nofollow

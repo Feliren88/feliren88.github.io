@@ -68,6 +68,18 @@ precisely so there is only one set of rules to keep correct.
 
 ## Learning aids
 
+### Writing for readers
+
+Assume the reader knows basic programming and school maths. Explain a new
+concept before using its technical name in an argument. Then connect the
+explanation to the diagram and equations. Keep the technical detail, but use
+complete sentences, concrete examples, and familiar verbs.
+
+Apply this rule to captions, symbol definitions, controls, questions, and
+warnings as well as the main paragraphs. Moreover, keep page descriptions in
+step with their track blurbs. The prose audit allows small numbers written as
+words and checks that every diagram part has a matching caption.
+
 Each module carries four controls beyond its diagram, all built for a reader who
 learns by doing and may be dyslexic:
 
@@ -357,4 +369,3 @@ It does count them in `live indexable pages`, which is a naming quirk in the sum
 This hides the pages from search and from site navigation. It does not make them secret.
 The repository is public, so the Markdown and YAML are readable on GitHub by anyone who
 looks. Never put anything in here that could not be published.
-

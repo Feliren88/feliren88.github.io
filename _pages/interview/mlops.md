@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: MLOps
-description: Keep a deployed model reproducible, observable, and repairable after it ships.
+description: Keep a deployed model reproducible, monitor its behaviour and repair failures.
 permalink: /mlops/
 topic_id: mlops
 robots: noindex, nofollow

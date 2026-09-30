@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Computer Science
-description: Estimate what code will cost in time, memory, communication, and storage.
+description: Estimate the time, memory, communication, and storage your code needs.
 permalink: /computer-science/
 topic_id: computer-science
 robots: noindex, nofollow

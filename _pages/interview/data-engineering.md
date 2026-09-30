@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Data Engineering
-description: Deliver correct data on time and within the storage and compute budget.
+description: Deliver correct data on time within the storage and computing budget.
 permalink: /data-engineering/
 topic_id: data-engineering
 robots: noindex, nofollow

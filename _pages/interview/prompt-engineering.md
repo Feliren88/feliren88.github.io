@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Prompt Engineering
-description: Design prompts as tested interfaces with clear inputs, outputs, and failure cases.
+description: Write prompts with clear inputs, outputs and failure handling, then test them.
 permalink: /prompt-engineering/
 topic_id: prompt-engineering
 robots: noindex, nofollow

@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Computer Vision
-description: Turn pixels into predictions and find the cases where vision metrics mislead you.
+description: Make predictions from images and identify failures that summary scores can hide.
 permalink: /computer-vision/
 topic_id: computer-vision
 robots: noindex, nofollow
