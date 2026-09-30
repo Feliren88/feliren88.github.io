@@ -153,6 +153,51 @@ def check_matrices():
     close('guide BA', g[1], [-1, -1, 2, -1])
     close('guide AB', g[2], [-1, -2, 1, -1])
 
+@check('linear-algebra/determinant-rank-inverse')
+def check_determinant():
+    lab = 'linear-algebra/determinant-rank-inverse'
+    rng = np.random.default_rng(12)
+    Ms = rng.integers(-30, 31, size=(80, 2, 2)) / 10.0
+    for k in range(20):                       # rank 1: second column a multiple of the first
+        Ms[k, :, 1] = Ms[k, :, 0] * rng.choice([-1.5, -0.5, 0.5, 2.0])
+    Ms[20] = 0.0                              # rank 0
+    ys = rng.integers(-30, 31, size=(80, 2)) / 10.0
+    for k in range(10):                       # consistent right-hand sides for some rank 1 systems
+        ys[k] = Ms[k, :, 0] * rng.uniform(-2, 2)
+    calls = []
+    for M, y in zip(Ms, ys):
+        m = M.ravel().tolist()
+        calls += [['det', [m]], ['rank', [m]], ['inverse', [m]], ['lines', [m]], ['solve', [m, y.tolist()]]]
+    out = run(lab, calls)
+    for i, (M, y) in enumerate(zip(Ms, ys)):
+        d, r, inv, ln, sol = out[5 * i:5 * i + 5]
+        close(f'det {i}', d, np.linalg.det(M))
+        same(f'rank {i}', r, int(np.linalg.matrix_rank(M)))
+        if r == 2:
+            close(f'inverse {i}', inv, np.linalg.inv(M).ravel())
+            same(f'solve kind {i}', sol['kind'], 'one')
+            close(f'solve {i}', sol['x'], np.linalg.solve(M, y))
+            continue
+        same(f'inverse {i}', inv, None)
+        x, res, *_ = np.linalg.lstsq(M, y, rcond=None)
+        consistent = np.linalg.norm(M @ x - y) < 1e-9
+        if r == 0:
+            same(f'solve kind {i}', sol['kind'], 'all' if np.linalg.norm(y) < 1e-12 else 'none')
+            continue
+        close(f'null {i}', M @ np.array(ln['nul']), [0, 0])
+        v = M[:, 0] if np.linalg.norm(M[:, 0]) > 0 else M[:, 1]
+        close(f'col {i}', ln['col'][0] * v[1] - ln['col'][1] * v[0], 0)
+        same(f'solve kind {i}', sol['kind'], 'line' if consistent else 'none')
+        if consistent:
+            close(f'solve point {i}', M @ np.array(sol['x']), y)
+            close(f'solve direction {i}', M @ np.array(sol['dir']), [0, 0])
+    # the numbers the guide quotes
+    g = run(lab, [['det', [[2, 1, 0.5, 1.5]]], ['det', [[2, 1, 0.5, -1]]], ['det', [[2, 1, 0.5, 0.25]]], ['rank', [[2, 1, 0.5, 0.25]]]])
+    close('guide det', g[0], 2.5)
+    close('guide flipped', g[1], -2.5)
+    close('guide squashed', g[2], 0)
+    same('guide rank', g[3], 1)
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

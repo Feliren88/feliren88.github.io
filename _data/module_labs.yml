@@ -4,3 +4,4 @@
 linear-algebra:
   '0': vectors-and-spaces
   '1': matrices-as-transformations
+  '2': determinant-rank-inverse

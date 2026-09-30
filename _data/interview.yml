@@ -2471,6 +2471,9 @@ topics:
                 is: 'the bottom-left entry'
               - sym: 'a_{22}'
                 is: 'the bottom-right entry'
+            play:
+              livetex: '\det A=9001\times9002-9003\times9004=9005'
+              liveslots: [a, d, b, c, det]
           - name: 'Rank and nullity account for every dimension'
             tex: '\mathrm{rank}(A) + \dim \ker(A) = n'
             read: 'Whatever the transformation does not preserve, it destroys, and the 2 add up to what you started with.'

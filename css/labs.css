@@ -67,3 +67,12 @@
 
 .lab-mat { display: inline-flex; gap: 0.6em; vertical-align: middle; padding: 0 0.35em; border-left: 2px solid var(--muted); border-right: 2px solid var(--muted); border-radius: 3px; }
 .lab-mat > span { display: inline-flex; flex-direction: column; align-items: flex-end; line-height: 1.3; }
+
+.lab-plane .pl-square { fill: color-mix(in srgb, var(--xp-o) 22%, transparent); stroke: var(--xp-o); stroke-width: 2; }
+.lab-plane .pl-square.is-flipped { fill: color-mix(in srgb, var(--tf-down) 24%, transparent); stroke: var(--tf-down); }
+.lab-plane .pl-f { fill: var(--text); fill-opacity: 0.75; }
+.lab-plane .pl-in { fill: var(--xp-v); }
+.lab-plane .pl-out { fill: var(--xp-o); stroke: var(--bg); stroke-width: 2; }
+
+/* Keep the guide steady when interrupting a readout transition. */
+.lab-determinant .lab-note { min-block-size: 4lh; }
