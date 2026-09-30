@@ -156,11 +156,11 @@
     }
     function report() {
       if (s.mode === '3d') {
-        api.say('The 2 arrows in 3D ' + (rank3(A3, B3) === 2 ? 'point different ways, so they span a plane through the origin.' : 'share a line.'));
+        api.say('The 2 arrows in 3D ' + (rank3(A3, B3) === 2 ? 'lie on different lines, so they span a plane through the origin.' : 'share a line.'));
         return;
       }
       var r = rank2(s.v1, s.v2), sum = combo(s.c1, s.c2, s.v1, s.v2);
-      var span = r === 2 ? 'They point different ways, so they span the whole plane.' :
+      var span = r === 2 ? 'They lie on different lines, so they span the whole plane.' :
         r === 1 ? 'They lie on 1 line, so they span only that line.' : 'Both are 0, so they span only the origin.';
       api.say('v1 is (' + fmt(s.v1[0], 1) + ', ' + fmt(s.v1[1], 1) + ') and v2 is (' + fmt(s.v2[0], 1) + ', ' + fmt(s.v2[1], 1) + '). ' +
         span + ' The combination lands at (' + fmt(sum[0]) + ', ' + fmt(sum[1]) + ').');
@@ -249,21 +249,21 @@
 
     var PAGES = [
       { t: '2 arrows', parts: ['v1', 'v2'], state: { v1: [2, 1], v2: [-1, 1.5], c1: 1, c2: 1, paint: false, basis: false, showU: false, mode: '2d' },
-        body: '<p><b class="is-q">v₁</b> = (2, 1) and <b class="is-k">v₂</b> = (−1, 1.5). Each arrow is a direction and a length. Drag either tip.</p>' },
+        body: '<p>Start with <b class="is-q">v₁</b> = (2, 1) and <b class="is-k">v₂</b> = (−1, 1.5). Drag either tip to change its direction and length.</p>' },
       { t: 'Add them nose to tail', parts: ['v1', 'v2', 'sum'], state: { c1: 1, c2: 1 },
         body: '<p>Put the tail of <b class="is-k">v₂</b> on the tip of <b class="is-q">v₁</b>. The far end is <b class="is-o">v₁ + v₂</b> = (1, 2.5).</p>' },
       { t: 'Stretch before you add', parts: ['v1', 'v2', 'sum'], state: { c1: 1.5, c2: -1 },
-        body: '<p>Scale each arrow, then add them: a linear combination. Drag the tip of <b class="is-o">c₁v₁ + c₂v₂</b>, and c₁ and c₂ follow. A negative c flips its arrow.</p>' },
+        body: '<p>Scale each arrow by c₁ or c₂, then add them to form a linear combination. Drag <b class="is-o">the result</b> to change both weights; a negative weight reverses its arrow.</p>' },
       { t: 'Paint the span', parts: ['span', 'sum'], state: { c1: 1, c2: 1, paint: true },
-        body: '<p>Press <b>Paint the span</b> to sweep many choices of c₁ and c₂. 2 arrows that point different ways reach every point of the plane.</p>' },
+        body: '<p>Press <b>Paint the span</b> to sweep many choices of c₁ and c₂. With 2 arrows on different lines, these combinations reach any point in the plane.</p>' },
       { t: 'Make them parallel', parts: ['span', 'v1', 'v2'], state: { v2: [-2, -1], c1: 1, c2: 0.5, paint: true },
-        body: '<p>Now <b class="is-k">v₂</b> = −1 × <b class="is-q">v₁</b>. Every combination stays on 1 line, so the span is that line. The pair is dependent.</p>' },
+        body: '<p>Here, <b class="is-k">v₂</b> = −<b class="is-q">v₁</b>, so 1 arrow is a multiple of the other. Such arrows are dependent, and their weighted sums stay on 1 line.</p>' },
       { t: 'Same point, new coordinates', parts: ['sum', 'v1', 'v2'], state: { v2: [-1, 1.5], c1: 1, c2: 1, paint: false, basis: true },
         body: '<p>On the square grid, the tip sits at (1, 2.5). On the grid built from <b class="is-q">v₁</b> and <b class="is-k">v₂</b>, the same point is (1, 1).</p>' },
       { t: 'Length and angle', parts: ['u', 'shadow', 'v1'], state: { basis: false, showU: true },
-        body: '<p><b class="is-v">u</b> · <b class="is-q">v₁</b> = |u| |v₁| cos θ. The <b class="is-o">shadow</b> of u on v₁ has length u · v₁ ÷ |v₁|. Drag u round.</p>' },
+        body: '<p>Here, <b class="is-v">u</b> · <b class="is-q">v₁</b> = |u| |v₁| cos θ. Drag u to change its <b class="is-o">shadow</b> on v₁, whose signed length is u · v₁ ÷ |v₁|.</p>' },
       { t: 'In 3 dimensions', parts: ['a3', 'b3', 'plane3'], state: { showU: false, mode: '3d' },
-        body: '<p>2 arrows that point different ways in 3D span a flat plane through the origin. Turn and tilt to see it edge on.</p>' }
+        body: '<p>In 3D, 2 arrows on different lines span a flat plane through the origin. Turn and tilt to see it edge on.</p>' }
     ];
     sync(); draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {

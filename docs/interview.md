@@ -252,6 +252,33 @@ Anything toggled with the `hidden` attribute relies on `.xp [hidden]` in
 `explainer.css`, because several panels are grid containers and `display: grid`
 would otherwise beat `hidden`.
 
+## Module explainers
+
+A track in `_data/module_labs.yml` gives each module an interactive explainer
+in place of its static diagram. Each explainer has markup in
+`_includes/labs/<track>/<slug>.html` and behaviour in `js/labs/<track>/<slug>.js`.
+
+Each script exports its maths functions for Node. Therefore,
+`scripts/verify_labs.py` can compare their results with NumPy and SciPy.
+The browser code calls `XP.lab(id, mount)` from `explainer-core.js`.
+Its API provides these methods.
+
+- `api.values(obj)` updates `[data-val]` in the explainer and `[data-live]` in its module.
+- `api.say(text)` updates the live region, while `api.focus(parts)` highlights the relevant marks.
+- `api.animate(from, to, ms, onFrame)` finishes any running animation before starting another.
+  It marks the root with `data-anim` while the animation runs.
+
+The loader, `js/components/lab-loader.js`, loads each script within 1 screen of the viewport.
+If loading fails, the module displays its static diagram.
+
+Every explainer opens on guide page 1, and each quantity keeps the same colour throughout.
+Readers drag quantities with natural handles. Sliders serve quantities without handles or other controls.
+When an equation playground repeats those controls, remove it and retain its live equation.
+The equation accepts `live: { tex, slots }` metadata, which the explainer updates.
+
+Check an explainer with `scripts/verify_labs.py --track <id>`,
+`scripts/check_labs.py <id>` and `scripts/check_chart_bounds.py`.
+
 ## Staged animations
 
 `js/components/interview-anim.js` gives every track one animation. The format

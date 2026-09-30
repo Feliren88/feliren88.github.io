@@ -199,7 +199,7 @@
       { t: 'Undo, when you can', parts: ['area', 'f'], state: { m: DEF, t: 1, showNull: false },
         body: '<p>Press <b>Undo with A⁻¹</b> to send every point back. Undo is switched off whenever the determinant is 0.</p>' },
       { t: 'Solve Av = y', parts: ['y', 'x'], state: { mode: 'solve', t: 1 },
-        body: '<p>Drag <b class="is-o">y</b>. With det A ≠ 0 there is exactly 1 answer <b class="is-v">x</b>. Squash A and there is none, or a whole line.</p>' }
+        body: '<p>Drag <b class="is-o">y</b>; with det A ≠ 0, exactly 1 <b class="is-v">input vector</b> reaches it. Squash A and there may be no input, or a whole line of them.</p>' }
     ];
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {

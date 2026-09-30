@@ -156,9 +156,9 @@
       { t: 'Drag the columns', parts: ['i', 'j', 'v'], state: { t: 1 },
         body: '<p>Drag the tips of <b class="is-q">Aî</b> and <b class="is-k">Aĵ</b>. The matrix above changes with them, and so does every point.</p>' },
       { t: '4 familiar moves', parts: ['i', 'j'], state: { m: rotation(30), t: 1 },
-        body: '<p>This is a rotation by 30°. Then try a stretch, a shear or a projection. A projection sends the plane onto 1 line.</p>' },
+        body: '<p>This matrix rotates the grid by 30°. Try stretching, shearing, or projecting the plane onto 1 line.</p>' },
       { t: '2 in a row', parts: ['i', 'j', 'v'], state: { m: DEF, compose: true, order: 'A first', t: 2 },
-        body: '<p>Apply A, then B, a quarter turn. The faint arrows show B first, then A. They land elsewhere, so BA and AB differ.</p>' }
+        body: '<p>Apply A, then B, a quarter turn. The faint arrows show the reverse order, which lands elsewhere, so BA and AB differ.</p>' }
     ];
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {
