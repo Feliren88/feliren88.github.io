@@ -2310,53 +2310,6 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 .an-ev.is-late { fill: var(--accent); }
 .an-wm { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
 
-/* ── Live controls ────────────────────────────────────────────────
-   The reader changes a number and the maths redraws. This is the
-   half a rendered video cannot have, and the reason the animations
-   are built in the browser rather than exported. */
-.an-live {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.7rem 1.1rem;
-  margin-top: 0.9rem;
-  padding: 0.8rem 0.9rem;
-  border: 1px dashed var(--border-ui);
-  border-radius: var(--radius-md);
-  background: var(--bg);
-}
-.an-livek {
-  font: 700 var(--fs-2xs) / 1 "Space Grotesk", sans-serif;
-  text-transform: var(--rd-caps);
-  letter-spacing: var(--rd-caps-track);
-  color: var(--cta);
-  flex-basis: 100%;
-}
-.an-knob {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: var(--fs-2xs);
-  color: var(--muted);
-}
-.an-knob input { width: 5.5rem; accent-color: var(--cta); }
-.an-knob b {
-  font: 600 var(--fs-2xs) "Space Grotesk", sans-serif;
-  color: var(--text);
-  min-width: 2.2rem;
-}
-.an-livereset {
-  margin-left: auto;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid var(--border-ui);
-  border-radius: var(--radius-sm);
-  background: none;
-  color: var(--muted);
-  font: 400 var(--fs-2xs) "Manrope", sans-serif;
-  cursor: pointer;
-}
-.an-livereset:hover { color: var(--text); border-color: var(--cta); }
-
 /* ════════════════════════════════════════════════════════
    Module player
 

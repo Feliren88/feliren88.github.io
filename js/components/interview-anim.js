@@ -468,58 +468,9 @@
            stage, and it must never run through the text. */
         s = el('defs', {}, el('clipPath', { id: 'an-clip-lintrans' }, rect({ x: 0, y: 0, width: 330, height: 236 }))) +
           el('g', { 'clip-path': 'url(#an-clip-lintrans)' }, s);
-        s += text('determinant 2.75', { x: 8, y: 252, 'class': 'an-lab an-det' });
+        s += text('determinant ' + (A[0][0] * A[1][1] - A[0][1] * A[1][0]).toFixed(2), { x: 8, y: 252, 'class': 'an-lab an-det' });
         return el('svg', { viewBox: '0 0 330 260', 'class': 'an-svg', role: 'img',
           'aria-label': 'A grid being transformed by a matrix' }, s);
-      },
-      live: {
-        knobs: [
-          { k: 'a', label: 'i lands x', min: -2, max: 2.5, v: 1, step: 0.1 },
-          { k: 'b', label: 'i lands y', min: -2, max: 2.5, v: -0.5, step: 0.1 },
-          { k: 'c', label: 'j lands x', min: -2, max: 2.5, v: 1.5, step: 0.1 },
-          { k: 'd', label: 'j lands y', min: -2, max: 2.5, v: 1, step: 0.1 }
-        ],
-        redraw: function (root, st) {
-          var O = { x: 130, y: 170 }, U = 46;
-          var A = [[st.a, st.c], [st.b, st.d]];
-          var lines = $$('.an-grid1', root);
-          var n = 0;
-          for (var k = -2; k <= 4; k++) {
-            var p1 = [k * A[0][0] + -2 * A[0][1], k * A[1][0] + -2 * A[1][1]];
-            var p2 = [k * A[0][0] + 4 * A[0][1], k * A[1][0] + 4 * A[1][1]];
-            if (lines[n]) {
-              lines[n].setAttribute('x1', O.x + p1[0] * U); lines[n].setAttribute('y1', O.y - p1[1] * U);
-              lines[n].setAttribute('x2', O.x + p2[0] * U); lines[n].setAttribute('y2', O.y - p2[1] * U);
-            }
-            n++;
-            var q1 = [-2 * A[0][0] + k * A[0][1], -2 * A[1][0] + k * A[1][1]];
-            var q2 = [4 * A[0][0] + k * A[0][1], 4 * A[1][0] + k * A[1][1]];
-            if (lines[n]) {
-              lines[n].setAttribute('x1', O.x + q1[0] * U); lines[n].setAttribute('y1', O.y - q1[1] * U);
-              lines[n].setAttribute('x2', O.x + q2[0] * U); lines[n].setAttribute('y2', O.y - q2[1] * U);
-            }
-            n++;
-          }
-          var mi = $('.an-ihat.is-moved', root), mj = $('.an-jhat.is-moved', root);
-          if (mi) { mi.setAttribute('x2', O.x + U * A[0][0]); mi.setAttribute('y2', O.y - U * A[1][0]); }
-          if (mj) { mj.setAttribute('x2', O.x + U * A[0][1]); mj.setAttribute('y2', O.y - U * A[1][1]); }
-          var after = $('.an-area.is-after', root);
-          if (after) {
-            after.setAttribute('points', [
-              O.x, O.y,
-              O.x + U * A[0][0], O.y - U * A[1][0],
-              O.x + U * (A[0][0] + A[0][1]), O.y - U * (A[1][0] + A[1][1]),
-              O.x + U * A[0][1], O.y - U * A[1][1]
-            ].map(function (v) { return (+v).toFixed(1); }).join(' '));
-          }
-          /* The determinant is the area scale, and it flips sign when the
-             grid turns inside out. Worth showing, since it is the one number
-             the reader can now make negative themselves. */
-          var det = st.a * st.d - st.b * st.c;
-          var out = $('.an-det', root);
-          if (out) out.textContent = 'determinant ' + det.toFixed(2) +
-            (det < 0 ? ' (flipped over)' : det === 0 ? ' (flattened)' : '');
-        }
       },
       beats: [
         { step: 'Start with the grid', say: 'Start with the plain grid. Every point in the plane sits somewhere on it.' },
@@ -567,36 +518,8 @@
           'class': 'an-tangent an-write', 'data-from': 5
         });
         s += el('circle', { cx: ax, cy: f(ax).toFixed(1), r: 5.5, 'class': 'an-pt1', 'data-from': 1 });
-        /* The live pair: one secant and one movable point the reader drives. */
-        var lm = (f(220) - f(ax)) / (220 - ax);
-        s += el('line', {
-          x1: 60, y1: (f(ax) + lm * (60 - ax)).toFixed(1),
-          x2: 380, y2: (f(ax) + lm * (380 - ax)).toFixed(1),
-          'class': 'an-secant an-livesec is-on'
-        });
-        s += el('circle', { cx: 220, cy: f(220).toFixed(1), r: 5, 'class': 'an-pt2 an-livept is-on' });
-        s += text('slope 0.000', { x: 236, y: 244, 'class': 'an-lab an-slope' });
         return el('svg', { viewBox: '0 0 430 250', 'class': 'an-svg', role: 'img',
           'aria-label': 'Two points on a curve sliding together into a tangent line' }, s);
-      },
-      live: {
-        knobs: [{ k: 'gap', label: 'gap between the points', min: 4, max: 110, v: 70, step: 1 }],
-        redraw: function (root, st) {
-          function f(x) { return 200 - 0.0013 * (x - 40) * (x - 40); }
-          var ax = 150, bx = ax + st.gap;
-          var y1 = f(ax), y2 = f(bx);
-          var m = (y2 - y1) / (bx - ax);
-          var line = $('.an-livesec', root), pt = $('.an-livept', root);
-          if (line) {
-            line.setAttribute('x1', 60); line.setAttribute('y1', (y1 + m * (60 - ax)).toFixed(1));
-            line.setAttribute('x2', 380); line.setAttribute('y2', (y1 + m * (380 - ax)).toFixed(1));
-          }
-          if (pt) { pt.setAttribute('cx', bx); pt.setAttribute('cy', f(bx).toFixed(1)); }
-          var out = $('.an-slope', root);
-          /* Slope is rise over run in screen coordinates, where y grows
-             downward, so the sign is flipped to read the way a reader expects. */
-          if (out) out.textContent = 'slope ' + (-m).toFixed(3);
-        }
       },
       beats: [
         { step: 'A curve', say: 'A curve. We want to know how steep it is at one exact point.' },
@@ -1528,45 +1451,6 @@
      Engine
      ════════════════════════════════════════════════════════ */
 
-  /* Live controls are what turn a played animation into an explorable one.
-     A scene declares knobs, and a redraw that rebuilds the parts those knobs
-     govern. Changing a knob pauses playback, because the reader has taken
-     over. This is the half VisuAlgo has and a rendered video cannot. */
-  function liveControls(host, scene, onChange) {
-    if (!scene.live) return null;
-    var state = {};
-    scene.live.knobs.forEach(function (k) { state[k.k] = k.v; });
-
-    var wrap = document.createElement('div');
-    wrap.className = 'an-live';
-    wrap.innerHTML = '<span class="an-livek">Try it yourself</span>' +
-      scene.live.knobs.map(function (k) {
-        return '<label class="an-knob"><span>' + esc(k.label) + '</span>' +
-          '<input type="range" min="' + k.min + '" max="' + k.max + '" step="' + (k.step || 0.1) +
-          '" value="' + k.v + '" data-k="' + k.k + '">' +
-          '<b data-out="' + k.k + '">' + k.v + '</b></label>';
-      }).join('') +
-      '<button type="button" class="an-livereset">Reset</button>';
-
-    wrap.addEventListener('input', function (e) {
-      var k = e.target.getAttribute('data-k');
-      if (!k) return;
-      state[k] = parseFloat(e.target.value);
-      $('[data-out="' + k + '"]', wrap).textContent = state[k].toFixed(1);
-      onChange(state);
-    });
-    wrap.addEventListener('click', function (e) {
-      if (!e.target.closest('.an-livereset')) return;
-      scene.live.knobs.forEach(function (k) {
-        state[k.k] = k.v;
-        $('input[data-k="' + k.k + '"]', wrap).value = k.v;
-        $('[data-out="' + k.k + '"]', wrap).textContent = k.v;
-      });
-      onChange(state);
-    });
-    return { node: wrap, state: state };
-  }
-
   function mount(host, scene) {
     var at = 0;
     var last = scene.beats.length - 1;
@@ -1605,18 +1489,6 @@
       '</div></figure>';
 
     var root = $('.an-stage', host);
-
-    /* Live knobs, if the scene has them. Redraw runs on every input, so it
-       has to be cheap: it only rewrites the parts the knobs govern. */
-    var live = liveControls(host, scene, function (state) {
-      scene.live.redraw(root, state);
-    });
-    if (live) {
-      $('.an-body', host).insertAdjacentElement('afterend', live.node);
-      /* Draw once at the starting values, so the readouts are true before
-         the reader touches anything. */
-      scene.live.redraw(root, live.state);
-    }
 
     /* Write needs each path's own length before CSS can draw it. */
     $$('.an-write', root).forEach(function (path) {

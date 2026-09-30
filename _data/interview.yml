@@ -12658,15 +12658,6 @@ topics:
               - fn: x / (1 - x)
                 s: 0
               readout: '"In this queue model, 50% utilisation gives a wait of 1 service time. At 90%, the wait is 9 service times."'
-              knobs:
-              - k: dummy
-                label: service time, for scale
-                min: 0.5
-                max: 3
-                v: 1
-                step: 0.1
-                dp: 1
-                s: 1
         covers:
           - Batch, online, and streaming inference
           - Latency budgets, p50 versus p99

@@ -265,13 +265,9 @@ From VisuAlgo:
 - **Speed control**, four settings. The gap is reading time for the caption, so
   slow is genuinely slower.
 
-And the part neither reference has on its own: **live controls**. A scene may
-declare `live: { knobs, redraw }`, and the reader drags a number while the maths
-responds. `/linear-algebra/` lets you move where the basis vectors land and
-watch the determinant go negative when the grid turns inside out. `/calculus/`
-lets you shrink the gap between two points and watch the secant slope converge
-on the derivative. Touching a knob pauses playback, because the reader has taken
-over.
+Scenes have no sliders of their own. Each track's hands-on controls live in its
+modules, in the equation playgrounds and the module explainers, so an animation
+never repeats a slider the reader meets again further down the page.
 
 Rendering with real Manim was considered and rejected, for the same reason the
 scenes are SVG rather than generated images: video cannot follow the light and
