@@ -1,0 +1,4 @@
+# Module explainers: track id, then zero-based module index, then slug.
+# Each slug has _includes/labs/<track>/<slug>.html and js/labs/<track>/<slug>.js.
+# See docs/interview.md, "Module explainers".
+linear-algebra: {}

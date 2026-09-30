@@ -34,6 +34,7 @@ theming lives in js/components/site-header.js.
 {% if page.motion_scene %}<link rel="stylesheet" href="{% include asset.html path='/css/essay-motion.css' %}">{% endif %}
 {% comment %}Every interview syllabus page shares the explainer styles; see docs/interview.md.{% endcomment %}
 {% if page.layout == 'syllabus' %}<link rel="stylesheet" href="{% include asset.html path='/css/explainer.css' %}">{% endif %}
+{% if page.topic_id and site.data.module_labs[page.topic_id] %}<link rel="stylesheet" href="{% include asset.html path='/css/labs.css' %}">{% endif %}
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
