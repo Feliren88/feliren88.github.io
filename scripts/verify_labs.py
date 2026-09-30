@@ -253,6 +253,60 @@ def check_eigen():
     close('guide symmetric', g[1]['values'], [3, 1])
     same('guide quarter turn', g[2]['real'], False)
 
+@check('linear-algebra/decompositions')
+def check_decompositions():
+    import base64
+    lab = 'linear-algebra/decompositions'
+    rng = np.random.default_rng(14)
+    Ms = list(rng.normal(size=(40, 2, 2))) + [np.array([[1.5, 1.0], [0.0, 1.2]]), np.array([[1.0, 2.0], [0.5, 1.0]]), np.zeros((2, 2))]
+    # stageMatrix takes the decomposition, so it is called in a second pass
+    decs = run(lab, [['svd2', [M.ravel().tolist()]] for M in Ms])
+    for i, (M, d) in enumerate(zip(Ms, decs)):
+        close(f'singular values {i}', d['S'], np.linalg.svd(M, compute_uv=False), 1e-9)
+        U, Vt = np.array(d['U']).reshape(2, 2), np.array(d['Vt']).reshape(2, 2)
+        close(f'U S Vt {i}', U @ np.diag(d['S']) @ Vt, M, 1e-9)
+        close(f'U orthogonal {i}', U.T @ U, np.eye(2), 1e-9)
+        close(f'V orthogonal {i}', Vt @ Vt.T, np.eye(2), 1e-9)
+    stages = run(lab, [['stageMatrix', [d, f]] for d in decs for f in (0, 1, 2, 3)])
+    for i, M in enumerate(Ms):
+        close(f'stage 0 {i}', stages[4 * i], np.eye(2).ravel())
+        close(f'stage 3 {i}', stages[4 * i + 3], M.ravel(), 1e-9)
+        close(f'stage 2 is Sigma Vt {i}', stages[4 * i + 2], (np.diag(decs[i]['S']) @ np.array(decs[i]['Vt']).reshape(2, 2)).ravel(), 1e-9)
+        close(f'stage 1 is a rotation {i}', np.linalg.det(np.array(stages[4 * i + 1]).reshape(2, 2)), 1, 1e-9)
+    # Jacobi SVD against LAPACK, and Eckart-Young on a real sample image
+    A = rng.normal(size=(20, 15))
+    man = json.load(open(os.path.join(ROOT, 'assets', 'data', 'tiny-vgg.json')))
+    raw = np.frombuffer(base64.b64decode(man['samples'][0]['rgb']), dtype=np.uint8)
+    same('sample size', raw.size, 64 * 64 * 3)
+    img = raw.reshape(64, 64, 3).astype(float) @ np.array([0.299, 0.587, 0.114]) / 255
+    out = run(lab, [['svd', [A.tolist()]], ['decodeGray', [man['samples'][0]['rgb'], 64, 64]], ['svd', [img.tolist()]]])
+    close('jacobi values', out[0]['S'], np.linalg.svd(A, compute_uv=False), 1e-9)
+    Uj, Vj = np.array(out[0]['U']), np.array(out[0]['V'])
+    close('jacobi rebuild', Uj @ np.diag(out[0]['S']) @ Vj.T, A, 1e-9)
+    close('gray image', out[1], img, 1e-12)
+    S_img = np.linalg.svd(img, compute_uv=False)
+    close('image values', out[2]['S'], S_img, 1e-8)
+    for kk in (1, 4, 8, 20):
+        rec, tail = run(lab, [['lowRank', [out[2], kk]], ['tailError', [out[2]['S'], kk]]])
+        err = np.linalg.norm(img - np.array(rec))
+        close(f'Eckart-Young k={kk}', err, np.sqrt(np.sum(S_img[kk:] ** 2)), 1e-8)
+        close(f'tail k={kk}', tail, err, 1e-8)
+    fixed = run(lab, [['pca', [[[4.5, 3.375]] * 10]]])[0]
+    same('coincident mean', fixed['mean'], [4.5, 3.375])
+    same('coincident variance', fixed['vars'], [0, 0])
+    # PCA and Cholesky
+    pts = rng.normal(size=(10, 2)) @ np.array([[1.8, 0.9], [0.3, 0.5]])
+    p, c, c_bad = run(lab, [['pca', [pts.tolist()]], ['chol2', [[2, 0.6, 0.6, 1]]], ['chol2', [[1, 2, 2, 1]]]])
+    X = pts - pts.mean(0)
+    w, V = np.linalg.eigh(X.T @ X / len(pts))
+    close('pca mean', p['mean'], pts.mean(0))
+    close('pca variances', p['vars'], w[::-1], 1e-9)
+    close('pca first axis', abs(np.dot(p['axes'][0], V[:, 1])), 1, 1e-9)
+    L = np.array(c).reshape(2, 2)
+    close('cholesky', L @ L.T, [[2, 0.6], [0.6, 1]])
+    close('cholesky matches numpy', L, np.linalg.cholesky([[2, 0.6], [0.6, 1]]))
+    same('not positive definite', c_bad, None)
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

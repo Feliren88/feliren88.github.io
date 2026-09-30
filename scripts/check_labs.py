@@ -42,11 +42,29 @@ def fail(*parts):
 # A fingerprint of everything a control can change inside one explainer.
 SNAP = """(sel) => { const x = document.querySelector(sel); if (!x) return '';
   let s = '';
-  x.querySelectorAll('svg').forEach(v => { s += v.innerHTML.length + ':' + v.innerHTML.slice(0, 4000); });
+  x.querySelectorAll('svg').forEach(v => { s += v.innerHTML; });
   x.querySelectorAll('canvas').forEach(c => { try { s += c.toDataURL().slice(-400); } catch (e) {} });
-  x.querySelectorAll('[data-val], [aria-pressed], input, select').forEach(e => { s += '|' + (e.value || '') + (e.getAttribute('aria-pressed') || '') + e.textContent; });
+  x.querySelectorAll('[data-val]').forEach(e => { s += '|' + e.textContent; });
   x.querySelectorAll('[data-say]').forEach(e => { s += '|' + e.textContent; });
   return s; }"""
+
+# Capture visible intermediate frames locally, so a slow test client cannot
+# miss a real replay that finishes at its starting picture.
+RECORD = """sel => { const snap = """ + SNAP + """;
+  const state = {before: snap(sel), changed: false, token: null};
+  function sample() {
+    if (snap(sel) !== state.before) state.changed = true;
+    state.token = requestAnimationFrame(sample);
+  }
+  state.token = requestAnimationFrame(sample);
+  window.__labCheckCapture = state;
+}"""
+STOP_RECORD = """() => {
+  const state = window.__labCheckCapture;
+  cancelAnimationFrame(state.token);
+  delete window.__labCheckCapture;
+  return state.changed;
+}"""
 
 # A module that teaches NaN and Infinity (Mathematics 2 and 9) marks its root data-teaches-nan.
 BADTEXT = """(sel) => { const r = document.querySelector(sel); if (r.hasAttribute('data-teaches-nan')) return '';
@@ -65,13 +83,13 @@ CONTRAST = """(sel) => { const root = document.querySelector(sel);
   function over(fg, bg) { const a = fg[3]; return [fg[0] * a + bg[0] * (1 - a), fg[1] * a + bg[1] * (1 - a), fg[2] * a + bg[2] * (1 - a), 1]; }
   function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
   const bg = rgb(getComputedStyle(root).backgroundColor), out = [];
-  root.querySelectorAll('svg text, .lab-eq, .lab-ctl label, .lab-note').forEach(el => {
-    if (el.closest('.is-dim, .is-faint') || !el.getClientRects().length) return;
+  root.querySelectorAll('svg text, .lab-eq, .lab-eq span, .lab-ctl label, .lab-note, .lab-src, .lab-src a, .xp-guide header b, .xp-guide-b, .xp-guide-b b, .xp-guide-n, button').forEach(el => {
+    if (el.matches(':disabled') || el.closest('.is-dim, .is-faint') || !el.getClientRects().length) return;
     const cs = getComputedStyle(el), c = rgb(el instanceof SVGElement ? cs.fill : cs.color);
     if (c && ratio(over(c, bg), bg) < 4.5) out.push('text "' + el.textContent.trim().slice(0, 20) + '" ' + ratio(over(c, bg), bg).toFixed(2));
   });
   root.querySelectorAll('.pl-vec, .pl-handle, .pl-mark').forEach(el => {
-    if (el.closest('.is-dim, .is-faint') || !el.getClientRects().length) return;
+    if (el.matches(':disabled') || el.closest('.is-dim, .is-faint') || !el.getClientRects().length) return;
     const cs = getComputedStyle(el);
     const c = rgb(el.classList.contains('pl-handle') ? cs.stroke : el.classList.contains('pl-vec') ? cs.color : (cs.stroke && cs.stroke !== 'none' ? cs.stroke : cs.fill));
     if (c && c[3] > 0 && ratio(over(c, bg), bg) < 3) out.push('mark ' + el.getAttribute('class') + ' ' + ratio(over(c, bg), bg).toFixed(2));
@@ -111,6 +129,7 @@ def sweep_controls(pg, sel, where, seen):
             continue
         seen.add(label)
         before = pg.evaluate(SNAP, sel)
+        pg.evaluate(RECORD, sel)
         tag = c.evaluate("e => e.tagName + ':' + (e.type || '')")
         if tag == 'INPUT:range':
             c.evaluate("e => { e.value = (+e.value === +e.max) ? e.min : e.max; e.dispatchEvent(new Event('input', {bubbles: true})); e.dispatchEvent(new Event('change', {bubbles: true})); }")
@@ -122,11 +141,12 @@ def sweep_controls(pg, sel, where, seen):
         pg.wait_for_timeout(150)
         mid = pg.evaluate(SNAP, sel)
         pg.wait_for_timeout(850)
+        observed = pg.evaluate(STOP_RECORD)
         if pg.evaluate("() => !!document.querySelector('dialog[open]')"):
             pg.keyboard.press('Escape')
             pg.wait_for_timeout(150)
             continue
-        if mid == before and pg.evaluate(SNAP, sel) == before:
+        if not observed and mid == before and pg.evaluate(SNAP, sel) == before:
             fail(where, 'control did nothing', label)
         bad = pg.evaluate(BADTEXT, sel)
         if bad:

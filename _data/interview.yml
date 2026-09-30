@@ -2601,6 +2601,9 @@ topics:
                 is: 'the input rotation, orthonormal columns'
               - sym: 'A^{\top}'
                 is: 'the transpose, rows and columns swapped'
+            play:
+              livetex: '\sigma_1=9001,\quad\sigma_2=9002'
+              liveslots: [s1, s2]
           - name: 'The best low rank approximation'
             tex: 'A_{k} = \sum_{r=1}^{k} \varsigma_{r}\, u_{r} v_{r}^{\top}, \qquad \|A - A_{k}\|_{F} \text{ is the smallest possible}'
             read: 'Keep the largest few stretches and drop the rest, and no other approximation of that rank does better.'

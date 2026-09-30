@@ -83,3 +83,14 @@
 .lab-plane .pl-curve { fill: none; stroke: currentColor; stroke-width: 2.5; }
 .lab-plane .pl-root.is-q { fill: var(--xp-q); } .lab-plane .pl-root.is-k { fill: var(--xp-k); }
 .lab-stage .lab-plane + .lab-plane { margin-top: 0.5rem; }
+
+.lab-images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.lab-images figure { margin: 0; }
+.lab-images canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; border-radius: var(--radius-sm); }
+.lab-images figcaption { font-size: var(--fs-2xs); color: var(--text); text-align: center; }
+.lab-images .lab-plane { grid-column: 1 / -1; }
+.lab-plane .pl-bar { fill: var(--xp-o); }
+
+/* Keep guide controls steady when real and complex values wrap differently. */
+.lab-eigen .lab-eq { min-block-size: 4lh; }
+.lab-src a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.16em; }

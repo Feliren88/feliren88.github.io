@@ -22,5 +22,10 @@ with sync_playwright() as p:
     start = lab.locator('[data-stage]').inner_html()
     slider.evaluate("e => {e.value=1; e.dispatchEvent(new Event('input', {bubbles:true}))}")
     assert start != lab.locator('[data-stage]').inner_html(), 'The iteration must be scrubbable'
+    next_page = lab.locator('[data-guide="1"]')
+    while not next_page.is_disabled(): next_page.click()
+    lab.locator('[data-guide="-1"]').click()
+    eigenvalue = lab.locator('[data-val="l1"]').inner_text()
+    assert 'i' not in eigenvalue and abs(float(eigenvalue)-2.5)<1e-9, 'Moving backwards must restore the guide example matrix'
     browser.close()
 print('Shrinking iterations and scrubbing passed at phone width.')

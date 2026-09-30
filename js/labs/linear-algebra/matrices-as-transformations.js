@@ -163,7 +163,11 @@
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {
       if (!p) { api.focus([]); return; }
-      if (!redraw) goTo(p.state);
+      if (!redraw) {
+        var target = {};
+        PAGES.slice(0, i + 1).forEach(function (page) { Object.assign(target, page.state); });
+        goTo(target);
+      }
       api.focus(p.parts);
     });
   });

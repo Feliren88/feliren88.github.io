@@ -161,7 +161,7 @@
     }
     function goTo(target) {
       var from = { m: s.m.slice(), t: s.t }, to = { m: target.m ? target.m.slice() : s.m.slice(), t: 't' in target ? target.t : s.t };
-      if ('mode' in target && target.mode !== s.mode) {
+      if ('mode' in target && (target.mode !== s.mode || target.n)) {
         s.mode = target.mode; s.n = 0; s.path = null; s.dirs = CLOUD.map(function (d) { return d.slice(); });
       }
       api.animate(from, to, 800, function (st) { s.m = st.m.slice(); s.t = st.t; draw(); }, function () {
@@ -255,7 +255,12 @@
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {
       if (!p) { api.focus([]); return; }
-      if (!redraw) goTo(p.state);
+      if (!redraw) {
+        var target = {};
+        PAGES.slice(0, i + 1).forEach(function (page) { Object.assign(target, page.state); });
+        if (target.mode !== 'iterate') target.n = 0;
+        goTo(target);
+      }
       api.focus(p.parts);
     });
   });

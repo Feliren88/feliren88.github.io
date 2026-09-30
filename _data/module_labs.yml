@@ -6,3 +6,4 @@ linear-algebra:
   '1': matrices-as-transformations
   '2': determinant-rank-inverse
   '3': eigenvectors
+  '4': decompositions
