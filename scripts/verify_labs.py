@@ -110,6 +110,49 @@ def check_vectors():
     same('guide parallel', g[2], 1)
 
 
+@check('linear-algebra/matrices-as-transformations')
+def check_matrices():
+    lab = 'linear-algebra/matrices-as-transformations'
+    rng = np.random.default_rng(11)
+    Ms, vs = rng.normal(size=(30, 2, 2)), rng.normal(size=(30, 2))
+    calls = []
+    for M, B, v in zip(Ms, Ms[::-1], vs):
+        calls += [['apply', [M.ravel().tolist(), v.tolist()]], ['mul', [B.ravel().tolist(), M.ravel().tolist()]],
+                  ['productTerms', [B.ravel().tolist(), M.ravel().tolist()]], ['det', [M.ravel().tolist()]]]
+    out = run(lab, calls)
+    for i, (M, B, v) in enumerate(zip(Ms, Ms[::-1], vs)):
+        close(f'apply {i}', out[4 * i], M @ v)
+        close(f'mul {i}', out[4 * i + 1], (B @ M).ravel())
+        close(f'terms {i}', np.sum(out[4 * i + 2], axis=1), (B @ M).ravel())
+        close(f'det {i}', out[4 * i + 3], np.linalg.det(M))
+    deg = [0, 30, 90, 135, -60]
+    out = run(lab, [['rotation', [d]] for d in deg] + [['projection', [d]] for d in deg] +
+              [['shear', [0.5]], ['scaling', [2, 0.5]]])
+    for i, d in enumerate(deg):
+        t = np.radians(d)
+        close(f'rotation {d}', out[i], [np.cos(t), -np.sin(t), np.sin(t), np.cos(t)])
+        u = np.array([np.cos(t), np.sin(t)])
+        Pm = np.array(out[len(deg) + i]).reshape(2, 2)
+        close(f'projection {d}', Pm, np.outer(u, u))
+        close(f'projection twice {d}', Pm @ Pm, Pm)
+    close('shear', out[-2], [1, 0.5, 0, 1])
+    close('scaling', out[-1], [2, 0, 0, 0.5])
+    A, B = [2, -1, 1, 1], [0, -1, 1, 0]
+    out = run(lab, [['stageMatrix', [A, B, 'A first', 0]], ['stageMatrix', [A, B, 'A first', 1]],
+                    ['stageMatrix', [A, B, 'A first', 2]], ['stageMatrix', [A, B, 'B first', 2]],
+                    ['stageMatrix', [A, B, 'A first', 0.5]]])
+    Am, Bm = np.array(A, float).reshape(2, 2), np.array(B, float).reshape(2, 2)
+    close('stage 0', out[0], [1, 0, 0, 1])
+    close('stage 1', out[1], A)
+    close('stage 2, A first', out[2], (Bm @ Am).ravel())
+    close('stage 2, B first', out[3], (Am @ Bm).ravel())
+    close('stage 0.5', out[4], (0.5 * np.eye(2) + 0.5 * Am).ravel())
+    # the numbers the guide quotes
+    g = run(lab, [['apply', [A, [1, 2]]], ['mul', [B, A]], ['mul', [A, B]]])
+    close('guide A v', g[0], [0, 3])
+    close('guide BA', g[1], [-1, -1, 2, -1])
+    close('guide AB', g[2], [-1, -2, 1, -1])
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

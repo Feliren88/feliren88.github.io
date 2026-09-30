@@ -3,3 +3,4 @@
 # See docs/interview.md, "Module explainers".
 linear-algebra:
   '0': vectors-and-spaces
+  '1': matrices-as-transformations

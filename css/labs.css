@@ -64,3 +64,6 @@
 .lab-plane .pl-span-line { stroke: color-mix(in srgb, var(--xp-o) 40%, transparent); stroke-width: 10; stroke-linecap: round; }
 .lab-plane .pl-span-dot { fill: var(--xp-o); }
 .lab-plane .pl-plane3 { fill: color-mix(in srgb, var(--xp-o) 16%, transparent); stroke: var(--xp-o); stroke-width: 1.5; }
+
+.lab-mat { display: inline-flex; gap: 0.6em; vertical-align: middle; padding: 0 0.35em; border-left: 2px solid var(--muted); border-right: 2px solid var(--muted); border-radius: 3px; }
+.lab-mat > span { display: inline-flex; flex-direction: column; align-items: flex-end; line-height: 1.3; }

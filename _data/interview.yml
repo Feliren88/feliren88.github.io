@@ -2409,45 +2409,8 @@ topics:
               - sym: 'v'
                 is: 'a vector, a list of numbers with a direction'
             play:
-              kind: grid
-              title: Move where the basis vectors land
-              alt: A square grid deformed by a 2 by 2 matrix, with the unit square shaded and its area shown as the determinant.
-              x:
-              - -3
-              - 3
-              y:
-              - -3
-              - 3
-              readout: '"determinant " + (a*d-b*c).toFixed(2) + ((a*d-b*c) < 0 ? ": the plane has been flipped over" : ((a*d-b*c)===0 ? ": the plane has been squashed onto a line" : ""))'
-              knobs:
-              - k: a
-                label: first column, across
-                min: -2
-                max: 2
-                v: 1
-                step: 0.1
-                s: 0
-              - k: c
-                label: first column, up
-                min: -2
-                max: 2
-                v: 0
-                step: 0.1
-                s: 0
-              - k: b
-                label: second column, across
-                min: -2
-                max: 2
-                v: 0
-                step: 0.1
-                s: 1
-              - k: d
-                label: second column, up
-                min: -2
-                max: 2
-                v: 1
-                step: 0.1
-                s: 1
+              livetex: '\begin{bmatrix}9001 & 9002 \\ 9003 & 9004\end{bmatrix}\begin{bmatrix}1\\2\end{bmatrix}=\begin{bmatrix}9005\\9006\end{bmatrix}'
+              liveslots: [a, b, c, d, vx, vy]
           - name: 'Composition is multiplication'
             tex: '(BA)v = B(Av), \qquad (BA)_{ij} = \sum_{r} B_{ir} A_{rj}'
             read: 'Doing 1 transformation then another is itself a transformation, and the product is how you write it down.'
