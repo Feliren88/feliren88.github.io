@@ -685,7 +685,7 @@ There are 6 implementation plans, one per track, run in this order:
    - `lab-loader.js`, `XP.tween`, `XP.plane` and `XP.lab`;
    - `css/labs.css` and `_data/module_labs.yml`;
    - the layout slot and fallback;
-   - removing the distribution labs listed in section 1, and replacing the calculus one-off;
+   - each later track's plan removes that track's distribution labs, and the Calculus plan replaces the calculus one-off, so no module loses a lab before its explainer exists;
    - `verify_labs.py`, and the extensions to the bounds check and the harness.
 2. Calculus.
 3. Mathematics.
