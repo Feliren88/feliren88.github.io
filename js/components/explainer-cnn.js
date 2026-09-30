@@ -77,7 +77,7 @@
       '<div class="xp-thumbs" role="group" aria-label="Sample images">' + model.samples.map(function (s, i) {
         return '<button type="button" data-sample="' + i + '" aria-pressed="' + (i === S.sample) + '" aria-label="' + esc(model.classes[i]) + '"><canvas width="64" height="64"></canvas></button>';
       }).join('') + '</div>' +
-      '<label class="xp-upload"><input type="file" accept="image/*" data-upload> Upload an image</label>' +
+      '<label class="xp-upload"><input type="file" accept="image/*" data-upload><span class="xp-go is-inline" aria-hidden="true">Upload an image</span></label>' +
       '</div>';
   }
 

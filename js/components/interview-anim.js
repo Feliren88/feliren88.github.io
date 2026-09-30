@@ -1670,7 +1670,8 @@
       if (e.key === 'ArrowLeft') { go(at - 1); e.preventDefault(); }
     });
 
-    go(last);
+    /* Open on the first step, so the reader builds the picture in order. */
+    go(0);
   }
 
   function init() {

@@ -765,7 +765,8 @@
       go(+b.getAttribute('data-i'));
     });
 
-    go(last);
+    /* Open on the first step, so the reader builds the picture in order. */
+    go(0);
   }
 
   /* Step through the parts one at a time, dimming the rest. */

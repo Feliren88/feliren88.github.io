@@ -460,7 +460,13 @@ def check_toy():
     every sample in the left class at the same mean distance to the bumps."""
     code = STUB % os.path.join(JS, 'explainer-core.js') + """
     global.document = { querySelector: s => s === '[data-xp="toy"]' ? host : null, documentElement: {} };
+    // The toy opens on noise. Press Generate as a reader would; with reduced
+    // motion on, the whole run happens at once.
+    XP.reduced = true;
+    const listeners = {};
+    host.addEventListener = (type, fn) => { listeners[type] = fn; };
     eval(fs.readFileSync(%r, 'utf8'));
+    listeners.click({ target: { closest: () => ({ dataset: {}, hasAttribute: n => n === 'data-run' }) } });
     process.stdout.write(JSON.stringify(read.innerHTML.split('<').map(x => x.split('>').slice(1).join('>')).join(' ')));
     """ % os.path.join(JS, 'explainer-diffusion.js')
     text = node(code)

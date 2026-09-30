@@ -107,7 +107,7 @@
           if (visible(p) && match(p)) { ctx.beginPath(); ctx.arc(sx(p[0]), sy(p[1]), r + 2, 0, 2 * Math.PI); ctx.fill(); }
         });
       }
-      host.querySelector('.xp-map-count').textContent = S.q
+      host.querySelector('.xp-wiz-count').textContent = S.q
         ? hits.toLocaleString() + ' of the sampled papers mention “' + S.q + '”'
         : D.points.filter(visible).length.toLocaleString() + ' sampled papers from ' + S.fromYear + ' to ' + S.year;
     }
@@ -180,11 +180,11 @@
       '<label class="xp-field" data-part="search"><span>Search</span><input type="search" data-q placeholder="e.g. translation, parsing, bias" aria-label="Search paper titles"></label>' +
       '<label class="xp-field is-stack" data-part="time"><span>Up to year <output>' + S.year + '</output></span><input type="range" min="' + S.fromYear + '" max="' + S.year + '" value="' + S.year + '" data-year></label>' +
       '<div class="xp-toggles"><label><input type="checkbox" data-t="contours" checked> Contours</label><label><input type="checkbox" data-t="points" checked> Papers</label><label><input type="checkbox" data-t="labels" checked> Topics</label></div>' +
-      '<div class="xp-map-zoom"><button type="button" data-zoom="1.5" aria-label="Zoom in">+</button><button type="button" data-zoom="0.66" aria-label="Zoom out">−</button><button type="button" data-zoom="0" aria-label="Reset the view">↺</button></div>' +
+      '<div class="xp-wiz-zoom"><button type="button" data-zoom="1.5" aria-label="Zoom in">+</button><button type="button" data-zoom="0.66" aria-label="Zoom out">−</button><button type="button" data-zoom="0" aria-label="Reset the view">↺</button></div>' +
       '</div>' +
-      '<div class="xp-stage"><canvas class="xp-map" tabindex="0" role="img" aria-label="Map of ACL paper abstracts; drag to pan, scroll to zoom, arrow keys to pan, plus and minus to zoom"></canvas>' +
-      '<p class="xp-note xp-map-count" aria-live="polite"></p></div>';
-    cv = host.querySelector('.xp-map');
+      '<div class="xp-stage"><canvas class="xp-wiz-map" tabindex="0" role="img" aria-label="Map of ACL paper abstracts; drag to pan, scroll to zoom, arrow keys to pan, plus and minus to zoom"></canvas>' +
+      '<p class="xp-note xp-wiz-count" aria-live="polite"></p></div>';
+    cv = host.querySelector('.xp-wiz-map');
     var st = host.querySelector('.xp-stage');
     tipper = XP.tip(st);
     XP.guide(st, PAGES, function (p) {

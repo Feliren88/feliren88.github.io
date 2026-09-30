@@ -436,7 +436,15 @@ html[data-theme="light"] .xp { --tf-up: #1b5aa8; --tf-down: #9c4a20; --xp-q: #2f
 .xp-thumbs button[aria-pressed="true"] { border-color: var(--accent); }
 .xp-thumbs canvas { width: 2.6rem; height: 2.6rem; border-radius: 3px; }
 .xp-upload { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--fs-xs); color: var(--muted); cursor: pointer; }
-.xp-upload input { max-width: 13rem; font-size: var(--fs-2xs); }
+/* The native file input stays in the page, focusable and labelled, but is
+   drawn as the site's button instead of the browser's own widget. */
+.xp-upload { position: relative; }
+.xp-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.xp-upload input:focus-visible + .xp-go { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The CNN's output column sits bottom right, where the guide card would cover
+   it, so on this explainer the card goes under the grid. */
+#xp-cnn .xp-guide { position: static; width: min(24rem, 100%); margin: 0.8rem 0 0 auto; }
+#xp-cnn .xp-guide-open { position: static; display: block; margin: 0.8rem 0 0 auto; }
 .xp-cnn { position: relative; display: grid; grid-template-columns: repeat(11, minmax(2.4rem, 3.3rem)) minmax(9.5rem, 13rem); justify-content: space-between; column-gap: 1rem; min-width: 62rem; padding: 0.4rem 0 0.2rem; }
 .xp-cnn-edges { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
 .xp-edge { fill: none; stroke: var(--muted); stroke-opacity: 0.13; stroke-width: 0.8; transition: stroke-opacity 0.2s ease; }
@@ -511,10 +519,10 @@ html[data-theme="light"] .xp { --tf-up: #1b5aa8; --tf-down: #9c4a20; --xp-q: #2f
 
 /* ── embedding map ─────────────────────────────────────── */
 
-.xp-map { display: block; width: 100%; height: min(72vh, 44rem); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--bg); cursor: grab; touch-action: none; }
-.xp-map:active { cursor: grabbing; }
-.xp-map-zoom { display: inline-flex; gap: 0.25rem; }
-.xp-map-zoom button { width: 2rem; height: 2rem; padding: 0; font-size: 1rem; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: 6px; cursor: pointer; }
+.xp-wiz-map { display: block; width: 100%; height: min(72vh, 44rem); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--bg); cursor: grab; touch-action: none; }
+.xp-wiz-map:active { cursor: grabbing; }
+.xp-wiz-zoom { display: inline-flex; gap: 0.25rem; }
+.xp-wiz-zoom button { width: 2rem; height: 2rem; padding: 0; font-size: 1rem; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: 6px; cursor: pointer; }
 .xp-toolbar .is-dim { opacity: 0.35; }
 .xp-toolbar .is-hl { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
 

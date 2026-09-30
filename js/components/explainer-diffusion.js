@@ -22,7 +22,7 @@
 
   function sd(host) {
     var data, timer = null;
-    var S = { p: 0, g: 2, k: 25, compare: false, step: 0 };
+    var S = { p: 0, g: 2, k: 0, compare: false, step: 0 };
     var TOUR = [
       { col: 'txt', t: 'The prompt becomes numbers', say: 'A tokenizer cuts the prompt into tokens and pads the list to 77. CLIP’s text encoder turns each token into a vector that already carries meaning from the words around it; in Stable Diffusion v1 each vector is 768 numbers.' },
       { col: 'ref', t: 'Start from noise', k: 0, say: 'Generation starts from random noise in a small latent space: 4 channels of 64 by 64. The seed fixes this noise, which is why the same seed and prompt give the same image.' },
@@ -373,9 +373,8 @@
     new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     window.addEventListener('resize', draw);
 
+    /* Open on pure noise, the first step; Generate runs the rest. */
     reset();
-    /* Arrive at a finished picture, so the panel says something before play. */
-    while (step()) {}
     shell();
   }
 

@@ -279,8 +279,9 @@ dark themes or the reading tints, cannot resize with the reading controls, and
 cannot be read by a screen reader.
 
 Four rules the engine enforces. The reader can always take over. Every beat has
-a caption. The last beat is the finished picture, so someone who never presses
-play still sees the whole thing. Reduced motion means no timer, never no content.
+a caption. Every player opens on its first step, so the picture is built in
+order; the step list beside it shows the whole procedure at once for a reader
+who would rather read ahead. Reduced motion means no timer, never no content.
 
 Adding a track's animation means one entry in `SCENES` and one line in
 `BY_TOPIC`. Verify with the harness in the session scratchpad: it loads all
