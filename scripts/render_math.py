@@ -485,14 +485,18 @@ def build(data, errors):
                 # numbers in it, which is the move that makes a figure feel
                 # like it is explaining rather than illustrating. Slots are
                 # written as 9001, 9002 and so on, and named in order.
+                # The live line belongs to the equation. It may sit on the
+                # equation itself (`live: {tex, slots}`), fed by a module
+                # explainer, or on its playground (`livetex`, `liveslots`).
                 play = eq.get("play") or {}
-                if play.get("livetex"):
+                src = eq.get("live") or {"tex": play.get("livetex"), "slots": play.get("liveslots")}
+                if src.get("tex"):
                     try:
-                        live = mathml(play["livetex"], display=True)
+                        live = mathml(src["tex"], display=True)
                     except Exception as exc:
                         errors.append("BAD LIVETEX: %s [%d] %s" % (where, ei, exc))
                         continue
-                    slots = play.get("liveslots") or []
+                    slots = src.get("slots") or []
                     for n, nm in enumerate(slots):
                         token = "<mn>%d</mn>" % (9001 + n)
                         if token not in live:

@@ -94,3 +94,9 @@
 /* Keep guide controls steady when real and complex values wrap differently. */
 .lab-eigen .lab-eq { min-block-size: 4lh; }
 .lab-src a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.16em; }
+
+.lab-plane .pl-sq { fill: color-mix(in srgb, var(--xp-k) 18%, transparent); stroke: var(--xp-k); stroke-width: 1; }
+.lab-plane .pl-right { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.lab-plane .pl-contour { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.lab-plane .pl-ols { fill: var(--xp-v); }
+.lab-plane .pl-ridge { fill: var(--xp-o); stroke: var(--bg); stroke-width: 2; }

@@ -7,3 +7,4 @@ linear-algebra:
   '2': determinant-rank-inverse
   '3': eigenvectors
   '4': decompositions
+  '5': least-squares

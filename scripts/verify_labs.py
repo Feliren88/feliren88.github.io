@@ -307,6 +307,52 @@ def check_decompositions():
     close('cholesky matches numpy', L, np.linalg.cholesky([[2, 0.6], [0.6, 1]]))
     same('not positive definite', c_bad, None)
 
+@check('linear-algebra/least-squares')
+def check_least_squares():
+    lab = 'linear-algebra/least-squares'
+    collapsed = run(lab, [['fitLine', [[[4, 3], [4, 5], [4, 7]]]]])[0]
+    close('constant-x fit', [collapsed['w'], collapsed['b']], [0, 5])
+    same('constant-x non-unique fit', collapsed['unique'], False)
+    rng = np.random.default_rng(15)
+    Xs = [rng.normal(size=(n, p)) for n, p in [(9, 2), (30, 2), (6, 3), (3, 2)]]
+    ys = [rng.normal(size=X.shape[0]) for X in Xs]
+    lams = [0, 0.1, 3.0]
+    out = run(lab, [['lstsq', [X.tolist(), y.tolist(), l]] for X, y in zip(Xs, ys) for l in lams] +
+              [['gram', [X.tolist()]] for X in Xs])
+    k = 0
+    for i, (X, y) in enumerate(zip(Xs, ys)):
+        for l in lams:
+            want = np.linalg.solve(X.T @ X + l * np.eye(X.shape[1]), X.T @ y)
+            close(f'lstsq {i} lambda {l}', out[k], want, 1e-9)
+            if l == 0:
+                close(f'lstsq {i} against lstsq', out[k], np.linalg.lstsq(X, y, rcond=None)[0], 1e-9)
+            k += 1
+    for i, X in enumerate(Xs):
+        close(f'gram {i}', out[k + i], X.T @ X)
+    pts = [[1, 2.1], [2, 3.4], [3, 3.2], [4, 5.1], [5, 5.6], [6, 7.2], [7, 7.1], [8, 9.4], [9, 9.1]]
+    P = np.array(pts)
+    fit, m1, m2 = run(lab, [['fitLine', [pts]], ['mse', [pts, 0.4, 4]], ['mse', [pts, 1.1, 0.5]]])
+    slope, icept = np.polyfit(P[:, 0], P[:, 1], 1)
+    close('fitLine', [fit['w'], fit['b']], [slope, icept], 1e-9)
+    close('mse', m1, np.mean((P[:, 1] - (0.4 * P[:, 0] + 4)) ** 2))
+    close('mse 2', m2, np.mean((P[:, 1] - (1.1 * P[:, 0] + 0.5)) ** 2))
+    a, b, y = [1.6, 0.2, 0.4], [0.3, 1.5, 0.5], [1.2, 1.4, 2.4]
+    pr, par = run(lab, [['project', [a, b, y]], ['project', [a, [3.2, 0.4, 0.8], y]]])
+    X = np.column_stack([a, b])
+    close('project w', pr['w'], np.linalg.lstsq(X, y, rcond=None)[0], 1e-9)
+    close('project yhat', pr['yhat'], X @ np.array(pr['w']), 1e-9)
+    close('residual is perpendicular', X.T @ np.array(pr['r']), [0, 0], 1e-9)
+    same('parallel columns', par, None)
+    yaw, pitch = 0.7, 0.45
+    cam, v = run(lab, [['camera', [yaw, pitch]], ['view3', [[0.3, -1.2, 2.0], yaw, pitch]]])
+    R, U = np.array(cam['right']), np.array(cam['up'])
+    close('camera orthonormal', [R @ R, U @ U, R @ U], [1, 1, 0])
+    close('camera matches view', v, [R @ [0.3, -1.2, 2.0], U @ [0.3, -1.2, 2.0]])
+    path = run(lab, [['ridgePath', [Xs[1].tolist(), ys[1].tolist(), [0.01, 1, 100]]]])[0]
+    norms = [np.linalg.norm(w) for w in path]
+    same('ridge path shrinks', norms == sorted(norms, reverse=True), True)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:
