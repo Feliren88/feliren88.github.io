@@ -291,11 +291,282 @@
     else fitCanvases();
   }
 
+  /* ── motion and planes for the module explainers (js/labs/) ──────────── */
+
+  /* Cubic ease in and out on [0, 1]. */
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  /* Blend 2 states of the same shape: numbers, arrays and plain objects.
+     Anything else, such as a string or a boolean, switches to `b` at the end. */
+  function mix(a, b, t) {
+    if (typeof a === 'number' && typeof b === 'number') return a + (b - a) * t;
+    if (Array.isArray(a) && Array.isArray(b) && a.length === b.length) {
+      return a.map(function (v, i) { return mix(v, b[i], t); });
+    }
+    if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+      var o = {};
+      for (var k in b) {
+        if (Object.prototype.hasOwnProperty.call(b, k)) o[k] = k in a ? mix(a[k], b[k], t) : b[k];
+      }
+      return o;
+    }
+    return t < 1 ? a : b;
+  }
+
+  /* Animate from one state to another. onFrame(state, f) runs every frame
+     with the raw fraction f; the last call always carries `to` exactly.
+     Under reduced motion, or with no requestAnimationFrame, it jumps to the
+     end at once. stop() finishes at once; seek(f) shows fraction f. */
+  function tween(from, to, ms, onFrame, onEnd) {
+    var raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : null;
+    var live = true, start = null;
+    function finish() {
+      if (!live) return;
+      live = false;
+      onFrame(to, 1);
+      if (onEnd) onEnd();
+    }
+    var h = {
+      stop: finish,
+      seek: function (f) {
+        live = false;
+        f = Math.max(0, Math.min(1, f));
+        onFrame(f >= 1 ? to : mix(from, to, ease(f)), f);
+      },
+      running: function () { return live; }
+    };
+    if (XP.reduced || !raf || !(ms > 0)) { finish(); return h; }
+    function step(now) {
+      if (!live) return;
+      if (start === null) start = now;
+      var f = Math.min(1, (now - start) / ms);
+      if (f >= 1) { finish(); return; }
+      onFrame(mix(from, to, ease(f)), f);
+      raf(step);
+    }
+    raf(step);
+    return h;
+  }
+
+  /* World-to-screen mapping for a plane `w` by `h` pixels with `pad` pixels
+     of margin. y points up. */
+  function planeMap(xr, yr, w, h, pad) {
+    var p = pad || 0, kx = (w - 2 * p) / (xr[1] - xr[0]), ky = (h - 2 * p) / (yr[1] - yr[0]);
+    return {
+      sx: function (x) { return p + (x - xr[0]) * kx; },
+      sy: function (y) { return h - p - (y - yr[0]) * ky; },
+      wx: function (px) { return xr[0] + (px - p) / kx; },
+      wy: function (py) { return yr[0] + (h - p - py) / ky; }
+    };
+  }
+
+  /* The lines of a grid, as polylines in world units, pushed through `T`: a
+     2 by 2 matrix [a, b, c, d] given by rows, or a function (x, y) -> [x', y'].
+     A matrix keeps lines straight, so 2 points per line are enough; a function
+     is sampled at 25. `ext` widens the grid by that many spans on each side,
+     so a transformed grid still fills the view. */
+  function gridSegments(xr, yr, step, T, ext) {
+    var e = ext === undefined ? 2 : ext, sx = xr[1] - xr[0], sy = yr[1] - yr[0];
+    var x0 = xr[0] - e * sx, x1 = xr[1] + e * sx, y0 = yr[0] - e * sy, y1 = yr[1] + e * sy;
+    var fn = typeof T === 'function' ? T : T ? function (x, y) { return [T[0] * x + T[1] * y, T[2] * x + T[3] * y]; } :
+      function (x, y) { return [x, y]; };
+    var n = typeof T === 'function' ? 24 : 1, out = [], k;
+    function line(ax, ay, bx, by) {
+      var pts = [];
+      for (var i = 0; i <= n; i++) pts.push(fn(ax + (bx - ax) * i / n, ay + (by - ay) * i / n));
+      out.push(pts);
+    }
+    for (k = Math.ceil(x0 / step - 1e-9); k <= Math.floor(x1 / step + 1e-9); k++) line(k * step, y0, k * step, y1);
+    for (k = Math.ceil(y0 / step - 1e-9); k <= Math.floor(y1 / step + 1e-9); k++) line(x0, k * step, x1, k * step);
+    return out;
+  }
+
+  /* An SVG coordinate plane appended to `el`: a clipped grid layer and plot
+     layer, then an unclipped top layer for handles, which clamp to the view. */
+  var planeCount = 0;
+  function plane(el, opts) {
+    var id = 'lab-pl' + (++planeCount), w = opts.w || 480, h = opts.h || 360, pad = opts.pad || 0;
+    var map = planeMap(opts.x, opts.y, w, h, pad), NS = 'http://www.w3.org/2000/svg';
+    el.insertAdjacentHTML('beforeend',
+      '<svg class="lab-plane" viewBox="0 0 ' + w + ' ' + h + '" role="group" aria-label="' + esc(opts.label || '') + '">' +
+      '<defs><clipPath id="' + id + '-clip"><rect x="' + pad + '" y="' + pad + '" width="' + (w - 2 * pad) + '" height="' + (h - 2 * pad) + '"/></clipPath></defs>' +
+      '<g class="pl-grid" clip-path="url(#' + id + '-clip)"></g>' +
+      '<g class="pl-plot" clip-path="url(#' + id + '-clip)"></g>' +
+      '<g class="pl-top"></g></svg>');
+    var svg = el.lastElementChild;
+    function pts(list) {
+      return list.map(function (q) { return r1(map.sx(q[0])) + ',' + r1(map.sy(q[1])); }).join(' ');
+    }
+    var P = {
+      svg: svg, map: map, w: w, h: h, pts: pts,
+      grid: svg.querySelector('.pl-grid'), plot: svg.querySelector('.pl-plot'), top: svg.querySelector('.pl-top'),
+      gridMarkup: function (T, step, cls) {
+        return '<g class="' + (cls || '') + '">' + gridSegments(opts.x, opts.y, step || 1, T).map(function (line) {
+          return '<polyline points="' + pts(line) + '"/>';
+        }).join('') + '</g>';
+      },
+      axes: function () {
+        return svgEl('line', { x1: 0, y1: map.sy(0), x2: w, y2: map.sy(0), 'class': 'pl-axis' }) +
+          svgEl('line', { x1: map.sx(0), y1: 0, x2: map.sx(0), y2: h, 'class': 'pl-axis' });
+      },
+      arrow: function (x0, y0, x1, y1, cls, part) {
+        var ax = map.sx(x0), ay = map.sy(y0), bx = map.sx(x1), by = map.sy(y1);
+        var dx = bx - ax, dy = by - ay, L = Math.sqrt(dx * dx + dy * dy);
+        var g = '<g class="pl-vec ' + (cls || '') + '"' + (part ? ' data-part="' + esc(part) + '"' : '') + '>';
+        if (L < 0.5) return g + svgEl('circle', { cx: ax, cy: ay, r: 3 }) + '</g>';
+        var ux = dx / L, uy = dy / L, hl = Math.min(11, L * 0.45), hw = hl * 0.55, sx = bx - ux * hl, sy = by - uy * hl;
+        return g + svgEl('line', { x1: ax, y1: ay, x2: sx, y2: sy }) +
+          svgEl('polygon', { points: r1(bx) + ',' + r1(by) + ' ' + r1(sx - uy * hw) + ',' + r1(sy + ux * hw) + ' ' + r1(sx + uy * hw) + ',' + r1(sy - ux * hw) }) + '</g>';
+      },
+      dot: function (x, y, r, cls, part) {
+        return svgEl('circle', { cx: map.sx(x), cy: map.sy(y), r: r || 4, 'class': cls, 'data-part': part });
+      },
+      /* A draggable, focusable point. Arrow keys move it by `snap` (0.1 by
+         default), and Shift moves it 10 times as far. onMove(x, y, done) runs on
+         every move; done is true when a drag ends or a key moves it. */
+      handle: function (o) {
+        var snap = o.snap || 0.1, mx = (opts.x[1] - opts.x[0]) * 0.03, my = (opts.y[1] - opts.y[0]) * 0.03;
+        var bx = o.bounds ? o.bounds[0] : [opts.x[0] + mx, opts.x[1] - mx];
+        var by = o.bounds ? o.bounds[1] : [opts.y[0] + my, opts.y[1] - my];
+        var c = document.createElementNS(NS, 'circle'), x = o.x, y = o.y, dragging = false;
+        c.setAttribute('r', 9);
+        c.setAttribute('class', 'pl-handle ' + (o.cls || ''));
+        c.setAttribute('tabindex', '0');
+        c.setAttribute('role', 'button');
+        c.setAttribute('aria-roledescription', 'draggable point');
+        if (o.part) c.setAttribute('data-part', o.part);
+        P.top.appendChild(c);
+        function q(v) { return parseFloat((Math.round(v / snap) * snap).toFixed(6)); }
+        function clamp(v, r) { return Math.max(r[0], Math.min(r[1], v)); }
+        function place() {
+          c.setAttribute('cx', r1(map.sx(x)));
+          c.setAttribute('cy', r1(map.sy(y)));
+          c.setAttribute('aria-label', o.label + ' at ' + fmt(x, 1) + ', ' + fmt(y, 1) + '. Arrow keys move it.');
+        }
+        function to(nx, ny, done) {
+          x = clamp(q(nx), bx); y = clamp(q(ny), by);
+          place();
+          if (o.onMove) o.onMove(x, y, done);
+        }
+        function world(e) {
+          var pt = svg.createSVGPoint();
+          pt.x = e.clientX; pt.y = e.clientY;
+          var s = pt.matrixTransform(svg.getScreenCTM().inverse());
+          return [map.wx(s.x), map.wy(s.y)];
+        }
+        c.addEventListener('pointerdown', function (e) {
+          dragging = true; c.setPointerCapture(e.pointerId); c.classList.add('is-drag'); e.preventDefault();
+        });
+        c.addEventListener('pointermove', function (e) {
+          if (!dragging) return;
+          var w0 = world(e); to(w0[0], w0[1], false);
+        });
+        c.addEventListener('pointerup', function (e) {
+          if (!dragging) return;
+          dragging = false; c.classList.remove('is-drag');
+          var w0 = world(e); to(w0[0], w0[1], true);
+        });
+        c.addEventListener('pointercancel', function () {
+          if (!dragging) return;
+          dragging = false; c.classList.remove('is-drag'); to(x, y, true);
+        });
+        c.addEventListener('keydown', function (e) {
+          var k = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key];
+          if (!k) return;
+          e.preventDefault();
+          var s = snap * (e.shiftKey ? 10 : 1);
+          to(x + k[0] * s, y + k[1] * s, true);
+        });
+        place();
+        return {
+          el: c,
+          get: function () { return [x, y]; },
+          set: function (nx, ny) { x = clamp(nx, bx); y = clamp(ny, by); place(); },
+          show: function (on) { c.style.display = on ? '' : 'none'; }
+        };
+      }
+    };
+    return P;
+  }
+
+  /* When an explainer cannot run, show the module's static diagram instead. */
+  function labFallback(slot, err) {
+    slot.setAttribute('data-lab-state', 'failed');
+    var fb = slot.nextElementSibling;
+    if (fb && fb.hasAttribute('data-lab-fallback')) fb.hidden = false;
+    var root = slot.querySelector('.lab');
+    if (root) root.hidden = true;
+    if (!slot.querySelector('.lab-fail')) {
+      var note = document.createElement('p');
+      note.className = 'lab-fail';
+      note.textContent = 'The interactive version did not load.';
+      slot.appendChild(note);
+    }
+    if (typeof console !== 'undefined') console.error('Module explainer ' + slot.getAttribute('data-lab') + ' failed', err);
+  }
+
+  /* Mount a module explainer into every slot that names `id`. mount(root, api)
+     gets the explainer's section and a small api: values, say, focus,
+     animate and interrupt. A throw inside mount shows the fallback. */
+  function lab(id, mount) {
+    Array.prototype.forEach.call(document.querySelectorAll('.lab-slot[data-lab="' + id + '"]'), function (slot) {
+      if (slot.getAttribute('data-lab-state') === 'ready') return;
+      var root = slot.querySelector('.lab'), mod = slot.closest('.syl-module');
+      var stage = root.querySelector('[data-stage]'), say = root.querySelector('[data-say]');
+      var current = null, focused = [];
+      var api = {
+        values: function (vals, d) {
+          Object.keys(vals).forEach(function (k) {
+            var v = vals[k], text = typeof v === 'number' ? (isFinite(v) ? fmt(v, d === undefined ? 2 : d) : '?') : String(v);
+            Array.prototype.forEach.call(root.querySelectorAll('[data-val="' + k + '"]'), function (n) { n.textContent = text; });
+            if (mod) Array.prototype.forEach.call(mod.querySelectorAll('[data-live="' + k + '"]'), function (n) { n.textContent = text; });
+          });
+        },
+        say: function (text) { if (say) say.textContent = text; },
+        focus: function (parts) { focused = parts || []; highlight(stage, focused); },
+        animate: function (from, to, ms, onFrame, onEnd) {
+          if (current) current.stop();
+          root.setAttribute('data-anim', '');
+          current = tween(from, to, ms, onFrame, function () {
+            root.removeAttribute('data-anim');
+            if (onEnd) onEnd();
+          });
+          return current;
+        },
+        interrupt: function () { if (current) current.stop(); }
+      };
+      /* A press anywhere in the explainer finishes the running animation. */
+      root.addEventListener('pointerdown', function () { api.interrupt(); }, true);
+      /* Hovering a term lights its part of the picture, and the other way round. */
+      Array.prototype.forEach.call(root.querySelectorAll('[data-term]'), function (t) {
+        t.addEventListener('mouseenter', function () { highlight(stage, [t.getAttribute('data-term')]); });
+        t.addEventListener('mouseleave', function () { highlight(stage, focused); });
+      });
+      stage.addEventListener('mouseover', function (e) {
+        var part = e.target.closest && e.target.closest('[data-part]');
+        var names = part ? part.getAttribute('data-part').split(' ') : [];
+        Array.prototype.forEach.call(root.querySelectorAll('[data-term]'), function (t) {
+          t.classList.toggle('is-hl', names.indexOf(t.getAttribute('data-term')) >= 0);
+        });
+      });
+      stage.addEventListener('mouseleave', function () {
+        Array.prototype.forEach.call(root.querySelectorAll('[data-term].is-hl'), function (t) { t.classList.remove('is-hl'); });
+      });
+      try {
+        mount(root, api);
+        slot.setAttribute('data-lab-state', 'ready');
+      } catch (e) {
+        labFallback(slot, e);
+      }
+    });
+  }
+
   var XP = {
     esc: esc, fmt: fmt, tint: tint, rng: rng, gauss: gauss, softmax: softmax,
     lgamma: lgamma, ibeta: ibeta, tourBar: tourBar, caption: caption, column: column,
     keepFocus: keepFocus, selectorFor: selectorFor,
     fitCanvases: fitCanvases, highlight: highlight, tip: tip, dialog: dialog, guide: guide, svgEl: svgEl, ribbon: ribbon, curve: curve,
+    ease: ease, mix: mix, tween: tween, planeMap: planeMap, gridSegments: gridSegments, plane: plane, lab: lab, labFallback: labFallback,
     reduced: typeof window !== 'undefined' && window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
   };

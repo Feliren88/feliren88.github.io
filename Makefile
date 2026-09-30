@@ -38,3 +38,4 @@ check: build  ## Build, then run the SEO/link audit over _site/
 test:  ## Run tooling and distribution checks
 	python3 -m unittest discover -s scripts
 	node scripts/test_interview_distributions.js
+	node scripts/test_lab_core.js
