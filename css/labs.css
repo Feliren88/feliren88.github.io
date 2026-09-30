@@ -76,3 +76,10 @@
 
 /* Keep the guide steady when interrupting a readout transition. */
 .lab-determinant .lab-note { min-block-size: 4lh; }
+
+.lab-plane .is-muted { color: var(--muted); }
+.lab-plane .pl-fanline { stroke: var(--muted); stroke-width: 1; }
+.lab-plane .pl-circle { fill: color-mix(in srgb, var(--xp-o) 10%, transparent); stroke: var(--xp-o); stroke-width: 1.5; }
+.lab-plane .pl-curve { fill: none; stroke: currentColor; stroke-width: 2.5; }
+.lab-plane .pl-root.is-q { fill: var(--xp-q); } .lab-plane .pl-root.is-k { fill: var(--xp-k); }
+.lab-stage .lab-plane + .lab-plane { margin-top: 0.5rem; }

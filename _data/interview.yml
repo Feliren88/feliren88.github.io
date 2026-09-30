@@ -2531,6 +2531,9 @@ topics:
             where:
               - sym: '\varsigma'
                 is: 'an eigenvalue, the factor its direction is stretched by'
+            play:
+              livetex: '\lambda_1=9001,\quad\lambda_2=9002'
+              liveslots: [l1, l2]
           - name: 'Where they come from'
             tex: '\det(A - \varsigma I) = 0'
             read: 'A direction survives only when the shifted matrix squashes something, so set its determinant to 0 and solve.'

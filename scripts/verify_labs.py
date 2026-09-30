@@ -198,6 +198,61 @@ def check_determinant():
     close('guide squashed', g[2], 0)
     same('guide rank', g[3], 1)
 
+@check('linear-algebra/eigenvectors')
+def check_eigen():
+    lab = 'linear-algebra/eigenvectors'
+    rng = np.random.default_rng(13)
+    Ms = list(rng.normal(size=(60, 2, 2)))
+    S = rng.normal(size=(10, 2, 2))
+    Ms += [a + a.T for a in S]                                   # symmetric
+    Ms += [np.array([[2.0, 1.0], [1.0, 2.0]]), np.array([[0.0, -1.0], [1.0, 0.0]]),
+           np.array([[1.0, 1.0], [0.0, 1.0]]), 1.5 * np.eye(2)]
+    out = run(lab, [['eig', [M.ravel().tolist()]] for M in Ms])
+    for i, (M, e) in enumerate(zip(Ms, out)):
+        w = np.linalg.eigvals(M)
+        if abs(w[0].imag) > 1e-9:
+            same(f'complex {i}', e['real'], False)
+            close(f're {i}', e['re'], w[0].real)
+            close(f'im {i}', e['im'], abs(w[0].imag))
+            continue
+        same(f'real {i}', e['real'], True)
+        close(f'values {i}', e['values'], sorted(w.real, reverse=True), 1e-7)
+        for k, v in enumerate(e['vectors']):
+            v = np.array(v)
+            lam = e['values'][k] if len(e['vectors']) == 2 else e['values'][0]
+            close(f'unit {i}.{k}', np.linalg.norm(v), 1)
+            close(f'A v = l v {i}.{k}', M @ v, lam * v, 1e-7)
+        if np.allclose(M, M.T) and len(e['vectors']) == 2 and abs(e['values'][0] - e['values'][1]) > 1e-6:
+            close(f'perpendicular {i}', np.dot(*e['vectors']), 0, 1e-7)
+    lams = rng.normal(size=len(Ms)) * 3
+    vs = rng.normal(size=(len(Ms), 2))
+    calls = []
+    for M, l, v in zip(Ms, lams, vs):
+        m = M.ravel().tolist()
+        calls += [['charPoly', [m, float(l)]], ['power', [m, v.tolist(), 5]], ['spectralRadius', [m]], ['knock', [m, v.tolist()]]]
+    out = run(lab, calls)
+    for i, (M, l, v) in enumerate(zip(Ms, lams, vs)):
+        cp, pw, rho, kn = out[4 * i:4 * i + 4]
+        close(f'charPoly {i}', cp, np.linalg.det(M - l * np.eye(2)), 1e-8)
+        close(f'power {i}', pw, np.linalg.matrix_power(M, 5) @ v, 1e-8)
+        close(f'spectral radius {i}', rho, np.max(np.abs(np.linalg.eigvals(M))), 1e-8)
+        w = M @ v
+        close(f'knock {i}', kn, np.arccos(min(1, abs(v @ w) / np.linalg.norm(v) / np.linalg.norm(w))), 1e-6)
+    # Display iterations retain contraction and bound growing arrows.
+    steps = run(lab, [['iterateStep', [[0.5, 0, 0, 0.25], [1, 1]]],
+                      ['iterateStep', [[3, 0, 0, 2], [1, 0]]],
+                      ['iterateStep', [[0, 0, 0, 0], [1, 1]]]])
+    close('shrinking display step', steps[0], [0.5, 0.25])
+    close('growing display step', steps[1], [1, 0])
+    close('zero display step', steps[2], [0, 0])
+    # the numbers the guide quotes
+    g = run(lab, [['eig', [[2, 1, 0.5, 1.5]]], ['eig', [[2, 1, 1, 2]]], ['eig', [[0, -1, 1, 0]]]])
+    close('guide values', g[0]['values'], [2.5, 1])
+    close('guide first vector', abs(np.dot(g[0]['vectors'][0], [2 / 5 ** 0.5, 1 / 5 ** 0.5])), 1)
+    close('guide second vector', abs(np.dot(g[0]['vectors'][1], [1 / 2 ** 0.5, -1 / 2 ** 0.5])), 1)
+    close('guide symmetric', g[1]['values'], [3, 1])
+    same('guide quarter turn', g[2]['real'], False)
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:
