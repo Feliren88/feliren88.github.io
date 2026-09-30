@@ -83,6 +83,7 @@ In the layout, the Integration explainer replaces the calculus integral one-off 
 - Every explainer opens on page 1 of its guide.
 - Its controls write into the module's live equations. It does this by setting the text of the `[data-live]` nodes whose names it publishes, through the same `fmt` the playgrounds use. The last control you touched wins.
 - Each track's plan lists which equations gain a live line. A new live line goes through the existing `interview_math.yml` generator.
+- An equation playground whose controls repeat its module's explainer is removed when that explainer lands. Its live equation stays, fed by the explainer. The Linear Algebra playgrounds for basis vectors and for fitting a line go this way.
 
 ### Errors and fallbacks
 
@@ -102,7 +103,7 @@ In the layout, the Integration explainer replaces the calculus integral one-off 
    - `--tf-up` and `--tf-down` are for sign.
 3. **One picture, built up.** Guide pages add layers to one scene. Each page tweens the scene to its state and says 1 or 2 sentences.
 4. **Concrete first.** Page 1 is one specific example with real numbers, and the general statement comes after.
-5. **You hold the object.** Anything with a natural handle is dragged. Sliders are only for parameters with no handle.
+5. **You hold the object.** Anything with a natural handle is dragged. A slider exists only for a quantity with no handle and no other control, so no 2 controls ever do the same job.
 
 ### Anatomy of each explainer
 
@@ -261,7 +262,7 @@ Each entry gives what moves, what the reader drags, the zoom views, and the refe
      - One point gets coordinates in the standard basis and in the v₁, v₂ basis.
      - u casts a shadow on v for the dot product.
      - A rotatable 3D view shows 2 vectors spanning a plane in ℝ³.
-   - **Drag:** the tips of v₁, v₂ and u, and c₁ and c₂.
+   - **Drag:** the tips of v₁, v₂ and u, and the tip of c₁v₁ + c₂v₂, which solves for c₁ and c₂.
    - **Zoom:** the coordinate solve in both bases, and the dot product arithmetic.
    - **Checked against:** `numpy.linalg.solve` and `matrix_rank`.
 1. **Matrices as transformations.**
@@ -320,7 +321,7 @@ Each entry gives what moves, what the reader drags, the zoom views, and the refe
      - Beside it, the unit circle's ellipse labels σ_max and σ_min.
      - "Invert then multiply" is compared with "solve" on Hilbert matrices, with the errors as bars on a log axis.
      - The loss contours before and after feature scaling carry gradient descent paths.
-   - **Drag:** the lines' angle, δ, the Hilbert size, and a scaling toggle.
+   - **Drag:** the second line's end, which tilts it; plus a δ slider, a Hilbert size slider, and a scaling toggle.
    - **Zoom:** κ from the singular values, and the error table.
    - **Checked against:** NumPy's `cond`, `solve` and `inv` on the same matrices.
 
