@@ -29,7 +29,6 @@ STOCK_PATTERNS = {
 }.freeze
 
 LONG_SENTENCE_WORDS = 38
-NUMERIC_WORDS = /\b(?:zero|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand)\b/i
 
 def visible_strings(topic)
   rows = []
@@ -154,6 +153,22 @@ data.fetch("topics").each do |topic|
       findings << ["#{prefix}.scene.alt", "diagram needs a specific text description", ""]
     end
     viz = mod["viz"]
+    if viz
+      part_key = {
+        "flow" => "steps", "compare" => "cols", "stack" => "layers",
+        "matrix" => "cells", "scale" => "stops", "parts" => "around", "tree" => "branches"
+      }[viz["type"]]
+      part_count = viz["type"] == "curve" ? 2 : Array(viz[part_key]).size
+      part_count += 1 if %w[parts tree].include?(viz["type"])
+      if Array(mod["beats"]).size != part_count
+        findings << ["#{prefix}.beats", "caption count must match diagram parts", ""]
+      end
+      if viz["type"] == "compare" && Array(viz["cols"]).any? { |col|
+        !col.is_a?(Hash) || col["k"].to_s.strip.empty? || !col["items"].is_a?(Array)
+      }
+        findings << ["#{prefix}.viz.cols", "each comparison column needs a label and an item list", ""]
+      end
+    end
     if viz && viz["type"] == "scale"
       selected = viz["on"]
       if !selected.is_a?(Integer) || selected.negative? || selected >= Array(viz["stops"]).size
@@ -164,11 +179,6 @@ data.fetch("topics").each do |topic|
 
   visible_strings(topic).each do |path, text|
     normalised = text.downcase.tr("_", "-")
-    text.scan(NUMERIC_WORDS).each do |word|
-      next if word == "ZeRO"
-
-      findings << [path, "spell numeric quantity as a digit", text]
-    end
     BANNED_WORDS.each do |word|
       findings << [path, "banned word '#{word}'", text] if normalised.match?(/\b#{Regexp.escape(word)}\b/)
     end

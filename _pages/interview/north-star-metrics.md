@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: North Star Metrics
-description: Choose the one number a product team steers by, break it into inputs, and defend it against the ways it misleads.
+description: Choose the one number a product team steers by, break it into inputs teams can move, and defend it against the ways it misleads.
 permalink: /north-star-metrics/
 topic_id: north-star-metrics
 robots: noindex, nofollow

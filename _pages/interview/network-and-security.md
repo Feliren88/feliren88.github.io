@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Network and Security
-description: Reason about attackers targeting a model, its data, its service, or its credentials.
+description: Assess attacks on a model, its data, its service, and its access credentials.
 permalink: /network-and-security/
 topic_id: network-and-security
 robots: noindex, nofollow

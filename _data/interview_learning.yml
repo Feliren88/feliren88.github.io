@@ -9,9 +9,9 @@
 # more than one text, which the module notes then cite by equation number.
 
 mission:
-  outcome: "Explain a technical idea from its basic assumptions, answer without notes, and say when the answer may fail."
-  method: "Study a module, explain it in your own words, answer its question after a break, then connect it to a related track."
-  evidence: "You are ready when you can answer the question without notes, name a limitation, and adapt when the interviewer changes an assumption."
+  outcome: "Explain the idea and the assumptions it needs. Then answer without notes and describe when your answer may fail."
+  method: "Study one module and explain it in your own words. After a break, answer its question without notes. Then explore a related track."
+  evidence: "You are ready when you can answer without notes and explain a limitation. You should also be able to change your answer when an assumption changes."
 
 tracks:
   - id: bayesian-statistics
@@ -20,7 +20,7 @@ tracks:
       - title: "Bayes Rules! An Introduction to Applied Bayesian Modeling"
         author: "Johnson, Ott, and Dogucu"
         url: "https://www.bayesrulesbook.com/"
-        use: "Use for priors, posterior inference, model checking, and hierarchical models."
+        use: "Learn how to choose a prior, update it with data, check the model, and share information across groups."
 
   - id: frequentist-statistics
     prerequisites: ["Algebra", "Probability and random variables"]
@@ -28,7 +28,7 @@ tracks:
       - title: "NIST/SEMATECH e-Handbook of Statistical Methods"
         author: "NIST"
         url: "https://www.itl.nist.gov/div898/handbook/"
-        use: "Use for estimators, tests, experimental design, and diagnostic practice."
+        use: "Learn how to estimate quantities, test claims, design experiments, and check statistical assumptions."
 
   - id: machine-learning
     prerequisites: ["Probability", "Linear algebra", "Basic calculus"]
@@ -36,7 +36,7 @@ tracks:
       - title: "The Elements of Statistical Learning"
         author: "Hastie, Tibshirani, and Friedman"
         url: "https://doi.org/10.1007/978-0-387-84858-7"
-        use: "Use for classical models, regularisation, evaluation, and statistical learning theory."
+        use: "Study standard prediction methods, regularisation to control complexity, evaluation, and the theory of learning from data."
 
   - id: deep-learning
     prerequisites: ["Machine learning", "Linear algebra", "Calculus"]
@@ -44,7 +44,7 @@ tracks:
       - title: "Deep Learning"
         author: "Goodfellow, Bengio, and Courville"
         url: "https://www.deeplearningbook.org/"
-        use: "Use for optimisation, regularisation, architectures, and training fundamentals."
+        use: "Learn how neural networks train, how regularisation limits overfitting, and how different network designs work."
 
   - id: linear-algebra
     prerequisites: ["Algebra", "Functions and graphs"]
@@ -52,7 +52,7 @@ tracks:
       - title: "Introduction to Linear Algebra"
         author: "Gilbert Strang"
         url: "https://math.mit.edu/~gs/linearalgebra/"
-        use: "Use for vector spaces, matrix factorisation, eigenvalues, and geometric intuition."
+        use: "Study vector spaces, ways to decompose matrices, eigenvalues, and the geometry behind the calculations."
 
   - id: calculus
     prerequisites: ["Algebra", "Functions and graphs"]
@@ -60,7 +60,7 @@ tracks:
       - title: "Calculus, Volume 1"
         author: "OpenStax"
         url: "https://openstax.org/details/books/calculus-volume-1"
-        use: "Use for limits, derivatives, integrals, and multivariable foundations."
+        use: "Study limits, rates of change, accumulated area, and the foundations for functions with several inputs."
 
   - id: math
     prerequisites: ["Basic algebra"]
@@ -68,7 +68,7 @@ tracks:
       - title: "The Open Logic Text"
         author: "Open Logic Project"
         url: "https://builds.openlogicproject.org/"
-        use: "Use for notation, sets, functions, logic, and formal mathematical language."
+        use: "Learn how to read notation and work with sets, functions, logic, and mathematical statements."
 
   - id: math-proof
     prerequisites: ["Sets and functions", "Propositional logic"]
@@ -76,7 +76,7 @@ tracks:
       - title: "Book of Proof"
         author: "Richard Hammack"
         url: "https://richardhammack.github.io/BookOfProof/"
-        use: "Use for quantifiers, direct proof, contradiction, induction, and counterexamples."
+        use: "Learn how to prove claims using direct arguments, contradiction, and induction. Also learn how examples can disprove claims."
 
   - id: computer-science
     prerequisites: ["Comfort reading code", "Basic algebra"]
@@ -84,7 +84,7 @@ tracks:
       - title: "Algorithms, 4th Edition"
         author: "Sedgewick and Wayne"
         url: "https://algs4.cs.princeton.edu/home/"
-        use: "Use for algorithms, data structures, graphs, and complexity."
+        use: "Study algorithms, data structures, graphs, and how time and memory needs grow with input size."
 
   - id: operating-systems
     prerequisites: ["Programming in C or Python", "Basic computer architecture"]
@@ -144,7 +144,7 @@ tracks:
       - title: "Attention Is All You Need"
         author: "Vaswani et al."
         url: "https://arxiv.org/abs/1706.03762"
-        use: "Use for the original attention architecture, masking, and positional encoding."
+        use: "Read the original transformer paper for attention, masks that block later tokens, and position information."
 
   - id: llm-training
     prerequisites: ["Transformers", "Optimisation", "Distributed systems basics"]
@@ -152,7 +152,7 @@ tracks:
       - title: "Training Compute-Optimal Large Language Models"
         author: "Hoffmann et al."
         url: "https://arxiv.org/abs/2203.15556"
-        use: "Use for data-compute trade-offs and evidence behind compute-optimal scaling."
+        use: "Study how training data, model size, and available computation affect language model performance."
 
   - id: nlp
     prerequisites: ["Probability", "Linear algebra", "Basic machine learning"]
@@ -160,7 +160,7 @@ tracks:
       - title: "Speech and Language Processing"
         author: "Jurafsky and Martin"
         url: "https://web.stanford.edu/~jurafsky/slp3/"
-        use: "Use for tokenisation, language modelling, sequence labelling, parsing, and evaluation."
+        use: "Study how text becomes tokens, how models predict language, and how to label, parse, and evaluate text."
 
   - id: computer-vision
     prerequisites: ["Linear algebra", "Calculus", "Deep learning basics"]
@@ -168,7 +168,7 @@ tracks:
       - title: "Computer Vision: Algorithms and Applications"
         author: "Richard Szeliski"
         url: "https://doi.org/10.1007/978-3-030-34372-9"
-        use: "Use for image formation, features, geometry, recognition, and dense prediction."
+        use: "Study how images form, how to detect visual patterns, how geometry works, and how models label pixels."
 
   - id: multimodality
     prerequisites: ["Embeddings", "Transformers", "Representation learning"]
@@ -176,7 +176,7 @@ tracks:
       - title: "Learning Transferable Visual Models From Natural Language Supervision"
         author: "Radford et al."
         url: "https://arxiv.org/abs/2103.00020"
-        use: "Use for contrastive image-text learning and cross-modal evaluation."
+        use: "Learn how matching images and text train shared representations, then study how to evaluate those representations."
 
   - id: embedding
     prerequisites: ["Linear algebra", "Basic probability"]
@@ -184,7 +184,7 @@ tracks:
       - title: "Efficient Estimation of Word Representations in Vector Space"
         author: "Mikolov et al."
         url: "https://arxiv.org/abs/1301.3781"
-        use: "Use for the original word2vec objectives and the evidence behind distributed representations."
+        use: "Read the original word2vec objectives and the experiments supporting its learned word vectors."
 
   - id: edge-ai
     prerequisites: ["Deep learning", "Computer systems basics"]
@@ -192,7 +192,7 @@ tracks:
       - title: "TinyML: Current Progress, Research Challenges, and Future Roadmap"
         author: "Dutta and Bharali"
         url: "https://arxiv.org/abs/2103.13569"
-        use: "Use for the constraints, deployment patterns, and open problems of on-device inference."
+        use: "Study the limits of small devices, ways to run models on them, and problems that remain unresolved."
 
   - id: image-generation
     prerequisites: ["Deep learning", "Probability", "Computer vision basics"]
@@ -200,7 +200,7 @@ tracks:
       - title: "Denoising Diffusion Probabilistic Models"
         author: "Ho, Jain, and Abbeel"
         url: "https://arxiv.org/abs/2006.11239"
-        use: "Use for the diffusion objective, forward process, and reverse sampling process."
+        use: "Read how diffusion models add noise during training and use learned predictions to generate samples."
 
   - id: uncertainty-estimation
     prerequisites: ["Probability", "Statistics", "Model evaluation"]
@@ -208,15 +208,15 @@ tracks:
       - title: "Information Theory, Inference, and Learning Algorithms"
         author: "MacKay"
         url: "https://www.inference.org.uk/itprnn/book.pdf"
-        use: "Use for entropy, the evidence and the Occam factor, and error bars from posterior curvature."
+        use: "Study entropy as a measure of uncertainty, evidence for comparing models, and uncertainty estimated from posterior curvature."
       - title: "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification"
         author: "Angelopoulos and Bates"
         url: "https://arxiv.org/abs/2107.07511"
-        use: "Use for coverage guarantees, calibration sets, and the limits of distribution-free prediction."
+        use: "Study prediction sets with coverage guarantees, the separate data used to calibrate them, and their assumptions."
       - title: "Uncertainty measures: The big picture"
         author: "Cuzzolin"
         url: "https://arxiv.org/abs/2104.06839"
-        use: "Use for lower and upper probability, credal sets, and how the imprecise frameworks relate."
+        use: "Study lower and upper probabilities and credal sets, collections of plausible probability distributions."
 
   - id: mechanistic-interpretability
     prerequisites: ["Transformers", "Linear algebra", "Neural network internals"]
@@ -224,7 +224,7 @@ tracks:
       - title: "A Mathematical Framework for Transformer Circuits"
         author: "Elhage et al."
         url: "https://transformer-circuits.pub/2021/framework/index.html"
-        use: "Use for residual streams, attention heads, and circuit-level analysis."
+        use: "Learn how transformer components process information and how researchers analyse their interactions."
 
   - id: ai-safety
     prerequisites: ["Machine learning systems", "Basic probability", "Model evaluation"]
@@ -232,7 +232,7 @@ tracks:
       - title: "Concrete Problems in AI Safety"
         author: "Amodei et al."
         url: "https://arxiv.org/abs/1606.06565"
-        use: "Use for accident risks, reward misspecification, oversight, and distribution shift."
+        use: "Study unintended failures, poorly specified rewards, human oversight, and changes between training and deployment data."
 
   - id: machine-learning-research
     prerequisites: ["Machine learning", "Statistics", "Experimental design"]
@@ -240,7 +240,7 @@ tracks:
       - title: "The ML Reproducibility Checklist"
         author: "Pineau et al."
         url: "https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf"
-        use: "Use for claims, experimental evidence, reporting, and reproducibility checks."
+        use: "Check whether your claims, experiments, and reporting give other researchers enough information to repeat the work."
 
   - id: north-star-metrics
     prerequisites: ["Basic product analytics", "A/B testing"]
@@ -256,7 +256,7 @@ tracks:
       - title: "Pre-train, Prompt, and Predict"
         author: "Liu et al."
         url: "https://arxiv.org/abs/2107.13586"
-        use: "Use for a research taxonomy of prompting methods and prompt-based learning."
+        use: "Study how prompting methods differ and how prompts can adapt a trained model to a task."
 
   - id: agentic-ai
     prerequisites: ["Prompt engineering", "APIs and tools", "Basic system design"]
@@ -264,7 +264,7 @@ tracks:
       - title: "ReAct: Synergizing Reasoning and Acting in Language Models"
         author: "Yao et al."
         url: "https://arxiv.org/abs/2210.03629"
-        use: "Use for the observation, reasoning, and action loop behind tool-using agents."
+        use: "Study how an agent alternates between reasoning, tool actions, and observations of the results."
 
   - id: mlops
     prerequisites: ["Machine learning", "Software delivery", "Monitoring basics"]
@@ -272,7 +272,7 @@ tracks:
       - title: "Rules of Machine Learning"
         author: "Google"
         url: "https://developers.google.com/machine-learning/guides/rules-of-ml"
-        use: "Use for production sequencing, metrics, pipelines, and operational failure modes."
+        use: "Learn how to introduce models into production, choose useful metrics, build pipelines, and handle operational failures."
 
   - id: data-engineering
     prerequisites: ["Databases", "Distributed systems basics", "SQL"]
@@ -280,7 +280,7 @@ tracks:
       - title: "The Dataflow Model"
         author: "Akidau et al."
         url: "https://research.google/pubs/the-dataflow-model-a-practical-approach-to-balancing-correctness-latency-and-cost-in-massive-scale-unbounded-out-of-order-data-processing/"
-        use: "Use for event time, watermarks, triggers, and stream-processing correctness."
+        use: "Study event time, progress estimates called watermarks, rules that trigger results, and correct handling of late data."
 
   - id: network-and-security
     prerequisites: ["Operating systems basics", "Client-server requests"]
@@ -288,4 +288,4 @@ tracks:
       - title: "Zero Trust Architecture, SP 800-207"
         author: "NIST"
         url: "https://csrc.nist.gov/pubs/sp/800/207/final"
-        use: "Use for trust boundaries, identity, policy enforcement, and modern network security architecture."
+        use: "Study identity checks, access rules, and trust boundaries in a network where location alone does not imply trust."

@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Deep Learning
-description: Train a neural network and diagnose it when the loss or metrics go wrong.
+description: Train a neural network and diagnose incorrect losses or evaluation scores.
 permalink: /deep-learning/
 topic_id: deep-learning
 robots: noindex, nofollow

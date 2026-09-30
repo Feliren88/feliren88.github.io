@@ -86,7 +86,7 @@
        the values are mixed in those proportions. */
     attention: {
       title: 'One attention head, end to end',
-      lead: 'Five words go in. Each one collects something from the words before it.',
+      lead: 'The model uses earlier words to update each word representation.',
       build: function () {
         /* Laid out top to bottom in bands, so nothing can overlap: words,
            then their vectors, then the grid, then the rewritten vectors.
@@ -163,18 +163,18 @@
         }, s);
       },
       beats: [
-        { step: 'Five words in', say: 'Five words. Right now each one knows nothing about the others.' },
-        { step: 'Each becomes a vector', say: 'Every word is really a list of numbers. That list is all the model has.' },
+        { step: 'Five words in', say: 'The input contains five words. Each starts with its own representation.' },
+        { step: 'Each becomes a vector', say: 'The model represents each word as a vector, a list of numbers.' },
         {
           step: 'Compare every pair',
-          say: 'Each word asks a question, and every other word offers a label. All pairs get compared.',
+          say: 'The model compares a query vector from each word with key vectors from the other words.',
           apply: function (root) {
             $$('.an-cell', root).forEach(function (c) { c.classList.add('is-on'); });
           }
         },
         {
           step: 'Score the matches',
-          say: 'A strong match makes a big dot. Weak matches stay small.',
+          say: 'Larger dots show higher scores for these pairs. Smaller dots show lower scores.',
           apply: function (root) {
             $$('.an-dot', root).forEach(function (d) {
               var r = +d.getAttribute('data-r'), c = +d.getAttribute('data-c');
@@ -186,7 +186,7 @@
         },
         {
           step: 'Mask the future',
-          say: 'A word cannot look at what comes after it. Those pairs switch off.',
+          say: 'Next, the causal mask blocks words that appear after the current word.',
           apply: function (root) {
             $$('.an-dot', root).forEach(function (d) {
               var r = +d.getAttribute('data-r'), c = +d.getAttribute('data-c');
@@ -200,7 +200,7 @@
         },
         {
           step: 'Normalise each row',
-          say: 'Each row is then shared out so it adds up to one. That row is a recipe.',
+          say: 'Then the model converts each row to weights that add up to one.',
           apply: function (root) {
             $$('.an-dot', root).forEach(function (d) {
               var r = +d.getAttribute('data-r'), c = +d.getAttribute('data-c');
@@ -212,14 +212,14 @@
         },
         {
           step: 'Mix the values',
-          say: 'Now mix. Each word pulls in the others in exactly those proportions.',
+          say: 'The model uses those weights to combine the value vectors into a new representation.',
           apply: function (root) {
             $$('.an-cell[data-r="4"]', root).forEach(function (c) { c.classList.add('is-lit'); });
           }
         },
         {
           step: 'Read the result',
-          say: 'Read the bottom row. "it" leaned almost entirely on "cat", which is how the model knows what is sitting.',
+          say: 'In the bottom row, the chosen weights connect "it" mostly to "cat". These example weights illustrate that connection.',
           apply: function (root) {
             $$('.an-cell', root).forEach(function (c) { c.classList.remove('is-lit'); });
             $$('.an-cell[data-r="4"][data-c="1"]', root).forEach(function (c) { c.classList.add('is-lit'); });
@@ -230,8 +230,8 @@
 
     /* ── Bayesian: prior meets data ────────────────────────────── */
     bayes: {
-      title: 'A belief meeting evidence',
-      lead: 'Start with a wide belief. Add data. Watch it tighten.',
+      title: 'Updating a belief with data',
+      lead: 'Compare your belief before and after observing new data.',
       build: function () {
         function bell(cx, w, h) {
           return 'M20 150 C' + (cx - w) + ' 150 ' + (cx - w * 0.5) + ' ' + (150 - h) +
@@ -250,18 +250,18 @@
           'aria-label': 'A wide prior narrowing into a posterior' }, s);
       },
       beats: [
-        { say: 'This is what you believed before any data. Wide, because you were unsure.' },
-        { say: 'Six observations arrive. They cluster to the right of your guess.' },
-        { say: 'The data has its own preferred answer, and it is fairly confident.' },
-        { say: 'Combine them and you get a tighter belief, pulled toward the data.' },
-        { say: 'More data pulls harder. A strong prior resists longer. That tug is the whole method.' }
+        { say: 'This curve shows the prior, your belief before seeing these observations. Its width represents uncertainty.' },
+        { say: 'Next, six observations arrive. Their values lie mostly to the right of the prior centre.' },
+        { say: 'The likelihood shows which parameter values best explain these observations.' },
+        { say: 'Combining the prior and likelihood gives the posterior. Here, it is narrower and closer to the observations.' },
+        { say: 'More observations usually give the likelihood more influence. A concentrated prior can have more influence than a broad prior.' }
       ]
     },
 
     /* ── Deep learning: gradient descent ───────────────────────── */
     descent: {
-      title: 'Walking downhill',
-      lead: 'Training is a walk down a surface you cannot see all of.',
+      title: 'Reducing training error',
+      lead: 'Gradient descent updates model parameters to reduce the training loss.',
       build: function () {
         var s = el('path', {
           d: 'M30 40 C110 190 150 40 230 120 S320 175 430 60',
@@ -278,19 +278,19 @@
           'aria-label': 'A ball rolling down a loss curve in steps' }, s);
       },
       beats: [
-        { say: 'You start somewhere on the surface. The height is how wrong the model is.' },
-        { say: 'The slope tells you which way is down. Take a step that size.' },
-        { say: 'Too big a step and you shoot past the bottom and climb the far side.' },
-        { say: 'Smaller steps settle. This is why the learning rate is shrunk over time.' },
-        { say: 'It stops in a dip. Whether that dip is the best one is not something it can tell.' },
-        { say: 'That is the whole loop. Look at the slope, step, look again.' }
+        { say: 'The starting point represents the current model parameters. The surface height shows the training loss, a measure of error.' },
+        { say: 'The gradient gives the direction of steepest increase. The model takes a step in the opposite direction.' },
+        { say: 'A large step can pass the minimum and increase the loss on the other side.' },
+        { say: 'A smaller learning rate gives smaller steps. Reducing it during training can help the parameters settle.' },
+        { say: 'The parameters reach a local minimum. This procedure does not prove that it is the best minimum.' },
+        { say: 'Training repeats these steps. Compute the gradient, update the parameters, and compute the next gradient.' }
       ]
     },
 
     /* ── Uncertainty: calibration and temperature ──────────────── */
     calib: {
       title: 'Fixing an overconfident model',
-      lead: 'A calibrated model sits on the diagonal. This one starts well above it.',
+      lead: 'Calibration compares confidence with accuracy. This example begins below the diagonal, showing overconfidence.',
       build: function () {
         var P = 30, S = 170;
         var s = el('line', { x1: P, y1: P + S, x2: P + S, y2: P + S, 'class': 'an-axis' });
@@ -312,19 +312,19 @@
           'aria-label': 'A calibration curve moving toward the diagonal' }, s);
       },
       beats: [
-        { say: 'Across the bottom, how confident the model claims to be.' },
-        { say: 'This diagonal is perfect. Say seventy per cent, be right seventy per cent of the time.' },
-        { say: 'Here is a real model. It sits below the line, so it claims more than it delivers.' },
-        { say: 'That gap is the problem. At its most confident it is wrong far more than it says.' },
-        { say: 'Divide every score by one number, fitted on held-out data, and it moves up.' },
-        { say: 'The ranking never changed. Only the numbers did. That is temperature scaling.' }
+        { say: 'The horizontal axis shows the confidence the model assigns to its predictions.' },
+        { say: 'The diagonal shows perfect calibration. Among predictions with seventy per cent confidence, seventy per cent should be correct.' },
+        { say: 'This example lies below the diagonal. The model is correct less often than its confidence suggests.' },
+        { say: 'The vertical gap shows overconfidence. Even the most confident predictions include more errors than expected.' },
+        { say: 'Temperature scaling divides the model scores by one fitted number. Here, it brings confidence closer to accuracy.' },
+        { say: 'The fitted temperature changes confidence without changing the order of the scores. It is estimated using separate validation data.' }
       ]
     },
 
     /* ── Interpretability: superposition ───────────────────────── */
     superpose: {
-      title: 'More ideas than neurons',
-      lead: 'Two directions, five things to store. They will have to share.',
+      title: 'Representing more features than neurons',
+      lead: 'The example represents five features using only two dimensions.',
       build: function () {
         var cx = 130, cy = 118, R = 82;
         var s = el('line', { x1: cx - R - 14, y1: cy, x2: cx + R + 14, y2: cy, 'class': 'an-axis' });
@@ -350,18 +350,18 @@
           'aria-label': 'Five feature directions packed into two neurons' }, s);
       },
       beats: [
-        { say: 'Two neurons. That gives you two clean directions to store things in.' },
-        { say: 'Two ideas fit perfectly, one per axis. Read either neuron and you know the answer.' },
-        { say: 'But the model has far more than two ideas worth keeping. So it packs them in at angles.' },
-        { say: 'Now no single neuron means one thing. Each fires a little for several ideas.' },
-        { say: 'That is superposition, and it is why reading one neuron tells you so little.' }
+        { say: 'The diagram has two neurons, represented by two coordinate directions.' },
+        { say: 'Two features can use separate directions. In this simple case, each neuron represents one feature.' },
+        { say: 'To represent five features in two dimensions, the model can use additional directions at different angles.' },
+        { say: 'The directions now overlap. A single neuron can respond to several features.' },
+        { say: 'This is called superposition. Because features share neurons, one neuron alone may be difficult to interpret.' }
       ]
     },
 
     /* ── Agentic AI: the loop and where it breaks ──────────────── */
     agentloop: {
       title: 'The agent loop, and where it fails',
-      lead: 'Four steps, repeating. The context fills a little more on every pass.',
+      lead: 'The agent repeats four steps. Each tool result adds information to its context.',
       build: function () {
         var s = '';
         var nodes = [['Look', 90, 60], ['Decide', 250, 60], ['Act', 250, 150], ['See result', 90, 150]];
@@ -387,14 +387,14 @@
           'aria-label': 'An agent loop with its context window filling up' }, s);
       },
       beats: [
-        { say: 'The agent looks at where things stand.' },
-        { say: 'It picks one action.' },
-        { say: 'It runs that action against a real tool.' },
-        { say: 'It reads what came back.' },
-        { say: 'Then round again. That loop is the entire idea.' },
-        { say: 'Every pass adds to the context. Nothing leaves on its own.' },
-        { say: 'On a long task the space runs out before the work does.' },
-        { say: 'That is the binding constraint today. Deciding what to forget is the real design problem.' }
+        { say: 'First, the agent reads the current task information.' },
+        { say: 'Next, the agent chooses an action.' },
+        { say: 'Then it calls a tool to carry out that action.' },
+        { say: 'After that, it reads the tool result.' },
+        { say: 'The agent repeats the process until it finishes or reaches a stopping rule.' },
+        { say: 'In this example, each tool result adds information to the context, the text available to the model.' },
+        { say: 'A long task can exceed the amount of text the model can accept at once.' },
+        { say: 'Therefore, the system needs a rule for keeping, summarising, or removing earlier information.' }
       ]
     },
 
@@ -473,13 +473,13 @@
           'aria-label': 'A grid being transformed by a matrix' }, s);
       },
       beats: [
-        { step: 'Start with the grid', say: 'Start with the plain grid. Every point in the plane sits somewhere on it.' },
-        { step: 'Name the two arrows', say: 'Two arrows define it. One step right, one step up. Everything else is built from those.' },
-        { step: 'Apply the matrix', say: 'Apply the matrix and the whole grid moves. Lines stay straight and the origin stays put.' },
-        { step: 'Read the columns', say: 'The two arrows landed somewhere new. Those two landing spots are the columns of the matrix.' },
-        { step: 'The unit square', say: 'Here is the square the arrows used to make.' },
-        { step: 'The determinant', say: 'And here is what it became. How much bigger it got is the determinant.' },
-        { step: 'Put it together', say: 'That is the whole idea. Read the columns, and you know where everything goes.' }
+        { step: 'Start with the grid', say: 'Start with the original grid. Its coordinates locate every point in the plane.' },
+        { step: 'Name the two arrows', say: 'The two arrows are basis vectors. One points right and the other points up, and combinations of them locate other points.' },
+        { step: 'Apply the matrix', say: 'Next, apply the matrix. This transformation keeps lines straight and leaves the origin in place.' },
+        { step: 'Read the columns', say: 'The columns tell you where the two basis vectors moved. Together, they determine the transformation.' },
+        { step: 'The unit square', say: 'The original basis vectors form a square with area one.' },
+        { step: 'The determinant', say: 'After the transformation, the square becomes a parallelogram. The determinant gives the area scale, with a sign indicating orientation.' },
+        { step: 'Put it together', say: 'Therefore, knowing where the basis vectors move tells you where every other point moves.' }
       ]
     },
 
@@ -522,13 +522,13 @@
           'aria-label': 'Two points on a curve sliding together into a tangent line' }, s);
       },
       beats: [
-        { step: 'A curve', say: 'A curve. We want to know how steep it is at one exact point.' },
-        { step: 'Two points', say: 'Pick that point, then a second one further along. Draw the line between them.' },
-        { step: 'Measure the slope', say: 'That line has a slope you can measure. It is the average steepness between the two.' },
-        { step: 'Slide closer', say: 'Now slide the second point closer.' },
-        { step: 'Closer again', say: 'Closer again. The line keeps tilting, but by less each time.' },
-        { step: 'The limit', say: 'In the limit it settles on one line. Its slope is the derivative at that point.' },
-        { step: 'That is the derivative', say: 'So a derivative is just this: the slope a line settles on when the gap goes to nothing.' }
+        { step: 'A curve', say: 'The curve represents a function. We want its slope at one particular point.' },
+        { step: 'Two points', say: 'Choose a second point and draw a line through both points.' },
+        { step: 'Measure the slope', say: 'The line slope gives the average rate of change between the two points.' },
+        { step: 'Slide closer', say: 'Next, move the second point closer to the first.' },
+        { step: 'Closer again', say: 'As the gap shrinks, the line slope approaches a particular value in this example.' },
+        { step: 'The limit', say: 'That limiting value is the derivative, the rate of change at the first point.' },
+        { step: 'That is the derivative', say: 'A derivative exists when this slope approaches the same value as the gap shrinks from either side.' }
       ]
     },
 
@@ -557,18 +557,18 @@
           'aria-label': 'Twenty confidence intervals, one of which misses the true value' }, s);
       },
       beats: [
-        { step: 'The real value', say: 'Somewhere there is a true value. You never get to see it.' },
-        { step: 'Run one study', say: 'You run one study and get an interval. Did it catch the truth? You cannot tell.' },
-        { step: 'Run twenty', say: 'So imagine running it twenty times. Each run gives a different interval.' },
-        { step: 'Count the misses', say: 'One of them misses entirely. That is the promise: about one in twenty will.' },
-        { step: 'What it does not say', say: 'The promise covers the procedure across many runs. It says nothing about the one interval in front of you.' }
+        { step: 'The real value', say: 'The horizontal line marks the true parameter value. In a real study, that value is usually unknown.' },
+        { step: 'Run one study', say: 'One study produces a confidence interval. Without knowing the true value, you cannot tell whether this interval contains it.' },
+        { step: 'Run twenty', say: 'Now imagine repeating the same study twenty times. Different samples produce different intervals.' },
+        { step: 'Count the misses', say: 'One interval in this illustration misses the true value. A 95% procedure covers it in about 95% of repeated studies.' },
+        { step: 'What it does not say', say: 'The coverage rate describes the procedure across repeated studies. It does not assign a probability to the fixed parameter in one realised interval.' }
       ]
     },
 
     /* ── Machine learning: capacity and overfitting ───────────── */
     overfit: {
-      title: 'Fitting, and fitting too hard',
-      lead: 'Same points, three models. Only one of them you would trust.',
+      title: 'Underfitting and overfitting',
+      lead: 'Compare three models fitted to the same data, then test them on a new point.',
       build: function () {
         var pts = [[60,168],[110,140],[160,148],[210,110],[260,120],[310,80],[360,96],[410,58]];
         var s = el('line', { x1: 40, y1: 200, x2: 450, y2: 200, 'class': 'an-axis' });
@@ -588,18 +588,18 @@
           'aria-label': 'Three fits through the same points, one too simple and one too complex' }, s);
       },
       beats: [
-        { step: 'The data', say: 'Eight measurements. There is a pattern, and there is noise on top of it.' },
-        { step: 'Too simple', say: 'A straight line misses the shape. It is wrong in the same way everywhere.' },
-        { step: 'About right', say: 'A gentle curve follows the trend and ignores the wobble.' },
-        { step: 'Too complex', say: 'This one passes through every point exactly. Zero error on the data you have.' },
-        { step: 'The test', say: 'Then a new point arrives. The wiggly fit is nowhere near it. That is overfitting.' }
+        { step: 'The data', say: 'The eight measurements contain a pattern and some random variation.' },
+        { step: 'Too simple', say: 'A straight line cannot follow the curved pattern. This model is too simple for these data.' },
+        { step: 'About right', say: 'The smoother curve follows the main pattern without passing through every measurement.' },
+        { step: 'Too complex', say: 'The complex curve passes through all eight measurements. Its training error is zero.' },
+        { step: 'The test', say: 'However, it predicts the new point poorly. This is overfitting, fitting training details that do not carry over to new data.' }
       ]
     },
 
     /* ── LLM training: next-token prediction ──────────────────── */
     nexttoken: {
-      title: 'The only thing it is trained to do',
-      lead: 'Predict the next word. Everything else grows out of that.',
+      title: 'Predicting the next token',
+      lead: 'This example shows next-token prediction during language model pre-training.',
       build: function () {
         var words = ['The', 'cat', 'sat', 'on', 'the'];
         var s = words.map(function (w, i) {
@@ -623,18 +623,18 @@
           'aria-label': 'A model predicting a distribution over the next word' }, s);
       },
       beats: [
-        { step: 'Some text', say: 'Take any sentence from the training data and cut it short.' },
-        { step: 'Hide the next word', say: 'Hide what comes next and ask the model to guess.' },
-        { step: 'It guesses a spread', say: 'It does not give one answer. It gives a score to every word it knows.' },
-        { step: 'Check the truth', say: 'The real next word was "mat". The model gave that a decent score, but not a certain one.' },
-        { step: 'Nudge and repeat', say: 'Nudge the weights so "mat" scores higher next time. Repeat a very large number of times.' }
+        { step: 'Some text', say: 'Start with a training sentence and show the model only its beginning.' },
+        { step: 'Hide the next token', say: 'The next token is hidden, so the model must predict it. A token can be a word or part of a word.' },
+        { step: 'Predict token probabilities', say: 'The model assigns a probability to each token in its vocabulary.' },
+        { step: 'Check the truth', say: 'The observed next token is "mat". Its predicted probability determines the loss for this example.' },
+        { step: 'Update weights and repeat', say: 'Training updates the weights to increase the probability of observed next tokens. The process repeats over many examples.' }
       ]
     },
 
     /* ── NLP: retrieval before generation ─────────────────────── */
     rag: {
-      title: 'Why a RAG answer goes wrong',
-      lead: 'Two systems, two ways to fail. Find out which one broke.',
+      title: 'Why an answer based on retrieved documents can fail',
+      lead: 'The system retrieves documents, then generates an answer. Check each stage separately.',
       build: function () {
         var s = '';
         var stages = [['Question', 30], ['Search', 140], ['Rerank', 250], ['Answer', 360]];
@@ -663,13 +663,13 @@
           'aria-label': 'A retrieval pipeline with two separate failure points' }, s);
       },
       beats: [
-        { step: 'A question', say: 'Someone asks a question.' },
-        { step: 'Search', say: 'The system searches a store of documents and pulls back a handful.' },
-        { step: 'What came back', say: 'One of them holds the answer. The others are noise.' },
-        { step: 'Write the answer', say: 'The model reads them and writes a reply.' },
-        { step: 'Failure one', say: 'The right document was there and the model still got it wrong. That is generation.' },
-        { step: 'Failure two', say: 'Or the right document never came back at all. That is retrieval, and no prompt fixes it.' },
-        { step: 'Measure separately', say: 'So measure the two halves separately, or you will tune the wrong one.' }
+        { step: 'A question', say: 'A user asks a question that needs information from documents.' },
+        { step: 'Search', say: 'The retrieval system searches the document collection and returns several relevant passages.' },
+        { step: 'What came back', say: 'In this example, one returned passage contains the answer. The other passages are less useful.' },
+        { step: 'Write the answer', say: 'Next, the language model uses the passages to write a reply.' },
+        { step: 'Failure one', say: 'The answer can be wrong even when the right passage was retrieved. This is a failure in answer generation.' },
+        { step: 'Failure two', say: 'Alternatively, the search may miss the right passage. Changing the writing prompt alone cannot supply missing evidence.' },
+        { step: 'Measure separately', say: 'Therefore, evaluate document retrieval and answer generation separately to find which part needs improvement.' }
       ]
     },
 
@@ -874,19 +874,19 @@
           'aria-label': 'A convolution window sliding across an image and filling a feature map' }, s);
       },
       beats: [
-        { step: 'The image', say: 'A grid of pixels on the left. An empty feature map on the right.' },
-        { step: 'First window', say: 'The window sits on the top-left patch and looks for one pattern.' },
-        { step: 'Write one number', say: 'How strongly it matched becomes a single number in the map.' },
-        { step: 'Slide across', say: 'Slide one step right and repeat. Same pattern, new place.' },
-        { step: 'Then down', say: 'At the end of the row, drop down and carry on.' },
-        { step: 'The whole map', say: 'Fill the map and you have said where that pattern appears everywhere.' },
-        { step: 'Why it is smaller', say: 'The map is smaller than the image, because the window needs room to sit.' }
+        { step: 'The image', say: 'The left grid is the input image. The right grid will store the computed feature values.' },
+        { step: 'First window', say: 'First, a small filter covers the top-left patch. Its weights respond to a particular image pattern.' },
+        { step: 'Write one number', say: 'The weighted sum for that patch becomes one number in the feature map.' },
+        { step: 'Slide across', say: 'Next, slide the filter right and repeat the calculation with the same weights.' },
+        { step: 'Then down', say: 'After finishing the row, move down and continue.' },
+        { step: 'The whole map', say: 'The completed feature map shows how strongly the filter responds at each position.' },
+        { step: 'Why it is smaller', say: 'Here, the filter must fit inside the image. Without padding, this makes the feature map smaller.' }
       ]
     },
 
     /* ── Multimodality: pulling two towers together ───────────── */
     clip: {
-      title: 'Teaching pictures and words to agree',
+      title: 'Learning matching image and text representations',
       lead: 'Matching pairs get pulled together. Everything else gets pushed apart.',
       build: function () {
         var s = '';
@@ -917,18 +917,18 @@
           'aria-label': 'Image and caption vectors being pulled together in a shared space' }, s);
       },
       beats: [
-        { step: 'Two towers', say: 'One encoder reads images. Another reads captions. They start with no shared language.' },
-        { step: 'One space', say: 'Both write into the same space, so an image and a caption can be compared directly.' },
-        { step: 'Pull the pairs', say: 'For every image and its real caption, pull the two closer together.' },
-        { step: 'Push the rest', say: 'Every other pairing in the batch gets pushed apart. That is why batch size matters here.' },
-        { step: 'What you get', say: 'Now a caption can find its picture, and a picture can be labelled with words it never saw in training.' }
+        { step: 'Two towers', say: 'One encoder converts images to vectors. Another converts captions to vectors. Training teaches them to represent matching content similarly.' },
+        { step: 'One space', say: 'Both encoders produce vectors in the same space, so the system can compare an image with a caption.' },
+        { step: 'Pull the pairs', say: 'Training increases similarity between each image and its matching caption.' },
+        { step: 'Push the rest', say: 'It also reduces similarity for other pairs in the batch. A larger batch provides more such comparisons.' },
+        { step: 'What you get', say: 'After training, captions can retrieve matching images. Text descriptions can also help classify images into new categories.' }
       ]
     },
 
     /* ── AI safety: reward hacking ────────────────────────────── */
     hack: {
       title: 'When scoring well stops meaning doing well',
-      lead: 'You measured the wrong thing. The optimiser found that out first.',
+      lead: 'A high score on a substitute measure can hide poor performance on the real goal.',
       build: function () {
         var s = '';
         s += rect({ x: 24, y: 34, width: 108, height: 40, rx: 8, 'class': 'an-box' });
@@ -950,19 +950,19 @@
           'aria-label': 'An agent finding a cheap route to a high score' }, s);
       },
       beats: [
-        { step: 'The real goal', say: 'You have something you actually want the system to do.' },
-        { step: 'The proxy', say: 'You cannot measure that directly, so you measure something close to it.' },
-        { step: 'The honest route', say: 'One way to score well is to do the thing properly.' },
-        { step: 'The cheap route', say: 'There is usually another way that scores just as well for far less effort.' },
-        { step: 'What optimisation finds', say: 'Optimisation finds the cheap route, because the score cannot tell them apart.' },
-        { step: 'Why it matters', say: 'Nothing went wrong with the training. The measurement was the problem.' }
+        { step: 'The real goal', say: 'First, define the behaviour you want the system to achieve.' },
+        { step: 'The proxy', say: 'If that behaviour is difficult to measure, choose a measurable substitute, called a proxy.' },
+        { step: 'The honest route', say: 'One way to score well on the proxy also achieves the intended goal.' },
+        { step: 'The cheap route', say: 'However, another strategy may receive the same score while doing less useful work.' },
+        { step: 'What optimisation finds', say: 'Training can favour that strategy because the proxy gives it a high score too.' },
+        { step: 'Why it matters', say: 'Therefore, check whether improving the measured score also improves the behaviour you actually want.' }
       ]
     },
 
     /* ── ML research: is that result real ─────────────────────── */
     seeds: {
-      title: 'Is that gain real',
-      lead: 'One run says yes. Five runs are less sure.',
+      title: 'Does the improvement hold across runs?',
+      lead: 'Repeated runs reveal variation that one comparison can hide.',
       build: function () {
         var s = el('line', { x1: 40, y1: 190, x2: 440, y2: 190, 'class': 'an-axis' });
         s += text('baseline', { x: 130, y: 206, 'text-anchor': 'middle', 'class': 'an-lab' });
@@ -991,18 +991,18 @@
           'aria-label': 'Two methods whose error bars overlap' }, s);
       },
       beats: [
-        { step: 'One run each', say: 'You run the baseline once and your method once. Yours scores higher.' },
-        { step: 'Run it again', say: 'Now run each five times, changing only the random seed.' },
-        { step: 'Draw the spread', say: 'Every run lands somewhere different. Draw the range each method covers.' },
-        { step: 'They overlap', say: 'The ranges overlap. A single run from each could have gone either way.' },
-        { step: 'What you can claim', say: 'So report the spread, not the best run. That is what makes it a result.' }
+        { step: 'One run each', say: 'First, run the comparison method and the new method once. The new method scores higher.' },
+        { step: 'Run it again', say: 'Next, run each method five times with different random seeds.' },
+        { step: 'Draw the spread', say: 'The scores vary between runs. Plot all the results to show that variation.' },
+        { step: 'They overlap', say: 'The ranges overlap in this example. Another pair of individual runs could reverse the apparent result.' },
+        { step: 'What you can claim', say: 'Therefore, report variation across runs alongside the average improvement. A best run alone gives an incomplete comparison.' }
       ]
     },
 
     /* ── MLOps: drift ─────────────────────────────────────────── */
     drift: {
-      title: 'The model did not change. The world did.',
-      lead: 'Watch the inputs move while accuracy looks fine.',
+      title: 'Changes in live input data',
+      lead: 'Input changes can appear before new labels let you measure accuracy.',
       build: function () {
         function bell(cx, w, h, base) {
           return 'M30 ' + base + ' C' + (cx - w) + ' ' + base + ' ' + (cx - w * 0.5) + ' ' +
@@ -1022,19 +1022,19 @@
           'aria-label': 'Input distribution drifting away from the training data' }, s);
       },
       beats: [
-        { step: 'Training data', say: 'This is the data the model learnt from. It works well here.' },
-        { step: 'Ship it', say: 'You ship it. For a while live traffic looks the same.' },
-        { step: 'A small shift', say: 'Then the inputs start arriving slightly different. Nothing dramatic.' },
-        { step: 'A bigger shift', say: 'A month later they are somewhere else entirely.' },
-        { step: 'No labels yet', say: 'Accuracy would tell you, but the labels take weeks to arrive.' },
-        { step: 'Watch the inputs', say: 'So watch the inputs and the prediction mix. They move first.' }
+        { step: 'Training data', say: 'The first distribution shows the inputs used during training. The model performs well on these data.' },
+        { step: 'Ship it', say: 'After deployment, the first live inputs look similar to the training inputs.' },
+        { step: 'A small shift', say: 'Then the input distribution begins to change slightly.' },
+        { step: 'A bigger shift', say: 'Later, the live inputs differ much more from the training data.' },
+        { step: 'No labels yet', say: 'Labels arrive weeks later, so you cannot yet measure current prediction accuracy.' },
+        { step: 'Watch the inputs', say: 'Meanwhile, monitor inputs and the mix of predictions. Changes can warn you to investigate before labels arrive.' }
       ]
     },
 
     /* ── Data engineering: watermarks and late events ─────────── */
     watermark: {
       title: 'Events that arrive late',
-      lead: 'The window has to close some time. Whatever arrives later is missed.',
+      lead: 'A stream-processing system needs a rule for events that arrive after an initial result.',
       build: function () {
         var s = el('line', { x1: 30, y1: 150, x2: 450, y2: 150, 'class': 'an-axis' });
         s += text('time', { x: 430, y: 168, 'class': 'an-lab' });
@@ -1054,19 +1054,19 @@
           'aria-label': 'A time window closing before a late event arrives' }, s);
       },
       beats: [
-        { step: 'A window', say: 'You are counting events in a fixed slice of time.' },
-        { step: 'Events arrive', say: 'Most arrive while the window is open, in roughly the right order.' },
-        { step: 'One is late', say: 'One took a detour through a slow queue and shows up after the others.' },
-        { step: 'Much later', say: 'Another turns up long after. Do you reopen the window for it?' },
-        { step: 'The watermark', say: 'The watermark is you saying how long you are willing to wait.' },
-        { step: 'The trade', say: 'Wait too little and you drop real data. Wait too long and nothing ever finalises.' }
+        { step: 'A window', say: 'The system counts events whose occurrence times fall within a fixed time window.' },
+        { step: 'Events arrive', say: 'Most events arrive promptly, in roughly the order they occurred.' },
+        { step: 'One is late', say: 'However, a slow queue delays one event, so it arrives after newer events.' },
+        { step: 'Much later', say: 'Another event arrives much later. The system needs a rule for updating an earlier result.' },
+        { step: 'The watermark', say: 'A watermark estimates how far event time has progressed. It helps the system decide when to produce a result.' },
+        { step: 'The trade', say: 'The waiting rule trades faster results against including late events. The system also needs a policy for events that arrive after finalisation.' }
       ]
     },
 
     /* ── Security: indirect prompt injection ──────────────────── */
     injection: {
       title: 'How an agent gets hijacked',
-      lead: 'The attacker never talks to your agent. They just leave a note.',
+      lead: 'An attacker can place instructions inside content that the agent reads.',
       build: function () {
         var s = '';
         s += rect({ x: 24, y: 30, width: 96, height: 38, rx: 7, 'class': 'an-box' });
@@ -1092,12 +1092,12 @@
           'aria-label': 'An agent following instructions hidden in a web page' }, s);
       },
       beats: [
-        { step: 'A normal task', say: 'You ask the agent to do something ordinary. Summarise this page.' },
-        { step: 'It fetches', say: 'The agent goes and reads the page, as instructed.' },
-        { step: 'The hidden note', say: 'Buried in that page is text addressed to the agent itself.' },
-        { step: 'It obeys', say: 'The agent cannot tell your instruction from the page content. Both are just text.' },
-        { step: 'The damage', say: 'It uses the permissions you gave it, on behalf of someone else.' },
-        { step: 'The real fix', say: 'Telling the model to ignore such text does not hold. Limit what the tools can do instead.' }
+        { step: 'A normal task', say: 'You ask the agent to summarise a web page.' },
+        { step: 'It fetches', say: 'Next, the agent fetches the page to read its content.' },
+        { step: 'The hidden note', say: 'The page contains an attacker instruction disguised as part of the content.' },
+        { step: 'It obeys', say: 'If the agent follows that instruction, it treats an untrusted page as an authority over the task.' },
+        { step: 'The damage', say: 'The attacker can then misuse tools that the user authorised for a different purpose.' },
+        { step: 'The real fix', say: 'Therefore, restrict tool permissions and enforce access rules outside the model. A prompt telling it to ignore attacks is insufficient protection.' }
       ]
     },
 
@@ -1135,11 +1135,11 @@
           'aria-label': 'Four sentences placed as points, clustering by meaning' }, s);
       },
       beats: [
-        { step: 'Four sentences', say: 'Four things somebody might ask. Two are about logging in, two are about money.' },
-        { step: 'Each becomes a point', say: 'The encoder turns each one into a list of numbers, which is a point on a map.' },
-        { step: 'Measure the distance', say: 'Now similarity is just distance. No understanding required, only arithmetic.' },
-        { step: 'They cluster', say: 'The two login questions land together, and so do the two about refunds. Nobody labelled that.' },
-        { step: 'Why it works', say: 'Search becomes finding the nearest points to your question. That is the whole trick behind retrieval.' }
+        { step: 'Four sentences', say: 'The four example sentences contain two login questions and two refund questions.' },
+        { step: 'Each becomes a point', say: 'An encoder converts each sentence to a vector, a list of numbers represented here as a point.' },
+        { step: 'Measure the distance', say: 'The search system compares those vectors using a distance or similarity measure.' },
+        { step: 'They cluster', say: 'In this illustration, questions about the same subject lie close together. The plotted questions did not need category labels.' },
+        { step: 'Why it works', say: 'To search, encode a new question and find nearby vectors. The usefulness of those matches depends on the encoder and the chosen measure.' }
       ]
     },
 
@@ -1167,18 +1167,18 @@
           'aria-label': 'A model shrinking through three steps until it fits a device budget' }, s);
       },
       beats: [
-        { step: 'Too big', say: 'The model you trained. Nowhere near fitting in the memory a phone will give you.' },
-        { step: 'Distil', say: 'Train a smaller model to copy the large one. The biggest single reduction, and the most work.' },
-        { step: 'Prune', say: 'Cut away weights that were contributing little. Structured pruning removes whole channels, which the hardware can exploit.' },
-        { step: 'Quantise', say: 'Store the numbers in eight bits instead of sixteen. Half the size again, for very little effort.' },
-        { step: 'It fits', say: 'Now it fits. Every step cost some quality, so measure on your own task rather than trusting the ratio.' }
+        { step: 'Too big', say: 'The original model needs more memory than the example phone can provide.' },
+        { step: 'Distil', say: 'Distillation trains a smaller model to match a larger model. Here, this gives the largest reduction but requires additional training.' },
+        { step: 'Prune', say: 'Pruning removes weights or components. Removing whole channels can reduce work on hardware that supports the smaller structure.' },
+        { step: 'Quantise', say: 'Quantisation stores values with fewer bits. Changing from sixteen to eight bits halves the storage for those values.' },
+        { step: 'It fits', say: 'The smaller model now fits in this example. Check accuracy, latency, and memory on the actual device after each change.' }
       ]
     },
 
     /* ── Image generation: denoising ───────────────────────────── */
     denoise: {
-      title: 'From static to a picture',
-      lead: 'One small prediction, repeated. Watch the noise come off.',
+      title: 'Generating an image from noise',
+      lead: 'The sampler repeatedly uses model predictions to reduce noise.',
       build: function () {
         var s = '';
         /* Five panels, each less noisy than the last. Noise is drawn as a
@@ -1213,11 +1213,11 @@
           'aria-label': 'Noise being removed step by step until a shape appears' }, s);
       },
       beats: [
-        { step: 'Pure noise', say: 'Start from static. There is no image here, and no information about one.' },
-        { step: 'Predict the noise', say: 'The model looks at this and predicts which part of it is noise. That is all it was trained to do.' },
-        { step: 'Take some off', say: 'Remove a fraction of what it predicted. Something faint starts to show through.' },
-        { step: 'Again', say: 'Repeat. Each pass has an easier job than the one before it.' },
-        { step: 'An image', say: 'After enough steps, an image. Better samplers get here in fewer passes, which is the cheapest saving available.' }
+        { step: 'Pure noise', say: 'The process starts with random noise. The model has learnt image patterns during training, but this initial sample is not an image.' },
+        { step: 'Predict the noise', say: 'In this example, the model predicts the noise component at the current step.' },
+        { step: 'Take some off', say: 'The sampler uses that prediction to reduce the noise. Some image structure begins to appear.' },
+        { step: 'Again', say: 'Next, repeat the update at a lower noise level.' },
+        { step: 'An image', say: 'After enough updates, the sample resembles an image. A suitable sampler can reduce the number of updates needed.' }
       ]
     },
 
@@ -1237,23 +1237,23 @@
           'aria-label': 'A long prompt where the middle is used least' }, s);
       },
       beats: [
-        { say: 'A long prompt. Fourteen documents, and one of them holds the answer.' },
+        { say: 'The example prompt contains fourteen documents. One of them contains the answer.' },
         {
-          say: 'Put it first and the model finds it easily.',
+          say: 'When the relevant document is first, this example shows strong use of its information.',
           apply: function (root) {
             $$('.an-doc', root).forEach(function (d) { d.classList.remove('is-key'); });
             $('.an-doc[data-i="0"]', root).classList.add('is-key');
           }
         },
         {
-          say: 'Put it in the middle and it often gets missed.',
+          say: 'When it is in the middle, this example shows weaker use of its information.',
           apply: function (root) {
             $$('.an-doc', root).forEach(function (d) { d.classList.remove('is-key'); });
             $('.an-doc[data-i="7"]', root).classList.add('is-key');
           }
         },
         {
-          say: 'Attention sags in the middle. The ends get used most.',
+          say: 'Some models use information near the ends more reliably than information in the middle of long prompts.',
           apply: function (root) {
             $$('.an-doc', root).forEach(function (d) {
               var i = +d.getAttribute('data-i');
@@ -1261,7 +1261,7 @@
             });
           }
         },
-        { say: 'So put what matters near the start or the end, and cut the rest.' }
+        { say: 'Therefore, test document order on your task. Removing irrelevant text and moving essential information can help.' }
       ]
     },
 
@@ -1274,7 +1274,7 @@
        captions can describe it. */
     average: {
       title: 'One draw against many',
-      lead: 'The samples never settle down. The average does. Watch which one moves.',
+      lead: 'Compare the variation in individual observations with their running average.',
       build: function () {
         var TRUTH = 108;
         /* Draws, as offsets from the truth. Chosen to wander early and
@@ -1326,11 +1326,11 @@
           'aria-label': 'Scattered draws with a running average converging on the true value' }, s);
       },
       beats: [
-        { say: 'Each dot is one draw. On its own it tells you very little about the truth.' },
-        { say: 'Take the running average as they arrive. Early on it swings about badly.' },
-        { say: 'The draws never calm down. Only the average does, and it does it steadily.' },
-        { say: 'The band it should stay inside closes like one over the square root of the count.' },
-        { say: 'So a hundred times the data buys ten times less error. That is the whole bargain.' }
+        { say: 'Each dot is one random observation. One observation gives little evidence about the population mean.' },
+        { say: 'Next, calculate the running average. With only a few observations, it can vary widely.' },
+        { say: 'The individual observations remain variable, while their average becomes more stable as the sample grows.' },
+        { say: 'Under the usual independent, finite-variance assumptions, the standard error decreases as one divided by the square root of the sample size.' },
+        { say: 'Therefore, one hundred times as many observations gives one tenth of the standard error under these assumptions.' }
       ]
     },
 
@@ -1341,8 +1341,8 @@
        rotation sits on an outer group, never on the element carrying
        the fade class, since a CSS transform would beat it. */
     induction: {
-      title: 'Two proofs, every case',
-      lead: 'You cannot check infinitely many claims. You can knock them over.',
+      title: 'Proving a statement by induction',
+      lead: 'A base case and an induction step can prove a statement for infinitely many integers.',
       build: function () {
         var N = 7;
         /* When each domino goes down. Base first, then the step, then
@@ -1364,11 +1364,11 @@
           'aria-label': 'A row of dominoes falling in turn from the base case onward' }, s);
       },
       beats: [
-        { say: 'One domino per size. There are infinitely many, so checking them is not an option.' },
-        { say: 'First obligation: prove the smallest case. That is the one you push over yourself.' },
-        { say: 'Second obligation: prove that any case falling knocks the next one down.' },
-        { say: 'Those two together take the whole row, however far along it you look.' },
-        { say: 'Skip the base case and nothing moves, however good the step is. That is the usual gap.' }
+        { say: 'Each domino represents a statement about one integer. There are infinitely many integers to cover.' },
+        { say: 'First, prove the base case, the statement for the starting integer.' },
+        { say: 'Next, prove that if the statement holds for an arbitrary integer, it also holds for the next integer.' },
+        { say: 'Together, the base case and this induction step prove the statement for every integer from the starting value onwards.' },
+        { say: 'Without the base case, the induction step has no established starting point.' }
       ]
     },
 
@@ -1379,8 +1379,8 @@
        because the exact numbers are machine specific and the ordering
        is the part that transfers. */
     fetchcost: {
-      title: 'Arithmetic is free. Fetching is not.',
-      lead: 'Four places a value can be, and what it costs to go and get it.',
+      title: 'The cost of accessing data',
+      lead: 'Compare access to registers, caches, and main memory.',
       build: function () {
         var ROWS = [
           { k: 'register', c: 1 },
@@ -1403,11 +1403,11 @@
           'aria-label': 'Four bars of increasing length for register, L1 cache, L2 cache and main memory' }, s);
       },
       beats: [
-        { say: 'A value already in a register costs about one operation to use. This is the free case.' },
-        { say: 'Reach into the nearest cache and you have spent a handful of those operations.' },
-        { say: 'Reach into the next one out and you have spent a few dozen of them.' },
-        { say: 'Miss every cache and go to main memory, and you have spent a few hundred.' },
-        { say: 'So the question is not how many operations you do. It is how many bytes you move.' }
+        { say: 'A register already holds the value close to the processor. Access is fast, though its exact cost depends on the operation.' },
+        { say: 'If the value is in the nearest cache, accessing it takes longer than using a register.' },
+        { say: 'Accessing a more distant cache takes longer again.' },
+        { say: 'If all caches miss, the processor must fetch the value from main memory. This can take hundreds of processor cycles.' },
+        { say: 'Therefore, estimate both computation and data movement. A program with few operations can still be slow if it repeatedly waits for memory.' }
       ]
     }
   };

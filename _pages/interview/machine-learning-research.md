@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Machine Learning Research
-description: Choose a useful research question and design an experiment that could disprove the claim.
+description: Choose a useful research question and design a test that could challenge your claim.
 permalink: /machine-learning-research/
 topic_id: machine-learning-research
 robots: noindex, nofollow

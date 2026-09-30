@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Edge AI
-description: Fit a useful model within a device's memory, latency, power, and privacy limits.
+description: Fit a useful model within a device's memory, response-time, power and privacy limits.
 permalink: /edge-ai/
 topic_id: edge-ai
 robots: noindex, nofollow

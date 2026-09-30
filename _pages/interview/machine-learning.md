@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Machine Learning
-description: Turn a vague product problem into a model that can be evaluated and shipped.
+description: Turn a vague product request into a model you can evaluate and deploy.
 permalink: /machine-learning/
 topic_id: machine-learning
 robots: noindex, nofollow

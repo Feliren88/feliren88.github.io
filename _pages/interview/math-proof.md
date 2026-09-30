@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Mathematical Proof
-description: Build a valid argument and find the exact step where a flawed argument fails.
+description: Build a valid mathematical argument and find the step where an invalid argument fails.
 permalink: /math-proof/
 topic_id: math-proof
 robots: noindex, nofollow

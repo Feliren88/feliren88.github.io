@@ -115,7 +115,7 @@
       function (s) { var mean = s.r * (1 - s.p) / s.p; return [0, Math.ceil(mean + 6 * Math.sqrt(mean / s.p))]; },
       function (k, s) { return k < 0 ? 0 : Math.exp(logChoose(k + s.r - 1, k) + s.r * Math.log(s.p) + k * Math.log1p(-s.p)); },
       function (x, s) { return sumTo(x, function (k) { return D['negative-binomial'].density(k, s); }); },
-      'X counts failures before the rth success.'),
+      'X counts failures before success number r.'),
     hypergeometric: discrete('Hypergeometric', [knob('K', 'Successes in 50 items', 1, 49, 1, 20), knob('n', 'Items drawn', 1, 49, 1, 12)],
       function (s) { return [Math.max(0, s.n - (50 - s.K)), Math.min(s.n, s.K)]; },
       function (k, s) { return Math.exp(logChoose(s.K, k) + logChoose(50 - s.K, s.n - k) - logChoose(50, s.n)); },
@@ -125,7 +125,7 @@
       function () { return [0, 2]; },
       function (k, s) { return probs(s)[k] || 0; },
       function (x, s) { var p = probs(s); return x < 0 ? 0 : x < 1 ? p[0] : x < 2 ? p[0] + p[1] : 1; },
-      'The chart codes A as 0, B as 1, and C as 2. This order is only for the CDF; categories have no inherent order.'),
+      'The chart represents categories A, B, and C as 0, 1, and 2. This chosen order lets the chart display a CDF. The categories themselves have no natural order.'),
     'discrete-uniform': discrete('Discrete uniform', [knob('a', 'First integer', -5, 5, 1, 0), knob('n', 'Number of values', 2, 16, 1, 6)],
       function (s) { return [s.a, s.a + s.n - 1]; },
       function (k, s) { return k >= s.a && k < s.a + s.n ? 1 / s.n : 0; },
@@ -169,7 +169,7 @@
         return Math.exp((s.a - 1) * Math.log(x) + (s.b - 1) * Math.log1p(-x) - logB);
       },
       function (x, s) { return betaI(x, s.a, s.b); },
-      'Shapes below 1 rise steeply at an endpoint.'),
+      'When a shape parameter is below 1, the density rises without bound near the corresponding endpoint.'),
     lognormal: continuous('Lognormal', [knob('mu', 'Log mean μ', -1, 1, .1, 0), knob('sigma', 'Log standard deviation σ', .3, 1.5, .1, .6)],
       function (s) { return [0, Math.exp(s.mu + 3.5 * s.sigma)]; },
       function (x, s) { if (x <= 0) return 0; var z = (Math.log(x) - s.mu) / s.sigma; return Math.exp(-z * z / 2) / (x * s.sigma * Math.sqrt(2 * PI)); },
@@ -348,7 +348,7 @@
     if (!allowed.length) return;
     host.innerHTML = '<section class="ivd-panel" aria-label="Interactive distribution explorer">' +
       '<div class="ivd-head"><div><h3>Explore a probability distribution</h3>' +
-      '<p>A PDF shows density for continuous values, while a PMF shows point probabilities for discrete values. A CDF shows the probability at or below a selected value.</p></div>' +
+      '<p>For separate outcomes, a probability mass function (PMF) gives the probability of each outcome. For continuous values, a probability density function (PDF) gives a curve whose area measures probability. A cumulative distribution function (CDF) gives the probability at or below the selected value.</p></div>' +
       '<label class="ivd-select">Distribution<select></select></label></div>' +
       '<div class="ivd-charts"><figure><figcaption class="ivd-left-title"></figcaption><svg class="ivd-density" viewBox="0 0 480 246" role="img"></svg></figure>' +
       '<figure><figcaption>CDF · cumulative probability</figcaption><svg class="ivd-cdf" viewBox="0 0 480 246" role="img"></svg></figure></div>' +
@@ -358,7 +358,7 @@
       '<div><dt class="ivd-formula-density-label"></dt><dd class="ivd-formula-density"></dd></div>' +
       '<div><dt>CDF</dt><dd class="ivd-formula-cdf"></dd></div></dl>' +
       '<p class="ivd-formula-scroll-hint">Swipe sideways to read a long equation.</p>' +
-      '<p>The notation uses Γ for the gamma function, B for the beta function, I for the regularized incomplete beta function, P for the regularized lower incomplete gamma function, and Φ for the standard normal CDF. The sign function, sgn, returns −1, 0, or 1. Densities vanish beyond their support, while a density at a boundary may have a finite or infinite one-sided limit. The hypergeometric model draws from 50 items.</p></details></section>';
+      '<p>Some formulas use named mathematical functions. Here, Γ is the gamma function and B is the beta function. Their incomplete forms I and P calculate accumulated probability for beta and gamma distributions. They denote the regularised incomplete beta and regularised lower incomplete gamma functions. Meanwhile, Φ is the standard normal CDF. The sign function, sgn, returns −1 for a negative value, 0 for zero, and 1 for a positive value. Outside the possible value range, density is zero. At a range boundary, its limiting value can be finite or infinite. The hypergeometric example samples from 50 items.</p></details></section>';
     var select = host.querySelector('select');
     var paramsHost = host.querySelector('.ivd-params');
     var cut = host.querySelector('.ivd-cut-label input');

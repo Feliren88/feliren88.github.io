@@ -52,16 +52,16 @@ layout: default
 
   <section class="syl-orientation" aria-labelledby="syl-orientation-title">
     <div class="syl-orientation-main">
-      <span class="syl-phase">Track mission</span>
+      <span class="syl-phase">Learning goal</span>
       <h2 id="syl-orientation-title">What this track prepares you to do</h2>
       <p>{{ site.data.interview_learning.mission.outcome }}</p>
       <p class="syl-orientation-evidence"><strong>Readiness check.</strong> {{ site.data.interview_learning.mission.evidence }}</p>
     </div>
     {% if learning %}
     <div class="syl-prereqs">
-      <h3>Bring these foundations</h3>
+      <h3>What to know first</h3>
       <ul>{% for prerequisite in learning.prerequisites %}<li>{{ prerequisite }}</li>{% endfor %}</ul>
-      <p>If any foundation is unfamiliar, open its track first. Otherwise, begin at module 1.</p>
+      <p>If a listed topic is unfamiliar, study its track first. Otherwise, begin with module 1.</p>
     </div>
     {% endif %}
   </section>
@@ -78,7 +78,7 @@ layout: default
     <div class="syl-method-copy">
       <span class="syl-phase">How to use this track</span>
       <h2 id="syl-method-title">Start with module 1</h2>
-      <p>New to the topic? Start at module 1 and use Focus to hide the rest. Use Reading to change the text and Listen when audio is easier.</p>
+      <p>Begin with module 1 if the topic is new to you. Use Focus to dim other modules. Reading adjusts the text, and Listen reads the module aloud.</p>
     </div>
     <ol class="syl-method-steps">
       <li><b>Goal</b><span>Read why the module matters.</span></li>
@@ -158,12 +158,12 @@ layout: default
       <div class="syl-grounding">
         <span class="syl-phase">Before you begin</span>
         {% if forloop.first %}
-        <p>This is the entry point for the track. It assumes only the foundations listed above.</p>
+        <p>Begin here. This module uses the topics listed under What to know first.</p>
         {% else %}
         {% assign previous_index = forloop.index0 | minus: 1 %}
-        <p>Builds on module {{ forloop.index | minus: 1 }}, <a href="#m{{ forloop.index | minus: 1 }}">{{ topic.modules[previous_index].name }}</a>.</p>
+        <p>This module builds on module {{ forloop.index | minus: 1 }}, <a href="#m{{ forloop.index | minus: 1 }}">{{ topic.modules[previous_index].name }}</a>.</p>
         {% endif %}
-        <p>The terms below are explained in this module. Read its steps in order, then use the terms in your own answer.</p>
+        <p>Read the explanation and diagram steps in order. After that, check the terms below and explain the idea yourself.</p>
       </div>
 
       <p class="syl-phase">Start with the diagram</p>
@@ -199,7 +199,7 @@ layout: default
           {% assign lkey = ekey | append: '/live' %}
           {% if site.data.interview_math.eq[lkey] %}
           <div class="ivm-live" data-live-eq>
-            <span class="ivm-live-label">with your numbers</span>
+            <span class="ivm-live-label">With your numbers</span>
             {{ site.data.interview_math.eq[lkey] }}
           </div>
           {% endif %}
@@ -234,16 +234,16 @@ layout: default
       </ul>
       <p class="syl-check"><span class="syl-check-label">Answer without notes</span>{{ m.check }}</p>
       <details class="syl-feedback">
-        <summary>Check the strength of your answer</summary>
+        <summary>Check your answer</summary>
         <div class="syl-feedback-body">
           <p>Check your answer against 4 points.</p>
           <ol>
-            <li>Answers the question directly before adding detail.</li>
-            <li>Explains how the result arises, using the module's terms.</li>
-            <li>States an assumption, a trade-off, or a way the answer could fail.</li>
-            <li>Uses a concrete example, equation, or test when the question calls for it.</li>
+            <li>Answer the question directly before adding detail.</li>
+            <li>Explain how the method works or why the result follows.</li>
+            <li>State an assumption, a cost, or a limitation that affects your answer.</li>
+            <li>Use an example, equation, or test when it helps answer the question.</li>
           </ol>
-          <p class="syl-feedback-note">These are criteria, not a model answer. Compare them with what you wrote, then choose when this question should return.</p>
+          <p class="syl-feedback-note">Use these points to review what you wrote. Then choose when to practise this question again.</p>
           <div class="syl-review" role="group" aria-label="Schedule the next review">
             <button type="button" data-review="again">Again tomorrow</button>
             <button type="button" data-review="hard">Hard, in 3 days</button>
@@ -265,8 +265,8 @@ layout: default
   <section class="syl-source" aria-labelledby="syl-source-title">
     <div>
       <span class="syl-phase">{% if learning.sources.size > 1 %}Foundational sources{% else %}Foundational source{% endif %}</span>
-      <h2 id="syl-source-title">Check the compressed notes against the source</h2>
-      <p>Use the syllabus for retrieval. Use the reference to verify claims, inspect assumptions, and read the evidence in context.{% if learning.sources.size > 1 %} Start with the first.{% endif %}</p>
+      <h2 id="syl-source-title">Read the source for more detail</h2>
+      <p>Use these notes to practise remembering the ideas. Then read the source to check the assumptions, evidence, and details.{% if learning.sources.size > 1 %} Start with the first.{% endif %}</p>
     </div>
     <ul class="syl-source-list">
       {% for src in learning.sources %}

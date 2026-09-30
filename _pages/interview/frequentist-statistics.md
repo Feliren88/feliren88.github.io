@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Frequentist Statistics
-description: Estimate effects, test claims, and state how the conclusion could be wrong.
+description: Estimate effects, test claims, and explain uncertainty in the conclusion.
 permalink: /frequentist-statistics/
 topic_id: frequentist-statistics
 robots: noindex, nofollow

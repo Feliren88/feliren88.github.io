@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Uncertainty Estimation
-description: Test whether model confidence is useful and decide when the model should abstain.
+description: Test whether confidence estimates are useful and decide when a model should decline to answer.
 permalink: /uncertainty-estimation/
 redirect_from:
   - /uncertainty-quantification/
