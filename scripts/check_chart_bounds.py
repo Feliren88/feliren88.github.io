@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Push every interview chart's knobs to their extremes and check nothing draws outside its chart.
 
-Covers the equation playgrounds (interview-math.js), the staged animations with
-live knobs (interview-anim.js) and the distribution labs. A mark counts as
+Covers the equation playgrounds (interview-math.js), the staged animations
+(interview-anim.js), the distribution labs, and the module explainers (js/labs/),
+whose handles are also pushed to every edge with the keyboard. A mark counts as
 contained when it sits inside a clipped group or inside the chart's viewBox.
 
   make serve   # in another terminal, serving _site on port 4000
@@ -37,13 +38,18 @@ with sync_playwright() as p:
     errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     for t in topics:
         pg.goto(f'{BASE}/{t}/', wait_until='load'); pg.wait_for_timeout(1200)
+        # Module explainers load lazily: bring each into view and wait for it.
+        for i in range(pg.evaluate("() => document.querySelectorAll('.lab-slot').length")):
+            pg.evaluate(f"() => document.querySelectorAll('.lab-slot')[{i}].scrollIntoView({{block: 'center'}})")
+            pg.wait_for_function(f"() => /ready|failed/.test(document.querySelectorAll('.lab-slot')[{i}].getAttribute('data-lab-state') || '')", timeout=8000)
         groups = pg.evaluate("""() => {
           const out = []; let n = 0;
-          document.querySelectorAll('.ivmp-play, .an-host, .ivd-lab').forEach(g => {
-            const r = g.querySelectorAll('input[type=range]'); if (!r.length) return;
-            g.setAttribute('data-chk', ++n); out.push([n, r.length, g.className.split(' ')[0]]); });
+          document.querySelectorAll('.ivmp-play, .an-host, .ivd-lab, .lab').forEach(g => {
+            const r = g.querySelectorAll('input[type=range]'), h = g.querySelectorAll('.pl-handle');
+            if (!r.length && !h.length) return;
+            g.setAttribute('data-chk', ++n); out.push([n, r.length, g.className.split(' ')[0], h.length]); });
           return out; }""")
-        for gid, nknobs, kind in groups:
+        for gid, nknobs, kind, nhandles in groups:
             root = f'[data-chk="{gid}"]'
             # every knob alone at min and max, then all at min, all at max
             settings = [(i, e) for i in range(nknobs) for e in ('min', 'max')] + [('all', 'min'), ('all', 'max')]
@@ -58,6 +64,21 @@ with sync_playwright() as p:
                     title = pg.evaluate(f"() => {{ const g = document.querySelector('{root}'); const h = g.querySelector('.ivmp-title, .an-title, h3'); return h ? h.textContent.slice(0, 50) : ''; }}")
                     print(f'{t} | {kind} | {title} | knob {which}={end} |', '; '.join(bad))
                     break
+            # Push every handle to each edge with the keyboard.
+            for j in range(nhandles):
+                h = pg.locator(f'{root} .pl-handle').nth(j)
+                if not h.is_visible():
+                    continue
+                for key in ('ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'):
+                    h.focus()
+                    for _ in range(60):
+                        pg.keyboard.press('Shift+' + key)
+                    pg.wait_for_timeout(60)
+                    bad = pg.evaluate(f"() => ({CHECK})(document.querySelector('{root}'))")
+                    if bad:
+                        problems += 1
+                        print(f'{t} | {kind} | handle {j} {key} |', '; '.join(bad))
+                        break
             # restore defaults by reloading only if needed later
     print('page errors:', errs[:3])
     b.close()

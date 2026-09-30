@@ -169,10 +169,20 @@ layout: default
       <p class="syl-phase">Start with the diagram</p>
       <div class="syl-scene"></div>
 
+      {% assign module_key = forloop.index0 | append: '' %}
+      {% assign lab_slug = site.data.module_labs[topic.id][module_key] %}
+      {% if lab_slug %}
+      {% capture lab_src %}/js/labs/{{ topic.id }}/{{ lab_slug }}.js{% endcapture %}
+      {% capture lab_include %}labs/{{ topic.id }}/{{ lab_slug }}.html{% endcapture %}
+      <div class="lab-slot" data-lab="{{ topic.id }}/{{ lab_slug }}" data-lab-src="{% include asset.html path=lab_src %}">
+        {% include {{ lab_include }} %}
+      </div>
+      <div class="syl-viz" data-lab-fallback hidden></div>
+      {% else %}
       <div class="syl-viz"></div>
+      {% endif %}
 
       {% assign lab_track = site.data.interview_distributions[topic.id] %}
-      {% assign module_key = forloop.index0 | append: '' %}
       {% assign lab = lab_track[module_key] %}
       {% if lab %}
       <div class="ivd-lab" data-distributions="{{ lab.options | join: ',' }}" data-default="{{ lab.default }}"></div>

@@ -2490,45 +2490,8 @@ topics:
               - sym: 'v'
                 is: "A vector, an ordered list of numbers"
             play:
-              kind: grid
-              title: "Change the outputs of the basis vectors"
-              alt: "A 2 by 2 matrix transforms a square grid. The shaded unit square shows the area change, and the readout gives the signed determinant."
-              x:
-              - -3
-              - 3
-              y:
-              - -3
-              - 3
-              readout: "\"Determinant \" + (a*d-b*c).toFixed(2) + ((a*d-b*c) < 0 ? \". The transformation reverses orientation.\" : ((a*d-b*c)===0 ? \". The output has fewer dimensions.\" : \"\"))"
-              knobs:
-              - k: a
-                label: "First column, across"
-                min: -2
-                max: 2
-                v: 1
-                step: 0.1
-                s: 0
-              - k: c
-                label: "First column, up"
-                min: -2
-                max: 2
-                v: 0
-                step: 0.1
-                s: 0
-              - k: b
-                label: "Second column, across"
-                min: -2
-                max: 2
-                v: 0
-                step: 0.1
-                s: 1
-              - k: d
-                label: "Second column, up"
-                min: -2
-                max: 2
-                v: 1
-                step: 0.1
-                s: 1
+              livetex: '\begin{bmatrix}9001 & 9002 \\ 9003 & 9004\end{bmatrix}\begin{bmatrix}1\\2\end{bmatrix}=\begin{bmatrix}9005\\9006\end{bmatrix}'
+              liveslots: [a, b, c, d, vx, vy]
           - name: "Combining transformations by multiplication"
             tex: '(BA)v = B(Av), \qquad (BA)_{ij} = \sum_{r} B_{ir} A_{rj}'
             read: "Applying one transformation and then another gives a combined transformation. Matrix multiplication expresses that combination."
@@ -2589,6 +2552,9 @@ topics:
                 is: "The bottom-left entry"
               - sym: 'a_{22}'
                 is: "The bottom-right entry"
+            play:
+              livetex: '\det A=9001\times9002-9003\times9004=9005'
+              liveslots: [a, d, b, c, det]
           - name: 'Rank and nullity account for every dimension'
             tex: '\mathrm{rank}(A) + \dim \ker(A) = n'
             read: "The rank counts the independent output directions. The nullity counts the independent input directions mapped to 0. Together, they equal the number of input dimensions."
@@ -2646,6 +2612,9 @@ topics:
             where:
               - sym: '\varsigma'
                 is: "The scale factor for the eigenvector, including any sign reversal"
+            play:
+              livetex: '\lambda_1=9001,\quad\lambda_2=9002'
+              liveslots: [l1, l2]
           - name: "Finding eigenvalues from the determinant"
             tex: '\det(A - \varsigma I) = 0'
             read: "An eigenvalue makes the shifted matrix map a non-zero vector to 0. Therefore, set the shifted matrix's determinant to 0 and solve."
@@ -2715,6 +2684,9 @@ topics:
                 is: "The input-coordinate matrix whose columns are perpendicular unit vectors"
               - sym: 'A^{\top}'
                 is: "The transpose of A, obtained by swapping its rows and columns"
+            play:
+              livetex: '\sigma_1=9001,\quad\sigma_2=9002'
+              liveslots: [s1, s2]
           - name: "The best approximation with a chosen rank"
             tex: 'A_{k} = \sum_{r=1}^{k} \varsigma_{r}\, u_{r} v_{r}^{\top}, \qquad \|A - A_{k}\|_{F} \text{ is the smallest possible}'
             read: "Keep the largest singular values and discard the rest. No other approximation with that rank has a smaller error under the theorem's error measure."
@@ -2809,58 +2781,9 @@ topics:
                 is: "The true answer for this input"
               - sym: 'X'
                 is: "The design matrix with one example per row and one feature per column"
-            play:
-              kind: fit
-              title: Move the line and watch the squared error
-              alt: A scatter of points with a straight line the reader can tilt and shift, with vertical residuals drawn and the mean squared error shown.
-              x:
-              - 0
-              - 10
-              y:
-              - 0
-              - 12
-              xlabel: "Feature"
-              ylabel: "Answer"
-              line: w*x + b
-              livetex: '\hat{y} \;=\; 9001\,x \;+\; 9002, \qquad \hat{R} \;=\; 9003'
-              liveslots: [w, b, loss]
-              points:
-              - - 1
-                - 2.1
-              - - 2
-                - 3.4
-              - - 3
-                - 3.2
-              - - 4
-                - 5.1
-              - - 5
-                - 5.6
-              - - 6
-                - 7.2
-              - - 7
-                - 7.1
-              - - 8
-                - 9.4
-              - - 9
-                - 9.1
-              readout: "\"Mean squared error \" + loss.toFixed(3) + (loss < 0.32 ? \". This is close to the least-squares fit.\" : \"\")"
-              knobs:
-              - k: w
-                label: "Slope"
-                min: -1
-                max: 2.5
-                v: 0.4
-                step: 0.02
-                dp: 2
-                s: 0
-              - k: b
-                label: "Intercept"
-                min: -2
-                max: 6
-                v: 4
-                step: 0.05
-                dp: 2
-                s: 1
+            live:
+              tex: '\hat{y} \;=\; 9001\,x \;+\; 9002, \qquad \hat{R} \;=\; 9003'
+              slots: [w, b, loss]
           - name: "Ridge regularisation and sensitivity"
             tex: '\hat{w}_{\lambda} = (X^{\top}X + \lambda I)^{-1} X^{\top} y'
             read: "Adding a positive term to the diagonal makes the solution less sensitive to input errors and pulls its coefficients towards 0."
@@ -2925,10 +2848,16 @@ topics:
                 is: "A small disturbance in the data"
               - sym: '\delta \hat{w}'
                 is: "The resulting change in the answer"
+            live:
+              tex: '\varkappa(A) = 9001'
+              slots: [kappa]
           - name: "Solve a system without computing the inverse"
             tex: '\text{solve } Av = y \; \text{directly, rather than forming } A^{-1} \text{ then multiplying}'
             read: "Split the matrix into simpler factors and solve using them. This usually needs less work and produces less rounding error than explicitly computing the inverse."
             note: "QR and Cholesky are methods for splitting a matrix into factors that make a system easier to solve. They can use about a third of the work of an explicit inverse and give more stable numerical results. Therefore, an explicit inverse in production code is often a sign that the implementation needs review."
+            live:
+              tex: '\mathrm{relative\ residual:}\quad \mathrm{solve} = 9001, \quad \mathrm{inverse} = 9002'
+              slots: [resSolve, resInv]
         covers:
           - "Floating-point representation and rounding errors"
           - Condition number and sensitivity

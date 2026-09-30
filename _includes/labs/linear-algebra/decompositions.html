@@ -1,0 +1,24 @@
+<section class="xp lab" id="lab-linear-algebra-decompositions" aria-labelledby="lab-la-svd-t">
+  <header class="lab-head">
+    <span class="syl-phase">Explore it</span>
+    <h3 id="lab-la-svd-t">Split a matrix into rotate, stretch, rotate</h3>
+  </header>
+  <p class="lab-eq">
+    <span data-factorisation><i>A</i> = <span class="lab-term is-o" data-term="u">U</span><span class="lab-term is-k" data-term="sigma">Σ</span><span class="lab-term is-q" data-term="vt">Vᵀ</span></span>
+    <span data-singular-values> &nbsp; <i>σ</i>₁ = <span data-val="s1">0</span>, <i>σ</i>₂ = <span data-val="s2">0</span></span>
+    <span data-chol-values hidden> &nbsp; <i>L</i> = <span class="lab-mat"><span><span data-val="l11">0</span><span data-val="l21">0</span></span><span>0<span data-val="l22">0</span></span></span></span>
+    <span class="lab-term" data-term="tail" data-image-error hidden> &nbsp; Rank <span data-val="k">8</span> error <span data-val="err">–</span></span>
+  </p>
+  <div class="lab-main">
+    <div class="lab-stage" data-stage>
+      <div class="lab-images" data-images hidden>
+        <figure><canvas width="64" height="64" data-img="orig" role="img" aria-label="The original sample image"></canvas><figcaption>Original</figcaption></figure>
+        <figure><canvas width="64" height="64" data-img="rank" role="img" aria-label="The image rebuilt from its largest singular values"></canvas><figcaption>Rank <span data-val="k">8</span> copy</figcaption></figure>
+      </div>
+    </div>
+    <div data-guide-box></div>
+  </div>
+  <div class="lab-ctl" data-ctl></div>
+  <p class="lab-say" aria-live="polite" data-say></p>
+  <p class="lab-src">The images come from <a href="https://poloclub.github.io/cnn-explainer/" rel="noopener noreferrer">CNN Explainer</a>, by the Polo Club of Data Science. Its <a href="https://github.com/poloclub/cnn-explainer" rel="noopener noreferrer">code</a> uses the MIT licence. The PCA cloud is simulated with a fixed seed. <a href="/third-party-notices/">Licences</a>.</p>
+</section>
