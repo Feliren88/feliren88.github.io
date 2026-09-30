@@ -8,6 +8,7 @@ with sync_playwright() as p:
     page.goto(base+'/linear-algebra/#m7')
     lab=page.locator('[data-lab="linear-algebra/conditioning"] .lab')
     lab.scroll_into_view_if_needed()
+    page.wait_for_function("() => document.querySelector('[data-lab=\"linear-algebra/conditioning\"]').getAttribute('data-lab-state') === 'ready'")
     assert lab.locator('svg.lab-plane:visible').count()==1, 'Only the active chart may be visible'
     nxt=lab.locator('[data-guide="1"]')
     nxt.click();nxt.click()
@@ -17,6 +18,13 @@ with sync_playwright() as p:
     assert lab.locator('[data-k="progress"]').count()==1, 'The numerical motions need a scrub control'
     lab.locator('[data-k="mode"]').select_option('hilbert')
     assert page.locator('#m7 [data-live="resSolve"]').count()==1, 'The Hilbert view must publish its measured residual to the module equation'
+    size=lab.locator('[data-k="n"]')
+    previous_size=float(size.input_value())
+    size.evaluate("e=>{e.value=12;e.dispatchEvent(new Event('input',{bubbles:true}))}")
+    scrub=lab.locator('[data-k="progress"]')
+    assert float(scrub.input_value())==1, 'A manual size change must put its motion at the final state'
+    scrub.evaluate("e=>{e.value=0;e.dispatchEvent(new Event('input',{bubbles:true}))}")
+    assert float(size.input_value())==previous_size, 'Scrubbing a manual size change must restore its previous matrix'
     lab.locator('[data-k="mode"]').select_option('scale')
     lab.locator('[data-act="play"]').click()
     scrub=lab.locator('[data-k="progress"]')
@@ -37,5 +45,15 @@ with sync_playwright() as p:
     assert lab.locator('[data-act="scaled"]').get_attribute('aria-pressed')=='false', 'Previous must restore the unscaled example'
     assert 'simulated' in lab.locator('.lab-src').inner_text(), 'Label simulated nudges'
     assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    page.emulate_media(reduced_motion='no-preference')
+    page.reload()
+    lab.scroll_into_view_if_needed()
+    lab.locator('[data-k="mode"]').select_option('scale')
+    lab.locator('[data-act="play"]').click()
+    assert lab.get_attribute('data-anim') is not None, 'The scrub test needs an active animation'
+    scrub=lab.locator('[data-k="progress"]')
+    scrub.evaluate("e=>{e.value=0.25;e.dispatchEvent(new Event('input',{bubbles:true}))}")
+    assert float(scrub.input_value())==0.25, 'Interrupting playback must preserve the requested fraction'
+    assert lab.get_attribute('data-anim') is None
     browser.close()
 print('Conditioning cloud, scrubbing, scaling, guide state and provenance passed.')

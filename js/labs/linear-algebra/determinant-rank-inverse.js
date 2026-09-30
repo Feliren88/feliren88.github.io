@@ -61,10 +61,10 @@
     var dlg = XP.dialog(root);
 
     ctl.innerHTML =
-      '<label>apply <input type="range" data-k="t" min="0" max="1" step="0.01" aria-label="How much of A to show"></label>' +
+      '<label>Apply <input type="range" data-k="t" min="0" max="1" step="0.01" aria-label="How much of A to show"></label>' +
       '<button type="button" data-act="play">Apply A</button>' +
       '<button type="button" data-act="undo">Undo with A⁻¹</button>' +
-      '<label>preset <select data-k="preset" aria-label="Preset matrix">' + Object.keys(PRESETS).map(function (k) { return '<option>' + k + '</option>'; }).join('') + '</select></label>' +
+      '<label>Preset <select data-k="preset" aria-label="Preset matrix">' + Object.keys(PRESETS).map(function (k) { return '<option>' + k + '</option>'; }).join('') + '</select></label>' +
       '<button type="button" data-act="solve" aria-pressed="false">Solve Av = y</button>' +
       '<button type="button" data-zoom="det">Determinant, worked</button>' +
       '<button type="button" data-zoom="rank">Rank and nullity</button>' +
@@ -89,7 +89,7 @@
       if (sol.kind === 'one') return 'Exactly 1 x lands on y: x = (' + fmt(sol.x[0]) + ', ' + fmt(sol.x[1]) + ').';
       if (sol.kind === 'line') return 'y sits on the squashed line, so a whole line of x lands on it.';
       if (sol.kind === 'all') return 'A sends everything to 0, and y is 0, so every x works.';
-      return 'No x lands on y: A only reaches ' + (rank(m) === 1 ? 'the squashed line' : 'the origin') + ', and y is off it.';
+      return 'No x lands on y because A only reaches ' + (rank(m) === 1 ? 'the squashed line' : 'the origin') + ', and y is off it.';
     }
 
     function draw() {
@@ -159,7 +159,7 @@
       if (!b) return;
       var act = b.getAttribute('data-act'), z = b.getAttribute('data-zoom');
       if (z === 'det') {
-        var m = s.m;
+        var m = blend(s.m, s.t);
         dlg.open('Determinant, worked', table([
           ['a d', fmt(m[0]) + ' × ' + fmt(m[3]) + ' = ' + fmt(m[0] * m[3])],
           ['b c', fmt(m[1]) + ' × ' + fmt(m[2]) + ' = ' + fmt(m[1] * m[2])],
@@ -168,7 +168,7 @@
         return;
       }
       if (z === 'rank') {
-        var rk = rank(s.m);
+        var rk = rank(blend(s.m, s.t));
         dlg.open('Rank and nullity', table([
           ['rank A, dimensions that survive', String(rk)],
           ['dim ker A, dimensions squashed to 0', String(2 - rk)],

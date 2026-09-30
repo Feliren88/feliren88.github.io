@@ -263,7 +263,7 @@
     ctl.addEventListener('input', function (e) {
       var k = e.target.getAttribute('data-k');
       if (k === 'lam') { s.lam = +e.target.value; draw(); }
-      if (k === 'progress' && motion) { api.interrupt(); frame(+e.target.value); report(); }
+      if (k === 'progress' && motion) { var requested = +e.target.value; api.interrupt(); frame(requested); report(); }
     });
     ctl.addEventListener('change', function (e) {
       if (e.target.getAttribute('data-k') === 'mode') { s.mode = e.target.value; prepare(s.mode === 'fit' ? { snap: true } : { wobble: s.mode === '3d' }); draw(); }

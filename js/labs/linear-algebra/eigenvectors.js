@@ -219,7 +219,7 @@
       ]) + '<p>Raising Λ to a power only raises each eigenvalue, which is why repetition is easy in this basis.</p>', btn);
     }
 
-    ctl.addEventListener('input', function (e) { if (e.target === tIn) { s.t = +tIn.value; s.mode = 'fan'; draw(); } });
+    ctl.addEventListener('input', function (e) { if (e.target === tIn) { var requested = +tIn.value; api.interrupt(); s.t = requested; draw(); } });
     ctl.addEventListener('change', function (e) {
       if (e.target === preset) goTo({ m: PRESETS[preset.value], t: 1, mode: 'fan' });
       else report();

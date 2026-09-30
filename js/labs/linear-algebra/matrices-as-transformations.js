@@ -109,7 +109,7 @@
       }).join('') + '</tbody></table>';
     }
     function zoomAv(btn) {
-      var m = s.m, av = apply(m, V);
+      var m = shown(), av = apply(m, V);
       dlg.open('A times v, worked', table([
         ['Aî, the first column', '(' + fmt(m[0]) + ', ' + fmt(m[2]) + ')'],
         ['Aĵ, the second column', '(' + fmt(m[1]) + ', ' + fmt(m[3]) + ')'],
@@ -119,7 +119,7 @@
     }
     function zoomBa(btn) {
       var terms = productTerms(B, s.m), ba = mul(B, s.m), names = ['(BA)₁₁', '(BA)₁₂', '(BA)₂₁', '(BA)₂₂'];
-      dlg.open('Entries of BA, worked', '<p>B is a quarter turn, [[' + fmt(B[0]) + ', ' + fmt(B[1]) + '], [' + fmt(B[2]) + ', ' + fmt(B[3]) + ']]. Each entry adds 2 products.</p>' +
+      dlg.open('Final product BA, worked', '<p>B is a quarter turn, [[' + fmt(B[0]) + ', ' + fmt(B[1]) + '], [' + fmt(B[2]) + ', ' + fmt(B[3]) + ']]. Each entry adds 2 products.</p>' +
         table(names.map(function (n, k) { return [n, fmt(terms[k][0]) + ' + ' + fmt(terms[k][1]) + ' = ' + fmt(ba[k])]; })), btn);
     }
 

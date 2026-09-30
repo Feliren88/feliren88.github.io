@@ -250,8 +250,8 @@
     }
     ctl.addEventListener('input', function (e) {
       var k = e.target.getAttribute('data-k');
-      if (k === 'progress' && motion) { api.interrupt(); frame(+e.target.value); report(); }
-      if (k === 'delta' || k === 'n') { s[k] = +e.target.value; draw(); }
+      if (k === 'progress' && motion) { var requested = +e.target.value; api.interrupt(); frame(requested); report(); }
+      if (k === 'delta' || k === 'n') { var target = {}; target[k] = +e.target.value; api.interrupt(); prepare(target); frame(1); }
     });
     ctl.addEventListener('change', function (e) {
       if (e.target.getAttribute('data-k') === 'mode') { s.mode = e.target.value; if (s.mode === 'scale') s.gstep = 0; prepare(s.mode === 'hilbert' ? { n: 12 } : s.mode === 'lines' ? { delta: 0.15 } : {}); draw(); }

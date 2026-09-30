@@ -38,9 +38,18 @@ with sync_playwright() as p:
     page.keyboard.press('Escape')
     lab.locator('[data-reset]').click()
     page.emulate_media(reduced_motion='no-preference')
+    page.reload()
+    lab.scroll_into_view_if_needed()
     nxt=lab.locator('[data-guide="1"]')
     while not nxt.is_disabled(): nxt.click()
     page.wait_for_timeout(920)
     assert lab.get_attribute('data-anim') is None, 'The last guide page must finish its transition within 900ms'
+    page.emulate_media(reduced_motion='no-preference')
+    lab.locator('[data-act="play"]').click()
+    assert lab.get_attribute('data-anim') is not None, 'The scrub test needs an active animation'
+    scrub=lab.locator('[data-k="progress"]')
+    scrub.evaluate("e=>{e.value=0.25;e.dispatchEvent(new Event('input',{bubbles:true}))}")
+    assert float(scrub.input_value())==0.25, 'Interrupting playback must preserve the requested fraction'
+    assert lab.get_attribute('data-anim') is None
     browser.close()
 print('Live line fit, scrubbing, degenerate points and guide timing passed.')
