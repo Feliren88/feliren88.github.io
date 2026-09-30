@@ -537,6 +537,13 @@
       };
       /* A press anywhere in the explainer finishes the running animation. */
       root.addEventListener('pointerdown', function () { api.interrupt(); }, true);
+      /* A redraw replaces marks, which drops their dimming: re-apply the
+         guide's highlight whenever the stage's contents change. Toggling
+         classes changes attributes only, so this cannot loop. */
+      if (typeof MutationObserver === 'function') {
+        new MutationObserver(function () { if (focused.length) highlight(stage, focused); })
+          .observe(stage, { childList: true, subtree: true });
+      }
       /* Hovering a term lights its part of the picture, and the other way round. */
       Array.prototype.forEach.call(root.querySelectorAll('[data-term]'), function (t) {
         t.addEventListener('mouseenter', function () { highlight(stage, [t.getAttribute('data-term')]); });

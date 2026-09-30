@@ -57,3 +57,10 @@
 .lab-plane text { font: 600 13px var(--xp-mono); fill: var(--text); }
 .lab-plane .is-dim { opacity: 0.18; }
 .lab-plane .pl-dash { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-dasharray: 5 4; }
+/* ── Linear Algebra ─────────────────────────────────────── */
+.lab-plane .pl-line { stroke: currentColor; stroke-width: 2; }
+.lab-plane .pl-trail { fill: var(--xp-o); }
+.lab-plane .pl-span { fill: color-mix(in srgb, var(--xp-o) 12%, transparent); }
+.lab-plane .pl-span-line { stroke: color-mix(in srgb, var(--xp-o) 40%, transparent); stroke-width: 10; stroke-linecap: round; }
+.lab-plane .pl-span-dot { fill: var(--xp-o); }
+.lab-plane .pl-plane3 { fill: color-mix(in srgb, var(--xp-o) 16%, transparent); stroke: var(--xp-o); stroke-width: 1.5; }

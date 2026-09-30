@@ -79,6 +79,14 @@ CONTRAST = """(sel) => { const root = document.querySelector(sel);
   return out.slice(0, 6); }"""
 
 
+# Marks that share 1 part must share its highlight: a redraw must not undo the guide's dimming.
+MIXED = """(sel) => { const st = document.querySelector(sel + ' [data-stage]'), by = {};
+  st.querySelectorAll('[data-part]').forEach(e => { const p = e.getAttribute('data-part');
+    if (p.indexOf(' ') >= 0 || !e.getClientRects().length) return;
+    (by[p] = by[p] || new Set()).add(e.classList.contains('is-dim')); });
+  return Object.keys(by).filter(p => by[p].size > 1); }"""
+
+
 def ready(pg, i):
     pg.evaluate(f"() => document.querySelectorAll('.lab-slot')[{i}].scrollIntoView({{block: 'center'}})")
     pg.wait_for_function(f"() => /ready|failed/.test(document.querySelectorAll('.lab-slot')[{i}].getAttribute('data-lab-state') || '')", timeout=8000)
@@ -187,6 +195,10 @@ def check_page(b, track, width):
         prv = pg.locator(f'{sel} [data-guide="-1"]')
         while not nxt.is_disabled():
             nxt.click()
+            pg.wait_for_timeout(1000)
+            mixed = pg.evaluate(MIXED, sel)
+            if mixed:
+                fail(where, 'page', guide_n(pg, sel), 'dims only some marks of', ', '.join(mixed))
         if guide_n(pg, sel) != f'{total} / {total}':
             fail(where, 'last guide page unreachable', guide_n(pg, sel))
         sweep_controls(pg, sel, where, seen)
@@ -234,7 +246,10 @@ def check_reduced(b, track):
 
 def check_fallback(b, track):
     first = LABS[track][sorted(LABS[track], key=int)[0]]
-    pg = b.new_page(viewport={'width': 1400, 'height': 900})
+    # The site's service worker fetches scripts itself, out of reach of page
+    # routes, so block it for this test.
+    ctx = b.new_context(service_workers='block', viewport={'width': 1400, 'height': 900})
+    pg = ctx.new_page()
     pg.route(f'**/js/labs/{track}/{first}.js*', lambda r: r.abort())
     pg.goto(f'{BASE}/{track}/', wait_until='load')
     i = pg.evaluate(f"() => [...document.querySelectorAll('.lab-slot')].findIndex(s => s.getAttribute('data-lab') === '{track}/{first}')")
@@ -245,7 +260,7 @@ def check_fallback(b, track):
             return !!fb && !fb.hidden && fb.children.length > 0 && !!s.querySelector('.lab-fail'); }}""")
         if not ok:
             fail(track, first, 'fallback diagram is missing or empty')
-    pg.close()
+    ctx.close()
 
 
 with sync_playwright() as p:
