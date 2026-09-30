@@ -463,6 +463,11 @@
           ].map(function (v) { return v.toFixed(1); }).join(' '),
           'class': 'an-area is-after', 'data-from': 5
         });
+        /* Clip the grids, arrows and squares to a box that stops above the
+           determinant label: a large matrix throws the grid far past the
+           stage, and it must never run through the text. */
+        s = el('defs', {}, el('clipPath', { id: 'an-clip-lintrans' }, rect({ x: 0, y: 0, width: 330, height: 236 }))) +
+          el('g', { 'clip-path': 'url(#an-clip-lintrans)' }, s);
         s += text('determinant 2.75', { x: 8, y: 252, 'class': 'an-lab an-det' });
         return el('svg', { viewBox: '0 0 330 260', 'class': 'an-svg', role: 'img',
           'aria-label': 'A grid being transformed by a matrix' }, s);
@@ -1374,8 +1379,12 @@
         /* Two open subpaths, the upper and lower edge. `.an-ci` sets a
            stroke and no fill, and an unfilled path defaults to black,
            so the fill is turned off here rather than in the stylesheet. */
-        s += el('path', { d: band(1) + band(-1), fill: 'none', 'stroke-width': 1.6,
-          'class': 'an-ci an-fade', 'data-from': 3 });
+        /* The band starts wider than the plot, so it is clipped to the area
+           above the axis; otherwise it runs through the axis and its label. */
+        s += el('defs', {}, el('clipPath', { id: 'an-clip-average' }, rect({ x: 30, y: 2, width: 440, height: 186 })));
+        s += el('g', { 'clip-path': 'url(#an-clip-average)' },
+          el('path', { d: band(1) + band(-1), fill: 'none', 'stroke-width': 1.6,
+            'class': 'an-ci an-fade', 'data-from': 3 }));
 
         s += el('g', { 'data-from': 0 }, D.map(function (d, i) {
           return el('circle', { cx: x(i), cy: TRUTH + d, r: 4, 'class': 'an-obs' });
@@ -1461,7 +1470,7 @@
           var y = 30 + i * 42;
           /* Square root scale. A linear one makes the first three bars
              invisible, which hides the comparison the scene is about. */
-          var w = 14 + Math.sqrt(r.c) * 22;
+          var w = 14 + Math.sqrt(r.c) * 20;   /* main memory ends at x = 490, inside the 500-wide stage */
           s += el('text', { x: 118, y: y + 15, 'class': 'an-lab', 'text-anchor': 'end' }, r.k);
           s += el('rect', { x: 130, y: y, width: w.toFixed(1), height: 22, rx: 3,
             'class': 'an-box an-fade', 'data-from': i });

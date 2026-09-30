@@ -189,11 +189,42 @@
       x = spec.x[0] + (spec.x[1] - spec.x[0]) * i / n;
       y = fn.apply(null, [x].concat(args));
       if (!isFinite(y)) { first = true; continue; }
-      y = Math.max(spec.y[0] - 99, Math.min(spec.y[1] + 99, y));
+      /* Keep coordinates within one axis span of the plot. The plot layer is
+         clipped to the frame, so this only bounds the numbers in the path;
+         slopes inside the frame are exact. */
+      var span = spec.y[1] - spec.y[0];
+      y = Math.max(spec.y[0] - span, Math.min(spec.y[1] + span, y));
       d += (first ? 'M' : 'L') + sx(x).toFixed(1) + ' ' + sy(y).toFixed(1);
       first = false;
     }
     return d;
+  }
+
+  /* Data marks draw into this layer, clipped to the plot area, so a knob
+     pushed past the axis range can never throw a line across the labels. */
+  function plotLayer(stage) {
+    var g = el('g', { 'clip-path': 'url(#' + stage.getAttribute('data-clip') + ')', 'class': 'ivmp-plot' });
+    stage.appendChild(g);
+    return g;
+  }
+
+  /* Where a curve first leaves the frame, if it does: a small arrow on the
+     edge says the values carry on past the axis, and in which direction. */
+  function exitMark(g, fn, sx, sy, spec, args) {
+    var n = 160, i, x, y;
+    for (i = 0; i <= n; i++) {
+      x = spec.x[0] + (spec.x[1] - spec.x[0]) * i / n;
+      y = fn.apply(null, [x].concat(args));
+      if (!isFinite(y) || y > spec.y[1] || y < spec.y[0]) {
+        var up = !isFinite(y) || y > spec.y[1], px = sx(x), py = up ? PAD.t + 1 : H - PAD.b - 1;
+        g.appendChild(el('path', {
+          d: up ? 'M' + (px - 5) + ' ' + (py + 8) + 'L' + px + ' ' + py + 'L' + (px + 5) + ' ' + (py + 8) + 'Z'
+                : 'M' + (px - 5) + ' ' + (py - 8) + 'L' + px + ' ' + py + 'L' + (px + 5) + ' ' + (py - 8) + 'Z',
+          'class': 'ivmp-exit'
+        }));
+        return;
+      }
+    }
   }
 
   /* ── Archetypes ──────────────────────────────────────────
@@ -213,13 +244,15 @@
       stage.textContent = '';
       axes(stage, sx, sy, spec);
       var args = names.map(function (n) { return state[n]; });
+      var plot = plotLayer(stage);
       fns.forEach(function (c, i) {
         if (!c.fn) return;
-        stage.appendChild(el('path', {
+        plot.appendChild(el('path', {
           d: pathFor(c.fn, sx, sy, spec, args),
           'class': 'ivmp-curve',
           'data-s': c.s === undefined ? i : c.s
         }));
+        exitMark(stage, c.fn, sx, sy, spec, args);
       });
     };
   };
@@ -234,8 +267,9 @@
       stage.textContent = '';
       axes(stage, sx, sy, spec);
       var args = names.map(function (n) { return state[n]; });
+      var plot = plotLayer(stage);
       if (line) {
-        stage.appendChild(el('path', {
+        plot.appendChild(el('path', {
           d: pathFor(line, sx, sy, spec, args), 'class': 'ivmp-curve',
           'data-s': spec.s === undefined ? 0 : spec.s
         }));
@@ -245,12 +279,12 @@
         var yh = line ? line.apply(null, [pt[0]].concat(args)) : 0;
         sse += (pt[1] - yh) * (pt[1] - yh);
         if (spec.residuals !== false) {
-          stage.appendChild(el('line', {
+          plot.appendChild(el('line', {
             x1: sx(pt[0]), y1: sy(pt[1]), x2: sx(pt[0]), y2: sy(yh),
             'class': 'ivmp-resid'
           }));
         }
-        stage.appendChild(el('circle', {
+        plot.appendChild(el('circle', {
           cx: sx(pt[0]), cy: sy(pt[1]), r: 4, 'class': 'ivmp-pt'
         }));
       });
@@ -268,15 +302,16 @@
       stage.textContent = '';
       axes(stage, sx, sy, spec);
       var args = names.map(function (n) { return state[n]; });
+      var plot = plotLayer(stage);
       [[neg, 0], [pos, 2]].forEach(function (pair) {
         if (!pair[0]) return;
-        stage.appendChild(el('path', {
+        plot.appendChild(el('path', {
           d: pathFor(pair[0], sx, sy, spec, args),
           'class': 'ivmp-curve', 'data-s': pair[1]
         }));
       });
       var thr = state[spec.knob || 't'];
-      stage.appendChild(el('line', {
+      plot.appendChild(el('line', {
         x1: sx(thr), y1: PAD.t, x2: sx(thr), y2: H - PAD.b,
         'class': 'ivmp-thr'
       }));
@@ -302,27 +337,28 @@
       var a = state.a, b = state.b, c = state.c, d = state.d;
       var lo = Math.ceil(spec.x[0]), hi = Math.floor(spec.x[1]), i;
       function P(u, v) { return [sx(a * u + b * v), sy(c * u + d * v)]; }
+      var plot = plotLayer(stage);
       for (i = lo; i <= hi; i++) {
         var p1 = P(i, spec.y[0]), p2 = P(i, spec.y[1]);
-        stage.appendChild(el('line', {
+        plot.appendChild(el('line', {
           x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1], 'class': 'ivmp-mesh'
         }));
         var q1 = P(spec.x[0], i), q2 = P(spec.x[1], i);
-        stage.appendChild(el('line', {
+        plot.appendChild(el('line', {
           x1: q1[0], y1: q1[1], x2: q2[0], y2: q2[1], 'class': 'ivmp-mesh'
         }));
       }
       var e1 = P(1, 0), e2 = P(0, 1), o = P(0, 0);
       var unit = [P(0, 0), P(1, 0), P(1, 1), P(0, 1)];
-      stage.appendChild(el('polygon', {
+      plot.appendChild(el('polygon', {
         points: unit.map(function (p) { return p.join(','); }).join(' '),
         'class': 'ivmp-area'
       }));
-      stage.appendChild(el('line', {
+      plot.appendChild(el('line', {
         x1: o[0], y1: o[1], x2: e1[0], y2: e1[1],
         'class': 'ivmp-basis', 'data-s': 0
       }));
-      stage.appendChild(el('line', {
+      plot.appendChild(el('line', {
         x1: o[0], y1: o[1], x2: e2[0], y2: e2[1],
         'class': 'ivmp-basis', 'data-s': 1
       }));
@@ -383,14 +419,15 @@
       stage.textContent = '';
       axes(stage, sx, sy, spec);
       var args = names.map(function (n) { return state[n]; });
+      var plot = plotLayer(stage);
       if (loss) {
-        stage.appendChild(el('path', {
+        plot.appendChild(el('path', {
           d: pathFor(loss, sx, sy, spec, args), 'class': 'ivmp-curve',
           'data-s': 0
         }));
       }
       (state.__trail || []).forEach(function (p, i, arr) {
-        stage.appendChild(el('circle', {
+        plot.appendChild(el('circle', {
           cx: sx(p), cy: sy(loss ? loss.apply(null, [p].concat(args)) : 0),
           r: i === arr.length - 1 ? 5 : 2.5,
           'class': i === arr.length - 1 ? 'ivmp-head' : 'ivmp-trail'
@@ -457,6 +494,8 @@
 
   /* ── Building one playground ─────────────────────────── */
 
+  var clipCount = 0;
+
   function playground(spec, fig) {
     var kind = KIND[spec.kind];
     if (!kind) return null;
@@ -478,7 +517,12 @@
       role: 'img',
       'aria-label': spec.alt || (spec.title || 'Interactive figure')
     });
-    var stage = el('g', {});
+    var clipId = 'ivmp-clip-' + (++clipCount);
+    var defs = el('defs', {}), clip = el('clipPath', { id: clipId });
+    clip.appendChild(el('rect', { x: PAD.l, y: PAD.t, width: W - PAD.l - PAD.r, height: H - PAD.t - PAD.b }));
+    defs.appendChild(clip);
+    svg.appendChild(defs);
+    var stage = el('g', { 'data-clip': clipId });
     svg.appendChild(stage);
     host.appendChild(svg);
 

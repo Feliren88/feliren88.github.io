@@ -2752,6 +2752,9 @@ html[data-theme="light"] .ivm {
   letter-spacing: 0.04em;
 }
 
+/* Marks where a curve leaves the frame; the plot itself is clipped. */
+.ivmp-exit { fill: var(--accent); }
+
 .ivmp-curve {
   fill: none;
   stroke: currentColor;
