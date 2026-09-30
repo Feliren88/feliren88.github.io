@@ -31,13 +31,13 @@
 
   var PAGES = [
     { t: 'What you are looking at', parts: [], body: '<p>A small convolutional network, Tiny VGG, classifying a 64 by 64 image into 10 classes. Each column is a layer and each square is one feature map, computed on this page from the trained weights.</p><p>Hover over a map to trace what feeds it. Select a map to see how it is made.</p>' },
-    { t: 'The input is 3 grids of numbers', parts: ['input'], body: '<p>A colour image is 3 channels, red, green and blue, each a 64 by 64 grid of values from 0 to 1. That is all the network ever sees.</p>' },
+    { t: 'The input is 3 grids of numbers', parts: ['input'], body: '<p>A colour image is 3 channels, red, green and blue, each a 64 by 64 grid of values from 0 to 1.</p>' },
     { t: 'A convolution slides small filters', parts: ['conv'], body: '<p>Each map in a convolution layer comes from 1 filter per input channel. A 3 by 3 filter slides across its channel, the products are summed across all channels, and a bias is added. 10 filters give 10 maps.</p><p>Blue is positive, orange is negative.</p>' },
     { t: 'ReLU keeps the positive part', parts: ['relu'], body: '<p>ReLU replaces every negative value with 0. Without it, stacked convolutions would collapse into one linear filter, and the network could not learn curved decision boundaries.</p>' },
-    { t: 'Deeper maps see more', parts: ['conv', 'relu'], body: '<p>Each layer reads 3 by 3 patches of the one before, so a map deep in the network responds to a larger area of the image. Early maps react to edges and colour; later ones to parts of objects.</p>' },
+    { t: 'Deeper maps see more', parts: ['conv', 'relu'], body: '<p>Each layer reads 3 by 3 patches of the one before, so a map deep in the network responds to a larger area of the image. Early maps respond to edges and colours; later maps combine them into larger patterns.</p>' },
     { t: 'Max pooling shrinks the maps', parts: ['pool'], body: '<p>Pooling keeps the largest value in each 2 by 2 block, halving the width and height. It cuts the computation and makes the response less sensitive to exactly where a feature sits.</p>' },
     { t: 'From maps to a class', parts: ['output'], body: '<p>The last 10 maps of 13 by 13 are flattened into 1,690 numbers. A dense layer turns them into 10 scores, and softmax turns the scores into probabilities that sum to 1.</p>' },
-    { t: 'Try another image', parts: ['input', 'output'], body: '<p>Pick another sample above, or upload your own. It is shrunk to 64 by 64 and every map recomputes. Images unlike the 10 classes still get a confident answer, which is its own lesson.</p>' }
+    { t: 'Try another image', parts: ['input', 'output'], body: '<p>Pick another sample above, or upload your own. It is shrunk to 64 by 64 and every map recomputes. An image outside the 10 classes still gets one of the 10 labels, because softmax always chooses among them.</p>' }
   ];
 
   var model, L, rgb, S = { sample: 6, hover: null };

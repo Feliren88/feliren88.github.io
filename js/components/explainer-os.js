@@ -135,12 +135,12 @@
   var HUES = ['--xp-q', '--xp-k', '--xp-v', '--xp-o', '--tf-down', '--tf-up'];
 
   var PAGES = [
-    { t: 'Who gets the CPU next?', tab: 'cpu', parts: ['gantt'], body: '<p>4 processes arrive over time and each needs the CPU for a while. A <b>scheduler</b> decides who runs. The Gantt chart shows its decisions, one colour per process.</p>' },
-    { t: 'Waiting is the cost', tab: 'cpu', parts: ['stats'], body: '<p>Turnaround is finish time minus arrival. Waiting is turnaround minus the time actually spent running. Switch algorithms: shortest-job-first minimises average waiting, round robin keeps every process responsive.</p>' },
+    { t: 'The scheduler picks who runs', tab: 'cpu', parts: ['gantt'], body: '<p>4 processes arrive over time and each needs the CPU for a while. A <b>scheduler</b> decides who runs. The Gantt chart shows its decisions, one colour per process.</p>' },
+    { t: 'Waiting is the cost', tab: 'cpu', parts: ['stats'], body: '<p>Turnaround is finish time minus arrival. Waiting is turnaround minus the time spent running. When jobs arrive together, shortest job first gives the lowest average waiting time. Round robin keeps every process responsive.</p>' },
     { t: 'Memory is smaller than the program', tab: 'mem', parts: ['frames'], body: '<p>Only a few pages fit in physical frames. When a page is needed and absent, a <b>page fault</b> loads it and something must leave. Each column shows the frames after one reference.</p>' },
     { t: 'Choosing what to evict', tab: 'mem', parts: ['frames', 'faults'], body: '<p>FIFO evicts the oldest page, LRU the least recently used, and OPT the page needed furthest in the future. OPT is impossible in practice, but it is the floor the others are measured against.</p>' },
-    { t: 'More frames, more faults?', tab: 'mem', parts: ['faults'], body: '<p>Press <b>Belady’s anomaly</b>. With FIFO, this string faults more with 4 frames than with 3. LRU and OPT never do this, because the pages they keep with n frames are always kept with n + 1.</p>' },
-    { t: 'Can everyone finish?', tab: 'bank', parts: ['bank'], body: '<p>The <b>Banker’s algorithm</b> grants resources only if some order exists in which every process can still get its maximum and finish. Step through it: each finished process returns what it held.</p>' }
+    { t: 'Belady’s anomaly', tab: 'mem', parts: ['faults'], body: '<p>Press <b>Belady’s anomaly</b>. With FIFO, this string faults more with 4 frames than with 3. LRU and OPT never do this, because the pages they keep with n frames are always kept with n + 1.</p>' },
+    { t: 'Checking for a safe order', tab: 'bank', parts: ['bank'], body: '<p>The <b>Banker’s algorithm</b> grants resources only if some order exists in which every process can still get its maximum and finish. Step through it. Each finished process returns what it held.</p>' }
   ];
 
   function hue(i) { return 'var(' + HUES[i % HUES.length] + ')'; }
@@ -242,8 +242,8 @@
     }).join('') + '</div></div><div class="xp-stage"><div class="xp-os-body"></div></div>';
   var stage = host.querySelector('.xp-stage');
   render();
-  guideApi = XP.guide(stage, PAGES, function (p) {
-    if (p && p.tab && p.tab !== S.tab) { S.tab = p.tab; setTabSilently(); }
+  guideApi = XP.guide(stage, PAGES, function (p, i, isRedraw) {
+    if (!isRedraw && p && p.tab && p.tab !== S.tab) { S.tab = p.tab; setTabSilently(); }
     XP.highlight(host.querySelector('.xp-os-body'), p ? p.parts : []);
   });
   function setTabSilently() {
@@ -280,8 +280,11 @@
     if (t.hasAttribute('data-refs')) { S.refs = t.value; render('[data-refs]'); }
     if (t.hasAttribute('data-avail')) {
       var a = t.value.trim().split(/\s+/).map(Number);
-      if (a.length === 3 && a.every(function (x) { return x >= 0; })) { S.bank.avail = a; S.bstep = 0; }
+      var ok = a.length === 3 && a.every(function (x) { return Number.isInteger(x) && x >= 0; });
+      if (ok) { S.bank.avail = a; S.bstep = 0; }
       render('[data-avail]');
+      /* Say why the value was not taken, rather than silently restoring it. */
+      if (!ok) host.querySelector('.xp-os-sum').innerHTML = '<b>Not changed.</b> Enter 3 whole numbers for A, B and C, separated by spaces, for example 3 3 2.';
     }
   });
   host.addEventListener('input', function (e) {

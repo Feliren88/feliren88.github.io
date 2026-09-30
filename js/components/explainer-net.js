@@ -89,11 +89,11 @@
   };
 
   var PAGES = [
-    { t: 'Every router runs the same search', tab: 'route', parts: ['graph'], body: '<p>Each router knows the whole map and its link costs. It runs <b>Dijkstra’s algorithm</b>: settle the closest unsettled router, then see whether going through it shortens the path to its neighbours.</p>' },
-    { t: 'Only the first hop is stored', tab: 'route', parts: ['table'], body: '<p>A router does not store whole paths. Its forwarding table keeps, for each destination, only which neighbour to hand the packet to. The next router makes its own choice.</p>' },
-    { t: 'How fast should TCP send?', tab: 'tcp', parts: ['cwnd'], body: '<p>TCP cannot see the network’s capacity, so it probes. In <b>slow start</b> the window doubles every round trip. Above the threshold it grows by 1 per round trip.</p>' },
+    { t: 'Every router runs the same search', tab: 'route', parts: ['graph'], body: '<p>Each router knows the whole map and its link costs. It runs <b>Dijkstra’s algorithm</b>. At each step it settles the closest unsettled router, then checks whether going through that router shortens the path to its neighbours.</p>' },
+    { t: 'Only the first hop is stored', tab: 'route', parts: ['table'], body: '<p>A router’s forwarding table keeps only the next hop for each destination. The next router makes its own choice.</p>' },
+    { t: 'TCP probes for capacity', tab: 'tcp', parts: ['cwnd'], body: '<p>TCP cannot see the network’s capacity, so it probes. In <b>slow start</b> the window doubles every round trip. Above the threshold it grows by 1 per round trip.</p>' },
     { t: 'Loss is the signal', tab: 'tcp', parts: ['cwnd'], body: '<p>A <b>triple duplicate ACK</b> halves the window. A <b>timeout</b> is worse news and resets it to 1. The sawtooth is how many connections share one link fairly.</p>' },
-    { t: 'Which network is this address on?', tab: 'ip', parts: ['bits'], body: '<p>The prefix length says how many leading bits name the network. Change the prefix and watch the split between network and host bits move, and the range of usable addresses change with it.</p>' }
+    { t: 'Network bits and host bits', tab: 'ip', parts: ['bits'], body: '<p>The prefix length says how many leading bits name the network. Change the prefix and watch the split between network and host bits move, and the range of usable addresses change with it.</p>' }
   ];
 
   function routeView() {
@@ -134,10 +134,11 @@
     s += XP.svgEl('path', { d: R.map(function (r, i) { return (i ? 'L' : 'M') + X(r.round).toFixed(1) + ' ' + Y(r.ssthresh).toFixed(1); }).join(''), 'class': 'xp-net-ss' });
     s += XP.svgEl('path', { d: R.map(function (r, i) { return (i ? 'L' : 'M') + X(r.round).toFixed(1) + ' ' + Y(r.cwnd).toFixed(1); }).join(''), 'class': 'xp-net-cwnd' });
     R.forEach(function (r) {
-      s += XP.svgEl('circle', { cx: X(r.round), cy: Y(r.cwnd), r: r.event ? 6 : 3.5, 'class': 'xp-net-pt' + (r.event ? ' is-' + r.event : ''), 'data-round': r.round });
+      s += XP.svgEl('circle', { cx: X(r.round), cy: Y(r.cwnd), r: r.event ? 6 : 4.5, 'class': 'xp-net-pt' + (r.event ? ' is-' + r.event : ''), 'data-round': r.round,
+        tabindex: 0, role: 'button', 'aria-label': 'Round ' + r.round + ', window ' + r.cwnd + (r.event ? ', ' + (r.event === 'loss' ? 'triple duplicate ACK' : 'timeout') : '') + '. Enter toggles a loss, Shift and Enter a timeout.' });
       s += XP.svgEl('text', { x: X(r.round), y: H - 12, 'text-anchor': 'middle', 'class': 'xp-cv-small' }, String(r.round));
     });
-    return '<div class="xp-ctl"><span class="xp-note">Select a round on the chart to toggle a loss there; hold Shift to toggle a timeout.</span>' +
+    return '<div class="xp-ctl"><span class="xp-note">Select a round on the chart, or focus it and press Enter, to toggle a loss there; hold Shift for a timeout.</span>' +
       '<label class="xp-field"><span>Initial threshold</span><input type="range" min="4" max="32" value="' + S.ssthresh + '" data-ss><output>' + S.ssthresh + '</output></label></div>' +
       '<div class="xp-net-tcp"><ol class="xp-net-hs" aria-label="TCP handshake"><li><b>SYN</b> client → server, seq = x</li><li><b>SYN-ACK</b> server → client, seq = y, ack = x + 1</li><li><b>ACK</b> client → server, ack = y + 1</li><li>Data flows, sending at most <b>cwnd</b> segments per round trip</li></ol>' +
       '<figure data-part="cwnd"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Congestion window over ' + S.rounds + ' round trips">' + s + '</svg>' +
@@ -170,19 +171,24 @@
       return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (S.tab === t[0]) + '">' + t[1] + '</button>';
     }).join('') + '</div></div><div class="xp-stage"><div class="xp-os-body"></div></div>';
   render();
-  XP.guide(host.querySelector('.xp-stage'), PAGES, function (p) {
-    if (p && p.tab && p.tab !== S.tab) { S.tab = p.tab; render(); }
+  XP.guide(host.querySelector('.xp-stage'), PAGES, function (p, i, isRedraw) {
+    if (!isRedraw && p && p.tab && p.tab !== S.tab) { S.tab = p.tab; render(); }
     XP.highlight(host.querySelector('.xp-os-body'), p ? p.parts : []);
   });
 
+  function toggleRound(pt, shift) {
+    var r = +pt.dataset.round, list = shift ? S.timeouts : S.losses, other = shift ? S.losses : S.timeouts;
+    var i = list.indexOf(r);
+    if (i >= 0) list.splice(i, 1); else { list.push(r); var j = other.indexOf(r); if (j >= 0) other.splice(j, 1); }
+    render('[data-round="' + r + '"]');
+  }
+  host.addEventListener('keydown', function (e) {
+    var pt = e.target.closest && e.target.closest('[data-round]');
+    if (pt && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggleRound(pt, e.shiftKey); }
+  });
   host.addEventListener('click', function (e) {
     var pt = e.target.closest('[data-round]');
-    if (pt) {
-      var r = +pt.dataset.round, list = e.shiftKey ? S.timeouts : S.losses, other = e.shiftKey ? S.losses : S.timeouts;
-      var i = list.indexOf(r);
-      if (i >= 0) list.splice(i, 1); else { list.push(r); var j = other.indexOf(r); if (j >= 0) other.splice(j, 1); }
-      render(); return;
-    }
+    if (pt) { toggleRound(pt, e.shiftKey); return; }
     var b = e.target.closest('button');
     if (!b || b.closest('.xp-guide') || b.classList.contains('xp-guide-open')) return;
     if (b.dataset.tab) { S.tab = b.dataset.tab; render(); return; }

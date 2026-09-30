@@ -21,8 +21,8 @@
   var PAGES = [
     { t: 'Ask the model a what-if question', parts: [], body: '<p>A trained network labels this image. Paint over part of it and the pixels are filled from their surroundings, then the network labels the edited image. If the label changes, the part you removed mattered.</p>' },
     { t: 'Erase and compare', parts: ['image', 'scores'], body: '<p>Drag across the image to erase. The table compares the top 5 classes before and after. A large drop from a small edit means the model leaned on that region.</p>' },
-    { t: 'Where is it looking?', parts: ['occ'], body: '<p><b>Find what matters</b> hides one 8 by 8 patch at a time, 225 positions in all, and records how much the chosen class loses. Red areas are the ones the model depends on for that class.</p>' },
-    { t: 'What this can and cannot show', parts: [], body: '<p>Occlusion shows sensitivity, not reasons. A patch can matter because it holds the object, or because the grey square itself looks like something else to the model. Try several classes before trusting a story.</p>' }
+    { t: 'Find the regions it relies on', parts: ['occ'], body: '<p><b>Find what matters</b> hides one 8 by 8 patch at a time, 225 positions in all, and records how much the chosen class loses. Red areas are the ones the model depends on for that class.</p>' },
+    { t: 'What this can and cannot show', parts: [], body: '<p>Occlusion measures sensitivity, meaning how much the score drops when a patch is hidden. A patch can matter because it holds the object, or because the grey square itself looks like something else to the model. Try several classes before trusting a story.</p>' }
   ];
 
   function top5(probs) {
@@ -90,6 +90,8 @@
     host.querySelector('.xp-edit-labels').innerHTML =
       '<span>Original: <b>' + esc(model.classes[bestO]) + '</b> ' + (pO[bestO] * 100).toFixed(1) + '%</span>' +
       '<span class="' + (bestC !== bestO ? 'is-changed' : '') + '">Edited: <b>' + esc(model.classes[bestC]) + '</b> ' + (pC[bestC] * 100).toFixed(1) + '%' + (bestC !== bestO ? ', the label changed' : '') + '</span>';
+    host.querySelector('[data-undo]').disabled = !history.length;
+    host.querySelector('[data-reset]').disabled = !history.length && !S.occ;
     host.querySelector('.xp-edit-scores').innerHTML = table(pO, pC) +
       '<p class="xp-note">Select a class to make it the target of <b>Find what matters</b>. Target: <b>' + esc(model.classes[S.target]) + '</b>.</p>';
   }

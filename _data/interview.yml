@@ -5503,8 +5503,8 @@ topics:
               A process is a running program with its own memory. Threads share
               one process's memory and run within it.
           - >-
-              Only one thread runs per core at a time. The scheduler picks it,
-              and each policy favours a different goal.
+              Each core runs 1 thread at a time, or a few with simultaneous multithreading.
+              The scheduler picks which, and each policy favours a different goal.
         covers:
           - Process states and the process control block
           - Threads, and what they share
@@ -5561,8 +5561,8 @@ topics:
               Every address a program uses is virtual. The hardware translates it
               through a page table into a physical frame.
           - >-
-              When a page is not in memory, a page fault loads it from disk and
-              another page must be evicted. The policy decides which.
+              When a page is not in memory, a page fault loads it from disk. If memory
+              is full, another page is evicted, and the policy decides which.
         covers:
           - Logical and physical addresses
           - Paging, page tables and the TLB
@@ -5928,7 +5928,7 @@ topics:
         plain:
           - >-
               TCP opens with a 3-way handshake, numbers every byte, and resends what
-              is not acknowledged. UDP does none of this and is faster.
+              is not acknowledged. UDP skips all of this, so it starts at once and never waits for a resend.
           - >-
               Congestion control grows the sending window until loss appears, then
               cuts it. That sawtooth is how the internet shares bandwidth.
@@ -6046,9 +6046,9 @@ topics:
         beats:
           - "Every pattern has the same 4 parts around it. Learn the parts and any new pattern is quick to read."
           - "It starts from a problem that keeps coming back, in many codebases and languages."
-          - "The solution is a shape of classes and calls. It is a template, not code to paste."
-          - "Every solution has a price, usually more indirection. A pattern you cannot justify is just extra classes."
-          - "The name is what makes it useful in conversation. One word replaces a whiteboard of boxes."
+          - "The solution is a shape of classes and calls, a template to adapt to your own code."
+          - "Every solution has a price, usually more indirection. Use a pattern only when it saves more than it costs."
+          - "The name lets a team discuss the design in one word instead of redrawing the classes."
       - name: Creational patterns
         why: "Creational patterns separate how an object is built from the code that uses it."
         plain:
@@ -6107,7 +6107,7 @@ topics:
           - k: Organise many objects
             items: [Composite, Bridge, Flyweight]
         beats:
-          - "Every structural pattern adds a layer between parts that were not built to fit. The question is what the layer is for."
+          - "Every structural pattern adds a layer between parts that were not built to fit. The patterns differ in what the layer is for."
           - "An adapter makes one interface look like another. A facade makes a whole subsystem look like one simple call."
           - "A decorator adds behaviour, such as caching or retries, with the same interface. A proxy controls access to the real object."
           - "A composite treats a tree of objects like one. A bridge splits 2 dimensions of variation, and a flyweight shares repeated state."
@@ -6142,8 +6142,8 @@ topics:
         why: "A smell is a surface sign that the design is making change expensive."
         plain:
           - >-
-              A smell is not a bug. The code works. It is a hint that the next change
-              will be harder than it should be.
+              A smell is code that works but makes the next change harder than it
+              should be.
           - >-
               Smells are useful because they are easy to spot. Each one points to
               a small set of refactorings that remove it.
@@ -6165,7 +6165,7 @@ topics:
           - "Some smells sit inside one function. A long function is the easiest to see and the easiest to fix."
           - "Duplicated code spreads the same logic around, so a fix in one copy leaves the others wrong."
           - "Feature envy is a function that uses another object's data more than its own. It probably belongs over there."
-          - "Shotgun surgery is the worst: one change forces edits in many places. The design has scattered one idea."
+          - "Shotgun surgery costs the most, because one change forces edits in many places."
         scene:
           kind: sets
           cases:
@@ -6202,7 +6202,7 @@ topics:
           - "Make one small, named move, such as extracting a function or renaming a variable."
           - "Run the tests. If they fail, undo the step rather than debugging a large diff."
           - "Commit. Each commit is a safe point, and a reviewer can read it in a minute."
-          - "Repeat. Many boring steps add up to a large change that never broke anything."
+          - "Repeat. The small steps add up to a large change, with the tests passing after every one."
         scene:
           kind: trace
           steps: [Tests pass, Extract function, Tests pass, Commit]
@@ -11448,7 +11448,7 @@ topics:
         plain:
           - >-
               A north star metric is the number a company aligns its priorities around.
-              It measures the value customers get, not activity for its own sake.
+              It measures the value customers get from the product.
           - >-
               It is an output. No team moves it directly. Teams move inputs, and the
               north star is how you know whether those inputs mattered.
@@ -11465,7 +11465,7 @@ topics:
           layers: [North star metric, Input metrics, Team projects, Daily decisions]
         beats:
           - "At the top, one number everyone can name. It says whether customers are getting value."
-          - "Below it, the inputs that drive it. These are what teams can actually move."
+          - "Below it are the inputs that drive it. Teams can move these directly."
           - "Each team picks projects aimed at its input, and can explain the link upward."
           - "At the base, daily decisions. When 2 good ideas compete, the north star breaks the tie."
       - name: Six kinds of north star

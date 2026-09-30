@@ -195,7 +195,7 @@
   }
 
   /* The guide card: numbered pages, each naming the parts it lights up.
-     `onPage(page, index)` runs on every change, so a page can also switch
+     `onPage(page, index, isRedraw)` runs on every change, so a page can also switch
      the canvas into the state it describes. The card can be closed and
      reopened; closing it clears the highlight. */
   function guide(box, pages, onPage) {
@@ -241,7 +241,10 @@
     draw();
     return {
       page: function () { return card.hidden ? null : pages[i]; },
-      redraw: function () { if (!card.hidden) onPage(pages[i], i); }
+      /* Re-apply the current page's highlight after the panel redraws. The
+         third argument tells the caller this is not a page change, so it
+         must not switch tabs or reset state the reader chose. */
+      redraw: function () { if (!card.hidden) onPage(pages[i], i, true); }
     };
   }
 

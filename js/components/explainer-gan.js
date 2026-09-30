@@ -113,11 +113,11 @@
   var N = 128;
 
   var PAGES = [
-    { t: 'Two networks in a contest', parts: [], body: '<p>The <b>generator</b> turns random noise into points. The <b>discriminator</b> scores each point: is it real data or a fake? Each network trains against the other. Press play and watch the fakes, in purple, move onto the real data, in green.</p>' },
+    { t: 'Two networks in a contest', parts: [], body: '<p>The <b>generator</b> turns random noise into points. The <b>discriminator</b> scores each point as real data or fake. Each network trains against the other. Press play and watch the fakes, in purple, move onto the real data, in green.</p>' },
     { t: 'The discriminator’s view', parts: ['heat'], body: '<p>The background is the discriminator’s answer everywhere on the plane. Green regions it calls real, purple regions it calls fake. It is trained to separate the two sets it is shown.</p>' },
-    { t: 'The generator’s gradients', parts: ['arrows'], body: '<p>Each arrow shows the direction that would make the discriminator believe that fake point more. The generator follows these arrows, which is the only way it ever learns about the real data.</p>' },
+    { t: 'The generator’s gradients', parts: ['arrows'], body: '<p>Each arrow shows the direction that would make the discriminator believe that fake point more. The generator follows these arrows. They are its only information about the real data.</p>' },
     { t: 'How noise is folded', parts: ['grid'], body: '<p>The mesh is a grid of noise values after the generator has transformed them. Watch it stretch and fold to lay the noise over the shape of the data.</p>' },
-    { t: 'Losses do not converge', parts: ['loss'], body: '<p>A GAN has no single loss going down. When one network improves, the other’s loss rises. Balance, not a minimum, is the goal, and the curves keep oscillating even when the samples look right.</p>' },
+    { t: 'Losses do not converge', parts: ['loss'], body: '<p>A GAN has no single loss going down. When one network improves, the other’s loss rises. Training aims for a balance between the 2 networks, and the curves keep oscillating even when the samples look right.</p>' },
     { t: 'Break it on purpose', parts: [], body: '<p>Raise the generator’s learning rate far above the discriminator’s, or pick <b>Four corners</b>. Fakes often pile onto one mode and ignore the others. That failure is <b>mode collapse</b>.</p>' }
   ];
 

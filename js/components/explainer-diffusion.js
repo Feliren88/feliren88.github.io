@@ -24,11 +24,11 @@
     var data, timer = null;
     var S = { p: 0, g: 2, k: 25, compare: false, step: 0 };
     var TOUR = [
-      { col: 'txt', t: 'The prompt becomes numbers', say: 'A tokenizer cuts the prompt into tokens and pads the list to 77. CLIP’s text encoder turns each token into 768 numbers that already carry meaning from the words around it.' },
+      { col: 'txt', t: 'The prompt becomes numbers', say: 'A tokenizer cuts the prompt into tokens and pads the list to 77. CLIP’s text encoder turns each token into a vector that already carries meaning from the words around it; in Stable Diffusion v1 each vector is 768 numbers.' },
       { col: 'ref', t: 'Start from noise', k: 0, say: 'Generation starts from random noise in a small latent space: 4 channels of 64 by 64. The seed fixes this noise, which is why the same seed and prompt give the same image.' },
-      { col: 'ref', t: 'Predict the noise twice', k: 6, say: 'At each step the U-Net predicts the noise in the latent twice: once reading the prompt and once reading an empty prompt. Guidance scales up the difference between the two.' },
+      { col: 'ref', t: 'Predict the noise twice', k: 6, say: 'At each step the U-Net predicts the noise in the latent twice, once reading the prompt and once reading an empty prompt. Guidance scales up the difference between the two.' },
       { col: 'ref', t: 'Remove a little, 50 times', k: 25, say: 'A scheduler decides how much of the predicted noise to subtract at this step. Repeating this 50 times refines the latent from static into a layout, then into detail.' },
-      { col: 'up', t: 'Decode to pixels', k: 25, say: 'The VAE decoder upscales the finished 64 by 64 latent to a 512 by 512 image. Fine detail is invented here, so small artefacts can come from the decoder and not the denoiser.' }
+      { col: 'up', t: 'Decode to pixels', k: 25, say: 'The VAE decoder upscales the finished 64 by 64 latent to a 512 by 512 image. The decoder generates the fine detail, so small artefacts can come from it rather than from the denoiser.' }
     ];
 
     function sprite(slug, g, z) {
@@ -59,11 +59,11 @@
 
       html += '<section class="xp-col' + (tour.col === 'txt' ? ' is-lit' : '') + '" aria-label="Text representation">' +
         '<h3 class="xp-col-t"><span>1</span>Text representation</h3>' +
-        '<p class="xp-shape">prompt → [77, 768]</p>' +
+        '<p class="xp-shape">prompt → [77, d]</p>' +
         '<ol class="xp-chipline"><li class="is-special">&lt;start&gt;</li>' +
         words.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') +
         '<li class="is-special">&lt;end&gt;</li><li class="is-pad">… padded to 77</li></ol>' +
-        '<p class="xp-note">Shown one token per word for reading. CLIP’s tokenizer splits rarer words into several pieces.</p>' +
+        '<p class="xp-note">Shown one token per word for reading. CLIP’s tokenizer splits rarer words into several pieces. d is the width of each token’s vector: 768 in Stable Diffusion v1.</p>' +
         '</section>';
 
       html += '<section class="xp-col is-wide' + (tour.col === 'ref' ? ' is-lit' : '') + '" aria-label="Refining the image representation">' +
@@ -331,8 +331,10 @@
       readout();
     }
 
+    /* A click during generation interrupts it rather than being ignored. */
+    function halt() { if (S.running) { clearInterval(S.running); S.running = null; } }
     function run() {
-      if (S.running) return;
+      halt();
       reset();
       if (reduced) { while (step()) {} shell(); return; }
       shell();
@@ -345,10 +347,15 @@
 
     host.addEventListener('click', function (e) {
       var b = e.target.closest('button');
-      if (!b || S.running) return;
+      if (!b) return;
+      halt();
       var sel = null;
       if (b.dataset.mode) { S.mode = b.dataset.mode; reset(); if (S.mode === 'fwd') S.i = 20; sel = '[data-mode="' + S.mode + '"]'; }
-      if (b.dataset.cls) { S.cls = parseInt(b.dataset.cls, 10); reset(); sel = '[data-cls="' + S.cls + '"]'; }
+      if (b.dataset.cls) {
+        S.cls = parseInt(b.dataset.cls, 10);
+        if (S.mode === 'rev') { run(); return; }
+        reset(); sel = '[data-cls="' + S.cls + '"]';
+      }
       if (b.hasAttribute('data-run')) { run(); return; }
       shell();
       var again = sel && host.querySelector(sel);

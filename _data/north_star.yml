@@ -126,7 +126,7 @@ models:
 
 checklist:
   - id: value
-    q: "It counts value customers receive, not effort the company spends."
+    q: "It counts something customers receive, such as rides taken or nights booked."
   - id: leading
     q: "It tends to rise before revenue does."
   - id: movable

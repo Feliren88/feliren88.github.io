@@ -2,7 +2,7 @@
   <header class="xp-head">
     <span class="syl-phase">Explore it first</span>
     <h2 id="xp-lintests-title">Most named tests are one linear model</h2>
-    <p>A t-test, a correlation and an ANOVA are usually taught as separate tools. Each is a linear model with a particular predictor, and its p-value is the test that one coefficient is 0. Learn the model once and the names become labels. Run a test and its model on the same sample below and compare the outputs.</p>
+    <p>A t-test, a correlation and an ANOVA are usually taught as separate tools. Each is a linear model with a particular predictor, and its p-value is the test that one coefficient is 0. One model therefore covers all of them. Run a test and its model on the same sample below and compare the outputs.</p>
   </header>
   <div class="xp-body tf" data-xp="lintests"></div>
 
@@ -26,7 +26,7 @@
       </tbody>
     </table>
   </div>
-  <p class="xp-note">The rank versions are approximations, close once samples are of moderate size; Lindeløv's simulations give the sizes test by test. Every row inherits the same assumptions: independent observations, and residuals that are roughly normal with equal variance. Checking the residuals of one model checks the test.</p>
+  <p class="xp-note">The rank versions are approximations, close once samples are of moderate size; Lindeløv's simulations give the sizes test by test. Every row inherits the same assumptions: independent observations, and residuals that are roughly normal with equal variance. So checking the fitted model's residuals is how you check a test's assumptions.</p>
 
   <p class="xp-source">After Jonas Kristoffer Lindeløv, <a href="https://lindeloev.github.io/tests-as-linear/" rel="noopener noreferrer">Common statistical tests are linear models (or: how to teach stats)</a>. The table is condensed in my own words. The panel's statistics are checked against SciPy by <code>scripts/verify_linear_tests.py</code>.</p>
 </section>

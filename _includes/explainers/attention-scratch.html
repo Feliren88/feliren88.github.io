@@ -2,7 +2,7 @@
   <header class="xp-head">
     <span class="syl-phase">Build it by hand</span>
     <h2 id="xp-scratch-title">Self-attention from scratch, one word at a time</h2>
-    <p>The same computation, small enough to read every number. One sentence, 16-dimensional embeddings, and the 5 lines of PyTorch that turn a word into a context vector. Choose a query word, then switch the scaling, the mask, extra heads and a second sentence on and off.</p>
+    <p>This is the same computation, small enough that you can read every number. One sentence, 16-dimensional embeddings, and the 5 lines of PyTorch that turn a word into a context vector. Choose a query word, then switch the scaling, the mask, extra heads and a second sentence on and off.</p>
   </header>
   <div class="xp-body tf" data-xp="scratch"></div>
   <p class="xp-source">The sentence, the sizes (d = 16, d<sub>q</sub> = d<sub>k</sub> = 24, d<sub>v</sub> = 28) and the code follow Sebastian Raschka, <a href="https://sebastianraschka.com/blog/2023/self-attention-from-scratch.html" rel="noopener noreferrer">Understanding and Coding the Self-Attention Mechanism of Large Language Models From Scratch</a> (2023). The weights come from a seeded generator on this page, so the values differ from the article's PyTorch output while every step and shape matches.</p>

@@ -392,7 +392,106 @@ def check_net():
     print(f'net: Dijkstra agrees with a heap implementation on {len(graphs)} random graphs; {len(addrs)} subnets agree with Python ipaddress; TCP Reno trace matches')
 
 
-CHECKS = {'tinyvgg': check_tinyvgg, 'gan': check_gan, 'os': check_os, 'db': check_db, 'net': check_net}
+# ── Self-attention from scratch, and the 2D diffusion toy ──────────────────
+# Both components render straight into the page, so these checks load them
+# with a stub document and read the numbers back out of the markup.
+
+STUB = """
+const fs = require('fs');
+let html = '';
+const read = { innerHTML: '' };
+const host = { dataset: {}, addEventListener() {}, querySelector(s) { return s === '.xp-toy-read' ? read : null; },
+  set innerHTML(v) { html = v; }, get innerHTML() { return html; } };
+global.window = { matchMedia: () => ({ matches: false }), addEventListener() {} };
+global.MutationObserver = function () { this.observe = () => {}; };
+global.getComputedStyle = () => ({ getPropertyValue: () => '' });
+global.XP = require(%r);
+"""
+
+
+def mulberry(seed):
+    M = 0xFFFFFFFF
+    def imul(a, b): return ((a & M) * (b & M)) & M
+    def s32(x):
+        x &= M
+        return x - (1 << 32) if x & 0x80000000 else x
+    st = [seed]
+    def f():
+        st[0] = s32(st[0] + 0x6D2B79F5); sd = st[0] & M
+        t = imul(sd ^ (sd >> 15), 1 | sd)
+        t = (s32(t + imul(t ^ (t >> 7), 61 | t)) ^ t) & M
+        return ((t ^ (t >> 14)) & M) / 4294967296
+    return f
+
+
+def check_scratch():
+    """The page's seeded weights, rebuilt here from the same generator, must
+    give the same scores and weights for the default query word."""
+    code = STUB % os.path.join(JS, 'explainer-core.js') + """
+    global.document = { querySelector: s => s === '[data-xp="scratch"]' ? host : null, documentElement: {} };
+    eval(fs.readFileSync(%r, 'utf8'));
+    const pick = (cls) => html.split('<ol class="' + cls + '">')[1].split('</ol>')[0].split('<b>').slice(1).map(x => +x.split('</b>')[0].replace('\u2212', '-'));
+    process.stdout.write(JSON.stringify({ alpha: pick('xp-alpha'), omega: pick('xp-omega') }));
+    """ % os.path.join(JS, 'explainer-transformer.js')
+    js = node(code)
+    r = mulberry(123)
+    def normals(rows, cols):
+        out = np.zeros((rows, cols))
+        for i in range(rows):
+            for j in range(cols):
+                u = max(r(), 1e-12); v = r()
+                out[i, j] = np.sqrt(-2 * np.log(u)) * np.cos(2 * np.pi * v)
+        return out
+    X = 0.4 * normals(6, 16); normals(8, 16)
+    WQ = np.zeros((24, 16)); WK = np.zeros((24, 16))
+    for i in range(24):
+        for j in range(16):
+            WQ[i, j] = r(); WK[i, j] = r()
+    q = WQ @ X[1]; omega = (X @ WK.T) @ q
+    a = np.exp(omega / np.sqrt(24) - (omega / np.sqrt(24)).max()); a /= a.sum()
+    close('scratch attention scores', js['omega'], np.round(omega, 1), 0.11)
+    close('scratch attention weights', js['alpha'], np.round(a, 3), 1.1e-3)
+    print('scratch: scores and softmax weights match a NumPy rebuild from the same seeded generator')
+
+
+def check_toy():
+    """The toy's exact denoiser and DDIM sampler, against the same sampler in
+    NumPy: with the page's defaults (left class, guidance 3) both must land
+    every sample in the left class at the same mean distance to the bumps."""
+    code = STUB % os.path.join(JS, 'explainer-core.js') + """
+    global.document = { querySelector: s => s === '[data-xp="toy"]' ? host : null, documentElement: {} };
+    eval(fs.readFileSync(%r, 'utf8'));
+    process.stdout.write(JSON.stringify(read.innerHTML.split('<').map(x => x.split('>').slice(1).join('>')).join(' ')));
+    """ % os.path.join(JS, 'explainer-diffusion.js')
+    text = node(code)
+    import re
+    m = re.search(r'left class\s+([0-9.]+)%', text)
+    if not m:
+        sys.exit('MISMATCH toy diffusion: no readout found in ' + text[:300])
+    hit = float(m.group(1)) / 100
+    dist = float(re.search(r'bump centre\s+([0-9.]+)', text).group(1))
+    SIG = 0.16
+    M = np.array([[-1.05, .8], [-1.35, 0], [-1.05, -.8], [1.05, .8], [1.35, 0], [1.05, -.8]]); C = np.array([0, 0, 0, 1, 1, 1])
+    T = 1000; abar = np.cumprod(1 - (1e-4 + (0.02 - 1e-4) * np.arange(T) / (T - 1)))
+    tau = np.round(np.arange(50) * (T - 1) / 49).astype(int)
+    def eps(x, a, idx):
+        v = a * SIG ** 2 + 1 - a; mu = np.sqrt(a) * M[idx]
+        d = x[:, None, :] - mu[None]; l = -(d ** 2).sum(-1) / (2 * v)
+        w = np.exp(l - l.max(1, keepdims=True)); w /= w.sum(1, keepdims=True)
+        return -np.sqrt(1 - a) * (w[..., None] * (mu[None] - x[:, None, :])).sum(1) / v
+    x = np.random.default_rng(0).standard_normal((20000, 2))
+    for i in range(49, 0, -1):
+        a, ap = abar[tau[i]], abar[tau[i - 1]]
+        e = eps(x, a, np.arange(6)); e = e + 3 * (eps(x, a, np.where(C == 0)[0]) - e)
+        x = np.sqrt(ap) * (x - np.sqrt(1 - a) * e) / np.sqrt(a) + np.sqrt(1 - ap) * e
+    d = np.linalg.norm(x[:, None] - M[None], axis=-1)
+    want_hit, want_dist = (C[d.argmin(1)] == 0).mean(), d.min(1).mean()
+    if abs(hit - want_hit) > 0.01 or abs(dist - want_dist) > 0.02:
+        sys.exit(f'MISMATCH toy diffusion: page {hit:.3f}, {dist:.3f} vs NumPy {want_hit:.3f}, {want_dist:.3f}')
+    print(f'toy: page and NumPy both put {hit:.0%} of samples in the left class, mean distance {dist:.3f} vs {want_dist:.3f}')
+
+
+CHECKS = {'tinyvgg': check_tinyvgg, 'gan': check_gan, 'os': check_os, 'db': check_db, 'net': check_net, 'scratch': check_scratch, 'toy': check_toy}
 
 if __name__ == '__main__':
     names = sys.argv[1:] or list(CHECKS)

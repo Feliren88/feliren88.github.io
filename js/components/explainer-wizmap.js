@@ -20,11 +20,11 @@
 
   var PAGES = [
     { t: 'Every dot is a paper', parts: [], focus: '', body: '<p>Each paper’s abstract was turned into an embedding, then UMAP squeezed those vectors onto 2 dimensions. Papers about similar things land near each other. This is a sample of 6,000 of the 63,213 abstracts WizMap mapped.</p>' },
-    { t: 'Where papers crowd', parts: [], focus: 'contours', body: '<p>The contours trace the density of all 63,213 papers. Peaks are research areas with many papers; the gaps between them are topics few people wrote about.</p>' },
-    { t: 'Labels that change with zoom', parts: [], focus: 'labels', body: '<p>Each label summarises the papers in one tile of the map by its most distinctive words. Scroll or pinch to zoom: finer tiles, and finer topics, appear as you go in.</p>' },
+    { t: 'Where papers crowd', parts: [], focus: 'contours', body: '<p>The contours trace the density of all 63,213 papers. Peaks are areas with many papers; the gaps between them hold few.</p>' },
+    { t: 'Labels that change with zoom', parts: [], focus: 'labels', body: '<p>Each label summarises the papers in one tile of the map by its most distinctive words. Scroll or pinch to zoom in, and labels for smaller tiles appear.</p>' },
     { t: 'Search the map', parts: ['search'], focus: 'search', body: '<p>Type a word into <b>Search</b>. Matching papers light up, and you can see whether a word belongs to one region or is spread across many.</p>' },
     { t: 'Watch the field move', parts: ['time'], focus: 'time', body: '<p>Drag the <b>year</b> slider. Early papers cluster in a few regions; new regions appear as the field changes. Positions stay fixed because the map was built once from all years.</p>' },
-    { t: 'What a map like this hides', parts: [], focus: '', body: '<p>UMAP keeps neighbours close but distorts large distances. 2 clusters far apart on the map are not necessarily far apart in the embedding. Read neighbourhoods, not the space between them.</p>' }
+    { t: 'What a map like this hides', parts: [], focus: '', body: '<p>UMAP keeps neighbours close but distorts large distances. 2 clusters far apart on the map may be close in the embedding, so compare papers within a neighbourhood.</p>' }
   ];
 
   /* Data to screen: one uniform scale fits the map in the canvas, centred,

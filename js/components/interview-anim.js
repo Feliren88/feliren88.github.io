@@ -781,10 +781,10 @@
       },
       beats: [
         { step: 'One function, three branches', say: 'A training function branches on the model type. Every new model means editing it again.' },
-        { step: 'Pin the behaviour', say: 'Before moving anything, make sure tests cover each branch. They are the safety net.' },
+        { step: 'Pin the behaviour', say: 'Before moving anything, make sure tests cover each branch.' },
         { step: 'Extract each branch', say: 'Move each branch into its own class with the same method. This is the Strategy pattern.' },
-        { step: 'Look it up', say: 'The caller asks a registry for the right strategy instead of branching. A new model is a new class, not an edit.' },
-        { step: 'Behaviour unchanged', say: 'The tests still pass. The shape changed and the behaviour did not. That is what makes it a refactoring.' }
+        { step: 'Look it up', say: 'The caller asks a registry for the right strategy instead of branching. A new model then needs a new class and no other edits.' },
+        { step: 'Behaviour unchanged', say: 'The tests still pass. The structure changed and the behaviour did not, which is what defines a refactoring.' }
       ]
     },
 
@@ -907,7 +907,7 @@
           'aria-label': 'An HTTP request wrapped by TCP, IP and Ethernet headers in turn' }, s);
       },
       beats: [
-        { step: 'The request', say: 'The browser writes an HTTP request. That is all the application knows about.' },
+        { step: 'The request', say: 'The browser writes an HTTP request, and the layers below handle its delivery.' },
         { step: 'Add ports', say: 'TCP wraps it with ports and sequence numbers: a segment.' },
         { step: 'Add addresses', say: 'IP wraps that with source and destination addresses: a packet.' },
         { step: 'Add the next hop', say: 'Ethernet wraps it for the next device on the local network: a frame.' },
