@@ -100,3 +100,10 @@
 .lab-plane .pl-contour { fill: none; stroke: var(--muted); stroke-width: 1.2; }
 .lab-plane .pl-ols { fill: var(--xp-v); }
 .lab-plane .pl-ridge { fill: var(--xp-o); stroke: var(--bg); stroke-width: 2; }
+
+.lab-plane .pl-ellipse { fill: none; stroke: var(--xp-o); stroke-width: 2; }
+.lab-plane .pl-cloud { fill: var(--xp-v); }
+.lab-plane .pl-cross { fill: var(--text); }
+.lab-plane .pl-bar-solve { fill: var(--xp-v); }
+.lab-plane .pl-bar-inv { fill: var(--tf-down); }
+.lab-plane .pl-step { fill: var(--xp-o); }

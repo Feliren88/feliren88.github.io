@@ -353,6 +353,49 @@ def check_least_squares():
     same('ridge path shrinks', norms == sorted(norms, reverse=True), True)
 
 
+@check('linear-algebra/conditioning')
+def check_conditioning():
+    from scipy.linalg import hilbert
+    lab = 'linear-algebra/conditioning'
+    singular = run(lab, [['gaussSolve', [[[1, 2], [2, 4]], [3, 6]]], ['invert', [[[1, 2], [2, 4]]]]])
+    same('singular Gaussian solve', singular[0], None)
+    same('singular inverse', singular[1], None)
+    rng = np.random.default_rng(16)
+    Ms = rng.normal(size=(30, 2, 2))
+    ys = rng.normal(size=(30, 2))
+    out = run(lab, [c for M, y in zip(Ms, ys) for c in (['svals', [M.ravel().tolist()]], ['cond', [M.ravel().tolist()]], ['solve2', [M.ravel().tolist(), y.tolist()]])])
+    for i, (M, y) in enumerate(zip(Ms, ys)):
+        close(f'svals {i}', out[3 * i], np.linalg.svd(M, compute_uv=False), 1e-9)
+        close(f'cond {i}', out[3 * i + 1], np.linalg.cond(M), 1e-7)
+        close(f'solve {i}', out[3 * i + 2], np.linalg.solve(M, y), 1e-9)
+    thetas = [70, 20, 8, 2]
+    sys_ = run(lab, [['system', [t]] for t in thetas] + [['cond', [[0, 1, 0, 1]]]])
+    conds = [np.linalg.cond(np.array(m).reshape(2, 2)) for m in sys_[:4]]
+    same('flatter lines are worse conditioned', conds == sorted(conds), True)
+    same('singular system has no condition number', sys_[4], None)
+    for n in range(2, 13):
+        H = hilbert(n)
+        h, e = run(lab, [['hilbert', [n]], ['hilbertErrors', [n]]])
+        close(f'hilbert {n}', h, H, 1e-15)
+        x = np.ones(n)
+        b = H @ x
+        ref = np.linalg.norm(np.linalg.solve(H, b) - x) / np.linalg.norm(x)
+        if ref > 1e-12:
+            same(f'forward error within 1000x of numpy, n={n}', 1e-3 < e['fwdSolve'] / ref < 1e3, True)
+        same(f'solve residual is tiny, n={n}', e['resSolve'] < 1e-13, True)
+        if n >= 8:
+            # The guide says inverting leaves a far larger residual. This checks it.
+            same(f'inverting is worse, n={n}', e['resInv'] > 100 * e['resSolve'], True)
+    path_u, path_s, n_u, n_s = run(lab, [['gdPath', [False, [-2.5, 0.5], 60]], ['gdPath', [True, [-2.5, 2.5], 60]],
+                                         ['stepsTo', [False, [-2.5, 0.5], 0.05]], ['stepsTo', [True, [-2.5, 2.5], 0.05]]])
+    w = np.array([-2.5, 0.5])
+    for k in range(5):
+        w = w - 0.075 * np.array([1.0, 25.0]) * w
+    close('unscaled descent', path_u[5], w)
+    close('scaled descent', path_s[1], [-1.25, 1.25])
+    same('scaling needs fewer steps', n_s < n_u, True)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

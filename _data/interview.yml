@@ -2758,10 +2758,16 @@ topics:
                 is: 'a small disturbance in the data'
               - sym: '\delta \hat{w}'
                 is: 'the resulting change in the answer'
+            live:
+              tex: '\varkappa(A) = 9001'
+              slots: [kappa]
           - name: 'Why nobody inverts a matrix'
             tex: '\text{solve } Av = y \; \text{directly, rather than forming } A^{-1} \text{ then multiplying}'
             read: 'Factorising and solving is faster and loses fewer digits than building the inverse and using it.'
             note: 'A QR or Cholesky factorisation solves the system in about a third of the work of an explicit inverse and is numerically far steadier. Seeing an explicit inverse in production code is usually a bug.'
+            live:
+              tex: '\mathrm{relative\ residual:}\quad \mathrm{solve} = 9001, \quad \mathrm{inverse} = 9002'
+              slots: [resSolve, resInv]
         covers:
           - Floating point and rounding error
           - Condition number and sensitivity

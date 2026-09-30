@@ -8,3 +8,4 @@ linear-algebra:
   '3': eigenvectors
   '4': decompositions
   '5': least-squares
+  '6': conditioning
