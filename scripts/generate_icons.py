@@ -42,6 +42,11 @@ SPRITE = os.path.join(HERE, "_includes", "interview-icons.html")
 # on purpose. That lets the templates resolve an icon with {{ topic.id }} and no
 # lookup table, which is worth more than naming each one after its shape.
 ICONS = [
+    ("information-theory", "tracks", "A binary branching code with unequal description lengths", [
+        '<path d="M12 3v5M12 8L5 13M12 8l7 5M19 13v7"/>',
+        '<circle cx="5" cy="15" r="2"/>',
+        '<circle cx="19" cy="20" r="1.5"/>',
+    ]),
     # ── Tracks ──────────────────────────────────────────────────────────
     ("bayesian-statistics", "tracks", "A wide prior and a narrow posterior over one baseline", [
         '<path d="M3 19h18"/>',

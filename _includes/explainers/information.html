@@ -1,0 +1,45 @@
+<section class="xp it-explorer" id="xp-information" aria-labelledby="it-title">
+  <header class="xp-head">
+    <span class="syl-phase">Change the probabilities</span>
+    <h2 id="it-title">See what uncertainty costs</h2>
+    <p>Move a slider, then follow the calculation beneath the picture. Each example uses a stated, finite model.</p>
+    <p>Choose Play to animate the current example. Then pause, step forward, or reset to inspect its values.</p>
+  </header>
+  <div data-information-explorer>
+    <div class="it-tabs" role="group" aria-label="Choose an information experiment">
+      <button type="button" data-mode="entropy" aria-pressed="true">Entropy</button>
+      <button type="button" data-mode="fitting" aria-pressed="false">Model fitting</button>
+      <button type="button" data-mode="channel" aria-pressed="false">Noisy channel</button>
+      <button type="button" data-mode="bayes" aria-pressed="false">Bayesian update</button>
+      <button type="button" data-mode="coding" aria-pressed="false">Compression</button>
+      <button type="button" data-mode="distortion" aria-pressed="false">Rate and distortion</button>
+    </div>
+    <noscript><p>Enable JavaScript to change these examples. The 16 lessons below include the equations and worked calculations.</p></noscript>
+    <div class="it-controls" data-it-controls></div>
+    <div class="it-transport" role="group" aria-label="Animation controls">
+      <button type="button" data-it-play aria-pressed="false">Play</button>
+      <button type="button" data-it-step>Step</button>
+      <button type="button" data-it-reset>Reset</button>
+      <label for="it-speed">Speed</label>
+      <select id="it-speed"><option value="1">Normal</option><option value="0.5">Slow</option><option value="2">Fast</option></select>
+    </div>
+    <p>On a narrow screen, scroll the diagram horizontally to keep its labels readable.</p>
+    <div class="it-stage" role="region" aria-label="Scrollable experiment diagram" tabindex="0">
+      <svg data-it-svg viewBox="0 0 680 330" role="img" aria-labelledby="it-svg-title it-svg-desc">
+        <title id="it-svg-title">Information theory experiment</title>
+        <desc id="it-svg-desc">The calculated picture follows the selected controls.</desc>
+        <g data-it-drawing></g>
+      </svg>
+    </div>
+    <div class="it-readouts" data-it-readouts></div>
+    <div class="it-calculation">
+      <h3 data-it-heading>Expected surprise</h3>
+      <p data-it-explanation></p>
+      <p class="it-formula" data-it-formula></p>
+      <p data-it-note></p>
+      <details><summary>Work through the current numbers</summary><div data-it-worked></div></details>
+    </div>
+    <output class="it-status" data-it-status aria-live="polite">Choose an experiment or change a probability.</output>
+  </div>
+  <p class="xp-source">The examples use chosen probabilities rather than trained model outputs. Logarithms use base 2 throughout this explorer.</p>
+</section>

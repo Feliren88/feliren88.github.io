@@ -404,3 +404,39 @@ It does count them in `live indexable pages`, which is a naming quirk in the sum
 This hides the pages from search and from site navigation. It does not make them secret.
 The repository is public, so the Markdown and YAML are readable on GitHub by anyone who
 looks. Never put anything in here that could not be published.
+
+## Information Theory
+
+The `/information-theory/` track follows a 16-week syllabus within the existing interview layout.
+Moreover, each lesson has a narrated diagram, an equation, explanatory text and a recall question.
+The page also loads `explainer-information.js` and `information-theory.css` for 6 numerical experiments.
+These cover entropy, cross-entropy fitting, noisy channels, Bayesian updates, Huffman coding and binary rate-distortion.
+The chosen models are finite and use base-2 logarithms.
+Therefore, the explorer reports information in bits.
+
+The shared animation engine also shows the probability-to-entropy calculation for a 4-symbol source.
+Its probabilities are 1/2, 1/4, 1/8 and 1/8.
+Then its weighted surprises sum to 1.75 bits per symbol.
+
+Run `node scripts/test_information_theory.js` to check the explorer identities and boundary cases.
+After that, run the site checks and inspect animation controls at desktop and phone widths.
+The page remains unlisted with `noindex, nofollow` and no sitemap entry, matching the other interview tracks.
+
+### Interactive Information Theory lessons
+
+Each of the 16 lessons mounts a numerical experiment from `information-lessons.js`.
+Its models reuse the finite-probability functions exported by `explainer-information.js`.
+Moreover, each experiment has probability or model controls, playback, pause, step, reset and a recorded-change scrubber.
+Curve plots also support dragging and keyboard arrows, Home and End.
+The active point stays within the horizontal chart viewport when controls change.
+During direct dragging, the chart preserves the reader’s scroll position.
+
+The experiments cover conditioning, directional KL, likelihood fitting, noisy cascades and posterior updates.
+They also cover ELBO gaps, nuisance compression, posterior uncertainty, expected-gap bounds and Fisher geometry.
+The ELBO example uses a finite model with an exact posterior.
+Furthermore, the bottleneck example separates a fair target bit from an independent nuisance bit.
+These are illustrative models, so the interface states their assumptions and units.
+
+Run `node scripts/test_information_lessons.js` for the numerical models.
+Then run `python scripts/check_information_lessons.py` against the active preview for the interaction checks.
+The script optionally accepts a viewport width and theme after its base URL.

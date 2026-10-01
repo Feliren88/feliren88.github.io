@@ -2883,6 +2883,966 @@ topics:
       - "Fit a line using the least-squares normal equations without a library."
       - "Compress an image by retaining its largest singular values, then inspect what detail remains."
 
+  - id: information-theory
+    name: Information Theory
+    group: foundations
+    blurb: Quantify uncertainty, fit probability models, and explain what learning preserves or discards.
+    scope: Study 1 module each week for 16 weeks. Derive the identities, explore the animations, then connect coding
+      and inference with machine learning.
+    links:
+    - math
+    - bayesian-statistics
+    - uncertainty-estimation
+    - deep-learning
+    modules:
+    - name: Probability and uncertainty
+      why: A distribution assigns probabilities to possible outcomes.
+      plain:
+      - Suppose a coin lands heads with probability 0.9. Its 2 possible outcomes still have probabilities summing
+        to 1.
+      - However, a fair coin gives each outcome probability 0.5. A probability describes an event; a distribution
+        describes all outcomes.
+      - For jointly observed variables, add joint probabilities to obtain a marginal distribution. Then divide by
+        a positive marginal to obtain a conditional probability.
+      math:
+      - name: Probability and uncertainty
+        tex: p(a\mid b)=\frac{p(a,b)}{p(b)}
+        read: Divide the joint probability by the probability of the observed condition.
+        note: Require p(b) greater than 0. The bar means given.
+        where:
+        - sym: p
+          is: A probability or probability density
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: b
+          is: An observed conditioning value
+      covers:
+      - Joint distribution
+      - Marginal distribution
+      - Conditional probability
+      - Independence
+      - Expectation
+      viz:
+        type: flow
+        steps:
+        - Choose outcomes
+        - Assign probabilities
+        - Condition on evidence
+      beats:
+      - Start with the possible values of the random variables.
+      - Then assign nonnegative probabilities that sum to 1.
+      - Finally, restrict to the observed condition and renormalise.
+      check: Why does conditioning require division by the marginal probability?
+    - name: Self-information and surprise
+      why: Logarithms turn event probabilities into additive information.
+      plain:
+      - An event with probability 1/8 contributes 3 bits because minus log base 2 of 1/8 equals 3.
+      - Meanwhile, an event with probability 1 contributes 0 bits. Less probable observations contribute more information.
+      - For independent events, multiply probabilities. Therefore, their negative logarithms add. Natural logarithms
+        measure information in nats.
+      math:
+      - name: Self-information and surprise
+        tex: \operatorname{Info}(a)=-\log_2 p(a)
+        read: Take the base-2 logarithm of the event probability and change its sign.
+        note: A zero-probability event has infinite surprise under that model.
+        where:
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+        - sym: p
+          is: A probability or probability density
+      covers:
+      - Self-information
+      - Bits
+      - Nats
+      - Logarithms
+      - Log-loss
+      viz:
+        type: flow
+        steps:
+        - Observe an event
+        - Read its probability
+        - Calculate surprise
+      beats:
+      - Identify the event that occurred.
+      - Then read the probability assigned before observing it.
+      - Finally, calculate its negative logarithm in the chosen units.
+      check: Why should independent event information add?
+    - name: Shannon entropy
+      why: Entropy averages surprise over a discrete distribution.
+      plain:
+      - For a fair coin, each outcome contributes 1 bit of surprise. Therefore, their probability-weighted average
+        equals 1 bit.
+      - More generally, multiply each event surprise by its probability, then add the products. This average is Shannon
+        entropy.
+      - A Bernoulli distribution describes 2 outcomes with probabilities u and 1 minus u. Its entropy peaks at u equal
+        to 0.5.
+      math:
+      - name: Shannon entropy
+        tex: H(U)=-\sum_a p(a)\log_2 p(a)
+        read: Multiply each surprise by its probability, then add across outcomes.
+        note: Use 0 log 0 equal to 0 by continuity. This formula concerns discrete variables.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: U
+          is: The source or input random variable
+        - sym: \sum
+          is: Add the indicated terms
+        - sym: p
+          is: A probability or probability density
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+      - name: Binary entropy
+        tex: H(U)=-u\log_2 u-(1-u)\log_2(1-u)
+        read: Weight the surprises of both outcomes by their respective probabilities.
+        note: Here, u is the probability of the first outcome. Use the zero-probability convention at endpoints.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: U
+          is: The source or input random variable
+        - sym: u
+          is: The first binary outcome probability
+      covers:
+      - Shannon entropy
+      - Binary entropy
+      - Expected surprise
+      - Maximum entropy
+      viz:
+        type: flow
+        steps:
+        - Event probabilities
+        - Weighted surprise
+        - Entropy
+      beats:
+      - Begin with all event probabilities.
+      - Then weight each negative logarithm by its event probability.
+      - Finally, sum the contributions to obtain bits per observation.
+      check: Derive the maximum entropy of a binary variable.
+    - name: Joint and conditional entropy
+      why: Conditioning measures the uncertainty remaining after an observation.
+      plain:
+      - Let U describe an input and V its label. Calculate label entropy separately for each input value.
+      - Then average these conditional entropies using the input probabilities. The result is H(V given U).
+      - The chain rule splits joint uncertainty into input uncertainty and remaining label uncertainty. Conditioning
+        reduces discrete entropy on average.
+      math:
+      - name: Joint and conditional entropy
+        tex: H(U,V)=H(U)+H(V\mid U)
+        read: Describe the input first, then describe the label conditional on that input.
+        note: A particular observation can increase uncertainty. The reduction holds after averaging over observations.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: U
+          is: The source or input random variable
+        - sym: V
+          is: The target random variable
+        - sym: \mid
+          is: Given the information on the right of the symbol
+      - name: Conditional entropy
+        tex: H(V\mid U)=-\sum_{a,b}p(a,b)\log_2 p(b\mid a)
+        read: Average conditional surprise under the joint distribution.
+        note: Here, a indexes input outcomes and b indexes target outcomes. Ignore zero-probability joint terms.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: V
+          is: The target random variable
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: U
+          is: The source or input random variable
+        - sym: \sum
+          is: Add the indicated terms
+        - sym: p
+          is: A probability or probability density
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+        - sym: b
+          is: A target outcome value
+      covers:
+      - Joint entropy
+      - Conditional entropy
+      - Chain rule
+      - Feature uncertainty
+      viz:
+        type: flow
+        steps:
+        - Input uncertainty
+        - Remaining label uncertainty
+        - Joint uncertainty
+      beats:
+      - Calculate uncertainty in the input distribution.
+      - Then average label uncertainty within each input condition.
+      - Finally, add both terms to recover the joint entropy.
+      check: Derive the entropy chain rule from the joint probability factorisation.
+    - name: Relative entropy and distribution mismatch
+      why: KL divergence measures the extra expected log-loss from using another distribution.
+      plain:
+      - Let P describe the data distribution and Q the model distribution. Compare their probabilities at each possible
+        outcome.
+      - Then average the logarithm of P divided by Q using probabilities from P. This gives Kullback-Leibler divergence.
+      - Gibbs inequality makes this divergence nonnegative. However, swapping P and Q can change its value.
+      math:
+      - name: Relative entropy and distribution mismatch
+        tex: \operatorname{D}_{\mathrm{KL}}(P\|Q)=\sum_a P(a)\log_2\frac{P(a)}{Q(a)}\geq0
+        read: Average the log probability ratio under the data distribution.
+        note: If Q assigns zero probability where P is positive, the divergence is infinite. It is asymmetric.
+        where:
+        - sym: P
+          is: The data distribution
+        - sym: Q
+          is: The model distribution
+        - sym: \sum
+          is: Add the indicated terms
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      - name: Gibbs inequality through Jensen
+        tex: \operatorname{D}_{\mathrm{KL}}(P\|Q)=-\mathbb{E}_{P}\log_2\frac{Q(a)}{P(a)}\geq-\log_2\sum_{a:P(a)>0}Q(a)\geq0
+        read: Apply convexity of negative logarithm, then use total model probability at most 1.
+        note: Assume Q is positive wherever P is positive. Otherwise, the divergence is infinite.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: P
+          is: The data distribution
+        - sym: Q
+          is: The model distribution
+        - sym: a
+          is: An outcome index, or a nonzero scale where explicitly stated
+        - sym: \sum
+          is: Add the indicated terms
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      covers:
+      - KL divergence
+      - Gibbs inequality
+      - Support mismatch
+      - Jensen inequality
+      viz:
+        type: flow
+        steps:
+        - Data distribution
+        - Model distribution
+        - Expected log ratio
+      beats:
+      - Specify the distribution generating the observations.
+      - Then specify the probabilities assigned by the model.
+      - Finally, average the log ratio using the data probabilities.
+      check: Prove nonnegativity and explain why KL divergence is not a metric.
+    - name: Cross-entropy, likelihood and fitting
+      why: Cross-entropy combines data entropy with a penalty for model mismatch.
+      plain:
+      - For P equal to [0.5, 0.5] and Q equal to [0.25, 0.75], cross-entropy is approximately 1.208 bits.
+      - The data entropy is 1 bit. Therefore, approximately 0.208 bits of this loss come from distribution mismatch.
+      - For independent observations, negative log-likelihood adds the observed negative log probabilities. Its sample
+        average equals empirical cross-entropy.
+      - Moreover, a one-hot class label selects the predicted probability of the observed class. Minimising its negative
+        logarithm fits a classifier.
+      math:
+      - name: Cross-entropy, likelihood and fitting
+        tex: H(P,Q)=H(P)+\operatorname{D}_{\mathrm{KL}}(P\|Q)
+        read: Split expected model surprise into data uncertainty and distribution mismatch.
+        note: Hold P fixed while optimising Q. Finite samples approximate population cross-entropy.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: P
+          is: The data distribution
+        - sym: Q
+          is: The model distribution
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      - name: Empirical negative log-likelihood
+        tex: -\frac1n\log\prod_{i=1}^{n}q(x_i)=-\frac1n\sum_{i=1}^{n}\log q(x_i)
+        read: Convert the product likelihood into a sum of log probabilities, then average.
+        note: Assume independent observations under q. Natural logarithms give nats. The sample distribution is fixed
+          during fitting.
+        where:
+        - sym: n
+          is: The number of items being counted
+        - sym: \prod
+          is: Multiply the indicated terms
+        - sym: q
+          is: The candidate probability model fitted to the fixed observed sample
+        - sym: x
+          is: One input example
+        - sym: \sum
+          is: Add the indicated terms
+      covers:
+      - Cross-entropy
+      - Negative log-likelihood
+      - Maximum likelihood
+      - One-hot labels
+      - Knowledge distillation
+      viz:
+        type: flow
+        steps:
+        - Data entropy
+        - Mismatch penalty
+        - Cross-entropy
+      beats:
+      - Calculate uncertainty under the data distribution.
+      - Then calculate the extra loss caused by model mismatch.
+      - Finally, add both terms to recover cross-entropy.
+      check: Show why maximising independent-sample likelihood minimises empirical cross-entropy.
+    - name: Mutual information and data processing
+      why: Mutual information measures the average uncertainty removed by another variable.
+      plain:
+      - Subtract conditional label entropy from label entropy. The result measures how much the input reveals about
+        the label.
+      - Equivalently, compare the joint distribution with the product of its marginals using KL divergence. Independence
+        gives zero mutual information.
+      - A Markov chain U to V to C means C depends on U only through V. Then I(U;C) cannot exceed I(U;V).
+      - For a representation C computed from input U, the relevant chain is V to U to C. Therefore, I(V;C) cannot
+        exceed I(V;U).
+      - Moreover, feature screening can miss interactions. Individually uninformative features can jointly predict
+        a label.
+      math:
+      - name: Mutual information and data processing
+        tex: \operatorname{I}(U;V)=H(V)-H(V\mid U)=\operatorname{D}_{\mathrm{KL}}(p(U,V)\|p(U)p(V))
+        read: Compare label uncertainty before and after observing the input.
+        note: These entropy identities assume finite discrete entropies. The KL definition extends beyond that setting.
+        where:
+        - sym: U
+          is: The source or input random variable
+        - sym: V
+          is: The target random variable
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: p
+          is: A probability or probability density
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      - name: Information and joint entropy
+        tex: \operatorname{I}(U;V)=H(U)+H(V)-H(U,V)
+        read: Subtract joint entropy from the sum of both marginal entropies.
+        note: Assume finite discrete entropies for this subtraction identity.
+        where:
+        - sym: U
+          is: The source or input random variable
+        - sym: V
+          is: The target random variable
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      - name: Data-processing inequality
+        tex: V\rightarrow U\rightarrow C\quad\Rightarrow\quad\operatorname{I}(V;C)\leq\operatorname{I}(V;U)
+        read: Processing the input cannot increase its information about the target.
+        note: Require conditional independence of V and C given U. For U to C to V, instead compare I(U;V) with I(U;C).
+        where:
+        - sym: V
+          is: The target random variable
+        - sym: U
+          is: The source or input random variable
+        - sym: C
+          is: The encoded representation random variable
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      covers:
+      - Mutual information
+      - Data-processing inequality
+      - Markov chain
+      - Feature selection
+      - Contrastive learning
+      viz:
+        type: flow
+        steps:
+        - Label entropy
+        - Conditional entropy
+        - Information retained
+      beats:
+      - Measure uncertainty before observing the input.
+      - Then measure the uncertainty remaining after observing it.
+      - Finally, subtract to obtain mutual information.
+      check: State both Markov-chain orientations and derive their data-processing inequalities.
+    - name: Coding, compression and description length
+      why: A probability model determines the expected length of a lossless code.
+      plain:
+      - For probabilities [1/2, 1/4, 1/8, 1/8], use codewords 0, 10, 110 and 111.
+      - Their average length is 0.5 times 1 plus 0.25 times 2 plus 0.25 times 3. Therefore, the mean equals 1.75 bits.
+      - A prefix code ensures no codeword begins another. Huffman coding repeatedly merges the 2 least probable symbols.
+      - Kraft inequality constrains prefix-code lengths. For a finite discrete source, optimal binary prefix codes
+        satisfy entropy at most mean length, below entropy plus 1.
+      - For independent identically distributed blocks, longer codes approach entropy per symbol. Arithmetic coding
+        uses sequence probability intervals.
+      - Minimum Description Length also counts the model description. Therefore, its model cost can offset improvements
+        in data compression.
+      math:
+      - name: Coding, compression and description length
+        tex: H(U)\leq\bar{c}<H(U)+1
+        read: Compare source entropy with the optimal mean binary prefix-code length.
+        note: The upper bound assumes an optimal code for a finite discrete source. Block coding needs source assumptions.
+        where:
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: U
+          is: The source or input random variable
+        - sym: c
+          is: The binary codeword length
+      - name: Kraft inequality
+        tex: \sum_a 2^{-c_a}\leq1
+        read: Add the binary tree fractions occupied by each codeword.
+        note: This inequality characterises possible lengths of binary prefix codes. Actual words also require a prefix-code
+          construction.
+        where:
+        - sym: \sum
+          is: Add the indicated terms
+      - name: Minimum Description Length
+        tex: \operatorname{Cost}=\operatorname{bits}(\operatorname{model})+\operatorname{bits}(\operatorname{data}\mid\operatorname{model})
+        read: Count both the model description and the data encoded using that model.
+        note: Specify the coding scheme before comparing models. Different MDL formulations treat model costs differently.
+        where:
+        - sym: \mid
+          is: Given the information on the right of the symbol
+      covers:
+      - Prefix codes
+      - Kraft inequality
+      - Huffman coding
+      - Arithmetic coding
+      - Typical sequences
+      - Source coding theorem
+      - Minimum Description Length
+      viz:
+        type: flow
+        steps:
+        - Probabilities
+        - Codeword lengths
+        - Model and data cost
+      beats:
+      - Give frequent symbols shorter descriptions.
+      - Then average the lengths using source probabilities.
+      - Finally, count model bits when comparing complete descriptions.
+      check: Construct a Huffman code and explain when its mean length approaches entropy.
+    - name: Bayesian information and active learning
+      why: Bayesian updating changes parameter uncertainty through observed evidence.
+      plain:
+      - Assume a coin has heads probability 1/2 or 3/4, with equal prior weights. Observe 3 heads followed by 1 tail.
+      - The sequence likelihoods are 16/256 and 27/256. Therefore, the posterior weights become 16/43 and 27/43.
+      - Posterior-to-prior KL measures realised information gain. However, a particular observation need not reduce
+        posterior entropy.
+      - Averaging this KL over possible observations gives mutual information between parameters and data. Active
+        learning chooses observations with large expected gain.
+      math:
+      - name: Bayesian information and active learning
+        tex: p(\theta\mid D)=\frac{p(D\mid\theta)p(\theta)}{p(D)}
+        read: Multiply each prior weight by its likelihood, then divide by the sum of those weights.
+        note: Assume the candidate coin probabilities are the entire model and tosses are independent given the candidate.
+        where:
+        - sym: p
+          is: A probability or probability density
+        - sym: \theta
+          is: The model parameters, the numbers fitted or assigned to the model
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: D
+          is: A dataset containing input and answer pairs
+      - name: Expected information gain
+        tex: \mathbb{E}_{D}\operatorname{D}_{\mathrm{KL}}(p(\theta\mid D)\|p(\theta))=\operatorname{I}(\theta;D)
+        read: Average posterior-to-prior divergence over possible datasets.
+        note: The expectation uses the prior predictive distribution of D. This is an average statement under the
+          model.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: p
+          is: A probability or probability density
+        - sym: \theta
+          is: The model parameters, the numbers fitted or assigned to the model
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: D
+          is: A dataset containing input and answer pairs
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      covers:
+      - Prior
+      - Posterior
+      - Likelihood
+      - Information gain
+      - Active learning
+      - Experimental design
+      viz:
+        type: flow
+        steps:
+        - Prior weights
+        - Likelihood weights
+        - Posterior weights
+      beats:
+      - Assign prior probabilities to the candidate models.
+      - Then multiply by the observed-data likelihood for each candidate.
+      - Finally, normalise to obtain posterior probabilities.
+      check: Derive the 27/43 posterior and distinguish realised from expected information gain.
+    - name: Variational inference and the ELBO
+      why: A tractable approximation can replace an inaccessible posterior.
+      plain:
+      - Let q describe a tractable latent-variable distribution for an observed input. Compare q with the exact posterior.
+      - Expand the log joint density as log posterior plus log evidence. Then average under q and rearrange.
+      - The evidence lower bound, or ELBO, equals expected log likelihood minus divergence from the latent prior.
+      - Its gap to log evidence is posterior KL. Therefore, maximising the bound reduces that gap for a fixed generative
+        model.
+      math:
+      - name: Variational inference and the ELBO
+        tex: \log p(x)=\operatorname{ELBO}+\operatorname{D}_{\mathrm{KL}}(q(z\mid x)\|p(z\mid x))
+        read: Subtract posterior KL from log evidence to obtain the evidence lower bound.
+        note: Use natural logarithms here. Require the relevant expectations and support conditions for a finite identity.
+        where:
+        - sym: p
+          is: A probability or probability density
+        - sym: x
+          is: One input example
+        - sym: q
+          is: The approximate posterior distribution
+        - sym: z
+          is: A hidden representation, the numbers produced by an intermediate model step
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      - name: Reconstruction and prior penalty
+        tex: \operatorname{ELBO}=\mathbb{E}_{q(z\mid x)}\log p(x\mid z)-\operatorname{D}_{\mathrm{KL}}(q(z\mid x)\|p(z))
+        read: Average reconstruction log likelihood, then subtract the divergence from the latent prior.
+        note: Assume p(x,z) equals p(x given z) times p(z). Optimising both model and approximation changes both terms.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: p
+          is: A probability or probability density
+        - sym: x
+          is: One input example
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: z
+          is: A hidden representation, the numbers produced by an intermediate model step
+        - sym: q
+          is: The approximate posterior distribution
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      covers:
+      - Variational inference
+      - ELBO
+      - Jensen inequality
+      - Reconstruction likelihood
+      - Variational autoencoders
+      viz:
+        type: flow
+        steps:
+        - Approximate posterior
+        - Lower bound
+        - Posterior gap
+      beats:
+      - Choose a latent distribution with tractable expectations.
+      - Then combine expected log likelihood and prior KL into the ELBO.
+      - Finally, interpret posterior KL as the gap to log evidence.
+      check: Derive both forms of the ELBO and explain which distributions each KL compares.
+    - name: Information bottleneck and sufficient representations
+      why: A representation can preserve target information while limiting retained input information.
+      plain:
+      - Let U be the input and V the target. Then sample representation C from an encoder given U.
+      - Then V to U to C forms the relevant Markov chain. Penalise retained input information while rewarding target
+        information.
+      - A sufficient representation preserves the input information needed to predict the target. Its conditional
+        target distribution matches the original conditional distribution.
+      - For continuous deterministic encoders, input-representation mutual information can be infinite. Noise, quantisation
+        or other explicit assumptions make the objective usable.
+      - The objective follows the information bottleneck method of Tishby, Pereira and Bialek.
+      math:
+      - name: Information bottleneck and sufficient representations
+        tex: \min_{p(C\mid U)} \operatorname{I}(U;C)-\rho \operatorname{I}(C;V)
+        read: Balance representation compression against preserved target information.
+        note: The positive coefficient rho controls the trade-off. This objective alone does not guarantee disentanglement.
+        where:
+        - sym: U
+          is: The source or input random variable
+        - sym: C
+          is: The encoded representation random variable
+        - sym: \rho
+          is: A positive compression-versus-prediction coefficient
+        - sym: V
+          is: The target random variable
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      covers:
+      - Information bottleneck
+      - Sufficient statistics
+      - Stochastic encoders
+      - Representation learning
+      viz:
+        type: flow
+        steps:
+        - Input retained
+        - Target preserved
+        - Trade-off
+      beats:
+      - Measure the input information retained by the encoder.
+      - Then measure information preserved about the target.
+      - Finally, balance the competing terms with a positive coefficient.
+      check: Why can a deterministic continuous encoder make the bottleneck objective problematic?
+    - name: Predictive uncertainty and calibration
+      why: Predictive entropy combines observation noise and uncertainty about model parameters.
+      plain:
+      - Average model predictions using posterior parameter weights. Then compute the entropy of that averaged predictive
+        distribution.
+      - The average of individual model entropies describes uncertainty remaining when parameters are specified. This
+        is aleatoric uncertainty under the model.
+      - The difference is mutual information between the prediction and parameters. This measures epistemic uncertainty
+        under the posterior.
+      - However, low predictive entropy can accompany incorrect predictions. Calibration compares stated probabilities
+        with observed frequencies.
+      - Reliability diagrams group predictions by confidence. The Brier score and negative log-likelihood evaluate
+        probabilistic predictions.
+      - Expected calibration error depends on binning. Temperature scaling fits a positive logit scale on held-out
+        data.
+      - Moreover, distribution shift can invalidate calibration measured on the original population. Compare ensemble
+        uncertainty with single-model uncertainty.
+      math:
+      - name: Predictive uncertainty and calibration
+        tex: H(V\mid x,D)=\mathbb{E}_{p(\theta\mid D)}H(V\mid x,\theta)+\operatorname{I}(V;\theta\mid x,D)
+        read: Split predictive entropy into expected conditional entropy and parameter information.
+        note: Assume a Bayesian model where labels depend on the training data through the parameters, given the input.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+        - sym: V
+          is: The target random variable
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: x
+          is: One input example
+        - sym: D
+          is: A dataset containing input and answer pairs
+        - sym: \theta
+          is: The model parameters, the numbers fitted or assigned to the model
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      covers:
+      - Aleatoric uncertainty
+      - Epistemic uncertainty
+      - Predictive entropy
+      - Calibration
+      - Brier score
+      - Expected calibration error
+      - Temperature scaling
+      viz:
+        type: flow
+        steps:
+        - Individual predictions
+        - Average prediction
+        - Entropy decomposition
+      beats:
+      - Read the distributions supplied by individual parameter settings.
+      - Then average these predictions using posterior weights.
+      - Finally, compare the entropy of the average with average entropy.
+      check: Derive the entropy decomposition and explain why entropy alone cannot establish calibration.
+    - name: Information and generalisation
+      why: Information acquired from training data can appear in expected generalisation bounds.
+      plain:
+      - Let S contain independent identically distributed training examples. Let W denote the output of a learning
+        algorithm.
+      - The generalisation gap equals population loss minus training loss. The displayed bound concerns its expectation
+        over data and algorithm randomness.
+      - Mutual information I(S;W) measures dependence between the particular training sample and the fitted model.
+      - For uniformly sub-Gaussian losses, an expected generalisation gap is bounded using that information and sample
+        size.
+      - Sub-Gaussian means centred loss tails obey a Gaussian-style exponential bound. The scale must hold uniformly
+        across fixed models.
+      - PAC-Bayes instead compares distributions over hypotheses using posterior-to-prior KL. A conventional prior
+        is independent of the current training sample.
+      - These bounds can be loose or infinite. Deterministic algorithms on continuous data need particular care.
+      - Xu and Raginsky prove the displayed expected-gap bound in Theorem 1 of their NeurIPS 2017 paper.
+      math:
+      - name: Information and generalisation
+        tex: '|\mathbb{E}[\operatorname{gap}]|\leq\sqrt{\frac{2\tau^2 \operatorname{I}(S;W)}{n}}'
+        read: Bound the absolute expected population-minus-training loss using algorithm information.
+        note: Use nats. Assume independent identically distributed examples and a uniform sub-Gaussian tail scale
+          tau for fixed-model losses.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: \tau
+          is: A uniform sub-Gaussian tail scale for each fixed-model loss
+        - sym: S
+          is: The random training dataset
+        - sym: W
+          is: The output of the learning algorithm
+        - sym: n
+          is: The number of items being counted
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      covers:
+      - Expected generalisation gap
+      - Mutual-information bounds
+      - PAC-Bayes
+      - Stability
+      - Compression bounds
+      - Stochastic learning
+      viz:
+        type: flow
+        steps:
+        - Training data
+        - Learned parameters
+        - Expected gap bound
+      beats:
+      - Specify the sampling assumptions for the training dataset.
+      - Then measure the information dependence of the algorithm output.
+      - Finally, apply a theorem with the required loss-tail assumptions.
+      check: State the assumptions of the information bound and distinguish it from a PAC-Bayes bound.
+    - name: Rate-distortion and continuous uncertainty
+      why: Allowing reconstruction error changes the minimum information needed for compression.
+      plain:
+      - Choose a distortion function measuring the cost of reconstructing an input incorrectly. Then constrain its
+        expected value.
+      - Among reconstruction channels satisfying that constraint, minimise input-reconstruction mutual information.
+        This defines the rate-distortion function.
+      - For a fair binary source and Hamming distortion, the rate equals 1 minus binary entropy for D between 0 and
+        0.5.
+      - Hamming distortion counts unequal bits. At D equal to 0.5, zero transmitted bits suffice under average distortion.
+      - For continuous variables, differential entropy integrates negative log density. It can be negative and changes
+        when units change.
+      - For a nonzero scale a, differential entropy of aU equals entropy of U plus log absolute a.
+      - However, KL and mutual information remain invariant under suitable invertible coordinate changes. Lossy representations
+        still require a specified distortion.
+      math:
+      - name: Rate-distortion and continuous uncertainty
+        tex: \mathcal{R}(\Delta)=\inf_{p(\hat U\mid U):\mathbb{E}[d(U,\hat U)]\leq\Delta}\operatorname{I}(U;\hat U)
+        read: Find the least mutual information among reconstruction channels meeting the distortion budget.
+        note: This is a single-letter information quantity. Operational coding interpretations require the stated
+          source and coding assumptions.
+        where:
+        - sym: \mathcal{R}
+          is: The rate-distortion function
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: \Delta
+          is: The permitted expected distortion
+        - sym: p
+          is: A probability or probability density
+        - sym: U
+          is: The source or input random variable
+        - sym: \mid
+          is: Given the information on the right of the symbol
+        - sym: \operatorname{I}
+          is: Mutual information between the stated random variables
+      - name: Fair binary rate-distortion
+        tex: \mathcal{R}(\Delta)=1-H_2(\Delta),\quad 0\leq\Delta\leq\frac12
+        read: Subtract binary error entropy from the fair source entropy of 1 bit.
+        note: Assume independent fair binary source symbols and expected Hamming distortion. Rate is zero for larger
+          feasible distortion budgets.
+        where:
+        - sym: \mathcal{R}
+          is: The rate-distortion function
+        - sym: \Delta
+          is: The permitted expected distortion
+        - sym: H
+          is: Discrete entropy, or cross-entropy when given 2 distributions
+      - name: Differential entropy
+        tex: h(U)=-\int p(a)\log p(a)\,da
+        read: Integrate negative log density weighted by the density itself.
+        note: Use natural logarithms for nats. A density value is not an event probability. Require the integral to
+          be defined.
+        where:
+        - sym: h
+          is: Differential entropy in the stated coordinates
+        - sym: U
+          is: The source or input random variable
+        - sym: \int
+          is: Integrate, accumulating values across a continuous range
+        - sym: p
+          is: A probability or probability density
+        - sym: a
+          is: An outcome value, or the nonzero scale explicitly named in the final equation
+      - name: Changing continuous units
+        tex: h(aU)=h(U)+\log|a|
+        read: Multiplying the variable by a scale changes differential entropy by the logarithm of that scale.
+        note: Require a nonzero scalar scale and well-defined differential entropy. Here, a is a scale rather than
+          an outcome index.
+        where:
+        - sym: h
+          is: Differential entropy in the stated coordinates
+        - sym: a
+          is: An outcome value, or the nonzero scale explicitly named in the final equation
+        - sym: U
+          is: The source or input random variable
+      covers:
+      - Rate-distortion function
+      - Hamming distortion
+      - Quantisation
+      - Neural compression
+      - Differential entropy
+      viz:
+        type: flow
+        steps:
+        - Distortion budget
+        - Reconstruction channel
+        - Minimum rate
+      beats:
+      - Choose the reconstruction error measure and its allowed average.
+      - Then consider channels that satisfy that limit.
+      - Finally, minimise the retained mutual information.
+      check: Derive the fair-binary rate-distortion curve and explain why differential entropy depends on units.
+    - name: Generative models and distribution objectives
+      why: Generative objectives compare observed data with probabilities or distributions produced by a model.
+      plain:
+      - An autoregressive model predicts each token given earlier tokens. Its sequence negative log-likelihood adds
+        token losses.
+      - Perplexity exponentiates mean token loss. Use exponentiation base e for nats or base 2 for bits.
+      - A variational autoencoder maximises the ELBO. Its reconstruction term is a log likelihood, so its form depends
+        on the observation model.
+      - Jensen-Shannon divergence averages KL divergences to the mixture distribution. It is symmetric and bounded
+        by 1 bit.
+      - The original idealised GAN minimax objective relates to Jensen-Shannon divergence with an optimal discriminator.
+        Practical GAN losses can differ.
+      - Diffusion models use noisy observations, score estimation and variational bounds. Common denoising objectives
+        depend on their weighting and parameterisation.
+      - Goodfellow and colleagues derive this relationship in Equation 6 of their NeurIPS 2014 paper.
+      math:
+      - name: Generative models and distribution objectives
+        tex: \operatorname{PPL}=\exp\left(-\frac1T\sum_{t=1}^{T}\log p(x_t\mid x_{<t})\right)
+        read: Average natural-log token losses and exponentiate the result.
+        note: Compare perplexity only with compatible tokenisation, data and evaluation conventions.
+        where:
+        - sym: T
+          is: The sequence length
+        - sym: \sum
+          is: Add the indicated terms
+        - sym: p
+          is: A probability or probability density
+        - sym: x
+          is: One input example
+        - sym: \mid
+          is: Given the information on the right of the symbol
+      - name: Jensen-Shannon divergence
+        tex: \operatorname{D}_{\mathrm{JS}}(P\|Q)=\frac12\operatorname{D}_{\mathrm{KL}}(P\|M)+\frac12\operatorname{D}_{\mathrm{KL}}(Q\|M),\quad
+          M=\frac{P+Q}{2}
+        read: Compare each distribution with their equally weighted mixture and average the divergences.
+        note: The result is symmetric and at most 1 bit with base-2 logarithms. Its square root is a metric.
+        where:
+        - sym: P
+          is: The data distribution
+        - sym: Q
+          is: The model distribution
+        - sym: M
+          is: The equally weighted mixture of P and Q
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      covers:
+      - Autoregressive likelihood
+      - Perplexity
+      - VAEs
+      - Jensen-Shannon divergence
+      - GANs
+      - Diffusion models
+      viz:
+        type: flow
+        steps:
+        - Model probabilities
+        - Log-loss
+        - Generative objective
+      beats:
+      - Assign probabilities to observed data or tokens.
+      - Then calculate the chosen loss or divergence.
+      - Finally, check the assumptions connecting that objective to the model family.
+      check: Explain the logarithm base in perplexity and the assumptions behind the original GAN divergence interpretation.
+    - name: Fisher information, geometry and final projects
+      why: Local changes in a probability model connect KL divergence with statistical estimation.
+      plain:
+      - For a differentiable parametric model, differentiate log density with respect to its parameters. This derivative
+        is the score.
+      - The expected outer product of the score gives the Fisher information matrix. It measures local distinguishability
+        of parameter settings.
+      - Under regularity conditions, small parameter changes make KL approximately half a quadratic form in this matrix.
+      - Natural gradient rescales a loss gradient using Fisher information. It needs an invertible matrix or a specified
+        regularised alternative.
+      - The Cramér-Rao bound constrains unbiased estimator variance under its own regularity assumptions. It does
+        not apply to every estimator.
+      - For a final project, compare uncertainty methods, build a compressor, or investigate calibration under distribution
+        shift.
+      - Alternatively, study active learning, bottleneck representations, PAC-Bayes, or token perplexity. Report assumptions,
+        calculations and evaluation results.
+      math:
+      - name: Fisher information, geometry and final projects
+        tex: F(\theta)=\mathbb{E}\left[\left[\nabla_{\theta}\log p(x\mid\theta)\right]\left[\nabla_{\theta}\log p(x\mid\theta)\right]^{\top}\right]
+        read: Average the outer product of log-density derivatives under the parametric model.
+        note: Require differentiability and the relevant regularity conditions. Fisher information can be singular.
+        where:
+        - sym: \mathbb{E}
+          is: The expected value, an average weighted by the probability distribution
+        - sym: F
+          is: The Fisher information matrix
+        - sym: \theta
+          is: The model parameters, the numbers fitted or assigned to the model
+        - sym: \nabla
+          is: The gradient, whose components are partial derivatives
+        - sym: p
+          is: A probability or probability density
+        - sym: x
+          is: One input example
+        - sym: \mid
+          is: Given the information on the right of the symbol
+      - name: Local KL geometry
+        tex: \operatorname{D}_{\mathrm{KL}}(p_{\theta}\|p_{\theta+\delta})=\frac12\delta^{\top}F(\theta)\delta+o(\|\delta\|^2)
+        read: For a small parameter displacement, the leading KL term is a Fisher quadratic form.
+        note: Use natural logarithms and a regular smooth model. The remainder divided by squared displacement length
+          approaches zero.
+        where:
+        - sym: p
+          is: A probability or probability density
+        - sym: \delta
+          is: A small change in the parameter vector
+        - sym: F
+          is: The Fisher information matrix
+        - sym: \theta
+          is: The model parameters, the numbers fitted or assigned to the model
+        - sym: \operatorname{D}_{\mathrm{KL}}
+          is: Kullback-Leibler divergence between the stated distributions
+      covers:
+      - Fisher information
+      - Score
+      - Information geometry
+      - Cramér-Rao bound
+      - Natural gradient
+      - Project design
+      viz:
+        type: flow
+        steps:
+        - Score derivatives
+        - Fisher matrix
+        - Estimation and optimisation
+      beats:
+      - Differentiate log density at fixed parameter settings.
+      - Then average score outer products under the model.
+      - Finally, use the matrix with the assumptions required by the chosen result.
+      check: Connect local KL, Fisher information and natural gradient, then state the conditions each needs.
+    traps:
+    - Reversing the data-processing inequality or using the wrong Markov chain.
+    - Treating low predictive entropy as evidence of correctness.
+    - Assuming every Bayesian observation reduces entropy.
+    - Ignoring zero model probabilities, logarithm bases or continuous-variable assumptions.
+    - Applying generalisation bounds without their sampling and loss assumptions.
+    drills:
+    - Implement entropy, KL, cross-entropy and mutual information, including zero-probability cases.
+    - Prove Gibbs inequality and derive the chain rule and ELBO.
+    - Build a Huffman coder and compare mean code length with source entropy.
+    - Train a classifier, plot predictive entropy, and compare confidence with observed errors.
+    - Fit temperature scaling on held-out data and evaluate calibration under a specified shift.
+    - Build a decision tree whose split score equals empirical label entropy minus weighted child entropy.
+    - Train a small VAE and track reconstruction likelihood and prior KL separately.
+    - Estimate mutual information with known synthetic ground truth and report estimator limitations.
+    - Choose a final project, state assumptions, and compare methods using held-out evidence.
   - id: calculus
     name: Calculus
     group: foundations

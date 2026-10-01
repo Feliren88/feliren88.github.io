@@ -8,8 +8,9 @@
   "cornerRadius": 2,
   "padding": 2,
   "opticalBalance": true,
-  "iconCount": 37,
+  "iconCount": 38,
   "icons": [
+    "information-theory",
     "bayesian-statistics",
     "linear-algebra",
     "calculus",

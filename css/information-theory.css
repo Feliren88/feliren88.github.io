@@ -1,0 +1,44 @@
+.it-explorer { --it-scale: var(--rd-scale, 1); }
+.it-tabs, .it-controls, .it-transport { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 18px 0; }
+.it-explorer button, .it-explorer select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+.it-explorer button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.it-controls label { display: grid; gap: 7px; flex: 1 1 220px; max-width: 330px; font-size: calc(14px * var(--it-scale)); }
+.it-controls input { width: 100%; accent-color: var(--accent); }
+.it-controls output { font-variant-numeric: tabular-nums; }
+.it-stage { border: 1px solid var(--line); border-radius: 8px; padding: 8px; overflow-x: auto; }
+.it-stage svg { width: 100%; min-width: 600px; height: auto; display: block; overflow: visible; }
+.it-stage text { font-family: inherit; fill: var(--text); font-size: calc(15px * var(--it-scale)); }
+.it-stage .it-bar { fill: var(--accent); }
+.it-stage .it-model { fill: var(--muted); }
+.it-stage .it-axis { stroke: var(--muted); stroke-width: 1; }
+.it-stage .it-curve { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.it-stage .it-point { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.it-stage .it-wire { stroke: var(--muted); stroke-width: 2; fill: none; }
+.it-stage .it-node { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+.it-readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 20px 0; }
+.it-readouts > div { padding: 12px; border: 1px solid var(--line); border-radius: 6px; }
+.it-readouts span { display: block; font-size: calc(13px * var(--it-scale)); }
+.it-readouts strong { display: block; margin-top: 8px; font-size: calc(21px * var(--it-scale)); font-variant-numeric: tabular-nums; }
+.it-calculation { max-width: 66ch; line-height: var(--rd-line, 1.65); }
+.it-calculation h3 { font-size: calc(18px * var(--it-scale)); margin-bottom: 12px; }
+.it-calculation p { margin: 12px 0; }
+.it-formula { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.it-calculation details { padding: 12px 0; }
+.it-calculation summary { cursor: pointer; }
+.it-status { display: block; margin-top: 12px; min-height: 1.5em; font-size: calc(13px * var(--it-scale)); color: var(--muted); }
+.it-explorer a { color: var(--text); text-decoration-color: var(--accent); }
+@media (max-width: 480px) { .it-tabs { gap: 8px; } .it-explorer button { padding: 8px; font-size: calc(13px * var(--it-scale)); } .it-stage { padding: 3px; } .it-readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.it-lesson { margin: 28px 0; padding: 20px; border: 1px solid var(--line); border-radius: 10px; }
+.it-lesson .xp-head h3 { font-size: calc(20px * var(--it-scale)); line-height: 1.4; margin: 0 0 12px; }
+.it-lesson .xp-head p, .it-lesson-drag { max-width: 66ch; line-height: var(--rd-line, 1.65); }
+.it-lesson-timeline { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin: 20px 0; }
+.it-lesson-timeline input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+.it-lesson-guide { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 12px; }
+.it-joint-cell { fill: var(--accent); }
+.it-lesson-handle { cursor: ew-resize; touch-action: none; }
+.it-lesson-handle:focus-visible { outline: none; stroke: var(--text); stroke-width: 4px; }
+.it-lesson .it-stage { overscroll-behavior-x: contain; }
+@media (max-width: 480px) { .it-lesson { padding: 12px; } .it-lesson .it-readouts { grid-template-columns: 1fr; } }
+/* Enlarge the whole diagram so reading controls preserve label spacing. */
+.it-lesson .it-stage svg { width: calc(100% * var(--it-scale)); min-width: calc(600px * var(--it-scale)); }
+.it-lesson .it-stage text { font-size: 15px; }

@@ -39,3 +39,5 @@ test:  ## Run tooling and distribution checks
 	python3 -m unittest discover -s scripts
 	node scripts/test_interview_distributions.js
 	node scripts/test_lab_core.js
+	node scripts/test_information_theory.js
+	node scripts/test_information_lessons.js

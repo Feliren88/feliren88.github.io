@@ -79,6 +79,30 @@
 
   var SCENES = {
 
+    expectedSurprise: {
+      title: 'From probability to expected surprise',
+      lead: 'Use a chosen 4-symbol source to connect probabilities with an average code length.',
+      build: function () {
+        function sceneText(value, attrs) { attrs['class']='an-t'; return text(value, attrs); }
+        var probabilities = [.5, .25, .125, .125], symbols = ['A', 'B', 'C', 'D'];
+        var s = sceneText('Probability', {x:30,y:30}) + sceneText('Surprise in bits', {x:260,y:30}) + sceneText('Weighted contribution', {x:420,y:30});
+        probabilities.forEach(function(p,i) {
+          var y=70+i*58, surprise=-Math.log2(p), weighted=p*surprise;
+          s += '<g class="an-fade" data-from="0">'+sceneText(symbols[i],{x:25,y:y+15})+rect({x:55,y:y,width:p*320,height:24,fill:'var(--accent)'})+sceneText(String(p),{x:225,y:y+17})+'</g>';
+          s += '<g class="an-fade" data-from="1">'+sceneText(String(surprise),{x:300,y:y+17})+'</g>';
+          s += '<g class="an-fade" data-from="2">'+sceneText(String(weighted),{x:490,y:y+17})+'</g>';
+        });
+        s += '<g class="an-fade" data-from="3">'+sceneText('Entropy = 1.75 bits per symbol',{x:280,y:330,'text-anchor':'middle'})+'</g>';
+        return '<svg class="an-svg" viewBox="0 0 600 355" role="img" aria-label="Four symbol probabilities become surprise and weighted contributions summing to 1.75 bits">'+s+'</svg>';
+      },
+      beats: [
+        {say:'Assume probabilities 1/2, 1/4, 1/8 and 1/8. Their sum equals 1.'},
+        {say:'Take each negative base-2 logarithm. The surprises equal 1, 2, 3 and 3 bits.'},
+        {say:'Then multiply each surprise by its probability. The contributions equal 0.5, 0.5, 0.375 and 0.375 bits.'},
+        {say:'Finally, add the contributions to obtain entropy 1.75 bits. A matching prefix code attains this mean length.'}
+      ]
+    },
+
     /* ── Transformers: attention ─────────────────────────────────
        The sequence 3Blue1Brown uses for this chapter. Words become
        vectors, vectors become queries and keys, the dot products fill
@@ -1414,6 +1438,7 @@
 
   /* Which track shows which scene. One flagship each. */
   var BY_TOPIC = {
+    'information-theory': 'expectedSurprise',
     'transformers': 'attention',
     'bayesian-statistics': 'bayes',
     'deep-learning': 'descent',
