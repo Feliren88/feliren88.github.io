@@ -11,7 +11,7 @@ def set_range(control, value):
 
 
 def number(lab, name):
-    return float(lab.locator(f'[data-val="{name}"]').first.text_content())
+    return float(lab.locator(f'[data-val="{name}"]').first.text_content().replace('−', '-'))
 
 
 def derivatives(page):
@@ -83,6 +83,10 @@ def derivatives(page):
     assert float(progress.input_value()) == 0.25, 'Interrupting playback must preserve the requested fraction'
     assert 0.01 < number(lab, 'h') < 1
     assert lab.get_attribute('data-anim') is None
+
+    lab.locator('[data-reset]').click()
+    for _ in range(3): lab.locator('[data-guide="1"]').click()
+    assert lab.locator('.xp-guide-n').inner_text() == '4 / 8', 'A rapid press must survive the coincident-point readout'
 
 
 with sync_playwright() as p:

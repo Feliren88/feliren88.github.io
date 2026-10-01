@@ -257,13 +257,13 @@
       { t: 'The limiting slope', parts: ['point', 'tangent'], state: { kind: 'square', x: 1, h: 0, zoom: 1 },
         body: '<p>The limiting line is the <b class="is-o">tangent</b>, whose slope 2 is the derivative here. However, setting h = 0 makes the quotient undefined.</p>' },
       { t: 'Look close to the point', parts: ['curve', 'tangent', 'point'], state: { kind: 'square', x: 1, h: 0.1, zoom: 32 },
-        body: '<p>Magnification makes the square curve look straighter near x = 1. Therefore, the <b class="is-o">tangent</b> predicts nearby values more closely.</p>' },
+        body: '<p>Magnification shows a smaller range around x = 1. Within that range, the <b class="is-o">tangent</b> closely follows the curve.</p>' },
       { t: 'Trace the slope', parts: ['tangent', 'point'], state: { kind: 'square', x: 1.5, h: 0.1, zoom: 16 },
         body: '<p>At x = 1.5, the square curve has slope 3. Moreover, dragging the first point moves its height on the <b class="is-o">derivative graph</b>.</p>' },
       { t: 'A corner has 2 slopes', parts: ['curve', 'tangent', 'point'], state: { kind: 'abs', x: 0, h: 0.5, zoom: 32 },
         body: '<p>For |x|, the left slope is −1 and the right slope is 1. Therefore, magnifying this corner cannot produce 1 tangent slope.</p>' },
       { t: 'A vertical tangent', parts: ['curve', 'tangent', 'point'], state: { kind: 'cube-root', x: 0, h: 0.1, zoom: 16 },
-        body: '<p>The cube root has a vertical tangent at 0. Therefore, its secant slopes grow without bound and give no finite derivative there.</p>' },
+        body: '<p>Near 0, the cube root’s secant slopes grow without bound. Therefore, its vertical tangent gives no finite derivative there.</p>' },
       { t: 'Small steps meet machine limits', parts: ['curve', 'secant', 'tangent'], state: { kind: 'exp', x: 1, h: 0.01, zoom: 16 },
         body: '<p>For eˣ at 1, the exact slope is e, about 2.71828. However, the worked table shows rounding error when h becomes too small.</p>' }
     ];

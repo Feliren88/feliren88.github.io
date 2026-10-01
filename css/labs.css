@@ -115,3 +115,5 @@
 .lab-plane .pl-point { fill: currentColor; }
 .lab-plane .pl-open { fill: var(--surface); stroke: currentColor; stroke-width: 2; }
 .lab-derivatives .lab-note { min-block-size: 3lh; }
+.lab-derivatives .lab-eq { display: grid; gap: 0.1rem; }
+.lab-derivatives .lab-eq .lab-term { white-space: nowrap; }
