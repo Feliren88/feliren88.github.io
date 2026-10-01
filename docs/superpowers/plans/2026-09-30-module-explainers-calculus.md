@@ -62,13 +62,13 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `chain(x,dx), squaredLoss(w,x,b,y), adjoints(w,x,b,y), passCounts(inputs,outputs). The loss result includes every forward node and derivative contribution.` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/chain-rule` with these assertions. Check f(g(x)) with g(x)=x² and f(z)=sin(z) at x=1; compare derivative 2x cos(x²) with central differences. For w=2,x=1,b=−1,y=3, verify loss4 and gradients w=−4,x=−8,b=−4,y=4. Verify shared-input contributions sum and pass counts 4/1.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/chain-rule`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Use 3 linked number lines with a draggable x and dx. A second view traces squared-error graph values forward and adjoints backward, including a shared input branch. Scrub the forward/backward pass. Drag model inputs in their graph nodes. Show local derivative and summed adjoint tables plus input/output pass counts. Publish chainRate and lossGradient in module 1.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/chain-rule` with these assertions. Check f(g(x)) with g(x)=x² and f(z)=sin(z) at x=1; compare derivative 2x cos(x²) with central differences. For w=2,x=1,b=−1,y=3, verify loss4 and gradients w=−4,x=−8,b=−4,y=4. Verify shared-input contributions sum and pass counts 4/1.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/chain-rule`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Use 3 linked number lines with a draggable x and dx. A second view traces squared-error graph values forward and adjoints backward, including a shared input branch. Scrub the forward/backward pass. Drag model inputs in their graph nodes. Show local derivative and summed adjoint tables plus input/output pass counts. Publish chainRate and lossGradient in module 1.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 3: Gradients, Jacobians and Hessians
 

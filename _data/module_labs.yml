@@ -11,3 +11,4 @@ linear-algebra:
   '6': conditioning
 calculus:
   '0': derivatives
+  '1': chain-rule

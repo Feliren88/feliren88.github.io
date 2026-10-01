@@ -428,6 +428,39 @@ def check_derivatives():
     same('roundoff at machine resolution',results[-1]['slope'],0)
 
 
+@check('calculus/chain-rule')
+def check_chain_rule():
+    lab = 'calculus/chain-rule'
+    xs = [-1.7, -1, 0, 0.5, 1, 1.8]
+    chains = run(lab, [['chain', [x, 0.01]] for x in xs])
+    for x, c in zip(xs, chains):
+        close(f'inner value {x}', c['g'], x*x)
+        close(f'outer value {x}', c['f'], np.sin(x*x))
+        close(f'inner nudge {x}', c['dg'], (x+0.01)**2-x*x)
+        close(f'outer nudge {x}', c['df'], np.sin((x+0.01)**2)-np.sin(x*x))
+        fd = (np.sin((x+1e-6)**2)-np.sin((x-1e-6)**2))/2e-6
+        close(f'chain rate {x}', c['rate'], fd, 1e-7)
+        close(f'shared product contributions {x}', c['contributions'], [x*np.cos(x*x)]*2)
+        close(f'contribution sum {x}', sum(c['contributions']), fd, 1e-7)
+    inputs = [[2,1,-1,3], [-1,0.5,2,-1], [0,0,0,0]]
+    calls = [[fn, args] for args in inputs for fn in ('squaredLoss','adjoints')]
+    out = run(lab, calls)
+    for i, (w,x,b,y) in enumerate(inputs):
+        f, a = out[2*i:2*i+2]
+        close(f'loss nodes {i}', [f['product'],f['prediction'],f['residual'],f['loss']], [w*x,w*x+b,w*x+b-y,(w*x+b-y)**2])
+        for j, key in enumerate(('w','x','b','y')):
+            lo, hi = np.array([w,x,b,y],float), np.array([w,x,b,y],float)
+            lo[j] -= 1e-6; hi[j] += 1e-6
+            fn = lambda v: (v[0]*v[1]+v[2]-v[3])**2
+            close(f'adjoint {i} {key}', a[key], (fn(hi)-fn(lo))/2e-6, 1e-7)
+        close(f'local adjoints {i}', [a['loss'],a['residual'],a['prediction'],a['product']], [1,2*(w*x+b-y),2*(w*x+b-y),2*(w*x+b-y)])
+    shared = run(lab,[['squaredLoss',[2,1,0,3,True]],['adjoints',[2,1,0,3,True]]])
+    close('shared-target loss',shared[0]['loss'],1)
+    close('shared-target branches',shared[1]['xContributions'],[4,-2])
+    close('shared-target total',shared[1]['x'],2)
+    same('forward and reverse passes',run(lab,[['passCounts',[4,1]]])[0],{'forward':4,'reverse':1})
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

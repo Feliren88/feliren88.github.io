@@ -89,16 +89,90 @@ def derivatives(page):
     assert lab.locator('.xp-guide-n').inner_text() == '4 / 8', 'A rapid press must survive the coincident-point readout'
 
 
+def chain_rule(page):
+    page.goto(BASE + '/calculus/#m2')
+    lab = page.locator('[data-lab="calculus/chain-rule"] .lab')
+    assert lab.count() == 1, 'The chain rule needs linked number lines and a computation graph'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/chain-rule\"]').getAttribute('data-lab-state') === 'ready'")
+    assert lab.locator('.xp-guide-n').inner_text() == '1 / 8'
+    assert abs(number(lab, 'g') - 1) < 1e-8 and abs(number(lab, 'f') - 0.8415) < 0.001
+    assert abs(float(page.locator('#m2 [data-live="chainRate"]').text_content()) - 1.0806) < 0.001
+    assert not lab.locator('[data-k="shape"]').is_visible(), 'Graph size belongs to the computation graph view'
+    assert not lab.locator('[data-loss-eq]').is_visible(), 'The number lines show their own equation'
+    progress = lab.locator('[data-k="progress"]')
+    lab.locator('[data-act="play"]').click()
+    finished = lab.locator('[data-stage]').inner_html()
+    set_range(progress, 0)
+    assert lab.locator('[data-stage]').inner_html() != finished, 'The forward pass must rewind'
+    set_range(progress, 1)
+    assert lab.locator('[data-stage]').inner_html() == finished
+    nxt, prev = lab.locator('[data-guide="1"]'), lab.locator('[data-guide="-1"]')
+    for _ in range(3): nxt.click()
+    smallest_label = lab.locator('[data-graph] svg').evaluate("e=>Math.min(...[...e.querySelectorAll('text')].map(t=>parseFloat(getComputedStyle(t).fontSize)*t.getScreenCTM().a))")
+    assert smallest_label >= 10, 'The computation graph needs readable labels on a phone'
+    wave = lab.locator('[data-graph] circle[r="7"]')
+    loss_node = lab.locator('[data-graph] .pl-node').last
+    loss_centre = float(loss_node.get_attribute('x')) + float(loss_node.get_attribute('width')) / 2
+    assert abs(float(wave.get_attribute('cx')) - loss_centre) < 0.1, 'The forward pass must reach the loss before reversing'
+    nxt.click()
+    assert number(lab, 'loss') == 4 and number(lab, 'lossGradient') == -8
+    assert not lab.locator('[data-line-eq]').is_visible(), 'The computation graph shows its own equation'
+    lab.locator('[data-term="graph"]').dispatch_event('mouseenter')
+    assert lab.locator('[data-graph] [data-part="graph"]:not(.is-dim)').count() > 0, 'Hovering loss must highlight its graph'
+    lab.locator('[data-term="graph"]').dispatch_event('mouseleave')
+    lab.locator('[data-k="shape"]').select_option('1,4')
+    set_range(progress, 0.5)
+    assert lab.locator('[data-k="shape"]').input_value() == '1,4', 'Pass counts must stay whole while scrubbing'
+    set_range(progress, 0)
+    assert lab.locator('[data-k="shape"]').input_value() == '4,1'
+    lab.locator('[data-k="shape"]').select_option('4,1')
+    assert float(page.locator('#m2 [data-live="lossGradient"]').text_content().replace('−', '-')) == -8
+    lab.locator('[data-k="parameter"]').select_option('w')
+    handle = lab.locator('[data-handle="parameter"]')
+    handle.focus(); page.keyboard.press('ArrowRight')
+    assert abs(number(lab, 'loss') - 3.61) < 1e-8, 'Dragging w must change the computed loss'
+    set_range(progress, 0)
+    assert number(lab, 'loss') == 4, 'Rewind must restore the model input before a manual change'
+    nxt.click()
+    assert number(lab, 'loss') == 1 and number(lab, 'lossGradient') == 2
+    lab.locator('[data-zoom="adjoints"]').click()
+    worked = page.locator('dialog[open]').inner_text()
+    assert '4.0000' in worked and '−2.0000' in worked and '2.0000' in worked, 'Shared-input adjoints must add every branch'
+    page.keyboard.press('Escape')
+    nxt.click()
+    assert number(lab, 'loss') == 0 and number(lab, 'lossGradient') == 0
+    prev.click()
+    assert lab.locator('[data-k="view"]').input_value() == 'shared'
+    assert number(lab, 'lossGradient') == 2, 'Previous must restore the shared-input example'
+    while not prev.is_disabled(): prev.click()
+    assert lab.locator('[data-k="view"]').input_value() == 'lines'
+    assert number(lab, 'g') == 1
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+    page.emulate_media(reduced_motion='no-preference'); page.reload()
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/chain-rule\"]').getAttribute('data-lab-state') === 'ready'")
+    lab.locator('[data-act="play"]').click()
+    assert lab.get_attribute('data-anim') is not None
+    set_range(progress, 0.25)
+    assert float(progress.input_value()) == 0.25 and lab.get_attribute('data-anim') is None
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule}
+SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
+
 with sync_playwright() as p:
     browser = p.chromium.launch(channel='chrome')
     for width in (1400, 390):
         for theme in ('dark', 'light'):
-            page = browser.new_page(viewport={'width': width, 'height': 1000}, reduced_motion='reduce')
-            page.add_init_script("localStorage.setItem('theme', '" + theme + "')")
-            errors = []
-            page.on('pageerror', lambda e: errors.append(str(e)))
-            derivatives(page)
-            assert not errors, errors
-            page.close()
+            for name in SELECTED:
+                page = browser.new_page(viewport={'width': width, 'height': 1000}, reduced_motion='reduce')
+                page.add_init_script("localStorage.setItem('theme', '" + theme + "')")
+                errors = []
+                page.on('pageerror', lambda e: errors.append(str(e)))
+                TESTS[name](page)
+                assert not errors, errors
+                page.close()
     browser.close()
 print('Calculus examples, recorded motion, guide navigation and edge states passed.')

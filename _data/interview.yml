@@ -2969,12 +2969,18 @@ topics:
         math:
           - name: 'The chain rule'
             tex: '\frac{\mathrm{d}}{\mathrm{d}x} f\big(g(x)\big) = f''\big(g(x)\big)\, g''(x)'
+            live:
+              tex: '\frac{\mathrm{d}}{\mathrm{d}x} f(g(x)) = 9001'
+              slots: [chainRate]
             read: "Multiply rates of change along the chain to calculate how an input change affects the final output."
             where:
               - sym: 'g'
                 is: "The inner function in the composition"
           - name: 'Reverse mode, which is what backpropagation is'
             tex: '\bar{z}_{r} = \sum_{s \in \mathrm{children}(r)} \bar{z}_{s} \frac{\partial z_{s}}{\partial z_{r}}'
+            live:
+              tex: '\frac{\partial L}{\partial x} = 9001'
+              slots: [lossGradient]
             read: "Start at the loss with derivative 1, then work backwards through the calculation and add derivative contributions where paths meet."
             where:
               - sym: '\bar{z}_{r}'

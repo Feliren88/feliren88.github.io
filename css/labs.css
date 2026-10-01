@@ -117,3 +117,8 @@
 .lab-derivatives .lab-note { min-block-size: 3lh; }
 .lab-derivatives .lab-eq { display: grid; gap: 0.1rem; }
 .lab-derivatives .lab-eq .lab-term { white-space: nowrap; }
+.lab-plane .pl-node { fill: var(--surface); stroke: currentColor; stroke-width: 2; }
+.lab-chain-rule .lab-note { min-block-size: 3lh; }
+.lab-chain-rule [data-lines] text { font-size: 16px; }
+.lab-chain-rule [data-graph] text { font-size: 15px; }
+.lab-chain-rule [data-graph] text[data-part="reverse"] { paint-order: stroke; stroke: var(--surface); stroke-width: 4; }
