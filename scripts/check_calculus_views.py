@@ -226,7 +226,73 @@ def gradients(page):
     assert float(progress.input_value()) == 0.25 and lab.get_attribute('data-anim') is None
 
 
-TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients}
+def optimisation(page):
+    page.goto(BASE+'/calculus/#m4')
+    lab=page.locator('[data-lab="calculus/optimisation-conditions"] .lab')
+    assert lab.count()==1, 'The optimisation module needs its own interactive scene'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/optimisation-conditions\"]').getAttribute('data-lab-state')==='ready'")
+    assert lab.locator('.xp-guide-n').inner_text()=='1 / 9'
+    assert number(lab,'stationaryGradient')==0 and number(lab,'smallestCurvature')==2
+    assert lab.locator('[data-classification]').inner_text()=='Minimum'
+    assert float(page.locator('#m4 [data-live="smallestCurvature"]').text_content())==2
+    progress=lab.locator('[data-k="progress"]')
+    handle=lab.locator('[data-handle="point"]');handle.focus();page.keyboard.press('ArrowRight')
+    assert number(lab,'stationaryGradient')>0 and lab.locator('[data-classification]').inner_text()=='Not stationary'
+    set_range(progress,0)
+    assert number(lab,'stationaryGradient')==0, 'A manual point change must rewind'
+    lab.locator('[data-reset]').click()
+    nxt,prev=lab.locator('[data-guide="1"]'),lab.locator('[data-guide="-1"]')
+    nxt.click();assert lab.locator('[data-classification]').inner_text()=='Maximum'
+    nxt.click();assert lab.locator('[data-classification]').inner_text()=='Saddle'
+    nxt.click();assert lab.locator('[data-classification]').inner_text()=='Inconclusive'
+    assert lab.locator('[data-part="curvature"].is-zero').count()==2, 'Zero curvature needs a neutral section and direction'
+    assert 'scaled normal' in ' '.join(lab.locator('[data-constraint] text').all_text_contents()), 'Use a legible constraint legend'
+    lab.locator('[data-zoom="hessian"]').click()
+    assert '0.0000' in page.locator('dialog[open]').inner_text()
+    assert 'fourth power' in page.locator('dialog[open]').inner_text()
+    page.keyboard.press('Escape')
+    nxt.click();assert number(lab,'chordGap')==1
+    lab.locator('[data-k="axis"]').select_option('y')
+    assert 'Slice along y' in ' '.join(lab.locator('[data-chord] text').all_text_contents()), 'Identical slices still need the chosen axis named'
+    nxt.click();assert number(lab,'chordGap')==-1
+    nxt.click();assert abs(number(lab,'tangentRate')+1)<1e-8
+    assert abs(float(page.locator('#m4 [data-live="stationaryGradient"]').text_content())-5**.5)<.0001, 'The live gradient must belong to the visible constrained objective'
+    lab.locator('[data-act="play"]').click()
+    assert abs(number(lab,'theta')-2/3)<.0001 and number(lab,'tangentRate')==0
+    set_range(progress,0);assert number(lab,'theta')==.5
+    set_range(progress,1)
+    lab.locator('[data-zoom="constraint"]').click()
+    assert '1.3333' in page.locator('dialog[open]').inner_text()
+    assert 'ϖ' not in page.locator('dialog[open] table').inner_text(), 'Table labels must use supported glyphs'
+    page.keyboard.press('Escape')
+    nxt.click();assert number(lab,'tangentRate')==0
+    prev.click();assert number(lab,'theta')==.5, 'Previous must restore the declared constraint point'
+    nxt.click();nxt.click()
+    assert lab.locator('[data-k="view"]').input_value()=='experiment'
+    assert number(lab,'positiveCount')==16 and number(lab,'sampleFraction')==.0313
+    assert number(lab,'signEstimate')==.125
+    assert page.locator('#m4 [data-live="stationaryGradient"]').text_content()=='Not evaluated'
+    assert page.locator('#m4 [data-live="smallestCurvature"]').text_content()=='Not evaluated'
+    set_range(lab.locator('[data-k="d"]'),6)
+    assert number(lab,'positiveCount')==0 and 'does not prove' in lab.locator('[data-note]').inner_text()
+    set_range(progress,.5)
+    assert float(lab.locator('[data-k="d"]').input_value()).is_integer()
+    lab.locator('[data-zoom="experiment"]').click()
+    assert '512' in page.locator('dialog[open]').inner_text() and '41' in page.locator('dialog[open]').inner_text()
+    page.keyboard.press('Escape')
+    while not prev.is_disabled():prev.click()
+    assert lab.locator('[data-classification]').inner_text()=='Minimum' and number(lab,'stationaryGradient')==0
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    page.emulate_media(reduced_motion='no-preference');page.reload();lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/optimisation-conditions\"]').getAttribute('data-lab-state')==='ready'")
+    lab.locator('[data-act="play"]').click();assert lab.get_attribute('data-anim') is not None
+    set_range(lab.locator('[data-k="progress"]'),.25)
+    assert float(lab.locator('[data-k="progress"]').input_value())==.25 and lab.get_attribute('data-anim') is None
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation}
 SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
 
 with sync_playwright() as p:

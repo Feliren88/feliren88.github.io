@@ -3121,6 +3121,9 @@ topics:
         math:
           - name: 'The conditions at a minimum'
             tex: '\nabla f(x^{\star}) = 0 \quad \text{and} \quad H(x^{\star}) \succeq 0'
+            live:
+              tex: '\|\nabla f(x)\| = 9001, \quad \lambda_{\min}(H(x)) = 9002'
+              slots: [stationaryGradient, smallestCurvature]
             read: "At a differentiable interior minimum, the gradient vanishes and curvature is nonnegative in every direction."
             note: "A 0 gradient can also occur at a maximum or saddle point. Therefore, inspect curvature to distinguish these three cases."
             where:
@@ -3130,9 +3133,9 @@ topics:
                 is: "Positive semidefinite, meaning that curvature is nonnegative in every direction"
               - sym: 'H'
                 is: "The Hessian, a matrix containing second derivatives"
-          - name: 'Why high dimensions are full of saddles'
-            tex: 'p(\text{all } d \text{ curvatures positive}) \approx 2^{-d} \; \text{for a random critical point}'
-            read: "A minimum requires upward curvature in every direction, which becomes much less likely as the number of dimensions grows."
+          - name: 'An estimate from independent curvature signs'
+            tex: 'p(\text{all } d \text{ signs positive}) = 2^{-d} \; \text{if signs are independent and equally likely}'
+            read: "Assume independent curvature signs, each positive with probability 1/2. Then all d signs are positive with probability 2⁻ᵈ. However, the Hessian model determines whether these assumptions hold."
             note: "Training rarely stops at a poor local minimum. Instead, saddle points and long regions with small gradients can slow it down. Momentum and adaptive update sizes help in these regions."
           - name: 'Constrained optimisation'
             tex: '\nabla f(x) = \varpi\, \nabla g(x), \qquad g(x) = 0'

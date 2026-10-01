@@ -499,6 +499,62 @@ def check_gradients():
     for got,want in zip(example,[1.6,[2.1,2.2],2.1]): close('first guide example',got,want)
 
 
+@check('calculus/optimisation-conditions')
+def check_optimisation():
+    from scipy.optimize import minimize
+    lab = 'calculus/optimisation-conditions'
+    kinds = {'minimum': np.diag([2.,2.]), 'maximum': np.diag([-2.,-2.]),
+             'saddle': np.diag([2.,-2.]), 'flat': np.diag([0.,2.])}
+    states = run(lab,[['stationary',[kind]] for kind in kinds])
+    for (kind,H),got in zip(kinds.items(),states):
+        close(f'{kind} Hessian',got['hessian'],H)
+        close(f'{kind} eigenvalues',got['eigenvalues'],np.linalg.eigvalsh(H))
+        close(f'{kind} gradient',got['gradient'],[0,0])
+        same(f'{kind} classification',got['type'],'inconclusive' if kind == 'flat' else kind)
+    labels = run(lab,[['classify',[v]] for v in ([1,2],[-2,-1],[-1,1],[0,2],[-2,0],[-1,0,1])])
+    same('curvature labels',labels,['minimum','maximum','saddle','inconclusive','inconclusive','saddle'])
+    solution = minimize(lambda z:z[0]**2+2*z[1]**2,[.5,.5],
+                        constraints={'type':'eq','fun':lambda z:z.sum()-1},tol=1e-12)
+    assert solution.success
+    out = run(lab,[['constrained',[x]] for x in (-.2,.5,2/3,1.2)])
+    for x,got in zip((-.2,.5,2/3,1.2),out):
+        point = np.array([x,1-x])
+        close('constraint point',got['point'],point)
+        close('constraint value',got['value'],point @ np.diag([1,2]) @ point)
+        close('objective gradient',got['objectiveGradient'],[2*x,4*(1-x)])
+        close('constraint gradient',got['constraintGradient'],[1,1])
+        close('tangent rate',got['tangentRate'],6*x-4)
+    close('constrained optimum',out[2]['point'],solution.x,1e-7)
+    close('aligned gradients',out[2]['objectiveGradient'],np.ones(2)*4/3)
+    close('optimum multiplier',out[2]['multiplier'],4/3)
+    # Reproduce the seeded uniforms and normal draws independently, then use NumPy eigenvalues.
+    def matrices(d,count,seed):
+        state=seed
+        def uniform():
+            nonlocal state
+            state=(1664525*state+1013904223)&0xffffffff
+            return (state+0.5)/2**32
+        for _ in range(count):
+            entries=[]
+            for _ in range(d*d):
+                u,v=uniform(),uniform()
+                entries.append(np.sqrt(-2*np.log(u))*np.cos(2*np.pi*v))
+            G=np.array(entries).reshape(d,d)
+            yield (G+G.T)/2
+    got=run(lab,[['curvatureSample',[d,512,41]] for d in range(1,7)])
+    for d,result in enumerate(got,1):
+        reference=np.array(list(matrices(d,512,41)))
+        close(f'd={d} sampled matrices',result['matrices'],reference,1e-11)
+        eig=np.linalg.eigvalsh(reference)
+        close(f'd={d} sampled eigenvalues',result['eigenvalues'],eig,1e-9)
+        positive=int(np.count_nonzero(np.all(eig>0,axis=1)))
+        same(f'd={d} positive count',result['positive'],positive)
+        close(f'd={d} fraction',result['fraction'],positive/512)
+    close('independent sign estimate',run(lab,[['independentSigns',[d]] for d in range(1,7)]),2.**-np.arange(1,7))
+    curves=run(lab,[['chord',[kind,axis,-1,1,.5]] for kind,axis in [('minimum','x'),('maximum','x'),('saddle','y'),('flat','x')]])
+    for got,want in zip(curves,[1,-1,-1,1]): close('midpoint chord gap',got['gap'],want)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

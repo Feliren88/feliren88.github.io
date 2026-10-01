@@ -129,8 +129,13 @@
 .lab-gradients .pl-warp-grid { stroke: currentColor; fill: none; }
 .lab-gradients .pl-warp-grid polyline { stroke: currentColor; stroke-width: 1.5; fill: none; }
 .lab-gradients [data-local] { margin-top: 0.7rem; }
+.lab-optimisation .lab-eq { display: grid; gap: 0.1rem; }
+.lab-optimisation .lab-eq .lab-term { white-space: normal; }
+.lab-optimisation .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-optimisation .lab-note { min-block-size: 4lh; }
 .lab-derivative-shape { margin-block: 0.8rem; }
 .lab-derivative-shape h4 { margin-block: 0.3rem; font-size: var(--fs-xs); }
 .lab-shape-cells { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: 0.2rem; }
 .lab-shape-cells span { padding: 0.4rem 0.1rem; border: 1px solid var(--border-ui); text-align: center; font: 500 0.75rem var(--xp-mono); }
 .lab-shape-cells .is-active { border: 2px solid var(--xp-o); padding: calc(0.4rem - 1px) 0; }
+.lab-optimisation .is-zero { color: var(--muted); }
