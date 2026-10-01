@@ -16,8 +16,6 @@ math:
   '5': { default: bernoulli, options: [bernoulli, binomial, geometric, negative-binomial, hypergeometric, categorical, discrete-uniform, poisson, uniform, normal, student-t, exponential, gamma, chi-square, beta, lognormal, weibull, logistic, laplace, cauchy, rayleigh, pareto, triangular, f] }
   '6': { default: binomial, options: [binomial, normal, student-t] }
   '7': { default: bernoulli, options: [bernoulli, categorical] }
-calculus:
-  '4': { default: normal, options: [normal, uniform, exponential, beta, student-t] }
 uncertainty-estimation:
   '0': { default: categorical, options: [categorical, bernoulli, beta] }
   '1': { default: normal, options: [normal, student-t] }

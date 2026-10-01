@@ -3183,6 +3183,9 @@ topics:
         math:
           - name: 'Expectation is an integral against a density'
             tex: '\mathbb{E}[g(x)] = \int g(x)\, p(x)\, \mathrm{d}x'
+            live:
+              tex: '\text{Integral for this example} = 9001'
+              slots: [area]
             read: "Multiply each possible value by its probability density, then integrate over the possible values."
             where:
               - sym: 'p(x)'
@@ -3193,6 +3196,9 @@ topics:
                 is: "The function whose expected value is calculated"
           - name: 'Monte Carlo, and why the error falls slowly'
             tex: '\hat{g} = \frac{1}{n_{\mathrm{s}}} \sum_{i=1}^{n_{\mathrm{s}}} g(x_{i}), \qquad \mathrm{SE} = \frac{\sigma_{g}}{\sqrt{n_{\mathrm{s}}}}'
+            live:
+              tex: '\hat{g} = 9001, \quad \text{Estimated SE} = 9002'
+              slots: [estimate, se]
             read: "Average sampled values. Obtaining 10 times less error generally requires 100 times more samples."
             note: "This rate does not depend on dimension. Therefore, sampling can outperform a grid in high dimensions despite its slow convergence."
             where:
@@ -3202,31 +3208,6 @@ topics:
                 is: "The sample-based estimate of the average"
               - sym: '\sigma_{g}'
                 is: "The standard deviation of the sampled quantity"
-            play:
-              kind: curve
-              title: "Inspect sampling error as sample size grows"
-              alt: "The curve shows standard error decreasing in proportion to one divided by the square root of the sample count."
-              x:
-              - 1
-              - 400
-              y:
-              - 0
-              - 1
-              xlabel: "Samples"
-              ylabel: "Standard error"
-              curves:
-              - fn: sg / sqrt(x)
-                s: 0
-              readout: '"To halve standard error, use roughly 4 times as many independent samples."'
-              knobs:
-              - k: sg
-                label: "Standard deviation"
-                min: 0.2
-                max: 4
-                v: 1
-                step: 0.1
-                dp: 1
-                s: 0
           - name: 'Why the loss you minimise is an estimate'
             tex: '\hat{R}(f) \;\xrightarrow{\;n \to \infty\;}\; R(f)'
             read: "Use training loss, a sample average, to estimate the population average that you cannot calculate directly."

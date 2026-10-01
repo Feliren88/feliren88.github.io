@@ -292,7 +292,69 @@ def optimisation(page):
     assert float(lab.locator('[data-k="progress"]').input_value())==.25 and lab.get_attribute('data-anim') is None
 
 
-TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation}
+def integration(page):
+    page.goto(BASE+'/calculus/#m5')
+    lab=page.locator('[data-lab="calculus/integration"] .lab')
+    assert lab.count()==1, 'Integration needs its own rectangles, accumulation and sampling scene'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/integration\"]').getAttribute('data-lab-state')==='ready'")
+    assert lab.locator('.xp-guide-n').inner_text()=='1 / 10'
+    assert number(lab,'area')==.3333 and number(lab,'sum')==.3281
+    assert float(page.locator('#m5 [data-live="area"]').text_content())==.3333
+    assert page.locator('#m5 [data-integral-playground], #m5 [data-distributions], #m5 .ivm-play').count()==0, 'Replace this module’s duplicate playgrounds'
+    progress=lab.locator('[data-k="progress"]')
+    lab.locator('[data-act="play"]').click()
+    assert lab.locator('[data-k="n"]').input_value()=='64' and number(lab,'b')==1
+    set_range(progress,0)
+    assert number(lab,'area')==0 and 'empty interval' in lab.locator('[data-note]').inner_text().lower()
+    set_range(progress,1)
+    point=lab.locator('[data-handle="square-endpoint"]');point.focus();page.keyboard.press('ArrowRight')
+    assert number(lab,'b')>1
+    set_range(progress,0);assert number(lab,'b')==1, 'Endpoint changes must rewind'
+    nxt,prev=lab.locator('[data-guide="1"]'),lab.locator('[data-guide="-1"]')
+    nxt.click();assert lab.locator('[data-k="n"]').input_value()=='64' and number(lab,'b')==1
+    nxt.click();assert number(lab,'area')==2.6667 and number(lab,'fx')==4
+    nxt.click();assert number(lab,'area')==0 and number(lab,'positiveArea')==2 and number(lab,'negativeArea')==2
+    prev.click();assert lab.locator('[data-k="kind"]').input_value()=='square' and number(lab,'b')==2
+    nxt.click();nxt.click()
+    assert lab.locator('[data-k="view"]').input_value()=='weights' and number(lab,'area')==.3333
+    assert page.locator('#m5 [data-live="estimate"]').text_content()=='Not sampled'
+    nxt.click();assert number(lab,'targetArea')==1 and abs(number(lab,'tail')-.0174)<.0001
+    assert abs(number(lab,'area')-.9826)<.0001
+    nxt.click();assert number(lab,'estimate')==.2732 and number(lab,'se')==.0488
+    assert float(page.locator('#m5 [data-live="estimate"]').text_content())==.2732
+    lab.locator('[data-zoom="sampling"]').click()
+    assert '43' in page.locator('dialog[open]').inner_text() and '0.273175' in page.locator('dialog[open]').inner_text()
+    page.keyboard.press('Escape')
+    lab.locator('[data-act="play"]').click()
+    assert lab.locator('[data-k="count"]').input_value()=='500' and number(lab,'estimate')==.3384
+    set_range(progress,0);assert lab.locator('[data-k="count"]').input_value()=='1'
+    assert page.locator('#m5 [data-live="se"]').text_content()=='Unavailable'
+    set_range(progress,1)
+    nxt.click();assert number(lab,'se')==.0132
+    nxt.click();assert 'one sample' in lab.locator('[data-note]').inner_text().lower()
+    assert lab.locator('[data-band]').get_attribute('data-available')=='false'
+    nxt.click();assert number(lab,'scale')==2 and number(lab,'densityHeight')==.5 and number(lab,'area')==1
+    scale=lab.locator('[data-handle="scale"]');scale.focus();page.keyboard.press('ArrowRight')
+    assert number(lab,'scale')>2 and number(lab,'area')==1
+    set_range(progress,0);assert number(lab,'scale')==2
+    lab.locator('[data-zoom="scale"]').click()
+    assert '0.500000' in page.locator('dialog[open]').inner_text()
+    page.keyboard.press('Escape')
+    while not prev.is_disabled():prev.click()
+    assert number(lab,'b')==1 and lab.locator('[data-k="n"]').input_value()=='4'
+    assert lab.locator('[data-k="view"]').input_value()=='area'
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    page.emulate_media(reduced_motion='no-preference');page.reload();lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/integration\"]').getAttribute('data-lab-state')==='ready'")
+    lab.locator('[data-act="play"]').click();assert lab.get_attribute('data-anim') is not None
+    set_range(lab.locator('[data-k="progress"]'),.25)
+    assert float(lab.locator('[data-k="progress"]').input_value())==.25 and lab.get_attribute('data-anim') is None
+    assert float(lab.locator('[data-k="n"]').input_value()).is_integer()
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation, 'integration': integration}
 SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
 
 with sync_playwright() as p:

@@ -555,6 +555,61 @@ def check_optimisation():
     for got,want in zip(curves,[1,-1,-1,1]): close('midpoint chord gap',got['gap'],want)
 
 
+@check('calculus/integration')
+def check_integration():
+    from scipy.integrate import quad
+    lab='calculus/integration'
+    functions={
+        'square':lambda x:x*x,
+        'sine':np.sin,
+        'uniform':lambda x:x*x if 0<=x<=1 else 0,
+        'exponential':lambda x:x*np.exp(-x) if x>=0 else 0,
+    }
+    for kind,fn in functions.items():
+        for a,b in ((0,1),(-1,2),(1,-1)):
+            reference=quad(fn,a,b,points=[x for x in (0,1) if min(a,b)<x<max(a,b)])[0]
+            got=run(lab,[['integral',[kind,a,b]]])[0]
+            close(f'{kind} integral {a},{b}',got,reference)
+            for n in (1,4,64):
+                mids=a+(np.arange(n)+.5)*(b-a)/n
+                sum_ref=(b-a)/n*sum(fn(x) for x in mids)
+                result=run(lab,[['riemann',[kind,a,b,n]]])[0]
+                close(f'{kind} midpoint sum {n}',result['value'],sum_ref)
+                close('rectangle midpoints',[r['x'] for r in result['rectangles']],mids)
+                close('rectangle areas',[r['area'] for r in result['rectangles']],[(b-a)/n*fn(x) for x in mids])
+        for x in (-.4,0,.3,1.5):
+            got=run(lab,[['accumulation',[kind,x]]])[0]
+            close(f'{kind} accumulation {x}',got,quad(fn,0,x,points=[1] if x>1 else None)[0])
+    close('uniform squared expectation',run(lab,[['expectation',['uniform']]])[0],quad(functions['uniform'],0,1)[0])
+    close('exponential mean',run(lab,[['expectation',['exponential']]])[0],quad(functions['exponential'],0,np.inf)[0])
+    def uniforms(n,seed):
+        state=seed;out=[]
+        for _ in range(n):
+            state=(1664525*state+1013904223)&0xffffffff
+            out.append((state+.5)/2**32)
+        return np.array(out)
+    for kind in ('uniform','exponential'):
+        for n in (1,2,64,500):
+            u=uniforms(n,43)
+            sample=u if kind=='uniform' else -np.log1p(-u)
+            values=sample**2 if kind=='uniform' else sample
+            got=run(lab,[['monteCarlo',[kind,n,43]]])[0]
+            close(f'{kind} sampled inputs {n}',got['samples'],sample)
+            close(f'{kind} sampled values {n}',got['values'],values)
+            close(f'{kind} mean {n}',got['estimate'],np.mean(values))
+            if n>1:close(f'{kind} estimated SE {n}',got['se'],np.std(values,ddof=1)/np.sqrt(n))
+            else:same('one sample has no estimated SE',got['se'],None)
+    for scale in (.25,1,3):
+        points=[-.1,0,.3*scale,scale,scale+.1]
+        got=run(lab,[['transformedDensity',[y,scale]] for y in points])
+        close('transformed density support',got,[1/scale if 0<=y<=scale else 0 for y in points])
+        height=got[2]
+        close('transformed unit mass',quad(lambda y:height,0,scale)[0],1)
+    same('zero scale is undefined',run(lab,[['transformedDensity',[0,0]]])[0],None)
+    same('empty rectangle count',run(lab,[['riemann',['square',0,1,0]]])[0],None)
+    close('first guide midpoint sum',run(lab,[['riemann',['square',0,1,4]]])[0]['value'],.328125)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

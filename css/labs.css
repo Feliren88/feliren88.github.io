@@ -139,3 +139,7 @@
 .lab-shape-cells span { padding: 0.4rem 0.1rem; border: 1px solid var(--border-ui); text-align: center; font: 500 0.75rem var(--xp-mono); }
 .lab-shape-cells .is-active { border: 2px solid var(--xp-o); padding: calc(0.4rem - 1px) 0; }
 .lab-optimisation .is-zero { color: var(--muted); }
+.lab-integration .lab-eq { display: grid; gap: 0.1rem; }
+.lab-integration .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-integration .lab-note { min-block-size: 4lh; }
+.lab-plane .pl-integral { fill: currentColor; fill-opacity: 0.18; stroke: currentColor; stroke-width: 1; }

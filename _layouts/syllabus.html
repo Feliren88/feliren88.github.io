@@ -187,9 +187,6 @@ layout: default
       {% if lab %}
       <div class="ivd-lab" data-distributions="{{ lab.options | join: ',' }}" data-default="{{ lab.default }}"></div>
       {% endif %}
-      {% if topic.id == 'calculus' and forloop.index0 == 4 %}
-      <div class="iva-lab" data-integral-playground></div>
-      {% endif %}
 
       {% if m.plain %}
       <p class="syl-phase">Plain explanation</p>

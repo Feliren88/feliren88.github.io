@@ -14,3 +14,4 @@ calculus:
   '1': chain-rule
   '2': gradients-jacobians-hessians
   '3': optimisation-conditions
+  '4': integration

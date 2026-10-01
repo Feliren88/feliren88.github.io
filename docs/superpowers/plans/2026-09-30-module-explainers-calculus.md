@@ -104,13 +104,13 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `riemann(kind,a,b,n), integral(kind,a,b), accumulation(kind,x), expectation(kind), monteCarlo(kind,n,seed), transformedDensity(y,scale). Use square, sine, uniform and exponential examples with explicit density support.` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/integration` with these assertions. Compare Riemann sums and exact accumulated areas to scipy.integrate.quad. Verify uniform E[X²]=1/3 and exponential E[X]=1. Check seeded Monte Carlo sample means and estimated standard errors independently. Check scaled density integral remains1.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/integration`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Animate refining rectangles and accumulated area, then shade g(x)p(x). Sample Monte Carlo estimates with an SE band and sample-count progression. Stretch a density strip under a scale change while retaining unit area. Drag integration endpoint and density scale; use integer rectangle/sample counts. Replace only this module’s integral one-off and distribution lab when this explainer lands. Publish area,estimate,se in module 4.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/integration` with these assertions. Compare Riemann sums and exact accumulated areas to scipy.integrate.quad. Verify uniform E[X²]=1/3 and exponential E[X]=1. Check seeded Monte Carlo sample means and estimated standard errors independently. Check scaled density integral remains1.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/integration`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Animate refining rectangles and accumulated area, then shade g(x)p(x). Sample Monte Carlo estimates with an SE band and sample-count progression. Stretch a density strip under a scale change while retaining unit area. Drag integration endpoint and density scale; use integer rectangle/sample counts. Replace only this module’s integral one-off and distribution lab when this explainer lands. Publish area,estimate,se in module 4.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 6: Approximation
 
