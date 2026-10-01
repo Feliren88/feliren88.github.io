@@ -254,6 +254,10 @@ would otherwise beat `hidden`.
 
 ## Module explainers
 
+Before writing maths lesson text, follow [the maths writing guide](maths-writing-guide.md).
+Then use [the language review plan](superpowers/plans/2026-10-01-maths-language-review.md) for module inventories and verification.
+These instructions cover existing lesson prose, guide pages, labels, active notes, and worked dialogs.
+
 A track in `_data/module_labs.yml` gives each module an interactive explainer
 in place of its static diagram. Each explainer has markup in
 `_includes/labs/<track>/<slug>.html` and behaviour in `js/labs/<track>/<slug>.js`.

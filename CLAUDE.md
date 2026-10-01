@@ -16,6 +16,7 @@ matches what you are about to touch.
 |---|---|
 | A pinned scroll scene, or a page with `motion_scene:` | `docs/essay-motion.md` |
 | `/interview/`, any syllabus page, `/transformers/` | `docs/interview.md` |
+| Maths interview prose, guides, labels, or worked calculations | `docs/maths-writing-guide.md` and `docs/superpowers/plans/2026-10-01-maths-language-review.md` |
 | `_data/game_theory.yml`, `_data/stoic.yml`, any generated file | `docs/generated-data.md` |
 | Icons on `/principles/` or `/high-agency/`, situation diagrams | `docs/icon-sprites.md` |
 | Meta tags, JSON-LD, the sitemap, robots, permalinks | `docs/seo.md` |

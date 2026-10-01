@@ -69,6 +69,7 @@ exclude:
   - vendor
   - README.md
   - CLAUDE.md
+  - AGENTS.md
   - CONTRIBUTING.md
   - backlog.md
   - docs
