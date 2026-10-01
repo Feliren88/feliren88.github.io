@@ -146,3 +146,10 @@
 .lab-approximation .lab-eq { display: grid; gap: 0.1rem; }
 .lab-approximation .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
 .lab-approximation .lab-note { min-block-size: 4lh; }
+.lab-matrix-calculus .lab-eq { display: grid; gap: 0.1rem; }
+.lab-matrix-calculus .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-matrix-calculus .lab-note { min-block-size: 4lh; }
+.lab-matrix-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+.lab-matrix-block { min-width: 0; margin-block: 0.4rem; }
+.lab-matrix-block h4, .lab-matrix-heading { margin-block: 0.4rem; font-size: var(--fs-xs); }
+.lab-matrix-pass { font-size: var(--fs-xs); }

@@ -3322,6 +3322,9 @@ topics:
                 is: "A weight vector, the coefficients of a linear model"
           - name: 'Softmax with cross entropy'
             tex: '\hat{p}_{k} = \frac{e^{o_{k}}}{\sum_{r} e^{o_{r}}}, \qquad \frac{\partial \mathcal{L}}{\partial o_{k}} = \hat{p}_{k} - y_{k}'
+            live:
+              tex: '\hat{p}_{k} = 9001, \quad \partial L/\partial z_{k} = 9002, \quad L = 9003'
+              slots: [probability, delta, loss]
             read: "Differentiating softmax with cross-entropy gives predicted probability minus the true label."
             note: "Differentiating these operations together cancels intermediate terms. Moreover, combining their implementation preserves numerical stability that can be lost when calculating them separately."
             where:
@@ -3333,34 +3336,6 @@ topics:
                 is: "Equals 1 if k is the true class and 0 otherwise"
               - sym: 'r'
                 is: "The index identifying a class"
-            play:
-              kind: bars
-              title: "Change one raw class score and inspect softmax"
-              alt: "Four bars show softmax probabilities for four classes. Changing one raw score or the temperature makes the distribution flatter or more concentrated."
-              labels:
-              - A
-              - B
-              - C
-              - D
-              height: 'exp((k === 0 ? o0 : (k === 1 ? 1.2 : (k === 2 ? 0.4 : 0.1))) / temp)'
-              readout: '"Temperature below 1 sharpens the distribution; above 1, it flattens towards uniform."'
-              knobs:
-              - k: o0
-                label: "Raw score for A"
-                min: -2
-                max: 5
-                v: 1
-                step: 0.1
-                dp: 1
-                s: 0
-              - k: temp
-                label: "Temperature"
-                min: 0.2
-                max: 3
-                v: 1
-                step: 0.05
-                dp: 2
-                s: 1
           - name: 'Shapes as a correctness test'
             tex: '\mathcal{L} \in \mathbb{R}, \; w \in \mathbb{R}^{d} \;\Longrightarrow\; \frac{\partial \mathcal{L}}{\partial w} \in \mathbb{R}^{d}'
             read: "A gradient has the same shape as the parameter or input with respect to which you differentiate."

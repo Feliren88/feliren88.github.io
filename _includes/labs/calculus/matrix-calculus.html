@@ -1,0 +1,19 @@
+<section class="xp lab lab-matrix-calculus" id="lab-calculus-matrix-calculus" aria-labelledby="lab-calculus-matrix-calculus-title">
+  <header class="lab-head"><h3 id="lab-calculus-matrix-calculus-title">Follow a layer’s values and gradients</h3></header>
+  <p class="lab-eq" data-formula>z = Wx + b, p = softmax(z), L = −log p₃</p>
+  <p class="lab-eq">
+    <span data-layer-readout><span class="lab-term is-q" data-term="forward">Selected class <span data-val="selectedClass">3</span>, raw score <span data-val="selectedLogit">3</span></span></span>
+    <span data-layer-readout><span class="lab-term is-o" data-term="probability">Probability <span data-val="probability">0.6652</span>, loss <span data-val="loss">0.4076</span></span></span>
+    <span data-layer-readout><span class="lab-term is-k" data-term="reverse">Predicted − label <span data-val="delta">−0.3348</span></span></span>
+    <span data-layer-readout><span class="lab-term is-k" data-term="weights">Selected weight <span data-val="weightEntry">1</span>, its gradient <span data-val="weightGradient">−0.6695</span></span></span>
+    <span data-layer-readout>Input gradient (<span data-val="dx0">−0.2447</span>, <span data-val="dx1">−0.0900</span>)</span>
+    <span data-quadratic-readout hidden><span class="lab-term is-q" data-term="quadratic">Point (<span data-val="wx">1</span>, <span data-val="wy">0.5</span>), quadratic value <span data-val="quadraticValue">2.5</span></span></span>
+    <span data-quadratic-readout hidden><span class="lab-term is-o" data-term="gradient">Full gradient (<span data-val="gx">3</span>, <span data-val="gy">4</span>)</span></span>
+    <span data-quadratic-readout hidden><span class="lab-term is-k" data-term="shortcut">Shortcut 2Aw (<span data-val="shortcutX">4</span>, <span data-val="shortcutY">2</span>)</span></span>
+    <span data-quadratic-readout hidden>Selected A entry <span data-val="matrixEntry">2</span></span>
+  </p>
+  <div class="lab-main"><div class="lab-stage" data-stage></div><div data-guide-box></div></div>
+  <p class="lab-note" data-note></p><div class="lab-ctl" data-ctl></div>
+  <p class="lab-src">The quadratic identity follows <a href="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">Petersen and Pedersen’s Matrix Cookbook</a>, section 2.4. Moreover, <a href="https://cs231n.stanford.edu/slides/2018/cs231n_2018_ds02.pdf">Stanford’s matrix calculus primer</a> explains the gradient shape rule.</p>
+  <p class="lab-say" aria-live="polite" data-say></p>
+</section>
