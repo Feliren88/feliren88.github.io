@@ -197,6 +197,7 @@ def check_page(b, track, width):
     for i in range(n):
         lab = pg.evaluate(f"() => document.querySelectorAll('.lab-slot')[{i}].getAttribute('data-lab')")
         where = f'{track} {width} {lab}'
+        print('Checking', where, flush=True)
         if ready(pg, i) != 'ready':
             fail(where, 'did not mount')
             continue
@@ -214,6 +215,7 @@ def check_page(b, track, width):
         nxt = pg.locator(f'{sel} [data-guide="1"]')
         prv = pg.locator(f'{sel} [data-guide="-1"]')
         while not nxt.is_disabled():
+            print('Guide', where, guide_n(pg, sel), flush=True)
             nxt.click()
             pg.wait_for_timeout(1000)
             mixed = pg.evaluate(MIXED, sel)

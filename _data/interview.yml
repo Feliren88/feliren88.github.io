@@ -3041,6 +3041,9 @@ topics:
         math:
           - name: 'The gradient'
             tex: '\nabla f(x) = \Big[ \tfrac{\partial f}{\partial x_{1}}, \dots, \tfrac{\partial f}{\partial x_{d}} \Big]^{\top}'
+            live:
+              tex: '\nabla f(x) = [9001, 9002]^{\top}'
+              slots: [gx, gy]
             read: "Collect the derivative for each input into 1 vector pointing in the direction of the fastest local increase."
             where:
               - sym: '\nabla'
@@ -3051,6 +3054,9 @@ topics:
                 is: "The number of components in a vector"
           - name: 'The directional derivative'
             tex: 'D_{u} f(x) = \langle \nabla f(x), u \rangle = \|\nabla f(x)\| \cos \vartheta'
+            live:
+              tex: 'D_{u} f(x) = 9001'
+              slots: [directionalRate]
             read: "Project the gradient onto a chosen direction to calculate the rate of change in that direction. No unit direction gives a greater rate than the gradient direction."
             where:
               - sym: 'D_{u} f(x)'

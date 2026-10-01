@@ -461,6 +461,44 @@ def check_chain_rule():
     same('forward and reverse passes',run(lab,[['passCounts',[4,1]]])[0],{'forward':4,'reverse':1})
 
 
+@check('calculus/gradients-jacobians-hessians')
+def check_gradients():
+    lab = 'calculus/gradients-jacobians-hessians'
+    points = [(1,0.5),(-1.5,-0.8),(0,0),(0.2,-1.2)]
+    fn = lambda z: z[0]**2 + 2*z[1]**2 + 0.2*z[0]*z[1]
+    mapping = lambda z: np.array([z[0]+0.2*z[1]**2,z[1]+0.2*z[0]**2])
+    calls = [[name,list(z)] for z in points for name in ('surface','gradient','hessian','mapping','jacobian')]
+    out = run(lab,calls)
+    for i,z in enumerate(points):
+        z = np.array(z,float)
+        f,g,H,v,J = out[5*i:5*i+5]
+        close(f'surface {i}',f,fn(z))
+        close(f'mapping {i}',v,mapping(z))
+        basis = np.eye(2)
+        df = [(fn(z+1e-6*u)-fn(z-1e-6*u))/2e-6 for u in basis]
+        close(f'gradient {i}',g,df,1e-7)
+        DJ = np.column_stack([(mapping(z+1e-6*u)-mapping(z-1e-6*u))/2e-6 for u in basis])
+        close(f'Jacobian {i}',J,DJ,1e-7)
+        step = 1e-4
+        D2 = [[(fn(z+step*(u+v))-fn(z+step*(u-v))-fn(z+step*(-u+v))+fn(z-step*(u+v)))/(4*step**2) for v in basis] for u in basis]
+        close(f'Hessian {i}',H,D2,1e-6)
+        for theta in (0,np.pi/2,np.pi):
+            u = np.array([np.cos(theta),np.sin(theta)])
+            got = run(lab,[['directional',list(z)+[theta]]])[0]
+            close(f'directional {i} {theta}',got,(fn(z+1e-6*u)-fn(z-1e-6*u))/2e-6,1e-7)
+    dims = run(lab,[['shapes',[3,2]],['shapes',[1,1]],['shapes',[6,6]]])
+    for (d,m),got in zip(((3,2),(1,1),(6,6)),dims):
+        same(f'derivative shapes {d},{m}',got,{'gradient':[d,1],'jacobian':[m,d],'hessian':[d,d]})
+    eig = run(lab,[['eigenSystem',[]]])[0]
+    H = np.array([[2,0.2],[0.2,4]])
+    close('curvature eigenvalues',eig['values'],np.linalg.eigvalsh(H))
+    vectors = np.array(eig['vectors'])
+    close('curvature eigenvectors',H@vectors.T,vectors.T@np.diag(eig['values']))
+    close('orthonormal curvature directions',vectors@vectors.T,np.eye(2))
+    example = run(lab,[['surface',[1,0.5]],['gradient',[1,0.5]],['directional',[1,0.5,0]]])
+    for got,want in zip(example,[1.6,[2.1,2.2],2.1]): close('first guide example',got,want)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

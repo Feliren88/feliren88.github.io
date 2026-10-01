@@ -122,3 +122,15 @@
 .lab-chain-rule [data-lines] text { font-size: 16px; }
 .lab-chain-rule [data-graph] text { font-size: 15px; }
 .lab-chain-rule [data-graph] text[data-part="reverse"] { paint-order: stroke; stroke: var(--surface); stroke-width: 4; }
+.lab-gradients .lab-eq { display: grid; gap: 0.1rem; }
+.lab-gradients .lab-eq .lab-term { white-space: nowrap; }
+.lab-gradients .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-gradients .lab-note { min-block-size: 3lh; }
+.lab-gradients .pl-warp-grid { stroke: currentColor; fill: none; }
+.lab-gradients .pl-warp-grid polyline { stroke: currentColor; stroke-width: 1.5; fill: none; }
+.lab-gradients [data-local] { margin-top: 0.7rem; }
+.lab-derivative-shape { margin-block: 0.8rem; }
+.lab-derivative-shape h4 { margin-block: 0.3rem; font-size: var(--fs-xs); }
+.lab-shape-cells { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: 0.2rem; }
+.lab-shape-cells span { padding: 0.4rem 0.1rem; border: 1px solid var(--border-ui); text-align: center; font: 500 0.75rem var(--xp-mono); }
+.lab-shape-cells .is-active { border: 2px solid var(--xp-o); padding: calc(0.4rem - 1px) 0; }

@@ -159,7 +159,74 @@ def chain_rule(page):
     assert float(progress.input_value()) == 0.25 and lab.get_attribute('data-anim') is None
 
 
-TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule}
+def gradients(page):
+    page.goto(BASE + '/calculus/#m3')
+    lab = page.locator('[data-lab="calculus/gradients-jacobians-hessians"] .lab')
+    assert lab.count() == 1, 'The gradient module needs contours, a local mapping and curvature'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/gradients-jacobians-hessians\"]').getAttribute('data-lab-state') === 'ready'")
+    assert lab.locator('.xp-guide-n').inner_text() == '1 / 9'
+    assert number(lab, 'fx') == 1.6 and number(lab, 'gx') == 2.1 and number(lab, 'gy') == 2.2
+    labels_fit = lab.locator('[data-cosine] svg').evaluate("e=>{const c=e.querySelector('clipPath rect').getBBox();return [...e.querySelectorAll('text')].every(t=>{const r=t.getBBox();return r.x>=c.x&&r.x+r.width<=c.x+c.width;});}")
+    assert labels_fit, 'Cosine angle labels must fit inside the clipped plot'
+    assert float(page.locator('#m3 [data-live="directionalRate"]').text_content()) == 2.1
+    progress = lab.locator('[data-k="progress"]')
+    lab.locator('[data-act="play"]').click()
+    set_range(progress, 0.5)
+    assert abs(number(lab, 'directionalRate') + 2.1) < 0.001
+    set_range(progress, 0)
+    assert number(lab, 'directionalRate') == 2.1
+    handle = lab.locator('[data-contours] [data-handle="point"]')
+    handle.focus(); page.keyboard.press('ArrowRight')
+    assert number(lab, 'gx') != 2.1
+    set_range(progress, 0)
+    assert number(lab, 'gx') == 2.1, 'A point drag must record its starting position'
+    nxt,prev = lab.locator('[data-guide="1"]'), lab.locator('[data-guide="-1"]')
+    nxt.click(); nxt.click()
+    assert abs(number(lab, 'directionalRate') - (2.1**2+2.2**2)**0.5) < 0.001
+    nxt.click()
+    assert abs(number(lab, 'directionalRate')) < 0.001, 'A perpendicular direction has zero rate'
+    nxt.click()
+    assert lab.locator('[data-k="view"]').input_value() == 'mapping'
+    assert number(lab, 'mapX') == 1.05 and number(lab, 'mapY') == 0.7
+    error = number(lab,'patchError')
+    nxt.click()
+    assert number(lab,'patchError') < error/5, 'A smaller square improves the local linear approximation'
+    lab.locator('[data-zoom="jacobian"]').click()
+    worked = page.locator('dialog[open]').inner_text()
+    assert '0.2000' in worked and '0.4000' in worked
+    page.keyboard.press('Escape')
+    nxt.click()
+    assert lab.locator('[data-k="view"]').input_value() == 'curvature'
+    assert abs(number(lab,'curvatureLow') - 1.9802) < 0.001
+    nxt.click()
+    assert number(lab,'gx') == number(lab,'gy') == number(lab,'directionalRate') == 0
+    assert 'Every direction' in lab.locator('[data-note]').inner_text()
+    prev.click()
+    assert number(lab,'gx') == 2.1, 'Previous must restore the declared point'
+    nxt.click(); nxt.click()
+    assert lab.locator('[data-k="view"]').input_value() == 'shapes'
+    set_range(lab.locator('[data-k="d"]'),6)
+    set_range(lab.locator('[data-k="m"]'),4)
+    assert lab.locator('[data-shape="jacobian"]').get_attribute('data-rows') == '4'
+    assert lab.locator('[data-shape="jacobian"]').get_attribute('data-cols') == '6'
+    set_range(progress,0.5)
+    assert float(lab.locator('[data-k="d"]').input_value()).is_integer()
+    assert float(lab.locator('[data-k="m"]').input_value()).is_integer()
+    while not prev.is_disabled(): prev.click()
+    assert number(lab,'fx') == 1.6 and lab.locator('[data-k="view"]').input_value() == 'contours'
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+    page.emulate_media(reduced_motion='no-preference'); page.reload()
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/gradients-jacobians-hessians\"]').getAttribute('data-lab-state') === 'ready'")
+    lab.locator('[data-act="play"]').click()
+    assert lab.get_attribute('data-anim') is not None
+    set_range(progress,0.25)
+    assert float(progress.input_value()) == 0.25 and lab.get_attribute('data-anim') is None
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients}
 SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
 
 with sync_playwright() as p:

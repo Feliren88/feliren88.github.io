@@ -76,13 +76,13 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `surface(x,y), gradient(x,y), hessian(x,y), mapping(x,y), jacobian(x,y), directional(x,y,theta), shapes(d,m). Use f=x²+2y²+0.2xy and map [x+0.2y²,y+0.2x²].` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/gradients-jacobians-hessians` with these assertions. Check gradient [2x+0.2y,4y+0.2x] and Hessian [[2,0.2],[0.2,4]] against central differences. Check mapping Jacobian entries and directional rates at 0,π/2,π. Check d=3,m=2 shapes.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/gradients-jacobians-hessians`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Draw contours, a gradient field and a draggable point and unit direction. Plot directional rate as a cosine. Warp a grid and magnify a local square to compare the nonlinear map with its Jacobian. Show Hessian eigen-directions and quadratic contours. A shapes view uses integer d,m controls. Publish gx,gy and directionalRate in module 2.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/gradients-jacobians-hessians` with these assertions. Check gradient [2x+0.2y,4y+0.2x] and Hessian [[2,0.2],[0.2,4]] against central differences. Check mapping Jacobian entries and directional rates at 0,π/2,π. Check d=3,m=2 shapes.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/gradients-jacobians-hessians`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Draw contours, a gradient field and a draggable point and unit direction. Plot directional rate as a cosine. Warp a grid and magnify a local square to compare the nonlinear map with its Jacobian. Show Hessian eigen-directions and quadratic contours. A shapes view uses integer d,m controls. Publish gx,gy and directionalRate in module 2.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 4: Optimisation conditions
 

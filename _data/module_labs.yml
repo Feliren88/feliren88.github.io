@@ -12,3 +12,4 @@ linear-algebra:
 calculus:
   '0': derivatives
   '1': chain-rule
+  '2': gradients-jacobians-hessians
