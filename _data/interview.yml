@@ -2913,6 +2913,9 @@ topics:
         math:
           - name: 'The derivative as a limit of slopes'
             tex: 'f''(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}'
+            live:
+              tex: 'f(x) = 9001, \qquad f''(x) = 9002, \qquad \frac{f(x+h)-f(x)}{h} = 9003'
+              slots: [fx, slope, secant]
             read: "Calculate the slope between two nearby points and take its limit as the points approach one another."
             where:
               - sym: 'f'
@@ -2923,33 +2926,6 @@ topics:
                 is: "The derivative giving the local slope at x"
               - sym: '\to'
                 is: "Approaches, or maps to, depending on the expression"
-            play:
-              kind: curve
-              title: "Move two points closer to estimate the tangent slope"
-              alt: "A secant line passes through two curve points. As the points approach each other, this line approaches the tangent."
-              x:
-              - -3
-              - 3
-              y:
-              - -2
-              - 8
-              xlabel: x
-              ylabel: f(x)
-              curves:
-              - fn: x*x
-                s: 0
-              - fn: (pow(1+h,2)-1)/h * (x-1) + 1
-                s: 1
-              readout: "\"Secant slope \" + ((pow(1+h,2)-1)/h).toFixed(3) + \", while the derivative at x = 1 is 2\""
-              knobs:
-              - k: h
-                label: "Distance between points"
-                min: 0.01
-                max: 2
-                v: 1.4
-                step: 0.01
-                dp: 2
-                s: 1
           - name: 'The derivative as a local straight line'
             tex: 'f(x + h) \approx f(x) + f''(x)\, h'
             read: "Near a point, a smooth function is approximately linear, with its derivative giving the line's slope."
@@ -2993,12 +2969,18 @@ topics:
         math:
           - name: 'The chain rule'
             tex: '\frac{\mathrm{d}}{\mathrm{d}x} f\big(g(x)\big) = f''\big(g(x)\big)\, g''(x)'
+            live:
+              tex: '\frac{\mathrm{d}}{\mathrm{d}x} f(g(x)) = 9001'
+              slots: [chainRate]
             read: "Multiply rates of change along the chain to calculate how an input change affects the final output."
             where:
               - sym: 'g'
                 is: "The inner function in the composition"
           - name: 'Reverse mode, which is what backpropagation is'
             tex: '\bar{z}_{r} = \sum_{s \in \mathrm{children}(r)} \bar{z}_{s} \frac{\partial z_{s}}{\partial z_{r}}'
+            live:
+              tex: '\frac{\partial L}{\partial x} = 9001'
+              slots: [lossGradient]
             read: "Start at the loss with derivative 1, then work backwards through the calculation and add derivative contributions where paths meet."
             where:
               - sym: '\bar{z}_{r}'
@@ -3059,6 +3041,9 @@ topics:
         math:
           - name: 'The gradient'
             tex: '\nabla f(x) = \Big[ \tfrac{\partial f}{\partial x_{1}}, \dots, \tfrac{\partial f}{\partial x_{d}} \Big]^{\top}'
+            live:
+              tex: '\nabla f(x) = [9001, 9002]^{\top}'
+              slots: [gx, gy]
             read: "Collect the derivative for each input into 1 vector pointing in the direction of the fastest local increase."
             where:
               - sym: '\nabla'
@@ -3069,6 +3054,9 @@ topics:
                 is: "The number of components in a vector"
           - name: 'The directional derivative'
             tex: 'D_{u} f(x) = \langle \nabla f(x), u \rangle = \|\nabla f(x)\| \cos \vartheta'
+            live:
+              tex: 'D_{u} f(x) = 9001'
+              slots: [directionalRate]
             read: "Project the gradient onto a chosen direction to calculate the rate of change in that direction. No unit direction gives a greater rate than the gradient direction."
             where:
               - sym: 'D_{u} f(x)'
@@ -3133,6 +3121,9 @@ topics:
         math:
           - name: 'The conditions at a minimum'
             tex: '\nabla f(x^{\star}) = 0 \quad \text{and} \quad H(x^{\star}) \succeq 0'
+            live:
+              tex: '\|\nabla f(x)\| = 9001, \quad \lambda_{\min}(H(x)) = 9002'
+              slots: [stationaryGradient, smallestCurvature]
             read: "At a differentiable interior minimum, the gradient vanishes and curvature is nonnegative in every direction."
             note: "A 0 gradient can also occur at a maximum or saddle point. Therefore, inspect curvature to distinguish these three cases."
             where:
@@ -3142,9 +3133,9 @@ topics:
                 is: "Positive semidefinite, meaning that curvature is nonnegative in every direction"
               - sym: 'H'
                 is: "The Hessian, a matrix containing second derivatives"
-          - name: 'Why high dimensions are full of saddles'
-            tex: 'p(\text{all } d \text{ curvatures positive}) \approx 2^{-d} \; \text{for a random critical point}'
-            read: "A minimum requires upward curvature in every direction, which becomes much less likely as the number of dimensions grows."
+          - name: 'An estimate from independent curvature signs'
+            tex: 'p(\text{all } d \text{ signs positive}) = 2^{-d} \; \text{if signs are independent and equally likely}'
+            read: "Assume independent curvature signs, each positive with probability 1/2. Then all d signs are positive with probability 2⁻ᵈ. However, the Hessian model determines whether these assumptions hold."
             note: "Training rarely stops at a poor local minimum. Instead, saddle points and long regions with small gradients can slow it down. Momentum and adaptive update sizes help in these regions."
           - name: 'Constrained optimisation'
             tex: '\nabla f(x) = \varpi\, \nabla g(x), \qquad g(x) = 0'
@@ -3192,6 +3183,9 @@ topics:
         math:
           - name: 'Expectation is an integral against a density'
             tex: '\mathbb{E}[g(x)] = \int g(x)\, p(x)\, \mathrm{d}x'
+            live:
+              tex: '\text{Integral for this example} = 9001'
+              slots: [area]
             read: "Multiply each possible value by its probability density, then integrate over the possible values."
             where:
               - sym: 'p(x)'
@@ -3202,6 +3196,9 @@ topics:
                 is: "The function whose expected value is calculated"
           - name: 'Monte Carlo, and why the error falls slowly'
             tex: '\hat{g} = \frac{1}{n_{\mathrm{s}}} \sum_{i=1}^{n_{\mathrm{s}}} g(x_{i}), \qquad \mathrm{SE} = \frac{\sigma_{g}}{\sqrt{n_{\mathrm{s}}}}'
+            live:
+              tex: '\hat{g} = 9001, \quad \text{Estimated SE} = 9002'
+              slots: [estimate, se]
             read: "Average sampled values. Obtaining 10 times less error generally requires 100 times more samples."
             note: "This rate does not depend on dimension. Therefore, sampling can outperform a grid in high dimensions despite its slow convergence."
             where:
@@ -3211,31 +3208,6 @@ topics:
                 is: "The sample-based estimate of the average"
               - sym: '\sigma_{g}'
                 is: "The standard deviation of the sampled quantity"
-            play:
-              kind: curve
-              title: "Inspect sampling error as sample size grows"
-              alt: "The curve shows standard error decreasing in proportion to one divided by the square root of the sample count."
-              x:
-              - 1
-              - 400
-              y:
-              - 0
-              - 1
-              xlabel: "Samples"
-              ylabel: "Standard error"
-              curves:
-              - fn: sg / sqrt(x)
-                s: 0
-              readout: '"To halve standard error, use roughly 4 times as many independent samples."'
-              knobs:
-              - k: sg
-                label: "Standard deviation"
-                min: 0.2
-                max: 4
-                v: 1
-                step: 0.1
-                dp: 1
-                s: 0
           - name: 'Why the loss you minimise is an estimate'
             tex: '\hat{R}(f) \;\xrightarrow{\;n \to \infty\;}\; R(f)'
             read: "Use training loss, a sample average, to estimate the population average that you cannot calculate directly."
@@ -3284,6 +3256,9 @@ topics:
         math:
           - name: 'Taylor series'
             tex: 'f(x + h) = f(x) + f''(x)h + \tfrac{1}{2} f''''(x) h^{2} + O(h^{3})'
+            live:
+              tex: '\text{Current approximation} = 9001, \quad \text{Absolute error} = 9002'
+              slots: [approximation, error]
             read: "Approximate the function locally with a line, then a quadratic curve. Additional terms make the approximation error decrease faster near the chosen point."
             where:
               - sym: 'f''''(x)'
@@ -3292,37 +3267,11 @@ topics:
                 is: "The remaining error, which decreases in proportion to h cubed near the expansion point"
               - sym: 'h'
                 is: "The distance between the two input points"
-            play:
-              kind: curve
-              title: "Add Taylor terms and compare approximations"
-              alt: "The plot compares the exponential function with linear and quadratic Taylor approximations. Adding terms improves the fit across a wider nearby range."
-              x:
-              - -2
-              - 2
-              y:
-              - -1
-              - 6
-              xlabel: x
-              ylabel: "Value"
-              curves:
-              - fn: exp(x)
-                s: 2
-              - fn: 'ord >= 1 ? 1 + x : 1'
-                s: 0
-              - fn: 'ord >= 2 ? 1 + x + x*x/2 : (ord >= 1 ? 1 + x : 1)'
-                s: 1
-              readout: '"At x = 1 the true value is 2.718. Linear gives 2, quadratic gives 2.5."'
-              knobs:
-              - k: ord
-                label: "Terms retained"
-                min: 0
-                max: 2
-                v: 1
-                step: 1
-                dp: 0
-                s: 0
           - name: 'Newton''s method'
             tex: 'x_{t+1} = x_{t} - \frac{f''(x_{t})}{f''''(x_{t})}'
+            live:
+              tex: '\text{First Newton input} = 9001'
+              slots: [newtonNext]
             read: "Fit a quadratic approximation and move to its minimum."
             note: "Newton's method converges in far fewer steps but requires solving a system involving the Hessian at each step. Therefore, deep learning usually uses first-order methods with approximations to curvature."
             where:

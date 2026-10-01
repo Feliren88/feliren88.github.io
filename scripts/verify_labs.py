@@ -396,6 +396,267 @@ def check_conditioning():
     same('scaling needs fewer steps', n_s < n_u, True)
 
 
+
+@check('calculus/derivatives')
+def check_derivatives():
+    lab = 'calculus/derivatives'
+    kinds = ['square', 'sine', 'exp', 'abs', 'cube-root']
+    xs = [-1.0, 0.0, 1.0, 2.0]
+    calls = [[fn, [kind, x]] for kind in kinds for x in xs for fn in ['value','derivative']]
+    out = run(lab, calls)
+    for i,kind in enumerate(kinds):
+        for j,x in enumerate(xs):
+            value,derivative=out[2*(i*len(xs)+j):2*(i*len(xs)+j)+2]
+            v={'square': x*x, 'sine': np.sin(x), 'exp': np.exp(x), 'abs': abs(x), 'cube-root': np.cbrt(x)}[kind]
+            close(f'{kind} value at {x}',value,v)
+            if kind in ('abs','cube-root') and x==0:
+                same(f'{kind} finite derivative at zero',derivative,None)
+            else:
+                d=2*x if kind=='square' else np.cos(x) if kind=='sine' else np.exp(x) if kind=='exp' else np.sign(x) if kind=='abs' else 1/(3*np.cbrt(x)**2)
+                close(f'{kind} derivative at {x}',derivative,d)
+    quotients=run(lab,[['quotient',['square',1,1]],['quotient',['square',1,0.1]],['quotient',['square',1,0]],
+                       ['derivativeState',['abs',0]],['derivativeState',['cube-root',0]]])
+    close('square secant h=1',quotients[0],3)
+    close('square secant h=0.1',quotients[1],2.1)
+    same('coincident points',quotients[2],None)
+    same('abs corner',quotients[3]['kind'],'corner')
+    same('cube-root vertical tangent',quotients[4]['kind'],'vertical')
+    hs=[1,0.1,1e-5,1e-10,1e-16]
+    results=run(lab,[['samples',['exp',1,hs]]])[0]
+    reference=[(np.exp(1+h)-np.exp(1))/h for h in hs]
+    close('quotient roundoff sweep',[r['slope'] for r in results],reference,1e-6)
+    same('roundoff at machine resolution',results[-1]['slope'],0)
+
+
+@check('calculus/chain-rule')
+def check_chain_rule():
+    lab = 'calculus/chain-rule'
+    xs = [-1.7, -1, 0, 0.5, 1, 1.8]
+    chains = run(lab, [['chain', [x, 0.01]] for x in xs])
+    for x, c in zip(xs, chains):
+        close(f'inner value {x}', c['g'], x*x)
+        close(f'outer value {x}', c['f'], np.sin(x*x))
+        close(f'inner nudge {x}', c['dg'], (x+0.01)**2-x*x)
+        close(f'outer nudge {x}', c['df'], np.sin((x+0.01)**2)-np.sin(x*x))
+        fd = (np.sin((x+1e-6)**2)-np.sin((x-1e-6)**2))/2e-6
+        close(f'chain rate {x}', c['rate'], fd, 1e-7)
+        close(f'shared product contributions {x}', c['contributions'], [x*np.cos(x*x)]*2)
+        close(f'contribution sum {x}', sum(c['contributions']), fd, 1e-7)
+    inputs = [[2,1,-1,3], [-1,0.5,2,-1], [0,0,0,0]]
+    calls = [[fn, args] for args in inputs for fn in ('squaredLoss','adjoints')]
+    out = run(lab, calls)
+    for i, (w,x,b,y) in enumerate(inputs):
+        f, a = out[2*i:2*i+2]
+        close(f'loss nodes {i}', [f['product'],f['prediction'],f['residual'],f['loss']], [w*x,w*x+b,w*x+b-y,(w*x+b-y)**2])
+        for j, key in enumerate(('w','x','b','y')):
+            lo, hi = np.array([w,x,b,y],float), np.array([w,x,b,y],float)
+            lo[j] -= 1e-6; hi[j] += 1e-6
+            fn = lambda v: (v[0]*v[1]+v[2]-v[3])**2
+            close(f'adjoint {i} {key}', a[key], (fn(hi)-fn(lo))/2e-6, 1e-7)
+        close(f'local adjoints {i}', [a['loss'],a['residual'],a['prediction'],a['product']], [1,2*(w*x+b-y),2*(w*x+b-y),2*(w*x+b-y)])
+    shared = run(lab,[['squaredLoss',[2,1,0,3,True]],['adjoints',[2,1,0,3,True]]])
+    close('shared-target loss',shared[0]['loss'],1)
+    close('shared-target branches',shared[1]['xContributions'],[4,-2])
+    close('shared-target total',shared[1]['x'],2)
+    same('forward and reverse passes',run(lab,[['passCounts',[4,1]]])[0],{'forward':4,'reverse':1})
+
+
+@check('calculus/gradients-jacobians-hessians')
+def check_gradients():
+    lab = 'calculus/gradients-jacobians-hessians'
+    points = [(1,0.5),(-1.5,-0.8),(0,0),(0.2,-1.2)]
+    fn = lambda z: z[0]**2 + 2*z[1]**2 + 0.2*z[0]*z[1]
+    mapping = lambda z: np.array([z[0]+0.2*z[1]**2,z[1]+0.2*z[0]**2])
+    calls = [[name,list(z)] for z in points for name in ('surface','gradient','hessian','mapping','jacobian')]
+    out = run(lab,calls)
+    for i,z in enumerate(points):
+        z = np.array(z,float)
+        f,g,H,v,J = out[5*i:5*i+5]
+        close(f'surface {i}',f,fn(z))
+        close(f'mapping {i}',v,mapping(z))
+        basis = np.eye(2)
+        df = [(fn(z+1e-6*u)-fn(z-1e-6*u))/2e-6 for u in basis]
+        close(f'gradient {i}',g,df,1e-7)
+        DJ = np.column_stack([(mapping(z+1e-6*u)-mapping(z-1e-6*u))/2e-6 for u in basis])
+        close(f'Jacobian {i}',J,DJ,1e-7)
+        step = 1e-4
+        D2 = [[(fn(z+step*(u+v))-fn(z+step*(u-v))-fn(z+step*(-u+v))+fn(z-step*(u+v)))/(4*step**2) for v in basis] for u in basis]
+        close(f'Hessian {i}',H,D2,1e-6)
+        for theta in (0,np.pi/2,np.pi):
+            u = np.array([np.cos(theta),np.sin(theta)])
+            got = run(lab,[['directional',list(z)+[theta]]])[0]
+            close(f'directional {i} {theta}',got,(fn(z+1e-6*u)-fn(z-1e-6*u))/2e-6,1e-7)
+    dims = run(lab,[['shapes',[3,2]],['shapes',[1,1]],['shapes',[6,6]]])
+    for (d,m),got in zip(((3,2),(1,1),(6,6)),dims):
+        same(f'derivative shapes {d},{m}',got,{'gradient':[d,1],'jacobian':[m,d],'hessian':[d,d]})
+    eig = run(lab,[['eigenSystem',[]]])[0]
+    H = np.array([[2,0.2],[0.2,4]])
+    close('curvature eigenvalues',eig['values'],np.linalg.eigvalsh(H))
+    vectors = np.array(eig['vectors'])
+    close('curvature eigenvectors',H@vectors.T,vectors.T@np.diag(eig['values']))
+    close('orthonormal curvature directions',vectors@vectors.T,np.eye(2))
+    example = run(lab,[['surface',[1,0.5]],['gradient',[1,0.5]],['directional',[1,0.5,0]]])
+    for got,want in zip(example,[1.6,[2.1,2.2],2.1]): close('first guide example',got,want)
+
+
+@check('calculus/optimisation-conditions')
+def check_optimisation():
+    from scipy.optimize import minimize
+    lab = 'calculus/optimisation-conditions'
+    kinds = {'minimum': np.diag([2.,2.]), 'maximum': np.diag([-2.,-2.]),
+             'saddle': np.diag([2.,-2.]), 'flat': np.diag([0.,2.])}
+    states = run(lab,[['stationary',[kind]] for kind in kinds])
+    for (kind,H),got in zip(kinds.items(),states):
+        close(f'{kind} Hessian',got['hessian'],H)
+        close(f'{kind} eigenvalues',got['eigenvalues'],np.linalg.eigvalsh(H))
+        close(f'{kind} gradient',got['gradient'],[0,0])
+        same(f'{kind} classification',got['type'],'inconclusive' if kind == 'flat' else kind)
+    labels = run(lab,[['classify',[v]] for v in ([1,2],[-2,-1],[-1,1],[0,2],[-2,0],[-1,0,1])])
+    same('curvature labels',labels,['minimum','maximum','saddle','inconclusive','inconclusive','saddle'])
+    solution = minimize(lambda z:z[0]**2+2*z[1]**2,[.5,.5],
+                        constraints={'type':'eq','fun':lambda z:z.sum()-1},tol=1e-12)
+    assert solution.success
+    out = run(lab,[['constrained',[x]] for x in (-.2,.5,2/3,1.2)])
+    for x,got in zip((-.2,.5,2/3,1.2),out):
+        point = np.array([x,1-x])
+        close('constraint point',got['point'],point)
+        close('constraint value',got['value'],point @ np.diag([1,2]) @ point)
+        close('objective gradient',got['objectiveGradient'],[2*x,4*(1-x)])
+        close('constraint gradient',got['constraintGradient'],[1,1])
+        close('tangent rate',got['tangentRate'],6*x-4)
+    close('constrained optimum',out[2]['point'],solution.x,1e-7)
+    close('aligned gradients',out[2]['objectiveGradient'],np.ones(2)*4/3)
+    close('optimum multiplier',out[2]['multiplier'],4/3)
+    # Reproduce the seeded uniforms and normal draws independently, then use NumPy eigenvalues.
+    def matrices(d,count,seed):
+        state=seed
+        def uniform():
+            nonlocal state
+            state=(1664525*state+1013904223)&0xffffffff
+            return (state+0.5)/2**32
+        for _ in range(count):
+            entries=[]
+            for _ in range(d*d):
+                u,v=uniform(),uniform()
+                entries.append(np.sqrt(-2*np.log(u))*np.cos(2*np.pi*v))
+            G=np.array(entries).reshape(d,d)
+            yield (G+G.T)/2
+    got=run(lab,[['curvatureSample',[d,512,41]] for d in range(1,7)])
+    for d,result in enumerate(got,1):
+        reference=np.array(list(matrices(d,512,41)))
+        close(f'd={d} sampled matrices',result['matrices'],reference,1e-11)
+        eig=np.linalg.eigvalsh(reference)
+        close(f'd={d} sampled eigenvalues',result['eigenvalues'],eig,1e-9)
+        positive=int(np.count_nonzero(np.all(eig>0,axis=1)))
+        same(f'd={d} positive count',result['positive'],positive)
+        close(f'd={d} fraction',result['fraction'],positive/512)
+    close('independent sign estimate',run(lab,[['independentSigns',[d]] for d in range(1,7)]),2.**-np.arange(1,7))
+    curves=run(lab,[['chord',[kind,axis,-1,1,.5]] for kind,axis in [('minimum','x'),('maximum','x'),('saddle','y'),('flat','x')]])
+    for got,want in zip(curves,[1,-1,-1,1]): close('midpoint chord gap',got['gap'],want)
+
+
+@check('calculus/integration')
+def check_integration():
+    from scipy.integrate import quad
+    lab='calculus/integration'
+    functions={
+        'square':lambda x:x*x,
+        'sine':np.sin,
+        'uniform':lambda x:x*x if 0<=x<=1 else 0,
+        'exponential':lambda x:x*np.exp(-x) if x>=0 else 0,
+    }
+    for kind,fn in functions.items():
+        for a,b in ((0,1),(-1,2),(1,-1)):
+            reference=quad(fn,a,b,points=[x for x in (0,1) if min(a,b)<x<max(a,b)])[0]
+            got=run(lab,[['integral',[kind,a,b]]])[0]
+            close(f'{kind} integral {a},{b}',got,reference)
+            for n in (1,4,64):
+                mids=a+(np.arange(n)+.5)*(b-a)/n
+                sum_ref=(b-a)/n*sum(fn(x) for x in mids)
+                result=run(lab,[['riemann',[kind,a,b,n]]])[0]
+                close(f'{kind} midpoint sum {n}',result['value'],sum_ref)
+                close('rectangle midpoints',[r['x'] for r in result['rectangles']],mids)
+                close('rectangle areas',[r['area'] for r in result['rectangles']],[(b-a)/n*fn(x) for x in mids])
+        for x in (-.4,0,.3,1.5):
+            got=run(lab,[['accumulation',[kind,x]]])[0]
+            close(f'{kind} accumulation {x}',got,quad(fn,0,x,points=[1] if x>1 else None)[0])
+    close('uniform squared expectation',run(lab,[['expectation',['uniform']]])[0],quad(functions['uniform'],0,1)[0])
+    close('exponential mean',run(lab,[['expectation',['exponential']]])[0],quad(functions['exponential'],0,np.inf)[0])
+    def uniforms(n,seed):
+        state=seed;out=[]
+        for _ in range(n):
+            state=(1664525*state+1013904223)&0xffffffff
+            out.append((state+.5)/2**32)
+        return np.array(out)
+    for kind in ('uniform','exponential'):
+        for n in (1,2,64,500):
+            u=uniforms(n,43)
+            sample=u if kind=='uniform' else -np.log1p(-u)
+            values=sample**2 if kind=='uniform' else sample
+            got=run(lab,[['monteCarlo',[kind,n,43]]])[0]
+            close(f'{kind} sampled inputs {n}',got['samples'],sample)
+            close(f'{kind} sampled values {n}',got['values'],values)
+            close(f'{kind} mean {n}',got['estimate'],np.mean(values))
+            if n>1:close(f'{kind} estimated SE {n}',got['se'],np.std(values,ddof=1)/np.sqrt(n))
+            else:same('one sample has no estimated SE',got['se'],None)
+    for scale in (.25,1,3):
+        points=[-.1,0,.3*scale,scale,scale+.1]
+        got=run(lab,[['transformedDensity',[y,scale]] for y in points])
+        close('transformed density support',got,[1/scale if 0<=y<=scale else 0 for y in points])
+        height=got[2]
+        close('transformed unit mass',quad(lambda y:height,0,scale)[0],1)
+    same('zero scale is undefined',run(lab,[['transformedDensity',[0,0]]])[0],None)
+    same('empty rectangle count',run(lab,[['riemann',['square',0,1,0]]])[0],None)
+    close('first guide midpoint sum',run(lab,[['riemann',['square',0,1,4]]])[0]['value'],.328125)
+
+
+@check('calculus/approximation')
+def check_approximation():
+    import math
+    lab='calculus/approximation'
+    calls=[]; refs=[]
+    for kind in ('exp','log1p'):
+        for a in (0,.25,1):
+            for order in (0,1,2,4,8):
+                c=[math.exp(a)/math.factorial(n) for n in range(order+1)] if kind=='exp' else [math.log1p(a)]+[(-1)**(n+1)/(n*(1+a)**n) for n in range(1,order+1)]
+                calls.append(['coefficients',[kind,a,order]]);refs.append(c)
+                for x in (-.5,.5,1,1.5,2):
+                    calls.append(['taylor',[kind,a,x,order]]);refs.append(np.polynomial.polynomial.polyval(x-a,c))
+    for got,want in zip(run(lab,calls),refs):close('Taylor coefficients and polynomial',got,want)
+    low,high=run(lab,[['taylor',['log1p',0,1.5,4]],['taylor',['log1p',0,1.5,8]]])
+    assert abs(high-math.log1p(1.5))>abs(low-math.log1p(1.5)), 'Outside-radius error should worsen in the chosen example'
+    def objective(k,x):return x*x+x**4/4 if k=='convex' else -x*x if k=='concave' else x
+    def slope(k,x):return 2*x+x**3 if k=='convex' else -2*x if k=='concave' else 1
+    def curvature(k,x):return 2+3*x*x if k=='convex' else -2 if k=='concave' else 0
+    for kind in ('convex','concave','linear'):
+        for start in (-1,0,1,1.5):
+            for count in (0,1,4,8):
+                n,g=run(lab,[['newton',[kind,start,count]],['descent',[kind,start,.1,count]]])
+                path=[start]
+                for _ in range(count):
+                    if curvature(kind,path[-1])==0:break
+                    path.append(path[-1]-slope(kind,path[-1])/curvature(kind,path[-1]))
+                close('Newton path',n['path'],path);same('Newton step count',n['steps'],len(path)-1)
+                same('Zero-curvature stalled state',n['stalled'],kind=='linear' and count>0)
+                path=[start]
+                for _ in range(count):path.append(path[-1]-.1*slope(kind,path[-1]))
+                close('Descent path',g['path'],path);same('Descent step count',g['steps'],count)
+    n=run(lab,[['newton',['concave',1,1]]])[0]
+    assert objective('concave',n['path'][-1])>objective('concave',1), 'Negative curvature sends Newton uphill'
+    for kind,x,fn,exact in [('exp',1,math.exp,math.exp(1)),('log1p',.5,math.log1p,1/1.5)]:
+        for exponent in range(1,17):
+            h=10.**-exponent;q=run(lab,[['differenceError',[kind,x,h]]])[0]
+            estimate=(fn(x+h)-fn(x-h))/(2*h)
+            # JavaScript and Python can differ by a final libm rounding bit.
+            rounding=4*np.finfo(float).eps*max(abs(fn(x+h)),abs(fn(x-h)))/h
+            assert abs(q['estimate']-estimate)<=rounding+1e-12
+            close('Exact derivative',q['exact'],exact)
+            close('Absolute central-difference error',q['error'],abs(q['estimate']-exact))
+    same('Undefined zero h',run(lab,[['differenceError',['exp',1,0]]])[0],None)
+    same('Invalid logarithm centre',run(lab,[['coefficients',['log1p',-1,2]]])[0],None)
+    same('Invalid Taylor order',run(lab,[['taylor',['exp',0,1,-1]]])[0],None)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

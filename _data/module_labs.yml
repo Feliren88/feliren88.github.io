@@ -9,3 +9,10 @@ linear-algebra:
   '4': decompositions
   '5': least-squares
   '6': conditioning
+calculus:
+  '0': derivatives
+  '1': chain-rule
+  '2': gradients-jacobians-hessians
+  '3': optimisation-conditions
+  '4': integration
+  '5': approximation

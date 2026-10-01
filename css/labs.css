@@ -107,3 +107,42 @@
 .lab-plane .pl-bar-solve { fill: var(--xp-v); }
 .lab-plane .pl-bar-inv { fill: var(--tf-down); }
 .lab-plane .pl-step { fill: var(--xp-o); }
+
+/* Calculus */
+.lab-calculus-figure { margin: 0 0 0.6rem; }
+.lab-calculus-figure figcaption { margin: 0.3rem 0; color: var(--text); font-size: var(--fs-xs); }
+.lab-calculus-table { max-width: 100%; overflow-x: auto; }
+.lab-plane .pl-point { fill: currentColor; }
+.lab-plane .pl-open { fill: var(--surface); stroke: currentColor; stroke-width: 2; }
+.lab-derivatives .lab-note { min-block-size: 3lh; }
+.lab-derivatives .lab-eq { display: grid; gap: 0.1rem; }
+.lab-derivatives .lab-eq .lab-term { white-space: nowrap; }
+.lab-plane .pl-node { fill: var(--surface); stroke: currentColor; stroke-width: 2; }
+.lab-chain-rule .lab-note { min-block-size: 3lh; }
+.lab-chain-rule [data-lines] text { font-size: 16px; }
+.lab-chain-rule [data-graph] text { font-size: 15px; }
+.lab-chain-rule [data-graph] text[data-part="reverse"] { paint-order: stroke; stroke: var(--surface); stroke-width: 4; }
+.lab-gradients .lab-eq { display: grid; gap: 0.1rem; }
+.lab-gradients .lab-eq .lab-term { white-space: nowrap; }
+.lab-gradients .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-gradients .lab-note { min-block-size: 3lh; }
+.lab-gradients .pl-warp-grid { stroke: currentColor; fill: none; }
+.lab-gradients .pl-warp-grid polyline { stroke: currentColor; stroke-width: 1.5; fill: none; }
+.lab-gradients [data-local] { margin-top: 0.7rem; }
+.lab-optimisation .lab-eq { display: grid; gap: 0.1rem; }
+.lab-optimisation .lab-eq .lab-term { white-space: normal; }
+.lab-optimisation .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-optimisation .lab-note { min-block-size: 4lh; }
+.lab-derivative-shape { margin-block: 0.8rem; }
+.lab-derivative-shape h4 { margin-block: 0.3rem; font-size: var(--fs-xs); }
+.lab-shape-cells { display: grid; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: 0.2rem; }
+.lab-shape-cells span { padding: 0.4rem 0.1rem; border: 1px solid var(--border-ui); text-align: center; font: 500 0.75rem var(--xp-mono); }
+.lab-shape-cells .is-active { border: 2px solid var(--xp-o); padding: calc(0.4rem - 1px) 0; }
+.lab-optimisation .is-zero { color: var(--muted); }
+.lab-integration .lab-eq { display: grid; gap: 0.1rem; }
+.lab-integration .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-integration .lab-note { min-block-size: 4lh; }
+.lab-plane .pl-integral { fill: currentColor; fill-opacity: 0.18; stroke: currentColor; stroke-width: 1; }
+.lab-approximation .lab-eq { display: grid; gap: 0.1rem; }
+.lab-approximation .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-approximation .lab-note { min-block-size: 4lh; }
