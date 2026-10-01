@@ -48,13 +48,13 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `value(kind,x), derivative(kind,x), quotient(kind,x,h), samples(kind,x,hs). Kinds are square, sine, exp, abs and cube-root. Derivative returns null at the abs corner and cube-root’s vertical tangent.` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/derivatives` with these assertions. Compare values and exact derivatives at x = −1, 0, 1 and 2. Check the square secant at x=1,h=1 is 3 and at h=0.1 is 2.1. Zero h returns null. Check cbrt on negative inputs and cancellation at small h.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/derivatives`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Draw the secant, tangent, local magnification and derivative graph. Drag x and the second point; select the 5 functions. Use a 700ms shrink motion with a recorded starting h. Show shrinking-h arithmetic in a dialog. Page 1 uses x² at x=1,h=1. Publish fx, slope and secant in module 0’s derivative equation; remove its repeated curve playground.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/derivatives` with these assertions. Compare values and exact derivatives at x = −1, 0, 1 and 2. Check the square secant at x=1,h=1 is 3 and at h=0.1 is 2.1. Zero h returns null. Check cbrt on negative inputs and cancellation at small h.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/derivatives`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Draw the secant, tangent, local magnification and derivative graph. Drag x and the second point; select the 5 functions. Use a 700ms shrink motion with a recorded starting h. Show shrinking-h arithmetic in a dialog. Page 1 uses x² at x=1,h=1. Publish fx, slope and secant in module 0’s derivative equation; remove its repeated curve playground.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 2: The chain rule
 

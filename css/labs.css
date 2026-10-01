@@ -107,3 +107,11 @@
 .lab-plane .pl-bar-solve { fill: var(--xp-v); }
 .lab-plane .pl-bar-inv { fill: var(--tf-down); }
 .lab-plane .pl-step { fill: var(--xp-o); }
+
+/* Calculus */
+.lab-calculus-figure { margin: 0 0 0.6rem; }
+.lab-calculus-figure figcaption { margin: 0.3rem 0; color: var(--text); font-size: var(--fs-xs); }
+.lab-calculus-table { max-width: 100%; overflow-x: auto; }
+.lab-plane .pl-point { fill: currentColor; }
+.lab-plane .pl-open { fill: var(--surface); stroke: currentColor; stroke-width: 2; }
+.lab-derivatives .lab-note { min-block-size: 3lh; }

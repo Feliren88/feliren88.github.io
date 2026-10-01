@@ -396,6 +396,38 @@ def check_conditioning():
     same('scaling needs fewer steps', n_s < n_u, True)
 
 
+
+@check('calculus/derivatives')
+def check_derivatives():
+    lab = 'calculus/derivatives'
+    kinds = ['square', 'sine', 'exp', 'abs', 'cube-root']
+    xs = [-1.0, 0.0, 1.0, 2.0]
+    calls = [[fn, [kind, x]] for kind in kinds for x in xs for fn in ['value','derivative']]
+    out = run(lab, calls)
+    for i,kind in enumerate(kinds):
+        for j,x in enumerate(xs):
+            value,derivative=out[2*(i*len(xs)+j):2*(i*len(xs)+j)+2]
+            v={'square': x*x, 'sine': np.sin(x), 'exp': np.exp(x), 'abs': abs(x), 'cube-root': np.cbrt(x)}[kind]
+            close(f'{kind} value at {x}',value,v)
+            if kind in ('abs','cube-root') and x==0:
+                same(f'{kind} finite derivative at zero',derivative,None)
+            else:
+                d=2*x if kind=='square' else np.cos(x) if kind=='sine' else np.exp(x) if kind=='exp' else np.sign(x) if kind=='abs' else 1/(3*np.cbrt(x)**2)
+                close(f'{kind} derivative at {x}',derivative,d)
+    quotients=run(lab,[['quotient',['square',1,1]],['quotient',['square',1,0.1]],['quotient',['square',1,0]],
+                       ['derivativeState',['abs',0]],['derivativeState',['cube-root',0]]])
+    close('square secant h=1',quotients[0],3)
+    close('square secant h=0.1',quotients[1],2.1)
+    same('coincident points',quotients[2],None)
+    same('abs corner',quotients[3]['kind'],'corner')
+    same('cube-root vertical tangent',quotients[4]['kind'],'vertical')
+    hs=[1,0.1,1e-5,1e-10,1e-16]
+    results=run(lab,[['samples',['exp',1,hs]]])[0]
+    reference=[(np.exp(1+h)-np.exp(1))/h for h in hs]
+    close('quotient roundoff sweep',[r['slope'] for r in results],reference,1e-6)
+    same('roundoff at machine resolution',results[-1]['slope'],0)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

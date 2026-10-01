@@ -9,3 +9,5 @@ linear-algebra:
   '4': decompositions
   '5': least-squares
   '6': conditioning
+calculus:
+  '0': derivatives

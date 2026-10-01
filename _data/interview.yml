@@ -2913,6 +2913,9 @@ topics:
         math:
           - name: 'The derivative as a limit of slopes'
             tex: 'f''(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}'
+            live:
+              tex: 'f(x) = 9001, \qquad f''(x) = 9002, \qquad \frac{f(x+h)-f(x)}{h} = 9003'
+              slots: [fx, slope, secant]
             read: "Calculate the slope between two nearby points and take its limit as the points approach one another."
             where:
               - sym: 'f'
@@ -2923,33 +2926,6 @@ topics:
                 is: "The derivative giving the local slope at x"
               - sym: '\to'
                 is: "Approaches, or maps to, depending on the expression"
-            play:
-              kind: curve
-              title: "Move two points closer to estimate the tangent slope"
-              alt: "A secant line passes through two curve points. As the points approach each other, this line approaches the tangent."
-              x:
-              - -3
-              - 3
-              y:
-              - -2
-              - 8
-              xlabel: x
-              ylabel: f(x)
-              curves:
-              - fn: x*x
-                s: 0
-              - fn: (pow(1+h,2)-1)/h * (x-1) + 1
-                s: 1
-              readout: "\"Secant slope \" + ((pow(1+h,2)-1)/h).toFixed(3) + \", while the derivative at x = 1 is 2\""
-              knobs:
-              - k: h
-                label: "Distance between points"
-                min: 0.01
-                max: 2
-                v: 1.4
-                step: 0.01
-                dp: 2
-                s: 1
           - name: 'The derivative as a local straight line'
             tex: 'f(x + h) \approx f(x) + f''(x)\, h'
             read: "Near a point, a smooth function is approximately linear, with its derivative giving the line's slope."
