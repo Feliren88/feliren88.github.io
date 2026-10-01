@@ -657,6 +657,59 @@ def check_approximation():
     same('Invalid Taylor order',run(lab,[['taylor',['exp',0,1,-1]]])[0],None)
 
 
+@check('calculus/matrix-calculus')
+def check_matrix_calculus():
+    from scipy.special import softmax,logsumexp
+    lab='calculus/matrix-calculus';rng=np.random.default_rng(47)
+    close('Softmax logits 1, 2, 3',run(lab,[['softmax',[[1,2,3]]]])[0],softmax([1,2,3]))
+    W=np.array([[1.,0],[0,1],[1,1]]);x=np.array([1.,2]);b=np.zeros(3)
+    first=run(lab,[['layer',[W.tolist(),x.tolist(),b.tolist(),2]]])[0]
+    close('First guide logits',first['logits'],[1,2,3]);close('First guide loss',first['loss'],logsumexp([1,2,3])-3)
+    for bias,label in [([1000,1000,1000],2),([-1000,0,1000],0)]:
+        q=run(lab,[['layer',[(W*0).tolist(),x.tolist(),bias,label]]])[0]
+        close('Stable extreme-logit probabilities',q['p'],softmax(bias));close('Stable extreme-logit loss',q['loss'],logsumexp(bias)-bias[label])
+    for inputs in (1,2,3):
+        for outputs in (2,3,4):
+            W=rng.normal(size=(outputs,inputs));x=rng.normal(size=inputs);b=rng.normal(size=outputs);label=outputs-1
+            q=run(lab,[['layer',[W.tolist(),x.tolist(),b.tolist(),label]]])[0]
+            z=W@x+b;p=softmax(z);delta=p-np.eye(outputs)[label]
+            close('Linear layer logits',q['logits'],z);close('Layer probabilities',q['p'],p)
+            close('Cross entropy',q['loss'],logsumexp(z)-z[label]);close('Predicted minus label',q['delta'],delta)
+            def loss(W,x,b):
+                z=W@x+b;return logsumexp(z)-z[label]
+            h=1e-6;dW=np.zeros_like(W);dx=np.zeros_like(x);db=np.zeros_like(b)
+            for i in range(outputs):
+                for j in range(inputs):
+                    plus=W.copy();minus=W.copy();plus[i,j]+=h;minus[i,j]-=h
+                    dW[i,j]=(loss(plus,x,b)-loss(minus,x,b))/(2*h)
+            for j in range(inputs):
+                plus=x.copy();minus=x.copy();plus[j]+=h;minus[j]-=h
+                dx[j]=(loss(W,plus,b)-loss(W,minus,b))/(2*h)
+            for i in range(outputs):
+                plus=b.copy();minus=b.copy();plus[i]+=h;minus[i]-=h
+                db[i]=(loss(W,x,plus)-loss(W,x,minus))/(2*h)
+            close('Every weight gradient entry',q['dW'],dW,1e-6);close('Every input gradient entry',q['dx'],dx,1e-6);close('Every bias gradient entry',q['db'],db,1e-6)
+    for n in (2,3,4):
+        A=rng.normal(size=(n,n));w=rng.normal(size=n);q=run(lab,[['quadratic',[A.tolist(),w.tolist()]]])[0]
+        close('Nonsymmetric quadratic value',q['value'],w@A@w);close('Full quadratic gradient',q['gradient'],(A+A.T)@w)
+        grad=[]
+        for i in range(n):
+            plus=w.copy();minus=w.copy();plus[i]+=1e-6;minus[i]-=1e-6
+            grad.append((plus@A@plus-minus@A@minus)/(2e-6))
+        close('Quadratic gradient by differences',q['gradient'],grad,1e-6)
+    for inputs in range(1,5):
+        for outputs in range(1,5):
+            for layout in ('numerator','denominator'):
+                for mistake in (False,True):
+                    q=run(lab,[['shapes',[inputs,outputs,layout,mistake]]])[0]
+                    left=([1,outputs] if layout=='numerator' else ([outputs,inputs] if mistake else [inputs,outputs]))
+                    right=(([inputs,outputs] if mistake else [outputs,inputs]) if layout=='numerator' else [outputs,1])
+                    same('Vector Jacobian layout',q['jacobian'],[outputs,inputs] if layout=='numerator' else [inputs,outputs])
+                    same('Reverse left dimensions',q['left'],left);same('Reverse right dimensions',q['right'],right)
+                    same('Reverse product compatibility',q['valid'],left[1]==right[0]);same('Parameter gradient shape',q['dW'],[outputs,inputs])
+    same('Empty softmax is undefined',run(lab,[['softmax',[[]]]])[0],None)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

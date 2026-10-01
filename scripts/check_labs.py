@@ -44,6 +44,7 @@ SNAP = """(sel) => { const x = document.querySelector(sel); if (!x) return '';
   let s = '';
   x.querySelectorAll('svg').forEach(v => { s += v.innerHTML; });
   x.querySelectorAll('canvas').forEach(c => { try { s += c.toDataURL().slice(-400); } catch (e) {} });
+  x.querySelectorAll('[data-stage]').forEach(e => { s += '|' + e.innerText; });
   x.querySelectorAll('[data-val]').forEach(e => { s += '|' + e.textContent; });
   x.querySelectorAll('[data-say]').forEach(e => { s += '|' + e.textContent; });
   return s; }"""

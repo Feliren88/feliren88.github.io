@@ -254,6 +254,10 @@ would otherwise beat `hidden`.
 
 ## Module explainers
 
+Before writing maths lesson text, follow [the maths writing guide](maths-writing-guide.md).
+Then use [the language review plan](superpowers/plans/2026-10-01-maths-language-review.md) for module inventories and verification.
+These instructions cover existing lesson prose, guide pages, labels, active notes, and worked dialogs.
+
 A track in `_data/module_labs.yml` gives each module an interactive explainer
 in place of its static diagram. Each explainer has markup in
 `_includes/labs/<track>/<slug>.html` and behaviour in `js/labs/<track>/<slug>.js`.
@@ -278,6 +282,10 @@ The equation accepts `live: { tex, slots }` metadata, which the explainer update
 
 Check an explainer with `scripts/verify_labs.py --track <id>`,
 `scripts/check_labs.py <id>` and `scripts/check_chart_bounds.py`.
+
+Linear Algebra and Calculus each install 1 interactive explainer for every module.
+Each track contains 7 modules. Therefore, the independent suite checks 14 module calculations.
+After Calculus, follow [the milestone handover](superpowers/handoffs/2026-10-01-calculus-milestone-handoff.md) for the remaining maths tracks.
 
 ## Staged animations
 

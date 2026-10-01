@@ -412,7 +412,76 @@ def approximation(page):
     assert float(lab.locator('[data-k="order"]').input_value()).is_integer()
 
 
-TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation, 'integration': integration, 'approximation': approximation}
+def matrix_calculus(page):
+    page.goto(BASE+'/calculus/#m7')
+    lab=page.locator('[data-lab="calculus/matrix-calculus"] .lab')
+    assert lab.count()==1, 'Matrix calculus needs its own layer, shape and quadratic scene'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/matrix-calculus\"]').getAttribute('data-lab-state')==='ready'")
+    assert lab.locator('.xp-guide-n').inner_text()=='1 / 10'
+    assert number(lab,'probability')==.6652 and number(lab,'delta')==-.3348 and number(lab,'loss')==.4076
+    assert float(page.locator('#m7 [data-live="probability"]').text_content())==.6652
+    assert page.locator('#m7 .ivm-play').count()==0
+    progress=lab.locator('[data-k="progress"]')
+    lab.locator('[data-act="play"]').click();set_range(progress,0)
+    assert number(lab,'probability')==.3333
+    set_range(progress,1);assert number(lab,'probability')==.6652
+    point=lab.locator('[data-handle="logit-2"]');point.focus();page.keyboard.press('ArrowUp')
+    assert number(lab,'selectedLogit')>3 and number(lab,'probability')>.6652
+    set_range(progress,0);assert number(lab,'selectedLogit')==3
+    set_range(progress,1)
+    nxt,prev=lab.locator('[data-guide="1"]'),lab.locator('[data-guide="-1"]')
+    nxt.click();assert number(lab,'selectedLogit')==4 and number(lab,'probability')==.8438
+    nxt.click();assert lab.locator('[data-k="label"]').input_value()=='0' and number(lab,'delta')==.6652
+    nxt.click();assert number(lab,'weightGradient')==-.6695
+    lab.locator('[data-zoom="layer"]').click();assert '−0.669518' in page.locator('dialog[open]').inner_text();page.keyboard.press('Escape')
+    weight=lab.locator('[data-handle="weight"]');weight.focus();page.keyboard.press('ArrowRight')
+    assert number(lab,'weightEntry')>1
+    set_range(progress,0);assert number(lab,'weightEntry')==1
+    nxt.click();assert number(lab,'dx0')==-.2447 and number(lab,'dx1')==-.0900
+    nxt.click();assert lab.locator('[data-k="view"]').input_value()=='shapes'
+    assert lab.locator('[data-k="layout"]').input_value()=='denominator' and lab.locator('[data-mismatch]').get_attribute('data-valid')=='true'
+    nxt.click();assert lab.locator('[data-k="layout"]').input_value()=='numerator'
+    nxt.click();assert lab.locator('[data-k="mistake"]').is_checked() and lab.locator('[data-mismatch]').get_attribute('data-valid')=='false'
+    assert '3' in lab.locator('[data-mismatch]').inner_text() and '2' in lab.locator('[data-mismatch]').inner_text()
+    set_range(lab.locator('[data-k="inputs"]'),3)
+    assert lab.locator('[data-mismatch]').get_attribute('data-valid')=='true' and 'wrong' in lab.locator('[data-mismatch]').inner_text().lower()
+    prev.click();assert not lab.locator('[data-k="mistake"]').is_checked() and lab.locator('[data-k="inputs"]').input_value()=='2'
+    nxt.click();nxt.click();assert number(lab,'quadraticValue')==2.5 and number(lab,'gx')==3 and number(lab,'gy')==4
+    assert number(lab,'shortcutX')==4 and number(lab,'shortcutY')==2
+    assert page.locator('#m7 [data-live="probability"]').text_content()=='Not evaluated'
+    entry=lab.locator('[data-handle="quadratic-entry"]');entry.focus();page.keyboard.press('ArrowLeft')
+    assert number(lab,'matrixEntry')<2
+    set_range(progress,0);assert number(lab,'matrixEntry')==2
+    nxt.click();assert lab.locator('[data-k="symmetry"]').input_value()=='symmetric'
+    assert number(lab,'gx')==number(lab,'shortcutX') and number(lab,'gy')==number(lab,'shortcutY')
+    lab.locator('[data-zoom="quadratic"]').click();assert '3.000000' in page.locator('dialog[open]').inner_text();page.keyboard.press('Escape')
+    before_mode=lab.locator('[data-note]').inner_text()
+    lab.locator('[data-k="symmetry"]').select_option('free')
+    assert lab.locator('[data-note]').inner_text()!=before_mode, 'Changing symmetry mode must explain how matrix entries will move'
+    assert 'independently' in lab.locator('[data-note]').inner_text()
+    while not prev.is_disabled():prev.click()
+    assert lab.locator('[data-k="view"]').input_value()=='layer' and number(lab,'probability')==.6652 and number(lab,'loss')==.4076
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    page.emulate_media(reduced_motion='no-preference');page.reload();lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/matrix-calculus\"]').getAttribute('data-lab-state')==='ready'")
+    lab.locator('[data-act="play"]').click();assert lab.get_attribute('data-anim') is not None
+    set_range(lab.locator('[data-k="progress"]'),.25)
+    assert float(lab.locator('[data-k="progress"]').input_value())==.25 and lab.get_attribute('data-anim') is None
+    motion_errors=[]
+    page.on('pageerror',lambda error:motion_errors.append(str(error)))
+    lab.locator('[data-reset]').click()
+    lab.locator('[data-k="selected"]').select_option('0')
+    lab.locator('[data-k="wentry"]').select_option('0')
+    for _ in range(3):
+        lab.locator('[data-guide="1"]').click()
+        page.wait_for_timeout(1000)
+    assert not motion_errors, ('Normal-motion guide changes must keep discrete indices valid',motion_errors)
+    assert lab.get_attribute('data-anim') is None
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation, 'integration': integration, 'approximation': approximation, 'matrix-calculus': matrix_calculus}
 SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
 
 with sync_playwright() as p:

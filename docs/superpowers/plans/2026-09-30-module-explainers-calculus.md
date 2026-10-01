@@ -132,20 +132,20 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `softmax(logits), layer(W,x,b,label), quadratic(A,w), shapes(inputs,outputs,layout,mistake). Layer returns logits,p,loss,delta,dW,dx,db with stable log-sum-exp.` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/matrix-calculus` with these assertions. Check logits [1,2,3] against scipy.special.softmax and stable loss for large logits. Compare every dW,dx,db entry with central differences. Verify non-symmetric quadratic gradient (A+Aᵀ)w. Verify both layout conventions and deliberate transpose mismatch dimensions.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/matrix-calculus`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Draw shape-sized layer blocks and reverse gradient blocks. Drag logits and selected W/A entries, with bars for probability and predicted-minus-label. Show the non-symmetric quadratic surface and gradient arrows. Switch layout convention and flag a transpose error with an explicit mismatch. Zoom into delta xᵀ entry arithmetic. Publish probability,delta and loss in module 6; remove its duplicate softmax controls.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/matrix-calculus` with these assertions. Check logits [1,2,3] against scipy.special.softmax and stable loss for large logits. Compare every dW,dx,db entry with central differences. Verify non-symmetric quadratic gradient (A+Aᵀ)w. Verify both layout conventions and deliberate transpose mismatch dimensions.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/matrix-calculus`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Draw shape-sized layer blocks and reverse gradient blocks. Drag logits and selected W/A entries, with bars for probability and predicted-minus-label. Show the non-symmetric quadratic surface and gradient arrows. Switch layout convention and flag a transpose error with an explicit mismatch. Zoom into delta xᵀ entry arithmetic. Publish probability,delta and loss in module 6; remove its duplicate softmax controls.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 8: Calculus milestone
 
 **Files:** Update `docs/interview.md` and the milestone handoff. Preserve all other lesson copy.
 
-- [ ] Step 1. Review every new guide, heading, dialog and source line with the requested writing guides. Fix imprecise claims and ungrounded terms.
-- [ ] Step 2. Run the full site, numerical, generated-equation, explainer, page and chart-bounds checks. Expected results are 14 total maths checks, 2 tracks checked with 0 problems, and zero page errors or overflowing charts.
-- [ ] Step 3. Record the 7 Calculus checkpoints, verification evidence and next maths track in the handoff. Commit the milestone.
-- [ ] Step 4. Request one fresh whole-branch review against main. Fix Important/Critical findings with failing regressions and a green suite. Record Minor findings for later.
+- [x] Step 1. Review every new guide, heading, dialog and source line with the requested writing guides. Fix imprecise claims and ungrounded terms.
+- [x] Step 2. Run the full site, numerical, generated-equation, explainer, page and chart-bounds checks. Expected results are 14 total maths checks, 2 tracks checked with 0 problems, and zero page errors or overflowing charts.
+- [x] Step 3. Record the 7 Calculus checkpoints, verification evidence and next maths track in the handoff. Commit the milestone.
+- [x] Step 4. Request one fresh whole-branch review against main. Fix Important/Critical findings with failing regressions and a green suite. Record Minor findings for later.
 - [ ] Step 5. Publish the checkpoint, merge the verified milestone into main, recheck the merged tree, push and safely update the owner’s clean Desktop checkout.
