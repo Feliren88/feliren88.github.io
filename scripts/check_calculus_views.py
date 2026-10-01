@@ -354,7 +354,65 @@ def integration(page):
     assert float(lab.locator('[data-k="n"]').input_value()).is_integer()
 
 
-TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation, 'integration': integration}
+def approximation(page):
+    page.goto(BASE+'/calculus/#m6')
+    lab=page.locator('[data-lab="calculus/approximation"] .lab')
+    assert lab.count()==1, 'Approximation needs its own Taylor, Newton and error scene'
+    lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/approximation\"]').getAttribute('data-lab-state')==='ready'")
+    assert lab.locator('.xp-guide-n').inner_text()=='1 / 10'
+    assert number(lab,'approximation')==2 and number(lab,'error')==.7183
+    assert float(page.locator('#m6 [data-live="approximation"]').text_content())==2
+    assert page.locator('#m6 .ivm-play').count()==0
+    lab.locator('[data-k="kind"]').select_option('log1p')
+    boundary=lab.locator('[data-note]').inner_text().lower()
+    assert 'boundary' in boundary and 'converges' in boundary, 'The log1p series converges at its positive boundary'
+    lab.locator('[data-k="kind"]').select_option('exp')
+    progress=lab.locator('[data-k="progress"]')
+    lab.locator('[data-act="play"]').click();assert lab.locator('[data-k="order"]').input_value()=='8'
+    set_range(progress,0);assert lab.locator('[data-k="order"]').input_value()=='1'
+    set_range(progress,1)
+    point=lab.locator('[data-handle="expansion-exp"]');point.focus();page.keyboard.press('ArrowRight')
+    assert number(lab,'a')>.0
+    set_range(progress,0);assert number(lab,'a')==0
+    nxt,prev=lab.locator('[data-guide="1"]'),lab.locator('[data-guide="-1"]')
+    nxt.click();assert number(lab,'approximation')==2.5
+    nxt.click();assert lab.locator('[data-k="order"]').input_value()=='6' and number(lab,'error')<.0003
+    nxt.click();assert lab.locator('[data-k="kind"]').input_value()=='log1p' and number(lab,'x')==.5
+    nxt.click();assert number(lab,'x')==1.5 and number(lab,'error')>1.8 and 'outside' in lab.locator('[data-note]').inner_text().lower()
+    prev.click();assert number(lab,'x')==.5 and lab.locator('[data-k="order"]').input_value()=='4'
+    nxt.click();nxt.click();assert number(lab,'newtonNext')==.4 and number(lab,'descentNext')==.7
+    assert float(page.locator('#m6 [data-live="newtonNext"]').text_content())==.4
+    lab.locator('[data-zoom="newton"]').click();assert '0.400000' in page.locator('dialog[open]').inner_text();page.keyboard.press('Escape')
+    lab.locator('[data-act="play"]').click();assert lab.locator('[data-k="count"]').input_value()=='8'
+    set_range(progress,0);assert lab.locator('[data-k="count"]').input_value()=='0'
+    set_range(progress,1)
+    nxt.click();assert number(lab,'newtonSteps')==8 and number(lab,'descentSteps')==8
+    nxt.click();assert lab.locator('[data-k="surface"]').input_value()=='concave'
+    assert number(lab,'newtonNext')==0 and number(lab,'newtonAfter')>number(lab,'startValue') and 'uphill' in lab.locator('[data-note]').inner_text().lower()
+    nxt.click();assert page.locator('#m6 [data-live="newtonNext"]').text_content()=='Unavailable'
+    assert 'zero curvature' in lab.locator('[data-note]').inner_text().lower()
+    nxt.click();assert lab.locator('[data-k="view"]').input_value()=='difference'
+    assert number(lab,'error')<1e-8
+    lab.locator('[data-act="play"]').click();assert lab.locator('[data-k="exponent"]').input_value()=='16'
+    assert number(lab,'approximation')==0 and number(lab,'error')>2.7
+    set_range(progress,0);assert lab.locator('[data-k="exponent"]').input_value()=='1'
+    set_range(progress,1)
+    lab.locator('[data-zoom="difference"]').click();assert 'rounded' in page.locator('dialog[open]').inner_text().lower();page.keyboard.press('Escape')
+    while not prev.is_disabled():prev.click()
+    assert lab.locator('[data-k="view"]').input_value()=='taylor' and number(lab,'a')==0 and number(lab,'x')==1
+    assert number(lab,'approximation')==2
+    assert 'NaN' not in lab.inner_text() and 'Infinity' not in lab.inner_text()
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    page.emulate_media(reduced_motion='no-preference');page.reload();lab.scroll_into_view_if_needed()
+    page.wait_for_function("document.querySelector('[data-lab=\"calculus/approximation\"]').getAttribute('data-lab-state')==='ready'")
+    lab.locator('[data-act="play"]').click();assert lab.get_attribute('data-anim') is not None
+    set_range(lab.locator('[data-k="progress"]'),.25)
+    assert float(lab.locator('[data-k="progress"]').input_value())==.25 and lab.get_attribute('data-anim') is None
+    assert float(lab.locator('[data-k="order"]').input_value()).is_integer()
+
+
+TESTS = {'derivatives': derivatives, 'chain-rule': chain_rule, 'gradients-jacobians-hessians': gradients, 'optimisation-conditions': optimisation, 'integration': integration, 'approximation': approximation}
 SELECTED = [a for a in sys.argv[1:] if a in TESTS] or list(TESTS)
 
 with sync_playwright() as p:

@@ -610,6 +610,53 @@ def check_integration():
     close('first guide midpoint sum',run(lab,[['riemann',['square',0,1,4]]])[0]['value'],.328125)
 
 
+@check('calculus/approximation')
+def check_approximation():
+    import math
+    lab='calculus/approximation'
+    calls=[]; refs=[]
+    for kind in ('exp','log1p'):
+        for a in (0,.25,1):
+            for order in (0,1,2,4,8):
+                c=[math.exp(a)/math.factorial(n) for n in range(order+1)] if kind=='exp' else [math.log1p(a)]+[(-1)**(n+1)/(n*(1+a)**n) for n in range(1,order+1)]
+                calls.append(['coefficients',[kind,a,order]]);refs.append(c)
+                for x in (-.5,.5,1,1.5,2):
+                    calls.append(['taylor',[kind,a,x,order]]);refs.append(np.polynomial.polynomial.polyval(x-a,c))
+    for got,want in zip(run(lab,calls),refs):close('Taylor coefficients and polynomial',got,want)
+    low,high=run(lab,[['taylor',['log1p',0,1.5,4]],['taylor',['log1p',0,1.5,8]]])
+    assert abs(high-math.log1p(1.5))>abs(low-math.log1p(1.5)), 'Outside-radius error should worsen in the chosen example'
+    def objective(k,x):return x*x+x**4/4 if k=='convex' else -x*x if k=='concave' else x
+    def slope(k,x):return 2*x+x**3 if k=='convex' else -2*x if k=='concave' else 1
+    def curvature(k,x):return 2+3*x*x if k=='convex' else -2 if k=='concave' else 0
+    for kind in ('convex','concave','linear'):
+        for start in (-1,0,1,1.5):
+            for count in (0,1,4,8):
+                n,g=run(lab,[['newton',[kind,start,count]],['descent',[kind,start,.1,count]]])
+                path=[start]
+                for _ in range(count):
+                    if curvature(kind,path[-1])==0:break
+                    path.append(path[-1]-slope(kind,path[-1])/curvature(kind,path[-1]))
+                close('Newton path',n['path'],path);same('Newton step count',n['steps'],len(path)-1)
+                same('Zero-curvature stalled state',n['stalled'],kind=='linear' and count>0)
+                path=[start]
+                for _ in range(count):path.append(path[-1]-.1*slope(kind,path[-1]))
+                close('Descent path',g['path'],path);same('Descent step count',g['steps'],count)
+    n=run(lab,[['newton',['concave',1,1]]])[0]
+    assert objective('concave',n['path'][-1])>objective('concave',1), 'Negative curvature sends Newton uphill'
+    for kind,x,fn,exact in [('exp',1,math.exp,math.exp(1)),('log1p',.5,math.log1p,1/1.5)]:
+        for exponent in range(1,17):
+            h=10.**-exponent;q=run(lab,[['differenceError',[kind,x,h]]])[0]
+            estimate=(fn(x+h)-fn(x-h))/(2*h)
+            # JavaScript and Python can differ by a final libm rounding bit.
+            rounding=4*np.finfo(float).eps*max(abs(fn(x+h)),abs(fn(x-h)))/h
+            assert abs(q['estimate']-estimate)<=rounding+1e-12
+            close('Exact derivative',q['exact'],exact)
+            close('Absolute central-difference error',q['error'],abs(q['estimate']-exact))
+    same('Undefined zero h',run(lab,[['differenceError',['exp',1,0]]])[0],None)
+    same('Invalid logarithm centre',run(lab,[['coefficients',['log1p',-1,2]]])[0],None)
+    same('Invalid Taylor order',run(lab,[['taylor',['exp',0,1,-1]]])[0],None)
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ['--track']:

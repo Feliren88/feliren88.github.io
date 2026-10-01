@@ -143,3 +143,6 @@
 .lab-integration .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
 .lab-integration .lab-note { min-block-size: 4lh; }
 .lab-plane .pl-integral { fill: currentColor; fill-opacity: 0.18; stroke: currentColor; stroke-width: 1; }
+.lab-approximation .lab-eq { display: grid; gap: 0.1rem; }
+.lab-approximation .lab-plane text { font-size: 15px; paint-order: stroke; stroke: var(--surface); stroke-width: 3; }
+.lab-approximation .lab-note { min-block-size: 4lh; }

@@ -3256,6 +3256,9 @@ topics:
         math:
           - name: 'Taylor series'
             tex: 'f(x + h) = f(x) + f''(x)h + \tfrac{1}{2} f''''(x) h^{2} + O(h^{3})'
+            live:
+              tex: '\text{Current approximation} = 9001, \quad \text{Absolute error} = 9002'
+              slots: [approximation, error]
             read: "Approximate the function locally with a line, then a quadratic curve. Additional terms make the approximation error decrease faster near the chosen point."
             where:
               - sym: 'f''''(x)'
@@ -3264,37 +3267,11 @@ topics:
                 is: "The remaining error, which decreases in proportion to h cubed near the expansion point"
               - sym: 'h'
                 is: "The distance between the two input points"
-            play:
-              kind: curve
-              title: "Add Taylor terms and compare approximations"
-              alt: "The plot compares the exponential function with linear and quadratic Taylor approximations. Adding terms improves the fit across a wider nearby range."
-              x:
-              - -2
-              - 2
-              y:
-              - -1
-              - 6
-              xlabel: x
-              ylabel: "Value"
-              curves:
-              - fn: exp(x)
-                s: 2
-              - fn: 'ord >= 1 ? 1 + x : 1'
-                s: 0
-              - fn: 'ord >= 2 ? 1 + x + x*x/2 : (ord >= 1 ? 1 + x : 1)'
-                s: 1
-              readout: '"At x = 1 the true value is 2.718. Linear gives 2, quadratic gives 2.5."'
-              knobs:
-              - k: ord
-                label: "Terms retained"
-                min: 0
-                max: 2
-                v: 1
-                step: 1
-                dp: 0
-                s: 0
           - name: 'Newton''s method'
             tex: 'x_{t+1} = x_{t} - \frac{f''(x_{t})}{f''''(x_{t})}'
+            live:
+              tex: '\text{First Newton input} = 9001'
+              slots: [newtonNext]
             read: "Fit a quadratic approximation and move to its minimum."
             note: "Newton's method converges in far fewer steps but requires solving a system involving the Hessian at each step. Therefore, deep learning usually uses first-order methods with approximations to curvature."
             where:

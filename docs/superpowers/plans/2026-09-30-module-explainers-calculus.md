@@ -118,13 +118,13 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Interfaces:** Export `taylor(kind,a,x,order), coefficients(kind,a,order), newton(kind,x,count), descent(kind,x,step,count), differenceError(kind,x,h). Use exp and log1p Taylor expansions, convex x²+x⁴/4 and concave −x² examples.` No later task depends on these maths functions.
 
-- [ ] Step 1. Add an independent numerical check named `calculus/approximation` with these assertions. Compare Taylor coefficients and approximation errors with exact derivatives and NumPy polynomial evaluation. Verify log1p outside its convergence radius can worsen with order. Check Newton/descent paths and step counts; return explicit stalled state at zero curvature. Verify central difference error against the exact derivative over h=10⁻¹..10⁻¹⁶.
-- [ ] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/approximation`. Expected failure is a missing explainer or maths export.
-- [ ] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
-- [ ] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
-- [ ] Step 5. Build its markup, guide and behaviour. Draw curve, Taylor polynomial and error shading around a draggable expansion point. Scrub rising order, and compare Newton’s local parabola with gradient descent. Show concave curvature causing an uphill Newton step. Plot the finite-difference error on logarithmic axes. Publish approximation,error,newtonNext in module 5 and remove the repeated Taylor playground.
-- [ ] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
-- [ ] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
+- [x] Step 1. Add an independent numerical check named `calculus/approximation` with these assertions. Compare Taylor coefficients and approximation errors with exact derivatives and NumPy polynomial evaluation. Verify log1p outside its convergence radius can worsen with order. Check Newton/descent paths and step counts; return explicit stalled state at zero curvature. Verify central difference error against the exact derivative over h=10⁻¹..10⁻¹⁶.
+- [x] Step 2. Run `../venv/bin/python scripts/verify_labs.py calculus/approximation`. Expected failure is a missing explainer or maths export.
+- [x] Step 3. Implement the pure exports and run the same check. Expected output names this explainer and reports 1 check passed.
+- [x] Step 4. Add focused browser assertions for the concrete guide example, active live equation, scrubbing endpoints, backward guide state and the relevant edge case. Run them before registering the lab and confirm the missing interactive scene.
+- [x] Step 5. Build its markup, guide and behaviour. Draw curve, Taylor polynomial and error shading around a draggable expansion point. Scrub rising order, and compare Newton’s local parabola with gradient descent. Show concave curvature causing an uphill Newton step. Plot the finite-difference error on logarithmic axes. Publish approximation,error,newtonNext in module 5 and remove the repeated Taylor playground.
+- [x] Step 6. Run the focused assertions, `scripts/check_labs.py calculus --base=http://localhost:4100`, `PAGES_DISABLE_NETWORK=1 make check` and `PATH="../venv/bin:$PATH" make test`. Expected results are zero browser problems, zero audit flags and passing tests. Inspect every guide page at 1400px and 390px in both themes.
+- [x] Step 7. Commit the explainer with no attribution, then run task-done with the independent numerical check.
 
 ### Task 7: Matrix calculus
 
