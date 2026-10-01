@@ -7,6 +7,9 @@ Then follow [the editing plan](superpowers/plans/2026-10-01-maths-language-revie
 
 ## 1. Start here
 
+Use [the combined maths and statistics skill](https://github.com/Feliren88/codex-skills/tree/main/skills/math-stats-writing) for precise claims and learner-friendly explanations.
+Then apply this repository’s writing rules and module checks.
+
 Read this section before changing any lesson.
 After that, use the relevant examples and checks below.
 

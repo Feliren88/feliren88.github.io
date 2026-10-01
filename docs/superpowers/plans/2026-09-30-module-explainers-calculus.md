@@ -144,8 +144,8 @@ Use `scripts/verify_labs.py` for NumPy/SciPy comparisons and `scripts/check_calc
 
 **Files:** Update `docs/interview.md` and the milestone handoff. Preserve all other lesson copy.
 
-- [ ] Step 1. Review every new guide, heading, dialog and source line with the requested writing guides. Fix imprecise claims and ungrounded terms.
-- [ ] Step 2. Run the full site, numerical, generated-equation, explainer, page and chart-bounds checks. Expected results are 14 total maths checks, 2 tracks checked with 0 problems, and zero page errors or overflowing charts.
-- [ ] Step 3. Record the 7 Calculus checkpoints, verification evidence and next maths track in the handoff. Commit the milestone.
-- [ ] Step 4. Request one fresh whole-branch review against main. Fix Important/Critical findings with failing regressions and a green suite. Record Minor findings for later.
+- [x] Step 1. Review every new guide, heading, dialog and source line with the requested writing guides. Fix imprecise claims and ungrounded terms.
+- [x] Step 2. Run the full site, numerical, generated-equation, explainer, page and chart-bounds checks. Expected results are 14 total maths checks, 2 tracks checked with 0 problems, and zero page errors or overflowing charts.
+- [x] Step 3. Record the 7 Calculus checkpoints, verification evidence and next maths track in the handoff. Commit the milestone.
+- [x] Step 4. Request one fresh whole-branch review against main. Fix Important/Critical findings with failing regressions and a green suite. Record Minor findings for later.
 - [ ] Step 5. Publish the checkpoint, merge the verified milestone into main, recheck the merged tree, push and safely update the owner’s clean Desktop checkout.

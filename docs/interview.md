@@ -283,6 +283,10 @@ The equation accepts `live: { tex, slots }` metadata, which the explainer update
 Check an explainer with `scripts/verify_labs.py --track <id>`,
 `scripts/check_labs.py <id>` and `scripts/check_chart_bounds.py`.
 
+Linear Algebra and Calculus each install 1 interactive explainer for every module.
+Each track contains 7 modules. Therefore, the independent suite checks 14 module calculations.
+After Calculus, follow [the milestone handover](superpowers/handoffs/2026-10-01-calculus-milestone-handoff.md) for the remaining maths tracks.
+
 ## Staged animations
 
 `js/components/interview-anim.js` gives every track one animation. The format

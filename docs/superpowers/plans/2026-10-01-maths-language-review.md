@@ -7,6 +7,9 @@ Read that guide first, then work through this plan 1 module at a time.
 
 ## 1. Deliverables and current status
 
+Use [the combined maths and statistics skill](https://github.com/Feliren88/codex-skills/tree/main/skills/math-stats-writing) for precise claims and learner-friendly explanations.
+Then apply this repository’s writing rules and module checks.
+
 This document plans a language review across all 45 maths modules.
 However, writing this plan does not mean those modules have already passed that review.
 The module inventory below starts with every language review marked Pending.

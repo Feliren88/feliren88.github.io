@@ -19,6 +19,9 @@ Preserve unrelated user changes and follow the latest task instructions.
 
 ## Maths interview language
 
+Use [the combined maths and statistics skill](https://github.com/Feliren88/codex-skills/tree/main/skills/math-stats-writing) for precise claims and learner-friendly explanations.
+Then apply this repository’s writing rules and module checks.
+
 Before writing or reviewing maths interview copy, read these documents.
 After that, complete the module worksheet and relevant checks.
 
