@@ -72,6 +72,20 @@ extra_js:
     </div>
   </nav>
 
+  <section class="iv-foundation-route" aria-labelledby="iv-foundation-title">
+    <h2 id="iv-foundation-title">Prepare to read equations and implementations</h2>
+    <p>Use these worked examples to practise reading unfamiliar technical material. Each connects notation, a calculation, and its interpretation.</p>
+    <ol>
+      {% for bridge in site.data.interview_foundations.bridges %}
+      {% assign module_number = bridge.module | plus: 1 %}
+      {% assign bridge_track = site.data.interview.topics | where: 'id', bridge.track | first %}
+      <li><a href="/{{ bridge.track }}/#foundation-{{ bridge.kind }}">{{ bridge.title }}</a> in {{ bridge_track.name }}, module {{ module_number }}.</li>
+      {% endfor %}
+    </ol>
+    <p>Then choose an unfamiliar equation and explain every object's role. Justify each transformation, name its assumptions, and connect it to code.</p>
+    <p>Finally, distinguish exact results from approximations and predict what changes when an assumption changes.</p>
+  </section>
+
   <p class="ivh-maplede">Each card opens a track with modules, practice questions, and related topics. On wider screens, the lines show how tracks connect.</p>
   <p class="ivh-maplede">For interactive practice, explore the <a href="/math/#m6">probability distributions</a> or <a href="/calculus/#m5">area under a curve</a>.</p>
 

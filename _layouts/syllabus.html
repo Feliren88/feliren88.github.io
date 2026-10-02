@@ -108,7 +108,7 @@ layout: default
       <svg class="ivi" viewBox="0 0 24 24" aria-hidden="true"><use href="#ivi-layers"/></svg>
       Notation used on this page
     </summary>
-    <p class="ivm-legend-lead">These symbols keep the same meaning across all {{ site.data.interview.topics | size }} tracks. Symbols used only in a module are defined below its equations.</p>
+    <p class="ivm-legend-lead">These entries explain the notation used in this notebook. However, a symbol's role can change between expressions or sources. Read the definitions below each equation before using it.</p>
     {% for grp in site.data.interview_math.notation %}
     <div class="ivm-legend-group">
       <h3>{{ grp.group }}</h3>
@@ -181,6 +181,11 @@ layout: default
       {% else %}
       <div class="syl-viz"></div>
       {% endif %}
+
+      {% assign foundations = site.data.interview_foundations.bridges | where: 'track', topic.id %}
+      {% for bridge in foundations %}
+        {% if bridge.module == forloop.parentloop.index0 %}{% include interview-foundation.html bridge=bridge %}{% endif %}
+      {% endfor %}
 
       {% assign lab_track = site.data.interview_distributions[topic.id] %}
       {% assign lab = lab_track[module_key] %}

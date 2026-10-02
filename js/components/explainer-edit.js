@@ -142,7 +142,7 @@
       '<div class="xp-stage"><div class="xp-edit">' +
       '<figure class="xp-edit-img" data-part="image"><figcaption>Original</figcaption><canvas data-cv="orig" width="64" height="64"></canvas></figure>' +
       '<figure class="xp-edit-img is-main" data-part="image occ"><figcaption>Edited: drag to erase</figcaption><canvas data-cv="cur" width="64" height="64" tabindex="0" aria-label="Edited image; drag with the mouse or a finger to erase part of it"></canvas><p class="xp-note xp-edit-occ" aria-live="polite"></p></figure>' +
-      '<div class="xp-edit-side" data-part="scores"><p class="xp-edit-labels" aria-live="polite"></p><div class="xp-edit-scores"></div></div>' +
+      '<div class="xp-edit-side" data-part="scores"><p class="xp-edit-labels" aria-live="polite"></p><div class="xp-edit-scores" tabindex="0" role="region" aria-label="Class probabilities. Scroll sideways if needed."></div></div>' +
       '</div></div>';
     Array.prototype.forEach.call(host.querySelectorAll('.xp-thumbs canvas'), function (cv, i) { draw(cv, TV.decode(model.samples[i].rgb)); });
     var st = host.querySelector('.xp-stage');

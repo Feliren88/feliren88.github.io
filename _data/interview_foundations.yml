@@ -1,0 +1,232 @@
+# General reading exercises belong inside their prerequisite lessons.
+# Module indices are zero-based and checked by the browser verification script.
+bridges:
+  - track: math
+    module: 0
+    kind: notation
+    title: Read variable roles before calculating
+    intro: "A symbol gets its meaning from its definition and surrounding expression. Identify its role before calculating."
+    prerequisite: "Use the function and sum examples above. Then distinguish an argument from an integration variable."
+    control: "Integration variable"
+    options: ["t", "u"]
+    steps:
+      - equation: 'F(x) = ∫₀ˣ t² dt = x³/3'
+        read: "The argument x sets the upper endpoint. The integration variable t visits values inside that interval."
+      - equation: 'F(x) = ∫₀ˣ u² du'
+        read: "Rename t to u throughout the integral. This changes the written name while preserving the function."
+      - equation: 'Fθ(x) = θ ∫₀ˣ u² du = θx³/3'
+        read: "The subscript θ identifies a parameter. Both x and θ affect this function, despite their different positions."
+      - equation: '∂Fθ/∂x = θx²; ∂Fθ/∂θ = x³/3'
+        read: "Differentiate one quantity while fixing the other. At x = 2 and θ = 3, the derivatives differ."
+    symbols:
+      - symbol: 'x'
+        meaning: "The argument, which remains outside the integral and sets its endpoint."
+      - symbol: 't, u'
+        meaning: "Dummy variables used inside an integral. Renaming them consistently preserves its value."
+      - symbol: 'θ'
+        meaning: "A parameter indexing the function family. A subscript can denote a parameter, an index, or another role."
+      - symbol: '∂, d'
+        meaning: "The partial derivative varies one argument. The differential identifies the variable being integrated."
+    note: "Read each author's definitions. For example, q can name a model, a proposal, or an approximate posterior."
+    question: "Rename the integration variable without changing Fθ. Then explain why replacing the endpoint x changes the function."
+    answer: "Replace both t² and dt with u² and du. The endpoint remains x. Changing x changes the interval."
+    next: information-theory
+
+  - track: information-theory
+    module: 0
+    kind: normalise
+    title: Turn scores into probabilities
+    intro: "Suppose 2 outcomes have scores 0 and θ. Exponentiate the scores, then divide by their total."
+    prerequisite: "Use sums, exponentials, and the distinction between probability mass and density."
+    control: "Parameter θ"
+    min: -2
+    max: 2
+    value: 0.7
+    step: 0.1
+    steps:
+      - equation: 'a₀ = 0; a₁ = 1; sθ(i) = θaᵢ'
+        read: "The index i chooses an outcome. The fixed feature aᵢ makes its score depend on θ."
+      - equation: 'wθ(i) = exp(sθ(i)); Zθ = 1 + exp(θ)'
+        read: "Exponentiation produces positive weights. Their sum Zθ is the normalising constant for this finite model."
+      - equation: 'qθ(i) = wθ(i)/Zθ; qθ(0) + qθ(1) = 1'
+        read: "Divide both weights by the same total. Therefore, the resulting probabilities sum to 1."
+      - equation: 'E_{qθ}[a] = qθ(0) × 0 + qθ(1) × 1'
+        read: "Average the feature using model probabilities. Moving θ changes these probabilities and their weighted average."
+    symbols:
+      - symbol: 'i, aᵢ'
+        meaning: "The outcome index and its fixed feature value. Here, the feature equals the outcome."
+      - symbol: 'sθ, wθ, qθ'
+        meaning: "The score, positive weight, and normalised model probability. These are different quantities."
+      - symbol: 'Zθ'
+        meaning: "The sum of all weights. It depends on θ even though it has no outcome argument."
+      - symbol: 'E_{qθ}[a]'
+        meaning: "The feature averaged under qθ. The expectation subscript names the averaging distribution."
+    note: "For continuous inputs, replace the sum with an integral and require 0 < Zθ < ∞. For example, constant weight 1 over the real line has infinite integral. It cannot define a density by normalisation. Some authors define energy Eθ = −sθ. Then lower energy gives higher density. Adding one constant to every score leaves the normalised distribution unchanged."
+    question: "Why does doubling every weight preserve qθ? Can a continuous density exceed 1?"
+    answer: "The total doubles too, so each ratio stays unchanged. A density can exceed 1. Its integral, rather than its pointwise height, must equal 1."
+    next: calculus
+
+  - track: calculus
+    module: 4
+    kind: normaliser-gradient
+    title: Differentiate the normalising constant
+    intro: "Use the 2-outcome model with scores 0 and θ. The log normaliser has a useful derivative."
+    prerequisite: "Study the chain rule and the Information Theory score-normalisation example first."
+    control: "Parameter θ"
+    min: -2
+    max: 2
+    value: 0.7
+    step: 0.1
+    steps:
+      - equation: 'Zθ = Σᵢ exp(θaᵢ); a₀ = 0; a₁ = 1'
+        read: "Hold both feature values fixed. The finite sum depends on θ through each exponentiated score."
+      - equation: 'dZθ/dθ = Σᵢ aᵢ exp(θaᵢ)'
+        read: "Differentiate each term. The chain rule multiplies its exponential by the fixed feature aᵢ."
+      - equation: 'd log Zθ/dθ = (1/Zθ) Σᵢ aᵢ exp(θaᵢ)'
+        read: "The derivative of log Zθ divides the previous derivative by Zθ. This division restores the model probabilities."
+      - equation: 'd log Zθ/dθ = Σᵢ qθ(i)aᵢ = E_{qθ}[a]'
+        read: "Recognise the probability-weighted sum as an expectation. The derivative equals the model's average feature value."
+    symbols:
+      - symbol: 'log'
+        meaning: "The natural logarithm in this derivation. Its derivative at positive z equals 1/z."
+      - symbol: 'd/dθ'
+        meaning: "Differentiate with respect to θ while fixing the outcomes and features."
+      - symbol: 'Σᵢ'
+        meaning: "Sum over the 2 allowed outcomes, using the index i."
+    note: "For a continuous model with fixed support, differentiating under the integral needs justification. Assume exp(sθ(x)) is differentiable in θ and Zθ is finite and positive. An integrable bound on those derivatives near θ permits exchanging differentiation and integration. Then ∇θ log Zθ = E_{qθ}[∇θ sθ(X)]. A parameter-dependent integration domain can introduce boundary terms."
+    question: "Which distribution appears in the final expectation? Why does changing θ also change that distribution?"
+    answer: "The expectation uses qθ, the normalised model distribution. Changing θ changes the scores, their total, and their normalised ratios."
+    next: frequentist-statistics
+
+  - track: frequentist-statistics
+    module: 1
+    kind: likelihood
+    title: Separate data averages from model averages
+    intro: "Assume 8 of 10 observations have feature 1. Fit the model with scores 0 and θ."
+    prerequisite: "Study negative log-likelihood and the Calculus normaliser derivative before following this derivation."
+    control: "Parameter θ"
+    min: -2
+    max: 2
+    value: 0.7
+    step: 0.1
+    steps:
+      - equation: 'log qθ(i) = θaᵢ − log Zθ'
+        read: "Taking the logarithm separates the outcome score from the shared normalising term. Both depend on θ."
+      - equation: 'L(θ) = −(1/10) Σⱼ log qθ(xⱼ) = −0.8θ + log Zθ'
+        read: "Average the negative log probabilities of the observations. The observed feature average is 8/10, or 0.8."
+      - equation: 'dL/dθ = E_{qθ}[a] − 0.8'
+        read: "Subtract the fixed data average from the model average. Their difference gives the likelihood gradient."
+      - equation: 'θnew = θ − η(E_{qθ}[a] − 0.8)'
+        read: "Use a positive learning rate η. A negative gradient increases θ and the probability of feature 1."
+    symbols:
+      - symbol: 'xⱼ, j'
+        meaning: "An observed outcome and its observation index. The dataset stays fixed during differentiation."
+      - symbol: 'L, η'
+        meaning: "The average negative log-likelihood and the positive learning rate used to reduce it."
+      - symbol: 'E_{qθ}[a]'
+        meaning: "The feature averaged over possible outcomes under the current model. It changes with θ."
+    note: "A population objective averages over the unknown data distribution. The training objective uses the observed dataset instead. Monte Carlo estimates an expectation by averaging sampled values. Correlated chain samples require dependence-aware error estimates. Finite sampling chains can also bias the gradient. Sampling an expectation does not directly compute the normalising constant."
+    question: "At θ = 0, calculate the gradient. Which direction does a gradient-descent update move θ?"
+    answer: "The model average is 0.5, giving gradient 0.5 − 0.8 = −0.3. Subtracting it increases θ."
+    next: bayesian-statistics
+
+  - track: bayesian-statistics
+    module: 2
+    kind: langevin
+    title: Compare optimisation with sampling
+    intro: "Consider the standard normal density, proportional to exp(−x²/2). Compare downhill movement with noisy sampling updates."
+    prerequisite: "Use gradients, normal random variables, and the posterior sampling discussion above."
+    control: "Step size h"
+    min: 0.02
+    max: 1
+    value: 0.2
+    step: 0.02
+    steps:
+      - equation: 'U(x) = x²/2; dU/dx = x; x₀ = 3'
+        read: "The potential U is the negative log density up to a constant. Its gradient points away from 0."
+      - equation: 'xₖ₊₁ = xₖ − hxₖ'
+        read: "Gradient descent moves towards 0. It seeks a minimum rather than the full spread of a distribution."
+      - equation: 'xₖ₊₁ = xₖ − hxₖ + √(2h)ξₖ; ξₖ ∼ N(0,1)'
+        read: "Independent normal noise adds variation. This discretised Langevin update combines drift with noise scaled to the step size."
+      - equation: 'Varstationary = 2h/[1 − (1 − h)²] = 1/(1 − h/2)'
+        read: "For 0 < h < 2, this chain's stationary variance exceeds the target variance 1. Smaller h reduces that bias."
+    symbols:
+      - symbol: 'k, h'
+        meaning: "The iteration index and positive step size. This example fixes the distribution while updating x."
+      - symbol: 'ξₖ, ∼'
+        meaning: "An independent standard normal draw at each step. The symbol ∼ specifies its distribution."
+      - symbol: 'Stationary distribution'
+        meaning: "A distribution preserved by a transition. It need not equal the intended target after discretisation."
+    note: "The diagram uses one reproducible illustrative noise sequence. It does not establish convergence. Burn-in discards initial steps; mixing describes movement through the distribution. Repeated samples remain dependent. A fixed step size can retain bias even after many steps. Clipping updates changes the transition and needs separate analysis."
+    question: "At h = 0.5, what is the stationary variance? Does extending the chain remove this discrepancy?"
+    answer: "The variance is 1/(1 − 0.25) = 4/3. More steps approach that biased stationary distribution."
+    source:
+      title: Langevin dynamics and step-size limits
+      url: https://www.stats.ox.ac.uk/~teh/research/compstats/WelTeh2011a.pdf
+    next: deep-learning
+
+  - track: deep-learning
+    module: 3
+    kind: autograd
+    title: Choose what the backward pass differentiates
+    intro: "Let L(w,x) = (wx)²/2. The same computation gives different gradients for x and w."
+    prerequisite: "Use the chain rule and gradient shapes. Then trace which quantities the graph treats as differentiable."
+    control: "Differentiate with respect to"
+    options: ["Input x", "Parameter w"]
+    steps:
+      - equation: 'x = 3; w = 2; y = wx = 6; L = y²/2 = 18'
+        read: "Trace the forward calculation from the input and weight through y to the scalar loss."
+      - equation: '∂L/∂x = yw = 12; ∂L/∂w = yx = 18'
+        read: "Apply the chain rule along each dependency. The input and parameter gradients answer different questions."
+      - equation: 'Chosen leaf requires_grad=True; other leaf requires_grad=False; L.backward()'
+        read: "Track the chosen leaf while freezing the other. Backpropagation follows their dependency to calculate the requested gradient."
+      - equation: 'With torch.no_grad(), update the chosen leaf; clear its accumulated gradient'
+        read: "Backward calculates gradients; an update changes values. Detach cuts an earlier graph connection, while eval changes certain layers' behaviour."
+    symbols:
+      - symbol: 'Leaf tensor'
+        meaning: "A graph input whose stored gradient can be used for an update when gradient tracking is enabled."
+      - symbol: 'Requires_grad'
+        meaning: "The tensor setting that requests gradient tracking. Freezing a weight still permits gradients with respect to inputs."
+      - symbol: 'Detach'
+        meaning: "Create a tensor sharing the same storage but disconnected from the earlier gradient graph."
+    note: "For an input update, freeze weights and track inputs. For training, track weights and treat data as fixed. Calling eval() does not disable gradient tracking. Running the entire forward pass under no_grad() prevents building the backward graph. Gradients accumulate unless cleared. If code returns a negative score, trace that sign through the loss and update."
+    question: "Why can setting w.requires_grad to false preserve ∂L/∂x, while detaching y removes that path?"
+    answer: "The multiplication still depends on x when w is frozen. Detaching y disconnects its dependence on both earlier inputs."
+    source:
+      title: PyTorch automatic differentiation
+      url: https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+    next: computer-vision
+
+  - track: computer-vision
+    module: 0
+    kind: tensor
+    title: Follow tensor shapes into a scalar loss
+    intro: "Use a batch of greyscale 28 × 28 images. Trace a convolution, flattening, and scalar scores."
+    prerequisite: "Use image channels, stride, padding, and the Linear Algebra shape checks."
+    control: "Batch size B"
+    min: 1
+    max: 8
+    value: 2
+    step: 1
+    steps:
+      - equation: 'X ∈ ℝᴮˣ¹ˣ²⁸ˣ²⁸'
+        read: "The axes represent batch, channel, height, and width. Each image has 1 channel and 784 pixel values."
+      - equation: 'Hout = floor((28 + 2×1 − (3−1) − 1)/2 + 1) = 14'
+        read: "Use 4 filters, kernel size 3, stride 2, padding 1, and dilation 1. The output has shape B × 4 × 14 × 14."
+      - equation: 'Flatten spatial and channel axes → [B, 784]; linear map → [B, 1]'
+        read: "Flatten each image's features while preserving the batch axis. A linear layer produces one score per image."
+      - equation: 'Sum([2,…,2]) = 2B; mean([2,…,2]) = 2'
+        read: "For illustrative scores all equal to 2, sum depends on batch size. Mean preserves their average."
+    symbols:
+      - symbol: 'B, ℝ'
+        meaning: "The number of images in the batch and the real-valued tensor entries."
+      - symbol: 'Hout, floor'
+        meaning: "The output height and rounding down to the nearest integer. The same calculation gives the output width."
+      - symbol: 'Flatten'
+        meaning: "Reshape selected axes into one axis. Preserve the batch axis to keep examples separate."
+      - symbol: 'Reduction'
+        meaning: "Combine entries through a sum or mean. A scalar loss can then drive the backward pass."
+    note: "A sum and a mean scale batch gradients differently. Squeezing the last size-1 axis gives [B]. Removing every size-1 axis can also erase the batch axis when B = 1. A scalar score becomes a probability only after a valid probability construction."
+    question: "For B = 1, what should the score vector's shape be? Why use squeeze on a specified axis?"
+    answer: "The score vector should have shape [1]. Squeezing only the final axis preserves the batch axis."
+    next: math

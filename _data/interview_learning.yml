@@ -11,7 +11,7 @@
 mission:
   outcome: "Explain the idea and the assumptions it needs. Then answer without notes and describe when your answer may fail."
   method: "Study one module and explain it in your own words. After a break, answer its question without notes. Then explore a related track."
-  evidence: "You are ready when you can answer without notes and explain a limitation. You should also be able to change your answer when an assumption changes."
+  evidence: "Read an unfamiliar equation and identify each object's type and role. Then explain each operation, what stays fixed, and the assumptions behind the result. Connect the calculation to code, and distinguish an exact identity from an approximation."
 
 tracks:
   - id: bayesian-statistics

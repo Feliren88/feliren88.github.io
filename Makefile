@@ -41,3 +41,4 @@ test:  ## Run tooling and distribution checks
 	node scripts/test_lab_core.js
 	node scripts/test_information_theory.js
 	node scripts/test_information_lessons.js
+	node scripts/test_reading_foundations.js

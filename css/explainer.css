@@ -294,6 +294,7 @@ html[data-theme="light"] .xp { --tf-up: #1b5aa8; --tf-down: #9c4a20; --xp-q: #2f
 .xp-nsm-earns { color: var(--muted); }
 .xp-nsm-cat b { padding: 0.1rem 0.5rem; border-radius: 999px; background: color-mix(in srgb, var(--tf-up) 22%, transparent); }
 .xp-table.is-compact { min-width: 0; margin-top: 0.6rem; }
+.xp-edit-scores { overflow-x: auto; min-width: 0; }
 .xp-tree { margin: 0; display: grid; justify-items: center; gap: 0.7rem; align-content: start; }
 .xp-tree figcaption { font-size: var(--fs-2xs); color: var(--muted); }
 .xp-tree-root { padding: 0.6rem 1rem; border: 2px solid var(--accent); border-radius: var(--radius-md); font: 650 var(--fs-sm) / 1.3 "Space Grotesk", sans-serif; text-align: center; }

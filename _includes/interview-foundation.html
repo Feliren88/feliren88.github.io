@@ -1,0 +1,34 @@
+{% assign bridge = include.bridge %}
+<section class="ivf ue-animation" data-foundation="{{ bridge.kind }}" aria-labelledby="foundation-{{ bridge.kind }}">
+  <h3 id="foundation-{{ bridge.kind }}">{{ bridge.title }}</h3>
+  <p>{{ bridge.intro }}</p>
+  <p class="ivf-prerequisite">{{ bridge.prerequisite }}</p>
+  <dl class="ivm-where">
+    {% for item in bridge.symbols %}
+    <div class="ivm-term"><dt><code>{{ item.symbol | escape }}</code></dt><dd>{{ item.meaning }}</dd></div>
+    {% endfor %}
+  </dl>
+  <ol class="ivf-derivation">
+    {% for step in bridge.steps %}
+    <li><code>{{ step.equation | escape }}</code><p>{{ step.read }}</p></li>
+    {% endfor %}
+  </ol>
+  <div class="ivf-interactive" hidden>
+    <label class="ivf-control">{{ bridge.control }}
+      {% if bridge.options %}
+      <select data-value>{% for option in bridge.options %}<option>{{ option }}</option>{% endfor %}</select>
+      {% else %}
+      <input data-value type="range" min="{{ bridge.min }}" max="{{ bridge.max }}" step="{{ bridge.step }}" value="{{ bridge.value }}">
+      {% endif %}
+      <output data-value-label></output>
+    </label>
+    <div class="ivf-diagram" tabindex="0" role="group" aria-label="Worked calculation"></div>
+    <div class="ivf-player"></div>
+  </div>
+  <p class="ivf-note">{{ bridge.note }}</p>
+  <details class="ivf-recall"><summary>{{ bridge.question }}</summary><p>{{ bridge.answer }}</p></details>
+  {% if bridge.source %}<p><a href="{{ bridge.source.url }}">{{ bridge.source.title }}</a> provides further detail.</p>{% endif %}
+  {% assign next_track = site.data.interview.topics | where: 'id', bridge.next | first %}
+  <p>Then continue with <a href="/{{ bridge.next }}/">{{ next_track.name }}</a>.</p>
+  <script type="application/json" class="ivf-data">{{ bridge | jsonify }}</script>
+</section>

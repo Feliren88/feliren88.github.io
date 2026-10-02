@@ -68,6 +68,25 @@ precisely so there is only one set of rules to keep correct.
 
 ## Learning aids
 
+### Reading unfamiliar equations
+
+Seven worked examples prepare readers to connect equations with implementations.
+The hub links directly to each example within its existing module.
+The authored explanations live in `_data/interview_foundations.yml`.
+Moreover, `_includes/interview-foundation.html` renders the full derivation and recall answer without JavaScript.
+The interactive component adds live calculations through `interview-foundations.js` and the shared narrator.
+It loads only on the 7 participating tracks.
+
+The route covers variable roles, score normalisation, normaliser derivatives, likelihood averages, Langevin sampling, gradient tracking, and tensor shapes.
+The examples use general calculations rather than reproducing an external case study.
+Therefore, learners practise identifying objects, fixed quantities, assumptions, and approximation errors across sources.
+The normaliser derivative distinguishes a finite-sum identity from the conditions needed for continuous integrals.
+Similarly, the sampling example shows why a fixed-step chain can retain a biased stationary distribution.
+
+Run `node scripts/test_reading_foundations.js` to check the calculations against independent finite differences.
+Then run `python scripts/check_reading_foundations.py <preview-url>` to verify the rendered controls and narration.
+The browser check covers desktop and phone widths, light and dark themes, enlarged text, reduced motion, and static fallbacks.
+
 ### Writing for readers
 
 Assume the reader knows basic programming and school maths. Explain a new

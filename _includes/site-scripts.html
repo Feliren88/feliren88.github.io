@@ -15,7 +15,11 @@ confirm `.em-story` exists.
 {% if page.url == '/project/' %}<script src="{% include asset.html path='/js/components/timeline.js' %}" defer></script>{% endif %}
 {% comment %}The explainer core loads before any page component that needs it.{% endcomment %}
 {% if page.layout == 'syllabus' %}<script src="{% include asset.html path='/js/components/explainer-core.js' %}" defer></script>{% endif %}
-{% if page.layout == 'syllabus' %}<script src="{% include asset.html path='/js/components/interview-narrative.js' %}" defer></script>{% endif %}
+{% if page.layout == 'syllabus' %}
+<script src="{% include asset.html path='/js/components/interview-narrative.js' %}" defer></script>
+{% assign foundations = site.data.interview_foundations.bridges | where: 'track', page.topic_id %}
+{% if foundations.size > 0 %}<script src="{% include asset.html path='/js/components/interview-foundations.js' %}" defer></script>{% endif %}
+{% endif %}
 {% if page.topic_id and site.data.module_labs[page.topic_id] %}<script src="{% include asset.html path='/js/components/lab-loader.js' %}" defer></script>{% endif %}
 {% if page.extra_js %}
   {% assign extra_js_list = page.extra_js %}

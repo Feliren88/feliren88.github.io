@@ -27,7 +27,7 @@
 .lab-note { margin: 0.5rem 0 0; font-size: var(--fs-xs); color: var(--text); }
 
 .lab-ctl { display: flex; flex-wrap: wrap; gap: 0.5rem 0.9rem; align-items: center; margin-top: 0.9rem; font-size: var(--fs-xs); }
-.lab-ctl label { display: inline-flex; gap: 0.4rem; align-items: center; color: var(--text); }
+.lab-ctl label { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; color: var(--text); min-width: 0; max-width: 100%; }
 .lab-ctl input[type="range"] { width: min(9rem, 36vw); accent-color: var(--accent); }
 .lab-ctl select { max-width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: var(--radius-sm); padding: 0.25rem 0.4rem; }
 .lab-ctl button { padding: 0.35rem 0.8rem; font: 600 var(--fs-xs) inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border-ui); border-radius: 999px; cursor: pointer; }
