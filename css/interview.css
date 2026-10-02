@@ -2949,17 +2949,11 @@ html[data-theme="light"] .ivm {
 .ue-chart .ue-error { fill: var(--muted); }
 .ivd-panel[data-narrative-step="0"] .ivd-cdf,
 .ivd-panel[data-narrative-step="1"] .ivd-cdf { opacity: .3; }
-.ivd-panel[data-narrative-step="0"] .ivd-area,
-.ivd-panel[data-narrative-step="1"] .ivd-area { opacity: 0; }
-.ivd-panel[data-narrative-step="0"] .ivd-bar-selected,
-.ivd-panel[data-narrative-step="1"] .ivd-bar-selected { fill: var(--ivd-pdf); }
-.ivd-panel[data-narrative-step="0"] .ivd-cut,
-.ivd-panel[data-narrative-step="0"] .ivd-dot { opacity: 0; }
 .ivd-panel[data-narrative-step="2"] .ivd-charts figure:first-child,
 .ivd-panel[data-narrative-step="3"] .ivd-charts figure:last-child { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (prefers-reduced-motion: no-preference) {
   .ue-chart rect, .ue-chart circle, .ue-chart g { transition: opacity .3s, fill .3s; }
-  .ivd-area, .ivd-cdf, .ivd-cut, .ivd-dot { transition: opacity .3s; }
+  .ivd-cdf { transition: opacity .3s; }
 }
 .maths-node { fill: var(--bg) !important; stroke: var(--border-ui); stroke-width: 1.5; }
 .maths-node.is-current { stroke: var(--accent); stroke-width: 3; }
