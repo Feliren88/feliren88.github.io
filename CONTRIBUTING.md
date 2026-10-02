@@ -167,6 +167,23 @@ career motives.
 
 ---
 
+### Never name a browser check `test_*.py`
+
+`make test` runs `python3 -m unittest discover -s scripts`, which imports every
+`test*.py` in `scripts/`. A Playwright script with that name is imported under the
+system Python and fails the suite. Browser checks are named `check_*.py`. Node logic
+tests are `test_*.js` and need their own line in the `test` target. List new files in
+`_config.yml` `exclude` too, or Jekyll publishes them.
+
+### Never let a browser check click while the page smooth-scrolls
+
+`styles.css` sets `scroll-behavior: smooth` on `html`, so Playwright's scroll to an
+element animates. Under load the click lands mid-scroll and times out with "element is
+not stable" or "outside of the viewport". It fails at random and only in long runs.
+After each `goto`, add `page.add_style_tag(content='html{scroll-behavior:auto!important}')`,
+and close each browser context when its check ends. `scripts/check_metacognition_page.py`
+does both.
+
 ## How to make common changes
 
 ### Add a page
