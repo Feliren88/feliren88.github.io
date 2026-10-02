@@ -98,4 +98,229 @@
     return;
   }
   if (typeof document === 'undefined') return;
+
+  if (!document.querySelector('.mc-hero')) return;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SVG = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs, text) {
+    var node = document.createElementNS(SVG, tag);
+    Object.keys(attrs).forEach(function (k) { node.setAttribute(k, attrs[k]); });
+    if (text) node.textContent = text;
+    return node;
+  }
+  function press(buttons, active) {
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === active)); });
+  }
+  function bindRange(input, output, onChange) {
+    function update() { output.textContent = input.value + '%'; if (onChange) onChange(+input.value); }
+    input.addEventListener('input', update);
+    update();
+  }
+
+  function initProgress() {
+    var fill = $('mc-progress-fill');
+    var links = Array.prototype.slice.call(document.querySelectorAll('.mc-rail a'));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute('href')); });
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (fill) fill.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+      var active = -1;
+      sections.forEach(function (section, i) { if (section && section.getBoundingClientRect().top < window.innerHeight * 0.45) active = i; });
+      links.forEach(function (link, i) { link.classList.toggle('is-current', i === active); });
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  function initHero() {
+    var svg = document.querySelector('.mc-loop svg');
+    if (svg && reduced && svg.pauseAnimations) svg.pauseAnimations();
+  }
+
+  function initPhases() {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.mc-phases button'));
+    var read = $('mc-phase-read'), track = document.querySelector('.mc-phase-track');
+    function show(button) {
+      var phase = PHASES[button.dataset.phase];
+      press(buttons, button);
+      track.style.setProperty('--at', buttons.indexOf(button));
+      read.textContent = '';
+      var title = document.createElement('h3'); title.textContent = phase.title;
+      var list = document.createElement('ul');
+      phase.questions.forEach(function (q) { var li = document.createElement('li'); li.textContent = q; list.appendChild(li); });
+      read.appendChild(title); read.appendChild(list);
+    }
+    buttons.forEach(function (b) { b.addEventListener('click', function () { show(b); }); });
+    show(buttons[0]);
+  }
+
+  function initPeople() {
+    var host = $('mc-people');
+    Array.prototype.forEach.call(host.querySelectorAll('.mc-people-row'), function (row) {
+      var dots = row.querySelector('.mc-dots'), miss = +row.dataset.miss;
+      for (var i = 0; i < 18; i++) {
+        var dot = document.createElement('i');
+        dot.style.setProperty('--i', i);
+        if (i < miss) dot.className = 'is-miss';
+        dots.appendChild(dot);
+      }
+    });
+    if (reduced || !('IntersectionObserver' in window)) { host.classList.add('is-shown'); return; }
+    var seen = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      host.classList.add('is-shown');
+      seen.disconnect();
+    }, { threshold: 0.4 });
+    seen.observe(host);
+  }
+
+  function initCheck() {
+    var feel = $('mc-feel'), readStep = document.querySelector('.mc-check-step[data-step="read"]');
+    var quizStep = document.querySelector('.mc-check-step[data-step="quiz"]');
+    var options = Array.prototype.slice.call(quizStep.querySelectorAll('button'));
+    bindRange(feel, $('mc-feel-out'));
+    $('mc-hide').addEventListener('click', function () {
+      readStep.hidden = true;
+      quizStep.hidden = false;
+      options[0].focus();
+    });
+    options.forEach(function (option) {
+      option.addEventListener('click', function () {
+        press(options, option);
+        options.forEach(function (b) { b.disabled = true; });
+        $('mc-check-read').textContent = checkReply(+feel.value, option.dataset.correct === 'true');
+      });
+    });
+  }
+
+  function drawCalibration(svg, rounds) {
+    svg.textContent = '';
+    var L = 40, R = 300, T = 20, B = 200;
+    var y = function (pct) { return B - pct / 100 * (B - T); };
+    [0, 50, 100].forEach(function (pct) {
+      svg.appendChild(svgEl('line', { x1: L, x2: R, y1: y(pct), y2: y(pct), class: 'mc-axis' }));
+      svg.appendChild(svgEl('text', { x: L - 6, y: y(pct) + 3, 'text-anchor': 'end', class: 'mc-axis-text' }, pct + '%'));
+    });
+    for (var i = 0; i < CLAIMS.length; i++) {
+      svg.appendChild(svgEl('text', { x: L + (i + 0.5) * 52, y: B + 18, 'text-anchor': 'middle', class: 'mc-axis-text' }, 'claim ' + (i + 1)));
+    }
+    if (!rounds.length) return;
+    var s = summarise(rounds);
+    var top = Math.min(y(s.meanConfidence), y(s.hitRate)), bottom = Math.max(y(s.meanConfidence), y(s.hitRate));
+    svg.appendChild(svgEl('rect', { x: L, y: top, width: R - L, height: Math.max(0, bottom - top), class: 'mc-gap' }));
+    svg.appendChild(svgEl('line', { x1: L, x2: R, y1: y(s.meanConfidence), y2: y(s.meanConfidence), class: 'mc-conf-line' }));
+    svg.appendChild(svgEl('line', { x1: L, x2: R, y1: y(s.hitRate), y2: y(s.hitRate), class: 'mc-hit-line' }));
+    svg.appendChild(svgEl('text', { x: R, y: y(s.meanConfidence) - 5, class: 'mc-line-text is-conf' }, 'said ' + s.meanConfidence + '%'));
+    svg.appendChild(svgEl('text', { x: R, y: y(s.hitRate) + 13, class: 'mc-line-text is-hit' }, 'got ' + s.hitRate + '%'));
+    rounds.forEach(function (r, i) {
+      svg.appendChild(svgEl('circle', { cx: L + (i + 0.5) * 52, cy: y(r.confidence), r: 7, class: r.correct ? 'mc-dot-right' : 'mc-dot-wrong' }));
+    });
+  }
+
+  function initCalibration() {
+    var answers = Array.prototype.slice.call(document.querySelectorAll('.mc-cal-answer button'));
+    var conf = $('mc-cal-conf'), submit = $('mc-cal-submit'), svg = $('mc-cal-svg');
+    var index = 0, rounds = [], picked = null, locked = false;
+    bindRange(conf, $('mc-cal-conf-out'));
+    function render() {
+      $('mc-cal-count').textContent = 'Claim ' + (index + 1) + ' of ' + CLAIMS.length;
+      $('mc-cal-claim').textContent = CLAIMS[index].text;
+      $('mc-cal-feedback').textContent = '';
+      picked = null; locked = false;
+      answers.forEach(function (b) { b.disabled = false; b.setAttribute('aria-pressed', 'false'); });
+      conf.disabled = false;
+      submit.disabled = true;
+      submit.textContent = 'Lock in my answer';
+    }
+    answers.forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (locked) return;
+        picked = b.dataset.answer === 'true';
+        press(answers, b);
+        submit.disabled = false;
+      });
+    });
+    submit.addEventListener('click', function () {
+      if (!locked) {
+        var claim = CLAIMS[index], correct = picked === claim.answer;
+        rounds.push({ confidence: +conf.value, correct: correct });
+        $('mc-cal-feedback').textContent = (correct ? 'Correct. ' : 'Incorrect. ') + claim.note;
+        answers.forEach(function (b) { b.disabled = true; });
+        conf.disabled = true;
+        locked = true;
+        submit.textContent = index < CLAIMS.length - 1 ? 'Next claim' : 'Start again';
+      } else {
+        if (index < CLAIMS.length - 1) index++;
+        else { index = 0; rounds = []; }
+        render();
+        answers[0].focus();
+      }
+      drawCalibration(svg, rounds);
+      $('mc-cal-summary').textContent = verdictText(summarise(rounds));
+    });
+    render();
+    drawCalibration(svg, rounds);
+  }
+
+  function initArbitration() {
+    var toggles = Array.prototype.slice.call(document.querySelectorAll('.mc-toggle button'));
+    var th = $('mc-arb-th'), grid = $('mc-arb-grid'), kind = 'tracks';
+    function render(threshold) {
+      var r = simulate(ASSISTANT[kind], ASSISTANT.correct, threshold);
+      grid.textContent = '';
+      r.cells.forEach(function (cell) {
+        var div = document.createElement('div');
+        div.className = 'mc-cell ' + (cell.accepted ? 'is-accepted' : 'is-checked') + ' ' + (cell.correct ? 'is-right' : 'is-wrong');
+        div.textContent = cell.confidence + '% ' + (cell.correct ? '✓' : '✗');
+        grid.appendChild(div);
+      });
+      grid.setAttribute('aria-label', 'Of 20 answers, I accept ' + (r.acceptedRight + r.acceptedWrong) + ', including ' + r.acceptedWrong + ' wrong, and check ' + r.checked + ' myself.');
+      $('mc-arb-wrong').textContent = r.acceptedWrong;
+      $('mc-arb-checked').textContent = r.checked;
+      $('mc-arb-right').textContent = r.acceptedRight;
+      $('mc-arb-read').textContent = arbitrationText(kind, r, threshold);
+    }
+    toggles.forEach(function (b) {
+      b.addEventListener('click', function () { kind = b.dataset.ai; press(toggles, b); render(+th.value); });
+    });
+    bindRange(th, $('mc-arb-th-out'), render);
+  }
+
+  function initPrompts() {
+    Array.prototype.forEach.call(document.querySelectorAll('.mc-prompts button'), function (b) {
+      b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); });
+    });
+  }
+
+  function initOffload() {
+    var host = $('mc-sort'), labels = { hand: 'Hand over', along: 'Work alongside', keep: 'Keep' };
+    TASKS.forEach(function (task) {
+      var row = document.createElement('div'); row.className = 'mc-task';
+      var text = document.createElement('p'); text.textContent = task.text;
+      var choice = document.createElement('div'); choice.className = 'mc-choice';
+      choice.setAttribute('role', 'group'); choice.setAttribute('aria-label', task.text);
+      var reply = document.createElement('output');
+      var buttons = Object.keys(labels).map(function (pick) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.dataset.pick = pick; b.textContent = labels[pick]; b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () { press(buttons, b); reply.textContent = offloadReply(task, pick); });
+        choice.appendChild(b);
+        return b;
+      });
+      row.appendChild(text); row.appendChild(choice); row.appendChild(reply);
+      host.appendChild(row);
+    });
+  }
+
+  initProgress();
+  initHero();
+  initPhases();
+  initPeople();
+  initCheck();
+  initCalibration();
+  initArbitration();
+  initPrompts();
+  initOffload();
 }());

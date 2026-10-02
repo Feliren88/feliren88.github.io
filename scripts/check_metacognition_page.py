@@ -36,6 +36,7 @@ def open_page(browser, base, path='/metacognition/', width=1200, theme=None, red
     if theme:
         context.add_init_script("localStorage.setItem('theme', '%s')" % theme)
     context.set_default_timeout(5000)
+    context.set_default_navigation_timeout(30000)
     page = context.new_page()
     errors = []
     page.on('pageerror', lambda err: errors.append(str(err)))
