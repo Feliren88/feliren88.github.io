@@ -617,7 +617,7 @@ hide_title: true
   <div class="mc-check mc-panel" id="mc-check">
     <div class="mc-check-step" data-step="read">
       <h3>Try it on yourself</h3>
-      <p class="mc-check-text">Sunlight contains every visible colour. Air molecules scatter short wavelengths far more strongly than long ones, so blue light is redirected across the whole sky. Violet scatters even more than blue. We still see a blue sky, because sunlight carries less violet and our eyes respond more strongly to blue.</p>
+      <p class="mc-check-text">Sunlight contains every visible colour. Air molecules scatter short wavelengths far more than long ones. Blue light gets spread across the whole sky. Violet scatters even more than blue. We see blue anyway, because sunlight carries less violet and our eyes favour blue.</p>
       <label class="mc-range" for="mc-feel">How well could you explain this to a friend? <output id="mc-feel-out">50%</output><input id="mc-feel" type="range" min="0" max="100" step="5" value="50"></label>
       <button class="mc-button" type="button" id="mc-hide">Hide the paragraph and test me</button>
     </div>
@@ -672,7 +672,7 @@ hide_title: true
     <div class="mc-bar" style="--v:39.7"><span>Same support with a brief reflection prompt</span><i></i><b>39.7%</b></div>
     <p class="mc-cite">Ren (2026). Reflection made students more selective, and they kept taking the advice that was right.</p>
   </figure>
-  <p class="mc-prose">In a survey of 319 knowledge workers, people with more confidence in generative AI reported less critical thinking (Lee et al., CHI 2025). Doyeon Lee and colleagues argue in PNAS Nexus that assistants should report more than confidence. They should say how well that confidence has tracked accuracy before. Pairs who share their confidence can decide better than either person alone (Bahrami et al., Science 2010).</p>
+  <p class="mc-prose">Lee et al. surveyed 319 knowledge workers (CHI 2025). Those more confident in generative AI reported less critical thinking. Doyeon Lee and colleagues argue in PNAS Nexus that assistants should report more than confidence. They should say how well that confidence has tracked accuracy before. Pairs who share their confidence can decide better than either person alone (Bahrami et al., Science 2010).</p>
 </section>
 
 <section class="mc-part" id="friction" aria-labelledby="mc-fr-title">
@@ -698,7 +698,7 @@ hide_title: true
     <li><b>Ask</b><small>Ask pointed questions without revealing my answer.</small></li>
     <li><b>Critique</b><small>Give it my answer and ask where it fails.</small></li>
   </ol>
-  <p class="mc-cite">The two pauses follow Lim’s DeBiasMe work (2025). The answer-first order is Michael Gerlich’s advice, reported in the APA Monitor, to stop an early AI answer anchoring my own.</p>
+  <p class="mc-cite">The two pauses follow Lim’s DeBiasMe work (2025). The answer-first order is Michael Gerlich’s advice in the APA Monitor. It stops an early AI answer from anchoring my own.</p>
 </section>
 
 <section class="mc-part" id="offload" aria-labelledby="mc-off-title">
@@ -713,7 +713,7 @@ hide_title: true
     </div>
     <p class="mc-cite">Budzyń et al. (2025), reported in the APA Monitor. The skill being measured is the one the tool had been doing.</p>
   </figure>
-  <p class="mc-prose">In a field experiment with 250 employees, ChatGPT access raised rated creativity most for people strong in metacognition (Sun et al., Journal of Applied Psychology, 2025). Mutlu Cukurova suggests sorting each person’s tasks the same way: work that only needs completing, and work that builds essential learning.</p>
+  <p class="mc-prose">Sun et al. ran a field experiment with 250 employees (Journal of Applied Psychology, 2025). ChatGPT access raised rated creativity most for those strong in metacognition. Mutlu Cukurova suggests the same sort for each person’s tasks. Some only need completing, and some build essential learning.</p>
 </section>
 
 <section class="mc-part" id="practice" aria-labelledby="mc-pr-title">

@@ -5,11 +5,11 @@ or any page carrying a `motion_scene:` key. Nothing else needs it.
 
 ## How a page opts in
 
-Fourteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
+Fifteen pages carry a pinned, scroll-scrubbed interlude. A page opts in with one
 front matter key:
 
 ```yaml
-motion_scene: repair    # one of the fourteen keys below
+motion_scene: repair    # one of the fifteen keys below
 ```
 
 `_includes/site-scripts.html` then sets `data-motion-scene` on `<html>` and loads
@@ -17,7 +17,7 @@ motion_scene: repair    # one of the fourteen keys below
 the SVG geometry; the CSS holds every colour. The keys are `repair` (/story/),
 `abstain` (the essay), `agency`, `decision`, `control`, `strategy`, `feedback`,
 `uncertainty`, `signal`, `consent`, `conversion`, `rapport` (/small-talk/),
-`curiosity` (/curious/), and `record`, which is on the homepage: `_pages/about.md`
+`curiosity` (/curious/), `metacognition` (/metacognition/), and `record`, which is on the homepage: `_pages/about.md`
 takes `permalink: /` and `/about/` is a `redirect_from` alias for it.
 
 **A key with no scene fails silently.** `js/components/essay-motion.js` looks the key
@@ -25,7 +25,7 @@ up and returns early when it misses, so the page loads both assets and renders
 nothing. `/curious/` shipped that way. After adding a `motion_scene` to a page, load
 it and confirm `.em-story` exists.
 
-Two of the fourteen colour hooks are easy to forget, and both are per-key: an
+Two of the fifteen colour hooks are easy to forget, and both are per-key: an
 `--em-accent` under `html[data-motion-scene="…"]` **and** one under
 `html[data-theme="light"][data-motion-scene="…"]`. Without them the scene falls back
 to the placeholder accent declared at the top of the file.

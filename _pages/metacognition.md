@@ -203,12 +203,12 @@ hide_title: true
     <h3>When I lead a team</h3>
     <ul>
       <li><b>Direct attention with purpose.</b> Say why we use AI on this task and which skills we want to keep.</li>
-      <li><b>Model conscious use.</b> Show my own answer-first habit, including the times the tool was right and I was wrong.</li>
+      <li><b>Model conscious use.</b> Show my own answer-first habit, including the times the AI was right and I was wrong.</li>
       <li><b>Make room for reflection.</b> Ask what people noticed about their own thinking. Keep “I don’t know” safe to say.</li>
     </ul>
     <p class="mc-cite">The 3 moves come from Hyper Island. The practice conditions follow A Human Edge’s account of flow.</p>
   </div>
-  <p class="mc-rule">My rule: before I ask, I write my answer and a number for how sure I am. Afterwards I check one claim and score the guess.</p>
+  <p class="mc-rule">My rule: Before I ask, I write my answer and a number for how sure I am. Afterwards I check one claim and score the guess.</p>
 </section>
 
 <section class="mc-part mc-sources" id="sources" aria-labelledby="mc-src-title">

@@ -197,7 +197,7 @@ unpredictably. Data files consumed by Liquid need underscores.
 
 ### The long-form interactive notes
 
-Sixteen pages follow the same shape: front matter only in `_pages/`, content in
+Seventeen pages follow the same shape: front matter only in `_pages/`, content in
 a data file or an include, icons in a sprite, behaviour in one component, styles
 in one page-scoped stylesheet, and reader state under a short `localStorage`
 prefix. Changing one means changing its content source, not its template. Each
@@ -215,6 +215,7 @@ loads its own CSS and JS through the `extra_css` / `extra_js` front matter keys.
 | `/communication/` | `communication-manual.html` | `communication-icons.html` (`cmi-`) | `communication.js` | — |
 | `/read-people/` | `read-people-reference.html` | — | `read-people.js` | `rp:` |
 | `/curious/`, `/life-challenges/`, `/self-love/`, `/story/` | in the page | — | one each, same name | — |
+| `/metacognition/` | in the page | — | `metacognition.js` | — |
 | `/interview/` + 31 syllabus pages | `interview.yml` | `interview-icons.html` (`ivi-`) | `interview.js`, `interview-anim.js`, `interview-math.js`, plus `explainer-core.js` and one `explainer-*.js` per explainer page | `iv:` |
 
 Icon counts are deliberately not listed here; they drift and the sprite file is

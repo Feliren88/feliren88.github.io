@@ -21,7 +21,7 @@
   var PHASES = {
     before: { title: 'Plan', questions: ['What is the goal, and what would a good answer look like?', 'What do I already know about this?', 'Which part must I do myself to learn it?'] },
     during: { title: 'Monitor', questions: ['Can I explain the last step without looking?', 'How sure am I, as a number?', 'Does this read easily because I understand it, or because it is well written?'] },
-    after: { title: 'Evaluate', questions: ['Which of my predictions missed?', 'What did the tool do that I want to learn to do?', 'What will I change next time?'] }
+    after: { title: 'Evaluate', questions: ['Which of my predictions missed?', 'What did the AI do that I want to learn to do?', 'What will I change next time?'] }
   };
 
   var TASKS = [
