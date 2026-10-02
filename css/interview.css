@@ -2831,6 +2831,12 @@ html[data-theme="light"] .ivm {
 .ivd-params input, .ivd-cut-label input { grid-column: 1 / -1; width: 100%; margin: 0; accent-color: var(--ivd-pdf); cursor: pointer; }
 .ivd-cut-label { align-self: start; }
 .ivd-cut-label span { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: .5rem; }
+.ivd-cut-label[hidden], .ivd-stepper[hidden] { display: none; }
+.ivd-stepper { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .35rem .5rem; align-items: center; align-self: start; font-size: .76rem; font-weight: 600; color: var(--muted); }
+.ivd-stepper span { grid-column: 1 / -1; }
+.ivd-stepper button { min-width: 2.75rem; min-height: 2.75rem; border: 1px solid var(--border-ui); border-radius: .45rem; color: var(--text); background: var(--bg); font: 700 1.1rem / 1 "Space Grotesk", sans-serif; cursor: pointer; }
+.ivd-stepper button[aria-disabled="true"] { opacity: .5; cursor: default; }
+.ivd-stepper output { color: var(--text); font: 700 1.05rem / 1 "Space Grotesk", sans-serif; font-variant-numeric: tabular-nums; text-align: center; }
 .ivd-result { display: block; margin-top: 1rem; color: var(--text); font: 700 .88rem / 1.5 "Space Grotesk", sans-serif; font-variant-numeric: tabular-nums; }
 .ivd-note { margin: .35rem 0 0; color: var(--muted); font-size: .76rem; line-height: 1.5; }
 .ivd-formulas { margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--line); }

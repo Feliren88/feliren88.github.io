@@ -352,7 +352,10 @@
       '<label class="ivd-select">Distribution<select></select></label></div>' +
       '<div class="ivd-charts"><figure><figcaption class="ivd-left-title"></figcaption><svg class="ivd-density" viewBox="0 0 480 246" role="img"></svg></figure>' +
       '<figure><figcaption>CDF · cumulative probability</figcaption><svg class="ivd-cdf" viewBox="0 0 480 246" role="img"></svg></figure></div>' +
-      '<div class="ivd-controls"><div class="ivd-params"></div><label class="ivd-cut-label"><span>Selected value <output></output></span><input type="range"></label></div>' +
+      '<div class="ivd-controls"><div class="ivd-params"></div><label class="ivd-cut-label"><span>Selected value <output></output></span><input type="range"></label>' +
+      '<div class="ivd-stepper" role="group" aria-label="Selected value" hidden><span>Selected value</span>' +
+      '<button type="button" data-delta="-1" aria-label="Decrease selected value">−</button><output></output>' +
+      '<button type="button" data-delta="1" aria-label="Increase selected value">+</button></div></div>' +
       '<output class="ivd-result" aria-live="polite"></output><p class="ivd-note"></p><div class="ivd-narrative"></div>' +
       '<details class="ivd-formulas"><summary>Show the probability formulas</summary><dl>' +
       '<div><dt class="ivd-formula-density-label"></dt><dd class="ivd-formula-density"></dd></div>' +
@@ -363,6 +366,9 @@
     var paramsHost = host.querySelector('.ivd-params');
     var cut = host.querySelector('.ivd-cut-label input');
     var cutValue = host.querySelector('.ivd-cut-label output');
+    var stepper = host.querySelector('.ivd-stepper');
+    var stepValue = stepper.querySelector('output');
+    var stepButtons = stepper.querySelectorAll('button');
     var result = host.querySelector('.ivd-result');
     var note = host.querySelector('.ivd-note');
     var density = host.querySelector('.ivd-density');
@@ -389,7 +395,9 @@
     }
     function paint() {
       var spec = D[id], value = +cut.value, discreteValue = spec.type === 'discrete';
-      cutValue.textContent = fmt(value);
+      cutValue.textContent = stepValue.textContent = fmt(value);
+      stepButtons[0].setAttribute('aria-disabled', value <= +cut.min);
+      stepButtons[1].setAttribute('aria-disabled', value >= +cut.max);
       leftTitle.textContent = discreteValue ? 'PMF · point probabilities' : 'PDF · probability density';
       drawDiscreteOrContinuous(density, spec, state, value, false);
       drawDiscreteOrContinuous(cdf, spec, state, value, true);
@@ -407,6 +415,8 @@
     }
     function setup(name) {
       id = name; state = {};
+      cut.parentNode.hidden = D[id].type === 'discrete';
+      stepper.hidden = D[id].type !== 'discrete';
       densityFormulaLabel.textContent = D[id].type === 'discrete' ? 'PMF' : 'PDF';
       densityFormula.innerHTML = FORMULAS[id].density;
       cdfFormula.innerHTML = FORMULAS[id].cdf;
@@ -447,6 +457,12 @@
     });
     select.addEventListener('change', function () { setup(select.value); });
     cut.addEventListener('input', paint);
+    Array.prototype.forEach.call(stepButtons, function (button) {
+      button.addEventListener('click', function () {
+        cut.value = clamp(+cut.value + +button.dataset.delta, +cut.min, +cut.max);
+        paint();
+      });
+    });
     select.value = allowed.indexOf(host.dataset.default) >= 0 ? host.dataset.default : allowed[0];
     setup(select.value);
     narrative = window.InterviewNarrative.mount(host.querySelector('.ivd-narrative'), {
