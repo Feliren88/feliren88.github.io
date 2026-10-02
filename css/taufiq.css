@@ -39,7 +39,7 @@ body:has(.taufiq-note) #pointcloud-bg,body:has(.taufiq-note) .shape-toggle-btn{d
 .tf-career p,.tf-trust-framework p{font-size:.9rem;color:var(--muted)}
 .tf-question-pair,.tf-taste-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.8rem 0}
 .tf-question-pair article,.tf-taste-grid article,.tf-reading-passes article{padding:1.4rem;background:var(--tf-panel);border:1px solid var(--tf-line);border-radius:.6rem}
-.tf-question-pair span,.tf-quadrant span,.tf-reading-passes span,.tf-translation article>span,.tf-funding-note>span{font-size:.78rem;color:var(--tf-accent);font-weight:650}
+.tf-question-pair span,.tf-quadrant span,.tf-reading-passes span,.tf-translation article>span{font-size:.78rem;color:var(--tf-accent);font-weight:650}
 .taufiq-note h3{font-size:1.15rem;line-height:1.4;margin:.65rem 0}
 .tf-question-pair p,.tf-taste-grid p,.tf-reading-passes p,.tf-shapes p,.tf-translation p{color:var(--muted);font-size:.95rem;margin:.5rem 0}
 .tf-prompt,.tf-working-notes details{margin:1.2rem 0;border:1px solid var(--tf-line);border-radius:.6rem;padding:0 1.2rem;background:var(--tf-panel)}
@@ -70,9 +70,6 @@ body:has(.taufiq-note) #pointcloud-bg,body:has(.taufiq-note) .shape-toggle-btn{d
 .tf-translation article{padding:1.1rem;border-block:1px solid var(--tf-line)}
 .tf-translation-arrow{color:var(--tf-accent);font-size:1.3rem}
 .tf-trust-framework li>span{color:var(--tf-accent);font-size:.8rem}
-.tf-funding-note{margin:2rem 0;padding:2rem;border:1px solid var(--tf-line);border-radius:.6rem;max-width:38rem}
-.tf-funding-note p{font-size:clamp(2.3rem,5vw,3.5rem);letter-spacing:-.04em;margin:.4rem 0}
-.tf-funding-note small{display:block;color:var(--muted);font-size:.9rem;line-height:1.65}
 .tf-final-action{font-size:1.15rem;max-width:65ch;margin-top:2rem}
 .tf-stories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
 .tf-stories article{border-top:1px solid var(--tf-line);padding-top:1.4rem}

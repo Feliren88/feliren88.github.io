@@ -200,7 +200,6 @@ hide_title: true
 
 <section class="tf-section" id="funding" aria-labelledby="tf-funding-title">
   <header class="tf-section-head"><span>09</span><h2 id="tf-funding-title">Turn funding into capacity for good work</h2></header>
-  <div class="tf-funding-note"><span>A figure I remember from our conversation</span><p>€30 million</p><small>He spoke of research funding reaching this scale. I record it as his account, without independently verifying the amount or award structure.</small></div>
   <div class="tf-prose">
     <p>The lesson I took was how research, initiative, and leadership can support each other. He described winning funding while continuing to pursue work he loved. Moreover, he connected that path with still having a life outside the role.</p>
     <p>Therefore, I want to think about what a grant makes possible. Which question can the team now investigate? Which people, equipment, and time does it support? What obligations will it create?</p>
