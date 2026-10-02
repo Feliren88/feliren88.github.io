@@ -209,8 +209,8 @@
     function draw() {
       var mode = s.mode;
       root.querySelector('[data-factorisation]').innerHTML = mode === 'chol'
-        ? '<i>A</i> = <span class="lab-term is-q" data-term="vt">L Lᵀ</span>'
-        : '<i>A</i> = <span class="lab-term is-o" data-term="u">U</span><span class="lab-term is-k" data-term="sigma">Σ</span><span class="lab-term is-q" data-term="vt">Vᵀ</span>';
+        ? '<i>A</i> = <span class="lab-term is-q" data-term="vt">'+window.InterviewDisplayMath.html("lab/decompositions/cholesky", undefined, true)+'</span>'
+        : '<i>A</i> = <span class="lab-term is-o" data-term="u">U</span><span class="lab-term is-k" data-term="sigma">Σ</span><span class="lab-term is-q" data-term="vt">'+window.InterviewDisplayMath.html("lab/decompositions/transpose", undefined, true)+'</span>';
       root.querySelector('[data-singular-values]').hidden = mode === 'chol';
       root.querySelector('[data-chol-values]').hidden = mode !== 'chol';
       root.querySelector('[data-image-error]').hidden = mode !== 'image';
@@ -306,22 +306,22 @@
         var S = imageSvd(s.sample).dec.S, total = S.reduce(function (t, v) { return t + v * v; }, 0), acc = 0;
         dlg.open('Singular values', table(S.slice(0, 12).map(function (v, j) {
           acc += v * v;
-          return ['σ' + (j + 1), fmt(v, 3) + ' (the first ' + (j + 1) + ' hold ' + fmt(100 * acc / total, 1) + '% of Σ σ²)'];
+          return [window.InterviewDisplayMath.html("lab/decompositions/singular-entry", {j:j+1}, true), fmt(v, 3) + ' (the first ' + (j + 1) + ' hold ' + fmt(100 * acc / total, 1) + ('% of '+window.InterviewDisplayMath.html("lab/decompositions/worked-2", undefined, true)+')')];
         })) + '<p>The first 12 of 64. They fall fast, which is why a few of them rebuild most of the picture.</p>', btn);
         return;
       }
       if (s.mode === 'pca') {
         var pc = pca(s.pts);
         dlg.open('Singular values', table([
-          ['σ₁', fmt(Math.sqrt(Math.max(0, pc.vars[0]) * s.pts.length), 3)],
-          ['σ₂', fmt(Math.sqrt(Math.max(0, pc.vars[1]) * s.pts.length), 3)],
+          [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-4", undefined, true)+''), fmt(Math.sqrt(Math.max(0, pc.vars[0]) * s.pts.length), 3)],
+          [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-5", undefined, true)+''), fmt(Math.sqrt(Math.max(0, pc.vars[1]) * s.pts.length), 3)],
           ['Number of centred points', String(s.pts.length)]
         ]) + '<p>Each squared singular value equals its covariance eigenvalue times the point count.</p>', btn);
         return;
       }
       var d = svd2(s.mode === 'chol' ? CHOL : s.m);
-      dlg.open('Singular values', table([['σ₁', fmt(d.S[0], 3)], ['σ₂', fmt(d.S[1], 3)], ['σ₁ σ₂ = |det A|', fmt(d.S[0] * d.S[1], 3)]]) +
-        '<p>σ₁ and σ₂ are the longest and shortest stretch A applies to any unit arrow.</p>', btn);
+      dlg.open('Singular values', table([[(''+window.InterviewDisplayMath.html("lab/decompositions/worked-4", undefined, true)+''), fmt(d.S[0], 3)], [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-5", undefined, true)+''), fmt(d.S[1], 3)], [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-3", undefined, true)+''), fmt(d.S[0] * d.S[1], 3)]]) +
+        ('<p>'+window.InterviewDisplayMath.html("lab/decompositions/worked-4", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/decompositions/worked-5", undefined, true)+' are the longest and shortest stretch A applies to any unit arrow.</p>'), btn);
     }
     function zoomError(btn) {
       if (!data) { ensureImages(function () { zoomError(btn); }); return; }
@@ -330,8 +330,8 @@
       var direct = frob(c.gray, lowRank(c.dec, s.k));
       dlg.open('Rank k error, worked', table([
         ['k, singular values kept', String(s.k)],
-        ['Σ σ² over the dropped values', fmt(dropped, 4)],
-        ['√ of that sum', fmt(Math.sqrt(dropped), 4)],
+        [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-0", undefined, true)+''), fmt(dropped, 4)],
+        [(''+window.InterviewDisplayMath.html("lab/decompositions/worked-1", undefined, true)+''), fmt(Math.sqrt(dropped), 4)],
         ['‖image − rank k copy‖, measured', fmt(direct, 4)]
       ]) + '<p>The last 2 rows agree. No other rank ' + s.k + ' matrix gets closer to the image.</p>', btn);
     }
@@ -360,21 +360,21 @@
 
     var PAGES = [
       { t: 'Rotate, stretch, rotate', parts: ['sigma', 'vt'], state: { mode: 'svd', f: 0, m: DEF },
-        body: '<p>The matrix A = [[1.5, 1], [0, 1.2]] acts through 3 simpler maps. Follow the unit circle and the 2 arrows <b class="is-q">v₁</b> and <b class="is-k">v₂</b>.</p>' },
-      { t: 'Vᵀ turns', parts: ['vt'], state: { f: 1 },
-        body: '<p>First <b class="is-q">Vᵀ</b> turns the plane, so v₁ and v₂ lie along the axes.</p>' },
+        body: ('<p>The matrix '+window.InterviewDisplayMath.html("lab/decompositions/extra-0", undefined, true)+' acts through 3 simpler maps. Follow the unit circle and the 2 arrows <b class="is-q">'+window.InterviewDisplayMath.html("lab/decompositions/extra-2", undefined, true)+'</b> and <b class="is-k">'+window.InterviewDisplayMath.html("lab/decompositions/extra-3", undefined, true)+'</b>.</p>') },
+      { t: 'Rotate with the transpose of V', parts: ['vt'], state: { f: 1 },
+        body: ('<p>First <b class="is-q">'+window.InterviewDisplayMath.html("lab/decompositions/extra-1", undefined, true)+'</b> turns the plane, so '+window.InterviewDisplayMath.html("lab/decompositions/extra-2", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/decompositions/extra-3", undefined, true)+' lie along the axes.</p>') },
       { t: 'Σ stretches', parts: ['sigma'], state: { f: 2 },
-        body: '<p>Then <b class="is-k">Σ</b> stretches along the axes, by σ₁ and σ₂. Those stretches are the singular values.</p>' },
+        body: ('<p>Then <b class="is-k">Σ</b> stretches along the axes, by '+window.InterviewDisplayMath.html("lab/decompositions/worked-4", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/decompositions/worked-5", undefined, true)+'. Those stretches are the singular values.</p>') },
       { t: 'U turns again', parts: ['sigma', 'u'], state: { f: 3 },
         body: '<p>Finally, <b class="is-o">U</b> places the stretched axes, using a turn and sometimes a reflection. Together, the 3 maps give A; drag î or ĵ to change them.</p>' },
       { t: 'Keep the big ones', parts: ['sigma'], state: { mode: 'image', k: 8 },
         body: '<p>A 64 by 64 image is a matrix too. Rebuilt from its 8 largest singular values, most of the picture survives.</p>' },
       { t: 'What you dropped', parts: ['tail'], state: { mode: 'image', k: 8 },
-        body: '<p>The error of the rank k copy is the square root of the dropped σ² added up. No other rank k matrix is closer.</p>' },
+        body: ('<p>The error of the rank k copy is the square root of the dropped '+window.InterviewDisplayMath.html("lab/decompositions/extra-4", undefined, true)+' added up. No other rank k matrix is closer.</p>') },
       { t: 'PCA is an SVD', parts: ['vt', 'cloud'], state: { mode: 'pca' },
         body: '<p>Principal component analysis (PCA) finds the axes with the most spread in centred data. These are the right singular vectors; drag a point to see them turn.</p>' },
       { t: 'Cholesky', parts: ['vt', 'sigma'], state: { mode: 'chol', f: 3 },
-        body: '<p>A positive definite matrix has positive xᵀAx for every non-zero x. Cholesky writes it as L Lᵀ; L maps the unit circle to the ellipse xᵀA⁻¹x = 1.</p>' }
+        body: ('<p>A positive definite matrix has positive '+window.InterviewDisplayMath.html("lab/decompositions/worked-7", undefined, true)+' for every non-zero x. Cholesky writes it as '+window.InterviewDisplayMath.html("lab/decompositions/worked-8", undefined, true)+'; L maps the unit circle to the ellipse '+window.InterviewDisplayMath.html("lab/decompositions/worked-6", undefined, true)+'.</p>') }
     ];
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {

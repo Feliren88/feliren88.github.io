@@ -164,6 +164,7 @@
       ]);
       description='Allowed distortion '+f(d)+'. Minimum rate '+f(rate)+' bits per symbol.';
     }
+    window.InterviewDisplayMath.set($('[data-it-formula]'),'explorer/'+mode,{h:f(h),H:f(H),KL:f(KL),mi:f(mi),wa:wa===undefined?'':wa.toPrecision(5),wb:wb===undefined?'':wb.toPrecision(5),post:f(post),mean:f(mean),rate:f(rate)});
     $('[data-it-drawing]').innerHTML=s;
     $('[data-it-readouts]').innerHTML=cards;
     $('#it-svg-desc').textContent=description;

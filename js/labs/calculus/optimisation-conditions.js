@@ -71,7 +71,7 @@
     var dlg=XP.dialog(root);
     ctl.innerHTML='<button type="button" data-act="play">Play the change</button><label>Motion <input data-k="progress" type="range" min="0" max="1" step="0.01" value="1" aria-label="Scrub the recorded change"></label>'+
       '<label>View <select data-k="view"><option value="surface">Surface and curvature</option><option value="chord">Convex chord test</option><option value="constraint">Linear constraint</option><option value="experiment">Random curvature experiment</option></select></label>'+
-      '<label data-kind-label>Surface <select data-k="kind"><option value="minimum">x² + y²</option><option value="maximum">−x² − y²</option><option value="saddle">x² − y²</option><option value="flat">x⁴ + y²</option></select></label>'+
+      '<label data-kind-label>Surface <select data-k="kind"><option value="minimum">Upward bowl</option><option value="maximum">Downward bowl</option><option value="saddle">Saddle</option><option value="flat">Flat quartic bowl</option></select></label>'+
       '<label data-axis-label hidden>Slice <select data-k="axis"><option value="x">Along x, y = 0</option><option value="y">Along y, x = 0</option></select></label>'+
       '<label data-t-label hidden>Fraction along chord <input data-k="t" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Position between the chord endpoints"></label>'+
       '<label data-d-label hidden>Dimension d <input data-k="d" type="range" min="1" max="6" step="1" value="3" aria-label="Matrix dimension"></label>'+
@@ -93,7 +93,7 @@
     var ha=endpoint('a'),hb=endpoint('b');
     var hl=handle(L,{x:0.5,y:0.5,snap:0.01,bounds:[[-0.2,1.2],[-0.2,1.2]],cls:'is-q',part:'constraint',label:'Point on x plus y equals 1',onMove:function(x,y,done){move({theta:(x+1-y)/2},done);}},'constraint');
     var he=handle(E,{x:3,y:0.03125,snap:1,bounds:[[1,6],[0,0.65]],cls:'is-q',part:'sample',label:'Selected matrix dimension',onMove:function(x,y,done){move({d:Math.round(x)},done);}},'dimension');
-    function text(plane,x,y,words,part){return el('text',{x:plane.map.sx(x),y:plane.map.sy(y),'text-anchor':'middle','data-part':part},XP.esc(words));}
+    function text(plane,x,y,words,part){var formulas={"Contours of x\u00b2 + 2y\u00b2": "lab/optimisation-conditions/svg-0", "Solid measured \u00b7 dashed 2\u207b\u1d48": "lab/optimisation-conditions/svg-1"}; if(formulas[words]){return '<foreignObject x="'+(plane.map.sx(x)-150)+'" y="'+(plane.map.sy(y)-17)+'" width="300" height="44" data-part="'+part+'"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:13px">'+window.InterviewDisplayMath.html(formulas[words], undefined, true)+'</div></foreignObject>';} return el('text',{x:plane.map.sx(x),y:plane.map.sy(y),'text-anchor':'middle','data-part':part},XP.esc(words));}
     function path(plane,points,cls,part){return el('polyline',{points:plane.pts(points),'class':'pl-mark '+cls,'data-part':part});}
     function project(x,y,z){return[x-0.55*y,0.35*y+0.2*z];}
     function curvatureClass(v){return v<-1e-10?'is-k':v>1e-10?'is-o':'is-zero';}
@@ -162,7 +162,7 @@
         theta:s.theta,constraintY:c.point[1],objectiveValue:c.value,tangentRate:Math.abs(c.tangentRate)<1e-10?0:c.tangentRate,multiplier:c.multiplier,
         d:String(s.d),positiveCount:String(sample.positive),sampleCount:String(sample.count),sampleFraction:sample.fraction,signEstimate:independentSigns(s.d)},4);
       var type=gn<1e-10?classify(eig):'not stationary';root.querySelector('[data-classification]').textContent=type[0].toUpperCase()+type.slice(1);
-      root.querySelector('[data-formula]').textContent=s.view==='constraint'?'Objective f(x, y) = x² + 2y², constraint g(x, y) = x + y − 1':s.view==='experiment'?'H = (G + Gᵀ) / 2, seed 41':formulas[s.kind];
+      root.querySelector('[data-formula]').innerHTML=window.InterviewDisplayMath.html('lab/optimisation-conditions/'+(s.view==='constraint'?'constraint':s.view==='experiment'?'experiment':s.kind), undefined, true);
       ['surface','chord','constraint','experiment'].forEach(function(k){boxes[k].hidden=s.view!==k;root.querySelector('[data-'+k+'-eq]').hidden=s.view!==k;ctl.querySelector('[data-zoom="'+(k==='surface'?'hessian':k)+'"]').hidden=s.view!==k;});
       ctl.querySelector('[data-kind-label]').hidden=s.view!=='surface'&&s.view!=='chord';
       ['axis','t'].forEach(function(k){ctl.querySelector('[data-'+k+'-label]').hidden=s.view!=='chord';});ctl.querySelector('[data-d-label]').hidden=s.view!=='experiment';
@@ -183,7 +183,7 @@
         var q=objective(s.kind,s.x,s.y),e=eigenvalues(q.hessian),gn=Math.hypot.apply(Math,q.gradient);
         dlg.open('Hessian, worked','<p>The Hessian contains second derivatives at the selected point. Accordingly, its eigenvalues measure curvature along its principal directions.</p>'+table(['Quantity','Current value'],[
           ['Gradient',q.gradient.map(function(v){return fmt(v,4);}).join(', ')],['Hessian',q.hessian.map(function(row){return '['+row.map(function(v){return fmt(v,4);}).join(', ')+']';}).join(' ')],['Eigenvalues',e.map(function(v){return fmt(v,4);}).join(', ')],['Stationary classification',gn<1e-10?classify(e):'Not stationary']])+
-          (s.kind==='flat'?'<p>At the origin, zero curvature makes the Hessian test inconclusive. However, the fourth power x⁴ rises on both sides, so this function still has a minimum.</p>':'<p>First check that the gradient is 0. After that, positive curvatures imply a strict local minimum. Conversely, negative curvatures imply a maximum, while mixed signs imply a saddle.</p>'),button);
+          (s.kind==='flat'?('<p>At the origin, zero curvature makes the Hessian test inconclusive. However, the fourth power '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-6", undefined, true)+' rises on both sides, so this function still has a minimum.</p>'):'<p>First check that the gradient is 0. After that, positive curvatures imply a strict local minimum. Conversely, negative curvatures imply a maximum, while mixed signs imply a saddle.</p>'),button);
       }else if(which==='chord'){
         var c=chord(s.kind,s.axis,s.a,s.b,s.t);
         dlg.open('Chord, worked','<p>A chord joins 2 points on the curve with a straight line. For a convex function, every intermediate curve value lies at or below that line.</p>'+table(['Quantity','Current value'],[
@@ -191,13 +191,13 @@
           '<p>A nonnegative gap passes this comparison. However, a single passing comparison does not establish convexity across the domain.</p>',button);
       }else if(which==='constraint'){
         var q=constrained(s.theta);
-        dlg.open('Constraint, worked','<p>The constraint forces y = 1 − x. Therefore, the objective becomes x² + 2(1 − x)², with derivative 6x − 4.</p><p>The constraint gradient is perpendicular to the line. Accordingly, projecting ∇f onto ∇g gives the current normal ratio ϖ.</p>'+table(['Quantity','Current value'],[
+        dlg.open('Constraint, worked',('<p>The constraint forces y = 1 − x. Therefore, the objective becomes '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-0", undefined, true)+', with derivative 6x − 4.</p><p>The constraint gradient is perpendicular to the line. Accordingly, projecting ∇f onto ∇g gives the current normal ratio ϖ.</p>')+table(['Quantity','Current value'],[
           ['Point',q.point.map(function(v){return fmt(v,4);}).join(', ')],['Objective gradient ∇f',q.objectiveGradient.map(function(v){return fmt(v,4);}).join(', ')],['Constraint gradient ∇g','1, 1'],['Tangent derivative',fmt(q.tangentRate,4)],['Normal ratio',fmt(q.multiplier,4)]])+
           '<p>The minimum occurs at x = 2/3, y = 1/3. There, ∇f = (4/3, 4/3) = (4/3)∇g and f = 2/3.</p>',button);
       }else{
         var rows=[];for(var d=1;d<=6;d++){var sample=prefix(d);rows.push([d,sample.positive+' / '+sample.count,fmt(sample.fraction,4),fmt(independentSigns(d),4)]);}
-        dlg.open('Random curvature, worked','<p>Positive definite means every eigenvalue is positive. The Gaussian entries have mean 0 and standard deviation 1. After that, H = (G + Gᵀ)/2 symmetrises each matrix.</p>'+
-          '<p>Seed 41 fixes '+shown()+' sampled matrices per dimension. Accordingly, the table separates their measured fractions from 2⁻ᵈ, which assumes independent signs with positive probability 1/2.</p>'+table(['d','All positive','Measured','2⁻ᵈ'],rows)+
+        dlg.open('Random curvature, worked',('<p>Positive definite means every eigenvalue is positive. The Gaussian entries have mean 0 and standard deviation 1. After that, '+window.InterviewDisplayMath.html("lab/optimisation-conditions/extra-0", undefined, true)+' symmetrises each matrix.</p>')+
+          '<p>Seed 41 fixes '+shown()+(' sampled matrices per dimension. Accordingly, the table separates their measured fractions from '+window.InterviewDisplayMath.html("lab/optimisation-conditions/extra-1", undefined, true)+', which assumes independent signs with positive probability 1/2.</p>')+table(['d','All positive','Measured',(''+window.InterviewDisplayMath.html("lab/optimisation-conditions/extra-1", undefined, true)+'')],rows)+
           table(['First matrix, selected d','Eigenvalues'],[[s.d,samples[s.d].eigenvalues[0].map(function(v){return fmt(v,4);}).join(', ')]])+
           '<p>The Gaussian matrix model determines these results. Therefore, the table alone does not determine the frequency of minima in a chosen loss.</p>',button);
       }
@@ -207,15 +207,15 @@
     ctl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;api.interrupt();if(b.hasAttribute('data-zoom'))return zoom(b.getAttribute('data-zoom'),b);if(b.hasAttribute('data-reset'))return record(snapshot(),Object.assign({},initial),false);
       if(b.getAttribute('data-act')==='play'){var from=snapshot(),to=snapshot();if(s.view==='surface'){from.reveal=0;to.reveal=1;to.x=to.y=0;}else if(s.view==='chord'){from.t=0;to.t=1;}else if(s.view==='constraint')to.theta=2/3;else{from.reveal=0;to.reveal=1;}record(from,to,true);}});
     var PAGES=[
-      {t:'Start at a minimum',parts:['surface','curvature','point'],state:{view:'surface'},body:'<p>At the origin, x² + y² has gradient 0, making it a stationary point. Since both curvatures are 2, this point is a minimum.</p>'},
-      {t:'Reverse both curvatures',parts:['surface','curvature','point'],state:{kind:'maximum'},body:'<p>The Hessian’s eigenvalues, its principal curvatures, are −2 and −2. Therefore, −x² − y² has a maximum at the origin despite gradient 0.</p>'},
-      {t:'Mix upward and downward bends',parts:['surface','curvature','point'],state:{kind:'saddle'},body:'<p>For x² − y², one direction rises while the other falls. Consequently, curvatures 2 and −2 identify the origin as a saddle.</p>'},
-      {t:'Leave zero curvature unresolved',parts:['surface','curvature','point'],state:{kind:'flat'},body:'<p>For x⁴ + y², the Hessian has curvatures 0 and 2 at the origin. Therefore, this test is inconclusive; inspecting x⁴ reveals the minimum.</p>'},
-      {t:'Compare a curve with its chord',parts:['curve','chord'],state:{view:'chord'},body:'<p>A convex curve lies at or below every chord joining 2 of its points. Here, x² has midpoint 0 below the chord height 1.</p>'},
-      {t:'Check another direction',parts:['curve','chord'],state:{view:'chord',kind:'saddle',axis:'y'},body:'<p>The saddle’s y slice is −y², with midpoint height 0 above the chord at −1. Therefore, this direction fails the convexity inequality.</p>'},
+      {t:'Start at a minimum',parts:['surface','curvature','point'],state:{view:'surface'},body:('<p>At the origin, '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-1", undefined, true)+' has gradient 0, making it a stationary point. Since both curvatures are 2, this point is a minimum.</p>')},
+      {t:'Reverse both curvatures',parts:['surface','curvature','point'],state:{kind:'maximum'},body:('<p>The Hessian’s eigenvalues, its principal curvatures, are −2 and −2. Therefore, '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-2", undefined, true)+' has a maximum at the origin despite gradient 0.</p>')},
+      {t:'Mix upward and downward bends',parts:['surface','curvature','point'],state:{kind:'saddle'},body:('<p>For '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-3", undefined, true)+', one direction rises while the other falls. Consequently, curvatures 2 and −2 identify the origin as a saddle.</p>')},
+      {t:'Leave zero curvature unresolved',parts:['surface','curvature','point'],state:{kind:'flat'},body:('<p>For '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-4", undefined, true)+', the Hessian has curvatures 0 and 2 at the origin. Therefore, this test is inconclusive; inspecting '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-6", undefined, true)+' reveals the minimum.</p>')},
+      {t:'Compare a curve with its chord',parts:['curve','chord'],state:{view:'chord'},body:'<p>A convex curve lies at or below every chord joining 2 of its points. Here, the square function has midpoint 0 below the chord height 1.</p>'},
+      {t:'Check another direction',parts:['curve','chord'],state:{view:'chord',kind:'saddle',axis:'y'},body:('<p>The saddle’s y slice is '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-5", undefined, true)+', with midpoint height 0 above the chord at −1. Therefore, this direction fails the convexity inequality.</p>')},
       {t:'Move along a constraint',parts:['constraint','objective','normal'],state:{view:'constraint'},body:'<p>With x + y = 1, the point (0.5, 0.5) gives objective 0.75. Along the constraint, its derivative is −1, so increasing x initially reduces the objective.</p>'},
       {t:'Align the gradients',parts:['constraint','objective','normal'],state:{view:'constraint',theta:2/3},body:'<p>At (2/3, 1/3), the tangent derivative is 0 and ∇f = (4/3)∇g. Accordingly, 4/3 is the Lagrange multiplier, the ratio between these aligned gradients.</p>'},
-      {t:'Measure random curvatures',parts:['sample','estimate','dimensions'],state:{view:'experiment',d:3},body:'<p>All eigenvalues are positive in 16 of 512 sampled Gaussian matrices with 3 dimensions. However, 2⁻³ = 1/8 assumes independent curvature signs; the measured fraction is 1/32.</p>'}
+      {t:'Measure random curvatures',parts:['sample','estimate','dimensions'],state:{view:'experiment',d:3},body:('<p>All eigenvalues are positive in 16 of 512 sampled Gaussian matrices with 3 dimensions. However, '+window.InterviewDisplayMath.html("lab/optimisation-conditions/worked-7", undefined, true)+' = 1/8 assumes independent curvature signs; the measured fraction is 1/32.</p>')}
     ];
     draw();report();XP.guide(root.querySelector('[data-guide-box]'),PAGES,function(p,i,redraw){if(!p){api.focus([]);return;}if(!redraw){api.interrupt();record(snapshot(),Object.assign({},initial,p.state),true);}api.focus(p.parts);});
   });

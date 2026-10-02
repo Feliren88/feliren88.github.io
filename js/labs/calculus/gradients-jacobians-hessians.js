@@ -155,6 +155,8 @@
         h+='</div></section>';
       });return h;
     }
+    window.InterviewDisplayMath.set(root.querySelector('[data-surface-formula]'),'lab/gradients-jacobians-hessians/initial-0');
+    window.InterviewDisplayMath.set(root.querySelector('[data-map-formula]'),'lab/gradients-jacobians-hessians/initial-1');
     function draw() {
       var g=gradient(s.x,s.y),q=currentMap(s.x,s.y),dims=shapes(s.d,s.m),rate=directional(s.x,s.y,s.theta);
       api.values({x:s.x,y:s.y,fx:surface(s.x,s.y),gx:g[0],gy:g[1],directionalRate:rate,angle:s.theta*180/Math.PI,
@@ -185,20 +187,20 @@
     function zoom(which,button){
       var g=gradient(s.x,s.y),J=currentJacobian(),h=1e-5;
       if(which==='partials')dlg.open('Partials, worked','<p>A partial derivative changes 1 input while holding the other fixed. Accordingly, a central difference compares outputs on either side of that input.</p>'+
-        '<p>Here, ∂f/∂x = 2 × '+precise(s.x)+' + 0.2 × '+precise(s.y)+' = '+precise(g[0])+'. Similarly, ∂f/∂y = 4 × '+precise(s.y)+' + 0.2 × '+precise(s.x)+' = '+precise(g[1])+'.</p>'+table(['Quantity','Derivative','Central difference'],[
-        ['∂f/∂x',precise(g[0]),precise((surface(s.x+h,s.y)-surface(s.x-h,s.y))/(2*h))],
-        ['∂f/∂y',precise(g[1]),precise((surface(s.x,s.y+h)-surface(s.x,s.y-h))/(2*h))],
+        ('<p>Here, '+window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/worked-0", undefined, true)+' = 2 × ')+precise(s.x)+' + 0.2 × '+precise(s.y)+' = '+precise(g[0])+('. Similarly, '+window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/worked-1", undefined, true)+' = 4 × ')+precise(s.y)+' + 0.2 × '+precise(s.x)+' = '+precise(g[1])+'.</p>'+table(['Quantity','Derivative','Central difference'],[
+        [(''+window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/worked-0", undefined, true)+''),precise(g[0]),precise((surface(s.x+h,s.y)-surface(s.x-h,s.y))/(2*h))],
+        [(''+window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/worked-1", undefined, true)+''),precise(g[1]),precise((surface(s.x,s.y+h)-surface(s.x,s.y-h))/(2*h))],
         ['Unit direction',[Math.cos(s.theta),Math.sin(s.theta)].map(precise).join(', '),'Length 1'],
         ['Gradient · direction',precise(directional(s.x,s.y,s.theta)),'Rate along this direction']]),button);
       else if(which==='jacobian'){
         var rows=[];
         for(var i=0;i<2;i++)for(var j=0;j<2;j++){
           var lo=[s.x,s.y],hi=[s.x,s.y];lo[j]-=h;hi[j]+=h;
-          rows.push(['J'+(i+1)+(j+1),precise(J[i][j]),precise((currentMap(hi[0],hi[1])[i]-currentMap(lo[0],lo[1])[i])/(2*h))]);
+          rows.push([window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/jacobian-entry", {row:i+1,column:j+1}, true),precise(J[i][j]),precise((currentMap(hi[0],hi[1])[i]-currentMap(lo[0],lo[1])[i])/(2*h))]);
         }
         dlg.open('Jacobian, worked','<p>The Jacobian collects each output’s derivative for each input. To check the current '+fmt(100*s.warp,0)+'% map, central differences compare nearby outputs around each input.</p>'+table(['Entry','Derivative','Central difference'],rows)+
           '<p>The square’s largest boundary error is '+precise(patchError())+'. After dividing displacement by ε, that error becomes '+precise(patchError()/s.epsilon)+'.</p>',button);
-      }else if(which==='curvature')dlg.open('Curvature, worked','<p>The local quadratic height is ½δᵀHδ after subtracting the tangent prediction. Here, H is constant at every point.</p>'+table(['Direction','Unit vector','Curvature'],eig.vectors.map(function(v,i){return[i+1,v.map(precise).join(', '),precise(eig.values[i])];}))+
+      }else if(which==='curvature')dlg.open('Curvature, worked',('<p>The local quadratic height is '+window.InterviewDisplayMath.html("lab/gradients-jacobians-hessians/worked-2", undefined, true)+' after subtracting the tangent prediction. Here, H is constant at every point.</p>')+table(['Direction','Unit vector','Curvature'],eig.vectors.map(function(v,i){return[i+1,v.map(precise).join(', '),precise(eig.values[i])];}))+
         '<p>Multiplying H by each listed vector gives its curvature times that vector. Moreover, both positive curvatures bend the quadratic upwards.</p>',button);
       else dlg.open('Shapes, worked','<p>This comparison uses '+s.d+' inputs and '+s.m+' outputs. Accordingly, J has '+s.m+' rows and '+s.d+' columns.</p>'+table(['Object','Shape','Entries'],[
         ['Gradient of 1 scalar output',s.d+' × 1',s.d],['Jacobian of all outputs',s.m+' × '+s.d,s.m*s.d],['Hessian of 1 scalar output',s.d+' × '+s.d,s.d*s.d]])+

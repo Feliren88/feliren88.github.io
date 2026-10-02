@@ -44,7 +44,8 @@ with sync_playwright() as p:
                     assert '1.992' in diagram.inner_text()
                 if bridge['kind'] == 'notation':
                     steps.nth(1).click()
-                    assert 'u² du' in diagram.inner_text()
+                    assert diagram.locator('math mfrac').count() == 1
+                    assert 'u' in diagram.locator('math').text_content()
                 if bridge['kind'] == 'langevin':
                     assert '2.000' in diagram.inner_text()
                 if bridge['kind'] == 'tensor':
@@ -69,9 +70,9 @@ with sync_playwright() as p:
                 scrub.press('ArrowRight')
                 assert root.locator('[data-count]').inner_text() == '2 / 4'
                 root.locator('[data-speed]').select_option('1200')
+                page.bring_to_front()
                 root.locator('[data-play]').click()
-                page.wait_for_timeout(1350)
-                assert root.locator('[data-count]').inner_text() == '3 / 4'
+                root.locator('[data-count]').filter(has_text='3 / 4').wait_for(timeout=10000)
                 root.locator('[data-play]').click()
                 root.locator('[data-reset]').click()
                 root.locator('summary').click()

@@ -84,7 +84,7 @@
       } });
     hp.el.setAttribute('data-handle', 'parameter');
     hp.el.addEventListener('pointerdown', function () { dragStart = snapshot(); });
-    function text(plane, x, y, words, part) {
+    function text(plane, x, y, words, part) {var formulas={"g(x) = x\u00b2": "lab/chain-rule/svg-0", "L = r\u00b2": "lab/chain-rule/svg-1"}; if(formulas[words]){return '<foreignObject x="'+(plane.map.sx(x)-150)+'" y="'+(plane.map.sy(y)-17)+'" width="300" height="44" data-part="'+part+'"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:13px">'+window.InterviewDisplayMath.html(formulas[words], undefined, true)+'</div></foreignObject>';}
       return el('text', { x: plane.map.sx(x), y: plane.map.sy(y), 'text-anchor': 'middle', 'data-part': part }, XP.esc(words));
     }
     function lineMarkup() {
@@ -132,7 +132,7 @@
           'data-part': input ? 'inputs' : 'graph' });
         h += text(G, p[0], p[1] + 0.05, label, input ? 'inputs' : 'graph');
         h += text(G, p[0], p[1] - 0.3, fmt(f[key], 2), input ? 'inputs' : 'graph');
-        if (!forward) h += text(G, p[0], p[1] + 0.8, '∂L/∂' + (key === 'prediction' ? 'p' : key === 'residual' ? 'r' : key === 'product' ? '(wx)' : key === 'loss' ? 'L' : key) + ' = ' + fmt(a[key], 1), 'reverse');
+        if (!forward) h += '<foreignObject x="'+(G.map.sx(p[0])-100)+'" y="'+(G.map.sy(p[1]+0.8)-20)+'" width="200" height="50" data-part="reverse"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:13px">'+window.InterviewDisplayMath.html("lab/chain-rule/reverse-label", {variable:key === 'prediction' ? 'p' : key === 'residual' ? 'r' : key === 'product' ? '(wx)' : key === 'loss' ? 'L' : key,value:fmt(a[key],1)}, true)+'</div></foreignObject>';
       });
       var path = [nodes.x, nodes.product, nodes.prediction, nodes.residual, nodes.loss];
       var at = clamp(step, 0, path.length - 1), index = Math.min(path.length - 2, Math.floor(at)), t = at - index;
@@ -178,7 +178,7 @@
       var c = chain(s.x, s.dx), shared = s.view === 'shared';
       var f = squaredLoss(s.w,s.x,s.b,s.y,shared), a = adjoints(s.w,s.x,s.b,s.y,shared);
       if (which === 'local') dlg.open('Local rates, worked', '<p>This calculation uses the current input and its small change dx.</p>' + table(['Quantity','Value'], [
-        ['x, dx',precise(s.x)+', '+precise(s.dx)], ['g(x) = x²',precise(c.g)], ['sin(g(x))',precise(c.f)],
+        ['x, dx',precise(s.x)+', '+precise(s.dx)], [(''+window.InterviewDisplayMath.html("lab/chain-rule/worked-0", undefined, true)+''),precise(c.g)], ['sin(g(x))',precise(c.f)],
         ['g′(x), cos(g(x))',precise(c.inner)+', '+precise(c.outer)], ['Their product',precise(c.rate)],
         ['Actual output change',precise(c.df)], ['Local predicted change',precise(c.rate*s.dx)],
         ['The 2 paths through x × x',c.contributions.map(precise).join(' + ')+' = '+precise(c.rate)]

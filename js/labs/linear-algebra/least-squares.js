@@ -92,7 +92,7 @@
       '<label>Motion <input type="range" data-k="progress" min="0" max="1" step="0.01" aria-label="Scrub the last motion"></label>' +
       '<button type="button" data-act="play">Play</button>' +
       '<button type="button" data-act="snap">Snap to least squares</button>' +
-      '<label>log₁₀ λ <input type="range" data-k="lam" min="-3" max="3" step="0.05" aria-label="Ridge penalty, as a power of 10"></label>' +
+      '<label>Logarithmic ridge penalty <input type="range" data-k="lam" min="-3" max="3" step="0.05" aria-label="Ridge penalty, as a power of 10"></label>' +
       '<button type="button" data-zoom="normal">Normal equations, worked</button>' +
       '<button type="button" data-zoom="residuals">Residuals, worked</button>' +
       '<button type="button" data-reset>Reset</button>';
@@ -281,15 +281,15 @@
         G[0][0] += penalty; G[1][1] += penalty;
         var Xy = [0, 1].map(function (c) { return X.reduce(function (t, row, k) { return t + row[c] * yv[k]; }, 0); });
         dlg.open('Normal equations, worked', table([
-          [penalty ? 'XᵀX + λI' : 'XᵀX', '[[' + fmt(G[0][0]) + ', ' + fmt(G[0][1]) + '], [' + fmt(G[1][0]) + ', ' + fmt(G[1][1]) + ']]'],
-          ['Xᵀy', '(' + fmt(Xy[0]) + ', ' + fmt(Xy[1]) + ')'],
-          [penalty ? 'ŵ, solving (XᵀX + λI) ŵ = Xᵀy' : 'ŵ, solving XᵀX ŵ = Xᵀy', w ? '(' + fmt(w[0]) + ', ' + fmt(w[1]) + ')' : 'The columns are parallel, so several weights fit equally well']
-        ]) + '<p>' + (s.mode === 'fit' ? 'Here X has a column of x values and a column of 1s, so ŵ is the slope and the intercept.' : s.mode === 'ridge' ? 'Here X contains the 30 simulated feature pairs, and λ penalises large weights.' : 'Here the columns of X are a and b.') + '</p>', b);
+          [penalty ? (''+window.InterviewDisplayMath.html("lab/least-squares/extra-0", undefined, true)+'') : (''+window.InterviewDisplayMath.html("lab/least-squares/extra-1", undefined, true)+''), '[[' + fmt(G[0][0]) + ', ' + fmt(G[0][1]) + '], [' + fmt(G[1][0]) + ', ' + fmt(G[1][1]) + ']]'],
+          [(''+window.InterviewDisplayMath.html("lab/least-squares/extra-2", undefined, true)+''), '(' + fmt(Xy[0]) + ', ' + fmt(Xy[1]) + ')'],
+          [penalty ? (''+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+', solving ('+window.InterviewDisplayMath.html("lab/least-squares/extra-0", undefined, true)+') '+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+' = '+window.InterviewDisplayMath.html("lab/least-squares/extra-2", undefined, true)+'') : (''+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+', solving '+window.InterviewDisplayMath.html("lab/least-squares/extra-1", undefined, true)+' '+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+' = '+window.InterviewDisplayMath.html("lab/least-squares/extra-2", undefined, true)+''), w ? '(' + fmt(w[0]) + ', ' + fmt(w[1]) + ')' : 'The columns are parallel, so several weights fit equally well']
+        ]) + '<p>' + (s.mode === 'fit' ? ('Here X has a column of x values and a column of 1s, so '+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+' is the slope and the intercept.') : s.mode === 'ridge' ? 'Here X contains the 30 simulated feature pairs, and λ penalises large weights.' : 'Here the columns of X are a and b.') + '</p>', b);
         return;
       }
       if (z === 'residuals') {
         var rows = s.pts.map(function (q) { var yh = s.w * q[0] + s.c, r = q[1] - yh; return [fmt(q[0], 1), fmt(q[1], 1), fmt(yh), fmt(r), fmt(r * r, 3)]; });
-        dlg.open('Residuals, worked', table(rows, ['x', 'y', 'ŷ', 'y − ŷ', '(y − ŷ)²']) + '<p>The mean of the last column is ' + fmt(mse(s.pts, s.w, s.c), 3) + ', the mean squared error.</p>', b);
+        dlg.open('Residuals, worked', table(rows, ['x', 'y', 'ŷ', 'y − ŷ', (''+window.InterviewDisplayMath.html("lab/least-squares/worked-0", undefined, true)+'')]) + '<p>The mean of the last column is ' + fmt(mse(s.pts, s.w, s.c), 3) + ', the mean squared error.</p>', b);
         return;
       }
       if (act === 'play') { play(); return; }
@@ -302,19 +302,19 @@
       { t: 'A target out of reach', parts: ['y', 'cols'], state: { mode: '3d', b: B, y: Y },
         body: '<p>Take <b class="is-q">a</b> = (1.6, 0.2, 0.4), <b class="is-k">b</b> = (0.3, 1.5, 0.5), and <b class="is-v">y</b> = (1.2, 1.4, 2.4). No weighted sum of a and b reaches y.</p>' },
       { t: 'Everything you can reach', parts: ['span', 'cols'], state: { mode: '3d' },
-        body: '<p>Every mix w₁a + w₂b lies on this flat plane through the origin. It is the column space of X.</p>' },
+        body: ('<p>Every mix '+window.InterviewDisplayMath.html("lab/least-squares/worked-2", undefined, true)+' lies on this flat plane through the origin. It is the column space of X.</p>') },
       { t: 'The shadow', parts: ['yhat', 'y'], state: { mode: '3d' },
-        body: '<p>The nearest reachable point is the shadow of y on the plane, <b class="is-o">ŷ</b> = Xŵ. That point is the least squares fit.</p>' },
+        body: ('<p>The nearest reachable point is the shadow of y on the plane, <b class="is-o">ŷ</b> = X'+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+'. That point is the least squares fit.</p>') },
       { t: 'The gap stands straight up', parts: ['res', 'yhat'], state: { mode: '3d' },
-        body: '<p>The <b class="is-k">residual</b> y − ŷ is the gap between target and fit, perpendicular to the plane. Therefore, Xᵀ(y − Xŵ) = 0 gives the normal equations.</p>' },
+        body: ('<p>The <b class="is-k">residual</b> y − ŷ is the gap between target and fit, perpendicular to the plane. Therefore, '+window.InterviewDisplayMath.html("lab/least-squares/extra-4", undefined, true)+' gives the normal equations.</p>') },
       { t: 'The same idea in 2D', parts: ['sq', 'line'], state: { mode: 'fit' },
         body: '<p>Here, 9 points are fitted with a line, and each vertical gap carries a square. Their total area divided by 9 gives the mean squared error.</p>' },
       { t: 'Snap to least squares', parts: ['line', 'sq'], state: { mode: 'fit', snap: true },
         body: '<p>The line glides to the fit, and no other line has less total area. Drag any point, then press Snap again.</p>' },
       { t: 'Ridge pulls w in', parts: ['ridge', 'circle', 'path'], state: { mode: 'ridge', lam: 0.5 },
-        body: '<p>Ridge penalises large weights by adding λ‖w‖² to the squared error. As λ grows, <b class="is-o">ŵ</b> slides along its path towards 0, inside a shrinking circle.</p>' },
+        body: ('<p>Ridge penalises large weights by adding '+window.InterviewDisplayMath.html("lab/least-squares/worked-1", undefined, true)+(' to the squared error. As λ grows, <b class="is-o">'+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+'</b> slides along its path towards 0, inside a shrinking circle.</p>')) },
       { t: 'Nearly parallel columns', parts: ['cols', 'yhat'], state: { mode: '3d', b: BNEAR, wobble: true },
-        body: '<p>Now b nearly lines up with a, and y wobbles. ŷ barely moves, but ŵ swings a long way.</p>' }
+        body: ('<p>Now b nearly lines up with a, and y wobbles. ŷ barely moves, but '+window.InterviewDisplayMath.html("lab/least-squares/extra-3", undefined, true)+' swings a long way.</p>') }
     ];
     prepare({ wobble: true });
     draw();

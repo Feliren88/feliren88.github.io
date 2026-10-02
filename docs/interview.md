@@ -511,3 +511,11 @@ Furthermore, track-level arrow handling advances the drawing and caption togethe
 Run `python scripts/check_module_narratives.py` against the preview for these 10 tracks.
 Its checks cover diagram-caption alignment, backward scrubbing, playback, native slider keys and enlarged text.
 The check visits desktop and phone widths in both themes.
+
+## Diagram equation rendering
+
+The lesson equations use LaTeX from `_data/interview.yml`. Moreover, standalone diagrams and live lab equations use LaTeX from `_data/interview_display_math/*.yml`. Run `python3 scripts/render_math.py` after changing either source. The generator validates standalone MathML and writes the `display` registry in `_data/interview_math.yml`.
+
+The syllabus loads its track's registry before its component scripts. Therefore, components can call `InterviewDisplayMath.html(key, values, inline)` or `InterviewDisplayMath.set(host, key, values)`. Runtime values replace named `SLOT_name` text placeholders and are escaped before insertion. Mathematical structure stays in the authored LaTeX. Actual programming code, scalar chart ticks, and narration remain readable text.
+
+Run `python3 scripts/check_interview_notation.py <preview-url>` to check desktop and phone rendering. Furthermore, `scripts/check_reading_foundations.py` checks live controls, narration, themes, and the static fallback.

@@ -1,0 +1,23 @@
+information-theory:
+  lesson/0: P(\mathrm{rain})+P(\mathrm{dry})=\text{SLOT_r0}+\text{SLOT_r1}=1
+  lesson/1: -\log_2(\text{SLOT_p})=\text{SLOT_r1}\;\mathrm{bits}
+  lesson/2: H=\text{SLOT_r0}+\text{SLOT_r1}=\text{SLOT_r2}\;\mathrm{bits}
+  lesson/3: H(X,Y)=H(X)+H(Y\mid X)=\text{SLOT_r2}\;\mathrm{bits}
+  lesson/4: D_{\mathrm{KL}}(P\Vert Q)=\text{SLOT_r0},\quad D_{\mathrm{KL}}(Q\Vert P)=\text{SLOT_r1}\;\mathrm{bits}
+  lesson/5: \widehat p=\frac{\text{SLOT_heads}}{\text{SLOT_heads}+\text{SLOT_tails}}=\text{SLOT_r0},\quad\overline L=\text{SLOT_r1}\;\mathrm{bits}
+  lesson/6: e=a+b-2ab=\text{SLOT_r2},\quad I(X;Y)=\text{SLOT_r1}\;\mathrm{bits}
+  lesson/7: \overline\ell=\sum\limits_{i=1}^{4}p_i\ell_i=\text{SLOT_r1}\;\mathrm{bits}
+  lesson/8: P(\theta=\tfrac34\mid D)=\text{SLOT_r0},\quad\mathbb E[\mathrm{IG}_{\mathrm{next}}]=\text{SLOT_r2}\;\mathrm{bits}
+  lesson/9: \log_2 p(x)=\mathrm{ELBO}+D_{\mathrm{KL}}(q\Vert p(\cdot\mid x))=\text{SLOT_r2}+\text{SLOT_r3}=-1
+  lesson/10: I(X;Z)-\rho I(Z;Y)=\text{SLOT_r0}-\text{SLOT_rho}\cdot\text{SLOT_r1}=\text{SLOT_r2}
+  lesson/11: H(Y\mid x,D)=\text{SLOT_r0}+\text{SLOT_r1}=\text{SLOT_r2}\;\mathrm{bits}
+  lesson/12: \sqrt{\frac{2(1/2)^2\,\text{SLOT_r0}}{\text{SLOT_r2}}}=\text{SLOT_r1}
+  lesson/13: R(D)=1-H_2(D)=\text{SLOT_r0},\quad h(X)=\log_2(\text{SLOT_scale})=\text{SLOT_r2}\;\mathrm{bits}
+  lesson/14: \mathrm{PPL}=2^{\overline L}=2^{\text{SLOT_r0}}=\text{SLOT_r1}
+  lesson/15: F(\theta)=\frac{1}{\theta(1-\theta)}=\text{SLOT_r0},\quad D_{\mathrm{KL}}\approx\frac12\delta^2F(\theta)=\text{SLOT_r2}\;\mathrm{nats}
+  explorer/entropy: H_2(p)=-p\log_2p-(1-p)\log_2(1-p)=\text{SLOT_h}\;\mathrm{bits}
+  explorer/fitting: H(P,Q)=H(P)+D_{\mathrm{KL}}(P\Vert Q)=\text{SLOT_H}+\text{SLOT_KL}\;\mathrm{bits}
+  explorer/channel: I(U;V)=H(U)-H(U\mid V)=\text{SLOT_mi}\;\mathrm{bits}
+  explorer/bayes: P(\theta=\tfrac34\mid D)=\frac{\text{SLOT_wb}}{\text{SLOT_wa}+\text{SLOT_wb}}=\text{SLOT_post}
+  explorer/coding: \overline\ell=\sum\limits_{i=1}^{4}p_i\ell_i=\text{SLOT_mean}\;\mathrm{bits}
+  explorer/distortion: R(D)=1-H_2(D)=\text{SLOT_rate}\;\mathrm{bits},\quad 0\leq D\leq\frac12

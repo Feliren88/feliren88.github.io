@@ -1,0 +1,186 @@
+calculus:
+  lab/integration/square: f(x)=x^2,\quad A(b)=\int_0^b f(x)\,\mathrm{d}x
+  lab/integration/sine: f(x)=\sin x,\quad A(b)=\int_0^b f(x)\,\mathrm{d}x
+  lab/integration/scale: Y=aX,\quad X\sim\mathrm{Uniform}(0,1),\quad p_Y(y)=\frac1a\quad(0\le y\le a)
+  lab/integration/uniform: X\sim\mathrm{Uniform}(0,1),\quad g(x)=x^2,\quad\mathbb E[g(X)]=\frac13
+  lab/integration/exponential: X\sim\mathrm{Exponential}(1),\quad g(x)=x,\quad\mathbb E[X]=1
+  lab/approximation/convex: f(x)=x^2+\frac{x^4}{4}
+  lab/approximation/concave: f(x)=-x^2
+  lab/approximation/linear: f(x)=x
+  lab/approximation/exp-taylor: f(x)=e^x,\quad T_N(x)=\sum_{n=0}^{\text{SLOT_order}}c_n(x-a)^n
+  lab/approximation/log-taylor: f(x)=\ln(1+x),\quad T_N(x)=\sum_{n=0}^{\text{SLOT_order}}c_n(x-a)^n
+  lab/approximation/exp-difference: f(x)=e^x,\quad f^{\prime}(x)\approx\frac{f(x+h)-f(x-h)}{2h}
+  lab/approximation/log-difference: f(x)=\ln(1+x),\quad f^{\prime}(x)\approx\frac{f(x+h)-f(x-h)}{2h}
+  lab/matrix-calculus/layer: z=Wx+b,\quad p=\operatorname{softmax}(z),\quad L=-\log p_{\text{SLOT_class}}
+  lab/matrix-calculus/shapes: W\in\mathbb R^{m\times d},\quad\text{Vector derivative layout }\text{SLOT_layout}
+  lab/matrix-calculus/quadratic: f(w)=w^\top Aw,\quad\nabla f=(A+A^\top)w
+  lab/optimisation-conditions/minimum: f(x,y)=x^2+y^2
+  lab/optimisation-conditions/maximum: f(x,y)=-x^2-y^2
+  lab/optimisation-conditions/saddle: f(x,y)=x^2-y^2
+  lab/optimisation-conditions/flat: f(x,y)=x^4+y^2
+  lab/optimisation-conditions/constraint: f(x,y)=x^2+2y^2,\quad g(x,y)=x+y-1
+  lab/optimisation-conditions/experiment: H=\frac{G+G^\top}{2},\quad\text{Seed }41
+  lab/integration/worked-0: e^{-x}
+  lab/integration/worked-1: x^2
+  lab/integration/worked-2: \mathrm{SE}=\sqrt{\frac{s^2}{n}}
+  lab/integration/worked-3: \frac1{\sqrt n}
+  lab/approximation/worked-0: c_n(x-a)^n
+  lab/approximation/worked-1: c_n
+  lab/approximation/worked-2: x^2+\frac{x^4}4
+  lab/approximation/worked-3: \frac{x^2}2
+  lab/approximation/worked-4: -x^2
+  lab/approximation/worked-5: 10^{-18}
+  lab/matrix-calculus/worked-0: \delta_i x_j
+  lab/matrix-calculus/worked-1: W^\top\delta
+  lab/matrix-calculus/worked-2: \delta^\top W
+  lab/matrix-calculus/worked-3: A+A^\top
+  lab/matrix-calculus/worked-4: Aw+A^\top w=(A+A^\top)w
+  lab/matrix-calculus/worked-5: A^\top=A
+  lab/matrix-calculus/worked-6: \frac{\partial L}{\partial W_{32}}
+  lab/matrix-calculus/worked-7: z_y
+  lab/gradients-jacobians-hessians/worked-0: \frac{\partial f}{\partial x}
+  lab/gradients-jacobians-hessians/worked-1: \frac{\partial f}{\partial y}
+  lab/gradients-jacobians-hessians/worked-2: \frac12\delta^\top H\delta
+  lab/optimisation-conditions/worked-0: x^2+2(1-x)^2
+  lab/optimisation-conditions/worked-1: x^2+y^2
+  lab/optimisation-conditions/worked-2: -x^2-y^2
+  lab/optimisation-conditions/worked-3: x^2-y^2
+  lab/optimisation-conditions/worked-4: x^4+y^2
+  lab/optimisation-conditions/worked-5: -y^2
+  lab/optimisation-conditions/worked-6: x^4
+  lab/optimisation-conditions/worked-7: 2^{-3}
+  lab/chain-rule/worked-0: g(x)=x^2
+  lab/chain-rule/worked-1: L=r^2
+  lab/derivatives/worked-0: x^2
+  lab/integration/initial-0: f(x)=x^2,\quad A(b)=\int_0^b f(x)\,\mathrm{d}x
+  lab/approximation/initial-0: f(x)=e^x,\quad a=0
+  lab/matrix-calculus/initial-0: z=Wx+b,\quad p=\operatorname{softmax}(z),\quad L=-\log p_3
+  lab/gradients-jacobians-hessians/initial-0: f(x,y)=x^2+2y^2+0.2xy
+  lab/gradients-jacobians-hessians/initial-1: F(x,y)=\begin{bmatrix}x+0.2y^2\\y+0.2x^2\end{bmatrix}
+  lab/gradients-jacobians-hessians/initial-2: D_uf
+  lab/gradients-jacobians-hessians/initial-3: H=\begin{bmatrix}2&0.2\\0.2&4\end{bmatrix}
+  lab/optimisation-conditions/initial-0: f(x,y)=x^2+y^2
+  lab/optimisation-conditions/initial-1: 2^{-d}
+  lab/chain-rule/initial-0: \frac{\partial L}{\partial x}
+  lab/chain-rule/initial-1: f^{\prime} g^{\prime}
+  lab/derivatives/initial-0: \frac{\Delta f}{h}
+  lab/derivatives/initial-1: f^{\prime}(x)
+  lab/approximation/extra-0: x-\frac{f^{\prime}(x)}{f^{\prime\prime}(x)}
+  lab/approximation/extra-1: x-\eta f^{\prime}(x)
+  lab/optimisation-conditions/extra-0: H=\frac{G+G^\top}2
+  lab/optimisation-conditions/extra-1: 2^{-d}
+  lab/matrix-calculus/extra-0: W^\top
+  lab/matrix-calculus/block-0: \frac{\partial L}{\partial b}
+  lab/matrix-calculus/block-1: \frac{\partial L}{\partial W}=\delta x^\top
+  lab/matrix-calculus/block-2: \frac{\partial L}{\partial x}=W^\top\delta
+  lab/optimisation-conditions/svg-0: \text{Contours of }x^2+2y^2
+  lab/optimisation-conditions/svg-1: \text{Solid measured; dashed }2^{-d}
+  lab/approximation/svg-0: \log_{10}|\text{Error}|
+  lab/approximation/svg-1: \log_{10}h
+  lab/chain-rule/svg-0: g(x)=x^2
+  lab/chain-rule/svg-1: L=r^2
+  lab/matrix-calculus/svg-0: w^\top Aw
+  lab/chain-rule/reverse-label: \frac{\partial L}{\partial\text{SLOT_variable}}=\text{SLOT_value}
+  lab/gradients-jacobians-hessians/jacobian-entry: J_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/transpose-delta: \delta^\top
+  lab/matrix-calculus/transpose-W: W^\top
+  lab/matrix-calculus/symbol-W: W_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-x: x_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-z: z_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-J: J_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-u: u_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-v: v_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-r: r_{\text{SLOT_row},\text{SLOT_column}}
+  lab/matrix-calculus/symbol-g: g_{\text{SLOT_row},\text{SLOT_column}}
+linear-algebra:
+  lab/eigenvectors/worked-0: \lambda=\frac{\operatorname{tr}(A)}2\pm\sqrt{\left(\frac{\operatorname{tr}(A)}2\right)^2-\det A}
+  lab/eigenvectors/worked-1: \lambda=\frac{\operatorname{tr}(A)}2\pm i\sqrt{\det A-\left(\frac{\operatorname{tr}(A)}2\right)^2}
+  lab/eigenvectors/worked-2: \left(\frac{\operatorname{tr}(A)}2\right)^2-\det A
+  lab/eigenvectors/worked-3: Q^{-1}
+  lab/decompositions/worked-0: \sum_{j>k}\sigma_j^2
+  lab/decompositions/worked-1: \sqrt{\sum_{j>k}\sigma_j^2}
+  lab/decompositions/worked-2: \sum_j\sigma_j^2
+  lab/decompositions/worked-3: \sigma_1\sigma_2=|\det A|
+  lab/decompositions/worked-4: \sigma_1
+  lab/decompositions/worked-5: \sigma_2
+  lab/decompositions/worked-6: x^\top A^{-1}x=1
+  lab/decompositions/worked-7: x^\top Ax
+  lab/decompositions/worked-8: LL^\top
+  lab/vectors-and-spaces/worked-0: \det A=x_1y_2-y_1x_2
+  lab/vectors-and-spaces/worked-1: c_1=\frac{Xy_2-Yx_2}{\det A}
+  lab/vectors-and-spaces/worked-2: c_2=\frac{x_1Y-y_1X}{\det A}
+  lab/vectors-and-spaces/worked-3: u\cdot v_1=u_1x_1+u_2y_1
+  lab/vectors-and-spaces/worked-4: \cos\theta=\frac{u\cdot v_1}{\|u\|\|v_1\|}
+  lab/vectors-and-spaces/worked-5: \frac{u\cdot v_1}{\|v_1\|}
+  lab/vectors-and-spaces/worked-6: v_1
+  lab/vectors-and-spaces/worked-7: v_2
+  lab/vectors-and-spaces/worked-8: c_1
+  lab/vectors-and-spaces/worked-9: c_2
+  lab/vectors-and-spaces/worked-10: u_1
+  lab/vectors-and-spaces/worked-11: u_2
+  lab/vectors-and-spaces/worked-12: x_1
+  lab/vectors-and-spaces/worked-13: x_2
+  lab/vectors-and-spaces/worked-14: y_1
+  lab/vectors-and-spaces/worked-15: y_2
+  lab/conditioning/worked-0: A_{ij}=\frac1{i+j-1}
+  lab/least-squares/worked-0: (y-\hat y)^2
+  lab/least-squares/worked-1: \lambda\|w\|^2
+  lab/least-squares/worked-2: w_1a+w_2b
+  lab/conditioning/initial-0: \frac{\sigma_{\max}}{\sigma_{\min}}
+  lab/conditioning/initial-1: \frac12(w_1^2+
+  lab/conditioning/initial-2: w_2^2)
+  lab/vectors-and-spaces/initial-0: c_1v_1
+  lab/vectors-and-spaces/initial-1: c_2v_2
+  lab/vectors-and-spaces/initial-2: c_1
+  lab/vectors-and-spaces/initial-3: c_2
+  lab/eigenvectors/initial-0: \lambda_1
+  lab/eigenvectors/initial-1: \lambda_2
+  lab/eigenvectors/initial-2: \lambda^2
+  lab/decompositions/initial-0: V^\top
+  lab/decompositions/initial-1: \sigma_1
+  lab/decompositions/initial-2: \sigma_2
+  lab/least-squares/initial-0: X^\top(y-X\hat w)
+  lab/least-squares/initial-1: \hat w
+  lab/least-squares/initial-2: \hat y
+  lab/decompositions/transpose: V^\top
+  lab/decompositions/cholesky: LL^\top
+  lab/least-squares/extra-0: X^\top X+\lambda I
+  lab/least-squares/extra-1: X^\top X
+  lab/least-squares/extra-2: X^\top y
+  lab/least-squares/extra-3: \hat w
+  lab/least-squares/extra-4: X^\top(y-X\hat w)=0
+  lab/decompositions/extra-0: A=\begin{bmatrix}1.5&1\\0&1.2\end{bmatrix}
+  lab/decompositions/extra-1: V^\top
+  lab/decompositions/extra-2: v_1
+  lab/decompositions/extra-3: v_2
+  lab/decompositions/extra-4: \sigma^2
+  lab/determinant-rank-inverse/extra-0: A^{-1}
+  lab/eigenvectors/matrix: \begin{bmatrix}\text{SLOT_a}&\text{SLOT_b}\\\text{SLOT_c}&\text{SLOT_d}\end{bmatrix}
+  lab/eigenvectors/power: A^{\text{SLOT_n}}=Q\Lambda^{\text{SLOT_n}}Q^{-1}
+  lab/decompositions/singular-entry: \sigma_{\text{SLOT_j}}
+  lab/matrices-as-transformations/entry-0: (BA)_{11}
+  lab/matrices-as-transformations/entry-1: (BA)_{12}
+  lab/matrices-as-transformations/entry-2: (BA)_{21}
+  lab/matrices-as-transformations/entry-3: (BA)_{22}
+bayesian-statistics:
+  statistics/bayesian-statistics/0: \Pr(H\mid E)=\frac{0.3\times0.8}{0.3\times0.8+0.7\times0.2}\approx0.632
+  statistics/bayesian-statistics/1: \mathbb E[p\mid D]=\frac{a+8}{a+b+10}
+  statistics/bayesian-statistics/2: L(p)=p^2(1-p),\quad\Pr(p\mid D)=\frac{L(p)}{0.285}
+  statistics/bayesian-statistics/3: \alpha=\frac1{1+4}=0.2,\quad\mu_{\mathrm{post}}=0.2\hat\theta+0.8\times10
+  statistics/bayesian-statistics/4: \mathbb E[p\mid D]=\frac57,\quad\Pr(K=0,1,2)=\left(\frac6{56},\frac{20}{56},\frac{30}{56}\right)
+  statistics/bayesian-statistics/5: \mathrm{ELBO}=\log_2p(D)-\mathrm{KL}(q\|p)=-1-\mathrm{KL}(q\|p)
+frequentist-statistics:
+  statistics/frequentist-statistics/0: \bar X=\frac{X_1+X_2}{2},\quad\mathbb E[\bar X]=0.5,\quad\operatorname{Var}(\bar X)=0.125
+  statistics/frequentist-statistics/1: L(p)=p^3(1-p),\quad\frac{\mathrm d\log L}{\mathrm dp}=\frac3p-\frac1{1-p}=0,\quad\hat p=\frac34
+  statistics/frequentist-statistics/2: \mathrm{SE}=\frac2{\sqrt{16}}=0.5,\quad10\pm1.96\times0.5=[9.02,10.98]
+  statistics/frequentist-statistics/3: z=\frac{11-10}{2/\sqrt{16}}=2,\quad p=2\Phi(-2)\approx0.0455
+  statistics/frequentist-statistics/4: \Pr(\text{At least one false rejection})=1-0.95^{20}\approx0.642,\quad\alpha_{\mathrm{Bonferroni}}=\frac{0.05}{20}=0.0025
+  statistics/frequentist-statistics/5: \mathrm{SE}=\sqrt{\frac{0.2\times0.8}{100}+\frac{0.3\times0.7}{100}}\approx0.0608,\quad0.1\pm1.96\times0.0608
+  statistics/frequentist-statistics/6: 0.8\times0.4+0.2\times0.8=0.48,\quad0.2\times0.3+0.8\times0.7=0.62
+  statistics/frequentist-statistics/7: \hat\beta_1=\frac32=1.5,\quad\hat\beta_0=3-1.5\times2=0,\quad\hat y=1.5x
+  statistics/frequentist-statistics/se-label: \frac2{\sqrt{16}}
+uncertainty-estimation:
+  statistics/uncertainty-estimation/0: I(p)=-\log_2 p,\quad H(p)=-\sum_kp_k\log_2p_k
+  statistics/uncertainty-estimation/3: \mathrm{Gap}=\frac{0.1+0.2+0.2}{3}\approx0.167
+  statistics/uncertainty-estimation/5: \left\lceil(9+1)(1-0.2)\right\rceil=8
+  statistics/uncertainty-estimation/7: \mathrm{Error}=\frac26\approx0.333,\quad\mathrm{Coverage}=\frac36=0.5

@@ -63,7 +63,7 @@
     ctl.innerHTML =
       '<label>Apply <input type="range" data-k="t" min="0" max="1" step="0.01" aria-label="How much of A to show"></label>' +
       '<button type="button" data-act="play">Apply A</button>' +
-      '<button type="button" data-act="undo">Undo with A⁻¹</button>' +
+      '<button type="button" data-act="undo">Apply the inverse</button>' +
       '<label>Preset <select data-k="preset" aria-label="Preset matrix">' + Object.keys(PRESETS).map(function (k) { return '<option>' + k + '</option>'; }).join('') + '</select></label>' +
       '<button type="button" data-act="solve" aria-pressed="false">Solve Av = y</button>' +
       '<button type="button" data-zoom="det">Determinant, worked</button>' +
@@ -197,7 +197,7 @@
       { t: 'Many inputs, 1 output', parts: ['null', 'out'], state: { m: SING, t: 1, showNull: true },
         body: '<p>Every point on the dashed line lands on the same spot. Once inputs share an output, nothing can tell them apart again.</p>' },
       { t: 'Undo, when you can', parts: ['area', 'f'], state: { m: DEF, t: 1, showNull: false },
-        body: '<p>Press <b>Undo with A⁻¹</b> to send every point back. Undo is switched off whenever the determinant is 0.</p>' },
+        body: ('<p>Press <b>Undo with '+window.InterviewDisplayMath.html("lab/determinant-rank-inverse/extra-0", undefined, true)+'</b> to send every point back. Undo is switched off whenever the determinant is 0.</p>') },
       { t: 'Solve Av = y', parts: ['y', 'x'], state: { mode: 'solve', t: 1 },
         body: '<p>Drag <b class="is-o">y</b>; with det A ≠ 0, exactly 1 <b class="is-v">input vector</b> reaches it. Squash A and there may be no input, or a whole line of them.</p>' }
     ];

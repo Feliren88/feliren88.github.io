@@ -42,7 +42,7 @@
   XP.lab('calculus/derivatives', function (root, api) {
     var fmt = XP.fmt, el = XP.svgEl, stage = root.querySelector('[data-stage]');
     var ctl = root.querySelector('[data-ctl]'), note = root.querySelector('[data-note]');
-    var names = { square: 'x²', sine: 'sin x', exp: 'eˣ', abs: '|x|', 'cube-root': 'Cube root of x' };
+    var names = { square: 'Square function', sine: 'Sine function', exp: 'Exponential function', abs: '|x|', 'cube-root': 'Cube root of x' };
     var initial = { kind: 'square', x: 1, h: 1, zoom: 1 };
     var s = Object.assign({}, initial), motion = { from: Object.assign({}, s), to: Object.assign({}, s) };
     var fraction = 1, dragStart = null;
@@ -251,7 +251,7 @@
     });
     var PAGES = [
       { t: 'A slope between 2 points', parts: ['point', 'secant', 'curve'], state: { kind: 'square', x: 1, h: 1, zoom: 1 },
-        body: '<p>The line through (1, 1) and (2, 4) is a <b class="is-k">secant</b> of x². Therefore, its slope is (4 − 1) ÷ (2 − 1) = 3.</p>' },
+        body: ('<p>The line through (1, 1) and (2, 4) is a <b class="is-k">secant</b> of '+window.InterviewDisplayMath.html("lab/derivatives/worked-0", undefined, true)+'. Therefore, its slope is (4 − 1) ÷ (2 − 1) = 3.</p>') },
       { t: 'Move the second point closer', parts: ['secant', 'tangent'], state: { kind: 'square', x: 1, h: 0.1, zoom: 1 },
         body: '<p>Now h = 0.1 gives a <b class="is-k">secant slope</b> of 2.1. After that, shrinking h brings this slope towards 2.</p>' },
       { t: 'The limiting slope', parts: ['point', 'tangent'], state: { kind: 'square', x: 1, h: 0, zoom: 1 },

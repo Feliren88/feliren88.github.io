@@ -178,7 +178,7 @@
       var r=e.calculate(state),focused=document.activeElement===$('[data-handle]');
       $('[data-drawing]').innerHTML=plot(r.plot,control);$('[data-drag-note]').hidden=r.plot.kind!=='curve';
       $('[data-readouts]').innerHTML=r.rows.map(function(row){return '<div><span>'+esc(row[0])+'</span><strong>'+f(row[1])+'</strong></div>';}).join('');
-      $('[data-equation]').textContent=r.formula;$('[data-worked]').innerHTML=r.worked.map(function(w){return '<p>'+esc(w)+'</p>';}).join('');
+      var values={};r.rows.forEach(function(row,i){values['r'+i]=f(row[1]);});Object.keys(state).forEach(function(key){values[key]=f(state[key]);});window.InterviewDisplayMath.set($('[data-equation]'),'lesson/'+index,values);$('[data-worked]').innerHTML=r.worked.map(function(w){return '<p>'+esc(w)+'</p>';}).join('');
       $('[data-caption]').textContent=guide===0?e.assumption:guide===1?e.operation:r.worked[r.worked.length-1];
       $('#'+id+'-svg-desc').textContent=r.formula;
       e.controls.forEach(function(c){$('[data-control="'+c[0]+'"]').value=state[c[0]];$('[data-value="'+c[0]+'"]').textContent=c[4]===1?state[c[0]]:f(state[c[0]]);});

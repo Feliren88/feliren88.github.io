@@ -17,6 +17,7 @@
   function fmt(x){return x.toFixed(3);}
   function safe(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function box(label,value){return '<div class="ivf-box"><span>'+safe(label)+'</span><strong>'+safe(value)+'</strong></div>';}
+  function mathBox(label,key,values){return '<div class="ivf-box"><span>'+safe(label)+'</span><div class="ivm-render">'+window.InterviewDisplayMath.html(key,values)+'</div></div>';}
   function bar(label,value,max){return '<div class="ivf-bar"><span>'+safe(label)+'</span><div><i style="width:'+Math.max(0,Math.min(100,100*value/max))+'%"></i></div><output>'+fmt(value)+'</output></div>';}
   // Fixed, seeded standard-normal draws keep the illustration reproducible.
   function noiseSequence(){
@@ -36,9 +37,9 @@
         case 'notation':
           var variable=value;
           frames=[box('Integration variable',variable)+box('Endpoint x','2'),
-            box('Same integral','∫₀² '+variable+'² d'+variable+' = 8/3'),
-            box('Fixed parameter θ','3')+box('Fθ(2)','8'),
-            box('Vary x, fix θ','∂F/∂x = 12')+box('Vary θ, fix x','∂F/∂θ = 8/3')];
+            mathBox('Same integral','foundation/notation/integral-'+variable),
+            box('Fixed parameter θ','3')+mathBox('Function value','foundation/notation/value'),
+            mathBox('Vary x, fix θ','foundation/notation/input-gradient')+mathBox('Vary θ, fix x','foundation/notation/parameter-gradient')];
           texts[1]='Using '+variable+' consistently gives the same integral, 8/3. The argument x remains the endpoint.';
           texts[3]+=' The input derivative equals 12; the parameter derivative equals 8/3.';
           break;
@@ -46,14 +47,14 @@
           frames=[box('Score of outcome 0','0')+box('Score of outcome 1',String(value)),
             bar('Weight 0',1,Math.max(1,m.weights[1]))+bar('Weight 1',m.weights[1],Math.max(1,m.weights[1]))+box('Total Zθ',fmt(m.z)),
             bar('Probability 0',m.probabilities[0],1)+bar('Probability 1',m.mean,1)+box('Sum','1'),
-            box('Weighted average','0 × '+fmt(m.probabilities[0])+' + 1 × '+fmt(m.mean)+' = '+fmt(m.mean))];
+            mathBox('Weighted average','foundation/normalise/average',{zero:fmt(m.probabilities[0]),one:fmt(m.mean),mean:fmt(m.mean)})];
           texts[1]+=' With θ = '+value+', the total is approximately '+fmt(m.z)+'.';
           texts[2]+=' Outcome 1 has probability approximately '+fmt(m.mean)+'.';
           texts[3]+=' The average equals approximately '+fmt(m.mean)+'.';
           break;
         case 'normaliser-gradient':
           frames=[box('Normaliser Zθ',fmt(m.z)),box('Derivative of Zθ',fmt(m.weights[1])),
-            box('Divide by Zθ',fmt(m.weights[1])+' / '+fmt(m.z)),
+            mathBox('Divide by the normaliser','foundation/normaliser-gradient/ratio',{weight:fmt(m.weights[1]),total:fmt(m.z)}),
             bar('Model weight for a = 1',m.mean,1)+box('Derivative and average',fmt(m.mean))];
           texts[3]+=' At θ = '+value+', both equal approximately '+fmt(m.mean)+'.';
           break;
@@ -82,7 +83,7 @@
         case 'autograd':
           var input=value==='Input x',chosen=input?'x':'w',other=input?'w':'x',g=gradients(2,3),derivative=input?g.input:g.parameter;
           frames=[box('Forward path','x = 3 → y = 2x = 6 → L = 18'),
-            box('Chosen gradient','∂L/∂'+chosen+' = '+derivative),
+            mathBox('Chosen gradient','foundation/autograd/'+(input?'input':'parameter')+'-gradient'),
             '<pre><code>'+safe('import torch\nx = torch.tensor(3.0)\nw = torch.tensor(2.0)\n'+chosen+'.requires_grad_(True)\n'+other+'.requires_grad_(False)\ny = w * x\nloss = y.square() / 2\nloss.backward()')+'</code></pre>',
             '<pre><code>'+safe('with torch.no_grad():\n    '+chosen+' -= 0.01 * '+chosen+'.grad\n'+chosen+'.grad = None')+'</code></pre>'+box('Updated '+chosen,fmt((input?3:2)-0.01*derivative))];
           texts[1]+=' Selecting '+chosen+' gives gradient '+derivative+'.';

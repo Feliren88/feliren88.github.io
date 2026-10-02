@@ -32,7 +32,9 @@
     var W = 1400, H = 640;
     var data, tipper, dlg, guideCard;
     var S = { ex: 0, block: 0, head: 0, temp: 0.8, mode: 'k', k: 5, p: 0.9, sampled: null, focusTok: null, stage: 3 };
-    var STAGES = ['Q·Kᵀ', '÷ √64', 'Mask', 'Softmax'];
+    var STAGES = ['Query-key product', 'Scale scores', 'Mask', 'Softmax'];
+    var STAGE_MATH = ['gpt/score', 'gpt/scale'];
+    function stageLabel(at) { return at < 2 ? window.InterviewDisplayMath.html(STAGE_MATH[at], {}, true) : STAGES[at]; }
     var svgEl = XP.svgEl, ribbon = XP.ribbon, curve = XP.curve;
 
     function Ex() { return data.examples[S.ex]; }
@@ -298,9 +300,9 @@
         var M = stageMatrix(S.block, S.head, S.stage), mx = 0;
         M.forEach(function (row) { row.forEach(function (v) { if (v !== null && isFinite(v)) mx = Math.max(mx, Math.abs(v)); }); });
         html = '<div class="xp-seg" role="group" aria-label="Stage">' + STAGES.map(function (st, i) {
-          return '<button type="button" data-stage="' + i + '" aria-pressed="' + (i === S.stage) + '">' + st + '</button>';
+          return '<button type="button" data-stage="' + i + '" aria-pressed="' + (i === S.stage) + '">' + stageLabel(i) + '</button>';
         }).join('') + '</div>' +
-          '<div class="xp-attn"><table class="xp-mat"><caption>Block ' + (S.block + 1) + ', head ' + (S.head + 1) + ', ' + STAGES[S.stage] +
+          '<div class="xp-attn"><table class="xp-mat"><caption>Block ' + (S.block + 1) + ', head ' + (S.head + 1) + ', ' + stageLabel(S.stage) +
           (S.stage === 3 ? ' (each row sums to 1)' : '') + '</caption><thead><tr><th scope="col"><span class="xp-axis">query ↓ key →</span></th>' +
           E.tokens.map(function (t) { return '<th scope="col">' + XP.esc(t).replace(/^ /, '·') + '</th>'; }).join('') + '</tr></thead><tbody>' +
           M.map(function (row, r) {
@@ -310,7 +312,7 @@
               return '<td style="' + XP.tint(v, S.stage === 3 ? 1 : mx, S.stage === 3) + '">' + XP.fmt(v, 2) + '</td>';
             }).join('') + '</tr>';
           }).join('') + '</tbody></table></div>' +
-          '<p class="xp-note">Q·Kᵀ is the raw dot product; dividing by √64 = 8 keeps it from growing with head size; the mask removes later keys; softmax turns each row into weights. Scores above the diagonal are not kept in the trace, so they show as dots.</p>';
+          '<p class="xp-note">' + window.InterviewDisplayMath.html('gpt/score', {}, true) + ' is the raw dot product; dividing by ' + window.InterviewDisplayMath.html('gpt/scale-equality', {}, true) + ' keeps it from growing with head size; the mask removes later keys; softmax turns each row into weights. Scores above the diagonal are not kept in the trace, so they show as dots.</p>';
       }
       if (which === 'probs') {
         var D = dist();
@@ -522,7 +524,7 @@
             }).join('') + '</ol>';
           }).join(''),
           say: S.scale
-            ? 'Dividing by √24 keeps the scores in a range where softmax still spreads weight around. Turn the division off and watch the weights collapse onto one word.'
+            ? 'Dividing by ' + window.InterviewDisplayMath.html('gpt/scratch-scale', {}, true) + ' keeps the scores in a range where softmax still spreads weight around. Turn the division off and watch the weights collapse onto one word.'
             : 'Without the division, the largest score dominates and softmax puts almost all the weight on one word. The gradient through the others nearly vanishes.'
         },
         {

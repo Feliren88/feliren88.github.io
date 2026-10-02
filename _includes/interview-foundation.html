@@ -5,12 +5,14 @@
   <p class="ivf-prerequisite">{{ bridge.prerequisite }}</p>
   <dl class="ivm-where">
     {% for item in bridge.symbols %}
-    <div class="ivm-term"><dt><code>{{ item.symbol | escape }}</code></dt><dd>{{ item.meaning }}</dd></div>
+    {% assign symbol_key = 'foundation/' | append: bridge.kind | append: '/symbol/' | append: forloop.index0 %}
+    <div class="ivm-term"><dt>{% if site.data.interview_math.display[page.topic_id][symbol_key] %}{{ site.data.interview_math.display[page.topic_id][symbol_key] }}{% else %}<code>{{ item.symbol | escape }}</code>{% endif %}</dt><dd>{{ item.meaning }}</dd></div>
     {% endfor %}
   </dl>
   <ol class="ivf-derivation">
     {% for step in bridge.steps %}
-    <li><code>{{ step.equation | escape }}</code><p>{{ step.read }}</p></li>
+    {% assign equation_key = 'foundation/' | append: bridge.kind | append: '/' | append: forloop.index0 %}
+    <li><div class="ivm-render">{{ site.data.interview_math.display[page.topic_id][equation_key] }}</div><p>{{ step.read }}</p></li>
     {% endfor %}
   </ol>
   <div class="ivf-interactive" hidden>

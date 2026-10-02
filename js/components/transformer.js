@@ -448,8 +448,12 @@
 
   /* An operation, written the way the paper writes it. */
   function op(formula, said) {
+    var equation = h('div', { 'class': 'tf-formula' });
+    if (formula.indexOf('transformer/') === 0) {
+      window.InterviewDisplayMath.set(equation, formula);
+    } else { equation.textContent = formula; }
     return h('div', { 'class': 'tf-op' }, [
-      h('code', { 'class': 'tf-formula', text: formula }),
+      equation,
       said ? h('p', { 'class': 'tf-op-said', text: said }) : null
     ]);
   }
@@ -509,7 +513,10 @@
     return h('dl', { 'class': 'tf-readout' },
       rows.reduce(function (acc, r) {
         acc.push(h('dt', { text: r[0] }));
-        acc.push(h('dd', { text: r[1] }));
+        var value = h('dd');
+        if (r[1] && typeof r[1] === 'object') window.InterviewDisplayMath.set(value, r[1].math, r[1].values);
+        else value.textContent = r[1];
+        acc.push(value);
         return acc;
       }, []));
   }
@@ -645,7 +652,7 @@
         pfrom: '(B, T)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op(
-            'X = Embedding(tokens) × √d_model + PE',
+            'transformer/embedding',
             'Each token starts as an embedding, a vector of numbers. Section 3.4 scales it by the square root of the model width. Then the model adds a vector that represents position.'));
           out.appendChild(stage(grid(M.x0, {
             rows: TOKENS, cols: AXES,
@@ -659,7 +666,7 @@
         pfrom: '(B, T, 512)', pto: '3 × (B, h, T, 64)',
         draw: function (out, c) {
           out.appendChild(op(
-            'head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V)',
+            'transformer/head',
             c.hd.name + ' illustrates ' + c.hd.asks + '. Each projection uses all ' +
             d + ' input dimensions to calculate ' + dk + ' output dimensions.'));
           out.appendChild(stage([
@@ -674,7 +681,7 @@
         from: '2 × (5, 4)', to: '(5, 5)',
         pfrom: '2 × (B, h, T, 64)', pto: '(B, h, T, T)',
         draw: function (out, c) {
-          out.appendChild(op('Q K^T',
+          out.appendChild(op('transformer/score',
             'Multiply each query by each key to obtain a score. Entry i, j measures the match between the query at position i and the key at position j.'));
           out.appendChild(stage(grid(c.per.raw, {
             rows: TOKENS, cols: TOKENS,
@@ -689,7 +696,7 @@
         from: '(5, 5)', to: '(5, 5)',
         pfrom: '(B, h, T, T)', pto: '(B, h, T, T)',
         draw: function (out, c) {
-          out.appendChild(op('Q K^T / √d_k',
+          out.appendChild(op('transformer/scaled-score',
             'With d_k = ' + dk + ' the divisor is ' + Math.sqrt(dk).toFixed(0) +
             '. Dividing by this value controls the score scale. Otherwise, larger vectors can produce extreme probabilities with very small gradients.'));
           out.appendChild(stage([
@@ -705,7 +712,7 @@
         from: '(5, 5)', to: '(5, 5)',
         pfrom: '(B, h, T, T)', pto: '(B, h, T, T)',
         draw: function (out, c) {
-          out.appendChild(op('score_ij ← −∞  for j > i',
+          out.appendChild(op('transformer/mask',
             st.masked
               ? 'The model sets scores for later positions to minus infinity. The softmax operation then gives those positions zero weight.'
               : 'The encoder can use the whole input sequence. Turn on Mask later positions to see causal attention, which blocks later tokens.'));
@@ -723,7 +730,7 @@
         from: '(5, 5)', to: '(5, 5)',
         pfrom: '(B, h, T, T)', pto: '(B, h, T, T)',
         draw: function (out, c) {
-          out.appendChild(op('A = softmax(Q K^T / √d_k)',
+          out.appendChild(op('transformer/weights',
             'Softmax converts each score row into non-negative weights that add up to one.'));
           out.appendChild(stage(grid(c.per.attn, {
             rows: TOKENS, cols: TOKENS, max: 1,
@@ -739,7 +746,7 @@
         from: '(5, 5) × (5, 4)', to: '(5, 4)',
         pfrom: '(B, h, T, T)', pto: '(B, h, T, 64)',
         draw: function (out, c) {
-          out.appendChild(op('A V',
+          out.appendChild(op('transformer/mix',
             'For each token, multiply the value vectors by its attention weights and add the results.'));
           out.appendChild(stage([
             grid(c.per.attn, { rows: TOKENS, cols: TOKENS, max: 1, caption: 'A' }),
@@ -753,7 +760,7 @@
         from: '2 × (5, 4)', to: '(5, 8)',
         pfrom: '8 × (B, T, 64)', pto: '(B, T, 512)',
         draw: function (out, c) {
-          out.appendChild(op('Concat(head_1, …, head_h)',
+          out.appendChild(op('transformer/concat',
             'Join the head outputs along their feature dimension. In this example, h × d_v equals the model width d_model.'));
           out.appendChild(stage(grid(c.res.cat, {
             rows: TOKENS,
@@ -771,7 +778,7 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out, c) {
           out.appendChild(op(
-            'MultiHead(Q, K, V) = Concat(head_1, …, head_h) W^O',
+            'transformer/multihead',
             'The output matrix combines the head outputs into one vector for each token.'));
           out.appendChild(stage(grid(c.res.out, {
             rows: TOKENS, cols: AXES, caption: 'The layer’s output'
@@ -830,7 +837,7 @@
         from: '(5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
-          out.appendChild(op('x',
+          out.appendChild(op('transformer/input',
             'These vectors form the residual stream, the representation passed between sub-layers. Each sub-layer adds an update of the same width. Therefore, the blocks can be repeated.'));
           out.appendChild(stage(grid(M.x0, {
             rows: TOKENS, cols: AXES, caption: 'The input residual stream'
@@ -843,7 +850,7 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op(
-            st.pre ? 'MultiHead(LayerNorm(x))' : 'MultiHead(x)',
+            st.pre ? 'transformer/pre-attention' : 'transformer/attention',
             st.pre
               ? 'Pre-norm normalises the input before attention. The residual connection also keeps a direct copy of the input.'
               : 'In the original paper, attention uses the input directly. Layer normalisation follows the residual addition.'));
@@ -858,8 +865,8 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op(
-            st.pre ? 'x + MultiHead(LayerNorm(x))'
-              : 'LayerNorm(x + MultiHead(x))',
+            st.pre ? 'transformer/pre-residual'
+              : 'transformer/post-residual',
             st.pre
               ? 'Pre-norm adds the attention output directly to the residual input. This arrangement can improve gradient behaviour. Whether training needs a warm-up schedule depends on the setup.'
               : 'Section 3.1 adds the sub-layer output to its input, then applies layer normalisation.'));
@@ -876,7 +883,7 @@
         from: '(5, 8)', to: '(5, 32)',
         pfrom: '(B, T, 512)', pto: '(B, T, 2048)',
         draw: function (out) {
-          out.appendChild(op('max(0, x W_1 + b_1)',
+          out.appendChild(op('transformer/relu',
             'The same feed-forward network processes each token separately. This is called position-wise processing. Its hidden layer is four times wider than its input here.'));
           out.appendChild(stage(grid(st.pre ? M.pre.ff.act : M.ff.act, {
             rows: TOKENS, dense: true,
@@ -895,7 +902,7 @@
         from: '(5, 32)', to: '(5, 8)',
         pfrom: '(B, T, 2048)', pto: '(B, T, 512)',
         draw: function (out) {
-          out.appendChild(op('FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
+          out.appendChild(op('transformer/ffn',
             'The second matrix restores the original width. This lets the model add the result to the residual stream.'));
           out.appendChild(stage(grid(st.pre ? M.pre.ff.out : M.ff.out, {
             rows: TOKENS, cols: AXES, caption: 'The feed-forward output added to the input'
@@ -908,7 +915,7 @@
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
           out.appendChild(op(
-            st.pre ? 'x + FFN(LayerNorm(x))' : 'LayerNorm(x + FFN(x))',
+            st.pre ? 'transformer/pre-ffn' : 'transformer/post-ffn',
             'This completes one block. Its output becomes the input to the next block.'));
           out.appendChild(stage(grid(st.pre ? M.pre.res2 : M.res2, {
             rows: TOKENS, cols: AXES, caption: 'The block output'
@@ -920,7 +927,7 @@
         from: 'shapes', to: 'a number',
         pfrom: null, pto: null,
         draw: function (out) {
-          out.appendChild(op('4 d² per attention sub-layer,  2 d d_ff per FFN',
+          out.appendChild(op('transformer/parameter-count',
             'Attention uses four square weight matrices, W^Q, W^K, W^V, and W^O. The feed-forward network uses two rectangular weight matrices.'));
           out.appendChild(readout([
             ['one attention sub-layer', commas(attnP)],
@@ -970,7 +977,7 @@
         from: '(5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
-          out.appendChild(op('softmax(Q K^T / √d_k) V',
+          out.appendChild(op('transformer/attention-output',
             'Without a mask or position information, attention alone does not represent order. Rearranging the input rows rearranges its output rows in the same way. Therefore, this model adds position information to the input vectors.'));
           out.appendChild(stage(grid(M.emb, {
             rows: TOKENS, cols: AXES,
@@ -984,7 +991,7 @@
         pfrom: 'pos', pto: '(1, 512)',
         draw: function (out) {
           out.appendChild(op(
-            'PE(pos, 2i) = sin(pos / 10000^(2i/d_model))\nPE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))',
+            'transformer/position-pair',
             'Even dimensions take the sine, odd ones the cosine, and i is the index of the pair.'));
           out.appendChild(stage(grid([PE16[st.pos]], {
             rows: ['pos ' + st.pos], max: 1,
@@ -997,7 +1004,7 @@
         from: 'positions 0…15', to: '(16, 8)',
         pfrom: null, pto: null,
         draw: function (out) {
-          out.appendChild(op('wavelength = 2π · 10000^(2i/d_model)',
+          out.appendChild(op('transformer/wavelength',
             'The first sine and cosine pair changes rapidly with position. Later pairs change more slowly. Together, these values distinguish positions in the displayed range.'));
           out.appendChild(stage(grid(PE16, {
             rows: PE16.map(function (_, i) { return String(i); }),
@@ -1018,7 +1025,7 @@
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
         draw: function (out) {
-          out.appendChild(op('X = Embedding(tokens) × √d_model + PE',
+          out.appendChild(op('transformer/embedding',
             'First, scale the token embedding. Then add its position vector. The result contains information about both token identity and position.'));
           out.appendChild(stage([
             grid(M.emb, { rows: TOKENS, caption: 'embedding × √8' }),
@@ -1032,7 +1039,7 @@
         from: 'pos', to: 'pos + k',
         pfrom: null, pto: null,
         draw: function (out) {
-          out.appendChild(op('PE(pos + k) = M_k · PE(pos)',
+          out.appendChild(op('transformer/position-offset',
             'For a fixed offset k, a linear transformation maps the encoding at pos to the encoding at pos + k. This property can help attention learn relationships between relative positions.'));
           var k = 2, a = st.pos, b = Math.min(LEN - 1, st.pos + k);
           out.appendChild(stage([
@@ -1078,7 +1085,7 @@
         pfrom: null, pto: null,
         draw: function (out) {
           var n = st.n, d = st.d, r = st.r, k = st.k;
-          out.appendChild(op('self-attention  n² · d      recurrent  n · d²',
+          out.appendChild(op('transformer/operation-count',
             'Compare the approximate operation counts for four types of layer. Move the slider to see how sequence length affects each count.'));
           out.appendChild(readout([
             ['self-attention, per layer', commas(n * n * d)],
@@ -1101,12 +1108,10 @@
           out.appendChild(op('maximum path length between any two positions',
             'Path length counts the processing steps connecting two positions. The paper argues that shorter paths can make relationships between distant tokens easier to learn.'));
           out.appendChild(readout([
-            ['self-attention', 'O(1)'],
-            ['recurrent', 'O(n)  =  ' + commas(st.n)],
-            ['convolutional, dilated', 'O(log_k n)  ≈  ' +
-              Math.ceil(Math.log(st.n) / Math.log(st.k))],
-            ['restricted self-attention', 'O(n / r)  =  ' +
-              Math.ceil(st.n / st.r)]
+            ['self-attention', {math: 'transformer/path-constant'}],
+            ['recurrent', {math: 'transformer/path-recurrent', values: {count: commas(st.n)}}],
+            ['convolutional, dilated', {math: 'transformer/path-convolution', values: {count: Math.ceil(Math.log(st.n) / Math.log(st.k))}}],
+            ['restricted self-attention', {math: 'transformer/path-restricted', values: {count: Math.ceil(st.n / st.r)}}]
           ]));
           out.appendChild(note('Sequential operations must wait for earlier steps. A self-attention layer has O(1) sequential steps across positions, while a recurrent layer has O(n). Thus, recurrence limits parallel processing.'));
         }
@@ -1118,7 +1123,7 @@
         draw: function (out) {
           var N = PAPER.N, hh = PAPER.h, dh = PAPER.dk, B = 2;
           var per = 2 * N * hh * dh * B;
-          out.appendChild(op('2 × layers × heads × d_head × bytes  per token',
+          out.appendChild(op('transformer/cache',
             'The factor two counts both keys and values. A full-context cache stores another row for each generated token, so its memory use grows with sequence length.'));
           out.appendChild(readout([
             ['per token, base model, 16-bit', bytes(per)],
@@ -1133,7 +1138,7 @@
         from: '(n, n) in memory', to: 'tiles',
         pfrom: null, pto: null,
         draw: function (out) {
-          out.appendChild(op('softmax(Q K^T / √d_k) V,  computed in tiles',
+          out.appendChild(op('transformer/tiled-attention',
             'FlashAttention computes the same attention operation in small blocks. It avoids storing the full n by n score matrix in main GPU memory. Each block is used as part of the calculation, then discarded.'));
           out.appendChild(stage(grid(M.mh.per[0].attn, {
             rows: TOKENS, cols: TOKENS, max: 1,
@@ -1221,7 +1226,7 @@
         from: '(1, 8)', to: '(1, 5)',
         pfrom: '(B, 1, 512)', pto: '(B, 1, 37000)',
         draw: function (out) {
-          out.appendChild(op('logits = h · E^T',
+          out.appendChild(op('transformer/logits',
             'Section 3.4 shares the embedding weights with the output projection. The dot product between the final hidden vector and each token embedding gives that token a score, called a logit.'));
           out.appendChild(stage(grid([logits], {
             rows: ['logit'], cols: TOKENS,
@@ -1236,7 +1241,7 @@
         draw: function (out) {
           var pr = probs(st.temp);
           var top = pr.indexOf(Math.max.apply(null, pr));
-          out.appendChild(op('p = softmax(logits / temperature)',
+          out.appendChild(op('transformer/temperature',
             'A temperature below one increases the probability of higher-scoring tokens. A temperature above one spreads probability more evenly, making lower-scoring tokens more likely to be sampled.'));
           out.appendChild(stage(grid([pr], {
             rows: ['p'], cols: TOKENS, max: 1,
@@ -1312,35 +1317,35 @@
         said: 'The input sentence contains the five example tokens shown on this page.' },
       { id: 'in-embed', x: EX, y: 566, w: 150, h: 30, label: 'Input Embedding',
         from: '(5 tokens)', to: '(5, 8)', pfrom: '(B, T)', pto: '(B, T, 512)',
-        formula: 'lookup, then × √d_model',
+        formula: 'transformer/lookup',
         said: 'Each token has an embedding vector. Scale that vector before adding its position encoding.',
         tensor: function () { return { m: M.emb, cols: AXES }; } },
       { id: 'in-pe', x: EX, y: 514, w: 150, h: 30, label: '⊕  Positional Encoding',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'PE(pos, 2i) = sin(pos / 10000^(2i/d_model))',
+        formula: 'transformer/position',
         said: 'Add a position vector to each token embedding. This supplies order information that unmasked attention alone does not contain.',
         tensor: function () { return { m: M.x0, cols: AXES }; } },
       { id: 'enc-mha', x: EX, y: 440, w: 150, h: 34, label: 'Multi-Head Attention',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'Concat(head_1, …, head_h) W^O,  no mask',
+        formula: 'transformer/encoder-heads',
         said: 'Encoder self-attention computes queries, keys, and values from the same input. Each position can use information from every input position.',
         tensor: function () { return { m: M.mh.out, cols: AXES }; } },
       { id: 'enc-an1', x: EX, y: 392, w: 150, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'LayerNorm(x + Sublayer(x))',
+        formula: 'transformer/sublayer',
         said: 'Add the sub-layer output to its input. Then normalise the sum.',
         tensor: function () { return { m: M.res1, cols: AXES }; } },
       { id: 'enc-ff', x: EX, y: 330, w: 150, h: 34, label: 'Feed Forward',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
+        formula: 'transformer/ffn',
         said: 'The first matrix increases the width to d_ff. ReLU sets negative activations to zero. The second matrix restores the input width. Apply these operations separately at every position.',
         tensor: function () { return { m: M.ff.out, cols: AXES }; } },
       { id: 'enc-an2', x: EX, y: 282, w: 150, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'LayerNorm(x + FFN(x))',
+        formula: 'transformer/post-ffn',
         said: 'This completes an encoder layer. The paper uses six such layers, and the decoder uses the final encoder output.',
         tensor: function () { return { m: M.res2, cols: AXES }; } },
 
@@ -1363,7 +1368,7 @@
       { id: 'dec-mmha', x: DX, y: 440, w: 186, h: 34,
         label: 'Masked Multi-Head Attention',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'score_ij ← −∞ for j > i, then softmax',
+        formula: 'transformer/decoder-mask',
         said: 'Decoder self-attention blocks later positions. With shifted targets, this prevents the model from reading the answer during training.',
         tensor: function () {
           return { m: M.mhMasked.per[0].attn, rows: TOKENS, cols: TOKENS, max: 1 };
@@ -1371,13 +1376,13 @@
       { id: 'dec-an1', x: DX, y: 392, w: 186, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'LayerNorm(x + MaskedMultiHead(x))',
+        formula: 'transformer/masked-residual',
         said: 'The updated decoder vectors now provide the queries for attention over the encoder output.',
         tensor: function () { return { m: M.dec.self, cols: AXES }; } },
       { id: 'dec-cross', x: DX, y: 330, w: 186, h: 34, label: 'Multi-Head Attention',
         from: 'Q (5, 8), K V (5, 8)', to: '(5, 8)',
         pfrom: 'Q (B, T, 512), K V (B, S, 512)', pto: '(B, T, 512)',
-        formula: 'Attention(Q from decoder, K and V from encoder)',
+        formula: 'transformer/cross-attention',
         said: 'Cross-attention connects the decoder to the encoder. Queries come from the decoder representation, while keys and values come from the encoder output. Thus, each decoder position can use the whole source sequence.',
         tensor: function () {
           return { m: M.dec.cross.per[0].attn, rows: TOKENS, cols: TOKENS, max: 1,
@@ -1386,27 +1391,27 @@
       { id: 'dec-an2', x: DX, y: 282, w: 186, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'LayerNorm(x + MultiHead(x, encoder))',
+        formula: 'transformer/cross-residual',
         said: 'Add the cross-attention output to the decoder input, then normalise the sum.',
         tensor: function () { return { m: M.dec.res2, cols: AXES }; } },
       { id: 'dec-ff', x: DX, y: 222, w: 186, h: 34, label: 'Feed Forward',
         from: '(5, 8)', to: '(5, 8)', pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'FFN(x) = max(0, x W_1 + b_1) W_2 + b_2',
+        formula: 'transformer/ffn',
         said: 'The decoder feed-forward network has the same input and output widths as the encoder feed-forward network.',
         tensor: function () { return { m: M.dec.ff.out, cols: AXES }; } },
       { id: 'dec-an3', x: DX, y: 174, w: 186, h: 28, label: 'Add & Norm',
         from: '(5, 8) + (5, 8)', to: '(5, 8)',
         pfrom: '(B, T, 512)', pto: '(B, T, 512)',
-        formula: 'LayerNorm(x + FFN(x))',
+        formula: 'transformer/post-ffn',
         said: 'This completes one decoder layer. The paper uses six layers.',
         tensor: function () { return { m: M.dec.res3, cols: AXES }; } },
       { id: 'head-linear', x: DX, y: 118, w: 186, h: 30, label: 'Linear',
         from: '(5, 8)', to: '(5, 5)', pfrom: '(B, T, 512)', pto: '(B, T, 37000)',
-        formula: 'logits = h · E^T',
+        formula: 'transformer/logits',
         said: 'Multiply by the transpose of the shared embedding matrix to obtain one score per vocabulary token.' },
       { id: 'head-softmax', x: DX, y: 70, w: 186, h: 30, label: 'Softmax',
         from: '(5, 5)', to: '(5, 5)', pfrom: '(B, T, 37000)', pto: '(B, T, 37000)',
-        formula: 'p = softmax(logits)',
+        formula: 'transformer/softmax',
         said: 'Softmax converts the token scores into probabilities that add up to one.' },
       { id: 'head-probs', x: DX, y: 24, w: 186, h: 26,
         label: 'Output Probabilities', soft: true,

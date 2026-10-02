@@ -1,0 +1,13 @@
+math:
+  'foundation/notation/integral-t': '\int_0^2 t^2\,\mathrm{d}t=\frac{8}{3}'
+  'foundation/notation/integral-u': '\int_0^2 u^2\,\mathrm{d}u=\frac{8}{3}'
+  'foundation/notation/value': 'F_\theta(2)=8'
+  'foundation/notation/input-gradient': '\frac{\partial F_\theta}{\partial x}=12'
+  'foundation/notation/parameter-gradient': '\frac{\partial F_\theta}{\partial\theta}=\frac{8}{3}'
+information-theory:
+  'foundation/normalise/average': '0\cdot\text{SLOT_zero}+1\cdot\text{SLOT_one}=\text{SLOT_mean}'
+calculus:
+  'foundation/normaliser-gradient/ratio': '\frac{\text{SLOT_weight}}{\text{SLOT_total}}'
+deep-learning:
+  'foundation/autograd/input-gradient': '\frac{\partial L}{\partial x}=12'
+  'foundation/autograd/parameter-gradient': '\frac{\partial L}{\partial w}=18'

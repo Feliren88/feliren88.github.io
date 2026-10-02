@@ -9,6 +9,7 @@ with sync_playwright() as p:
             page=browser.new_page(viewport={'width':width,'height':1000},reduced_motion='reduce')
             errors=[]
             page.on('pageerror',lambda e:errors.append(str(e)))
+            page.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
             page.goto(base+'/information-theory/')
             page.evaluate('(theme)=>document.documentElement.dataset.theme=theme',theme)
             lessons=page.locator('.it-lesson')
@@ -37,10 +38,10 @@ with sync_playwright() as p:
                 assert float(root.locator('[data-progress]').input_value())==.05
                 root.locator('[data-reset]').click()
                 root.locator('[data-play]').click()
-                page.wait_for_timeout(450)
+                root.locator('[data-progress]').evaluate('(el)=>new Promise(resolve=>{const timer=setInterval(()=>{if(Number(el.value)>=.25){clearInterval(timer);resolve();}},30);})')
                 assert float(root.locator('[data-progress]').input_value())>0
-                assert root.locator('[data-equation]').inner_text()!=initial
-                root.locator('[data-play]').click()
+                assert root.locator('[data-equation]').inner_text()!=initial, (i, 'Playback equation did not change')
+                root.locator('[data-play]').evaluate('(el)=>{if(el.getAttribute("aria-pressed")==="true")el.click();}')
                 assert root.locator('[data-play]').get_attribute('aria-pressed')=='false'
                 root.locator('[data-reset]').click()
                 handle=root.locator('[data-handle]')

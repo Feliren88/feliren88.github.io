@@ -1,11 +1,11 @@
 <section class="xp lab lab-gradients" id="lab-calculus-gradients" aria-labelledby="lab-calculus-gradients-title">
   <header class="lab-head"><h3 id="lab-calculus-gradients-title">Choose where to move next</h3></header>
-  <p class="lab-eq" data-surface-formula>f(x, y) = x² + 2y² + 0.2xy</p>
-  <p class="lab-eq" data-map-formula hidden>Full map F(x, y) = [x + 0.2y², y + 0.2x²]</p>
+  <p class="lab-eq" data-surface-formula>{{ site.data.interview_math.display[page.topic_id]["lab/gradients-jacobians-hessians/initial-0"] | replace: 'display="block"', 'display="inline"' }}</p>
+  <p class="lab-eq" data-map-formula hidden>{{ site.data.interview_math.display[page.topic_id]["lab/gradients-jacobians-hessians/initial-1"] | replace: 'display="block"', 'display="inline"' }}</p>
   <p class="lab-eq" data-contour-eq>
     <span class="lab-term is-q" data-term="point">(x, y) = (<span data-val="x">1</span>, <span data-val="y">0.5</span>), f = <span data-val="fx">1.6</span></span>
     <span class="lab-term is-o" data-term="gradient">∇f = (<span data-val="gx">2.1</span>, <span data-val="gy">2.2</span>)</span>
-    <span class="lab-term is-k" data-term="direction">Dᵤf = <span data-val="directionalRate">2.1</span>, θ = <span data-val="angle">0</span>°</span>
+    <span class="lab-term is-k" data-term="direction">{{ site.data.interview_math.display[page.topic_id]["lab/gradients-jacobians-hessians/initial-2"] | replace: 'display="block"', 'display="inline"' }} = <span data-val="directionalRate">2.1</span>, θ = <span data-val="angle">0</span>°</span>
   </p>
   <p class="lab-eq" data-mapping-eq hidden>
     <span class="lab-term is-q" data-term="point">Input (<span data-val="x">1</span>, <span data-val="y">0.5</span>)</span>
@@ -13,7 +13,7 @@
     <span class="lab-term is-k" data-term="local">ε = <span data-val="epsilon">0.5</span>, corner error = <span data-val="patchError">0.0707</span></span>
   </p>
   <p class="lab-eq" data-curvature-eq hidden>
-    <span class="lab-term is-o" data-term="curvature">H = [[2, 0.2], [0.2, 4]]</span>
+    <span class="lab-term is-o" data-term="curvature">{{ site.data.interview_math.display[page.topic_id]["lab/gradients-jacobians-hessians/initial-3"] | replace: 'display="block"', 'display="inline"' }}</span>
     <span class="lab-term is-k" data-term="axes">Curvatures <span data-val="curvatureLow">1.9802</span> and <span data-val="curvatureHigh">4.0198</span></span>
   </p>
   <p class="lab-eq" data-shapes-eq hidden>

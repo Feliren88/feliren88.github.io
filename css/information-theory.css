@@ -22,7 +22,7 @@
 .it-calculation { max-width: 66ch; line-height: var(--rd-line, 1.65); }
 .it-calculation h3 { font-size: calc(18px * var(--it-scale)); margin-bottom: 12px; }
 .it-calculation p { margin: 12px 0; }
-.it-formula { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.it-formula { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; max-width: 100%; overflow-x: auto; padding-block: .4rem; }
 .it-calculation details { padding: 12px 0; }
 .it-calculation summary { cursor: pointer; }
 .it-status { display: block; margin-top: 12px; min-height: 1.5em; font-size: calc(13px * var(--it-scale)); color: var(--muted); }

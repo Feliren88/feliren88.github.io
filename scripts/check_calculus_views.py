@@ -491,6 +491,7 @@ with sync_playwright() as p:
             for name in SELECTED:
                 page = browser.new_page(viewport={'width': width, 'height': 1000}, reduced_motion='reduce')
                 page.add_init_script("localStorage.setItem('theme', '" + theme + "')")
+                page.route("**/*", lambda route: route.continue_() if route.request.url.startswith(BASE) else route.abort())
                 errors = []
                 page.on('pageerror', lambda e: errors.append(str(e)))
                 TESTS[name](page)

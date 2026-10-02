@@ -15,7 +15,7 @@ The external energy-model notebook informed the gap analysis but remains outside
 | Computer Vision, module 1, after convolution arithmetic | The stated convolution maps [B,1,28,28] to [B,4,14,14]. Flattening preserves B. Sum and mean scale gradients differently. |
 
 The passage inventory includes introductions, prerequisites, symbols, derivations, live diagrams, captions, controls, notes, and recall answers.
-The equations are authored Unicode expressions rather than entries in the generated MathML table.
+The equations now use authored LaTeX from `_data/interview_display_math/`, converted to MathML by `scripts/render_math.py`.
 Therefore, the static derivation remains available when JavaScript is disabled.
 The hub route and shared readiness statement explain the observable reading goal.
 

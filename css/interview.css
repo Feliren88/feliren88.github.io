@@ -2963,6 +2963,11 @@ html[data-theme="light"] .ivm {
 }
 .maths-node { fill: var(--bg) !important; stroke: var(--border-ui); stroke-width: 1.5; }
 .maths-node.is-current { stroke: var(--accent); stroke-width: 3; }
+.maths-mathline { display: flex; align-items: center; height: 56px; color: var(--text); font-size: 16px; }
+.maths-mathline math { font-family: "STIX Two Math", "Cambria Math", serif; margin: 0; }
+.syl-page math { font-family: "STIX Two Math", "Cambria Math", serif; }
+.ivf math { color: var(--text); font-family: "STIX Two Math", "Cambria Math", serif; }
+.ivf .ivm-term dt math { font-size: var(--fs-xs); }
 .xp p code { white-space: normal; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes ivn-arrive { from { opacity: 0; } to { opacity: 1; } }

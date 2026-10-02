@@ -73,7 +73,7 @@
       '<button type="button" data-act="again">Apply again</button>' +
       '<label>Preset <select data-k="preset" aria-label="Preset matrix">' + Object.keys(PRESETS).map(function (n) { return '<option>' + n + '</option>'; }).join('') + '</select></label>' +
       '<button type="button" data-zoom="poly">Characteristic polynomial, worked</button>' +
-      '<button type="button" data-zoom="diag">A = QΛQ⁻¹, worked</button>' +
+      '<button type="button" data-zoom="diag">Diagonalisation, worked</button>' +
       '<button type="button" data-reset>Reset</button>';
     var tIn = ctl.querySelector('[data-k="t"]'), preset = ctl.querySelector('[data-k="preset"]');
 
@@ -192,15 +192,15 @@
     function zoomPoly(btn) {
       var m = s.m, tv = tr(m), dv = det(m), disc = tv * tv / 4 - dv, e = eig(m);
       var rows = [['trace = a + d', fmt(m[0]) + ' + ' + fmt(m[3]) + ' = ' + fmt(tv)], ['det = a d − b c', fmt(dv)],
-        ['(trace ÷ 2)² − det', fmt(disc)]];
-      rows.push(e.real ? ['λ = trace ÷ 2 ± √((trace ÷ 2)² − det)', fmt(e.values[0]) + ' and ' + fmt(e.values[1])] :
-        ['λ = trace ÷ 2 ± i √(det − (trace ÷ 2)²)', fmt(e.re) + ' ± ' + fmt(e.im) + 'i']);
+        [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-2", undefined, true)+''), fmt(disc)]];
+      rows.push(e.real ? [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-0", undefined, true)+''), fmt(e.values[0]) + ' and ' + fmt(e.values[1])] :
+        [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-1", undefined, true)+''), fmt(e.re) + ' ± ' + fmt(e.im) + 'i']);
       dlg.open('Characteristic polynomial, worked', table(rows) + '<p>Av = λv has a nonzero answer exactly when A − λI squashes the plane, so det(A − λI) = 0.</p>', btn);
     }
     function zoomDiag(btn) {
       var e = eig(s.m), n = Math.max(1, s.n || 5);
       if (!e.real || e.vectors.length < 2) {
-        dlg.open('A = QΛQ⁻¹, worked', '<p>' + (e.real ? 'This matrix has only 1 eigenvector direction, so there is no Q to build.' :
+        dlg.open('Diagonalisation, worked', '<p>' + (e.real ? 'This matrix has only 1 eigenvector direction, so there is no Q to build.' :
           'The eigenvalues are complex, so Q and Λ need complex numbers.') + ' Repeated multiplication still works.</p>', btn);
         return;
       }
@@ -210,11 +210,11 @@
       var viaQ = [Qm[0] * ln[0] * Qi[0] + Qm[1] * ln[1] * Qi[2], Qm[0] * ln[0] * Qi[1] + Qm[1] * ln[1] * Qi[3],
         Qm[2] * ln[0] * Qi[0] + Qm[3] * ln[1] * Qi[2], Qm[2] * ln[0] * Qi[1] + Qm[3] * ln[1] * Qi[3]];
       var byHand = power(s.m, [1, 0], n).concat(power(s.m, [0, 1], n));
-      function mat(x) { return '[[' + fmt(x[0]) + ', ' + fmt(x[1]) + '], [' + fmt(x[2]) + ', ' + fmt(x[3]) + ']]'; }
-      dlg.open('A = QΛQ⁻¹, worked', table([
+      function mat(x) { return window.InterviewDisplayMath.html("lab/eigenvectors/matrix", {a:fmt(x[0]),b:fmt(x[1]),c:fmt(x[2]),d:fmt(x[3])}, true); }
+      dlg.open('Diagonalisation, worked', table([
         ['Q, the eigenvectors as columns', mat(Qm)],
         ['Λ, the eigenvalues', 'diag(' + fmt(e.values[0]) + ', ' + fmt(e.values[1]) + ')'],
-        ['A to the power ' + n + ' = Q Λ^' + n + ' Q⁻¹', mat(viaQ)],
+        [window.InterviewDisplayMath.html("lab/eigenvectors/power", {n:n}, true), mat(viaQ)],
         ['The same, multiplying ' + n + ' times', mat([byHand[0], byHand[2], byHand[1], byHand[3]])]
       ]) + '<p>Raising Λ to a power only raises each eigenvalue, which is why repetition is easy in this basis.</p>', btn);
     }

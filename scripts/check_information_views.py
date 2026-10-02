@@ -10,6 +10,7 @@ with sync_playwright() as p:
             page=browser.new_page(viewport={'width':width,'height':1000},reduced_motion='reduce')
             errors=[]
             page.on('pageerror',lambda e:errors.append(str(e)))
+            page.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
             response=page.goto(base+'/information-theory/')
             assert response.status==200
             page.evaluate('(theme)=>document.documentElement.dataset.theme=theme',theme)

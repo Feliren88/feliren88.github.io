@@ -77,10 +77,10 @@
           return '<button type="button" data-g="' + i + '" aria-pressed="' + (i === S.g) + '">' + v + '</button>';
         }).join('') + '</div></div></div>' +
         '<div class="xp-sd-ref">' + frame(P.slug, S.g, true) +
-        '<div class="xp-cfg"><p class="xp-shape">ε̃ = ε∅ + w (ε<sub>c</sub> − ε∅), w = ' + g + '</p>' +
-        '<div class="xp-noises"><figure><img src="' + host.dataset.img + 'noise-pred-text.webp" alt="" width="64" height="64" loading="lazy"><figcaption>ε<sub>c</sub>, with the prompt</figcaption></figure>' +
-        '<figure><img src="' + host.dataset.img + 'noise-pred-empty.webp" alt="" width="64" height="64" loading="lazy"><figcaption>ε∅, empty prompt</figcaption></figure>' +
-        '<figure><img src="' + host.dataset.img + 'noise-pred-final.webp" alt="" width="64" height="64" loading="lazy"><figcaption>ε̃, what is removed</figcaption></figure></div>' +
+        '<div class="xp-cfg"><p class="xp-shape">' + window.InterviewDisplayMath.html('diffusion/guidance', {guidance: g}) + '</p>' +
+        '<div class="xp-noises"><figure><img src="' + host.dataset.img + 'noise-pred-text.webp" alt="" width="64" height="64" loading="lazy"><figcaption>' + window.InterviewDisplayMath.html('diffusion/conditional', {}, true) + ', with the prompt</figcaption></figure>' +
+        '<figure><img src="' + host.dataset.img + 'noise-pred-empty.webp" alt="" width="64" height="64" loading="lazy"><figcaption>' + window.InterviewDisplayMath.html('diffusion/unconditional', {}, true) + ', empty prompt</figcaption></figure>' +
+        '<figure><img src="' + host.dataset.img + 'noise-pred-final.webp" alt="" width="64" height="64" loading="lazy"><figcaption>' + window.InterviewDisplayMath.html('diffusion/guided', {}, true) + ', what is removed</figcaption></figure></div>' +
         '<p class="xp-note">' + (g === 0
           ? 'At w = 0 the prompt is ignored entirely, so both prompts give the same picture.'
           : g === 1 ? 'At w = 1 the model follows its prompted prediction as trained, with no extra push.'
@@ -319,7 +319,7 @@
         '<div class="xp-toy-side">' +
         (S.mode === 'fwd'
           ? '<label class="xp-field is-stack"><span>Noise step</span><input type="range" min="0" max="' + (STEPS - 1) + '" value="' + S.i + '" data-k="i"></label>' +
-            '<p class="xp-note">Data from both classes, coloured by class, jumped straight to the chosen noise level with x<sub>t</sub> = √ā x<sub>0</sub> + √(1 − ā) ε. No chain is simulated; this is why training is cheap.</p>'
+            '<p class="xp-note">Data from both classes, coloured by class, jumped straight to the chosen noise level with ' + window.InterviewDisplayMath.html('diffusion/forward', {}, true) + '. No chain is simulated; this is why training is cheap.</p>'
           : '<button type="button" class="xp-go" data-run>' + (S.i === 0 ? 'Generate again' : 'Generate') + '</button>' +
             '<p class="xp-note">500 points start as pure noise. At each of 50 steps, the exact noise prediction for this data is guided toward the chosen class and a DDIM step removes part of it.</p>') +
         '<dl class="xp-toy-read"></dl>' +

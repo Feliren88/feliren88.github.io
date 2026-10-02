@@ -201,28 +201,28 @@
       var p = combo(s.c1, s.c2, s.v1, s.v2), d = det2(s.v1, s.v2), c = coords(p, s.v1, s.v2);
       var rows = [
         ['The point (X, Y) on the square grid', '(' + fmt(p[0]) + ', ' + fmt(p[1]) + ')'],
-        ['det = x₁ y₂ − y₁ x₂', fmt(s.v1[0]) + ' × ' + fmt(s.v2[1]) + ' − ' + fmt(s.v1[1]) + ' × ' + fmt(s.v2[0]) + ' = ' + fmt(d)]
+        [(''+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-0", undefined, true)+''), fmt(s.v1[0]) + ' × ' + fmt(s.v2[1]) + ' − ' + fmt(s.v1[1]) + ' × ' + fmt(s.v2[0]) + ' = ' + fmt(d)]
       ];
       if (c) {
-        rows.push(['c₁ = (X y₂ − Y x₂) ÷ det', '(' + fmt(p[0]) + ' × ' + fmt(s.v2[1]) + ' − ' + fmt(p[1]) + ' × ' + fmt(s.v2[0]) + ') ÷ ' + fmt(d) + ' = ' + fmt(c[0])]);
-        rows.push(['c₂ = (x₁ Y − y₁ X) ÷ det', '(' + fmt(s.v1[0]) + ' × ' + fmt(p[1]) + ' − ' + fmt(s.v1[1]) + ' × ' + fmt(p[0]) + ') ÷ ' + fmt(d) + ' = ' + fmt(c[1])]);
+        rows.push([(''+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-1", undefined, true)+''), '(' + fmt(p[0]) + ' × ' + fmt(s.v2[1]) + ' − ' + fmt(p[1]) + ' × ' + fmt(s.v2[0]) + ') ÷ ' + fmt(d) + ' = ' + fmt(c[0])]);
+        rows.push([(''+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-2", undefined, true)+''), '(' + fmt(s.v1[0]) + ' × ' + fmt(p[1]) + ' − ' + fmt(s.v1[1]) + ' × ' + fmt(p[0]) + ') ÷ ' + fmt(d) + ' = ' + fmt(c[1])]);
       }
-      dlg.open('Coordinates in both bases', '<p>Here v₁ = (x₁, y₁) and v₂ = (x₂, y₂).</p>' + table(rows) + (c ?
-        '<p>In the basis v₁, v₂, the same point is (' + fmt(c[0]) + ', ' + fmt(c[1]) + ').</p>' :
-        '<p>The determinant is 0, so v₁ and v₂ share a line. They are no basis, and coordinates in them are not unique.</p>'), btn);
+      dlg.open('Coordinates in both bases', ('<p>Here '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-12", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-14", undefined, true)+') and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+' = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-13", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-15", undefined, true)+').</p>') + table(rows) + (c ?
+        ('<p>In the basis '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+', the same point is (') + fmt(c[0]) + ', ' + fmt(c[1]) + ').</p>' :
+        ('<p>The determinant is 0, so '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+' share a line. They are no basis, and coordinates in them are not unique.</p>')), btn);
     }
     function zoomDot(btn) {
       var d = dot(s.u, s.v1), nu = norm(s.u), nv = norm(s.v1), th = angle(s.u, s.v1);
       var rows = [
-        ['u · v₁ = u₁ x₁ + u₂ y₁', fmt(s.u[0]) + ' × ' + fmt(s.v1[0]) + ' + ' + fmt(s.u[1]) + ' × ' + fmt(s.v1[1]) + ' = ' + fmt(d)],
-        ['|u|', fmt(nu)], ['|v₁|', fmt(nv)]
+        [(''+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-3", undefined, true)+''), fmt(s.u[0]) + ' × ' + fmt(s.v1[0]) + ' + ' + fmt(s.u[1]) + ' × ' + fmt(s.v1[1]) + ' = ' + fmt(d)],
+        ['|u|', fmt(nu)], [('|'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'|'), fmt(nv)]
       ];
       if (th !== null) {
-        rows.push(['cos θ = u · v₁ ÷ (|u| |v₁|)', fmt(d / (nu * nv), 3)]);
+        rows.push([(''+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-4", undefined, true)+''), fmt(d / (nu * nv), 3)]);
         rows.push(['θ', fmt(th * 180 / Math.PI, 1) + '°']);
-        rows.push(['Shadow length, u · v₁ ÷ |v₁|', fmt(d / nv)]);
+        rows.push([('Shadow length, '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-5", undefined, true)+''), fmt(d / nv)]);
       }
-      dlg.open('Dot product, worked', '<p>Here u = (u₁, u₂) and v₁ = (x₁, y₁).</p>' + table(rows) +
+      dlg.open('Dot product, worked', ('<p>Here u = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-10", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-11", undefined, true)+') and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-12", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-14", undefined, true)+').</p>') + table(rows) +
         (th === null ? '<p>One of the arrows has length 0, so it has no direction and no angle.</p>' : ''), btn);
     }
 
@@ -249,19 +249,19 @@
 
     var PAGES = [
       { t: '2 arrows', parts: ['v1', 'v2'], state: { v1: [2, 1], v2: [-1, 1.5], c1: 1, c2: 1, paint: false, basis: false, showU: false, mode: '2d' },
-        body: '<p>Start with <b class="is-q">v₁</b> = (2, 1) and <b class="is-k">v₂</b> = (−1, 1.5). Drag either tip to change its direction and length.</p>' },
+        body: ('<p>Start with <b class="is-q">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'</b> = (2, 1) and <b class="is-k">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+'</b> = (−1, 1.5). Drag either tip to change its direction and length.</p>') },
       { t: 'Add them nose to tail', parts: ['v1', 'v2', 'sum'], state: { c1: 1, c2: 1 },
-        body: '<p>Put the tail of <b class="is-k">v₂</b> on the tip of <b class="is-q">v₁</b>. The far end is <b class="is-o">v₁ + v₂</b> = (1, 2.5).</p>' },
+        body: ('<p>Put the tail of <b class="is-k">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+'</b> on the tip of <b class="is-q">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'</b>. The far end is <b class="is-o">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' + '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+'</b> = (1, 2.5).</p>') },
       { t: 'Stretch before you add', parts: ['v1', 'v2', 'sum'], state: { c1: 1.5, c2: -1 },
-        body: '<p>Scale each arrow by c₁ or c₂, then add them to form a linear combination. Drag <b class="is-o">the result</b> to change both weights; a negative weight reverses its arrow.</p>' },
+        body: ('<p>Scale each arrow by '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-8", undefined, true)+' or '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-9", undefined, true)+', then add them to form a linear combination. Drag <b class="is-o">the result</b> to change both weights; a negative weight reverses its arrow.</p>') },
       { t: 'Paint the span', parts: ['span', 'sum'], state: { c1: 1, c2: 1, paint: true },
-        body: '<p>Press <b>Paint the span</b> to sweep many choices of c₁ and c₂. With 2 arrows on different lines, these combinations reach any point in the plane.</p>' },
+        body: ('<p>Press <b>Paint the span</b> to sweep many choices of '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-8", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-9", undefined, true)+'. With 2 arrows on different lines, these combinations reach any point in the plane.</p>') },
       { t: 'Make them parallel', parts: ['span', 'v1', 'v2'], state: { v2: [-2, -1], c1: 1, c2: 0.5, paint: true },
-        body: '<p>Here, <b class="is-k">v₂</b> = −<b class="is-q">v₁</b>, so 1 arrow is a multiple of the other. Such arrows are dependent, and their weighted sums stay on 1 line.</p>' },
+        body: ('<p>Here, <b class="is-k">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+'</b> = −<b class="is-q">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'</b>, so 1 arrow is a multiple of the other. Such arrows are dependent, and their weighted sums stay on 1 line.</p>') },
       { t: 'Same point, new coordinates', parts: ['sum', 'v1', 'v2'], state: { v2: [-1, 1.5], c1: 1, c2: 1, paint: false, basis: true },
-        body: '<p>On the square grid, the tip sits at (1, 2.5). On the grid built from <b class="is-q">v₁</b> and <b class="is-k">v₂</b>, the same point is (1, 1).</p>' },
+        body: ('<p>On the square grid, the tip sits at (1, 2.5). On the grid built from <b class="is-q">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'</b> and <b class="is-k">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+'</b>, the same point is (1, 1).</p>') },
       { t: 'Length and angle', parts: ['u', 'shadow', 'v1'], state: { basis: false, showU: true },
-        body: '<p>Here, <b class="is-v">u</b> · <b class="is-q">v₁</b> = |u| |v₁| cos θ. Drag u to change its <b class="is-o">shadow</b> on v₁, whose signed length is u · v₁ ÷ |v₁|.</p>' },
+        body: ('<p>Here, <b class="is-v">u</b> · <b class="is-q">'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'</b> = |u| |'+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+'| cos θ. Drag u to change its <b class="is-o">shadow</b> on '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+', whose signed length is '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-5", undefined, true)+'.</p>') },
       { t: 'In 3 dimensions', parts: ['a3', 'b3', 'plane3'], state: { showU: false, mode: '3d' },
         body: '<p>In 3D, 2 arrows on different lines span a flat plane through the origin. Turn and tilt to see it edge on.</p>' }
     ];

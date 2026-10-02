@@ -1,6 +1,6 @@
 <section class="xp lab lab-optimisation" id="lab-calculus-optimisation" aria-labelledby="lab-calculus-optimisation-title">
   <header class="lab-head"><h3 id="lab-calculus-optimisation-title">Check slopes, then curvature</h3></header>
-  <p class="lab-eq" data-formula>f(x, y) = x² + y²</p>
+  <p class="lab-eq" data-formula>{{ site.data.interview_math.display[page.topic_id]["lab/optimisation-conditions/initial-0"] | replace: 'display="block"', 'display="inline"' }}</p>
   <p class="lab-eq" data-surface-eq>
     <span class="lab-term is-q" data-term="point">Point (<span data-val="x">0</span>, <span data-val="y">0</span>), f = <span data-val="fx">0</span></span>
     <span class="lab-term is-o" data-term="curvature">Gradient length <span data-val="stationaryGradient">0</span>, smallest curvature <span data-val="smallestCurvature">2</span></span>
@@ -18,7 +18,7 @@
   <p class="lab-eq" data-experiment-eq hidden>
     <span class="lab-term is-q" data-term="sample">Dimension <span data-val="d">3</span>, all positive <span data-val="positiveCount">16</span> / <span data-val="sampleCount">512</span></span>
     <span class="lab-term is-o" data-term="sample">Measured fraction <span data-val="sampleFraction">0.0313</span></span>
-    <span class="lab-term is-k" data-term="estimate">Independent sign estimate 2⁻ᵈ = <span data-val="signEstimate">0.125</span></span>
+    <span class="lab-term is-k" data-term="estimate">Independent sign estimate {{ site.data.interview_math.display[page.topic_id]["lab/optimisation-conditions/initial-1"] | replace: 'display="block"', 'display="inline"' }} = <span data-val="signEstimate">0.125</span></span>
   </p>
   <div class="lab-main"><div class="lab-stage" data-stage></div><div data-guide-box></div></div>
   <p class="lab-note" data-note></p>

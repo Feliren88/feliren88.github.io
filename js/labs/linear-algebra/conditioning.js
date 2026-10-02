@@ -291,7 +291,7 @@
       { t: 'Where κ comes from', parts: ['ellipse'], state: { theta: 8, delta: 0.15 },
         body: '<p>The <b class="is-o">ellipse</b> marks all solutions produced by input nudges of exactly δ. Its long-to-short radius ratio is κ = σmax ÷ σmin.</p>' },
       { t: 'Solving beats inverting', parts: ['resSolve', 'resInv'], state: { mode: 'hilbert', n: 10 },
-        body: '<p>Hilbert matrices have entries Aᵢⱼ = 1/(i + j − 1), making large systems sensitive to rounding. At n = 10, forming an inverse leaves a larger residual than a direct solve.</p>' },
+        body: ('<p>Hilbert matrices have entries '+window.InterviewDisplayMath.html("lab/conditioning/worked-0", undefined, true)+', making large systems sensitive to rounding. At n = 10, forming an inverse leaves a larger residual than a direct solve.</p>') },
       { t: 'Unscaled features', parts: ['path', 'loss'], state: { mode: 'scale', scaled: false },
         body: '<p>Gradient descent takes steps downhill on the loss surface. Here, a feature 5 times larger than the other produces thin contours and a zigzag path.</p>' },
       { t: 'After scaling', parts: ['path', 'loss'], state: { mode: 'scale', scaled: true },
