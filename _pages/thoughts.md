@@ -34,6 +34,11 @@ layout-class: page writings-page
   <h2 id="writings-guides-title">Field guides and personal notes</h2>
   <p class="section-note">Longer pieces on decisions, relationships, and the habits I keep testing in my own life.</p>
   <div class="writings-guides-grid">
+<a class="essay-feature" href="/metacognition/">
+<span class="essay-feature-title">Metacognition</span>
+<span class="essay-feature-desc">A visual guide to checking what you actually understand when AI answers fast. Score your confidence, weigh the machine’s, and decide what to hand over.</span>
+<span class="read-more">Open the field guide →</span>
+</a>
 <a class="essay-feature" href="/high-agency/">
 <span class="essay-feature-title">High Agency</span>
 <span class="essay-feature-desc">A visual reading of George Mack’s essay, with exercises for examining agency in your own decisions.</span>

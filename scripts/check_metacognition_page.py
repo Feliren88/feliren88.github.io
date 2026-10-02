@@ -43,6 +43,9 @@ def open_page(browser, base, path='/metacognition/', width=1200, theme=None, red
     errors = []
     page.on('pageerror', lambda err: errors.append(str(err)))
     page.goto(base + path, wait_until='load')
+    # styles.css sets scroll-behavior: smooth, so Playwright's scroll-to-element animates
+    # and a click under load lands mid-scroll. The checks test behaviour, not scrolling.
+    page.add_style_tag(content='html{scroll-behavior:auto!important}')
     return page, errors
 
 

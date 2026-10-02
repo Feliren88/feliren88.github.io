@@ -85,6 +85,8 @@ exclude:
   - scripts/solve_games.py
   - scripts/verify_stoic_quotes.py
   - scripts/games.json
+  - scripts/test_metacognition.js
+  - scripts/check_metacognition_page.py
   - notes
 
 # Permalink structure
