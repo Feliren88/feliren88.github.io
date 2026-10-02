@@ -139,6 +139,23 @@
       ]
     },
     /*
+      /metacognition/: a fluent draft, one question it cannot survive, an answer
+      and a confidence written down before asking again, and the check that shows
+      the confident sentence was the wrong one.
+    */
+    metacognition: {
+      narrative: true,
+      title: 'The draft read beautifully.',
+      copy: 'She skimmed it, liked how sure it sounded, and sent it on.',
+      steps: ['Fluent', 'Asked', 'Predict', 'Check'],
+      frames: [
+        ['The report took under a minute', 'The draft read beautifully.', 'She skimmed it, liked how sure it sounded, and sent it on.'],
+        ['Her manager asked one question', 'Where does this number come from?', 'She read the paragraph again. It still sounded right, and she could not explain it.'],
+        ['Before asking again, she wrote her own answer', 'Her guess, and how sure she was.', 'About 3%, and 60% sure, on a sticky note. Then she traced the number to its source.'],
+        ['The source said 3.1%', 'Her guess was closer than the confident draft.', 'Now she writes her answer and confidence before she asks. The assistant drafts, and she decides what stays.']
+      ]
+    },
+    /*
       The only eight-beat scene, and the only one on a page rather than a writing.
       Research and service claims are traceable to Vicky's published personal
       writing, _data/experience.yml, publications.yml or awards.yml. The 5+
@@ -224,7 +241,7 @@
     if (key === 'feedback') return buildFeedbackNarrativeCanvas(canvas, svg);
     if (key === 'consent') return buildConsentNarrativeCanvas(canvas, svg);
     if (key === 'conversion') return buildConversionNarrativeCanvas(canvas, svg);
-    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport' || key === 'record' || key === 'curiosity') return buildEmotionalNarrativeCanvas(canvas, svg, key);
+    if (key === 'agency' || key === 'decision' || key === 'control' || key === 'uncertainty' || key === 'rapport' || key === 'record' || key === 'curiosity' || key === 'metacognition') return buildEmotionalNarrativeCanvas(canvas, svg, key);
     var night = svgEl('g', { class: 'em-story-frame em-story-night' });
     night.innerHTML = '<path class="em-room" d="M70 300V72h250v228M70 250h250M118 72v178M70 176h250"/><path class="em-rain" d="M92 92l-18 36m70-48l-26 52m80-42l-22 44m86-50l-24 48"/><g class="em-fig em-fig-boy"><circle class="em-head" cx="405" cy="174" r="25"/><path class="em-person" d="M405 199v72m-43 49 43-49 43 49"/><path class="em-person em-arm" d="M405 220l-42 34"/></g><rect class="em-drawer" x="350" y="247" width="88" height="42" rx="4"/><path class="em-drawer-stuck" d="M365 264h48"/><text x="192" y="330">He noticed what others passed by.</text>';
     svg.appendChild(night);
@@ -354,6 +371,15 @@
           '<circle class="em-attempt-next" cx="118" cy="176" r="32"/><text class="em-attempt-label" x="118" y="244">the number</text><path class="em-pull" d="M156 158c78-28 108-44 166-52M156 176h166M156 194c78 28 108 44 166 52"/><g class="em-load"><rect x="326" y="80" width="330" height="52" rx="7"/><text x="491" y="112">the tidy story</text><rect x="326" y="150" width="330" height="52" rx="7"/><text x="491" y="182">a second story</text><rect x="326" y="220" width="330" height="52" rx="7"/><text x="491" y="252">a third story</text></g><text x="375" y="344">Three explanations fitted the number equally well.</text>',
           '<rect class="em-note" x="96" y="46" width="558" height="240" rx="9"/><text class="em-note-title" x="136" y="84">IF I CHECK LAST MONTH</text><path class="em-note-rule" d="M136 106h478M136 166h478M136 226h478"/><text class="em-note-key" x="150" y="142">the tidy story</text><text class="em-note-value" x="600" y="142">says higher</text><text class="em-note-key" x="150" y="202">a second story</text><text class="em-note-value" x="600" y="202">says flat</text><text class="em-note-key" x="150" y="262">a third story</text><text class="em-note-value" x="600" y="262">says lower</text><text x="375" y="344">One question the three could not agree on.</text>',
           '<g class="em-fig em-fig-report"><circle class="em-head" cx="148" cy="158" r="23"/><path class="em-person" d="M148 181v70m-34 54 34-54 34 54M148 206l52 20"/></g><rect class="em-message" x="252" y="62" width="426" height="152" rx="12"/><text class="em-message-small" x="465" y="102">WHAT SHE SAID</text><rect class="em-result-mark" x="292" y="128" width="346" height="48" rx="20"/><text class="em-result-word" x="465" y="158">MY EXPLANATION WAS THE WRONG ONE</text><path class="em-thought-line" d="M252 146 202 174"/><g class="em-carry"><rect x="292" y="236" width="346" height="58" rx="8"/><text x="465" y="262">KEPT</text><text class="em-carry-word" x="465" y="284">the one that survived the check</text></g><text x="375" y="344">She reported the result that ruled out her guess.</text>'
+        ]
+      },
+      metacognition: {
+        label: 'A fluent AI draft is sent unchecked, fails one question, and is checked against her own written guess and the source',
+        frames: [
+          '<rect class="em-screen" x="214" y="44" width="400" height="236" rx="12"/><text class="em-screen-label" x="414" y="80">QUARTERLY REPORT</text><path class="em-message-line" d="M250 112h328M250 140h300M250 168h318M250 196h260"/><rect class="em-result-mark" x="250" y="222" width="200" height="34" rx="17"/><text class="em-result-word" x="350" y="244">SOUNDS CERTAIN</text><g class="em-fig em-fig-skim"><circle class="em-head" cx="110" cy="150" r="22"/><path class="em-person" d="M110 172v62m-30 46 30-46 30 46M110 196l58-6"/></g><path class="em-arrow" d="M630 162h70m-16-14 16 14-16 14"/><text x="375" y="344">She sent it on without checking a single number.</text>',
+          '<rect class="em-note" x="96" y="132" width="330" height="150" rx="9"/><path class="em-note-rule" d="M126 168h270M126 204h270M126 240h200"/><rect class="em-result-mark" x="228" y="188" width="70" height="30" rx="15"/><text class="em-result-word" x="263" y="208">4.2%</text><rect class="em-message" x="380" y="52" width="300" height="58" rx="10"/><text class="em-result-word" x="530" y="86">WHERE DOES THIS COME FROM?</text><path class="em-thought-line" d="M298 196C340 150 380 126 420 110"/><g class="em-fig em-fig-ask"><circle class="em-head em-helper" cx="604" cy="168" r="22"/><path class="em-person em-helper" d="M604 190v62m-30 46 30-46 30 46M604 214l-50-10"/></g><text x="375" y="344">She could not say where the number came from.</text>',
+          '<rect class="em-note" x="88" y="70" width="240" height="190" rx="8"/><text class="em-note-title" x="116" y="104">BEFORE I ASK AGAIN</text><text class="em-note-key" x="116" y="146">my answer</text><text class="em-note-value" x="302" y="146">about 3%</text><path class="em-note-rule" d="M116 162h186M116 206h186"/><text class="em-note-key" x="116" y="190">how sure</text><text class="em-note-value" x="302" y="190">60%</text><path class="em-arrow" d="M350 166h70m-16-14 16 14-16 14"/><rect class="em-screen" x="440" y="70" width="230" height="190" rx="12"/><text class="em-screen-label" x="555" y="104">SOURCE TABLE</text><path class="em-message-line" d="M470 134h170M470 164h150M470 194h170M470 224h120"/><text x="375" y="344">Her answer and her confidence went on paper first.</text>',
+          '<rect class="em-message" x="70" y="70" width="300" height="52" rx="7"/><text class="em-result-word" x="220" y="101">draft · 4.2% · certain</text><path class="em-broken" d="M100 97h240"/><rect class="em-result-mark" x="70" y="146" width="300" height="52" rx="7"/><text class="em-result-word" x="220" y="177">her guess · about 3% · 60% sure</text><path class="em-arrow" d="M390 172h56m-16-14 16 14-16 14"/><rect class="em-screen" x="466" y="70" width="214" height="128" rx="12"/><text class="em-screen-label" x="573" y="104">THE SOURCE SAID</text><text class="em-screen-value" x="573" y="160">3.1%</text><g class="em-carry"><rect x="200" y="226" width="350" height="58" rx="8"/><text x="375" y="252">KEPT</text><text class="em-carry-word" x="375" y="274">answer first, then ask</text></g><text x="375" y="344">The confident sentence was wrong. Her 60% guess was closer.</text>'
         ]
       },
       record: {
