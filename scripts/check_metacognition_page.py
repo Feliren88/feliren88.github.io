@@ -76,7 +76,10 @@ def writings_card_and_nav(browser, base):
     assert page.locator('.writings-guides-grid a[href="/metacognition/"]').count() == 1, 'no card on /writings/'
     page, _ = open_page(browser, base)
     assert page.locator('a.is-active[href="/writings/"]').count() >= 1, 'Writings is not lit on the guide'
-    assert '/metacognition/' in (SITE / 'llms.txt').read_text(), 'llms.txt has no entry'
+    llms = (SITE / 'llms.txt').read_text()
+    assert '/metacognition/' in llms, 'llms.txt has no entry'
+    studies = page.locator('#sources ol').nth(1).locator('li').count()
+    assert '%d studies' % studies in llms, 'llms.txt miscounts the %d cited studies' % studies
 
 
 @check

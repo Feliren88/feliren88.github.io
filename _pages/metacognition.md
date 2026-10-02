@@ -225,7 +225,7 @@ hide_title: true
     <li>Lim (AIREASONING-2025 workshop). <a href="https://arxiv.org/abs/2504.16770">DeBiasMe: de-biasing human-AI interactions with metacognitive AIED interventions</a>.</li>
     <li>edtechdev AIED wiki. <a href="https://edtechdev.github.io/aied/concepts/metacognition/">Metacognition</a>.</li>
   </ol>
-  <h3>Studies behind the numbers</h3>
+  <h3>Studies cited</h3>
   <ol>
     <li>Kosmyna et al. (2025). <a href="https://arxiv.org/abs/2506.08872">Your brain on ChatGPT: accumulation of cognitive debt when using an AI assistant for essay writing task</a>. Preprint.</li>
     <li>Ngai and Gilbert (Cognitive Research: Principles and Implications 2026). <a href="https://doi.org/10.1186/s41235-026-00714-0">Metacognitive training facilitates optimal cognitive offloading</a>.</li>
