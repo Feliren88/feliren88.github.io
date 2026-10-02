@@ -5,9 +5,9 @@
   var CLAIMS = [
     { text: 'Sunlight takes about 8 minutes to reach Earth.', answer: true, note: 'It takes about 8 minutes and 20 seconds on average.' },
     { text: 'The Great Wall of China is visible to the naked eye from the Moon.', answer: false, note: 'At that distance it is far too narrow to see with the naked eye.' },
-    { text: 'An octopus has 3 hearts.', answer: true, note: 'One heart pumps blood around the body, and 2 more pump it through the gills.' },
+    { text: 'An octopus has 3 hearts.', answer: true, note: 'One heart pumps blood around the body. The other 2 pump it through the gills, where oxygen enters.' },
     { text: 'The summit of Mount Everest is the point on Earth farthest from its centre.', answer: false, note: 'That point is the summit of Chimborazo in Ecuador. Earth bulges at the equator, which lifts it further out.' },
-    { text: 'Botanically, a banana is a berry.', answer: true, note: 'It grows from a single flower with one ovary, which is how botanists define a berry.' }
+    { text: 'In plant science, a banana is a berry.', answer: true, note: 'In plant science, a berry grows from one flower’s ovary, which holds the seeds. A banana fits this definition.' }
   ];
 
   // 20 made-up answers, 14 right. Both assistants are equally accurate; only
@@ -20,19 +20,19 @@
 
   var PHASES = {
     before: { title: 'Plan', questions: ['What is the goal, and what would a good answer look like?', 'What do I already know about this?', 'Which part must I do myself to learn it?'] },
-    during: { title: 'Monitor', questions: ['Can I explain the last step without looking?', 'How sure am I, as a number?', 'Does this read easily because I understand it, or because it is well written?'] },
-    after: { title: 'Evaluate', questions: ['Which of my predictions missed?', 'What did the AI do that I want to learn to do?', 'What will I change next time?'] }
+    during: { title: 'Check my progress', questions: ['Can I explain the last step without looking?', 'What percentage describes how sure I am?', 'Does this read easily because I understand it, or because it is well written?'] },
+    after: { title: 'Review the result', questions: ['Which answers or predictions were wrong?', 'What did the AI do that I want to learn to do?', 'What will I change next time?'] }
   };
 
   var TASKS = [
     { text: 'Format a reference list', pick: 'hand', why: 'It needs doing, and I learn little from doing it again.' },
-    { text: 'Draft a routine status email', pick: 'hand', why: 'The stakes are low, the result is easy to check, and I know what good looks like.' },
-    { text: 'Summarise 10 papers I must cite', pick: 'along', why: 'It can find and sort them. I read the passages I will rely on.' },
-    { text: 'Debug code in a language I am learning', pick: 'keep', why: 'The struggle is the lesson. I ask it for hints and write the fix myself.' },
-    { text: 'Choose between 2 job offers', pick: 'keep', why: 'It can suggest questions. The weighing depends on things only I know.' },
-    { text: 'Review a model’s output for errors', pick: 'along', why: 'It can flag candidates. Deciding what counts as an error is the skill I want to keep.' }
+    { text: 'Draft a routine status email', pick: 'hand', why: 'I know what the email needs to say, so I can check the draft easily.' },
+    { text: 'Summarise 10 papers I must cite', pick: 'along', why: 'AI can help me sort the papers. Then I read the passages I need and check each summary.' },
+    { text: 'Debug code in a language I am learning', pick: 'keep', why: 'Working through the bug helps me learn. So I ask AI for hints and write the fix myself.' },
+    { text: 'Choose between 2 job offers', pick: 'keep', why: 'AI can suggest questions. However, I decide which offer fits my needs and priorities.' },
+    { text: 'Review a model’s output for errors', pick: 'along', why: 'AI can point out possible errors. Then I check them myself to practise spotting mistakes.' }
   ];
-  var VERBS = { hand: 'hand it over', along: 'work alongside it', keep: 'keep it' };
+  var VERBS = { hand: 'hand it over', along: 'work with AI', keep: 'do it myself' };
 
   function round1(x) { return Math.round(x * 10) / 10; }
   function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
@@ -47,11 +47,11 @@
   }
 
   function verdictText(s) {
-    if (!s.n) return 'Your average confidence and hit rate appear here after each claim.';
+    if (!s.n) return 'Your average confidence and percentage of correct answers appear here after each claim.';
     var line = 'Average confidence ' + s.meanConfidence + '%. Correct ' + s.hitRate + '%.';
     if (s.n < CLAIMS.length) return line;
-    if (s.verdict === 'over') return line + ' You were ' + s.gap + ' points more confident than accurate. Next round, lower the number on claims you cannot trace.';
-    if (s.verdict === 'under') return line + ' You were ' + (-s.gap) + ' points less confident than accurate. You knew more than you claimed.';
+    if (s.verdict === 'over') return line + ' You were ' + s.gap + ' points more confident than accurate. Next time, check the evidence before choosing how sure you are.';
+    if (s.verdict === 'under') return line + ' You were ' + (-s.gap) + ' points less confident than accurate. You got more answers right than your confidence suggested.';
     return line + ' Your confidence and your accuracy were within 10 points of each other.';
   }
 
@@ -69,20 +69,23 @@
 
   function arbitrationText(kind, r, threshold) {
     if (kind === 'flat') {
-      return 'Its confidence never moves. My threshold can only accept all 20 answers or check all 20.' +
+      return 'It always says 95% sure. So the slider makes me trust all 20 answers or check all 20.' +
         (r.checked ? ' Right now I check every answer myself.' : ' Right now I accept every answer, including ' + plural(r.acceptedWrong, 'wrong one') + '.');
     }
-    return 'Its confidence carries information. At ' + threshold + '%, I check ' + plural(r.checked, 'answer') +
+    return 'Its more confident answers are more often right. At ' + threshold + '%, I check ' + plural(r.checked, 'answer') +
       ' and accept ' + plural(r.acceptedWrong, 'wrong answer') + '.';
   }
 
   function checkReply(rating, correct) {
-    return (correct ? 'Right. The paragraph describes the effect and never gives the reason.' :
-      'The paragraph never gives the reason. It only says that short waves scatter more.') +
-      ' You rated your ability to explain it at ' + rating + '%' +
-      (rating >= 70 ? ', so the smooth writing supplied part of that feeling.' : ', which matches what the paragraph gave you.') +
-      ' Molecules are far smaller than light’s wavelength. They act like tiny antennas that re-radiate the light.' +
-      ' Shorter waves get re-radiated far more strongly, roughly with the fourth power of frequency.';
+    return (correct ? 'Right. The paragraph says what happens, but leaves out why.' :
+      'The paragraph leaves out why. It only says that shorter waves spread more strongly.') +
+      ' You rated your ability to explain it at ' + rating + '%.' +
+      (rating >= 70 ? ' If that felt easy, check whether you could explain the missing step.' :
+        ' Now compare that rating with what you could explain without looking.') +
+      ' Air particles respond to light and send it out again in different directions.' +
+      ' This is called scattering. They scatter shorter light waves more strongly.' +
+      ' Wavelength means the distance between neighbouring peaks of a wave.' +
+      ' For these tiny particles, halving the wavelength makes scattering roughly 16 times stronger.';
   }
 
   function offloadReply(task, choice) {
@@ -204,7 +207,7 @@
       svg.appendChild(svgEl('text', { x: L - 6, y: y(pct) + 3, 'text-anchor': 'end', class: 'mc-axis-text' }, pct + '%'));
     });
     for (var i = 0; i < CLAIMS.length; i++) {
-      svg.appendChild(svgEl('text', { x: L + (i + 0.5) * 52, y: B + 18, 'text-anchor': 'middle', class: 'mc-axis-text' }, 'claim ' + (i + 1)));
+      svg.appendChild(svgEl('text', { x: L + (i + 0.5) * 52, y: B + 18, 'text-anchor': 'middle', class: 'mc-axis-text' }, 'Claim ' + (i + 1)));
     }
     if (!rounds.length) return;
     var s = summarise(rounds);
@@ -212,8 +215,8 @@
     svg.appendChild(svgEl('rect', { x: L, y: top, width: R - L, height: Math.max(0, bottom - top), class: 'mc-gap' }));
     svg.appendChild(svgEl('line', { x1: L, x2: R, y1: y(s.meanConfidence), y2: y(s.meanConfidence), class: 'mc-conf-line' }));
     svg.appendChild(svgEl('line', { x1: L, x2: R, y1: y(s.hitRate), y2: y(s.hitRate), class: 'mc-hit-line' }));
-    svg.appendChild(svgEl('text', { x: R, y: y(s.meanConfidence) - 5, class: 'mc-line-text is-conf' }, 'said ' + s.meanConfidence + '%'));
-    svg.appendChild(svgEl('text', { x: R, y: y(s.hitRate) + 13, class: 'mc-line-text is-hit' }, 'got ' + s.hitRate + '%'));
+    svg.appendChild(svgEl('text', { x: R, y: y(s.meanConfidence) - 5, class: 'mc-line-text is-conf' }, 'Confidence ' + s.meanConfidence + '%'));
+    svg.appendChild(svgEl('text', { x: R, y: y(s.hitRate) + 13, class: 'mc-line-text is-hit' }, 'Correct ' + s.hitRate + '%'));
     rounds.forEach(function (r, i) {
       svg.appendChild(svgEl('circle', { cx: L + (i + 0.5) * 52, cy: y(r.confidence), r: 7, class: r.correct ? 'mc-dot-right' : 'mc-dot-wrong' }));
     });
@@ -295,7 +298,7 @@
   }
 
   function initOffload() {
-    var host = $('mc-sort'), labels = { hand: 'Hand over', along: 'Work alongside', keep: 'Keep' };
+    var host = $('mc-sort'), labels = { hand: 'Let AI do it', along: 'Work with AI', keep: 'Do it myself' };
     TASKS.forEach(function (task) {
       var row = document.createElement('div'); row.className = 'mc-task';
       var text = document.createElement('p'); text.textContent = task.text;

@@ -87,7 +87,7 @@ def phases_switch(browser, base):
     page, _ = open_page(browser, base)
     assert 'Plan' in page.inner_text('#mc-phase-read')
     page.click('.mc-phases [data-phase="during"]')
-    assert 'Monitor' in page.inner_text('#mc-phase-read')
+    assert 'Check my progress' in page.inner_text('#mc-phase-read')
     assert page.get_attribute('.mc-phases [data-phase="during"]', 'aria-pressed') == 'true'
     assert page.get_attribute('.mc-phases [data-phase="before"]', 'aria-pressed') == 'false'
 

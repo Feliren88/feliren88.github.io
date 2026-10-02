@@ -145,14 +145,14 @@
     */
     metacognition: {
       narrative: true,
-      title: 'The draft read beautifully.',
+      title: 'The AI draft was easy to read.',
       copy: 'She skimmed it, liked how sure it sounded, and sent it on.',
-      steps: ['Fluent', 'Asked', 'Predict', 'Check'],
+      steps: ['Read', 'Ask', 'Predict', 'Check'],
       frames: [
-        ['The report took under a minute', 'The draft read beautifully.', 'She skimmed it, liked how sure it sounded, and sent it on.'],
+        ['The report took under a minute', 'The AI draft was easy to read.', 'She skimmed it, liked how sure it sounded, and sent it on.'],
         ['Her manager asked one question', 'Where does this number come from?', 'She read the paragraph again. It still sounded right, and she could not explain it.'],
-        ['Before asking again, she wrote her own answer', 'Her guess, and how sure she was.', 'About 3%, and 60% sure, on a sticky note. Then she traced the number to its source.'],
-        ['The source said 3.1%', 'Her guess was closer than the confident draft.', 'Now she writes her answer and confidence before she asks. The assistant drafts, and she decides what stays.']
+        ['Before asking again, she wrote her own answer', 'She wrote her guess and confidence.', 'She guessed about 3% and felt 60% sure. Then she checked the original source.'],
+        ['The source said 3.1%', 'Her guess was closer than the confident draft.', 'Now she writes her answer and confidence before asking AI. The assistant drafts, and she decides what stays.']
       ]
     },
     /*

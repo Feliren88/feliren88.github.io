@@ -36,7 +36,7 @@ layout-class: page writings-page
   <div class="writings-guides-grid">
 <a class="essay-feature" href="/metacognition/">
 <span class="essay-feature-title">Metacognition</span>
-<span class="essay-feature-desc">A visual guide to checking what you actually understand when AI answers fast. Score your confidence, weigh the machine’s, and decide what to hand over.</span>
+<span class="essay-feature-desc">Check what you understand when you use AI. Then practise judging your confidence, checking answers, and choosing which tasks to do yourself.</span>
 <span class="read-more">Open the field guide →</span>
 </a>
 <a class="essay-feature" href="/high-agency/">
