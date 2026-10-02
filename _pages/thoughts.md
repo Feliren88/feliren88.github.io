@@ -34,6 +34,11 @@ layout-class: page writings-page
   <h2 id="writings-guides-title">Field guides and personal notes</h2>
   <p class="section-note">Longer pieces on decisions, relationships, and the habits I keep testing in my own life.</p>
   <div class="writings-guides-grid">
+<a class="essay-feature" href="/taufiq/">
+<span class="essay-feature-title">Taufiq</span>
+<span class="essay-feature-desc">Lessons from a mentor on fundamental research, depth before breadth, research taste, and leadership. Includes visual notes, working questions, and related research lives.</span>
+<span class="read-more">Open the field note →</span>
+</a>
 <a class="essay-feature" href="/metacognition/">
 <span class="essay-feature-title">Metacognition</span>
 <span class="essay-feature-desc">Check what you understand when you use AI. Then practise judging your confidence, checking answers, and choosing which tasks to do yourself.</span>
