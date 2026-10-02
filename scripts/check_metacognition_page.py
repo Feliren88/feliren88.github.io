@@ -17,6 +17,7 @@ from playwright.sync_api import sync_playwright
 
 SITE = Path(__file__).resolve().parent.parent / '_site'
 CHECKS = []
+OPEN = []  # contexts opened by the running check, closed after it
 BANNED = re.compile(r'\b(delve|foster|leverage|utili[sz]e|facilitate|empower|streamline|robust|cutting-edge|tapestry|realm|beacon|multifaceted|meticulous|intricate|paramount|transformative|elevate|embark|supercharge|harness)\w*', re.I)
 
 
@@ -35,6 +36,7 @@ def open_page(browser, base, path='/metacognition/', width=1200, theme=None, red
                                   reduced_motion='reduce' if reduced else 'no-preference')
     if theme:
         context.add_init_script("localStorage.setItem('theme', '%s')" % theme)
+    OPEN.append(context)
     context.set_default_timeout(5000)
     context.set_default_navigation_timeout(30000)
     page = context.new_page()
@@ -218,6 +220,9 @@ def main(argv):
             except Exception as err:  # every failure is reported, then counted
                 failures += 1
                 print('FAIL', fn.__name__, '-', (str(err).splitlines() or [repr(err)])[0][:300])
+            finally:
+                while OPEN:
+                    OPEN.pop().close()
         browser.close()
     httpd.shutdown()
     print('%d failed' % failures)
