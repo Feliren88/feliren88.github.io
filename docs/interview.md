@@ -440,3 +440,39 @@ These are illustrative models, so the interface states their assumptions and uni
 Run `node scripts/test_information_lessons.js` for the numerical models.
 Then run `python scripts/check_information_lessons.py` against the active preview for the interaction checks.
 The script optionally accepts a viewport width and theme after its base URL.
+
+## Uncertainty walkthroughs and distribution narration
+
+Each of the 9 uncertainty lessons adds a worked animation from `uncertainty-animations.js`.
+The chosen examples show calculations rather than results from a trained model.
+Moreover, the existing lesson diagrams remain available with their original narrated steps.
+
+The shared player in `interview-narrative.js` advances the drawing and caption together.
+It supports previous and next steps, playback, speed, reset and reversible scrubbing.
+Furthermore, the learner can request spoken narration for the current step.
+Playback stops when the page becomes hidden or the example leaves the viewport.
+
+Every distribution explorer uses this player to connect point probabilities or density with cumulative probability.
+Its captions recalculate when parameters or the selected value change.
+Therefore, the uncertainty track retains its 6 distribution explorers.
+Categorical cumulative probabilities use the displayed order, while truncated plots retain full-distribution CDF values.
+
+Run `python scripts/check_learning_narratives.py` against the local preview to verify these controls.
+The check covers phone and desktop widths, both themes, enlarged text and all 24 distribution families.
+
+## Worked statistics and proof animations
+
+The same narrator now supports 6 Bayesian, 8 Frequentist, 10 Mathematics and 7 Mathematical Proof examples.
+`statistics-animations.js` draws numerical calculations, while `math-animations.js` reveals calculations and proof arguments in order.
+Each example has 4 steps, with its assumptions stated before the calculation depends on them.
+Moreover, the original lesson diagrams retain their existing walkthroughs.
+
+The new examples illustrate chosen inputs rather than measured performance.
+Bayesian coin examples assume conditional independence given a shared probability.
+Normal intervals and tests state their known-variance assumptions.
+Conformal coverage concerns calibration and future data averaged under exchangeability.
+Proof examples distinguish a finite check from an argument covering every permitted input.
+
+Run `python scripts/check_learning_narratives.py` against the local preview for all 5 requested tracks.
+Its checks cover 40 examples, forward and backward steps, playback, reset, speech dispatch and enlarged text.
+Furthermore, it checks SVG text bounds, phone and desktop layouts, both themes and all 24 distribution families.

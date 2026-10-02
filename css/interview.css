@@ -1107,13 +1107,14 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 }
 .syl-cards-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 .syl-cards-head .syl-panel-title { margin: 0; }
-.syl-cards-ctl { display: flex; gap: 0.4rem; }
+.syl-cards-ctl { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .syl-cards-ctl button {
   display: inline-flex;
   align-items: center;
@@ -2922,4 +2923,56 @@ html[data-theme="light"] .ivm {
 .ivm-live [data-live] {
   color: var(--accent);
   font-weight: 600;
+}
+
+/* Captions, controls and marks share the reading scale. */
+.ivn-steps { margin: 1rem 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+.ivn-steps button { width: 100%; text-align: left; padding: .6rem .8rem; border: 1px solid var(--border-ui); border-radius: .4rem; background: var(--bg); color: var(--muted); font: inherit; font-size: var(--fs-xs); line-height: var(--rd-lead, 1.6); cursor: pointer; }
+.ivn-steps button[aria-current="step"] { color: var(--text); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--bg)); }
+.ivn-say { color: var(--text); font-size: var(--fs-sm); line-height: var(--rd-lead, 1.6); max-width: 66ch; }
+.ivn-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: var(--fs-xs); }
+.ivn-controls button, .ivn-controls select { border: 1px solid var(--border-ui); border-radius: .35rem; padding: .5rem; color: var(--text); background: var(--bg); font: inherit; cursor: pointer; }
+.ivn-controls button:disabled { opacity: .5; cursor: default; }
+.ivn-controls label { display: flex; align-items: center; gap: .4rem; }
+.ivn-controls input { accent-color: var(--accent); max-width: 9rem; }
+.ue-animation { margin: 1.2rem 0; padding: 1rem; border: 1px solid var(--border-ui); border-radius: .75rem; min-width: 0; }
+.ue-animation h3 { margin: 0; font-size: var(--fs-md); line-height: var(--rd-lead, 1.6); }
+.ue-assumption { color: var(--muted); font-size: var(--fs-xs); line-height: var(--rd-lead, 1.6); }
+.ue-chart { overflow-x: auto; }
+.ue-chart svg { display: block; width: calc(100% * var(--rd-scale, 1)); min-width: calc(560px * var(--rd-scale, 1)); height: auto; }
+.ue-chart text { fill: var(--text); font: 15px sans-serif; }
+.ue-chart rect, .ue-chart circle { fill: var(--accent); }
+.ue-chart .ue-axis { stroke: var(--text); fill: none; }
+.ue-chart .ue-reference { stroke: var(--muted); stroke-dasharray: 5 4; fill: none; }
+.ue-chart .ue-selected { stroke: var(--text); stroke-width: 3; }
+.ue-chart .ue-deferred { opacity: .3; }
+.ue-chart .ue-error { fill: var(--muted); }
+.ivd-panel[data-narrative-step="0"] .ivd-cdf,
+.ivd-panel[data-narrative-step="1"] .ivd-cdf { opacity: .3; }
+.ivd-panel[data-narrative-step="0"] .ivd-area,
+.ivd-panel[data-narrative-step="1"] .ivd-area { opacity: 0; }
+.ivd-panel[data-narrative-step="0"] .ivd-bar-selected,
+.ivd-panel[data-narrative-step="1"] .ivd-bar-selected { fill: var(--ivd-pdf); }
+.ivd-panel[data-narrative-step="0"] .ivd-cut,
+.ivd-panel[data-narrative-step="0"] .ivd-dot { opacity: 0; }
+.ivd-panel[data-narrative-step="2"] .ivd-charts figure:first-child,
+.ivd-panel[data-narrative-step="3"] .ivd-charts figure:last-child { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .ue-chart rect, .ue-chart circle, .ue-chart g { transition: opacity .3s, fill .3s; }
+  .ivd-area, .ivd-cdf, .ivd-cut, .ivd-dot { transition: opacity .3s; }
+}
+.maths-node { fill: var(--bg) !important; stroke: var(--border-ui); stroke-width: 1.5; }
+.maths-node.is-current { stroke: var(--accent); stroke-width: 3; }
+.xp p code { white-space: normal; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ivn-arrive { from { opacity: 0; } to { opacity: 1; } }
+  .ue-chart svg > rect, .ue-chart svg > circle { animation: ivn-arrive .35s both; }
+}
+.ivn-module-animation { margin: 1rem 0; min-width: 0; }
+.ivn-module-animation > .syl-viz { margin-bottom: .75rem; }
+.ivn-module-player { border: 1px solid var(--border-ui); border-radius: .65rem; padding: .9rem; }
+.ivn-track-player { padding: 0 1rem 1rem; }
+.ivn-track-animation .an-body { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .ivn-animated-viz .is-at { animation: ivn-arrive .45s both; }
 }

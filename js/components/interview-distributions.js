@@ -353,7 +353,7 @@
       '<div class="ivd-charts"><figure><figcaption class="ivd-left-title"></figcaption><svg class="ivd-density" viewBox="0 0 480 246" role="img"></svg></figure>' +
       '<figure><figcaption>CDF · cumulative probability</figcaption><svg class="ivd-cdf" viewBox="0 0 480 246" role="img"></svg></figure></div>' +
       '<div class="ivd-controls"><div class="ivd-params"></div><label class="ivd-cut-label"><span>Selected value <output></output></span><input type="range"></label></div>' +
-      '<output class="ivd-result" aria-live="polite"></output><p class="ivd-note"></p>' +
+      '<output class="ivd-result" aria-live="polite"></output><p class="ivd-note"></p><div class="ivd-narrative"></div>' +
       '<details class="ivd-formulas"><summary>Show the probability formulas</summary><dl>' +
       '<div><dt class="ivd-formula-density-label"></dt><dd class="ivd-formula-density"></dd></div>' +
       '<div><dt>CDF</dt><dd class="ivd-formula-cdf"></dd></div></dl>' +
@@ -371,7 +371,7 @@
     var densityFormulaLabel = host.querySelector('.ivd-formula-density-label');
     var densityFormula = host.querySelector('.ivd-formula-density');
     var cdfFormula = host.querySelector('.ivd-formula-cdf');
-    var state = {}, id = '';
+    var state = {}, id = '', narrative = null;
     ['discrete', 'continuous'].forEach(function (type) {
       var group = document.createElement('optgroup'); group.label = type === 'discrete' ? 'Discrete' : 'Continuous';
       allowed.forEach(function (name) {
@@ -399,6 +399,7 @@
       density.setAttribute('aria-label', spec.name + ' ' + (discreteValue ? 'PMF' : 'PDF') + ' at ' + fmt(value) + '. ' + (discreteValue ? 'Point probability ' : 'Density ') + fmt(ordinate) + '. Values at or below the marker are highlighted.');
       cdf.setAttribute('aria-label', spec.name + ' CDF at ' + fmt(value) + '. Cumulative probability ' + fmt(probability) + '.');
       note.textContent = spec.note || (discreteValue ? 'Move the marker to sum point probabilities.' : 'The shaded PDF area to the left of the marker equals the CDF value.');
+      if (narrative) narrative.refresh();
     }
     function drawDiscreteOrContinuous(target, spec, values, value, cumulative) {
       if (spec.type === 'discrete') drawDiscrete(target, spec, values, value, cumulative);
@@ -448,6 +449,34 @@
     cut.addEventListener('input', paint);
     select.value = allowed.indexOf(host.dataset.default) >= 0 ? host.dataset.default : allowed[0];
     setup(select.value);
+    narrative = window.InterviewNarrative.mount(host.querySelector('.ivd-narrative'), {
+      steps: [
+        function () {
+          return 'Begin with the '+D[id].name+' distribution. The current parameters are '+
+            D[id].params.map(function(p){return p.label+' '+fmt(state[p.key]);}).join(', ')+'.';
+        },
+        function () {
+          var value=+cut.value, spec=D[id];
+          return spec.type==='discrete' ? 'Select value '+fmt(value)+'. Its point probability equals '+fmt(spec.density(value,state))+'.' :
+            'Select value '+fmt(value)+'. Its density equals '+fmt(spec.density(value,state))+'. A density height differs from an interval probability.';
+        },
+        function () {
+          var spec=D[id], value=+cut.value;
+          var bounds=spec.range(state);
+          var cropped=spec.cdf(bounds[0],state)>1e-8 || spec.cdf(bounds[1],state)<1-1e-8;
+          return (spec.type==='discrete' ? 'Add the point probabilities at or below '+fmt(value)+'.' :
+            'Accumulate density area from the lower support boundary to '+fmt(value)+'.')+
+            ' The resulting probability equals '+fmt(spec.cdf(value,state))+'.'+
+            (id==='categorical' ? ' This cumulative value uses the displayed category order.' :
+              spec.type==='continuous' && cropped ? ' The plot omits some tail probability; the CDF uses the full distribution.' : '');
+        },
+        function () {
+          return 'Read the same probability on the cumulative plot. P(X ≤ '+fmt(+cut.value)+') = '+fmt(D[id].cdf(+cut.value,state))+
+            '. Then change a parameter or the selected value to compare the two plots.';
+        }
+      ],
+      draw: function (step) { host.querySelector('.ivd-panel').dataset.narrativeStep=step; }
+    });
   }
   Array.prototype.forEach.call(document.querySelectorAll('[data-distributions]'), init);
 }());

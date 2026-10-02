@@ -13,4 +13,5 @@ extra_js:
   - /js/components/interview.js
   - /js/components/interview-anim.js
   - /js/components/interview-math.js
+  - /js/components/uncertainty-animations.js
 ---
