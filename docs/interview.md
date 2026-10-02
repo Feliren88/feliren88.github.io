@@ -476,3 +476,19 @@ Proof examples distinguish a finite check from an argument covering every permit
 Run `python scripts/check_learning_narratives.py` against the local preview for all 5 requested tracks.
 Its checks cover 40 examples, forward and backward steps, playback, reset, speech dispatch and enlarged text.
 Furthermore, it checks SVG text bounds, phone and desktop layouts, both themes and all 24 distribution families.
+
+## Narrated model and systems tracks
+
+`interview-module-animations.js` connects the authored diagrams to the shared narrative player on 10 tracks.
+These tracks are LLM Training, NLP, Multimodality, Embeddings, Edge AI, Agents, MLOps, Data Engineering, Mechanistic Interpretability and AI Safety.
+Their 68 lessons retain the original captions and drawing steps.
+Moreover, their 10 opening animations use the same playback and speech controls.
+
+The adapter calls each diagram's existing step handler to preserve cumulative states.
+The legacy controls remain hidden, while the new controls provide playback, speed, reset and scrubbing.
+The diagram wrapper retains group semantics so its labels remain available to screen readers.
+Furthermore, track-level arrow handling advances the drawing and caption together, while sliders retain native keyboard behaviour.
+
+Run `python scripts/check_module_narratives.py` against the preview for these 10 tracks.
+Its checks cover diagram-caption alignment, backward scrubbing, playback, native slider keys and enlarged text.
+The check visits desktop and phone widths in both themes.

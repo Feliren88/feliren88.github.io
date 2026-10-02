@@ -13,4 +13,5 @@ extra_js:
   - /js/components/interview-anim.js
   - /js/components/interview-math.js
   - /js/components/explainer-wizmap.js
+  - /js/components/interview-module-animations.js
 ---

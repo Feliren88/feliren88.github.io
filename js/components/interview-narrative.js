@@ -61,7 +61,7 @@
     document.addEventListener('visibilitychange',function(){if(document.hidden)pause();});
     if ('IntersectionObserver' in window) new IntersectionObserver(function(entries){
       if(!entries[0].isIntersecting)pause();
-    }).observe(host.closest('.ue-animation, .ivd-panel') || host);
+    }).observe(host.closest('.ue-animation, .ivd-panel, .ivn-module-animation, .an-host') || host);
     go(0);
     return {refresh:function(){pause();go(at);},reset:function(){pause();go(0);}};
   }
