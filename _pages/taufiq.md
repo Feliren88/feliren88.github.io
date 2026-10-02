@@ -30,7 +30,7 @@ hide_title: true
 
 <div class="tf-origin" role="note">
   <p>These are my recollections of a private conversation, written in my own words. I have anonymised the mentor and institutions in the body.</p>
-  <p>Moreover, career and funding details below are his account, recalled from our conversation. Linked sources explain related ideas; they do not verify that private account.</p>
+  <p>Linked sources explain related ideas; they do not verify that private account.</p>
 </div>
 
 <nav class="tf-index" aria-label="Sections in this field note">
