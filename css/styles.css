@@ -37,7 +37,6 @@
 :root {
   --bg: #070d14;
   --bg-soft: #0b121c;
-  --bg-grid: rgba(95, 113, 136, 0.1);
   --surface: #0b141f;
   --surface-soft: #0e1825;
   --stat-fill: rgba(14, 24, 37, 0.2);
@@ -79,7 +78,6 @@
 html[data-theme="light"] {
   --bg: #f0f3f7;
   --bg-soft: #e8ecf3;
-  --bg-grid: rgba(95, 113, 136, 0.07);
   --surface: #ffffff;
   --surface-soft: #f0f3f7;
   --stat-fill: rgba(255, 255, 255, 0.3);

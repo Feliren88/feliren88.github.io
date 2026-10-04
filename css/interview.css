@@ -70,7 +70,6 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
    token, so one setting reaches all of them. */
 .ivh-group-title,
 .ivh-card-meta,
-.ivh-stats span,
 .syl-group,
 .syl-panel-title,
 .syl-check-label,
@@ -143,22 +142,6 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
   margin: 1.1rem 0 1rem;
 }
 .ivh-lede { font-size: var(--fs-base); line-height: 1.65; color: var(--muted); margin: 0; }
-.ivh-stats {
-  display: flex;
-  gap: 2.25rem;
-  list-style: none;
-  padding: 1.6rem 0 0;
-  margin: 1.6rem 0 0;
-  border-top: 1px solid var(--line);
-}
-.ivh-stats li { display: flex; flex-direction: column; gap: 0.2rem; }
-.ivh-stats strong { font: 600 1.6rem / 1 "Space Grotesk", sans-serif; color: var(--text); }
-.ivh-stats span {
-  font-size: var(--fs-2xs);
-  letter-spacing: var(--rd-caps-track);
-  color: var(--muted);
-}
-
 .ivh-maplede {
   font-size: var(--fs-sm);
   line-height: 1.6;
@@ -183,22 +166,33 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
   color: var(--text);
 }
 .ivh-contract p { margin: 0; font-size: var(--fs-sm); color: var(--muted); }
+/* The four steps run in order, so they read as a numbered sequence
+   rather than four tiles. */
 .ivh-contract ol {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.55rem;
   list-style: none;
   padding: 0;
   margin: 0;
+  counter-reset: ivh-step;
 }
 .ivh-contract li {
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 1fr);
+  column-gap: 0.6rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+  counter-increment: ivh-step;
+}
+.ivh-contract li:first-child { padding-top: 0; border-top: 0; }
+.ivh-contract li::before {
+  content: counter(ivh-step);
+  grid-row: span 2;
+  font: 600 var(--fs-xs) / 1.45 "Space Grotesk", sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
 }
 .ivh-contract strong,
-.ivh-contract span { display: block; }
+.ivh-contract span { display: block; grid-column: 2; }
 .ivh-contract strong { margin-bottom: 0.15rem; font-size: var(--fs-xs); color: var(--text); }
 .ivh-contract span { font-size: var(--fs-2xs); color: var(--muted); }
 
@@ -1305,7 +1299,6 @@ body:has(.interview-hub, .syl-page) #pointcloud-bg { display: none; }
 
 @media (max-width: 640px) {
   .ivh-start-grid { grid-template-columns: 1fr; }
-  .ivh-stats { gap: 1.4rem; }
   .iv-map-svg { display: none; }
   .syl-covers { grid-template-columns: 1fr; }
   .ivz-stops { grid-auto-flow: row; grid-auto-columns: auto; }

@@ -19,13 +19,6 @@ extra_js:
     <h1 class="ivh-title">Research interview notebook</h1>
     <p class="ivh-lede">I use this notebook to prepare for PhD and research interviews. Each track helps me explain ideas and support them with evidence. It also helps me recognise their limits. To begin, choose a question below. Each track lists what you need to know first. Start with basic algebra and programming. Then follow related tracks as you need them.</p>
     {% assign topics = site.data.interview.topics %}
-    {% assign mod_n = 0 %}{% assign cov_n = 0 %}
-    {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}
-    <ul class="ivh-stats">
-      <li><strong>{{ topics | size }}</strong><span>tracks</span></li>
-      <li><strong>{{ mod_n }}</strong><span>modules</span></li>
-      <li><strong>{{ cov_n }}</strong><span>terms</span></li>
-    </ul>
   </header>
 
   <section class="ivh-contract" aria-labelledby="ivh-contract-title">
@@ -86,7 +79,6 @@ extra_js:
     <p>Finally, separate exact results from approximations. Then predict how changing an assumption affects the result.</p>
   </section>
 
-  <p class="ivh-maplede">Each card opens a track with modules, practice questions, and related topics. On wider screens, the lines show how tracks connect.</p>
   <p class="ivh-maplede">For interactive practice, explore the <a href="/math/#m6">probability distributions</a> or <a href="/calculus/#m5">area under a curve</a>.</p>
 
   <div class="ivh-map" id="iv-map">
