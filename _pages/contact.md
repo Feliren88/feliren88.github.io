@@ -12,8 +12,8 @@ extra_js: /js/components/contact.js
 
 <header class="ct-hero" aria-labelledby="ct-title">
   <div class="ct-hero-copy">
-    <p class="ct-status"><i aria-hidden="true"></i> Open to research conversations</p>
     <h1 id="ct-title">Work with me on decisions under uncertainty.</h1>
+    <p class="ct-status">Open to research conversations</p>
     <p class="ct-lead">{{ site.data.contact.intro_sub }}</p>
     <p class="ct-location">Jakarta <span aria-hidden="true">·</span> working internationally</p>
     <div class="ct-actions">
@@ -24,7 +24,6 @@ extra_js: /js/components/contact.js
     <p class="ct-copy-status" id="ct-copy-status" role="status" aria-live="polite"></p>
   </div>
   <figure class="ct-portrait">
-    <div class="ct-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
     <img src="/assets/img/profile_2_color.webp" alt="Vicky Feliren, AI researcher and applied scientist" draggable="false" fetchpriority="high" width="650" height="650">
     <figcaption>Sequential decision making under uncertainty</figcaption>
   </figure>
@@ -38,7 +37,6 @@ extra_js: /js/components/contact.js
   <div class="ct-fit-list">
     {% for item in site.data.contact.engagements %}
     <article class="ct-fit-row">
-      <span class="ct-num">0{{ forloop.index }}</span>
       <div class="ct-fit-name"><h3>{{ item.type }}</h3><span>{% if forloop.index == 1 %}Research{% elsif forloop.index == 2 %}Roles{% elsif forloop.index == 3 %}Events{% else %}Guidance{% endif %}</span></div>
       <p>{{ item.description }}</p>
       <div class="ct-include"><small>Include</small><p>{{ item.include }}</p><small class="ct-next">What happens next</small><p>{{ item.response }}</p></div>

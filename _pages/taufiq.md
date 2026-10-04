@@ -13,8 +13,8 @@ hide_title: true
 
 <header class="tf-hero">
   <div class="tf-hero-copy">
-    <p class="tf-eyebrow">Field note · Research and a life beyond it</p>
     <h1>Taufiq</h1>
+    <p class="tf-metadata">Field note · Research and a life beyond it</p>
     <p class="tf-deck">A mentor taught me to build depth before widening my work.</p>
     <p>I kept thinking about his advice after our conversation. This note records what I understood and how I want to use it.</p>
     <a class="tf-start" href="#conversation">Begin with the conversation <span aria-hidden="true">↓</span></a>
@@ -34,23 +34,23 @@ hide_title: true
 </div>
 
 <nav class="tf-index" aria-label="Sections in this field note">
-  <a href="#conversation"><span>01</span>The mentor</a>
-  <a href="#foundations"><span>02</span>Fundamental questions</a>
-  <a href="#quadrants"><span>03</span>Bohr, Pasteur, Edison</a>
-  <a href="#depth"><span>04</span>Depth before breadth</a>
-  <a href="#phd"><span>05</span>Choosing a PhD</a>
-  <a href="#taste"><span>06</span>Research taste</a>
-  <a href="#communities"><span>07</span>Entering a community</a>
-  <a href="#leadership"><span>08</span>Leading with trust</a>
-  <a href="#funding"><span>09</span>Funding and freedom</a>
-  <a href="#learning"><span>10</span>Staying sharp</a>
-  <a href="#practice"><span>11</span>My working questions</a>
-  <a href="#stories"><span>12</span>Related research lives</a>
-  <a href="#sources"><span>13</span>Further reading</a>
+  <a href="#conversation">The mentor</a>
+  <a href="#foundations">Fundamental questions</a>
+  <a href="#quadrants">Bohr, Pasteur, Edison</a>
+  <a href="#depth">Depth before breadth</a>
+  <a href="#phd">Choosing a PhD</a>
+  <a href="#taste">Research taste</a>
+  <a href="#communities">Entering a community</a>
+  <a href="#leadership">Leading with trust</a>
+  <a href="#funding">Funding and freedom</a>
+  <a href="#learning">Staying sharp</a>
+  <a href="#practice">My working questions</a>
+  <a href="#stories">Related research lives</a>
+  <a href="#sources">Further reading</a>
 </nav>
 
 <section class="tf-section" id="conversation" aria-labelledby="tf-conversation-title">
-  <header class="tf-section-head"><span>01</span><h2 id="tf-conversation-title">The person behind the advice</h2></header>
+  <header class="tf-section-head"><h2 id="tf-conversation-title">The person behind the advice</h2></header>
   <div class="tf-prose">
     <p>He began with information theory and earned a doctorate at a leading UK university. Information theory studies how information can be measured, transmitted, and recovered under constraints. Afterwards, he taught and researched at different institutions, while gradually taking on wider responsibilities.</p>
     <p>He described moving into new research areas, leading initiatives, and winning funding. Moreover, he told me about an upcoming appointment as a university research vice-president. The person holding that role was approaching retirement.</p>
@@ -67,7 +67,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="foundations" aria-labelledby="tf-foundations-title">
-  <header class="tf-section-head"><span>02</span><h2 id="tf-foundations-title">Choose questions that can travel</h2></header>
+  <header class="tf-section-head"><h2 id="tf-foundations-title">Choose questions that can travel</h2></header>
   <div class="tf-prose">
     <p>He encouraged me to pursue fundamental research, which seeks explanations and principles behind particular results. His reason was the range of problems those ideas might eventually help solve. A good explanation can remain useful when the application changes.</p>
     <p>For example, information theory asks what can be communicated reliably through noise. Different applications can share that question, even when their devices and data differ. This is how I understand the value of a foundation.</p>
@@ -83,7 +83,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="quadrants" aria-labelledby="tf-quadrants-title">
-  <header class="tf-section-head"><span>03</span><h2 id="tf-quadrants-title">Keep understanding and use in view</h2></header>
+  <header class="tf-section-head"><h2 id="tf-quadrants-title">Keep understanding and use in view</h2></header>
   <div class="tf-prose">
     <p>He used Niels Bohr, Louis Pasteur, and Thomas Alva Edison to explain different research directions. His advice was to begin near Pasteur, with some room towards Bohr. Later, I could bring that foundation into work closer to Edison.</p>
     <p>Donald Stokes’s <i>Pasteur’s Quadrant</i> gives this comparison a useful structure. It separates the pursuit of fundamental understanding from attention to practical use. Therefore, a project can pursue both at once. <a class="tf-cite" href="#source-stokes" aria-label="Source 2, Donald Stokes">[2]</a></p>
@@ -107,7 +107,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="depth" aria-labelledby="tf-depth-title">
-  <header class="tf-section-head"><span>04</span><h2 id="tf-depth-title">Build a speciality I can carry into wider work</h2></header>
+  <header class="tf-section-head"><h2 id="tf-depth-title">Build a speciality I can carry into wider work</h2></header>
   <div class="tf-prose">
     <p>He recommended becoming a specialist before trying to be a generalist. Depth gives people a reason to take my contribution seriously. Moreover, working through one field teaches me how to evaluate a claim and recognise a weak explanation.</p>
     <p>Then I can become T-shaped, with depth in one area and breadth for working with others. The vertical part represents a field I know well. The horizontal part represents enough shared understanding to collaborate across fields.</p>
@@ -125,7 +125,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="phd" aria-labelledby="tf-phd-title">
-  <header class="tf-section-head"><span>05</span><h2 id="tf-phd-title">Use the PhD to learn how to choose questions</h2></header>
+  <header class="tf-section-head"><h2 id="tf-phd-title">Use the PhD to learn how to choose questions</h2></header>
   <div class="tf-prose">
     <p>He encouraged me to pursue blue-skies research during my PhD. This means exploring questions whose answers and eventual uses are still uncertain. He wanted me to have room to investigate and develop my own judgement.</p>
     <p>Moreover, he warned against a PhD so tightly tied to project delivery that it feels like industrial work. I understand that concern as a question about intellectual freedom. If the deliverable determines every step, where do I learn to choose a research direction?</p>
@@ -140,7 +140,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="taste" aria-labelledby="tf-taste-title">
-  <header class="tf-section-head"><span>06</span><h2 id="tf-taste-title">Practise judgement before committing years</h2></header>
+  <header class="tf-section-head"><h2 id="tf-taste-title">Practise judgement before committing years</h2></header>
   <div class="tf-prose">
     <p>He stressed judgement and research taste. I understand research taste as choosing questions that deserve attention, given what matters and what I can learn. It also includes knowing which promising-looking directions to leave alone.</p>
     <p>Therefore, I need to ask more than whether I can make a method work. What changes if I answer the question? Which assumption does it test? Who would learn something from either outcome?</p>
@@ -158,7 +158,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="communities" aria-labelledby="tf-communities-title">
-  <header class="tf-section-head"><span>07</span><h2 id="tf-communities-title">Enter a new community with something useful to offer</h2></header>
+  <header class="tf-section-head"><h2 id="tf-communities-title">Enter a new community with something useful to offer</h2></header>
   <div class="tf-prose">
     <p>He also taught me about selling and framing research. Each community has its own language, priorities, and standards of evidence. Therefore, I need to explain my contribution in terms its members can evaluate.</p>
     <p>In his advice, entering a new field did not require abandoning what I already knew. I could bring a different perspective and a useful method. At the same time, I needed to learn what the community already understood.</p>
@@ -179,7 +179,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="leadership" aria-labelledby="tf-leadership-title">
-  <header class="tf-section-head"><span>08</span><h2 id="tf-leadership-title">Learn how decisions happen, and remain trustworthy</h2></header>
+  <header class="tf-section-head"><h2 id="tf-leadership-title">Learn how decisions happen, and remain trustworthy</h2></header>
   <div class="tf-prose">
     <p>His advice included understanding the politics of an institution while remaining likeable and trusted. I read that as learning how people make decisions and what they need. Good work still needs support, resources, and people willing to work together.</p>
     <p>The Center for Creative Leadership describes political skill through social awareness, influence, relationships, and sincerity. It also recommends thinking before speaking and maintaining relationships beyond senior management. <a class="tf-cite" href="#source-leadership" aria-label="Source 6, Center for Creative Leadership">[6]</a></p>
@@ -199,7 +199,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="funding" aria-labelledby="tf-funding-title">
-  <header class="tf-section-head"><span>09</span><h2 id="tf-funding-title">Turn funding into capacity for good work</h2></header>
+  <header class="tf-section-head"><h2 id="tf-funding-title">Turn funding into capacity for good work</h2></header>
   <div class="tf-prose">
     <p>The lesson I took was how research, initiative, and leadership can support each other. He described winning funding while continuing to pursue work he loved. Moreover, he connected that path with still having a life outside the role.</p>
     <p>Therefore, I want to think about what a grant makes possible. Which question can the team now investigate? Which people, equipment, and time does it support? What obligations will it create?</p>
@@ -209,7 +209,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="learning" aria-labelledby="tf-learning-title">
-  <header class="tf-section-head"><span>10</span><h2 id="tf-learning-title">Stay sharp without letting the role consume the person</h2></header>
+  <header class="tf-section-head"><h2 id="tf-learning-title">Stay sharp without letting the role consume the person</h2></header>
   <div class="tf-prose">
     <p>I remain impressed by how quickly he learnt a new concept or a mathematically heavy paper. His example made continued learning feel compatible with wider responsibility. Moreover, he kept returning to thinking itself as something worth maintaining.</p>
     <p>I cannot know his whole learning method from one conversation. However, I can practise a reading habit that fits the lesson. S. Keshav’s paper-reading guide moves through orientation, closer examination, and reconstruction of the argument. <a class="tf-cite" href="#source-reading" aria-label="Source 8, S. Keshav’s paper-reading guide">[8]</a></p>
@@ -226,7 +226,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="practice" aria-labelledby="tf-practice-title">
-  <header class="tf-section-head"><span>11</span><h2 id="tf-practice-title">Questions I want to keep using</h2></header>
+  <header class="tf-section-head"><h2 id="tf-practice-title">Questions I want to keep using</h2></header>
   <div class="tf-prose"><p>I want this conversation to change how I choose and work. Therefore, I return to these questions when considering a PhD, project, collaboration, or leadership role.</p></div>
   <div class="tf-working-notes">
     <details open><summary>My research direction</summary><ul><li>Which fundamental question do I want to understand well?</li><li>Which practical problem helps me study it?</li><li>What explanation or method might remain useful when the application changes?</li></ul></details>
@@ -238,7 +238,7 @@ hide_title: true
 </section>
 
 <section class="tf-section" id="stories" aria-labelledby="tf-stories-title">
-  <header class="tf-section-head"><span>12</span><h2 id="tf-stories-title">Research lives I can learn from</h2></header>
+  <header class="tf-section-head"><h2 id="tf-stories-title">Research lives I can learn from</h2></header>
   <div class="tf-prose"><p>These public stories resemble parts of the path he described. However, each person faced different opportunities, collaborators, and institutions. I use their accounts to examine choices, rather than predict a career.</p></div>
   <div class="tf-stories">
     <article><span>Fundamental ideas with wide reach</span><h3>Claude Shannon</h3><p>Shannon’s 1948 work established information theory at Bell Labs. Its institutional history traces the theory’s influence across communications and later technologies. Moreover, Shannon helped propose the Dartmouth research project on artificial intelligence.</p><p>For me, this illustrates how a rigorous foundation can support work beyond its original setting. The story concerns intellectual reach; it offers little guidance about university executive leadership.</p><a href="https://www.nokia.com/bell-labs/about/history/innovation-stories/information-theory-turns-75/">Read Bell Labs’ history of information theory</a></article>
@@ -251,7 +251,7 @@ hide_title: true
 </section>
 
 <section class="tf-section tf-sources" id="sources" aria-labelledby="tf-sources-title">
-  <header class="tf-section-head"><span>13</span><h2 id="tf-sources-title">Further reading</h2></header>
+  <header class="tf-section-head"><h2 id="tf-sources-title">Further reading</h2></header>
   <p>The conversation provides the personal advice in this note. These sources provide related frameworks and practical guidance. Moreover, the diagrams and working questions are my own adaptations.</p>
   <ol>
     <li id="source-frontier"><a href="https://erc.europa.eu/about-erc/thematic-working-groups/working-group-mapping-frontier-research">European Research Council, Mapping Frontier Research</a>. An example of funding researcher-led questions across scientific fields.</li>

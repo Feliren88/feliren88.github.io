@@ -144,7 +144,7 @@ feliren88.github.io/
 │   └── usecase.html   # One use case detail page, driven by uc_id
 ├── _includes/
 │   ├── site-head.html          # <head>: resource hints, stylesheets, analytics, meta
-│   ├── site-header.html        # Top bar: nav, theme toggle, shape picker
+│   ├── site-header.html        # Top bar: nav and theme toggle
 │   ├── site-nav.html           # Nav links + active state, used by header and footer
 │   ├── site-footer.html        # Footer: brand, social links, nav
 │   ├── site-scripts.html       # Script loading at the end of <body>
@@ -156,7 +156,7 @@ feliren88.github.io/
 ├── assets/            # Fonts and WebP images
 ├── css/               # styles.css is global; every other file is page-scoped
 ├── js/
-│   ├── main.js        # Point cloud, filters, tilt, reveal, reveal-group stagger
+│   ├── main.js        # Filters, card disclosures, and theme-aware banners
 │   └── components/    # One file per page that needs behaviour
 └── scripts/           # Generators, verifiers and audits. Not published
 ```
@@ -299,7 +299,7 @@ Cases), and any extra prefix listed under `owns:`. That last one is how a
 long-form note at its own top-level URL still lights up Writings.
 
 `js/components/site-header.js` holds no navigation content. It handles the
-mobile drawer, the theme toggle and the shape popover, and nothing else.
+mobile drawer and the theme toggle.
 
 ## Design System (Gestalt-based)
 
@@ -425,20 +425,16 @@ The filter's visibility logic is inline in `_pages/cv.md`, because `main.js` rou
 `.filter-pill` clicks only to `.project-card` elements and that page has none. Both
 set `is-active` and agree on it.
 
-### Reveal Group Stagger (Common Fate)
-Wrap card grids in `.reveal-group` so children animate together with 80ms stagger:
+### Reading surfaces and motion
 
-```html
-<div class="insights-grid reveal-group">
-  <div class="insight-card reveal">…</div>
-  <div class="insight-card reveal">…</div>
-</div>
-```
+Keep page content visible before scrolling and when scripts are unavailable.
+Legacy `.reveal` and `.reveal-group` classes remain compatible with static content.
+Use hover and focus changes to identify actions without lifting or tilting cards.
 
-`main.js` observes `.reveal-group` elements and marks both the group and its children `.in-view` together.
-
-### Point Cloud (Background — Decorative)
-The `#pointcloud-bg` canvas is **decorative only**. Current CSS opacity: `0.22` (desktop), `0.18` (≤1020px), hidden on coarse pointer (mobile). Do not raise above `0.30` — it competes with foreground content (Figure-Ground law).
+The decorative point-cloud background and its picker have been removed.
+Keep the plain background and opaque navigation surface.
+However, preserve the page-specific diagrams, learning tools, and scroll scenes
+that explain the content rather than decorating it.
 
 ## Code Conventions
 

@@ -5,7 +5,7 @@ and each concern has one obvious home:
 
   site-head.html            <head>: resource hints, stylesheets, analytics, meta
   seo/structured-data.html  JSON-LD, called from site-head.html
-  site-header.html          top bar: nav, theme toggle, shape picker
+  site-header.html          top bar: nav, theme toggle
   site-footer.html          footer: brand, social links, nav
   site-scripts.html         script loading at the end of <body>
 
@@ -22,8 +22,6 @@ rest of the site's content: identity.yml, navigation.yml, media.yml, events.yml.
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4R769D6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-
-    <canvas id="pointcloud-bg" aria-hidden="true"></canvas>
 
     {%- include site-header.html -%}
 
