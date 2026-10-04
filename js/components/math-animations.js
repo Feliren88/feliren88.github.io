@@ -23,7 +23,7 @@
       'Consider positive integers 1, 2, 3 and so on. The sequence has no last member.',
       'Pair each positive integer n with the even integer 2n.',
       'Each positive even integer has exactly one partner, obtained by dividing it by 2.',
-      'This pairing is a bijection, meaning a reversible one-to-one correspondence. Therefore, the two infinite sets have equal cardinality.']},
+      'This pairing is a bijection, meaning a reversible one-to-one correspondence. Therefore, the two infinite sets have the same size.']},
     {title:'Count pairs with and without order',steps:[
       'Choose 2 different items from 5 available items. First count selections where order matters.',
       'There are 5 choices for the first item and 4 for the second. Multiply to obtain 20.',

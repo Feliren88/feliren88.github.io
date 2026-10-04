@@ -11,7 +11,7 @@
 mission:
   outcome: "Explain the idea and the assumptions it needs. Then answer without notes and describe when your answer may fail."
   method: "Study one module and explain it in your own words. After a break, answer its question without notes. Then explore a related track."
-  evidence: "Read an unfamiliar equation and identify each object's type and role. Then explain each operation, what stays fixed, and the assumptions behind the result. Connect the calculation to code, and distinguish an exact identity from an approximation."
+  evidence: "Read an unfamiliar equation and identify each object's type and role. Then explain each operation and state what stays fixed. After that, name the assumptions and connect the calculation to code. Separate exact identities from approximations."
 
 tracks:
   - id: bayesian-statistics
@@ -20,7 +20,7 @@ tracks:
       - title: "Bayes Rules! An Introduction to Applied Bayesian Modeling"
         author: "Johnson, Ott, and Dogucu"
         url: "https://www.bayesrulesbook.com/"
-        use: "Learn how to choose a prior, update it with data, check the model, and share information across groups."
+        use: "Learn how to choose a prior and update it with data. Then check the model and share information across groups."
 
   - id: frequentist-statistics
     prerequisites: ["Algebra", "Probability and random variables"]
@@ -92,11 +92,11 @@ tracks:
       - title: "Operating Systems: Three Easy Pieces"
         author: "Arpaci-Dusseau and Arpaci-Dusseau"
         url: "https://pages.cs.wisc.edu/~remzi/OSTEP/"
-        use: "Use for processes, scheduling, virtual memory, concurrency and file systems, free online."
+        use: "Study processes, scheduling, virtual memory, concurrency and file systems. The book is free online."
       - title: "OS & DBMS Foundation, visual diagrams"
         author: "100NikhilBro"
         url: "https://github.com/100NikhilBro/os_dbms"
-        use: "Use for a one-page diagram per topic when revising."
+        use: "Review each topic with its one-page diagram."
 
   - id: databases
     prerequisites: ["Basic set notation", "Some SQL"]
@@ -104,15 +104,15 @@ tracks:
       - title: "CMU 15-445/645 Database Systems"
         author: "Pavlo"
         url: "https://15445.courses.cs.cmu.edu/"
-        use: "Use for storage, indexing, query execution, concurrency control and recovery, with recorded lectures."
+        use: "Study storage, indexing, query execution, concurrency control and recovery. The course includes recorded lectures."
       - title: "Database System Concepts"
         author: "Silberschatz, Korth and Sudarshan"
         url: "https://db-book.com/"
-        use: "Use for the relational model, normalisation and transactions."
+        use: "Study the relational model, normalisation and transactions."
       - title: "OS & DBMS Foundation, visual diagrams"
         author: "100NikhilBro"
         url: "https://github.com/100NikhilBro/os_dbms"
-        use: "Use for a one-page diagram per topic when revising."
+        use: "Review each topic with its one-page diagram."
 
   - id: computer-networks
     prerequisites: ["Binary numbers", "Basic programming"]
@@ -120,11 +120,11 @@ tracks:
       - title: "Computer Networking: A Top-Down Approach"
         author: "Kurose and Ross"
         url: "https://gaia.cs.umass.edu/kurose_ross/index.php"
-        use: "Use for application, transport, network and link layers, with interactive exercises."
+        use: "Study application, transport, network and link layers. Then practise with interactive exercises."
       - title: "Networks Foundation, visual diagrams"
         author: "100NikhilBro"
         url: "https://github.com/100NikhilBro/networks-foundation"
-        use: "Use for a one-page diagram per topic when revising."
+        use: "Review each topic with its one-page diagram."
 
   - id: design-patterns
     prerequisites: ["Programming in one object-oriented language", "Writing unit tests"]
@@ -132,11 +132,11 @@ tracks:
       - title: "Design Patterns catalogue"
         author: "Refactoring.Guru"
         url: "https://refactoring.guru/design-patterns/catalog"
-        use: "Use for the intent, structure and trade-offs of each of the 22 classic patterns."
+        use: "Study the purpose, structure and trade-offs of each of the 22 classic patterns."
       - title: "Refactoring: Improving the Design of Existing Code"
         author: "Fowler"
         url: "https://martinfowler.com/books/refactoring.html"
-        use: "Use for code smells and the catalogue of behaviour-preserving refactorings."
+        use: "Identify recurring code problems called code smells. Then study ways to restructure code while preserving behaviour."
 
   - id: transformers
     prerequisites: ["Deep learning", "Linear algebra", "Probability"]
@@ -248,7 +248,7 @@ tracks:
       - title: "Choosing Your North Star Metric"
         author: "Rachitsky, for Future (a16z)"
         url: "https://future.com/north-star-metrics/"
-        use: "Use for the 6 kinds of north star, the survey of companies, and input metrics."
+        use: "Compare 6 kinds of north star metric and the company survey. Then study the inputs affecting each metric."
 
   - id: prompt-engineering
     prerequisites: ["LLM fundamentals", "Clear task specification"]
@@ -280,7 +280,7 @@ tracks:
       - title: "The Dataflow Model"
         author: "Akidau et al."
         url: "https://research.google/pubs/the-dataflow-model-a-practical-approach-to-balancing-correctness-latency-and-cost-in-massive-scale-unbounded-out-of-order-data-processing/"
-        use: "Study event time, progress estimates called watermarks, rules that trigger results, and correct handling of late data."
+        use: "Study event time and progress estimates called watermarks. Then examine result triggers and rules for handling late data."
 
   - id: network-and-security
     prerequisites: ["Operating systems basics", "Client-server requests"]
@@ -288,7 +288,7 @@ tracks:
       - title: "Zero Trust Architecture, SP 800-207"
         author: "NIST"
         url: "https://csrc.nist.gov/pubs/sp/800/207/final"
-        use: "Study identity checks, access rules, and trust boundaries in a network where location alone does not imply trust."
+        use: "Study identity checks and access rules. Then examine trust boundaries in networks where location alone does not imply trust."
 
   - id: information-theory
     prerequisites: ["Probability and conditional distributions", "Calculus and optimisation", "Linear algebra", "Basic machine learning"]

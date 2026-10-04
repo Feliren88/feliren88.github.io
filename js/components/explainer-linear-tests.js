@@ -150,13 +150,13 @@
         var R = rank(Y), mw = mannWhitney(D.a, D.b), fitR = ols(G, R);
         left = card('wilcox.test(y ~ group)', [['U', f(mw.u, 1)], ['z', f(mw.z)], ['p', fp(mw.p), true]]);
         right = card('lm(rank(y) ~ 1 + group)', [['β₁, rank difference', f(fitR.b1)], ['t', f(fitR.t)], ['df', fitR.df], ['p', fp(fitR.p), true]], 'is-lm');
-        note = 'The Mann-Whitney test is close to a t-test on the ranks. The two p-values are near each other but not equal, because one uses a normal approximation and the other a t distribution.';
+        note = 'Compare the Mann-Whitney test with a t-test on ranks. Their p-values can differ. Here, Mann-Whitney uses a normal approximation, while the regression uses a t distribution.';
         viz = plot(G.map(function (g, i) { return [g + (i % 7 - 3) * 0.018, R[i], g]; }), [[0, fitR.b0], [1, fitR.b0 + fitR.b1]], 'group (0 or 1)', 'rank of y');
       } else {
         var tt = tTest(D.a, D.b), fit = ols(G, Y);
         left = card('t.test(y ~ group, var.equal = TRUE)', [['mean difference', f(tt.diff), true], ['t', f(tt.t), true], ['df', tt.df, true], ['p', fp(tt.p), true]]);
         right = card('lm(y ~ 1 + group)', [['β₀, mean of group 0', f(fit.b0)], ['β₁, slope', f(fit.b1), true], ['t for β₁', f(fit.t), true], ['df', fit.df, true], ['p', fp(fit.p), true]], 'is-lm');
-        note = 'Code the groups as 0 and 1. The fitted line runs through both group means, so its slope is the difference in means and its t-test is the t-test. The numbers are the same to every decimal.';
+        note = 'Code the groups as 0 and 1. The fitted line passes through both group means. Therefore, its slope equals their difference. With pooled variance, both methods give the same t statistic and p-value.';
         viz = plot(G.map(function (g, i) { return [g + (i % 7 - 3) * 0.018, Y[i], g]; }), [[0, fit.b0], [1, fit.b0 + fit.b1]], 'group (0 or 1)', 'y');
       }
     } else if (S.mode === 'cor') {
@@ -164,14 +164,14 @@
       var pr = pearson(xx, yy), fc = ols(xx, yy);
       left = card(S.rankIt ? 'cor.test(x, y, method = "spearman")' : 'cor.test(x, y)', [[S.rankIt ? 'ρ' : 'r', f(pr.r)], ['t', f(pr.t), true], ['df', pr.df, true], ['p', fp(pr.p), true]]);
       right = card(S.rankIt ? 'lm(rank(y) ~ 1 + rank(x))' : 'lm(y ~ 1 + x)', [['β₁, slope', f(fc.b1)], ['t for β₁', f(fc.t), true], ['df', fc.df, true], ['p', fp(fc.p), true]], 'is-lm');
-      note = (S.rankIt ? 'Spearman’s ρ is Pearson’s r computed on ranks, so its test is the slope test on ranked data. R and SciPy use an exact null for ρ in small samples, so their p can differ slightly from this one. ' : '') +
-        'The slope and r differ by a scale factor, standard deviation of y over standard deviation of x, but their t statistics are identical. Standardise both variables and the slope becomes r.';
+      note = (S.rankIt ? 'Spearman’s ρ is Pearson’s r computed on ranks. Here, the p-value uses a t approximation. Exact or permutation tests can give different p-values for small samples. ' : '') +
+        'The slope equals r times the standard deviation of y divided by that of x. Both tests give the same t statistic. Standardise both variables and the slope equals r.';
       viz = plot(xx.map(function (v, i) { return [v, yy[i], 0]; }), [[Math.min.apply(null, xx), fc.b0 + fc.b1 * Math.min.apply(null, xx)], [Math.max.apply(null, xx), fc.b0 + fc.b1 * Math.max.apply(null, xx)]], S.rankIt ? 'rank of x' : 'x', S.rankIt ? 'rank of y' : 'y');
     } else {
       var d = D.b, om = olsMean(d), m = mean(d);
       left = card('t.test(y, mu = 0)', [['mean', f(m), true], ['t', f(om.t), true], ['df', om.df, true], ['p', fp(om.p), true]]);
       right = card('lm(y ~ 1)', [['β₀, intercept', f(om.b0), true], ['t', f(om.t), true], ['df', om.df, true], ['p', fp(om.p), true]], 'is-lm');
-      note = 'A model with only an intercept predicts the same number for everyone. The best such number is the mean, and testing β₀ = 0 is the one-sample t-test. A paired t-test is the same model fitted to the differences.';
+      note = 'An intercept-only model predicts the same value for every observation. Least squares chooses the sample mean. Testing whether that mean equals 0 gives the one-sample t-test. For paired observations, fit the model to their differences.';
       viz = plot(d.map(function (v, i) { return [i % 9 * 0.1 - 0.4, v, 1]; }), [[-0.5, m], [0.5, m]], 'observations', 'y');
     }
 
@@ -184,7 +184,7 @@
       (S.mode === 'one' ? '' : '<label class="xp-toggles"><input type="checkbox" data-rank' + (S.rankIt ? ' checked' : '') + '> Rank the data</label>') +
       '<button type="button" class="xp-go is-inline" data-new>New sample</button></div>' +
       '<div class="xp-lt">' + viz + '<div class="xp-lt-res">' + left + '<span class="xp-eq" aria-hidden="true">' + (S.rankIt && S.mode === 'two' ? '≈' : '=') + '</span>' + right + '</div></div>' +
-      '<p class="xp-note">' + note + ' Highlighted values agree.</p>';
+      '<p class="xp-note">' + note + ' Compare the highlighted values.</p>';
     host.innerHTML = html;
   }
 

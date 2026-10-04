@@ -44,7 +44,7 @@ models:
     name: Marketplace or platform
     earns: "Takes a cut of each transaction."
     category: consumption
-    why: "Money arrives with each transaction, so count the transactions. They also show both sides of the market are healthy."
+    why: "Revenue comes from transactions, so count them. Also check whether both buyers and sellers benefit."
     companies:
       - [Airbnb, Nights booked]
       - [Uber, Rides taken]
@@ -69,7 +69,7 @@ models:
     name: Freemium software for teams
     earns: "Free to start, paid seats for teams."
     category: customers
-    why: "Value shows up when a team uses the product together, and money when it pays. Count active or paying teams."
+    why: "Teams receive value through shared use and produce revenue when they pay. Therefore, count active or paying teams."
     companies:
       - [Slack, Paid teams]
       - [Airtable, Weekly paid seats]
@@ -104,7 +104,7 @@ models:
     name: Consumer subscription
     earns: "Individuals pay a monthly or yearly plan."
     category: engagement
-    why: "People keep paying while they keep using it. Engagement predicts renewal; some count paying customers directly."
+    why: "Continued use can predict subscription renewal. Therefore, track engagement, or count paying customers directly."
     companies:
       - [Duolingo, Daily active users]
       - [Strava, Monthly active users]
@@ -116,7 +116,7 @@ models:
     name: Product that wins on experience
     earns: "Charges a premium for being better to use."
     category: experience
-    why: "The product's edge is how it feels. Measure satisfaction and protect it from growth tactics."
+    why: "The product competes on user experience. Measure satisfaction and check whether growth tactics reduce it."
     companies:
       - [Robinhood, Net promoter score]
       - [Superhuman, Net promoter score]
@@ -134,7 +134,7 @@ checklist:
   - id: frequent
     q: "It can be measured at least every week."
   - id: guarded
-    q: "Raising it while hurting users would show up in a guardrail."
+    q: "A guardrail metric would reveal improvements that harm users."
   - id: simple
     q: "Anyone in the company can say it and explain why it matters."
 

@@ -3,7 +3,7 @@
   <header class="xp-head">
     <span class="syl-phase">Explore it first</span>
     <h2 id="xp-patterns-title">The pattern catalogue</h2>
-    <p>22 patterns in 3 groups. Each card gives the intent in one line. Open one for the problem it solves, when to reach for it, when to leave it alone, and a short Python example from machine learning work.</p>
+    <p>Explore 22 patterns in 3 groups. Each card states the pattern’s purpose. Open a card to read its problem, solution and usage advice. A short Python example shows how it applies to machine learning code.</p>
   </header>
   <div class="xp-body" data-xp="patterns">
     <div class="xp-bar">
@@ -13,7 +13,7 @@
         <button type="button" data-group="{{ g.id }}" aria-pressed="false">{{ g.name }} <span>{{ n }}</span></button>
         {%- endfor %}
       </div>
-      <label class="xp-field"><span>Search</span><input type="search" data-search placeholder="e.g. retry, undo, tree" aria-label="Search patterns"></label>
+      <label class="xp-field"><span>Search</span><input type="search" data-search placeholder="For example, retry, undo, tree" aria-label="Search patterns"></label>
     </div>
     {%- for g in dp.groups %}
     <div class="xp-pgroup" data-group="{{ g.id }}">
@@ -35,8 +35,8 @@
         <dl class="xp-pdl">
           <div><dt>Problem</dt><dd>{{ p.problem }}</dd></div>
           <div><dt>Solution</dt><dd>{{ p.solution }}</dd></div>
-          <div><dt>Reach for it when</dt><dd>{{ p.when }}</dd></div>
-          <div><dt>Leave it alone when</dt><dd>{{ p.avoid }}</dd></div>
+          <div><dt>Use it when</dt><dd>{{ p.when }}</dd></div>
+          <div><dt>Avoid it when</dt><dd>{{ p.avoid }}</dd></div>
         </dl>
         <pre class="xp-pre"><code>{{ p.example | escape }}</code></pre>
         <p class="xp-prel"><span>Related</span>{% for r in p.related %}{% assign rp = dp.patterns | where: 'id', r | first %}<button type="button" data-open="{{ r }}">{{ rp.name }}</button>{% endfor %}</p>

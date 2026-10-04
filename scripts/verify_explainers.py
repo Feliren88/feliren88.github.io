@@ -402,7 +402,9 @@ let html = '';
 const read = { innerHTML: '' };
 const host = { dataset: {}, addEventListener() {}, querySelector(s) { return s === '.xp-toy-read' ? read : null; },
   set innerHTML(v) { html = v; }, get innerHTML() { return html; } };
-global.window = { matchMedia: () => ({ matches: false }), addEventListener() {} };
+// Numerical checks read scalar values, so formula decoration can stay empty.
+global.window = { matchMedia: () => ({ matches: false }), addEventListener() {},
+  InterviewDisplayMath: { html() { return ''; } } };
 global.MutationObserver = function () { this.observe = () => {}; };
 global.getComputedStyle = () => ({ getPropertyValue: () => '' });
 global.XP = require(%r);

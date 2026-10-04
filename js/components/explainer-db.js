@@ -104,10 +104,10 @@
 
   var PAGES = [
     { t: 'Why a B+ tree', tab: 'tree', parts: ['tree'], body: '<p>A database index must find one key among millions while reading few disk pages. A B+ tree keeps keys sorted in wide nodes, so it stays only a few levels deep.</p><p>Insert keys and watch it grow.</p>' },
-    { t: 'Splits keep it balanced', tab: 'tree', parts: ['tree'], body: '<p>When a leaf overflows it splits in two, and the first key of the new leaf is copied up. A full internal node splits too, moving its middle key up. The tree only grows at the root, so every leaf stays at the same depth.</p>' },
+    { t: 'Splits keep it balanced', tab: 'tree', parts: ['tree'], body: '<p>When a leaf overflows, it splits in two. The first key of the new leaf is copied to its parent. An overflowing internal node also splits, moving its middle key to the parent. Only a root split adds a level, so leaves stay at equal depth.</p>' },
     { t: 'Joins match rows', tab: 'join', parts: ['join'], body: '<p>A join pairs rows whose keys match. Switch between inner, left, right and full to see which unmatched rows survive, padded with nulls. Key 3 matches twice on the right, so its row appears twice.</p>' },
-    { t: 'The cost of matching', tab: 'join', parts: ['cost'], body: '<p>A nested loop compares every pair, so its cost is the rows on the left times the rows on the right. A hash join builds a table on one side and probes it once per row on the other, which is why engines prefer it for large equality joins.</p>' },
-    { t: 'Conflicts form a graph', tab: 'txn', parts: ['graph'], body: '<p>2 transactions interleave reads and writes. Every pair of conflicting operations on the same item draws an edge. A cycle means no serial order gives the same result, so the schedule is not conflict serializable.</p>' }
+    { t: 'The cost of matching', tab: 'join', parts: ['cost'], body: '<p>A nested loop compares every pair. Its comparison count is the product of the two row counts. A hash join builds a lookup table from one input, then probes it for each row of the other. Therefore, engines often prefer hashing for large equality joins.</p>' },
+    { t: 'Conflicts form a graph', tab: 'txn', parts: ['graph'], body: '<p>2 transactions interleave reads and writes. Conflicting operations access the same item, with at least one write. Their order adds a directed edge between transactions. A cycle means no sequential execution preserves these conflict orders. Therefore, the schedule is not conflict serializable.</p>' }
   ];
 
   function treeView() {
@@ -191,7 +191,7 @@
       '<p class="xp-os-sum" aria-live="polite">' + (P.serializable
         ? '<b>Conflict serializable.</b> Equivalent to running ' + P.order.join(' then ') + ' one after the other.'
         : '<b>Not conflict serializable.</b> The edges form a cycle, so no serial order produces the same conflicts.') +
-      ' Write operations as R1(A) for "transaction 1 reads A".</p></div>';
+      ' Enter R1(A) to mean "transaction 1 reads A".</p></div>';
   }
 
   function render(sel) {

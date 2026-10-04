@@ -2,7 +2,7 @@
   <header class="xp-head">
     <span class="syl-phase">Explore it first</span>
     <h2 id="xp-edit-title">Remove part of an image and ask the network again</h2>
-    <p>A trained network labels an image. Erase a region, let the gap fill from its surroundings, and see whether the label survives. Then let the page find which regions the chosen class depends on.</p>
+    <p>A trained network labels an image. Erase a region to fill it from surrounding pixels. Then check whether the predicted label changes. Finally, find which regions affect the chosen class score.</p>
   </header>
   <div class="xp-body tf" data-xp="edit" data-model="{% include asset.html path='/assets/data/tiny-vgg.json' %}" data-weights="{% include asset.html path='/assets/data/tiny-vgg.bin' %}"></div>
   <p class="xp-source">After Cabrera, Hohman, Lin and Chau, <a href="https://github.com/poloclub/interactive-classification" rel="noopener noreferrer">Interactive Classification for Deep Learning Interpretation</a> (CVPR 2018 demo, MIT licence), which uses SqueezeNet and PatchMatch inpainting. Here the network is Tiny VGG from <a href="https://github.com/poloclub/cnn-explainer" rel="noopener noreferrer">CNN Explainer</a>, erased pixels are filled by harmonic (diffusion) inpainting, and the map is occlusion sensitivity after Zeiler and Fergus, <a href="https://arxiv.org/abs/1311.2901" rel="noopener noreferrer">Visualizing and Understanding Convolutional Networks</a> (2014). <a href="/third-party-notices/">Licences</a>.</p>

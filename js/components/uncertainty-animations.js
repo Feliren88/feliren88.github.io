@@ -36,7 +36,7 @@
         'The new probabilities are '+calibrated([2,1,0],2).map(function(x){return x.toFixed(3);}).join(', ')+'. A stays top-ranked; improved calibration requires held-out evidence.'],
       frames:[['Model scores',[2,1,0],2],['Probability at T = 1',calibrated([2,1,0],1),1],['Scores divided by 2',[1,.5,0],2],['Probability at T = 2',calibrated([2,1,0],2),1]]},
     {title:'Construct a conformal prediction set',kind:'conformal',
-      steps:['Use 9 illustrative held-out scores, sorted from 0.05 to 0.9. Each score equals 1 minus the true-label probability.',
+      steps:['Use 9 illustrative held-out scores, sorted from 0.05 to 0.9. Each score equals 1 minus the probability assigned to the true label.',
         'Allow the correct label to fall outside the set with probability at most α = 0.2. The displayed ceiling calculation gives required rank 8.',
         'The eighth score equals 0.75. Use this value as the inclusion threshold.',
         'New class probabilities 0.5, 0.3 and 0.2 give scores 0.5, 0.7 and 0.8. Include A and B. Assume calibration and test scores are exchangeable. Their joint distribution stays unchanged when their order changes. Then coverage is at least 80%, averaged over calibration and test draws.']},

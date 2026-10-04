@@ -20,7 +20,7 @@ bridges:
         read: "Differentiate one quantity while fixing the other. At x = 2 and θ = 3, the derivatives differ."
     symbols:
       - symbol: 'x'
-        meaning: "The argument, which remains outside the integral and sets its endpoint."
+        meaning: "The argument setting the integral’s upper endpoint."
       - symbol: 't, u'
         meaning: "Dummy variables used inside an integral. Renaming them consistently preserves its value."
       - symbol: 'θ'
@@ -93,7 +93,7 @@ bridges:
         meaning: "Differentiate with respect to θ while fixing the outcomes and features."
       - symbol: 'Σᵢ'
         meaning: "Sum over the 2 allowed outcomes, using the index i."
-    note: "For a continuous model with fixed support, differentiating under the integral needs justification. Assume exp(sθ(x)) is differentiable in θ and Zθ is finite and positive. An integrable bound on those derivatives near θ permits exchanging differentiation and integration. Then the log normaliser's gradient equals the model average of the score gradient. A parameter-dependent integration domain can introduce boundary terms."
+    note: "For a continuous model with fixed support, differentiating under the integral needs justification. Assume exp(sθ(x)) is differentiable in θ. Also require Zθ to be finite and positive. An integrable bound on those derivatives near θ permits exchanging differentiation and integration. Then the log normaliser's gradient equals the model average of the score gradient. A parameter-dependent integration domain can introduce boundary terms."
     question: "Which distribution appears in the final expectation? Why does changing θ also change that distribution?"
     answer: "The expectation uses qθ, the normalised model distribution. Changing θ changes the scores, their total, and their normalised ratios."
     next: frequentist-statistics
@@ -143,7 +143,7 @@ bridges:
     step: 0.02
     steps:
       -
-        read: "The potential U is the negative log density up to a constant. Its gradient points away from 0."
+        read: "The potential U equals negative log density plus a constant. Its gradient points away from 0."
       -
         read: "Gradient descent moves towards 0. It seeks a minimum rather than the full spread of a distribution."
       -

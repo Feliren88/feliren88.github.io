@@ -348,7 +348,7 @@
     if (!allowed.length) return;
     host.innerHTML = '<section class="ivd-panel" aria-label="Interactive distribution explorer">' +
       '<div class="ivd-head"><div><h3>Explore a probability distribution</h3>' +
-      '<p>For separate outcomes, a probability mass function (PMF) gives the probability of each outcome. For continuous values, a probability density function (PDF) gives a curve whose area measures probability. A cumulative distribution function (CDF) gives the probability at or below the selected value.</p></div>' +
+      '<p>For separate outcomes, the probability mass function (PMF) gives each outcome’s probability. For continuous values, the probability density function (PDF) gives a curve. Its area over a range measures the probability within that range. Meanwhile, the cumulative distribution function (CDF) gives probability at or below the selected value.</p></div>' +
       '<label class="ivd-select">Distribution<select></select></label></div>' +
       '<div class="ivd-charts"><figure><figcaption class="ivd-left-title"></figcaption><svg class="ivd-density" viewBox="0 0 480 246" role="img"></svg></figure>' +
       '<figure><figcaption>CDF · cumulative probability</figcaption><svg class="ivd-cdf" viewBox="0 0 480 246" role="img"></svg></figure></div>' +
@@ -361,7 +361,7 @@
       '<div><dt class="ivd-formula-density-label"></dt><dd class="ivd-formula-density"></dd></div>' +
       '<div><dt>CDF</dt><dd class="ivd-formula-cdf"></dd></div></dl>' +
       '<p class="ivd-formula-scroll-hint">Swipe sideways to read a long equation.</p>' +
-      '<p>Some formulas use named mathematical functions. Here, Γ is the gamma function and B is the beta function. Their incomplete forms I and P calculate accumulated probability for beta and gamma distributions. They denote the regularised incomplete beta and regularised lower incomplete gamma functions. Meanwhile, Φ is the standard normal CDF. The sign function, sgn, returns −1 for a negative value, 0 for zero, and 1 for a positive value. Outside the possible value range, density is zero. At a range boundary, its limiting value can be finite or infinite. The hypergeometric example samples from 50 items.</p></details></section>';
+      '<p>Some formulas use named mathematical functions. Here, Γ is the gamma function and B is the beta function. The regularised incomplete beta function I calculates accumulated beta probability. Similarly, the regularised lower incomplete gamma function P calculates accumulated gamma probability. Meanwhile, Φ is the standard normal CDF. The sign function, sgn, returns −1 for a negative value and 1 for a positive value. At zero, it returns 0. Outside the possible value range, density is zero. At a range boundary, its limiting value can be finite or infinite. The hypergeometric example samples from 50 items.</p></details></section>';
     var select = host.querySelector('select');
     var paramsHost = host.querySelector('.ivd-params');
     var cut = host.querySelector('.ivd-cut-label input');

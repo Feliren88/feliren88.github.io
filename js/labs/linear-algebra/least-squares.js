@@ -308,7 +308,7 @@
       { t: 'The gap stands straight up', parts: ['res', 'yhat'], state: { mode: '3d' },
         body: ('<p>The <b class="is-k">residual</b> y − ŷ is the gap between target and fit, perpendicular to the plane. Therefore, '+window.InterviewDisplayMath.html("lab/least-squares/extra-4", undefined, true)+' gives the normal equations.</p>') },
       { t: 'The same idea in 2D', parts: ['sq', 'line'], state: { mode: 'fit' },
-        body: '<p>Here, 9 points are fitted with a line, and each vertical gap carries a square. Their total area divided by 9 gives the mean squared error.</p>' },
+        body: '<p>Here, a line fits 9 points. Each vertical gap carries a square. Then divide their total area by 9 to obtain mean squared error.</p>' },
       { t: 'Snap to least squares', parts: ['line', 'sq'], state: { mode: 'fit', snap: true },
         body: '<p>The line glides to the fit, and no other line has less total area. Drag any point, then press Snap again.</p>' },
       { t: 'Ridge pulls w in', parts: ['ridge', 'circle', 'path'], state: { mode: 'ridge', lam: 0.5 },

@@ -60,7 +60,7 @@
 
   host.innerHTML = '<section class="iva-panel" aria-label="Interactive area under a curve">' +
     '<div class="iva-head"><div><h3>Change the equation, watch the area</h3>' +
-    '<p>Move the sliders to change the function or the start and end points. The curve and shaded area update together.</p></div>' +
+    '<p>Choose a function. Then move the sliders to change its coefficients or integration bounds. The curve and shaded area update together.</p></div>' +
     '<label>Function<select class="iva-form"></select></label></div>' +
     '<p class="iva-current-equation"></p>' +
     '<div class="iva-plot"><svg viewBox="0 0 700 326" role="img" aria-label="Function curve and signed area between two bounds"></svg></div>' +
@@ -70,7 +70,7 @@
     '<label>Lower bound <output data-value="low"></output><input data-control="low" type="range" min="-3.5" max="3.4" step="0.1" value="-2"></label>' +
     '<label>Upper bound <output data-value="high"></output><input data-control="high" type="range" min="-3.4" max="3.5" step="0.1" value="2"></label></div>' +
     '<div class="iva-results"><output class="iva-integral"></output><span class="iva-positive"></span><span class="iva-negative"></span></div>' +
-    '<p class="iva-note">The integral adds area above the x-axis and subtracts area below it. The two amounts are also shown separately.</p></section>';
+    '<p class="iva-note">The integral adds area above the x-axis and subtracts area below it. The panel also shows both amounts separately.</p></section>';
   var select = host.querySelector('.iva-form');
   var chart = host.querySelector('svg');
   var controls = {};

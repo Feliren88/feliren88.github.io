@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Databases
-description: Model data, query it correctly, and explain what the database guarantees when many users write at once.
+description: Model and query data correctly. Then explain database guarantees when many users write at once.
 permalink: /databases/
 topic_id: databases
 robots: noindex, nofollow

@@ -17,7 +17,7 @@ extra_js:
 
   <header class="ivh-header">
     <h1 class="ivh-title">Research interview notebook</h1>
-    <p class="ivh-lede">I use this notebook to prepare for PhD and research interviews. Each track helps me explain an idea, support it with evidence, and recognise its limits. To begin, choose a question below. Each track lists what you need to know first. Start with basic algebra and programming, then follow the related tracks as you need them.</p>
+    <p class="ivh-lede">I use this notebook to prepare for PhD and research interviews. Each track helps me explain ideas and support them with evidence. It also helps me recognise their limits. To begin, choose a question below. Each track lists what you need to know first. Start with basic algebra and programming. Then follow related tracks as you need them.</p>
     {% assign topics = site.data.interview.topics %}
     {% assign mod_n = 0 %}{% assign cov_n = 0 %}
     {% for t in topics %}{% assign mod_n = mod_n | plus: t.modules.size %}{% for m in t.modules %}{% assign cov_n = cov_n | plus: m.covers.size %}{% endfor %}{% endfor %}
@@ -31,7 +31,7 @@ extra_js:
   <section class="ivh-contract" aria-labelledby="ivh-contract-title">
     <div>
       <h2 id="ivh-contract-title">How to support your answer</h2>
-      <p>Explain what you compared and what the evidence shows. For example, calibration measures whether a model's confidence matches how often it is correct. To claim that a method improves calibration, name the other method and the data used to test both. Then explain when that result might change.</p>
+      <p>Explain what you compared and what the evidence shows. For example, calibration measures whether a model's confidence matches how often it is correct. When claiming better calibration, name the comparison method. Then identify the data used to test both methods and explain when the result might change.</p>
     </div>
     <ol>
       <li><strong>Explain</strong><span>State the idea and its assumptions in your own words.</span></li>
@@ -82,8 +82,8 @@ extra_js:
       <li><a href="/{{ bridge.track }}/#foundation-{{ bridge.kind }}">{{ bridge.title }}</a> in {{ bridge_track.name }}, module {{ module_number }}.</li>
       {% endfor %}
     </ol>
-    <p>Then choose an unfamiliar equation and explain every object's role. Justify each transformation, name its assumptions, and connect it to code.</p>
-    <p>Finally, distinguish exact results from approximations and predict what changes when an assumption changes.</p>
+    <p>Then choose an unfamiliar equation and explain each object's role. Explain why each step is valid and name its assumptions. After that, connect the calculation to code.</p>
+    <p>Finally, separate exact results from approximations. Then predict how changing an assumption affects the result.</p>
   </section>
 
   <p class="ivh-maplede">Each card opens a track with modules, practice questions, and related topics. On wider screens, the lines show how tracks connect.</p>

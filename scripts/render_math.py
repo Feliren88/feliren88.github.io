@@ -143,6 +143,15 @@ CANON = [
     ]),
 ]
 
+# A symbol can have a different established role in a particular equation.
+# Keep these explicit, reviewed exceptions local rather than changing the shared legend.
+LOCAL_GLOSS = {
+    ("machine-learning", 4, 2, r"\pi"): "The positive-class frequency before resampling",
+    ("transformers", 2, 1, "k"): "A key vector",
+    ("llm-training", 3, 0, r"\sigma"): "The logistic function converting a score difference into a probability between 0 and 1",
+    ("mechanistic-interpretability", 5, 0, r"\sigma"): "The logistic function converting a score into a probability between 0 and 1",
+}
+
 CANON_GLOSS = {}
 for _grp, _items in CANON:
     for _s, _g in _items:
@@ -468,10 +477,11 @@ def build(data, errors):
                     local[s] = g
                     seen[s] = g
                     ck = canon_key(s)
-                    if ck and CANON_GLOSS[ck] != g:
+                    expected_gloss = LOCAL_GLOSS.get((tid, mi, ei, s), CANON_GLOSS.get(ck))
+                    if ck and expected_gloss != g:
                         errors.append(
                             "GLOSS CLASH: %s [%d] %s\n     canon: %s\n     here : %s"
-                            % (where, ei, s, CANON_GLOSS[ck], g))
+                            % (where, ei, s, expected_gloss, g))
                     one = mathml(s)
                     sym_mls.append(one)
                     syms["%s/%d" % (key, si)] = one.replace(

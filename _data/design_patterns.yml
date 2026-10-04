@@ -14,20 +14,20 @@
 groups:
   - id: creational
     name: Creational
-    about: "How objects get made, kept apart from the code that uses them."
+    about: "Separate object construction from the code that uses those objects."
   - id: structural
     name: Structural
-    about: "How objects are combined into larger parts that stay flexible."
+    about: "Combine objects while keeping their parts replaceable."
   - id: behavioural
     name: Behavioural
-    about: "Which object is responsible for what, and how objects talk."
+    about: "Assign responsibility to objects and define how they communicate."
 
 patterns:
   # ── Creational ─────────────────────────────────────────────
   - id: factory-method
     name: Factory Method
     group: creational
-    intent: "Let a method decide which class to create, so callers depend only on what they get back."
+    intent: "Let a method choose which class to create. Callers depend on the returned interface."
     problem: "Your code calls a constructor directly, so adding a new variant means editing every caller."
     solution: "Move construction into one method. Subclasses, or a lookup, choose the concrete class."
     when: "You know new variants will arrive and callers should not care which one they get."
@@ -47,7 +47,7 @@ patterns:
     name: Abstract Factory
     group: creational
     intent: "Create whole families of related objects that must be used together, without naming their classes."
-    problem: "Objects come in matched sets, and mixing one set's parts with another's breaks things."
+    problem: "Objects form matched sets. Mixing parts from different sets can cause failures."
     solution: "Define one factory per family. Each factory makes every part of its set."
     when: "You switch between complete families, such as a local stack and a cloud stack."
     avoid: "The parts vary independently; then separate factories are simpler."
@@ -106,8 +106,8 @@ patterns:
     intent: "Guarantee one instance of a class and give everyone access to it."
     problem: "Some resource, such as a connection pool, must exist exactly once."
     solution: "The class controls its own creation and hands back the same instance every time."
-    when: "There truly must be one, and passing it around is impossible."
-    avoid: "Almost always. It is a global variable, it hides dependencies, and it makes tests share state. Prefer creating one instance at start-up and passing it in."
+    when: "Exactly one instance must exist, and passing it between callers is impractical."
+    avoid: "Usually prefer an instance created at start-up and passed to callers. Singleton hides dependencies through global access and makes tests share state."
     example: |
       # Prefer this: one instance, created once, passed where needed.
       def main():
@@ -206,7 +206,7 @@ patterns:
     problem: "Using a subsystem needs many objects called in the right order."
     solution: "Write one class whose methods do the common tasks, hiding the steps."
     when: "Most callers need a few common operations, not the full power underneath."
-    avoid: "The facade starts growing every option of the subsystem; it has become the subsystem."
+    avoid: "The facade exposes every subsystem option, so it no longer simplifies access."
     example: |
       class Trainer:
           def fit(self, model, data):
@@ -224,7 +224,7 @@ patterns:
     intent: "Share the common part of many small objects instead of storing it in each."
     problem: "Millions of objects each carry the same heavy data and memory runs out."
     solution: "Store shared state once and keep only what differs in each object."
-    when: "You have very many similar objects, such as tokens pointing at one vocabulary entry."
+    when: "Many similar objects can share data, such as tokens pointing to one vocabulary entry."
     avoid: "There are few objects; the saving is not worth the indirection."
     example: |
       vocab = {}                      # one shared entry per distinct string
@@ -317,7 +317,7 @@ patterns:
     problem: "Every component knows every other, so one change ripples everywhere."
     solution: "Components talk only to a mediator, which decides who needs to act."
     when: "Several components react to each other, such as agents sharing a plan."
-    avoid: "The mediator becomes a god object that knows everything."
+    avoid: "The mediator takes on unrelated responsibilities and depends on every component."
     example: |
       class Orchestrator:
           def __init__(self, planner, coder, reviewer):
@@ -403,7 +403,7 @@ patterns:
     group: behavioural
     intent: "Fix the order of steps in a base class and let subclasses fill in some steps."
     problem: "Several classes repeat the same outline and differ only in a few steps."
-    solution: "The base class runs the outline and calls hooks that subclasses override."
+    solution: "The base class runs the shared sequence. It calls methods that subclasses override for variable steps."
     when: "Every variant must follow the same sequence, such as load, clean, train, evaluate."
     avoid: "Subclasses need to change the order; use composition and strategies instead."
     example: |
@@ -487,7 +487,7 @@ smells:
   - id: shotgun
     name: Shotgun surgery
     family: Change preventers
-    sign: "One small change forces edits in many files."
+    sign: "One change requires edits in many files."
     fixes: [Move function, Move field, Combine functions into class]
     patterns: [factory-method, abstract-factory]
   - id: divergent

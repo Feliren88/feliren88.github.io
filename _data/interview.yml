@@ -39,7 +39,7 @@ topics:
     name: Bayesian Statistics
     group: foundations
     blurb: "Update uncertainty with data and explain the resulting probabilities."
-    scope: "Study prior distributions, posterior distributions after observing data, and methods for calculating them. Then use uncertainty estimation to check calibration and interval coverage."
+    scope: "Study priors, posteriors after observing data, and methods for calculating them. Then use uncertainty estimation to check calibration and interval coverage."
     links: [uncertainty-estimation]
     modules:
       - name: Probability as belief
@@ -61,10 +61,10 @@ topics:
           alt: "A wide range of plausible values narrows after new data updates the belief."
         plain:
           - >-
-              Bayesian probability describes uncertainty about a claim or an unknown
-              parameter. Start with a prior, the probability distribution before the new data,
-              and update it to a posterior after observing the data. That posterior can become
-              the prior for the next update.
+              Bayesian probability describes uncertainty about a claim or an unknown parameter.
+              Start with a prior distribution describing uncertainty before the new data. Then
+              update it to a posterior after observing the data. That posterior can become the
+              prior for the next update.
           - >-
               Bayes' rule calculates this update. However, you must include the base rate, the
               frequency of a condition before testing. When a disease is rare, false positive
@@ -72,7 +72,7 @@ topics:
         math:
           - name: 'Bayes rule'
             tex: 'p(\theta \mid D) \;=\; \frac{p(D \mid \theta)\, p(\theta)}{p(D)}'
-            read: "Multiply the prior probability by how likely the observed data are at each parameter value. Then divide by the normalising constant to obtain the posterior."
+            read: "At each parameter value, multiply the prior by the likelihood of the observed data. Then divide by the normalising constant to obtain the posterior."
             note: "The denominator is constant across parameter values. Therefore, you can calculate the posterior up to proportionality and normalise it afterwards."
             where:
               - sym: '\theta'
@@ -95,7 +95,7 @@ topics:
                 is: "Proportional to, or equal up to a constant factor"
           - name: "Positive tests for a rare disease"
             tex: 'p(H \mid T_{+}) \;=\; \frac{p(T_{+} \mid H)\, p(H)}{p(T_{+} \mid H)\, p(H) + p(T_{+} \mid \lnot H)\, p(\lnot H)}'
-            read: "Positive results include true disease cases and false alarms among healthy people. When disease is rare, the much larger healthy group can produce more false alarms than true positives."
+            read: "Positive results include true disease cases and false alarms among healthy people. When disease is rare, the healthy group is much larger. Therefore, it can produce more false alarms than true positives."
             play:
               kind: bars
               title: "Change disease prevalence to calculate the probability after a positive test"
@@ -127,7 +127,7 @@ topics:
                   v: 0.99
                   step: 0.005
                   dp: 3
-            note: "When the disease affects one person in 10,000 and both test rates are 99%, fewer than 1% of positive tests indicate disease. False positives outnumber true positives because the disease is rare."
+            note: "The disease affects one person in 10,000, and both test rates are 99%. Then fewer than 1% of positive tests indicate disease. False positives outnumber true positives because the disease is rare."
             where:
               - sym: 'H'
                 is: "The event that the person has the disease"
@@ -144,7 +144,7 @@ topics:
           - "Exchangeability, where observation order does not affect probability, and de Finetti's theorem"
           - "The likelihood principle and its consequences for interpreting evidence"
           - "Posterior credible intervals compared with repeated-sampling confidence intervals"
-        check: "A test has 99% sensitivity and 99% specificity, and the disease affects one in 10,000 people. What is the chance of disease after a positive result? Explain it to someone without a statistics background."
+        check: "A test has 99% sensitivity and 99% specificity. The disease affects one in 10,000 people. What is the chance of disease after a positive result? Explain it to someone without a statistics background."
         viz:
           type: flow
           steps:
@@ -230,8 +230,8 @@ topics:
               Start with the posterior distribution you want to calculate. It often has no
               directly usable formula.
           - >-
-              For some conjugate prior and likelihood pairs, the posterior has a known formula
-              that requires no sampling settings.
+              Some prior and likelihood pairs give a posterior with a known formula. These
+              conjugate pairs require no sampling settings.
           - >-
               Otherwise, draw thousands of samples and use their spread to approximate the
               distribution.
@@ -243,14 +243,13 @@ topics:
               A posterior distribution often has no formula you can calculate directly.
               Instead, draw thousands of samples and use their distribution to approximate it.
           - >-
-              Sampling methods move through possible parameter values differently. A random
-              walk makes small random moves and can be inefficient with many parameters.
-              Hamiltonian methods use the slope of the probability surface to propose longer
-              moves.
+              Sampling methods move through possible parameter values differently. A random walk
+              makes small random moves and can be inefficient with many parameters. By contrast,
+              Hamiltonian methods use slopes of the probability surface to propose longer moves.
         math:
           - name: "The posterior normalising integral"
             tex: 'p(D) \;=\; \int p(D \mid \theta)\, p(\theta) \; \mathrm{d}\theta'
-            read: "The normalising constant averages likelihood over all parameter values allowed by the prior. With more than a few parameters, this integral often has no usable closed-form solution."
+            read: "The normalising constant averages likelihood over parameter values allowed by the prior. With more than a few parameters, this integral often has no usable closed-form solution."
             note: "Sampling avoids evaluating that integral directly. Variational inference, which fits a simpler distribution, replaces the problem with an easier optimisation."
             where:
               - sym: '\int'
@@ -259,7 +258,7 @@ topics:
                 is: "The evidence, the same number for every parameter, so it only rescales"
           - name: 'Metropolis and Hastings, the acceptance rule'
             tex: '\mathrm{acc}(\theta'' \mid \theta) \;=\; \min\!\left(1, \; \frac{p(D \mid \theta'')\, p(\theta'')\, q(\theta \mid \theta'')}{p(D \mid \theta)\, p(\theta)\, q(\theta'' \mid \theta)}\right)'
-            read: "For a symmetric proposal, always accept a move to higher posterior density and sometimes accept a move to lower density according to their ratio."
+            read: "For a symmetric proposal, always accept a move to higher posterior density. Otherwise, accept the move with a probability given by the density ratio."
             note: "The normalising constant cancels in the acceptance ratio. Therefore, the sampler can work without calculating the evidence integral."
             where:
               - sym: '\mathrm{acc}'
@@ -271,7 +270,7 @@ topics:
           - name: "The variational inference objective"
             tex: '\mathrm{ELBO}(q) \;=\; \mathbb{E}_{q}\big[\log p(D \mid \theta)\big] \;-\; \mathrm{KL}\big(q(\theta) \,\|\, p(\theta)\big)'
             read: "Fit a simpler distribution by balancing agreement with the observed data against departure from the prior. The remaining gap measures its difference from the true posterior."
-            note: "Maximising this bound minimises a divergence, a measure of distributional difference, from the posterior. However, variational approximations often underestimate uncertainty, so check whether that affects your conclusion."
+            note: "Maximising this bound minimises divergence from the posterior. Divergence measures the difference between distributions. However, variational approximations often underestimate uncertainty, so check whether that affects your conclusion."
             where:
               - sym: 'q'
                 is: "The simple distribution standing in for the true posterior"
@@ -343,7 +342,7 @@ topics:
           - name: 'Partial pooling as a weighted average'
             tex: '\mathbb{E}[\theta_{j} \mid y] \;\approx\; w_{j}\, \bar{y}_{j} \;+\; (1 - w_{j})\, \mu, \qquad w_{j} = \frac{n_{j} / \sigma^{2}}{n_{j} / \sigma^{2} + 1 / \tau^{2}}'
             read: "A group with substantial data retains more weight on its own mean. A group with little data receives more weight on the overall mean."
-            note: "A weight of 0 gives complete pooling, where groups share the overall mean. A weight of one gives no pooling, where each group uses its own mean. The model estimates intermediate weights from the data."
+            note: "A weight of 0 gives complete pooling, where groups share the overall mean. By contrast, a weight of one gives no pooling, where each group uses its own mean. The model estimates intermediate weights from the data."
             where:
               - sym: '\bar{y}_{j}'
                 is: "The raw average within group j"
@@ -390,13 +389,12 @@ topics:
               the score difference.
         plain:
           - >-
-              After fitting a posterior, generate simulated data from it and compare them with
-              the observed data. Large differences can reveal where the model fits poorly.
+              After fitting a posterior, generate simulated data from it. Then compare these data
+              with the observations. Large differences can reveal where the model fits poorly.
           - >-
               This check can reveal problems that a single score misses. Then use comparison
-              methods such as leave-one-out prediction, which tests each observation using a
-              model fitted without it. Check whether a few unusual observations dominate the
-              score.
+              methods such as leave-one-out prediction. This tests each observation using a model
+              fitted without it. Also check whether a few unusual observations dominate the score.
         math:
           - name: 'The posterior predictive'
             tex: 'p(\tilde{y} \mid D) \;=\; \int p(\tilde{y} \mid \theta)\, p(\theta \mid D)\; \mathrm{d}\theta'
@@ -461,19 +459,19 @@ topics:
               elaborate approximations.
         plain:
           - >-
-              A Gaussian process assigns uncertainty to possible functions. Bayesian
-              optimisation uses uncertain predictions to choose the next experiment, and
-              Bayesian neural networks describe uncertainty about network weights.
+              A Gaussian process assigns uncertainty to possible functions. Bayesian optimisation
+              uses uncertain predictions to choose the next experiment. Meanwhile, Bayesian neural
+              networks describe uncertainty about network weights.
           - >-
-              However, an ensemble of independently trained ordinary networks often gives
-              better calibration than more elaborate approximations. Calibration measures
-              whether stated probabilities match observed frequencies. Compare measured
-              calibration rather than relying on the method's name.
+              However, independently trained networks often give better calibration than more
+              elaborate approximations. Calibration measures whether stated probabilities match
+              observed frequencies. Therefore, compare measured calibration rather than relying on
+              the method's name.
         math:
           - name: "Maximum likelihood and posterior maximum estimates"
             tex: '\theta_{\mathrm{MLE}} = \arg\max_{\theta} \; p(D \mid \theta), \qquad \theta_{\mathrm{MAP}} = \arg\max_{\theta} \; p(D \mid \theta)\, p(\theta)'
             read: "Maximum likelihood chooses the best fit to the data. A maximum a posteriori estimate also incorporates the prior."
-            note: "Both methods return one parameter value. However, the posterior is a full distribution, so using only its highest point discards the uncertainty that Bayesian analysis was intended to describe."
+            note: "Both methods return one parameter value. However, the posterior is a full distribution. Using only its highest point discards the uncertainty that Bayesian analysis describes."
             where:
               - sym: '\arg\max'
                 is: "The input that achieves the largest value"
@@ -532,7 +530,7 @@ topics:
     links: [bayesian-statistics, machine-learning]
     modules:
       - name: Estimators and their properties
-        why: "Use repeated samples to assess how far estimates are from the true value, how much they vary, and whether more data improves them."
+        why: "Use repeated samples to assess estimation error and variation. Then check whether more data improves the estimates."
         beats:
           - >-
               With low bias and low variance, estimates stay close to the true value across
@@ -542,8 +540,7 @@ topics:
               individual estimate can be far from the true value.
           - >-
               With high bias and low variance, estimates repeatedly miss the true value in the
-              same direction. Therefore, the repeated agreement can make the error harder to
-              spot.
+              same direction. Therefore, their agreement can make the error harder to spot.
           - >-
               With high bias and high variance, estimates vary greatly and miss the true value
               on average. Therefore, reporting them without addressing both problems would be
@@ -570,7 +567,7 @@ topics:
                 is: "The variance, a measure of spread around the mean"
           - name: 'The score and Fisher information'
             tex: 'U(\theta) = \frac{\partial}{\partial \theta} \log p(D \mid \theta), \qquad \mathcal{I}(\theta) = \mathbb{E}\big[U(\theta)^{2}\big]'
-            read: "The score measures the slope of log likelihood as the parameter changes. Fisher information measures the average squared score, indicating how precisely data can estimate the parameter."
+            read: "The score measures the slope of log likelihood as the parameter changes. Fisher information measures the average squared score. This indicates how precisely data can estimate the parameter."
             where:
               - sym: 'U'
                 is: "The score, the slope of the log likelihood"
@@ -608,8 +605,8 @@ topics:
         why: "A common recipe derives many estimators. Work through it by hand instead of memorising the results."
         beats:
           - >-
-              Write the probability or probability density of the observed data as a function
-              of the unknown parameter.
+              Write the probability or density of the observed data. Then view it as a function of
+              the unknown parameter.
           - >-
               Then take the logarithm. This turns products into sums that you can
               differentiate term by term.
@@ -626,19 +623,18 @@ topics:
           alt: 'A wide band of candidate parameter values narrowing to the single value that makes the observed data most likely.'
         plain:
           - >-
-              Maximum likelihood chooses the parameter value that gives the observed data the
-              greatest probability or probability density. A parameter is an unknown number
-              that describes a distribution, such as its mean.
+              A parameter describes a distribution, such as its mean. Maximum likelihood chooses
+              the value giving the observed data the greatest probability or density.
           - >-
-              To find this value, write the likelihood, which measures the fit for each
-              parameter value. Then take its logarithm, differentiate to find its slope, and
-              set the slope to 0. The algebra differs between distributions, but the result
-              often matches a familiar sample quantity.
+              First write the likelihood, which measures the fit for each parameter value. Then
+              take its logarithm. Differentiate to find its slope, and set that slope to 0. The
+              algebra differs between distributions. However, the result often matches a familiar
+              sample quantity.
         math:
           - name: 'The likelihood of the data you saw'
             tex: '\mathcal{L}(\theta) \;=\; p(D \mid \theta) \;=\; \prod_{i=1}^{N} p(x_{i} \mid \theta)'
             read: "Keep the observed data fixed and vary the parameter. For independent observations, multiply their probabilities or probability densities to obtain the likelihood."
-            note: "Likelihood varies with the parameter while the observed data stay fixed. It is not a probability distribution over parameters and need not integrate to 1. To obtain a posterior, multiply it by a prior and normalise the result."
+            note: "Likelihood varies with the parameter while the observed data stay fixed. It is not a probability distribution over parameters and need not integrate to 1. To obtain a posterior, multiply it by a prior. Then normalise the result."
             where:
               - sym: '\mathcal{L}(\theta)'
                 is: "The likelihood, how well a parameter explains the data"
@@ -648,7 +644,7 @@ topics:
                 is: "Multiply the indicated terms"
           - name: 'The log likelihood, and the estimate it defines'
             tex: '\hat{\theta}_{\mathrm{MLE}} \;=\; \arg\max_{\theta} \; \sum_{i=1}^{N} \log p(x_{i} \mid \theta)'
-            read: "Taking logarithms turns a product into a sum and preserves its maximum because the logarithm increases with its input."
+            read: "Taking logarithms turns a product into a sum. Because the logarithm increases with its input, this preserves the maximum."
             note: "You can differentiate the sum term by term. Moreover, working with logs avoids underflow, where a computer rounds an extremely small product to 0 as N grows."
             where:
               - sym: '\hat{\theta}_{\mathrm{MLE}}'
@@ -667,7 +663,7 @@ topics:
           - name: 'Binomial and categorical estimates from counts'
             tex: '\hat{\theta}_{k} = \frac{n_{k}}{N}, \qquad \sum_{k=1}^{K} \hat{\theta}_{k} = 1'
             read: "Estimate each category's probability by dividing its observed count by the total sample size."
-            note: "A Lagrange multiplier adds the requirement that probabilities sum to one to the optimisation. Here the multiplier is N. Naive Bayes classifiers use these count estimates, and smoothing adds a small allowance to avoid a probability of 0 for unseen categories."
+            note: "A Lagrange multiplier enforces the requirement that probabilities sum to one. Here the multiplier is N. Naive Bayes classifiers use these count estimates. Moreover, smoothing adds a small allowance so unseen categories avoid probability 0."
             where:
               - sym: 'n_{k}'
                 is: "How many observations fell in category k"
@@ -691,7 +687,7 @@ topics:
           - name: 'Normal estimates for mean and variance'
             tex: '\hat{\mu} = \bar{x}, \qquad \hat{\sigma}^{2}_{\mathrm{MLE}} = \frac{1}{N} \sum_{i=1}^{N} (x_{i} - \bar{x})^{2}'
             read: "The estimated mean is the sample mean, which is unbiased. However, the variance estimate is slightly too small on average."
-            note: "The variance estimate divides by N instead of N minus 1. Estimating the mean from the same data removes one independent choice, called a degree of freedom. Therefore, multiplying by N over N minus one gives an unbiased variance estimator. The original bias shrinks as N grows."
+            note: "The variance estimate divides by N instead of N minus 1. Estimating the mean from these data removes one independent choice, called a degree of freedom. Therefore, multiplying by N over N minus one gives an unbiased variance estimator. The original bias shrinks as N grows."
             where:
               - sym: '\hat{\mu}'
                 is: "The estimated mean"
@@ -703,7 +699,7 @@ topics:
             note: "This maximum lies on the boundary, where setting the derivative to 0 cannot find it. Therefore, maximum likelihood needs more than differentiation alone. The estimate is biased downwards because samples cannot exceed the true upper limit."
             where:
               - sym: '\mathbf{1}\{\cdot\}'
-                is: "one when the condition holds and 0 otherwise"
+                is: "One when the condition holds and 0 otherwise"
           - name: 'Invariance'
             tex: '\widehat{g(\theta)} \;=\; g(\hat{\theta})'
             read: "First estimate the parameter by maximum likelihood, then apply the desired function to that estimate. This gives a maximum likelihood estimate of the transformed parameter."
@@ -713,7 +709,7 @@ topics:
                 is: "A smooth function of the estimate, such as a ratio"
           - name: 'What the estimate does as data accumulates'
             tex: '\sqrt{N}\,\big(\hat{\theta}_{\mathrm{MLE}} - \theta\big) \;\xrightarrow{\;d\;}\; \mathcal{N}\!\big(0, \; \mathcal{I}(\theta)^{-1}\big)'
-            read: "Under suitable assumptions, increasing the sample size makes the estimate approximately normal around the true value, with variance approaching the Cramér-Rao limit."
+            read: "Under suitable assumptions, large samples give an approximately normal estimate around the true value. Its variance approaches the Cramér-Rao limit."
             note: "This large-sample result supports standard errors, Wald intervals built from an estimate and its standard error, and tests comparing likelihoods. However, it does not guarantee accuracy for small samples."
             where:
               - sym: '\mathcal{I}(\theta)'
@@ -772,14 +768,14 @@ topics:
               Imagine repeating your study 1,000 times with new samples. The resulting
               estimates would differ, and the standard error measures that variation.
           - >-
-              A confidence interval comes from a procedure for producing a range from a
-              sample. Across repeated studies, a 95% procedure produces intervals that contain
-              the true value 95% of the time. This coverage describes the repeated procedure.
+              A confidence interval procedure produces a range from a sample. Across repeated
+              studies, a 95% procedure contains the true value 95% of the time. This coverage
+              describes the repeated procedure.
         math:
           - name: 'The central limit theorem'
             tex: '\frac{\bar{X} - \mu}{\sigma / \sqrt{N}} \;\xrightarrow{\;d\;}\; \mathcal{N}(0, 1) \quad \text{as } N \to \infty'
             read: "With sufficiently many independent observations and finite variance, the standardised sample mean approaches a normal distribution even if individual observations are not normal."
-            note: "The usual theorem requires independence and finite variance. Heavy tails can violate the variance requirement, while correlated observations violate independence. Sandwich errors allow changing noise levels, and clustered errors account for dependence within groups."
+            note: "The usual theorem requires independence and finite variance. Heavy tails can violate the variance requirement, while correlated observations violate independence. Sandwich errors allow changing noise levels. Meanwhile, clustered errors account for dependence within groups."
             where:
               - sym: '\bar{X}'
                 is: "The sample average"
@@ -851,7 +847,7 @@ topics:
           - name: 'What a p-value is'
             tex: 'p\text{-value} \;=\; p\big(|Z| \geq |z_{\mathrm{obs}}| \;\big|\; H_{0}\big)'
             read: "Assuming the null hypothesis is true, calculate the probability of a result at least as extreme as the observed result."
-            note: "It is not the chance the null is true, not the chance of a replication, not the size of the effect, and not one minus the chance the alternative is true."
+            note: "A p-value does not give the probability that the null or alternative hypothesis is true. Nor does it measure effect size or the chance of replication. Also, it is not one minus the probability that the alternative is true."
             where:
               - sym: 'Z'
                 is: "A test statistic expressed in standard-error units"
@@ -870,7 +866,7 @@ topics:
           - name: 'Sample size for a 2-sample test'
             tex: 'N \;\approx\; \frac{2\,\sigma^{2}\,\big(z_{1-\alpha/2} + z_{1-\beta}\big)^{2}}{\Delta^{2}}'
             read: 'Halving the effect you want to catch multiplies the sample you need by 4.'
-            note: "Calculate the required sample size before running the experiment. Calculating observed power afterwards adds no information beyond the p-value when used to explain a result that was not significant."
+            note: "Calculate the required sample size before running the experiment. After a non-significant result, observed power adds no information beyond the p-value."
             where:
               - sym: '\Delta'
                 is: "The minimum effect worth detecting"
@@ -903,7 +899,7 @@ topics:
         why: "Testing many hypotheses increases the chance of reporting a false positive."
         beats:
           - >-
-              Run 40 tests without correcting for the number of tests, and a couple may appear
+              Run 40 tests without correcting for their number. Then a couple may appear
               significant by chance alone.
           - >-
               Controlling the false discovery rate limits the expected fraction of false
@@ -992,13 +988,13 @@ topics:
               outcomes. Random assignment supports a causal claim that the version caused the
               difference.
           - >-
-              Before running the test, decide which unit you will assign, how long the test
-              will run, and which outcome would make you reverse the change. These choices
-              determine whether you can interpret the result.
+              Before running the test, choose the unit of random assignment and the test duration.
+              Also decide which outcome would make you reverse the change. These choices determine
+              whether you can interpret the result.
         math:
           - name: 'The estimator an A/B test reports'
             tex: '\hat{\Delta} = \bar{Y}_{\mathrm{treat}} - \bar{Y}_{\mathrm{ctrl}}, \qquad \mathrm{SE}(\hat{\Delta}) = \sqrt{\frac{\sigma_{\mathrm{t}}^{2}}{N_{\mathrm{t}}} + \frac{\sigma_{\mathrm{c}}^{2}}{N_{\mathrm{c}}}}'
-            read: "Subtract the two group means to estimate the treatment effect. For independent groups, add their variances and take the square root to obtain the standard error."
+            read: "Subtract the two group means to estimate the treatment effect. For independent groups, add the variances of those means. Then take the square root to obtain the standard error."
             where:
               - sym: '\hat{\Delta}'
                 is: "The measured difference between the arms"
@@ -1085,7 +1081,7 @@ topics:
           - name: 'Adjusting when you could not randomise'
             tex: '\tau = \mathbb{E}_{X}\Big[\mathbb{E}[Y \mid W{=}1, X] - \mathbb{E}[Y \mid W{=}0, X]\Big]'
             read: "Compare treated and untreated units with similar measured characteristics. Then average the comparisons across those groups."
-            note: "The adjustment is valid if X includes the factors needed to remove confounding, and every relevant kind of unit has some chance of receiving either treatment. These are assumptions about the data-generating process, which observations alone cannot fully verify."
+            note: "X must include the factors needed to remove confounding. Also, every relevant kind of unit must have some chance of receiving either treatment. These assumptions concern how the data arise. Therefore, observations alone cannot fully verify them."
             where:
               - sym: 'X'
                 is: "The covariates you adjust for"
@@ -1278,7 +1274,7 @@ topics:
           - Baseline
           - Decision
       - name: The core model families
-        why: "Boosted decision trees are a strong option for data stored in rows and columns because they handle mixed input types and interactions."
+        why: "Boosted trees handle mixed input types and interactions, making them a strong option for tabular data."
         beats:
           - >-
               Many real datasets have rows and columns, mixed data types, and missing values.
@@ -1402,7 +1398,7 @@ topics:
         math:
           - name: 'Precision, recall and their trade'
             tex: '\mathrm{precision} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}, \quad \mathrm{recall} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}}, \quad F_{1} = \frac{2\, \mathrm{PR}}{\mathrm{P} + \mathrm{R}}'
-            read: "Precision measures the proportion of flagged cases that are truly positive, while recall measures the proportion of true positives that were flagged."
+            read: "Precision measures how many flagged cases are truly positive. In contrast, recall measures how many true positives were flagged."
             where:
               - sym: '\mathrm{TP}'
                 is: "The number of positive cases correctly flagged"
@@ -1415,7 +1411,7 @@ topics:
           - name: 'What ROC-AUC measures'
             tex: '\mathrm{AUC} = p\big(f(x^{+}) > f(x^{-})\big)'
             read: "Measure the probability that a randomly chosen positive case receives a higher score than a randomly chosen negative case."
-            note: "ROC-AUC depends only on ordering. Therefore, a model can achieve perfect AUC while reporting unhelpful probabilities. Calibration checks the relationship between these probabilities and observed outcomes."
+            note: "This expression assumes positive and negative scores do not tie. With ties, include half the tie probability. ROC-AUC measures ordering. Therefore, a model can have perfect AUC while reporting unhelpful probabilities. Calibration compares those probabilities with observed outcomes."
             where:
               - sym: 'x^{+}'
                 is: "A randomly selected positive example"
@@ -1475,7 +1471,7 @@ topics:
                 is: "The feature value after scaling"
           - name: 'Target encoding, and the leak inside it'
             tex: '\mathrm{enc}(c) = \frac{\sum_{i \in c} y_{i} + \lambda\, \bar{y}}{n_{c} + \lambda}'
-            read: "Replace each category with its average target value, moving that average towards the overall mean when the category has few examples."
+            read: "Replace each category with its average target value. For categories with few examples, move this towards the overall mean."
             note: "Using a row's own target to calculate its feature leaks the answer. Therefore, calculate the encoding from other folds, which are separate groups of rows used during evaluation."
             where:
               - sym: 'c'
@@ -1554,18 +1550,22 @@ topics:
           - name: 'Importance weighting'
             tex: '\mathbb{E}_{p_{\mathrm{te}}}[\ell] = \mathbb{E}_{p_{\mathrm{tr}}}\!\left[\frac{p_{\mathrm{te}}(x)}{p_{\mathrm{tr}}(x)}\, \ell\right]'
             read: "Give training examples different weights so that their weighted distribution resembles future data."
-            note: "Weights become large where the training data has few examples. Therefore, the estimate becomes unstable in regions where the adjustment is most needed."
+            note: "This equality requires an unchanged input-to-answer relationship and deployment inputs covered by the training distribution. Weights become large where training examples are scarce. Therefore, the estimate can become unstable where the adjustment is most needed."
           - name: 'Why resampling breaks calibration'
-            tex: '\hat{p}_{\mathrm{corrected}} = \frac{\hat{p}\, r}{\hat{p}\, r + (1 - \hat{p})}, \qquad r = \frac{\text{original positive rate}}{\text{resampled positive rate}}'
-            read: "Oversampling a rare class changes the class frequency the model learns. Therefore, adjust its predicted probabilities back towards the actual frequency."
-            note: "Class weights and focal loss also change the confidence scale. If the product needs probabilities, adjust the decision threshold rather than altering class frequencies in training."
+            tex: "\\hat{p}_{\\mathrm{corrected}} = \\frac{\\hat{p}\\, r}{\\hat{p}\\, r + (1 - \\hat{p})}, \\qquad r = \\frac{\\pi/(1-\\pi)}{\\pi_{\\mathrm{sample}}/(1-\\pi_{\\mathrm{sample}})}"
+            read: "Oversampling changes the class frequency represented by the model. Under pure label shift, multiply predicted odds by the ratio of original to sampled prior odds."
+            note: "Assume pure label shift, meaning that the input distribution within each class stays unchanged. Also assume calibrated probabilities for the sampled data and class frequencies strictly between 0 and 1. Let pi and pi_sample denote the original and sampled positive rates. Each rate has odds equal to the rate divided by 1 minus the rate. Class weights and focal loss can also change confidence. Therefore, check calibration when the product needs probabilities."
             where:
               - sym: '\hat{p}'
                 is: "The probability predicted by the model"
               - sym: 'r'
-                is: "The ratio of actual class frequency to training class frequency"
+                is: "The original positive-class odds divided by the sampled positive-class odds"
               - sym: '\hat{p}_{\mathrm{corrected}}'
                 is: "The probability after adjusting for the actual class frequency"
+              - sym: '\pi'
+                is: "The positive-class frequency before resampling"
+              - sym: '\pi_{\mathrm{sample}}'
+                is: "The positive-class frequency after resampling"
         covers:
           - "Class weights, resampling, synthetic minority examples through SMOTE, and focal loss address rare classes differently"
           - "Resampling changes the class frequency represented by predicted probabilities"
@@ -1609,7 +1609,7 @@ topics:
           - name: 'The bias variance decomposition for a prediction'
             tex: '\mathbb{E}\big[(y - \hat{f}(x))^{2}\big] = \underbrace{\big(\mathbb{E}[\hat{f}(x)] - f(x)\big)^{2}}_{\text{bias}^{2}} + \underbrace{\mathrm{Var}\big(\hat{f}(x)\big)}_{\text{variance}} + \underbrace{\sigma^{2}}_{\text{noise}}'
             read: "Split prediction error into systematic error, variation between training datasets, and unavoidable noise."
-            note: "The noise term gives a lower limit on error. A model that claims to beat this limit is evaluating information from its own training data."
+            note: "The noise term sets a lower limit on expected squared prediction error under this model. However, error measured on one finite sample can fall below that expectation. Therefore, inspect the evaluation before claiming to beat this limit."
             where:
               - sym: '\hat{f}'
                 is: "The model fitted on one particular dataset"
@@ -1723,7 +1723,7 @@ topics:
     links: [transformers, llm-training]
     modules:
       - name: Optimisation
-        why: "The optimiser, step size, and shape of the loss function determine whether training reaches a stable solution."
+        why: "The optimiser, learning rate and loss shape affect whether training reaches a stable solution."
         beats:
           - >-
               One training update depends on four choices about how to use the gradient.
@@ -1754,7 +1754,7 @@ topics:
               updates make progress slow. Warmup starts with small updates because the first
               training steps are especially sensitive.
         math:
-          - name: "one step of gradient descent"
+          - name: "One step of gradient descent"
             tex: '\theta_{t+1} \;=\; \theta_{t} \;-\; \eta\, \nabla_{\theta} \mathcal{L}(\theta_{t})'
             read: "Move the parameters against the gradient, with the learning rate setting the update size."
             note: "A small learning rate makes progress slow, while a large one can overshoot and increase the loss until training becomes unstable. The interactive example shows both outcomes."
@@ -2056,7 +2056,7 @@ topics:
           - name: 'The chain rule on a chain of layers'
             tex: '\frac{\partial \mathcal{L}}{\partial \theta_{l}} \;=\; \frac{\partial \mathcal{L}}{\partial z_{L}} \prod_{r = l+1}^{L} \frac{\partial z_{r}}{\partial z_{r-1}} \cdot \frac{\partial z_{l}}{\partial \theta_{l}}'
             read: "A parameter gradient combines derivatives from each later layer. Repeated multiplication can make gradients unstable in deep networks."
-            note: "A Jacobian is a table of derivatives for several inputs and outputs. Multiplying many factors below 1 can shrink a gradient towards 0, while factors above 1 can enlarge it. A residual connection provides an unchanged path that helps gradients pass through deep networks."
+            note: "A Jacobian is a table of derivatives for several inputs and outputs. Repeated factors below 1 can shrink gradients towards 0. Conversely, factors above 1 can enlarge them. Residual connections provide unchanged paths that help gradients pass through deep networks."
             where:
               - sym: 'l'
                 is: "The layer index counted from the input"
@@ -2377,7 +2377,7 @@ topics:
     name: Linear Algebra
     group: foundations
     blurb: "Explain vectors, matrices and the transformations they describe."
-    scope: "Study vector spaces, matrix transformations and numerical calculations here. Use the mathematics track for general notation, calculus for rates of change and machine learning for model applications."
+    scope: "Study vector spaces, matrix transformations and numerical calculations here. Then use mathematics for general notation and calculus for rates of change. Machine learning covers model applications."
     links: [calculus, machine-learning]
     modules:
       - name: Vectors and spaces
@@ -2400,13 +2400,12 @@ topics:
               unnecessary vector. Coordinates describe a vector relative to the chosen basis.
         plain:
           - >-
-              A vector is a list of numbers that can represent an arrow with a length and
+              A vector is a list of numbers. It can represent an arrow with a length and
               direction. You can add vectors or multiply them by numbers, called scalars.
           - >-
-              A vector space contains the results of these operations. The span of a set of
-              vectors is everything those vectors can produce. A basis is an independent set
-              that spans the whole space, and the dimension is the number of vectors in that
-              basis.
+              A vector space contains the results of these operations. The span contains
+              everything the given vectors can produce. A basis is an independent set that spans
+              the whole space. Its vector count gives the dimension.
         math:
           - name: "Linear combinations and span"
             tex: '\mathrm{span}\{v_{1}, \dots, v_{n}\} = \Big\{ \textstyle\sum_{i} c_{i} v_{i} \;:\; c_{i} \in \mathbb{R} \Big\}'
@@ -2426,7 +2425,7 @@ topics:
             note: "A basis must be independent and span the space. Independence means it has no unnecessary vector, while spanning means it can represent every vector in the space."
           - name: "Dot products, lengths and angles"
             tex: '\langle u, v \rangle = \|u\|\,\|v\| \cos \vartheta, \qquad \|v\| = \sqrt{\langle v, v \rangle}'
-            read: "A dot product combines corresponding vector components into one number. It measures how strongly the vectors point along each other."
+            read: "Multiply corresponding vector components, then add the products to obtain the dot product. This measures how strongly the vectors point along each other."
             note: "A dot product of 0 means the vectors are perpendicular. This supports closest-point projections, least-squares fits and bases of perpendicular vectors. It also supports cosine similarity, which compares directions of embeddings, the learned vectors representing inputs."
             where:
               - sym: '\langle u, v \rangle'
@@ -2473,9 +2472,9 @@ topics:
               transformation. This transformation moves vectors while preserving addition and
               scaling.
           - >-
-              For a 2 by 2 matrix, each column gives the new position of one original basis
-              vector. Therefore, its four entries specify the destinations of two basis
-              vectors, which determine the transformation for every point.
+              For a 2 by 2 matrix, each column gives the output of one original basis vector.
+              Therefore, its four entries specify the destinations of two basis vectors. These
+              destinations determine the transformation for every point.
         math:
           - name: "Matrix columns give the transformed basis vectors"
             tex: 'A = \begin{bmatrix} | & | \\ A e_{1} & A e_{2} \\ | & | \end{bmatrix}, \qquad A v = v_{1} (A e_{1}) + v_{2} (A e_{2})'
@@ -2540,7 +2539,7 @@ topics:
           - name: 'The determinant as a scaling factor'
             tex: '\det \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} = a_{11}a_{22} - a_{12}a_{21}'
             read: "The absolute determinant gives the area scaling factor. A negative determinant also means that the transformation reverses orientation."
-            note: "A determinant of 0 means the output occupies fewer dimensions than the input, so an inverse cannot recover a unique input. A matrix with this property is called singular."
+            note: "A determinant of 0 means the output occupies fewer dimensions than the input. Therefore, an inverse cannot recover a unique input. A matrix with this property is called singular."
             where:
               - sym: '\det'
                 is: "The determinant, which gives signed area or volume scaling"
@@ -2600,10 +2599,9 @@ topics:
               A matrix can move a vector to a different direction. However, an eigenvector
               remains on its original line after the transformation.
           - >-
-              The corresponding eigenvalue tells you the scale factor, including any reversal.
-              These directions help you understand repeated applications of the
-              transformation, because each application multiplies the vector by the same
-              factor.
+              The eigenvalue gives the scale factor, including any reversal. Each matrix
+              application multiplies the eigenvector by this same factor. Therefore, eigenvectors
+              help explain repeated transformations.
         math:
           - name: 'The eigenvalue equation'
             tex: 'A v = \varsigma\, v, \qquad v \neq 0'
@@ -2653,9 +2651,8 @@ topics:
         why: "Matrix decompositions turn difficult operations into stable, reusable steps."
         beats:
           - >-
-              A singular value decomposition splits a matrix into three simpler
-              transformations. The first changes the coordinate directions by a rotation or
-              reflection.
+              A singular value decomposition splits a matrix into three simpler transformations.
+              First, change the coordinate directions by a rotation or reflection.
           - >-
               The second stretches along the coordinate axes. The scale factors are called
               singular values, and discarding small ones gives a compressed approximation.
@@ -2667,9 +2664,9 @@ topics:
               A matrix decomposition writes a matrix as a product of simpler matrices. For
               example, the pieces may rotate coordinates or stretch them along the axes.
           - >-
-              The singular value decomposition, or SVD, exists for every matrix. It separates
-              the transformation into two changes of coordinate directions with axis scaling
-              between them. Geometrically, these changes are rotations or reflections.
+              The singular value decomposition, or SVD, exists for every matrix. It changes
+              coordinate directions, scales the axes, then changes directions again.
+              Geometrically, the changes of direction are rotations or reflections.
         math:
           - name: 'The singular value decomposition'
             tex: 'A = U \Sigma V^{\top}'
@@ -2690,7 +2687,7 @@ topics:
           - name: "The best approximation with a chosen rank"
             tex: 'A_{k} = \sum_{r=1}^{k} \varsigma_{r}\, u_{r} v_{r}^{\top}, \qquad \|A - A_{k}\|_{F} \text{ is the smallest possible}'
             read: "Keep the largest singular values and discard the rest. No other approximation with that rank has a smaller error under the theorem's error measure."
-            note: "This result supports principal component analysis, which finds directions of greatest variation; latent semantic analysis, which finds patterns in text; image compression; and low-rank adapters, which train small matrix updates."
+            note: "This result supports principal component analysis, which finds directions of greatest variation. It also supports latent semantic analysis, which finds patterns in text, and image compression. Moreover, low-rank adapters use it to train small matrix updates."
             where:
               - sym: '\varsigma_{r}'
                 is: "The r-th singular value, in decreasing order"
@@ -2854,7 +2851,7 @@ topics:
           - name: "Solve a system without computing the inverse"
             tex: '\text{solve } Av = y \; \text{directly, rather than forming } A^{-1} \text{ then multiplying}'
             read: "Split the matrix into simpler factors and solve using them. This usually needs less work and produces less rounding error than explicitly computing the inverse."
-            note: "QR and Cholesky are methods for splitting a matrix into factors that make a system easier to solve. They can use about a third of the work of an explicit inverse and give more stable numerical results. Therefore, an explicit inverse in production code is often a sign that the implementation needs review."
+            note: "QR and Cholesky split a matrix into factors that make a system easier to solve. They can use about a third of the work of an explicit inverse. Moreover, they can give more stable numerical results. Therefore, review production code that explicitly calculates an inverse."
             live:
               tex: '\mathrm{relative\ residual:}\quad \mathrm{solve} = 9001, \quad \mathrm{inverse} = 9002'
               slots: [resSolve, resInv]
@@ -2902,8 +2899,7 @@ topics:
         to 1.
       - However, a fair coin gives each outcome probability 0.5. A probability describes an event; a distribution
         describes all outcomes.
-      - For jointly observed variables, add joint probabilities to obtain a marginal distribution. Then divide by
-        a positive marginal to obtain a conditional probability.
+      - "For jointly observed variables, add joint probabilities to obtain a marginal distribution. Then divide by a positive marginal probability to obtain a conditional probability."
       math:
       - name: Probability and uncertainty
         tex: p(a\mid b)=\frac{p(a,b)}{p(b)}
@@ -2938,7 +2934,7 @@ topics:
     - name: Self-information and surprise
       why: Logarithms turn event probabilities into additive information.
       plain:
-      - An event with probability 1/8 contributes 3 bits because minus log base 2 of 1/8 equals 3.
+      - "An event with probability 1/8 contributes 3 bits. This follows because minus log base 2 of 1/8 equals 3."
       - Meanwhile, an event with probability 1 contributes 0 bits. Less probable observations contribute more information.
       - For independent events, multiply probabilities. Therefore, their negative logarithms add. Natural logarithms
         measure information in nats.
@@ -3272,8 +3268,7 @@ topics:
       - For probabilities [1/2, 1/4, 1/8, 1/8], use codewords 0, 10, 110 and 111.
       - Their average length is 0.5 times 1 plus 0.25 times 2 plus 0.25 times 3. Therefore, the mean equals 1.75 bits.
       - A prefix code ensures no codeword begins another. Huffman coding repeatedly merges the 2 least probable symbols.
-      - Kraft inequality constrains prefix-code lengths. For a finite discrete source, optimal binary prefix codes
-        satisfy entropy at most mean length, below entropy plus 1.
+      - "Kraft inequality constrains prefix-code lengths. For a finite discrete source, an optimal binary prefix code has mean length at least entropy. Moreover, that mean length is below entropy plus 1."
       - For independent identically distributed blocks, longer codes approach entropy per symbol. Arithmetic coding
         uses sequence probability intervals.
       - Minimum Description Length also counts the model description. Therefore, its model cost can offset improvements
@@ -3388,7 +3383,7 @@ topics:
     - name: Variational inference and the ELBO
       why: A tractable approximation can replace an inaccessible posterior.
       plain:
-      - Let q describe a tractable latent-variable distribution for an observed input. Compare q with the exact posterior.
+      - "Let q describe a latent-variable distribution whose required calculations we can perform. Then compare q with the exact posterior."
       - Expand the log joint density as log posterior plus log evidence. Then average under q and rearrange.
       - The evidence lower bound, or ELBO, equals expected log likelihood minus divergence from the latent prior.
       - Its gap to log evidence is posterior KL. Therefore, maximising the bound reduces that gap for a fixed generative
@@ -3556,8 +3551,7 @@ topics:
       - The generalisation gap equals population loss minus training loss. The displayed bound concerns its expectation
         over data and algorithm randomness.
       - Mutual information I(S;W) measures dependence between the particular training sample and the fitted model.
-      - For uniformly sub-Gaussian losses, an expected generalisation gap is bounded using that information and sample
-        size.
+      - "For uniformly sub-Gaussian losses, the expected generalisation gap has an information bound. This bound uses mutual information and sample size."
       - Sub-Gaussian means centred loss tails obey a Gaussian-style exponential bound. The scale must hold uniformly
         across fixed models.
       - PAC-Bayes instead compares distributions over hypotheses using posterior-to-prior KL. A conventional prior
@@ -3608,8 +3602,7 @@ topics:
         expected value.
       - Among reconstruction channels satisfying that constraint, minimise input-reconstruction mutual information.
         This defines the rate-distortion function.
-      - For a fair binary source and Hamming distortion, the rate equals 1 minus binary entropy for D between 0 and
-        0.5.
+      - "For a fair binary source, Hamming distortion counts unequal bits. The rate equals 1 minus binary entropy when D lies between 0 and 0.5."
       - Hamming distortion counts unequal bits. At D equal to 0.5, zero transmitted bits suffice under average distortion.
       - For continuous variables, differential entropy integrates negative log density. It can be negative and changes
         when units change.
@@ -3700,12 +3693,10 @@ topics:
       - An autoregressive model predicts each token given earlier tokens. Its sequence negative log-likelihood adds
         token losses.
       - Perplexity exponentiates mean token loss. Use exponentiation base e for nats or base 2 for bits.
-      - A variational autoencoder maximises the ELBO. Its reconstruction term is a log likelihood, so its form depends
-        on the observation model.
+      - "A variational autoencoder maximises the ELBO. Its reconstruction term is a log likelihood. Therefore, its form depends on the observation model."
       - Jensen-Shannon divergence averages KL divergences to the mixture distribution. It is symmetric and bounded
         by 1 bit.
-      - The original idealised GAN minimax objective relates to Jensen-Shannon divergence with an optimal discriminator.
-        Practical GAN losses can differ.
+      - "With an optimal discriminator, the original idealised GAN minimax objective relates to Jensen-Shannon divergence. However, practical GAN losses can differ."
       - Diffusion models use noisy observations, score estimation and variational bounds. Common denoising objectives
         depend on their weighting and parameterisation.
       - Goodfellow and colleagues derive this relationship in Equation 6 of their NeurIPS 2014 paper.
@@ -3843,6 +3834,7 @@ topics:
     - Train a small VAE and track reconstruction likelihood and prior KL separately.
     - Estimate mutual information with known synthetic ground truth and report estimator limitations.
     - Choose a final project, state assumptions, and compare methods using held-out evidence.
+
   - id: calculus
     name: Calculus
     group: foundations
@@ -3854,7 +3846,7 @@ topics:
         why: "A derivative measures the local rate of change that an optimisation step uses."
         beats:
           - >-
-              Choose a point on a curve and a second 1 nearby.
+              Choose a point on a curve. Then choose a second point nearby.
           - >-
               Draw the straight line through both points. Its slope measures the average rate
               of change between them.
@@ -3920,8 +3912,8 @@ topics:
               backwards is cheaper when there is one output and many inputs.
         plain:
           - >-
-              When one quantity affects a second and the second affects a third, multiply the
-              two rates of change to find the total rate.
+              Suppose one quantity affects a second, and the second affects a third. Then multiply
+              the two rates of change to find the total rate.
           - >-
               A neural network connects many such calculations. Backpropagation works
               backwards through these connections and multiplies the rates to find how each
@@ -3941,7 +3933,7 @@ topics:
             live:
               tex: '\frac{\partial L}{\partial x} = 9001'
               slots: [lossGradient]
-            read: "Start at the loss with derivative 1, then work backwards through the calculation and add derivative contributions where paths meet."
+            read: "Start at the loss with derivative 1. Then work backwards through the calculation. Add derivative contributions where paths meet."
             where:
               - sym: '\bar{z}_{r}'
                 is: "The derivative of the loss with respect to node r"
@@ -3984,16 +3976,18 @@ topics:
               A Jacobian stacks gradients for several outputs. Its rows correspond to outputs
               and its columns to inputs.
           - >-
-              A gradient lists the partial derivatives for one output. It points in the
-              direction of the fastest local increase.
+              A gradient lists the partial derivatives for one output. For a differentiable
+              function, compare unrestricted Euclidean unit directions. Then a nonzero gradient
+              points along the fastest instantaneous increase.
           - >-
               A partial derivative measures how the output changes when you change one input
               and keep the others fixed.
         plain:
           - >-
-              For a function with several inputs and one output, the gradient lists the
-              derivative for each input in a vector. It points in the direction of the fastest
-              local increase in the output.
+              For one output, the gradient collects the derivative for each input into a vector.
+              For a differentiable function, compare unrestricted directions of equal Euclidean
+              length. Then a nonzero gradient points along the fastest instantaneous increase.
+              Euclidean length measures ordinary straight-line distance.
           - >-
               A Jacobian collects these derivatives for several outputs in a table. A Hessian
               collects second derivatives, which describe how the slopes change and therefore
@@ -4004,7 +3998,7 @@ topics:
             live:
               tex: '\nabla f(x) = [9001, 9002]^{\top}'
               slots: [gx, gy]
-            read: "Collect the derivative for each input into 1 vector pointing in the direction of the fastest local increase."
+            read: "Collect the partial derivatives into a vector. For a differentiable function, a nonzero gradient gives the steepest unrestricted Euclidean unit direction."
             where:
               - sym: '\nabla'
                 is: "The gradient, whose components are partial derivatives"
@@ -4017,7 +4011,7 @@ topics:
             live:
               tex: 'D_{u} f(x) = 9001'
               slots: [directionalRate]
-            read: "Project the gradient onto a chosen direction to calculate the rate of change in that direction. No unit direction gives a greater rate than the gradient direction."
+            read: "For a differentiable function, multiply matching gradient and direction entries, then add. This gives the directional rate. Among unrestricted Euclidean unit directions, a nonzero gradient gives the greatest rate."
             where:
               - sym: 'D_{u} f(x)'
                 is: "The rate of change along direction u"
@@ -4025,9 +4019,9 @@ topics:
                 is: "A second vector"
               - sym: '\vartheta'
                 is: "The angle between the two vectors"
-          - name: "three objects, 3 shapes"
+          - name: "Three derivative objects and their shapes"
             tex: 'f : \mathbb{R}^{d} \to \mathbb{R} \Rightarrow \nabla f \in \mathbb{R}^{d}; \qquad f : \mathbb{R}^{d} \to \mathbb{R}^{m} \Rightarrow J \in \mathbb{R}^{m \times d}; \qquad H \in \mathbb{R}^{d \times d}'
-            read: "The gradient is a vector of first derivatives, the Jacobian is a table of first derivatives, and the Hessian is a table of second derivatives."
+            read: "The gradient is a vector of first derivatives. Meanwhile, the Jacobian is a table of first derivatives for several outputs. The Hessian is a table of second derivatives."
             note: "Check the number of rows and columns to catch errors quickly. A derivative with the wrong shape is incorrect even if the algebra appears plausible."
             where:
               - sym: 'J'
@@ -4060,12 +4054,14 @@ topics:
               A 0 gradient is necessary at an interior minimum of a differentiable function.
               However, it is not sufficient.
           - >-
-              If the surface curves upwards in every direction, the point is a minimum.
+              At a stationary point, the gradient is 0. If the Hessian has positive curvature in
+              every direction, the point is a strict local minimum.
           - >-
-              If it curves downwards in every direction, the point is a maximum.
+              At a stationary point, negative Hessian curvature in every direction gives a strict
+              local maximum.
           - >-
-              If it curves upwards in 1 direction and downwards in another, the point is a
-              saddle. Therefore, the gradient alone cannot distinguish these cases.
+              At a stationary point, mixed positive and negative Hessian curvatures give a saddle.
+              Therefore, the gradient alone cannot distinguish these cases.
         scene:
           kind: descent
           cap: "The slope changes as the point moves toward a low place."
@@ -4084,7 +4080,7 @@ topics:
             live:
               tex: '\|\nabla f(x)\| = 9001, \quad \lambda_{\min}(H(x)) = 9002'
               slots: [stationaryGradient, smallestCurvature]
-            read: "At a differentiable interior minimum, the gradient vanishes and curvature is nonnegative in every direction."
+            read: "At a twice-differentiable interior minimum, the gradient vanishes. Moreover, Hessian curvature is nonnegative in every direction."
             note: "A 0 gradient can also occur at a maximum or saddle point. Therefore, inspect curvature to distinguish these three cases."
             where:
               - sym: 'x^{\star}'
@@ -4159,8 +4155,8 @@ topics:
             live:
               tex: '\hat{g} = 9001, \quad \text{Estimated SE} = 9002'
               slots: [estimate, se]
-            read: "Average sampled values. Obtaining 10 times less error generally requires 100 times more samples."
-            note: "This rate does not depend on dimension. Therefore, sampling can outperform a grid in high dimensions despite its slow convergence."
+            read: "Average independent draws from the same distribution with finite variance. Reducing standard error by 10 requires 100 times more samples."
+            note: "Under these sampling assumptions, the standard error rate does not depend on dimension. Therefore, sampling can outperform a grid in high dimensions despite its slow convergence."
             where:
               - sym: 'n_{\mathrm{s}}'
                 is: "The number of samples drawn"
@@ -4232,7 +4228,7 @@ topics:
             live:
               tex: '\text{First Newton input} = 9001'
               slots: [newtonNext]
-            read: "Fit a quadratic approximation and move to its minimum."
+            read: "With positive-definite curvature, fit a quadratic approximation and move to its minimum. Otherwise, Newton's stationary point can be a maximum or saddle."
             note: "Newton's method converges in far fewer steps but requires solving a system involving the Hessian at each step. Therefore, deep learning usually uses first-order methods with approximations to curvature."
             where:
               - sym: 'x_{t}'
@@ -4350,11 +4346,10 @@ topics:
               into more complicated expressions.
         plain:
           - >-
-              Mathematical notation uses symbols to express ideas briefly. Start with three
-              common constructions. A set groups objects, a function maps an input from one
-              set to an output in another, and a sum adds values. First identify the type of
-              each object, such as a number, vector or set. This helps you work out what the
-              expression can mean.
+              Mathematical notation uses symbols to express ideas briefly. A set groups objects.
+              Meanwhile, a function maps each input to an output, and a sum adds values. First
+              identify each object's type, such as a number, vector or set. This helps you work
+              out what the expression can mean.
           - >-
               Mathematicians chose these symbols and definitions. Leibniz wanted a language in
               which people could settle arguments by calculation. Later, Frege developed
@@ -4427,10 +4422,10 @@ topics:
               numbers are then built from it.
         plain:
           - >-
-              Counting answers how many things are present, so people could count before they
-              had a number for absence. In traditions that developed 0, it appeared later,
-              first as a placeholder for an empty position. People later accepted it as a
-              quantity, although that change met resistance.
+              Counting tells us how many things are present. People could therefore count before
+              they had a number for absence. In traditions that developed 0, it first marked an
+              empty position. Later, people accepted it as a quantity, although that change met
+              resistance.
           - >-
               Set theory takes a different approach. It defines 0 as the empty set, which has
               no members. Then it defines each whole number as the set of all the whole
@@ -4458,7 +4453,7 @@ topics:
           - name: "Extending number systems to allow more operations"
             tex: 'a + (-a) = 0, \qquad b \times \tfrac{1}{b} = 1 \;\; (b \ne 0)'
             read: "Opposite numbers add to 0, and a non-zero number multiplied by its reciprocal gives 1. These extensions allow subtraction and division to produce answers in a larger number system."
-            note: "Subtraction was once allowed only when its answer stayed positive. People called negative numbers fictitious for a long time. Later, mathematicians accepted extensions such as negative numbers and fractions to allow operations that the earlier number system could not support."
+            note: "Subtraction was once allowed only when its answer stayed positive. People called negative numbers fictitious for a long time. Later, mathematicians accepted negative numbers and fractions as extensions. These allowed operations that the earlier number system could not support."
             where:
               - sym: 'b'
                 is: "Any number other than 0"
@@ -4578,9 +4573,8 @@ topics:
         why: "Countability separates infinite sets that can be listed from those that cannot."
         beats:
           - >-
-              A countable collection can be listed with a first member, a second member and so
-              on. The whole numbers and fractions are countable, although their lists never
-              end.
+              A countable collection can be listed with a first member, a second member and so on.
+              Whole numbers and fractions are countable. However, their lists never end.
           - >-
               The real numbers cannot all be listed. For any proposed list, you can construct
               a number that differs from each listed number in at least one digit.
@@ -4609,7 +4603,7 @@ topics:
                 is: "A second set being compared against it"
           - name: 'The diagonal argument'
             tex: '\text{for any list } r_{1}, r_{2}, \dots \;\; r^{\ast} \text{ differs from } r_{i} \text{ in place } i'
-            read: "Choose a first digit different from the first number, a second digit different from the second, and continue. The resulting number differs from every entry on the list."
+            read: "Choose a first digit different from the first number's first digit. Then choose a second digit different from the second number's second digit, and continue. The resulting number differs from every listed entry."
             note: "A related construction proves that the halting problem is undecidable. This problem asks whether a program eventually stops. In both arguments, constructing something that differs from every listed candidate proves that the proposed list or decision procedure cannot cover every case."
             where:
               - sym: 'r_{i}'
@@ -4656,9 +4650,9 @@ topics:
         plain:
           - >-
               To count arrangements, multiply the number of choices at each step. Ordering n
-              distinct things gives n factorial, written n!. To choose k of them without
-              counting different orders separately, divide by the number of orders that
-              describe the same choice.
+              distinct things gives n factorial, written n!. When selecting k items without order,
+              several arrangements describe the same selection. Therefore, divide by the number of
+              such arrangements.
           - >-
               For example, 60 items have more subsets than a machine could list before the sun
               burns out. Most of those possibilities will never be examined. Therefore, a
@@ -4752,11 +4746,11 @@ topics:
               A random variable is a function that assigns a number to each outcome.
         plain:
           - >-
-              For finitely many possible outcomes, probability assigns a number to each event,
-              or group of outcomes. No probability is negative, the probability of the whole
-              sample space is 1, and probabilities add for events that cannot occur together.
-              Conditioning means keeping only the outcomes consistent with new information,
-              then adjusting their probabilities so the total is 1.
+              For finitely many outcomes, probability assigns a number to each event, or group of
+              outcomes. No probability is negative, and the whole sample space has probability 1.
+              Also, probabilities add for events that cannot occur together. Conditioning keeps
+              only outcomes consistent with new information. Then adjust their probabilities so
+              the total is 1.
           - >-
               Kolmogorov's axioms are rules for combining probabilities. However, they do not
               specify what a probability means. Researchers use two main interpretations. One
@@ -4846,8 +4840,9 @@ topics:
           - >-
               Averaging a few independent samples reduces this variation.
           - >-
-              With many independent samples, the standard deviation of the average falls as 1
-              over the square root of the sample count.
+              For independent draws with the same finite variance, averaging reduces variation.
+              The average's standard deviation falls as 1 over the square root of the sample
+              count.
           - >-
               Therefore, a larger test set usually gives a more stable average when samples
               are independent. However, extra samples do not remove systematic bias.
@@ -4858,16 +4853,16 @@ topics:
           alt: "A wide bell-shaped distribution and a narrower distribution of averages share the same baseline."
         plain:
           - >-
-              Expectation is the average of possible values weighted by their probabilities.
-              Variance measures the average squared distance from that expectation. For
-              independent samples with finite variance, the standard deviation of their
-              average falls as 1 over the square root of the sample count.
+              Expectation averages possible values using their probabilities as weights. Variance
+              measures the average squared distance from that expectation. For independent draws
+              with the same finite variance, averaging reduces variation. Specifically, the
+              average's standard deviation falls as 1 over the square root of the sample count.
           - >-
-              Hume asked why observations should support claims about things we have not
-              observed. Concentration inequalities give a narrower mathematical result. They
-              bound how far a sample average can differ from its expectation, provided the
-              samples follow the assumed distribution. They do not justify general induction,
-              and the guarantee can fail when the data distribution changes.
+              Hume asked why observations should support claims about things we have not observed.
+              Concentration inequalities give a narrower mathematical result. Under stated
+              distribution assumptions, they bound a sample average's difference from its
+              expectation. However, they do not justify general induction. The guarantee can fail
+              when the data distribution changes.
         math:
           - name: "Linearity of expectation"
             tex: '\mathbb{E}[a X + b Y] = a\, \mathbb{E}[X] + b\, \mathbb{E}[Y]'
@@ -5054,12 +5049,11 @@ topics:
               store probabilities as log probabilities and add them to calculate the log
               likelihood of a sequence.
           - >-
-              Logarithms also change how a plot represents scale. Human judgements of loudness
-              and brightness similarly depend more on ratios than on differences. However, a
-              straight line on logarithmic axes does not guarantee that the relationship
-              continues outside the data. A line fitted over three decades, or factors of 10,
-              supports those decades; extending it two decades further assumes that the same
-              mechanism continues.
+              Logarithms also change how a plot represents scale. Human judgements of loudness and
+              brightness similarly depend more on ratios than on differences. However, a straight
+              line on logarithmic axes need not continue beyond the data. A line fitted over three
+              decades supports those factors of 10. Extending it two decades further assumes that
+              the same mechanism continues.
         math:
           - name: "Combining probabilities using logarithms"
             tex: '\log \prod_{i=1}^{n} p_{i} = \sum_{i=1}^{n} \log p_{i}'
@@ -5071,7 +5065,7 @@ topics:
           - name: "A power law on logarithmic axes"
             tex: 'y = c\, x^{-\kappa} \;\Longleftrightarrow\; \log y = \log c - \kappa \log x'
             read: "Take logarithms of both axes. A power law then appears as a straight line whose slope is the exponent."
-            note: "A scaling law describes how a measured quantity changes with resources such as computing power. Fit the line using the computing budget you can afford, then use it to predict results for a larger budget, subject to the assumption that the relationship continues."
+            note: "A scaling law describes how a measured quantity changes with resources such as computing power. Fit the line within your available computing budget. Then predict results for a larger budget, assuming the relationship continues."
             where:
               - sym: '\kappa'
                 is: "The exponent, the slope on a log-log plot"
@@ -5138,9 +5132,9 @@ topics:
               Use a more precise accumulator, which stores the running total.
         plain:
           - >-
-              A floating-point number stores a fixed number of significant digits. The gap
-              between stored values grows as the values grow, so its precision is relative to
-              the number's magnitude rather than a fixed step size.
+              A floating-point number stores a fixed number of significant digits. The gap between
+              stored values grows as the values grow. Therefore, precision is relative to
+              magnitude rather than a fixed step size.
           - >-
               A computer cannot store every real number. Instead, it rounds a whole interval
               of possible values to the same floating-point value. Calculations therefore
@@ -5264,9 +5258,9 @@ topics:
         plain:
           - >-
               A universal claim says that a condition holds for every input. A single failing
-              input, called a counterexample, disproves it. By contrast, an existence claim
-              says that at least one input satisfies the condition. Disproving that claim
-              requires ruling out every possible input.
+              input, called a counterexample, disproves it. By contrast, an existence claim says
+              that at least one input satisfies the condition. Disproving it requires ruling out
+              every possible input.
           - >-
               A bound is a limit on a quantity. A single bound that works for every input is
               stronger than allowing each input its own bound. Therefore, check the order of
@@ -5294,7 +5288,7 @@ topics:
           - name: 'Order changes the claim'
             tex: '\forall \epsilon\, \exists n_{0} \;\ne\; \exists n_{0}\, \forall \epsilon'
             read: "A separate threshold for each tolerance is weaker than one threshold that works for all of them."
-            note: "Ordinary convergence lets the required threshold depend on the case. Uniform convergence requires one threshold that works across all cases. The same distinction appears in generalisation bounds, which limit prediction error on new data. A separate bound for each model does not automatically give a bound for all models at once."
+            note: "Ordinary convergence lets the required threshold depend on the case. Uniform convergence requires one threshold that works across all cases. The distinction also appears in generalisation bounds, which limit prediction error on new data. A separate bound for each model does not automatically cover all models at once."
             where:
               - sym: '\epsilon'
                 is: "A small tolerance"
@@ -5339,10 +5333,10 @@ topics:
               is usually the first method to try for an implication, which says that one
               condition guarantees another.
           - >-
-              The contrapositive reverses the implication and negates both parts. It is
-              equivalent to the original claim, so either direction can establish it. However,
-              reversing the parts without negating them gives the converse, which may be
-              false. Keep this distinction clear when proving a claim on a whiteboard.
+              The contrapositive reverses the implication and negates both parts. It is equivalent
+              to the original claim, so either statement can establish it. However, reversing the
+              parts without negating them gives the converse, which may be false. Keep this
+              distinction clear when proving a claim on a whiteboard.
         math:
           - name: "An equivalent contrapositive"
             tex: '(P \Rightarrow Q) \;\equiv\; (\neg Q \Rightarrow \neg P)'
@@ -5522,7 +5516,7 @@ topics:
           - name: "Proving a loop invariant"
             tex: '\text{true before the loop} \;\wedge\; \text{preserved by 1 pass} \;\Longrightarrow\; \text{true at exit}'
             read: "Prove the statement before the loop starts, then show that each iteration preserves it. Therefore, it holds after any number of iterations."
-            note: "Also show that a non-negative quantity decreases on each iteration and cannot keep decreasing forever. The invariant establishes correctness, while the decreasing quantity establishes termination, meaning that the loop stops. Without a termination argument, correctness alone does not prove the algorithm finishes."
+            note: "Also show that a non-negative quantity decreases each iteration and cannot decrease forever. The invariant establishes correctness while the decreasing quantity establishes termination, meaning that the loop stops. Without a termination argument, correctness alone does not prove the algorithm finishes."
         covers:
           - "Proving the first case and the next-case step"
           - "Induction using the previous case or all smaller cases"
@@ -5602,9 +5596,9 @@ topics:
               The triangle inequality says that travelling through a third point is never
               shorter than the direct route.
           - >-
-              For a convex function, the straight segment between two points on the curve lies
-              above the curve. Therefore, applying the function to an average gives no more
-              than averaging the function values.
+              For a convex function, the segment joining two curve points lies above the curve.
+              Therefore, applying the function to an average gives no more than averaging the
+              function values.
           - >-
               These inequalities replace a difficult quantity with an easier quantity that
               bounds it from above.
@@ -5639,7 +5633,7 @@ topics:
           - name: "The direction of Jensen's inequality"
             tex: '\varphi \big( \mathbb{E}[X] \big) \le \mathbb{E}\big[ \varphi(X) \big] \quad \text{for convex } \varphi'
             read: "For a convex function, applying the function after averaging gives no more than averaging the function values."
-            note: "The inequality reverses for a concave function, whose connecting straight segments lie below its curve. This direction determines why the evidence lower bound, a tractable bound used in probabilistic models, is a lower bound. Reversing it would invalidate the argument."
+            note: "For a concave function, connecting segments lie below the curve, so the inequality reverses. This direction explains why the evidence lower bound bounds the value from below. That bound supports calculations in probabilistic models. Reversing the inequality would invalidate the argument."
             where:
               - sym: '\varphi'
                 is: "A convex function whose value between two points is no greater than the connecting straight segment"
@@ -5696,8 +5690,8 @@ topics:
               A constructive proof gives an example or a method for building one. This can
               require more work.
           - >-
-              A counting argument can instead show that more objects than available places
-              force at least one place to contain multiple objects.
+              Suppose there are more objects than available places. Then a counting argument shows
+              that at least one place contains multiple objects.
           - >-
               Alternatively, show that a random selection has a probability greater than 0 of
               succeeding. This proves that at least one successful object exists.
@@ -5714,7 +5708,7 @@ topics:
         math:
           - name: "The quantitative pigeonhole principle"
             tex: 'n \text{ items into } m \text{ slots} \;\Rightarrow\; \text{some slot holds} \ge \lceil n/m \rceil'
-            read: "At least one place contains at least the average number of objects per place, rounded up to a whole number."
+            read: "Divide the object count by the number of places and round up. At least one place contains this many objects."
             note: "This form counts how many objects at least one place must contain. It proves that no lossless compressor can shorten every input. It also explains why a layer with fewer neurons than features must represent some features together, which is called superposition."
             where:
               - sym: '\lceil \cdot \rceil'
@@ -5961,7 +5955,7 @@ topics:
         why: "Greedy methods, dynamic programming, and divide and conquer rely on different problem structure."
         beats:
           - >-
-              First identify the structure of the problem before choosing a method.
+              First identify the problem structure. Then choose a method.
           - >-
               If you can split it into independent halves, consider divide and conquer.
           - >-
@@ -5976,15 +5970,14 @@ topics:
               it, which is fast but needs a proof of correctness. Dynamic programming stores
               answers to repeated smaller problems so it does not solve them again.
           - >-
-              First ask whether different branches solve the same smaller problems. If they
-              do, memoisation, which saves each answer when first computed, can reduce an
-              exponential search to polynomial time when the number of distinct problems is
-              polynomial.
+              First ask whether different branches solve the same smaller problems. If so,
+              memoisation saves each answer when first computed. With polynomially many distinct
+              problems, this can reduce exponential repeated work to polynomial time.
         math:
           - name: 'The master theorem'
             tex: 'T(n) = a\, T(n/b) + f(n)'
             read: "Split the problem into a parts, each of size n divided by b. Total cost depends on the work in the smaller problems compared with the work that combines them."
-            note: "For merge sort, a equals two and b equals 2, while combining requires linear work. Therefore, total cost grows as n log n. Recognising this pattern avoids expanding every recursive call by hand."
+            note: "For merge sort, a and b both equal 2, while combining requires linear work. Therefore, total cost grows as n log n. This pattern avoids expanding every recursive call by hand."
             where:
               - sym: 'a'
                 is: "How many subproblems each split produces"
@@ -6389,23 +6382,24 @@ topics:
       - "Profile a training step and identify which parts consume its time."
 
   # ── Models ───────────────────────────────────────────────────────────────
+
   - id: operating-systems
     name: Operating Systems
     group: foundations
-    blurb: "Explain how one machine runs many programs at once, and what it costs when they compete."
+    blurb: "Explain how a machine runs many programs and what happens when they compete for resources."
     scope: "Study processes, scheduling, memory, synchronisation and storage. Use computer science for algorithms and data structures, and databases for durable data."
     links: [computer-science, databases]
     modules:
       - name: The kernel and its boundary
         math_optional: true
-        why: "The kernel is the only code with full control of the hardware, and every program reaches it through system calls."
+        why: "The kernel controls hardware. Programs request its services through system calls."
         plain:
           - >-
-              Programs run in user mode and cannot touch devices or other programs'
-              memory. The kernel runs in a privileged mode and can.
+              Programs run in user mode, which restricts access to devices and other programs'
+              memory. However, the kernel runs with permission to access them.
           - >-
-              A system call is the controlled door between them. Crossing it costs
-              time, which is why fast programs make fewer of them.
+              A system call lets a program request a kernel service. Each call takes time, so
+              reducing calls can improve performance.
         covers:
           - User mode and kernel mode
           - System calls and traps
@@ -6419,9 +6413,9 @@ topics:
           layers: [Applications, System call interface, Kernel, Hardware]
         beats:
           - "Applications live at the top, each in its own protected space."
-          - "They ask for anything privileged through system calls, a narrow and checked interface."
+          - "Applications request privileged operations through the system call interface, which checks access."
           - "The kernel schedules tasks, allocates memory and controls devices."
-          - "At the base is the hardware, which only the kernel may touch directly."
+          - "The kernel accesses the hardware directly."
       - name: Processes, threads and scheduling
         math_optional: true
         why: "A scheduler decides which ready process runs next, trading throughput against responsiveness."
@@ -6430,8 +6424,8 @@ topics:
               A process is a running program with its own memory. Threads share
               one process's memory and run within it.
           - >-
-              Each core runs 1 thread at a time, or a few with simultaneous multithreading.
-              The scheduler picks which, and each policy favours a different goal.
+              Each core runs 1 thread at a time, or a few with simultaneous multithreading. The
+              scheduler selects threads according to its policy and performance goals.
         covers:
           - Process states and the process control block
           - Threads, and what they share
@@ -6459,11 +6453,11 @@ topics:
         why: "Threads that share data need locks, and locks acquired in the wrong order can freeze a system."
         plain:
           - >-
-              A race condition happens when the result depends on the order threads
-              happen to run. Locks make a critical section run one thread at a time.
+              A race condition occurs when thread execution order affects the result. Locks restrict
+              a critical section, where shared data change, to one thread at a time.
           - >-
-              Deadlock needs 4 conditions at once. Break any one and it cannot
-              happen, which is what lock ordering and the Banker's algorithm do.
+              Deadlock requires 4 conditions together. Lock ordering prevents circular wait, while
+              the Banker's algorithm avoids states without a safe completion order.
         covers:
           - Race conditions and critical sections
           - Mutexes, semaphores and monitors
@@ -6490,8 +6484,8 @@ topics:
               Every address a program uses is virtual. The hardware translates it
               through a page table into a physical frame.
           - >-
-              When a page is not in memory, a page fault loads it from disk. If memory
-              is full, another page is evicted, and the policy decides which.
+              If a needed page is absent from memory, a page fault triggers its loading. When memory
+              is full, the replacement policy chooses a page to evict.
         covers:
           - Logical and physical addresses
           - Paging, page tables and the TLB
@@ -6505,19 +6499,19 @@ topics:
           steps: [Virtual address, TLB lookup, Page table, Physical frame]
         beats:
           - "A program uses a virtual address, split into a page number and an offset."
-          - "The TLB caches recent translations, so most lookups end here."
-          - "On a miss, the page table gives the frame, or signals a page fault."
-          - "The frame plus the offset is the physical address the memory sees."
+          - "The translation lookaside buffer (TLB) caches recent address translations. A cache hit avoids a page-table lookup."
+          - "On a TLB miss, the hardware checks the page table. An absent page triggers a page fault."
+          - "The frame address plus the offset gives the physical memory address."
       - name: Files and storage
         math_optional: true
-        why: "A file system turns a block device into named, durable files, and its design decides what survives a crash."
+        why: "A file system organises storage blocks into named files. Its design determines what survives a crash."
         plain:
           - >-
               A disk only stores numbered blocks. The file system keeps the map from
               names to blocks, plus which blocks are free.
           - >-
-              Disks are slow and crashes happen mid-write. Journaling and RAID trade
-              space and time for safety.
+              Storage is slow, and a crash can interrupt a write. Journaling supports recovery,
+              while RAID adds redundancy at a cost in storage and time.
         covers:
           - Directories, inodes and allocation
           - Free-space management
@@ -6533,7 +6527,7 @@ topics:
           - "Users see names, arranged in directories."
           - "Each name points to an inode, which records where the file's data lives."
           - "The data sits in fixed-size blocks, tracked as used or free."
-          - "The disk only understands block numbers. Everything above is the file system's bookkeeping."
+          - "The disk addresses blocks by number. The file system maps names and metadata to those blocks."
       - name: Virtualisation and protection
         math_optional: true
         why: "Virtual machines and containers isolate workloads on shared hardware at different costs."
@@ -6542,8 +6536,8 @@ topics:
               A virtual machine runs a whole operating system on a hypervisor. A
               container shares the host kernel and isolates only processes.
           - >-
-              The lighter the isolation, the faster it starts, and the more a kernel
-              bug can cross between tenants.
+              Containers generally start faster than virtual machines. However, sharing a kernel can
+              let a kernel bug affect several tenants.
         covers:
           - Hypervisors, type 1 and type 2
           - Containers, namespaces and control groups
@@ -6561,7 +6555,7 @@ topics:
             items: [Shared kernel, Lighter isolation, Fast to start]
         beats:
           - "A virtual machine brings its own kernel. A bug inside it rarely reaches the host."
-          - "A container shares the host's kernel. It starts in moments, but a kernel flaw is shared by every container."
+          - "A container shares the host's kernel and starts quickly. However, a host kernel flaw can affect every container."
     traps:
       - "Saying threads have their own memory"
       - "Confusing deadlock avoidance with prevention"
@@ -6572,20 +6566,22 @@ topics:
       - "Write a program with a race condition, then fix it with a mutex"
       - "Find a reference string where FIFO shows Belady's anomaly"
       - "Run the Banker's algorithm on paper for a small state, then change one number to make it unsafe"
+
   - id: databases
     name: Databases
     group: foundations
-    blurb: "Model data, query it correctly, and explain what the database guarantees when many users write at once."
+    blurb: "Model and query data correctly. Then explain database guarantees when many users write at once."
     scope: "Study data modelling, SQL, indexing, transactions and distribution. Use data engineering for pipelines and operating systems for storage below the database."
     links: [data-engineering, operating-systems]
     modules:
       - name: Modelling data
         math_optional: true
-        why: "An entity-relationship model fixes what the data means before any table exists."
+        why: "An entity-relationship model defines entities and their relationships before you create tables."
         plain:
           - >-
-              Entities are things, attributes describe them and relationships link
-              them. Cardinality says how many of each can relate.
+              Entities are the things represented in the data. Attributes describe them, and
+              relationships link them. Cardinality specifies how many entities can participate in
+              each relationship.
           - >-
               Keys identify rows. Integrity constraints stop the database from ever
               holding data that breaks the model.
@@ -6602,22 +6598,22 @@ topics:
           centre: A data model
           around: [Entities, Attributes, Relationships, Keys, Constraints]
         beats:
-          - "A model has 5 kinds of piece. Get them right and the tables follow."
+          - "A data model defines entities, attributes, relationships, keys and constraints. Use these 5 elements to design the tables."
           - "Entities are the things you store, such as students and courses."
           - "Attributes describe an entity, such as a name or a start date."
           - "Relationships link entities. Some carry attributes of their own, such as a grade."
           - "Keys pick out exactly one row, and foreign keys point from one table to another."
-          - "Constraints refuse data that breaks the rules, before it is ever written."
+          - "Constraints reject changes that would violate the data model."
       - name: Normalisation
         math_optional: true
         why: "Normal forms remove redundancy so that each fact is stored once and updates cannot contradict each other."
         plain:
           - >-
-              If the same fact is stored twice, one copy can be changed and the other
-              not. That is an update anomaly.
+              An update anomaly occurs when changing one copy of a fact leaves another copy
+              unchanged.
           - >-
-              Functional dependencies show which columns decide which. Normal forms
-              split tables until every dependency follows a key.
+              A functional dependency specifies which columns determine another value. Normalisation
+              uses these dependencies to split tables and reduce repeated facts.
         covers:
           - Functional dependencies
           - Insert, update and delete anomalies
@@ -6670,14 +6666,14 @@ topics:
           - "A full join keeps everything from both sides, matched where it can."
       - name: Indexes and B+ trees
         math_optional: true
-        why: "An index trades write cost and space for fast lookups, and the B+ tree is the default structure behind most of them."
+        why: "An index uses storage and adds write costs to speed up lookups. B+ trees commonly provide this structure."
         plain:
           - >-
-              Without an index, finding a row means scanning the table. A B+ tree
-              keeps keys sorted in wide, shallow nodes, so a lookup reads only a few.
+              Without an index, a lookup may scan the table. A B+ tree stores sorted keys in wide
+              nodes, keeping the tree shallow and limiting page reads.
           - >-
-              Its leaves are linked, so range queries walk sideways. Every insert
-              keeps the tree balanced by splitting full nodes.
+              Linked leaves let range queries read keys in order. Inserts split overflowing nodes to
+              keep the tree balanced.
         covers:
           - Primary and secondary indexes
           - B trees and B+ trees
@@ -6695,16 +6691,17 @@ topics:
           - k: Leaves
             items: [All keys in order, Links to the next leaf]
         beats:
-          - "A B+ tree keeps every key in its leaves and only guides the search above them."
+          - "A B+ tree stores all keys in its leaves. Internal nodes guide the search."
           - "Internal nodes hold separator keys that guide the search toward the right child. Each node fits in a disk page."
           - "The leaves hold all keys in sorted order, linked in a chain, so a range query walks along them."
       - name: Transactions and isolation
         math_optional: true
-        why: "Transactions make a group of changes all-or-nothing, and isolation levels decide which anomalies concurrent users can see."
+        why: "Transactions apply a group of changes completely or undo them. Isolation levels specify which effects concurrent transactions can observe."
         plain:
           - >-
-              ACID promises that a transaction happens completely or not at all, and
-              that concurrent transactions behave as if they ran in some order.
+              ACID covers atomicity, consistency, isolation and durability. Atomicity makes changes
+              all-or-nothing. Serializable isolation makes concurrent transactions behave as if they
+              ran in sequence.
           - >-
               Full isolation is expensive, so databases offer weaker levels. Each
               level allows specific anomalies, such as reading a row that later changes.
@@ -6726,7 +6723,7 @@ topics:
           - "Read uncommitted lets you see other transactions' unfinished changes."
           - "Read committed hides unfinished changes, but a row can change between 2 reads."
           - "Repeatable read keeps rows stable, but new rows can still appear."
-          - "Serializable behaves as if transactions ran one at a time. It is the safest and the slowest."
+          - "Serializable execution behaves as if transactions ran one at a time. Enforcing this guarantee can add coordination costs."
         scene:
           kind: sets
           cases:
@@ -6739,14 +6736,14 @@ topics:
           alt: "Which anomalies each isolation level still allows."
       - name: Scaling out
         math_optional: true
-        why: "Replication and sharding spread data across machines, and the CAP theorem limits what they can promise during a partition."
+        why: "Replication and sharding distribute data across machines. During a network partition, CAP limits consistency and availability guarantees."
         plain:
           - >-
               Replication copies data for safety and read speed. Sharding splits data
               so each machine holds only part of it.
           - >-
-              When the network splits, a system must choose between answering and
-              staying consistent. Most choose per operation.
+              During a network partition, a system must trade availability against consistency.
+              Systems can make this choice per operation.
         covers:
           - Replication, leader and follower
           - Sharding and choosing a shard key
@@ -6775,10 +6772,11 @@ topics:
       - "Insert 20 keys into a B+ tree in the simulator and predict each split first"
       - "Write a schedule that is not conflict serializable, then fix it"
       - "Explain a query plan for a join on your own data"
+
   - id: computer-networks
     name: Computer Networks
     group: foundations
-    blurb: "Trace a message from one machine to another, and explain what each layer adds and what it can lose."
+    blurb: "Trace a message between machines. Then explain what each network layer adds and where failures can occur."
     scope: "Study layers, addressing, routing, transport and application protocols. Use network and security for attacks on AI systems and operating systems for the host side."
     links: [network-and-security, operating-systems]
     modules:
@@ -6790,8 +6788,8 @@ topics:
               Each layer adds a header on the way down and removes it on the way up.
               The application never sees routers or cables.
           - >-
-              The OSI model has 7 layers; the internet in practice runs on 4 or 5.
-              The names matter less than knowing what each adds.
+              The OSI model has 7 layers, while practical internet models use 4 or 5. Explain what
+              each layer provides.
         covers:
           - The OSI model and the TCP/IP model
           - Encapsulation and headers
@@ -6811,7 +6809,7 @@ topics:
           - "Physical turns bits into signals on a wire or radio."
       - name: Addressing and subnets
         math_optional: true
-        why: "An IP address and prefix say which network a host is on, which decides whether traffic goes direct or to a router."
+        why: "An IP address and prefix identify the host network. This determines whether traffic goes directly or through a router."
         plain:
           - >-
               A prefix length, such as /24, says how many leading bits name the
@@ -6835,8 +6833,8 @@ topics:
           - k: Host bits
             items: [Unique per device, All zeros or all ones are reserved]
         beats:
-          - "The first bits, as many as the prefix says, are the same for every host on the subnet."
-          - "The remaining bits pick one host. All zeros names the network and all ones is the broadcast."
+          - "The prefix length specifies how many leading bits identify the subnet. Hosts on that subnet share those bits."
+          - "The remaining bits identify a host. In ordinary IPv4 subnets, all zeros identify the network and all ones identify broadcast."
       - name: Routing
         math_optional: true
         why: "Routers build forwarding tables from shortest paths, so each makes a local choice that adds up to a route."
@@ -6868,8 +6866,8 @@ topics:
         why: "TCP turns an unreliable network into a reliable, ordered stream, and controls how fast it sends."
         plain:
           - >-
-              TCP opens with a 3-way handshake, numbers every byte, and resends what
-              is not acknowledged. UDP skips all of this, so it starts at once and never waits for a resend.
+              TCP uses a 3-way handshake, numbers bytes and retransmits unacknowledged data. UDP
+              provides none of these mechanisms, so applications decide how to handle loss.
           - >-
               Congestion control grows the sending window until loss appears, then
               cuts it. That sawtooth is how the internet shares bandwidth.
@@ -6919,7 +6917,7 @@ topics:
           - "A frame arrives on a port."
           - "The switch notes that its source address lives on that port."
           - "It looks up the destination address in its table."
-          - "If it knows the port, it forwards there; if not, it floods every other port."
+          - "If the switch knows the destination port, it forwards the frame there. Otherwise, it floods the other ports."
       - name: Applications and quality of service
         math_optional: true
         why: "Application protocols sit on transport, and the network's latency, loss and jitter decide what they can do."
@@ -6958,16 +6956,17 @@ topics:
       - "Run Dijkstra by hand, then check it in the simulator"
       - "Capture a TCP handshake with a packet sniffer and label each field"
       - "Plot a congestion window over 20 rounds with 2 losses"
+
   - id: design-patterns
     name: Design Patterns and Refactoring
     group: systems
-    blurb: "Name the structure in a codebase, say which change it makes cheap, and reshape it without breaking behaviour."
+    blurb: "Identify a codebase's structure and explain which changes it supports. Then refactor it while preserving behaviour."
     scope: "Study the classic object-oriented patterns and the refactoring moves that lead to them. Use computer science for algorithms and MLOps for how code reaches production."
     links: [computer-science, mlops]
     modules:
       - name: Why patterns exist
         math_optional: true
-        why: "A pattern is a named answer to a recurring design problem, so a team can discuss structure in one word."
+        why: "A design pattern names a recurring problem and a reusable solution. The shared name helps teams discuss structure."
         plain:
           - >-
               The same design problems keep returning. You need to swap an algorithm,
@@ -6988,10 +6987,10 @@ topics:
           centre: A pattern
           around: [A recurring problem, A known solution, Its consequences, A shared name]
         beats:
-          - "Every pattern has the same 4 parts around it. Learn the parts and any new pattern is quick to read."
+          - "A pattern describes a recurring problem, a known solution, its consequences and a shared name."
           - "It starts from a problem that keeps coming back, in many codebases and languages."
-          - "The solution is a shape of classes and calls, a template to adapt to your own code."
-          - "Every solution has a price, usually more indirection. Use a pattern only when it saves more than it costs."
+          - "The solution describes how classes and calls relate. Adapt that structure to your code."
+          - "Patterns often add indirection, where calls pass through extra objects. Use a pattern when easier changes justify this cost."
           - "The name lets a team discuss the design in one word instead of redrawing the classes."
       - name: Creational patterns
         math_optional: true
@@ -7001,8 +7000,8 @@ topics:
               Code that builds objects and code that uses them change for different
               reasons. Mixing them means every new variant touches the caller.
           - >-
-              Creational patterns move construction behind one seam. A factory picks
-              the class, a builder assembles it in steps, and a prototype copies it.
+              Creational patterns separate construction from callers. A factory chooses the class, a
+              builder assembles the object, and a prototype supplies a copy.
         covers:
           - Factory Method
           - Abstract Factory
@@ -7023,7 +7022,7 @@ topics:
         beats:
           - "When the caller should not know the concrete class, a factory decides. An abstract factory decides a whole matching family at once."
           - "When an object needs many optional parts, a builder assembles it step by step and checks it before handing it over."
-          - "When building is expensive, copy a configured prototype. When exactly one must exist, a singleton guards it, and hides a global."
+          - "When construction is expensive, copy a configured prototype. A singleton restricts a class to one instance, but creates global access."
       - name: Structural patterns
         math_optional: true
         why: "Structural patterns connect objects so each part stays small and replaceable."
@@ -7062,11 +7061,12 @@ topics:
         why: "Behavioural patterns decide which object does what, and how objects communicate."
         plain:
           - >-
-              Most bugs in large systems come from unclear responsibility. Nobody knows
-              which object decides, or who needs to hear about a change.
+              Unclear responsibility can cause bugs in large systems. Specify which object makes
+              each decision and which objects need change notifications.
           - >-
-              Behavioural patterns assign that responsibility. A strategy owns an
-              algorithm, an observer is told about changes, a command is an action held as an object.
+              Behavioural patterns assign responsibility. A strategy supplies an algorithm, an
+              observer receives change notifications, and a command represents an action as an
+              object.
         covers:
           - Strategy and State
           - Observer
@@ -7087,7 +7087,7 @@ topics:
           - "Observers subscribe to changes in another object. A mediator coordinates communication between objects."
       - name: Code smells
         math_optional: true
-        why: "A smell is a surface sign that the design is making change expensive."
+        why: "A code smell is a visible sign that the design may make changes difficult."
         plain:
           - >-
               A smell is code that works but makes the next change harder than it
@@ -7110,10 +7110,10 @@ topics:
           stops: [Long function, Duplicated code, Feature envy, Shotgun surgery]
           'on': 3
         beats:
-          - "Some smells sit inside one function. A long function is the easiest to see and the easiest to fix."
+          - "Some smells occur within one function. A long function can often be split into smaller functions."
           - "Duplicated code spreads the same logic around, so a fix in one copy leaves the others wrong."
-          - "Feature envy is a function that uses another object's data more than its own. It probably belongs over there."
-          - "Shotgun surgery costs the most, because one change forces edits in many places."
+          - "Feature envy occurs when a function mainly uses another object's data. Consider moving the function to that object."
+          - "Shotgun surgery occurs when one change requires edits in many places, increasing the risk of inconsistent changes."
         scene:
           kind: sets
           cases:
@@ -7146,10 +7146,10 @@ topics:
           steps: [Tests pass, Make one small change, Run the tests, Commit, Repeat]
           loop: true
         beats:
-          - "Start green. If there are no tests, write a few that pin today's behaviour, even if it looks wrong."
+          - "Start with passing tests. If none exist, write tests that record current behaviour, even when it seems wrong."
           - "Make one small, named move, such as extracting a function or renaming a variable."
           - "Run the tests. If they fail, undo the step rather than debugging a large diff."
-          - "Commit. Each commit is a safe point, and a reviewer can read it in a minute."
+          - "Commit the verified change. Small commits are easier to review and undo."
           - "Repeat. The small steps add up to a large change, with the tests passing after every one."
         scene:
           kind: trace
@@ -7166,6 +7166,7 @@ topics:
       - "Replace an if-else chain over model names with a registry of strategies"
       - "Wrap a third-party client in an adapter, then swap in a fake for a test"
       - "Explain Observer and Mediator to a colleague with one example each"
+
   - id: transformers
     name: Transformers
     group: models
@@ -7180,9 +7181,9 @@ topics:
               Transform each token vector into three vectors called a query, a key, and a
               value.
           - >-
-              Then compare each query with every key using a dot product, which multiplies
-              corresponding entries and adds the results. The number of comparisons grows with
-              length squared.
+              Then compare each query with every key using a dot product. This multiplies
+              corresponding entries and adds the results. Therefore, the comparison count
+              grows with length squared.
           - >-
               Remove comparisons with positions the token must not use. In a decoder, these
               include all later positions.
@@ -7336,7 +7337,7 @@ topics:
           - name: 'The feed-forward network'
             tex: '\mathrm{FFN}(z) = W_{2}\, \varphi(W_{1} z + b_{1}) + b_{2}, \qquad W_{1} \in \mathbb{R}^{4d \times d}'
             read: "Expand each token vector to about four times its width, apply a nonlinear function, and reduce it to the original width."
-            note: "At a feed-forward width of four times the model width, these networks contain roughly 2/three of a block's weight parameters. Some interpretability studies describe them as key-value memories, but that account does not explain every behaviour."
+            note: "With feed-forward width four times the model width, these networks contain roughly two-thirds of a block's weight parameters. Some interpretability studies describe them as key-value memories. However, that account does not explain every behaviour."
             where:
               - sym: 'W_{1}'
                 is: "The widening projection"
@@ -7420,7 +7421,7 @@ topics:
               - sym: 'q'
                 is: "A query vector"
               - sym: 'k'
-                is: "An index identifying a class or a neighbour"
+                is: "A key vector"
         covers:
           - "Fixed sinusoidal positions and learned position vectors"
           - "Score biases based on relative position"
@@ -7534,9 +7535,9 @@ topics:
               An encoder reads all input positions together and is useful for assigning
               labels. A decoder generates one token at a time using only preceding tokens.
           - >-
-              For example, if you have 50000 labelled examples for one task, a small encoder
-              trained on those labels is often cheaper, faster, and more accurate than
-              prompting a large model.
+              For example, consider 50,000 labelled examples for one task. A small encoder
+              trained on them is often cheaper, faster and more accurate than prompting a
+              large model.
         math:
           - name: "Encoder, decoder, and encoder-decoder attention"
             tex: '\text{encoder: } p(z \mid x); \qquad \text{decoder: } p(x_{t} \mid x_{<t}); \qquad \text{encoder-decoder: } p(y \mid x)'
@@ -7599,8 +7600,8 @@ topics:
               usually requires substantial arithmetic. Decode generates new tokens one at a
               time and often spends more time moving data from memory.
           - >-
-              Therefore, a generating graphics processing unit, or GPU, can show 20%
-              utilisation while waiting for memory transfers. Processing several requests
+              Therefore, a graphics processing unit, or GPU, can show 20% utilisation during
+              generation while waiting for memory transfers. Processing several requests
               together can improve use of its arithmetic capacity.
         math:
           - name: '2 phases with different bottlenecks'
@@ -7742,7 +7743,7 @@ topics:
           - name: 'Mixing sources'
             tex: 'p_{\mathrm{mix}}(s) \propto n_{s}^{\varrho_{m}}, \qquad 0 \leq \varrho_{m} \leq 1'
             read: "Raise each source size to a chosen power, then use those values to set sampling probabilities. A smaller exponent gives smaller sources a greater share."
-            note: "An exponent of One samples in proportion to source size, while an exponent of 0 gives every source the same probability. This choice controls how much non-English text the model sees and can contribute to differences in how well later behaviour training works across languages."
+            note: "An exponent of 1 samples in proportion to source size. In contrast, 0 gives every source the same probability. This controls how much non-English text the model sees. Therefore, it can contribute to differences in later behaviour training across languages."
             where:
               - sym: 'n_{s}'
                 is: "How many tokens source s holds"
@@ -7810,7 +7811,7 @@ topics:
           - name: "Balancing model size and training data"
             tex: 'N_{\mathrm{tok}}^{\star} \approx 20\, |\theta|, \qquad \text{minimise } \mathcal{L} \text{ subject to } C \approx 6\,|\theta|\,N_{\mathrm{tok}}'
             read: "For a fixed training-compute budget, the Chinchilla estimate uses roughly 20 training tokens per model parameter."
-            note: "This estimate aims to minimise training loss for a fixed training budget. However, it does not minimise serving cost. A frequently used model may be trained on more data than this ratio suggests, because the training cost is paid once while inference costs continue with each request."
+            note: "This estimate aims to minimise training loss for a fixed training budget. However, it does not minimise serving cost. A frequently used model may therefore need more training data than this ratio suggests. Training costs occur once, while inference costs continue with each request."
             where:
               - sym: 'N_{\mathrm{tok}}^{\star}'
                 is: "The token count that minimises loss for the budget"
@@ -7966,7 +7967,7 @@ topics:
               - sym: '\succ'
                 is: "Is preferred to"
               - sym: '\sigma'
-                is: "A standard deviation, a measure of spread in the original units"
+                is: "The logistic function converting a score difference into a probability between 0 and 1"
           - name: 'The reinforcement learning objective'
             tex: '\max_{\pi} \; \mathbb{E}_{x, a \sim \pi}\big[r(x, a)\big] \;-\; \beta_{\mathrm{kl}}\, \mathrm{KL}\big(\pi \,\|\, \pi_{\mathrm{ref}}\big)'
             read: "Increase the reward score while penalising a large change from the reference model."
@@ -8328,9 +8329,9 @@ topics:
               label each token, or generate new text. Therefore, decide the output before
               choosing the method.
           - >-
-              If you have no labels, start with rules or a prompted model. Building a small
-              labelled set through active learning, where the model selects examples for
-              people to label, requires additional effort.
+              If you have no labels, start with rules or a prompted model. Alternatively,
+              build a small labelled set through active learning. The model selects examples
+              for people to label, which requires additional effort.
         math:
           - name: 'Sequence labelling with a transition score'
             tex: '\hat{y} = \arg\max_{y} \; \sum_{t} \big[ \psi(x_{t}, y_{t}) + \varsigma(y_{t-1}, y_{t}) \big]'
@@ -8584,7 +8585,7 @@ topics:
           type: parts
           centre: Why it is worse in this language
           around:
-          - Tokenizer cost
+          - "Tokeniser cost"
           - Training data volume
           - Script and code-switching
           - Benchmark coverage
@@ -8708,7 +8709,7 @@ topics:
                 is: "One input example"
           - name: 'Convolution output size'
             tex: 'H_{\mathrm{out}} = \left\lfloor \frac{H + 2P_{c} - \varkappa_{h}}{S_{c}} \right\rfloor + 1'
-            read: "Padding enlarges the input boundary, the kernel size determines the filter width, and the stride determines the spacing between output positions."
+            read: "Padding adds values around the input boundary. The kernel size sets the filter width, while stride sets the spacing between outputs."
             where:
               - sym: 'P_{c}'
                 is: "How many pixels of padding are added each side"
@@ -8837,8 +8838,8 @@ topics:
                 is: "The overlap score between 2 regions"
           - name: 'Mean average precision'
             tex: '\mathrm{mAP} = \frac{1}{K} \sum_{k=1}^{K} \int_{0}^{1} p_{k}(\varrho)\, \mathrm{d}\varrho'
-            read: "For each class, calculate the area under the precision-recall curve, which compares correctness among predictions with the share of objects found. Then average across classes."
-            note: "State the overlap threshold required for a predicted box to count as correct. A score at one loose threshold differs from a score averaged across several thresholds, so do not compare them as if they measured the same requirement."
+            read: "For each class, calculate the area under its precision-recall curve. This compares prediction correctness with the share of objects found. Then average the areas across classes."
+            note: "State the overlap threshold required for a predicted box to count as correct. A score at one loose threshold differs from a score averaged across several thresholds. Therefore, compare scores only when they measure the same requirement."
             where:
               - sym: 'p_{k}(\varrho)'
                 is: "The fraction of predicted class-k objects that are correct at the specified share of true objects found"
@@ -9084,7 +9085,7 @@ topics:
               data.
           - >-
               Frames from one video and tiles from one satellite scene can be near-duplicates.
-              A random split can place related images in both sets, so the reported score
+              A random split can place related images in both sets. Therefore, the score
               partly measures recognition of familiar content rather than generalisation to a
               new video or scene.
         math:
@@ -9177,10 +9178,10 @@ topics:
               - sym: 'f_{T}'
                 is: "The text encoder"
               - sym: 'g'
-                is: "A smooth function of the estimate, such as a ratio"
+                is: "The function combining the input representations"
           - name: 'A cross-attention bridge'
             tex: '\mathrm{Attn}\big(\mathbf{Q} = z^{T} W^{Q}, \; \mathbf{K} = z^{I} W^{K}, \; \mathbf{V} = z^{I} W^{V}\big)'
-            read: "Use text vectors as queries and image features as keys and values, so each text position receives a weighted combination of image information."
+            read: "Use text vectors as queries and image features as keys and values. Therefore, each text position receives a weighted combination of image information."
             note: "Reversing the direction makes image positions use text information instead. Therefore, the two directions give different model behaviour."
             where:
               - sym: 'W^{K}'
@@ -9457,7 +9458,7 @@ topics:
             read: "Add the probabilities of all valid ways the text labels could align with the audio. This avoids needing a marked start time for each sound."
             where:
               - sym: '\varpi'
-                is: "one alignment of labels to frames"
+                is: "One alignment of labels to frames"
               - sym: '\mathcal{A}(y)'
                 is: "Every alignment consistent with the transcript"
         covers:
@@ -9510,7 +9511,7 @@ topics:
               - sym: '\mathrm{R@}k'
                 is: "Recall at k"
               - sym: '\mathbf{1}\{\cdot\}'
-                is: "one when the condition holds and 0 otherwise"
+                is: "One when the condition holds and 0 otherwise"
         covers:
           - "Visual question answering (VQA), captioning, and retrieval benchmarks"
           - "MMMU-style reasoning tests and stricter versions that remove text-only answerable questions"
@@ -9631,7 +9632,7 @@ topics:
           - "The encoder outputs a vector containing hundreds or thousands of numbers."
           - "Treat the vector as a point in a numerical space. Then calculate distance to compare items according to the similarity learnt during training."
       - name: How embeddings get trained
-        why: "The training signal decides what similar ends up meaning."
+        why: "The training signal determines which relationships the embedding treats as similar."
         plain:
           - >-
               Training needs examples of which items should be similar. When explicit
@@ -9791,9 +9792,8 @@ topics:
         why: "Large vector datasets often require approximate indexes with settings that exchange search accuracy for speed."
         plain:
           - >-
-              Comparing a query with every stored vector can become too slow once there are
-              millions. A search index stores a structure that helps locate likely matches
-              without checking everything.
+              Comparing a query with millions of stored vectors can become too slow.
+              Therefore, an index helps locate likely matches without checking every vector.
           - >-
               Approximate indexes exchange some recall for speed. Recall measures the fraction
               of exact nearest neighbours they find. They can return most matches much faster
@@ -9935,6 +9935,7 @@ topics:
       - "Measure recall at 10 before and after changing the index type."
       - "Plot similarities between vector pairs and check whether their directions occupy a narrow cone."
       - "Cut off input beyond the model's length limit and measure the resulting retrieval loss."
+
   - id: edge-ai
     name: Edge AI
     group: systems
@@ -10003,7 +10004,7 @@ topics:
           - name: 'Distillation'
             tex: '\mathcal{L} = (1 - \varrho_{d})\, \mathcal{L}_{\mathrm{CE}}(y, \hat{p}) \;+\; \varrho_{d}\, \tau^{2}\, \mathrm{KL}\big(p^{\mathrm{T}}_{\tau} \,\|\, \hat{p}_{\tau}\big)'
             read: "Train the student model to match the teacher model's full probability distribution, rather than only its highest-probability label."
-            note: "A teacher can assign some probability to related alternatives, such as lynx when the label is cat. A hard label instead assigns 1 to the chosen class and 0 to the others. Temperature controls how concentrated these probabilities are. The temperature-squared factor helps keep gradient magnitudes, which determine training updates, comparable."
+            note: "A teacher may assign probability to related alternatives, such as lynx when the label is cat. In contrast, a hard label assigns 1 to the chosen class and 0 elsewhere. Temperature controls how concentrated these probabilities are. The temperature-squared factor keeps gradient sizes, which set training updates, comparable."
             where:
               - sym: 'p^{\mathrm{T}}_{\tau}'
                 is: "The teacher distribution at temperature tau"
@@ -10172,7 +10173,7 @@ topics:
           - name: "Arithmetic intensity, or calculations per byte"
             tex: '\mathcal{A} = \frac{\text{FLOPs}}{\text{bytes moved}}'
             read: "Compare the number of calculations per byte read with the device's calculation and memory limits. This identifies whether arithmetic or memory transfer limits speed."
-            note: "The roofline model compares these two hardware limits. Below the device's ratio of arithmetic speed to memory speed, the calculation is memory-bound, meaning that data transfer limits it. Faster arithmetic alone will not help; changing batch size can improve data reuse."
+            note: "The roofline model compares arithmetic and memory-transfer limits. Below the device's ratio of arithmetic speed to memory speed, data transfer limits the calculation. This is called memory-bound operation. Faster arithmetic alone will not help. However, changing batch size can improve data reuse."
             where:
               - sym: '\mathcal{A}'
                 is: "The number of arithmetic operations per byte read"
@@ -10281,6 +10282,7 @@ topics:
       - "Run a model on a phone and time the first token, then repeat after 10 minutes."
       - "Find one operation that falls back to the CPU and replace or remove it."
       - "Write a rule for choosing local or remote inference, including behaviour without a connection."
+
   - id: image-generation
     name: Image Generation
     group: models
@@ -10314,7 +10316,7 @@ topics:
           - name: 'What the network is trained to do'
             tex: '\mathcal{L} = \mathbb{E}_{x_{0}, \varepsilon, t}\Big[\big\| \varepsilon - \varepsilon_{\theta}(x_{t}, t) \big\|^{2}\Big]'
             read: "Predict the noise added to the image so that subtracting the prediction removes noise."
-            note: "Predicting noise, the clean image, or velocity gives three versions of the same objective. They differ in how they weight errors at different noise levels, rather than the underlying information they learn."
+            note: "Predicting noise, the clean image or velocity gives three forms of the same objective. However, they weight errors differently across noise levels while learning the same underlying information."
             where:
               - sym: '\varepsilon_{\theta}'
                 is: "The noise predicted by the network"
@@ -10589,7 +10591,7 @@ topics:
         math:
           - name: 'Frechet inception distance'
             tex: '\mathrm{FID} = \|\mu_{r} - \mu_{g}\|^{2} + \mathrm{tr}\big(\Sigma_{r} + \Sigma_{g} - 2(\Sigma_{r}\Sigma_{g})^{1/2}\big)'
-            read: "Compare real and generated image features using their average values and covariances, which describe how features vary together."
+            read: "Compare real and generated image features using their means and covariances. Covariances describe how features vary together."
             note: "FID assumes Gaussian feature distributions, whose shape is described by their means and covariances. However, the score also depends on the feature extractor and sample size. Therefore, values from different papers are not directly comparable when their evaluation pipelines differ."
             where:
               - sym: '\mu_{r}'
@@ -10636,6 +10638,7 @@ topics:
       - "Compare pairs of generated images on 30 prompts before trusting an automated score"
 
   # ── Judgement ────────────────────────────────────────────────────────────
+
   - id: uncertainty-estimation
     name: Uncertainty Estimation
     group: judgement
@@ -10699,7 +10702,7 @@ topics:
           - Every outcome is equally likely
           'on': 2
       - name: What kind of uncertainty
-        why: "Separating the sources of uncertainty helps you decide whether to collect data, improve the model, or avoid answering."
+        why: "Separating uncertainty sources helps you choose an action. You might collect data, improve the model, or avoid answering."
         beats:
           - >-
               Researchers distinguish two sources of uncertainty because each requires a
@@ -10794,7 +10797,7 @@ topics:
           - name: 'The set of distributions still allowed'
             tex: '\mathcal{P} = \left\{ p \; : \; p(S) \geq \underline{p}(S) \quad \forall S \subseteq \Theta \right\}'
             read: "Keep every probability distribution that satisfies the lower probability limit for every event."
-            note: "The allowed distributions form a credal set. It is convex, meaning that a mixture of allowed distributions is also allowed, and closed, meaning that it contains its limiting distributions. However, this set is more complex than a single probability vector, which is sufficient for many decisions."
+            note: "The allowed distributions form a credal set. It is convex, so mixtures of allowed distributions are also allowed. It is also closed, so it contains its limiting distributions. However, this set is more complex than a single probability vector. One vector is sufficient for many decisions."
             where:
               - sym: '\mathcal{P}'
                 is: "The credal set containing every allowed probability distribution"
@@ -10854,7 +10857,7 @@ topics:
           - name: 'Expected calibration error'
             tex: '\mathrm{ECE} = \sum_{m=1}^{M_{b}} \frac{|B_{m}|}{N} \Big| \mathrm{acc}(B_{m}) - \mathrm{conf}(B_{m}) \Big|'
             read: "Group predictions by confidence and measure the difference between average confidence and accuracy within each group."
-            note: "The result depends on how you form the groups and does not indicate the direction of the mismatch. It can approach 0 when overconfidence and underconfidence cancel within a group, even if different regions are poorly calibrated. Therefore, also show a reliability diagram, which plots confidence against accuracy."
+            note: "The result depends on how you form the groups. Moreover, it does not show the mismatch's direction. Overconfidence and underconfidence can cancel within a group, giving a value near 0. Different regions may still be poorly calibrated. Therefore, also show a reliability diagram plotting confidence against accuracy."
             where:
               - sym: 'B_{m}'
                 is: "The group of predictions in confidence interval m"
@@ -10929,9 +10932,9 @@ topics:
               calibration.
         plain:
           - >-
-              Recalibration adjusts confidence without changing the ordering of predictions.
-              Temperature scaling divides the raw scores by 1 positive constant, chosen using
-              data that the model did not see during training.
+              Recalibration adjusts confidence without changing prediction order. Temperature
+              scaling divides the raw scores by 1 positive constant. Choose that constant using
+              data the model did not see during training.
           - >-
               This adjustment is inexpensive and can work well. However, it can fail when the
               pattern of new inputs changes because the fitted constant describes the earlier
@@ -10940,7 +10943,7 @@ topics:
           - name: 'Temperature scaling'
             tex: '\hat{p} = \mathrm{softmax}\!\left(\frac{o}{\tau}\right), \qquad \tau^{\star} = \arg\min_{\tau} \; \mathcal{L}_{\mathrm{NLL}}\big(\mathrm{val}\big)'
             read: "Fit 1 positive constant using separate calibration data to make all predicted probabilities flatter or more concentrated."
-            note: "Temperature scaling preserves prediction order, accuracy, and AUC, a metric based on ordering positive cases above negative cases. Therefore, it is a useful first adjustment. However, it cannot fix confidence that is high on the wrong examples."
+            note: "Temperature scaling preserves prediction order, accuracy, and AUC. AUC measures how well scores order positive cases above negative cases. Therefore, scaling is a useful first adjustment. However, it cannot fix confidence that is high on the wrong examples."
             where:
               - sym: 'o'
                 is: "The logits, which are raw class scores before conversion to probabilities"
@@ -10991,19 +10994,17 @@ topics:
           alt: "The diagram shows prediction sets expanding from one label for an easy input to four possible labels for a harder input."
         plain:
           - >-
-              Conformal prediction returns a set of possible answers. Coverage is the
-              proportion of cases where this set contains the true answer. For example, with
-              90% coverage, the set should contain the true answer at least 9 times out of 10
-              across many cases.
+              Conformal prediction returns a set of possible answers. Coverage is the proportion
+              of cases where this set contains the true answer. For example, 90% coverage means
+              inclusion at least 9 times out of 10 across repeated cases.
           - >-
               However, this guarantee averages over inputs and does not promise coverage for a
-              particular input. New data must also satisfy the same exchangeability assumption
-              as the calibration data, meaning that their joint behaviour does not depend on
-              the order of the examples.
+              particular input. New and calibration data must jointly satisfy exchangeability.
+              This means their joint behaviour does not depend on the order of the examples.
         math:
           - name: 'The guarantee'
             tex: 'p\big(y \in C(x)\big) \geq 1 - \alpha'
-            read: "With a target of 90% coverage, the prediction set contains the true answer at least 90% of the time across cases, regardless of the underlying model."
+            read: "Assume calibration and future examples are exchangeable, with the finite-sample threshold defined below. Then coverage is at least 90%, averaged over calibration and future draws. This holds regardless of the underlying model."
             note: "The guarantee needs exchangeability, meaning that the joint behaviour of the examples does not depend on their order. It does not need a correct model. However, coverage averages over inputs and can hold overall while failing for a subgroup, which motivates further research."
             where:
               - sym: 'C(x)'
@@ -11014,7 +11015,7 @@ topics:
                 is: "Is a member of"
           - name: 'How the threshold is found'
             tex: '\hat{\varrho} = \mathrm{Quantile}\left(\frac{\lceil (n_{c}+1)(1-\alpha) \rceil}{n_{c}}; \; \{s_{i}\}\right), \qquad C(x) = \{ y : s(x, y) \leq \hat{\varrho} \}'
-            read: "Score the calibration examples, choose the required quantile, and include every label whose score is at or below the cut-off."
+            read: "Score the calibration examples. Then choose the required quantile. Include every label whose score is at or below the cut-off."
             note: "The added one supplies the finite-sample correction. Therefore, the guarantee applies with the available number of examples instead of only as the sample becomes indefinitely large."
             where:
               - sym: 's_{i}'
@@ -11090,10 +11091,10 @@ topics:
               uncertainty nearby, but it does not describe other possible solutions.
         plain:
           - >-
-              To estimate uncertainty about the model itself, you can train several models,
-              run predictions with dropout, or measure curvature near the fitted solution.
-              Dropout randomly switches off units, while curvature measures how quickly the
-              loss or posterior changes around a solution.
+              Several methods estimate uncertainty about the model itself. Train several models,
+              run predictions with dropout, or measure curvature near the fitted solution. Dropout
+              randomly switches off units. Meanwhile, curvature measures how quickly loss or
+              posterior density changes around a solution.
           - >-
               However, these estimates cost computation when you serve predictions. An
               ensemble, a group of models whose predictions you combine, works well but
@@ -11146,8 +11147,8 @@ topics:
         why: "Selective prediction uses uncertainty to decide which cases to answer and which to pass to someone else."
         beats:
           - >-
-              Abstain on the least confident cases to increase accuracy on the cases you
-              answer.
+              Abstaining on the least confident cases can improve accuracy on retained cases.
+              Check that improvement on the task.
           - >-
               Answering every case accepts more errors. Therefore, use the cost of a mistake
               to choose the confidence threshold.
@@ -11162,9 +11163,9 @@ topics:
               An uncertainty estimate is useful when it changes an action. Often the action is
               abstention, which means declining to answer.
           - >-
-              When you abstain on the least confident cases, accuracy on the remaining cases
-              rises. Plot how the error rate changes with the proportion answered. After that,
-              choose a threshold using the cost of a mistake.
+              Abstaining on the least confident cases can improve accuracy on the remaining cases.
+              Check whether it does on your task. Then plot error rate against the proportion
+              answered. After that, choose a threshold using the cost of a mistake.
         math:
           - name: 'The risk-coverage curve'
             tex: '\mathrm{cov}(\varsigma) = p\big(c(x) \geq \varsigma\big), \qquad \mathrm{risk}(\varsigma) = \mathbb{E}\big[\ell \;\big|\; c(x) \geq \varsigma\big]'
@@ -11226,7 +11227,7 @@ topics:
         math:
           - name: 'Length-normalised sequence confidence'
             tex: '\mathrm{conf}(a) = \exp\!\left(\frac{1}{|a|} \sum_{t} \log p_{\theta}(a_{t} \mid a_{<t})\right)'
-            read: "Average the information content per token so that answer length alone does not make a long answer appear less certain."
+            read: "Average the information content per token. This prevents answer length alone from making a long answer appear less certain."
             note: "Token probability reflects fluency and does not directly measure truth. Semantic entropy groups sampled answers by meaning before measuring their spread. It can track correctness more closely, but verify this on the task."
             where:
               - sym: '|a|'
@@ -11239,7 +11240,7 @@ topics:
                 is: "The confidence assigned to the complete answer"
           - name: 'Semantic entropy'
             tex: '\mathcal{H}_{\mathrm{sem}} = -\sum_{g} p(g) \log p(g), \qquad p(g) = \sum_{a \in g} p(a)'
-            read: "Generate several answers, group those with the same meaning, and measure how probability is spread across the groups."
+            read: "Generate several answers. Then group answers with the same meaning. Measure how probability is spread across the groups."
             note: "This distinguishes one answer phrased in 10 ways from 10 different answers. The first case indicates agreement in meaning, whereas the second indicates uncertainty. However, token-level entropy can treat the two cases alike."
             where:
               - sym: 'g'
@@ -11374,8 +11375,8 @@ topics:
               However, to identify a cause, change those values and measure whether the
               behaviour changes.
           - >-
-              Activation patching performs this intervention. Run 1 unchanged input and 1
-              altered input, copy an intermediate value between the runs, and check whether
+              Activation patching tests this causal effect. Run 1 unchanged input and 1
+              altered input. Then copy an intermediate value between runs and check whether
               the answer changes.
         math:
           - name: 'Activation patching'
@@ -11586,8 +11587,8 @@ topics:
               Steering adds a direction during the forward pass. It requires no retraining and
               can be switched off.
           - >-
-              Editing changes weights to alter a specific fact. This change is permanent,
-              although its effects transfer to related questions less well than they initially
+              Editing changes weights to alter a specific fact. The change is permanent.
+              However, its effects transfer to related questions less well than they first
               appear to.
           - >-
               Fine-tuning updates many weights. It is the most effective option, although its
@@ -11678,7 +11679,7 @@ topics:
               - sym: '\hat{c}'
                 is: "The probe's predicted probability that the property is present"
               - sym: '\sigma'
-                is: "A standard deviation, a measure of spread in the original units"
+                is: "The logistic function converting a score into a probability between 0 and 1"
         covers:
           - "Specify the evidence needed for a safety argument based on interpretability"
           - "Detect deception and awareness of the model's situation"
@@ -11920,7 +11921,7 @@ topics:
             - The goal was measured badly
           - k: Goal misgeneralisation
             items:
-            - The goal was learned narrowly
+            - The goal was learnt narrowly
           - k: Sycophancy
             items:
             - Agreement got rewarded
@@ -12067,9 +12068,8 @@ topics:
           alt: "The model answers clear cases and declines to answer uncertain cases."
         plain:
           - >-
-              A model that declines to answer uncertain cases is safer than one that
-              confidently gives wrong answers. Calibration checks whether its confidence can
-              support this choice.
+              Declining uncertain answers can reduce harm from confident errors. Calibration checks
+              whether confidence can support this choice.
           - >-
               However, a model update can change the relationship between confidence and
               errors. Test that relationship again before reusing the same decision rule.
@@ -12127,9 +12127,9 @@ topics:
               releases, and independent audits. These practices connect the paper to decisions
               about actual use.
           - >-
-              Open weights means releasing the model's learned parameters. Researchers
-              disagree about the benefits and risks. Therefore, state the strongest argument
-              on each side before explaining your position.
+              Open weights means releasing the model's learnt parameters. Researchers disagree about
+              the benefits and risks. Therefore, state the strongest argument on each side before
+              explaining your position.
         math:
           - name: 'A safety case, in the shape a regulator expects'
             tex: '\text{claim} \;\leftarrow\; \text{argument} \;\leftarrow\; \text{evidence}, \qquad \text{stated with its assumptions}'
@@ -12409,9 +12409,8 @@ topics:
               State where the result applies and where it has not been tested.
         plain:
           - >-
-              A reader should be able to find the result, its supporting
-              evidence, and the conditions under which it holds. Put each
-              figure or table near the claim it helps establish.
+              Readers need the result, its evidence and the conditions where it holds. Therefore,
+              place each figure or table near the claim it supports.
           - >-
               A limitation states what the study has not established. Explain
               how a later test could address it without weakening the result
@@ -12520,20 +12519,20 @@ topics:
   - id: north-star-metrics
     name: North Star Metrics
     group: judgement
-    blurb: "Choose the one number a product team steers by, break it into inputs teams can move, and defend it against the ways it misleads."
+    blurb: "Choose a metric for customer value. Then identify inputs teams can influence and checks that detect misleading improvements."
     scope: "Study how a product metric is chosen, decomposed and guarded. Use frequentist statistics for experiments and MLOps for monitoring models in production."
     links: [frequentist-statistics, mlops]
     modules:
       - name: What a north star metric is
         math_optional: true
-        why: "One shared top-line metric lines up every team's priorities behind the value customers get."
+        why: "A shared outcome metric helps teams align priorities with customer value."
         plain:
           - >-
               A north star metric is the number a company aligns its priorities around.
               It measures the value customers get from the product.
           - >-
-              It is an output. No team moves it directly. Teams move inputs, and the
-              north star is how you know whether those inputs mattered.
+              The north star measures an outcome. Teams change its inputs, then check whether those
+              changes improve the outcome.
         covers:
           - The top-line metric priorities align around
           - Value delivered to customers
@@ -12546,10 +12545,10 @@ topics:
           type: stack
           layers: [North star metric, Input metrics, Team projects, Daily decisions]
         beats:
-          - "At the top, one number everyone can name. It says whether customers are getting value."
+          - "The north star is a shared measure of customer value."
           - "Below it are the inputs that drive it. Teams can move these directly."
           - "Each team picks projects aimed at its input, and can explain the link upward."
-          - "At the base, daily decisions. When 2 good ideas compete, the north star breaks the tie."
+          - "Use the north star to compare daily decisions. When 2 ideas compete, assess their likely effect on customer value."
       - name: Six kinds of north star
         math_optional: true
         why: "Most north stars fall into 6 categories, and each suits a different way of making money."
@@ -12574,11 +12573,11 @@ topics:
           around: [Revenue, Customer growth, Consumption, Engagement, Growth efficiency, User experience]
         beats:
           - "Six kinds cover many common business models. Some use 2, but they rarely use more."
-          - "Revenue is the most common. It is also spiky and hard for any one team to move."
+          - "Revenue is the most common category. However, it can fluctuate sharply and be difficult for one team to influence."
           - "Customer growth counts paying users or market share."
           - "Consumption measures the core action, such as rides, nights booked or messages sent."
-          - "Engagement counts how often people come back, as daily or monthly actives."
-          - "Growth efficiency matters when growth is bought, so margins and payback lead."
+          - "Engagement counts returning users, such as daily or monthly active users."
+          - "When acquiring customers costs money, growth efficiency measures margins and how quickly acquisition costs are recovered."
           - "User experience leads when the product wins on quality, measured by satisfaction."
         scene:
           kind: sets
@@ -12623,11 +12622,11 @@ topics:
           - "If money comes from seats or plans, count the accounts getting value, such as weekly active paid users."
       - name: Inputs teams can move
         math_optional: true
-        why: "No team can move the north star directly, so each team owns an input that drives it."
+        why: "Give each team an input metric it can influence and link that input to the north star."
         plain:
           - >-
-              Break the north star into the few quantities that multiply or add up to it.
-              This is a metric tree.
+              A metric tree links an outcome to its inputs. Decompose the north star into quantities
+              that add or multiply, where an exact relationship exists.
           - >-
               Give each input an owner. A team can then ship a change, watch its input
               move, and check whether the north star followed.
@@ -12650,13 +12649,13 @@ topics:
           - k: Conversion
             items: [Search to request]
         beats:
-          - "Put the north star at the root. Every branch below should add to it or multiply into it."
+          - "Put the north star at the root and link branches to its inputs. Distinguish exact calculations from hypothesised influences."
           - "The rider side depends on attracting new riders and increasing rides from existing riders."
           - "On the driver side, more available drivers and shorter pickup times help more requests become rides."
           - "Conversion links the two sides by measuring the share of searches that become booked rides."
       - name: When the metric misleads
         math_optional: true
-        why: "Any single number can be gamed, or can crowd out the value it was meant to track."
+        why: "Optimising one metric can encourage gaming or reduce the customer value it was meant to measure."
         plain:
           - >-
               When a measure becomes a target, people find ways to raise it without
@@ -12680,7 +12679,7 @@ topics:
         beats:
           - "At first the metric and the value move together. That is why it was chosen."
           - "Under pressure, cheap ways to raise the number appear, such as notifications that bring people back without helping them."
-          - "Push far enough and the number rises while the value falls. Guardrails are how you notice."
+          - "The metric can rise while customer value falls. Guardrail metrics track unwanted effects so teams can detect this."
         scene:
           kind: trace
           steps: [Choose a metric, Optimise it, Number rises, Users leave]
@@ -12708,10 +12707,10 @@ topics:
           type: flow
           steps: [Offline model metric, Online proxy, Input metric, North star]
         beats:
-          - "Start with the offline score. It tells you the model is better at the task you trained it on."
+          - "An improved offline score shows better performance on the evaluation task. Check whether that improvement transfers to production."
           - "An online proxy, such as clicks, checks that users behave differently in production."
           - "The proxy should move an input metric that a team owns, such as rides per rider."
-          - "Only then does the north star move. Any link in this chain can break, and an experiment is how you find which."
+          - "The input should affect the north star. However, any link can fail, so test each relationship experimentally."
     traps:
       - "Choosing revenue by default and then finding no team can move it"
       - "Choosing a metric teams cannot influence within a quarter"
@@ -12722,6 +12721,7 @@ topics:
       - "Draw a metric tree from daily actives down to changes one team could ship"
       - "Describe how a team could raise your chosen metric while hurting users"
       - "Design an A/B test whose primary metric is an input and whose guardrail is the north star"
+
   - id: prompt-engineering
     name: Prompt Engineering
     group: judgement
@@ -12756,7 +12756,7 @@ topics:
           - name: "How the context affects an answer"
             tex: 'p\big(a \mid \text{instruction}, \text{examples}, \text{query}\big)'
             read: "Every part of the context can affect the answer, so remove material that conflicts with or distracts from the task."
-            note: "A prompt changes the probabilities of possible continuations rather than guaranteeing obedience like a program instruction. This helps explain why examples, context and wording affect the output."
+            note: "A prompt changes the probabilities of possible continuations. It cannot guarantee obedience. Therefore, examples, context and wording can change the output."
             where:
               - sym: 'a'
                 is: "The answer being scored"
@@ -13004,9 +13004,9 @@ topics:
               Without one, a successful recent example can make a change look better than it
               is.
           - >-
-              Start with 30 examples before editing the prompt, then change one thing at a
-              time. Keep the examples as a regression suite, which checks whether later
-              changes or model upgrades break behaviour that previously worked.
+              Before editing the prompt, write 30 evaluation examples. Then change one thing at a
+              time. Keep these examples as regression tests that check previously working behaviour
+              after later changes or model upgrades.
         math:
           - name: "Sample size for detecting an improvement"
             tex: 'n \;\approx\; \frac{\big(z_{1-\alpha/2} + z_{1-\beta}\big)^{2}\, \bar{p}(1 - \bar{p})}{\Delta^{2}} \times 2'
@@ -13153,6 +13153,7 @@ topics:
       - "Try to redirect your own system through instructions placed in untrusted content."
 
   # ── Systems ──────────────────────────────────────────────────────────────
+
   - id: agentic-ai
     name: Agentic AI
     group: systems
@@ -13271,13 +13272,12 @@ topics:
               and their types. The model reads the schema and description as part of its
               prompt, so their wording affects its choices.
           - >-
-              Most agent failures involve tools. Therefore, start with clear names and
-              descriptions, and write error messages that explain what to change on the next
-              attempt.
+              Tool failures can interrupt agent tasks. Therefore, use clear names and descriptions.
+              Write errors that explain what to change on the next attempt.
         math:
           - name: 'A tool call as a typed function'
             tex: '\mathrm{tool} : \mathcal{S}_{\mathrm{in}} \to \mathcal{S}_{\mathrm{out}}, \qquad a_{t} = \big(\mathrm{name}, \; \mathrm{args} \in \mathcal{S}_{\mathrm{in}}\big)'
-            read: "The model selects a tool name and supplies arguments that must satisfy the input schema."
+            read: "The model selects a tool and supplies arguments. The arguments must satisfy the input schema."
             note: "Most tool-use failures involve constructing arguments rather than choosing the tool. Therefore, a precise error that explains how to correct the arguments can help more than a longer description."
             where:
               - sym: '\mathcal{S}_{\mathrm{in}}'
@@ -13334,7 +13334,7 @@ topics:
         math:
           - name: 'What the context is worth carrying'
             tex: '\max \; \sum_{r} u_{r} \, b_{r} \quad \text{subject to} \quad \sum_{r} c_{r} \, b_{r} \leq T_{\max}'
-            read: "Choose useful items under a fixed context limit, like a knapsack problem that selects valuable items within a capacity limit."
+            read: "Choose useful items within the context limit. This resembles a knapsack problem, which selects valuable items subject to a capacity limit."
             note: "Compare usefulness per token. Keep summaries that preserve needed information and remove less useful items before shortening the remaining context."
             where:
               - sym: 'u_{r}'
@@ -13382,9 +13382,9 @@ topics:
               Planning divides a large task into parts small enough to check. Control sets the
               time and money available for the entire run.
           - >-
-              Moreover, fixing the plan before reading untrusted content supports security. It
-              prevents injected instructions from redefining a task that the agent has already
-              fixed.
+              Moreover, fixing the authorised plan before reading untrusted content supports
+              security. Enforce that plan outside the model so injected instructions cannot redefine
+              the task.
         math:
           - name: 'Searching over plans'
             tex: '\hat{\varrho} = \arg\max_{\varrho \in \mathcal{P}} \; V(\varrho), \qquad |\mathcal{P}| \text{ grows exponentially with depth}'
@@ -13738,8 +13738,8 @@ topics:
         why: "Serving must meet latency and throughput targets within a compute budget."
         beats:
           - >-
-              Batch scoring groups predictions into scheduled jobs. It is cheapest per
-              prediction, but the results may be hours old.
+              Batch scoring groups predictions into scheduled jobs. It can reduce cost per
+              prediction, but results may be hours old.
           - >-
               Micro-batching groups requests for a short time. This adds a little waiting time
               while improving hardware use.
@@ -13844,7 +13844,7 @@ topics:
           - name: "What shadow and canary releases test"
             tex: '\text{shadow: no user impact}; \quad \text{canary: } \varrho_{c} \text{ of traffic}; \quad \text{blue-green: instant switch and rollback}'
             read: "Shadow and canary deployments test different failures. Also measure how quickly the service can return to the previous model."
-            note: "Shadow mode can reveal crashes and slower responses, but it does not directly test how users respond to new outputs because they do not see them. Choose each release stage according to the failure it is meant to detect."
+            note: "Shadow mode can reveal crashes and slower responses. However, users do not see its outputs, so it cannot directly test their response to them. Choose each release stage according to the failure it is meant to detect."
             where:
               - sym: '\varrho_{c}'
                 is: "The share of traffic sent to the new version"
@@ -14110,9 +14110,9 @@ topics:
               distributes this work across machines. A shuffle, which moves rows between
               machines, is often the slowest part.
           - >-
-              Data skew means the work is distributed unevenly. For example, one key may
-              contain most rows, leaving one machine busy while the others wait. Therefore,
-              inspect per-task sizes and times when a stage is slow.
+              Data skew means workers receive unequal amounts of work. For example, one key may
+              contain most rows, keeping one machine busy while others wait. Therefore, inspect task
+              sizes and times when a stage is slow.
         math:
           - name: 'Why a skewed join stalls'
             tex: 't_{\mathrm{stage}} = \max_{r} \; t_{r} \; \text{, not} \; \frac{1}{n_{\mathrm{part}}}\sum_{r} t_{r}'
@@ -14166,10 +14166,10 @@ topics:
               A streaming system handles events as they arrive, but events can be late, out of
               order or duplicated. The calculations must account for these cases.
           - >-
-              A watermark indicates how far the system has progressed through event time and
-              helps decide when to close a window. A strict lateness allowance can exclude
-              valid late events. A generous allowance keeps results open longer, so choose it
-              according to the application's accuracy and timing needs.
+              A watermark tracks progress through event time and helps decide when to close a
+              window. A strict lateness allowance can exclude valid late events. However, a generous
+              allowance delays final results. Choose it according to the application's accuracy and
+              timing needs.
         math:
           - name: "Event time and processing time"
             tex: '\text{watermark}(t) = \max\big(\text{event times seen}\big) - \delta_{\mathrm{late}}'
@@ -14773,3 +14773,4 @@ topics:
       - "Draw a threat model for one of your services."
       - "Audit a real project's dependencies and prioritise the security findings."
       - "Write an example prompt injection that would exploit your own agent."
+

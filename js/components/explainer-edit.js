@@ -19,10 +19,10 @@
   var tipper, busy = false;
 
   var PAGES = [
-    { t: 'Ask the model a what-if question', parts: [], body: '<p>A trained network labels this image. Paint over part of it and the pixels are filled from their surroundings, then the network labels the edited image. If the label changes, the part you removed mattered.</p>' },
+    { t: 'Ask the model a what-if question', parts: [], body: '<p>A trained network labels this image. Paint over a region to fill it with values from surrounding pixels. Then the network labels the edited image. A changed label shows sensitivity to that edit.</p>' },
     { t: 'Erase and compare', parts: ['image', 'scores'], body: '<p>Drag across the image to erase. The table compares the top 5 classes before and after. A large drop from a small edit means the model leaned on that region.</p>' },
     { t: 'Find the regions it relies on', parts: ['occ'], body: '<p><b>Find what matters</b> hides one 8 by 8 patch at a time, 225 positions in all, and records how much the chosen class loses. Red areas are the ones the model depends on for that class.</p>' },
-    { t: 'What this can and cannot show', parts: [], body: '<p>Occlusion measures sensitivity, meaning how much the score drops when a patch is hidden. A patch can matter because it holds the object, or because the grey square itself looks like something else to the model. Try several classes before trusting a story.</p>' }
+    { t: 'What this can and cannot show', parts: [], body: '<p>Occlusion hides a patch and measures how much the class score falls. The patch may contain the object. Alternatively, the replacement grey square may resemble something else to the model. Compare several classes before interpreting the result.</p>' }
   ];
 
   function top5(probs) {
@@ -141,7 +141,7 @@
       '<button type="button" class="xp-go is-inline" data-occ>Find what matters</button></div>' +
       '<div class="xp-stage"><div class="xp-edit">' +
       '<figure class="xp-edit-img" data-part="image"><figcaption>Original</figcaption><canvas data-cv="orig" width="64" height="64"></canvas></figure>' +
-      '<figure class="xp-edit-img is-main" data-part="image occ"><figcaption>Edited: drag to erase</figcaption><canvas data-cv="cur" width="64" height="64" tabindex="0" aria-label="Edited image; drag with the mouse or a finger to erase part of it"></canvas><p class="xp-note xp-edit-occ" aria-live="polite"></p></figure>' +
+      '<figure class="xp-edit-img is-main" data-part="image occ"><figcaption>Edited image. Drag to erase</figcaption><canvas data-cv="cur" width="64" height="64" tabindex="0" aria-label="Edited image; drag with the mouse or a finger to erase part of it"></canvas><p class="xp-note xp-edit-occ" aria-live="polite"></p></figure>' +
       '<div class="xp-edit-side" data-part="scores"><p class="xp-edit-labels" aria-live="polite"></p><div class="xp-edit-scores" tabindex="0" role="region" aria-label="Class probabilities. Scroll sideways if needed."></div></div>' +
       '</div></div>';
     Array.prototype.forEach.call(host.querySelectorAll('.xp-thumbs canvas'), function (cv, i) { draw(cv, TV.decode(model.samples[i].rgb)); });

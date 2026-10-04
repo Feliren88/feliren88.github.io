@@ -861,7 +861,7 @@
     panel.setAttribute('aria-label', 'Reading settings');
     panel.innerHTML =
       '<h2>Reading</h2>' +
-      '<p>Set this page up so it is comfortable to read. Your choices are remembered.</p>' +
+      '<p>Adjust the page so it is comfortable to read. This browser saves your settings.</p>' +
       '<div class="rd-row"><label for="rd-scale">Text size</label>' +
       '<input type="range" id="rd-scale" min="0.9" max="1.6" step="0.05"></div>' +
       '<div class="rd-row"><label for="rd-lead">Space between lines</label>' +
@@ -978,8 +978,8 @@
         if (left > 0) return;
         clearTimer(true);
         out.textContent = timerKind === 'break'
-          ? 'Break finished. Pick a different module and recall one idea.'
-          : 'Round finished. Take a break before continuing.';
+          ? 'Your break has finished. Choose another module. Then recall 1 idea.'
+          : 'Your study round has finished. Take a break before continuing.';
       }
 
       choices.forEach(function (button) {
@@ -995,7 +995,7 @@
       });
       stop.addEventListener('click', function () {
         clearTimer(true);
-        out.textContent = 'Timer stopped. Pick a round when you are ready.';
+        out.textContent = 'The timer has stopped. Choose a round when you are ready.';
       });
     }
 

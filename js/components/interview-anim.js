@@ -187,11 +187,11 @@
         }, s);
       },
       beats: [
-        { step: 'Five words in', say: 'The input contains five words. Each starts with its own representation.' },
+        { step: 'Five words in', say: 'The input contains 5 words. Each starts with its own representation.' },
         { step: 'Each becomes a vector', say: 'The model represents each word as a vector, a list of numbers.' },
         {
           step: 'Compare every pair',
-          say: 'The model compares a query vector from each word with key vectors from the other words.',
+          say: 'The model compares each word\'s query vector with key vectors from other words.',
           apply: function (root) {
             $$('.an-cell', root).forEach(function (c) { c.classList.add('is-on'); });
           }
@@ -224,7 +224,7 @@
         },
         {
           step: 'Normalise each row',
-          say: 'Then the model converts each row to weights that add up to one.',
+          say: 'Then the model converts each row to weights that add up to 1.',
           apply: function (root) {
             $$('.an-dot', root).forEach(function (d) {
               var r = +d.getAttribute('data-r'), c = +d.getAttribute('data-c');
@@ -275,7 +275,7 @@
       },
       beats: [
         { say: 'This curve shows the prior, your belief before seeing these observations. Its width represents uncertainty.' },
-        { say: 'Next, six observations arrive. Their values lie mostly to the right of the prior centre.' },
+        { say: 'Next, 6 observations arrive. Their values lie mostly to the right of the prior centre.' },
         { say: 'The likelihood shows which parameter values best explain these observations.' },
         { say: 'Combining the prior and likelihood gives the posterior. Here, it is narrower and closer to the observations.' },
         { say: 'More observations usually give the likelihood more influence. A concentrated prior can have more influence than a broad prior.' }
@@ -337,7 +337,7 @@
       },
       beats: [
         { say: 'The horizontal axis shows the confidence the model assigns to its predictions.' },
-        { say: 'The diagonal shows perfect calibration. Among predictions with seventy per cent confidence, seventy per cent should be correct.' },
+        { say: 'The diagonal shows perfect calibration. Among predictions with 70% confidence, 70% should be correct.' },
         { say: 'This example lies below the diagonal. The model is correct less often than its confidence suggests.' },
         { say: 'The vertical gap shows overconfidence. Even the most confident predictions include more errors than expected.' },
         { say: 'Temperature scaling divides the model scores by one fitted number. Here, it brings confidence closer to accuracy.' },
@@ -498,11 +498,11 @@
       },
       beats: [
         { step: 'Start with the grid', say: 'Start with the original grid. Its coordinates locate every point in the plane.' },
-        { step: 'Name the two arrows', say: 'The two arrows are basis vectors. One points right and the other points up, and combinations of them locate other points.' },
+        { step: 'Name the two arrows', say: 'The 2 arrows are basis vectors. One points right and the other points up. Combining them locates other points.' },
         { step: 'Apply the matrix', say: 'Next, apply the matrix. This transformation keeps lines straight and leaves the origin in place.' },
         { step: 'Read the columns', say: 'The columns tell you where the two basis vectors moved. Together, they determine the transformation.' },
-        { step: 'The unit square', say: 'The original basis vectors form a square with area one.' },
-        { step: 'The determinant', say: 'After the transformation, the square becomes a parallelogram. The determinant gives the area scale, with a sign indicating orientation.' },
+        { step: 'The unit square', say: 'The original basis vectors form a square with area 1.' },
+        { step: 'The determinant', say: 'After the transformation, the square becomes a parallelogram. The determinant\'s magnitude gives the area scale. Its sign indicates orientation.' },
         { step: 'Put it together', say: 'Therefore, knowing where the basis vectors move tells you where every other point moves.' }
       ]
     },
@@ -552,13 +552,13 @@
         { step: 'Slide closer', say: 'Next, move the second point closer to the first.' },
         { step: 'Closer again', say: 'As the gap shrinks, the line slope approaches a particular value in this example.' },
         { step: 'The limit', say: 'That limiting value is the derivative, the rate of change at the first point.' },
-        { step: 'That is the derivative', say: 'A derivative exists when this slope approaches the same value as the gap shrinks from either side.' }
+        { step: 'That is the derivative', say: 'A derivative exists when this slope approaches the same finite value from either side.' }
       ]
     },
 
     /* ── Frequentist: what a confidence interval promises ─────── */
     intervals: {
-      title: 'What "95% confident" actually means',
+      title: 'What 95% confidence means',
       lead: 'Twenty studies, twenty intervals. Count how many miss.',
       build: function () {
         var truth = 250, s = '';
@@ -583,9 +583,9 @@
       beats: [
         { step: 'The real value', say: 'The horizontal line marks the true parameter value. In a real study, that value is usually unknown.' },
         { step: 'Run one study', say: 'One study produces a confidence interval. Without knowing the true value, you cannot tell whether this interval contains it.' },
-        { step: 'Run twenty', say: 'Now imagine repeating the same study twenty times. Different samples produce different intervals.' },
-        { step: 'Count the misses', say: 'One interval in this illustration misses the true value. A 95% procedure covers it in about 95% of repeated studies.' },
-        { step: 'What it does not say', say: 'The coverage rate describes the procedure across repeated studies. It does not assign a probability to the fixed parameter in one realised interval.' }
+        { step: 'Run twenty', say: 'Now imagine repeating the same study 20 times. Different samples produce different intervals.' },
+        { step: 'Count the misses', say: 'Here, 1 interval misses the true value. Under its assumptions, a 95% procedure covers the parameter in about 95% of repetitions.' },
+        { step: 'What it does not say', say: 'Coverage describes the procedure across repeated studies. It does not give a probability for the fixed parameter inside this particular interval.' }
       ]
     },
 
@@ -612,11 +612,11 @@
           'aria-label': 'Three fits through the same points, one too simple and one too complex' }, s);
       },
       beats: [
-        { step: 'The data', say: 'The eight measurements contain a pattern and some random variation.' },
+        { step: 'The data', say: 'The 8 measurements contain a pattern and some random variation.' },
         { step: 'Too simple', say: 'A straight line cannot follow the curved pattern. This model is too simple for these data.' },
         { step: 'About right', say: 'The smoother curve follows the main pattern without passing through every measurement.' },
-        { step: 'Too complex', say: 'The complex curve passes through all eight measurements. Its training error is zero.' },
-        { step: 'The test', say: 'However, it predicts the new point poorly. This is overfitting, fitting training details that do not carry over to new data.' }
+        { step: 'Too complex', say: 'The complex curve passes through all 8 measurements. Its training error is 0.' },
+        { step: 'The test', say: 'However, it predicts the new point poorly. The model has fitted training details that do not carry over to new data. This is overfitting.' }
       ]
     },
 
@@ -735,8 +735,8 @@
         { step: 'One function, three branches', say: 'A training function branches on the model type. Every new model means editing it again.' },
         { step: 'Pin the behaviour', say: 'Before moving anything, make sure tests cover each branch.' },
         { step: 'Extract each branch', say: 'Move each branch into its own class with the same method. This is the Strategy pattern.' },
-        { step: 'Look it up', say: 'The caller asks a registry for the right strategy instead of branching. A new model then needs a new class and no other edits.' },
-        { step: 'Behaviour unchanged', say: 'The tests still pass. The structure changed and the behaviour did not, which is what defines a refactoring.' }
+        { step: 'Look it up', say: 'The caller asks a registry for the strategy. To add a model, create its strategy class and register it.' },
+        { step: 'Behaviour unchanged', say: 'The tests still pass. Refactoring changes code structure while preserving its behaviour.' }
       ]
     },
 
@@ -769,11 +769,11 @@
           'aria-label': 'A north star metric broken into three input metrics, each owned by a team, with guardrails below' }, s);
       },
       beats: [
-        { step: 'The north star', say: 'A ride-hailing company steers by rides taken. It counts the job customers hire the product for.' },
-        { step: 'Break it into inputs', say: 'Rides come from new riders, from existing riders riding more, and from enough drivers online to serve them.' },
-        { step: 'Give each an owner', say: 'Each input belongs to one team. The team can ship a change and see its input move within weeks.' },
-        { step: 'Add guardrails', say: 'Some things must not get worse while rides rise: cancellations, wait times, what drivers earn.' },
-        { step: 'Read the result', say: 'If rides rise and a guardrail breaks, the metric was gamed. Report the two together.' }
+        { step: 'The north star', say: 'A ride-hailing company tracks completed rides. This count measures how often customers use its main service.' },
+        { step: 'Break it into inputs', say: 'Completed rides depend on new riders, returning riders and available drivers.' },
+        { step: 'Give each an owner', say: 'Assign each input to a team. Then measure how the team\'s changes affect that input.' },
+        { step: 'Add guardrails', say: 'As rides increase, also monitor cancellations, wait times and driver earnings. These measures protect service quality.' },
+        { step: 'Read the result', say: 'More rides can coincide with worse service. Therefore, report rides alongside cancellations, wait times and driver earnings.' }
       ]
     },
 
@@ -801,12 +801,12 @@
           'aria-label': 'A round robin Gantt chart where 4 processes take turns on one CPU' }, s);
       },
       beats: [
-        { step: 'A ready queue', say: '4 processes are ready, and there is one CPU.' },
+        { step: 'A ready queue', say: 'There are 4 ready processes and 1 CPU.' },
         { step: 'A short slice each', say: 'P1 runs for its time slice, then goes to the back of the queue.' },
         { step: 'The next in line', say: 'P2 and P3 get their turns. P3 is short, so it finishes inside its slice.' },
         { step: 'Around again', say: 'P1 returns for another slice, then P4 gets its first.' },
         { step: 'Until all finish', say: 'The cycle repeats until every process is done.' },
-        { step: 'The trade-off', say: 'Nobody waits long for a first turn. The price is extra switching, and longer total time for long jobs.' }
+        { step: 'The trade-off', say: 'In this example, each process gets a first turn quickly. However, switching takes time and can delay completion.' }
       ]
     },
 
@@ -836,7 +836,7 @@
         { step: 'A full leaf', say: 'This leaf holds as many keys as a node allows.' },
         { step: 'One more key', say: 'Inserting 25 would overflow it.' },
         { step: 'Split in two', say: 'The leaf splits into 2 half-full leaves, still linked in order.' },
-        { step: 'Push a key up', say: 'The first key of the right leaf is copied up as a separator. The tree grows at the root, so every leaf stays at the same depth.' }
+        { step: 'Push a key up', say: 'Copy the right leaf\'s first key into its parent as a separator. Splits can reach the root. Leaves stay at the same depth.' }
       ]
     },
 
@@ -860,9 +860,9 @@
       },
       beats: [
         { step: 'The request', say: 'The browser writes an HTTP request, and the layers below handle its delivery.' },
-        { step: 'Add ports', say: 'TCP wraps it with ports and sequence numbers: a segment.' },
-        { step: 'Add addresses', say: 'IP wraps that with source and destination addresses: a packet.' },
-        { step: 'Add the next hop', say: 'Ethernet wraps it for the next device on the local network: a frame.' },
+        { step: 'Add ports', say: 'TCP adds ports and sequence numbers. The resulting unit is a segment.' },
+        { step: 'Add addresses', say: 'Then IP adds source and destination addresses, forming a packet.' },
+        { step: 'Add the next hop', say: 'Ethernet adds information for the next device on the local network. The resulting unit is a frame.' },
         { step: 'Unwrap on the way', say: 'Each router strips and replaces only the outer frame. The request inside arrives untouched.' }
       ]
     },
@@ -942,7 +942,7 @@
       },
       beats: [
         { step: 'Two towers', say: 'One encoder converts images to vectors. Another converts captions to vectors. Training teaches them to represent matching content similarly.' },
-        { step: 'One space', say: 'Both encoders produce vectors in the same space, so the system can compare an image with a caption.' },
+        { step: 'One space', say: 'Both encoders produce vectors in a shared space. Therefore, the system can compare images with captions.' },
         { step: 'Pull the pairs', say: 'Training increases similarity between each image and its matching caption.' },
         { step: 'Push the rest', say: 'It also reduces similarity for other pairs in the batch. A larger batch provides more such comparisons.' },
         { step: 'What you get', say: 'After training, captions can retrieve matching images. Text descriptions can also help classify images into new categories.' }
@@ -1163,7 +1163,7 @@
         { step: 'Each becomes a point', say: 'An encoder converts each sentence to a vector, a list of numbers represented here as a point.' },
         { step: 'Measure the distance', say: 'The search system compares those vectors using a distance or similarity measure.' },
         { step: 'They cluster', say: 'In this illustration, questions about the same subject lie close together. The plotted questions did not need category labels.' },
-        { step: 'Why it works', say: 'To search, encode a new question and find nearby vectors. The usefulness of those matches depends on the encoder and the chosen measure.' }
+        { step: 'Why it works', say: 'To search, encode a new question. Then find nearby vectors. Match quality depends on the encoder and distance measure.' }
       ]
     },
 
@@ -1194,7 +1194,7 @@
         { step: 'Too big', say: 'The original model needs more memory than the example phone can provide.' },
         { step: 'Distil', say: 'Distillation trains a smaller model to match a larger model. Here, this gives the largest reduction but requires additional training.' },
         { step: 'Prune', say: 'Pruning removes weights or components. Removing whole channels can reduce work on hardware that supports the smaller structure.' },
-        { step: 'Quantise', say: 'Quantisation stores values with fewer bits. Changing from sixteen to eight bits halves the storage for those values.' },
+        { step: 'Quantise', say: 'Quantisation stores values with fewer bits. Changing from 16 to 8 bits halves storage for those values.' },
         { step: 'It fits', say: 'The smaller model now fits in this example. Check accuracy, latency, and memory on the actual device after each change.' }
       ]
     },
@@ -1237,7 +1237,7 @@
           'aria-label': 'Noise being removed step by step until a shape appears' }, s);
       },
       beats: [
-        { step: 'Pure noise', say: 'The process starts with random noise. The model has learnt image patterns during training, but this initial sample is not an image.' },
+        { step: 'Pure noise', say: 'The process starts with random noise. The trained model uses learnt image patterns to guide later updates.' },
         { step: 'Predict the noise', say: 'In this example, the model predicts the noise component at the current step.' },
         { step: 'Take some off', say: 'The sampler uses that prediction to reduce the noise. Some image structure begins to appear.' },
         { step: 'Again', say: 'Next, repeat the update at a lower noise level.' },
@@ -1261,7 +1261,7 @@
           'aria-label': 'A long prompt where the middle is used least' }, s);
       },
       beats: [
-        { say: 'The example prompt contains fourteen documents. One of them contains the answer.' },
+        { say: 'The example prompt contains 14 documents. One contains the answer.' },
         {
           say: 'When the relevant document is first, this example shows strong use of its information.',
           apply: function (root) {
@@ -1353,8 +1353,8 @@
         { say: 'Each dot is one random observation. One observation gives little evidence about the population mean.' },
         { say: 'Next, calculate the running average. With only a few observations, it can vary widely.' },
         { say: 'The individual observations remain variable, while their average becomes more stable as the sample grows.' },
-        { say: 'Under the usual independent, finite-variance assumptions, the standard error decreases as one divided by the square root of the sample size.' },
-        { say: 'Therefore, one hundred times as many observations gives one tenth of the standard error under these assumptions.' }
+        { say: 'Assume independent observations from the same distribution with finite variance. The standard error measures variation in the sample mean. Divide the distribution\'s standard deviation by the square root of sample size.' },
+        { say: 'Under these assumptions, 100 times as many observations reduces the standard error to one tenth.' }
       ]
     },
 
@@ -1390,8 +1390,8 @@
       beats: [
         { say: 'Each domino represents a statement about one integer. There are infinitely many integers to cover.' },
         { say: 'First, prove the base case, the statement for the starting integer.' },
-        { say: 'Next, prove that if the statement holds for an arbitrary integer, it also holds for the next integer.' },
-        { say: 'Together, the base case and this induction step prove the statement for every integer from the starting value onwards.' },
+        { say: 'Next, take an arbitrary integer in the stated range. Assume the claim holds there. Then prove it for the next integer.' },
+        { say: 'Together, the base case and induction step prove the claim for every integer from the starting value onwards.' },
         { say: 'Without the base case, the induction step has no established starting point.' }
       ]
     },

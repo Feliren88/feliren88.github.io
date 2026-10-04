@@ -114,11 +114,11 @@
 
   var PAGES = [
     { t: 'Two networks in a contest', parts: [], body: '<p>The <b>generator</b> turns random noise into points. The <b>discriminator</b> scores each point as real data or fake. Each network trains against the other. Press play and watch the fakes, in purple, move onto the real data, in green.</p>' },
-    { t: 'The discriminator’s view', parts: ['heat'], body: '<p>The background is the discriminator’s answer everywhere on the plane. Green regions it calls real, purple regions it calls fake. It is trained to separate the two sets it is shown.</p>' },
-    { t: 'The generator’s gradients', parts: ['arrows'], body: '<p>Each arrow shows the direction that would make the discriminator believe that fake point more. The generator follows these arrows. They are its only information about the real data.</p>' },
-    { t: 'How noise is folded', parts: ['grid'], body: '<p>The mesh is a grid of noise values after the generator has transformed them. Watch it stretch and fold to lay the noise over the shape of the data.</p>' },
+    { t: 'The discriminator’s view', parts: ['heat'], body: '<p>The background shows the discriminator’s prediction across the plane. It labels green regions as real and purple regions as fake. Training teaches it to separate the two sets shown.</p>' },
+    { t: 'The generator’s gradients', parts: ['arrows'], body: '<p>Each arrow points towards a higher discriminator score for that generated point. The generator follows these directions. They provide its only training information about the real data.</p>' },
+    { t: 'How noise is folded', parts: ['grid'], body: '<p>The mesh shows a grid of noise values transformed by the generator. Watch it stretch and fold towards the data’s shape.</p>' },
     { t: 'Losses do not converge', parts: ['loss'], body: '<p>A GAN has no single loss going down. When one network improves, the other’s loss rises. Training aims for a balance between the 2 networks, and the curves keep oscillating even when the samples look right.</p>' },
-    { t: 'Break it on purpose', parts: [], body: '<p>Raise the generator’s learning rate far above the discriminator’s, or pick <b>Four corners</b>. Fakes often pile onto one mode and ignore the others. That failure is <b>mode collapse</b>.</p>' }
+    { t: 'Break it on purpose', parts: [], body: '<p>Raise the generator’s learning rate far above the discriminator’s, or choose <b>Four corners</b>. Generated points often collect in one cluster and miss the others. This failure is called <b>mode collapse</b>.</p>' }
   ];
 
   function reset() {

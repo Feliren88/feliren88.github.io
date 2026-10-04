@@ -89,11 +89,11 @@
   };
 
   var PAGES = [
-    { t: 'Every router runs the same search', tab: 'route', parts: ['graph'], body: '<p>Each router knows the whole map and its link costs. It runs <b>Dijkstra’s algorithm</b>. At each step it settles the closest unsettled router, then checks whether going through that router shortens the path to its neighbours.</p>' },
+    { t: 'Every router runs the same search', tab: 'route', parts: ['graph'], body: '<p>Each router knows the network map and link costs. It runs <b>Dijkstra’s algorithm</b> to find shortest paths. Each step finalises the nearest unfinished router. Then it checks whether paths through that router shorten the distances to its neighbours.</p>' },
     { t: 'Only the first hop is stored', tab: 'route', parts: ['table'], body: '<p>A router’s forwarding table keeps only the next hop for each destination. The next router makes its own choice.</p>' },
     { t: 'TCP probes for capacity', tab: 'tcp', parts: ['cwnd'], body: '<p>TCP cannot see the network’s capacity, so it probes. In <b>slow start</b> the window doubles every round trip. Above the threshold it grows by 1 per round trip.</p>' },
-    { t: 'Loss is the signal', tab: 'tcp', parts: ['cwnd'], body: '<p>A <b>triple duplicate ACK</b> halves the window. A <b>timeout</b> is worse news and resets it to 1. The sawtooth is how many connections share one link fairly.</p>' },
-    { t: 'Network bits and host bits', tab: 'ip', parts: ['bits'], body: '<p>The prefix length says how many leading bits name the network. Change the prefix and watch the split between network and host bits move, and the range of usable addresses change with it.</p>' }
+    { t: 'Loss is the signal', tab: 'tcp', parts: ['cwnd'], body: '<p>A <b>triple duplicate ACK</b> indicates loss and halves the window in this model. A <b>timeout</b> resets it to 1. This repeated growth and reduction helps connections share bandwidth.</p>' },
+    { t: 'Network bits and host bits', tab: 'ip', parts: ['bits'], body: '<p>The prefix length specifies how many leading bits identify the network. Change the prefix. Then observe the network and host bits and the usable address range.</p>' }
   ];
 
   function routeView() {
@@ -124,7 +124,7 @@
       '<div class="xp-net-route"><svg viewBox="0 0 640 280" data-part="graph" role="img" aria-label="Network of 6 routers with link costs; numbers above each router are its current distance from ' + S.src + '">' + s + '</svg>' +
       '<div data-part="table"><table class="xp-table is-compact"><caption>' + S.src + '’s forwarding table' + (k < steps.length ? ', when finished' : '') + '</caption><thead><tr><th scope="col">Destination</th><th scope="col">Next hop</th><th scope="col">Cost</th></tr></thead><tbody>' +
       NODES.filter(function (n) { return n !== S.src; }).map(function (n) { return '<tr><th scope="row">' + n + '</th><td>' + (hops[n] || '–') + '</td><td>' + R.dist[n] + '</td></tr>'; }).join('') + '</tbody></table>' +
-      '<p class="xp-os-sum" aria-live="polite">' + (k === 0 ? 'Start: only ' + S.src + ' has a known distance, 0.' : 'Step ' + k + ': settled <b>' + st.settled + '</b> at distance ' + st.dist[st.settled] + ', then relaxed its links.') + '</p></div></div>';
+      '<p class="xp-os-sum" aria-live="polite">' + (k === 0 ? 'Initially, only ' + S.src + ' has a known distance, 0.' : 'Step ' + k + ', finalised <b>' + st.settled + '</b> at distance ' + st.dist[st.settled] + ', then checked paths through its links.') + '</p></div></div>';
   }
 
   function tcpView() {
@@ -138,7 +138,7 @@
         tabindex: 0, role: 'button', 'aria-label': 'Round ' + r.round + ', window ' + r.cwnd + (r.event ? ', ' + (r.event === 'loss' ? 'triple duplicate ACK' : 'timeout') : '') + '. Enter toggles a loss, Shift and Enter a timeout.' });
       s += XP.svgEl('text', { x: X(r.round), y: H - 12, 'text-anchor': 'middle', 'class': 'xp-cv-small' }, String(r.round));
     });
-    return '<div class="xp-ctl"><span class="xp-note">Select a round on the chart, or focus it and press Enter, to toggle a loss there; hold Shift for a timeout.</span>' +
+    return '<div class="xp-ctl"><span class="xp-note">Select a chart round to toggle a loss, or focus it and press Enter. Hold Shift to toggle a timeout.</span>' +
       '<label class="xp-field"><span>Initial threshold</span><input type="range" min="4" max="32" value="' + S.ssthresh + '" data-ss><output>' + S.ssthresh + '</output></label></div>' +
       '<div class="xp-net-tcp"><ol class="xp-net-hs" aria-label="TCP handshake"><li><b>SYN</b> client → server, seq = x</li><li><b>SYN-ACK</b> server → client, seq = y, ack = x + 1</li><li><b>ACK</b> client → server, ack = y + 1</li><li>Data flows, sending at most <b>cwnd</b> segments per round trip</li></ol>' +
       '<figure data-part="cwnd"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Congestion window over ' + S.rounds + ' round trips">' + s + '</svg>' +

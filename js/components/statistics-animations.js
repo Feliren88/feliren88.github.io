@@ -87,7 +87,7 @@
         F('Inputs',['Observed mean','Known deviation'],[10,2],12),F('Standard error',['2 / √16'],[.5],1),
         F('Interval margin',['1.96 × 0.5'],[.98],1),F('Interval endpoints',['Lower','Sample mean','Upper'],[9.02,10,10.98],12)]},
       {title:'Calculate a two-sided normal-test p-value',steps:[
-        'Test a null population mean of 10 using 16 independent normal observations with known standard deviation 2.',
+        'Assume 16 independent normal observations with known standard deviation 2. Test a null population mean of 10.',
         'An observed mean of 11 gives a standardised distance of 2, as the displayed calculation shows.',
         'Under the null, the standardised mean follows a standard normal distribution. Count both tails beyond ±2.',
         'The two-sided p-value is approximately 0.0455. It is a tail probability under the null, without assigning a probability to the null claim.'],frames:[
@@ -112,7 +112,7 @@
         'Assume severe cases make up 80% of the treatment group and 20% of the comparison group.',
         'Within severe cases, success rates are 0.4 versus 0.3. Within mild cases, they are 0.8 versus 0.7.',
         'Weight by each group’s observed severity mix. The crude rates become 0.48 and 0.62.',
-        'Equal severity weights give adjusted rates 0.6 and 0.5. For a causal interpretation, no unmeasured cause may affect both treatment choice and outcome. Both treatments must also be possible within each group, with consistent treatment definitions.'],frames:[
+        'Equal severity weights give adjusted rates 0.6 and 0.5. A causal interpretation requires no unmeasured cause affecting both treatment choice and outcome. Also, both treatments must be possible within each group. Moreover, treatment definitions must be consistent.'],frames:[
         F('Fraction of severe cases',['Treatment','Comparison'],[.8,.2],1),
         F('Within-group success rate',['Severe treatment','Severe comparison','Mild treatment','Mild comparison'],[.4,.3,.8,.7],1),
         F('Crude success rate',['Treatment','Comparison'],[.8*.4+.2*.8,.2*.3+.8*.7],1),

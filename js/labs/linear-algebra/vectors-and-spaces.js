@@ -70,8 +70,8 @@
     var dlg = XP.dialog(root);
 
     ctl.innerHTML =
-      '<label hidden>turn <input type="range" data-k="yaw" min="-3.1" max="3.1" step="0.02" aria-label="Turn the 3D view"></label>' +
-      '<label hidden>tilt <input type="range" data-k="pitch" min="-1.2" max="1.2" step="0.02" aria-label="Tilt the 3D view"></label>' +
+      '<label hidden>Turn <input type="range" data-k="yaw" min="-3.1" max="3.1" step="0.02" aria-label="Turn the 3D view"></label>' +
+      '<label hidden>Tilt <input type="range" data-k="pitch" min="-1.2" max="1.2" step="0.02" aria-label="Tilt the 3D view"></label>' +
       '<button type="button" data-act="paint">Paint the span</button>' +
       '<button type="button" data-act="basis" aria-pressed="false">Basis grid</button>' +
       '<button type="button" data-act="u" aria-pressed="false">Show u</button>' +
@@ -209,7 +209,7 @@
       }
       dlg.open('Coordinates in both bases', ('<p>Here '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-12", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-14", undefined, true)+') and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+' = ('+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-13", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-15", undefined, true)+').</p>') + table(rows) + (c ?
         ('<p>In the basis '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+', '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+', the same point is (') + fmt(c[0]) + ', ' + fmt(c[1]) + ').</p>' :
-        ('<p>The determinant is 0, so '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+' share a line. They are no basis, and coordinates in them are not unique.</p>')), btn);
+        ('<p>The determinant is 0, so '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-6", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/vectors-and-spaces/worked-7", undefined, true)+' share a line. They do not form a basis. Therefore, coordinates in them are not unique.</p>')), btn);
     }
     function zoomDot(btn) {
       var d = dot(s.u, s.v1), nu = norm(s.u), nv = norm(s.v1), th = angle(s.u, s.v1);

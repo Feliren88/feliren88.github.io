@@ -78,7 +78,7 @@ layout: default
     <div class="syl-method-copy">
       <span class="syl-phase">How to use this track</span>
       <h2 id="syl-method-title">Start with module 1</h2>
-      <p>Begin with module 1 if the topic is new to you. Use Focus to dim other modules. Reading adjusts the text, and Listen reads the module aloud.</p>
+      <p>If the topic is new to you, begin with module 1. Use Focus to dim other modules. To adjust the text, select Reading. To hear the module aloud, select Listen.</p>
     </div>
     <ol class="syl-method-steps">
       <li><b>Goal</b><span>Read why the module matters.</span></li>
@@ -163,7 +163,7 @@ layout: default
         {% assign previous_index = forloop.index0 | minus: 1 %}
         <p>This module builds on module {{ forloop.index | minus: 1 }}, <a href="#m{{ forloop.index | minus: 1 }}">{{ topic.modules[previous_index].name }}</a>.</p>
         {% endif %}
-        <p>Read the explanation and diagram steps in order. After that, check the terms below and explain the idea yourself.</p>
+        <p>Read the explanation in order. Then follow the diagram steps and check the terms below. After that, explain the idea in your own words.</p>
       </div>
 
       <p class="syl-phase">Start with the diagram</p>
@@ -266,7 +266,7 @@ layout: default
       </details>
       <details class="syl-notes">
         <summary>Scratchpad</summary>
-        <label for="iv-note-{{ forloop.index }}">Write the idea in your own words. This stays in this browser.</label>
+        <label for="iv-note-{{ forloop.index }}">Write the idea in your own words. This browser saves your notes.</label>
         <textarea id="iv-note-{{ forloop.index }}" rows="4"></textarea>
       </details>
     </li>
@@ -278,7 +278,7 @@ layout: default
     <div>
       <span class="syl-phase">{% if learning.sources.size > 1 %}Foundational sources{% else %}Foundational source{% endif %}</span>
       <h2 id="syl-source-title">Read the source for more detail</h2>
-      <p>Use these notes to practise remembering the ideas. Then read the source to check the assumptions, evidence, and details.{% if learning.sources.size > 1 %} Start with the first.{% endif %}</p>
+      <p>Use these notes to practise recalling the ideas. Then read the source to check assumptions, evidence, and details.{% if learning.sources.size > 1 %} Start with the first.{% endif %}</p>
     </div>
     <ul class="syl-source-list">
       {% for src in learning.sources %}

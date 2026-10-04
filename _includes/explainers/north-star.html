@@ -3,7 +3,7 @@
   <header class="xp-head">
     <span class="syl-phase">Explore it first</span>
     <h2 id="xp-nsm-title">Choose a north star for a business</h2>
-    <p>Pick how a business makes money. The panel shows the kind of north star that usually fits, the metric real companies chose, the inputs teams would own, and the guardrail that keeps the number honest. Then test a metric of your own against 6 questions.</p>
+    <p>Choose a business model. Then compare a suitable metric category with company examples. Explore input metrics and a guardrail that tracks unwanted effects. Finally, test your own metric against 6 questions.</p>
   </header>
   <div class="xp-body tf" data-xp="nsm">
     <div class="xp-pills" role="group" aria-label="Business model">
@@ -15,7 +15,7 @@
     <article class="xp-nsm" data-for="{{ m.id }}"{% unless forloop.first %} hidden{% endunless %}>
       <div class="xp-nsm-main">
         <p class="xp-nsm-earns">{{ m.earns }}</p>
-        <p class="xp-nsm-cat">Usual kind of north star: <b>{{ cat.name }}</b></p>
+        <p class="xp-nsm-cat">Usual north star category <b>{{ cat.name }}</b></p>
         <p>{{ m.why }}</p>
         <table class="xp-table is-compact">
           <caption>What companies with this model chose</caption>
@@ -37,7 +37,7 @@
         <figcaption>How often each kind was named, as a share of companies surveyed</figcaption>
         <ol>
           {%- for c in ns.categories %}
-          <li><span>{{ c.name }}</span><span class="xp-bar-track"><i style="width:{{ c.share | times: 2 }}%"></i></span><b>about {{ c.share }}%</b><small>{{ c.examples }}</small></li>
+          <li><span>{{ c.name }}</span><span class="xp-bar-track"><i style="width:{{ c.share | times: 2 }}%"></i></span><b>About {{ c.share }}%</b><small>{{ c.examples }}</small></li>
           {%- endfor %}
         </ol>
         <p class="xp-note">A company could name more than one kind, so the shares add up to more than 100%.</p>
@@ -45,7 +45,7 @@
 
       <form class="xp-check" data-check aria-labelledby="xp-check-title">
         <h3 id="xp-check-title">Test your own metric</h3>
-        <label class="xp-field is-stack"><span>Your metric</span><input type="text" data-metric placeholder="e.g. weekly active teams" autocomplete="off"></label>
+        <label class="xp-field is-stack"><span>Your metric</span><input type="text" data-metric placeholder="For example, weekly active teams" autocomplete="off"></label>
         <fieldset>
           <legend>Tick what is true of it</legend>
           {%- for q in ns.checklist %}

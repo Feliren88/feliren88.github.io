@@ -185,9 +185,9 @@
 
     var PAGES = [
       { t: 'The unit square', parts: ['area', 'f'], state: { m: DEF, t: 0, mode: 'area', showNull: false },
-        body: '<p>Start with the unit square. Its area is 1, and the letter F inside it shows which way round the plane is.</p>' },
+        body: '<p>Start with the unit square, whose area is 1. The letter F inside shows the plane’s orientation.</p>' },
       { t: 'Apply A', parts: ['area'], state: { t: 1 },
-        body: '<p>A turns the square into a parallelogram. Its area is the <b class="is-o">determinant</b>, 2.5 here.</p>' },
+        body: '<p>A turns the square into a parallelogram. Its area equals the absolute <b class="is-o">determinant</b>, 2.5 here.</p>' },
       { t: 'The formula', parts: ['i', 'j', 'area'], state: { t: 1 },
         body: '<p>det A = a d − b c. With columns <b class="is-q">(2, 0.5)</b> and <b class="is-k">(1, 1.5)</b>, that is 2 × 1.5 − 1 × 0.5 = 2.5.</p>' },
       { t: 'Turn it over', parts: ['area', 'f'], state: { m: FLIP, t: 1 },
@@ -195,11 +195,11 @@
       { t: 'Squash it', parts: ['area', 'col'], state: { m: SING, t: 1 },
         body: '<p>Now <b class="is-k">ĵ</b> sits on the line of <b class="is-q">î</b>. The square flattens, the determinant is 0, and the rank drops to 1.</p>' },
       { t: 'Many inputs, 1 output', parts: ['null', 'out'], state: { m: SING, t: 1, showNull: true },
-        body: '<p>Every point on the dashed line lands on the same spot. Once inputs share an output, nothing can tell them apart again.</p>' },
+        body: '<p>Every point on the dashed line produces the same output. Therefore, that output cannot identify which input you used.</p>' },
       { t: 'Undo, when you can', parts: ['area', 'f'], state: { m: DEF, t: 1, showNull: false },
         body: ('<p>Press <b>Undo with '+window.InterviewDisplayMath.html("lab/determinant-rank-inverse/extra-0", undefined, true)+'</b> to send every point back. Undo is switched off whenever the determinant is 0.</p>') },
       { t: 'Solve Av = y', parts: ['y', 'x'], state: { mode: 'solve', t: 1 },
-        body: '<p>Drag <b class="is-o">y</b>; with det A ≠ 0, exactly 1 <b class="is-v">input vector</b> reaches it. Squash A and there may be no input, or a whole line of them.</p>' }
+        body: '<p>Drag <b class="is-o">y</b>. With det A ≠ 0, exactly 1 <b class="is-v">input vector</b> reaches it. However, squash A and there may be no input or a whole line of them.</p>' }
     ];
     draw();
     XP.guide(root.querySelector('[data-guide-box]'), PAGES, function (p, i, redraw) {

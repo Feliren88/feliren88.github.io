@@ -195,7 +195,7 @@
         [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-2", undefined, true)+''), fmt(disc)]];
       rows.push(e.real ? [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-0", undefined, true)+''), fmt(e.values[0]) + ' and ' + fmt(e.values[1])] :
         [(''+window.InterviewDisplayMath.html("lab/eigenvectors/worked-1", undefined, true)+''), fmt(e.re) + ' ± ' + fmt(e.im) + 'i']);
-      dlg.open('Characteristic polynomial, worked', table(rows) + '<p>Av = λv has a nonzero answer exactly when A − λI squashes the plane, so det(A − λI) = 0.</p>', btn);
+      dlg.open('Characteristic polynomial, worked', table(rows) + '<p>A nonzero vector satisfies Av = λv exactly when A − λI collapses a direction. Therefore, det(A − λI) = 0.</p>', btn);
     }
     function zoomDiag(btn) {
       var e = eig(s.m), n = Math.max(1, s.n || 5);
@@ -242,7 +242,7 @@
       { t: 'Apply A', parts: ['fan'], state: { t: 1 },
         body: '<p>Almost every arrow is knocked off its line. The faint lines still show where each one started.</p>' },
       { t: 'The arrows that stay', parts: ['e1', 'e2'], state: { t: 1 },
-        body: '<p>The arrows along <b class="is-q">(2, 1)</b> and <b class="is-k">(1, −1)</b> stay on their lines. They are eigenvectors, and their eigenvalues give their stretch factors, 2.5 and 1.</p>' },
+        body: '<p>The arrows along <b class="is-q">(2, 1)</b> and <b class="is-k">(1, −1)</b> stay on their lines. These are eigenvectors. Their eigenvalues give scale factors 2.5 and 1.</p>' },
       { t: 'The circle becomes an ellipse', parts: ['circle', 'e1', 'e2'], state: { t: 1 },
         body: '<p>Push the whole unit circle through A and it becomes an ellipse. The eigenvectors land on their own lines.</p>' },
       { t: 'Where they come from', parts: ['poly', 'e1', 'e2'], state: { t: 1 },

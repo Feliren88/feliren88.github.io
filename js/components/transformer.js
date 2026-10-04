@@ -700,8 +700,8 @@
             'With d_k = ' + dk + ' the divisor is ' + Math.sqrt(dk).toFixed(0) +
             '. Dividing by this value controls the score scale. Otherwise, larger vectors can produce extreme probabilities with very small gradients.'));
           out.appendChild(stage([
-            grid(c.per.raw, { rows: TOKENS, cols: TOKENS, caption: 'before' }),
-            grid(c.per.scaled, { rows: TOKENS, cols: TOKENS, caption: 'after' })
+            grid(c.per.raw, { rows: TOKENS, cols: TOKENS, caption: 'Before' }),
+            grid(c.per.scaled, { rows: TOKENS, cols: TOKENS, caption: 'After' })
           ]));
           out.appendChild(note('In the paper d_k is ' + PAPER.dk +
             ', so the divisor is ' + Math.sqrt(PAPER.dk).toFixed(0) + '.'));
@@ -981,7 +981,7 @@
             'Without a mask or position information, attention alone does not represent order. Rearranging the input rows rearranges its output rows in the same way. Therefore, this model adds position information to the input vectors.'));
           out.appendChild(stage(grid(M.emb, {
             rows: TOKENS, cols: AXES,
-            caption: 'embeddings alone, scaled by √d_model'
+            caption: 'Embeddings alone, scaled by √d_model'
           })));
         }
       },
@@ -995,7 +995,7 @@
             'Even dimensions take the sine, odd ones the cosine, and i is the index of the pair.'));
           out.appendChild(stage(grid([PE16[st.pos]], {
             rows: ['pos ' + st.pos], max: 1,
-            caption: 'the encoding for position ' + st.pos
+            caption: 'The encoding for position ' + st.pos
           })));
         }
       },
@@ -1029,7 +1029,7 @@
             'First, scale the token embedding. Then add its position vector. The result contains information about both token identity and position.'));
           out.appendChild(stage([
             grid(M.emb, { rows: TOKENS, caption: 'embedding × √8' }),
-            grid(M.pe, { rows: TOKENS, max: 1, caption: 'position' }),
+            grid(M.pe, { rows: TOKENS, max: 1, caption: 'Position' }),
             grid(M.x0, { rows: TOKENS, caption: 'The sum passed into attention' })
           ]));
         }
@@ -1245,7 +1245,7 @@
             'A temperature below one increases the probability of higher-scoring tokens. A temperature above one spreads probability more evenly, making lower-scoring tokens more likely to be sampled.'));
           out.appendChild(stage(grid([pr], {
             rows: ['p'], cols: TOKENS, max: 1,
-            caption: 'at temperature ' + st.temp.toFixed(2)
+            caption: 'At temperature ' + st.temp.toFixed(2)
           })));
           out.appendChild(readout([
             ['greedy pick', TOKENS[top]],
@@ -1548,7 +1548,7 @@
         var t = n.tensor();
         detail.appendChild(stage(grid(t.m, {
           rows: t.rows || TOKENS, cols: t.cols, max: t.max,
-          caption: t.cap || 'what leaves this box'
+          caption: t.cap || 'What leaves this box'
         })));
       }
       if (!shown(n)) {

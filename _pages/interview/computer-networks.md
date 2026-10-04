@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Computer Networks
-description: Trace a message from one machine to another, and explain what each layer adds and what it can lose.
+description: Trace a message between machines. Then explain what each network layer adds and where failures can occur.
 permalink: /computer-networks/
 topic_id: computer-networks
 robots: noindex, nofollow

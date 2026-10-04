@@ -307,7 +307,7 @@
         dlg.open('Singular values', table(S.slice(0, 12).map(function (v, j) {
           acc += v * v;
           return [window.InterviewDisplayMath.html("lab/decompositions/singular-entry", {j:j+1}, true), fmt(v, 3) + ' (the first ' + (j + 1) + ' hold ' + fmt(100 * acc / total, 1) + ('% of '+window.InterviewDisplayMath.html("lab/decompositions/worked-2", undefined, true)+')')];
-        })) + '<p>The first 12 of 64. They fall fast, which is why a few of them rebuild most of the picture.</p>', btn);
+        })) + '<p>The table shows the first 12 of 64 singular values. They decrease quickly, so a few rebuild most of the picture.</p>', btn);
         return;
       }
       if (s.mode === 'pca') {
@@ -366,13 +366,13 @@
       { t: 'Σ stretches', parts: ['sigma'], state: { f: 2 },
         body: ('<p>Then <b class="is-k">Σ</b> stretches along the axes, by '+window.InterviewDisplayMath.html("lab/decompositions/worked-4", undefined, true)+' and '+window.InterviewDisplayMath.html("lab/decompositions/worked-5", undefined, true)+'. Those stretches are the singular values.</p>') },
       { t: 'U turns again', parts: ['sigma', 'u'], state: { f: 3 },
-        body: '<p>Finally, <b class="is-o">U</b> places the stretched axes, using a turn and sometimes a reflection. Together, the 3 maps give A; drag î or ĵ to change them.</p>' },
+        body: '<p>Finally, <b class="is-o">U</b> places the stretched axes, using a turn and sometimes a reflection. Together, the 3 maps give A. Then drag î or ĵ to change them.</p>' },
       { t: 'Keep the big ones', parts: ['sigma'], state: { mode: 'image', k: 8 },
         body: '<p>A 64 by 64 image is a matrix too. Rebuilt from its 8 largest singular values, most of the picture survives.</p>' },
       { t: 'What you dropped', parts: ['tail'], state: { mode: 'image', k: 8 },
         body: ('<p>The error of the rank k copy is the square root of the dropped '+window.InterviewDisplayMath.html("lab/decompositions/extra-4", undefined, true)+' added up. No other rank k matrix is closer.</p>') },
       { t: 'PCA is an SVD', parts: ['vt', 'cloud'], state: { mode: 'pca' },
-        body: '<p>Principal component analysis (PCA) finds the axes with the most spread in centred data. These are the right singular vectors; drag a point to see them turn.</p>' },
+        body: '<p>Principal component analysis (PCA) finds the axes with the most spread in centred data. These are the right singular vectors. Then drag a point to see them turn.</p>' },
       { t: 'Cholesky', parts: ['vt', 'sigma'], state: { mode: 'chol', f: 3 },
         body: ('<p>A positive definite matrix has positive '+window.InterviewDisplayMath.html("lab/decompositions/worked-7", undefined, true)+' for every non-zero x. Cholesky writes it as '+window.InterviewDisplayMath.html("lab/decompositions/worked-8", undefined, true)+'; L maps the unit circle to the ellipse '+window.InterviewDisplayMath.html("lab/decompositions/worked-6", undefined, true)+'.</p>') }
     ];

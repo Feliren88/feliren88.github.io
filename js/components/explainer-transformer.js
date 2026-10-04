@@ -254,14 +254,14 @@
 
     var PAGES = [
       { t: 'What you are looking at', parts: [], body: '<p>This is GPT-2 (small) reading a prompt and scoring every possible next token. Text enters on the left and flows right. Every attention weight and probability here was recorded from the real model.</p><p>Hover over anything for its value. The ⊕ buttons open a closer view.</p>' },
-      { t: 'Text becomes tokens', parts: ['tokens'], body: '<p>The prompt is cut into <b>tokens</b>, pieces of words GPT-2 has an id for. It knows 50,257 of them. A leading space belongs to the token.</p>' },
-      { t: 'Tokens become vectors', parts: ['emb', 'tokens'], body: '<p>Each id picks one row of a 50,257 by 768 table: the <b>token embedding</b>. A learned <b>position embedding</b> for its slot is added, so the model knows the order of the words. Each grey bar is 768 numbers.</p>' },
+      { t: 'Text becomes tokens', parts: ['tokens'], body: '<p>The prompt is split into <b>tokens</b>, pieces of text with numeric identifiers. GPT-2 has 50,257 possible tokens. A leading space belongs to the token.</p>' },
+      { t: 'Tokens become vectors', parts: ['emb', 'tokens'], body: '<p>Each token identifier selects one row from a 50,257 by 768 table. This row is its <b>token embedding</b>. Then add a learned <b>position embedding</b> to represent its position. Each grey bar contains 768 numbers.</p>' },
       { t: 'Query, key and value', parts: ['qkv'], body: '<p>In each head, every token’s vector is projected 3 ways. The <b class="is-q">query</b> is what the token looks for, the <b class="is-k">key</b> is what it offers, and the <b class="is-v">value</b> is what it passes on. Each is 64 numbers.</p>' },
-      { t: 'Scores, then the mask', parts: ['key', 'query', 'attn'], body: '<p>Every query is compared with every key by a dot product, divided by 8, the square root of 64. Keys that come later in the prompt are masked out, so no token can read the future. The empty rings are those masked scores.</p>' },
+      { t: 'Scores, then the mask', parts: ['key', 'query', 'attn'], body: '<p>A dot product multiplies corresponding query and key entries, then adds the products. Divide each score by 8, the square root of 64. Mask later keys so tokens cannot use future positions. Empty rings show masked scores.</p>' },
       { t: 'Softmax turns scores into weights', parts: ['attn'], body: '<p>Each row of scores goes through softmax. The bigger and darker a dot, the more of its information a token takes from that key. Every row sums to 1. Hover over a dot to read its weight.</p>' },
       { t: 'Values are mixed', parts: ['value', 'out'], body: '<p>Each token’s output is the weighted average of the <b class="is-v">values</b>, using its row of weights. Attention is the only step in a block that moves information between tokens.</p>' },
       { t: '12 heads, then 12 blocks', parts: ['heads', 'blocks'], body: '<p>12 heads run side by side with their own weights, each free to track a different relation. Step through them with the arrows under the matrix. Their outputs are joined back into 768 numbers and added to the <b>residual</b> stream.</p>' },
-      { t: 'The MLP works on each token alone', parts: ['mlp', 'residual'], body: '<p>A 2-layer network widens each token to 3,072 numbers, applies GELU, and narrows back to 768. No information crosses between tokens here. The whole block then repeats 11 more times.</p>' },
+      { t: 'The MLP works on each token alone', parts: ['mlp', 'residual'], body: '<p>A 2-layer network widens each token vector to 3,072 numbers. Then GELU applies a nonlinear transformation before the network narrows the vector to 768 numbers. Each token is processed separately. The whole block repeats 11 more times.</p>' },
       { t: 'Choosing the next token', parts: ['probs'], body: '<p>The last token’s final vector is scored against all 50,257 token embeddings. Dividing by the <b>temperature</b> sharpens or flattens the softmax, and top-k or top-p keeps only the likeliest. Press <b>Generate</b> to sample one.</p>' }
     ];
 
@@ -504,7 +504,7 @@
           body: '<div class="xp-qkv"><span><b>q</b> from “' + esc(WORDS[S.q]) + '”' + strip(R.q) + '</span>' +
             '<span><b>K</b> from ' + (S.cross ? 'the second sentence' : 'every word') + '<span class="xp-stack">' + R.K.map(function (k) { return strip(k); }).join('') + '</span></span>' +
             '<span><b>V</b><span class="xp-stack">' + R.V.map(function (v) { return strip(v, 'is-v'); }).join('') + '</span></span></div>',
-          say: 'Three weight matrices turn each embedding into a query (what this word looks for), a key (what it offers) and a value (what it passes on). W_query and W_key are 24 by 16; W_value is 28 by 16.' +
+          say: 'Three matrices project each embedding into a query, a key and a value. Queries compare with keys to calculate weights for combining values. W_query and W_key are 24 by 16, while W_value is 28 by 16.' +
             (S.cross ? ' With cross-attention, keys and values come from a second sequence of ' + L + ' tokens. Only the query stays with the first.' : '')
         },
         {

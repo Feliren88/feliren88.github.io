@@ -41,7 +41,7 @@
             box('Fixed parameter θ','3')+mathBox('Function value','foundation/notation/value'),
             mathBox('Vary x, fix θ','foundation/notation/input-gradient')+mathBox('Vary θ, fix x','foundation/notation/parameter-gradient')];
           texts[1]='Using '+variable+' consistently gives the same integral, 8/3. The argument x remains the endpoint.';
-          texts[3]+=' The input derivative equals 12; the parameter derivative equals 8/3.';
+          texts[3]+=' The input derivative equals 12. Meanwhile, the parameter derivative equals 8/3.';
           break;
         case 'normalise':
           frames=[box('Score of outcome 0','0')+box('Score of outcome 1',String(value)),
@@ -77,7 +77,7 @@
           }
           frames=[box('Start x₀','3')+box('Target variance','1'),trace(false),trace(true),
             bar('Target variance',1,2)+bar('Stationary chain variance',stationaryVariance(value),2)];
-          texts[2]+=' The accent-coloured path shows 20 steps from one fixed noise sequence; the muted path shows descent.';
+          texts[2]+=' The accent-coloured path shows 20 steps from one fixed noise sequence. Meanwhile, the muted path shows descent.';
           texts[3]+=' At h = '+value+', stationary variance is approximately '+fmt(stationaryVariance(value))+'.';
           break;
         case 'autograd':

@@ -30,14 +30,14 @@
   var PARTS = { input: 'input', conv: 'conv', relu: 'relu', pool: 'pool', output: 'output' };
 
   var PAGES = [
-    { t: 'What you are looking at', parts: [], body: '<p>A small convolutional network, Tiny VGG, classifying a 64 by 64 image into 10 classes. Each column is a layer and each square is one feature map, computed on this page from the trained weights.</p><p>Hover over a map to trace what feeds it. Select a map to see how it is made.</p>' },
-    { t: 'The input is 3 grids of numbers', parts: ['input'], body: '<p>A colour image is 3 channels, red, green and blue, each a 64 by 64 grid of values from 0 to 1.</p>' },
-    { t: 'A convolution slides small filters', parts: ['conv'], body: '<p>Each map in a convolution layer comes from 1 filter per input channel. A 3 by 3 filter slides across its channel, the products are summed across all channels, and a bias is added. 10 filters give 10 maps.</p><p>Blue is positive, orange is negative.</p>' },
+    { t: 'What you are looking at', parts: [], body: '<p>Tiny VGG is a small convolutional network that classifies a 64 by 64 image into 10 classes. Each column shows a layer. Each square shows a feature map, calculated here from the trained weights.</p><p>Hover over a map to trace what feeds it. Select a map to see how it is made.</p>' },
+    { t: 'The input is 3 grids of numbers', parts: ['input'], body: '<p>A colour image has 3 channels for red, green and blue. Each channel contains a 64 by 64 grid of values from 0 to 1.</p>' },
+    { t: 'A convolution slides small filters', parts: ['conv'], body: '<p>Each map in a convolution layer comes from 1 filter per input channel. A 3 by 3 filter slides across each channel and multiplies the matching values. Then add the products across all channels and add a bias. Applying 10 sets of filters gives 10 maps.</p><p>Blue is positive, orange is negative.</p>' },
     { t: 'ReLU keeps the positive part', parts: ['relu'], body: '<p>ReLU replaces every negative value with 0. Without it, stacked convolutions would collapse into one linear filter, and the network could not learn curved decision boundaries.</p>' },
-    { t: 'Deeper maps see more', parts: ['conv', 'relu'], body: '<p>Each layer reads 3 by 3 patches of the one before, so a map deep in the network responds to a larger area of the image. Early maps respond to edges and colours; later maps combine them into larger patterns.</p>' },
+    { t: 'Deeper maps see more', parts: ['conv', 'relu'], body: '<p>Each convolution reads 3 by 3 patches from the previous layer. Therefore, deeper maps respond to larger image regions. Early maps respond to edges and colours. Later maps combine them into larger patterns.</p>' },
     { t: 'Max pooling shrinks the maps', parts: ['pool'], body: '<p>Pooling keeps the largest value in each 2 by 2 block, halving the width and height. It cuts the computation and makes the response less sensitive to exactly where a feature sits.</p>' },
-    { t: 'From maps to a class', parts: ['output'], body: '<p>The last 10 maps of 13 by 13 are flattened into 1,690 numbers. A dense layer turns them into 10 scores, and softmax turns the scores into probabilities that sum to 1.</p>' },
-    { t: 'Try another image', parts: ['input', 'output'], body: '<p>Pick another sample above, or upload your own. It is shrunk to 64 by 64 and every map recomputes. An image outside the 10 classes still gets one of the 10 labels, because softmax always chooses among them.</p>' }
+    { t: 'From maps to a class', parts: ['output'], body: '<p>The last 10 maps of 13 by 13 are flattened into 1,690 numbers. A dense layer combines these numbers into 10 scores. Then softmax converts the scores into probabilities that sum to 1.</p>' },
+    { t: 'Try another image', parts: ['input', 'output'], body: '<p>Choose another sample above or upload your own image. The page resizes it to 64 by 64 and recalculates every map. Even an image outside the 10 classes receives one of their labels. The network always chooses among these classes.</p>' }
   ];
 
   var model, L, rgb, S = { sample: 6, hover: null };
@@ -178,10 +178,10 @@
     var col = COLS[ci], x = L[col.k], html = '';
     var srcKey = COLS[ci - 1] ? COLS[ci - 1].k : null;
     if (col.kind === 'input') {
-      html = '<p>The ' + ['red', 'green', 'blue'][ch] + ' channel: 64 × 64 pixel values divided by 255, so they run from 0 to 1.</p>';
+      html = '<p>The ' + ['red', 'green', 'blue'][ch] + ' channel contains 64 × 64 pixel values. Dividing them by 255 gives values from 0 to 1.</p>';
     } else if (col.kind === 'conv') {
       var src = L[srcKey], k = model.W[col.k + '/kernel'], bias = model.W[col.k + '/bias'][ch], ci2 = src.c;
-      html = '<p>Map ' + (ch + 1) + ' of ' + esc(col.t) + ' = the sum over ' + ci2 + ' input maps of (input map ★ its own 3 × 3 kernel), plus a bias of ' + XP.fmt(bias, 3) + '. Each kernel is shown beside its input; blue weights add, orange weights subtract.</p><div class="xp-kgrid">' +
+      html = '<p>Map ' + (ch + 1) + ' of ' + esc(col.t) + ' = the sum over ' + ci2 + ' input maps of (input map ★ its own 3 × 3 kernel), plus a bias of ' + XP.fmt(bias, 3) + '. Each kernel appears beside its input. Blue weights add, while orange weights subtract.</p><div class="xp-kgrid">' +
         Array.apply(null, Array(ci2)).map(function (_, c) {
           var cells = '', km = 0;
           for (var t = 0; t < 9; t++) km = Math.max(km, Math.abs(k[t * ci2 * x.c + c * x.c + ch]));
@@ -190,7 +190,7 @@
             cells += '<i style="' + XP.tint(v, km) + '" title="' + v.toFixed(3) + '"></i>';
           }
           return '<figure><canvas data-src="' + c + '"></canvas><span class="xp-op">★</span><span class="xp-kern">' + cells + '</span></figure>';
-        }).join('') + '</div><p class="xp-note">Output ' + x.h + ' × ' + x.w + ': each 3 × 3 window without padding loses 1 pixel on every side.</p><canvas class="xp-big" data-out></canvas>';
+        }).join('') + '</div><p class="xp-note">Output ' + x.h + ' × ' + x.w + '. Each 3 × 3 window without padding loses 1 pixel on every side.</p><canvas class="xp-big" data-out></canvas>';
     } else if (col.kind === 'relu') {
       html = '<p>ReLU(x) = max(0, x), applied to every value of map ' + (ch + 1) + ' of ' + esc(srcKey) + '. The orange, negative parts on the left become 0 on the right.</p><div class="xp-pair"><canvas data-before></canvas><span class="xp-op">→</span><canvas class="xp-big" data-out></canvas></div>';
     } else if (col.kind === 'pool') {
@@ -209,7 +209,7 @@
   }
   function explainOutput(from) {
     var order = L.probs.map(function (p, i) { return i; }).sort(function (a, b) { return L.probs[b] - L.probs[a]; });
-    dlg.open('From 1,690 numbers to 10 probabilities', '<p>max_pool_2 is flattened to 1,690 numbers. The dense layer gives each class a score, its logit; softmax turns logits into probabilities.</p>' +
+    dlg.open('From 1,690 numbers to 10 probabilities', '<p>max_pool_2 is flattened to 1,690 numbers. The dense layer gives each class a score called a logit. Then softmax converts the logits into probabilities.</p>' +
       '<table class="xp-table is-compact"><thead><tr><th scope="col">Class</th><th scope="col">Logit</th><th scope="col">Softmax</th></tr></thead><tbody>' +
       order.map(function (i) { return '<tr><th scope="row">' + esc(model.classes[i]) + '</th><td>' + XP.fmt(L.logits[i], 3) + '</td><td>' + (L.probs[i] * 100).toFixed(2) + '%</td></tr>'; }).join('') +
       '</tbody></table>', from);

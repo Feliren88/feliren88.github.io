@@ -94,7 +94,7 @@
       var p=state.p, h=entropy([p,1-p]);
       s=text(160,28,'Outcome probabilities','middle')+bars([p,1-p],['Heads','Tails'],30,270)+text(495,28,'Binary entropy in bits','middle')+curve(function(u){return entropy([u,1-u]);},p,370,245,270,180,1,'Probability of heads');
       cards=card('Entropy',f(h)+' bits')+card('Heads surprise',f(-Math.log2(p))+' bits')+card('Tails surprise',f(-Math.log2(1-p))+' bits');
-      setCopy('Expected surprise','Weight each outcome surprise by its probability. Then add the contributions.','H = −p log₂ p − (1−p) log₂(1−p) = '+f(h)+' bits.','At either endpoint, entropy is zero. A zero-probability outcome has infinite surprise but contributes zero expected surprise.',[
+      setCopy('Expected surprise','Weight each outcome surprise by its probability. Then add the contributions.','H = −p log₂ p − (1−p) log₂(1−p) = '+f(h)+' bits.','At either endpoint, entropy is zero. A zero-probability outcome has infinite surprise. However, its contribution to expected surprise is zero.',[
         'Assume heads probability '+f(p)+' and tails probability '+f(1-p)+'.',
         'The weighted heads contribution equals '+f(p===0?0:-p*Math.log2(p))+' bits. The tails contribution equals '+f(p===1?0:-(1-p)*Math.log2(1-p))+' bits.',
         'Therefore, their sum equals '+f(h)+' bits per toss.'
@@ -146,7 +146,7 @@
       s=text(30,28,'Symbol')+text(170,28,'Probability')+text(410,28,'Huffman code')+text(600,28,'Bits');
       probs.forEach(function(p,i) { var y=75+i*60; s+=text(40,y,'ABCD'[i])+bar(140,y-20,p*420,26)+text(365,y,f(p),'end')+text(450,y,words[i])+text(620,y,words[i].length,'end'); });
       cards=card('Source entropy',f(sourceH)+' bits')+card('Mean code length',f(mean)+' bits')+card('Excess code length',f(mean-sourceH)+' bits');
-      setCopy('Build a lossless prefix code','Huffman coding repeatedly merges the 2 smallest probability weights. Following left and right edges gives each binary codeword.','Mean length = Σ probability × codeword length = '+f(mean)+' bits per symbol.','No codeword begins another codeword. Code lengths can change abruptly as probabilities cross a merge boundary.',[
+      setCopy('Build a lossless prefix code','Huffman coding repeatedly merges the 2 smallest probability weights. Then follow left and right edges to obtain each binary codeword.','Mean length = Σ probability × codeword length = '+f(mean)+' bits per symbol.','No codeword begins another codeword. Code lengths can change abruptly as probabilities cross a merge boundary.',[
         'Assume the 4 symbol probabilities displayed above. Then merge the 2 least probable nodes until 1 root remains.',
         'Assign 0 to each left edge and 1 to each right edge. Reading paths gives the displayed codewords.',
         'The weighted lengths are '+probs.map(function(p,i){return f(p)+' × '+words[i].length;}).join(' + ')+'. Their sum is '+f(mean)+' bits.',

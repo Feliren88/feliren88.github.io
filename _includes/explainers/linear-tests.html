@@ -1,14 +1,14 @@
 <section class="xp" id="xp-lintests" aria-labelledby="xp-lintests-title">
   <header class="xp-head">
     <span class="syl-phase">Explore it first</span>
-    <h2 id="xp-lintests-title">Most named tests are one linear model</h2>
-    <p>A t-test, a correlation and an ANOVA are usually taught as separate tools. Each is a linear model with a particular predictor, and its p-value is the test that one coefficient is 0. One model therefore covers all of them. Run a test and its model on the same sample below and compare the outputs.</p>
+    <h2 id="xp-lintests-title">Connect common tests to linear models</h2>
+    <p>Several common tests can be expressed through linear models. A model coefficient describes a mean, slope or group difference. The test compares that coefficient, or several coefficients, with a null value. Below, run a test and its model on the same sample. Then compare their outputs.</p>
   </header>
   <div class="xp-body tf" data-xp="lintests"></div>
 
   <div class="xp-table-wrap">
     <table class="xp-table">
-      <caption>The same idea, test by test. <code>G</code> is a 0/1 group indicator; <code>G2</code>, <code>G3</code> are indicators for further groups.</caption>
+      <caption>Compare each test with its model. <code>G</code> marks group membership as 0 or 1. Similarly, <code>G2</code> and <code>G3</code> mark further groups.</caption>
       <thead>
         <tr><th scope="col">Named test</th><th scope="col">Linear model</th><th scope="col">What the coefficient is</th><th scope="col">Rank-based version</th></tr>
       </thead>
@@ -19,14 +19,14 @@
         <tr><th scope="row">Welch's t-test</th><td><code>y ~ 1 + G</code>, a separate variance per group</td><td>β<sub>1</sub> as above, without assuming equal spread</td><td>Mann-Whitney, as for the two-sample test</td></tr>
         <tr><th scope="row">Pearson correlation</th><td><code>y ~ 1 + x</code></td><td>β<sub>1</sub> is the slope; with both variables standardised it equals r</td><td>Spearman: <code>rank(y) ~ 1 + rank(x)</code></td></tr>
         <tr><th scope="row">One-way ANOVA</th><td><code>y ~ 1 + G2 + G3 + …</code></td><td>Each β is a group's difference from the first; the F-test asks whether all are 0</td><td>Kruskal-Wallis: <code>rank(y) ~ 1 + G2 + G3 + …</code></td></tr>
-        <tr><th scope="row">Two-way ANOVA</th><td><code>y ~ 1 + A + B + A:B</code></td><td>Main effects, plus an interaction term for whether A's effect depends on B</td><td>no simple rank version</td></tr>
-        <tr><th scope="row">ANCOVA</th><td><code>y ~ 1 + G + x</code></td><td>The group difference after adjusting for a continuous covariate</td><td>no simple rank version</td></tr>
-        <tr><th scope="row">Chi-square goodness of fit</th><td><code>log(count) ~ 1 + category</code>, Poisson</td><td>Each β is a category's log ratio to the first</td><td>not applicable</td></tr>
-        <tr><th scope="row">Chi-square independence</th><td><code>log(count) ~ 1 + A + B + A:B</code>, Poisson</td><td>The A:B interaction is the dependence being tested</td><td>not applicable</td></tr>
+        <tr><th scope="row">Two-way ANOVA</th><td><code>y ~ 1 + A + B + A:B</code></td><td>Main effects, plus an interaction term for whether A's effect depends on B</td><td>No simple rank version</td></tr>
+        <tr><th scope="row">ANCOVA</th><td><code>y ~ 1 + G + x</code></td><td>The group difference after adjusting for a continuous covariate</td><td>No simple rank version</td></tr>
+        <tr><th scope="row">Chi-square goodness of fit</th><td><code>log(count) ~ 1 + category</code>, Poisson</td><td>Each β is a category's log ratio to the first</td><td>Not applicable</td></tr>
+        <tr><th scope="row">Chi-square independence</th><td><code>log(count) ~ 1 + A + B + A:B</code>, Poisson</td><td>The A:B interaction is the dependence being tested</td><td>Not applicable</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="xp-note">The rank versions are approximations, close once samples are of moderate size; Lindeløv's simulations give the sizes test by test. Every row inherits the same assumptions: independent observations, and residuals that are roughly normal with equal variance. So checking the fitted model's residuals is how you check a test's assumptions.</p>
+  <p class="xp-note">Rank-based p-values can differ from the regression approximation, especially with small samples. Therefore, check the procedure used for each test. Classical Gaussian regression assumes independent errors with constant variance. Normal errors give exact small-sample t and F reference distributions. However, Welch's test allows unequal variances, and Poisson models use count assumptions. For paired tests, check independence between pairs and model the differences.</p>
 
   <p class="xp-source">After Jonas Kristoffer Lindeløv, <a href="https://lindeloev.github.io/tests-as-linear/" rel="noopener noreferrer">Common statistical tests are linear models (or: how to teach stats)</a>. The table is condensed in my own words. The panel's statistics are checked against SciPy by <code>scripts/verify_linear_tests.py</code>.</p>
 </section>

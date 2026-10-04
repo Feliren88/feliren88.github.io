@@ -2,7 +2,7 @@
   <header class="xp-head">
     <span class="syl-phase">Build it by hand</span>
     <h2 id="xp-toy-title">Diffusion you can compute exactly</h2>
-    <p>Shrink the problem to 2 dimensions and 2 classes of data, and the noise a perfect denoiser would predict has a closed form. Nothing here is trained. Add noise to see the forward process, then remove it to generate, and push the guidance past 1 to see what it costs.</p>
+    <p>This example uses 2 dimensions and 2 data classes. A formula calculates the exact noise prediction, so it needs no trained model. First add noise to inspect the forward process. Then remove noise to generate points. Finally, raise guidance above 1 and compare the results.</p>
   </header>
   <div class="xp-body tf" data-xp="toy"></div>
   <p class="xp-source">The data is a mixture of 6 Gaussian bumps with standard deviation 0.16, 3 per class. Noise follows the linear schedule of Ho et al. (2020) over 1,000 steps and is removed with 50 deterministic DDIM steps (Song et al., 2021). Guidance follows Ho and Salimans, <a href="https://arxiv.org/abs/2207.12598" rel="noopener noreferrer">Classifier-Free Diffusion Guidance</a> (2022). The sampler was checked against an independent NumPy implementation.</p>

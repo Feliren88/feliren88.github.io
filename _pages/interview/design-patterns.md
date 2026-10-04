@@ -1,7 +1,7 @@
 ---
 layout: syllabus
 title: Design Patterns and Refactoring
-description: Name the structure in a codebase, say which change it makes cheap, and reshape it without breaking behaviour.
+description: Identify a codebase's structure and explain which changes it supports. Then refactor it while preserving behaviour.
 permalink: /design-patterns/
 topic_id: design-patterns
 robots: noindex, nofollow

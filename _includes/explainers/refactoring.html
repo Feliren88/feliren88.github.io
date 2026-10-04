@@ -3,7 +3,7 @@
   <header class="xp-head">
     <span class="syl-phase">Build it by hand</span>
     <h2 id="xp-refactor-title">From smell to refactoring</h2>
-    <p>Pick a smell you recognise. The panel names the refactorings that remove it and the patterns that often appear once it is gone. 4 smells carry a worked example with the code before and after.</p>
+    <p>Choose a code smell you recognise. Then explore refactorings that address it and related design patterns. 4 smells include worked examples showing the code before and after.</p>
   </header>
   <div class="xp-body" data-xp="smells">
     <div class="xp-smells" role="group" aria-label="Code smells">
@@ -11,7 +11,7 @@
       {%- for fam in families %}
       <div class="xp-smell-fam"><span>{{ fam }}</span>
         {%- assign ss = dp.smells | where: 'family', fam %}{% for s in ss %}
-        <button type="button" data-smell="{{ s.id }}" aria-pressed="{% if forloop.parentloop.first and forloop.first %}true{% else %}false{% endif %}">{{ s.name }}{% if s.refactoring %} <i title="worked example" aria-label="has a worked example">●</i>{% endif %}</button>
+        <button type="button" data-smell="{{ s.id }}" aria-pressed="{% if forloop.parentloop.first and forloop.first %}true{% else %}false{% endif %}">{{ s.name }}{% if s.refactoring %} <i title="Worked example" aria-label="Has a worked example">●</i>{% endif %}</button>
         {%- endfor %}
       </div>
       {%- endfor %}
@@ -24,7 +24,7 @@
       <p><b>Patterns that often follow.</b> {% for pid in s.patterns %}{% assign pp = dp.patterns | where: 'id', pid | first %}<a href="#pat-{{ pid }}" data-open="{{ pid }}">{{ pp.name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.</p>
       {%- if s.refactoring %}{% assign r = dp.refactorings | where: 'id', s.refactoring | first %}
       <div class="xp-rf">
-        <div class="xp-rf-h"><b>Worked example: {{ r.name }}</b>
+        <div class="xp-rf-h"><b>Worked example. {{ r.name }}</b>
           <div class="xp-seg" role="group" aria-label="Show code"><button type="button" data-view="before" aria-pressed="false">Before</button><button type="button" data-view="after" aria-pressed="false">After</button><button type="button" data-view="both" aria-pressed="true">Both</button></div>
         </div>
         <p class="xp-note">{{ r.why }}</p>

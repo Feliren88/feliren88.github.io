@@ -115,7 +115,7 @@
         ['Aĵ, the second column', '(' + fmt(m[1]) + ', ' + fmt(m[3]) + ')'],
         ['1 × Aî + 2 × Aĵ, across', '1 × ' + fmt(m[0]) + ' + 2 × ' + fmt(m[1]) + ' = ' + fmt(av[0])],
         ['1 × Aî + 2 × Aĵ, up', '1 × ' + fmt(m[2]) + ' + 2 × ' + fmt(m[3]) + ' = ' + fmt(av[1])]
-      ]) + '<p>The vector (1, 2) uses 1 of the first column and 2 of the second.</p>', btn);
+      ]) + '<p>For vector (1, 2), multiply the first column by 1 and the second by 2. Then add the results.</p>', btn);
     }
     function zoomBa(btn) {
       var terms = productTerms(B, s.m), ba = mul(B, s.m), names = [window.InterviewDisplayMath.html("lab/matrices-as-transformations/entry-0", undefined, true), window.InterviewDisplayMath.html("lab/matrices-as-transformations/entry-1", undefined, true), window.InterviewDisplayMath.html("lab/matrices-as-transformations/entry-2", undefined, true), window.InterviewDisplayMath.html("lab/matrices-as-transformations/entry-3", undefined, true)];

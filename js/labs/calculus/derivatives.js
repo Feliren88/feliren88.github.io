@@ -255,7 +255,7 @@
       { t: 'Move the second point closer', parts: ['secant', 'tangent'], state: { kind: 'square', x: 1, h: 0.1, zoom: 1 },
         body: '<p>Now h = 0.1 gives a <b class="is-k">secant slope</b> of 2.1. After that, shrinking h brings this slope towards 2.</p>' },
       { t: 'The limiting slope', parts: ['point', 'tangent'], state: { kind: 'square', x: 1, h: 0, zoom: 1 },
-        body: '<p>The limiting line is the <b class="is-o">tangent</b>, whose slope 2 is the derivative here. However, setting h = 0 makes the quotient undefined.</p>' },
+        body: '<p>The limiting line is the <b class="is-o">tangent</b>. Its slope 2 gives the derivative here. However, setting h = 0 makes the quotient undefined.</p>' },
       { t: 'Look close to the point', parts: ['curve', 'tangent', 'point'], state: { kind: 'square', x: 1, h: 0.1, zoom: 32 },
         body: '<p>Magnification shows a smaller range around x = 1. Within that range, the <b class="is-o">tangent</b> closely follows the curve.</p>' },
       { t: 'Trace the slope', parts: ['tangent', 'point'], state: { kind: 'square', x: 1.5, h: 0.1, zoom: 16 },

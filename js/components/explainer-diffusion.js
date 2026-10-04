@@ -24,11 +24,11 @@
     var data, timer = null;
     var S = { p: 0, g: 2, k: 0, compare: false, step: 0 };
     var TOUR = [
-      { col: 'txt', t: 'The prompt becomes numbers', say: 'A tokenizer cuts the prompt into tokens and pads the list to 77. CLIP’s text encoder turns each token into a vector that already carries meaning from the words around it; in Stable Diffusion v1 each vector is 768 numbers.' },
-      { col: 'ref', t: 'Start from noise', k: 0, say: 'Generation starts from random noise in a small latent space: 4 channels of 64 by 64. The seed fixes this noise, which is why the same seed and prompt give the same image.' },
-      { col: 'ref', t: 'Predict the noise twice', k: 6, say: 'At each step the U-Net predicts the noise in the latent twice, once reading the prompt and once reading an empty prompt. Guidance scales up the difference between the two.' },
-      { col: 'ref', t: 'Remove a little, 50 times', k: 25, say: 'A scheduler decides how much of the predicted noise to subtract at this step. Repeating this 50 times refines the latent from static into a layout, then into detail.' },
-      { col: 'up', t: 'Decode to pixels', k: 25, say: 'The VAE decoder upscales the finished 64 by 64 latent to a 512 by 512 image. The decoder generates the fine detail, so small artefacts can come from it rather than from the denoiser.' }
+      { col: 'txt', t: 'The prompt becomes numbers', say: 'A tokeniser splits the prompt into text pieces called tokens and pads the list to 77. CLIP’s text encoder represents each token using its surrounding words. In Stable Diffusion v1, each vector contains 768 numbers.' },
+      { col: 'ref', t: 'Start from noise', k: 0, say: 'Generation starts from noise in a compressed representation with 4 channels of 64 by 64 values. The seed fixes the starting noise. With other settings unchanged, the same seed and prompt reproduce the image.' },
+      { col: 'ref', t: 'Predict the noise twice', k: 6, say: 'At each step, the U-Net predicts noise in the compressed representation twice. One prediction uses the prompt, while the other uses an empty prompt. Guidance scales their difference.' },
+      { col: 'ref', t: 'Remove a little, 50 times', k: 25, say: 'The scheduler sets how much predicted noise to subtract at each step. Repeating this 50 times refines the compressed representation into a layout and then adds detail.' },
+      { col: 'up', t: 'Decode to pixels', k: 25, say: 'The variational autoencoder (VAE) decoder turns the 64 by 64 representation into a 512 by 512 image. It generates fine detail. Therefore, some small artefacts originate in the decoder.' }
     ];
 
     function sprite(slug, g, z) {
@@ -63,7 +63,7 @@
         '<ol class="xp-chipline"><li class="is-special">&lt;start&gt;</li>' +
         words.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') +
         '<li class="is-special">&lt;end&gt;</li><li class="is-pad">… padded to 77</li></ol>' +
-        '<p class="xp-note">Shown one token per word for reading. CLIP’s tokenizer splits rarer words into several pieces. d is the width of each token’s vector: 768 in Stable Diffusion v1.</p>' +
+        '<p class="xp-note">The display shows one token per word for readability. However, CLIP’s tokeniser splits rarer words into several pieces. The vector width d is 768 in Stable Diffusion v1.</p>' +
         '</section>';
 
       html += '<section class="xp-col is-wide' + (tour.col === 'ref' ? ' is-lit' : '') + '" aria-label="Refining the image representation">' +
@@ -94,7 +94,7 @@
         frame(P.slug, S.g, false) +
         '<label class="xp-toggles"><input type="checkbox" data-compare' + (S.compare ? ' checked' : '') + '> Compare with the other prompt</label>' +
         (S.compare ? frame(data.prompts[1 - S.p].slug, S.g, false, 'is-other') +
-          '<p class="xp-note">Other prompt: “' + esc(data.prompts[1 - S.p].text) + '”, same seed and guidance.</p>' : '') +
+          '<p class="xp-note">Compare with prompt “' + esc(data.prompts[1 - S.p].text) + '”, same seed and guidance.</p>' : '') +
         '</section></div>';
 
       host.innerHTML = html;
@@ -321,7 +321,7 @@
           ? '<label class="xp-field is-stack"><span>Noise step</span><input type="range" min="0" max="' + (STEPS - 1) + '" value="' + S.i + '" data-k="i"></label>' +
             '<p class="xp-note">Data from both classes, coloured by class, jumped straight to the chosen noise level with ' + window.InterviewDisplayMath.html('diffusion/forward', {}, true) + '. No chain is simulated; this is why training is cheap.</p>'
           : '<button type="button" class="xp-go" data-run>' + (S.i === 0 ? 'Generate again' : 'Generate') + '</button>' +
-            '<p class="xp-note">500 points start as pure noise. At each of 50 steps, the exact noise prediction for this data is guided toward the chosen class and a DDIM step removes part of it.</p>') +
+            '<p class="xp-note">500 points start as pure noise. At each of 50 steps, the exact noise prediction for this data is guided towards the chosen class and a DDIM step removes part of it.</p>') +
         '<dl class="xp-toy-read"></dl>' +
         '<p class="xp-note">' + (S.cls < 0
           ? 'With no prompt the points split between both classes.'

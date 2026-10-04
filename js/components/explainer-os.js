@@ -135,10 +135,10 @@
   var HUES = ['--xp-q', '--xp-k', '--xp-v', '--xp-o', '--tf-down', '--tf-up'];
 
   var PAGES = [
-    { t: 'The scheduler picks who runs', tab: 'cpu', parts: ['gantt'], body: '<p>4 processes arrive over time and each needs the CPU for a while. A <b>scheduler</b> decides who runs. The Gantt chart shows its decisions, one colour per process.</p>' },
-    { t: 'Waiting is the cost', tab: 'cpu', parts: ['stats'], body: '<p>Turnaround is finish time minus arrival. Waiting is turnaround minus the time spent running. When jobs arrive together, shortest job first gives the lowest average waiting time. Round robin keeps every process responsive.</p>' },
-    { t: 'Memory is smaller than the program', tab: 'mem', parts: ['frames'], body: '<p>Only a few pages fit in physical frames. When a page is needed and absent, a <b>page fault</b> loads it and something must leave. Each column shows the frames after one reference.</p>' },
-    { t: 'Choosing what to evict', tab: 'mem', parts: ['frames', 'faults'], body: '<p>FIFO evicts the oldest page, LRU the least recently used, and OPT the page needed furthest in the future. OPT is impossible in practice, but it is the floor the others are measured against.</p>' },
+    { t: 'The scheduler picks who runs', tab: 'cpu', parts: ['gantt'], body: '<p>4 processes arrive over time, each needing CPU time. A <b>scheduler</b> chooses which process runs. The Gantt chart, a timeline of process execution, shows these decisions with one colour per process.</p>' },
+    { t: 'Waiting is the cost', tab: 'cpu', parts: ['stats'], body: '<p>Turnaround time runs from arrival to completion. Waiting time excludes time spent running. When jobs arrive together, shortest job first minimises average waiting time. However, round robin gives each ready process regular turns.</p>' },
+    { t: 'Memory is smaller than the program', tab: 'mem', parts: ['frames'], body: '<p>Only a few pages fit in physical memory frames. A <b>page fault</b> occurs when a needed page is absent. Loading it replaces another page if every frame is occupied. Each column shows the frames after one page reference.</p>' },
+    { t: 'Choosing what to evict', tab: 'mem', parts: ['frames', 'faults'], body: '<p>FIFO replaces the page loaded earliest. LRU replaces the least recently used page. OPT replaces the page needed furthest in the future. It requires future knowledge, so it provides a lower bound for comparison.</p>' },
     { t: 'Belady’s anomaly', tab: 'mem', parts: ['faults'], body: '<p>Press <b>Belady’s anomaly</b>. With FIFO, this string faults more with 4 frames than with 3. LRU and OPT never do this, because the pages they keep with n frames are always kept with n + 1.</p>' },
     { t: 'Checking for a safe order', tab: 'bank', parts: ['bank'], body: '<p>The <b>Banker’s algorithm</b> grants resources only if some order exists in which every process can still get its maximum and finish. Step through it. Each finished process returns what it held.</p>' }
   ];
@@ -168,7 +168,7 @@
       }).join('') + '</div>' +
       (S.algo === 'RR' ? '<label class="xp-field"><span>Quantum</span><input type="range" min="1" max="6" value="' + S.quantum + '" data-k="quantum"><output>' + S.quantum + '</output></label>' : '') + '</div>' +
       '<figure class="xp-os-gantt" data-part="gantt"><svg viewBox="0 0 ' + W + ' ' + h + '" role="img" aria-label="Gantt chart of the schedule">' + s + '</svg></figure>' +
-      '<div class="xp-os-grid"><table class="xp-table is-compact xp-os-procs" data-part="procs"><caption>Processes: edit any number</caption><thead><tr><th scope="col">Process</th><th scope="col">Arrival</th><th scope="col">Burst</th><th scope="col">Priority</th></tr></thead><tbody>' +
+      '<div class="xp-os-grid"><table class="xp-table is-compact xp-os-procs" data-part="procs"><caption>Processes. Edit any number</caption><thead><tr><th scope="col">Process</th><th scope="col">Arrival</th><th scope="col">Burst</th><th scope="col">Priority</th></tr></thead><tbody>' +
       S.procs.map(function (p, i) {
         return '<tr><th scope="row"><span class="xp-swatch" style="background:' + hue(i) + '"></span>' + p.id + '</th>' +
           ['arrival', 'burst', 'priority'].map(function (k) {
@@ -200,7 +200,7 @@
       '<tr class="xp-os-hit"><th scope="row">Result</th>' + R.cols.map(function (c) {
         return '<td title="' + (c.hit ? 'hit' : 'fault' + (c.evicted !== null ? ', evicted ' + c.evicted : '')) + '">' + (c.hit ? '✓' : '✗') + '</td>';
       }).join('') + '</tr></tbody></table></div>' +
-      '<p class="xp-os-sum" data-part="faults" aria-live="polite"><b>' + R.faults + ' faults</b> in ' + refs.length + ' references with ' + S.palgo + '. With ' + S.frames + ' frames: ' + others + '.</p>';
+      '<p class="xp-os-sum" data-part="faults" aria-live="polite"><b>' + R.faults + ' faults</b> in ' + refs.length + ' references with ' + S.palgo + '. With ' + S.frames + ' frames, ' + others + '.</p>';
   }
 
   function bankView() {
@@ -218,7 +218,7 @@
       }).join('') + '</tbody></table>' +
       '<div class="xp-os-bank"><p><b>Work</b> ' + work.join(' ') + '</p><p><b>Order so far</b> ' + (done.length ? done.map(function (i) { return 'P' + i; }).join(' → ') : 'none') + '</p>' +
       '<p class="xp-os-sum" aria-live="polite">' + (shown < R.steps.length
-        ? 'Next: find any unfinished process whose need fits in Work.'
+        ? 'Next, find an unfinished process whose remaining need fits within Work.'
         : R.safe ? '<b>Safe.</b> Every process can finish in this order, so the state is safe.' : '<b>Unsafe.</b> No remaining process fits in Work, so granting this state could deadlock.') + '</p></div></div>';
   }
 

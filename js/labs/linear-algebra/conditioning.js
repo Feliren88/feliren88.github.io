@@ -272,7 +272,7 @@
         var rows = [];
         for (var n = 2; n <= 12; n++) { var er = hilbertErrors(n); rows.push([n, er.resSolve.toExponential(1), er.resInv.toExponential(1), er.fwdSolve.toExponential(1), er.fwdInv.toExponential(1)]); }
         dlg.open('Errors table', table(rows, ['n', 'residual, solve', 'residual, invert', 'error in x, solve', 'error in x, invert']) +
-          '<p>Every value is relative and computed in your browser in 64-bit floats, with x set to all 1s.</p>', b);
+          '<p>The table reports relative errors using 64-bit floating-point arithmetic. This calculation fixes every entry of x at 1.</p>', b);
         return;
       }
       if (act === 'play') { play(); return; }

@@ -2,7 +2,7 @@
   <header class="xp-head">
     <span class="syl-phase">Build it by hand</span>
     <h2 id="xp-gan-title">Train a GAN in your browser</h2>
-    <p>A generative adversarial network trains 2 networks against each other. The generator makes points and the discriminator judges whether they look like the data. Press <b>Train</b> and watch the generator, trained live on this page, pull random noise onto the shape of the data.</p>
+    <p>A generative adversarial network (GAN) trains 2 networks against each other. The generator makes points, while the discriminator compares them with the data. Press <b>Train</b> to train the generator here and watch its points approach the data’s shape.</p>
   </header>
   <div class="xp-body tf" data-xp="gan"></div>
   <p class="xp-source">After Kahng, Thorat, Chau, Viégas and Wattenberg, <a href="https://poloclub.github.io/ganlab/" rel="noopener noreferrer">GAN Lab: Understanding Complex Deep Generative Models using Interactive Visual Experimentation</a> (IEEE VIS 2018; <a href="https://github.com/poloclub/ganlab" rel="noopener noreferrer">code</a>, Apache 2.0). The networks, their backpropagation and Adam are written for this page and checked against finite differences by <code>scripts/verify_explainers.py</code>. Losses follow Goodfellow et al., <a href="https://arxiv.org/abs/1406.2661" rel="noopener noreferrer">Generative Adversarial Nets</a> (2014), with the non-saturating generator loss.</p>
