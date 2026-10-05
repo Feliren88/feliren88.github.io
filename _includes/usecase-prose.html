@@ -1,0 +1,7 @@
+{%- capture paragraph_break %}
+
+{% endcapture -%}
+{%- assign paragraphs = include.text | split: paragraph_break -%}
+{%- for paragraph in paragraphs -%}
+<p class="{{ include.class }}">{{ paragraph | strip }}</p>
+{% endfor %}

@@ -35,14 +35,14 @@ layout: default
   {% if uc.situation %}
   <div class="uc-page-section">
     <span class="uc-section-label">Situation</span>
-    <p class="uc-section-body">{{ uc.situation }}</p>
+    {% include usecase-prose.html text=uc.situation class="uc-section-body" %}
   </div>
   {% endif %}
 
   {% if uc.complication %}
   <div class="uc-page-section">
     <span class="uc-section-label">The Challenge</span>
-    <p class="uc-section-body">{{ uc.complication }}</p>
+    {% include usecase-prose.html text=uc.complication class="uc-section-body" %}
   </div>
   {% endif %}
 
@@ -50,7 +50,8 @@ layout: default
   <div class="uc-page-section">
     <span class="uc-section-label">The Approach</span>
     {% for pair in uc.resolution %}
-    <p class="uc-section-body">{{ pair[1] }}</p>
+    {% assign approach_text = pair[1] %}
+    {% include usecase-prose.html text=approach_text class="uc-section-body" %}
     {% endfor %}
   </div>
   {% endif %}
@@ -58,28 +59,28 @@ layout: default
   {% if uc.impact %}
   <div class="uc-impact-block">
     <span class="uc-section-label">Impact</span>
-    <p class="uc-impact-body">{{ uc.impact }}</p>
+    {% include usecase-prose.html text=uc.impact class="uc-impact-body" %}
   </div>
   {% endif %}
 
   {% if uc.why_this %}
   <div class="uc-page-section">
     <span class="uc-section-label">Why I chose this problem</span>
-    <p class="uc-section-body">{{ uc.why_this }}</p>
+    {% include usecase-prose.html text=uc.why_this class="uc-section-body" %}
   </div>
   {% endif %}
 
   {% if uc.surprise %}
   <div class="uc-page-section">
     <span class="uc-section-label">What surprised me</span>
-    <p class="uc-section-body">{{ uc.surprise }}</p>
+    {% include usecase-prose.html text=uc.surprise class="uc-section-body" %}
   </div>
   {% endif %}
 
   {% if uc.next %}
   <div class="uc-page-section">
     <span class="uc-section-label">What I would do next</span>
-    <p class="uc-section-body">{{ uc.next }}</p>
+    {% include usecase-prose.html text=uc.next class="uc-section-body" %}
   </div>
   {% endif %}
 
