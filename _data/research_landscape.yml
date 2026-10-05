@@ -8,7 +8,6 @@ profiles:
     finding: 'Tests covered 4 navigation policies, 3 scores, and 2 benchmarks. They met the reported targets for including correct actions at individual steps.'
     limit: 'The guarantee requires routes used to set the cut-off and future routes to be <a href="/encp-vln/#encp-abstract-title">exchangeable</a>. Reordering those routes must leave the probability of the whole collection unchanged.'
     question: d-traj
-    connection: 'ENCP links a guarantee to the routes used to choose its action cut-off. Asking for help can change the route, so I want to test whether that guarantee survives.'
   - key: sea-vl
     name: SEA-VL
     title: Images and language grounded in Southeast Asia
@@ -17,7 +16,6 @@ profiles:
     finding: 'The dataset contains 1.28 million images across 11 regional languages.'
     limit: 'The dataset supports regional evaluation. A reliability claim still needs tests for the model and task using it.'
     question: d-shift
-    connection: 'SEA-VL provides regional data for testing models across languages and cultures. I want to examine whether signals used to flag errors remain useful across those settings.'
   - key: flood-procanet
     name: ProCANet
     title: Flood maps from colour and near-infrared images
@@ -27,24 +25,255 @@ profiles:
     limit: 'I also tested images from a different satellite without retraining. The reference labels came from a water index, which uses reflected light to identify water.'
     case_page: /usecases/procaenet-flood-segmentation/
     question: d-shift
-    connection: 'My flood mapping work tested a model across different satellite inputs. That experience motivates testing whether an error monitor can recognise when its own judgement needs review.'
 
 directions:
   - id: d-traj
+    x: 500
+    y: 262
+    label: Routes after<br>asking for help
+    from:
+    - encp-vln
+    - vln
     title: 'Do route guarantees hold when rules for seeking help change?'
     desc: '<a href="/encp-vln/">ENCP</a> gives an agent a set of suggested actions at each step. Its guarantee limits the chance of missing a correct action anywhere along the route. This guarantee requires routes used to set the cut-off and future routes to be <a href="/encp-vln/#encp-abstract-title">exchangeable</a>. Reordering those routes must leave the probability of the whole collection unchanged. However, asking for help can change which routes the agent follows. I want to test whether the guarantee still holds after that change.'
     sources:
       - { label: ENCP, url: /encp-vln/ }
   - id: d-cost
+    x: 395
+    y: 372
+    label: Withholding answers<br>as error costs change
+    from:
+    - crossmodal
+    - fraud
     title: 'When should a model withhold an answer as error costs change?'
     desc: 'The same error can carry different costs in different settings. I want rules that adjust when a model answers or asks for review. Those rules should also work when the model was trained with different error costs.'
     sources:
       - { label: Cross-modal abstention, url: /usecases/multilingual-vlm-crossmodal-conflict/ }
       - { label: Fraud detection, url: /usecases/fraud-detection-pipeline/ }
   - id: d-shift
+    x: 605
+    y: 372
+    label: Reviewing model signals<br>when inputs change
+    from:
+    - goal-hijack
+    - crossmodal
+    - sea-vl
+    - procanet
     title: 'Can internal model signals identify when an answer needs review?'
     desc: 'A monitor reads values inside a model to flag answers that may need review. These values, called internal model signals, can change with the language, inputs, or model. Therefore, I want to test when the monitor’s own judgement needs review.'
     sources:
       - { label: SEA-VL, url: 'https://aclanthology.org/2025.acl-long.916/' }
       - { label: Flood mapping, url: /usecases/procaenet-flood-segmentation/ }
       - { label: Goal Hijack Probe, url: /goal-hijack-probe/ }
+
+# Map positions and connections preserve the past-work landscape.
+clusters:
+- id: reliability
+  path: M457 153C455 180 447 224 414 245C381 267 302 271 258 280C214 288 185 307 149 297C114 286 61 249 43 216C24 183 23 129 40 100C57 72 105
+    55 145 47C185 38 231 44 278 50C324 55 396 63 426 80C456 97 459 125 457 153Z
+- id: language
+  path: M999 192C987 227 948 288 916 316C883 343 846 353 805 358C765 362 719 362 673 344C627 325 550 277 529 247C509 217 537 195 550 164C564 133
+    567 77 611 59C655 41 752 48 814 56C877 63 956 82 987 105C1018 128 1011 157 999 192Z
+- id: earth
+  path: M997 566C1002 598 973 639 943 662C913 684 853 697 818 700C784 703 771 698 736 678C701 659 625 614 610 585C596 556 635 527 652 505C668
+    484 680 469 711 457C742 445 802 431 836 433C869 435 884 447 911 469C938 491 992 534 997 566Z
+- id: society
+  path: M569 639C565 649 535 647 495 656C456 665 382 689 333 692C284 696 240 684 200 676C161 669 110 659 98 647C86 636 109 619 126 607C144 596
+    162 585 205 578C248 570 332 559 384 562C436 565 487 584 518 597C548 609 573 629 569 639Z
+- id: safety
+  path: M296 465C290 485 276 511 257 527C239 543 208 554 183 559C158 564 132 564 107 557C82 550 46 532 33 515C19 498 21 476 28 454C36 432 53 396
+    76 384C99 373 130 379 165 383C201 387 270 394 291 407C313 421 302 445 296 465Z
+- id: direction
+  path: M714 352C720 395 688 470 661 499C635 528 594 521 555 524C515 527 465 537 426 518C387 499 337 444 319 410C302 375 310 341 321 311C332 280
+    346 245 386 226C426 207 522 194 562 197C601 199 600 216 625 242C650 268 708 309 714 352Z
+  label: Research direction
+  label_x: 500
+  label_y: 214
+topics:
+- id: uq
+  cluster: reliability
+  x: 135
+  y: 95
+  label: Uncertainty Quantification
+  url: /encp-vln/#encp-method-title
+  desc: Uncertainty estimates measure how much doubt remains in a prediction.
+- id: conformal
+  cluster: reliability
+  x: 100
+  y: 235
+  label: Conformal Prediction
+  url: /encp-vln/#encp-method-title
+  desc: Conformal prediction uses past examples to choose sets of answers with a stated error limit.
+- id: vln
+  cluster: reliability
+  x: 380
+  y: 105
+  label: Vision-and-Language<br>Navigation
+  url: /encp-vln/
+  desc: A navigation agent follows language instructions using images of its surroundings.
+- id: vlm
+  cluster: language
+  x: 590
+  y: 120
+  label: Vision-Language Models
+  url: /usecases/multilingual-vlm-crossmodal-conflict/
+  desc: These models process images and text together.
+- id: multilingual
+  cluster: language
+  x: 775
+  y: 55
+  label: Multilingual NLP
+  url: /usecases/commonlid-language-identification/
+  desc: Natural language processing studies how computers work with human language. Here, the work covers several languages.
+- id: benchmarks
+  cluster: language
+  x: 785
+  y: 170
+  label: Benchmarks &amp; Datasets
+  url: https://aclanthology.org/2025.acl-long.916/
+  desc: A benchmark is a dataset and test procedure used to compare model performance.
+- id: cultural
+  cluster: language
+  x: 880
+  y: 262
+  label: Cultural &amp; Regional AI
+  url: https://aclanthology.org/2025.acl-long.916/
+  desc: This work evaluates models using languages, images, and contexts from specific regions.
+- id: safety
+  cluster: safety
+  x: 140
+  y: 420
+  label: Safety &amp; Security Monitoring
+  url: /goal-hijack-probe/
+  desc: A monitor flags inputs or model behaviour that may need review.
+- id: remote
+  cluster: earth
+  x: 870
+  y: 470
+  label: Remote Sensing
+  url: /usecases/procaenet-flood-segmentation/
+  desc: Remote sensing studies places using images or measurements collected from a distance, such as satellite images.
+- id: segmentation
+  cluster: earth
+  x: 790
+  y: 660
+  label: Semantic Segmentation
+  url: /usecases/procaenet-flood-segmentation/
+  desc: Semantic segmentation assigns a category to each image pixel, such as water or dry land.
+- id: urban
+  cluster: society
+  x: 310
+  y: 655
+  label: Urban Policy
+  url: /usecases/plastic-bag-ban-causal-analysis/
+  desc: This work examines how city policies affect outcomes such as waste complaints.
+work:
+- id: encp-vln
+  pub: encp-vln
+  cluster: reliability
+  x: 255
+  y: 215
+  label: ENCP
+  topics:
+  - uq
+  - conformal
+  - vln
+- id: sea-vl
+  pub: sea-vl
+  cluster: language
+  x: 660
+  y: 225
+  label: SEA-VL
+  topics:
+  - vlm
+  - benchmarks
+  - cultural
+- id: commonlid
+  pub: commonlid
+  cluster: language
+  x: 925
+  y: 105
+  label: CommonLID
+  topics:
+  - multilingual
+  - benchmarks
+- id: anthropogenic
+  pub: anthropogenic
+  cluster: language
+  x: 815
+  y: 345
+  label: Anthropogenic<br>Regional Adaptation
+  topics:
+  - cultural
+  - vlm
+- id: procanet
+  pub: flood-procanet
+  cluster: earth
+  x: 720
+  y: 560
+  label: ProCANet
+  topics:
+  - remote
+  - segmentation
+- id: mining
+  pub: mining-multispectral
+  cluster: earth
+  x: 890
+  y: 580
+  label: Mining<br>Footprints
+  topics:
+  - remote
+  - segmentation
+- id: retention
+  pub: retention-ponds
+  cluster: society
+  x: 470
+  y: 612
+  label: Retention Ponds
+  topics:
+  - urban
+  - remote
+- id: plastic
+  pub: plastic-bag-ban
+  cluster: society
+  x: 150
+  y: 625
+  label: Plastic Bag Ban
+  topics:
+  - urban
+- id: crossmodal
+  cluster: language
+  x: 700
+  y: 280
+  label: Cross-modal<br>Abstention
+  topics:
+  - multilingual
+  - vlm
+  title: Do Multilingual VLMs Abstain Under Cross-Modal Conflict in Low-Resource Languages?
+  venue: Apart Research Global South AI Safety Hackathon, 2026
+  desc: Models followed false captions more often in lower-resource languages. However, internal signals still identified whether they followed
+    the image or text. Therefore, we used these signals to guide models towards withholding answers.
+  url: /usecases/multilingual-vlm-crossmodal-conflict/
+- id: goal-hijack
+  cluster: safety
+  x: 250
+  y: 505
+  label: Goal Hijack Probe
+  topics:
+  - safety
+  title: Goal Hijack Probe
+  venue: Independent research project
+  desc: A detector reads internal model signals to flag attempts to override the user’s task. However, its false-alarm guarantee requires harmless
+    calibration prompts that represent future inputs.
+  url: /goal-hijack-probe/
+- id: fraud
+  cluster: safety
+  x: 95
+  y: 510
+  label: Fraud Detection
+  topics:
+  - safety
+  title: Real-time fraud detection pipeline
+  venue: GDP Labs, production system
+  desc: One real-time pipeline detected account takeover, synthetic identities, and merchant collusion.
+  url: /usecases/fraud-detection-pipeline/

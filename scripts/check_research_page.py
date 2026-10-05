@@ -6,20 +6,6 @@ import re
 from playwright.sync_api import sync_playwright, expect
 
 
-def selected_project(page, key, question):
-    buttons = page.locator('[data-research-choice][aria-pressed="true"]')
-    assert buttons.count() == 1
-    assert buttons.get_attribute('data-research-choice') == key
-    panels = page.locator('[data-research-connection]:visible')
-    assert panels.count() == 1
-    assert panels.get_attribute('data-research-connection') == key
-    assert panels.locator('[data-next-question]').get_attribute('href') == question
-    assert panels.locator('[data-contribution]').inner_text().strip()
-    assert panels.locator('[data-connection-reason]').inner_text().strip()
-    assert page.locator('.rd-card.is-connected').count() == 1
-    assert page.locator('.rd-card.is-connected').get_attribute('id') == question[1:]
-
-
 def check_cached_map(browser):
     # Cached HTML can request assets after their contents change on the server.
     # Use the historical rendered map with the current page's assets.
@@ -62,26 +48,30 @@ def main():
                     context, page, errors = open_page(browser, width, theme)
                     try:
                         page.goto('http://about.test/research/', wait_until='load')
-                        assert page.locator('[data-research-choice]').count() == 3, 'The connection explorer is missing.'
-                        selected_project(page, 'encp-vln', '#d-traj')
-                        for key, question in [('sea-vl', '#d-shift'), ('flood-procanet', '#d-shift')]:
-                            page.locator(f'[data-research-trace="{key}"]').click()
-                            selected_project(page, key, question)
-                        for key, question in [('sea-vl', '#d-shift'), ('flood-procanet', '#d-shift'), ('encp-vln', '#d-traj')]:
-                            page.locator(f'[data-research-choice="{key}"]').click()
-                            selected_project(page, key, question)
-                        button = page.locator('[data-research-choice="sea-vl"]')
-                        button.focus()
-                        page.keyboard.press('Space')
-                        selected_project(page, 'sea-vl', '#d-shift')
-                        button = page.locator('[data-research-choice="flood-procanet"]')
-                        button.focus()
+                        assert page.locator('#research-landscape .rl-stage').count() == 1, 'The research direction and past-work diagram is missing.'
+                        expect(page.locator('.rl-work')).to_have_count(11)
+                        expect(page.locator('.rl-dir')).to_have_count(3)
+                        encp = page.locator('.rl-work[data-id="encp-vln"]')
+                        encp.focus()
+                        expect(page.locator('.rl-preview')).to_be_visible()
+                        expect(page.locator('.rl-dir[data-id="d-traj"]')).to_have_class(re.compile(r'is-active'))
+                        direction = page.locator('.rl-dir[data-id="d-traj"]')
+                        expect(direction).to_have_accessible_description(re.compile('exchangeable'))
+                        direction.focus()
+                        expect(page.locator('.rl-preview-desc')).not_to_contain_text('<a')
+                        assert direction.get_attribute('href') == '/encp-vln/'
                         page.keyboard.press('Enter')
-                        selected_project(page, 'flood-procanet', '#d-shift')
-                        page.locator('[data-next-question]:visible').click()
-                        assert page.url.endswith('#d-shift')
-                        assert page.locator('#d-shift').is_visible()
-                        assert page.locator('[data-research-results]').get_attribute('aria-live') == 'polite'
+                        expect(page).to_have_url(re.compile(r'/encp-vln/$'))
+                        page.go_back()
+                        expect(page.locator('.rl-stage')).to_be_visible()
+                        for topic in page.locator('.rl-topic').all():
+                            assert topic.get_attribute('href'), 'A map term needs a linked explanation.'
+                            topic.focus()
+                            expect(page.locator('.rl-preview')).to_be_visible()
+                            assert page.locator('.rl-preview-desc').inner_text().strip()
+                        for edge in page.locator('.rl-edge').all():
+                            for coordinate in ['x1', 'y1', 'x2', 'y2']:
+                                float(edge.get_attribute(coordinate))
                         page.locator('[data-filter="geospatial"]').click()
                         expect(page.locator('#publications-container .project-card:visible')).to_have_count(3)
                         page.locator('[data-filter="all"]').click()
@@ -93,18 +83,18 @@ def main():
                         assert not errors, errors
                         page.locator('#research-landscape').scroll_into_view_if_needed()
                         page.screenshot(path=f'/tmp/research-design-{width}-{theme}.png', full_page=True)
-                        print(f'PASS Research selections, keyboard and archive, {width}px, {theme}.', flush=True)
+                        print(f'PASS Research map, keyboard and archive, {width}px, {theme}.', flush=True)
                     finally:
                         context.close()
             context, page, _ = open_page(browser, 390, 'light', javascript=False)
             try:
                 page.goto('http://about.test/research/', wait_until='load')
-                assert page.locator('[data-research-connection]:visible').count() == 3
-                assert page.locator('[data-research-choice]:visible').count() == 0
-                assert page.locator('[data-next-question]:visible').count() == 3
+                assert page.locator('.rl-work:visible').count() == 11
+                assert page.locator('.rl-dir:visible').count() == 3
+                expect(page.locator('.rl-dir[data-id="d-traj"]')).to_have_accessible_description(re.compile('exchangeable'))
                 expect(page.locator('#publications-container .project-card:visible')).to_have_count(8)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-                print('PASS All connections and archive readable without JavaScript.', flush=True)
+                print('PASS Diagram links and archive readable without JavaScript.', flush=True)
             finally:
                 context.close()
         finally:

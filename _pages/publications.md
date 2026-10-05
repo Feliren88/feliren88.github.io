@@ -32,16 +32,21 @@ extra_js: /js/components/research-landscape.js
 }
 </script>
 
-<article class="modern-portfolio research-modern">
+<article class="modern-portfolio research-modern research-current">
   <header class="mp-hero research-hero">
     <div>
       <h1>Research and selected work</h1>
       <p class="mp-lead">My work spans navigation, Southeast Asian datasets, and satellite image analysis. Across these settings, I examine how models support decisions and where their assumptions fail. The projects below show my contributions and the questions I want to pursue next.</p>
-      <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected work</a><a class="mp-text-link" href="#research-direction">What I want to test next →</a></div>
+      <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected work</a><a class="mp-text-link" href="#research-landscape">Past work and research direction →</a></div>
     </div>
   </header>
 
   {%- assign rl = site.data.research_landscape %}
+  <section class="mp-section research-landscape" id="research-landscape">
+    <header class="mp-section-head"><div><h2>Past work and research direction</h2></div><p>Filled shapes link to past papers and projects. Dashed shapes show open questions and link to their starting points. Hover over a shape or focus it to read more.</p></header>
+    {% include research-landscape.html %}
+  </section>
+
   <section class="mp-section" id="featured-research">
     <header class="mp-section-head"><div><h2>Selected work</h2></div><p>In navigation, I developed a method for choosing which actions an agent should consider. Alongside this work, I contributed regional data systems and designed a model for flood mapping.</p></header>
     <div class="research-feature-grid">
@@ -64,30 +69,10 @@ extra_js: /js/components/research-landscape.js
             {% assign project_page = pub.project_page | default: profile.case_page %}
             {% if project_page %}<a href="{{ project_page }}" class="mp-text-link">Project page</a>{% endif %}
             <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a>
-            <a href="#connection-{{ profile.key }}" class="mp-text-link" data-research-trace="{{ profile.key }}">Next question →</a>
           </div>
         </div>
       </article>{% endfor %}
     </div>
-  </section>
-
-  <section class="mp-section research-direction" id="research-direction">
-    <header class="mp-section-head"><div><h2>What I want to test next</h2></div><p>These projects motivate my current interest in decisions under uncertainty. I want to test how reliability changes when an agent’s choices, inputs, or error costs change.</p></header>
-    <div class="rd-grid">
-      {% for question in rl.directions %}
-      <article class="rd-card" id="{{ question.id }}">
-        <h3>{{ question.title }}</h3>
-        <p>{{ question.desc }}</p>
-        <p class="rd-builds"><span>Starting points</span> {% for source in question.sources %}<a href="{{ source.url }}"{% if source.url contains '://' %} target="_blank" rel="noreferrer"{% endif %}>{{ source.label }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
-      </article>
-      {% endfor %}
-    </div>
-    <p class="research-practice">For each question, I want to name the decision, the cost of errors, and the required assumptions. This would help people judge whether a reliability claim applies to their setting.</p>
-  </section>
-
-  <section class="mp-section research-landscape" id="research-landscape">
-    <header class="mp-section-head"><div><h2>How this work shapes my questions</h2></div><p>Each project offers a starting point for further tests. Explore how a contribution leads to an open question.</p></header>
-    {% include research-landscape.html %}
   </section>
 
   <section class="mp-section research-archive" id="research-archive">

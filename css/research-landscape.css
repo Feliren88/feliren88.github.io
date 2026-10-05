@@ -50,6 +50,7 @@
 }
 
 .rl-topic {
+  text-decoration: none;
   font-size: clamp(0.72rem, 1.7cqw, 1.2rem);
   color: var(--text);
   background: var(--bg);
@@ -157,68 +158,35 @@
 .rd-card:target { outline: 2px dashed #8b6fc4; outline-offset: -2px; }
 @media (max-width: 800px) { .rd-grid { grid-template-columns: 1fr; } }
 
-/* Current Research layout, scoped to its matching connection explorer. */
+/* Current Research layout. The alternate selector supports cached explorer pages. */
 /* Selected Research work, open questions and their connections. */
-.research-modern:has([data-research-connections]) .research-hero { grid-template-columns: 1fr; gap: 0; }
-.research-modern:has([data-research-connections]) .research-hero h1 { max-width: 24ch; }
-.research-modern:has([data-research-connections]) .research-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
-.research-modern:has([data-research-connections]) .research-feature {
+.research-modern:is(.research-current, :has([data-research-connections])) .research-hero { grid-template-columns: 1fr; gap: 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-hero h1 { max-width: 24ch; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature {
   display: block;
   padding: var(--card-pad-lg);
   border: 0;
   scroll-margin-top: 6rem;
 }
-.research-modern:has([data-research-connections]) .research-feature h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.25; }
-.research-modern:has([data-research-connections]) .research-feature-name { margin: 0; color: var(--accent); font-weight: 700; }
-.research-modern:has([data-research-connections]) .research-feature-meta { display: block; line-height: 1.7; }
-.research-modern:has([data-research-connections]) .research-feature-meta span { display: block; }
-.research-modern:has([data-research-connections]) .research-contribution { min-height: 0; margin: 1rem 0 0; }
-.research-modern:has([data-research-connections]) .research-feature dl { margin: 1.75rem 0 1.5rem; }
-.research-modern:has([data-research-connections]) .research-feature dl div { grid-template-columns: 110px minmax(0, 1fr); padding: 0.85rem 0; }
-.research-modern:has([data-research-connections]) .research-feature dl div:first-child { border-top: 0; padding-top: 0; }
-.research-modern:has([data-research-connections]) .research-feature dt { font-size: 0.8rem; text-transform: none; letter-spacing: 0; }
-.research-modern:has([data-research-connections]) .research-feature dd { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
-.research-modern:has([data-research-connections]) .research-feature-actions { flex-wrap: wrap; }
-.research-modern:has([data-research-connections]) .research-practice { max-width: 68ch; margin: 2rem 0 0; color: var(--muted); line-height: 1.7; }
-.research-modern:has([data-research-connections]) .rd-grid { display: grid; grid-template-columns: 1fr; }
-.research-modern:has([data-research-connections]) .rd-card { padding: 1.75rem 0; border-top: 1px solid var(--line); scroll-margin-top: 6rem; }
-.research-modern:has([data-research-connections]) .rd-card h3 { margin: 0 0 0.75rem; font-size: clamp(1.2rem, 2vw, 1.55rem); line-height: 1.35; max-width: 48ch; }
-.research-modern:has([data-research-connections]) .rd-card p { margin: 0; max-width: 72ch; color: var(--muted); line-height: 1.75; }
-.research-modern:has([data-research-connections]) .rd-card .rd-builds { margin-top: 1rem; font-size: 0.9rem; }
-.research-modern:has([data-research-connections]) .rd-builds span { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
-.research-modern:has([data-research-connections]) .research-feature dd a, .research-modern:has([data-research-connections]) .rd-card > p a, .research-modern:has([data-research-connections]) .rd-builds a, .research-modern:has([data-research-connections]) .research-connection a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-.research-modern:has([data-research-connections]) .rd-card:target, .research-modern:has([data-research-connections]) .rd-card.is-connected:target { outline: 2px solid var(--accent); outline-offset: 0.5rem; }
-.research-modern:has([data-research-connections]) .rd-card.is-connected h3 { color: var(--accent); }
-.research-modern:has([data-research-connections]) .research-connections { border-block: 1px solid var(--line); padding: 1.75rem 0; }
-.research-modern:has([data-research-connections]) .research-connections [hidden] { display: none; }
-.research-modern:has([data-research-connections]) .research-connection-controls > p { margin: 0 0 1rem; color: var(--muted); }
-.research-modern:has([data-research-connections]) .research-connection-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
-.research-modern:has([data-research-connections]) .research-connection-buttons button {
-  min-height: 44px;
-  padding: 0.6rem 1.1rem;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border-ui);
-  border-radius: 4px;
-  font: 600 1rem "Manrope", sans-serif;
-  cursor: pointer;
-}
-.research-modern:has([data-research-connections]) .research-connection-buttons button[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-.research-modern:has([data-research-connections]) .research-connection { max-width: 72ch; }
-.research-modern:has([data-research-connections]) .research-connection:not([hidden]) ~ .research-connection:not([hidden]) { border-top: 1px solid var(--line); padding-top: 1.75rem; margin-top: 1.75rem; }
-.research-modern:has([data-research-connections]) .research-connection-path { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-.research-modern:has([data-research-connections]) .research-connection-path h3 { scroll-margin-top: 6rem; margin: 0; font-size: 1.3rem; }
-.research-modern:has([data-research-connections]) .research-connection-path p { margin: 0; color: var(--muted); }
-.research-modern:has([data-research-connections]) .research-connection-path > span { color: var(--accent); }
-.research-modern:has([data-research-connections]) .research-connection > p { margin: 1rem 0; line-height: 1.75; color: var(--muted); }
-.research-modern:has([data-research-connections]) .research-connection [data-next-question] { display: block; font-weight: 600; line-height: 1.6; }
-.research-modern:has([data-research-connections]) .research-connection-work { display: inline-block; margin-top: 1.25rem; font-size: 0.9rem; }
-.research-modern:has([data-research-connections]) .research-feature:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
-.research-modern:has([data-research-connections]) .research-feature:last-child:nth-child(odd) dl { margin-top: 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.25; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-name { margin: 0; color: var(--accent); font-weight: 700; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-meta { display: block; line-height: 1.7; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-meta span { display: block; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-contribution { min-height: 0; margin: 1rem 0 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dl { margin: 1.75rem 0 1.5rem; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dl div { grid-template-columns: 110px minmax(0, 1fr); padding: 0.85rem 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dl div:first-child { border-top: 0; padding-top: 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dt { font-size: 0.8rem; text-transform: none; letter-spacing: 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dd { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-actions { flex-wrap: wrap; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature:last-child:nth-child(odd) dl { margin-top: 0; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dd a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
 @media (max-width: 760px) {
-.research-modern:has([data-research-connections]) .research-feature-grid { grid-template-columns: 1fr; }
-.research-modern:has([data-research-connections]) .research-feature:last-child:nth-child(odd) { display: block; }
-.research-modern:has([data-research-connections]) .research-feature:last-child:nth-child(odd) dl { margin-top: 1.75rem; }
-.research-modern:has([data-research-connections]) .research-feature { grid-template-columns: 1fr; gap: 1.5rem; }
-.research-modern:has([data-research-connections]) .research-feature dl div { grid-template-columns: 1fr; gap: 0.5rem; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature-grid { grid-template-columns: 1fr; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature:last-child:nth-child(odd) { display: block; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature:last-child:nth-child(odd) dl { margin-top: 1.75rem; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature { grid-template-columns: 1fr; gap: 1.5rem; }
+.research-modern:is(.research-current, :has([data-research-connections])) .research-feature dl div { grid-template-columns: 1fr; gap: 0.5rem; }
 }

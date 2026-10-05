@@ -1,23 +1,55 @@
+{%- comment -%}
+The research landscape map on /research/. All content comes from
+_data/research_landscape.yml; titles, venues and links of published papers come
+from _data/publications.yml. Node positions are percentages of a 1000 x 700
+stage, so the SVG lines and the HTML pills stay aligned at every width.
+{%- endcomment -%}
 {%- assign rl = site.data.research_landscape -%}
-<div class="research-connections" data-research-connections>
-  <div class="research-connection-controls" data-research-controls hidden>
-    <p id="research-choice-label">Choose a project to trace its next question.</p>
-    <div class="research-connection-buttons" role="group" aria-labelledby="research-choice-label">
-      {% for profile in rl.profiles %}
-      <button type="button" data-research-choice="{{ profile.key }}" aria-pressed="false" aria-controls="research-connection-results">{{ profile.name }}</button>
-      {% endfor %}
-    </div>
-  </div>
-  <div id="research-connection-results" data-research-results aria-live="polite" aria-atomic="true">
-    {% for profile in rl.profiles %}
-    {% assign question = rl.directions | where: 'id', profile.question | first %}
-    <article class="research-connection" data-research-connection="{{ profile.key }}" data-question="{{ profile.question }}" aria-labelledby="connection-{{ profile.key }}">
-      <div class="research-connection-path"><h3 id="connection-{{ profile.key }}">{{ profile.name }}</h3><span aria-hidden="true">→</span><p>Next question</p></div>
-      <p data-contribution>{{ profile.contribution }}</p>
-      <p data-connection-reason>{{ profile.connection }}</p>
-      <a data-next-question href="#{{ profile.question }}">{{ question.title }}</a>
-      <a class="research-connection-work" href="#work-{{ profile.key }}">View the project and evidence <span aria-hidden="true">↑</span></a>
-    </article>
-    {% endfor %}
+{%- assign rl_nodes = rl.topics | concat: rl.work | concat: rl.directions -%}
+<div class="rl-scroll">
+  <div class="rl-stage">
+    <svg class="rl-svg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      {%- for c in rl.clusters %}
+      <path class="rl-region rl--{{ c.id }}" d="{{ c.path }}"/>
+      {%- endfor %}
+      {%- for w in rl.work %}{% for t_id in w.topics %}{% assign t = rl_nodes | where: 'id', t_id | first %}
+      <line class="rl-edge" data-a="{{ w.id }}" data-b="{{ t.id }}" x1="{{ w.x }}" y1="{{ w.y }}" x2="{{ t.x }}" y2="{{ t.y }}"/>
+      {%- endfor %}{% endfor %}
+      {%- for d in rl.directions %}{% for f_id in d.from %}{% assign f = rl_nodes | where: 'id', f_id | first %}
+      <line class="rl-edge rl-edge--dir" data-a="{{ d.id }}" data-b="{{ f.id }}" x1="{{ d.x }}" y1="{{ d.y }}" x2="{{ f.x }}" y2="{{ f.y }}"/>
+      {%- endfor %}{% endfor %}
+    </svg>
+    {%- for c in rl.clusters %}{% if c.label %}
+    <span class="rl-region-label rl--{{ c.id }}" style="left:{{ c.label_x | divided_by: 10.0 }}%;top:{{ c.label_y | divided_by: 7.0 }}%">{{ c.label }}</span>
+    {%- endif %}{% endfor %}
+    {%- for t in rl.topics %}
+    <a class="rl-node rl-topic rl--{{ t.cluster }}" data-id="{{ t.id }}" style="left:{{ t.x | divided_by: 10.0 }}%;top:{{ t.y | divided_by: 7.0 }}%"
+       href="{{ t.url }}"{% if t.url contains '://' %} target="_blank" rel="noreferrer"{% endif %}
+       data-title="{{ t.label | replace: '<br>', ' ' | strip_html | escape }}" data-venue="Topic" data-desc="{{ t.desc | escape }}"
+       aria-label="{{ t.label | replace: '<br>', ' ' | strip_html | escape }}. {{ t.desc | escape }}">{{ t.label }}</a>
+    {%- endfor %}
+    {%- for w in rl.work %}
+    {%- if w.pub %}{% assign pub = site.data.publications | where: 'key', w.pub | first %}
+      {%- assign w_title = pub.title %}{% assign w_venue = pub.venue %}{% assign w_desc = pub.description %}{% assign w_url = pub.project_page | default: pub.url %}
+    {%- else %}
+      {%- assign w_title = w.title %}{% assign w_venue = w.venue %}{% assign w_desc = w.desc %}{% assign w_url = w.url %}
+    {%- endif %}
+    <a class="rl-node rl-work rl--{{ w.cluster }}" style="left:{{ w.x | divided_by: 10.0 }}%;top:{{ w.y | divided_by: 7.0 }}%"
+       href="{{ w_url }}"{% if w_url contains '://' %} target="_blank" rel="noreferrer"{% endif %}
+       data-id="{{ w.id }}" data-title="{{ w_title | escape }}" data-venue="{{ w_venue | escape }}" data-desc="{{ w_desc | escape }}"
+       aria-label="{{ w_title | escape }}, {{ w_venue | escape }}">{{ w.label }}</a>
+    {%- endfor %}
+    {%- for d in rl.directions %}
+    <a class="rl-node rl-dir" style="left:{{ d.x | divided_by: 10.0 }}%;top:{{ d.y | divided_by: 7.0 }}%" href="{{ d.sources.first.url }}"{% if d.sources.first.url contains "://" %} target="_blank" rel="noreferrer"{% endif %}
+       data-id="{{ d.id }}" data-title="{{ d.title | escape }}" data-venue="Research direction" data-desc="{{ d.desc | strip_html | escape }}"
+       aria-label="Open starting point for {{ d.title | escape }}" aria-describedby="rl-desc-{{ d.id }}">{{ d.label }}</a>
+    <span id="rl-desc-{{ d.id }}" hidden>{{ d.desc | strip_html | escape }}</span>
+    {%- endfor %}
+    <div class="rl-preview" role="tooltip" hidden><p class="rl-preview-venue"></p><p class="rl-preview-title"></p><p class="rl-preview-desc"></p></div>
   </div>
 </div>
+<ul class="rl-legend" aria-label="Map key">
+  <li><span class="rl-key rl-key--work" aria-hidden="true"></span>Past paper or project</li>
+  <li><span class="rl-key rl-key--topic" aria-hidden="true"></span>Topic</li>
+  <li><span class="rl-key rl-key--dir" aria-hidden="true"></span>Research direction</li>
+</ul>
