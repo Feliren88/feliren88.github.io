@@ -90,7 +90,7 @@ motion_scene: record
       <div class="about-method-grid">
         <article><span>01</span><h3>What can a guarantee cover?</h3><p>My navigation work sets thresholds using whole routes, allowing steps to depend on each other. However, the guarantee requires exchangeability. This means reordering calibration and test routes must leave their probabilities unchanged.</p></article>
         <article><span>02</span><h3>Which guarantees survive change?</h3><p>A threshold can meet its overall target yet fail when inputs change. Therefore, I want to identify which assumptions matter for each language, task, or input format.</p></article>
-        <article><span>03</span><h3>Can internal evidence help?</h3><p>In Telugu tests, an internal classifier identified whether a model followed the image or caption. Its accuracy was 0.92. Building on that result, I want to test whether the signal predicts errors after model changes.</p></article>
+        <article><span>03</span><h3>Can internal evidence help?</h3><p>I want to test whether internal signals reveal which evidence a model follows. If so, I will examine whether those signals predict errors after model changes.</p></article>
         <article><span>04</span><h3>When should a model defer?</h3><p>A model can act, withhold an answer, or ask for review. Therefore, I want decision rules that account for the costs of errors and review.</p></article>
       </div>
     </div>
