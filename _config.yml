@@ -87,6 +87,8 @@ exclude:
   - scripts/games.json
   - scripts/test_metacognition.js
   - scripts/check_metacognition_page.py
+  - scripts/check_about_page.py
+  - scripts/check_research_page.py
   - notes
 
 # Permalink structure

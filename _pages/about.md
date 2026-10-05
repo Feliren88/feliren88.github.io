@@ -7,14 +7,15 @@ permalink: /
 redirect_from:
   - /about/
 extra_css: /css/about.css
+extra_js: /js/components/about-decisions.js
 hide_title: true
 motion_scene: record
 ---
 <article class="about-story">
   <header class="about-story-hero">
     <div class="about-story-copy">
-      <h1>When does a model’s uncertainty <em>remain valid?</em></h1>
-      <p class="about-story-lead">I’m Vicky Feliren. I study how agents make a sequence of decisions with incomplete evidence. Each choice changes what the agent encounters next. Therefore, I ask when it should act, wait, or seek help. My work in navigation, multilingual evaluation, and deployed machine learning informs these questions.</p>
+      <h1>When should an agent <em>ask for help?</em></h1>
+      <p class="about-story-lead">I’m Vicky Feliren, an applied scientist interested in decisions under uncertainty. I study when an agent should act, gather more evidence, or ask for help.</p>
       <div class="about-story-actions">
         <a class="btn btn-primary" href="/research/">Read the research</a>
         <a class="about-text-link" href="/cv/">View the CV <span aria-hidden="true">↗</span></a>
@@ -43,78 +44,89 @@ motion_scene: record
   </div>
   {% endif %}
 
-  <!-- The record slideshow sits above the sticky section navigation. -->
+  <!-- The record slideshow introduces the background below. -->
   <div data-scene-slot></div>
 
-  <nav class="about-story-nav" aria-label="On this page">
-    <span>About</span>
-    <a href="#question">Question</a>
-    <a href="#path">Experience</a>
-    <a href="#method">Research agenda</a>
-    <a href="#direction">Open question</a>
-  </nav>
-
-  <section class="about-chapter" id="question">
-    <div class="about-chapter-index"><span>01</span><p>The question</p></div>
-    <div class="about-chapter-body">
-      <h2>A reliability claim needs clear conditions.</h2>
-      <div class="about-prose-columns">
-        <p>A navigation agent can make a confident wrong turn. Moreover, a rule tested on individual steps may fail across a whole route. My ENCP method sets its threshold using complete routes. Its guarantee concerns whether proposed action sets contain the correct action throughout a route. However, the guarantee depends on how calibration and test routes are sampled. Therefore, a new environment requires checking that assumption again.</p>
-        <p>I also study models that receive images and conflicting text. In these tests, an internal signal reveals which source the model follows. Meanwhile, my security detector can exceed its false-alarm target when harmless input formats change. Together, these findings motivate a broader question. Which uncertainty claims survive changes in models and data?</p>
-      </div>
-      <div class="about-equation" role="img" aria-label="Research question connecting an uncertainty estimate, its validity conditions, and a decision">
-        <span>Uncertainty estimate</span><i>→</i><span>Validity conditions</span><i>→</i><strong>Decision</strong>
-      </div>
+  <section class="about-overview-section" id="background" aria-labelledby="about-background-title">
+    <header><h2 id="about-background-title">Background</h2></header>
+    <div class="about-overview-copy">
+      <p>At Jakarta Smart City, I forecast municipal waste. Later, at GDP Labs, I built banking models. At Monash, I studied flood and mining maps from satellite images. Alongside this work, I help build Southeast Asian datasets with SEACrowd.</p>
+      <p>These settings shaped my interest in how uncertainty should influence a decision.</p>
+      <a class="about-inline-cta" href="/cv/">View the full CV <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <section class="about-chapter" id="path">
-    <div class="about-chapter-index"><span>02</span><p>The path</p></div>
-    <div class="about-chapter-body">
-      <h2>Decisions in practice shaped my research question.</h2>
-      <div class="about-path" role="list">
-        <article role="listitem"><time>2021</time><div><h3>Jakarta Smart City</h3><p>I forecast municipal waste to help plan city resources. Therefore, I judged the model by the decisions it could inform.</p></div></article>
-        <article role="listitem"><time>2021–23</time><div><h3>Banking systems</h3><p>I built biometric, credit, and fraud models for Indonesian banks. In that work, I had to consider what each error would cost.</p></div></article>
-        <article role="listitem"><time>2022–25</time><div><h3>Earth observation</h3><p>At Monash, I studied flood and mining maps from satellite images. In those studies, different sensors and regions exposed each model’s limits.</p></div></article>
-        <article role="listitem"><time>2024–present</time><div><h3>SEACrowd</h3><p>I help build datasets and benchmarks for Southeast Asian languages and images. Through this work, I contributed to SEA-VL, published at ACL 2025.</p></div></article>
-        <article role="listitem" class="is-current"><time>2026</time><div><h3>Navigation and uncertainty</h3><p>I proposed my Monash thesis on reliability guarantees across entire navigation routes. The resulting preprint covers proposed action sets throughout a route. However, that guarantee requires stated assumptions about calibration and test routes.</p></div></article>
+  <section class="about-overview-section about-research" id="research-interests" aria-labelledby="about-research-title">
+    <header><h2 id="about-research-title">Research interests</h2></header>
+    <div class="about-research-content">
+      <div class="about-overview-copy">
+        <p>Each choice an agent makes changes what it encounters next. Therefore, I want to study whether uncertainty estimates remain reliable across a whole task.</p>
+        <p>I’m interested in how changes in inputs, models, and error costs affect these decisions. I also want to test whether internal model signals help identify when an answer needs review.</p>
+        <a class="about-inline-cta" href="/research/">See my work and next questions <span aria-hidden="true">→</span></a>
       </div>
-      <a class="about-inline-cta" href="/cv/">Read the full CV <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
 
-  <section class="about-chapter" id="method">
-    <div class="about-chapter-index"><span>03</span><p>The agenda</p></div>
-    <div class="about-chapter-body">
-      <h2>I study when uncertainty estimates remain reliable.</h2>
-      <div class="about-method-grid">
-        <article><span>01</span><h3>What can a guarantee cover?</h3><p>My navigation work sets thresholds using whole routes, allowing steps to depend on each other. However, the guarantee requires exchangeability. This means reordering calibration and test routes must leave their probabilities unchanged.</p></article>
-        <article><span>02</span><h3>Which guarantees survive change?</h3><p>A threshold can meet its overall target yet fail when inputs change. Therefore, I want to identify which assumptions matter for each language, task, or input format.</p></article>
-        <article><span>03</span><h3>Can internal evidence help?</h3><p>I want to test whether internal signals reveal which evidence a model follows. If so, I will examine whether those signals predict errors after model changes.</p></article>
-        <article><span>04</span><h3>When should a model defer?</h3><p>A model can act, withhold an answer, or ask for review. Therefore, I want decision rules that account for the costs of errors and review.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="about-chapter" id="direction">
-    <div class="about-chapter-index"><span>04</span><p>The open question</p></div>
-    <div class="about-chapter-body">
-      <h2>Can a decision rule stay reliable after the agent changes its course?</h2>
-      <div class="about-direction-panel">
-        <div>
-          <span class="about-status"><i></i> An open hypothesis</span>
-          <p>An agent changes what it sees next when it acts or asks for help. Therefore, I want to test whether its decision rule stays reliable across that sequence. Further tests could change the model through training, including training for safer behaviour.</p>
+      <figure class="about-decision-example" data-about-decisions aria-labelledby="about-example-title">
+        <figcaption>
+          <h3 id="about-example-title">Each choice changes the next decision.</h3>
+          <p>A navigation agent reaches an unfamiliar junction.</p>
+        </figcaption>
+        <svg class="about-decision-diagram about-decision-diagram--wide" viewBox="0 0 760 245" role="img" aria-labelledby="about-diagram-title about-diagram-desc">
+          <title id="about-diagram-title">Evidence and decisions form a sequence</title>
+          <desc id="about-diagram-desc">Available evidence informs the next step. That step changes later evidence, which informs the next decision.</desc>
+          <defs><marker id="about-arrow-wide" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>
+          <g class="about-diagram-nodes">
+            <rect x="20" y="35" width="205" height="76" rx="5" />
+            <rect x="280" y="35" width="190" height="76" rx="5" />
+            <rect x="525" y="35" width="215" height="76" rx="5" />
+          </g>
+          <g class="about-diagram-labels" text-anchor="middle">
+            <text x="122" y="78">Available evidence</text>
+            <text x="375" y="78">Choose the next step</text>
+            <text x="632" y="78" data-about-next>Later evidence</text>
+          </g>
+          <g class="about-diagram-arrows" marker-end="url(#about-arrow-wide)">
+            <path d="M 230 73 H 271" />
+            <path d="M 475 73 H 516" />
+            <path class="about-diagram-feedback" d="M 632 119 V 178 H 122 V 119" />
+          </g>
+          <text class="about-diagram-note" x="380" y="222" text-anchor="middle">Later evidence informs the next decision.</text>
+        </svg>
+        <svg class="about-decision-diagram about-decision-diagram--narrow" viewBox="0 0 320 295" role="img" aria-labelledby="about-diagram-mobile-title about-diagram-mobile-desc">
+          <title id="about-diagram-mobile-title">Evidence and decisions form a sequence</title>
+          <desc id="about-diagram-mobile-desc">Available evidence informs the next step. That step changes later evidence, which informs the next decision.</desc>
+          <defs><marker id="about-arrow-narrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>
+          <g class="about-diagram-nodes">
+            <rect x="25" y="10" width="245" height="62" rx="5" />
+            <rect x="25" y="110" width="245" height="62" rx="5" />
+            <rect x="25" y="210" width="245" height="62" rx="5" />
+          </g>
+          <g class="about-diagram-labels" text-anchor="middle">
+            <text x="147" y="47">Available evidence</text>
+            <text x="147" y="147">Choose the next step</text>
+            <text x="147" y="247" data-about-next>Later evidence</text>
+          </g>
+          <g class="about-diagram-arrows" marker-end="url(#about-arrow-narrow)">
+            <path d="M 147 78 V 101" />
+            <path d="M 147 178 V 201" />
+            <path class="about-diagram-feedback" d="M 276 241 H 306 V 41 H 279" />
+          </g>
+        </svg>
+        <div class="about-decision-controls" data-about-controls hidden>
+          <p id="about-choice-instruction">Choose the agent’s next step.</p>
+          <div class="about-decision-buttons" role="group" aria-labelledby="about-choice-instruction">
+            <button type="button" data-about-choice="act" aria-pressed="false" aria-controls="about-decision-outcomes">Act</button>
+            <button type="button" data-about-choice="gather" aria-pressed="false" aria-controls="about-decision-outcomes">Gather evidence</button>
+            <button type="button" data-about-choice="help" aria-pressed="false" aria-controls="about-decision-outcomes">Ask for help</button>
+          </div>
         </div>
-        <dl>
-          <div><dt>Evidence so far</dt><dd><a href="/encp-vln/">ENCP</a> sets thresholds using complete routes under stated assumptions about calibration and test routes.</dd></div>
-          <div><dt>Working hypothesis</dt><dd>A change in when the agent asks for help may require a new calibration rule.</dd></div>
-          <div><dt>What would change the view</dt><dd>Evidence that the existing rule still meets its target across the changed routes.</dd></div>
-        </dl>
-      </div>
-      <div class="about-closing">
-        <p>For the evidence behind these questions, see my published work and preprint on the research page.</p>
-        <div><a class="btn btn-primary" href="/research/">Read the research</a><a class="btn btn-secondary" href="/contact/">Contact me</a></div>
-      </div>
+        <div id="about-decision-outcomes" data-about-outcomes aria-live="polite" aria-atomic="true">
+          <ul class="about-decision-outcomes">
+            <li data-about-outcome="act" data-next-label="The corridor ahead"><strong>Act</strong><p>The agent enters a corridor. Its next decision depends on what it sees there.</p></li>
+            <li data-about-outcome="gather" data-next-label="More observations"><strong>Gather evidence</strong><p>The agent inspects its surroundings. It gains more observations before choosing a corridor.</p></li>
+            <li data-about-outcome="help" data-next-label="Additional guidance"><strong>Ask for help</strong><p>The agent pauses for guidance. Its next decision uses the additional instruction.</p></li>
+          </ul>
+        </div>
+      </figure>
     </div>
   </section>
 </article>

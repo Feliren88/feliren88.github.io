@@ -35,47 +35,59 @@ extra_js: /js/components/research-landscape.js
 <article class="modern-portfolio research-modern">
   <header class="mp-hero research-hero">
     <div>
-      <h1>When should an agent act, defer, or ask for help?</h1>
-      <p class="mp-lead">I study how agents decide when to act, wait, or seek help. Each choice changes the evidence available for the next decision. Therefore, I ask when uncertainty estimates remain reliable across a whole task. My navigation, multilingual evaluation, and applied machine learning work informs this research.</p>
-      <div class="mp-actions"><a class="btn btn-primary" href="#research-direction">Research direction</a><a class="mp-text-link" href="#research-landscape">How past work connects →</a></div>
+      <h1>Research and selected work</h1>
+      <p class="mp-lead">My work spans navigation, Southeast Asian datasets, and satellite image analysis. Across these settings, I examine how models support decisions and where their assumptions fail. The projects below show my contributions and the questions I want to pursue next.</p>
+      <div class="mp-actions"><a class="btn btn-primary" href="#featured-research">Selected work</a><a class="mp-text-link" href="#research-direction">What I want to test next →</a></div>
     </div>
-    <aside class="research-thesis" aria-label="Research position">
-      <strong>Research position</strong>
-      <p>An uncertainty claim should state which decision it supports and when it holds. Therefore, I test how changes in decision rules, data, or costs affect those claims.</p>
-    </aside>
   </header>
 
   {%- assign rl = site.data.research_landscape %}
-  {%- assign rl_from = rl.work | concat: rl.topics %}
-  <section class="mp-section research-direction" id="research-direction">
-    <header class="mp-section-head"><div><h2>Research direction</h2></div><p>An agent’s choices change what it sees next. Therefore, confidence in one answer may say little about the whole task. I am writing a survey on this problem, which motivates the questions below.</p></header>
-    <div class="rd-grid">
-      {%- for d in rl.directions %}
-      <article class="rd-card" id="{{ d.id }}">
-        <h3>{{ d.title }}</h3>
-        <p>{{ d.desc }}</p>
-        <p class="rd-builds"><span>Builds on</span> {% for f_id in d.from %}{% assign f = rl_from | where: 'id', f_id | first %}{% assign f_name = f.label | replace: '<br>', ' ' %}{% if f.pub %}{% assign f_pub = site.data.publications | where: 'key', f.pub | first %}{% assign f_url = f_pub.project_page | default: f_pub.url %}{% else %}{% assign f_url = f.url %}{% endif %}{% if f_url %}<a href="{{ f_url }}"{% if f_url contains '://' %} target="_blank" rel="noreferrer"{% endif %}>{{ f_name }}</a>{% else %}{{ f_name }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
-      </article>
-      {%- endfor %}
+  <section class="mp-section" id="featured-research">
+    <header class="mp-section-head"><div><h2>Selected work</h2></div><p>In navigation, I developed a method for setting thresholds across whole routes. Alongside this work, I contributed regional data systems and designed a model for flood mapping.</p></header>
+    <div class="research-feature-grid">
+      {% for profile in rl.profiles %}
+      {% assign pub = site.data.publications | where: 'key', profile.key | first %}
+      <article class="research-feature" id="work-{{ profile.key }}" aria-labelledby="title-{{ profile.key }}">
+        <div>
+          <p class="research-feature-name">{{ profile.name }}</p>
+          <h3 id="title-{{ profile.key }}">{{ profile.title }}</h3>
+          <p class="research-feature-meta"><span>{{ pub.tag }}</span><span>{{ pub.venue }}</span></p>
+          <p class="research-contribution">{{ profile.problem }}</p>
+        </div>
+        <div>
+          <dl>
+            <div><dt>My contribution</dt><dd>{{ profile.contribution }}</dd></div>
+            <div><dt>Evidence</dt><dd>{{ profile.finding }}</dd></div>
+            <div><dt>Scope</dt><dd>{{ profile.limit }}</dd></div>
+          </dl>
+          <div class="research-feature-actions">
+            {% assign project_page = pub.project_page | default: profile.case_page %}
+            {% if project_page %}<a href="{{ project_page }}" class="mp-text-link">Project page</a>{% endif %}
+            <a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a>
+            <a href="#connection-{{ profile.key }}" class="mp-text-link" data-research-trace="{{ profile.key }}">Next question →</a>
+          </div>
+        </div>
+      </article>{% endfor %}
     </div>
+  </section>
+
+  <section class="mp-section research-direction" id="research-direction">
+    <header class="mp-section-head"><div><h2>What I want to test next</h2></div><p>These projects motivate my current interest in decisions under uncertainty. I want to test how reliability changes when an agent’s choices, inputs, or error costs change.</p></header>
+    <div class="rd-grid">
+      {% for question in rl.directions %}
+      <article class="rd-card" id="{{ question.id }}">
+        <h3>{{ question.title }}</h3>
+        <p>{{ question.desc }}</p>
+        <p class="rd-builds"><span>Starting points</span> {% for source in question.sources %}<a href="{{ source.url }}"{% if source.url contains '://' %} target="_blank" rel="noreferrer"{% endif %}>{{ source.label }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="research-practice">For each question, I want to name the decision, the cost of errors, and the required assumptions. This would help people judge whether a reliability claim applies to their setting.</p>
   </section>
 
   <section class="mp-section research-landscape" id="research-landscape">
-    <header class="mp-section-head"><div><h2>From past work to research direction</h2></div><p>Filled shapes show completed papers and projects. In contrast, the dashed centre shows open research questions. To preview a paper or project, hover over its shape. After that, select it to open its page.</p></header>
+    <header class="mp-section-head"><div><h2>How this work shapes my questions</h2></div><p>Each project offers a starting point for further tests. Explore how a contribution leads to an open question.</p></header>
     {% include research-landscape.html %}
-  </section>
-
-  <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Selected past work</h2></div><p>ENCP studies whether proposed action sets contain the correct action throughout a navigation route. Meanwhile, SEA-VL provides images and text for evaluating models on Southeast Asian cultures.</p></header>
-    <div class="research-feature-grid">
-      {% assign featured_keys = 'encp-vln,sea-vl' | split: ',' %}
-      {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}
-      <article class="research-feature{% if pub.key == 'encp-vln' %} is-primary{% endif %}" data-kind="{{ pub.kind }}">
-        <h3>{{ pub.title }}</h3><p class="research-feature-meta"><span>{{ pub.tag }}</span><span>{{ pub.venue }}</span></p><p class="research-contribution">{{ pub.description }}</p>
-        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}I developed ENCP, which sets thresholds using whole routes, and led the paper.{% else %}I built systems to collect regional data and check benchmark quality.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Tests met reported targets for including correct actions at individual steps. They covered 4 policies, 3 scores, and 2 benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
-        <div class="research-feature-actions">{% if pub.project_page %}<a href="{{ pub.project_page }}" class="mp-text-link">Project page</a>{% endif %}<a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a><details><summary>Abstract</summary><p>{{ pub.abstract }}</p></details></div>
-      </article>{% endfor %}
-    </div>
   </section>
 
   <section class="mp-section research-archive" id="research-archive">

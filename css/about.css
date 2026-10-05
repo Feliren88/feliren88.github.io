@@ -139,3 +139,103 @@
 .about-chapter-index>span,.about-method-grid article>span{display:none}
 .about-chapter-index p{font-size:var(--fs-sm);letter-spacing:normal;text-transform:none}
 .about-story-nav,.cv-nav{background:var(--bg);backdrop-filter:none}
+
+/* The About overview connects a short background with a navigation example. */
+.about-overview-section {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2.75rem, 6vw, 5rem) 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 5rem;
+}
+.about-overview-section h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.5vw, 2.25rem);
+  line-height: 1.2;
+}
+.about-overview-copy {
+  min-width: 0;
+  max-width: 66ch;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+.about-overview-copy p { margin: 0 0 1.15rem; }
+.about-research { grid-template-columns: 1fr; gap: 2rem; }
+.about-research-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+.about-decision-example {
+  margin: 0;
+  min-width: 0;
+  container-type: inline-size;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.about-decision-example h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.about-decision-example figcaption p,
+.about-decision-controls > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.about-decision-diagram { display: block; width: 100%; height: auto; margin: 1.5rem 0; }
+.about-decision-diagram--wide { display: none; }
+.about-decision-diagram--narrow { max-width: 320px; margin-inline: auto; }
+@container (min-width: 665px) {
+  .about-decision-diagram--wide { display: block; }
+  .about-decision-diagram--narrow { display: none; }
+}
+.about-diagram-nodes rect { fill: var(--bg); stroke: var(--border-ui); stroke-width: 1.5; }
+.about-diagram-labels { fill: var(--text); font: 500 18px "Manrope", sans-serif; }
+.about-diagram-arrows path { fill: none; stroke: var(--muted); stroke-width: 2; }
+.about-diagram-arrows .about-diagram-feedback { stroke: var(--accent); }
+.about-decision-diagram marker path { fill: var(--muted); }
+.about-diagram-note { fill: var(--muted); font: 400 16px "Manrope", sans-serif; }
+.about-decision-controls { padding-top: 1.1rem; border-top: 1px solid var(--line); }
+.about-decision-buttons { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0.75rem 0 1.1rem; }
+.about-decision-buttons button {
+  min-height: 44px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-ui);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font: 600 0.84rem "Manrope", sans-serif;
+  cursor: pointer;
+}
+.about-decision-buttons button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.about-decision-buttons button:hover { border-color: var(--accent); }
+.about-decision-outcomes { list-style: none; margin: 0; padding: 0; }
+.about-decision-outcomes li:not([hidden]) ~ li:not([hidden]) { margin-top: 1rem; }
+.about-decision-outcomes strong { font-size: 0.88rem; color: var(--text); }
+.about-decision-outcomes p { margin: 0.35rem 0 0; font-size: 0.92rem; line-height: 1.7; color: var(--muted); }
+.about-decision-example [hidden] { display: none; }
+@media (max-width: 900px) {
+  .about-research-content { grid-template-columns: 1fr; gap: 2rem; }
+  .about-decision-example { max-width: 680px; }
+}
+@media (max-width: 760px) {
+  .about-overview-section { grid-template-columns: 1fr; gap: 1.4rem; padding: 2.75rem 0; }
+  .about-overview-copy { font-size: 1rem; }
+}
+@media (max-width: 520px) {
+  .about-decision-example { padding: 1.1rem; }
+  .about-decision-buttons { display: grid; grid-template-columns: 1fr; }
+  .about-decision-outcomes li:not([hidden]) ~ li:not([hidden]) { margin-top: 1rem; }
+}
