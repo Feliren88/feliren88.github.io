@@ -129,21 +129,21 @@ topics:
   cluster: language
   x: 785
   y: 170
-  label: Benchmarks &amp; Datasets
+  label: Benchmarks; Datasets
   url: https://aclanthology.org/2025.acl-long.916/
   desc: A benchmark is a dataset and test procedure used to compare model performance.
 - id: cultural
   cluster: language
   x: 880
   y: 262
-  label: Cultural &amp; Regional AI
+  label: Cultural; Regional AI
   url: https://aclanthology.org/2025.acl-long.916/
   desc: This work evaluates models using languages, images, and contexts from specific regions.
 - id: safety
   cluster: safety
   x: 140
   y: 420
-  label: Safety &amp; Security Monitoring
+  label: Safety; Security Monitoring
   url: /goal-hijack-probe/
   desc: A monitor flags inputs or model behaviour that may need review.
 - id: remote
