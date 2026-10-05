@@ -73,7 +73,7 @@
   kind: applied
   tag: 'FIRST AUTHOR · PREPRINT'
   title: 'ENCP: Episode-Normalized Conformal Prediction for Vision-and-Language Navigation'
-  description: 'Episode-level calibration provides whole-route coverage guarantees across 4 navigation policies on R2R and REVERIE under exchangeable episodes.'
+  description: 'ENCP sets thresholds using whole routes and gives guarantees on including correct actions throughout a route. Tests cover 4 navigation policies on R2R and REVERIE. However, the guarantee requires calibration and test routes whose probabilities stay unchanged when reordered.'
   venue: 'arXiv preprint, 2026'
   year: "2026"
   publisher: 'arXiv'

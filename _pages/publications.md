@@ -36,19 +36,19 @@ extra_js: /js/components/research-landscape.js
   <header class="mp-hero research-hero">
     <div>
       <h1>When should an agent act, defer, or ask for help?</h1>
-      <p class="mp-lead">My research direction is sequential decision making under uncertainty. Each choice an agent makes changes what it meets next. I want uncertainty estimates that stay reliable across that sequence and in deployed systems. My past work in navigation, multilingual evaluation, and applied machine learning supplies the starting points.</p>
+      <p class="mp-lead">I study how agents decide when to act, wait, or seek help. Each choice changes the evidence available for the next decision. Therefore, I ask when uncertainty estimates remain reliable across a whole task. My navigation, multilingual evaluation, and applied machine learning work informs this research.</p>
       <div class="mp-actions"><a class="btn btn-primary" href="#research-direction">Research direction</a><a class="mp-text-link" href="#research-landscape">How past work connects →</a></div>
     </div>
     <aside class="research-thesis" aria-label="Research position">
       <strong>Research position</strong>
-      <p>An uncertainty claim should name the decision it supports and the conditions it holds under. I want to find when such claims survive a change in policy, data, or costs.</p>
+      <p>An uncertainty claim should state which decision it supports and when it holds. Therefore, I test how changes in decision rules, data, or costs affect those claims.</p>
     </aside>
   </header>
 
   {%- assign rl = site.data.research_landscape %}
   {%- assign rl_from = rl.work | concat: rl.topics %}
   <section class="mp-section research-direction" id="research-direction">
-    <header class="mp-section-head"><div><h2>Research direction</h2></div><p>An agent's choice to act, defer, or ask changes what it sees next. Confidence in one answer is then a weak guide to the whole task. These questions come from a survey I am writing on how uncertainty estimates support decisions.</p></header>
+    <header class="mp-section-head"><div><h2>Research direction</h2></div><p>An agent’s choices change what it sees next. Therefore, confidence in one answer may say little about the whole task. I am writing a survey on this problem, which motivates the questions below.</p></header>
     <div class="rd-grid">
       {%- for d in rl.directions %}
       <article class="rd-card" id="{{ d.id }}">
@@ -61,18 +61,18 @@ extra_js: /js/components/research-landscape.js
   </section>
 
   <section class="mp-section research-landscape" id="research-landscape">
-    <header class="mp-section-head"><div><h2>From past work to research direction</h2></div><p>Filled pills are papers and projects I have completed. The dashed centre holds the questions I want to pursue. Hover over a pill to preview it, and select it to open its page.</p></header>
+    <header class="mp-section-head"><div><h2>From past work to research direction</h2></div><p>Filled shapes show completed papers and projects. In contrast, the dashed centre shows open research questions. To preview a paper or project, hover over its shape. After that, select it to open its page.</p></header>
     {% include research-landscape.html %}
   </section>
 
   <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Selected past work</h2></div><p>ENCP studies coverage across whole navigation routes. SEA-VL builds a regional vision-language dataset.</p></header>
+    <header class="mp-section-head"><div><h2>Selected past work</h2></div><p>ENCP studies whether proposed action sets contain the correct action throughout a navigation route. Meanwhile, SEA-VL provides images and text for evaluating models on Southeast Asian cultures.</p></header>
     <div class="research-feature-grid">
       {% assign featured_keys = 'encp-vln,sea-vl' | split: ',' %}
       {% for featured_key in featured_keys %}{% assign pub = site.data.publications | where: 'key', featured_key | first %}
       <article class="research-feature{% if pub.key == 'encp-vln' %} is-primary{% endif %}" data-kind="{{ pub.kind }}">
         <h3>{{ pub.title }}</h3><p class="research-feature-meta"><span>{{ pub.tag }}</span><span>{{ pub.venue }}</span></p><p class="research-contribution">{{ pub.description }}</p>
-        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}Developed episode-normalized calibration and led the paper.{% else %}Built regional data infrastructure and benchmark quality controls.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Met reported empirical step-coverage targets across 4 policies, 3 scores, and 2 benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
+        <dl><div><dt>Contribution</dt><dd>{% if pub.key == 'encp-vln' %}I developed ENCP, which sets thresholds using whole routes, and led the paper.{% else %}I built systems to collect regional data and check benchmark quality.{% endif %}</dd></div><div><dt>Evidence</dt><dd>{% if pub.key == 'encp-vln' %}Tests met reported targets for including correct actions at individual steps. They covered 4 policies, 3 scores, and 2 benchmarks.{% else %}1.28M images across 11 regional languages.{% endif %}</dd></div></dl>
         <div class="research-feature-actions">{% if pub.project_page %}<a href="{{ pub.project_page }}" class="mp-text-link">Project page</a>{% endif %}<a href="{{ pub.url }}" target="_blank" rel="noreferrer" class="paper-btn">Read paper ↗</a><details><summary>Abstract</summary><p>{{ pub.abstract }}</p></details></div>
       </article>{% endfor %}
     </div>

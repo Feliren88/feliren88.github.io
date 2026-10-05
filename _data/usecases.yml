@@ -1,7 +1,28 @@
 
 wip_notice: >
-  I update these case studies as the work develops. Each one explains the
-  problem, method, evidence, and limits so others can assess or reproduce it.
+  I update these case studies as the work develops.
+  To help readers assess each case, I explain its problem, method, evidence, and limits.
+
+# Complete summaries for the featured cards on /usecases/.
+featured_summaries:
+  vln-conformal-prediction:
+    hook: "ENCP uses whole routes to set a navigation agent’s threshold for asking for help."
+    problem: "Confident wrong moves can compound until a route fails. Therefore, an agent needs a tested rule for seeking help."
+    method: "I rescaled action scores and set a threshold using the largest score on each calibration route."
+    evidence: "Tests covered 4 navigation models, 3 scores, and 2 benchmarks. With help on flagged steps, route success rose from 71% to 91%."
+    limit: "The preprint requires exchangeability. Reordering calibration and test routes must leave their probabilities unchanged. Therefore, changed routes require checking this assumption."
+  multilingual-vlm-crossmodal-conflict:
+    hook: "Models can follow a false caption despite retaining internal evidence for the visual answer."
+    problem: "An image and its caption can contradict each other. However, tests in English may miss failures in other languages."
+    method: "We compared answers with and without false captions. Then we used internal model signals to guide models towards withholding answers."
+    evidence: "We ran 10,260 tests across 9 models and 3 languages. An internal classifier identified image-versus-text choices with 0.92 accuracy in Telugu."
+    limit: "For models able to withhold answers, steering reduced text overrides to zero in tested languages. However, transfer to more languages and guarantees on answer reliability remain open."
+  goal-hijack-probe:
+    hook: "Internal model signals can reveal attempts to override the user’s task, even when the answer stays unchanged."
+    problem: "Attackers add competing instructions to a prompt. However, checking only the answer misses attempts that fail to change it."
+    method: "I trained a classifier on internal model signals. Then I used harmless prompts to set a false-alarm threshold."
+    evidence: "The original threshold flagged 25.8% of harmless prompts in a new format. Adding representative calibration inputs reduced the overall rate to 4.5%."
+    limit: "These tests use 1 model family and template-based attacks. Moreover, a classifier using only prompt text nearly matched the internal detector."
 
 # ============================================================
 # CATEGORY DEFINITIONS

@@ -16,30 +16,30 @@ directions:
   - id: d-traj
     x: 500
     y: 262
-    label: 'Trajectory guarantees<br>after a policy change'
-    title: 'Do trajectory guarantees survive a policy change?'
-    desc: 'When an agent defers or asks for help, it changes the states it meets next. ENCP covers whole routes when episodes are exchangeable. I want to know when that guarantee still holds once the deferral policy changes.'
+    label: 'Route guarantees<br>after decision rules change'
+    title: 'Do route guarantees survive a change in decision rules?'
+    desc: 'An agent changes its future inputs when it waits or asks for help. ENCP bounds the risk of proposed action sets missing a correct action along a route. However, it requires stated sampling assumptions. Therefore, I want to test whether new rules for seeking help preserve those assumptions.'
     from: [encp-vln, vln]
   - id: d-cost
     x: 395
     y: 372
-    label: 'Abstention that<br>follows error costs'
-    title: 'Can abstention follow the cost of an error?'
-    desc: 'Models can report useful confidence yet fail to act on it when penalties change. I want abstention rules that follow costs unseen in training and still answer when an answer is worth giving.'
+    label: 'Withholding answers<br>as error costs change'
+    title: 'When should a model withhold an answer?'
+    desc: 'A model may report useful confidence yet ignore changes in the cost of an error. Therefore, I want rules that adjust when the model answers or withholds an answer. These rules should also work with costs absent from training.'
     from: [crossmodal, fraud]
   - id: d-shift
     x: 605
     y: 372
-    label: 'Monitors that hold<br>under shift'
+    label: 'Reliable monitors<br>when inputs change'
     title: 'When should a monitor withhold its own judgement?'
-    desc: 'Probes and calibrated scores can fail when the language, the sensor, or the monitored policy changes. I want conditions under which a monitor can tell that its own signal has stopped being reliable.'
+    desc: 'A monitor uses model signals to detect errors or attacks. However, its signal can fail when languages, sensors, or the model’s decision rules change. Therefore, I want to test when a monitor can recognise that its own judgement needs review.'
     from: [goal-hijack, crossmodal, cultural, remote]
   - id: d-deploy
     x: 500
     y: 482
     label: 'Reliable decisions<br>in deployed systems'
     title: 'What makes a reliability claim usable in practice?'
-    desc: 'Fraud screening, flood mapping, and policy analysis all act on imperfect predictions. I want guarantees stated in terms of the decision, its cost, and the data they hold for.'
+    desc: 'Fraud screening, flood mapping, and policy analysis use imperfect predictions. Therefore, I want guarantees that specify the decision, its costs, and the data conditions they require.'
     from: [fraud, remote, urban]
 
 clusters:
@@ -89,7 +89,7 @@ work:
     topics: [multilingual, vlm]
     title: 'Do Multilingual VLMs Abstain Under Cross-Modal Conflict in Low-Resource Languages?'
     venue: 'Apart Research Global South AI Safety Hackathon, 2026'
-    desc: 'A model that trusts visual evidence in English follows a false caption in Telugu. We measured the shift, located its signal, and steered the model back.'
+    desc: 'Models followed false captions more often in lower-resource languages. However, internal signals still identified whether they followed the image or text. Therefore, we used these signals to guide models towards withholding answers.'
     url: /usecases/multilingual-vlm-crossmodal-conflict/
   - id: goal-hijack
     cluster: safety
@@ -99,7 +99,7 @@ work:
     topics: [safety]
     title: 'Goal Hijack Probe'
     venue: 'Independent research project'
-    desc: 'A read-only probe flags goal-hijack attempts in model hidden states. Its false-alarm bound depends on representative benign calibration data.'
+    desc: 'A detector reads internal model signals to flag attempts to override the user’s task. However, its false-alarm guarantee requires harmless calibration prompts that represent future inputs.'
     url: /goal-hijack-probe/
   - id: fraud
     cluster: safety
