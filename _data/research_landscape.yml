@@ -2,17 +2,17 @@
 profiles:
   - key: encp-vln
     name: ENCP
-    title: Reliable action sets across a navigation route
-    problem: 'A navigation agent makes several dependent choices before reaching its goal. I studied how to bound the risk of missing a correct action along that route.'
-    contribution: 'I developed ENCP, which sets thresholds using whole routes, and led the paper.'
+    title: Keeping the correct action available throughout a route
+    problem: 'At each step, a navigation agent chooses from a set of suggested actions. I studied how to keep the correct action available throughout the route.'
+    contribution: 'I developed ENCP, which uses completed routes to set the cut-off for including an action. Moreover, I led the paper.'
     finding: 'Tests covered 4 navigation policies, 3 scores, and 2 benchmarks. They met the reported targets for including correct actions at individual steps.'
-    limit: 'The guarantee requires calibration and test routes whose probabilities remain unchanged when reordered.'
+    limit: 'The guarantee requires routes used to set the cut-off and future routes to be <a href="/encp-vln/#encp-abstract-title">exchangeable</a>. Reordering those routes must leave the probability of the whole collection unchanged.'
     question: d-traj
-    connection: 'ENCP provides a starting guarantee under stated sampling assumptions. Asking for help changes the route, so I want to test whether those assumptions still hold.'
+    connection: 'ENCP links a guarantee to the routes used to choose its action cut-off. Asking for help can change the route, so I want to test whether that guarantee survives.'
   - key: sea-vl
     name: SEA-VL
     title: Images and language grounded in Southeast Asia
-    problem: 'Models need tests that reflect the languages and cultures of their users. SEA-VL provides regional images and text for those tests.'
+    problem: 'Models need tests that reflect the languages and cultures of their users. SEA-VL, a dataset of Southeast Asian images and text, provides material for those tests.'
     contribution: 'I built systems to collect regional data and check benchmark quality.'
     finding: 'The dataset contains 1.28 million images across 11 regional languages.'
     limit: 'The dataset supports regional evaluation. A reliability claim still needs tests for the model and task using it.'
@@ -21,10 +21,10 @@ profiles:
   - key: flood-procanet
     name: ProCANet
     title: Flood maps from colour and near-infrared images
-    problem: 'Colour images can confuse flood water with shadows and dark soil. Near-infrared images help distinguish them, so I studied how to combine both inputs.'
+    problem: 'Colour images can confuse flood water with shadows and dark soil. Near-infrared light lies just beyond the visible colour range. Images using that light help distinguish water, so I studied how to combine both inputs.'
     contribution: 'I designed ProCANet to combine features from both inputs, then trained and evaluated it.'
     finding: 'Predicted and reference flood regions reached an overlap score of 0.815 on Sen1Floods11.'
-    limit: 'I also tested images from a different satellite without retraining. That test used reference labels derived from a water index.'
+    limit: 'I also tested images from a different satellite without retraining. The reference labels came from a water index, which uses reflected light to identify water.'
     case_page: /usecases/procaenet-flood-segmentation/
     question: d-shift
     connection: 'My flood mapping work tested a model across different satellite inputs. That experience motivates testing whether an error monitor can recognise when its own judgement needs review.'
@@ -32,18 +32,18 @@ profiles:
 directions:
   - id: d-traj
     title: 'Do route guarantees hold when rules for seeking help change?'
-    desc: 'An agent changes its future inputs when it waits or asks for help. Therefore, I want to test how these choices affect the assumptions behind a route guarantee.'
+    desc: '<a href="/encp-vln/">ENCP</a> gives an agent a set of suggested actions at each step. Its guarantee limits the chance of missing a correct action anywhere along the route. This guarantee requires routes used to set the cut-off and future routes to be <a href="/encp-vln/#encp-abstract-title">exchangeable</a>. Reordering those routes must leave the probability of the whole collection unchanged. However, asking for help can change which routes the agent follows. I want to test whether the guarantee still holds after that change.'
     sources:
       - { label: ENCP, url: /encp-vln/ }
   - id: d-cost
     title: 'When should a model withhold an answer as error costs change?'
-    desc: 'The same error can carry different costs in different settings. I want decision rules that respond to those costs, including costs absent from training.'
+    desc: 'The same error can carry different costs in different settings. I want rules that adjust when a model answers or asks for review. Those rules should also work when the model was trained with different error costs.'
     sources:
       - { label: Cross-modal abstention, url: /usecases/multilingual-vlm-crossmodal-conflict/ }
       - { label: Fraud detection, url: /usecases/fraud-detection-pipeline/ }
   - id: d-shift
     title: 'Can internal model signals identify when an answer needs review?'
-    desc: 'An error monitor uses model signals to flag answers that may need review. However, those signals can change with the language, inputs, or model. I want to test when the monitor can recognise that its own judgement has become unreliable.'
+    desc: 'A monitor reads values inside a model to flag answers that may need review. These values, called internal model signals, can change with the language, inputs, or model. Therefore, I want to test when the monitor’s own judgement needs review.'
     sources:
       - { label: SEA-VL, url: 'https://aclanthology.org/2025.acl-long.916/' }
       - { label: Flood mapping, url: /usecases/procaenet-flood-segmentation/ }

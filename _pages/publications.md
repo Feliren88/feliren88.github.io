@@ -43,7 +43,7 @@ extra_js: /js/components/research-landscape.js
 
   {%- assign rl = site.data.research_landscape %}
   <section class="mp-section" id="featured-research">
-    <header class="mp-section-head"><div><h2>Selected work</h2></div><p>In navigation, I developed a method for setting thresholds across whole routes. Alongside this work, I contributed regional data systems and designed a model for flood mapping.</p></header>
+    <header class="mp-section-head"><div><h2>Selected work</h2></div><p>In navigation, I developed a method for choosing which actions an agent should consider. Alongside this work, I contributed regional data systems and designed a model for flood mapping.</p></header>
     <div class="research-feature-grid">
       {% for profile in rl.profiles %}
       {% assign pub = site.data.publications | where: 'key', profile.key | first %}
